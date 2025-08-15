@@ -1,0 +1,19 @@
+import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:yousafe/features/faq/state/faq_bloc.dart';
+import 'package:yousafe/features/faq/faq_view.dart';
+
+class FaqProvider {
+  FaqProvider._();
+
+  static Widget get page {
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider<FaqBloc>(
+          create: (context) => FaqBloc(),
+        ),
+      ],
+      child: FAQView(),
+    );
+  }
+}

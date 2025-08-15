@@ -1,0 +1,71 @@
+name: yousafe
+description: "A new Flutter project."
+# The following line prevents the package from being accidentally published to
+# pub.dev using `flutter pub publish`. This is preferred for private packages.
+publish_to: "none" # Remove this line if you wish to publish to pub.dev
+
+version: 1.0.0+1
+
+environment:
+  sdk: ^3.6.0
+
+dependencies:
+  flutter:
+    sdk: flutter
+  # https://pub.dev/packages/intl
+  flutter_localizations:
+    sdk: flutter
+  intl: 0.20.2
+
+  # https://pub.dev/packages/flutter_svg
+  flutter_svg: ^2.0.16
+  # https://pub.dev/packages/go_router
+  go_router: ^14.6.2
+  # https://pub.dev/packages/dio
+  # https://pub.dev/packages/pretty_dio_logger
+  dio: ^5.7.0
+  pretty_dio_logger: ^1.4.0
+  # https://pub.dev/packages/flutter_bloc
+  flutter_bloc: ^8.1.6
+
+  cupertino_icons: ^1.0.8
+  equatable: ^2.0.7
+  provider: ^6.1.2
+  result_dart: ^2.0.0
+  flutter_switch: ^0.3.2
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+
+  flutter_lints: ^5.0.0
+
+flutter:
+  generate: true
+  uses-material-design: true
+
+  assets:
+    - assets/images/
+    - assets/svg/
+
+  fonts:
+    - family: Lexend_Light
+      fonts:
+        - asset: assets/fonts/Lexend-Light.ttf
+    - family: Lexend_Regular
+      fonts:
+        - asset: assets/fonts/Lexend-Regular.ttf
+    - family: Lexend_Medium
+      fonts:
+        - asset: assets/fonts/Lexend-Medium.ttf
+    - family: Lexend_SemiBold
+      fonts:
+        - asset: assets/fonts/Lexend-SemiBold.ttf
+
+# Comando para gerar o arquivo => flutter gen-l10n
+l10n:
+  arb-dir: lib/l10n
+  template-arb-file: app_en.arb
+  output-localization-file: app_localizations.dart
+  supported-locales: [en, pt]
+  output-dir: lib/l10n
