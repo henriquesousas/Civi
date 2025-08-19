@@ -8,6 +8,9 @@ class Routes {
   static const otpVerification = "/otp-verification";
   static const welcome = "/welcome";
   static const settings = "/settings";
+  static const faq = "/faq";
+  static const terms = "/terms";
+  static const privacyPolicy = "/privacy_policy";
 
   // OLD
   static const home = "/home";
@@ -16,9 +19,7 @@ class Routes {
   static const profile = "/profile";
   static const myProfile = "/my_profile";
   static const favorites = "/favorites";
-  static const faq = "/faq";
-  static const terms = "/terms";
-  static const privacyPolicy = "/privacy_policy";
+
   static const aboutUs = "/about_us";
   static const productDetail = "/product_detail";
 }

@@ -23,9 +23,9 @@ class NavMenu {
       color: AppColors.primary,
     ),
     NavMenu(
-      icon: Icons.history_outlined,
-      activeIcon: Icons.history_rounded,
-      label: 'Produtos',
+      icon: Icons.inventory_2_outlined,
+      activeIcon: Icons.inventory_2_rounded,
+      label: 'Itens',
       color: AppColors.primary,
       // color: AppColors.secondary,
     ),

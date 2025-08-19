@@ -46,7 +46,7 @@ class SettingsContentSection extends StatelessWidget {
                 title,
                 style: context.getTextStyle.mediumSmall.copyWith(
                   color: AppColors.textPrimary,
-                  fontWeight: FontWeight.w700,
+                  fontWeight: FontWeight.w600,
                 ),
               ),
             ],

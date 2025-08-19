@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:yousafe/features/settings/action_tile.dart';
 import 'package:yousafe/features/settings/settings_content_section.dart';
 import 'package:yousafe/features/settings/switch_tile.dart';
 import 'package:yousafe/shared/components/primary_app_bar.dart';
 import 'package:yousafe/shared/extensions/context_extension.dart';
+
+import '../../app/router/router_config.dart';
 
 class SettingsPage extends StatelessWidget {
   const SettingsPage({super.key});
@@ -26,19 +29,19 @@ class SettingsPage extends StatelessWidget {
                   title: context.strings.privatePolicy,
                   subtitle: context.strings.readOurPolicy,
                   icon: Icons.policy_outlined,
-                  onTap: () {},
+                  onTap: () => context.push(Routes.privacyPolicy),
                 ),
                 ActionTile(
                   title: context.strings.useTerm,
                   subtitle: context.strings.readOurTerms,
                   icon: Icons.description_outlined,
-                  onTap: () {},
+                  onTap: () => context.push(Routes.terms),
                 ),
               ],
             ),
             SettingsContentSection(
               title: context.strings.preferences,
-              icon: Icons.security_outlined,
+              icon: Icons.tune_outlined,
               children: [
                 SwitchTile(
                   title: context.strings.darkMode,
@@ -69,6 +72,12 @@ class SettingsPage extends StatelessWidget {
                   subtitle: context.strings.rateAppRead,
                   icon: Icons.star_outline,
                   onTap: () {},
+                ),
+                ActionTile(
+                  title: context.strings.frequentlyAsk,
+                  subtitle: context.strings.frequentlyAskRead,
+                  icon: Icons.quiz_outlined,
+                  onTap: () => context.push(Routes.faq),
                 ),
                 ActionTile(
                   title: context.strings.about,

@@ -1,15 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
-import 'package:yousafe/app/theme/app_colors.dart';
 import 'package:yousafe/app/localization/image_config.dart';
-import 'package:yousafe/app/theme/size_config.dart';
 import 'package:yousafe/app/localization/string_config.dart';
-import 'package:yousafe/shared/extensions/text_style_extension.dart';
+import 'package:yousafe/app/theme/app_colors.dart';
+import 'package:yousafe/app/theme/size_config.dart';
+import 'package:yousafe/features/faq/components/ui_expansion_tile.dart';
 import 'package:yousafe/features/faq/state/faq_bloc.dart';
 import 'package:yousafe/features/faq/state/faq_event.dart';
 import 'package:yousafe/features/faq/state/faq_state.dart';
-import 'package:yousafe/features/faq/components/ui_expansion_tile.dart';
+import 'package:yousafe/shared/extensions/text_style_extension.dart';
 
 enum FAQ { faq1, faq2, faq3, faq4, faq5, faq6, faq7 }
 
@@ -38,8 +38,8 @@ class FAQView extends StatelessWidget {
             children: [
               GestureDetector(
                 onTap: () => context.pop(),
-                child: Image(
-                  image: const AssetImage(ImageConfig.backArrow),
+                child: const Image(
+                  image: AssetImage(ImageConfig.backArrow),
                   width: SizeConfig.width24,
                   height: SizeConfig.height24,
                   color: AppColors.primaryColor,
@@ -62,8 +62,8 @@ class FAQView extends StatelessWidget {
               bottom: SizeConfig.padding10,
             ),
             child: GestureDetector(
-              child: Image(
-                image: const AssetImage(ImageConfig.search),
+              child: const Image(
+                image: AssetImage(ImageConfig.search),
                 width: SizeConfig.width20,
                 height: SizeConfig.height20,
                 color: AppColors.primaryColor,

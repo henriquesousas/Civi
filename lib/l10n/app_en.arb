@@ -89,6 +89,8 @@
     "rateApp" : "Avaliar aplicativo",
     "rateAppRead" : "Nos avalie para melhorar nossos serviços",
     "settings" : "Configurações",
+    "frequentlyAsk" : "Perguntas frequentes",
+    "frequentlyAskRead" : "Maiores dúvidas sobre nós",
 
 
     "@Commons": { "description": "Textos comuns" },

@@ -16,9 +16,15 @@ class UIVerificationFlag extends StatelessWidget {
         horizontal: 6,
         vertical: 3,
       ),
+      // decoration: BoxDecoration(
+      //   color: Colors.black.withValues(alpha: 0.3),
+      //   borderRadius: BorderRadius.circular(12),
+      // ),
       decoration: BoxDecoration(
-        color: Colors.black.withValues(alpha: 0.3),
-        borderRadius: BorderRadius.circular(12),
+        color: Colors.white.withValues(alpha: 0.2),
+        borderRadius: BorderRadius.circular(
+          20,
+        ),
       ),
       child: Row(
         mainAxisSize: MainAxisSize.min,
@@ -32,7 +38,7 @@ class UIVerificationFlag extends StatelessWidget {
           Text(
             isVerified ? 'Verificado' : 'Não verificado',
             style: context.getTextStyle.small.copyWith(
-              fontSize: 8,
+              // fontSize: 8,
               color: Colors.white,
             ),
           ),

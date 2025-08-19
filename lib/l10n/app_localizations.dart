@@ -543,6 +543,18 @@ abstract class AppLocalizations {
   /// **'Configurações'**
   String get settings;
 
+  /// No description provided for @frequentlyAsk.
+  ///
+  /// In en, this message translates to:
+  /// **'Perguntas frequentes'**
+  String get frequentlyAsk;
+
+  /// No description provided for @frequentlyAskRead.
+  ///
+  /// In en, this message translates to:
+  /// **'Maiores dúvidas sobre nós'**
+  String get frequentlyAskRead;
+
   /// No description provided for @labelAgreeTerms.
   ///
   /// In en, this message translates to:

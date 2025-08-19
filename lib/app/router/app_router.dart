@@ -74,24 +74,33 @@ class AppRouter {
         ),
       ),
       GoRoute(
+        path: Routes.faq,
+        pageBuilder: (context, state) => slideTransitionPage(
+          key: state.pageKey,
+          child: FaqProvider.page,
+        ),
+      ),
+      GoRoute(
+        path: Routes.terms,
+        pageBuilder: (context, state) => slideTransitionPage(
+          key: state.pageKey,
+          child: const UserTermsView(),
+        ),
+      ),
+      GoRoute(
+        path: Routes.privacyPolicy,
+        pageBuilder: (context, state) => slideTransitionPage(
+          key: state.pageKey,
+          child: const PrivacyPolicyView(),
+        ),
+      ),
+      GoRoute(
         path: Routes.onboarding2,
         builder: (context, state) => WelcomeProvider.page,
       ),
       GoRoute(
         path: Routes.profile,
         builder: (context, state) => ProfileProvider.page,
-      ),
-      GoRoute(
-        path: Routes.faq,
-        builder: (context, state) => FaqProvider.page,
-      ),
-      GoRoute(
-        path: Routes.terms,
-        builder: (context, state) => UserTermsView(),
-      ),
-      GoRoute(
-        path: Routes.privacyPolicy,
-        builder: (context, state) => PrivacyPolicyView(),
       ),
       GoRoute(
         path: Routes.aboutUs,

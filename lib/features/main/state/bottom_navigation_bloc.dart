@@ -1,6 +1,6 @@
-import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:yousafe/features/home/home_view.dart';
+import 'package:yousafe/features/profile/profile_page.dart';
 import 'package:yousafe/features/profile/profile_view.dart';
 import 'package:yousafe/features/settings/settings_page.dart';
 
@@ -16,8 +16,8 @@ class BottomNavigationBloc
             showBottomBar: true,
             pages: [
               const HomeView(),
-              Container(),
-              const ProfileView(),
+              ProfileView(),
+              const ProfilePage(),
               const SettingsPage(),
             ],
           ),

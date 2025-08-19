@@ -234,5 +234,11 @@ class AppLocalizationsEn extends AppLocalizations {
   String get settings => 'Configurações';
 
   @override
+  String get frequentlyAsk => 'Perguntas frequentes';
+
+  @override
+  String get frequentlyAskRead => 'Maiores dúvidas sobre nós';
+
+  @override
   String get labelAgreeTerms => 'Eu concordo com os Termos e Condições';
 }
