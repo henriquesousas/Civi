@@ -183,5 +183,56 @@ class AppLocalizationsEn extends AppLocalizations {
   String get welcomeOnboardingDesc3 => 'Estamos evoluindo rapidamente para oferecer mais recursos e tornar seu uso mais fácil e seguros';
 
   @override
+  String get preferences => 'Preferência';
+
+  @override
+  String get policyAndTerms => 'Políticas e termo de uso';
+
+  @override
+  String get about => 'Sobre';
+
+  @override
+  String get aboutRead => 'Veja a versão e informações';
+
+  @override
+  String get privatePolicy => 'Política';
+
+  @override
+  String get useTerm => 'Termos de uso';
+
+  @override
+  String get readOurPolicy => 'Leia nossa política de privacidade';
+
+  @override
+  String get readOurTerms => 'Leia o nosso termo de uso';
+
+  @override
+  String get darkMode => 'Modo escuro';
+
+  @override
+  String get darkModeRead => 'Habilite ou não o tema escuro';
+
+  @override
+  String get helpCenter => 'Central de ajuda';
+
+  @override
+  String get helpCenterRead => 'Obtenha ajuda e suporte';
+
+  @override
+  String get contactUs => 'Contato';
+
+  @override
+  String get contactUsRead => 'Entre em contato conosco';
+
+  @override
+  String get rateApp => 'Avaliar aplicativo';
+
+  @override
+  String get rateAppRead => 'Nos avalie para melhorar nossos serviços';
+
+  @override
+  String get settings => 'Configurações';
+
+  @override
   String get labelAgreeTerms => 'Eu concordo com os Termos e Condições';
 }

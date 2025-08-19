@@ -14,6 +14,7 @@ import 'package:yousafe/features/policy/privacy_policy_view.dart';
 import 'package:yousafe/features/product/product_detail_view.dart';
 import 'package:yousafe/features/profile/profile_edit_view.dart';
 import 'package:yousafe/features/profile/profile_provider.dart';
+import 'package:yousafe/features/settings/settings_page.dart';
 import 'package:yousafe/features/splash/splash_page.dart';
 import 'package:yousafe/features/terms/use_terms_view.dart';
 import 'package:yousafe/features/welcome/old/welcome_provider.dart';
@@ -63,6 +64,13 @@ class AppRouter {
         pageBuilder: (context, state) => slideTransitionPage(
           key: state.pageKey,
           child: const WelcomePage(),
+        ),
+      ),
+      GoRoute(
+        path: Routes.settings,
+        pageBuilder: (context, state) => slideTransitionPage(
+          key: state.pageKey,
+          child: const SettingsPage(),
         ),
       ),
       GoRoute(

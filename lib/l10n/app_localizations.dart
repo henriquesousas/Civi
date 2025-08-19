@@ -441,6 +441,108 @@ abstract class AppLocalizations {
   /// **'Estamos evoluindo rapidamente para oferecer mais recursos e tornar seu uso mais fácil e seguros'**
   String get welcomeOnboardingDesc3;
 
+  /// No description provided for @preferences.
+  ///
+  /// In en, this message translates to:
+  /// **'Preferência'**
+  String get preferences;
+
+  /// No description provided for @policyAndTerms.
+  ///
+  /// In en, this message translates to:
+  /// **'Políticas e termo de uso'**
+  String get policyAndTerms;
+
+  /// No description provided for @about.
+  ///
+  /// In en, this message translates to:
+  /// **'Sobre'**
+  String get about;
+
+  /// No description provided for @aboutRead.
+  ///
+  /// In en, this message translates to:
+  /// **'Veja a versão e informações'**
+  String get aboutRead;
+
+  /// No description provided for @privatePolicy.
+  ///
+  /// In en, this message translates to:
+  /// **'Política'**
+  String get privatePolicy;
+
+  /// No description provided for @useTerm.
+  ///
+  /// In en, this message translates to:
+  /// **'Termos de uso'**
+  String get useTerm;
+
+  /// No description provided for @readOurPolicy.
+  ///
+  /// In en, this message translates to:
+  /// **'Leia nossa política de privacidade'**
+  String get readOurPolicy;
+
+  /// No description provided for @readOurTerms.
+  ///
+  /// In en, this message translates to:
+  /// **'Leia o nosso termo de uso'**
+  String get readOurTerms;
+
+  /// No description provided for @darkMode.
+  ///
+  /// In en, this message translates to:
+  /// **'Modo escuro'**
+  String get darkMode;
+
+  /// No description provided for @darkModeRead.
+  ///
+  /// In en, this message translates to:
+  /// **'Habilite ou não o tema escuro'**
+  String get darkModeRead;
+
+  /// No description provided for @helpCenter.
+  ///
+  /// In en, this message translates to:
+  /// **'Central de ajuda'**
+  String get helpCenter;
+
+  /// No description provided for @helpCenterRead.
+  ///
+  /// In en, this message translates to:
+  /// **'Obtenha ajuda e suporte'**
+  String get helpCenterRead;
+
+  /// No description provided for @contactUs.
+  ///
+  /// In en, this message translates to:
+  /// **'Contato'**
+  String get contactUs;
+
+  /// No description provided for @contactUsRead.
+  ///
+  /// In en, this message translates to:
+  /// **'Entre em contato conosco'**
+  String get contactUsRead;
+
+  /// No description provided for @rateApp.
+  ///
+  /// In en, this message translates to:
+  /// **'Avaliar aplicativo'**
+  String get rateApp;
+
+  /// No description provided for @rateAppRead.
+  ///
+  /// In en, this message translates to:
+  /// **'Nos avalie para melhorar nossos serviços'**
+  String get rateAppRead;
+
+  /// Settings
+  ///
+  /// In en, this message translates to:
+  /// **'Configurações'**
+  String get settings;
+
   /// No description provided for @labelAgreeTerms.
   ///
   /// In en, this message translates to:
