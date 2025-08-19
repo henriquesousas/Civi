@@ -5,10 +5,10 @@ import 'package:yousafe/features/about/about_us_view.dart';
 import 'package:yousafe/features/auth/login/login_page.dart';
 import 'package:yousafe/features/auth/otp/otp_verification_page.dart';
 import 'package:yousafe/features/auth/register/register_account_page.dart';
-import 'package:yousafe/features/bottom_view/bottom_navigation_bar_view.dart';
 import 'package:yousafe/features/faq/faq_provider.dart';
 import 'package:yousafe/features/favorites/favourite_view.dart';
 import 'package:yousafe/features/home/home_view.dart';
+import 'package:yousafe/features/main/main_page.dart';
 import 'package:yousafe/features/onboarding/onboarding_page.dart';
 import 'package:yousafe/features/policy/privacy_policy_view.dart';
 import 'package:yousafe/features/product/product_detail_view.dart';
@@ -21,7 +21,7 @@ import 'package:yousafe/features/welcome/welcome_page.dart';
 
 class AppRouter {
   static var router = GoRouter(
-    initialLocation: Routes.splash,
+    initialLocation: Routes.bottomView,
     debugLogDiagnostics: true,
     // redirect: _redirect,
     // refreshListenable: authRepository,
@@ -107,7 +107,7 @@ class AppRouter {
       ),
       GoRoute(
         path: Routes.bottomView,
-        builder: (context, state) => BottomNavigationBarView(),
+        builder: (context, state) => MainPage(),
       ),
     ],
   );

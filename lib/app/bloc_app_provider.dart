@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:yousafe/features/bottom_view/state/bottom_navigation_bloc.dart';
+
+import '../features/main/state/bottom_navigation_bloc.dart';
 
 class BlocAppProvider extends StatelessWidget {
   final Widget child;

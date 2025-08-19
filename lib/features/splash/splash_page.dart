@@ -2,14 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:go_router/go_router.dart';
 import 'package:yousafe/app/router/router_config.dart';
-import 'package:yousafe/shared/animation/fade_animator.dart';
-import 'package:yousafe/shared/animation/scale_fade_animator.dart';
-import 'package:yousafe/shared/animation/slide_fade_animator.dart';
 import 'package:yousafe/features/splash/components/splash_background_animation.dart';
 import 'package:yousafe/features/splash/components/splash_bottom_section.dart';
 import 'package:yousafe/features/splash/components/splash_content.dart';
 import 'package:yousafe/features/splash/components/splash_line_indicator.dart';
 import 'package:yousafe/features/splash/components/splash_logo.dart';
+import 'package:yousafe/shared/animation/fade_animator.dart';
+import 'package:yousafe/shared/animation/scale_fade_animator.dart';
+import 'package:yousafe/shared/animation/slide_fade_animator.dart';
 import 'package:yousafe/shared/extensions/screen_size_extension.dart';
 
 class SplashPage extends StatefulWidget {
@@ -48,18 +48,18 @@ class _SplashPageState extends State<SplashPage> {
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      ScaleFadeAnimator(
+                      const ScaleFadeAnimator(
                         duration: Duration(milliseconds: 1500),
                         child: SplashLogo(),
                       ),
-                      SizedBox(height: 40),
-                      SlideFadeAnimator(child: SplashContent()),
+                      const SizedBox(height: 40),
+                      const SlideFadeAnimator(child: SplashContent()),
                       SizedBox(height: context.percentHeight(0.1)),
-                      FadeAnimator(child: SplashLineIndicator()),
+                      const SplashLineIndicator(),
                     ],
                   ),
                 ),
-                FadeAnimator(child: SplashBottomSection()),
+                const FadeAnimator(child: SplashBottomSection()),
                 SizedBox(height: context.percentHeight(0.05)),
               ],
             ),

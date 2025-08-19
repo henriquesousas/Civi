@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:yousafe/features/bottom_view/state/botto_navigation_event.dart';
-import 'package:yousafe/features/bottom_view/state/bottom_navigation_state.dart';
 import 'package:yousafe/features/favorites/favourite_view.dart';
 import 'package:yousafe/features/home/home_view.dart';
 import 'package:yousafe/features/profile/profile_view.dart';
+
+import 'bottom_navigation_event.dart';
+import 'bottom_navigation_state.dart';
 
 class BottomNavigationBloc
     extends Bloc<BottomNavigationEvent, BottomNavigationState> {
