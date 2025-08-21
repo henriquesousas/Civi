@@ -94,6 +94,13 @@ class _ProfilePageState extends State<ProfilePage>
         color: AppColors.primary,
       ),
       const ProfileMenu(
+        icon: Icons.timeline,
+        title: 'Últimas ocorrências',
+        subtitle: 'Veja as últimas ocorrências registradas',
+        route: Routes.profileEdit,
+        color: AppColors.primary,
+      ),
+      const ProfileMenu(
         icon: Icons.settings_outlined,
         title: 'Settings',
         subtitle: 'Preferences e politicas de privacidade',

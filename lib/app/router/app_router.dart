@@ -24,7 +24,7 @@ import 'package:yousafe/features/welcome/welcome_page.dart';
 
 class AppRouter {
   static var router = GoRouter(
-    initialLocation: Routes.splash,
+    initialLocation: Routes.bottomView,
     debugLogDiagnostics: true,
     // redirect: _redirect,
     // refreshListenable: authRepository,
