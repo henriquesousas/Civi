@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 
-class FadeAnimator extends StatefulWidget {
+class TransitionAnimator extends StatefulWidget {
   final Widget child;
   final Duration duration;
   final Duration delay;
   final Curve curve;
 
-  const FadeAnimator({
+  const TransitionAnimator({
     super.key,
     required this.child,
     this.delay = const Duration(milliseconds: 800),
@@ -15,10 +15,10 @@ class FadeAnimator extends StatefulWidget {
   });
 
   @override
-  State<FadeAnimator> createState() => _FadeAnimatorState();
+  State<TransitionAnimator> createState() => _TransitionAnimatorState();
 }
 
-class _FadeAnimatorState extends State<FadeAnimator>
+class _TransitionAnimatorState extends State<TransitionAnimator>
     with SingleTickerProviderStateMixin {
   late final AnimationController _controller;
   late final Animation<double> _animation;

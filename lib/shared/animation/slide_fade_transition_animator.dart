@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 
-class SlideFadeAnimator extends StatefulWidget {
+class SlideFadeTransitionAnimator extends StatefulWidget {
   final Widget child;
   final Duration delay;
   final Duration duration;
   final Curve fadeCurve;
   final Curve slideCurve;
   final Offset slideBeginOffset;
-  const SlideFadeAnimator({
+  const SlideFadeTransitionAnimator({
     super.key,
     required this.child,
     this.delay = const Duration(milliseconds: 800),
@@ -18,11 +18,12 @@ class SlideFadeAnimator extends StatefulWidget {
   });
 
   @override
-  State<SlideFadeAnimator> createState() => _SlideFadeAnimatorState();
+  State<SlideFadeTransitionAnimator> createState() =>
+      _SlideFadeTransitionAnimatorState();
 }
 
-class _SlideFadeAnimatorState extends State<SlideFadeAnimator>
-    with TickerProviderStateMixin {
+class _SlideFadeTransitionAnimatorState
+    extends State<SlideFadeTransitionAnimator> with TickerProviderStateMixin {
   late final AnimationController _controller;
   late final Animation<double> _opacityAnimation;
   late final Animation<Offset> _slideAnimation;

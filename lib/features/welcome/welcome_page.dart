@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
+import 'package:yousafe/app/router/router_config.dart';
 import 'package:yousafe/features/welcome/components/confetti_animation.dart';
 import 'package:yousafe/features/welcome/components/welcome_card.dart';
 import 'package:yousafe/features/welcome/welcome_feature.dart';
-import 'package:yousafe/shared/animation/slide_fade_animator.dart';
+import 'package:yousafe/shared/animation/slide_fade_transition_animator.dart';
 import 'package:yousafe/shared/components/buttons/primary_button.dart';
 import 'package:yousafe/shared/components/icons/primary_icon.dart';
 import 'package:yousafe/shared/components/indicator/primary_progress_indicator.dart';
@@ -70,7 +72,10 @@ class _WelcomePageState extends State<WelcomePage>
         duration: const Duration(milliseconds: 300),
         curve: Curves.easeInOut,
       );
+      return;
     }
+
+    context.push(Routes.bottomView);
   }
 
   void _previousPage() {
@@ -121,7 +126,7 @@ class _WelcomePageState extends State<WelcomePage>
                   ),
                 ),
                 Expanded(
-                  child: SlideFadeAnimator(
+                  child: SlideFadeTransitionAnimator(
                     delay: const Duration(milliseconds: 300),
                     child: PageViewBuilder(
                       itemCount: _totalPages,

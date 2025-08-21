@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:yousafe/app/theme/app_colors.dart';
 import 'package:yousafe/app/localization/image_config.dart';
-import 'package:yousafe/app/theme/size_config.dart';
 import 'package:yousafe/app/localization/string_config.dart';
+import 'package:yousafe/app/theme/app_colors.dart';
+import 'package:yousafe/app/theme/size_config.dart';
 import 'package:yousafe/shared/extensions/text_style_extension.dart';
 
-class PrivacyPolicyView extends StatelessWidget {
-  const PrivacyPolicyView({super.key});
+class PrivacyPolicyPage extends StatelessWidget {
+  const PrivacyPolicyPage({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -31,8 +31,8 @@ class PrivacyPolicyView extends StatelessWidget {
             children: [
               GestureDetector(
                 onTap: () => context.pop(),
-                child: Image(
-                  image: const AssetImage(ImageConfig.backArrow),
+                child: const Image(
+                  image: AssetImage(ImageConfig.backArrow),
                   width: SizeConfig.width24,
                   height: SizeConfig.height24,
                   color: AppColors.primaryColor,

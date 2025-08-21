@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:yousafe/shared/extensions/text_style_extension.dart';
 
-import '../../app/theme/app_colors.dart';
-import '../../shared/components/buttons/secondary_outline_button.dart';
+import '../../../app/theme/app_colors.dart';
+import '../../../shared/components/buttons/secondary_outline_button.dart';
 
 class ProfileLogoutSection extends StatelessWidget {
   const ProfileLogoutSection({super.key});

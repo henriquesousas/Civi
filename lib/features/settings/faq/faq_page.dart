@@ -5,16 +5,16 @@ import 'package:yousafe/app/localization/image_config.dart';
 import 'package:yousafe/app/localization/string_config.dart';
 import 'package:yousafe/app/theme/app_colors.dart';
 import 'package:yousafe/app/theme/size_config.dart';
-import 'package:yousafe/features/faq/components/ui_expansion_tile.dart';
-import 'package:yousafe/features/faq/state/faq_bloc.dart';
-import 'package:yousafe/features/faq/state/faq_event.dart';
-import 'package:yousafe/features/faq/state/faq_state.dart';
+import 'package:yousafe/features/settings/faq/components/ui_expansion_tile.dart';
+import 'package:yousafe/features/settings/faq/state/faq_bloc.dart';
+import 'package:yousafe/features/settings/faq/state/faq_event.dart';
+import 'package:yousafe/features/settings/faq/state/faq_state.dart';
 import 'package:yousafe/shared/extensions/text_style_extension.dart';
 
 enum FAQ { faq1, faq2, faq3, faq4, faq5, faq6, faq7 }
 
-class FAQView extends StatelessWidget {
-  const FAQView({super.key});
+class FaqPage extends StatelessWidget {
+  const FaqPage({super.key});
 
   @override
   Widget build(BuildContext context) {

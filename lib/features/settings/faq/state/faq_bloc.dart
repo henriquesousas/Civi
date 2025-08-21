@@ -1,6 +1,7 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:yousafe/features/faq/state/faq_event.dart';
-import 'package:yousafe/features/faq/state/faq_state.dart';
+
+import 'faq_event.dart';
+import 'faq_state.dart';
 
 class FaqBloc extends Bloc<FaqEvent, FaqState> {
   FaqBloc() : super(FaqState()) {

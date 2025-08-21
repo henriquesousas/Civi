@@ -1,19 +1,21 @@
 import 'package:flutter/material.dart';
-import 'package:yousafe/features/profile/profile_menu.dart';
+import 'package:yousafe/features/profile/components/profile_menu.dart';
 import 'package:yousafe/shared/extensions/text_style_extension.dart';
 
-import '../../app/theme/app_colors.dart';
+import '../../../app/theme/app_colors.dart';
 
 class ProfileMenuTile extends StatelessWidget {
   final ProfileMenu item;
-  const ProfileMenuTile({super.key, required this.item});
+  final ValueChanged<ProfileMenu> onChanged;
+  const ProfileMenuTile(
+      {super.key, required this.item, required this.onChanged});
 
   @override
   Widget build(BuildContext context) {
     return Material(
       color: Colors.transparent,
       child: InkWell(
-        // onTap: () => _onMenuItemTap(item),
+        onTap: () => onChanged(item),
         borderRadius: BorderRadius.circular(20),
         child: Padding(
           padding: const EdgeInsets.all(20),

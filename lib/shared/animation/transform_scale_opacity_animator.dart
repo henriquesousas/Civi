@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-class ScaleFadeAnimator extends StatefulWidget {
+class TransformScaleOpacityAnimator extends StatefulWidget {
   final Widget child;
   final Duration delay;
   final Duration duration;
@@ -10,7 +10,7 @@ class ScaleFadeAnimator extends StatefulWidget {
   final double scaleAnimationEnd;
   final double fadeAnimationEnd;
 
-  const ScaleFadeAnimator({
+  const TransformScaleOpacityAnimator({
     super.key,
     required this.child,
     this.delay = Duration.zero,
@@ -23,10 +23,12 @@ class ScaleFadeAnimator extends StatefulWidget {
   });
 
   @override
-  State<ScaleFadeAnimator> createState() => _ScaleFadeAnimatorState();
+  State<TransformScaleOpacityAnimator> createState() =>
+      _TransformScaleOpacityAnimatorState();
 }
 
-class _ScaleFadeAnimatorState extends State<ScaleFadeAnimator>
+class _TransformScaleOpacityAnimatorState
+    extends State<TransformScaleOpacityAnimator>
     with SingleTickerProviderStateMixin {
   late final AnimationController _controller;
   late final Animation<double> _scaleAnimation;

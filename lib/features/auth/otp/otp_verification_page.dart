@@ -5,7 +5,7 @@ import 'package:yousafe/features/auth/otp/components/otp_change_number.dart';
 import 'package:yousafe/features/auth/otp/components/otp_code_field.dart';
 import 'package:yousafe/features/auth/otp/components/otp_header_text.dart';
 import 'package:yousafe/features/auth/otp/components/otp_resend_code.dart';
-import 'package:yousafe/shared/animation/scale_fade_animator.dart';
+import 'package:yousafe/shared/animation/transform_scale_opacity_animator.dart';
 import 'package:yousafe/shared/components/buttons/primary_button.dart';
 import 'package:yousafe/shared/components/icons/primary_icon.dart';
 import 'package:yousafe/shared/extensions/context_extension.dart';
@@ -36,7 +36,7 @@ class _OtpVerificationPageState extends State<OtpVerificationPage> {
               crossAxisAlignment: CrossAxisAlignment.center,
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                const ScaleFadeAnimator(
+                const TransformScaleOpacityAnimator(
                   child: PrimaryIcon(
                     borderRadius: 50,
                     width: 100,

@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:yousafe/features/onboarding/components/onboading_text_section.dart';
 import 'package:yousafe/features/onboarding/components/onboarding_logo.dart';
 import 'package:yousafe/features/onboarding/onboarding_item.dart';
-import 'package:yousafe/shared/animation/slide_fade_animator.dart';
+import 'package:yousafe/shared/animation/slide_fade_transition_animator.dart';
 
 class OnboardingContent extends StatefulWidget {
   final OnboardingItem page;
@@ -29,7 +29,7 @@ class _OnboardingContentState extends State<OnboardingContent>
               ),
               Expanded(
                 flex: 2,
-                child: SlideFadeAnimator(
+                child: SlideFadeTransitionAnimator(
                   duration: Duration(milliseconds: 300),
                   delay: Duration(milliseconds: 200),
                   child: OnboardingTextSection(

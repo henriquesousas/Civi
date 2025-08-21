@@ -1,28 +1,30 @@
 import 'package:go_router/go_router.dart';
 import 'package:yousafe/app/router/router_config.dart';
 import 'package:yousafe/app/router/slide_transition_page.dart';
-import 'package:yousafe/features/about/about_us_view.dart';
 import 'package:yousafe/features/auth/login/login_page.dart';
 import 'package:yousafe/features/auth/otp/otp_verification_page.dart';
 import 'package:yousafe/features/auth/register/register_account_page.dart';
-import 'package:yousafe/features/faq/faq_provider.dart';
 import 'package:yousafe/features/favorites/favourite_view.dart';
 import 'package:yousafe/features/home/home_view.dart';
 import 'package:yousafe/features/main/main_page.dart';
 import 'package:yousafe/features/onboarding/onboarding_page.dart';
-import 'package:yousafe/features/policy/privacy_policy_view.dart';
 import 'package:yousafe/features/product/product_detail_view.dart';
-import 'package:yousafe/features/profile/profile_edit_view.dart';
+import 'package:yousafe/features/profile/old/profile_edit_view.dart';
+import 'package:yousafe/features/profile/profile_edit_page.dart';
 import 'package:yousafe/features/profile/profile_provider.dart';
+import 'package:yousafe/features/settings/about/about_us_view.dart';
+import 'package:yousafe/features/settings/faq/faq_provider.dart';
+import 'package:yousafe/features/settings/help/help_page.dart';
+import 'package:yousafe/features/settings/privacy_policy/privacy_policy_page.dart';
 import 'package:yousafe/features/settings/settings_page.dart';
+import 'package:yousafe/features/settings/terms/use_terms_view.dart';
 import 'package:yousafe/features/splash/splash_page.dart';
-import 'package:yousafe/features/terms/use_terms_view.dart';
 import 'package:yousafe/features/welcome/old/welcome_provider.dart';
 import 'package:yousafe/features/welcome/welcome_page.dart';
 
 class AppRouter {
   static var router = GoRouter(
-    initialLocation: Routes.bottomView,
+    initialLocation: Routes.splash,
     debugLogDiagnostics: true,
     // redirect: _redirect,
     // refreshListenable: authRepository,
@@ -91,7 +93,21 @@ class AppRouter {
         path: Routes.privacyPolicy,
         pageBuilder: (context, state) => slideTransitionPage(
           key: state.pageKey,
-          child: const PrivacyPolicyView(),
+          child: const PrivacyPolicyPage(),
+        ),
+      ),
+      GoRoute(
+        path: Routes.profileEdit,
+        pageBuilder: (context, state) => slideTransitionPage(
+          key: state.pageKey,
+          child: const ProfileEditPage(),
+        ),
+      ),
+      GoRoute(
+        path: Routes.help,
+        pageBuilder: (context, state) => slideTransitionPage(
+          key: state.pageKey,
+          child: const HelpPage(),
         ),
       ),
       GoRoute(

@@ -5,7 +5,7 @@ import 'package:yousafe/features/auth/register/components/form_contact_info.dart
 import 'package:yousafe/features/auth/register/components/form_personal_info.dart';
 import 'package:yousafe/features/auth/register/components/form_security_info.dart';
 import 'package:yousafe/features/auth/register/components/register_account_progress_indicator.dart';
-import 'package:yousafe/shared/animation/slide_fade_animator.dart';
+import 'package:yousafe/shared/animation/slide_fade_transition_animator.dart';
 import 'package:yousafe/shared/components/buttons/primary_button.dart';
 import 'package:yousafe/shared/components/buttons/secondary_outline_button.dart';
 import 'package:yousafe/shared/components/primary_app_bar.dart';
@@ -57,7 +57,7 @@ class _RegisterAccountPageState extends State<RegisterAccountPage> {
       backgroundColor: AppColors.background,
       appBar: PrimaryAppBar(title: context.strings.registerAccountAppbar),
       body: SafeArea(
-        child: SlideFadeAnimator(
+        child: SlideFadeTransitionAnimator(
           delay: Duration(milliseconds: 100),
           child: Column(
             children: [

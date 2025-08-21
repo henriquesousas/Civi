@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:yousafe/app/router/router_config.dart';
 import 'package:yousafe/features/profile/components/profile_app_bar.dart';
+import 'package:yousafe/features/profile/components/profile_logout_section.dart';
+import 'package:yousafe/features/profile/components/profile_menu.dart';
 import 'package:yousafe/features/profile/components/profile_menu_section.dart';
-import 'package:yousafe/features/profile/profile_logout_section.dart';
-import 'package:yousafe/features/profile/profile_menu.dart';
 
 import '../../app/theme/app_colors.dart';
 
@@ -75,35 +76,35 @@ class _ProfilePageState extends State<ProfilePage>
         icon: Icons.edit_outlined,
         title: 'Conta',
         subtitle: 'Altere suas informações pessoais',
-        route: '/edit-profile',
+        route: Routes.profileEdit,
         color: AppColors.primary,
       ),
       const ProfileMenu(
         icon: Icons.password,
         title: 'Mudar senha',
         subtitle: 'Altere sua senha nesta opção',
-        route: '/change-password',
+        route: Routes.profileEdit,
         color: AppColors.primary,
       ),
       const ProfileMenu(
         icon: Icons.inventory_2_outlined,
         title: 'Meus itens',
         subtitle: 'Seus items cadastrados',
-        route: '/ride-history',
+        route: Routes.profileEdit,
         color: AppColors.primary,
       ),
       const ProfileMenu(
         icon: Icons.settings_outlined,
         title: 'Settings',
         subtitle: 'Preferences e politicas de privacidade',
-        route: '/settings',
+        route: Routes.settings,
         color: AppColors.primary,
       ),
       const ProfileMenu(
         icon: Icons.help_outline_rounded,
         title: 'Ajuda',
         subtitle: 'Obtenha ajuda ou fale com a gente',
-        route: '/help-support',
+        route: Routes.help,
         color: AppColors.primary,
       ),
     ];

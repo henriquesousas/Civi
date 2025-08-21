@@ -11,6 +11,8 @@ class Routes {
   static const faq = "/faq";
   static const terms = "/terms";
   static const privacyPolicy = "/privacy_policy";
+  static const profileEdit = "/profile_edit";
+  static const help = "/help";
 
   // OLD
   static const home = "/home";

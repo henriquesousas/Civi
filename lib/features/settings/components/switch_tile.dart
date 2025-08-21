@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:yousafe/shared/extensions/text_style_extension.dart';
 
-import '../../app/theme/app_colors.dart';
+import '../../../app/theme/app_colors.dart';
 
 class SwitchTile extends StatelessWidget {
   final String title;

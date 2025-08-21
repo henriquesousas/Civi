@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:yousafe/app/theme/app_colors.dart';
 import 'package:yousafe/app/localization/image_config.dart';
-import 'package:yousafe/app/theme/size_config.dart';
 import 'package:yousafe/app/localization/string_config.dart';
+import 'package:yousafe/app/theme/app_colors.dart';
+import 'package:yousafe/app/theme/size_config.dart';
+import 'package:yousafe/features/settings/faq/components/ui_expansion_tile.dart';
 import 'package:yousafe/shared/extensions/text_style_extension.dart';
-import 'package:yousafe/features/faq/components/ui_expansion_tile.dart';
 
 class QuestionView extends StatelessWidget {
   const QuestionView({super.key});
@@ -22,8 +22,8 @@ class QuestionView extends StatelessWidget {
           ),
           child: Row(
             children: [
-              Image(
-                image: const AssetImage(ImageConfig.backArrow),
+              const Image(
+                image: AssetImage(ImageConfig.backArrow),
                 width: SizeConfig.width24,
                 height: SizeConfig.height24,
                 color: AppColors.primaryColor,
@@ -45,8 +45,8 @@ class QuestionView extends StatelessWidget {
               bottom: SizeConfig.padding10,
             ),
             child: GestureDetector(
-              child: Image(
-                image: const AssetImage(ImageConfig.search),
+              child: const Image(
+                image: AssetImage(ImageConfig.search),
                 width: SizeConfig.width20,
                 height: SizeConfig.height20,
                 color: AppColors.primaryColor,
@@ -55,8 +55,8 @@ class QuestionView extends StatelessWidget {
           )
         ],
       ),
-      body: Padding(
-        padding: const EdgeInsets.only(
+      body: const Padding(
+        padding: EdgeInsets.only(
           left: SizeConfig.padding24,
           right: SizeConfig.padding24,
           top: SizeConfig.padding24,

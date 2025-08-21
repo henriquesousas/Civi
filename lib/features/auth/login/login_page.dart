@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:yousafe/features/auth/login/components/login_welcome_section.dart';
-import 'package:yousafe/shared/animation/slide_fade_animator.dart';
+import 'package:yousafe/shared/animation/slide_fade_transition_animator.dart';
 import 'package:yousafe/shared/extensions/screen_size_extension.dart';
 
 import '../../../app/theme/app_colors.dart';
@@ -32,7 +32,7 @@ class _LoginPageState extends State<LoginPage> {
           child: SingleChildScrollView(
             physics: const BouncingScrollPhysics(),
             padding: EdgeInsets.all(context.responsiveText(0.06)),
-            child: const SlideFadeAnimator(
+            child: const SlideFadeTransitionAnimator(
               delay: Duration(milliseconds: 300),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,

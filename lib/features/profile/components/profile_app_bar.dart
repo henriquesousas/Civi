@@ -22,6 +22,7 @@ class ProfileAppBar extends StatelessWidget {
           child: Padding(
             padding: const EdgeInsets.all(24),
             child: Column(
+              spacing: 10,
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Container(
@@ -41,15 +42,14 @@ class ProfileAppBar extends StatelessWidget {
                     size: 50,
                   ),
                 ),
-                const SizedBox(height: 16),
                 Text(
                   "Jhon Doe",
-                  style: context.getTextStyle.mediumLarge.copyWith(
+                  style: context.getTextStyle.regular.copyWith(
                     color: Colors.white,
-                    fontSize: context.responsiveText(0.05),
+                    fontWeight: FontWeight.bold,
+                    fontSize: context.responsiveText(0.07),
                   ),
                 ),
-                const SizedBox(height: 16),
                 Text(
                   "Membro desde Março de 2023",
                   style: context.getTextStyle.small.copyWith(
@@ -57,7 +57,6 @@ class ProfileAppBar extends StatelessWidget {
                     fontWeight: FontWeight.normal,
                   ),
                 ),
-                const SizedBox(height: 16),
                 const UIVerificationFlag(isVerified: true),
               ],
             ),
