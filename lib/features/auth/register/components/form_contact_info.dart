@@ -11,7 +11,7 @@ class FormContactInfo extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
-      padding: EdgeInsets.all(24),
+      padding: const EdgeInsets.all(24),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -19,21 +19,21 @@ class FormContactInfo extends StatelessWidget {
             title: context.strings.formContactTitle,
             subtitle: context.strings.formContactSubtitle,
           ),
-          SizedBox(height: 32),
+          const SizedBox(height: 32),
           PrimaryTextField(
             labelText: context.strings.labelTextEmail,
             hintText: context.strings.hintEmail,
-            prefixIcon: Icon(
+            prefixIcon: const Icon(
               Icons.email_outlined,
               color: AppColors.textSecondary,
               size: 20,
             ),
           ),
-          SizedBox(height: 10),
+          const SizedBox(height: 10),
           PrimaryTextField(
             labelText: context.strings.registerAccountLabelTextPhone,
             hintText: context.strings.registerAccountLabelHintPhone,
-            prefixIcon: Icon(
+            prefixIcon: const Icon(
               Icons.phone_outlined,
               color: AppColors.textSecondary,
               size: 20,

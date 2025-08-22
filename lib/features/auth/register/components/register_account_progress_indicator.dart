@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:yousafe/features/auth/register/components/progress_indicator_label.dart';
 import 'package:yousafe/shared/extensions/context_extension.dart';
+
 import '../../../../app/theme/app_colors.dart' show AppColors;
 
+//TODO : Remover
 enum Steps {
   personal(0),
   contact(1),
@@ -25,12 +27,10 @@ class RegisterAccountProgressIndicator extends StatefulWidget {
 
 class _RegisterAccountProgressIndicatorState
     extends State<RegisterAccountProgressIndicator> {
-  // final int _totalSteps = 3;
-
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: EdgeInsets.all(24),
+      padding: const EdgeInsets.all(24),
       child: Column(
         spacing: 16,
         children: [
@@ -44,7 +44,7 @@ class _RegisterAccountProgressIndicatorState
                     children: [
                       Expanded(
                         child: AnimatedContainer(
-                          duration: Duration(milliseconds: 300),
+                          duration: const Duration(milliseconds: 300),
                           height: 4,
                           decoration: BoxDecoration(
                             color:
@@ -53,7 +53,8 @@ class _RegisterAccountProgressIndicatorState
                           ),
                         ),
                       ),
-                      if (index < widget.totalStep - 1) SizedBox(width: 8),
+                      if (index < widget.totalStep - 1)
+                        const SizedBox(width: 8),
                     ],
                   ),
                 );

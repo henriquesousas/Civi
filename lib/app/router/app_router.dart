@@ -6,6 +6,8 @@ import 'package:yousafe/features/auth/otp/otp_verification_page.dart';
 import 'package:yousafe/features/auth/register/register_account_page.dart';
 import 'package:yousafe/features/favorites/favourite_view.dart';
 import 'package:yousafe/features/home/home_view.dart';
+import 'package:yousafe/features/itens/create_new_item_page.dart';
+import 'package:yousafe/features/itens/my_items_page.dart';
 import 'package:yousafe/features/main/main_page.dart';
 import 'package:yousafe/features/onboarding/onboarding_page.dart';
 import 'package:yousafe/features/product/product_detail_view.dart';
@@ -108,6 +110,20 @@ class AppRouter {
         pageBuilder: (context, state) => slideTransitionPage(
           key: state.pageKey,
           child: const HelpPage(),
+        ),
+      ),
+      GoRoute(
+        path: Routes.myItems,
+        pageBuilder: (context, state) => slideTransitionPage(
+          key: state.pageKey,
+          child: const MyItemsPage(),
+        ),
+      ),
+      GoRoute(
+        path: Routes.createNewItem,
+        pageBuilder: (context, state) => slideTransitionPage(
+          key: state.pageKey,
+          child: const CreateNewItemPage(),
         ),
       ),
       GoRoute(

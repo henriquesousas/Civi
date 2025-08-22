@@ -7,6 +7,7 @@ abstract class BaseButton extends StatelessWidget {
   final VoidCallback? onPressed;
   final EdgeInsets? padding;
   final double? height;
+  final double? width;
   final double? borderRadius;
   final TextStyle? textStyle;
 
@@ -16,6 +17,7 @@ abstract class BaseButton extends StatelessWidget {
     this.onPressed,
     this.padding,
     this.height,
+    this.width,
     this.borderRadius,
     this.textStyle,
     this.backgroundColor,
@@ -27,7 +29,7 @@ abstract class BaseButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      width: double.infinity,
+      width: width ?? double.infinity,
       child: ElevatedButton(
         onPressed: onPressed,
         style: ElevatedButton.styleFrom(

@@ -4,7 +4,6 @@ import 'package:yousafe/app/router/router_config.dart';
 import 'package:yousafe/features/auth/register/components/form_contact_info.dart';
 import 'package:yousafe/features/auth/register/components/form_personal_info.dart';
 import 'package:yousafe/features/auth/register/components/form_security_info.dart';
-import 'package:yousafe/features/auth/register/components/register_account_progress_indicator.dart';
 import 'package:yousafe/shared/animation/slide_fade_transition_animator.dart';
 import 'package:yousafe/shared/components/buttons/primary_button.dart';
 import 'package:yousafe/shared/components/buttons/secondary_outline_button.dart';
@@ -12,6 +11,7 @@ import 'package:yousafe/shared/components/primary_app_bar.dart';
 import 'package:yousafe/shared/extensions/context_extension.dart';
 
 import '../../../app/theme/app_colors.dart';
+import '../../../shared/components/progress_indicator/step_indicator.dart';
 
 class RegisterAccountPage extends StatefulWidget {
   const RegisterAccountPage({super.key});
@@ -24,6 +24,12 @@ class _RegisterAccountPageState extends State<RegisterAccountPage> {
   final PageController _pageController = PageController();
   final int _totalStep = 3;
   int _currentStep = 0;
+
+  final List<String> _titles = [
+    "Dados pessoais",
+    "Contato",
+    "Segurança",
+  ];
 
   void _previousStep() {
     setState(() {
@@ -58,18 +64,21 @@ class _RegisterAccountPageState extends State<RegisterAccountPage> {
       appBar: PrimaryAppBar(title: context.strings.registerAccountAppbar),
       body: SafeArea(
         child: SlideFadeTransitionAnimator(
-          delay: Duration(milliseconds: 100),
+          delay: const Duration(milliseconds: 100),
           child: Column(
             children: [
-              RegisterAccountProgressIndicator(
-                currentStep: _currentStep,
-                totalStep: _totalStep,
+              Padding(
+                padding: const EdgeInsets.all(24),
+                child: StepIndicator(
+                  currentStep: _currentStep,
+                  titles: _titles,
+                ),
               ),
               Expanded(
                 child: PageView(
                   controller: _pageController,
                   physics: const NeverScrollableScrollPhysics(),
-                  children: [
+                  children: const [
                     FormPersonalInfo(),
                     FormContactInfo(),
                     FormSecurityInfo(),

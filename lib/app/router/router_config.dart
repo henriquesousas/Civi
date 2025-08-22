@@ -13,15 +13,15 @@ class Routes {
   static const privacyPolicy = "/privacy_policy";
   static const profileEdit = "/profile_edit";
   static const help = "/help";
+  static const myItems = "/my_items";
+  static const createNewItem = "/create-new-item";
 
   // OLD
   static const home = "/home";
-
   static const onboarding2 = "/onboarding";
   static const profile = "/profile";
   static const myProfile = "/my_profile";
   static const favorites = "/favorites";
-
   static const aboutUs = "/about_us";
   static const productDetail = "/product_detail";
 }

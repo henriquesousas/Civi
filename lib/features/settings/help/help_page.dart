@@ -69,22 +69,20 @@ class _HelpPageState extends State<HelpPage> {
       appBar: const PrimaryAppBar(title: "Ajuda"),
       bottomNavigationBar: Padding(
         padding: const EdgeInsets.all(30),
-        child: Container(
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              Text(
-                "Todos os direitos reservado",
-                style: context.getTextStyle.small.copyWith(
-                  fontWeight: FontWeight.bold,
-                ),
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            Text(
+              "Todos os direitos reservado",
+              style: context.getTextStyle.small.copyWith(
+                fontWeight: FontWeight.bold,
               ),
-              Text(
-                "Desenvolvido por Àtomos LTDA",
-                style: context.getTextStyle.small,
-              ),
-            ],
-          ),
+            ),
+            Text(
+              "Desenvolvido por Àtomos LTDA",
+              style: context.getTextStyle.small,
+            ),
+          ],
         ),
       ),
       body: FadeSlideTransitionAnimator(
@@ -115,9 +113,9 @@ class _HelpPageState extends State<HelpPage> {
                 physics: const NeverScrollableScrollPhysics(),
                 gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                   crossAxisCount: 2,
-                  crossAxisSpacing: 12,
-                  mainAxisSpacing: 12,
-                  childAspectRatio: 0.8,
+                  crossAxisSpacing: 6,
+                  mainAxisSpacing: 6,
+                  childAspectRatio: 0.9,
                 ),
                 itemCount: _supportOptions.length,
                 itemBuilder: (context, index) {

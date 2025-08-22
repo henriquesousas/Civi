@@ -11,7 +11,7 @@ class FormPersonalInfo extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
-      padding: EdgeInsets.all(24),
+      padding: const EdgeInsets.all(24),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -19,21 +19,21 @@ class FormPersonalInfo extends StatelessWidget {
             title: context.strings.formPersonalDataSubtitle,
             subtitle: context.strings.tellAboutYou,
           ),
-          SizedBox(height: 32),
+          const SizedBox(height: 32),
           PrimaryTextField(
             labelText: context.strings.registerAccountLabelTextName,
             hintText: context.strings.registerAccountLabelHintName,
-            prefixIcon: Icon(
+            prefixIcon: const Icon(
               Icons.person_outline,
               color: AppColors.textSecondary,
               size: 20,
             ),
           ),
-          SizedBox(height: 10),
+          const SizedBox(height: 10),
           PrimaryTextField(
             labelText: context.strings.registerAccountLabelTextSurname,
             hintText: context.strings.registerAccountLabelHintSurname,
-            prefixIcon: Icon(
+            prefixIcon: const Icon(
               Icons.person_outline,
               color: AppColors.textSecondary,
               size: 20,

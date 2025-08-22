@@ -8,6 +8,7 @@ class PrimaryTextField extends StatelessWidget {
   final Widget? suffixIcon;
   final TextInputType? textInputType;
   final bool? obscureText;
+  final int? maxLine;
   const PrimaryTextField({
     super.key,
     required this.labelText,
@@ -16,6 +17,7 @@ class PrimaryTextField extends StatelessWidget {
     this.textInputType = TextInputType.text,
     this.suffixIcon,
     this.obscureText,
+    this.maxLine = 1,
   });
 
   @override
@@ -24,6 +26,7 @@ class PrimaryTextField extends StatelessWidget {
       keyboardType: textInputType,
       textInputAction: TextInputAction.next,
       obscureText: obscureText ?? false,
+      maxLines: maxLine,
       style: context.getTextStyle.regular.copyWith(
         height: 1.4,
         letterSpacing: 0.1,

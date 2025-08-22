@@ -90,7 +90,7 @@ class _ProfilePageState extends State<ProfilePage>
         icon: Icons.inventory_2_outlined,
         title: 'Meus itens',
         subtitle: 'Seus items cadastrados',
-        route: Routes.profileEdit,
+        route: Routes.myItems,
         color: AppColors.primary,
       ),
       const ProfileMenu(

@@ -8,6 +8,7 @@ class PrimaryButton extends BaseButton {
     super.key,
     required super.text,
     required super.onPressed,
+    super.width,
   });
 
   @override
