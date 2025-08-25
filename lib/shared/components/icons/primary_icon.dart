@@ -7,12 +7,14 @@ class PrimaryIcon extends StatelessWidget {
   final double? borderRadius;
   final double? width;
   final double? height;
+  final LinearGradient? background;
   const PrimaryIcon(
       {super.key,
       required this.icon,
       this.borderRadius,
       this.width,
-      this.height});
+      this.height,
+      this.background});
 
   @override
   Widget build(BuildContext context) {
@@ -20,7 +22,7 @@ class PrimaryIcon extends StatelessWidget {
       width: width ?? 60,
       height: height ?? 60,
       decoration: BoxDecoration(
-        gradient: AppColors.primaryGradient,
+        gradient: background ?? AppColors.primaryGradient,
         borderRadius: BorderRadius.circular(borderRadius ?? 16),
         boxShadow: [
           BoxShadow(

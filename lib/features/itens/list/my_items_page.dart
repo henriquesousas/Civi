@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:yousafe/app/localization/image_config.dart';
 import 'package:yousafe/app/router/router_config.dart';
-import 'package:yousafe/features/itens/components/my_items.dart';
-import 'package:yousafe/features/itens/components/my_items_card.dart';
+import 'package:yousafe/features/itens/list/my_items_card.dart';
+import 'package:yousafe/features/itens/my_items.dart';
 import 'package:yousafe/shared/animation/fade_slide_transition_animator.dart';
 import 'package:yousafe/shared/components/primary_app_bar.dart';
 import 'package:yousafe/shared/extensions/text_style_extension.dart';
@@ -57,7 +57,12 @@ class _MyItemsPageState extends State<MyItemsPage> {
           itemCount: _menuItems.length,
           itemBuilder: (context, index) {
             final item = _menuItems[index];
-            return MyItemsCard(item: item);
+            return MyItemsCard(
+              item: item,
+              onTap: () => context.push(
+                Routes.itemEdit,
+              ),
+            );
           },
         ),
       ),

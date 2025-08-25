@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:yousafe/app/theme/app_colors.dart';
-import 'package:yousafe/features/itens/components/step_colors.dart';
+import 'package:yousafe/features/itens/create/components/step_colors.dart';
 import 'package:yousafe/shared/extensions/text_style_extension.dart';
 
-import '../../../shared/components/inputs/primary_text_field.dart';
+import '../../../../shared/components/inputs/primary_text_field.dart';
 import 'header.dart';
 
 class FormStepDetail extends StatefulWidget {

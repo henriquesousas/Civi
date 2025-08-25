@@ -6,11 +6,12 @@ import 'package:yousafe/features/auth/otp/otp_verification_page.dart';
 import 'package:yousafe/features/auth/register/register_account_page.dart';
 import 'package:yousafe/features/favorites/favourite_view.dart';
 import 'package:yousafe/features/home/home_view.dart';
-import 'package:yousafe/features/itens/create_new_item_page.dart';
-import 'package:yousafe/features/itens/my_items_page.dart';
+import 'package:yousafe/features/itens/create/create_new_item_page.dart';
+import 'package:yousafe/features/itens/edit/item_edit_page.dart';
+import 'package:yousafe/features/itens/list/my_items_page.dart';
 import 'package:yousafe/features/main/main_page.dart';
+import 'package:yousafe/features/occurrence/occurrence_detail_page.dart';
 import 'package:yousafe/features/onboarding/onboarding_page.dart';
-import 'package:yousafe/features/product/product_detail_view.dart';
 import 'package:yousafe/features/profile/old/profile_edit_view.dart';
 import 'package:yousafe/features/profile/profile_edit_page.dart';
 import 'package:yousafe/features/profile/profile_provider.dart';
@@ -40,6 +41,13 @@ class AppRouter {
         pageBuilder: (context, state) => slideTransitionPage(
           key: state.pageKey,
           child: const OnboardingPage(),
+        ),
+      ),
+      GoRoute(
+        path: Routes.itemEdit,
+        pageBuilder: (context, state) => slideTransitionPage(
+          key: state.pageKey,
+          child: const ItemEditPage(),
         ),
       ),
       GoRoute(
@@ -152,7 +160,7 @@ class AppRouter {
       ),
       GoRoute(
         path: Routes.productDetail,
-        builder: (context, state) => ProductDetailView(),
+        builder: (context, state) => const OccurrenceDetailPage(),
       ),
       GoRoute(
         path: Routes.bottomView,

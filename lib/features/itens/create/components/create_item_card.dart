@@ -3,7 +3,7 @@ import 'package:yousafe/features/itens/my_item.dart';
 import 'package:yousafe/shared/extensions/screen_size_extension.dart';
 import 'package:yousafe/shared/extensions/text_style_extension.dart';
 
-import '../../../app/theme/app_colors.dart';
+import '../../../../app/theme/app_colors.dart';
 
 class CreateItemCard extends StatelessWidget {
   final MyItem item;
@@ -78,8 +78,8 @@ class CreateItemCard extends StatelessWidget {
             Text(
               item.name,
               style: context.getTextStyle.regular.copyWith(
-                color: item.isSelected ? Colors.white : AppColors.textColor,
-                fontWeight: item.isSelected ? FontWeight.w600 : FontWeight.w400,
+                color: item.isSelected ? Colors.white : AppColors.blackColor,
+                fontWeight: item.isSelected ? FontWeight.w600 : FontWeight.w500,
                 fontSize: context.responsiveText(0.033),
               ),
               textAlign: TextAlign.center,

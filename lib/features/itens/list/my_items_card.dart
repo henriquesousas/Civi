@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:yousafe/features/itens/components/my_items.dart';
+import 'package:yousafe/features/itens/my_items.dart';
 import 'package:yousafe/shared/extensions/text_style_extension.dart';
 
 import '../../../app/theme/app_colors.dart';
 
 class MyItemsCard extends StatelessWidget {
   final MyItems item;
-  const MyItemsCard({super.key, required this.item});
+  final VoidCallback onTap;
+  const MyItemsCard({super.key, required this.item, required this.onTap});
 
   @override
   Widget build(BuildContext context) {
@@ -68,7 +69,9 @@ class MyItemsCard extends StatelessWidget {
                     children: [
                       Text(
                         item.name,
-                        style: context.getTextStyle.mediumSmall,
+                        style: context.getTextStyle.mediumSmall.copyWith(
+                          fontWeight: FontWeight.w600,
+                        ),
                       ),
                       Container(
                         height: 30,
@@ -76,13 +79,15 @@ class MyItemsCard extends StatelessWidget {
                           color: AppColors.border,
                           borderRadius: BorderRadius.circular(10),
                         ),
-                        child: TextButton(
-                          onPressed: () {},
-                          child: Text(
-                            "Editar",
-                            style: context.getTextStyle.small.copyWith(
-                              fontWeight: FontWeight.w100,
-                              color: AppColors.textSecondary,
+                        child: Center(
+                          child: TextButton(
+                            onPressed: onTap,
+                            child: Text(
+                              "Editar",
+                              style: context.getTextStyle.small.copyWith(
+                                fontWeight: FontWeight.w500,
+                                color: AppColors.textSecondary,
+                              ),
                             ),
                           ),
                         ),

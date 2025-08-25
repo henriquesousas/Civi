@@ -21,7 +21,9 @@ class FaqPage extends StatelessWidget {
     TextStyle getStyle(
         BuildContext context, Set<int> expandedIndexes, int currentIndex) {
       return expandedIndexes.contains(currentIndex)
-          ? context.getTextStyle.regular
+          ? context.getTextStyle.smallMedium.copyWith(
+              fontWeight: FontWeight.w600,
+            )
           : context.getTextStyle.smallMedium;
     }
 

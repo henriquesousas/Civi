@@ -15,6 +15,7 @@ class Routes {
   static const help = "/help";
   static const myItems = "/my_items";
   static const createNewItem = "/create-new-item";
+  static const itemEdit = "/item-edit";
 
   // OLD
   static const home = "/home";

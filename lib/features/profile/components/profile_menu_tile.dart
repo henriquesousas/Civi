@@ -42,7 +42,7 @@ class ProfileMenuTile extends StatelessWidget {
                       item.title,
                       style: context.getTextStyle.smallMedium.copyWith(
                         color: AppColors.textPrimary,
-                        fontWeight: FontWeight.w600,
+                        fontWeight: FontWeight.w500,
                       ),
                     ),
                     const SizedBox(height: 4),
@@ -50,6 +50,7 @@ class ProfileMenuTile extends StatelessWidget {
                       item.subtitle,
                       style: context.getTextStyle.small.copyWith(
                         color: AppColors.textSecondary,
+                        fontWeight: FontWeight.w300,
                       ),
                     ),
                   ],

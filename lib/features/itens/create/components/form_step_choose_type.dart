@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:yousafe/features/itens/components/create_item_card.dart';
-import 'package:yousafe/features/itens/components/header.dart';
+import 'package:yousafe/features/itens/create/components/create_item_card.dart';
+import 'package:yousafe/features/itens/create/components/header.dart';
 
-import '../my_item.dart';
+import '../../my_item.dart';
 
 class FormStepChooseType extends StatefulWidget {
   const FormStepChooseType({super.key});

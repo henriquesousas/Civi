@@ -1,15 +1,15 @@
 import 'package:flutter/material.dart';
-import 'package:yousafe/features/itens/components/form_step_detail.dart';
-import 'package:yousafe/features/itens/components/form_step_obs.dart';
-import 'package:yousafe/features/itens/components/form_step_photo.dart';
+import 'package:yousafe/features/itens/create/components/form_step_detail.dart';
+import 'package:yousafe/features/itens/create/components/form_step_photo.dart';
 import 'package:yousafe/shared/animation/fade_slide_transition_animator.dart';
 import 'package:yousafe/shared/components/buttons/primary_button.dart';
 import 'package:yousafe/shared/components/primary_app_bar.dart';
 import 'package:yousafe/shared/extensions/context_extension.dart';
 
-import '../../shared/components/buttons/secondary_outline_button.dart';
-import '../../shared/components/progress_indicator/step_indicator.dart';
+import '../../../shared/components/buttons/secondary_outline_button.dart';
+import '../../../shared/components/progress_indicator/step_indicator.dart';
 import 'components/form_step_choose_type.dart';
+import 'components/form_step_obs.dart';
 
 class CreateNewItemPage extends StatefulWidget {
   const CreateNewItemPage({super.key});

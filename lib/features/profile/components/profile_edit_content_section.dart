@@ -44,6 +44,7 @@ class ProfileEditContentSection extends StatelessWidget {
                 title,
                 style: context.getTextStyle.mediumSmall.copyWith(
                   color: AppColors.textPrimary,
+                  fontWeight: FontWeight.w600,
                 ),
               ),
             ],

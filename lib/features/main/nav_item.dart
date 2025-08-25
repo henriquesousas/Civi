@@ -128,8 +128,7 @@ class _NavItemState extends State<NavItem> with TickerProviderStateMixin {
                     ? widget.item.color
                     : AppColors.textSecondary,
                 fontSize: 11, //SizeConfig.getTextSize(isSelected ? 11 : 10),
-                fontWeight: FontWeight
-                    .w600, //isSelected ? FontWeight.w600 : FontWeight.w500,
+                fontWeight: FontWeight.normal,
                 height: 1.0,
               ),
               child: Text(
@@ -138,7 +137,8 @@ class _NavItemState extends State<NavItem> with TickerProviderStateMixin {
                 maxLines: 1,
                 overflow: TextOverflow.ellipsis,
                 style: context.getTextStyle.small.copyWith(
-                  fontWeight: FontWeight.bold,
+                  fontWeight:
+                      widget.isSelected ? FontWeight.w700 : FontWeight.w500,
                 ),
               ),
             ),

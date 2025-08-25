@@ -9,23 +9,25 @@ class TextStyles {
     return _instance!;
   }
 
-  static const String _lexendLight = "Lexend_Light";
-  static const String _lexendRegular = "Lexend_Regular";
-  static const String _lexendMedium = "Lexend_Medium";
+  // static const String _lexendLight = "Lexend_Light";
+  // static const String _lexendRegular = "Lexend_Regular";
+  // static const String _lexendMedium = "Lexend_Medium";
+  // static const String _poppins = "Poppins";
+  static const String _font = "Poppins";
 
   static const TextStyle textLight = TextStyle(
-    fontFamily: _lexendLight,
-    fontWeight: FontWeight.w300,
+    fontFamily: _font,
+    fontWeight: FontWeight.w400,
   );
 
   static const TextStyle textRegular = TextStyle(
-    fontFamily: _lexendRegular,
+    fontFamily: _font,
     fontWeight: FontWeight.w400,
   );
 
   static const TextStyle textMedium = TextStyle(
-    fontFamily: _lexendMedium,
-    fontWeight: FontWeight.w100,
+    fontFamily: _font,
+    fontWeight: FontWeight.w400,
   );
 
   TextStyle get small => textLight.copyWith(fontSize: 12);

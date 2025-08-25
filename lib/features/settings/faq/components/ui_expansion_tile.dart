@@ -60,9 +60,12 @@ class UiExpansionTile extends StatelessWidget {
             }
           },
           children: [
-            Divider(color: AppColors.lineColor, height: 0),
+            const Divider(color: AppColors.lineColor, height: 0),
             const SizedBox(height: SizeConfig.height12),
-            Text(answer, style: context.getTextStyle.small),
+            Text(answer,
+                style: context.getTextStyle.small.copyWith(
+                  color: AppColors.textSecondary,
+                )),
           ],
         ),
       ),

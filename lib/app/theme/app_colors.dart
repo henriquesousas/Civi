@@ -83,6 +83,15 @@ class AppColors {
     ],
   );
 
+  static LinearGradient lightGradient = LinearGradient(
+    begin: Alignment.topLeft,
+    end: Alignment.bottomRight,
+    colors: [
+      Colors.white,
+      Colors.grey,
+    ],
+  );
+
   /// OLD Version
   ///Light Version
   static const Color primaryColor = Color(0XFF212121);
