@@ -11,7 +11,7 @@ class HelpCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: const EdgeInsets.all(16),
+      padding: const EdgeInsets.symmetric(horizontal: 16),
       decoration: BoxDecoration(
         color: Colors.white,
         borderRadius: BorderRadius.circular(16),
@@ -63,9 +63,8 @@ class HelpCard extends StatelessWidget {
           const SizedBox(height: 4),
           Text(
             helpOption.subtitle,
-            style: context.getTextStyle.small.copyWith(
-              color: AppColors.textSecondary,
-            ),
+            style: context.getTextStyle.small
+                .copyWith(color: AppColors.textSecondary, fontSize: 11),
             textAlign: TextAlign.center,
           ),
           const SizedBox(height: 8),

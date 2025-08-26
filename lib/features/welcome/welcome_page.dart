@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:yousafe/app/router/router_config.dart';
-import 'package:yousafe/features/welcome/components/confetti_animation.dart';
 import 'package:yousafe/features/welcome/components/welcome_card.dart';
 import 'package:yousafe/features/welcome/welcome_feature.dart';
 import 'package:yousafe/shared/animation/slide_fade_transition_animator.dart';
@@ -10,7 +9,6 @@ import 'package:yousafe/shared/components/icons/primary_icon.dart';
 import 'package:yousafe/shared/components/indicator/primary_progress_indicator.dart';
 import 'package:yousafe/shared/components/pageview/page_view_builder.dart';
 import 'package:yousafe/shared/extensions/context_extension.dart';
-import 'package:yousafe/shared/extensions/screen_size_extension.dart';
 import 'package:yousafe/shared/extensions/text_style_extension.dart';
 
 import '../../app/theme/app_colors.dart';
@@ -38,21 +36,21 @@ class _WelcomePageState extends State<WelcomePage>
     _features = [
       WelcomeFeature(
         icon: Icons.location_on_rounded,
-        title: localization.welcomeOnboardingTitle1,
+        title: "Localização",
         description: localization.welcomeOnboardingDesc1,
         gradient: AppColors.primaryGradient,
         actionText: 'Add Locations',
       ),
       WelcomeFeature(
         icon: Icons.inventory,
-        title: localization.welcomeOnboardingTitle2,
+        title: "Registre seus Ítens",
         description: localization.welcomeOnboardingDesc2,
         gradient: AppColors.secondaryGradient,
         actionText: 'Add Payment',
       ),
       WelcomeFeature(
         icon: Icons.star_rounded,
-        title: localization.welcomeOnboardingTitle3,
+        title: "Lançamento",
         description: localization.welcomeOnboardingDesc3,
         gradient: AppColors.accentGradient,
         actionText: 'Explore Features',
@@ -94,82 +92,86 @@ class _WelcomePageState extends State<WelcomePage>
       body: SafeArea(
         child: Stack(
           children: [
-            const ConfettiAnimation(),
-            Column(
-              spacing: 20,
-              children: [
-                const SizedBox(height: 30),
-                const PrimaryIcon(
-                  width: 80,
-                  height: 80,
-                  borderRadius: 50,
-                  icon: Icon(
-                    Icons.celebration_rounded,
-                    color: Colors.white,
-                    size: 40,
-                  ),
-                ),
-                Text(
-                  "${context.strings.welcomeHeader} Paulo",
-                  textAlign: TextAlign.center,
-                  style: context.getTextStyle.mediumLarge.copyWith(
-                    color: AppColors.textPrimary,
-                    fontSize: context.responsiveText(0.08),
-                  ),
-                ),
-                Text(
-                  context.strings.welcomeAccountCreatedSuccess,
-                  textAlign: TextAlign.center,
-                  style: context.getTextStyle.smallMedium.copyWith(
-                    height: 1.5,
-                    color: AppColors.textSecondary,
-                  ),
-                ),
-                Expanded(
-                  child: SlideFadeTransitionAnimator(
-                    delay: const Duration(milliseconds: 300),
-                    child: PageViewBuilder(
-                      itemCount: _totalPages,
-                      initialPage: _currentPage,
-                      itemBuilder: (context, index, controller) {
-                        _pageController = controller;
-                        return WelcomeCard(feature: _features[index]);
-                      },
-                      onPageChanged: _onPageChanged,
+            // const ConfettiAnimation(),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 10),
+              child: Column(
+                spacing: 20,
+                children: [
+                  const SizedBox(height: 30),
+                  const PrimaryIcon(
+                    width: 80,
+                    height: 80,
+                    borderRadius: 50,
+                    icon: Icon(
+                      Icons.celebration_rounded,
+                      color: Colors.white,
+                      size: 40,
                     ),
                   ),
-                ),
-                PrimaryProgressIndicator(
-                  currentPage: _currentPage,
-                  totalPage: _totalPages,
-                  selectedColor: AppColors.primary,
-                  unselectedColor: AppColors.border,
-                ),
-                Padding(
-                  padding: const EdgeInsets.symmetric(
-                    horizontal: 20,
-                    vertical: 20,
+                  Text(
+                    "${context.strings.welcomeHeader} Paulo",
+                    textAlign: TextAlign.center,
+                    style: context.getTextStyle.mediumLarge.copyWith(
+                      fontWeight: FontWeight.bold,
+                      color: AppColors.textPrimary,
+                      // fontSize: context.responsiveText(0.08),
+                    ),
                   ),
-                  child: Row(
-                    spacing: 10,
-                    children: [
-                      if (_currentPage > 0)
+                  Text(
+                    context.strings.welcomeAccountCreatedSuccess,
+                    textAlign: TextAlign.center,
+                    style: context.getTextStyle.smallMedium.copyWith(
+                      height: 1.5,
+                      color: AppColors.textSecondary,
+                    ),
+                  ),
+                  Expanded(
+                    child: SlideFadeTransitionAnimator(
+                      delay: const Duration(milliseconds: 300),
+                      child: PageViewBuilder(
+                        itemCount: _totalPages,
+                        initialPage: _currentPage,
+                        itemBuilder: (context, index, controller) {
+                          _pageController = controller;
+                          return WelcomeCard(feature: _features[index]);
+                        },
+                        onPageChanged: _onPageChanged,
+                      ),
+                    ),
+                  ),
+                  PrimaryProgressIndicator(
+                    currentPage: _currentPage,
+                    totalPage: _totalPages,
+                    selectedColor: AppColors.primary,
+                    unselectedColor: AppColors.border,
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: 20,
+                      vertical: 20,
+                    ),
+                    child: Row(
+                      spacing: 10,
+                      children: [
+                        if (_currentPage > 0)
+                          Expanded(
+                            child: SecondaryOutlineButton(
+                              text: context.strings.back,
+                              onPressed: _previousPage,
+                            ),
+                          ),
                         Expanded(
-                          child: SecondaryOutlineButton(
-                            text: context.strings.back,
-                            onPressed: _previousPage,
+                          child: PrimaryButton(
+                            text: context.strings.next,
+                            onPressed: _nextPage,
                           ),
                         ),
-                      Expanded(
-                        child: PrimaryButton(
-                          text: context.strings.next,
-                          onPressed: _nextPage,
-                        ),
-                      ),
-                    ],
+                      ],
+                    ),
                   ),
-                ),
-              ],
+                ],
+              ),
             )
           ],
         ),

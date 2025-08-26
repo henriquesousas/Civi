@@ -43,7 +43,7 @@ class OnboardingBottomSection extends StatelessWidget {
                 Expanded(
                   child: SecondaryOutlineButton(
                     text: context.strings.back,
-                    textStyle: context.getTextStyle.medium,
+                    textStyle: context.getTextStyle.regular,
                     foregroundColor: Colors.white,
                     borderColor: Colors.white,
                     onPressed: onPrevious,
@@ -52,7 +52,7 @@ class OnboardingBottomSection extends StatelessWidget {
               Expanded(
                 child: SecondaryButton(
                   text: buttonTitle,
-                  textStyle: context.getTextStyle.medium,
+                  textStyle: context.getTextStyle.regular,
                   onPressed: onNext,
                 ),
               ),

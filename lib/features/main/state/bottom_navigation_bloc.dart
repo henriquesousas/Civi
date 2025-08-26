@@ -1,6 +1,6 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:yousafe/features/favorites/favourite_view.dart';
 import 'package:yousafe/features/home/home_view.dart';
+import 'package:yousafe/features/occurrence/occurrence_page.dart';
 import 'package:yousafe/features/profile/profile_page.dart';
 import 'package:yousafe/features/settings/settings_page.dart';
 
@@ -16,7 +16,8 @@ class BottomNavigationBloc
             showBottomBar: true,
             pages: [
               const HomeView(),
-              const FavouriteView(),
+              // const FavouriteView(),
+              const OccurrencePage(),
               const ProfilePage(),
               const SettingsPage(),
             ],

@@ -1,16 +1,16 @@
 import 'package:flutter/material.dart';
-import 'package:go_router/go_router.dart';
 import 'package:yousafe/app/localization/image_config.dart';
 import 'package:yousafe/app/theme/app_colors.dart';
 import 'package:yousafe/app/theme/size_config.dart';
 import 'package:yousafe/features/favorites/components/ui_verification_flag.dart';
-import 'package:yousafe/features/favorites/favourite_model.dart';
-import 'package:yousafe/features/profile/components/profile_edit_content_section.dart';
 import 'package:yousafe/shared/components/buttons/primary_button.dart';
-import 'package:yousafe/shared/components/icons/primary_icon.dart';
+import 'package:yousafe/shared/components/primary_app_bar.dart';
 import 'package:yousafe/shared/extensions/screen_size_extension.dart';
 import 'package:yousafe/shared/extensions/text_style_extension.dart';
 
+import '../../shared/components/icons/primary_icon.dart';
+import '../favorites/favourite_model.dart';
+import '../profile/components/profile_edit_content_section.dart';
 import '../welcome/old/components/ui_dot.dart';
 
 class OccurrenceDetailPage extends StatelessWidget {
@@ -19,68 +19,23 @@ class OccurrenceDetailPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: AppColors.backgroundColor,
-      appBar: AppBar(
-        backgroundColor: AppColors.backgroundColor,
-        elevation: 0,
-        automaticallyImplyLeading: false,
-        title: Padding(
-          padding: const EdgeInsets.only(
-            left: SizeConfig.padding05,
-          ),
-          child: Row(
-            children: [
-              // IconButton(
-              //   icon: Image(
-              //     image: AssetImage(ImageConfig.backArrow),
-              //     color: AppColors.primaryColor,
-              //     width: 24,
-              //   ),
-              //   onPressed: () => Navigator.of(context).pop(),
-              // ),
-              GestureDetector(
-                onTap: () => context.pop(),
-                child: Image(
-                  image: const AssetImage(ImageConfig.backArrow),
-                  width: SizeConfig.width24,
-                  height: SizeConfig.height24,
-                  color: AppColors.primaryColor,
-                ),
-              ),
-              const SizedBox(width: SizeConfig.width10),
-              Text(
-                "Detalhes da ocorrência",
-                style: context.getTextStyle.medium.copyWith(
-                  fontWeight: FontWeight.bold,
-                ),
-              ),
-            ],
-          ),
-        ),
+      backgroundColor: AppColors.background,
+      appBar: PrimaryAppBar(
+        title: "Detalhes da ocorrência",
         actions: [
-          IconButton(
-            icon: Image(
-              image: AssetImage(ImageConfig.share),
-              width: 24,
+          Padding(
+            padding: EdgeInsets.symmetric(horizontal: 10),
+            child: IconButton(
+              icon: Icon(
+                Icons.share,
+                color: AppColors.primaryColor,
+              ),
+              onPressed: () {},
             ),
-            onPressed: () {},
-          ),
-          // IconButton(
-          //   icon: Icon(
-          //     Icons.flag_circle_outlined,
-          //     color: AppColors.primaryColor,
-          //   ),
-          //   onPressed: () {},
-          // ),
-          IconButton(
-            icon: Image(
-              image: AssetImage(ImageConfig.flag),
-              width: 24,
-            ),
-            onPressed: () {},
           ),
         ],
       ),
+
       body: SingleChildScrollView(
         physics: const BouncingScrollPhysics(),
         padding: const EdgeInsets.all(12),
@@ -88,52 +43,6 @@ class OccurrenceDetailPage extends StatelessWidget {
           // spacing: 30,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            // CustomScrollView(
-            //   slivers: [
-            //     SliverToBoxAdapter(
-            //       child: SizedBox(
-            //         // height: SizeConfig.height280,
-            //         child: Stack(
-            //           children: [
-            //             PageView.builder(
-            //               itemCount: 3,
-            //               itemBuilder: (context, index) {
-            //                 return Padding(
-            //                   padding:
-            //                       const EdgeInsets.symmetric(horizontal: 1),
-            //                   child: ClipRRect(
-            //                     borderRadius: BorderRadius.circular(8),
-            //                     child: Image.asset(
-            //                       width: context.screenWidth,
-            //                       height: SizeConfig.height280,
-            //                       ImageConfig.fakeCarro1,
-            //                       fit: BoxFit.cover,
-            //                     ),
-            //                   ),
-            //                 );
-            //               },
-            //             ),
-            //             Positioned(
-            //               bottom: 10,
-            //               left: 0,
-            //               right: 0,
-            //               child: Row(
-            //                 mainAxisAlignment: MainAxisAlignment.center,
-            //                 children: List.generate(3,
-            //                     (index) => UIDot(currentPage: 0, index: index)),
-            //               ),
-            //             ),
-            //             const Positioned(
-            //               bottom: 10,
-            //               right: 20,
-            //               child: UIVerificationFlag(isVerified: true),
-            //             ),
-            //           ],
-            //         ),
-            //       ),
-            //     ),
-            //   ],
-            // ),
             // Galeria de imagens
             SizedBox(
               height: SizeConfig.height280,
@@ -209,7 +118,7 @@ class OccurrenceDetailPage extends StatelessWidget {
                       ),
                     ],
                   ),
-                  const SizedBox(height: SizeConfig.height06),
+                  const SizedBox(height: 20),
                   Row(
                     children: [
                       // Icon(
@@ -260,11 +169,11 @@ class OccurrenceDetailPage extends StatelessWidget {
                       ),
                     ],
                   ),
-                  const SizedBox(height: SizeConfig.height16),
+                  // const SizedBox(height: SizeConfig.height16),
                 ],
               ),
             ),
-            const SizedBox(height: SizeConfig.height16),
+            const SizedBox(height: 10),
             ProfileEditContentSection(
               title: "Detalhes do veículo",
               icon: Icons.description,
@@ -476,7 +385,7 @@ class OccurrenceDetailPage extends StatelessWidget {
                   border: Border.all(color: AppColors.buttonColor),
                 ),
                 child: IconButton(
-                  icon: Icon(Icons.call, color: AppColors.buttonColor),
+                  icon: const Icon(Icons.call, color: AppColors.buttonColor),
                   onPressed: () {},
                 ),
               ),

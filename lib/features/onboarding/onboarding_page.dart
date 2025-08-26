@@ -67,14 +67,14 @@ class _OnboardingPageState extends State<OnboardingPage> {
         title: localization.onboardingTitleTwo,
         description: localization.onboardingDescriptionOne,
         icon: Icons.directions_car_rounded,
-        gradient: AppColors.secondaryGradient,
+        gradient: AppColors.primaryGradient,
         lottieAsset: null,
       ),
       OnboardingItem(
         title: localization.onboardingTitleThree,
         description: localization.onboardingDescriptionThree,
         icon: Icons.location_on_rounded,
-        gradient: AppColors.accentGradient,
+        gradient: AppColors.primaryGradient,
         lottieAsset: null,
       ),
       OnboardingItem(

@@ -24,10 +24,10 @@ class LoginWelcomeSection extends StatelessWidget {
         const SizedBox(height: 24),
         Text(
           context.strings.loginTitle,
-          style: context.getTextStyle.regular.copyWith(
+          style: context.getTextStyle.regularMedium.copyWith(
               color: AppColors.textPrimary,
-              fontSize: context.responsiveText(0.08),
-              fontWeight: FontWeight.bold),
+              fontWeight: FontWeight.bold,
+              fontSize: context.responsiveText(0.045)),
         ),
         const SizedBox(height: 10),
         Text(

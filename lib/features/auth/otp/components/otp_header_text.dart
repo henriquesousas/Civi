@@ -15,8 +15,9 @@ class OtpHeaderText extends StatelessWidget {
         Text(
           context.strings.otpInsertVerificationCode,
           textAlign: TextAlign.center,
-          style: context.getTextStyle.mediumLarge.copyWith(
+          style: context.getTextStyle.medium.copyWith(
             color: AppColors.textPrimary,
+            fontWeight: FontWeight.w600,
             height: 1.5,
           ),
         ),
@@ -26,7 +27,8 @@ class OtpHeaderText extends StatelessWidget {
           text: TextSpan(
             style: context.getTextStyle.smallMedium.copyWith(
               color: AppColors.textSecondary,
-              height: 1.5,
+              height: 2,
+              // fontSize: context.responsiveText(0.03),
             ),
             children: [
               TextSpan(
@@ -34,10 +36,15 @@ class OtpHeaderText extends StatelessWidget {
               ),
               TextSpan(
                 text: _maskedPhoneNumber,
-                style: const TextStyle(
+                style: context.getTextStyle.smallMedium.copyWith(
                   fontWeight: FontWeight.w600,
                   color: AppColors.primary,
+                  // fontSize: context.responsiveText(0.03),
                 ),
+                // style: const TextStyle(
+                //   fontWeight: FontWeight.w600,
+                //   color: AppColors.primary,
+                // ),
               ),
             ],
           ),

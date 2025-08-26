@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:yousafe/shared/extensions/screen_size_extension.dart';
 import 'package:yousafe/shared/extensions/text_style_extension.dart';
 
 import '../../../../app/theme/app_colors.dart';
@@ -16,9 +17,10 @@ class RegisterAccountHeaderTitle extends StatelessWidget {
       children: [
         Text(
           title,
-          style: context.getTextStyle.mediumLarge.copyWith(
-            color: AppColors.textPrimary,
-          ),
+          style: context.getTextStyle.regularMedium.copyWith(
+              color: AppColors.textPrimary,
+              fontWeight: FontWeight.bold,
+              fontSize: context.responsiveText(0.045)),
         ),
         const SizedBox(height: 8),
         Text(

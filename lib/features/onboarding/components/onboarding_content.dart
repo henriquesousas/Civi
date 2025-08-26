@@ -20,7 +20,7 @@ class _OnboardingContentState extends State<OnboardingContent>
       decoration: BoxDecoration(gradient: widget.page.gradient),
       child: SafeArea(
         child: Padding(
-          padding: EdgeInsetsGeometry.all(24),
+          padding: const EdgeInsetsGeometry.all(24),
           child: Column(
             children: [
               Expanded(
@@ -30,8 +30,8 @@ class _OnboardingContentState extends State<OnboardingContent>
               Expanded(
                 flex: 2,
                 child: SlideFadeTransitionAnimator(
-                  duration: Duration(milliseconds: 300),
-                  delay: Duration(milliseconds: 200),
+                  duration: const Duration(milliseconds: 300),
+                  delay: const Duration(milliseconds: 200),
                   child: OnboardingTextSection(
                     title: widget.page.title,
                     description: widget.page.description,

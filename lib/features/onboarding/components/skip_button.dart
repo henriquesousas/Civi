@@ -24,9 +24,8 @@ class SkipButton extends StatelessWidget {
         ),
         child: Text(
           context.strings.jump,
-          style: context.getTextStyle.smallMedium.copyWith(
+          style: context.getTextStyle.regular.copyWith(
             color: Colors.white.withValues(alpha: 0.8),
-            fontWeight: FontWeight.bold,
           ),
         ),
       ),

@@ -16,6 +16,7 @@ class Routes {
   static const myItems = "/my_items";
   static const createNewItem = "/create-new-item";
   static const itemEdit = "/item-edit";
+  static const occurrences = "/occurrences";
 
   // OLD
   static const home = "/home";

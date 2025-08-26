@@ -79,8 +79,10 @@ class _HelpPageState extends State<HelpPage> {
               ),
             ),
             Text(
-              "Desenvolvido por Àtomos LTDA",
-              style: context.getTextStyle.small,
+              "Desenvolvido por Àtomos LTDA - 2025",
+              style: context.getTextStyle.small.copyWith(
+                color: AppColors.textSecondary,
+              ),
             ),
           ],
         ),
@@ -103,6 +105,7 @@ class _HelpPageState extends State<HelpPage> {
                     'Contatar Suporte ',
                     style: context.getTextStyle.mediumSmall.copyWith(
                       color: AppColors.textPrimary,
+                      fontWeight: FontWeight.bold,
                     ),
                   ),
                 ],
@@ -115,7 +118,7 @@ class _HelpPageState extends State<HelpPage> {
                   crossAxisCount: 2,
                   crossAxisSpacing: 6,
                   mainAxisSpacing: 6,
-                  childAspectRatio: 0.9,
+                  childAspectRatio: 0.8,
                 ),
                 itemCount: _supportOptions.length,
                 itemBuilder: (context, index) {

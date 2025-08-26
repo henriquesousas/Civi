@@ -27,31 +27,30 @@ class DottedContainer extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            image != null  ?
-            ClipRRect(
-              borderRadius: BorderRadius.circular(10),
-              child: Image.asset(
-                ImageConfig.fakeCarro3,
-                // width: 300,
-                height: height,
-                fit: BoxFit.cover,
-              ),
-            )
-            :
-            Row(
-              spacing: 5,
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Icon(
-                  Icons.camera_alt,
-                  color: Colors.black.withValues(alpha: 0.2),
-                ),
-                Text(
-                  'Adicionar foto',
-                  style: context.getTextStyle.small,
-                ),
-              ],
-            ),
+            image != null
+                ? ClipRRect(
+                    borderRadius: BorderRadius.circular(10),
+                    child: Image.asset(
+                      ImageConfig.fakeCarro3,
+                      // width: 300,
+                      height: height,
+                      fit: BoxFit.cover,
+                    ),
+                  )
+                : Row(
+                    spacing: 5,
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Icon(
+                        Icons.camera_alt,
+                        color: Colors.black.withValues(alpha: 0.2),
+                      ),
+                      Text(
+                        'Adicionar foto',
+                        style: context.getTextStyle.small,
+                      ),
+                    ],
+                  ),
           ],
         ),
       ),

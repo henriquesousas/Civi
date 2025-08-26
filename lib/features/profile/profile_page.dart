@@ -97,7 +97,7 @@ class _ProfilePageState extends State<ProfilePage>
         icon: Icons.timeline,
         title: 'Últimas ocorrências',
         subtitle: 'Veja as últimas ocorrências registradas',
-        route: Routes.profileEdit,
+        route: Routes.occurrences,
         color: AppColors.primary,
       ),
       const ProfileMenu(

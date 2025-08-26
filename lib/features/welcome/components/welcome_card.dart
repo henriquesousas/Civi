@@ -12,7 +12,7 @@ class WelcomeCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: const EdgeInsets.all(24),
+      margin: const EdgeInsets.symmetric(horizontal: 5),
       child: Card(
         elevation: 8,
         shadowColor: Colors.black.withValues(alpha: 0.1),
@@ -33,6 +33,7 @@ class WelcomeCard extends StatelessWidget {
           ),
           padding: const EdgeInsets.all(32),
           child: Column(
+            spacing: 10,
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               PrimaryIcon(
@@ -45,13 +46,15 @@ class WelcomeCard extends StatelessWidget {
                   size: 30,
                 ),
               ),
-              const SizedBox(height: 30),
+              // const SizedBox(height: 30),
               Text(
                 feature.title,
-                style: context.getTextStyle.mediumLarge,
+                style: context.getTextStyle.mediumLarge.copyWith(
+                  fontWeight: FontWeight.bold,
+                ),
                 textAlign: TextAlign.center,
               ),
-              const SizedBox(height: 10),
+              // const SizedBox(height: 10),
               Text(
                 feature.description,
                 textAlign: TextAlign.center,

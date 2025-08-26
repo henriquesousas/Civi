@@ -11,6 +11,7 @@ import 'package:yousafe/features/itens/edit/item_edit_page.dart';
 import 'package:yousafe/features/itens/list/my_items_page.dart';
 import 'package:yousafe/features/main/main_page.dart';
 import 'package:yousafe/features/occurrence/occurrence_detail_page.dart';
+import 'package:yousafe/features/occurrence/occurrence_page.dart';
 import 'package:yousafe/features/onboarding/onboarding_page.dart';
 import 'package:yousafe/features/profile/old/profile_edit_view.dart';
 import 'package:yousafe/features/profile/profile_edit_page.dart';
@@ -27,7 +28,7 @@ import 'package:yousafe/features/welcome/welcome_page.dart';
 
 class AppRouter {
   static var router = GoRouter(
-    initialLocation: Routes.bottomView,
+    initialLocation: Routes.splash,
     debugLogDiagnostics: true,
     // redirect: _redirect,
     // refreshListenable: authRepository,
@@ -62,6 +63,13 @@ class AppRouter {
         pageBuilder: (context, state) => slideTransitionPage(
           key: state.pageKey,
           child: const LoginPage(),
+        ),
+      ),
+      GoRoute(
+        path: Routes.occurrences,
+        pageBuilder: (context, state) => slideTransitionPage(
+          key: state.pageKey,
+          child: const OccurrencePage(),
         ),
       ),
       GoRoute(
@@ -135,6 +143,13 @@ class AppRouter {
         ),
       ),
       GoRoute(
+        path: Routes.productDetail,
+        pageBuilder: (context, state) => slideTransitionPage(
+          key: state.pageKey,
+          child: const OccurrenceDetailPage(),
+        ),
+      ),
+      GoRoute(
         path: Routes.onboarding2,
         builder: (context, state) => WelcomeProvider.page,
       ),
@@ -157,10 +172,6 @@ class AppRouter {
       GoRoute(
         path: Routes.favorites,
         builder: (context, state) => FavouriteView(),
-      ),
-      GoRoute(
-        path: Routes.productDetail,
-        builder: (context, state) => const OccurrenceDetailPage(),
       ),
       GoRoute(
         path: Routes.bottomView,

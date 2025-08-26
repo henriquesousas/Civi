@@ -58,7 +58,7 @@ class _ItemEditPageState extends State<ItemEditPage> {
                       itemCount: 4,
                       itemBuilder: (context, index) {
                         return DottedContainer(
-                          height: 100,
+                          height: context.percentHeight(0.1),
                           width: 0,
                           image: index != 3 ? ImageConfig.fakeCarro3 : null,
                         );

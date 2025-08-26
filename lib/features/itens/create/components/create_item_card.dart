@@ -15,15 +15,15 @@ class CreateItemCard extends StatelessWidget {
     return GestureDetector(
       onTap: onTap,
       child: Container(
-        padding: const EdgeInsets.all(10),
+        padding: const EdgeInsets.symmetric(horizontal: 10),
         decoration: BoxDecoration(
           color: item.isSelected ? AppColors.primaryDark : Colors.white,
-          borderRadius: BorderRadius.circular(16),
+          borderRadius: BorderRadius.circular(8),
           boxShadow: [
             BoxShadow(
               color: Colors.black.withValues(alpha: 0.1),
               offset: const Offset(0, 4),
-              blurRadius: 10,
+              blurRadius: 4,
               spreadRadius: 0,
             ),
           ],

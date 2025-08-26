@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:yousafe/shared/extensions/screen_size_extension.dart';
 import 'package:yousafe/shared/extensions/text_style_extension.dart';
 
 class OnboardingTextSection extends StatelessWidget {
@@ -13,14 +14,19 @@ class OnboardingTextSection extends StatelessWidget {
       children: [
         Text(
           title,
-          style: context.getTextStyle.mediumLarge.copyWith(
-            color: Colors.white,
-            fontWeight: FontWeight.bold,
-            height: 1.2,
-          ),
-          textAlign: TextAlign.center,
+          // style: context.getTextStyle.medium.copyWith(
+          //   color: Colors.white,
+          //   fontWeight: FontWeight.bold,
+          //   height: 1.2,
+          // ),
+          // textAlign: TextAlign.center,
+          style: context.getTextStyle.regularMedium.copyWith(
+              color: Colors.white,
+              fontWeight: FontWeight.bold,
+              height: 1.2,
+              fontSize: context.responsiveText(0.06)),
         ),
-        SizedBox(height: 12),
+        const SizedBox(height: 12),
         Text(
           description,
           textAlign: TextAlign.center,
@@ -28,7 +34,6 @@ class OnboardingTextSection extends StatelessWidget {
           maxLines: 4,
           style: context.getTextStyle.smallMedium.copyWith(
             color: Colors.white.withValues(alpha: 0.9),
-            fontSize: 16,
             height: 1.6,
           ),
         ),

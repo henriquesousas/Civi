@@ -88,7 +88,7 @@ class AppColors {
     end: Alignment.bottomRight,
     colors: [
       Colors.white,
-      Colors.grey,
+      Colors.grey.shade100,
     ],
   );
 

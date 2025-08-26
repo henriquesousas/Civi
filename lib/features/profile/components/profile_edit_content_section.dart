@@ -42,10 +42,15 @@ class ProfileEditContentSection extends StatelessWidget {
               const SizedBox(width: 8),
               Text(
                 title,
-                style: context.getTextStyle.mediumSmall.copyWith(
+                style: context.getTextStyle.smallMedium.copyWith(
                   color: AppColors.textPrimary,
-                  fontWeight: FontWeight.w600,
+                  fontWeight: FontWeight.bold,
+                  // fontSize: context.responsiveText(0.032),
                 ),
+                // style: context.getTextStyle.mediumSmall.copyWith(
+                //   color: AppColors.textPrimary,
+                //   fontWeight: FontWeight.w600,
+                // ),
               ),
             ],
           ),
