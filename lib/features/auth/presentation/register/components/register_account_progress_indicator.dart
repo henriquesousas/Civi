@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:yousafe/features/auth/register/components/progress_indicator_label.dart';
+import 'package:yousafe/features/auth/presentation/register/components/progress_indicator_label.dart';
 import 'package:yousafe/shared/extensions/context_extension.dart';
 
-import '../../../../app/theme/app_colors.dart' show AppColors;
+import '../../../../../app/theme/app_colors.dart';
+//
+// import '../../../../app/theme/app_colors.dart' show AppColors;
 
 //TODO : Remover
 enum Steps {

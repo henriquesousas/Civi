@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:yousafe/app/theme/app_colors.dart';
-import 'package:yousafe/features/auth/login/components/login_google_button.dart';
-import 'package:yousafe/features/auth/login/components/login_or.dart';
+import 'package:yousafe/features/auth/presentation/login/components/login_or.dart';
 import 'package:yousafe/shared/components/buttons/primary_button.dart';
 import 'package:yousafe/shared/components/inputs/primary_text_field.dart';
 import 'package:yousafe/shared/extensions/context_extension.dart';
 import 'package:yousafe/shared/extensions/text_style_extension.dart';
+
+import 'login_google_button.dart';
 
 class LoginForm extends StatelessWidget {
   const LoginForm({super.key});

@@ -1,0 +1,13 @@
+import '../notification/domain_notification.dart';
+
+abstract class ValueObject<T> {
+  late final DomainNotification notification;
+
+  ValueObject() : notification = DomainNotification() {
+    validate(value);
+  }
+
+  T get value;
+
+  void validate(T value);
+}

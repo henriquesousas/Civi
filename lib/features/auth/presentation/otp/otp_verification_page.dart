@@ -1,18 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:yousafe/app/router/router_config.dart';
-import 'package:yousafe/features/auth/otp/components/otp_change_number.dart';
-import 'package:yousafe/features/auth/otp/components/otp_code_field.dart';
-import 'package:yousafe/features/auth/otp/components/otp_header_text.dart';
-import 'package:yousafe/features/auth/otp/components/otp_resend_code.dart';
+import 'package:yousafe/features/auth/presentation/otp/components/otp_header_text.dart';
+import 'package:yousafe/features/auth/presentation/otp/components/otp_resend_code.dart';
 import 'package:yousafe/shared/animation/transform_scale_opacity_animator.dart';
 import 'package:yousafe/shared/components/buttons/primary_button.dart';
 import 'package:yousafe/shared/components/icons/primary_icon.dart';
 import 'package:yousafe/shared/extensions/context_extension.dart';
 import 'package:yousafe/shared/extensions/screen_size_extension.dart';
 
-import '../../../app/theme/app_colors.dart';
-import '../../../shared/components/primary_app_bar.dart';
+import '../../../../app/theme/app_colors.dart';
+import '../../../../shared/components/primary_app_bar.dart';
+import 'components/otp_change_number.dart';
+import 'components/otp_code_field.dart';
 
 class OtpVerificationPage extends StatefulWidget {
   const OtpVerificationPage({super.key});

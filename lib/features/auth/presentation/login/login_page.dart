@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:yousafe/features/auth/login/components/login_welcome_section.dart';
 import 'package:yousafe/shared/animation/slide_fade_transition_animator.dart';
 import 'package:yousafe/shared/extensions/screen_size_extension.dart';
 
-import '../../../app/theme/app_colors.dart';
+import '../../../../app/theme/app_colors.dart';
 import 'components/login_form.dart';
 import 'components/login_no_have_account.dart';
+import 'components/login_welcome_section.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});

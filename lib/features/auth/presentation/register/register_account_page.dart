@@ -1,17 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:yousafe/app/router/router_config.dart';
-import 'package:yousafe/features/auth/register/components/form_contact_info.dart';
-import 'package:yousafe/features/auth/register/components/form_personal_info.dart';
-import 'package:yousafe/features/auth/register/components/form_security_info.dart';
 import 'package:yousafe/shared/animation/slide_fade_transition_animator.dart';
 import 'package:yousafe/shared/components/buttons/primary_button.dart';
 import 'package:yousafe/shared/components/buttons/secondary_outline_button.dart';
 import 'package:yousafe/shared/components/primary_app_bar.dart';
 import 'package:yousafe/shared/extensions/context_extension.dart';
 
-import '../../../app/theme/app_colors.dart';
-import '../../../shared/components/progress_indicator/step_indicator.dart';
+import '../../../../app/theme/app_colors.dart';
+import '../../../../shared/components/progress_indicator/step_indicator.dart';
+import 'components/form_contact_info.dart';
+import 'components/form_personal_info.dart';
+import 'components/form_security_info.dart';
 
 class RegisterAccountPage extends StatefulWidget {
   const RegisterAccountPage({super.key});

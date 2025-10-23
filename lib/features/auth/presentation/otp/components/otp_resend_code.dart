@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:yousafe/shared/extensions/context_extension.dart';
 import 'package:yousafe/shared/extensions/text_style_extension.dart';
 
-import '../../../../app/theme/app_colors.dart';
+import '../../../../../app/theme/app_colors.dart';
 
 class OtpResendCode extends StatelessWidget {
   const OtpResendCode({super.key});

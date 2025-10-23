@@ -4,7 +4,7 @@ import 'package:yousafe/shared/extensions/context_extension.dart';
 import 'package:yousafe/shared/extensions/screen_size_extension.dart';
 import 'package:yousafe/shared/extensions/text_style_extension.dart';
 
-import '../../../../app/theme/app_colors.dart';
+import '../../../../../app/theme/app_colors.dart';
 
 class LoginWelcomeSection extends StatelessWidget {
   const LoginWelcomeSection({super.key});

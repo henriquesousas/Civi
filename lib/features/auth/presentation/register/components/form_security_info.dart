@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:yousafe/features/auth/register/components/check_terms.dart';
-import 'package:yousafe/features/auth/register/components/register_account_header_title.dart';
+import 'package:yousafe/features/auth/presentation/register/components/register_account_header_title.dart';
 import 'package:yousafe/shared/components/inputs/primary_text_field.dart';
 import 'package:yousafe/shared/extensions/context_extension.dart';
 
-import '../../../../app/theme/app_colors.dart';
+import '../../../../../app/theme/app_colors.dart';
+import 'check_terms.dart';
 
 class FormSecurityInfo extends StatelessWidget {
   const FormSecurityInfo({super.key});

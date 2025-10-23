@@ -1,9 +1,6 @@
 import 'package:go_router/go_router.dart';
 import 'package:yousafe/app/router/router_config.dart';
 import 'package:yousafe/app/router/slide_transition_page.dart';
-import 'package:yousafe/features/auth/login/login_page.dart';
-import 'package:yousafe/features/auth/otp/otp_verification_page.dart';
-import 'package:yousafe/features/auth/register/register_account_page.dart';
 import 'package:yousafe/features/favorites/favourite_view.dart';
 import 'package:yousafe/features/home/home_view.dart';
 import 'package:yousafe/features/itens/create/create_new_item_page.dart';
@@ -26,9 +23,13 @@ import 'package:yousafe/features/splash/splash_page.dart';
 import 'package:yousafe/features/welcome/old/welcome_provider.dart';
 import 'package:yousafe/features/welcome/welcome_page.dart';
 
+import '../../features/auth/presentation/login/login_page.dart';
+import '../../features/auth/presentation/otp/otp_verification_page.dart';
+import '../../features/auth/presentation/register/register_account_page.dart';
+
 class AppRouter {
   static var router = GoRouter(
-    initialLocation: Routes.bottomView,
+    initialLocation: Routes.splash,
     debugLogDiagnostics: true,
     // redirect: _redirect,
     // refreshListenable: authRepository,
