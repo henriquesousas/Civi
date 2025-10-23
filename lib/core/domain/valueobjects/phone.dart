@@ -1,9 +1,7 @@
 import 'package:yousafe/core/domain/valueobjects/value_object.dart';
 
 class Phone extends ValueObject {
-  final String _value;
-
-  Phone._({required String value}) : _value = value;
+  Phone._({required String value}) : super(value);
 
   factory Phone.create({required String value}) {
     return Phone._(value: value);
@@ -15,10 +13,4 @@ class Phone extends ValueObject {
       notification.add("phone", "Telefone inválido");
     }
   }
-
-  @override
-  String get value => _value;
-
-  @override
-  List<Object?> get props => [value];
 }
