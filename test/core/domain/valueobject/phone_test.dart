@@ -17,5 +17,13 @@ void main() {
       expect(sut.notification.hasErrors, isTrue);
       expect(sut.notification.getErrors, [expectedError]);
     });
+
+    test("teste", () {
+      final sut = Phone.create(value: "1972732245");
+      final sut2 = Phone.create(value: "1972732245");
+
+      final res = sut == sut2;
+      print(res);
+    });
   });
 }

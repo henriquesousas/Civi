@@ -1,7 +1,6 @@
-import 'package:equatable/equatable.dart';
 import 'package:yousafe/core/domain/valueobjects/value_object.dart';
 
-class Phone extends ValueObject with EquatableMixin {
+class Phone extends ValueObject {
   final String _value;
 
   Phone._({required String value}) : _value = value;
@@ -22,7 +21,4 @@ class Phone extends ValueObject with EquatableMixin {
 
   @override
   List<Object?> get props => [value];
-
-  @override
-  String toString() => ' $value';
 }

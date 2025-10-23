@@ -56,6 +56,6 @@ void main() {
 
     expect(sut.hasErrors, isTrue);
     expect(sut.getErrors.length, equals(expectedErrorLength));
-    expect(sut.getErrors, "any");
+    expect(sut.getErrors, ["any"]);
   });
 }
