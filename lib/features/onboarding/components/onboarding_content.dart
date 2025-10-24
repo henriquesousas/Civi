@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:yousafe/features/onboarding/components/onboading_text_section.dart';
-import 'package:yousafe/features/onboarding/components/onboarding_logo.dart';
-import 'package:yousafe/features/onboarding/onboarding_item.dart';
-import 'package:yousafe/shared/animation/slide_fade_transition_animator.dart';
+import 'package:deehelp/features/onboarding/components/onboading_text_section.dart';
+import 'package:deehelp/features/onboarding/components/onboarding_logo.dart';
+import 'package:deehelp/features/onboarding/onboarding_item.dart';
+import 'package:deehelp/shared/animation/slide_fade_transition_animator.dart';
 
 class OnboardingContent extends StatefulWidget {
   final OnboardingItem page;

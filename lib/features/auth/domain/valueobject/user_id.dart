@@ -1,5 +1,5 @@
-import 'package:yousafe/core/domain/utils/id_utils.dart';
-import 'package:yousafe/core/domain/valueobjects/identifier.dart';
+import 'package:deehelp/core/domain/utils/id_utils.dart';
+import 'package:deehelp/core/domain/valueobject/identifier.dart';
 
 class UserId extends Identifier {
   UserId(super.value);

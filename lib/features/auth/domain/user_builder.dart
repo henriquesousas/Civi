@@ -1,13 +1,13 @@
-import 'package:yousafe/core/domain/valueobjects/email.dart';
-import 'package:yousafe/core/domain/valueobjects/image_url.dart';
-import 'package:yousafe/core/domain/valueobjects/phone.dart';
-import 'package:yousafe/features/auth/domain/entity/user.dart';
-import 'package:yousafe/features/auth/domain/gender.dart';
-import 'package:yousafe/features/auth/domain/status.dart';
-import 'package:yousafe/features/auth/domain/valueobject/name.dart';
-import 'package:yousafe/features/auth/domain/valueobject/password.dart';
-import 'package:yousafe/features/auth/domain/valueobject/sur_name.dart';
-import 'package:yousafe/features/auth/domain/valueobject/user_id.dart';
+import 'package:deehelp/core/domain/valueobject/email.dart';
+import 'package:deehelp/core/domain/valueobject/image_url.dart';
+import 'package:deehelp/core/domain/valueobject/phone.dart';
+import 'package:deehelp/features/auth/domain/entity/user.dart';
+import 'package:deehelp/features/auth/domain/gender.dart';
+import 'package:deehelp/features/auth/domain/status.dart';
+import 'package:deehelp/features/auth/domain/valueobject/name.dart';
+import 'package:deehelp/features/auth/domain/valueobject/password.dart';
+import 'package:deehelp/features/auth/domain/valueobject/sur_name.dart';
+import 'package:deehelp/features/auth/domain/valueobject/user_id.dart';
 
 class UserBuilder {
   String name;

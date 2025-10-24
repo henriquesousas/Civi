@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:go_router/go_router.dart';
-import 'package:yousafe/app/router/router_config.dart';
-import 'package:yousafe/features/onboarding/components/onboarding_bottom_section.dart';
-import 'package:yousafe/features/onboarding/components/onboarding_content.dart';
-import 'package:yousafe/features/onboarding/components/skip_button.dart';
-import 'package:yousafe/features/onboarding/onboarding_item.dart';
-import 'package:yousafe/shared/components/pageview/page_view_builder.dart';
-import 'package:yousafe/shared/extensions/context_extension.dart';
+import 'package:deehelp/app/router/router_config.dart';
+import 'package:deehelp/features/onboarding/components/onboarding_bottom_section.dart';
+import 'package:deehelp/features/onboarding/components/onboarding_content.dart';
+import 'package:deehelp/features/onboarding/components/skip_button.dart';
+import 'package:deehelp/features/onboarding/onboarding_item.dart';
+import 'package:deehelp/shared/components/pageview/page_view_builder.dart';
+import 'package:deehelp/shared/extensions/context_extension.dart';
 
 import '../../app/theme/app_colors.dart';
 

@@ -1,5 +1,5 @@
 import 'package:flutter_test/flutter_test.dart';
-import 'package:yousafe/core/domain/exception/validation_exception.dart';
+import 'package:deehelp/core/domain/exception/validation_exception.dart';
 
 void main() {
   test("givenAValidationException_wheCreateInstace_shouldReturnCorrectValues",

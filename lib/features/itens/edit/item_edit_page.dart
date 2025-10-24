@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:yousafe/app/localization/image_config.dart';
-import 'package:yousafe/features/itens/edit/my_item_edit_section.dart';
-import 'package:yousafe/shared/components/primary_app_bar.dart';
-import 'package:yousafe/shared/extensions/screen_size_extension.dart';
+import 'package:deehelp/app/localization/image_config.dart';
+import 'package:deehelp/features/itens/edit/my_item_edit_section.dart';
+import 'package:deehelp/shared/components/primary_app_bar.dart';
+import 'package:deehelp/shared/extensions/screen_size_extension.dart';
 
 import '../../../app/theme/app_colors.dart';
 import '../../../shared/animation/fade_slide_transition_animator.dart';

@@ -1,6 +1,6 @@
 import 'package:flutter_test/flutter_test.dart';
-import 'package:yousafe/core/domain/extension/enum_extension.dart';
-import 'package:yousafe/features/auth/domain/gender.dart';
+import 'package:deehelp/core/domain/extension/enum_extension.dart';
+import 'package:deehelp/features/auth/domain/gender.dart';
 
 void main() {
   test("givenACorrectStringGender_when_shouldReturnCorrectGender", () {

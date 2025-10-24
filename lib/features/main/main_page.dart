@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:yousafe/app/theme/app_colors.dart';
-import 'package:yousafe/features/main/state/bottom_navigation_bloc.dart';
-import 'package:yousafe/features/main/state/bottom_navigation_event.dart';
-import 'package:yousafe/features/main/state/bottom_navigation_state.dart';
-import 'package:yousafe/shared/extensions/screen_size_extension.dart';
+import 'package:deehelp/app/theme/app_colors.dart';
+import 'package:deehelp/features/main/state/bottom_navigation_bloc.dart';
+import 'package:deehelp/features/main/state/bottom_navigation_event.dart';
+import 'package:deehelp/features/main/state/bottom_navigation_state.dart';
+import 'package:deehelp/shared/extensions/screen_size_extension.dart';
 
 import 'nav_item.dart';
 import 'nav_menu.dart';

@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:yousafe/shared/animation/fade_slide_transition_animator.dart';
-import 'package:yousafe/shared/components/inputs/secondary_text_field.dart';
-import 'package:yousafe/shared/components/primary_app_bar.dart';
+import 'package:deehelp/shared/animation/fade_slide_transition_animator.dart';
+import 'package:deehelp/shared/components/inputs/secondary_text_field.dart';
+import 'package:deehelp/shared/components/primary_app_bar.dart';
 
 import '../../app/theme/app_colors.dart' show AppColors;
 import '../../shared/components/buttons/primary_button.dart';

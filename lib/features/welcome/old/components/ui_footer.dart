@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:yousafe/app/localization/image_config.dart';
-import 'package:yousafe/app/localization/string_config.dart';
-import 'package:yousafe/app/theme/size_config.dart';
-import 'package:yousafe/features/welcome/old/welcome.dart';
-import 'package:yousafe/shared/components/buttons/primary_button.dart';
+import 'package:deehelp/app/localization/image_config.dart';
+import 'package:deehelp/app/localization/string_config.dart';
+import 'package:deehelp/app/theme/size_config.dart';
+import 'package:deehelp/features/welcome/old/welcome.dart';
+import 'package:deehelp/shared/components/buttons/primary_button.dart';
 
 import '../state/welcome_bloc.dart';
 

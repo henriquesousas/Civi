@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:yousafe/features/favorites/components/ui_verification_flag.dart';
-import 'package:yousafe/features/favorites/favourite_model.dart';
-import 'package:yousafe/shared/extensions/screen_size_extension.dart';
+import 'package:deehelp/features/favorites/components/ui_verification_flag.dart';
+import 'package:deehelp/features/favorites/favourite_model.dart';
+import 'package:deehelp/shared/extensions/screen_size_extension.dart';
 
 class UIHeader extends StatelessWidget {
   final FavouriteModel favourite;

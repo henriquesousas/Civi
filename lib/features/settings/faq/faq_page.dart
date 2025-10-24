@@ -1,15 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
-import 'package:yousafe/app/localization/image_config.dart';
-import 'package:yousafe/app/localization/string_config.dart';
-import 'package:yousafe/app/theme/app_colors.dart';
-import 'package:yousafe/app/theme/size_config.dart';
-import 'package:yousafe/features/settings/faq/components/ui_expansion_tile.dart';
-import 'package:yousafe/features/settings/faq/state/faq_bloc.dart';
-import 'package:yousafe/features/settings/faq/state/faq_event.dart';
-import 'package:yousafe/features/settings/faq/state/faq_state.dart';
-import 'package:yousafe/shared/extensions/text_style_extension.dart';
+import 'package:deehelp/app/localization/image_config.dart';
+import 'package:deehelp/app/localization/string_config.dart';
+import 'package:deehelp/app/theme/app_colors.dart';
+import 'package:deehelp/app/theme/size_config.dart';
+import 'package:deehelp/features/settings/faq/components/ui_expansion_tile.dart';
+import 'package:deehelp/features/settings/faq/state/faq_bloc.dart';
+import 'package:deehelp/features/settings/faq/state/faq_event.dart';
+import 'package:deehelp/features/settings/faq/state/faq_state.dart';
+import 'package:deehelp/shared/extensions/text_style_extension.dart';
 
 enum FAQ { faq1, faq2, faq3, faq4, faq5, faq6, faq7 }
 

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:yousafe/shared/animation/slide_fade_transition_animator.dart';
-import 'package:yousafe/shared/extensions/screen_size_extension.dart';
+import 'package:deehelp/shared/animation/slide_fade_transition_animator.dart';
+import 'package:deehelp/shared/extensions/screen_size_extension.dart';
 
 import '../../../../app/theme/app_colors.dart';
 import 'components/login_form.dart';

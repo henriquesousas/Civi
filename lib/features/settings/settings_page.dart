@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:yousafe/features/settings/components/action_tile.dart';
-import 'package:yousafe/features/settings/components/settings_content_section.dart';
-import 'package:yousafe/features/settings/components/switch_tile.dart';
-import 'package:yousafe/shared/components/primary_app_bar.dart';
-import 'package:yousafe/shared/extensions/context_extension.dart';
+import 'package:deehelp/features/settings/components/action_tile.dart';
+import 'package:deehelp/features/settings/components/settings_content_section.dart';
+import 'package:deehelp/features/settings/components/switch_tile.dart';
+import 'package:deehelp/shared/components/primary_app_bar.dart';
+import 'package:deehelp/shared/extensions/context_extension.dart';
 
 import '../../app/router/router_config.dart';
 

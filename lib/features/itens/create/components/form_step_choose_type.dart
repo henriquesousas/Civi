@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:yousafe/features/itens/create/components/create_item_card.dart';
-import 'package:yousafe/features/itens/create/components/header.dart';
+import 'package:deehelp/features/itens/create/components/create_item_card.dart';
+import 'package:deehelp/features/itens/create/components/header.dart';
 
 import '../../my_item.dart';
 

@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:yousafe/shared/components/buttons/secondary_button.dart';
-import 'package:yousafe/shared/components/buttons/secondary_outline_button.dart';
-import 'package:yousafe/shared/components/indicator/primary_progress_indicator.dart';
-import 'package:yousafe/shared/extensions/context_extension.dart';
-import 'package:yousafe/shared/extensions/screen_size_extension.dart';
-import 'package:yousafe/shared/extensions/text_style_extension.dart';
+import 'package:deehelp/shared/components/buttons/secondary_button.dart';
+import 'package:deehelp/shared/components/buttons/secondary_outline_button.dart';
+import 'package:deehelp/shared/components/indicator/primary_progress_indicator.dart';
+import 'package:deehelp/shared/extensions/context_extension.dart';
+import 'package:deehelp/shared/extensions/screen_size_extension.dart';
+import 'package:deehelp/shared/extensions/text_style_extension.dart';
 
 class OnboardingBottomSection extends StatelessWidget {
   final String buttonTitle;

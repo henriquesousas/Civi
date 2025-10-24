@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:yousafe/app/router/router_config.dart';
-import 'package:yousafe/features/profile/components/profile_app_bar.dart';
-import 'package:yousafe/features/profile/components/profile_logout_section.dart';
-import 'package:yousafe/features/profile/components/profile_menu.dart';
-import 'package:yousafe/features/profile/components/profile_menu_section.dart';
+import 'package:deehelp/app/router/router_config.dart';
+import 'package:deehelp/features/profile/components/profile_app_bar.dart';
+import 'package:deehelp/features/profile/components/profile_logout_section.dart';
+import 'package:deehelp/features/profile/components/profile_menu.dart';
+import 'package:deehelp/features/profile/components/profile_menu_section.dart';
 
 import '../../app/theme/app_colors.dart';
 

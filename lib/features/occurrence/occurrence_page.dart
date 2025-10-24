@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:yousafe/app/router/router_config.dart';
-import 'package:yousafe/shared/components/icons/primary_icon.dart';
-import 'package:yousafe/shared/components/primary_app_bar.dart';
-import 'package:yousafe/shared/extensions/text_style_extension.dart';
+import 'package:deehelp/app/router/router_config.dart';
+import 'package:deehelp/shared/components/icons/primary_icon.dart';
+import 'package:deehelp/shared/components/primary_app_bar.dart';
+import 'package:deehelp/shared/extensions/text_style_extension.dart';
 
 import '../../app/theme/app_colors.dart';
 

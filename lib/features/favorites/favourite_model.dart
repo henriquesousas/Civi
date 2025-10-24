@@ -1,5 +1,5 @@
-import 'package:yousafe/app/localization/image_config.dart';
-import 'package:yousafe/app/localization/string_config.dart';
+import 'package:deehelp/app/localization/image_config.dart';
+import 'package:deehelp/app/localization/string_config.dart';
 
 class FavouriteModel {
   final String image;

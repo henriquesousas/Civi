@@ -3,12 +3,12 @@ import 'package:flutter/services.dart';
 import 'package:flutter_map/flutter_map.dart';
 import 'package:go_router/go_router.dart';
 import 'package:latlong2/latlong.dart';
-import 'package:yousafe/app/localization/image_config.dart';
-import 'package:yousafe/app/router/router_config.dart';
-import 'package:yousafe/app/theme/app_colors.dart';
-import 'package:yousafe/features/home/occurrence_location.dart';
-import 'package:yousafe/shared/extensions/screen_size_extension.dart';
-import 'package:yousafe/shared/extensions/text_style_extension.dart';
+import 'package:deehelp/app/localization/image_config.dart';
+import 'package:deehelp/app/router/router_config.dart';
+import 'package:deehelp/app/theme/app_colors.dart';
+import 'package:deehelp/features/home/occurrence_location.dart';
+import 'package:deehelp/shared/extensions/screen_size_extension.dart';
+import 'package:deehelp/shared/extensions/text_style_extension.dart';
 
 import '../../app/theme/size_config.dart';
 

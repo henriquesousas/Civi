@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:yousafe/app/router/router_config.dart';
-import 'package:yousafe/features/auth/presentation/otp/components/otp_header_text.dart';
-import 'package:yousafe/features/auth/presentation/otp/components/otp_resend_code.dart';
-import 'package:yousafe/shared/animation/transform_scale_opacity_animator.dart';
-import 'package:yousafe/shared/components/buttons/primary_button.dart';
-import 'package:yousafe/shared/components/icons/primary_icon.dart';
-import 'package:yousafe/shared/extensions/context_extension.dart';
-import 'package:yousafe/shared/extensions/screen_size_extension.dart';
+import 'package:deehelp/app/router/router_config.dart';
+import 'package:deehelp/features/auth/presentation/otp/components/otp_header_text.dart';
+import 'package:deehelp/features/auth/presentation/otp/components/otp_resend_code.dart';
+import 'package:deehelp/shared/animation/transform_scale_opacity_animator.dart';
+import 'package:deehelp/shared/components/buttons/primary_button.dart';
+import 'package:deehelp/shared/components/icons/primary_icon.dart';
+import 'package:deehelp/shared/extensions/context_extension.dart';
+import 'package:deehelp/shared/extensions/screen_size_extension.dart';
 
 import '../../../../app/theme/app_colors.dart';
 import '../../../../shared/components/primary_app_bar.dart';

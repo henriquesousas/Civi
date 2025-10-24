@@ -1,15 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:yousafe/app/router/router_config.dart';
-import 'package:yousafe/features/welcome/components/welcome_card.dart';
-import 'package:yousafe/features/welcome/welcome_feature.dart';
-import 'package:yousafe/shared/animation/slide_fade_transition_animator.dart';
-import 'package:yousafe/shared/components/buttons/primary_button.dart';
-import 'package:yousafe/shared/components/icons/primary_icon.dart';
-import 'package:yousafe/shared/components/indicator/primary_progress_indicator.dart';
-import 'package:yousafe/shared/components/pageview/page_view_builder.dart';
-import 'package:yousafe/shared/extensions/context_extension.dart';
-import 'package:yousafe/shared/extensions/text_style_extension.dart';
+import 'package:deehelp/app/router/router_config.dart';
+import 'package:deehelp/features/welcome/components/welcome_card.dart';
+import 'package:deehelp/features/welcome/welcome_feature.dart';
+import 'package:deehelp/shared/animation/slide_fade_transition_animator.dart';
+import 'package:deehelp/shared/components/buttons/primary_button.dart';
+import 'package:deehelp/shared/components/icons/primary_icon.dart';
+import 'package:deehelp/shared/components/indicator/primary_progress_indicator.dart';
+import 'package:deehelp/shared/components/pageview/page_view_builder.dart';
+import 'package:deehelp/shared/extensions/context_extension.dart';
+import 'package:deehelp/shared/extensions/text_style_extension.dart';
 
 import '../../app/theme/app_colors.dart';
 import '../../shared/components/buttons/secondary_outline_button.dart';

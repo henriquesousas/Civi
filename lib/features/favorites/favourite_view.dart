@@ -1,17 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:yousafe/app/localization/image_config.dart';
-import 'package:yousafe/app/localization/string_config.dart';
-import 'package:yousafe/app/router/router_config.dart';
-import 'package:yousafe/app/theme/app_colors.dart';
-import 'package:yousafe/app/theme/app_font_size.dart';
-import 'package:yousafe/app/theme/app_fonts.dart';
-import 'package:yousafe/app/theme/size_config.dart';
-import 'package:yousafe/features/favorites/components/ui_favourite_card.dart';
-import 'package:yousafe/features/favorites/favourite_model.dart';
-import 'package:yousafe/shared/components/buttons/primary_button.dart';
-import 'package:yousafe/shared/extensions/screen_size_extension.dart';
-import 'package:yousafe/shared/extensions/text_style_extension.dart';
+import 'package:deehelp/app/localization/image_config.dart';
+import 'package:deehelp/app/localization/string_config.dart';
+import 'package:deehelp/app/router/router_config.dart';
+import 'package:deehelp/app/theme/app_colors.dart';
+import 'package:deehelp/app/theme/app_font_size.dart';
+import 'package:deehelp/app/theme/app_fonts.dart';
+import 'package:deehelp/app/theme/size_config.dart';
+import 'package:deehelp/features/favorites/components/ui_favourite_card.dart';
+import 'package:deehelp/features/favorites/favourite_model.dart';
+import 'package:deehelp/shared/components/buttons/primary_button.dart';
+import 'package:deehelp/shared/extensions/screen_size_extension.dart';
+import 'package:deehelp/shared/extensions/text_style_extension.dart';
 
 class FavouriteView extends StatelessWidget {
   const FavouriteView({super.key});

@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:yousafe/features/settings/help/help_card.dart';
-import 'package:yousafe/features/settings/help/help_options.dart';
-import 'package:yousafe/shared/animation/fade_slide_transition_animator.dart';
-import 'package:yousafe/shared/components/primary_app_bar.dart';
-import 'package:yousafe/shared/extensions/text_style_extension.dart';
+import 'package:deehelp/features/settings/help/help_card.dart';
+import 'package:deehelp/features/settings/help/help_options.dart';
+import 'package:deehelp/shared/animation/fade_slide_transition_animator.dart';
+import 'package:deehelp/shared/components/primary_app_bar.dart';
+import 'package:deehelp/shared/extensions/text_style_extension.dart';
 
 import '../../../app/theme/app_colors.dart';
 

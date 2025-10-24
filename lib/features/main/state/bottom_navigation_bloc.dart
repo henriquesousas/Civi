@@ -1,7 +1,7 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:yousafe/features/home/home_view.dart';
-import 'package:yousafe/features/profile/profile_page.dart';
-import 'package:yousafe/features/settings/settings_page.dart';
+import 'package:deehelp/features/home/home_view.dart';
+import 'package:deehelp/features/profile/profile_page.dart';
+import 'package:deehelp/features/settings/settings_page.dart';
 
 import '../../itens/list/my_items_page.dart';
 import 'bottom_navigation_event.dart';

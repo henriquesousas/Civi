@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:yousafe/shared/extensions/screen_size_extension.dart';
-import 'package:yousafe/shared/extensions/text_style_extension.dart';
+import 'package:deehelp/shared/extensions/screen_size_extension.dart';
+import 'package:deehelp/shared/extensions/text_style_extension.dart';
 
 class OnboardingTextSection extends StatelessWidget {
   final String title;

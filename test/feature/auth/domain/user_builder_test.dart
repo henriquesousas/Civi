@@ -1,8 +1,8 @@
 import 'package:flutter_test/flutter_test.dart';
-import 'package:yousafe/core/domain/utils/id_utils.dart';
-import 'package:yousafe/features/auth/domain/gender.dart';
-import 'package:yousafe/features/auth/domain/status.dart';
-import 'package:yousafe/features/auth/domain/user_builder.dart';
+import 'package:deehelp/core/domain/utils/id_utils.dart';
+import 'package:deehelp/features/auth/domain/gender.dart';
+import 'package:deehelp/features/auth/domain/status.dart';
+import 'package:deehelp/features/auth/domain/user_builder.dart';
 
 void main() {
   test("givenAnUserDefaultValues_whenBuild_shouldReturnUser", () {

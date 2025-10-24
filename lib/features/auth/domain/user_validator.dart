@@ -1,6 +1,6 @@
-import 'package:yousafe/core/domain/notification/domain_notification.dart';
-import 'package:yousafe/core/domain/validation/validator.dart';
-import 'package:yousafe/features/auth/domain/entity/user.dart';
+import 'package:deehelp/core/domain/notification/domain_notification.dart';
+import 'package:deehelp/core/domain/validation/validator.dart';
+import 'package:deehelp/features/auth/domain/entity/user.dart';
 
 import '../../../core/domain/validation/validation_handler.dart';
 

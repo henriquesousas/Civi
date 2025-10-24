@@ -1,4 +1,4 @@
-import 'package:yousafe/core/domain/valueobjects/value_object.dart';
+import 'package:deehelp/core/domain/valueobject/value_object.dart';
 
 class Phone extends ValueObject {
   static const _length = 11;

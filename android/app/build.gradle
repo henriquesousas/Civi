@@ -6,7 +6,7 @@ plugins {
 }
 
 android {
-    namespace = "br.com.atomos.yousafe"
+    namespace = "br.com.atomos.deehelp"
     compileSdk = flutter.compileSdkVersion
     ndkVersion = "25.1.8937393"
     // ndkVersion flutter.ndkVersion
@@ -22,7 +22,7 @@ android {
 
     defaultConfig {
         // TODO: Specify your own unique Application ID (https://developer.android.com/studio/build/application-id.html).
-        applicationId = "br.com.atomos.yousafe"
+        applicationId = "br.com.atomos.deehelp"
         // You can update the following values to match your application needs.
         // For more information, see: https://flutter.dev/to/review-gradle-config.
         minSdk = flutter.minSdkVersion

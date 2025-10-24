@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:yousafe/shared/extensions/text_style_extension.dart';
+import 'package:deehelp/shared/extensions/text_style_extension.dart';
 
 abstract class BaseButton extends StatelessWidget {
   final String text;

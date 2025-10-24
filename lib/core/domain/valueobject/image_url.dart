@@ -1,4 +1,4 @@
-import 'package:yousafe/core/domain/valueobjects/value_object.dart';
+import 'package:deehelp/core/domain/valueobject/value_object.dart';
 
 class ImageUrl extends ValueObject<String> {
   static final RegExp _urlRegex = RegExp(

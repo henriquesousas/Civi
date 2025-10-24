@@ -1,11 +1,11 @@
 import 'package:dartz/dartz.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
-import 'package:yousafe/core/domain/exception/validation_exception.dart';
-import 'package:yousafe/features/auth/domain/entity/user.dart';
-import 'package:yousafe/features/auth/domain/usecases/create/create_use_dto.dart';
-import 'package:yousafe/features/auth/domain/usecases/create/create_user_usecase.dart';
-import 'package:yousafe/features/auth/domain/user_repository.dart';
+import 'package:deehelp/core/domain/exception/validation_exception.dart';
+import 'package:deehelp/features/auth/domain/entity/user.dart';
+import 'package:deehelp/features/auth/domain/usecases/create/create_use_dto.dart';
+import 'package:deehelp/features/auth/domain/usecases/create/create_user_usecase.dart';
+import 'package:deehelp/features/auth/domain/user_repository.dart';
 
 class UserRepositoryMock extends Mock implements UserRepository {}
 

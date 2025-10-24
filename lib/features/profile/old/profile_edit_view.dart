@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:yousafe/app/localization/image_config.dart';
-import 'package:yousafe/app/localization/string_config.dart';
-import 'package:yousafe/app/theme/app_colors.dart';
-import 'package:yousafe/app/theme/size_config.dart';
-import 'package:yousafe/shared/components/buttons/primary_button.dart';
-import 'package:yousafe/shared/components/ui_textfield.dart';
-import 'package:yousafe/shared/extensions/text_style_extension.dart';
+import 'package:deehelp/app/localization/image_config.dart';
+import 'package:deehelp/app/localization/string_config.dart';
+import 'package:deehelp/app/theme/app_colors.dart';
+import 'package:deehelp/app/theme/size_config.dart';
+import 'package:deehelp/shared/components/buttons/primary_button.dart';
+import 'package:deehelp/shared/components/ui_textfield.dart';
+import 'package:deehelp/shared/extensions/text_style_extension.dart';
 
 import '../components/old/ui_change_mobie_bottom_sheet.dart';
 

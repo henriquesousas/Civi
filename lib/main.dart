@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:yousafe/app/app.dart';
+import 'package:deehelp/app/app.dart';
 
 //Raze - Rapido antizone emergency
 //Flee - Fast local emergency

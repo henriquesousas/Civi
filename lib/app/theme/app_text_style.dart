@@ -1,7 +1,7 @@
 // import 'package:flutter/material.dart';
-// import 'package:yousafe/@shared/config/app_colors.dart';
-// import 'package:yousafe/@shared/config/app_fonts.dart';
-// import 'package:yousafe/@shared/config/app_font_size.dart';
+// import 'package:deehelp/@shared/config/app_colors.dart';
+// import 'package:deehelp/@shared/config/app_fonts.dart';
+// import 'package:deehelp/@shared/config/app_font_size.dart';
 
 // class AppTextStyle {
 //   static const TextStyle h1Medium = TextStyle(

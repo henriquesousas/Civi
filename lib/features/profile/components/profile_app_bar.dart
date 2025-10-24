@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:yousafe/features/favorites/components/ui_verification_flag.dart';
-import 'package:yousafe/shared/extensions/screen_size_extension.dart';
-import 'package:yousafe/shared/extensions/text_style_extension.dart';
+import 'package:deehelp/features/favorites/components/ui_verification_flag.dart';
+import 'package:deehelp/shared/extensions/screen_size_extension.dart';
+import 'package:deehelp/shared/extensions/text_style_extension.dart';
 
 import '../../../app/theme/app_colors.dart';
 

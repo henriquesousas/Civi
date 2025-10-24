@@ -1,5 +1,5 @@
-import 'package:yousafe/core/domain/utils/id_utils.dart';
-import 'package:yousafe/core/domain/valueobjects/value_object.dart';
+import 'package:deehelp/core/domain/utils/id_utils.dart';
+import 'package:deehelp/core/domain/valueobject/value_object.dart';
 
 class Identifier extends ValueObject<String> {
   static const _maxLength = 32;

@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:yousafe/app/localization/string_config.dart';
-import 'package:yousafe/app/router/router_config.dart';
-import 'package:yousafe/app/theme/app_colors.dart';
-import 'package:yousafe/app/theme/size_config.dart';
-import 'package:yousafe/features/profile/components/old/ui_card.dart';
-import 'package:yousafe/features/profile/components/old/ui_card_switch.dart';
-import 'package:yousafe/features/profile/components/old/ui_header.dart';
-import 'package:yousafe/shared/components/buttons/secondary_outline_button.dart';
-import 'package:yousafe/shared/extensions/text_style_extension.dart';
+import 'package:deehelp/app/localization/string_config.dart';
+import 'package:deehelp/app/router/router_config.dart';
+import 'package:deehelp/app/theme/app_colors.dart';
+import 'package:deehelp/app/theme/size_config.dart';
+import 'package:deehelp/features/profile/components/old/ui_card.dart';
+import 'package:deehelp/features/profile/components/old/ui_card_switch.dart';
+import 'package:deehelp/features/profile/components/old/ui_header.dart';
+import 'package:deehelp/shared/components/buttons/secondary_outline_button.dart';
+import 'package:deehelp/shared/extensions/text_style_extension.dart';
 
 class ProfileView extends StatelessWidget {
   const ProfileView({super.key});

@@ -1,15 +1,15 @@
+import 'package:deehelp/shared/extensions/screen_size_extension.dart';
+import 'package:deehelp/shared/extensions/text_style_extension.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:yousafe/app/localization/image_config.dart';
-import 'package:yousafe/app/router/router_config.dart';
-import 'package:yousafe/app/theme/app_colors.dart';
-import 'package:yousafe/app/theme/size_config.dart';
-import 'package:yousafe/features/favorites/components/ui_verification_flag.dart';
-import 'package:yousafe/features/favorites/favourite_model.dart';
-import 'package:yousafe/shared/components/buttons/secondary_outline_button.dart';
-import 'package:yousafe/shared/components/buttons/primary_button.dart';
-import 'package:yousafe/shared/extensions/screen_size_extension.dart';
-import 'package:yousafe/shared/extensions/text_style_extension.dart';
+import 'package:deehelp/app/localization/image_config.dart';
+import 'package:deehelp/app/router/router_config.dart';
+import 'package:deehelp/app/theme/app_colors.dart';
+import 'package:deehelp/app/theme/size_config.dart';
+import 'package:deehelp/features/favorites/components/ui_verification_flag.dart';
+import 'package:deehelp/features/favorites/favourite_model.dart';
+import 'package:deehelp/shared/components/buttons/primary_button.dart';
+import 'package:deehelp/shared/components/buttons/secondary_outline_button.dart';
 
 class UIFavouriteCard extends StatelessWidget {
   final FavouriteModel favouriteModel;

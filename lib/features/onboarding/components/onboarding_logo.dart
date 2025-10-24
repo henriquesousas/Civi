@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:yousafe/app/theme/app_colors.dart';
-import 'package:yousafe/shared/extensions/screen_size_extension.dart';
+import 'package:deehelp/app/theme/app_colors.dart';
+import 'package:deehelp/shared/extensions/screen_size_extension.dart';
 
 class OnboardingLogo extends StatelessWidget {
   final IconData icon;

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:yousafe/shared/components/progress_indicator/step_item.dart';
+import 'package:deehelp/shared/components/progress_indicator/step_item.dart';
 
 class StepIndicator extends StatelessWidget {
   final int currentStep;

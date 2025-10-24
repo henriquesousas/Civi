@@ -1,9 +1,9 @@
+import 'package:deehelp/app/theme/size_config.dart';
+import 'package:deehelp/shared/extensions/screen_size_extension.dart';
+import 'package:deehelp/shared/extensions/text_style_extension.dart';
 import 'package:flutter/material.dart';
-import 'package:yousafe/app/theme/app_colors.dart';
-import 'package:yousafe/app/localization/image_config.dart';
-import 'package:yousafe/app/theme/size_config.dart';
-import 'package:yousafe/shared/extensions/screen_size_extension.dart';
-import 'package:yousafe/shared/extensions/text_style_extension.dart';
+import 'package:deehelp/app/localization/image_config.dart';
+import 'package:deehelp/app/theme/app_colors.dart';
 
 class UICard extends StatelessWidget {
   final List<String> titles;

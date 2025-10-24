@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:yousafe/features/settings/faq/faq_page.dart';
-import 'package:yousafe/features/settings/faq/state/faq_bloc.dart';
+import 'package:deehelp/features/settings/faq/faq_page.dart';
+import 'package:deehelp/features/settings/faq/state/faq_bloc.dart';
 
 class FaqProvider {
   FaqProvider._();

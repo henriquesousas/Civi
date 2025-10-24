@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:yousafe/app/localization/string_config.dart';
-import 'package:yousafe/app/router/router_config.dart';
-import 'package:yousafe/features/welcome/old/welcome.dart';
-import 'package:yousafe/shared/extensions/text_style_extension.dart';
+import 'package:deehelp/app/localization/string_config.dart';
+import 'package:deehelp/app/router/router_config.dart';
+import 'package:deehelp/features/welcome/old/welcome.dart';
+import 'package:deehelp/shared/extensions/text_style_extension.dart';
 
 class UISkip extends StatelessWidget {
   final int currentPage;

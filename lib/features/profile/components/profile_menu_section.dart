@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:yousafe/features/profile/components/profile_menu.dart';
-import 'package:yousafe/features/profile/components/profile_menu_tile.dart';
+import 'package:deehelp/features/profile/components/profile_menu.dart';
+import 'package:deehelp/features/profile/components/profile_menu_tile.dart';
 
 import '../../../app/theme/app_colors.dart';
 

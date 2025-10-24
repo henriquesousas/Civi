@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:yousafe/features/profile/components/profile_menu.dart';
-import 'package:yousafe/shared/extensions/text_style_extension.dart';
+import 'package:deehelp/features/profile/components/profile_menu.dart';
+import 'package:deehelp/shared/extensions/text_style_extension.dart';
 
 import '../../../app/theme/app_colors.dart';
 

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:yousafe/features/auth/presentation/register/components/register_account_header_title.dart';
-import 'package:yousafe/shared/components/inputs/primary_text_field.dart';
-import 'package:yousafe/shared/extensions/context_extension.dart';
+import 'package:deehelp/features/auth/presentation/register/components/register_account_header_title.dart';
+import 'package:deehelp/shared/components/inputs/primary_text_field.dart';
+import 'package:deehelp/shared/extensions/context_extension.dart';
 
 import '../../../../../app/theme/app_colors.dart';
 

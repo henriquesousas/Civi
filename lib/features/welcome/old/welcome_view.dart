@@ -1,15 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
-import 'package:yousafe/app/router/router_config.dart';
-import 'package:yousafe/app/theme/app_colors.dart';
-import 'package:yousafe/app/theme/size_config.dart';
-import 'package:yousafe/features/welcome/old/components/ui_footer.dart';
-import 'package:yousafe/features/welcome/old/components/ui_page_view_section.dart';
-import 'package:yousafe/features/welcome/old/state/welcome_bloc.dart';
-import 'package:yousafe/features/welcome/old/state/welcome_events.dart';
-import 'package:yousafe/features/welcome/old/state/welcome_state.dart';
-import 'package:yousafe/features/welcome/old/welcome.dart';
+import 'package:deehelp/app/router/router_config.dart';
+import 'package:deehelp/app/theme/app_colors.dart';
+import 'package:deehelp/app/theme/size_config.dart';
+import 'package:deehelp/features/welcome/old/components/ui_footer.dart';
+import 'package:deehelp/features/welcome/old/components/ui_page_view_section.dart';
+import 'package:deehelp/features/welcome/old/state/welcome_bloc.dart';
+import 'package:deehelp/features/welcome/old/state/welcome_events.dart';
+import 'package:deehelp/features/welcome/old/state/welcome_state.dart';
+import 'package:deehelp/features/welcome/old/welcome.dart';
 
 class WelcomeView extends StatelessWidget {
   final Welcome welcome;

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:yousafe/features/welcome/old/components/ui_yousafe_text.dart';
+import 'package:deehelp/features/welcome/old/components/ui_yousafe_text.dart';
 
 import '../state/welcome_bloc.dart';
 

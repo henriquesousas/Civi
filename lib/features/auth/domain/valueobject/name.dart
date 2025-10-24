@@ -1,4 +1,4 @@
-import 'package:yousafe/core/domain/valueobjects/value_object.dart';
+import 'package:deehelp/core/domain/valueobject/value_object.dart';
 
 class Name extends ValueObject<String> {
   static const int _minLength = 2;

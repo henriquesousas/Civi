@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:yousafe/app/theme/app_colors.dart';
-import 'package:yousafe/app/theme/size_config.dart';
+import 'package:deehelp/app/theme/app_colors.dart';
+import 'package:deehelp/app/theme/size_config.dart';
 
 class UIDot extends StatelessWidget {
   final int currentPage;

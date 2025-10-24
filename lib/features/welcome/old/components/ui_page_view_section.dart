@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:yousafe/app/theme/size_config.dart';
-import 'package:yousafe/features/welcome/old/components/ui_dot.dart';
-import 'package:yousafe/features/welcome/old/welcome.dart';
-import 'package:yousafe/shared/extensions/screen_size_extension.dart';
-import 'package:yousafe/shared/extensions/text_style_extension.dart';
+import 'package:deehelp/app/theme/size_config.dart';
+import 'package:deehelp/features/welcome/old/components/ui_dot.dart';
+import 'package:deehelp/features/welcome/old/welcome.dart';
+import 'package:deehelp/shared/extensions/screen_size_extension.dart';
+import 'package:deehelp/shared/extensions/text_style_extension.dart';
 
 import '../state/welcome_bloc.dart';
 
