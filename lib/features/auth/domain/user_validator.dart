@@ -1,8 +1,8 @@
 import 'package:yousafe/core/domain/notification/domain_notification.dart';
-import 'package:yousafe/core/domain/validator.dart';
-import 'package:yousafe/features/auth/domain/user.dart';
+import 'package:yousafe/core/domain/validation/validator.dart';
+import 'package:yousafe/features/auth/domain/entity/user.dart';
 
-import '../../../core/domain/validation_handler.dart';
+import '../../../core/domain/validation/validation_handler.dart';
 
 class UserValidator extends Validator {
   final User user;
@@ -25,6 +25,10 @@ class UserValidator extends Validator {
     ];
 
     notifications.forEach((notification) => copyIfHasError(notification));
+
+    if (user.gender == null) {
+      handler.append("gender", "Gênero inválido");
+    }
   }
 
   void copyIfHasError(final DomainNotification? notification) {

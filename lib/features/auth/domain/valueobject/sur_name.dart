@@ -1,4 +1,4 @@
-import '../../../core/domain/valueobjects/value_object.dart';
+import '../../../../core/domain/valueobjects/value_object.dart';
 
 class SurName extends ValueObject<String> {
   static const int _minLength = 2;

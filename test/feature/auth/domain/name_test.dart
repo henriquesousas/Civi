@@ -1,5 +1,5 @@
 import 'package:flutter_test/flutter_test.dart';
-import 'package:yousafe/features/auth/domain/name.dart';
+import 'package:yousafe/features/auth/domain/valueobject/name.dart';
 
 void main() {
   group("Name ValueObject", () {

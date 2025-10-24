@@ -1,4 +1,4 @@
-import 'package:yousafe/core/domain/validation_handler.dart';
+import 'package:yousafe/core/domain/validation/validation_handler.dart';
 
 import 'notification_message.dart';
 

@@ -20,7 +20,7 @@ void main() {
     expect(sut.email.value, equals("any@gmail.com"));
     expect(sut.phone.value, equals("11975454454"));
     expect(sut.password.value, equals("any"));
-    expect(sut.gender.name, equals("male"));
+    expect(sut.gender!.name, equals("male"));
     expect(sut.status, equals(Status.pending));
     expect(sut.createdAt, isNotNull);
     expect(sut.userId.value.length, equals(32));
@@ -55,7 +55,7 @@ void main() {
     expect(sut.email.value, equals("any@gmail.com"));
     expect(sut.phone.value, equals("11975454454"));
     expect(sut.password.value, equals("any"));
-    expect(sut.gender.name, equals("male"));
+    expect(sut.gender!.name, equals("male"));
     expect(sut.status, equals(Status.active));
     expect(sut.createdAt, equals(expectedCreatedAt));
     expect(sut.userId.value, equals(expectedUserId));
