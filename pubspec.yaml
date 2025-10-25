@@ -18,11 +18,10 @@ dependencies:
   intl: 0.20.2
 
   uuid: ^4.0.0
-
-#  https://pub:dev/packages/dartz/install:
+  #  https://pub:dev/packages/dartz/install:
   dartz: ^0.10.1
-
-
+  #  https://pub:dev/packages/firebase_core/install:
+  firebase_core: ^4.2.0
   # https://pub.dev/packages/dotted_border
   dotted_border: ^3.1.0
   # https://pub.dev/packages/flutter_svg
@@ -109,5 +108,5 @@ l10n:
   arb-dir: lib/l10n
   template-arb-file: app_en.arb
   output-localization-file: app_localizations.dart
-  supported-locales: [en, pt]
+  supported-locales: [ en, pt ]
   output-dir: lib/l10n
