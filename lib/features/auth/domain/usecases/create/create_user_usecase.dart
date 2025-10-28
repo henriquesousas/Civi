@@ -3,6 +3,7 @@ import 'package:deehelp/core/domain/exception/validation_exception.dart';
 import 'package:deehelp/core/domain/extension/enum_extension.dart';
 import 'package:deehelp/core/domain/type/result.dart';
 import 'package:deehelp/core/domain/use_case.dart';
+import 'package:deehelp/features/auth/domain/auth_exception.dart';
 import 'package:deehelp/features/auth/domain/auth_repository.dart';
 import 'package:deehelp/features/auth/domain/entity/user.dart';
 import 'package:deehelp/features/auth/domain/gender.dart';
@@ -15,7 +16,7 @@ class CreateUserUsecase extends UseCase<CreateUseDto, EitherResult<User>> {
   CreateUserUsecase({required this.repository});
 
   @override
-  EitherResult<User> execute(CreateUseDto dto) {
+  Future<EitherResult<User>> execute(CreateUseDto dto) async {
     final user = UserBuilder(
       name: dto.name,
       surName: dto.surname,
@@ -29,7 +30,10 @@ class CreateUserUsecase extends UseCase<CreateUseDto, EitherResult<User>> {
       return left(ValidationException(errors: user.notification.getErrors));
     }
 
-    repository.save(user);
-    return right(user);
+    final authResult = await repository.save(user);
+
+    return authResult.success
+        ? right(user)
+        : left(AuthException.fromResult(authResult));
   }
 }

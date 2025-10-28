@@ -21,7 +21,7 @@ class AuthResult {
     );
   }
 
-  factory AuthResult.error(String message) {
+  factory AuthResult.failure(String message) {
     return AuthResult(success: false, message: message);
   }
 }

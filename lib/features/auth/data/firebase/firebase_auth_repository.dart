@@ -25,10 +25,10 @@ class FirebaseAuthRepository implements AuthRepository {
       return AuthResult.success(user);
     } on FirebaseAuthException catch (e) {
       await _rollback(credentials);
-      return AuthResult.error(e.errorMessage);
+      return AuthResult.failure(e.errorMessage);
     } on Exception catch (e) {
       await _rollback(credentials);
-      return AuthResult.error('Erro inesperado: ${e.toString()}');
+      return AuthResult.failure('Erro inesperado: ${e.toString()}');
     }
   }
 
@@ -47,9 +47,9 @@ class FirebaseAuthRepository implements AuthRepository {
 
       return AuthResult.success(user);
     } on FirebaseAuthException catch (e) {
-      return AuthResult.error(e.errorMessage);
+      return AuthResult.failure(e.errorMessage);
     } catch (e) {
-      return AuthResult.error('Erro inesperado: ${e.toString()}');
+      return AuthResult.failure('Erro inesperado: ${e.toString()}');
     }
   }
 
