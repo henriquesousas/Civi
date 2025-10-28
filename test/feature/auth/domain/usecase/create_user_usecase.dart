@@ -1,5 +1,5 @@
-import 'package:dartz/dartz.dart';
 import 'package:deehelp/core/domain/exception/validation_exception.dart';
+import 'package:deehelp/core/domain/extension/either_extension.dart';
 import 'package:deehelp/features/auth/domain/auth_repository.dart';
 import 'package:deehelp/features/auth/domain/entity/user.dart';
 import 'package:deehelp/features/auth/domain/usecases/create/create_use_dto.dart';
@@ -11,17 +11,6 @@ class UserRepositoryMock extends Mock implements AuthRepository {}
 
 class UserFake extends Fake implements User {}
 
-extension EitherExtensions<L, R> on Either<L, R> {
-  R? get successOrNull => fold((_) => null, (right) => right);
-
-  L? get errorOrNull => fold((left) => left, (_) => null);
-
-  R getOrThrow() => fold(
-        (left) => throw left is Exception ? left : Exception(left.toString()),
-        (right) => right,
-      );
-}
-
 void main() {
   late CreateUserUsecase sut;
   late AuthRepository repository;
@@ -32,7 +21,7 @@ void main() {
     sut = CreateUserUsecase(repository: repository);
   });
 
-  test("givenACorrectDto_whenCallSave_shouldReturnUser", () {
+  test("givenACorrectDto_whenCallSave_shouldReturnUser", () async {
     final dto = CreateUseDto(
       name: "any",
       surname: "any",
@@ -42,13 +31,13 @@ void main() {
       gender: "male",
     );
 
-    final result = sut.execute(dto);
+    final result = await sut.execute(dto);
 
     expect(result.isRight(), isTrue);
     verify(() => repository.save(any())).called(1);
   });
 
-  test("givenAInvalidDto_whenCallSave_shouldReturnError", () {
+  test("givenAInvalidDto_whenCallSave_shouldReturnError", () async {
     final dto = CreateUseDto(
       name: "a",
       surname: "a",
@@ -58,7 +47,7 @@ void main() {
       gender: "any",
     );
 
-    final result = sut.execute(dto);
+    final result = await sut.execute(dto);
 
     final exception = result.errorOrNull as ValidationException;
 
