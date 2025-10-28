@@ -1,13 +1,13 @@
 import 'package:dartz/dartz.dart';
-import 'package:flutter_test/flutter_test.dart';
-import 'package:mocktail/mocktail.dart';
 import 'package:deehelp/core/domain/exception/validation_exception.dart';
+import 'package:deehelp/features/auth/domain/auth_repository.dart';
 import 'package:deehelp/features/auth/domain/entity/user.dart';
 import 'package:deehelp/features/auth/domain/usecases/create/create_use_dto.dart';
 import 'package:deehelp/features/auth/domain/usecases/create/create_user_usecase.dart';
-import 'package:deehelp/features/auth/domain/user_repository.dart';
+import 'package:flutter_test/flutter_test.dart';
+import 'package:mocktail/mocktail.dart';
 
-class UserRepositoryMock extends Mock implements UserRepository {}
+class UserRepositoryMock extends Mock implements AuthRepository {}
 
 class UserFake extends Fake implements User {}
 
@@ -24,7 +24,7 @@ extension EitherExtensions<L, R> on Either<L, R> {
 
 void main() {
   late CreateUserUsecase sut;
-  late UserRepository repository;
+  late AuthRepository repository;
 
   setUpAll(() {
     registerFallbackValue(UserFake());

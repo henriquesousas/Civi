@@ -1,6 +1,6 @@
-import 'domain_exception.dart';
+import 'app_exception.dart';
 
-final class ValidationException extends DomainException {
+final class ValidationException extends AppException {
   final List<String> errors;
 
   ValidationException({
