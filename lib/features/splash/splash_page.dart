@@ -1,5 +1,4 @@
-import 'package:deehelp/features/auth/domain/gender.dart';
-import 'package:deehelp/features/auth/domain/user_builder.dart';
+import 'package:deehelp/app/router/router_config.dart';
 import 'package:deehelp/features/splash/components/splash_background_animation.dart';
 import 'package:deehelp/features/splash/components/splash_bottom_section.dart';
 import 'package:deehelp/features/splash/components/splash_content.dart';
@@ -11,6 +10,7 @@ import 'package:deehelp/shared/animation/transition_animator.dart';
 import 'package:deehelp/shared/extensions/screen_size_extension.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:go_router/go_router.dart';
 
 class SplashPage extends StatefulWidget {
   const SplashPage({super.key});
@@ -27,34 +27,10 @@ class _SplashPageState extends State<SplashPage> {
   }
 
   void _navigateToNextScreen() async {
-    // await Future.delayed(const Duration(milliseconds: 5000));
-    // WidgetsBinding.instance.addPostFrameCallback((_) {
-    //   context.push(Routes.onboarding);
-    // });
-
-    final user = UserBuilder(
-            name: "Paulo",
-            surName: "any",
-            email: "paulohenriqussssess2201sas4@gmail.com",
-            phone: "11972732245",
-            password: "prm260110",
-            gender: Gender.male)
-        .build();
-
-    // final repo = FirebaseAuthRepository();
-    // repo.save(user);
-    // repo.login("paulohenriquess2201sas4@gmail.com", "prm260110");
-    // final u = FirebaseAuth.instance.createUserWithEmailAndPassword(
-    //   email: "paulo@gmail.com",
-    //   password: "prm260110",
-    // );
-
-    // FirebaseAuth.instance.signOut();
-    //
-    // FirebaseAuth.instance.signInWithEmailAndPassword(
-    //   email: "paulo@gmail.com",
-    //   password: "prm260110",
-    // );
+    await Future.delayed(const Duration(milliseconds: 5000));
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      context.push(Routes.onboarding);
+    });
   }
 
   @override

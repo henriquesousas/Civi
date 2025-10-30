@@ -408,13 +408,13 @@ abstract class AppLocalizations {
   /// No description provided for @welcomeOnboardingTitle1.
   ///
   /// In en, this message translates to:
-  /// **'Definir sua localização'**
+  /// **'Localização'**
   String get welcomeOnboardingTitle1;
 
   /// No description provided for @welcomeOnboardingTitle2.
   ///
   /// In en, this message translates to:
-  /// **'Cadastre seus veículos e aparelhos'**
+  /// **'Cadastre seus Ítens'**
   String get welcomeOnboardingTitle2;
 
   /// No description provided for @welcomeOnboardingTitle3.
@@ -560,6 +560,12 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Eu concordo com os Termos e Condições'**
   String get labelAgreeTerms;
+
+  /// No description provided for @notHaveAccountYet.
+  ///
+  /// In en, this message translates to:
+  /// **'Ainda não tem uma conta? '**
+  String get notHaveAccountYet;
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {

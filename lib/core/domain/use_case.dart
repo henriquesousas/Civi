@@ -1,3 +1,5 @@
+import 'package:deehelp/core/domain/type/result.dart';
+
 abstract class UseCase<IN, OUT> {
-  Future<OUT> execute(IN dto);
+  Future<EitherResult<OUT>> execute(IN dto);
 }

@@ -1,5 +1,7 @@
-import 'package:flutter/material.dart';
+import 'package:deehelp/app/theme/app_colors.dart';
+import 'package:deehelp/shared/extensions/screen_size_extension.dart';
 import 'package:deehelp/shared/extensions/text_style_extension.dart';
+import 'package:flutter/material.dart';
 
 abstract class BaseButton extends StatelessWidget {
   final String text;
@@ -10,6 +12,7 @@ abstract class BaseButton extends StatelessWidget {
   final double? width;
   final double? borderRadius;
   final TextStyle? textStyle;
+  final bool isLoading;
 
   const BaseButton({
     super.key,
@@ -21,6 +24,7 @@ abstract class BaseButton extends StatelessWidget {
     this.borderRadius,
     this.textStyle,
     this.backgroundColor,
+    this.isLoading = false,
   });
 
   Color getBackgroundColor();
@@ -36,15 +40,25 @@ abstract class BaseButton extends StatelessWidget {
           backgroundColor: getBackgroundColor(),
           foregroundColor: getForegroundColor(),
           elevation: 0,
-          padding: EdgeInsets.symmetric(vertical: height ?? 18),
+          padding: EdgeInsets.symmetric(
+              vertical: height ?? context.percentHeight(0.016)),
           shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(12),
+            borderRadius: BorderRadius.circular(8),
           ),
         ),
-        child: Text(
-          text,
-          style: textStyle ?? context.getTextStyle.mediumSmall,
-        ),
+        child: isLoading
+            ? const SizedBox(
+                width: 20,
+                height: 20,
+                child: CircularProgressIndicator(
+                  strokeWidth: 2,
+                  color: AppColors.lineColor,
+                ),
+              )
+            : Text(
+                text,
+                style: textStyle ?? context.getTextStyle.mediumSmall,
+              ),
       ),
     );
   }

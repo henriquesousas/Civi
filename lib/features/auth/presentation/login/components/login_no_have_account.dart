@@ -1,8 +1,8 @@
-import 'package:flutter/material.dart';
-import 'package:go_router/go_router.dart';
 import 'package:deehelp/app/router/router_config.dart';
 import 'package:deehelp/shared/extensions/context_extension.dart';
-import 'package:deehelp/shared/extensions/text_style_extension.dart';
+import 'package:deehelp/shared/extensions/screen_size_extension.dart';
+import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 
 import '../../../../../app/theme/app_colors.dart';
 
@@ -11,35 +11,35 @@ class LoginNoHaveAccount extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      mainAxisSize: MainAxisSize.min,
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: [
-        Text(
-          "Ainda não tem uma conta? ",
-          style: context.getTextStyle.smallMedium.copyWith(
-            color: AppColors.textSecondary,
+    return InkWell(
+      onTap: () {
+        context.push(Routes.registerAccount);
+      },
+      borderRadius: BorderRadius.circular(8),
+      child: Padding(
+        padding: EdgeInsets.symmetric(
+          horizontal: context.percentWidth(0.1),
+          vertical: 30,
+        ),
+        child: Text.rich(
+          textAlign: TextAlign.center,
+          TextSpan(
+            text: "${context.strings.notHaveAccountYet} \n",
+            style: Theme.of(context).textTheme.titleSmall?.copyWith(
+                  color: AppColors.textSecondary,
+                ),
+            children: <TextSpan>[
+              TextSpan(
+                text: context.strings.buttonClickHere,
+                style: Theme.of(context).textTheme.titleSmall?.copyWith(
+                      fontWeight: FontWeight.bold,
+                      color: AppColors.primary,
+                    ),
+              ),
+            ],
           ),
         ),
-        TextButton(
-          onPressed: () {
-            context.push(Routes.registerAccount);
-          },
-          style: TextButton.styleFrom(
-            padding: EdgeInsets.zero,
-            minimumSize: Size.zero,
-            tapTargetSize: MaterialTapTargetSize.shrinkWrap,
-          ),
-          child: Text(
-            context.strings.buttonClickHere,
-            style: context.getTextStyle.regular.copyWith(
-              fontWeight: FontWeight.bold,
-              decoration: TextDecoration.underline,
-              color: AppColors.primary,
-            ),
-          ),
-        ),
-      ],
+      ),
     );
   }
 }

@@ -1,9 +1,10 @@
-import 'package:flutter/material.dart';
 import 'package:deehelp/app/theme/app_colors.dart';
+import 'package:flutter/material.dart';
 
 class AppTheme {
   static ThemeData themeLight() {
     return ThemeData(
+      fontFamily: "Poppins",
       useMaterial3: false,
       brightness: Brightness.light,
       // textTheme: const TextTheme(
@@ -23,15 +24,23 @@ class AppTheme {
         ),
         enabledBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(12),
-          borderSide: BorderSide(color: AppColors.border, width: 1),
+          borderSide: const BorderSide(color: AppColors.border, width: 1),
         ),
         focusedBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(12),
-          borderSide: BorderSide(color: AppColors.primary, width: 2),
+          borderSide: const BorderSide(color: AppColors.primary, width: 2),
         ),
         contentPadding: const EdgeInsets.symmetric(
           horizontal: 16,
           vertical: 16,
+        ),
+        errorBorder: OutlineInputBorder(
+          borderSide: const BorderSide(color: Colors.red),
+          borderRadius: BorderRadius.circular(8),
+        ),
+        focusedErrorBorder: OutlineInputBorder(
+          borderSide: const BorderSide(color: Colors.red, width: 2.0),
+          borderRadius: BorderRadius.circular(8),
         ),
       ),
       colorScheme: const ColorScheme(
@@ -50,7 +59,8 @@ class AppTheme {
           backgroundColor: AppColors.buttonBackgroundColor,
           foregroundColor: AppColors.buttonTextColor,
           elevation: 0,
-          disabledBackgroundColor: AppColors.redColor.withValues(alpha: 0.5),
+          disabledBackgroundColor:
+              AppColors.buttonDisableColor.withValues(alpha: 0.5),
           // textStyle: AppTextStyles.button,
         ),
       ),

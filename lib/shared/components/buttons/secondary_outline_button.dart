@@ -1,5 +1,6 @@
-import 'package:flutter/material.dart';
+import 'package:deehelp/shared/extensions/screen_size_extension.dart';
 import 'package:deehelp/shared/extensions/text_style_extension.dart';
+import 'package:flutter/material.dart';
 
 import '../../../app/theme/app_colors.dart';
 
@@ -36,9 +37,10 @@ class SecondaryOutlineButton extends StatelessWidget {
           side: BorderSide(
             color: borderColor ?? AppColors.primary,
           ),
-          padding: EdgeInsets.symmetric(vertical: height ?? 18),
+          padding: EdgeInsets.symmetric(
+              vertical: height ?? context.percentHeight(0.016)),
           shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(12),
+            borderRadius: BorderRadius.circular(8),
           ),
         ),
         child: Text(

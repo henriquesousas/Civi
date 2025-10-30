@@ -1,8 +1,6 @@
-import 'package:flutter/material.dart';
 import 'package:deehelp/shared/components/icons/primary_icon.dart';
 import 'package:deehelp/shared/extensions/context_extension.dart';
-import 'package:deehelp/shared/extensions/screen_size_extension.dart';
-import 'package:deehelp/shared/extensions/text_style_extension.dart';
+import 'package:flutter/material.dart';
 
 import '../../../../../app/theme/app_colors.dart';
 
@@ -24,17 +22,16 @@ class LoginWelcomeSection extends StatelessWidget {
         const SizedBox(height: 24),
         Text(
           context.strings.loginTitle,
-          style: context.getTextStyle.regularMedium.copyWith(
-              color: AppColors.textPrimary,
-              fontWeight: FontWeight.bold,
-              fontSize: context.responsiveText(0.045)),
+          style: Theme.of(context).textTheme.headlineSmall?.copyWith(
+                fontWeight: FontWeight.bold,
+              ),
         ),
-        const SizedBox(height: 10),
+        // const SizedBox(height: 10),
         Text(
           context.strings.loginSubtitle,
-          style: context.getTextStyle.smallMedium.copyWith(
-            color: AppColors.textSecondary,
-          ),
+          style: Theme.of(context).textTheme.labelMedium?.copyWith(
+                color: AppColors.textSecondary,
+              ),
         ),
       ],
     );

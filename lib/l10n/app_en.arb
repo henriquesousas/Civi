@@ -94,5 +94,7 @@
 
 
     "@Commons": { "description": "Textos comuns" },
-    "labelAgreeTerms": "Eu concordo com os Termos e Condições"
+    "labelAgreeTerms": "Eu concordo com os Termos e Condições",
+
+    "notHaveAccountYet" : "Ainda não tem uma conta? "
 }

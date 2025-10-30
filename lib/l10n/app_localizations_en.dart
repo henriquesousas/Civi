@@ -165,10 +165,10 @@ class AppLocalizationsEn extends AppLocalizations {
   String get welcomeAccountCreatedSuccess => 'Conta criada com sucesso! \nVamos ajustar algumas configurações para você começar a relatar ocorrências.';
 
   @override
-  String get welcomeOnboardingTitle1 => 'Definir sua localização';
+  String get welcomeOnboardingTitle1 => 'Localização';
 
   @override
-  String get welcomeOnboardingTitle2 => 'Cadastre seus veículos e aparelhos';
+  String get welcomeOnboardingTitle2 => 'Cadastre seus Ítens';
 
   @override
   String get welcomeOnboardingTitle3 => 'Nascemos agora :)';
@@ -241,4 +241,7 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get labelAgreeTerms => 'Eu concordo com os Termos e Condições';
+
+  @override
+  String get notHaveAccountYet => 'Ainda não tem uma conta? ';
 }
