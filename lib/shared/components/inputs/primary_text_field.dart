@@ -1,5 +1,7 @@
-import 'package:flutter/material.dart';
 import 'package:deehelp/shared/extensions/text_style_extension.dart';
+import 'package:flutter/material.dart';
+
+import '../../../app/theme/app_colors.dart';
 
 class PrimaryTextField extends StatelessWidget {
   final String labelText;
@@ -9,6 +11,8 @@ class PrimaryTextField extends StatelessWidget {
   final TextInputType? textInputType;
   final bool? obscureText;
   final int? maxLine;
+  final String? errorText;
+  final ValueChanged<String>? onChanged;
   const PrimaryTextField({
     super.key,
     required this.labelText,
@@ -18,6 +22,8 @@ class PrimaryTextField extends StatelessWidget {
     this.suffixIcon,
     this.obscureText,
     this.maxLine = 1,
+    this.errorText,
+    this.onChanged,
   });
 
   @override
@@ -38,15 +44,12 @@ class PrimaryTextField extends StatelessWidget {
         floatingLabelAlignment: FloatingLabelAlignment.start,
         prefixIcon: prefixIcon,
         suffixIcon: suffixIcon,
-        contentPadding: const EdgeInsets.symmetric(
-          vertical: 22,
-          horizontal: 20,
+        errorText: errorText,
+        floatingLabelStyle: TextStyle(
+          color: errorText?.isNotEmpty == true ? Colors.red : AppColors.primary,
         ),
       ),
-      validator: (value) {
-        return null;
-      },
-      onFieldSubmitted: (_) {},
+      onChanged: onChanged,
     );
   }
 }

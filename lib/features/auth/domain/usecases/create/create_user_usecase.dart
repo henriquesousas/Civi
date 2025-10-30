@@ -10,7 +10,7 @@ import 'package:deehelp/features/auth/domain/gender.dart';
 import 'package:deehelp/features/auth/domain/usecases/create/create_use_dto.dart';
 import 'package:deehelp/features/auth/domain/user_builder.dart';
 
-class CreateUserUsecase extends UseCase<CreateUseDto, EitherResult<User>> {
+class CreateUserUsecase extends UseCase<CreateUseDto, User> {
   final AuthRepository repository;
 
   CreateUserUsecase({required this.repository});

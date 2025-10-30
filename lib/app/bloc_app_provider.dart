@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../features/main/state/bottom_navigation_bloc.dart';
 
+//TODO: remove
 class BlocAppProvider extends StatelessWidget {
   final Widget child;
 

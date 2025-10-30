@@ -1,11 +1,11 @@
-import 'package:flutter/material.dart';
-import 'package:go_router/go_router.dart';
 import 'package:deehelp/app/router/router_config.dart';
 import 'package:deehelp/shared/animation/slide_fade_transition_animator.dart';
 import 'package:deehelp/shared/components/buttons/primary_button.dart';
 import 'package:deehelp/shared/components/buttons/secondary_outline_button.dart';
 import 'package:deehelp/shared/components/primary_app_bar.dart';
 import 'package:deehelp/shared/extensions/context_extension.dart';
+import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 
 import '../../../../app/theme/app_colors.dart';
 import '../../../../shared/components/progress_indicator/step_indicator.dart';
