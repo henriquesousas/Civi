@@ -3,6 +3,7 @@ import 'package:deehelp/features/auth/presentation/login/components/login_or.dar
 import 'package:deehelp/shared/components/buttons/primary_button.dart';
 import 'package:deehelp/shared/components/inputs/primary_text_field.dart';
 import 'package:deehelp/shared/extensions/context_extension.dart';
+import 'package:deehelp/shared/extensions/text_style_extension.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:provider/provider.dart';
@@ -92,33 +93,29 @@ class _LoginFormState extends State<LoginForm> {
                 );
               },
             ),
-            // Forgot Password
             Align(
               alignment: Alignment.bottomRight,
               child: TextButton(
                 onPressed: () {},
                 style: TextButton.styleFrom(
-                  padding: const EdgeInsets.all(8),
+                  padding:
+                      const EdgeInsets.symmetric(vertical: 12, horizontal: 5),
                   minimumSize: Size.zero,
                   tapTargetSize: MaterialTapTargetSize.shrinkWrap,
                 ),
                 child: Text(
                   context.strings.forgotPassword,
-                  style: Theme.of(context).textTheme.titleSmall?.copyWith(
-                        color: AppColors.primary,
-                        decoration: TextDecoration.underline,
-                        fontWeight: FontWeight.w600,
-                      ),
+                  style: context.getTextStyle.regular.copyWith(
+                    color: AppColors.primary,
+                    decoration: TextDecoration.underline,
+                  ),
                 ),
               ),
             ),
-            // Submit LoginWithEmailAndPassword
             PrimaryButton(
               text: context.strings.buttonEnter,
-              onPressed: state.isFormValid
-                  ? () => loginActions.submitLogin(state)
-                  : null,
-              isLoading: AuthStatus.loading.name == state.status.name,
+              onPressed:
+                  state.isFormValid ? () => loginActions.submitLogin : null,
             ),
             const LoginOr(),
             const LoginGoogleButton(),
