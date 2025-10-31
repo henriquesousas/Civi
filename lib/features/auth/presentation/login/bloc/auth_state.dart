@@ -27,7 +27,7 @@ class AuthState extends Equatable {
     this.user,
   });
 
-  bool get isFormValid => email.hasError && password.hasError;
+  bool get isFormValid => email.isValid && password.isValid;
 
   factory AuthState.initial() => const AuthState._(
         status: AuthStatus.initial,

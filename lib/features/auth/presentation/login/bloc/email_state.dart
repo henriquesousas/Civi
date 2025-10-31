@@ -17,6 +17,6 @@ class EmailState {
     );
   }
 
-  // bool get isValid => error == null && value.isNotEmpty;
+  bool get isValid => error == null && value.isNotEmpty;
   bool get hasError => error == null;
 }

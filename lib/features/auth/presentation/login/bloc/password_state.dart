@@ -21,6 +21,12 @@ class PasswordState {
     );
   }
 
-  // bool get isValid => error == null && (value == null);
+  bool get isValid => _isValid();
+  bool _isValid() {
+    if (value == null) return false;
+    if (error != null) return false;
+    return error == null && value != null;
+  }
+
   bool get hasError => error == null;
 }
