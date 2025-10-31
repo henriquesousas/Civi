@@ -56,7 +56,7 @@ class AuthState extends Equatable {
       value: pwd,
       error: error,
     );
-    return copyWith(password: newState);
+    return copyWith(password: newState, status: AuthStatus.initial);
   }
 
   AuthState updateEmailState(String newEmail, String? error) {
@@ -64,7 +64,7 @@ class AuthState extends Equatable {
       value: newEmail,
       error: error,
     );
-    return copyWith(email: newState);
+    return copyWith(email: newState, status: AuthStatus.initial);
   }
 
   AuthState updatePasswordVisibilityState(bool obscureText) {
@@ -72,7 +72,7 @@ class AuthState extends Equatable {
       obscureText: obscureText,
       error: password.error,
     );
-    return copyWith(password: newState);
+    return copyWith(password: newState, status: AuthStatus.initial);
   }
 
   @override

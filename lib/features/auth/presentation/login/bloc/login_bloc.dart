@@ -1,3 +1,4 @@
+import 'package:deehelp/core/resources/app_strings.dart';
 import 'package:deehelp/features/auth/domain/usecases/login/login_dto.dart';
 import 'package:deehelp/features/auth/domain/usecases/login/login_with_email_and_password_usecase.dart';
 import 'package:deehelp/features/auth/presentation/login/bloc/auth_event.dart';
@@ -8,11 +9,15 @@ import '../../../domain/auth_exception.dart';
 import '../../../domain/entity/user.dart';
 import 'auth_state.dart';
 
+//TODO: Remover appStrings
 class LoginBloc extends Bloc<AuthEvent, AuthState> {
   final LoginWithEmailAndPasswordUsecase loginWithEmailAndPasswordUseCase;
+  final AppStrings appStrings;
 
-  LoginBloc({required this.loginWithEmailAndPasswordUseCase})
-      : super(AuthState.initial()) {
+  LoginBloc({
+    required this.loginWithEmailAndPasswordUseCase,
+    required this.appStrings,
+  }) : super(AuthState.initial()) {
     on<LoginWithEmailAndPasswordEvent>(loginWithEmailAndPassword);
     on<EmailChangedEvent>(onEmailChange);
     on<PasswordChangedEvent>(onPasswordChange);
@@ -25,7 +30,7 @@ class LoginBloc extends Bloc<AuthEvent, AuthState> {
   ) async {
     final email = event.email;
     final isValid = email.contains("@");
-    final error = isValid ? null : "Email inválido";
+    final error = isValid ? null : appStrings.passwordTooShort;
 
     final newState = state.updateEmailState(email, error);
     emit(newState);

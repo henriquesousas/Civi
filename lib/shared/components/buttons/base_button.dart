@@ -33,7 +33,7 @@ abstract class BaseButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      width: width ?? double.infinity,
+      width: width ?? context.screenWidth,
       child: ElevatedButton(
         onPressed: onPressed,
         style: ElevatedButton.styleFrom(

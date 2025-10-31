@@ -13,6 +13,7 @@ class SecondaryOutlineButton extends StatelessWidget {
   final TextStyle? textStyle;
   final Color? foregroundColor;
   final Color? borderColor;
+  final double? width;
 
   const SecondaryOutlineButton({
     super.key,
@@ -23,13 +24,14 @@ class SecondaryOutlineButton extends StatelessWidget {
     this.borderRadius,
     this.foregroundColor,
     this.borderColor,
+    this.width,
     required this.text,
   });
 
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      width: double.infinity,
+      width: width ?? context.screenWidth,
       child: OutlinedButton(
         onPressed: onPressed,
         style: OutlinedButton.styleFrom(

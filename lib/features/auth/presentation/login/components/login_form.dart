@@ -1,4 +1,5 @@
 import 'package:deehelp/app/theme/app_colors.dart';
+import 'package:deehelp/core/ui/dialog/dialog_extension.dart';
 import 'package:deehelp/features/auth/presentation/login/components/login_or.dart';
 import 'package:deehelp/shared/components/buttons/primary_button.dart';
 import 'package:deehelp/shared/components/inputs/primary_text_field.dart';
@@ -35,7 +36,12 @@ class _LoginFormState extends State<LoginForm> {
   Widget build(BuildContext context) {
     return BlocConsumer<LoginBloc, AuthState>(
       listener: (context, state) {
-        debugPrint("event");
+        if (state.status == AuthStatus.error) {
+          context.showDialogWarning(
+            "Aviso",
+            state.errorMessage ?? '',
+          );
+        }
       },
       builder: (context, state) {
         return Column(
@@ -114,8 +120,11 @@ class _LoginFormState extends State<LoginForm> {
             ),
             PrimaryButton(
               text: context.strings.buttonEnter,
-              onPressed:
-                  state.isFormValid ? () => loginActions.submitLogin : null,
+              // onPressed:
+              //     state.isFormValid ? () => loginActions.submitLogin : null,
+              onPressed: state.isFormValid
+                  ? () => loginActions.submitLogin(state)
+                  : null,
             ),
             const LoginOr(),
             const LoginGoogleButton(),

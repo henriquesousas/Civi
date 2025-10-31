@@ -10,10 +10,14 @@ class PrimaryButton extends BaseButton {
     required super.onPressed,
     super.width,
     super.isLoading,
+    super.borderRadius,
+    super.height,
+    super.padding,
+    super.backgroundColor,
   });
 
   @override
-  Color getBackgroundColor() => AppColors.primary;
+  Color getBackgroundColor() => super.backgroundColor ?? AppColors.primary;
 
   @override
   Color getForegroundColor() => Colors.white;

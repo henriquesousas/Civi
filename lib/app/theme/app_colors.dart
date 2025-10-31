@@ -46,6 +46,7 @@ class AppColors {
   static const Color shadow = Color(0x1A000000); // 10% Black
   static const Color shadowLight = Color(0x0D000000); // 5% Black
   static const Color shadowDark = Color(0x26000000); // 15% Black
+  static const Color iconWarning = Color(0xFFb96902); // 15% Black
 
   static const LinearGradient secondaryGradient = LinearGradient(
     begin: Alignment.topLeft,
@@ -80,6 +81,15 @@ class AppColors {
     colors: [
       primary,
       primaryLight,
+    ],
+  );
+
+  static LinearGradient primaryGradient2 = LinearGradient(
+    begin: Alignment.topLeft,
+    end: Alignment.bottomRight,
+    colors: [
+      primary.withValues(alpha: 0.2),
+      primaryLight.withValues(alpha: 0.2),
     ],
   );
 

@@ -1,4 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:deehelp/core/resources/app_string_adapter.dart';
+import 'package:deehelp/core/resources/app_strings.dart';
 import 'package:deehelp/features/auth/data/firebase/firebase_auth_repository.dart';
 import 'package:deehelp/features/auth/domain/auth_repository.dart';
 import 'package:deehelp/features/auth/domain/usecases/login/login_with_email_and_password_usecase.dart';
@@ -9,6 +11,7 @@ import 'package:provider/provider.dart';
 
 import '../features/auth/presentation/login/bloc/login_bloc.dart';
 import '../features/main/state/bottom_navigation_bloc.dart';
+import '../l10n/app_localizations.dart';
 
 class ApplicationProvider extends StatelessWidget {
   final Widget child;
@@ -22,6 +25,9 @@ class ApplicationProvider extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiBlocProvider(
       providers: [
+        Provider<AppStrings>(
+          create: (context) => AppStringsAdapter(AppLocalizations.of(context)),
+        ),
         BlocProvider<BottomNavigationBloc>(
           create: (context) => BottomNavigationBloc(),
         ),
@@ -41,6 +47,7 @@ class ApplicationProvider extends StatelessWidget {
         ),
         Provider<LoginBloc>(
           create: (context) => LoginBloc(
+            appStrings: context.read<AppStrings>(),
             loginWithEmailAndPasswordUseCase:
                 context.read<LoginWithEmailAndPasswordUsecase>(),
           ),
