@@ -3,12 +3,12 @@ import 'package:deehelp/core/ui/dialog/dialog_extension.dart';
 import 'package:deehelp/features/auth/presentation/login/components/login_or.dart';
 import 'package:deehelp/shared/components/buttons/primary_button.dart';
 import 'package:deehelp/shared/components/inputs/primary_text_field.dart';
-import 'package:deehelp/shared/extensions/context_extension.dart';
 import 'package:deehelp/shared/extensions/text_style_extension.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:provider/provider.dart';
 
+import '../../../../../core/resources/resources.dart';
 import '../bloc/auth_state.dart';
 import '../bloc/email_state.dart';
 import '../bloc/login_bloc.dart';
@@ -38,7 +38,7 @@ class _LoginFormState extends State<LoginForm> {
       listener: (context, state) {
         if (state.status == AuthStatus.error) {
           context.showDialogWarning(
-            "Aviso",
+            R.strings.warning,
             state.errorMessage ?? '',
           );
         }
@@ -56,8 +56,8 @@ class _LoginFormState extends State<LoginForm> {
                     hasError ? AppColors.error : AppColors.textSecondary;
 
                 return PrimaryTextField(
-                  labelText: context.strings.labelTextEmail,
-                  hintText: context.strings.hintEmail,
+                  labelText: R.strings.email,
+                  hintText: R.strings.email,
                   textInputType: TextInputType.emailAddress,
                   prefixIcon: Icon(
                     Icons.email_outlined,
@@ -81,8 +81,8 @@ class _LoginFormState extends State<LoginForm> {
                     : Icons.visibility;
 
                 return PrimaryTextField(
-                  labelText: context.strings.labelTextPassword,
-                  hintText: context.strings.hintPassword,
+                  labelText: R.strings.password,
+                  hintText: R.strings.password,
                   obscureText: state.password.obscureText,
                   prefixIcon: Icon(
                     Icons.lock_outline,
@@ -110,7 +110,7 @@ class _LoginFormState extends State<LoginForm> {
                   tapTargetSize: MaterialTapTargetSize.shrinkWrap,
                 ),
                 child: Text(
-                  context.strings.forgotPassword,
+                  R.strings.forgotPassword,
                   style: context.getTextStyle.regular.copyWith(
                     color: AppColors.primary,
                     decoration: TextDecoration.underline,
@@ -119,9 +119,7 @@ class _LoginFormState extends State<LoginForm> {
               ),
             ),
             PrimaryButton(
-              text: context.strings.buttonEnter,
-              // onPressed:
-              //     state.isFormValid ? () => loginActions.submitLogin : null,
+              text: R.strings.enter,
               onPressed: state.isFormValid
                   ? () => loginActions.submitLogin(state)
                   : null,

@@ -1,6 +1,8 @@
-import 'package:flutter/material.dart';
 import 'package:deehelp/app/theme/app_colors.dart';
 import 'package:deehelp/shared/extensions/text_style_extension.dart';
+import 'package:flutter/material.dart';
+
+import '../../../../../core/resources/resources.dart';
 
 class LoginOr extends StatelessWidget {
   const LoginOr({super.key});
@@ -11,9 +13,9 @@ class LoginOr extends StatelessWidget {
       children: [
         const Expanded(child: Divider(color: AppColors.greyColor)),
         Padding(
-          padding: EdgeInsetsGeometry.all(16),
+          padding: const EdgeInsetsGeometry.all(16),
           child: Text(
-            'Ou',
+            R.strings.or,
             style: context.getTextStyle.regular.copyWith(
               color: AppColors.textTertiary,
             ),

@@ -8,7 +8,6 @@ import '../../../domain/auth_exception.dart';
 import '../../../domain/entity/user.dart';
 import 'auth_state.dart';
 
-//TODO: Remover appStrings
 class LoginBloc extends Bloc<AuthEvent, AuthState> {
   final LoginWithEmailAndPasswordUsecase loginWithEmailAndPasswordUseCase;
 
