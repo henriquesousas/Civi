@@ -1,10 +1,17 @@
-import 'package:deehelp/app/theme/app_colors.dart';
 import 'package:deehelp/shared/extensions/screen_size_extension.dart';
 import 'package:flutter/material.dart';
 
 class OnboardingLogo extends StatelessWidget {
-  final IconData icon;
-  const OnboardingLogo({super.key, required this.icon});
+  // final IconData icon;
+  final Icon icon;
+  final Color? circleInsideColor;
+  final Color? circleOutsideColor;
+  const OnboardingLogo({
+    super.key,
+    required this.icon,
+    this.circleInsideColor,
+    this.circleOutsideColor,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -16,7 +23,7 @@ class OnboardingLogo extends StatelessWidget {
         width: width,
         height: height,
         decoration: BoxDecoration(
-          color: Colors.white.withValues(alpha: 0.15),
+          color: circleOutsideColor ?? Colors.white.withValues(alpha: 0.15),
           borderRadius: BorderRadius.circular(radius),
           border: Border.all(
             color: Colors.white.withValues(alpha: 0.6),
@@ -30,7 +37,7 @@ class OnboardingLogo extends StatelessWidget {
               width: width,
               height: width,
               decoration: BoxDecoration(
-                color: Colors.white,
+                color: circleInsideColor ?? Colors.white,
                 borderRadius: BorderRadius.circular(radius),
                 boxShadow: [
                   BoxShadow(
@@ -41,11 +48,7 @@ class OnboardingLogo extends StatelessWidget {
                   ),
                 ],
               ),
-              child: Icon(
-                icon,
-                size: context.responsiveRadius(0.1),
-                color: AppColors.primary,
-              ),
+              child: icon,
             ),
           ),
         ),

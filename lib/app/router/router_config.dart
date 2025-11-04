@@ -4,6 +4,7 @@ class Routes {
   static const splash = "/splash";
   static const onboarding = "/onboarding";
   static const login = "/login";
+  static const loginWithGoogle = "/login-with-google";
   static const registerAccount = "/register-account";
   static const otpVerification = "/otp-verification";
   static const welcome = "/welcome";

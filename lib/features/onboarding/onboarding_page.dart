@@ -1,6 +1,3 @@
-import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
-import 'package:go_router/go_router.dart';
 import 'package:deehelp/app/router/router_config.dart';
 import 'package:deehelp/features/onboarding/components/onboarding_bottom_section.dart';
 import 'package:deehelp/features/onboarding/components/onboarding_content.dart';
@@ -8,6 +5,9 @@ import 'package:deehelp/features/onboarding/components/skip_button.dart';
 import 'package:deehelp/features/onboarding/onboarding_item.dart';
 import 'package:deehelp/shared/components/pageview/page_view_builder.dart';
 import 'package:deehelp/shared/extensions/context_extension.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'package:go_router/go_router.dart';
 
 import '../../app/theme/app_colors.dart';
 
@@ -38,7 +38,7 @@ class _OnboardingPageState extends State<OnboardingPage> {
       return;
     }
 
-    context.push(Routes.login);
+    context.push(Routes.loginWithGoogle);
   }
 
   void _onPreviousPage() {
@@ -47,7 +47,7 @@ class _OnboardingPageState extends State<OnboardingPage> {
   }
 
   void _onSkip() {
-    context.push(Routes.login);
+    context.push(Routes.loginWithGoogle);
   }
 
   @override

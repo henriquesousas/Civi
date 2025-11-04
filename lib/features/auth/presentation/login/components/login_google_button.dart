@@ -1,5 +1,6 @@
 import 'package:deehelp/shared/extensions/text_style_extension.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 
 import '../../../../../app/theme/app_colors.dart';
 import '../../../../../core/resources/resources.dart';
@@ -24,11 +25,16 @@ class LoginGoogleButton extends StatelessWidget {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          const Icon(Icons.g_mobiledata),
+          //const Icon(Icons.g_mobiledata),
+          SvgPicture.asset(
+            R.images.svgGoogleIcon,
+            width: 20,
+            height: 20,
+          ),
           const SizedBox(width: 8),
           Text(
             R.strings.enterWithGoogle,
-            style: context.getTextStyle.mediumSmall,
+            style: context.textSmallRegular,
           ),
         ],
       ),

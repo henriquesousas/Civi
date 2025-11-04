@@ -1,6 +1,6 @@
-import 'package:go_router/go_router.dart';
 import 'package:deehelp/app/router/router_config.dart';
 import 'package:deehelp/app/router/slide_transition_page.dart';
+import 'package:deehelp/features/auth/presentation/login/login_with_google_page.dart';
 import 'package:deehelp/features/favorites/favourite_view.dart';
 import 'package:deehelp/features/home/home_view.dart';
 import 'package:deehelp/features/itens/create/create_new_item_page.dart';
@@ -22,6 +22,7 @@ import 'package:deehelp/features/settings/terms/use_terms_view.dart';
 import 'package:deehelp/features/splash/splash_page.dart';
 import 'package:deehelp/features/welcome/old/welcome_provider.dart';
 import 'package:deehelp/features/welcome/welcome_page.dart';
+import 'package:go_router/go_router.dart';
 
 import '../../features/auth/presentation/login/login_page.dart';
 import '../../features/auth/presentation/otp/otp_verification_page.dart';
@@ -36,7 +37,7 @@ class AppRouter {
     routes: [
       GoRoute(
         path: Routes.splash,
-        builder: (context, state) => SplashPage(),
+        builder: (context, state) => const SplashPage(),
       ),
       GoRoute(
         path: Routes.onboarding,
@@ -64,6 +65,13 @@ class AppRouter {
         pageBuilder: (context, state) => slideTransitionPage(
           key: state.pageKey,
           child: const LoginPage(),
+        ),
+      ),
+      GoRoute(
+        path: Routes.loginWithGoogle,
+        pageBuilder: (context, state) => slideTransitionPage(
+          key: state.pageKey,
+          child: const LoginWithGooglePage(),
         ),
       ),
       GoRoute(

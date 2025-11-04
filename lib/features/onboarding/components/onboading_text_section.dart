@@ -28,7 +28,7 @@ class OnboardingTextSection extends StatelessWidget {
           overflow: TextOverflow.ellipsis,
           maxLines: 4,
           style: context.textSmall.copyWith(
-            color: Colors.white.withValues(alpha: 0.6),
+            color: Colors.white.withValues(alpha: 1),
             height: 1.6,
           ),
         ),
