@@ -40,6 +40,8 @@ dependencies:
   flutter_bloc: ^8.1.6
   flutter_map: ^8.1.1
   latlong2: ^0.9.1
+#  https://pub.dev/packages/google_sign_in/install
+  google_sign_in: ^7.2.0
 
   # Location services
   geolocator: ^10.1.0

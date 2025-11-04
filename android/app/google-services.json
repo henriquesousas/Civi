@@ -12,7 +12,20 @@
           "package_name": "br.com.atomos.deehelp"
         }
       },
-      "oauth_client": [],
+      "oauth_client": [
+        {
+          "client_id": "673259838307-ur8p2h3ob4tlnonc74it74jggc2u852f.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "br.com.atomos.deehelp",
+            "certificate_hash": "59209bf461ea2fc417e6364b7809629d4aec2a5b"
+          }
+        },
+        {
+          "client_id": "673259838307-a2tmdcc0oil4tmohe6r5gbcfssiklur8.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
       "api_key": [
         {
           "current_key": "AIzaSyCPskYPY-ibG3uh7lCpvXhlo8ShGp5Hn0w"
@@ -20,7 +33,12 @@
       ],
       "services": {
         "appinvite_service": {
-          "other_platform_oauth_client": []
+          "other_platform_oauth_client": [
+            {
+              "client_id": "673259838307-a2tmdcc0oil4tmohe6r5gbcfssiklur8.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
         }
       }
     }

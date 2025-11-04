@@ -8,6 +8,9 @@ abstract class Translation with TranslationParts {
   String get or;
   String get notHaveAccount;
   String get warning;
+  String get skip;
+  String get loginInvalidCredentialsError;
+  String get loginWithGoogleError;
 
   // Login
   String get loginInfo;

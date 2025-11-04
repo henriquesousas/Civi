@@ -1,7 +1,7 @@
-import 'package:flutter/material.dart';
 import 'package:deehelp/features/welcome/welcome_feature.dart';
 import 'package:deehelp/shared/components/icons/primary_icon.dart';
 import 'package:deehelp/shared/extensions/text_style_extension.dart';
+import 'package:flutter/material.dart';
 
 import '../../../app/theme/app_colors.dart';
 
@@ -49,7 +49,7 @@ class WelcomeCard extends StatelessWidget {
               // const SizedBox(height: 30),
               Text(
                 feature.title,
-                style: context.getTextStyle.mediumLarge.copyWith(
+                style: context.getTextStyle.medium.copyWith(
                   fontWeight: FontWeight.bold,
                 ),
                 textAlign: TextAlign.center,

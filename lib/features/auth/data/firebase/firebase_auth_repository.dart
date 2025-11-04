@@ -1,34 +1,49 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:deehelp/core/domain/extension/either_extension.dart';
 import 'package:deehelp/features/auth/data/auth_result.dart';
+import 'package:deehelp/features/auth/data/firebase/firebase_auth_service.dart';
 import 'package:deehelp/features/auth/data/firebase/firebase_extension.dart';
+import 'package:deehelp/features/auth/data/firebase/firebase_firestore_service.dart';
 import 'package:deehelp/features/auth/data/user_model.dart';
 import 'package:deehelp/features/auth/domain/auth_repository.dart';
 import 'package:deehelp/features/auth/domain/entity/user.dart';
-import 'package:firebase_auth/firebase_auth.dart'
-    show FirebaseAuth, FirebaseAuthException, UserCredential;
+import 'package:firebase_auth/firebase_auth.dart' show FirebaseAuthException;
 
 class FirebaseAuthRepository implements AuthRepository {
-  static const String _userCollection = "users";
-  final FirebaseAuth firebaseAuth;
-  final FirebaseFirestore firestore;
+  final FirebaseAuthService firebaseAuthService;
+  final FirebaseFirestoreService firestoreService;
 
-  FirebaseAuthRepository({required this.firebaseAuth, required this.firestore});
+  FirebaseAuthRepository({
+    required this.firebaseAuthService,
+    required this.firestoreService,
+  });
 
   @override
   Future<AuthResult> save(User user) async {
-    UserCredential? credentials;
     try {
-      credentials = await _createUserInFirebaseAuth(user);
+      final result = await firebaseAuthService
+          .createUserWithEmailAndPassword(
+        user.email.value,
+        user.password!.value,
+        user.name.value,
+      )
+          .flatMapAsync((credential) {
+        return firestoreService.save(
+            UserModel.toMap(user), credential.user!.uid);
+      });
 
-      await _saveUserInFirestore(credentials, user);
-
-      return AuthResult.success(user);
+      return result.fold(
+        (error) async {
+          await firebaseAuthService.delete();
+          return AuthResult.failure(error.message ?? "");
+        },
+        (document) => AuthResult.success(user),
+      );
     } on FirebaseAuthException catch (e) {
-      await _rollback(credentials);
+      await firebaseAuthService.delete();
       return AuthResult.failure(e.errorMessage);
     } on Exception catch (e) {
-      await _rollback(credentials);
-      return AuthResult.failure('Erro inesperado: ${e.toString()}');
+      await firebaseAuthService.delete();
+      return AuthResult.failure(e.toString());
     }
   }
 
@@ -38,53 +53,19 @@ class FirebaseAuthRepository implements AuthRepository {
     String password,
   ) async {
     try {
-      final credentials = await firebaseAuth.signInWithEmailAndPassword(
-        email: email,
-        password: password,
+      final result = await firebaseAuthService
+          .signInWithEmailAndPassword(email, password)
+          .flatMapAsync((usrCredentials) async =>
+              firestoreService.get(usrCredentials.user!));
+
+      return result.fold(
+        (e) => AuthResult.failure(e.errorMessage),
+        (document) => AuthResult.success(UserModel.toUser(document.data()!)),
       );
-
-      final user = await _getUserFromFirestore(credentials);
-
-      return AuthResult.success(user);
     } on FirebaseAuthException catch (e) {
       return AuthResult.failure(e.errorMessage);
     } catch (e) {
-      return AuthResult.failure('Erro inesperado: ${e.toString()}');
+      return AuthResult.failure(e.toString());
     }
-  }
-
-  Future<void> _rollback(UserCredential? credential) async {
-    await credential?.user?.delete();
-  }
-
-  Future<void> _saveUserInFirestore(
-    UserCredential credentials,
-    User user,
-  ) async {
-    final firebaseUser = credentials.user!;
-    await firestore
-        .collection(_userCollection)
-        .doc(firebaseUser.uid)
-        .set(UserModel.toMap(user));
-  }
-
-  Future<UserCredential> _createUserInFirebaseAuth(User user) async {
-    final credentials = await firebaseAuth.createUserWithEmailAndPassword(
-      email: user.email.value,
-      password: user.password.value,
-    );
-
-    credentials.user!.updateProfile(displayName: user.name.value);
-
-    return credentials;
-  }
-
-  Future<User> _getUserFromFirestore(UserCredential credentials) async {
-    final doc = await firestore
-        .collection(_userCollection)
-        .doc(credentials.user!.uid)
-        .get();
-
-    return UserModel.toUser(doc.data()!);
   }
 }

@@ -5,12 +5,13 @@ import '../../../../../app/theme/app_colors.dart';
 import '../../../../../core/resources/resources.dart';
 
 class LoginGoogleButton extends StatelessWidget {
-  const LoginGoogleButton({super.key});
+  final VoidCallback onPressed;
+  const LoginGoogleButton({super.key, required this.onPressed});
 
   @override
   Widget build(BuildContext context) {
     return OutlinedButton(
-      onPressed: () {},
+      onPressed: onPressed,
       style: OutlinedButton.styleFrom(
         foregroundColor: AppColors.textColor,
         backgroundColor: Colors.white,

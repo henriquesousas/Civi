@@ -41,4 +41,10 @@ class LoginActions {
           ),
         );
   }
+
+  void submitLoginWithGoogle(AuthState state) {
+    context.read<LoginBloc>().add(
+          LoginWithGoogleEvent(),
+        );
+  }
 }

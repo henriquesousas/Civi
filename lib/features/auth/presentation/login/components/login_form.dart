@@ -42,6 +42,13 @@ class _LoginFormState extends State<LoginForm> {
             state.errorMessage ?? '',
           );
         }
+
+        if (state.status == AuthStatus.success) {
+          context.showDialogWarning(
+            "Sucesso",
+            'Login realizado com sucesso',
+          );
+        }
       },
       builder: (context, state) {
         return Column(
@@ -125,7 +132,9 @@ class _LoginFormState extends State<LoginForm> {
                   : null,
             ),
             const LoginOr(),
-            const LoginGoogleButton(),
+            LoginGoogleButton(
+              onPressed: () => loginActions.submitLoginWithGoogle(state),
+            ),
           ],
         );
       },

@@ -1,5 +1,6 @@
 import 'package:deehelp/features/auth/domain/usecases/login/login_dto.dart';
 import 'package:deehelp/features/auth/domain/usecases/login/login_with_email_and_password_usecase.dart';
+import 'package:deehelp/features/auth/domain/usecases/login/login_with_google_usecase.dart';
 import 'package:deehelp/features/auth/presentation/login/bloc/auth_event.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -10,11 +11,14 @@ import 'auth_state.dart';
 
 class LoginBloc extends Bloc<AuthEvent, AuthState> {
   final LoginWithEmailAndPasswordUsecase loginWithEmailAndPasswordUseCase;
+  final LoginWithGoogleUsecase loginWithGoogleUsecase;
 
   LoginBloc({
     required this.loginWithEmailAndPasswordUseCase,
+    required this.loginWithGoogleUsecase,
   }) : super(AuthState.initial()) {
     on<LoginWithEmailAndPasswordEvent>(loginWithEmailAndPassword);
+    on<LoginWithGoogleEvent>(loginWithGoogle);
     on<EmailChangedEvent>(onEmailChange);
     on<PasswordChangedEvent>(onPasswordChange);
     on<PasswordChangedObscureTextEvent>(onChangeVisibility);
@@ -64,6 +68,24 @@ class LoginBloc extends Bloc<AuthEvent, AuthState> {
       currentState: state,
       emit: emit,
       command: () => loginWithEmailAndPasswordUseCase.execute(dto),
+      onLoading: (currentState) =>
+          currentState.copyWith(status: AuthStatus.loading),
+      onSuccess: (currentState, user) =>
+          currentState.copyWith(status: AuthStatus.success, user: user),
+      onError: (currentState, error) => currentState.copyWith(
+          status: AuthStatus.error,
+          errorMessage: (error as AuthException).message),
+    );
+  }
+
+  Future<void> loginWithGoogle(
+    LoginWithGoogleEvent event,
+    Emitter<AuthState> emit,
+  ) async {
+    await BlocCommandWrapper.execute<User, AuthState>(
+      currentState: state,
+      emit: emit,
+      command: () => loginWithGoogleUsecase.execute(),
       onLoading: (currentState) =>
           currentState.copyWith(status: AuthStatus.loading),
       onSuccess: (currentState, user) =>

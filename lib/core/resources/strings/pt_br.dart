@@ -31,4 +31,13 @@ class PtBr with TranslationParts implements Translation {
 
   @override
   String get warning => "Aviso";
+
+  @override
+  String get skip => "Pular";
+
+  @override
+  String get loginInvalidCredentialsError => "Login ou senha inválidos!!!";
+
+  @override
+  String get loginWithGoogleError => "Falha na autenticação com o google!";
 }

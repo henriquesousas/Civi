@@ -10,3 +10,14 @@ extension EitherExtensions<L, R> on Either<L, R> {
         (right) => right,
       );
 }
+
+extension FutureEitherExtension<L, R> on Future<Either<L, R>> {
+  Future<Either<L, R2>> flatMapAsync<R2>(
+      Future<Either<L, R2>> Function(R) f) async {
+    final either = await this;
+    return either.fold(
+      (left) => Left(left),
+      (right) async => await f(right),
+    );
+  }
+}

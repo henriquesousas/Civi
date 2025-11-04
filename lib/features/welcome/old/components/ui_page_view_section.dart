@@ -1,11 +1,11 @@
-import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:deehelp/app/theme/size_config.dart';
 import 'package:deehelp/features/welcome/old/components/ui_dot.dart';
 import 'package:deehelp/features/welcome/old/welcome.dart';
 import 'package:deehelp/shared/extensions/screen_size_extension.dart';
 import 'package:deehelp/shared/extensions/text_style_extension.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 
 import '../state/welcome_bloc.dart';
 
@@ -61,7 +61,7 @@ class UIPageViewSection extends StatelessWidget {
               Text(
                 page.title ?? "",
                 textAlign: TextAlign.center,
-                style: context.getTextStyle.mediumLarge,
+                style: context.getTextStyle.medium,
               ),
               const SizedBox(height: SizeConfig.height10),
               Text(

@@ -17,11 +17,11 @@ class UserValidator extends Validator {
     final List<DomainNotification?> notifications = [
       user.id.notification,
       user.name.notification,
-      user.surName.notification,
-      user.password.notification,
       user.email.notification,
-      user.phone.notification,
       user.photoUrl?.notification,
+      // user.surName.notification,
+      // user.password.notification,
+      // user.phone.notification,
     ];
 
     notifications.forEach((notification) => copyIfHasError(notification));

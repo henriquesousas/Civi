@@ -1,5 +1,3 @@
-import 'package:flutter/material.dart';
-import 'package:go_router/go_router.dart';
 import 'package:deehelp/app/router/router_config.dart';
 import 'package:deehelp/features/welcome/components/welcome_card.dart';
 import 'package:deehelp/features/welcome/welcome_feature.dart';
@@ -10,6 +8,8 @@ import 'package:deehelp/shared/components/indicator/primary_progress_indicator.d
 import 'package:deehelp/shared/components/pageview/page_view_builder.dart';
 import 'package:deehelp/shared/extensions/context_extension.dart';
 import 'package:deehelp/shared/extensions/text_style_extension.dart';
+import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 
 import '../../app/theme/app_colors.dart';
 import '../../shared/components/buttons/secondary_outline_button.dart';
@@ -112,7 +112,7 @@ class _WelcomePageState extends State<WelcomePage>
                   Text(
                     "${context.strings.welcomeHeader} Paulo",
                     textAlign: TextAlign.center,
-                    style: context.getTextStyle.mediumLarge.copyWith(
+                    style: context.getTextStyle.medium.copyWith(
                       fontWeight: FontWeight.bold,
                       color: AppColors.textPrimary,
                       // fontSize: context.responsiveText(0.08),

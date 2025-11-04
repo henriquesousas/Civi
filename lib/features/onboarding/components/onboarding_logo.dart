@@ -1,6 +1,6 @@
-import 'package:flutter/material.dart';
 import 'package:deehelp/app/theme/app_colors.dart';
 import 'package:deehelp/shared/extensions/screen_size_extension.dart';
+import 'package:flutter/material.dart';
 
 class OnboardingLogo extends StatelessWidget {
   final IconData icon;
@@ -8,38 +8,44 @@ class OnboardingLogo extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final width = context.percentWidth(0.5);
+    final height = context.percentWidth(0.5);
+    final radius = context.responsiveRadius(0.6);
     return Center(
       child: Container(
-        width: context.percentWidth(0.5),
-        height: context.percentHeight(0.23),
+        width: width,
+        height: height,
         decoration: BoxDecoration(
           color: Colors.white.withValues(alpha: 0.15),
-          borderRadius: BorderRadius.circular(300),
+          borderRadius: BorderRadius.circular(radius),
           border: Border.all(
-            color: Colors.white.withValues(alpha: 0.3),
+            color: Colors.white.withValues(alpha: 0.6),
             width: 2,
           ),
         ),
-        child: Center(
-          child: Container(
-            width: 150,
-            height: 150,
-            decoration: BoxDecoration(
-              color: Colors.white,
-              borderRadius: BorderRadius.circular(300),
-              boxShadow: [
-                BoxShadow(
-                  color: Colors.black.withValues(alpha: 0.1),
-                  offset: const Offset(0, 10),
-                  blurRadius: 30,
-                  spreadRadius: 0,
-                ),
-              ],
-            ),
-            child: Icon(
-              icon,
-              size: 60,
-              color: AppColors.primary,
+        child: Padding(
+          padding: const EdgeInsets.all(20),
+          child: Center(
+            child: Container(
+              width: width,
+              height: width,
+              decoration: BoxDecoration(
+                color: Colors.white,
+                borderRadius: BorderRadius.circular(radius),
+                boxShadow: [
+                  BoxShadow(
+                    color: Colors.black.withValues(alpha: 0.1),
+                    offset: const Offset(0, 10),
+                    blurRadius: 30,
+                    spreadRadius: 0,
+                  ),
+                ],
+              ),
+              child: Icon(
+                icon,
+                size: context.responsiveRadius(0.1),
+                color: AppColors.primary,
+              ),
             ),
           ),
         ),

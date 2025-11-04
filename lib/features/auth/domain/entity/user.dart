@@ -14,27 +14,27 @@ import '../gender.dart';
 
 class User extends Entity<UserId> {
   final Name name;
-  final SurName surName;
   final Email email;
-  final Phone phone;
-  final Password password;
+  final SurName? surName;
+  final Password? password;
+  final Phone? phone;
   final UserId userId;
   final Gender? gender;
   final Status? status;
   final ImageUrl? photoUrl;
   final String? googleId;
-  final DateTime createdAt;
+  final DateTime? createdAt;
   final DateTime? deletedAt;
 
   User({
     required this.userId,
     required this.name,
-    required this.surName,
-    required this.gender,
     required this.email,
-    required this.phone,
-    required this.password,
-    required this.createdAt,
+    this.surName,
+    this.gender,
+    this.phone,
+    this.password,
+    this.createdAt,
     this.status,
     this.photoUrl,
     this.googleId,
