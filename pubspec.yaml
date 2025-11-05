@@ -69,6 +69,7 @@ flutter:
   assets:
     - assets/images/
     - assets/svg/
+    - assets/lottie/
 
   fonts:
     - family: Lexend_Light

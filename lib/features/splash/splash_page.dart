@@ -29,7 +29,7 @@ class _SplashPageState extends State<SplashPage> {
   void _navigateToNextScreen() async {
     await Future.delayed(const Duration(milliseconds: 5000));
     WidgetsBinding.instance.addPostFrameCallback((_) {
-      context.push(Routes.onboarding);
+      context.pushReplacement(Routes.onboarding);
     });
   }
 

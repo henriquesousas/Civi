@@ -10,6 +10,7 @@ import 'package:flutter/services.dart';
 import 'package:go_router/go_router.dart';
 
 import '../../app/theme/app_colors.dart';
+import '../../core/resources/resources.dart';
 
 class OnboardingPage extends StatefulWidget {
   const OnboardingPage({super.key});
@@ -38,7 +39,7 @@ class _OnboardingPageState extends State<OnboardingPage> {
       return;
     }
 
-    context.push(Routes.loginWithGoogle);
+    context.pushReplacement(Routes.loginWithGoogle);
   }
 
   void _onPreviousPage() {
@@ -53,33 +54,32 @@ class _OnboardingPageState extends State<OnboardingPage> {
   @override
   void didChangeDependencies() {
     super.didChangeDependencies();
-    final localization = context.strings;
 
     items = [
       OnboardingItem(
-        title: localization.onboardingTitleOne,
-        description: localization.onboardingDescriptionOne,
+        title: R.strings.onboardingWelcomeHead,
+        description: R.strings.onboardingWelcomeBody,
         icon: Icons.waving_hand_rounded,
         gradient: AppColors.primaryGradient,
-        lottieAsset: null, // You can add Lottie animations here
+        lottieAsset: null,
       ),
       OnboardingItem(
-        title: localization.onboardingTitleTwo,
-        description: localization.onboardingDescriptionOne,
+        title: R.strings.onboardingHelpHead,
+        description: R.strings.onboardingHelpBody,
         icon: Icons.directions_car_rounded,
         gradient: AppColors.primaryGradient,
         lottieAsset: null,
       ),
       OnboardingItem(
-        title: localization.onboardingTitleThree,
-        description: localization.onboardingDescriptionThree,
+        title: R.strings.onboardingAlertsRealTimeHead,
+        description: R.strings.onboardingAlertsRealTimeBody,
         icon: Icons.location_on_rounded,
         gradient: AppColors.primaryGradient,
         lottieAsset: null,
       ),
       OnboardingItem(
-        title: localization.onboardingTitleFour,
-        description: localization.onboardingDescriptionFour,
+        title: R.strings.onboardingSecurityHead,
+        description: R.strings.onboardingSecurityBody,
         icon: Icons.security_rounded,
         gradient: AppColors.primaryGradient,
         lottieAsset: null,

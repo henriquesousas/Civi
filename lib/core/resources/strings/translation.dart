@@ -14,6 +14,18 @@ abstract class Translation with TranslationParts {
 
   // Login
   String get loginInfo;
+  String get enterCreateAccount;
+  String get continueWithoutLogin;
+
+  //Onboarding
+  String get onboardingWelcomeHead;
+  String get onboardingWelcomeBody;
+  String get onboardingHelpHead;
+  String get onboardingHelpBody;
+  String get onboardingAlertsRealTimeHead;
+  String get onboardingAlertsRealTimeBody;
+  String get onboardingSecurityHead;
+  String get onboardingSecurityBody;
 }
 
 mixin TranslationParts {

@@ -11,7 +11,7 @@ plugins {
 android {
     namespace = "br.com.atomos.deehelp"
     compileSdk = flutter.compileSdkVersion
-    ndkVersion = "25.1.8937393"
+    ndkVersion = "26.1.10909125"
     // ndkVersion flutter.ndkVersion
 
     compileOptions {
@@ -28,7 +28,7 @@ android {
         applicationId = "br.com.atomos.deehelp"
         // You can update the following values to match your application needs.
         // For more information, see: https://flutter.dev/to/review-gradle-config.
-        minSdk = 23//flutter.minSdkVersion
+        minSdkVersion = flutter.minSdkVersion//flutter.minSdkVersion
         targetSdk = flutter.targetSdkVersion
         versionCode = flutter.versionCode
         versionName = flutter.versionName

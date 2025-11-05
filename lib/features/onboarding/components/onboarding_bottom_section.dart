@@ -37,7 +37,7 @@ class OnboardingBottomSection extends StatelessWidget {
           ),
           const SizedBox(height: 20),
           Padding(
-            padding: const EdgeInsets.symmetric(vertical: 20),
+            padding: const EdgeInsets.symmetric(vertical: 30, horizontal: 20),
             child: Row(
               spacing: 10,
               children: [
