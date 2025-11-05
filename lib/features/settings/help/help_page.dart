@@ -1,9 +1,9 @@
-import 'package:flutter/material.dart';
 import 'package:deehelp/features/settings/help/help_card.dart';
 import 'package:deehelp/features/settings/help/help_options.dart';
 import 'package:deehelp/shared/animation/fade_slide_transition_animator.dart';
 import 'package:deehelp/shared/components/primary_app_bar.dart';
 import 'package:deehelp/shared/extensions/text_style_extension.dart';
+import 'package:flutter/material.dart';
 
 import '../../../app/theme/app_colors.dart';
 
@@ -74,16 +74,16 @@ class _HelpPageState extends State<HelpPage> {
           children: [
             Text(
               "Todos os direitos reservado",
-              style: context.getTextStyle.small.copyWith(
+              style: context.textSmall.copyWith(
                 fontWeight: FontWeight.bold,
               ),
             ),
             Text(
               "Desenvolvido por Àtomos LTDA - 2025",
-              style: context.getTextStyle.small.copyWith(
+              style: context.textSmall.copyWith(
                 color: AppColors.textSecondary,
               ),
-            ),
+            )
           ],
         ),
       ),
@@ -103,7 +103,7 @@ class _HelpPageState extends State<HelpPage> {
                   const SizedBox(width: 8),
                   Text(
                     'Contatar Suporte ',
-                    style: context.getTextStyle.mediumSmall.copyWith(
+                    style: context.textMediumSmall.copyWith(
                       color: AppColors.textPrimary,
                       fontWeight: FontWeight.bold,
                     ),

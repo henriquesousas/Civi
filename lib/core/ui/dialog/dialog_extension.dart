@@ -1,5 +1,7 @@
 import 'package:deehelp/core/ui/dialog/alert_dialog_info.dart';
+import 'package:deehelp/core/ui/dialog/alert_dialog_question.dart';
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 
 extension DialogExtension on BuildContext {
   Future<T?> _showCustomDialog<T>({
@@ -27,6 +29,26 @@ extension DialogExtension on BuildContext {
         title: title,
         message: message,
         titleButton: titleButton,
+      ),
+    );
+  }
+
+  Future<bool?> showDialogQuestion({
+    required final String title,
+    required final String message,
+    String confirmTitle = "SIM",
+    String cancelTitle = "NAO",
+    VoidCallback? onConfirmButton,
+  }) {
+    return _showCustomDialog<bool>(
+      barrierDismissible: false,
+      content: AlertDialogQuestion(
+        title: title,
+        message: message,
+        confirmButton: confirmTitle,
+        cancelButton: cancelTitle,
+        onCancelButton: () => pop(),
+        onConfirmButton: onConfirmButton ?? () => pop(),
       ),
     );
   }

@@ -8,6 +8,7 @@ import 'package:deehelp/shared/animation/slide_fade_transition_animator.dart';
 import 'package:deehelp/shared/animation/transform_scale_opacity_animator.dart';
 import 'package:deehelp/shared/animation/transition_animator.dart';
 import 'package:deehelp/shared/extensions/screen_size_extension.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:go_router/go_router.dart';
@@ -28,8 +29,16 @@ class _SplashPageState extends State<SplashPage> {
 
   void _navigateToNextScreen() async {
     await Future.delayed(const Duration(milliseconds: 5000));
+
+    //TODO: Refactor pra nao deixar aqui essa implementacao com o firebase, ja tem um service pra isso
     WidgetsBinding.instance.addPostFrameCallback((_) {
-      context.pushReplacement(Routes.onboarding);
+      final user = FirebaseAuth.instance.currentUser;
+
+      if (user != null) {
+        context.pushReplacement(Routes.bottomView);
+      } else {
+        context.pushReplacement(Routes.onboarding);
+      }
     });
   }
 

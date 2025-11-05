@@ -9,13 +9,15 @@ abstract class Translation with TranslationParts {
   String get notHaveAccount;
   String get warning;
   String get skip;
-  String get loginInvalidCredentialsError;
-  String get loginWithGoogleError;
+  String get version;
+  String get exitApp;
 
   // Login
   String get loginInfo;
   String get enterCreateAccount;
   String get continueWithoutLogin;
+  String get loginInvalidCredentialsError;
+  String get loginWithGoogleError;
 
   //Onboarding
   String get onboardingWelcomeHead;

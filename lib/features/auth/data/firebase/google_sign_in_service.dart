@@ -2,6 +2,7 @@ import 'package:dartz/dartz.dart';
 import 'package:deehelp/core/resources/resources.dart';
 import 'package:deehelp/features/auth/data/auth_result.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 
 //TODO: DI
@@ -64,6 +65,17 @@ class GoogleSignInService {
       });
     } catch (e, _) {
       return Left(AuthResult.failure(e.toString()));
+    }
+  }
+
+  Future<void> signOut() async {
+    try {
+      await initSignIn();
+
+      await _googleSignIn.signOut();
+      await FirebaseAuth.instance.signOut();
+    } catch (e) {
+      debugPrint(e.toString());
     }
   }
 }

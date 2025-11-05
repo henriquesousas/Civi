@@ -31,6 +31,12 @@ class PtBr with TranslationParts implements Translation {
   @override
   String get skip => "Pular";
 
+  @override
+  String get version => "Versão";
+
+  @override
+  String get exitApp => "Sair";
+
   //Onboarding
   //============================================================================
   @override

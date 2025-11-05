@@ -19,10 +19,14 @@ import 'components/login_google_button.dart';
 class LoginWithGooglePage extends StatelessWidget {
   const LoginWithGooglePage({super.key});
 
-  void submitLoginWithGoogle(BuildContext context, AuthState state) {
+  void _submitLoginWithGoogle(BuildContext context, AuthState state) {
     context.read<LoginBloc>().add(
           LoginWithGoogleEvent(),
         );
+  }
+
+  void _submitContinueWithoutLogin(BuildContext context) {
+    context.pushReplacement(Routes.bottomView);
   }
 
   @override
@@ -49,18 +53,17 @@ class LoginWithGooglePage extends StatelessWidget {
             builder: (context, state) {
               return Stack(
                 children: [
-                  Center(
-                      child: Lottie.asset(
-                    "assets/lottie/security_icon.json",
-                    width: context.percentWidth(0.7),
-                    height: context.percentHeight(0.7),
-                  )),
                   Positioned(
                     bottom: 60,
                     left: 30,
                     right: 30,
                     child: Column(
                       children: [
+                        Lottie.asset(
+                          "assets/lottie/security_icon.json",
+                          width: context.percentWidth(0.7),
+                          height: context.percentHeight(0.7),
+                        ),
                         Text(
                           R.strings.enterCreateAccount,
                           style: context.textRegular.copyWith(
@@ -82,14 +85,14 @@ class LoginWithGooglePage extends StatelessWidget {
                         const SizedBox(height: 20),
                         LoginGoogleButton(
                             onPressed: () =>
-                                submitLoginWithGoogle(context, state)),
+                                _submitLoginWithGoogle(context, state)),
                         const SizedBox(height: 10),
                         SecondaryOutlineButton(
                           text: R.strings.continueWithoutLogin,
                           textStyle: context.textSmallRegular,
                           foregroundColor: Colors.white,
                           borderColor: Colors.white,
-                          onPressed: () {},
+                          onPressed: () => _submitContinueWithoutLogin(context),
                         ),
                         const SizedBox(height: 10),
                       ],

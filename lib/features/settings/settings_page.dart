@@ -1,10 +1,9 @@
-import 'package:flutter/material.dart';
-import 'package:go_router/go_router.dart';
 import 'package:deehelp/features/settings/components/action_tile.dart';
 import 'package:deehelp/features/settings/components/settings_content_section.dart';
-import 'package:deehelp/features/settings/components/switch_tile.dart';
 import 'package:deehelp/shared/components/primary_app_bar.dart';
 import 'package:deehelp/shared/extensions/context_extension.dart';
+import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 
 import '../../app/router/router_config.dart';
 
@@ -39,18 +38,18 @@ class SettingsPage extends StatelessWidget {
                 ),
               ],
             ),
-            SettingsContentSection(
-              title: context.strings.preferences,
-              icon: Icons.tune_outlined,
-              children: [
-                SwitchTile(
-                  title: context.strings.darkMode,
-                  subtitle: context.strings.darkModeRead,
-                  value: true,
-                  onChanged: (p0) {},
-                ),
-              ],
-            ),
+            // SettingsContentSection(
+            //   title: context.strings.preferences,
+            //   icon: Icons.tune_outlined,
+            //   children: [
+            //     SwitchTile(
+            //       title: context.strings.darkMode,
+            //       subtitle: context.strings.darkModeRead,
+            //       value: true,
+            //       onChanged: (p0) {},
+            //     ),
+            //   ],
+            // ),
             SettingsContentSection(
               title: context.strings.about,
               icon: Icons.help_outline,

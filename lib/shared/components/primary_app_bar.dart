@@ -1,5 +1,5 @@
-import 'package:flutter/material.dart';
 import 'package:deehelp/shared/extensions/text_style_extension.dart';
+import 'package:flutter/material.dart';
 
 class PrimaryAppBar extends StatelessWidget implements PreferredSizeWidget {
   final String title;
@@ -13,7 +13,7 @@ class PrimaryAppBar extends StatelessWidget implements PreferredSizeWidget {
     return AppBar(
       title: Text(
         title,
-        style: context.getTextStyle.regularMedium.copyWith(
+        style: context.textMediumSmall.copyWith(
           fontWeight: FontWeight.bold,
         ),
       ),

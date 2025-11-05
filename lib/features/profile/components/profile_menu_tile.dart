@@ -1,6 +1,6 @@
-import 'package:flutter/material.dart';
 import 'package:deehelp/features/profile/components/profile_menu.dart';
 import 'package:deehelp/shared/extensions/text_style_extension.dart';
+import 'package:flutter/material.dart';
 
 import '../../../app/theme/app_colors.dart';
 
@@ -40,17 +40,16 @@ class ProfileMenuTile extends StatelessWidget {
                   children: [
                     Text(
                       item.title,
-                      style: context.getTextStyle.smallMedium.copyWith(
+                      style: context.textSmallMedium.copyWith(
+                        fontWeight: FontWeight.w500,
                         color: AppColors.textPrimary,
-                        fontWeight: FontWeight.w600,
                       ),
                     ),
                     const SizedBox(height: 4),
                     Text(
                       item.subtitle,
-                      style: context.getTextStyle.small.copyWith(
+                      style: context.textSmall.copyWith(
                         color: AppColors.textSecondary,
-                        fontWeight: FontWeight.w300,
                       ),
                     ),
                   ],

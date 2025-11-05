@@ -1,9 +1,9 @@
-import 'package:flutter/material.dart';
 import 'package:deehelp/app/router/router_config.dart';
 import 'package:deehelp/features/profile/components/profile_app_bar.dart';
 import 'package:deehelp/features/profile/components/profile_logout_section.dart';
 import 'package:deehelp/features/profile/components/profile_menu.dart';
 import 'package:deehelp/features/profile/components/profile_menu_section.dart';
+import 'package:flutter/material.dart';
 
 import '../../app/theme/app_colors.dart';
 
@@ -72,20 +72,20 @@ class _ProfilePageState extends State<ProfilePage>
   void didChangeDependencies() {
     super.didChangeDependencies();
     _menuItems = [
-      const ProfileMenu(
-        icon: Icons.edit_outlined,
-        title: 'Conta',
-        subtitle: 'Altere suas informações pessoais',
-        route: Routes.profileEdit,
-        color: AppColors.primary,
-      ),
-      const ProfileMenu(
-        icon: Icons.password,
-        title: 'Mudar senha',
-        subtitle: 'Altere sua senha nesta opção',
-        route: Routes.profileEdit,
-        color: AppColors.primary,
-      ),
+      // const ProfileMenu(
+      //   icon: Icons.edit_outlined,
+      //   title: 'Conta',
+      //   subtitle: 'Altere suas informações pessoais',
+      //   route: Routes.profileEdit,
+      //   color: AppColors.primary,
+      // ),
+      // const ProfileMenu(
+      //   icon: Icons.password,
+      //   title: 'Mudar senha',
+      //   subtitle: 'Altere sua senha nesta opção',
+      //   route: Routes.profileEdit,
+      //   color: AppColors.primary,
+      // ),
       const ProfileMenu(
         icon: Icons.inventory_2_outlined,
         title: 'Meus itens',

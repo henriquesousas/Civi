@@ -1,6 +1,7 @@
-import 'package:flutter/material.dart';
 import 'package:deehelp/features/settings/help/help_options.dart';
+import 'package:deehelp/shared/extensions/screen_size_extension.dart';
 import 'package:deehelp/shared/extensions/text_style_extension.dart';
+import 'package:flutter/material.dart';
 
 import '../../../app/theme/app_colors.dart';
 
@@ -46,13 +47,13 @@ class HelpCard extends StatelessWidget {
               color: helpOption.isAvailable
                   ? helpOption.color
                   : AppColors.textTertiary,
-              size: 24,
+              size: context.percentWidth(0.05),
             ),
           ),
-          const SizedBox(height: 12),
+          // const SizedBox(height: 12),
           Text(
             helpOption.title,
-            style: context.getTextStyle.mediumSmall.copyWith(
+            style: context.textSmall.copyWith(
               color: helpOption.isAvailable
                   ? AppColors.textPrimary
                   : AppColors.textTertiary,
@@ -60,14 +61,15 @@ class HelpCard extends StatelessWidget {
             ),
             textAlign: TextAlign.center,
           ),
-          const SizedBox(height: 4),
+          // const SizedBox(height: 4),
           Text(
             helpOption.subtitle,
-            style: context.getTextStyle.small
-                .copyWith(color: AppColors.textSecondary, fontSize: 11),
+            style: context.textSmall.copyWith(
+                color: AppColors.textSecondary,
+                fontSize: context.percentWidth(0.025)),
             textAlign: TextAlign.center,
           ),
-          const SizedBox(height: 8),
+          // const SizedBox(height: 8),
           Container(
             padding: const EdgeInsets.symmetric(
               horizontal: 8,
@@ -79,10 +81,10 @@ class HelpCard extends StatelessWidget {
             ),
             child: Text(
               helpOption.estimatedWait,
-              style: context.getTextStyle.small.copyWith(
-                color: helpOption.color,
-                fontWeight: FontWeight.w500,
-              ),
+              style: context.textSmall.copyWith(
+                  color: helpOption.color,
+                  fontWeight: FontWeight.w500,
+                  fontSize: context.percentWidth(0.025)),
             ),
           ),
         ],

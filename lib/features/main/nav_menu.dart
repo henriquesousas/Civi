@@ -36,12 +36,12 @@ class NavMenu {
       color: AppColors.primary,
       // color: AppColors.accent,
     ),
-    NavMenu(
-      icon: Icons.settings_outlined,
-      activeIcon: Icons.settings_rounded,
-      label: 'Mais',
-      color: AppColors.primary,
-      // color: AppColors.info,
-    ),
+    // NavMenu(
+    //   icon: Icons.settings_outlined,
+    //   activeIcon: Icons.settings_rounded,
+    //   label: 'Mais',
+    //   color: AppColors.primary,
+    //   // color: AppColors.info,
+    // ),
   ];
 }

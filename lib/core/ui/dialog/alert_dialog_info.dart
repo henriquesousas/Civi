@@ -8,11 +8,12 @@ class AlertDialogInfo extends StatelessWidget {
   final String title;
   final String message;
   final String titleButton;
-  const AlertDialogInfo(
-      {super.key,
-      required this.title,
-      required this.message,
-      required this.titleButton});
+  const AlertDialogInfo({
+    super.key,
+    required this.title,
+    required this.message,
+    required this.titleButton,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -87,17 +88,3 @@ class AlertDialogInfo extends StatelessWidget {
     );
   }
 }
-
-//TODO: Transformar em um gradiente icon
-// Container(
-//   padding: const EdgeInsets.all(12),
-//   decoration: BoxDecoration(
-//     color: AppColors.error.withValues(alpha: 0.1),
-//     borderRadius: BorderRadius.circular(12),
-//   ),
-//   child: const Icon(
-//     Icons.warning_rounded,
-//     color: AppColors.error,
-//     size: 24,
-//   ),
-// ),

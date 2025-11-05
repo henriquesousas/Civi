@@ -83,7 +83,7 @@ extension TextStylesExtension on BuildContext {
 
   TextStyle get textSmall {
     return _baseLight.copyWith(
-      fontSize: responsiveText2(0.030, min: 12.0, max: 18.0), // ~3.0%
+      fontSize: responsiveText2(0.030, min: 10.0, max: 18.0), // ~3.0%
     );
   }
 
@@ -113,7 +113,7 @@ extension TextStylesExtension on BuildContext {
   // mediumSmall (Peso Medium, 16px)
   TextStyle get textMediumSmall {
     return _baseMedium.copyWith(
-      fontSize: responsiveText2(0.042, min: 16.0, max: 22.0), // ~4.2%
+      fontSize: responsiveText2(0.042, min: 16.0, max: 18.0), // ~4.2%
     );
   }
 

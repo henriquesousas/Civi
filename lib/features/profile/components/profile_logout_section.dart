@@ -1,8 +1,13 @@
-import 'package:flutter/material.dart';
+import 'package:deehelp/core/ui/dialog/dialog_extension.dart';
 import 'package:deehelp/shared/extensions/text_style_extension.dart';
+import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 
+import '../../../app/router/router_config.dart';
 import '../../../app/theme/app_colors.dart';
+import '../../../core/resources/resources.dart';
 import '../../../shared/components/buttons/secondary_outline_button.dart';
+import '../../auth/data/firebase/google_sign_in_service.dart';
 
 class ProfileLogoutSection extends StatelessWidget {
   const ProfileLogoutSection({super.key});
@@ -10,7 +15,7 @@ class ProfileLogoutSection extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: const EdgeInsets.all(24),
+      margin: const EdgeInsets.symmetric(horizontal: 24),
       child: Column(
         children: [
           Container(
@@ -24,25 +29,36 @@ class ProfileLogoutSection extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Text(
-                  "Versão",
-                  style: context.getTextStyle.smallMedium
+                  R.strings.version,
+                  style: context.textSmall
                       .copyWith(color: AppColors.textSecondary),
                 ),
                 Text(
                   "1.0.0",
-                  style: context.getTextStyle.small.copyWith(
+                  style: context.textSmall.copyWith(
                     color: AppColors.textPrimary,
-                    fontWeight: FontWeight.w700,
+                    fontWeight: FontWeight.w600,
                   ),
                 ),
               ],
             ),
           ),
-          const SizedBox(height: 16),
+          const SizedBox(height: 10),
           SecondaryOutlineButton(
-            text: "Sair do aplicativo",
+            onPressed: () {
+              //TODO: Nao usar GoogleSignInService direto tem um usecase pra isso
+              context.showDialogQuestion(
+                title: "Deslogar",
+                message: "Sair do aplicativo?",
+                onConfirmButton: () {
+                  GoogleSignInService().signOut();
+                  context.pushReplacement(Routes.splash);
+                },
+              );
+            },
+            text: R.strings.exitApp,
             borderColor: AppColors.error,
-            textStyle: context.getTextStyle.smallMedium.copyWith(
+            textStyle: context.textSmallMedium.copyWith(
               color: AppColors.error,
               fontWeight: FontWeight.bold,
             ),

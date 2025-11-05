@@ -1,6 +1,7 @@
-import 'package:flutter/material.dart';
 import 'package:deehelp/app/theme/app_colors.dart';
+import 'package:deehelp/shared/extensions/screen_size_extension.dart';
 import 'package:deehelp/shared/extensions/text_style_extension.dart';
+import 'package:flutter/material.dart';
 
 import 'nav_menu.dart';
 
@@ -52,12 +53,9 @@ class _NavItemState extends State<NavItem> with TickerProviderStateMixin {
     return GestureDetector(
       onTap: () => widget.onItemTapped(widget.index),
       child: AnimatedContainer(
+        margin: const EdgeInsets.symmetric(horizontal: 10),
         duration: const Duration(milliseconds: 300),
         curve: Curves.easeInOut,
-        padding: const EdgeInsets.symmetric(
-          horizontal: 12,
-          vertical: 8,
-        ),
         decoration: BoxDecoration(
           color: widget.isSelected
               ? widget.item.color.withValues(alpha: 0.15)
@@ -68,7 +66,6 @@ class _NavItemState extends State<NavItem> with TickerProviderStateMixin {
           mainAxisSize: MainAxisSize.min,
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            // Icon with animation
             AnimatedBuilder(
               animation: _scaleController,
               builder: (context, child) {
@@ -81,11 +78,13 @@ class _NavItemState extends State<NavItem> with TickerProviderStateMixin {
                   child: Stack(
                     alignment: Alignment.center,
                     children: [
-                      // Background circle for active state
+                      // Container
                       AnimatedContainer(
                         duration: const Duration(milliseconds: 300),
-                        width: widget.isSelected ? 32 : 0,
-                        height: widget.isSelected ? 32 : 0,
+                        width:
+                            widget.isSelected ? context.percentWidth(0.06) : 0,
+                        height:
+                            widget.isSelected ? context.percentHeight(0.04) : 0,
                         decoration: BoxDecoration(
                           color: widget.item.color.withValues(alpha: 0.2),
                           shape: BoxShape.circle,
@@ -109,7 +108,7 @@ class _NavItemState extends State<NavItem> with TickerProviderStateMixin {
                           color: widget.isSelected
                               ? widget.item.color
                               : AppColors.textSecondary,
-                          size: 22,
+                          size: context.percentWidth(0.05),
                         ),
                       ),
                     ],
@@ -118,25 +117,20 @@ class _NavItemState extends State<NavItem> with TickerProviderStateMixin {
               },
             ),
 
-            const SizedBox(height: 4),
-
-            // Label with animation
+            //Label
             AnimatedDefaultTextStyle(
               duration: const Duration(milliseconds: 300),
-              style: TextStyle(
+              style: context.textSmall.copyWith(
                 color: widget.isSelected
                     ? widget.item.color
                     : AppColors.textSecondary,
-                fontSize: 11, //SizeConfig.getTextSize(isSelected ? 11 : 10),
-                fontWeight: FontWeight.normal,
-                height: 1.0,
               ),
               child: Text(
                 widget.item.label,
                 textAlign: TextAlign.center,
                 maxLines: 1,
                 overflow: TextOverflow.ellipsis,
-                style: context.getTextStyle.small.copyWith(
+                style: context.textSmall.copyWith(
                   fontWeight:
                       widget.isSelected ? FontWeight.w700 : FontWeight.w500,
                 ),
@@ -146,7 +140,7 @@ class _NavItemState extends State<NavItem> with TickerProviderStateMixin {
             // Active indicator dot
             AnimatedContainer(
               duration: const Duration(milliseconds: 300),
-              margin: const EdgeInsets.only(top: 2),
+              // margin: const EdgeInsets.only(top: 2),
               width: widget.isSelected ? 4 : 0,
               height: 4,
               decoration: BoxDecoration(
