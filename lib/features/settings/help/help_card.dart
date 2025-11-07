@@ -3,7 +3,7 @@ import 'package:deehelp/shared/extensions/screen_size_extension.dart';
 import 'package:deehelp/shared/extensions/text_style_extension.dart';
 import 'package:flutter/material.dart';
 
-import '../../../app/theme/app_colors.dart';
+import '../../../app/theme/app_colors_v2.dart';
 
 class HelpCard extends StatelessWidget {
   final HelpOptions helpOption;
@@ -22,7 +22,7 @@ class HelpCard extends StatelessWidget {
         //       : AppColors.border,
         // ),
         border: Border.all(
-          color: AppColors.borderDark,
+          color: AppColorsV2.borderDark,
         ),
         boxShadow: [
           BoxShadow(
@@ -46,7 +46,7 @@ class HelpCard extends StatelessWidget {
               helpOption.icon,
               color: helpOption.isAvailable
                   ? helpOption.color
-                  : AppColors.textTertiary,
+                  : AppColorsV2.textTertiary,
               size: context.percentWidth(0.05),
             ),
           ),
@@ -55,8 +55,8 @@ class HelpCard extends StatelessWidget {
             helpOption.title,
             style: context.textSmall.copyWith(
               color: helpOption.isAvailable
-                  ? AppColors.textPrimary
-                  : AppColors.textTertiary,
+                  ? AppColorsV2.textPrimary
+                  : AppColorsV2.textTertiary,
               fontWeight: FontWeight.w600,
             ),
             textAlign: TextAlign.center,
@@ -65,7 +65,7 @@ class HelpCard extends StatelessWidget {
           Text(
             helpOption.subtitle,
             style: context.textSmall.copyWith(
-                color: AppColors.textSecondary,
+                color: AppColorsV2.textSecondary,
                 fontSize: context.percentWidth(0.025)),
             textAlign: TextAlign.center,
           ),

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:deehelp/l10n/app_localizations.dart';
-import 'package:deehelp/shared/extensions/text_style_extension.dart';
+
+import '../../../core/resources/resources.dart';
 
 class SplashLineIndicator extends StatelessWidget {
   const SplashLineIndicator({super.key});
@@ -19,12 +19,13 @@ class SplashLineIndicator extends StatelessWidget {
             minHeight: 3,
           ),
         ),
-        SizedBox(height: 16),
+        const SizedBox(height: 16),
         Text(
-          AppLocalizations.of(context)!.loading,
-          style: context.getTextStyle.smallMedium.copyWith(
-              color: Colors.white.withValues(alpha: 0.7),
-              fontWeight: FontWeight.w400),
+          R.strings.waiting,
+          style: Theme.of(context).textTheme.labelSmall?.copyWith(
+                color: Colors.white.withValues(alpha: 0.7),
+                fontWeight: FontWeight.w400,
+              ),
         ),
       ],
     );

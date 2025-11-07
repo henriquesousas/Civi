@@ -1,10 +1,11 @@
-import 'package:deehelp/shared/components/buttons/secondary_button.dart';
-import 'package:deehelp/shared/components/buttons/secondary_outline_button.dart';
+import 'package:deehelp/core/theme/app_colors.dart';
 import 'package:deehelp/shared/components/indicator/primary_progress_indicator.dart';
 import 'package:deehelp/shared/extensions/context_extension.dart';
 import 'package:deehelp/shared/extensions/screen_size_extension.dart';
-import 'package:deehelp/shared/extensions/text_style_extension.dart';
 import 'package:flutter/material.dart';
+
+import '../../../core/components/buttons/ui_outline_button.dart';
+import '../../../core/components/buttons/ui_secondary_button.dart';
 
 class OnboardingBottomSection extends StatelessWidget {
   final String buttonTitle;
@@ -43,19 +44,17 @@ class OnboardingBottomSection extends StatelessWidget {
               children: [
                 if (currentPage > 0)
                   Expanded(
-                    child: SecondaryOutlineButton(
+                    child: UIOutlineButton(
                       text: context.strings.back,
-                      textStyle: context.getTextStyle.regular,
-                      foregroundColor: Colors.white,
                       borderColor: Colors.white,
-                      onPressed: onPrevious,
+                      press: onPrevious,
+                      textColor: AppColors.whiteColor,
                     ),
                   ),
                 Expanded(
-                  child: SecondaryButton(
+                  child: UISecondaryButton(
                     text: buttonTitle,
-                    textStyle: context.getTextStyle.regular,
-                    onPressed: onNext,
+                    press: onNext,
                   ),
                 ),
               ],

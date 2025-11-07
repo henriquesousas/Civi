@@ -1,16 +1,14 @@
-import 'package:flutter/material.dart';
 import 'package:deehelp/app/localization/image_config.dart';
-import 'package:deehelp/app/theme/app_colors.dart';
-import 'package:deehelp/app/theme/size_config.dart';
+import 'package:deehelp/app/theme/app_colors_v2.dart';
 import 'package:deehelp/features/favorites/components/ui_verification_flag.dart';
 import 'package:deehelp/shared/components/buttons/primary_button.dart';
 import 'package:deehelp/shared/components/primary_app_bar.dart';
 import 'package:deehelp/shared/extensions/screen_size_extension.dart';
 import 'package:deehelp/shared/extensions/text_style_extension.dart';
+import 'package:flutter/material.dart';
 
 import '../../shared/components/icons/primary_icon.dart';
 import '../favorites/favourite_model.dart';
-import '../profile/components/profile_edit_content_section.dart';
 import '../welcome/old/components/ui_dot.dart';
 
 class OccurrenceDetailPage extends StatelessWidget {
@@ -19,7 +17,7 @@ class OccurrenceDetailPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: AppColors.background,
+      backgroundColor: AppColorsV2.background,
       appBar: PrimaryAppBar(
         title: "Detalhes da ocorrência",
         actions: [
@@ -28,7 +26,7 @@ class OccurrenceDetailPage extends StatelessWidget {
             child: IconButton(
               icon: Icon(
                 Icons.share,
-                color: AppColors.primaryColor,
+                color: AppColorsV2.primaryColor,
               ),
               onPressed: () {},
             ),
@@ -45,7 +43,7 @@ class OccurrenceDetailPage extends StatelessWidget {
           children: [
             // Galeria de imagens
             SizedBox(
-              height: SizeConfig.height280,
+              height: 280,
               child: Stack(
                 children: [
                   PageView.builder(
@@ -57,7 +55,7 @@ class OccurrenceDetailPage extends StatelessWidget {
                           borderRadius: BorderRadius.circular(8),
                           child: Image.asset(
                             width: context.screenWidth,
-                            height: SizeConfig.height280,
+                            height: 280,
                             ImageConfig.fakeCarro1,
                             fit: BoxFit.cover,
                           ),
@@ -83,7 +81,7 @@ class OccurrenceDetailPage extends StatelessWidget {
                 ],
               ),
             ),
-            const SizedBox(height: SizeConfig.height16),
+            const SizedBox(height: 16),
             // Título e informações básicas
             Padding(
               padding: const EdgeInsets.symmetric(
@@ -109,10 +107,10 @@ class OccurrenceDetailPage extends StatelessWidget {
                       PrimaryIcon(
                         height: 30,
                         width: 30,
-                        background: AppColors.lightGradient,
+                        background: AppColorsV2.lightGradient,
                         icon: const Icon(
                           Icons.favorite,
-                          color: AppColors.primary,
+                          color: AppColorsV2.primary,
                           size: 16,
                         ),
                       ),
@@ -174,80 +172,80 @@ class OccurrenceDetailPage extends StatelessWidget {
               ),
             ),
             const SizedBox(height: 10),
-            ProfileEditContentSection(
-              title: "Detalhes do veículo",
-              icon: Icons.description,
-              children: [
-                _buildInfoItem(
-                  context,
-                  "Placa",
-                  "DND0171",
-                  ImageConfig.license,
-                  Icons.confirmation_number,
-                ),
-                _buildInfoItem(context, "Cor", "Vermelho", ImageConfig.pallete,
-                    Icons.color_lens,
-                    valueColor: Colors.red),
-                _buildInfoItem(context, "Ano", "2025", ImageConfig.calendar,
-                    Icons.calendar_today),
-                _buildInfoItem(context, "Modelo", "Honda Civic EXL",
-                    ImageConfig.vehicle2, Icons.directions_car),
-                _buildInfoItem(
-                    context,
-                    "Observações",
-                    "O veículo possui um adesivo no vidro traseiro com a frase 'Deus é fiel'",
-                    ImageConfig.obs,
-                    Icons.note),
-              ],
-            ),
+            // ProfileEditContentSection(
+            //   title: "Detalhes do veículo",
+            //   icon: Icons.description,
+            //   children: [
+            //     _buildInfoItem(
+            //       context,
+            //       "Placa",
+            //       "DND0171",
+            //       ImageConfig.license,
+            //       Icons.confirmation_number,
+            //     ),
+            //     _buildInfoItem(context, "Cor", "Vermelho", ImageConfig.pallete,
+            //         Icons.color_lens,
+            //         valueColor: Colors.red),
+            //     _buildInfoItem(context, "Ano", "2025", ImageConfig.calendar,
+            //         Icons.calendar_today),
+            //     _buildInfoItem(context, "Modelo", "Honda Civic EXL",
+            //         ImageConfig.vehicle2, Icons.directions_car),
+            //     _buildInfoItem(
+            //         context,
+            //         "Observações",
+            //         "O veículo possui um adesivo no vidro traseiro com a frase 'Deus é fiel'",
+            //         ImageConfig.obs,
+            //         Icons.note),
+            //   ],
+            // ),
             const SizedBox(height: 10),
-            ProfileEditContentSection(
-              title: "Detalhes da ocorrência",
-              icon: Icons.offline_bolt,
-              children: [
-                _buildInfoItem(context, "Data", "01/01/2025",
-                    ImageConfig.calendar, Icons.date_range),
-                _buildInfoItem(context, "Horário", "12:30", ImageConfig.clock,
-                    Icons.access_time),
-                _buildInfoItem(
-                    context,
-                    "Local",
-                    "Av. Paulista, 1000 - Barueri/SP",
-                    ImageConfig.pin,
-                    Icons.place),
-                _buildInfoItem(context, "Tipo", "Roubo de veículo",
-                    ImageConfig.warning, Icons.warning),
-                _buildInfoItem(context, "Status", "Em andamento",
-                    ImageConfig.info, Icons.info,
-                    valueColor: Colors.orange),
-              ],
-            ),
+            // ProfileEditContentSection(
+            //   title: "Detalhes da ocorrência",
+            //   icon: Icons.offline_bolt,
+            //   children: [
+            //     _buildInfoItem(context, "Data", "01/01/2025",
+            //         ImageConfig.calendar, Icons.date_range),
+            //     _buildInfoItem(context, "Horário", "12:30", ImageConfig.clock,
+            //         Icons.access_time),
+            //     _buildInfoItem(
+            //         context,
+            //         "Local",
+            //         "Av. Paulista, 1000 - Barueri/SP",
+            //         ImageConfig.pin,
+            //         Icons.place),
+            //     _buildInfoItem(context, "Tipo", "Roubo de veículo",
+            //         ImageConfig.warning, Icons.warning),
+            //     _buildInfoItem(context, "Status", "Em andamento",
+            //         ImageConfig.info, Icons.info,
+            //         valueColor: Colors.orange),
+            //   ],
+            // ),
             const SizedBox(height: 10),
-            ProfileEditContentSection(
-              title: "Informações do proprietário",
-              icon: Icons.account_circle,
-              children: [
-                _buildInfoItem(context, "Nome", "João Silva",
-                    ImageConfig.profile2, Icons.person),
-                _buildInfoItem(context, "Contato", "(11) 99999-9999",
-                    ImageConfig.phone, Icons.phone),
-                _buildInfoItem(context, "E-mail", "joao@email.com",
-                    ImageConfig.email, Icons.email),
-              ],
-            ),
+            // ProfileEditContentSection(
+            //   title: "Informações do proprietário",
+            //   icon: Icons.account_circle,
+            //   children: [
+            //     _buildInfoItem(context, "Nome", "João Silva",
+            //         ImageConfig.profile2, Icons.person),
+            //     _buildInfoItem(context, "Contato", "(11) 99999-9999",
+            //         ImageConfig.phone, Icons.phone),
+            //     _buildInfoItem(context, "E-mail", "joao@email.com",
+            //         ImageConfig.email, Icons.email),
+            //   ],
+            // ),
             const SizedBox(height: 10),
-            ProfileEditContentSection(
-              title: "Como aconteceu",
-              icon: Icons.report,
-              children: [
-                Text(
-                  "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam eget ligula eu lectus lobortis condimentum. Aliquam nonummy auctor massa. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Nulla at risus. Quisque purus magna, auctor et, sagittis ac, posuere eu, lectus. Nam mattis, felis ut adipiscing.",
-                  maxLines: 5,
-                  overflow: TextOverflow.ellipsis,
-                  style: context.getTextStyle.small,
-                )
-              ],
-            ),
+            // ProfileEditContentSection(
+            //   title: "Como aconteceu",
+            //   icon: Icons.report,
+            //   children: [
+            //     Text(
+            //       "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam eget ligula eu lectus lobortis condimentum. Aliquam nonummy auctor massa. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Nulla at risus. Quisque purus magna, auctor et, sagittis ac, posuere eu, lectus. Nam mattis, felis ut adipiscing.",
+            //       maxLines: 5,
+            //       overflow: TextOverflow.ellipsis,
+            //       style: context.getTextStyle.small,
+            //     )
+            //   ],
+            // ),
             const SizedBox(height: 30),
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -266,13 +264,13 @@ class OccurrenceDetailPage extends StatelessWidget {
                       child: Text(
                         "Ver todas",
                         style: context.getTextStyle.small.copyWith(
-                          color: AppColors.primaryColor,
+                          color: AppColorsV2.primaryColor,
                         ),
                       ),
                     ),
                   ],
                 ),
-                const SizedBox(height: SizeConfig.height16),
+                const SizedBox(height: 16),
                 SizedBox(
                   height: 180,
                   child: ListView.builder(
@@ -282,19 +280,17 @@ class OccurrenceDetailPage extends StatelessWidget {
                       final favorite = FavouriteModel.getFavourites[index];
                       return Container(
                         width: 160,
-                        margin:
-                            const EdgeInsets.only(right: SizeConfig.padding12),
+                        margin: const EdgeInsets.only(right: 12),
                         decoration: BoxDecoration(
-                          color: AppColors.secondaryColor,
-                          borderRadius:
-                              BorderRadius.circular(SizeConfig.borderRadius14),
+                          color: AppColorsV2.secondaryColor,
+                          borderRadius: BorderRadius.circular(14),
                         ),
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             ClipRRect(
                               borderRadius: const BorderRadius.vertical(
-                                top: Radius.circular(SizeConfig.borderRadius14),
+                                top: Radius.circular(14),
                               ),
                               child: Image.asset(
                                 favorite.image,
@@ -304,8 +300,7 @@ class OccurrenceDetailPage extends StatelessWidget {
                               ),
                             ),
                             Padding(
-                              padding:
-                                  const EdgeInsets.all(SizeConfig.padding08),
+                              padding: const EdgeInsets.all(8),
                               child: Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
@@ -332,7 +327,7 @@ class OccurrenceDetailPage extends StatelessWidget {
                                     child: Icon(
                                       Icons.arrow_forward,
                                       size: 16,
-                                      color: AppColors.primaryColor,
+                                      color: AppColorsV2.primaryColor,
                                     ),
                                   ),
                                 ],
@@ -354,11 +349,11 @@ class OccurrenceDetailPage extends StatelessWidget {
       bottomNavigationBar: SafeArea(
         child: Container(
           padding: const EdgeInsets.symmetric(
-            horizontal: SizeConfig.padding24,
-            vertical: SizeConfig.padding12,
+            horizontal: 24,
+            vertical: 12,
           ),
           decoration: BoxDecoration(
-            color: AppColors.backgroundColor,
+            color: AppColorsV2.backgroundColor,
             boxShadow: [
               BoxShadow(
                 color: Colors.black.withValues(alpha: 0.1),
@@ -375,17 +370,16 @@ class OccurrenceDetailPage extends StatelessWidget {
                   onPressed: () {},
                 ),
               ),
-              const SizedBox(width: SizeConfig.padding12),
+              const SizedBox(width: 12),
               Container(
                 width: 50,
                 height: 50,
                 decoration: BoxDecoration(
-                  borderRadius:
-                      BorderRadius.circular(SizeConfig.borderRadius14),
-                  border: Border.all(color: AppColors.buttonColor),
+                  borderRadius: BorderRadius.circular(14),
+                  border: Border.all(color: AppColorsV2.buttonColor),
                 ),
                 child: IconButton(
-                  icon: const Icon(Icons.call, color: AppColors.buttonColor),
+                  icon: const Icon(Icons.call, color: AppColorsV2.buttonColor),
                   onPressed: () {},
                 ),
               ),
@@ -411,9 +405,9 @@ class OccurrenceDetailPage extends StatelessWidget {
         left: 20,
         right: 30,
       ),
-      padding: const EdgeInsets.all(SizeConfig.padding16),
+      padding: const EdgeInsets.all(16),
       decoration: BoxDecoration(
-        color: AppColors.secondaryColor,
+        color: AppColorsV2.secondaryColor,
         borderRadius: BorderRadius.circular(8),
         // border: Border.all(
         //   color: Colors.grey.shade200,
@@ -442,7 +436,7 @@ class OccurrenceDetailPage extends StatelessWidget {
               ),
             ],
           ),
-          const SizedBox(height: SizeConfig.padding12),
+          const SizedBox(height: 12),
           if (content != null)
             Text(
               content,
@@ -467,7 +461,7 @@ class OccurrenceDetailPage extends StatelessWidget {
   }) {
     return Padding(
       padding: const EdgeInsets.only(
-        bottom: SizeConfig.padding08,
+        bottom: 8,
       ),
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -485,14 +479,14 @@ class OccurrenceDetailPage extends StatelessWidget {
                 Text(
                   label,
                   style: context.getTextStyle.small.copyWith(
-                    color: AppColors.textLightColor,
+                    color: AppColorsV2.textLightColor,
                   ),
                 ),
                 const SizedBox(height: 2),
                 Text(
                   value,
                   style: context.getTextStyle.small.copyWith(
-                    color: valueColor ?? AppColors.textColor,
+                    color: valueColor ?? AppColorsV2.textColor,
                     fontWeight: FontWeight.w600,
                   ),
                 ),

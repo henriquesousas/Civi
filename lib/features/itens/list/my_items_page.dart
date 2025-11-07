@@ -1,12 +1,12 @@
-import 'package:flutter/material.dart';
-import 'package:go_router/go_router.dart';
 import 'package:deehelp/app/localization/image_config.dart';
-import 'package:deehelp/app/router/router_config.dart';
+import 'package:deehelp/core/router/router_constants.dart';
 import 'package:deehelp/features/itens/list/my_items_card.dart';
 import 'package:deehelp/features/itens/my_items.dart';
 import 'package:deehelp/shared/animation/fade_slide_transition_animator.dart';
 import 'package:deehelp/shared/components/primary_app_bar.dart';
 import 'package:deehelp/shared/extensions/text_style_extension.dart';
+import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 
 class MyItemsPage extends StatefulWidget {
   const MyItemsPage({super.key});
@@ -40,7 +40,7 @@ class _MyItemsPageState extends State<MyItemsPage> {
             child: Row(
               children: [
                 TextButton(
-                  onPressed: () => context.push(Routes.createNewItem),
+                  onPressed: () => context.push(RouterConstant.createNewItem),
                   child: Text(
                     "Novo Item",
                     style: context.getTextStyle.small,
@@ -60,7 +60,7 @@ class _MyItemsPageState extends State<MyItemsPage> {
             return MyItemsCard(
               item: item,
               onTap: () => context.push(
-                Routes.itemEdit,
+                RouterConstant.itemEdit,
               ),
             );
           },

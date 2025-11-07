@@ -37,28 +37,35 @@ class PtBr with TranslationParts implements Translation {
   @override
   String get exitApp => "Sair";
 
+  @override
+  String get waiting => "Aguarde...";
+
   //Onboarding
   //============================================================================
   @override
   String get onboardingWelcomeHead => "Bem vindo";
+
   @override
   String get onboardingWelcomeBody =>
       "Proteção em tempo real. Relate ocorrências e ajude a manter todos seguros";
 
   @override
   String get onboardingHelpHead => "Ajuda rápida";
+
   @override
   String get onboardingHelpBody =>
       "Reportar um incidente (carro roubado, celular, perigo iminente) leva menos de 1 minuto. Sua informação é vital para proteger vizinhos e recuperar bens perdidos.";
 
   @override
   String get onboardingAlertsRealTimeHead => "Alertas";
+
   @override
   String get onboardingAlertsRealTimeBody =>
       "Fique por dentro das ocorrências registradas \nna sua região e tome decisões com mais segurança!";
 
   @override
   String get onboardingSecurityHead => "Segurança";
+
   @override
   String get onboardingSecurityBody =>
       "Todas as ocorrências passam por verificação e cada alerta é monitorado para manter você informado e seguro";
@@ -67,13 +74,48 @@ class PtBr with TranslationParts implements Translation {
   //============================================================================
   @override
   String get loginWithGoogleError => "Falha na autenticação com o google!";
+
   @override
   String get loginInvalidCredentialsError => "Login ou senha inválidos!!!";
+
   @override
   String get loginInfo =>
       "Faça login e continue acompanahando as ocorrências na sua região.";
+
   @override
   String get enterCreateAccount => "Entrar/Criar conta";
+
   @override
   String get continueWithoutLogin => "Continuar sem logar";
+
+  // Splash
+  //============================================================================
+  @override
+  String get splashHeadline => "Segurança colaborativa na palma da mão";
+
+  // Profile
+  //============================================================================
+  @override
+  String get preferences => "Preferências";
+
+  @override
+  String get faq => "FAQ";
+
+  @override
+  String get favorites => "Favoritos";
+
+  @override
+  String get help => "Ajuda";
+
+  @override
+  String get sharedAndSupport => "Compartilhar e apoiar";
+
+  @override
+  String get lastOccurrences => "Útimas ocorrências";
+
+  @override
+  String get myItems => "Meus itens";
+
+  @override
+  String get search => "Consultar";
 }

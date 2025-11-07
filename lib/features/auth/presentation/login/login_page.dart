@@ -3,7 +3,6 @@ import 'package:deehelp/shared/extensions/screen_size_extension.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
-import '../../../../app/theme/app_colors.dart';
 import 'components/login_form.dart';
 import 'components/login_no_have_account.dart';
 import 'components/login_welcome_section.dart';
@@ -19,7 +18,6 @@ class _LoginPageState extends State<LoginPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: AppColors.background,
       bottomNavigationBar: const LoginNoHaveAccount(),
       body: AnnotatedRegion<SystemUiOverlayStyle>(
         value: SystemUiOverlayStyle.dark.copyWith(

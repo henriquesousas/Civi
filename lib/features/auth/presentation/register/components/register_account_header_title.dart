@@ -1,8 +1,8 @@
-import 'package:flutter/material.dart';
 import 'package:deehelp/shared/extensions/screen_size_extension.dart';
 import 'package:deehelp/shared/extensions/text_style_extension.dart';
+import 'package:flutter/material.dart';
 
-import '../../../../../app/theme/app_colors.dart';
+import '../../../../../app/theme/app_colors_v2.dart';
 
 class RegisterAccountHeaderTitle extends StatelessWidget {
   final String title;
@@ -18,7 +18,7 @@ class RegisterAccountHeaderTitle extends StatelessWidget {
         Text(
           title,
           style: context.getTextStyle.regularMedium.copyWith(
-              color: AppColors.textPrimary,
+              color: AppColorsV2.textPrimary,
               fontWeight: FontWeight.bold,
               fontSize: context.responsiveText(0.045)),
         ),
@@ -26,7 +26,7 @@ class RegisterAccountHeaderTitle extends StatelessWidget {
         Text(
           subtitle,
           style: context.getTextStyle.regular.copyWith(
-            color: AppColors.textSecondary,
+            color: AppColorsV2.textSecondary,
             fontWeight: FontWeight.normal,
           ),
         ),

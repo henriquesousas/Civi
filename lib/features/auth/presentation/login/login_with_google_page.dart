@@ -1,20 +1,20 @@
-import 'package:deehelp/app/router/router_config.dart';
-import 'package:deehelp/core/resources/resources.dart';
-import 'package:deehelp/core/ui/dialog/dialog_extension.dart';
+import 'package:deehelp/core/components/buttons/ui_google_button.dart';
+import 'package:deehelp/core/components/buttons/ui_outline_button.dart';
+import 'package:deehelp/core/components/dialogs/dialog_extension.dart';
+import 'package:deehelp/core/theme/app_colors.dart';
 import 'package:deehelp/features/auth/presentation/login/bloc/auth_state.dart';
 import 'package:deehelp/features/auth/presentation/login/bloc/login_bloc.dart';
 import 'package:deehelp/features/splash/components/splash_background_animation.dart';
-import 'package:deehelp/shared/components/buttons/secondary_outline_button.dart';
 import 'package:deehelp/shared/extensions/screen_size_extension.dart';
-import 'package:deehelp/shared/extensions/text_style_extension.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:lottie/lottie.dart';
 
+import '../../../../core/resources/resources.dart';
+import '../../../../core/router/router_constants.dart';
 import 'bloc/auth_event.dart';
-import 'components/login_google_button.dart';
 
 class LoginWithGooglePage extends StatelessWidget {
   const LoginWithGooglePage({super.key});
@@ -26,7 +26,7 @@ class LoginWithGooglePage extends StatelessWidget {
   }
 
   void _submitContinueWithoutLogin(BuildContext context) {
-    context.pushReplacement(Routes.bottomView);
+    context.pushReplacement(RouterConstant.bottomView);
   }
 
   @override
@@ -47,7 +47,7 @@ class LoginWithGooglePage extends StatelessWidget {
               }
 
               if (state.status == AuthStatus.success) {
-                context.pushReplacement(Routes.bottomView);
+                context.pushReplacement(RouterConstant.bottomView);
               }
             },
             builder: (context, state) {
@@ -66,35 +66,38 @@ class LoginWithGooglePage extends StatelessWidget {
                         ),
                         Text(
                           R.strings.enterCreateAccount,
-                          style: context.textRegular.copyWith(
-                            fontWeight: FontWeight.bold,
-                            color: Colors.white,
-                            height: 1.6,
-                          ),
+                          style: Theme.of(context)
+                              .textTheme
+                              .headlineSmall
+                              ?.copyWith(
+                                fontWeight: FontWeight.bold,
+                                color: Colors.white,
+                                height: 1.6,
+                              ),
                         ),
-                        const SizedBox(height: 5),
                         Text(
                           R.strings.loginInfo,
                           textAlign: TextAlign.center,
-                          style: context.textSmallLight.copyWith(
-                            fontWeight: FontWeight.normal,
-                            color: Colors.white.withValues(alpha: 0.9),
-                            height: 1.6,
-                          ),
+                          style:
+                              Theme.of(context).textTheme.titleSmall?.copyWith(
+                                    fontWeight: FontWeight.normal,
+                                    color: Colors.white.withValues(alpha: 0.7),
+                                    height: 1.6,
+                                  ),
                         ),
                         const SizedBox(height: 20),
-                        LoginGoogleButton(
-                            onPressed: () =>
-                                _submitLoginWithGoogle(context, state)),
-                        const SizedBox(height: 10),
-                        SecondaryOutlineButton(
-                          text: R.strings.continueWithoutLogin,
-                          textStyle: context.textSmallRegular,
-                          foregroundColor: Colors.white,
-                          borderColor: Colors.white,
-                          onPressed: () => _submitContinueWithoutLogin(context),
+                        UIGoogleButton(
+                          press: () => _submitLoginWithGoogle(context, state),
+                          bgColor: AppColors.whiteColor,
                         ),
                         const SizedBox(height: 10),
+                        UIOutlineButton(
+                          text: R.strings.continueWithoutLogin,
+                          borderColor: Colors.white,
+                          textColor: Colors.white,
+                          press: () => _submitContinueWithoutLogin(context),
+                        ),
+                        // const SizedBox(height: 10),
                       ],
                     ),
                   )

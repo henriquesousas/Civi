@@ -1,4 +1,4 @@
-import 'package:deehelp/app/theme/app_colors.dart';
+import 'package:deehelp/app/theme/app_colors_v2.dart';
 import 'package:deehelp/features/main/state/bottom_navigation_bloc.dart';
 import 'package:deehelp/features/main/state/bottom_navigation_event.dart';
 import 'package:deehelp/features/main/state/bottom_navigation_state.dart';
@@ -47,7 +47,7 @@ class MainPage extends StatelessWidget {
 
         // Outras telas (index != 0 → bottom bar padrão do Scaffold)
         return Scaffold(
-          backgroundColor: AppColors.backgroundColor,
+          backgroundColor: AppColorsV2.backgroundColor,
           body: IndexedStack(
             index: state.selectedIndex,
             children: state.pages,
@@ -78,7 +78,7 @@ class MainPage extends StatelessWidget {
               spreadRadius: 0,
             ),
             BoxShadow(
-              color: AppColors.primary.withValues(alpha: 0.1),
+              color: AppColorsV2.primary.withValues(alpha: 0.1),
               offset: const Offset(0, 4),
               blurRadius: 16,
               spreadRadius: 0,

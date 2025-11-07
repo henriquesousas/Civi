@@ -1,10 +1,9 @@
+import 'package:deehelp/app/localization/image_config.dart';
+import 'package:deehelp/app/localization/string_config.dart';
+import 'package:deehelp/app/theme/app_colors_v2.dart';
 import 'package:deehelp/shared/extensions/text_style_extension.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:deehelp/app/localization/image_config.dart';
-import 'package:deehelp/app/localization/string_config.dart';
-import 'package:deehelp/app/theme/app_colors.dart';
-import 'package:deehelp/app/theme/size_config.dart';
 
 class AboutUsView extends StatelessWidget {
   const AboutUsView({super.key});
@@ -20,12 +19,12 @@ class AboutUsView extends StatelessWidget {
 
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: AppColors.backgroundColor,
+        backgroundColor: AppColorsV2.backgroundColor,
         elevation: 0,
         automaticallyImplyLeading: false,
         title: Padding(
           padding: const EdgeInsets.only(
-            left: SizeConfig.padding05,
+            left: 05,
           ),
           child: Row(
             children: [
@@ -33,12 +32,12 @@ class AboutUsView extends StatelessWidget {
                 onTap: () => context.pop(),
                 child: Image(
                   image: const AssetImage(ImageConfig.backArrow),
-                  width: SizeConfig.width24,
-                  height: SizeConfig.height24,
-                  color: AppColors.primaryColor,
+                  width: 24,
+                  height: 24,
+                  color: AppColorsV2.primaryColor,
                 ),
               ),
-              const SizedBox(width: SizeConfig.width10),
+              const SizedBox(width: 10),
               Text(
                 StringConfig.aboutUs,
                 style: context.getTextStyle.medium,
@@ -49,20 +48,20 @@ class AboutUsView extends StatelessWidget {
       ),
       body: Padding(
         padding: const EdgeInsets.only(
-          left: SizeConfig.padding24,
-          right: SizeConfig.padding24,
+          left: 24,
+          right: 24,
         ),
         child: ListView.builder(
           itemCount: terms.length,
           itemBuilder: (context, index) {
             return Column(
               children: [
-                const SizedBox(height: SizeConfig.height10),
+                const SizedBox(height: 10),
                 Text(
                   terms[index],
                   style: context.getTextStyle.small,
                 ),
-                const SizedBox(height: SizeConfig.height16),
+                const SizedBox(height: 16),
               ],
             );
           },

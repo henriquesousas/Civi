@@ -1,6 +1,4 @@
-import 'package:flutter/material.dart';
-import 'package:go_router/go_router.dart';
-import 'package:deehelp/app/router/router_config.dart';
+import 'package:deehelp/core/router/router_constants.dart';
 import 'package:deehelp/features/auth/presentation/otp/components/otp_header_text.dart';
 import 'package:deehelp/features/auth/presentation/otp/components/otp_resend_code.dart';
 import 'package:deehelp/shared/animation/transform_scale_opacity_animator.dart';
@@ -8,8 +6,10 @@ import 'package:deehelp/shared/components/buttons/primary_button.dart';
 import 'package:deehelp/shared/components/icons/primary_icon.dart';
 import 'package:deehelp/shared/extensions/context_extension.dart';
 import 'package:deehelp/shared/extensions/screen_size_extension.dart';
+import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 
-import '../../../../app/theme/app_colors.dart';
+import '../../../../app/theme/app_colors_v2.dart';
 import '../../../../shared/components/primary_app_bar.dart';
 import 'components/otp_change_number.dart';
 import 'components/otp_code_field.dart';
@@ -25,7 +25,7 @@ class _OtpVerificationPageState extends State<OtpVerificationPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: AppColors.background,
+      backgroundColor: AppColorsV2.background,
       appBar: PrimaryAppBar(title: context.strings.otpAppBar),
       body: SafeArea(
         child: SingleChildScrollView(
@@ -57,7 +57,7 @@ class _OtpVerificationPageState extends State<OtpVerificationPage> {
                 SizedBox(height: context.percentHeight(0.15)),
                 PrimaryButton(
                     text: context.strings.otpButtonResendCode,
-                    onPressed: () => context.push(Routes.welcome)),
+                    onPressed: () => context.push(RouterConstant.welcome)),
                 const SizedBox(height: 20),
                 const OtpChangeNumber(),
               ],

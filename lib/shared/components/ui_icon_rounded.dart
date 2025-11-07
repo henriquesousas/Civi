@@ -1,5 +1,5 @@
+import 'package:deehelp/app/theme/app_colors_v2.dart';
 import 'package:flutter/material.dart';
-import 'package:deehelp/app/theme/app_colors.dart';
 
 class UIIconRounded extends StatelessWidget {
   final String fileImage;
@@ -25,7 +25,7 @@ class UIIconRounded extends StatelessWidget {
       child: Center(
         child: Image(
           image: AssetImage(fileImage),
-          color: color ?? AppColors.buttonColor,
+          color: color ?? AppColorsV2.buttonColor,
           width: 18,
         ),
       ),

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../../../app/theme/app_colors.dart';
+import '../../../app/theme/app_colors_v2.dart';
 
 class SplashBackgroundAnimation extends StatefulWidget {
   final Widget child;
@@ -48,9 +48,9 @@ class _SplashBackgroundAnimationState extends State<SplashBackgroundAnimation>
               begin: Alignment.topLeft,
               end: Alignment.bottomRight,
               colors: [
-                AppColors.primary,
-                AppColors.primaryLight,
-                AppColors.secondary,
+                AppColorsV2.primary,
+                AppColorsV2.primaryLight,
+                AppColorsV2.secondary,
               ],
               stops: [0.0, 0.6 + (_backgroundAnimation.value * 0.2), 1.0],
             ),

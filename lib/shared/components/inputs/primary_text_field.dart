@@ -1,7 +1,7 @@
 import 'package:deehelp/shared/extensions/text_style_extension.dart';
 import 'package:flutter/material.dart';
 
-import '../../../app/theme/app_colors.dart';
+import '../../../app/theme/app_colors_v2.dart';
 
 class PrimaryTextField extends StatelessWidget {
   final String labelText;
@@ -46,7 +46,8 @@ class PrimaryTextField extends StatelessWidget {
         suffixIcon: suffixIcon,
         errorText: errorText,
         floatingLabelStyle: TextStyle(
-          color: errorText?.isNotEmpty == true ? Colors.red : AppColors.primary,
+          color:
+              errorText?.isNotEmpty == true ? Colors.red : AppColorsV2.primary,
         ),
         contentPadding: const EdgeInsets.symmetric(
           vertical: 25,

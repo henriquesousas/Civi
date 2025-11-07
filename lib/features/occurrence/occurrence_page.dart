@@ -1,11 +1,11 @@
-import 'package:flutter/material.dart';
-import 'package:go_router/go_router.dart';
-import 'package:deehelp/app/router/router_config.dart';
+import 'package:deehelp/core/router/router_constants.dart';
 import 'package:deehelp/shared/components/icons/primary_icon.dart';
 import 'package:deehelp/shared/components/primary_app_bar.dart';
 import 'package:deehelp/shared/extensions/text_style_extension.dart';
+import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 
-import '../../app/theme/app_colors.dart';
+import '../../app/theme/app_colors_v2.dart';
 
 class OccurrencePage extends StatelessWidget {
   const OccurrencePage({super.key});
@@ -13,7 +13,7 @@ class OccurrencePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: AppColors.background,
+      backgroundColor: AppColorsV2.background,
       appBar: const PrimaryAppBar(title: "Ocorrência"),
       body: ListView.builder(
         physics: BouncingScrollPhysics(),
@@ -29,7 +29,7 @@ class OccurrencePage extends StatelessWidget {
             child: Material(
               color: Colors.transparent,
               child: InkWell(
-                onTap: () => context.push(Routes.productDetail),
+                onTap: () => context.push(RouterConstant.productDetail),
                 borderRadius: BorderRadius.circular(20),
                 child: Container(
                   padding: EdgeInsets.all(20),
@@ -53,7 +53,7 @@ class OccurrencePage extends StatelessWidget {
                           Text(
                             "Ontem",
                             style: context.getTextStyle.regular.copyWith(
-                              color: AppColors.textPrimary,
+                              color: AppColorsV2.textPrimary,
                               fontWeight: FontWeight.w600,
                             ),
                           ),
@@ -61,17 +61,17 @@ class OccurrencePage extends StatelessWidget {
                           Text(
                             "12:45",
                             style: context.getTextStyle.small.copyWith(
-                              color: AppColors.textSecondary,
+                              color: AppColorsV2.textSecondary,
                             ),
                           ),
                           const Spacer(),
                           PrimaryIcon(
                             height: 25,
                             width: 25,
-                            background: AppColors.lightGradient,
+                            background: AppColorsV2.lightGradient,
                             icon: Icon(
                               Icons.favorite,
-                              color: AppColors.primary,
+                              color: AppColorsV2.primary,
                               size: 16,
                             ),
                           ),
@@ -80,13 +80,13 @@ class OccurrencePage extends StatelessWidget {
                             padding: EdgeInsets.symmetric(
                                 horizontal: 8, vertical: 4),
                             decoration: BoxDecoration(
-                              color: AppColors.success.withOpacity(0.1),
+                              color: AppColorsV2.success.withOpacity(0.1),
                               borderRadius: BorderRadius.circular(8),
                             ),
                             child: Text(
                               "Verificado",
                               style: context.getTextStyle.small.copyWith(
-                                  color: AppColors.success,
+                                  color: AppColorsV2.success,
                                   fontWeight: FontWeight.w600,
                                   fontSize: 11),
                             ),
@@ -103,33 +103,33 @@ class OccurrencePage extends StatelessWidget {
                                 width: 12,
                                 height: 12,
                                 decoration: BoxDecoration(
-                                  color: AppColors.success,
+                                  color: AppColorsV2.success,
                                   borderRadius: BorderRadius.circular(6),
                                 ),
                               ),
                               Container(
                                 width: 2,
                                 height: 30,
-                                color: AppColors.border,
+                                color: AppColorsV2.border,
                               ),
                               Container(
                                 width: 12,
                                 height: 12,
                                 decoration: BoxDecoration(
-                                  color: AppColors.error,
+                                  color: AppColorsV2.error,
                                   borderRadius: BorderRadius.circular(6),
                                 ),
                               ),
                               Container(
                                 width: 2,
                                 height: 30,
-                                color: AppColors.border,
+                                color: AppColorsV2.border,
                               ),
                               Container(
                                 width: 12,
                                 height: 12,
                                 decoration: BoxDecoration(
-                                  color: AppColors.error,
+                                  color: AppColorsV2.error,
                                   borderRadius: BorderRadius.circular(6),
                                 ),
                               ),
@@ -144,7 +144,7 @@ class OccurrencePage extends StatelessWidget {
                                 Text(
                                   "Avenida paulista 1500, Osasco - São Paulo ",
                                   style: context.getTextStyle.regular.copyWith(
-                                    color: AppColors.textPrimary,
+                                    color: AppColorsV2.textPrimary,
                                     fontWeight: FontWeight.w500,
                                   ),
                                   maxLines: 1,
@@ -154,7 +154,7 @@ class OccurrencePage extends StatelessWidget {
                                 Text(
                                   "Furto/Roubo",
                                   style: context.getTextStyle.small.copyWith(
-                                    color: AppColors.textPrimary,
+                                    color: AppColorsV2.textPrimary,
                                     fontWeight: FontWeight.w600,
                                   ),
                                   maxLines: 1,
@@ -164,7 +164,7 @@ class OccurrencePage extends StatelessWidget {
                                 Text(
                                   "DND0171",
                                   style: context.getTextStyle.small.copyWith(
-                                    color: AppColors.textPrimary,
+                                    color: AppColorsV2.textPrimary,
                                     fontWeight: FontWeight.w600,
                                   ),
                                   maxLines: 1,
@@ -179,40 +179,40 @@ class OccurrencePage extends StatelessWidget {
                       Container(
                         padding: EdgeInsets.all(12),
                         decoration: BoxDecoration(
-                          color: AppColors.surface,
+                          color: AppColorsV2.surface,
                           borderRadius: BorderRadius.circular(12),
                         ),
                         child: Row(
                           children: [
                             Icon(
                               Icons.person_outline,
-                              color: AppColors.textSecondary,
+                              color: AppColorsV2.textSecondary,
                               size: 16,
                             ),
                             SizedBox(width: 8),
                             Text(
                               "Jhon Doe",
                               style: context.getTextStyle.small.copyWith(
-                                color: AppColors.textSecondary,
+                                color: AppColorsV2.textSecondary,
                               ),
                             ),
                             SizedBox(width: 16),
                             Icon(
                               Icons.directions_car,
-                              color: AppColors.textSecondary,
+                              color: AppColorsV2.textSecondary,
                               size: 16,
                             ),
                             SizedBox(width: 8),
                             Text(
                               "Gol G3",
                               style: context.getTextStyle.small.copyWith(
-                                color: AppColors.textSecondary,
+                                color: AppColorsV2.textSecondary,
                               ),
                             ),
                             const Spacer(),
                             Icon(
                               Icons.chevron_right,
-                              color: AppColors.textTertiary,
+                              color: AppColorsV2.textTertiary,
                               size: 16,
                             ),
                           ],

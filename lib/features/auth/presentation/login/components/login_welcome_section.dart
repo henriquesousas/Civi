@@ -1,7 +1,7 @@
 import 'package:deehelp/shared/components/icons/primary_icon.dart';
 import 'package:flutter/material.dart';
 
-import '../../../../../app/theme/app_colors.dart';
+import '../../../../../app/theme/app_colors_v2.dart';
 import '../../../../../core/resources/resources.dart';
 
 class LoginWelcomeSection extends StatelessWidget {
@@ -22,14 +22,14 @@ class LoginWelcomeSection extends StatelessWidget {
         const SizedBox(height: 24),
         Text(
           R.strings.welcome,
-          style: Theme.of(context).textTheme.headlineSmall?.copyWith(
+          style: Theme.of(context).textTheme.headlineMedium?.copyWith(
                 fontWeight: FontWeight.bold,
               ),
         ),
         Text(
           R.strings.loginInfo,
           style: Theme.of(context).textTheme.labelMedium?.copyWith(
-                color: AppColors.textSecondary,
+                color: AppColorsV2.textSecondary,
               ),
         ),
       ],

@@ -1,9 +1,9 @@
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:deehelp/features/home/home_view.dart';
-import 'package:deehelp/features/profile/profile_page.dart';
 import 'package:deehelp/features/settings/settings_page.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../itens/list/my_items_page.dart';
+import '../../profile/profile_page.dart';
 import 'bottom_navigation_event.dart';
 import 'bottom_navigation_state.dart';
 
@@ -20,6 +20,7 @@ class BottomNavigationBloc
               // const OccurrencePage(),
               const MyItemsPage(),
               const ProfilePage(),
+              // const ProfileOldPage(),
               const SettingsPage(),
             ],
           ),

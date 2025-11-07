@@ -1,15 +1,17 @@
-import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:go_router/go_router.dart';
 import 'package:deehelp/app/localization/image_config.dart';
 import 'package:deehelp/app/localization/string_config.dart';
-import 'package:deehelp/app/theme/app_colors.dart';
+import 'package:deehelp/app/theme/app_colors_v2.dart';
 import 'package:deehelp/app/theme/size_config.dart';
 import 'package:deehelp/features/settings/faq/components/ui_expansion_tile.dart';
 import 'package:deehelp/features/settings/faq/state/faq_bloc.dart';
 import 'package:deehelp/features/settings/faq/state/faq_event.dart';
 import 'package:deehelp/features/settings/faq/state/faq_state.dart';
 import 'package:deehelp/shared/extensions/text_style_extension.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
+
+import '../../../core/theme/constants.dart';
 
 enum FAQ { faq1, faq2, faq3, faq4, faq5, faq6, faq7 }
 
@@ -28,13 +30,14 @@ class FaqPage extends StatelessWidget {
     }
 
     return Scaffold(
+      backgroundColor: Colors.grey[50],
       appBar: AppBar(
-        backgroundColor: AppColors.backgroundColor,
+        // backgroundColor: AppColorsV2.backgroundColor,
         elevation: 0,
         automaticallyImplyLeading: false,
         title: Padding(
           padding: const EdgeInsets.only(
-            left: SizeConfig.padding05,
+            left: 5,
           ),
           child: Row(
             children: [
@@ -42,15 +45,16 @@ class FaqPage extends StatelessWidget {
                 onTap: () => context.pop(),
                 child: const Image(
                   image: AssetImage(ImageConfig.backArrow),
-                  width: SizeConfig.width24,
-                  height: SizeConfig.height24,
-                  color: AppColors.primaryColor,
+                  width: 24,
+                  height: 24,
+                  color: AppColorsV2.primaryColor,
                 ),
               ),
-              const SizedBox(width: SizeConfig.width10),
+              const SizedBox(width: 10),
               Text(
                 StringConfig.frequentlyQuestion,
-                style: context.getTextStyle.medium,
+                style: Theme.of(context).textTheme.titleMedium,
+                // style: context.getTextStyle.medium,
               ),
             ],
           ),
@@ -68,7 +72,7 @@ class FaqPage extends StatelessWidget {
                 image: AssetImage(ImageConfig.search),
                 width: SizeConfig.width20,
                 height: SizeConfig.height20,
-                color: AppColors.primaryColor,
+                color: AppColorsV2.primaryColor,
               ),
             ),
           )
@@ -78,16 +82,16 @@ class FaqPage extends StatelessWidget {
         builder: (context, state) {
           return Padding(
             padding: const EdgeInsets.only(
-              left: SizeConfig.padding24,
-              right: SizeConfig.padding24,
-              top: SizeConfig.padding24,
-              bottom: SizeConfig.padding10,
+              left: defaultPadding,
+              right: defaultPadding,
+              top: defaultPadding,
+              bottom: defaultPadding,
             ),
             child: SingleChildScrollView(
               child: Column(
                 spacing: SizeConfig.height12,
                 children: [
-                  UiExpansionTile(
+                  UIExpansionTile(
                     question: StringConfig.question1,
                     answer: StringConfig.answer1,
                     onExpansionChanged: (value) {
@@ -98,7 +102,7 @@ class FaqPage extends StatelessWidget {
                     answerStyle: getStyle(
                         context, state.expandedIndexes, FAQ.faq1.index),
                   ),
-                  UiExpansionTile(
+                  UIExpansionTile(
                     question: StringConfig.question2,
                     answer: StringConfig.answer2,
                     onExpansionChanged: (value) {
@@ -109,7 +113,7 @@ class FaqPage extends StatelessWidget {
                     answerStyle: getStyle(
                         context, state.expandedIndexes, FAQ.faq2.index),
                   ),
-                  UiExpansionTile(
+                  UIExpansionTile(
                     question: StringConfig.question3,
                     answer: StringConfig.answer3,
                     onExpansionChanged: (value) {
@@ -120,7 +124,7 @@ class FaqPage extends StatelessWidget {
                     answerStyle: getStyle(
                         context, state.expandedIndexes, FAQ.faq3.index),
                   ),
-                  UiExpansionTile(
+                  UIExpansionTile(
                     question: StringConfig.question4,
                     answer: StringConfig.answer4,
                     onExpansionChanged: (value) {
@@ -131,7 +135,7 @@ class FaqPage extends StatelessWidget {
                     answerStyle: getStyle(
                         context, state.expandedIndexes, FAQ.faq4.index),
                   ),
-                  UiExpansionTile(
+                  UIExpansionTile(
                     question: StringConfig.question5,
                     answer: StringConfig.answer5,
                     onExpansionChanged: (value) {
@@ -142,7 +146,7 @@ class FaqPage extends StatelessWidget {
                     answerStyle: getStyle(
                         context, state.expandedIndexes, FAQ.faq5.index),
                   ),
-                  UiExpansionTile(
+                  UIExpansionTile(
                     question: StringConfig.question6,
                     answer: StringConfig.answer6,
                     onExpansionChanged: (value) {
@@ -153,7 +157,7 @@ class FaqPage extends StatelessWidget {
                     answerStyle: getStyle(
                         context, state.expandedIndexes, FAQ.faq6.index),
                   ),
-                  UiExpansionTile(
+                  UIExpansionTile(
                     question: StringConfig.question7,
                     answer: StringConfig.answer7,
                     onExpansionChanged: (value) {

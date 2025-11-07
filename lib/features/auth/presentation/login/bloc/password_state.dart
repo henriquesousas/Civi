@@ -6,7 +6,7 @@ class PasswordState {
   const PasswordState({
     this.value,
     this.error,
-    this.obscureText = true,
+    this.obscureText = false,
   });
 
   PasswordState copyWith({

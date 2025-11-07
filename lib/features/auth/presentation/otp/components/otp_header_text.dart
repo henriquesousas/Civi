@@ -1,8 +1,8 @@
-import 'package:flutter/material.dart';
 import 'package:deehelp/shared/extensions/context_extension.dart';
 import 'package:deehelp/shared/extensions/text_style_extension.dart';
+import 'package:flutter/material.dart';
 
-import '../../../../../app/theme/app_colors.dart';
+import '../../../../../app/theme/app_colors_v2.dart';
 
 class OtpHeaderText extends StatelessWidget {
   final String phoneNumber;
@@ -16,7 +16,7 @@ class OtpHeaderText extends StatelessWidget {
           context.strings.otpInsertVerificationCode,
           textAlign: TextAlign.center,
           style: context.getTextStyle.medium.copyWith(
-            color: AppColors.textPrimary,
+            color: AppColorsV2.textPrimary,
             fontWeight: FontWeight.w600,
             height: 1.5,
           ),
@@ -26,7 +26,7 @@ class OtpHeaderText extends StatelessWidget {
           textAlign: TextAlign.center,
           text: TextSpan(
             style: context.getTextStyle.smallMedium.copyWith(
-              color: AppColors.textSecondary,
+              color: AppColorsV2.textSecondary,
               height: 2,
               // fontSize: context.responsiveText(0.03),
             ),
@@ -38,7 +38,7 @@ class OtpHeaderText extends StatelessWidget {
                 text: _maskedPhoneNumber,
                 style: context.getTextStyle.smallMedium.copyWith(
                   fontWeight: FontWeight.w600,
-                  color: AppColors.primary,
+                  color: AppColorsV2.primary,
                   // fontSize: context.responsiveText(0.03),
                 ),
                 // style: const TextStyle(

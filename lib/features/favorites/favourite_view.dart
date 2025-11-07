@@ -1,17 +1,12 @@
-import 'package:flutter/material.dart';
-import 'package:go_router/go_router.dart';
-import 'package:deehelp/app/localization/image_config.dart';
-import 'package:deehelp/app/localization/string_config.dart';
-import 'package:deehelp/app/router/router_config.dart';
-import 'package:deehelp/app/theme/app_colors.dart';
-import 'package:deehelp/app/theme/app_font_size.dart';
-import 'package:deehelp/app/theme/app_fonts.dart';
-import 'package:deehelp/app/theme/size_config.dart';
+import 'package:deehelp/app/theme/app_colors_v2.dart';
 import 'package:deehelp/features/favorites/components/ui_favourite_card.dart';
 import 'package:deehelp/features/favorites/favourite_model.dart';
-import 'package:deehelp/shared/components/buttons/primary_button.dart';
 import 'package:deehelp/shared/extensions/screen_size_extension.dart';
 import 'package:deehelp/shared/extensions/text_style_extension.dart';
+import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
+
+import '../../core/router/router_constants.dart';
 
 class FavouriteView extends StatelessWidget {
   const FavouriteView({super.key});
@@ -21,14 +16,14 @@ class FavouriteView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: AppColors.backgroundColor,
+      backgroundColor: AppColorsV2.backgroundColor,
       appBar: AppBar(
-        backgroundColor: AppColors.backgroundColor,
+        backgroundColor: AppColorsV2.backgroundColor,
         elevation: 0,
         automaticallyImplyLeading: false,
         title: Padding(
           padding: const EdgeInsets.only(
-            left: SizeConfig.padding05,
+            left: 5,
           ),
           child: Row(
             children: [
@@ -56,7 +51,7 @@ class FavouriteView extends StatelessWidget {
             return UIFavouriteCard(
               favouriteModel: favorite,
               onTap: () {
-                context.push(Routes.productDetail);
+                context.push(RouterConstant.productDetail);
               },
             );
           },

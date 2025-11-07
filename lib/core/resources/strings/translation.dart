@@ -10,7 +10,7 @@ abstract class Translation with TranslationParts {
   String get warning;
   String get skip;
   String get version;
-  String get exitApp;
+  String get waiting;
 
   // Login
   String get loginInfo;
@@ -28,6 +28,20 @@ abstract class Translation with TranslationParts {
   String get onboardingAlertsRealTimeBody;
   String get onboardingSecurityHead;
   String get onboardingSecurityBody;
+
+  //Splash
+  String get splashHeadline;
+
+  // Profile
+  String get preferences;
+  String get sharedAndSupport;
+  String get exitApp;
+  String get faq;
+  String get help;
+  String get myItems;
+  String get lastOccurrences;
+  String get favorites;
+  String get search;
 }
 
 mixin TranslationParts {

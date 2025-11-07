@@ -1,11 +1,11 @@
-import 'package:flutter/material.dart';
-import 'package:go_router/go_router.dart';
 import 'package:deehelp/app/localization/image_config.dart';
 import 'package:deehelp/features/itens/edit/my_item_edit_section.dart';
 import 'package:deehelp/shared/components/primary_app_bar.dart';
 import 'package:deehelp/shared/extensions/screen_size_extension.dart';
+import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 
-import '../../../app/theme/app_colors.dart';
+import '../../../app/theme/app_colors_v2.dart';
 import '../../../shared/animation/fade_slide_transition_animator.dart';
 import '../../../shared/components/buttons/primary_button.dart';
 import '../../../shared/components/inputs/primary_text_field.dart';
@@ -23,7 +23,7 @@ class _ItemEditPageState extends State<ItemEditPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: AppColors.background,
+      backgroundColor: AppColorsV2.background,
       appBar: PrimaryAppBar(
         title: "Detalhes",
         leading: IconButton(

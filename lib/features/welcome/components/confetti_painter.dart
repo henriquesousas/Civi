@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../../../app/theme/app_colors.dart';
+import '../../../app/theme/app_colors_v2.dart';
 
 class ConfettiPainter extends CustomPainter {
   final double progress;
@@ -17,13 +17,13 @@ class ConfettiPainter extends CustomPainter {
       final y = (progress * size.height * 2 - i * 20) % size.height;
 
       paint.color = [
-        AppColors.primary,
-        AppColors.secondary,
-        AppColors.accent,
-        AppColors.success,
-        AppColors.warning,
+        AppColorsV2.primary,
+        AppColorsV2.secondary,
+        AppColorsV2.accent,
+        AppColorsV2.success,
+        AppColorsV2.warning,
       ][i % 5]
-          .withValues(alpha:  0.7);
+          .withValues(alpha: 0.7);
 
       // Draw confetti shapes
       if (i % 3 == 0) {

@@ -1,16 +1,14 @@
+import 'package:deehelp/app/localization/image_config.dart';
+import 'package:deehelp/app/theme/app_colors_v2.dart';
+import 'package:deehelp/core/router/router_constants.dart';
+import 'package:deehelp/features/home/occurrence_location.dart';
+import 'package:deehelp/shared/extensions/screen_size_extension.dart';
+import 'package:deehelp/shared/extensions/text_style_extension.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_map/flutter_map.dart';
 import 'package:go_router/go_router.dart';
 import 'package:latlong2/latlong.dart';
-import 'package:deehelp/app/localization/image_config.dart';
-import 'package:deehelp/app/router/router_config.dart';
-import 'package:deehelp/app/theme/app_colors.dart';
-import 'package:deehelp/features/home/occurrence_location.dart';
-import 'package:deehelp/shared/extensions/screen_size_extension.dart';
-import 'package:deehelp/shared/extensions/text_style_extension.dart';
-
-import '../../app/theme/size_config.dart';
 
 class HomeView extends StatefulWidget {
   const HomeView({super.key});
@@ -227,7 +225,7 @@ class _HomeViewState extends State<HomeView> with TickerProviderStateMixin {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: AppColors.background,
+      backgroundColor: AppColorsV2.background,
       // appBar: PrimaryAppBar(title: "Home"),
       body: Stack(
         children: [
@@ -276,7 +274,7 @@ class _HomeViewState extends State<HomeView> with TickerProviderStateMixin {
                     width: 70,
                     height: 70,
                     child: _buildLocationMarker(
-                      color: AppColors.success,
+                      color: AppColorsV2.success,
                       icon: Icons.my_location,
                       label: 'Você',
                     ),
@@ -289,7 +287,7 @@ class _HomeViewState extends State<HomeView> with TickerProviderStateMixin {
                       width: 70,
                       height: 70,
                       child: _buildLocationMarker(
-                        color: AppColors.error,
+                        color: AppColorsV2.error,
                         icon: Icons.location_on,
                         label: 'Destino',
                       ),
@@ -360,7 +358,7 @@ class _HomeViewState extends State<HomeView> with TickerProviderStateMixin {
           child: Text(
             label,
             style: context.getTextStyle.small.copyWith(
-              color: AppColors.textPrimary,
+              color: AppColorsV2.textPrimary,
               fontWeight: FontWeight.w600,
             ),
           ),
@@ -372,11 +370,11 @@ class _HomeViewState extends State<HomeView> with TickerProviderStateMixin {
   Widget _buildDriverMarker(OccurrenceLocation driver) {
     return Container(
       decoration: BoxDecoration(
-        color: AppColors.primary,
+        color: AppColorsV2.primary,
         borderRadius: BorderRadius.circular(16),
         boxShadow: [
           BoxShadow(
-            color: AppColors.primary.withOpacity(0.3),
+            color: AppColorsV2.primary.withOpacity(0.3),
             offset: const Offset(0, 2),
             blurRadius: 8,
             spreadRadius: 0,
@@ -412,7 +410,7 @@ class _HomeViewState extends State<HomeView> with TickerProviderStateMixin {
         onPressed: onPressed,
         icon: Icon(
           icon,
-          color: AppColors.textPrimary,
+          color: AppColorsV2.textPrimary,
           size: 20,
         ),
       ),
@@ -488,7 +486,7 @@ class _HomeViewState extends State<HomeView> with TickerProviderStateMixin {
                         width: 40,
                         height: 4,
                         decoration: BoxDecoration(
-                          color: AppColors.border,
+                          color: AppColorsV2.border,
                           borderRadius: BorderRadius.circular(2),
                         ),
                       ),
@@ -575,7 +573,7 @@ class _HomeViewState extends State<HomeView> with TickerProviderStateMixin {
               Text(
                 'Bom dia Paulo',
                 style: context.getTextStyle.regular.copyWith(
-                  color: AppColors.textPrimary,
+                  color: AppColorsV2.textPrimary,
                   fontWeight: FontWeight.bold,
                   fontSize: context.responsiveText(0.06),
                 ),
@@ -584,7 +582,7 @@ class _HomeViewState extends State<HomeView> with TickerProviderStateMixin {
               Text(
                 'Avenida Jão Ventura dos santos 3060, Osasco - SP',
                 style: context.getTextStyle.smallMedium.copyWith(
-                  color: AppColors.textSecondary,
+                  color: AppColorsV2.textSecondary,
                   fontWeight: FontWeight.w500,
                 ),
               ),
@@ -595,7 +593,7 @@ class _HomeViewState extends State<HomeView> with TickerProviderStateMixin {
         Container(
           padding: EdgeInsets.all(12),
           decoration: BoxDecoration(
-            gradient: AppColors.primaryGradient,
+            gradient: AppColorsV2.primaryGradient,
             borderRadius: BorderRadius.circular(16),
           ),
           child: Icon(
@@ -616,14 +614,14 @@ class _HomeViewState extends State<HomeView> with TickerProviderStateMixin {
           children: [
             Icon(
               Icons.history,
-              color: AppColors.textSecondary,
+              color: AppColorsV2.textSecondary,
               size: 20,
             ),
             SizedBox(width: 8),
             Text(
               'Ocorrências nesta região',
               style: context.getTextStyle.smallMedium.copyWith(
-                color: AppColors.textPrimary,
+                color: AppColorsV2.textPrimary,
                 fontWeight: FontWeight.w600,
               ),
             ),
@@ -812,10 +810,10 @@ class _HomeViewState extends State<HomeView> with TickerProviderStateMixin {
             itemBuilder: (context, index) {
               final occurrence = _nearbyDrivers[index];
               return GestureDetector(
-                onTap: () => context.push(Routes.productDetail),
+                onTap: () => context.push(RouterConstant.productDetail),
                 child: Container(
                   width: 190,
-                  margin: const EdgeInsets.only(right: SizeConfig.padding12),
+                  margin: const EdgeInsets.only(right: 12),
                   // decoration: BoxDecoration(
                   //   color: AppColors.secondaryColor,
                   //   borderRadius:
@@ -824,7 +822,7 @@ class _HomeViewState extends State<HomeView> with TickerProviderStateMixin {
                   decoration: BoxDecoration(
                     color: Colors.white,
                     borderRadius: BorderRadius.circular(12),
-                    border: Border.all(color: AppColors.border),
+                    border: Border.all(color: AppColorsV2.border),
                     boxShadow: [
                       BoxShadow(
                         color: Colors.black.withOpacity(0.31),
@@ -839,7 +837,7 @@ class _HomeViewState extends State<HomeView> with TickerProviderStateMixin {
                     children: [
                       ClipRRect(
                         borderRadius: const BorderRadius.vertical(
-                          top: Radius.circular(SizeConfig.borderRadius14),
+                          top: Radius.circular(14),
                         ),
                         child: Image.asset(
                           occurrence.image,
@@ -849,7 +847,7 @@ class _HomeViewState extends State<HomeView> with TickerProviderStateMixin {
                         ),
                       ),
                       Padding(
-                        padding: const EdgeInsets.all(SizeConfig.padding08),
+                        padding: const EdgeInsets.all(8),
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
@@ -868,7 +866,7 @@ class _HomeViewState extends State<HomeView> with TickerProviderStateMixin {
                                   "12:45",
                                   style: context.getTextStyle.small.copyWith(
                                       fontWeight: FontWeight.normal,
-                                      color: AppColors.textSecondary,
+                                      color: AppColorsV2.textSecondary,
                                       fontSize: 11),
                                   maxLines: 1,
                                   overflow: TextOverflow.ellipsis,
@@ -880,7 +878,7 @@ class _HomeViewState extends State<HomeView> with TickerProviderStateMixin {
                               "Rua João do meriti 1245, Osasco- São Paulo",
                               style: context.getTextStyle.small.copyWith(
                                 fontSize: 10,
-                                color: AppColors.textSecondary,
+                                color: AppColorsV2.textSecondary,
                               ),
                               // overflow: TextOverflow.ellipsis,
                             ),
@@ -890,14 +888,14 @@ class _HomeViewState extends State<HomeView> with TickerProviderStateMixin {
                               children: [
                                 Icon(
                                   Icons.directions_car,
-                                  color: AppColors.textSecondary,
+                                  color: AppColorsV2.textSecondary,
                                   size: 16,
                                 ),
                                 Text(
                                   "Gol G3",
                                   style: context.getTextStyle.small.copyWith(
                                     fontWeight: FontWeight.normal,
-                                    color: AppColors.textSecondary,
+                                    color: AppColorsV2.textSecondary,
                                     fontSize: 11,
                                   ),
                                 ),
@@ -905,7 +903,7 @@ class _HomeViewState extends State<HomeView> with TickerProviderStateMixin {
                                   "DND0171",
                                   style: context.getTextStyle.small.copyWith(
                                     fontWeight: FontWeight.normal,
-                                    color: AppColors.textSecondary,
+                                    color: AppColorsV2.textSecondary,
                                     fontSize: 11,
                                   ),
                                 ),
@@ -917,7 +915,7 @@ class _HomeViewState extends State<HomeView> with TickerProviderStateMixin {
                                   horizontal: 8, vertical: 4),
                               decoration: BoxDecoration(
                                 color: occurrence.isVerified
-                                    ? AppColors.success.withOpacity(0.1)
+                                    ? AppColorsV2.success.withOpacity(0.1)
                                     : Colors.grey.withOpacity(0.1),
                                 borderRadius: BorderRadius.circular(8),
                               ),
@@ -927,7 +925,7 @@ class _HomeViewState extends State<HomeView> with TickerProviderStateMixin {
                                     : "Não verificado",
                                 style: context.getTextStyle.small.copyWith(
                                   color: occurrence.isVerified
-                                      ? AppColors.success
+                                      ? AppColorsV2.success
                                       : Colors.grey,
                                   fontWeight: FontWeight.w600,
                                   fontSize: 9,
@@ -980,13 +978,13 @@ class _HomeViewState extends State<HomeView> with TickerProviderStateMixin {
           decoration: BoxDecoration(
             color: Colors.white,
             borderRadius: BorderRadius.circular(12),
-            border: Border.all(color: AppColors.border),
+            border: Border.all(color: AppColorsV2.border),
           ),
           child: Row(
             children: [
               Icon(
                 Icons.schedule,
-                color: AppColors.textSecondary,
+                color: AppColorsV2.textSecondary,
                 size: 18,
               ),
               SizedBox(width: 12),
@@ -994,13 +992,13 @@ class _HomeViewState extends State<HomeView> with TickerProviderStateMixin {
                 child: Text(
                   destination,
                   style: context.getTextStyle.smallMedium.copyWith(
-                    color: AppColors.textPrimary,
+                    color: AppColorsV2.textPrimary,
                   ),
                 ),
               ),
               Icon(
                 Icons.chevron_right,
-                color: AppColors.textSecondary,
+                color: AppColorsV2.textSecondary,
                 size: 18,
               ),
             ],

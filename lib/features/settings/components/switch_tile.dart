@@ -1,7 +1,7 @@
-import 'package:flutter/cupertino.dart';
 import 'package:deehelp/shared/extensions/text_style_extension.dart';
+import 'package:flutter/cupertino.dart';
 
-import '../../../app/theme/app_colors.dart';
+import '../../../app/theme/app_colors_v2.dart';
 
 class SwitchTile extends StatelessWidget {
   final String title;
@@ -20,9 +20,9 @@ class SwitchTile extends StatelessWidget {
     return Container(
       padding: const EdgeInsets.all(12),
       decoration: BoxDecoration(
-        color: AppColors.surface,
+        color: AppColorsV2.surface,
         borderRadius: BorderRadius.circular(12),
-        border: Border.all(color: AppColors.border),
+        border: Border.all(color: AppColorsV2.border),
       ),
       child: Row(
         children: [
@@ -33,7 +33,7 @@ class SwitchTile extends StatelessWidget {
                 Text(
                   title,
                   style: context.getTextStyle.smallMedium.copyWith(
-                    color: AppColors.textPrimary,
+                    color: AppColorsV2.textPrimary,
                     fontWeight: FontWeight.bold,
                   ),
                 ),
@@ -41,7 +41,7 @@ class SwitchTile extends StatelessWidget {
                 Text(
                   subtitle,
                   style: context.getTextStyle.small.copyWith(
-                    color: AppColors.textSecondary,
+                    color: AppColorsV2.textSecondary,
                   ),
                 ),
               ],
@@ -50,12 +50,12 @@ class SwitchTile extends StatelessWidget {
           CupertinoSwitch(
             value: value,
             onChanged: onChanged,
-            activeTrackColor: AppColors.primary,
+            activeTrackColor: AppColorsV2.primary,
             // activeColor: AppColors.primary,
             // thumbColor: Colors.green.shade900,
             // activeTrackColor: AppColors.primary.withValues(alpha: 0.3),
-            inactiveThumbColor: AppColors.textTertiary,
-            inactiveTrackColor: AppColors.border,
+            inactiveThumbColor: AppColorsV2.textTertiary,
+            inactiveTrackColor: AppColorsV2.border,
           )
         ],
       ),

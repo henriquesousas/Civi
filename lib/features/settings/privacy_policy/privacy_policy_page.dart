@@ -1,10 +1,10 @@
-import 'package:flutter/material.dart';
-import 'package:go_router/go_router.dart';
 import 'package:deehelp/app/localization/image_config.dart';
 import 'package:deehelp/app/localization/string_config.dart';
-import 'package:deehelp/app/theme/app_colors.dart';
+import 'package:deehelp/app/theme/app_colors_v2.dart';
 import 'package:deehelp/app/theme/size_config.dart';
 import 'package:deehelp/shared/extensions/text_style_extension.dart';
+import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 
 class PrivacyPolicyPage extends StatelessWidget {
   const PrivacyPolicyPage({super.key});
@@ -20,7 +20,7 @@ class PrivacyPolicyPage extends StatelessWidget {
 
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: AppColors.backgroundColor,
+        backgroundColor: AppColorsV2.backgroundColor,
         elevation: 0,
         automaticallyImplyLeading: false,
         title: Padding(
@@ -35,7 +35,7 @@ class PrivacyPolicyPage extends StatelessWidget {
                   image: AssetImage(ImageConfig.backArrow),
                   width: SizeConfig.width24,
                   height: SizeConfig.height24,
-                  color: AppColors.primaryColor,
+                  color: AppColorsV2.primaryColor,
                 ),
               ),
               const SizedBox(width: SizeConfig.width10),

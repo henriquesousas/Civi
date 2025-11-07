@@ -1,10 +1,10 @@
-import 'package:flutter/material.dart';
 import 'package:deehelp/app/localization/image_config.dart';
 import 'package:deehelp/app/localization/string_config.dart';
-import 'package:deehelp/app/theme/app_colors.dart';
+import 'package:deehelp/app/theme/app_colors_v2.dart';
 import 'package:deehelp/app/theme/size_config.dart';
 import 'package:deehelp/features/settings/faq/components/ui_expansion_tile.dart';
 import 'package:deehelp/shared/extensions/text_style_extension.dart';
+import 'package:flutter/material.dart';
 
 class QuestionView extends StatelessWidget {
   const QuestionView({super.key});
@@ -13,7 +13,7 @@ class QuestionView extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: AppColors.backgroundColor,
+        backgroundColor: AppColorsV2.backgroundColor,
         elevation: 0,
         automaticallyImplyLeading: false,
         title: Padding(
@@ -26,7 +26,7 @@ class QuestionView extends StatelessWidget {
                 image: AssetImage(ImageConfig.backArrow),
                 width: SizeConfig.width24,
                 height: SizeConfig.height24,
-                color: AppColors.primaryColor,
+                color: AppColorsV2.primaryColor,
               ),
               const SizedBox(width: SizeConfig.width10),
               Text(
@@ -49,7 +49,7 @@ class QuestionView extends StatelessWidget {
                 image: AssetImage(ImageConfig.search),
                 width: SizeConfig.width20,
                 height: SizeConfig.height20,
-                color: AppColors.primaryColor,
+                color: AppColorsV2.primaryColor,
               ),
             ),
           )
@@ -66,31 +66,31 @@ class QuestionView extends StatelessWidget {
           child: Column(
             spacing: SizeConfig.height12,
             children: [
-              UiExpansionTile(
+              UIExpansionTile(
                 question: StringConfig.question1,
                 answer: StringConfig.answer1,
               ),
-              UiExpansionTile(
+              UIExpansionTile(
                 question: StringConfig.question2,
                 answer: StringConfig.answer2,
               ),
-              UiExpansionTile(
+              UIExpansionTile(
                 question: StringConfig.question3,
                 answer: StringConfig.answer3,
               ),
-              UiExpansionTile(
+              UIExpansionTile(
                 question: StringConfig.question4,
                 answer: StringConfig.answer4,
               ),
-              UiExpansionTile(
+              UIExpansionTile(
                 question: StringConfig.question5,
                 answer: StringConfig.answer5,
               ),
-              UiExpansionTile(
+              UIExpansionTile(
                 question: StringConfig.question6,
                 answer: StringConfig.answer6,
               ),
-              UiExpansionTile(
+              UIExpansionTile(
                 question: StringConfig.question7,
                 answer: StringConfig.answer7,
               ),

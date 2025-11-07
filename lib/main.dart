@@ -1,4 +1,4 @@
-import 'package:deehelp/app/app.dart';
+import 'package:deehelp/dee_help.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -13,5 +13,5 @@ void main() async {
   SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(
     statusBarColor: Colors.transparent,
   ));
-  runApp(const YouSafeApp());
+  runApp(const DeeHelp());
 }

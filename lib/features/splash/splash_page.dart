@@ -1,4 +1,3 @@
-import 'package:deehelp/app/router/router_config.dart';
 import 'package:deehelp/features/splash/components/splash_background_animation.dart';
 import 'package:deehelp/features/splash/components/splash_bottom_section.dart';
 import 'package:deehelp/features/splash/components/splash_content.dart';
@@ -12,6 +11,8 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:go_router/go_router.dart';
+
+import '../../core/router/router_constants.dart';
 
 class SplashPage extends StatefulWidget {
   const SplashPage({super.key});
@@ -35,9 +36,9 @@ class _SplashPageState extends State<SplashPage> {
       final user = FirebaseAuth.instance.currentUser;
 
       if (user != null) {
-        context.pushReplacement(Routes.bottomView);
+        context.pushReplacement(RouterConstant.bottomView);
       } else {
-        context.pushReplacement(Routes.onboarding);
+        context.pushReplacement(RouterConstant.onboarding);
       }
     });
   }
@@ -69,7 +70,6 @@ class _SplashPageState extends State<SplashPage> {
                   ),
                 ),
                 const TransitionAnimator(child: SplashBottomSection()),
-                SizedBox(height: context.percentHeight(0.05)),
               ],
             ),
           ),

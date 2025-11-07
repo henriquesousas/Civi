@@ -5,7 +5,7 @@ import 'package:deehelp/shared/extensions/context_extension.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
-import '../../app/router/router_config.dart';
+import '../../core/router/router_constants.dart';
 
 class SettingsPage extends StatelessWidget {
   const SettingsPage({super.key});
@@ -28,13 +28,13 @@ class SettingsPage extends StatelessWidget {
                   title: context.strings.privatePolicy,
                   subtitle: context.strings.readOurPolicy,
                   icon: Icons.policy_outlined,
-                  onTap: () => context.push(Routes.privacyPolicy),
+                  onTap: () => context.push(RouterConstant.privacyPolicy),
                 ),
                 ActionTile(
                   title: context.strings.useTerm,
                   subtitle: context.strings.readOurTerms,
                   icon: Icons.description_outlined,
-                  onTap: () => context.push(Routes.terms),
+                  onTap: () => context.push(RouterConstant.terms),
                 ),
               ],
             ),
@@ -76,7 +76,7 @@ class SettingsPage extends StatelessWidget {
                   title: context.strings.frequentlyAsk,
                   subtitle: context.strings.frequentlyAskRead,
                   icon: Icons.quiz_outlined,
-                  onTap: () => context.push(Routes.faq),
+                  onTap: () => context.push(RouterConstant.faq),
                 ),
                 ActionTile(
                   title: context.strings.about,

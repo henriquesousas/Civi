@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../../app/theme/app_colors.dart';
+import '../../app/theme/app_colors_v2.dart';
 
 class NavMenu {
   final IconData icon;
@@ -20,20 +20,20 @@ class NavMenu {
       icon: Icons.home_outlined,
       activeIcon: Icons.home_rounded,
       label: 'Home',
-      color: AppColors.primary,
+      color: AppColorsV2.primary,
     ),
     NavMenu(
       icon: Icons.inventory_2_outlined,
       activeIcon: Icons.inventory_2_rounded,
       label: 'Itens',
-      color: AppColors.primary,
+      color: AppColorsV2.primary,
       // color: AppColors.secondary,
     ),
     NavMenu(
       icon: Icons.person_outline_rounded,
       activeIcon: Icons.person_rounded,
       label: 'Perfil',
-      color: AppColors.primary,
+      color: AppColorsV2.primary,
       // color: AppColors.accent,
     ),
     // NavMenu(

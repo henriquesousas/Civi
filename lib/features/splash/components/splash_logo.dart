@@ -1,5 +1,5 @@
+import 'package:deehelp/app/theme/app_colors_v2.dart';
 import 'package:flutter/material.dart';
-import 'package:deehelp/app/theme/app_colors.dart';
 
 class SplashLogo extends StatelessWidget {
   const SplashLogo({super.key});
@@ -21,11 +21,11 @@ class SplashLogo extends StatelessWidget {
           ),
         ],
       ),
-      child: Center(
+      child: const Center(
         child: Icon(
           Icons.directions_car_rounded,
           size: 60,
-          color: AppColors.primary,
+          color: AppColorsV2.primary,
         ),
       ),
     );

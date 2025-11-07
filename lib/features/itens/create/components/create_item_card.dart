@@ -1,9 +1,9 @@
-import 'package:flutter/material.dart';
 import 'package:deehelp/features/itens/my_item.dart';
 import 'package:deehelp/shared/extensions/screen_size_extension.dart';
 import 'package:deehelp/shared/extensions/text_style_extension.dart';
+import 'package:flutter/material.dart';
 
-import '../../../../app/theme/app_colors.dart';
+import '../../../../app/theme/app_colors_v2.dart';
 
 class CreateItemCard extends StatelessWidget {
   final MyItem item;
@@ -17,7 +17,7 @@ class CreateItemCard extends StatelessWidget {
       child: Container(
         padding: const EdgeInsets.symmetric(horizontal: 10),
         decoration: BoxDecoration(
-          color: item.isSelected ? AppColors.primaryDark : Colors.white,
+          color: item.isSelected ? AppColorsV2.primaryDark : Colors.white,
           borderRadius: BorderRadius.circular(8),
           boxShadow: [
             BoxShadow(
@@ -64,13 +64,13 @@ class CreateItemCard extends StatelessWidget {
               padding: const EdgeInsets.all(12),
               decoration: BoxDecoration(
                 color: item.isSelected
-                    ? AppColors.primary
-                    : AppColors.primary.withValues(alpha: 0.1),
+                    ? AppColorsV2.primary
+                    : AppColorsV2.primary.withValues(alpha: 0.1),
                 borderRadius: BorderRadius.circular(12),
               ),
               child: Icon(
                 item.icon,
-                color: item.isSelected ? Colors.white : AppColors.primary,
+                color: item.isSelected ? Colors.white : AppColorsV2.primary,
                 size: 20,
               ),
             ),
@@ -78,7 +78,7 @@ class CreateItemCard extends StatelessWidget {
             Text(
               item.name,
               style: context.getTextStyle.regular.copyWith(
-                color: item.isSelected ? Colors.white : AppColors.blackColor,
+                color: item.isSelected ? Colors.white : AppColorsV2.blackColor,
                 fontWeight: item.isSelected ? FontWeight.w600 : FontWeight.w500,
                 fontSize: context.responsiveText(0.033),
               ),

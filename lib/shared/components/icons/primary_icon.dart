@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../../../app/theme/app_colors.dart';
+import '../../../app/theme/app_colors_v2.dart';
 
 class PrimaryIcon extends StatelessWidget {
   final Icon icon;
@@ -22,11 +22,11 @@ class PrimaryIcon extends StatelessWidget {
       width: width ?? 60,
       height: height ?? 60,
       decoration: BoxDecoration(
-        gradient: background ?? AppColors.primaryGradient,
+        gradient: background ?? AppColorsV2.primaryGradient,
         borderRadius: BorderRadius.circular(borderRadius ?? 16),
         boxShadow: [
           BoxShadow(
-            color: AppColors.primary.withValues(alpha: 0.3),
+            color: AppColorsV2.primary.withValues(alpha: 0.3),
             offset: const Offset(0, 8),
             blurRadius: 24,
             spreadRadius: 0,

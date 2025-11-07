@@ -1,4 +1,4 @@
-import 'package:deehelp/app/router/router_config.dart';
+import 'package:deehelp/core/router/router_constants.dart';
 import 'package:deehelp/features/welcome/components/welcome_card.dart';
 import 'package:deehelp/features/welcome/welcome_feature.dart';
 import 'package:deehelp/shared/animation/slide_fade_transition_animator.dart';
@@ -11,7 +11,7 @@ import 'package:deehelp/shared/extensions/text_style_extension.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
-import '../../app/theme/app_colors.dart';
+import '../../app/theme/app_colors_v2.dart';
 import '../../shared/components/buttons/secondary_outline_button.dart';
 
 class WelcomePage extends StatefulWidget {
@@ -38,21 +38,21 @@ class _WelcomePageState extends State<WelcomePage>
         icon: Icons.location_on_rounded,
         title: "Localização",
         description: localization.welcomeOnboardingDesc1,
-        gradient: AppColors.primaryGradient,
+        gradient: AppColorsV2.primaryGradient,
         actionText: 'Add Locations',
       ),
       WelcomeFeature(
         icon: Icons.inventory,
         title: "Registre seus Ítens",
         description: localization.welcomeOnboardingDesc2,
-        gradient: AppColors.secondaryGradient,
+        gradient: AppColorsV2.secondaryGradient,
         actionText: 'Add Payment',
       ),
       WelcomeFeature(
         icon: Icons.star_rounded,
         title: "Lançamento",
         description: localization.welcomeOnboardingDesc3,
-        gradient: AppColors.accentGradient,
+        gradient: AppColorsV2.accentGradient,
         actionText: 'Explore Features',
       ),
     ];
@@ -73,7 +73,7 @@ class _WelcomePageState extends State<WelcomePage>
       return;
     }
 
-    context.push(Routes.bottomView);
+    context.push(RouterConstant.bottomView);
   }
 
   void _previousPage() {
@@ -88,7 +88,7 @@ class _WelcomePageState extends State<WelcomePage>
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: AppColors.background,
+      backgroundColor: AppColorsV2.background,
       body: SafeArea(
         child: Stack(
           children: [
@@ -114,7 +114,7 @@ class _WelcomePageState extends State<WelcomePage>
                     textAlign: TextAlign.center,
                     style: context.getTextStyle.medium.copyWith(
                       fontWeight: FontWeight.bold,
-                      color: AppColors.textPrimary,
+                      color: AppColorsV2.textPrimary,
                       // fontSize: context.responsiveText(0.08),
                     ),
                   ),
@@ -123,7 +123,7 @@ class _WelcomePageState extends State<WelcomePage>
                     textAlign: TextAlign.center,
                     style: context.getTextStyle.smallMedium.copyWith(
                       height: 1.5,
-                      color: AppColors.textSecondary,
+                      color: AppColorsV2.textSecondary,
                     ),
                   ),
                   Expanded(
@@ -143,8 +143,8 @@ class _WelcomePageState extends State<WelcomePage>
                   PrimaryProgressIndicator(
                     currentPage: _currentPage,
                     totalPage: _totalPages,
-                    selectedColor: AppColors.primary,
-                    unselectedColor: AppColors.border,
+                    selectedColor: AppColorsV2.primary,
+                    unselectedColor: AppColorsV2.border,
                   ),
                   Padding(
                     padding: const EdgeInsets.symmetric(

@@ -1,7 +1,7 @@
-import 'package:flutter/material.dart';
 import 'package:deehelp/shared/extensions/text_style_extension.dart';
+import 'package:flutter/material.dart';
 
-import '../../../app/theme/app_colors.dart';
+import '../../../app/theme/app_colors_v2.dart';
 
 class StepItem extends StatelessWidget {
   final String title;
@@ -26,7 +26,7 @@ class StepItem extends StatelessWidget {
             duration: const Duration(milliseconds: 300),
             height: 10,
             decoration: BoxDecoration(
-              color: isActive ? AppColors.primary : AppColors.border,
+              color: isActive ? AppColorsV2.primary : AppColorsV2.border,
               borderRadius: BorderRadius.circular(10),
             ),
           ),
@@ -34,7 +34,7 @@ class StepItem extends StatelessWidget {
           Text(
             title,
             style: context.getTextStyle.small.copyWith(
-              color: isActive ? AppColors.primary : AppColors.textSecondary,
+              color: isActive ? AppColorsV2.primary : AppColorsV2.textSecondary,
               fontWeight: isActive ? FontWeight.bold : FontWeight.w300,
               // fontSize: context.responsiveText(0.03),
             ),

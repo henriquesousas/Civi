@@ -1,8 +1,8 @@
-import 'package:flutter/material.dart';
 import 'package:deehelp/features/itens/my_items.dart';
 import 'package:deehelp/shared/extensions/text_style_extension.dart';
+import 'package:flutter/material.dart';
 
-import '../../../app/theme/app_colors.dart';
+import '../../../app/theme/app_colors_v2.dart';
 
 class MyItemsCard extends StatelessWidget {
   final MyItems item;
@@ -76,7 +76,7 @@ class MyItemsCard extends StatelessWidget {
                       Container(
                         height: 30,
                         decoration: BoxDecoration(
-                          color: AppColors.border,
+                          color: AppColorsV2.border,
                           borderRadius: BorderRadius.circular(10),
                         ),
                         child: Center(
@@ -86,7 +86,7 @@ class MyItemsCard extends StatelessWidget {
                               "Editar",
                               style: context.getTextStyle.small.copyWith(
                                 fontWeight: FontWeight.w500,
-                                color: AppColors.textSecondary,
+                                color: AppColorsV2.textSecondary,
                               ),
                             ),
                           ),
@@ -106,7 +106,7 @@ class MyItemsCard extends StatelessWidget {
                           height: 5,
                           width: 5,
                           decoration: BoxDecoration(
-                            color: AppColors.borderDark,
+                            color: AppColorsV2.borderDark,
                             borderRadius: BorderRadius.circular(20),
                           ),
                         ),

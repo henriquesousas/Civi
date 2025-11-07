@@ -1,7 +1,7 @@
-import 'package:flutter/material.dart';
 import 'package:deehelp/shared/extensions/text_style_extension.dart';
+import 'package:flutter/material.dart';
 
-import '../../../app/theme/app_colors.dart';
+import '../../../app/theme/app_colors_v2.dart';
 
 class SettingsContentSection extends StatelessWidget {
   final String title;
@@ -38,14 +38,14 @@ class SettingsContentSection extends StatelessWidget {
             children: [
               Icon(
                 icon,
-                color: AppColors.primary,
+                color: AppColorsV2.primary,
                 size: 20,
               ),
               const SizedBox(width: 8),
               Text(
                 title,
                 style: context.getTextStyle.mediumSmall.copyWith(
-                  color: AppColors.textPrimary,
+                  color: AppColorsV2.textPrimary,
                   fontWeight: FontWeight.w600,
                 ),
               ),

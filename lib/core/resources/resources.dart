@@ -1,8 +1,9 @@
 import 'dart:ui';
 
-import 'package:deehelp/core/resources/images/images.dart';
 import 'package:deehelp/core/resources/strings/pt_br.dart';
 import 'package:deehelp/core/resources/strings/translation.dart';
+
+import 'images/images.dart';
 
 class R {
   static Translation strings = PtBr();

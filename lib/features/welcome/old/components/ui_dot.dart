@@ -1,6 +1,6 @@
-import 'package:flutter/material.dart';
-import 'package:deehelp/app/theme/app_colors.dart';
+import 'package:deehelp/app/theme/app_colors_v2.dart';
 import 'package:deehelp/app/theme/size_config.dart';
+import 'package:flutter/material.dart';
 
 class UIDot extends StatelessWidget {
   final int currentPage;
@@ -22,8 +22,8 @@ class UIDot extends StatelessWidget {
       width: isActive ? SizeConfig.width18 : SizeConfig.width18,
       decoration: BoxDecoration(
         color: currentPage == index
-            ? AppColors.primaryColor
-            : AppColors.dotIndicatorColor,
+            ? AppColorsV2.primaryColor
+            : AppColorsV2.dotIndicatorColor,
         borderRadius: BorderRadius.circular(SizeConfig.borderRadius39),
       ),
     );

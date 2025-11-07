@@ -1,4 +1,4 @@
-import 'package:deehelp/app/theme/app_colors.dart';
+import 'package:deehelp/app/theme/app_colors_v2.dart';
 import 'package:deehelp/shared/extensions/screen_size_extension.dart';
 import 'package:deehelp/shared/extensions/text_style_extension.dart';
 import 'package:flutter/material.dart';
@@ -107,7 +107,7 @@ class _NavItemState extends State<NavItem> with TickerProviderStateMixin {
                               '${widget.item.label}_${widget.isSelected}'),
                           color: widget.isSelected
                               ? widget.item.color
-                              : AppColors.textSecondary,
+                              : AppColorsV2.textSecondary,
                           size: context.percentWidth(0.05),
                         ),
                       ),
@@ -123,7 +123,7 @@ class _NavItemState extends State<NavItem> with TickerProviderStateMixin {
               style: context.textSmall.copyWith(
                 color: widget.isSelected
                     ? widget.item.color
-                    : AppColors.textSecondary,
+                    : AppColorsV2.textSecondary,
               ),
               child: Text(
                 widget.item.label,

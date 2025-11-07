@@ -1,7 +1,7 @@
-import 'package:flutter/material.dart';
 import 'package:deehelp/shared/extensions/text_style_extension.dart';
+import 'package:flutter/material.dart';
 
-import '../../../app/theme/app_colors.dart';
+import '../../../app/theme/app_colors_v2.dart';
 
 class ActionTile extends StatelessWidget {
   final String title;
@@ -24,22 +24,22 @@ class ActionTile extends StatelessWidget {
       child: Container(
         padding: const EdgeInsets.all(12),
         decoration: BoxDecoration(
-          color: AppColors.surface,
+          color: AppColorsV2.surface,
           borderRadius: BorderRadius.circular(12),
-          border: Border.all(color: AppColors.border),
+          border: Border.all(color: AppColorsV2.border),
         ),
         child: Row(
           children: [
             Container(
               padding: const EdgeInsets.all(8),
               decoration: BoxDecoration(
-                color: (isDestructive ? AppColors.error : AppColors.primary)
+                color: (isDestructive ? AppColorsV2.error : AppColorsV2.primary)
                     .withValues(alpha: 0.1),
                 borderRadius: BorderRadius.circular(8),
               ),
               child: Icon(
                 icon,
-                color: isDestructive ? AppColors.error : AppColors.primary,
+                color: isDestructive ? AppColorsV2.error : AppColorsV2.primary,
                 size: 16,
               ),
             ),
@@ -56,7 +56,7 @@ class ActionTile extends StatelessWidget {
                   Text(
                     subtitle,
                     style: context.getTextStyle.small.copyWith(
-                      color: AppColors.textSecondary,
+                      color: AppColorsV2.textSecondary,
                     ),
                   ),
                 ],
@@ -64,7 +64,7 @@ class ActionTile extends StatelessWidget {
             ),
             const Icon(
               Icons.chevron_right,
-              color: AppColors.textSecondary,
+              color: AppColorsV2.textSecondary,
               size: 20,
             ),
           ],

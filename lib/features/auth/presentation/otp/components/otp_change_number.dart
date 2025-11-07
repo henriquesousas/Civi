@@ -1,8 +1,8 @@
-import 'package:flutter/material.dart';
 import 'package:deehelp/shared/extensions/context_extension.dart';
 import 'package:deehelp/shared/extensions/text_style_extension.dart';
+import 'package:flutter/material.dart';
 
-import '../../../../../app/theme/app_colors.dart';
+import '../../../../../app/theme/app_colors_v2.dart';
 
 class OtpChangeNumber extends StatelessWidget {
   const OtpChangeNumber({super.key});
@@ -22,14 +22,14 @@ class OtpChangeNumber extends StatelessWidget {
         children: [
           const Icon(
             Icons.edit_outlined,
-            color: AppColors.textSecondary,
+            color: AppColorsV2.textSecondary,
             size: 18,
           ),
           const SizedBox(width: 8),
           Text(
             context.strings.otpChangePhoneNumber,
             style: context.getTextStyle.smallMedium.copyWith(
-              color: AppColors.textSecondary,
+              color: AppColorsV2.textSecondary,
               fontWeight: FontWeight.bold,
             ),
           ),

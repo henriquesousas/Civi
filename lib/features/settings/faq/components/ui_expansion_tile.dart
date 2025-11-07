@@ -1,15 +1,14 @@
+import 'package:deehelp/core/theme/app_colors.dart';
+import 'package:deehelp/core/theme/constants.dart';
 import 'package:flutter/material.dart';
-import 'package:deehelp/app/theme/app_colors.dart';
-import 'package:deehelp/app/theme/size_config.dart';
-import 'package:deehelp/shared/extensions/text_style_extension.dart';
 
-class UiExpansionTile extends StatelessWidget {
+class UIExpansionTile extends StatelessWidget {
   final String question;
   final String answer;
   final ValueChanged<bool>? onExpansionChanged;
   final TextStyle? answerStyle;
   final bool expanded;
-  const UiExpansionTile({
+  const UIExpansionTile({
     super.key,
     required this.question,
     required this.answer,
@@ -20,6 +19,8 @@ class UiExpansionTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final colorScheme = Theme.of(context).colorScheme;
+
     return Theme(
       data: ThemeData().copyWith(dividerColor: Colors.transparent),
       child: ListTileTheme(
@@ -30,29 +31,36 @@ class UiExpansionTile extends StatelessWidget {
         minLeadingWidth: 0,
         child: ExpansionTile(
           key: PageStorageKey(question),
-          // initiallyExpanded: expanded,
-          backgroundColor: Theme.of(context).colorScheme.secondaryContainer,
-          collapsedBackgroundColor:
-              Theme.of(context).colorScheme.secondaryContainer,
+          backgroundColor: AppColors.lightGreyColor20.withValues(alpha: 0.2),
+          collapsedBackgroundColor: colorScheme.secondaryContainer,
+          collapsedIconColor: AppColors.greyColor,
+          iconColor: AppColors.greyColor,
           title: Padding(
-            padding:
-                const EdgeInsets.symmetric(horizontal: SizeConfig.padding12),
+            padding: const EdgeInsets.symmetric(horizontal: defaultPadding),
             child: Text(
               question,
-              style: answerStyle ?? context.getTextStyle.smallMedium,
+              style: Theme.of(context).textTheme.titleSmall,
             ),
           ),
           shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(SizeConfig.borderRadius14),
+            borderRadius: BorderRadius.circular(defaultPadding),
+            side: const BorderSide(
+              width: 1,
+              color: AppColors.lightGreyColor20,
+            ),
           ),
           collapsedShape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(SizeConfig.borderRadius14),
+            borderRadius: BorderRadius.circular(defaultPadding),
+            side: const BorderSide(
+              width: 1,
+              color: AppColors.lightGreyColor20,
+            ),
           ),
           clipBehavior: Clip.antiAlias,
           childrenPadding: const EdgeInsets.only(
-            bottom: SizeConfig.padding12,
-            right: SizeConfig.padding12,
-            left: SizeConfig.padding12,
+            bottom: defaultPadding,
+            right: defaultPadding,
+            left: defaultPadding,
           ),
           onExpansionChanged: (value) {
             if (onExpansionChanged != null) {
@@ -60,12 +68,10 @@ class UiExpansionTile extends StatelessWidget {
             }
           },
           children: [
-            const Divider(color: AppColors.lineColor, height: 0),
-            const SizedBox(height: SizeConfig.height12),
-            Text(answer,
-                style: context.getTextStyle.small.copyWith(
-                  color: AppColors.textSecondary,
-                )),
+            Text(
+              answer,
+              style: Theme.of(context).textTheme.bodyMedium,
+            ),
           ],
         ),
       ),

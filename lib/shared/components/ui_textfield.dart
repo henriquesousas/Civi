@@ -1,8 +1,8 @@
-import 'package:flutter/material.dart';
-import 'package:deehelp/app/theme/app_colors.dart';
+import 'package:deehelp/app/theme/app_colors_v2.dart';
 import 'package:deehelp/app/theme/size_config.dart';
 import 'package:deehelp/shared/extensions/screen_size_extension.dart';
 import 'package:deehelp/shared/extensions/text_style_extension.dart';
+import 'package:flutter/material.dart';
 
 class UITextField extends StatelessWidget {
   final String? hint;
@@ -29,7 +29,7 @@ class UITextField extends StatelessWidget {
       ),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(SizeConfig.borderRadius14),
-        color: AppColors.secondaryColor,
+        color: AppColorsV2.secondaryColor,
       ),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
@@ -43,14 +43,14 @@ class UITextField extends StatelessWidget {
             height: SizeConfig.height30,
             child: TextField(
               controller: textEditingController,
-              cursorColor: AppColors.primaryColor,
+              cursorColor: AppColorsV2.primaryColor,
               // focusNode: textEditingController,
               style: context.getTextStyle.regular,
               decoration: InputDecoration(
                 contentPadding: EdgeInsets.zero,
                 hintText: hint,
                 hintStyle: context.getTextStyle.small.copyWith(
-                  color: AppColors.textSecondary,
+                  color: AppColorsV2.textSecondary,
                 ),
                 // hintStyle: TextStyle(
                 //   fontSize: FontSize.body2,

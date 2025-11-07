@@ -2,7 +2,7 @@ import 'package:deehelp/shared/extensions/text_style_extension.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
-import '../../../../../app/theme/app_colors.dart';
+import '../../../../../app/theme/app_colors_v2.dart';
 import '../../../../../core/resources/resources.dart';
 
 class LoginGoogleButton extends StatelessWidget {
@@ -14,9 +14,9 @@ class LoginGoogleButton extends StatelessWidget {
     return OutlinedButton(
       onPressed: onPressed,
       style: OutlinedButton.styleFrom(
-        foregroundColor: AppColors.textColor,
+        foregroundColor: AppColorsV2.textColor,
         backgroundColor: Colors.white,
-        side: const BorderSide(color: AppColors.border),
+        side: const BorderSide(color: AppColorsV2.border),
         padding: const EdgeInsets.all(16),
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(12),
@@ -25,7 +25,6 @@ class LoginGoogleButton extends StatelessWidget {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          //const Icon(Icons.g_mobiledata),
           SvgPicture.asset(
             R.images.svgGoogleIcon,
             width: 20,

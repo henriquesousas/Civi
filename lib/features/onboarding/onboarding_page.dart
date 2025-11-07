@@ -1,4 +1,4 @@
-import 'package:deehelp/app/router/router_config.dart';
+import 'package:deehelp/core/router/router_constants.dart';
 import 'package:deehelp/features/onboarding/components/onboarding_bottom_section.dart';
 import 'package:deehelp/features/onboarding/components/onboarding_content.dart';
 import 'package:deehelp/features/onboarding/components/skip_button.dart';
@@ -9,9 +9,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:go_router/go_router.dart';
 
-import '../../app/theme/app_colors.dart';
-import '../../core/resources/resources.dart';
-
 class OnboardingPage extends StatefulWidget {
   const OnboardingPage({super.key});
 
@@ -21,7 +18,7 @@ class OnboardingPage extends StatefulWidget {
 
 class _OnboardingPageState extends State<OnboardingPage> {
   late PageController pageController;
-  List<OnboardingItem> items = [];
+  // List<OnboardingItem> items = [];
   int _currentPage = 0;
 
   void _onPageChanged(int page) {
@@ -31,7 +28,7 @@ class _OnboardingPageState extends State<OnboardingPage> {
   }
 
   void _onNextPage() {
-    if (_currentPage < items.length - 1) {
+    if (_currentPage < OnboardingItem.pages().length - 1) {
       pageController.nextPage(
         duration: const Duration(milliseconds: 300),
         curve: Curves.easeInOut,
@@ -39,7 +36,7 @@ class _OnboardingPageState extends State<OnboardingPage> {
       return;
     }
 
-    context.pushReplacement(Routes.loginWithGoogle);
+    context.pushReplacement(RouterConstant.loginWithGoogle);
   }
 
   void _onPreviousPage() {
@@ -48,43 +45,43 @@ class _OnboardingPageState extends State<OnboardingPage> {
   }
 
   void _onSkip() {
-    context.push(Routes.loginWithGoogle);
+    context.push(RouterConstant.loginWithGoogle);
   }
 
   @override
   void didChangeDependencies() {
     super.didChangeDependencies();
 
-    items = [
-      OnboardingItem(
-        title: R.strings.onboardingWelcomeHead,
-        description: R.strings.onboardingWelcomeBody,
-        icon: Icons.waving_hand_rounded,
-        gradient: AppColors.primaryGradient,
-        lottieAsset: null,
-      ),
-      OnboardingItem(
-        title: R.strings.onboardingHelpHead,
-        description: R.strings.onboardingHelpBody,
-        icon: Icons.directions_car_rounded,
-        gradient: AppColors.primaryGradient,
-        lottieAsset: null,
-      ),
-      OnboardingItem(
-        title: R.strings.onboardingAlertsRealTimeHead,
-        description: R.strings.onboardingAlertsRealTimeBody,
-        icon: Icons.location_on_rounded,
-        gradient: AppColors.primaryGradient,
-        lottieAsset: null,
-      ),
-      OnboardingItem(
-        title: R.strings.onboardingSecurityHead,
-        description: R.strings.onboardingSecurityBody,
-        icon: Icons.security_rounded,
-        gradient: AppColors.primaryGradient,
-        lottieAsset: null,
-      ),
-    ];
+    // items = [
+    //   OnboardingItem(
+    //     title: R.strings.onboardingWelcomeHead,
+    //     description: R.strings.onboardingWelcomeBody,
+    //     icon: Icons.waving_hand_rounded,
+    //     gradient: AppColorsV2.primaryGradient,
+    //     lottieAsset: null,
+    //   ),
+    //   OnboardingItem(
+    //     title: R.strings.onboardingHelpHead,
+    //     description: R.strings.onboardingHelpBody,
+    //     icon: Icons.directions_car_rounded,
+    //     gradient: AppColorsV2.primaryGradient,
+    //     lottieAsset: null,
+    //   ),
+    //   OnboardingItem(
+    //     title: R.strings.onboardingAlertsRealTimeHead,
+    //     description: R.strings.onboardingAlertsRealTimeBody,
+    //     icon: Icons.location_on_rounded,
+    //     gradient: AppColorsV2.primaryGradient,
+    //     lottieAsset: null,
+    //   ),
+    //   OnboardingItem(
+    //     title: R.strings.onboardingSecurityHead,
+    //     description: R.strings.onboardingSecurityBody,
+    //     icon: Icons.security_rounded,
+    //     gradient: AppColorsV2.primaryGradient,
+    //     lottieAsset: null,
+    //   ),
+    // ];
   }
 
   @override
@@ -98,21 +95,19 @@ class _OnboardingPageState extends State<OnboardingPage> {
           children: [
             PageViewBuilder(
               onPageChanged: _onPageChanged,
-              itemCount: items.length,
+              itemCount: OnboardingItem.pages().length,
               initialPage: 0,
               itemBuilder: (context, index, controller) {
                 pageController = controller;
-                final page = items[index];
+                final page = OnboardingItem.pages()[index];
                 return OnboardingContent(page: page);
               },
             ),
-            SkipButton(
-              onSkip: _onSkip,
-            ),
+            SkipButton(onSkip: _onSkip),
             OnboardingBottomSection(
               currentPage: _currentPage,
-              totalPage: items.length,
-              buttonTitle: _currentPage == items.length - 1
+              totalPage: OnboardingItem.pages().length,
+              buttonTitle: _currentPage == OnboardingItem.pages().length - 1
                   ? context.strings.start
                   : context.strings.next,
               onNext: _onNextPage,

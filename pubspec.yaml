@@ -42,18 +42,17 @@ dependencies:
   latlong2: ^0.9.1
   #  https://pub.dev/packages/google_sign_in/install
   google_sign_in: ^7.2.0
-
   # Location services
   geolocator: ^10.1.0
   geocoding: ^2.1.1
-
   cupertino_icons: ^1.0.8
   equatable: ^2.0.7
   provider: ^6.1.2
   #  result_dart: ^2.0.0
   flutter_switch: ^0.3.2
-#  https://pub:dev/packages/lottie/install:
+  # https://pub:dev/packages/lottie/install:
   lottie: ^3.3.2
+  cached_network_image: ^3.2.0
 
 dev_dependencies:
   flutter_test:
@@ -72,45 +71,26 @@ flutter:
     - assets/lottie/
 
   fonts:
-    - family: Lexend_Light
+    - family: Plus Jakarta
       fonts:
-        - asset: assets/fonts/Lexend-Light.ttf
-    - family: Lexend_Regular
-      fonts:
-        - asset: assets/fonts/Lexend-Regular.ttf
-    - family: Lexend_Medium
-      fonts:
-        - asset: assets/fonts/Lexend-Medium.ttf
-    - family: Lexend_SemiBold
-      fonts:
-        - asset: assets/fonts/Lexend-SemiBold.ttf
-
-
-    - family: Poppins
-      fonts:
-        - asset: assets/fonts/poppins/poppins_light.ttf
-          weight: 300
-        - asset: assets/fonts/poppins/poppins_regular.ttf
-          weight: 400
-        - asset: assets/fonts/poppins/poppins_black.ttf
+        - asset: assets/fonts/plus_jakarta/PlusJakartaDisplay-Regular.otf
+        - asset: assets/fonts/plus_jakarta/PlusJakartaDisplay-Medium.otf
           weight: 500
-        - asset: assets/fonts/poppins/poppins_semi_bold.ttf
+        - asset: assets/fonts/plus_jakarta/PlusJakartaDisplay-Bold.otf
           weight: 700
-        - asset: assets/fonts/poppins/poppins_bold.ttf
-          weight: 800
-        - asset: assets/fonts/poppins/poppins_extra_bold.ttf
-          weight: 900
 
-    - family: Roboto
+    - family: Grandis Extended
       fonts:
-        - asset: assets/fonts/roboto/roboto_light.ttf
-          weight: 300
-        - asset: assets/fonts/roboto/roboto_medium.ttf
-          weight: 400
-        - asset: assets/fonts/roboto/roboto_black.ttf
-          weight: 500
-        - asset: assets/fonts/roboto/roboto_bold.ttf
-          weight: 800
+          - asset: assets/fonts/grandis_extended/GrandisExtended-Regular.ttf
+          - asset: assets/fonts/grandis_extended/GrandisExtended-Thin.ttf
+            weight: 300
+          - asset: assets/fonts/grandis_extended/GrandisExtended-Medium.ttf
+            weight: 500
+          - asset: assets/fonts/grandis_extended/GrandisExtended-Bold.ttf
+            weight: 700
+          - asset: assets/fonts/grandis_extended/GrandisExtended-Black.ttf
+            weight: 900
+
 
 # Comando para gerar o arquivo => flutter gen-l10n
 l10n:

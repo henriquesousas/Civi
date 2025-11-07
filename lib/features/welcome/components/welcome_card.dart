@@ -3,7 +3,7 @@ import 'package:deehelp/shared/components/icons/primary_icon.dart';
 import 'package:deehelp/shared/extensions/text_style_extension.dart';
 import 'package:flutter/material.dart';
 
-import '../../../app/theme/app_colors.dart';
+import '../../../app/theme/app_colors_v2.dart';
 
 class WelcomeCard extends StatelessWidget {
   final WelcomeFeature feature;
@@ -59,7 +59,7 @@ class WelcomeCard extends StatelessWidget {
                 feature.description,
                 textAlign: TextAlign.center,
                 style: context.getTextStyle.regular.copyWith(
-                  color: AppColors.textSecondary,
+                  color: AppColorsV2.textSecondary,
                   height: 1.6,
                 ),
               ),

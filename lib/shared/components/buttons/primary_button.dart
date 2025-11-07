@@ -1,7 +1,7 @@
 import 'package:deehelp/shared/components/buttons/base_button.dart';
 import 'package:flutter/material.dart';
 
-import '../../../app/theme/app_colors.dart';
+import '../../../app/theme/app_colors_v2.dart';
 
 class PrimaryButton extends BaseButton {
   const PrimaryButton({
@@ -17,7 +17,7 @@ class PrimaryButton extends BaseButton {
   });
 
   @override
-  Color getBackgroundColor() => super.backgroundColor ?? AppColors.primary;
+  Color getBackgroundColor() => super.backgroundColor ?? AppColorsV2.primary;
 
   @override
   Color getForegroundColor() => Colors.white;

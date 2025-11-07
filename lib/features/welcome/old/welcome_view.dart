@@ -1,15 +1,15 @@
-import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:go_router/go_router.dart';
-import 'package:deehelp/app/router/router_config.dart';
-import 'package:deehelp/app/theme/app_colors.dart';
+import 'package:deehelp/app/theme/app_colors_v2.dart';
 import 'package:deehelp/app/theme/size_config.dart';
+import 'package:deehelp/core/router/router_constants.dart';
 import 'package:deehelp/features/welcome/old/components/ui_footer.dart';
 import 'package:deehelp/features/welcome/old/components/ui_page_view_section.dart';
 import 'package:deehelp/features/welcome/old/state/welcome_bloc.dart';
 import 'package:deehelp/features/welcome/old/state/welcome_events.dart';
 import 'package:deehelp/features/welcome/old/state/welcome_state.dart';
 import 'package:deehelp/features/welcome/old/welcome.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
 
 class WelcomeView extends StatelessWidget {
   final Welcome welcome;
@@ -20,7 +20,7 @@ class WelcomeView extends StatelessWidget {
     final PageController pageController = PageController();
 
     void navigateLogin() {
-      context.push(Routes.profile);
+      context.push(RouterConstant.profile);
     }
 
     void navigatePage(int page) {
@@ -34,7 +34,7 @@ class WelcomeView extends StatelessWidget {
     return BlocBuilder<WelcomeBloc, WelcomeState>(
       builder: (ctx, state) {
         return Scaffold(
-          backgroundColor: AppColors.backgroundColor,
+          backgroundColor: AppColorsV2.backgroundColor,
           bottomNavigationBar: UIFooter(
             onTap: () {
               final currentPage = state.page;

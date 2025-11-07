@@ -1,4 +1,4 @@
-import 'package:deehelp/app/theme/app_colors.dart';
+import 'package:deehelp/app/theme/app_colors_v2.dart';
 import 'package:flutter/material.dart';
 
 class AppTheme {
@@ -17,18 +17,18 @@ class AppTheme {
       // ),
       inputDecorationTheme: InputDecorationTheme(
         filled: true,
-        fillColor: AppColors.surface,
+        fillColor: AppColorsV2.surface,
         border: OutlineInputBorder(
           borderRadius: BorderRadius.circular(12),
           borderSide: BorderSide.none,
         ),
         enabledBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(12),
-          borderSide: const BorderSide(color: AppColors.border, width: 1),
+          borderSide: const BorderSide(color: AppColorsV2.border, width: 1),
         ),
         focusedBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(12),
-          borderSide: const BorderSide(color: AppColors.primary, width: 2),
+          borderSide: const BorderSide(color: AppColorsV2.primary, width: 2),
         ),
         contentPadding: const EdgeInsets.symmetric(
           horizontal: 16,
@@ -44,23 +44,23 @@ class AppTheme {
         ),
       ),
       colorScheme: const ColorScheme(
-        primary: AppColors.primaryColor,
-        onPrimary: AppColors.primaryColor,
-        secondary: AppColors.secondaryColor,
-        onSecondary: AppColors.primaryColor,
-        error: AppColors.redColor,
-        onError: AppColors.redColor,
-        surface: AppColors.containerBackgroundColor,
-        onSurface: AppColors.primaryColor,
+        primary: AppColorsV2.primaryColor,
+        onPrimary: AppColorsV2.primaryColor,
+        secondary: AppColorsV2.secondaryColor,
+        onSecondary: AppColorsV2.primaryColor,
+        error: AppColorsV2.redColor,
+        onError: AppColorsV2.redColor,
+        surface: AppColorsV2.containerBackgroundColor,
+        onSurface: AppColorsV2.primaryColor,
         brightness: Brightness.light,
       ),
       elevatedButtonTheme: ElevatedButtonThemeData(
         style: ElevatedButton.styleFrom(
-          backgroundColor: AppColors.buttonBackgroundColor,
-          foregroundColor: AppColors.buttonTextColor,
+          backgroundColor: AppColorsV2.buttonBackgroundColor,
+          foregroundColor: AppColorsV2.buttonTextColor,
           elevation: 0,
           disabledBackgroundColor:
-              AppColors.buttonDisableColor.withValues(alpha: 0.5),
+              AppColorsV2.buttonDisableColor.withValues(alpha: 0.5),
           // textStyle: AppTextStyles.button,
         ),
       ),

@@ -1,8 +1,8 @@
-import 'package:dotted_border/dotted_border.dart';
-import 'package:flutter/material.dart';
-import 'package:deehelp/app/theme/app_colors.dart';
+import 'package:deehelp/app/theme/app_colors_v2.dart';
 import 'package:deehelp/shared/extensions/screen_size_extension.dart';
 import 'package:deehelp/shared/extensions/text_style_extension.dart';
+import 'package:dotted_border/dotted_border.dart';
+import 'package:flutter/material.dart';
 
 import 'header.dart';
 
@@ -27,7 +27,7 @@ class FormStepPhoto extends StatelessWidget {
               dashPattern: [5, 5],
               strokeWidth: 2,
               radius: Radius.circular(12),
-              color: AppColors.primary,
+              color: AppColorsV2.primary,
               // padding: EdgeInsets.all(16),
             ),
             child: Container(

@@ -1,7 +1,6 @@
-import 'package:deehelp/l10n/app_localizations.dart';
-import 'package:deehelp/shared/extensions/screen_size_extension.dart';
-import 'package:deehelp/shared/extensions/text_style_extension.dart';
 import 'package:flutter/material.dart';
+
+import '../../../core/resources/resources.dart';
 
 class SplashContent extends StatelessWidget {
   const SplashContent({super.key});
@@ -12,21 +11,19 @@ class SplashContent extends StatelessWidget {
       children: [
         Text(
           "DeeHelp",
-          style: context.getTextStyle.medium.copyWith(
-            color: Colors.white,
-            fontSize: context.responsiveText(0.065),
-            fontWeight: FontWeight.bold,
-            letterSpacing: 1.2,
-          ),
+          style: Theme.of(context).textTheme.headlineMedium?.copyWith(
+                color: Colors.white,
+                fontWeight: FontWeight.bold,
+                letterSpacing: 1.2,
+              ),
         ),
         const SizedBox(height: 10),
         Text(
-          AppLocalizations.of(context)!.splashContent,
+          R.strings.splashHeadline,
           textAlign: TextAlign.center,
-          style: context.getTextStyle.smallMedium.copyWith(
-              color: Colors.white.withValues(alpha: 0.9),
-              fontWeight: FontWeight.w300,
-              fontSize: context.responsiveText(0.032)),
+          style: Theme.of(context).textTheme.labelMedium?.copyWith(
+              color: Colors.white.withValues(alpha: 0.7),
+              fontWeight: FontWeight.w400),
         ),
       ],
     );

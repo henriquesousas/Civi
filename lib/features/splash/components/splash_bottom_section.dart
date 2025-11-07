@@ -1,6 +1,7 @@
+import 'package:deehelp/core/theme/app_colors.dart';
 import 'package:flutter/material.dart';
-import 'package:deehelp/l10n/app_localizations.dart';
-import 'package:deehelp/shared/extensions/text_style_extension.dart';
+
+import '../../../core/resources/resources.dart';
 
 class SplashBottomSection extends StatelessWidget {
   const SplashBottomSection({super.key});
@@ -10,10 +11,10 @@ class SplashBottomSection extends StatelessWidget {
     return Column(
       children: [
         Text(
-          "${AppLocalizations.of(context)!.version} 1.0.0",
-          style: context.getTextStyle.small.copyWith(
-            color: Colors.white.withValues(alpha: 0.6),
-          ),
+          "${R.strings.version} 1.0.0",
+          style: Theme.of(context).textTheme.labelSmall?.copyWith(
+                color: AppColors.lightGreyColor,
+              ),
         ),
       ],
     );

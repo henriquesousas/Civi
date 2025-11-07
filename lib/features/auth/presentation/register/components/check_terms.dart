@@ -1,7 +1,7 @@
-import 'package:flutter/material.dart';
 import 'package:deehelp/shared/extensions/text_style_extension.dart';
+import 'package:flutter/material.dart';
 
-import '../../../../../app/theme/app_colors.dart';
+import '../../../../../app/theme/app_colors_v2.dart';
 
 class CheckTerms extends StatelessWidget {
   final bool value;
@@ -27,9 +27,9 @@ class CheckTerms extends StatelessWidget {
             height: 24,
             margin: EdgeInsets.only(top: 2),
             decoration: BoxDecoration(
-              color: value ? AppColors.primary : Colors.transparent,
+              color: value ? AppColorsV2.primary : Colors.transparent,
               border: Border.all(
-                color: value ? AppColors.primary : AppColors.border,
+                color: value ? AppColorsV2.primary : AppColorsV2.border,
                 width: 2,
               ),
               borderRadius: BorderRadius.circular(4),
@@ -47,14 +47,14 @@ class CheckTerms extends StatelessWidget {
             child: RichText(
               text: TextSpan(
                 style: context.getTextStyle.smallMedium.copyWith(
-                  color: AppColors.textSecondary,
+                  color: AppColorsV2.textSecondary,
                 ),
                 children: [
                   TextSpan(text: title),
                   if (isRequired)
                     TextSpan(
                       text: ' *',
-                      style: TextStyle(color: AppColors.error),
+                      style: TextStyle(color: AppColorsV2.error),
                     ),
                 ],
               ),

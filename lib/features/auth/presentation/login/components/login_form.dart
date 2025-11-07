@@ -1,9 +1,9 @@
-import 'package:deehelp/app/theme/app_colors.dart';
-import 'package:deehelp/core/ui/dialog/dialog_extension.dart';
+import 'package:deehelp/core/components/buttons/ui_google_button.dart';
+import 'package:deehelp/core/components/buttons/ui_primary_button.dart';
+import 'package:deehelp/core/components/dialogs/dialog_extension.dart';
+import 'package:deehelp/core/components/textfields/ui_email_text_field.dart';
+import 'package:deehelp/core/components/textfields/ui_password_text_field.dart';
 import 'package:deehelp/features/auth/presentation/login/components/login_or.dart';
-import 'package:deehelp/shared/components/buttons/primary_button.dart';
-import 'package:deehelp/shared/components/inputs/primary_text_field.dart';
-import 'package:deehelp/shared/extensions/text_style_extension.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:provider/provider.dart';
@@ -14,7 +14,6 @@ import '../bloc/email_state.dart';
 import '../bloc/login_bloc.dart';
 import '../bloc/password_state.dart';
 import '../login_action.dart';
-import 'login_google_button.dart';
 
 class LoginForm extends StatefulWidget {
   const LoginForm({super.key});
@@ -54,60 +53,26 @@ class _LoginFormState extends State<LoginForm> {
         return Column(
           spacing: 12,
           children: [
-            // Email Field
             Selector<LoginBloc, EmailState>(
               selector: (_, bloc) => state.email,
               builder: (context, emailState, child) {
-                final hasError = emailState.error != null;
-                final iconColor =
-                    hasError ? AppColors.error : AppColors.textSecondary;
-
-                return PrimaryTextField(
-                  labelText: R.strings.email,
-                  hintText: R.strings.email,
-                  textInputType: TextInputType.emailAddress,
-                  prefixIcon: Icon(
-                    Icons.email_outlined,
-                    color: iconColor,
-                    size: 20,
-                  ),
+                return UIEmailTextField(
                   errorText: state.email.error,
                   onChanged: (value) => loginActions.onEmailChange(value),
                 );
               },
             ),
-            //  Password Field
             Selector<LoginBloc, PasswordState>(
               selector: (_, bloc) => bloc.state.password,
               builder: (context, passwordState, child) {
-                final hasError = passwordState.error != null;
-                final iconColor =
-                    hasError ? AppColors.error : AppColors.textSecondary;
-                final suffixIcon = state.password.obscureText
-                    ? Icons.visibility_off
-                    : Icons.visibility;
-
-                return PrimaryTextField(
-                  labelText: R.strings.password,
-                  hintText: R.strings.password,
-                  obscureText: state.password.obscureText,
-                  prefixIcon: Icon(
-                    Icons.lock_outline,
-                    color: iconColor,
-                    size: 20,
-                  ),
-                  suffixIcon: IconButton(
-                    onPressed: () =>
-                        loginActions.togglePasswordVisibility(state.password),
-                    icon: Icon(suffixIcon, color: iconColor, size: 20),
-                  ),
-                  errorText: state.password.error,
-                  onChanged: (value) => loginActions.onPasswordChange(value),
-                );
+                return UIPasswordTextField(
+                    obscureText: state.password.obscureText,
+                    errorText: state.password.error,
+                    onChanged: (value) => loginActions.onPasswordChange(value));
               },
             ),
             Align(
-              alignment: Alignment.bottomRight,
+              alignment: Alignment.center,
               child: TextButton(
                 onPressed: () {},
                 style: TextButton.styleFrom(
@@ -116,25 +81,17 @@ class _LoginFormState extends State<LoginForm> {
                   minimumSize: Size.zero,
                   tapTargetSize: MaterialTapTargetSize.shrinkWrap,
                 ),
-                child: Text(
-                  R.strings.forgotPassword,
-                  style: context.getTextStyle.regular.copyWith(
-                    color: AppColors.primary,
-                    decoration: TextDecoration.underline,
-                  ),
-                ),
+                child: Text(R.strings.forgotPassword),
               ),
             ),
-            PrimaryButton(
-              text: R.strings.enter,
-              onPressed: state.isFormValid
-                  ? () => loginActions.submitLogin(state)
-                  : null,
-            ),
+            UIPrimaryButton(
+                text: R.strings.enter,
+                press: () => state.isFormValid
+                    ? () => loginActions.submitLogin(state)
+                    : null),
             const LoginOr(),
-            LoginGoogleButton(
-              onPressed: () => loginActions.submitLoginWithGoogle(state),
-            ),
+            UIGoogleButton(
+                press: () => loginActions.submitLoginWithGoogle(state))
           ],
         );
       },

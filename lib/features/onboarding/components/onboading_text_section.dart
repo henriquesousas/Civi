@@ -1,4 +1,3 @@
-import 'package:deehelp/shared/extensions/text_style_extension.dart';
 import 'package:flutter/material.dart';
 
 class OnboardingTextSection extends StatelessWidget {
@@ -13,24 +12,26 @@ class OnboardingTextSection extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Column(
+      spacing: 10,
       children: [
         Text(
           title,
-          style: context.textLargeBold.copyWith(
-            color: Colors.white,
-            height: 1.2,
-            fontWeight: FontWeight.bold,
-          ),
+          style: Theme.of(context).textTheme.headlineSmall?.copyWith(
+                color: Colors.white,
+                height: 1.2,
+                fontWeight: FontWeight.bold,
+              ),
         ),
         Text(
           description,
           textAlign: TextAlign.center,
           overflow: TextOverflow.ellipsis,
           maxLines: 4,
-          style: context.textSmall.copyWith(
-            color: Colors.white.withValues(alpha: 1),
-            height: 1.6,
-          ),
+          style: Theme.of(context).textTheme.bodySmall?.copyWith(
+                color: Colors.white.withValues(alpha: 0.8),
+                height: 1.6,
+                fontWeight: FontWeight.normal,
+              ),
         ),
       ],
     );

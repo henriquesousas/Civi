@@ -1,9 +1,9 @@
-import 'package:flutter/material.dart';
 import 'package:deehelp/features/auth/presentation/register/components/register_account_header_title.dart';
 import 'package:deehelp/shared/components/inputs/primary_text_field.dart';
 import 'package:deehelp/shared/extensions/context_extension.dart';
+import 'package:flutter/material.dart';
 
-import '../../../../../app/theme/app_colors.dart';
+import '../../../../../app/theme/app_colors_v2.dart';
 
 class FormPersonalInfo extends StatelessWidget {
   const FormPersonalInfo({super.key});
@@ -25,7 +25,7 @@ class FormPersonalInfo extends StatelessWidget {
             hintText: context.strings.registerAccountLabelHintName,
             prefixIcon: const Icon(
               Icons.person_outline,
-              color: AppColors.textSecondary,
+              color: AppColorsV2.textSecondary,
               size: 20,
             ),
           ),
@@ -35,7 +35,7 @@ class FormPersonalInfo extends StatelessWidget {
             hintText: context.strings.registerAccountLabelHintSurname,
             prefixIcon: const Icon(
               Icons.person_outline,
-              color: AppColors.textSecondary,
+              color: AppColorsV2.textSecondary,
               size: 20,
             ),
           ),

@@ -1,7 +1,7 @@
-import 'package:flutter/material.dart';
-import 'package:deehelp/app/theme/app_colors.dart';
+import 'package:deehelp/app/theme/app_colors_v2.dart';
 import 'package:deehelp/features/itens/create/components/step_colors.dart';
 import 'package:deehelp/shared/extensions/text_style_extension.dart';
+import 'package:flutter/material.dart';
 
 import '../../../../shared/components/inputs/primary_text_field.dart';
 import 'header.dart';
@@ -50,7 +50,7 @@ class _FormStepDetailState extends State<FormStepDetail> {
           Text(
             "Selecione a cor",
             style: context.getTextStyle.regular.copyWith(
-              color: AppColors.textSecondary,
+              color: AppColorsV2.textSecondary,
             ),
           ),
           GridView.builder(

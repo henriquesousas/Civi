@@ -2,7 +2,7 @@ import 'package:deehelp/shared/extensions/screen_size_extension.dart';
 import 'package:deehelp/shared/extensions/text_style_extension.dart';
 import 'package:flutter/material.dart';
 
-import '../../../app/theme/app_colors.dart';
+import '../../../app/theme/app_colors_v2.dart';
 
 class SecondaryOutlineButton extends StatelessWidget {
   final String text;
@@ -35,9 +35,9 @@ class SecondaryOutlineButton extends StatelessWidget {
       child: OutlinedButton(
         onPressed: onPressed,
         style: OutlinedButton.styleFrom(
-          foregroundColor: foregroundColor ?? AppColors.primary,
+          foregroundColor: foregroundColor ?? AppColorsV2.primary,
           side: BorderSide(
-            color: borderColor ?? AppColors.primary,
+            color: borderColor ?? AppColorsV2.primary,
           ),
           padding: EdgeInsets.symmetric(
               vertical: height ?? context.percentHeight(0.016)),

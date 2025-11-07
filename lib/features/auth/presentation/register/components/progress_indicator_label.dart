@@ -1,6 +1,6 @@
-import 'package:flutter/material.dart';
-import 'package:deehelp/app/theme/app_colors.dart';
+import 'package:deehelp/app/theme/app_colors_v2.dart';
 import 'package:deehelp/shared/extensions/text_style_extension.dart';
+import 'package:flutter/material.dart';
 
 class ProgressIndicatorLabel extends StatelessWidget {
   final String label;
@@ -16,7 +16,7 @@ class ProgressIndicatorLabel extends StatelessWidget {
     return Text(
       label,
       style: context.getTextStyle.small.copyWith(
-        color: isActive ? AppColors.primary : AppColors.textSecondary,
+        color: isActive ? AppColorsV2.primary : AppColorsV2.textSecondary,
         fontWeight: isActive ? FontWeight.bold : FontWeight.w300,
         // fontSize: context.responsiveText(0.03),
       ),
