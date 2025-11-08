@@ -24,9 +24,7 @@ class ProfilePreferenceCard extends StatelessWidget {
                 ProfileMenuListTile(
                   text: R.strings.myItems,
                   svgSrc: R.images.svgOrder,
-                  press: () {
-                    print("sa");
-                  },
+                  press: () {},
                 ),
                 ProfileMenuListTile(
                   text: R.strings.lastOccurrences,
