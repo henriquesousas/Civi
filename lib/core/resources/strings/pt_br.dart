@@ -2,6 +2,9 @@ import 'package:deehelp/core/resources/strings/translation.dart';
 
 class PtBr with TranslationParts implements Translation {
   @override
+  String get appName => "DeeHelp";
+
+  @override
   String get welcome => "Bem vindo";
 
   @override
@@ -118,4 +121,15 @@ class PtBr with TranslationParts implements Translation {
 
   @override
   String get search => "Consultar";
+
+  // BottomBar
+  //============================================================================
+  @override
+  String get bottomBarHome => "Discover";
+
+  @override
+  String get bottomBarMyItems => "Meus Itens";
+
+  @override
+  String get bottomBarProfile => "Profile";
 }

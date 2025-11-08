@@ -1,4 +1,5 @@
 abstract class Translation with TranslationParts {
+  String get appName;
   String get welcome;
   String get email;
   String get password;
@@ -42,6 +43,11 @@ abstract class Translation with TranslationParts {
   String get lastOccurrences;
   String get favorites;
   String get search;
+
+  // BottomBar
+  String get bottomBarProfile;
+  String get bottomBarMyItems;
+  String get bottomBarHome;
 }
 
 mixin TranslationParts {

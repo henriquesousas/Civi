@@ -14,4 +14,6 @@ class Images {
   String svgCall = 'assets/svg/call.svg';
   String svgMessage = 'assets/svg/message.svg';
   String svgWhatsapp = 'assets/svg/whatsapp.svg';
+  String svgCategory = 'assets/svg/category.svg';
+  String svgProfile = 'assets/svg/profile.svg';
 }

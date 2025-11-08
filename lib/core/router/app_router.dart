@@ -1,12 +1,12 @@
 import 'package:deehelp/core/router/router_constants.dart';
 import 'package:deehelp/core/router/slide_transition_page.dart';
+import 'package:deehelp/entry_point.dart';
 import 'package:deehelp/features/auth/presentation/login/login_with_google_page.dart';
 import 'package:deehelp/features/favorites/favourite_view.dart';
 import 'package:deehelp/features/home/home_view.dart';
 import 'package:deehelp/features/itens/create/create_new_item_page.dart';
 import 'package:deehelp/features/itens/edit/item_edit_page.dart';
 import 'package:deehelp/features/itens/list/my_items_page.dart';
-import 'package:deehelp/features/main/main_page.dart';
 import 'package:deehelp/features/occurrence/occurrence_detail_page.dart';
 import 'package:deehelp/features/occurrence/occurrence_page.dart';
 import 'package:deehelp/features/onboarding/onboarding_page.dart';
@@ -181,7 +181,7 @@ class AppRouter {
       ),
       GoRoute(
         path: RouterConstant.bottomView,
-        builder: (context, state) => MainPage(),
+        builder: (context, state) => const EntryPoint(), //MainPage(),
       ),
     ],
   );
