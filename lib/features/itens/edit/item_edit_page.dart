@@ -1,6 +1,5 @@
 import 'package:deehelp/app/localization/image_config.dart';
-import 'package:deehelp/features/itens/edit/my_item_edit_section.dart';
-import 'package:deehelp/shared/components/primary_app_bar.dart';
+import 'package:deehelp/core/components/ui_app_bar.dart';
 import 'package:deehelp/shared/extensions/screen_size_extension.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
@@ -11,6 +10,7 @@ import '../../../shared/components/buttons/primary_button.dart';
 import '../../../shared/components/inputs/primary_text_field.dart';
 import '../../../shared/components/inputs/secondary_text_field.dart';
 import '../dotted_container.dart';
+import 'my_item_edit_section.dart';
 
 class ItemEditPage extends StatefulWidget {
   const ItemEditPage({super.key});
@@ -24,7 +24,7 @@ class _ItemEditPageState extends State<ItemEditPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: AppColorsV2.background,
-      appBar: PrimaryAppBar(
+      appBar: UIAppBar(
         title: "Detalhes",
         leading: IconButton(
           onPressed: () => context.pop(),

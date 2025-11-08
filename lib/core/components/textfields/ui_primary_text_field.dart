@@ -11,6 +11,7 @@ class UIPrimaryTextField extends StatelessWidget {
   final int? maxLine;
   final String? errorText;
   final ValueChanged<String>? onChanged;
+  final VoidCallback? onTap;
 
   const UIPrimaryTextField({
     super.key,
@@ -22,31 +23,38 @@ class UIPrimaryTextField extends StatelessWidget {
     this.maxLine = 1,
     this.errorText,
     this.onChanged,
+    this.onTap,
   });
 
   @override
   Widget build(BuildContext context) {
-    return TextFormField(
-      keyboardType: textInputType,
-      textInputAction: TextInputAction.next,
-      obscureText: obscureText ?? false,
-      maxLines: maxLine,
-      decoration: InputDecoration(
-        labelText: labelText,
-        hintText: labelText,
-        floatingLabelBehavior: FloatingLabelBehavior.auto,
-        floatingLabelAlignment: FloatingLabelAlignment.start,
-        prefixIcon: prefixIcon,
-        suffixIcon: suffixIcon,
-        errorText: errorText,
-        floatingLabelStyle: TextStyle(
-          color: errorText?.isNotEmpty == true
-              ? AppColors.errorColor
-              : AppColors.primaryColor,
+    return GestureDetector(
+      onTap: onTap,
+      child: AbsorbPointer(
+        absorbing: onTap != null, //
+        child: TextFormField(
+          keyboardType: textInputType,
+          textInputAction: TextInputAction.next,
+          obscureText: obscureText ?? false,
+          maxLines: maxLine,
+          decoration: InputDecoration(
+            labelText: labelText,
+            hintText: labelText,
+            floatingLabelBehavior: FloatingLabelBehavior.auto,
+            floatingLabelAlignment: FloatingLabelAlignment.start,
+            prefixIcon: prefixIcon,
+            suffixIcon: suffixIcon,
+            errorText: errorText,
+            floatingLabelStyle: TextStyle(
+              color: errorText?.isNotEmpty == true
+                  ? AppColors.errorColor
+                  : AppColors.primaryColor,
+            ),
+            isDense: false, //
+          ),
+          onChanged: onChanged,
         ),
-        isDense: false, //
       ),
-      onChanged: onChanged,
     );
   }
 }

@@ -1,6 +1,6 @@
+import 'package:deehelp/core/components/textfields/ui_primary_text_field.dart';
 import 'package:flutter/material.dart';
 
-import '../../../../shared/components/inputs/primary_text_field.dart';
 import 'header.dart';
 
 class FormStepObs extends StatelessWidget {
@@ -19,9 +19,8 @@ class FormStepObs extends StatelessWidget {
                 "Adicione informações adicionais que possam ajudar, como características únicas ou circunstâncias do ocorrido.",
           ),
           SizedBox(height: 32),
-          PrimaryTextField(
+          UIPrimaryTextField(
             labelText: "Observação",
-            hintText: "Ex: amassado na lateral esquerda...",
             maxLine: 5,
           ),
         ],

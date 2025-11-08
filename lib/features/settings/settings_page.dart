@@ -1,6 +1,6 @@
+import 'package:deehelp/core/components/ui_app_bar.dart';
 import 'package:deehelp/features/settings/components/action_tile.dart';
 import 'package:deehelp/features/settings/components/settings_content_section.dart';
-import 'package:deehelp/shared/components/primary_app_bar.dart';
 import 'package:deehelp/shared/extensions/context_extension.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
@@ -13,7 +13,7 @@ class SettingsPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: PrimaryAppBar(title: context.strings.settings),
+      appBar: UIAppBar(title: context.strings.settings),
       body: SingleChildScrollView(
         physics: const BouncingScrollPhysics(),
         padding: const EdgeInsets.all(24),

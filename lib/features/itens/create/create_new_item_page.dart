@@ -1,12 +1,12 @@
-import 'package:flutter/material.dart';
+import 'package:deehelp/core/components/buttons/ui_outline_button.dart';
+import 'package:deehelp/core/components/buttons/ui_primary_button.dart';
+import 'package:deehelp/core/components/ui_app_bar.dart';
 import 'package:deehelp/features/itens/create/components/form_step_detail.dart';
 import 'package:deehelp/features/itens/create/components/form_step_photo.dart';
 import 'package:deehelp/shared/animation/fade_slide_transition_animator.dart';
-import 'package:deehelp/shared/components/buttons/primary_button.dart';
-import 'package:deehelp/shared/components/primary_app_bar.dart';
 import 'package:deehelp/shared/extensions/context_extension.dart';
+import 'package:flutter/material.dart';
 
-import '../../../shared/components/buttons/secondary_outline_button.dart';
 import '../../../shared/components/progress_indicator/step_indicator.dart';
 import 'components/form_step_choose_type.dart';
 import 'components/form_step_obs.dart';
@@ -58,7 +58,8 @@ class _CreateNewItemPageState extends State<CreateNewItemPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: const PrimaryAppBar(title: "Novo item"),
+      backgroundColor: Colors.grey[50],
+      appBar: const UIAppBar(title: "Novo item"),
       bottomNavigationBar: Padding(
         padding: const EdgeInsets.all(24),
         child: Row(
@@ -66,15 +67,15 @@ class _CreateNewItemPageState extends State<CreateNewItemPage> {
           children: [
             if (_currentStep > 0)
               Expanded(
-                child: SecondaryOutlineButton(
+                child: UIOutlineButton(
                   text: context.strings.back,
-                  onPressed: _previousStep,
+                  press: _previousStep,
                 ),
               ),
             Expanded(
-              child: PrimaryButton(
+              child: UIPrimaryButton(
                 text: context.strings.next,
-                onPressed: _nextStep,
+                press: _nextStep,
               ),
             ),
           ],

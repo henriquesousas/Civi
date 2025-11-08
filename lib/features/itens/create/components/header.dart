@@ -1,8 +1,4 @@
-import 'package:deehelp/shared/extensions/screen_size_extension.dart';
-import 'package:deehelp/shared/extensions/text_style_extension.dart';
 import 'package:flutter/material.dart';
-
-import '../../../../app/theme/app_colors_v2.dart';
 
 class Header extends StatelessWidget {
   final String title;
@@ -16,18 +12,14 @@ class Header extends StatelessWidget {
       children: [
         Text(
           title,
-          style: context.getTextStyle.regularMedium.copyWith(
-              color: AppColorsV2.textPrimary,
-              fontWeight: FontWeight.bold,
-              fontSize: context.responsiveText(0.045)),
+          style: Theme.of(context).textTheme.titleLarge?.copyWith(
+                fontWeight: FontWeight.bold,
+              ),
         ),
         const SizedBox(height: 8),
         Text(
           subtitle,
-          style: context.getTextStyle.small.copyWith(
-            color: AppColorsV2.textSecondary,
-            fontWeight: FontWeight.normal,
-          ),
+          style: Theme.of(context).textTheme.bodyMedium,
         ),
       ],
     );

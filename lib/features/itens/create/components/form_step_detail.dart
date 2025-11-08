@@ -1,9 +1,12 @@
-import 'package:deehelp/app/theme/app_colors_v2.dart';
+import 'package:deehelp/core/components/custom_modal_bottom_sheet.dart';
+import 'package:deehelp/core/components/textfields/ui_primary_text_field.dart';
+import 'package:deehelp/features/itens/create/components/select_color.dart';
 import 'package:deehelp/features/itens/create/components/step_colors.dart';
-import 'package:deehelp/shared/extensions/text_style_extension.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
 
-import '../../../../shared/components/inputs/primary_text_field.dart';
+import '../../../../core/resources/resources.dart';
+import '../../../../core/theme/constants.dart';
 import 'header.dart';
 
 class FormStepDetail extends StatefulWidget {
@@ -38,64 +41,96 @@ class _FormStepDetailState extends State<FormStepDetail> {
                 "Preencha as informações importantes sobre o produto, como modelo, cor, placa ou número de série.",
           ),
           const SizedBox(height: 32),
-          const PrimaryTextField(
-            labelText: "Placa",
-            hintText: "informe o número",
+          const UIPrimaryTextField(
+            labelText: "Número da placa",
           ),
-          const PrimaryTextField(
-            labelText: "Marca",
-            hintText: "Ex: VW, Fiat, BMW...",
+          const UIPrimaryTextField(
+            labelText: "Ex: VW, Fiat, BMW...",
           ),
-          const SizedBox(height: 10),
-          Text(
-            "Selecione a cor",
-            style: context.getTextStyle.regular.copyWith(
-              color: AppColorsV2.textSecondary,
-            ),
-          ),
-          GridView.builder(
-            shrinkWrap: true,
-            physics: const NeverScrollableScrollPhysics(),
-            gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-              crossAxisCount: 10,
-              mainAxisSpacing: 8,
-              crossAxisSpacing: 8,
-              mainAxisExtent: 35,
-            ),
-            itemCount: colorsList.length,
-            itemBuilder: (context, index) {
-              final item = colorsList[index];
-              return GestureDetector(
-                onTap: () {
-                  setState(() {
-                    _currentIndex = index;
-                    for (var i = 0; i < colorsList.length; i++) {
-                      colorsList[i].isSelected = false;
-                    }
-                    item.isSelected = true;
-                  });
-                },
-                child: Container(
-                  decoration: BoxDecoration(
-                    shape: BoxShape.circle,
-                    color: colorsList[index].color,
-                    border: Border.all(
-                      color: Colors.grey[400]!,
-                      width: item.isSelected ? 5 : 1,
-                    ),
-                    boxShadow: [
-                      BoxShadow(
-                        color: Colors.black.withValues(alpha: 0.1),
-                        blurRadius: 2,
-                        offset: const Offset(0, 1),
-                      ),
-                    ],
-                  ),
-                  child: const Center(),
+          UIPrimaryTextField(
+            prefixIcon: Padding(
+              padding:
+                  const EdgeInsets.symmetric(vertical: defaultPadding * 0.75),
+              child: SvgPicture.asset(
+                R.images.svgPallet,
+                height: 24,
+                width: 24,
+                colorFilter: ColorFilter.mode(
+                  Theme.of(context)
+                      .textTheme
+                      .bodyLarge!
+                      .color!
+                      .withValues(alpha: 0.3),
+                  BlendMode.srcIn,
                 ),
-              );
+              ),
+            ),
+            labelText: "Selecione uma cor",
+            onTap: () {
+              customModalBottomSheet(context, child: const SelectColor());
             },
           ),
+          // Text(
+          //   "Selecione a cor",
+          //   style: Theme.of(context).textTheme.titleSmall?.copyWith(
+          //         color: AppColors.textSecondary,
+          //       ),
+          // ),
+          // Container(
+          //   padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
+          //   decoration: BoxDecoration(
+          //       color: Colors.white,
+          //       borderRadius: BorderRadius.circular(20),
+          //       border: Border.all(
+          //         width: 1,
+          //         color: AppColors.lightGreyColor20,
+          //       )),
+          //   child: GridView.builder(
+          //     shrinkWrap: true,
+          //     physics: const NeverScrollableScrollPhysics(),
+          //     gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+          //       crossAxisCount: 5,
+          //       mainAxisSpacing: 10,
+          //       crossAxisSpacing: 10,
+          //       mainAxisExtent: 20,
+          //     ),
+          //     itemCount: colorsList.length,
+          //     itemBuilder: (context, index) {
+          //       final item = colorsList[index];
+          //       return GestureDetector(
+          //         onTap: () {
+          //           setState(() {
+          //             _currentIndex = index;
+          //             for (var i = 0; i < colorsList.length; i++) {
+          //               colorsList[i].isSelected = false;
+          //             }
+          //             item.isSelected = true;
+          //           });
+          //         },
+          //         child: Container(
+          //           decoration: BoxDecoration(
+          //             shape: BoxShape.circle,
+          //             color: colorsList[index].color,
+          //             border: Border.all(
+          //               color: item.isSelected
+          //                   ? AppColors.whiteColor
+          //                   : Colors.grey[400]!, //Colors.grey[400]!,
+          //               width: item.isSelected ? 3 : 1,
+          //             ),
+          //             boxShadow: [
+          //               BoxShadow(
+          //                 color: Colors.black.withValues(alpha: 0.1),
+          //                 blurRadius: 2,
+          //                 offset: const Offset(0, 1),
+          //               ),
+          //             ],
+          //           ),
+          //           child: const Center(),
+          //         ),
+          //       );
+          //     },
+          //   ),
+          // ),
         ],
       ),
     );

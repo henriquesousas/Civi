@@ -1,4 +1,5 @@
 import 'package:animations/animations.dart';
+import 'package:deehelp/core/components/ui_app_bar.dart';
 import 'package:deehelp/core/theme/app_colors.dart';
 import 'package:deehelp/features/profile/profile_page.dart';
 import 'package:flutter/material.dart';
@@ -41,17 +42,9 @@ class _EntryPointState extends State<EntryPoint> {
     }
 
     return Scaffold(
-      appBar: AppBar(
-        backgroundColor: Theme.of(context).scaffoldBackgroundColor,
+      appBar: UIAppBar(
         leading: const SizedBox(),
-        leadingWidth: 0,
-        centerTitle: false,
-        title: Text(
-          R.strings.appName,
-          style: Theme.of(context).textTheme.headlineSmall?.copyWith(
-                fontWeight: FontWeight.bold,
-              ),
-        ),
+        title: R.strings.appName,
         actions: [
           IconButton(
             onPressed: () {},

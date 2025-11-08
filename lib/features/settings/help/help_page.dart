@@ -4,9 +4,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:lottie/lottie.dart';
 
+import '../../../core/components/ui_app_bar.dart';
 import '../../../core/resources/resources.dart';
 import '../../../core/theme/constants.dart';
-import '../../../shared/components/primary_app_bar.dart';
 
 class HelpPage extends StatelessWidget {
   const HelpPage({super.key});
@@ -15,7 +15,7 @@ class HelpPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Theme.of(context).colorScheme.surface,
-      appBar: const PrimaryAppBar(title: "Ajuda"),
+      appBar: const UIAppBar(title: "Ajuda"),
       bottomNavigationBar: Container(
         height: context.percentHeight(0.16),
         decoration: BoxDecoration(

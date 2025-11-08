@@ -1,7 +1,7 @@
+import 'package:deehelp/core/components/ui_app_bar.dart';
 import 'package:deehelp/features/settings/help/help_card.dart';
 import 'package:deehelp/features/settings/help/help_options.dart';
 import 'package:deehelp/shared/animation/fade_slide_transition_animator.dart';
-import 'package:deehelp/shared/components/primary_app_bar.dart';
 import 'package:deehelp/shared/extensions/text_style_extension.dart';
 import 'package:flutter/material.dart';
 
@@ -66,7 +66,7 @@ class _HelpOldPageState extends State<HelpOldPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: AppColorsV2.background,
-      appBar: const PrimaryAppBar(title: "Ajuda"),
+      appBar: const UIAppBar(title: "Ajuda"),
       bottomNavigationBar: Padding(
         padding: const EdgeInsets.all(30),
         child: Column(

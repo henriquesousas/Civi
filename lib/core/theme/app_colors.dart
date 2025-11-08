@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 class AppColors {
   static const Color primaryColor = Color(0xFF6C5CE7);
+  static const Color primaryColorDark = Color(0xFF5A4FCF);
   static const MaterialColor primaryMaterialColor =
       MaterialColor(0xFF9581FF, <int, Color>{
     50: Color(0xFFEFECFF),
@@ -27,6 +28,7 @@ class AppColors {
   static const Color greyColor = Color(0xFFB8B5C3);
   static const Color lightGreyColor = Color(0xFFF8F8F9);
   static const Color lightGreyColor20 = Color(0xFFdfdfe0);
+  static const Color lightGreyColor30 = Color(0xFFebebec);
   static const Color darkGreyColor = Color(0xFF1C1C25);
 
   static const Color whiteColor = Colors.white;
@@ -41,6 +43,8 @@ class AppColors {
   static const Color successColor = Color(0xFF2ED573);
   static const Color warningColor = Color(0xFFFFBE21);
   static const Color errorColor = Color(0xFFEA5B5B);
+
+  static const Color textSecondary = Color(0xFF6C757D);
 
   static const LinearGradient primaryGradient = LinearGradient(
     begin: Alignment.topLeft,

@@ -1,13 +1,13 @@
+import 'package:deehelp/core/components/ui_app_bar.dart';
 import 'package:deehelp/core/router/router_constants.dart';
 import 'package:deehelp/shared/animation/slide_fade_transition_animator.dart';
 import 'package:deehelp/shared/components/buttons/primary_button.dart';
-import 'package:deehelp/shared/components/buttons/secondary_outline_button.dart';
-import 'package:deehelp/shared/components/primary_app_bar.dart';
 import 'package:deehelp/shared/extensions/context_extension.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
 import '../../../../app/theme/app_colors_v2.dart';
+import '../../../../shared/components/buttons/secondary_outline_button.dart';
 import '../../../../shared/components/progress_indicator/step_indicator.dart';
 import 'components/form_contact_info.dart';
 import 'components/form_personal_info.dart';
@@ -61,7 +61,7 @@ class _RegisterAccountPageState extends State<RegisterAccountPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: AppColorsV2.background,
-      appBar: PrimaryAppBar(title: context.strings.registerAccountAppbar),
+      appBar: UIAppBar(title: context.strings.registerAccountAppbar),
       body: SafeArea(
         child: SlideFadeTransitionAnimator(
           delay: const Duration(milliseconds: 100),

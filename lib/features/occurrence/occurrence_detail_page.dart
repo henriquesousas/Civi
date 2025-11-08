@@ -1,8 +1,8 @@
 import 'package:deehelp/app/localization/image_config.dart';
 import 'package:deehelp/app/theme/app_colors_v2.dart';
+import 'package:deehelp/core/components/ui_app_bar.dart';
 import 'package:deehelp/features/favorites/components/ui_verification_flag.dart';
 import 'package:deehelp/shared/components/buttons/primary_button.dart';
-import 'package:deehelp/shared/components/primary_app_bar.dart';
 import 'package:deehelp/shared/extensions/screen_size_extension.dart';
 import 'package:deehelp/shared/extensions/text_style_extension.dart';
 import 'package:flutter/material.dart';
@@ -18,7 +18,7 @@ class OccurrenceDetailPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: AppColorsV2.background,
-      appBar: PrimaryAppBar(
+      appBar: UIAppBar(
         title: "Detalhes da ocorrência",
         actions: [
           Padding(

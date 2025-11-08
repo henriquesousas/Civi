@@ -4,9 +4,10 @@ import 'app_colors.dart';
 import 'constants.dart';
 
 const InputDecorationTheme lightInputDecorationTheme = InputDecorationTheme(
-  fillColor: AppColors.lightGreyColor,
+  fillColor: AppColors.lightGreyColor30,
   filled: true,
   hintStyle: TextStyle(color: AppColors.greyColor),
+  labelStyle: TextStyle(color: AppColors.greyColor),
   border: outlineInputBorder,
   enabledBorder: outlineInputBorder,
   focusedBorder: focusedOutlineInputBorder,

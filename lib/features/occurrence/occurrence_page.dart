@@ -1,6 +1,6 @@
+import 'package:deehelp/core/components/ui_app_bar.dart';
 import 'package:deehelp/core/router/router_constants.dart';
 import 'package:deehelp/shared/components/icons/primary_icon.dart';
-import 'package:deehelp/shared/components/primary_app_bar.dart';
 import 'package:deehelp/shared/extensions/text_style_extension.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
@@ -14,7 +14,7 @@ class OccurrencePage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: AppColorsV2.background,
-      appBar: const PrimaryAppBar(title: "Ocorrência"),
+      appBar: const UIAppBar(title: "Ocorrência"),
       body: ListView.builder(
         physics: BouncingScrollPhysics(),
         padding: EdgeInsets.only(

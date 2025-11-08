@@ -10,7 +10,7 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
 import '../../../../app/theme/app_colors_v2.dart';
-import '../../../../shared/components/primary_app_bar.dart';
+import '../../../../core/components/ui_app_bar.dart';
 import 'components/otp_change_number.dart';
 import 'components/otp_code_field.dart';
 
@@ -26,7 +26,7 @@ class _OtpVerificationPageState extends State<OtpVerificationPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: AppColorsV2.background,
-      appBar: PrimaryAppBar(title: context.strings.otpAppBar),
+      appBar: UIAppBar(title: context.strings.otpAppBar),
       body: SafeArea(
         child: SingleChildScrollView(
           padding: const EdgeInsets.all(24),
