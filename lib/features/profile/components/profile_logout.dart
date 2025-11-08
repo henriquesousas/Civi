@@ -1,3 +1,6 @@
+import 'package:deehelp/core/components/custom_modal_bottom_sheet.dart';
+import 'package:deehelp/features/profile/components/logout_modal.dart';
+import 'package:deehelp/shared/extensions/screen_size_extension.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
@@ -12,7 +15,13 @@ class ProfileLogout extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 20),
       child: ListTile(
-        onTap: () {},
+        onTap: () {
+          customModalBottomSheet(
+            context,
+            height: context.percentHeight(0.25),
+            child: const LogoutModal(),
+          );
+        },
         minLeadingWidth: 24,
         leading: SvgPicture.asset(
           R.images.svgLogout,
@@ -25,8 +34,8 @@ class ProfileLogout extends StatelessWidget {
         ),
         title: Text(
           R.strings.exitApp,
-          style: const TextStyle(
-              color: AppColors.errorColor, fontSize: 14, height: 1),
+          style: Theme.of(context).textTheme.titleMedium?.copyWith(
+              fontWeight: FontWeight.bold, color: AppColors.errorColor),
         ),
       ),
     );

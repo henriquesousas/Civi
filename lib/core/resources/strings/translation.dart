@@ -48,6 +48,11 @@ abstract class Translation with TranslationParts {
   String get bottomBarProfile;
   String get bottomBarMyItems;
   String get bottomBarHome;
+
+  // Logout
+  String get logoutConfirmButton;
+  String get logoutExitMessage;
+  String get logoutExitTitle;
 }
 
 mixin TranslationParts {

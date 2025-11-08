@@ -53,7 +53,7 @@ class UIExpansionTile extends StatelessWidget {
             borderRadius: BorderRadius.circular(defaultPadding),
             side: const BorderSide(
               width: 1,
-              color: AppColors.lightGreyColor20,
+              color: AppColors.whileColor80,
             ),
           ),
           clipBehavior: Clip.antiAlias,
@@ -70,7 +70,9 @@ class UIExpansionTile extends StatelessWidget {
           children: [
             Text(
               answer,
-              style: Theme.of(context).textTheme.bodyMedium,
+              style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                    color: AppColors.whileColor40,
+                  ),
             ),
           ],
         ),

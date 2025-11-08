@@ -49,9 +49,10 @@ class UISecondaryButton extends StatelessWidget {
               )
             : Text(
                 text,
-                style: DefaultTextStyle.of(context).style.copyWith(
-                      color: AppColors.primaryColor,
-                    ),
+                style: textStyle ??
+                    DefaultTextStyle.of(context).style.copyWith(
+                          color: AppColors.primaryColor,
+                        ),
               ),
       ),
     );

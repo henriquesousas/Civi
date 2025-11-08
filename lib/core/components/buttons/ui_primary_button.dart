@@ -35,6 +35,7 @@ class UIPrimaryButton extends StatelessWidget {
         onPressed: press,
         style: ElevatedButton.styleFrom(
           elevation: 0,
+          backgroundColor: bgColor,
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(12),
           ),

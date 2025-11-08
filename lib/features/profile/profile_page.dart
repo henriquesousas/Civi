@@ -29,7 +29,7 @@ class ProfilePage extends StatelessWidget {
           const ProfilePreferenceCard(),
           const SizedBox(height: 30),
           const ProfileSharedSupportCard(),
-          const SizedBox(height: defaultPadding),
+          const SizedBox(height: defaultPadding / 2),
           const ProfileLogout()
         ],
       ),
