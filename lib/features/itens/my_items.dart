@@ -4,6 +4,8 @@ class MyItems {
   final bool isVehicle;
   final int year;
   final String? imageUrl;
+  final bool active;
 
-  MyItems(this.name, this.code, this.isVehicle, this.year, this.imageUrl);
+  MyItems(this.name, this.code, this.isVehicle, this.year, this.imageUrl,
+      this.active);
 }

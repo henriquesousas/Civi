@@ -144,4 +144,9 @@ class PtBr with TranslationParts implements Translation {
   @override
   String get logoutExitMessage =>
       "Tem certeza que deseja sair da sua conta? Você precisará fazer login novamente para acessar o DeeHelp.";
+
+  // BottomBar
+  //============================================================================
+  @override
+  String get addNewItem => "Adicionar novo item";
 }

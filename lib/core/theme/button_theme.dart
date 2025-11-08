@@ -24,8 +24,7 @@ OutlinedButtonThemeData outlinedButtonTheme({
       backgroundColor: bgColor,
       padding: const EdgeInsets.all(defaultPadding),
       minimumSize: const Size(double.infinity, 32),
-      side:
-          BorderSide(width: 1.5, color: borderColor ?? AppColors.primaryColor),
+      side: BorderSide(width: 1, color: borderColor ?? AppColors.primaryColor),
       shape: const RoundedRectangleBorder(
         borderRadius: BorderRadius.all(Radius.circular(defaultBorderRadius)),
       ),
