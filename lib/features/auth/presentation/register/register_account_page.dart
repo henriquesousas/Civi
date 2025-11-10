@@ -70,8 +70,8 @@ class _RegisterAccountPageState extends State<RegisterAccountPage> {
               Padding(
                 padding: const EdgeInsets.all(24),
                 child: StepIndicator(
-                  currentStep: _currentStep,
-                  titles: _titles,
+                  step: _currentStep,
+                  labels: _titles,
                 ),
               ),
               Expanded(

@@ -1,23 +1,23 @@
-import 'package:deehelp/core/components/buttons/ui_outline_button.dart';
 import 'package:deehelp/core/router/router_constants.dart';
-import 'package:deehelp/core/theme/app_colors.dart';
-import 'package:deehelp/features/itens/list/secondary_item_card.dart';
-import 'package:deehelp/features/itens/my_items.dart';
+import 'package:deehelp/features/itens/domain/my_items.dart';
+import 'package:deehelp/features/itens/presentation/list/components/list_item_card.dart';
 import 'package:deehelp/shared/animation/fade_slide_transition_animator.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
-import '../../../core/resources/resources.dart';
-import '../../../core/theme/constants.dart';
+import '../../../../core/components/buttons/ui_outline_button.dart';
+import '../../../../core/resources/resources.dart';
+import '../../../../core/theme/app_colors.dart';
+import '../../../../core/theme/constants.dart';
 
-class MyItemsPage extends StatefulWidget {
-  const MyItemsPage({super.key});
+class ListItemPage extends StatefulWidget {
+  const ListItemPage({super.key});
 
   @override
-  State<MyItemsPage> createState() => _MyItemsPageState();
+  State<ListItemPage> createState() => _ListItemPageState();
 }
 
-class _MyItemsPageState extends State<MyItemsPage> {
+class _ListItemPageState extends State<ListItemPage> {
   List<MyItems> _menuItems = [];
 
   @override
@@ -50,15 +50,6 @@ class _MyItemsPageState extends State<MyItemsPage> {
       body: FadeSlideTransitionAnimator(
         child: Column(
           children: [
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 20),
-              child: UIOutlineButton(
-                borderColor: AppColors.lightGreyColor20,
-                textColor: AppColors.whileColor10,
-                text: R.strings.addNewItem,
-                press: () => context.push(RouterConstant.createNewItem),
-              ),
-            ),
             Expanded(
               child: ListView.builder(
                 physics: const BouncingScrollPhysics(),
@@ -70,7 +61,7 @@ class _MyItemsPageState extends State<MyItemsPage> {
                       left: defaultPadding,
                       right: defaultPadding,
                     ),
-                    child: SecondaryItemCard(
+                    child: ListItemCard(
                       image: item.imageUrl ?? '',
                       brandName: item.name,
                       code: item.code,
@@ -80,6 +71,15 @@ class _MyItemsPageState extends State<MyItemsPage> {
                     ),
                   );
                 },
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 20),
+              child: UIOutlineButton(
+                borderColor: AppColors.lightGreyColor20,
+                textColor: AppColors.whileColor10,
+                text: R.strings.addNewItem,
+                press: () => context.push(RouterConstant.createNewItem),
               ),
             ),
           ],

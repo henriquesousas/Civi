@@ -1,7 +1,7 @@
 import 'package:deehelp/shared/extensions/text_style_extension.dart';
 import 'package:flutter/material.dart';
 
-import '../../../app/theme/app_colors_v2.dart' show AppColorsV2;
+import '../../../../app/theme/app_colors_v2.dart';
 
 class MyItemEditSection extends StatelessWidget {
   final String title;

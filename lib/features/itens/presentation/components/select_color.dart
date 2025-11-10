@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
 
+import '../../../../core/resources/resources.dart';
+
 class SelectColor extends StatelessWidget {
-  const SelectColor({super.key});
+  final Function(String) onChange;
+  const SelectColor({super.key, required this.onChange});
 
   @override
   Widget build(BuildContext context) {
@@ -40,7 +43,7 @@ class SelectColor extends StatelessWidget {
               borderRadius: BorderRadius.circular(2),
             ),
           ),
-          const Text("Selecione uma cor"),
+          Text(R.strings.selectColor),
           Expanded(
             child: ListView.separated(
               separatorBuilder: (context, index) => Divider(
@@ -53,7 +56,7 @@ class SelectColor extends StatelessWidget {
                 final color = colors[index];
                 return ListTile(
                   onTap: () {
-                    debugPrint("sa");
+                    onChange(color["name"].toString());
                   },
                   leading: Container(
                     width: 30,

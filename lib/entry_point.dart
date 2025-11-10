@@ -8,7 +8,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'core/resources/resources.dart';
 import 'core/theme/constants.dart';
 import 'features/home/home_view.dart';
-import 'features/itens/list/my_items_page.dart';
+import 'features/itens/presentation/list/list_items_page.dart';
 
 class EntryPoint extends StatefulWidget {
   const EntryPoint({super.key});
@@ -20,10 +20,21 @@ class EntryPoint extends StatefulWidget {
 class _EntryPointState extends State<EntryPoint> {
   final List _pages = const [
     HomeView(),
-    MyItemsPage(),
+    ListItemPage(),
     ProfilePage(),
   ];
   int _currentIndex = 0;
+
+  String _geTitleTopBar() {
+    if (_currentIndex == 1) {
+      return "Meus Items";
+    }
+
+    if (_currentIndex == 2) {
+      return "Profile";
+    }
+    return "Explorar";
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -44,7 +55,7 @@ class _EntryPointState extends State<EntryPoint> {
     return Scaffold(
       appBar: UIAppBar(
         leading: const SizedBox(),
-        title: R.strings.appName,
+        title: _geTitleTopBar(),
         actions: [
           IconButton(
             onPressed: () {},

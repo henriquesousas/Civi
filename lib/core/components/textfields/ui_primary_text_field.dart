@@ -6,12 +6,15 @@ class UIPrimaryTextField extends StatelessWidget {
   final String labelText;
   final Widget? prefixIcon;
   final Widget? suffixIcon;
-  final TextInputType? textInputType;
-  final bool? obscureText;
-  final int? maxLine;
   final String? errorText;
-  final ValueChanged<String>? onChanged;
+  final int? maxLine;
+  final bool? obscureText;
+  final TextStyle? labelStyle;
   final VoidCallback? onTap;
+  final TextInputType? textInputType;
+  final ValueChanged<String>? onChanged;
+  final OutlineInputBorder? enabledBorder;
+  final String? initialValue;
 
   const UIPrimaryTextField({
     super.key,
@@ -24,6 +27,9 @@ class UIPrimaryTextField extends StatelessWidget {
     this.errorText,
     this.onChanged,
     this.onTap,
+    this.labelStyle,
+    this.enabledBorder,
+    this.initialValue,
   });
 
   @override
@@ -33,11 +39,34 @@ class UIPrimaryTextField extends StatelessWidget {
       child: AbsorbPointer(
         absorbing: onTap != null, //
         child: TextFormField(
+          controller: initialValue != null
+              ? TextEditingController(text: initialValue)
+              : null,
           keyboardType: textInputType,
           textInputAction: TextInputAction.next,
           obscureText: obscureText ?? false,
           maxLines: maxLine,
           decoration: InputDecoration(
+            // border: OutlineInputBorder(
+            //   borderRadius: BorderRadius.circular(12.0),
+            //   borderSide: BorderSide(
+            //     color: AppColors.primaryColor,
+            //     width: 1,
+            //   ),
+            // ),
+            // enabledBorder: OutlineInputBorder(
+            //   borderRadius: BorderRadius.circular(12.0),
+            //   borderSide: const BorderSide(
+            //     color: AppColors.primaryColor,
+            //     width: 1,
+            //   ),
+            // ),
+            // enabledBorder: outlineInputBorder.copyWith(
+            //   borderSide: BorderSide(
+            //     color: AppColors.primaryColor,
+            //   ),
+            // ),
+            enabledBorder: enabledBorder,
             labelText: labelText,
             hintText: labelText,
             floatingLabelBehavior: FloatingLabelBehavior.auto,
@@ -45,12 +74,13 @@ class UIPrimaryTextField extends StatelessWidget {
             prefixIcon: prefixIcon,
             suffixIcon: suffixIcon,
             errorText: errorText,
+            labelStyle: labelStyle,
             floatingLabelStyle: TextStyle(
               color: errorText?.isNotEmpty == true
                   ? AppColors.errorColor
                   : AppColors.primaryColor,
             ),
-            isDense: false, //
+            isDense: false,
           ),
           onChanged: onChanged,
         ),

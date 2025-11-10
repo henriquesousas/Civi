@@ -3,14 +3,14 @@ import 'package:deehelp/core/theme/app_colors.dart';
 import 'package:deehelp/core/theme/constants.dart';
 import 'package:flutter/material.dart';
 
-class SecondaryItemCard extends StatelessWidget {
+class ListItemCard extends StatelessWidget {
   final String image, brandName, code;
   final int year;
   final bool active;
   final VoidCallback? press;
   final ButtonStyle? style;
 
-  const SecondaryItemCard({
+  const ListItemCard({
     super.key,
     required this.image,
     required this.brandName,
@@ -28,17 +28,17 @@ class SecondaryItemCard extends StatelessWidget {
       child: OutlinedButton(
         onPressed: press,
         style: OutlinedButton.styleFrom(
-          // backgroundColor: Colors.white,
+          backgroundColor: Colors.white,
           minimumSize: const Size(256, 130),
           maximumSize: const Size(256, 130),
           side: const BorderSide(
             color: AppColors.lightGreyColor20,
-            width: 1,
+            width: 0,
           ),
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(16),
           ),
-          padding: const EdgeInsets.symmetric(vertical: 12, horizontal: 24),
+          padding: const EdgeInsets.symmetric(vertical: 12, horizontal: 10),
         ),
         child: Row(
           children: [
@@ -96,10 +96,7 @@ class SecondaryItemCard extends StatelessWidget {
                       code,
                       maxLines: 2,
                       overflow: TextOverflow.ellipsis,
-                      style: Theme.of(context)
-                          .textTheme
-                          .titleSmall!
-                          .copyWith(fontSize: 12),
+                      style: Theme.of(context).textTheme.titleMedium!,
                     ),
                     Text(
                       "$year",

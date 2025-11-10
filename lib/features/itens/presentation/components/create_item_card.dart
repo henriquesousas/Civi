@@ -1,11 +1,11 @@
 import 'package:deehelp/core/theme/app_colors.dart';
-import 'package:deehelp/features/itens/my_item.dart';
+import 'package:deehelp/features/itens/presentation/create/type_item_select.dart';
 import 'package:flutter/material.dart';
 
 import '../../../../app/theme/app_colors_v2.dart';
 
 class CreateItemCard extends StatelessWidget {
-  final MyItem item;
+  final TypeItemSelect item;
   final VoidCallback onTap;
   const CreateItemCard({super.key, required this.item, required this.onTap});
 

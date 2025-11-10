@@ -1,29 +1,32 @@
-import 'package:flutter/material.dart';
 import 'package:deehelp/shared/components/progress_indicator/step_item.dart';
+import 'package:flutter/material.dart';
 
 class StepIndicator extends StatelessWidget {
-  final int currentStep;
-  final List<String> titles;
+  final int step;
+  final List<String> labels;
 
   const StepIndicator({
     super.key,
-    required this.currentStep,
-    required this.titles,
+    required this.step,
+    required this.labels,
   });
 
   @override
   Widget build(BuildContext context) {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: List.generate(titles.length, (index) {
-        return Expanded(
-          child: StepItem(
-            title: titles[index],
-            isActive: index == currentStep,
-            isCompleted: index < currentStep,
-          ),
-        );
-      }),
+    return Padding(
+      padding: const EdgeInsets.only(top: 30, bottom: 30),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: List.generate(labels.length, (index) {
+          return Expanded(
+            child: StepItem(
+              title: labels[index],
+              isActive: index == step,
+              isCompleted: index < step,
+            ),
+          );
+        }),
+      ),
     );
   }
 }

@@ -1,16 +1,23 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 
 class UIAppBar extends StatelessWidget implements PreferredSizeWidget {
   final String title;
   final Widget? leading;
   final List<Widget>? actions;
-  const UIAppBar({super.key, required this.title, this.leading, this.actions});
+  final bool showDefaultLeading;
+  const UIAppBar(
+      {super.key,
+      required this.title,
+      this.leading,
+      this.actions,
+      this.showDefaultLeading = false});
 
   @override
   Widget build(BuildContext context) {
     return AppBar(
       backgroundColor: Theme.of(context).scaffoldBackgroundColor,
-      leadingWidth: 0,
+      leadingWidth: showDefaultLeading ? null : 0,
       centerTitle: false,
       title: Text(
         title,
@@ -19,7 +26,12 @@ class UIAppBar extends StatelessWidget implements PreferredSizeWidget {
             ),
       ),
       elevation: 0,
-      leading: leading,
+      leading: showDefaultLeading
+          ? IconButton(
+              onPressed: () => context.pop(),
+              icon: const Icon(Icons.arrow_back),
+            )
+          : leading,
       actions: actions,
       automaticallyImplyLeading: false,
     );

@@ -133,7 +133,7 @@ class PtBr with TranslationParts implements Translation {
   @override
   String get bottomBarProfile => "Profile";
 
-  // BottomBar
+  // Logout
   //============================================================================
   @override
   String get logoutConfirmButton => "Sim, quero sair!";
@@ -145,8 +145,32 @@ class PtBr with TranslationParts implements Translation {
   String get logoutExitMessage =>
       "Tem certeza que deseja sair da sua conta? Você precisará fazer login novamente para acessar o DeeHelp.";
 
-  // BottomBar
+  // Item
   //============================================================================
   @override
   String get addNewItem => "Adicionar novo item";
+  @override
+  String get stepOneHeader => "Qual é o seu produto";
+  @override
+  String get stepOneBody =>
+      "Informe o tipo de produto (carro, moto, celular ou outro). Isso facilita a identificação da sua ocorrência.";
+
+  @override
+  String get stepItemDetailHeader => "Informe os detalhes";
+
+  @override
+  String get stepItemDetailBody =>
+      "Preencha as informações importantes sobre o produto, como modelo, cor, placa ou número de série.";
+
+  @override
+  String get errorMessageVehicle => "Placa inválida";
+
+  @override
+  String get hintTextVehicleCode => "Número da placa";
+
+  @override
+  String get selectColor => "Selecione uma cor";
+
+  @override
+  String get selectBrand => "Selecione a marca";
 }

@@ -2,8 +2,8 @@ import 'package:deehelp/shared/extensions/text_style_extension.dart';
 import 'package:dotted_border/dotted_border.dart';
 import 'package:flutter/material.dart';
 
-import '../../app/localization/image_config.dart';
-import '../../app/theme/app_colors_v2.dart';
+import '../../../../app/localization/image_config.dart';
+import '../../../../app/theme/app_colors_v2.dart';
 
 class DottedContainer extends StatelessWidget {
   final double height;
