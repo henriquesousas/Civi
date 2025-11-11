@@ -1,6 +1,5 @@
 import 'package:deehelp/core/components/buttons/ui_google_button.dart';
 import 'package:deehelp/core/components/buttons/ui_outline_button.dart';
-import 'package:deehelp/core/components/dialogs/dialog_extension.dart';
 import 'package:deehelp/core/theme/app_colors.dart';
 import 'package:deehelp/features/auth/presentation/login/bloc/auth_state.dart';
 import 'package:deehelp/features/auth/presentation/login/bloc/login_bloc.dart';
@@ -40,10 +39,10 @@ class LoginWithGooglePage extends StatelessWidget {
           child: BlocConsumer<LoginBloc, AuthState>(
             listener: (context, state) {
               if (state.status == AuthStatus.error) {
-                context.showDialogWarning(
-                  R.strings.warning,
-                  state.errorMessage ?? '',
-                );
+                // context.showDialogWarning(
+                //   R.strings.warning,
+                //   state.errorMessage ?? '',
+                // );
               }
 
               if (state.status == AuthStatus.success) {

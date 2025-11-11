@@ -43,6 +43,16 @@ class PtBr with TranslationParts implements Translation {
   @override
   String get waiting => "Aguarde...";
 
+  @override
+  String get obs => "Observação";
+
+  @override
+  String get cancelRegister => "Cancelar cadastro";
+
+  @override
+  String get cancelRegisterMessage =>
+      "Sair agora fará você perder todos os dados do cadastro. Confirmar saída?";
+
   //Onboarding
   //============================================================================
   @override
@@ -148,9 +158,14 @@ class PtBr with TranslationParts implements Translation {
   // Item
   //============================================================================
   @override
+  String get appNewItemTitle => "Novo item";
+
+  @override
   String get addNewItem => "Adicionar novo item";
+
   @override
   String get stepOneHeader => "Qual é o seu produto";
+
   @override
   String get stepOneBody =>
       "Informe o tipo de produto (carro, moto, celular ou outro). Isso facilita a identificação da sua ocorrência.";
@@ -173,4 +188,19 @@ class PtBr with TranslationParts implements Translation {
 
   @override
   String get selectBrand => "Selecione a marca";
+
+  @override
+  String get stepObsHeady => "Alguma obervação ?";
+
+  @override
+  String get stepObsBody =>
+      "Adicione informações adicionais que possam ajudar, como características únicas ou circunstâncias do ocorrido.";
+
+  @override
+  List<String> get itemSteps => [
+        "Tipo",
+        "Detalhes",
+        "Observação",
+        "Foto",
+      ];
 }

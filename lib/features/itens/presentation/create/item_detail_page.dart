@@ -2,27 +2,27 @@ import 'dart:async';
 
 import 'package:deehelp/core/components/custom_modal_bottom_sheet.dart';
 import 'package:deehelp/core/components/textfields/ui_primary_text_field.dart';
-import 'package:deehelp/features/itens/presentation/components/select_brand.dart';
-import 'package:deehelp/features/itens/presentation/components/select_color.dart';
 import 'package:deehelp/features/itens/presentation/create/bloc/create_item_bloc.dart';
 import 'package:deehelp/features/itens/presentation/create/bloc/item_event.dart';
 import 'package:deehelp/features/itens/presentation/create/bloc/item_state.dart';
+import 'package:deehelp/features/itens/presentation/create/components/modal_select_brand.dart';
+import 'package:deehelp/features/itens/presentation/create/components/modal_select_color.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../../core/resources/resources.dart';
 import '../../../../core/theme/app_colors.dart';
 import '../../../../core/theme/input_decoration_theme.dart';
-import 'header.dart';
+import 'components/header.dart';
 
-class FormStepDetail extends StatefulWidget {
-  const FormStepDetail({super.key});
+class ItemDetailPage extends StatefulWidget {
+  const ItemDetailPage({super.key});
 
   @override
-  State<FormStepDetail> createState() => _FormStepDetailState();
+  State<ItemDetailPage> createState() => _ItemDetailPageState();
 }
 
-class _FormStepDetailState extends State<FormStepDetail> {
+class _ItemDetailPageState extends State<ItemDetailPage> {
   void _updateCode(String code) {
     context.read<CreateItemBloc>().add(ItemCodeChangeEvent(code: code));
   }
@@ -54,7 +54,7 @@ class _FormStepDetailState extends State<FormStepDetail> {
   void _onTapSelectBrand(BuildContext context) {
     _handleSelectionModal<String>(
       context: context,
-      modalBuilder: (onComplete) => SelectBrand(
+      modalBuilder: (onComplete) => ModalSelectBrand(
         onChange: (brand) => onComplete(brand),
       ),
       updateBloc: (result) => context
@@ -66,18 +66,13 @@ class _FormStepDetailState extends State<FormStepDetail> {
   void _onTapSelectColor(BuildContext context) {
     _handleSelectionModal<String>(
       context: context,
-      modalBuilder: (onComplete) => SelectColor(
+      modalBuilder: (onComplete) => ModalSelectColor(
         onChange: (color) => onComplete(color),
       ),
       updateBloc: (result) => context
           .read<CreateItemBloc>()
           .add(ItemColorChangeEvent(color: result)),
     );
-  }
-
-  @override
-  void dispose() {
-    super.dispose();
   }
 
   @override
@@ -88,6 +83,7 @@ class _FormStepDetailState extends State<FormStepDetail> {
         builder: (context, state) {
           final hasBrand = state.detailBrand.brand != null;
           final hasColor = state.detailColor.color != null;
+          final hasCode = state.detailCode.code != null;
           final selectedLabelStyle =
               Theme.of(context).textTheme.bodyLarge?.copyWith(
                     color: AppColors.primaryColor,
@@ -96,11 +92,11 @@ class _FormStepDetailState extends State<FormStepDetail> {
           final activeBorder = outlineInputBorder.copyWith(
             borderSide: const BorderSide(
               color: AppColors.primaryColor,
-              width: 2.0,
+              width: 1.0,
             ),
           );
           return Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.center,
             spacing: 10,
             children: [
               Header(
@@ -109,8 +105,11 @@ class _FormStepDetailState extends State<FormStepDetail> {
               ),
               const SizedBox(height: 32),
               UIPrimaryTextField(
+                initialValue: state.detailCode.code,
                 labelText: R.strings.hintTextVehicleCode,
                 errorText: state.detailCode.error,
+                labelStyle: hasCode ? selectedLabelStyle : null,
+                enabledBorder: hasCode ? activeBorder : null,
                 onChanged: (value) => _updateCode(value),
               ),
               UIPrimaryTextField(

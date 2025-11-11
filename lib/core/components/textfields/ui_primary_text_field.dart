@@ -47,25 +47,6 @@ class UIPrimaryTextField extends StatelessWidget {
           obscureText: obscureText ?? false,
           maxLines: maxLine,
           decoration: InputDecoration(
-            // border: OutlineInputBorder(
-            //   borderRadius: BorderRadius.circular(12.0),
-            //   borderSide: BorderSide(
-            //     color: AppColors.primaryColor,
-            //     width: 1,
-            //   ),
-            // ),
-            // enabledBorder: OutlineInputBorder(
-            //   borderRadius: BorderRadius.circular(12.0),
-            //   borderSide: const BorderSide(
-            //     color: AppColors.primaryColor,
-            //     width: 1,
-            //   ),
-            // ),
-            // enabledBorder: outlineInputBorder.copyWith(
-            //   borderSide: BorderSide(
-            //     color: AppColors.primaryColor,
-            //   ),
-            // ),
             enabledBorder: enabledBorder,
             labelText: labelText,
             hintText: labelText,

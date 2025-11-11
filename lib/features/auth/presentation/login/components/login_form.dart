@@ -1,6 +1,5 @@
 import 'package:deehelp/core/components/buttons/ui_google_button.dart';
 import 'package:deehelp/core/components/buttons/ui_primary_button.dart';
-import 'package:deehelp/core/components/dialogs/dialog_extension.dart';
 import 'package:deehelp/core/components/textfields/ui_email_text_field.dart';
 import 'package:deehelp/core/components/textfields/ui_password_text_field.dart';
 import 'package:deehelp/features/auth/presentation/login/components/login_or.dart';
@@ -36,17 +35,17 @@ class _LoginFormState extends State<LoginForm> {
     return BlocConsumer<LoginBloc, AuthState>(
       listener: (context, state) {
         if (state.status == AuthStatus.error) {
-          context.showDialogWarning(
-            R.strings.warning,
-            state.errorMessage ?? '',
-          );
+          // context.showDialogWarning(
+          //   R.strings.warning,
+          //   state.errorMessage ?? '',
+          // );
         }
 
         if (state.status == AuthStatus.success) {
-          context.showDialogWarning(
-            "Sucesso",
-            'Login realizado com sucesso',
-          );
+          // context.showDialogWarning(
+          //   "Sucesso",
+          //   'Login realizado com sucesso',
+          // );
         }
       },
       builder: (context, state) {

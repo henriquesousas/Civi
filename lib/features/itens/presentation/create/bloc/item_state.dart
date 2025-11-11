@@ -34,6 +34,17 @@ class ItemState extends Equatable {
   });
 
   bool get isFormSelectItemTypeValid => detailItem.selectedItem != null;
+  bool get isFormItemDetailValid => _isFormItemDetailValid();
+  bool _isFormItemDetailValid() {
+    if (detailColor.color != null &&
+        detailCode.code != null &&
+        detailCode.error == null &&
+        detailBrand.brand != null) {
+      return true;
+    }
+
+    return false;
+  }
 
   factory ItemState.initial() => ItemState._(
         status: ItemStatus.initial,
@@ -66,20 +77,32 @@ class ItemState extends Equatable {
 
     return copyWith(
       detailCode: newState,
-      status: ItemStatus.initial,
+      detailBrand: detailBrand,
+      detailItem: detailItem,
+      detailColor: detailColor,
     );
   }
 
   ItemState updateColorEvent(String color) {
     final newState = detailColor.copyWith(color: color);
 
-    return copyWith(detailColor: newState);
+    return copyWith(
+      detailColor: newState,
+      detailBrand: detailBrand,
+      detailItem: detailItem,
+      detailCode: detailCode,
+    );
   }
 
   ItemState updateBrandEvent(String brand) {
     final newState = detailBrand.copyWith(brand: brand);
 
-    return copyWith(detailBrand: newState);
+    return copyWith(
+      detailBrand: newState,
+      detailItem: detailItem,
+      detailColor: detailColor,
+      detailCode: detailCode,
+    );
   }
 
   ItemState updateItemSelectedEvent(TypeItemSelect item) {
@@ -88,6 +111,8 @@ class ItemState extends Equatable {
 
     return copyWith(
       detailItem: newState,
+      detailBrand: detailBrand,
+      detailColor: detailColor,
       status: ItemStatus.updateItemSelected,
     );
   }
@@ -101,6 +126,8 @@ class ItemState extends Equatable {
     return copyWith(
       detailItem: newState,
       detailCode: detailCode,
+      detailColor: detailColor,
+      detailBrand: detailBrand,
       status: ItemStatus.loadedItemsSuccess,
     );
   }

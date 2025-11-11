@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 
-import '../../../../core/resources/resources.dart';
+import '../../../../../core/resources/resources.dart';
 
-class SelectBrand extends StatelessWidget {
+class ModalSelectBrand extends StatelessWidget {
   final Function(String) onChange;
-  const SelectBrand({super.key, required this.onChange});
+  const ModalSelectBrand({super.key, required this.onChange});
 
   @override
   Widget build(BuildContext context) {

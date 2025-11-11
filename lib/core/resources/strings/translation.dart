@@ -12,6 +12,9 @@ abstract class Translation with TranslationParts {
   String get skip;
   String get version;
   String get waiting;
+  String get obs;
+  String get cancelRegister;
+  String get cancelRegisterMessage;
   // Login
   String get loginInfo;
   String get enterCreateAccount;
@@ -49,6 +52,7 @@ abstract class Translation with TranslationParts {
   String get logoutExitTitle;
 
   // Items
+  String get appNewItemTitle;
   String get addNewItem;
   String get stepOneHeader;
   String get stepOneBody;
@@ -58,6 +62,9 @@ abstract class Translation with TranslationParts {
   String get hintTextVehicleCode;
   String get selectColor;
   String get selectBrand;
+  String get stepObsHeady;
+  String get stepObsBody;
+  List<String> get itemSteps;
 }
 
 mixin TranslationParts {

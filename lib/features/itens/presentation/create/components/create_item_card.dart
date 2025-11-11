@@ -2,7 +2,7 @@ import 'package:deehelp/core/theme/app_colors.dart';
 import 'package:deehelp/features/itens/presentation/create/type_item_select.dart';
 import 'package:flutter/material.dart';
 
-import '../../../../app/theme/app_colors_v2.dart';
+import '../../../../../app/theme/app_colors_v2.dart';
 
 class CreateItemCard extends StatelessWidget {
   final TypeItemSelect item;

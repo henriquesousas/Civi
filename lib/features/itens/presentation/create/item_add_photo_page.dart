@@ -4,10 +4,10 @@ import 'package:deehelp/shared/extensions/text_style_extension.dart';
 import 'package:dotted_border/dotted_border.dart';
 import 'package:flutter/material.dart';
 
-import 'header.dart';
+import 'components/header.dart';
 
-class FormStepPhoto extends StatelessWidget {
-  const FormStepPhoto({super.key});
+class ItemAddPhotoPage extends StatelessWidget {
+  const ItemAddPhotoPage({super.key});
 
   @override
   Widget build(BuildContext context) {

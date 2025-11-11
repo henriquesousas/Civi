@@ -5,19 +5,18 @@ class UIAppBar extends StatelessWidget implements PreferredSizeWidget {
   final String title;
   final Widget? leading;
   final List<Widget>? actions;
-  final bool showDefaultLeading;
-  const UIAppBar(
-      {super.key,
-      required this.title,
-      this.leading,
-      this.actions,
-      this.showDefaultLeading = false});
+  const UIAppBar({
+    super.key,
+    required this.title,
+    this.leading,
+    this.actions,
+  });
 
   @override
   Widget build(BuildContext context) {
     return AppBar(
       backgroundColor: Theme.of(context).scaffoldBackgroundColor,
-      leadingWidth: showDefaultLeading ? null : 0,
+      leadingWidth: leading != null ? null : 0,
       centerTitle: false,
       title: Text(
         title,
@@ -26,12 +25,11 @@ class UIAppBar extends StatelessWidget implements PreferredSizeWidget {
             ),
       ),
       elevation: 0,
-      leading: showDefaultLeading
-          ? IconButton(
-              onPressed: () => context.pop(),
-              icon: const Icon(Icons.arrow_back),
-            )
-          : leading,
+      leading: leading ??
+          IconButton(
+            onPressed: () => context.pop(),
+            icon: const Icon(Icons.arrow_back),
+          ),
       actions: actions,
       automaticallyImplyLeading: false,
     );

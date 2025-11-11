@@ -1,5 +1,5 @@
 import 'package:deehelp/features/itens/presentation/create/bloc/create_item_bloc.dart';
-import 'package:deehelp/features/itens/presentation/create/create_new_item_page.dart';
+import 'package:deehelp/features/itens/presentation/create/create_item_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:provider/provider.dart';
@@ -30,7 +30,7 @@ class CreateNewItemPageProvider extends StatelessWidget {
           create: (context) => CreateItemBloc(),
         ),
       ],
-      child: const CreateNewItemPage(),
+      child: const CreateItemPage(),
     );
   }
 }

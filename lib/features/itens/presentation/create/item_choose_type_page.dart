@@ -1,24 +1,22 @@
-import 'package:deehelp/features/itens/presentation/components/create_item_card.dart';
-import 'package:deehelp/features/itens/presentation/components/header.dart';
 import 'package:deehelp/features/itens/presentation/create/bloc/create_item_bloc.dart';
 import 'package:deehelp/features/itens/presentation/create/bloc/item_state.dart';
+import 'package:deehelp/features/itens/presentation/create/components/create_item_card.dart';
+import 'package:deehelp/features/itens/presentation/create/components/header.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../../core/resources/resources.dart';
-import '../create/bloc/item_event.dart';
-import '../create/type_item_select.dart';
+import 'bloc/item_event.dart';
+import 'type_item_select.dart';
 
-class FormStepChooseType extends StatefulWidget {
-  final VoidCallback? press;
-
-  const FormStepChooseType({super.key, required this.press});
+class ItemChooseTypePage extends StatefulWidget {
+  const ItemChooseTypePage({super.key});
 
   @override
-  State<FormStepChooseType> createState() => _FormStepChooseTypeState();
+  State<ItemChooseTypePage> createState() => _ItemChooseTypePageState();
 }
 
-class _FormStepChooseTypeState extends State<FormStepChooseType> {
+class _ItemChooseTypePageState extends State<ItemChooseTypePage> {
   _selectItem(TypeItemSelect item) {
     context.read<CreateItemBloc>().add(ItemSelectedEvent(item: item));
   }
@@ -77,10 +75,6 @@ class _FormStepChooseTypeState extends State<FormStepChooseType> {
                 ),
               ),
             ),
-            // UIPrimaryButton(
-            //   text: context.strings.next,
-            //   press: state.isFormSelectItemTypeValid ? widget.press : null,
-            // ),
           ],
         );
       },
