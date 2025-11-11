@@ -4,8 +4,8 @@ import 'package:deehelp/features/itens/presentation/create/bloc/detail_color_sta
 import 'package:deehelp/features/itens/presentation/create/bloc/detail_item_state.dart';
 import 'package:equatable/equatable.dart';
 
-import '../data.dart';
-import '../type_item_select.dart';
+import '../utils/data.dart';
+import '../utils/type_item_select.dart';
 
 enum ItemStatus {
   initial,
@@ -72,65 +72,28 @@ class ItemState extends Equatable {
     );
   }
 
-  ItemState updateCodeEvent(String code, String? error) {
-    final newState = detailCode.copyWith(code: code, error: error);
+  ItemState updateCode(String code, {String? error}) =>
+      copyWith(detailCode: detailCode.copyWith(code: code, error: error));
 
-    return copyWith(
-      detailCode: newState,
-      detailBrand: detailBrand,
-      detailItem: detailItem,
-      detailColor: detailColor,
-    );
-  }
+  ItemState updateColor(String color) =>
+      copyWith(detailColor: detailColor.copyWith(color: color));
 
-  ItemState updateColorEvent(String color) {
-    final newState = detailColor.copyWith(color: color);
+  ItemState updateBrand(String brand) =>
+      copyWith(detailBrand: detailBrand.copyWith(brand: brand));
 
-    return copyWith(
-      detailColor: newState,
-      detailBrand: detailBrand,
-      detailItem: detailItem,
-      detailCode: detailCode,
-    );
-  }
+  ItemState updateItemSelected(TypeItemSelect item) => copyWith(
+        detailItem: detailItem.copyWith(
+          selectedItem: item,
+          items: detailItem.items,
+        ),
+        status: ItemStatus.updateItemSelected,
+      );
 
-  ItemState updateBrandEvent(String brand) {
-    final newState = detailBrand.copyWith(brand: brand);
-
-    return copyWith(
-      detailBrand: newState,
-      detailItem: detailItem,
-      detailColor: detailColor,
-      detailCode: detailCode,
-    );
-  }
-
-  ItemState updateItemSelectedEvent(TypeItemSelect item) {
-    final newState =
-        detailItem.copyWith(selectedItem: item, items: detailItem.items);
-
-    return copyWith(
-      detailItem: newState,
-      detailBrand: detailBrand,
-      detailColor: detailColor,
-      status: ItemStatus.updateItemSelected,
-    );
-  }
-
-  ItemState loadItems() {
-    final newState = detailItem.copyWith(
-      selectedItem: null,
-      items: Data().load(),
-    );
-
-    return copyWith(
-      detailItem: newState,
-      detailCode: detailCode,
-      detailColor: detailColor,
-      detailBrand: detailBrand,
-      status: ItemStatus.loadedItemsSuccess,
-    );
-  }
+  ItemState loadItems() => copyWith(
+        detailItem:
+            detailItem.copyWith(items: Data().load(), selectedItem: null),
+        status: ItemStatus.loadedItemsSuccess,
+      );
 
   @override
   List<Object?> get props => [

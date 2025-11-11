@@ -7,7 +7,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../../core/resources/resources.dart';
 import 'bloc/item_event.dart';
-import 'type_item_select.dart';
+import 'utils/type_item_select.dart';
 
 class ItemChooseTypePage extends StatefulWidget {
   const ItemChooseTypePage({super.key});

@@ -4,7 +4,7 @@ import 'package:deehelp/entry_point.dart';
 import 'package:deehelp/features/auth/presentation/login/login_with_google_page.dart';
 import 'package:deehelp/features/favorites/favourite_view.dart';
 import 'package:deehelp/features/home/home_view.dart';
-import 'package:deehelp/features/itens/presentation/create/create_new_item_page_provider.dart';
+import 'package:deehelp/features/itens/presentation/create/utils/create_item_provider.dart';
 import 'package:deehelp/features/itens/presentation/edit/item_edit_page.dart';
 import 'package:deehelp/features/itens/presentation/list/list_items_page.dart';
 import 'package:deehelp/features/occurrence/occurrence_detail_page.dart';
@@ -145,7 +145,7 @@ class AppRouter {
         path: RouterConstant.createNewItem,
         pageBuilder: (context, state) => slideTransitionPage(
           key: state.pageKey,
-          child: const CreateNewItemPageProvider(),
+          child: const CreateItemProvider(),
         ),
       ),
       GoRoute(

@@ -1,4 +1,4 @@
-import '../type_item_select.dart';
+import '../utils/type_item_select.dart';
 
 class DetailItemState {
   final TypeItemSelect? selectedItem;

@@ -1,5 +1,5 @@
 import 'package:deehelp/core/theme/app_colors.dart';
-import 'package:deehelp/features/itens/presentation/create/type_item_select.dart';
+import 'package:deehelp/features/itens/presentation/create/utils/type_item_select.dart';
 import 'package:flutter/material.dart';
 
 import '../../../../../app/theme/app_colors_v2.dart';

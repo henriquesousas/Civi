@@ -20,7 +20,8 @@ class CreateItemBloc extends Bloc<ItemEvent, ItemState> {
     final code = event.code;
     final isValid = code.length > 5;
     final error = isValid ? null : R.strings.errorMessageVehicle;
-    final newState = state.updateCodeEvent(code, error);
+    final newState = state.updateCode(code, error: error);
+
     emit(newState);
   }
 
@@ -28,7 +29,7 @@ class CreateItemBloc extends Bloc<ItemEvent, ItemState> {
     ItemColorChangeEvent event,
     Emitter<ItemState> emit,
   ) {
-    final newState = state.updateColorEvent(event.color);
+    final newState = state.updateColor(event.color);
     emit(newState);
   }
 
@@ -36,7 +37,7 @@ class CreateItemBloc extends Bloc<ItemEvent, ItemState> {
     ItemBrandChangeEvent event,
     Emitter<ItemState> emit,
   ) {
-    final newState = state.updateBrandEvent(event.brand);
+    final newState = state.updateBrand(event.brand);
     emit(newState);
   }
 
@@ -44,7 +45,7 @@ class CreateItemBloc extends Bloc<ItemEvent, ItemState> {
     ItemSelectedEvent event,
     Emitter<ItemState> emit,
   ) {
-    final newState = state.updateItemSelectedEvent(event.item);
+    final newState = state.updateItemSelected(event.item);
     emit(newState);
   }
 
