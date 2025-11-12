@@ -5,6 +5,7 @@ import 'package:deehelp/features/itens/presentation/create/bloc/create_item_bloc
 import 'package:deehelp/features/itens/presentation/create/bloc/item_state.dart';
 import 'package:deehelp/features/itens/presentation/create/item_add_photo_page.dart';
 import 'package:deehelp/features/itens/presentation/create/item_detail_page.dart';
+import 'package:deehelp/features/itens/presentation/create/item_summary_page.dart';
 import 'package:deehelp/shared/animation/fade_slide_transition_animator.dart';
 import 'package:deehelp/shared/extensions/context_extension.dart';
 import 'package:flutter/material.dart';
@@ -22,6 +23,7 @@ enum ItemStep {
   details,
   obs,
   photo,
+  summary,
 }
 
 class CreateItemPage extends StatefulWidget {
@@ -33,6 +35,7 @@ class CreateItemPage extends StatefulWidget {
 
 class _CreateItemPageState extends State<CreateItemPage> {
   int _currentStepIndex = 0;
+  bool _isNavigateLastPage = false;
 
   ItemStep get _currentStep => ItemStep.values[_currentStepIndex];
   final PageController _pageController = PageController();
@@ -54,6 +57,10 @@ class _CreateItemPageState extends State<CreateItemPage> {
   }
 
   void _next() {
+    if (_isNavigateLastPage) {
+      _navigateLastPage();
+      return;
+    }
     if (_currentStepIndex < ItemStep.values.length - 1) {
       setState(() => _currentStepIndex++);
       _pageController.nextPage(
@@ -63,23 +70,53 @@ class _CreateItemPageState extends State<CreateItemPage> {
     }
   }
 
-  bool _isValid(ItemState state) {
+  void _navigateSpecificPage(int index) {
+    _isNavigateLastPage = true;
+    setState(() => _currentStepIndex = index);
+    _pageController.animateToPage(
+      index,
+      duration: const Duration(milliseconds: 300),
+      curve: Curves.easeInOut,
+    );
+  }
+
+  void _navigateLastPage() {
+    final last = _currentStepIndex = (ItemStep.values.length - 1);
+    context.read<CreateItemBloc>().add(ChangePageEvent(page: last));
+  }
+
+  bool _handleButtonState(ItemState state) {
     switch (_currentStep) {
       case ItemStep.type:
         return state.isFormSelectItemTypeValid;
       case ItemStep.details:
         return state.isFormItemDetailValid;
-      case ItemStep.obs:
+      case ItemStep.photo:
+        return state.isPhotoValid;
+      case ItemStep.summary:
         return true;
       default:
-        return false;
+        return true;
+    }
+  }
+
+  String _handleButtonText(ItemState state) {
+    switch (_currentStep) {
+      case ItemStep.summary:
+        return R.strings.confirm;
+      default:
+        return R.strings.next;
     }
   }
 
   @override
   Widget build(BuildContext context) {
     return BlocConsumer<CreateItemBloc, ItemState>(
-      listener: (context, state) {},
+      listener: (context, state) {
+        if (state.status == ItemStatus.updatePage) {
+          if (state.page != null) _navigateSpecificPage(state.page!);
+        }
+      },
       builder: (context, state) {
         return Scaffold(
           backgroundColor: Colors.grey[50],
@@ -113,8 +150,8 @@ class _CreateItemPageState extends State<CreateItemPage> {
                   ),
                 Expanded(
                   child: UIPrimaryButton(
-                    text: context.strings.next,
-                    press: _isValid(state) ? _next : null,
+                    text: _handleButtonText(state),
+                    press: _handleButtonState(state) ? _next : null,
                   ),
                 ),
               ],
@@ -139,6 +176,7 @@ class _CreateItemPageState extends State<CreateItemPage> {
                           ItemDetailPage(),
                           ItemObsPage(),
                           ItemAddPhotoPage(),
+                          ItemSummaryPage(),
                         ],
                       ),
                     ),

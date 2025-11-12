@@ -7,8 +7,8 @@ class Data {
       TypeItemSelect("Carro", Icons.drive_eta, false),
       TypeItemSelect("Caminhão", Icons.local_shipping, false),
       TypeItemSelect("Motocicleta", Icons.electric_moped, false),
-      TypeItemSelect("Bicleta", Icons.directions_bike_outlined, false),
-      TypeItemSelect("Celular", Icons.phone_android, false),
+      // TypeItemSelect("Bicleta", Icons.directions_bike_outlined, false),
+      // TypeItemSelect("Celular", Icons.phone_android, false),
     ];
   }
 }

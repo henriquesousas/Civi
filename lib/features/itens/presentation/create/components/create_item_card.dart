@@ -2,8 +2,6 @@ import 'package:deehelp/core/theme/app_colors.dart';
 import 'package:deehelp/features/itens/presentation/create/utils/type_item_select.dart';
 import 'package:flutter/material.dart';
 
-import '../../../../../app/theme/app_colors_v2.dart';
-
 class CreateItemCard extends StatelessWidget {
   final TypeItemSelect item;
   final VoidCallback onTap;
@@ -14,10 +12,13 @@ class CreateItemCard extends StatelessWidget {
     return GestureDetector(
       onTap: onTap,
       child: Container(
-        padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
+        padding: const EdgeInsets.all(20),
         decoration: BoxDecoration(
           color: item.isSelected ? AppColors.primaryColor : Colors.white,
-          borderRadius: BorderRadius.circular(8),
+          borderRadius: BorderRadius.circular(12),
+          border: BoxBorder.all(
+            color: AppColors.primaryColor.withValues(alpha: 0.1),
+          ),
         ),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -49,7 +50,7 @@ class CreateItemCard extends StatelessWidget {
                             : FontWeight.normal,
                         color: item.isSelected
                             ? Colors.white
-                            : AppColorsV2.blackColor,
+                            : AppColors.blackColor,
                       ),
                   textAlign: TextAlign.center,
                 ),

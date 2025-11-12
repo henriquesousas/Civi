@@ -53,6 +53,15 @@ class PtBr with TranslationParts implements Translation {
   String get cancelRegisterMessage =>
       "Sair agora fará você perder todos os dados do cadastro. Confirmar saída?";
 
+  @override
+  String get addPhoto => "Adicionar foto";
+
+  @override
+  String get confirm => "Confirmar";
+
+  @override
+  String get next => "Próximo";
+
   //Onboarding
   //============================================================================
   @override
@@ -197,10 +206,18 @@ class PtBr with TranslationParts implements Translation {
       "Adicione informações adicionais que possam ajudar, como características únicas ou circunstâncias do ocorrido.";
 
   @override
-  List<String> get itemSteps => [
-        "Tipo",
-        "Detalhes",
-        "Observação",
-        "Foto",
-      ];
+  String get stepAddPhotoHead => "Adicione uma foto";
+
+  @override
+  String get stepAddPhotoBody =>
+      "Envie uma imagem do produto para facilitar a identificação e tornar seu registro mais completo.";
+
+  @override
+  String get stepSummaryHead => "Resumo";
+
+  @override
+  String get stepSummaryBody => "Reveja as informações";
+
+  @override
+  List<String> get itemSteps => ["Tipo", "Detalhes", "Observação", "Foto"];
 }

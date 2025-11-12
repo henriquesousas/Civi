@@ -11,6 +11,9 @@ class CreateItemBloc extends Bloc<ItemEvent, ItemState> {
     on<ItemCodeChangeEvent>(onCodeChange);
     on<ItemColorChangeEvent>(onColorChange);
     on<ItemBrandChangeEvent>(onBrandChange);
+    on<ItemObsChangeEvent>(onItemObsChange);
+    on<ChangePageEvent>(onChangePage);
+    on<ImagePickerEvent>(onImagePicker);
   }
 
   void onCodeChange(
@@ -55,5 +58,28 @@ class CreateItemBloc extends Bloc<ItemEvent, ItemState> {
   ) {
     final newState = state.loadItems();
     emit(newState);
+  }
+
+  void onImagePicker(
+    ImagePickerEvent event,
+    Emitter<ItemState> emit,
+  ) {
+    emit(state.updatePhoto(event.file));
+  }
+
+  void onItemObsChange(
+    ItemObsChangeEvent event,
+    Emitter<ItemState> emit,
+  ) {
+    emit(
+      state.updateObs(event.value),
+    );
+  }
+
+  void onChangePage(
+    ChangePageEvent event,
+    Emitter<ItemState> emit,
+  ) {
+    emit(state.updatePage(event.page));
   }
 }

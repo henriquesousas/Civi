@@ -21,7 +21,7 @@ class StepIndicator extends StatelessWidget {
           return Expanded(
             child: StepItem(
               title: labels[index],
-              isActive: index == step,
+              isActive: index <= step,
               isCompleted: index < step,
             ),
           );

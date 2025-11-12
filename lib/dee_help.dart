@@ -1,6 +1,6 @@
-import 'package:deehelp/app/app_provider.dart';
-import 'package:deehelp/core/router/app_router.dart';
+import 'package:deehelp/core/router/main_router.dart';
 import 'package:deehelp/core/theme/app_theme.dart';
+import 'package:deehelp/main_provider.dart';
 import 'package:flutter/material.dart';
 
 import 'l10n/app_localizations.dart';
@@ -23,7 +23,7 @@ class DeeHelp extends StatelessWidget {
           return locale;
         },
         locale: const Locale("en"),
-        routerConfig: AppRouter.router,
+        routerConfig: MainRouter.router,
         // theme: AppTheme.themeLight(),
         theme: AppTheme.lightTheme(context),
         themeMode: ThemeMode.light,

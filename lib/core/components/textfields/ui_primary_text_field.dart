@@ -31,7 +31,6 @@ class UIPrimaryTextField extends StatelessWidget {
     this.enabledBorder,
     this.initialValue,
   });
-
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
@@ -39,9 +38,7 @@ class UIPrimaryTextField extends StatelessWidget {
       child: AbsorbPointer(
         absorbing: onTap != null, //
         child: TextFormField(
-          controller: initialValue != null
-              ? TextEditingController(text: initialValue)
-              : null,
+          initialValue: initialValue,
           keyboardType: textInputType,
           textInputAction: TextInputAction.next,
           obscureText: obscureText ?? false,

@@ -23,6 +23,7 @@ class ItemDetailPage extends StatefulWidget {
 }
 
 class _ItemDetailPageState extends State<ItemDetailPage> {
+  final TextEditingController txtCode = TextEditingController();
   void _updateCode(String code) {
     context.read<CreateItemBloc>().add(ItemCodeChangeEvent(code: code));
   }
@@ -85,10 +86,7 @@ class _ItemDetailPageState extends State<ItemDetailPage> {
           final hasColor = state.detailColor.color != null;
           final hasCode = state.detailCode.code != null;
           final selectedLabelStyle =
-              Theme.of(context).textTheme.bodyLarge?.copyWith(
-                    color: AppColors.primaryColor,
-                    fontWeight: FontWeight.bold,
-                  );
+              Theme.of(context).textTheme.bodyLarge?.copyWith();
           final activeBorder = outlineInputBorder.copyWith(
             borderSide: const BorderSide(
               color: AppColors.primaryColor,

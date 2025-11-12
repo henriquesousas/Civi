@@ -1,10 +1,11 @@
 import 'package:deehelp/core/components/textfields/ui_primary_text_field.dart';
-import 'package:deehelp/features/itens/presentation/create/bloc/create_item_bloc.dart';
-import 'package:deehelp/features/itens/presentation/create/bloc/item_state.dart';
+import 'package:deehelp/features/itens/presentation/create/bloc/item_event.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../../core/resources/resources.dart';
+import 'bloc/create_item_bloc.dart';
+import 'bloc/item_state.dart';
 import 'components/header.dart';
 
 class ItemObsPage extends StatelessWidget {
@@ -12,6 +13,10 @@ class ItemObsPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    void updateObs(String value) {
+      context.read<CreateItemBloc>().add(ItemObsChangeEvent(value: value));
+    }
+
     return BlocConsumer<CreateItemBloc, ItemState>(
       listener: (context, state) {},
       builder: (context, state) {
@@ -26,8 +31,10 @@ class ItemObsPage extends StatelessWidget {
               ),
               const SizedBox(height: 32),
               UIPrimaryTextField(
+                initialValue: state.itemObs.value ?? "",
                 labelText: R.strings.obs,
                 maxLine: 5,
+                onChanged: (value) => updateObs(value),
               ),
             ],
           ),

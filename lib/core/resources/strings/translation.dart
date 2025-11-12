@@ -15,6 +15,9 @@ abstract class Translation with TranslationParts {
   String get obs;
   String get cancelRegister;
   String get cancelRegisterMessage;
+  String get addPhoto;
+  String get confirm;
+  String get next;
   // Login
   String get loginInfo;
   String get enterCreateAccount;
@@ -64,6 +67,10 @@ abstract class Translation with TranslationParts {
   String get selectBrand;
   String get stepObsHeady;
   String get stepObsBody;
+  String get stepAddPhotoHead;
+  String get stepAddPhotoBody;
+  String get stepSummaryHead;
+  String get stepSummaryBody;
   List<String> get itemSteps;
 }
 

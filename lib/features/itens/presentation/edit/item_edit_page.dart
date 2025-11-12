@@ -1,4 +1,5 @@
 import 'package:deehelp/app/localization/image_config.dart';
+import 'package:deehelp/core/components/container/ui_simple_container.dart';
 import 'package:deehelp/core/components/ui_app_bar.dart';
 import 'package:deehelp/shared/extensions/screen_size_extension.dart';
 import 'package:flutter/material.dart';
@@ -10,7 +11,6 @@ import '../../../../shared/components/buttons/primary_button.dart';
 import '../../../../shared/components/inputs/primary_text_field.dart';
 import '../../../../shared/components/inputs/secondary_text_field.dart';
 import 'dotted_container.dart';
-import 'my_item_edit_section.dart';
 
 class ItemEditPage extends StatefulWidget {
   const ItemEditPage({super.key});
@@ -38,9 +38,9 @@ class _ItemEditPageState extends State<ItemEditPage> {
           child: Column(
             spacing: 30,
             children: [
-              MyItemEditSection(
-                title: "Fotos",
-                icon: Icons.image,
+              UISimpleContainer(
+                // title: "Fotos",
+                // icon: Icons.image,
                 children: [
                   SizedBox(
                     width: context.screenWidth,
@@ -67,9 +67,9 @@ class _ItemEditPageState extends State<ItemEditPage> {
                   ),
                 ],
               ),
-              const MyItemEditSection(
-                title: "Detalhes do veículo",
-                icon: Icons.directions_car,
+              const UISimpleContainer(
+                // title: "Detalhes do veículo",
+                // icon: Icons.directions_car,
                 children: [
                   Column(
                     spacing: 16,
@@ -90,9 +90,9 @@ class _ItemEditPageState extends State<ItemEditPage> {
                   ),
                 ],
               ),
-              const MyItemEditSection(
-                title: "Observação",
-                icon: Icons.description,
+              const UISimpleContainer(
+                // title: "Observação",
+                // icon: Icons.description,
                 children: [
                   Column(
                     spacing: 16,
