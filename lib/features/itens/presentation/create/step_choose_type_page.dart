@@ -9,14 +9,14 @@ import '../../../../core/resources/resources.dart';
 import 'bloc/item_event.dart';
 import 'utils/type_item_select.dart';
 
-class ItemChooseTypePage extends StatefulWidget {
-  const ItemChooseTypePage({super.key});
+class StepChooseTypePage extends StatefulWidget {
+  const StepChooseTypePage({super.key});
 
   @override
-  State<ItemChooseTypePage> createState() => _ItemChooseTypePageState();
+  State<StepChooseTypePage> createState() => _StepChooseTypePageState();
 }
 
-class _ItemChooseTypePageState extends State<ItemChooseTypePage> {
+class _StepChooseTypePageState extends State<StepChooseTypePage> {
   _selectItem(TypeItemSelect item) {
     context.read<CreateItemBloc>().add(ItemSelectedEvent(item: item));
   }

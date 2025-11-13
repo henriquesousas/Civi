@@ -10,8 +10,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../../core/resources/resources.dart';
 import 'components/header.dart';
 
-class ItemSummaryPage extends StatelessWidget {
-  const ItemSummaryPage({super.key});
+class StepSummaryPage extends StatelessWidget {
+  const StepSummaryPage({super.key});
 
   @override
   Widget build(BuildContext context) {

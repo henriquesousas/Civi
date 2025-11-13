@@ -14,10 +14,10 @@ class CreateUserUsecase extends UseCase<CreateUseDto, User> {
   CreateUserUsecase({required this.repository});
 
   @override
-  Future<EitherResult<User>> execute(CreateUseDto dto) async {
+  Future<EitherResult<User>> execute(CreateUseDto data) async {
     final user = UserBuilder(
-      name: dto.name,
-      email: dto.email,
+      name: data.name,
+      email: data.email,
     ).build();
 
     if (user.notification.hasErrors) {

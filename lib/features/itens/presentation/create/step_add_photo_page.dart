@@ -14,16 +14,15 @@ import '../../../../core/resources/resources.dart';
 import 'bloc/item_event.dart';
 import 'components/header.dart';
 
-class ItemAddPhotoPage extends StatefulWidget {
-  const ItemAddPhotoPage({super.key});
+class StepAddPhotoPage extends StatefulWidget {
+  const StepAddPhotoPage({super.key});
 
   @override
-  State<ItemAddPhotoPage> createState() => _ItemAddPhotoPageState();
+  State<StepAddPhotoPage> createState() => _StepAddPhotoPageState();
 }
 
-class _ItemAddPhotoPageState extends State<ItemAddPhotoPage> {
+class _StepAddPhotoPageState extends State<StepAddPhotoPage> {
   final ImagePicker imagePicker = ImagePicker();
-  // File? imagePicked;
   bool isUploading = false;
 
   Future<void> pickImageFromGallery() async {

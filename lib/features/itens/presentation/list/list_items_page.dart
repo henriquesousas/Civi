@@ -1,5 +1,5 @@
 import 'package:deehelp/core/router/router_constants.dart';
-import 'package:deehelp/features/itens/domain/my_items.dart';
+import 'package:deehelp/features/itens/domain/entities/my_items.dart';
 import 'package:deehelp/features/itens/presentation/list/components/list_item_card.dart';
 import 'package:deehelp/shared/animation/fade_slide_transition_animator.dart';
 import 'package:flutter/material.dart';

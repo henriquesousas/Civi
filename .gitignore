@@ -43,3 +43,19 @@ app.*.map.json
 /android/app/debug
 /android/app/profile
 /android/app/release
+
+# Environment variables
+.env/
+!.env/README.md
+!.env/env.example.json
+
+# Arquivos específicos para ignorar
+.env/env.local.json
+.env/env.prod.json
+.env/env.dev.json
+.env/env.staging.json
+
+# Qualquer arquivo com dados sensíveis
+.env/*.local.*
+.env/*.prod.*
+.env/*.dev.

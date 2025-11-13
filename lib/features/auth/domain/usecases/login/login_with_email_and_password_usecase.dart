@@ -12,10 +12,10 @@ class LoginWithEmailAndPasswordUsecase extends UseCase<LoginDto, User> {
   LoginWithEmailAndPasswordUsecase({required this.repository});
 
   @override
-  Future<EitherResult<User>> execute(LoginDto dto) async {
+  Future<EitherResult<User>> execute(LoginDto data) async {
     //TODO: not in use
     throw UnimplementedError();
-    final authResult = await repository.login(dto.email, dto.password);
+    final authResult = await repository.login(data.email, data.password);
 
     return authResult.success
         ? right(authResult.user!)

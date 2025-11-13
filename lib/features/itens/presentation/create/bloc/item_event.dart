@@ -49,3 +49,9 @@ class ImagePickerEvent extends ItemEvent {
 
   ImagePickerEvent({required this.file});
 }
+
+class UploadImageEvent extends ItemEvent {
+  final File file;
+
+  UploadImageEvent({required this.file});
+}

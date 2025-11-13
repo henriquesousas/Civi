@@ -15,14 +15,14 @@ import '../../../../core/theme/app_colors.dart';
 import '../../../../core/theme/input_decoration_theme.dart';
 import 'components/header.dart';
 
-class ItemDetailPage extends StatefulWidget {
-  const ItemDetailPage({super.key});
+class StepItemDetailPage extends StatefulWidget {
+  const StepItemDetailPage({super.key});
 
   @override
-  State<ItemDetailPage> createState() => _ItemDetailPageState();
+  State<StepItemDetailPage> createState() => _StepItemDetailPageState();
 }
 
-class _ItemDetailPageState extends State<ItemDetailPage> {
+class _StepItemDetailPageState extends State<StepItemDetailPage> {
   final TextEditingController txtCode = TextEditingController();
   void _updateCode(String code) {
     context.read<CreateItemBloc>().add(ItemCodeChangeEvent(code: code));

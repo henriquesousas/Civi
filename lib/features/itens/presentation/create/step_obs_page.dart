@@ -8,8 +8,8 @@ import 'bloc/create_item_bloc.dart';
 import 'bloc/item_state.dart';
 import 'components/header.dart';
 
-class ItemObsPage extends StatelessWidget {
-  const ItemObsPage({super.key});
+class StepObsPage extends StatelessWidget {
+  const StepObsPage({super.key});
 
   @override
   Widget build(BuildContext context) {

@@ -1,3 +1,6 @@
+import 'package:dartz/dartz.dart';
+import 'package:deehelp/core/wrapper/bloc_command_wrapper.dart';
+import 'package:deehelp/features/itens/domain/usecases/upload/upload_image_usecase.dart';
 import 'package:deehelp/features/itens/presentation/create/bloc/item_event.dart';
 import 'package:deehelp/features/itens/presentation/create/bloc/item_state.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -5,7 +8,10 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../../../core/resources/resources.dart';
 
 class CreateItemBloc extends Bloc<ItemEvent, ItemState> {
-  CreateItemBloc() : super(ItemState.initial()) {
+  final UploadImageUsecase uploadImageUsecase;
+
+  CreateItemBloc({required this.uploadImageUsecase})
+      : super(ItemState.initial()) {
     on<ItemSelectedEvent>(onItemSelect);
     on<LoadItemsEvent>(onLoadItems);
     on<ItemCodeChangeEvent>(onCodeChange);
@@ -14,6 +20,24 @@ class CreateItemBloc extends Bloc<ItemEvent, ItemState> {
     on<ItemObsChangeEvent>(onItemObsChange);
     on<ChangePageEvent>(onChangePage);
     on<ImagePickerEvent>(onImagePicker);
+    on<UploadImageEvent>(uploadImage);
+  }
+
+  Future<void> uploadImage(
+    UploadImageEvent event,
+    Emitter<ItemState> emit,
+  ) async {
+    await BlocCommandWrapper.execute<Unit, ItemState>(
+      currentState: state,
+      emit: emit,
+      command: () => uploadImageUsecase.execute(event.file.path),
+      onLoading: (currentState) =>
+          currentState.copyWith(status: ItemStatus.loading),
+      onSuccess: (currentState, result) =>
+          currentState.copyWith(status: ItemStatus.success),
+      onError: (currentState, error) => currentState.copyWith(
+          status: ItemStatus.error, errorMessage: "Any error"),
+    );
   }
 
   void onCodeChange(

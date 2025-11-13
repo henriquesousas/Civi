@@ -3,9 +3,9 @@ import 'package:deehelp/core/components/dialogs/dialog_extension.dart';
 import 'package:deehelp/core/components/ui_app_bar.dart';
 import 'package:deehelp/features/itens/presentation/create/bloc/create_item_bloc.dart';
 import 'package:deehelp/features/itens/presentation/create/bloc/item_state.dart';
-import 'package:deehelp/features/itens/presentation/create/item_add_photo_page.dart';
-import 'package:deehelp/features/itens/presentation/create/item_detail_page.dart';
-import 'package:deehelp/features/itens/presentation/create/item_summary_page.dart';
+import 'package:deehelp/features/itens/presentation/create/step_add_photo_page.dart';
+import 'package:deehelp/features/itens/presentation/create/step_item_detail_page.dart';
+import 'package:deehelp/features/itens/presentation/create/step_summary_page.dart';
 import 'package:deehelp/shared/animation/fade_slide_transition_animator.dart';
 import 'package:deehelp/shared/extensions/context_extension.dart';
 import 'package:flutter/material.dart';
@@ -15,8 +15,8 @@ import '../../../../core/components/buttons/ui_primary_button.dart';
 import '../../../../core/resources/resources.dart';
 import '../../../../shared/components/progress_indicator/step_indicator.dart';
 import 'bloc/item_event.dart';
-import 'item_choose_type_page.dart';
-import 'item_obs_page.dart';
+import 'step_choose_type_page.dart';
+import 'step_obs_page.dart';
 
 enum ItemStep {
   type,
@@ -47,6 +47,7 @@ class _CreateItemPageState extends State<CreateItemPage> {
   }
 
   void _previous() {
+    context.read<CreateItemBloc>().add(ChangePageEvent(page: -1));
     if (_currentStepIndex > 0) {
       setState(() => _currentStepIndex--);
       _pageController.previousPage(
@@ -68,6 +69,12 @@ class _CreateItemPageState extends State<CreateItemPage> {
         curve: Curves.easeInOut,
       );
     }
+  }
+
+  void _save(ItemState state) {
+    context.read<CreateItemBloc>().add(
+          UploadImageEvent(file: state.photoUrl!),
+        );
   }
 
   void _navigateSpecificPage(int index) {
@@ -114,7 +121,12 @@ class _CreateItemPageState extends State<CreateItemPage> {
     return BlocConsumer<CreateItemBloc, ItemState>(
       listener: (context, state) {
         if (state.status == ItemStatus.updatePage) {
-          if (state.page != null) _navigateSpecificPage(state.page!);
+          if (state.page != null) {
+            final pageIndex = state.page!;
+            if (pageIndex >= 0) {
+              _navigateSpecificPage(state.page!);
+            }
+          }
         }
       },
       builder: (context, state) {
@@ -151,7 +163,9 @@ class _CreateItemPageState extends State<CreateItemPage> {
                 Expanded(
                   child: UIPrimaryButton(
                     text: _handleButtonText(state),
-                    press: _handleButtonState(state) ? _next : null,
+                    press: _handleButtonState(state)
+                        ? (_currentStepIndex == 4 ? () => _save(state) : _next)
+                        : null,
                   ),
                 ),
               ],
@@ -172,11 +186,11 @@ class _CreateItemPageState extends State<CreateItemPage> {
                         controller: _pageController,
                         physics: const NeverScrollableScrollPhysics(),
                         children: const [
-                          ItemChooseTypePage(),
-                          ItemDetailPage(),
-                          ItemObsPage(),
-                          ItemAddPhotoPage(),
-                          ItemSummaryPage(),
+                          StepChooseTypePage(),
+                          StepItemDetailPage(),
+                          StepObsPage(),
+                          StepAddPhotoPage(),
+                          StepSummaryPage(),
                         ],
                       ),
                     ),
