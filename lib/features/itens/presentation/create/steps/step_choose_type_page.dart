@@ -5,9 +5,9 @@ import 'package:deehelp/features/itens/presentation/create/components/header.dar
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../../../../core/resources/resources.dart';
-import 'bloc/item_event.dart';
-import 'utils/type_item_select.dart';
+import '../../../../../core/resources/resources.dart';
+import '../bloc/item_event.dart';
+import '../utils/type_item_select.dart';
 
 class StepChooseTypePage extends StatefulWidget {
   const StepChooseTypePage({super.key});

@@ -18,4 +18,7 @@ class Images {
   String svgProfile = 'assets/svg/profile.svg';
   String svgBookmark = 'assets/svg/bookmark.svg';
   String svgPallet = 'assets/svg/pallete.svg';
+  //Images
+  String successLight = 'assets/images/success.png';
+  String successDark = 'assets/images/success_dark.png';
 }

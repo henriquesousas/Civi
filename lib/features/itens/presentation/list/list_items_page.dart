@@ -18,13 +18,13 @@ class ListItemPage extends StatefulWidget {
 }
 
 class _ListItemPageState extends State<ListItemPage> {
-  List<MyItems> _menuItems = [];
+  List<Item> _menuItems = [];
 
   @override
   void didChangeDependencies() {
     super.didChangeDependencies();
     _menuItems = [
-      MyItems(
+      Item(
         "Wolkswagen Gol",
         "DND0171",
         true,
@@ -32,7 +32,7 @@ class _ListItemPageState extends State<ListItemPage> {
         "https://atribunarj.com.br/uploads/FILES/destacadas/03-01-2025-Carroroubadoerecuperado.webp",
         true,
       ),
-      MyItems(
+      Item(
         "FIAT DUCATO 2.3 - Kleyn Vans",
         "ABC7451",
         true,

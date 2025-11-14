@@ -18,6 +18,7 @@ abstract class Translation with TranslationParts {
   String get addPhoto;
   String get confirm;
   String get next;
+  String get goAhead;
   // Login
   String get loginInfo;
   String get enterCreateAccount;
@@ -71,6 +72,8 @@ abstract class Translation with TranslationParts {
   String get stepAddPhotoBody;
   String get stepSummaryHead;
   String get stepSummaryBody;
+  String get itemRegisterSuccessMessage;
+  String get itemRegisterReceiver;
   List<String> get itemSteps;
 }
 

@@ -12,12 +12,12 @@ import '../utils/type_item_select.dart';
 
 enum ItemStatus {
   initial,
-  updateItemSelected,
-  loadedItemsSuccess,
   updatePage,
   loading,
   success,
-  error;
+  error,
+  loadedItemsSuccess,
+  updateItemSelected;
 }
 
 class ItemState extends Equatable {

@@ -35,7 +35,7 @@ class UISecondaryButton extends StatelessWidget {
           elevation: 0,
           backgroundColor: AppColors.whiteColor,
           shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(12),
+            borderRadius: BorderRadius.circular(borderRadius ?? 12),
           ),
         ),
         child: loading

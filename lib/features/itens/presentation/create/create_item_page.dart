@@ -1,22 +1,25 @@
 import 'package:deehelp/core/components/buttons/ui_outline_button.dart';
 import 'package:deehelp/core/components/dialogs/dialog_extension.dart';
+import 'package:deehelp/core/components/loader/loading.dart';
 import 'package:deehelp/core/components/ui_app_bar.dart';
 import 'package:deehelp/features/itens/presentation/create/bloc/create_item_bloc.dart';
 import 'package:deehelp/features/itens/presentation/create/bloc/item_state.dart';
-import 'package:deehelp/features/itens/presentation/create/step_add_photo_page.dart';
-import 'package:deehelp/features/itens/presentation/create/step_item_detail_page.dart';
-import 'package:deehelp/features/itens/presentation/create/step_summary_page.dart';
+import 'package:deehelp/features/itens/presentation/create/steps/step_add_photo_page.dart';
+import 'package:deehelp/features/itens/presentation/create/steps/step_item_detail_page.dart';
+import 'package:deehelp/features/itens/presentation/create/steps/step_summary_page.dart';
 import 'package:deehelp/shared/animation/fade_slide_transition_animator.dart';
 import 'package:deehelp/shared/extensions/context_extension.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
 
 import '../../../../core/components/buttons/ui_primary_button.dart';
 import '../../../../core/resources/resources.dart';
+import '../../../../core/router/router_constants.dart';
 import '../../../../shared/components/progress_indicator/step_indicator.dart';
 import 'bloc/item_event.dart';
-import 'step_choose_type_page.dart';
-import 'step_obs_page.dart';
+import 'steps/step_choose_type_page.dart';
+import 'steps/step_obs_page.dart';
 
 enum ItemStep {
   type,
@@ -127,6 +130,15 @@ class _CreateItemPageState extends State<CreateItemPage> {
               _navigateSpecificPage(state.page!);
             }
           }
+        }
+
+        if (state.status == ItemStatus.loading) {
+          Loading.instance().show(context: context, text: "Aguarde");
+        }
+
+        if (state.status == ItemStatus.success) {
+          Loading.instance().hide();
+          context.pushReplacement(RouterConstant.itemRegisterSuccess);
         }
       },
       builder: (context, state) {

@@ -10,10 +10,10 @@ import 'package:deehelp/features/itens/presentation/create/components/modal_sele
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../../../../core/resources/resources.dart';
-import '../../../../core/theme/app_colors.dart';
-import '../../../../core/theme/input_decoration_theme.dart';
-import 'components/header.dart';
+import '../../../../../core/resources/resources.dart';
+import '../../../../../core/theme/app_colors.dart';
+import '../../../../../core/theme/input_decoration_theme.dart';
+import '../components/header.dart';
 
 class StepItemDetailPage extends StatefulWidget {
   const StepItemDetailPage({super.key});
@@ -25,7 +25,9 @@ class StepItemDetailPage extends StatefulWidget {
 class _StepItemDetailPageState extends State<StepItemDetailPage> {
   final TextEditingController txtCode = TextEditingController();
   void _updateCode(String code) {
-    context.read<CreateItemBloc>().add(ItemCodeChangeEvent(code: code));
+    context
+        .read<CreateItemBloc>()
+        .add(ItemCodeChangeEvent(code: code.toUpperCase()));
   }
 
   void _handleSelectionModal<T>({
@@ -108,6 +110,7 @@ class _StepItemDetailPageState extends State<StepItemDetailPage> {
                 errorText: state.detailCode.error,
                 labelStyle: hasCode ? selectedLabelStyle : null,
                 enabledBorder: hasCode ? activeBorder : null,
+                upperCase: true,
                 onChanged: (value) => _updateCode(value),
               ),
               UIPrimaryTextField(

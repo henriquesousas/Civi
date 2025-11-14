@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import '../../../app/theme/app_colors_v2.dart';
 
+//TODO: Background para qualquer tela
 class SplashBackgroundAnimation extends StatefulWidget {
   final Widget child;
   const SplashBackgroundAnimation({super.key, required this.child});

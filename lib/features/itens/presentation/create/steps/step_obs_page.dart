@@ -3,10 +3,10 @@ import 'package:deehelp/features/itens/presentation/create/bloc/item_event.dart'
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../../../../core/resources/resources.dart';
-import 'bloc/create_item_bloc.dart';
-import 'bloc/item_state.dart';
-import 'components/header.dart';
+import '../../../../../core/resources/resources.dart';
+import '../bloc/create_item_bloc.dart';
+import '../bloc/item_state.dart';
+import '../components/header.dart';
 
 class StepObsPage extends StatelessWidget {
   const StepObsPage({super.key});

@@ -17,6 +17,7 @@ class RouterConstant {
   static const myItems = "/my_items";
   static const createNewItem = "/create-new-item";
   static const itemEdit = "/item-edit";
+  static const itemRegisterSuccess = "/item-register-success";
   static const occurrences = "/occurrences";
 
   // OLD

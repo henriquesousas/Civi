@@ -19,7 +19,6 @@ class BlocCommandWrapper {
     try {
       // Emit loading state
       emit(onLoading(currentState));
-
       // Execute the use case and handle the result
       final result = await command();
       result.fold(

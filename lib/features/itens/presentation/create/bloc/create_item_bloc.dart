@@ -1,16 +1,18 @@
 import 'package:dartz/dartz.dart';
 import 'package:deehelp/core/wrapper/bloc_command_wrapper.dart';
-import 'package:deehelp/features/itens/domain/usecases/upload/upload_image_usecase.dart';
+import 'package:deehelp/features/itens/domain/usecases/upload/create_item_dto.dart';
+import 'package:deehelp/features/itens/domain/usecases/upload/create_item_usecase.dart';
 import 'package:deehelp/features/itens/presentation/create/bloc/item_event.dart';
 import 'package:deehelp/features/itens/presentation/create/bloc/item_state.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../../../core/resources/resources.dart';
 
 class CreateItemBloc extends Bloc<ItemEvent, ItemState> {
-  final UploadImageUsecase uploadImageUsecase;
+  final CreateItemUsecase createItemUsecase;
 
-  CreateItemBloc({required this.uploadImageUsecase})
+  CreateItemBloc({required this.createItemUsecase})
       : super(ItemState.initial()) {
     on<ItemSelectedEvent>(onItemSelect);
     on<LoadItemsEvent>(onLoadItems);
@@ -22,15 +24,23 @@ class CreateItemBloc extends Bloc<ItemEvent, ItemState> {
     on<ImagePickerEvent>(onImagePicker);
     on<UploadImageEvent>(uploadImage);
   }
-
+//TODO: Remover o Firebase.instance
   Future<void> uploadImage(
     UploadImageEvent event,
     Emitter<ItemState> emit,
   ) async {
+    final dto = CreateItemDto(
+      userId: FirebaseAuth.instance.currentUser!.uid,
+      imageUrl: state.photoUrl!.path,
+      name: "name",
+      code: state.detailCode.code!,
+      year: 0000,
+      type: state.detailItem.selectedItem!.name,
+    );
     await BlocCommandWrapper.execute<Unit, ItemState>(
       currentState: state,
       emit: emit,
-      command: () => uploadImageUsecase.execute(event.file.path),
+      command: () => createItemUsecase.execute(dto),
       onLoading: (currentState) =>
           currentState.copyWith(status: ItemStatus.loading),
       onSuccess: (currentState, result) =>

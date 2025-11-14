@@ -1,3 +1,4 @@
+import 'package:deehelp/core/components/textfields/upper_case_text_formatter.dart';
 import 'package:flutter/material.dart';
 
 import '../../theme/app_colors.dart';
@@ -15,6 +16,7 @@ class UIPrimaryTextField extends StatelessWidget {
   final ValueChanged<String>? onChanged;
   final OutlineInputBorder? enabledBorder;
   final String? initialValue;
+  final bool upperCase;
 
   const UIPrimaryTextField({
     super.key,
@@ -30,6 +32,7 @@ class UIPrimaryTextField extends StatelessWidget {
     this.labelStyle,
     this.enabledBorder,
     this.initialValue,
+    this.upperCase = false,
   });
   @override
   Widget build(BuildContext context) {
@@ -40,9 +43,10 @@ class UIPrimaryTextField extends StatelessWidget {
         child: TextFormField(
           initialValue: initialValue,
           keyboardType: textInputType,
-          textInputAction: TextInputAction.next,
+          textInputAction: TextInputAction.done,
           obscureText: obscureText ?? false,
           maxLines: maxLine,
+          inputFormatters: upperCase ? [UpperCaseTextFormatter()] : null,
           decoration: InputDecoration(
             enabledBorder: enabledBorder,
             labelText: labelText,

@@ -62,6 +62,9 @@ class PtBr with TranslationParts implements Translation {
   @override
   String get next => "Próximo";
 
+  @override
+  String get goAhead => "Continue";
+
   //Onboarding
   //============================================================================
   @override
@@ -217,6 +220,13 @@ class PtBr with TranslationParts implements Translation {
 
   @override
   String get stepSummaryBody => "Reveja as informações";
+
+  @override
+  String get itemRegisterSuccessMessage =>
+      "Obrigado pelo cadastro! Todos os produtos passam por verificação interna para sua segurança. Em breve estará disponível.";
+
+  @override
+  String get itemRegisterReceiver => "Cadastro recebido";
 
   @override
   List<String> get itemSteps => ["Tipo", "Detalhes", "Observação", "Foto"];

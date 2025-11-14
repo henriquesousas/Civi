@@ -7,8 +7,8 @@ import 'package:deehelp/features/itens/presentation/create/components/box_summar
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../../../../core/resources/resources.dart';
-import 'components/header.dart';
+import '../../../../../core/resources/resources.dart';
+import '../components/header.dart';
 
 class StepSummaryPage extends StatelessWidget {
   const StepSummaryPage({super.key});
