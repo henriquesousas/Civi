@@ -1,7 +1,7 @@
 import 'package:deehelp/core/components/buttons/ui_outline_button.dart';
 import 'package:deehelp/core/components/dialogs/dialog_extension.dart';
-import 'package:deehelp/core/components/loader/loading.dart';
 import 'package:deehelp/core/components/ui_app_bar.dart';
+import 'package:deehelp/core/theme/app_colors.dart';
 import 'package:deehelp/features/itens/presentation/create/bloc/create_item_bloc.dart';
 import 'package:deehelp/features/itens/presentation/create/bloc/item_state.dart';
 import 'package:deehelp/features/itens/presentation/create/steps/step_add_photo_page.dart';
@@ -14,6 +14,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 
 import '../../../../core/components/buttons/ui_primary_button.dart';
+import '../../../../core/components/loader/loading.dart';
 import '../../../../core/resources/resources.dart';
 import '../../../../core/router/router_constants.dart';
 import '../../../../shared/components/progress_indicator/step_indicator.dart';
@@ -139,6 +140,21 @@ class _CreateItemPageState extends State<CreateItemPage> {
         if (state.status == ItemStatus.success) {
           Loading.instance().hide();
           context.pushReplacement(RouterConstant.itemRegisterSuccess);
+        }
+
+        if (state.status == ItemStatus.error) {
+          Loading.instance().hide();
+          final snackBar = SnackBar(
+            backgroundColor: AppColors.errorColor,
+            content: Text(state.errorMessage!),
+            // action: SnackBarAction(
+            //   label: 'Undo',
+            //   onPressed: () {},
+            // ),
+            duration: const Duration(seconds: 4),
+          );
+
+          ScaffoldMessenger.of(context).showSnackBar(snackBar);
         }
       },
       builder: (context, state) {

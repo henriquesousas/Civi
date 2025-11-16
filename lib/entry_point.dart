@@ -27,7 +27,7 @@ class _EntryPointState extends State<EntryPoint> {
 
   String _geTitleTopBar() {
     if (_currentIndex == 1) {
-      return "Meus Items";
+      return "Meus Produtos";
     }
 
     if (_currentIndex == 2) {
@@ -54,7 +54,6 @@ class _EntryPointState extends State<EntryPoint> {
 
     return Scaffold(
       appBar: UIAppBar(
-        leading: const SizedBox(),
         title: _geTitleTopBar(),
         actions: [
           IconButton(

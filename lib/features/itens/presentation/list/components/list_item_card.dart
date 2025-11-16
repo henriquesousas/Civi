@@ -61,18 +61,23 @@ class ListItemCard extends StatelessWidget {
                       children: [
                         Expanded(
                           child: Text(
-                            brandName.toUpperCase(),
+                            code,
+                            maxLines: 2,
+                            overflow: TextOverflow.ellipsis,
                             style: Theme.of(context)
                                 .textTheme
-                                .bodyMedium!
-                                .copyWith(fontSize: 12),
-                            overflow: TextOverflow.ellipsis,
+                                .titleMedium
+                                ?.copyWith(
+                                  fontWeight: FontWeight.bold,
+                                ),
                           ),
                         ),
                         Container(
                           padding: const EdgeInsets.symmetric(
-                              horizontal: defaultPadding / 2),
-                          height: 16,
+                            horizontal: defaultPadding,
+                            vertical: defaultPadding / 2,
+                          ),
+                          // height: 16,
                           decoration: BoxDecoration(
                             color: active
                                 ? AppColors.successColor
@@ -82,21 +87,25 @@ class ListItemCard extends StatelessWidget {
                           ),
                           child: Text(
                             active ? "Ativo" : "Inativo",
-                            style: const TextStyle(
-                              color: Colors.white,
-                              fontSize: 10,
-                              fontWeight: FontWeight.w500,
-                            ),
+                            style: Theme.of(context)
+                                .textTheme
+                                .titleSmall
+                                ?.copyWith(
+                                  color: Colors.white,
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 11,
+                                ),
                           ),
                         ),
                       ],
                     ),
-                    const SizedBox(height: defaultPadding / 2),
                     Text(
-                      code,
-                      maxLines: 2,
+                      brandName.toUpperCase(),
+                      style: Theme.of(context)
+                          .textTheme
+                          .bodyMedium!
+                          .copyWith(fontSize: 12),
                       overflow: TextOverflow.ellipsis,
-                      style: Theme.of(context).textTheme.titleMedium!,
                     ),
                     Text(
                       "$year",

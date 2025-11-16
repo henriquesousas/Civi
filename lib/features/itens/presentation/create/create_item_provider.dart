@@ -1,9 +1,11 @@
-import 'package:deehelp/core/services/upload/r2_upload_image.dart';
-import 'package:deehelp/core/services/upload/upload_image.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:deehelp/core/services/upload/media_storage.dart';
+import 'package:deehelp/core/services/upload/r2_media_storage.dart';
+import 'package:deehelp/features/itens/data/remote_item_repository.dart';
+import 'package:deehelp/features/itens/domain/item_repository.dart';
 import 'package:deehelp/features/itens/domain/usecases/upload/create_item_usecase.dart';
 import 'package:deehelp/features/itens/presentation/create/bloc/create_item_bloc.dart';
 import 'package:deehelp/features/itens/presentation/create/create_item_page.dart';
-import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:provider/provider.dart';
@@ -15,16 +17,21 @@ class CreateItemProvider extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiBlocProvider(
       providers: [
-        Provider<FirebaseStorage>(
-          create: (context) => FirebaseStorage.instance,
-        ),
         Provider<MediaStorage>(
-          create: (context) =>
-              R2UploadImage(storage: context.read<FirebaseStorage>()),
+          create: (context) => R2MediaStorage(),
+        ),
+        Provider<ItemRepository>(
+          create: (context) => RemoteItemRepository(
+              firestore: context.read<FirebaseFirestore>()),
         ),
         Provider<CreateItemUsecase>(
-          create: (context) =>
-              CreateItemUsecase(media: context.read<MediaStorage>()),
+          create: (context) => CreateItemUsecase(
+            media: context.read<MediaStorage>(),
+            repository: context.read<ItemRepository>(),
+            bucket: 'deehelp',
+            imageName:
+                'products/${DateTime.now().millisecondsSinceEpoch.toString()}.${"jpeg"}',
+          ),
         ),
         Provider<CreateItemBloc>(
           create: (context) => CreateItemBloc(

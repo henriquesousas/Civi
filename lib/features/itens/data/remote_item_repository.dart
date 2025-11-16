@@ -12,6 +12,10 @@ class RemoteItemRepository implements ItemRepository {
   @override
   Future<void> save(Item item) async {
     final data = ItemModel().toMap(item);
-    await firestore.collection("products").doc(item.userId).set(data);
+    await firestore
+        .collection("users")
+        .doc(item.userId)
+        .collection("products")
+        .add(data);
   }
 }

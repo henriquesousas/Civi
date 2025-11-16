@@ -24,17 +24,15 @@ class StepItemDetailPage extends StatefulWidget {
 
 class _StepItemDetailPageState extends State<StepItemDetailPage> {
   final TextEditingController txtCode = TextEditingController();
-  void _updateCode(String code) {
-    context
-        .read<CreateItemBloc>()
-        .add(ItemCodeChangeEvent(code: code.toUpperCase()));
-  }
+  final FocusNode _txtFocusNodes = FocusNode();
 
-  void _handleSelectionModal<T>({
+  void _handleModal<T>({
     required BuildContext context,
     required Widget Function(void Function(T result) onComplete) modalBuilder,
     required void Function(T result) updateBloc,
   }) async {
+    _unFocus();
+
     final completer = Completer<T?>();
     void onResult(T result) {
       if (!completer.isCompleted) {
@@ -54,8 +52,8 @@ class _StepItemDetailPageState extends State<StepItemDetailPage> {
     }
   }
 
-  void _onTapSelectBrand(BuildContext context) {
-    _handleSelectionModal<String>(
+  void _selectBrand(BuildContext context) {
+    _handleModal<String>(
       context: context,
       modalBuilder: (onComplete) => ModalSelectBrand(
         onChange: (brand) => onComplete(brand),
@@ -66,8 +64,8 @@ class _StepItemDetailPageState extends State<StepItemDetailPage> {
     );
   }
 
-  void _onTapSelectColor(BuildContext context) {
-    _handleSelectionModal<String>(
+  void _selectColor(BuildContext context) {
+    _handleModal<String>(
       context: context,
       modalBuilder: (onComplete) => ModalSelectColor(
         onChange: (color) => onComplete(color),
@@ -76,6 +74,24 @@ class _StepItemDetailPageState extends State<StepItemDetailPage> {
           .read<CreateItemBloc>()
           .add(ItemColorChangeEvent(color: result)),
     );
+  }
+
+  void _changeVehicleCode(String code) {
+    context
+        .read<CreateItemBloc>()
+        .add(ItemCodeChangeEvent(code: code.toUpperCase()));
+  }
+
+  void _unFocus() {
+    if (_txtFocusNodes.hasFocus) {
+      _txtFocusNodes.unfocus();
+    }
+  }
+
+  @override
+  void dispose() {
+    _txtFocusNodes.dispose();
+    super.dispose();
   }
 
   @override
@@ -105,19 +121,20 @@ class _StepItemDetailPageState extends State<StepItemDetailPage> {
               ),
               const SizedBox(height: 32),
               UIPrimaryTextField(
+                focusNode: _txtFocusNodes,
                 initialValue: state.detailCode.code,
                 labelText: R.strings.hintTextVehicleCode,
                 errorText: state.detailCode.error,
                 labelStyle: hasCode ? selectedLabelStyle : null,
                 enabledBorder: hasCode ? activeBorder : null,
                 upperCase: true,
-                onChanged: (value) => _updateCode(value),
+                onChanged: (value) => _changeVehicleCode(value),
               ),
               UIPrimaryTextField(
                 labelText: state.detailBrand.brand ?? R.strings.selectBrand,
                 initialValue: state.detailBrand.brand,
                 labelStyle: hasBrand ? selectedLabelStyle : null,
-                onTap: () => _onTapSelectBrand(context),
+                onTap: () => _selectBrand(context),
                 suffixIcon: Icon(
                   Icons.arrow_circle_down,
                   color: hasBrand
@@ -131,7 +148,7 @@ class _StepItemDetailPageState extends State<StepItemDetailPage> {
                 labelText: state.detailColor.color ?? R.strings.selectColor,
                 labelStyle: hasColor ? selectedLabelStyle : null,
                 enabledBorder: hasColor ? activeBorder : null,
-                onTap: () => _onTapSelectColor(context),
+                onTap: () => _selectColor(context),
                 suffixIcon: Icon(
                   Icons.arrow_circle_down,
                   color: hasColor

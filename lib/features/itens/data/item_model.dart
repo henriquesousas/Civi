@@ -8,10 +8,11 @@ class ItemModel {
       'code': item.code,
       'year': item.year,
       'imageUrl': item.imageUrl,
-      'status': item.status,
-      'type': item.status,
+      'status': item.status.toString(),
+      'type': item.type,
       'userId': item.userId,
-      'createdAt': item.createdAt.millisecondsSinceEpoch,
+      'createdAt': item.createdAt?.millisecondsSinceEpoch ??
+          DateTime.now().microsecondsSinceEpoch,
     };
   }
 

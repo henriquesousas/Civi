@@ -64,6 +64,9 @@ class PtBr with TranslationParts implements Translation {
 
   @override
   String get goAhead => "Continue";
+  @override
+  String get defaultMessageError =>
+      "Não foi possível realizar essa operação, tente novamente mai tarde :(";
 
   //Onboarding
   //============================================================================
@@ -173,7 +176,7 @@ class PtBr with TranslationParts implements Translation {
   String get appNewItemTitle => "Novo item";
 
   @override
-  String get addNewItem => "Adicionar novo item";
+  String get addNewItem => "Novo produto";
 
   @override
   String get stepOneHeader => "Qual é o seu produto";

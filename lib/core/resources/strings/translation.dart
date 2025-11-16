@@ -19,6 +19,7 @@ abstract class Translation with TranslationParts {
   String get confirm;
   String get next;
   String get goAhead;
+  String get defaultMessageError;
   // Login
   String get loginInfo;
   String get enterCreateAccount;

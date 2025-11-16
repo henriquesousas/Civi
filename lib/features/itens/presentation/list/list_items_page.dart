@@ -1,13 +1,12 @@
 import 'package:deehelp/core/router/router_constants.dart';
 import 'package:deehelp/features/itens/domain/entities/my_items.dart';
+import 'package:deehelp/features/itens/domain/item_status.dart';
 import 'package:deehelp/features/itens/presentation/list/components/list_item_card.dart';
 import 'package:deehelp/shared/animation/fade_slide_transition_animator.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
-import '../../../../core/components/buttons/ui_outline_button.dart';
 import '../../../../core/resources/resources.dart';
-import '../../../../core/theme/app_colors.dart';
 import '../../../../core/theme/constants.dart';
 
 class ListItemPage extends StatefulWidget {
@@ -25,20 +24,26 @@ class _ListItemPageState extends State<ListItemPage> {
     super.didChangeDependencies();
     _menuItems = [
       Item(
-        "Wolkswagen Gol",
-        "DND0171",
-        true,
-        2022,
-        "https://atribunarj.com.br/uploads/FILES/destacadas/03-01-2025-Carroroubadoerecuperado.webp",
-        true,
+        id: '123',
+        name: 'Teste',
+        code: 'DND0171',
+        year: 2010,
+        imageUrl:
+            'https://pub-0366da0e0a6d49998a77e988d464e762.r2.dev/products/1763224036114.jpeg',
+        status: ItemStatus.pending,
+        type: 'Carro',
+        userId: '123',
       ),
       Item(
-        "FIAT DUCATO 2.3 - Kleyn Vans",
-        "ABC7451",
-        true,
-        2024,
-        "https://d2e5b8shawuel2.cloudfront.net/vehicle/310033/hrv/original.jpg",
-        false,
+        id: '123',
+        name: 'Teste',
+        code: 'JDEH71',
+        year: 2010,
+        imageUrl:
+            'https://pub-0366da0e0a6d49998a77e988d464e762.r2.dev/products/1763224036114.jpeg',
+        status: ItemStatus.active,
+        type: 'Caminhao',
+        userId: '123',
       ),
     ];
   }
@@ -49,7 +54,26 @@ class _ListItemPageState extends State<ListItemPage> {
       backgroundColor: Colors.grey[50],
       body: FadeSlideTransitionAnimator(
         child: Column(
+          mainAxisAlignment: MainAxisAlignment.start,
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
+            const SizedBox(height: 10),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 20),
+              child: ElevatedButton.icon(
+                onPressed: () => context.push(RouterConstant.createNewItem),
+                label: Text(R.strings.addNewItem),
+                icon: const Icon(Icons.add),
+                style: ElevatedButton.styleFrom(
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: 16,
+                    vertical: 8,
+                  ),
+                  minimumSize: Size.zero,
+                  alignment: Alignment.center,
+                ),
+              ),
+            ),
             Expanded(
               child: ListView.builder(
                 physics: const BouncingScrollPhysics(),
@@ -66,20 +90,11 @@ class _ListItemPageState extends State<ListItemPage> {
                       brandName: item.name,
                       code: item.code,
                       year: item.year,
-                      active: item.active,
+                      active: true,
                       press: () => context.push(RouterConstant.itemEdit),
                     ),
                   );
                 },
-              ),
-            ),
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 20),
-              child: UIOutlineButton(
-                borderColor: AppColors.lightGreyColor20,
-                textColor: AppColors.whileColor10,
-                text: R.strings.addNewItem,
-                press: () => context.push(RouterConstant.createNewItem),
               ),
             ),
           ],

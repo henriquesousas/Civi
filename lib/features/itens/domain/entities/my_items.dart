@@ -9,7 +9,7 @@ class Item {
   final ItemStatus status;
   final String type;
   final String userId;
-  final String? imageUrl;
+  String? imageUrl;
   DateTime? createdAt;
 
   Item({
@@ -28,7 +28,7 @@ class Item {
 
   factory Item.from(CreateItemDto dto) {
     return Item(
-      id: "122",
+      id: dto.userId,
       name: dto.name,
       code: dto.code,
       type: dto.type,
@@ -37,5 +37,9 @@ class Item {
       userId: dto.userId,
       status: ItemStatus.pending,
     );
+  }
+
+  void changeUrl(final String newUrl) {
+    imageUrl = newUrl;
   }
 }

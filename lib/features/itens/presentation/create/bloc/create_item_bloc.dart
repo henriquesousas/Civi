@@ -1,5 +1,6 @@
 import 'package:dartz/dartz.dart';
 import 'package:deehelp/core/wrapper/bloc_command_wrapper.dart';
+import 'package:deehelp/features/itens/domain/item_exception.dart';
 import 'package:deehelp/features/itens/domain/usecases/upload/create_item_dto.dart';
 import 'package:deehelp/features/itens/domain/usecases/upload/create_item_usecase.dart';
 import 'package:deehelp/features/itens/presentation/create/bloc/item_event.dart';
@@ -9,6 +10,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../../../core/resources/resources.dart';
 
+//TODO: Remover o Firebase.instance
 class CreateItemBloc extends Bloc<ItemEvent, ItemState> {
   final CreateItemUsecase createItemUsecase;
 
@@ -24,7 +26,7 @@ class CreateItemBloc extends Bloc<ItemEvent, ItemState> {
     on<ImagePickerEvent>(onImagePicker);
     on<UploadImageEvent>(uploadImage);
   }
-//TODO: Remover o Firebase.instance
+
   Future<void> uploadImage(
     UploadImageEvent event,
     Emitter<ItemState> emit,
@@ -46,7 +48,8 @@ class CreateItemBloc extends Bloc<ItemEvent, ItemState> {
       onSuccess: (currentState, result) =>
           currentState.copyWith(status: ItemStatus.success),
       onError: (currentState, error) => currentState.copyWith(
-          status: ItemStatus.error, errorMessage: "Any error"),
+          status: ItemStatus.error,
+          errorMessage: (error as ItemException).message),
     );
   }
 

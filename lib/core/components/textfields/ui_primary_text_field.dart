@@ -5,6 +5,7 @@ import '../../theme/app_colors.dart';
 
 class UIPrimaryTextField extends StatelessWidget {
   final String labelText;
+  final bool upperCase;
   final Widget? prefixIcon;
   final Widget? suffixIcon;
   final String? errorText;
@@ -16,7 +17,7 @@ class UIPrimaryTextField extends StatelessWidget {
   final ValueChanged<String>? onChanged;
   final OutlineInputBorder? enabledBorder;
   final String? initialValue;
-  final bool upperCase;
+  final FocusNode? focusNode;
 
   const UIPrimaryTextField({
     super.key,
@@ -33,6 +34,7 @@ class UIPrimaryTextField extends StatelessWidget {
     this.enabledBorder,
     this.initialValue,
     this.upperCase = false,
+    this.focusNode,
   });
   @override
   Widget build(BuildContext context) {
@@ -41,6 +43,7 @@ class UIPrimaryTextField extends StatelessWidget {
       child: AbsorbPointer(
         absorbing: onTap != null, //
         child: TextFormField(
+          focusNode: focusNode,
           initialValue: initialValue,
           keyboardType: textInputType,
           textInputAction: TextInputAction.done,

@@ -24,7 +24,7 @@ class StepSummaryPage extends StatelessWidget {
         listener: (context, state) {},
         builder: (context, state) {
           return Column(
-            spacing: 1,
+            spacing: 10,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Header(
@@ -35,7 +35,7 @@ class StepSummaryPage extends StatelessWidget {
               UISimpleContainer(
                 press: () => navigate(0),
                 children: [
-                  const BoxSummaryHeader(title: "Tipo"),
+                  BoxSummaryHeader(title: R.strings.itemSteps[0]),
                   Text(
                     state.detailItem.selectedItem?.name ?? "",
                     style: Theme.of(context).textTheme.bodySmall,
@@ -45,7 +45,7 @@ class StepSummaryPage extends StatelessWidget {
               UISimpleContainer(
                 press: () => navigate(1),
                 children: [
-                  const BoxSummaryHeader(title: "Detalhes"),
+                  BoxSummaryHeader(title: R.strings.itemSteps[1]),
                   const SizedBox(height: 8),
                   Column(
                     children: state
@@ -81,7 +81,7 @@ class StepSummaryPage extends StatelessWidget {
               UISimpleContainer(
                 press: () => navigate(2),
                 children: [
-                  const BoxSummaryHeader(title: "Observações"),
+                  BoxSummaryHeader(title: R.strings.itemSteps[2]),
                   Text(
                     (state.itemObs.value?.isEmpty ?? true)
                         ? "Não informado"
@@ -95,7 +95,7 @@ class StepSummaryPage extends StatelessWidget {
               UISimpleContainer(
                 press: () => navigate(3),
                 children: [
-                  const BoxSummaryHeader(title: "Fotos"),
+                  BoxSummaryHeader(title: R.strings.itemSteps[3]),
                   const SizedBox(height: 12),
                   SizedBox(
                     height: 120,
