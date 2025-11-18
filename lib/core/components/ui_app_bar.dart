@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:go_router/go_router.dart';
 
 class UIAppBar extends StatelessWidget implements PreferredSizeWidget {
   final String title;
@@ -20,16 +19,12 @@ class UIAppBar extends StatelessWidget implements PreferredSizeWidget {
       centerTitle: false,
       title: Text(
         title,
-        style: Theme.of(context).textTheme.headlineSmall?.copyWith(
+        style: Theme.of(context).textTheme.titleLarge?.copyWith(
               fontWeight: FontWeight.bold,
             ),
       ),
       elevation: 0,
-      leading: leading ??
-          IconButton(
-            onPressed: () => context.pop(),
-            icon: const Icon(Icons.arrow_back),
-          ),
+      leading: leading,
       actions: actions,
       automaticallyImplyLeading: false,
     );

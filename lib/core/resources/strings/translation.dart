@@ -43,7 +43,7 @@ abstract class Translation with TranslationParts {
   String get exitApp;
   String get faq;
   String get help;
-  String get myItems;
+  String get myProducts;
   String get lastOccurrences;
   String get favorites;
   String get search;

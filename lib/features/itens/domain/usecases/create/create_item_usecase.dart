@@ -8,10 +8,10 @@ import 'package:deehelp/core/services/upload/upload_info.dart';
 import 'package:deehelp/features/itens/domain/entities/my_items.dart';
 import 'package:deehelp/features/itens/domain/item_exception.dart';
 import 'package:deehelp/features/itens/domain/item_repository.dart';
-import 'package:deehelp/features/itens/domain/usecases/upload/create_item_dto.dart';
 import 'package:logging/logging.dart';
 
 import '../../../../../core/resources/resources.dart';
+import 'create_item_dto.dart';
 
 class CreateItemUsecase extends UseCase<CreateItemDto, Unit> {
   static final _logger = Logger("CreateItemUsecase");

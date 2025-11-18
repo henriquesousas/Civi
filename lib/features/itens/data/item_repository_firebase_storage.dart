@@ -4,18 +4,35 @@ import 'package:deehelp/features/itens/domain/item_repository.dart';
 
 import 'item_model.dart';
 
-class RemoteItemRepository implements ItemRepository {
-  final FirebaseFirestore firestore;
+class ItemRepositoryFirebaseStorage implements ItemRepository {
+  final FirebaseFirestore _firestore;
 
-  RemoteItemRepository({required this.firestore});
+  ItemRepositoryFirebaseStorage({required FirebaseFirestore firestore})
+      : _firestore = firestore;
 
   @override
   Future<void> save(Item item) async {
-    final data = ItemModel().toMap(item);
-    await firestore
+    final data = ItemModel.toMap(item);
+    await _firestore
         .collection("users")
         .doc(item.userId)
         .collection("products")
         .add(data);
+  }
+
+  @override
+  Future<List<Item>> getByUser(String userId) async {
+    {
+      final querySnapshot = await _firestore
+          .collection("users")
+          .doc(userId)
+          .collection("products")
+          .get();
+
+      return querySnapshot.docs.map((doc) {
+        final data = doc.data();
+        return ItemModel.fromMap(data);
+      }).toList();
+    }
   }
 }

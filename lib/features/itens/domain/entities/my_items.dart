@@ -1,6 +1,7 @@
 import '../item_status.dart';
-import '../usecases/upload/create_item_dto.dart';
+import '../usecases/create/create_item_dto.dart';
 
+//TODO: Renomear para product
 class Item {
   final String id;
   final String name;

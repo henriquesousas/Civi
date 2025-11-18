@@ -142,7 +142,7 @@ class PtBr with TranslationParts implements Translation {
   String get lastOccurrences => "Útimas ocorrências";
 
   @override
-  String get myItems => "Meus itens";
+  String get myProducts => "Meus produtos";
 
   @override
   String get search => "Consultar";
@@ -176,7 +176,7 @@ class PtBr with TranslationParts implements Translation {
   String get appNewItemTitle => "Novo item";
 
   @override
-  String get addNewItem => "Novo produto";
+  String get addNewItem => "Novo";
 
   @override
   String get stepOneHeader => "Qual é o seu produto";

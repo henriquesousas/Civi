@@ -22,7 +22,7 @@ class ProfilePreferenceCard extends StatelessWidget {
             child: Column(
               children: [
                 ProfileMenuListTile(
-                  text: R.strings.myItems,
+                  text: R.strings.myProducts,
                   svgSrc: R.images.svgOrder,
                   press: () {},
                 ),

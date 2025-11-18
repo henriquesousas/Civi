@@ -29,7 +29,7 @@ class ProfileCard extends StatelessWidget {
       leading: CircleAvatar(
         radius: 28,
         child: UINetworkImageWithLoader(
-          photoUrl,
+          src: photoUrl,
           radius: 100,
         ),
       ),

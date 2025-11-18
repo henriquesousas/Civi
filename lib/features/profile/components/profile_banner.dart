@@ -15,7 +15,8 @@ class ProfileBanner extends StatelessWidget {
         onTap: () {},
         child: const AspectRatio(
           aspectRatio: 1.8,
-          child: UINetworkImageWithLoader("https://i.imgur.com/dz0BBom.png"),
+          child:
+              UINetworkImageWithLoader(src: "https://i.imgur.com/dz0BBom.png"),
         ),
       ),
     );

@@ -1,40 +1,44 @@
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:deehelp/core/components/images/ui_image_place_holder_widget.dart';
+import 'package:deehelp/core/theme/constants.dart';
 import 'package:flutter/material.dart';
-
-import '../../theme/app_colors.dart';
-import '../../theme/constants.dart';
-import '../skeleton/skeleton.dart';
 
 class UINetworkImageWithLoader extends StatelessWidget {
   final BoxFit fit;
-
-  const UINetworkImageWithLoader(
-    this.src, {
-    super.key,
-    this.fit = BoxFit.cover,
-    this.radius = defaultPadding,
-  });
-
   final String src;
   final double radius;
+  final double? width;
+  final double? height;
+
+  const UINetworkImageWithLoader({
+    super.key,
+    this.fit = BoxFit.cover,
+    this.radius = defaultBorderRadius,
+    this.width = 60,
+    this.height = 60,
+    required this.src,
+  });
 
   @override
   Widget build(BuildContext context) {
     return ClipRRect(
       borderRadius: BorderRadius.all(Radius.circular(radius)),
       child: CachedNetworkImage(
+        width: width,
+        height: height,
         fit: fit,
         imageUrl: src,
-        imageBuilder: (context, imageProvider) => Container(
-          decoration: BoxDecoration(
-            image: DecorationImage(
-              image: imageProvider,
-              fit: fit,
+        progressIndicatorBuilder: (context, url, downloadProgress) => Container(
+          color: Colors.grey[200],
+          child: Center(
+            child: CircularProgressIndicator(
+              value: downloadProgress.progress,
+              strokeWidth: 2,
+              color: Colors.grey[400],
             ),
           ),
         ),
-        placeholder: (context, url) => const Skeleton(),
-        errorWidget: (context, url, error) => const Icon(Icons.error),
+        errorWidget: (context, url, error) => const UIImagePlaceHolderWidget(),
       ),
     );
   }

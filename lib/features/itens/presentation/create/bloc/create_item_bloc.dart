@@ -1,14 +1,14 @@
 import 'package:dartz/dartz.dart';
 import 'package:deehelp/core/wrapper/bloc_command_wrapper.dart';
 import 'package:deehelp/features/itens/domain/item_exception.dart';
-import 'package:deehelp/features/itens/domain/usecases/upload/create_item_dto.dart';
-import 'package:deehelp/features/itens/domain/usecases/upload/create_item_usecase.dart';
 import 'package:deehelp/features/itens/presentation/create/bloc/item_event.dart';
 import 'package:deehelp/features/itens/presentation/create/bloc/item_state.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../../../core/resources/resources.dart';
+import '../../../domain/usecases/create/create_item_dto.dart';
+import '../../../domain/usecases/create/create_item_usecase.dart';
 
 //TODO: Remover o Firebase.instance
 class CreateItemBloc extends Bloc<ItemEvent, ItemState> {

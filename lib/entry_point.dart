@@ -1,6 +1,6 @@
 import 'package:animations/animations.dart';
-import 'package:deehelp/core/components/ui_app_bar.dart';
 import 'package:deehelp/core/theme/app_colors.dart';
+import 'package:deehelp/features/itens/presentation/list/list_product_provider.dart';
 import 'package:deehelp/features/profile/profile_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -8,7 +8,6 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'core/resources/resources.dart';
 import 'core/theme/constants.dart';
 import 'features/home/home_view.dart';
-import 'features/itens/presentation/list/list_items_page.dart';
 
 class EntryPoint extends StatefulWidget {
   const EntryPoint({super.key});
@@ -20,7 +19,7 @@ class EntryPoint extends StatefulWidget {
 class _EntryPointState extends State<EntryPoint> {
   final List _pages = const [
     HomeView(),
-    ListItemPage(),
+    ListProductProvider(),
     ProfilePage(),
   ];
   int _currentIndex = 0;
@@ -53,32 +52,31 @@ class _EntryPointState extends State<EntryPoint> {
     }
 
     return Scaffold(
-      appBar: UIAppBar(
-        title: _geTitleTopBar(),
-        actions: [
-          IconButton(
-            onPressed: () {},
-            icon: SvgPicture.asset(
-              R.images.svgSearch,
-              height: 24,
-              colorFilter: ColorFilter.mode(
-                  Theme.of(context).textTheme.bodyLarge!.color!,
-                  BlendMode.srcIn),
-            ),
-          ),
-          IconButton(
-            onPressed: () {},
-            icon: SvgPicture.asset(
-              R.images.svgNotification,
-              height: 24,
-              colorFilter: ColorFilter.mode(
-                  Theme.of(context).textTheme.bodyLarge!.color!,
-                  BlendMode.srcIn),
-            ),
-          ),
-        ],
-      ),
-      // body: _pages[_currentIndex],
+      // appBar: UIAppBar(
+      //   title: _geTitleTopBar(),
+      //   actions: [
+      //     IconButton(
+      //       onPressed: () {},
+      //       icon: SvgPicture.asset(
+      //         R.images.svgSearch,
+      //         height: 24,
+      //         colorFilter: ColorFilter.mode(
+      //             Theme.of(context).textTheme.bodyLarge!.color!,
+      //             BlendMode.srcIn),
+      //       ),
+      //     ),
+      //     IconButton(
+      //       onPressed: () {},
+      //       icon: SvgPicture.asset(
+      //         R.images.svgNotification,
+      //         height: 24,
+      //         colorFilter: ColorFilter.mode(
+      //             Theme.of(context).textTheme.bodyLarge!.color!,
+      //             BlendMode.srcIn),
+      //       ),
+      //     ),
+      //   ],
+      // ),
       body: PageTransitionSwitcher(
         duration: defaultDuration,
         transitionBuilder: (child, animation, secondAnimation) {
@@ -123,7 +121,7 @@ class _EntryPointState extends State<EntryPoint> {
               icon: svgIcon(R.images.svgCategory),
               activeIcon:
                   svgIcon(R.images.svgCategory, color: AppColors.primaryColor),
-              label: R.strings.myItems,
+              label: R.strings.myProducts,
             ),
             BottomNavigationBarItem(
               icon: svgIcon(R.images.svgProfile),

@@ -1,6 +1,5 @@
 import 'package:deehelp/core/router/router_constants.dart';
 import 'package:deehelp/core/router/slide_transition_page.dart';
-import 'package:deehelp/entry_point.dart';
 import 'package:deehelp/features/home/home_view.dart';
 import 'package:deehelp/features/occurrence/occurrence_detail_page.dart';
 import 'package:deehelp/features/occurrence/occurrence_page.dart';
@@ -10,6 +9,7 @@ import 'package:deehelp/features/splash/splash_page.dart';
 import 'package:deehelp/features/welcome/old/welcome_provider.dart';
 import 'package:go_router/go_router.dart';
 
+import '../../entry_point.dart';
 import 'auth_router.dart';
 import 'item_router.dart';
 import 'onboarding_router.dart';
