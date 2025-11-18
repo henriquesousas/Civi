@@ -13,7 +13,6 @@ class ListProductState with _$ListProductState {
   ) = _ListProductStateSuccess;
 
   const factory ListProductState.error(String message) = _ListProductStateError;
-  const factory ListProductState.empty() = _UserStateEmpty;
-  const factory ListProductState.filterEmpty(String filterType) =
-      _UserStateFilterEmpty;
+  const factory ListProductState.empty() = _ListProductStateEmpty;
+  const factory ListProductState.delete() = _ListProductStateDelete;
 }

@@ -1,5 +1,7 @@
+import 'package:dartz/dartz.dart';
 import 'package:deehelp/core/wrapper/command_cubit.dart';
 import 'package:deehelp/features/itens/domain/entities/my_items.dart';
+import 'package:deehelp/features/itens/domain/usecases/delete/delete_product_usecase.dart';
 import 'package:deehelp/features/itens/domain/usecases/list/get_products_by_user_usecase.dart';
 import 'package:deehelp/features/itens/presentation/list/bloc/list_product_state.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -9,11 +11,15 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 class ListProductCubit extends Cubit<ListProductState> {
   static final String _todos = "Todos";
   final GetProductsByUserUsecase _usecase;
+  final DeleteProductUsecase _deleteProductUsecase;
   List<Item> _filteredItems = [];
   List<Item> _items = [];
 
-  ListProductCubit({required GetProductsByUserUsecase usecase})
-      : _usecase = usecase,
+  ListProductCubit({
+    required GetProductsByUserUsecase usecase,
+    required DeleteProductUsecase deleteProductUsecase,
+  })  : _usecase = usecase,
+        _deleteProductUsecase = deleteProductUsecase,
         super(const ListProductState.initial());
 
   Future<void> fetchItems() async {
@@ -26,7 +32,9 @@ class ListProductCubit extends Cubit<ListProductState> {
       onError: (error) => const ListProductState.empty(),
       onSuccess: (items) {
         _items = items;
-        return ListProductState.success(items, _todos);
+        return items.isEmpty
+            ? const ListProductState.empty()
+            : ListProductState.success(items, _todos);
       },
     );
   }
@@ -42,5 +50,17 @@ class ListProductCubit extends Cubit<ListProductState> {
     } else {
       emit(ListProductState.success([], param));
     }
+  }
+
+  Future<void> delete() async {
+    final userId = FirebaseAuth.instance.currentUser?.uid;
+    if (userId == null) emit(const ListProductState.error("Any"));
+    await CommandCubit.execute<Unit, ListProductState>(
+      emit: emit,
+      command: () => _deleteProductUsecase.execute(userId!),
+      onLoading: () => const ListProductState.loading(),
+      onError: (error) => const ListProductState.empty(),
+      onSuccess: (unit) => const ListProductState.delete(),
+    );
   }
 }

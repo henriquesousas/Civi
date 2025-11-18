@@ -29,7 +29,7 @@ class Item {
 
   factory Item.from(CreateItemDto dto) {
     return Item(
-      id: dto.userId,
+      id: "456",
       name: dto.name,
       code: dto.code,
       type: dto.type,

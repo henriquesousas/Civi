@@ -4,6 +4,7 @@ import 'package:deehelp/features/itens/presentation/list/bloc/list_product_state
 import 'package:deehelp/features/itens/presentation/list/components/item_add_new_widget.dart';
 import 'package:deehelp/features/itens/presentation/list/components/item_modal_widget.dart';
 import 'package:deehelp/shared/animation/fade_slide_transition_animator.dart';
+import 'package:deehelp/shared/extensions/screen_size_extension.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
@@ -29,87 +30,6 @@ class _ListItemPageState extends State<ListItemPage> {
     context.read<ListProductCubit>().fetchItems();
     super.initState();
   }
-  //
-  // void _showOptions(BuildContext context, Item item) {
-  //   customModalBottomSheet(
-  //     context,
-  //     child: Padding(
-  //       padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 16),
-  //       child: Column(
-  //         mainAxisSize: MainAxisSize.min,
-  //         children: [
-  //           // Handle do bottom sheet
-  //           Container(
-  //             width: 40,
-  //             height: 4,
-  //             decoration: BoxDecoration(
-  //               color: Colors.grey[300],
-  //               borderRadius: BorderRadius.circular(2),
-  //             ),
-  //           ),
-  //           const SizedBox(height: 20),
-  //           Text(
-  //             item.name,
-  //             style: Theme.of(context).textTheme.titleMedium?.copyWith(
-  //                   fontWeight: FontWeight.w600,
-  //                 ),
-  //           ),
-  //           const SizedBox(height: 16),
-  //           const Divider(height: 1, color: Color(0xFFF3F4F6)),
-  //           // Opções
-  //           _buildOptionItem(
-  //             context: context,
-  //             icon: Icons.edit_outlined,
-  //             title: 'Editar',
-  //             color: Color(0xFF6B7280),
-  //             onTap: () {},
-  //           ),
-  //           _buildOptionItem(
-  //             context: context,
-  //             icon: Icons.delete_outline,
-  //             title: 'Excluir',
-  //             color: Color(0xFFEF4444),
-  //             onTap: () {},
-  //           ),
-  //           const SizedBox(height: 16),
-  //         ],
-  //       ),
-  //     ),
-  //   );
-  // }
-  //
-  // Widget _buildOptionItem({
-  //   required BuildContext context,
-  //   required IconData icon,
-  //   required String title,
-  //   required Color color,
-  //   required VoidCallback onTap,
-  // }) {
-  //   return ListTile(
-  //     leading: Container(
-  //       width: 36,
-  //       height: 36,
-  //       decoration: BoxDecoration(
-  //         color: color.withValues(alpha: 0.1),
-  //         borderRadius: BorderRadius.circular(10),
-  //       ),
-  //       child: Icon(icon, color: color, size: 20),
-  //     ),
-  //     title: Text(
-  //       title,
-  //       style: Theme.of(context)
-  //           .textTheme
-  //           .titleSmall
-  //           ?.copyWith(fontWeight: FontWeight.normal),
-  //     ),
-  //     trailing: Icon(Icons.chevron_right, color: Colors.grey[400], size: 20),
-  //     contentPadding: const EdgeInsets.symmetric(vertical: 4),
-  //     onTap: () {
-  //       Navigator.pop(context);
-  //       onTap();
-  //     },
-  //   );
-  // }
 
   @override
   Widget build(BuildContext context) {
@@ -177,7 +97,14 @@ class _ListItemPageState extends State<ListItemPage> {
                               onMenuPress: () {
                                 customModalBottomSheet(
                                   context,
-                                  child: ItemModalWidget(item: item),
+                                  height: context.percentHeight(0.3),
+                                  child: ItemModalWidget(
+                                    item: item,
+                                    onDelete: () => context
+                                        .read<ListProductCubit>()
+                                        .delete(),
+                                    onEdit: () {},
+                                  ),
                                 );
                               },
                             ),

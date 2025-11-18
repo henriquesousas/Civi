@@ -35,15 +35,15 @@ class ModalSelectBrand extends StatelessWidget {
       padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
       child: Column(
         children: [
-          Container(
-            margin: const EdgeInsets.only(bottom: 8),
-            width: 40,
-            height: 4,
-            decoration: BoxDecoration(
-              color: Colors.grey[300],
-              borderRadius: BorderRadius.circular(2),
-            ),
-          ),
+          // Container(
+          //   margin: const EdgeInsets.only(bottom: 8),
+          //   width: 40,
+          //   height: 4,
+          //   decoration: BoxDecoration(
+          //     color: Colors.grey[300],
+          //     borderRadius: BorderRadius.circular(2),
+          //   ),
+          // ),
           Text(R.strings.selectBrand),
           Expanded(
             child: ListView.separated(

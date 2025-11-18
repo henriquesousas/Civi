@@ -55,8 +55,8 @@ extension ListProductStatePatterns on ListProductState {
     TResult Function(_ListProductStateLoading value)? loading,
     TResult Function(_ListProductStateSuccess value)? success,
     TResult Function(_ListProductStateError value)? error,
-    TResult Function(_UserStateEmpty value)? empty,
-    TResult Function(_UserStateFilterEmpty value)? filterEmpty,
+    TResult Function(_ListProductStateEmpty value)? empty,
+    TResult Function(_ListProductStateDelete value)? delete,
     required TResult orElse(),
   }) {
     final _that = this;
@@ -69,10 +69,10 @@ extension ListProductStatePatterns on ListProductState {
         return success(_that);
       case _ListProductStateError() when error != null:
         return error(_that);
-      case _UserStateEmpty() when empty != null:
+      case _ListProductStateEmpty() when empty != null:
         return empty(_that);
-      case _UserStateFilterEmpty() when filterEmpty != null:
-        return filterEmpty(_that);
+      case _ListProductStateDelete() when delete != null:
+        return delete(_that);
       case _:
         return orElse();
     }
@@ -97,8 +97,8 @@ extension ListProductStatePatterns on ListProductState {
     required TResult Function(_ListProductStateLoading value) loading,
     required TResult Function(_ListProductStateSuccess value) success,
     required TResult Function(_ListProductStateError value) error,
-    required TResult Function(_UserStateEmpty value) empty,
-    required TResult Function(_UserStateFilterEmpty value) filterEmpty,
+    required TResult Function(_ListProductStateEmpty value) empty,
+    required TResult Function(_ListProductStateDelete value) delete,
   }) {
     final _that = this;
     switch (_that) {
@@ -110,10 +110,10 @@ extension ListProductStatePatterns on ListProductState {
         return success(_that);
       case _ListProductStateError():
         return error(_that);
-      case _UserStateEmpty():
+      case _ListProductStateEmpty():
         return empty(_that);
-      case _UserStateFilterEmpty():
-        return filterEmpty(_that);
+      case _ListProductStateDelete():
+        return delete(_that);
       case _:
         throw StateError('Unexpected subclass');
     }
@@ -137,8 +137,8 @@ extension ListProductStatePatterns on ListProductState {
     TResult? Function(_ListProductStateLoading value)? loading,
     TResult? Function(_ListProductStateSuccess value)? success,
     TResult? Function(_ListProductStateError value)? error,
-    TResult? Function(_UserStateEmpty value)? empty,
-    TResult? Function(_UserStateFilterEmpty value)? filterEmpty,
+    TResult? Function(_ListProductStateEmpty value)? empty,
+    TResult? Function(_ListProductStateDelete value)? delete,
   }) {
     final _that = this;
     switch (_that) {
@@ -150,10 +150,10 @@ extension ListProductStatePatterns on ListProductState {
         return success(_that);
       case _ListProductStateError() when error != null:
         return error(_that);
-      case _UserStateEmpty() when empty != null:
+      case _ListProductStateEmpty() when empty != null:
         return empty(_that);
-      case _UserStateFilterEmpty() when filterEmpty != null:
-        return filterEmpty(_that);
+      case _ListProductStateDelete() when delete != null:
+        return delete(_that);
       case _:
         return null;
     }
@@ -178,7 +178,7 @@ extension ListProductStatePatterns on ListProductState {
     TResult Function(List<Item> items, String selectedFilter)? success,
     TResult Function(String message)? error,
     TResult Function()? empty,
-    TResult Function(String filterType)? filterEmpty,
+    TResult Function()? delete,
     required TResult orElse(),
   }) {
     final _that = this;
@@ -191,10 +191,10 @@ extension ListProductStatePatterns on ListProductState {
         return success(_that.items, _that.selectedFilter);
       case _ListProductStateError() when error != null:
         return error(_that.message);
-      case _UserStateEmpty() when empty != null:
+      case _ListProductStateEmpty() when empty != null:
         return empty();
-      case _UserStateFilterEmpty() when filterEmpty != null:
-        return filterEmpty(_that.filterType);
+      case _ListProductStateDelete() when delete != null:
+        return delete();
       case _:
         return orElse();
     }
@@ -220,7 +220,7 @@ extension ListProductStatePatterns on ListProductState {
     required TResult Function(List<Item> items, String selectedFilter) success,
     required TResult Function(String message) error,
     required TResult Function() empty,
-    required TResult Function(String filterType) filterEmpty,
+    required TResult Function() delete,
   }) {
     final _that = this;
     switch (_that) {
@@ -232,10 +232,10 @@ extension ListProductStatePatterns on ListProductState {
         return success(_that.items, _that.selectedFilter);
       case _ListProductStateError():
         return error(_that.message);
-      case _UserStateEmpty():
+      case _ListProductStateEmpty():
         return empty();
-      case _UserStateFilterEmpty():
-        return filterEmpty(_that.filterType);
+      case _ListProductStateDelete():
+        return delete();
       case _:
         throw StateError('Unexpected subclass');
     }
@@ -260,7 +260,7 @@ extension ListProductStatePatterns on ListProductState {
     TResult? Function(List<Item> items, String selectedFilter)? success,
     TResult? Function(String message)? error,
     TResult? Function()? empty,
-    TResult? Function(String filterType)? filterEmpty,
+    TResult? Function()? delete,
   }) {
     final _that = this;
     switch (_that) {
@@ -272,10 +272,10 @@ extension ListProductStatePatterns on ListProductState {
         return success(_that.items, _that.selectedFilter);
       case _ListProductStateError() when error != null:
         return error(_that.message);
-      case _UserStateEmpty() when empty != null:
+      case _ListProductStateEmpty() when empty != null:
         return empty();
-      case _UserStateFilterEmpty() when filterEmpty != null:
-        return filterEmpty(_that.filterType);
+      case _ListProductStateDelete() when delete != null:
+        return delete();
       case _:
         return null;
     }
@@ -470,13 +470,13 @@ class __$ListProductStateErrorCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _UserStateEmpty implements ListProductState {
-  const _UserStateEmpty();
+class _ListProductStateEmpty implements ListProductState {
+  const _ListProductStateEmpty();
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _UserStateEmpty);
+        (other.runtimeType == runtimeType && other is _ListProductStateEmpty);
   }
 
   @override
@@ -490,67 +490,21 @@ class _UserStateEmpty implements ListProductState {
 
 /// @nodoc
 
-class _UserStateFilterEmpty implements ListProductState {
-  const _UserStateFilterEmpty(this.filterType);
-
-  final String filterType;
-
-  /// Create a copy of ListProductState
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  @pragma('vm:prefer-inline')
-  _$UserStateFilterEmptyCopyWith<_UserStateFilterEmpty> get copyWith =>
-      __$UserStateFilterEmptyCopyWithImpl<_UserStateFilterEmpty>(
-          this, _$identity);
+class _ListProductStateDelete implements ListProductState {
+  const _ListProductStateDelete();
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType &&
-            other is _UserStateFilterEmpty &&
-            (identical(other.filterType, filterType) ||
-                other.filterType == filterType));
+        (other.runtimeType == runtimeType && other is _ListProductStateDelete);
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, filterType);
+  int get hashCode => runtimeType.hashCode;
 
   @override
   String toString() {
-    return 'ListProductState.filterEmpty(filterType: $filterType)';
-  }
-}
-
-/// @nodoc
-abstract mixin class _$UserStateFilterEmptyCopyWith<$Res>
-    implements $ListProductStateCopyWith<$Res> {
-  factory _$UserStateFilterEmptyCopyWith(_UserStateFilterEmpty value,
-          $Res Function(_UserStateFilterEmpty) _then) =
-      __$UserStateFilterEmptyCopyWithImpl;
-  @useResult
-  $Res call({String filterType});
-}
-
-/// @nodoc
-class __$UserStateFilterEmptyCopyWithImpl<$Res>
-    implements _$UserStateFilterEmptyCopyWith<$Res> {
-  __$UserStateFilterEmptyCopyWithImpl(this._self, this._then);
-
-  final _UserStateFilterEmpty _self;
-  final $Res Function(_UserStateFilterEmpty) _then;
-
-  /// Create a copy of ListProductState
-  /// with the given fields replaced by the non-null parameter values.
-  @pragma('vm:prefer-inline')
-  $Res call({
-    Object? filterType = null,
-  }) {
-    return _then(_UserStateFilterEmpty(
-      null == filterType
-          ? _self.filterType
-          : filterType // ignore: cast_nullable_to_non_nullable
-              as String,
-    ));
+    return 'ListProductState.delete()';
   }
 }
 

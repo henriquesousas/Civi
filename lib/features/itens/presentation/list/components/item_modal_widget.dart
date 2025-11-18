@@ -5,8 +5,14 @@ import 'package:flutter/material.dart';
 
 class ItemModalWidget extends StatelessWidget {
   final Item item;
+  final VoidCallback onDelete;
+  final VoidCallback onEdit;
 
-  const ItemModalWidget({super.key, required this.item});
+  const ItemModalWidget(
+      {super.key,
+      required this.item,
+      required this.onDelete,
+      required this.onEdit});
 
   @override
   Widget build(BuildContext context) {
@@ -27,13 +33,13 @@ class ItemModalWidget extends StatelessWidget {
             icon: Icons.edit_outlined,
             title: 'Editar',
             color: AppColors.darkGreyColor10,
-            onTap: () {},
+            onTap: onEdit,
           ),
           ItemListTileModalWidget(
             icon: Icons.delete_outline,
             title: 'Excluir',
             color: AppColors.errorColor,
-            onTap: () {},
+            onTap: onDelete,
           ),
           const SizedBox(height: 16),
         ],

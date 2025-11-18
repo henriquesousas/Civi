@@ -17,7 +17,8 @@ class ItemRepositoryFirebaseStorage implements ItemRepository {
         .collection("users")
         .doc(item.userId)
         .collection("products")
-        .add(data);
+        .doc(item.id)
+        .set(data);
   }
 
   @override
@@ -34,5 +35,15 @@ class ItemRepositoryFirebaseStorage implements ItemRepository {
         return ItemModel.fromMap(data);
       }).toList();
     }
+  }
+
+  @override
+  Future<void> delete(String userId) async {
+    await _firestore
+        .collection("users")
+        .doc(userId)
+        .collection("products")
+        .doc("123")
+        .delete();
   }
 }

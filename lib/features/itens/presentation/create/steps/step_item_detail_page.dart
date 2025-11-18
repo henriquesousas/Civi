@@ -4,16 +4,17 @@ import 'package:deehelp/core/components/custom_modal_bottom_sheet.dart';
 import 'package:deehelp/core/components/textfields/ui_primary_text_field.dart';
 import 'package:deehelp/features/itens/presentation/create/bloc/create_item_bloc.dart';
 import 'package:deehelp/features/itens/presentation/create/bloc/item_event.dart';
-import 'package:deehelp/features/itens/presentation/create/bloc/item_state.dart';
-import 'package:deehelp/features/itens/presentation/create/components/modal_select_brand.dart';
 import 'package:deehelp/features/itens/presentation/create/components/modal_select_color.dart';
+import 'package:deehelp/shared/extensions/screen_size_extension.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../../../core/resources/resources.dart';
 import '../../../../../core/theme/app_colors.dart';
 import '../../../../../core/theme/input_decoration_theme.dart';
+import '../bloc/item_state.dart' hide ItemStatus;
 import '../components/header.dart';
+import '../components/modal_select_brand.dart';
 
 class StepItemDetailPage extends StatefulWidget {
   const StepItemDetailPage({super.key});
@@ -44,6 +45,7 @@ class _StepItemDetailPageState extends State<StepItemDetailPage> {
     customModalBottomSheet(
       context,
       child: modalBuilder(onResult),
+      height: context.percentHeight(0.5),
     );
 
     final T? result = await completer.future;
