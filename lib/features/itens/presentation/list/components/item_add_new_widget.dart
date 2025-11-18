@@ -1,19 +1,18 @@
 import 'package:flutter/material.dart';
-import 'package:go_router/go_router.dart';
 
 import '../../../../../core/resources/resources.dart';
-import '../../../../../core/router/router_constants.dart';
 import '../../../../../core/theme/app_colors.dart';
 
 class ItemAddNewWidget extends StatelessWidget {
-  const ItemAddNewWidget({super.key});
+  final VoidCallback press;
+  const ItemAddNewWidget({super.key, required this.press});
 
   @override
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.only(right: 20),
       child: TextButton.icon(
-        onPressed: () => context.push(RouterConstant.createNewItem),
+        onPressed: press,
         icon: const Icon(
           Icons.add,
           size: 18,

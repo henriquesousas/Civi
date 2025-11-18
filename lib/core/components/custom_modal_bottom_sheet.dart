@@ -22,8 +22,25 @@ Future<dynamic> customModalBottomSheet(
       ),
     ),
     builder: (context) => SizedBox(
-      height: height ?? MediaQuery.of(context).size.height * 0.75,
-      child: child,
+      // height: height ?? MediaQuery.of(context).size.height * 0.75,
+      height: height,
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          Padding(
+            padding: const EdgeInsets.symmetric(vertical: 12),
+            child: Container(
+              width: 40,
+              height: 4,
+              decoration: BoxDecoration(
+                color: Colors.grey[300],
+                borderRadius: BorderRadius.circular(2),
+              ),
+            ),
+          ),
+          child,
+        ],
+      ),
     ),
   );
 }

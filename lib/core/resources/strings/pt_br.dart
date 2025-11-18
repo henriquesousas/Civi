@@ -232,5 +232,9 @@ class PtBr with TranslationParts implements Translation {
   String get itemRegisterReceiver => "Cadastro recebido";
 
   @override
-  List<String> get itemSteps => ["Tipo", "Detalhes", "Observação", "Foto"];
+  List<String> get createItemSteps =>
+      ["Tipo", "Detalhes", "Observação", "Foto"];
+
+  @override
+  List<String> get listItems => ["Carro", "Caminhão", "Motocicleta"];
 }

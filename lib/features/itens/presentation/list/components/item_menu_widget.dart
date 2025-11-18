@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 
 class ItemMenuWidget extends StatelessWidget {
-  const ItemMenuWidget({super.key});
+  final VoidCallback press;
+  const ItemMenuWidget({super.key, required this.press});
 
   @override
   Widget build(BuildContext context) {
@@ -22,7 +23,7 @@ class ItemMenuWidget extends StatelessWidget {
       ),
       child: IconButton(
         icon: Icon(Icons.more_vert, size: 18, color: Colors.grey[600]),
-        onPressed: () {},
+        onPressed: press,
         padding: EdgeInsets.zero,
       ),
     );

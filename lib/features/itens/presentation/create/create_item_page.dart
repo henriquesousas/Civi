@@ -206,7 +206,7 @@ class _CreateItemPageState extends State<CreateItemPage> {
                 children: [
                   StepIndicator(
                     step: _currentStepIndex,
-                    labels: R.strings.itemSteps,
+                    labels: R.strings.createItemSteps,
                   ),
                   Expanded(
                     child: FadeSlideTransitionAnimator(

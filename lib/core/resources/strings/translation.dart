@@ -75,7 +75,8 @@ abstract class Translation with TranslationParts {
   String get stepSummaryBody;
   String get itemRegisterSuccessMessage;
   String get itemRegisterReceiver;
-  List<String> get itemSteps;
+  List<String> get createItemSteps;
+  List<String> get listItems;
 }
 
 mixin TranslationParts {

@@ -29,10 +29,8 @@ class ListProductProvider extends StatelessWidget {
           ),
         ),
         BlocProvider<ListProductCubit>(
-          create: (context) => ListProductCubit(
-              usecase: context.read<GetProductsByUserUsecase>())
-            ..fetchItems(),
-        ),
+            create: (context) => ListProductCubit(
+                usecase: context.read<GetProductsByUserUsecase>())),
       ],
       child: const ListItemPage(),
     );

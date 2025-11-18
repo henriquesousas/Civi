@@ -14,8 +14,8 @@ class EmptyStateWidget extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Container(
-              width: 120,
-              height: 120,
+              // width: 120,
+              // height: 120,
               decoration: BoxDecoration(
                 color: Color(0xFFF8FAFC),
                 shape: BoxShape.circle,

@@ -1,5 +1,4 @@
 import 'package:deehelp/features/itens/domain/entities/my_items.dart';
-import 'package:deehelp/features/itens/presentation/list/components/item_menu_widget.dart';
 import 'package:flutter/material.dart';
 
 class ItemHeaderWidget extends StatelessWidget {
@@ -8,24 +7,18 @@ class ItemHeaderWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Text(
-              item.name,
-              style: Theme.of(context).textTheme.titleLarge?.copyWith(
-                    fontWeight: FontWeight.w700,
-                    fontSize: 18,
-                    color: Colors.black87,
-                  ),
-            ),
-            Text(item.code, style: Theme.of(context).textTheme.bodySmall),
-          ],
+        Text(
+          item.name,
+          style: Theme.of(context).textTheme.titleMedium?.copyWith(
+                fontWeight: FontWeight.bold,
+                color: Colors.black87,
+                // fontSize: 18,
+              ),
         ),
-        const ItemMenuWidget()
+        Text(item.code, style: Theme.of(context).textTheme.bodySmall),
       ],
     );
   }

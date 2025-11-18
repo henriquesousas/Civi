@@ -56,6 +56,7 @@ extension ListProductStatePatterns on ListProductState {
     TResult Function(_ListProductStateSuccess value)? success,
     TResult Function(_ListProductStateError value)? error,
     TResult Function(_UserStateEmpty value)? empty,
+    TResult Function(_UserStateFilterEmpty value)? filterEmpty,
     required TResult orElse(),
   }) {
     final _that = this;
@@ -70,6 +71,8 @@ extension ListProductStatePatterns on ListProductState {
         return error(_that);
       case _UserStateEmpty() when empty != null:
         return empty(_that);
+      case _UserStateFilterEmpty() when filterEmpty != null:
+        return filterEmpty(_that);
       case _:
         return orElse();
     }
@@ -95,6 +98,7 @@ extension ListProductStatePatterns on ListProductState {
     required TResult Function(_ListProductStateSuccess value) success,
     required TResult Function(_ListProductStateError value) error,
     required TResult Function(_UserStateEmpty value) empty,
+    required TResult Function(_UserStateFilterEmpty value) filterEmpty,
   }) {
     final _that = this;
     switch (_that) {
@@ -108,6 +112,8 @@ extension ListProductStatePatterns on ListProductState {
         return error(_that);
       case _UserStateEmpty():
         return empty(_that);
+      case _UserStateFilterEmpty():
+        return filterEmpty(_that);
       case _:
         throw StateError('Unexpected subclass');
     }
@@ -132,6 +138,7 @@ extension ListProductStatePatterns on ListProductState {
     TResult? Function(_ListProductStateSuccess value)? success,
     TResult? Function(_ListProductStateError value)? error,
     TResult? Function(_UserStateEmpty value)? empty,
+    TResult? Function(_UserStateFilterEmpty value)? filterEmpty,
   }) {
     final _that = this;
     switch (_that) {
@@ -145,6 +152,8 @@ extension ListProductStatePatterns on ListProductState {
         return error(_that);
       case _UserStateEmpty() when empty != null:
         return empty(_that);
+      case _UserStateFilterEmpty() when filterEmpty != null:
+        return filterEmpty(_that);
       case _:
         return null;
     }
@@ -166,9 +175,10 @@ extension ListProductStatePatterns on ListProductState {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function(List<Item> items)? success,
+    TResult Function(List<Item> items, String selectedFilter)? success,
     TResult Function(String message)? error,
     TResult Function()? empty,
+    TResult Function(String filterType)? filterEmpty,
     required TResult orElse(),
   }) {
     final _that = this;
@@ -178,11 +188,13 @@ extension ListProductStatePatterns on ListProductState {
       case _ListProductStateLoading() when loading != null:
         return loading();
       case _ListProductStateSuccess() when success != null:
-        return success(_that.items);
+        return success(_that.items, _that.selectedFilter);
       case _ListProductStateError() when error != null:
         return error(_that.message);
       case _UserStateEmpty() when empty != null:
         return empty();
+      case _UserStateFilterEmpty() when filterEmpty != null:
+        return filterEmpty(_that.filterType);
       case _:
         return orElse();
     }
@@ -205,9 +217,10 @@ extension ListProductStatePatterns on ListProductState {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loading,
-    required TResult Function(List<Item> items) success,
+    required TResult Function(List<Item> items, String selectedFilter) success,
     required TResult Function(String message) error,
     required TResult Function() empty,
+    required TResult Function(String filterType) filterEmpty,
   }) {
     final _that = this;
     switch (_that) {
@@ -216,11 +229,13 @@ extension ListProductStatePatterns on ListProductState {
       case _ListProductStateLoading():
         return loading();
       case _ListProductStateSuccess():
-        return success(_that.items);
+        return success(_that.items, _that.selectedFilter);
       case _ListProductStateError():
         return error(_that.message);
       case _UserStateEmpty():
         return empty();
+      case _UserStateFilterEmpty():
+        return filterEmpty(_that.filterType);
       case _:
         throw StateError('Unexpected subclass');
     }
@@ -242,9 +257,10 @@ extension ListProductStatePatterns on ListProductState {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function()? loading,
-    TResult? Function(List<Item> items)? success,
+    TResult? Function(List<Item> items, String selectedFilter)? success,
     TResult? Function(String message)? error,
     TResult? Function()? empty,
+    TResult? Function(String filterType)? filterEmpty,
   }) {
     final _that = this;
     switch (_that) {
@@ -253,11 +269,13 @@ extension ListProductStatePatterns on ListProductState {
       case _ListProductStateLoading() when loading != null:
         return loading();
       case _ListProductStateSuccess() when success != null:
-        return success(_that.items);
+        return success(_that.items, _that.selectedFilter);
       case _ListProductStateError() when error != null:
         return error(_that.message);
       case _UserStateEmpty() when empty != null:
         return empty();
+      case _UserStateFilterEmpty() when filterEmpty != null:
+        return filterEmpty(_that.filterType);
       case _:
         return null;
     }
@@ -307,7 +325,8 @@ class _ListProductStateLoading implements ListProductState {
 /// @nodoc
 
 class _ListProductStateSuccess implements ListProductState {
-  const _ListProductStateSuccess(final List<Item> items) : _items = items;
+  const _ListProductStateSuccess(final List<Item> items, this.selectedFilter)
+      : _items = items;
 
   final List<Item> _items;
   List<Item> get items {
@@ -315,6 +334,8 @@ class _ListProductStateSuccess implements ListProductState {
     // ignore: implicit_dynamic_type
     return EqualUnmodifiableListView(_items);
   }
+
+  final String selectedFilter;
 
   /// Create a copy of ListProductState
   /// with the given fields replaced by the non-null parameter values.
@@ -329,16 +350,18 @@ class _ListProductStateSuccess implements ListProductState {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _ListProductStateSuccess &&
-            const DeepCollectionEquality().equals(other._items, _items));
+            const DeepCollectionEquality().equals(other._items, _items) &&
+            (identical(other.selectedFilter, selectedFilter) ||
+                other.selectedFilter == selectedFilter));
   }
 
   @override
-  int get hashCode =>
-      Object.hash(runtimeType, const DeepCollectionEquality().hash(_items));
+  int get hashCode => Object.hash(
+      runtimeType, const DeepCollectionEquality().hash(_items), selectedFilter);
 
   @override
   String toString() {
-    return 'ListProductState.success(items: $items)';
+    return 'ListProductState.success(items: $items, selectedFilter: $selectedFilter)';
   }
 }
 
@@ -349,7 +372,7 @@ abstract mixin class _$ListProductStateSuccessCopyWith<$Res>
           $Res Function(_ListProductStateSuccess) _then) =
       __$ListProductStateSuccessCopyWithImpl;
   @useResult
-  $Res call({List<Item> items});
+  $Res call({List<Item> items, String selectedFilter});
 }
 
 /// @nodoc
@@ -365,12 +388,17 @@ class __$ListProductStateSuccessCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   $Res call({
     Object? items = null,
+    Object? selectedFilter = null,
   }) {
     return _then(_ListProductStateSuccess(
       null == items
           ? _self._items
           : items // ignore: cast_nullable_to_non_nullable
               as List<Item>,
+      null == selectedFilter
+          ? _self.selectedFilter
+          : selectedFilter // ignore: cast_nullable_to_non_nullable
+              as String,
     ));
   }
 }
@@ -457,6 +485,72 @@ class _UserStateEmpty implements ListProductState {
   @override
   String toString() {
     return 'ListProductState.empty()';
+  }
+}
+
+/// @nodoc
+
+class _UserStateFilterEmpty implements ListProductState {
+  const _UserStateFilterEmpty(this.filterType);
+
+  final String filterType;
+
+  /// Create a copy of ListProductState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @pragma('vm:prefer-inline')
+  _$UserStateFilterEmptyCopyWith<_UserStateFilterEmpty> get copyWith =>
+      __$UserStateFilterEmptyCopyWithImpl<_UserStateFilterEmpty>(
+          this, _$identity);
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _UserStateFilterEmpty &&
+            (identical(other.filterType, filterType) ||
+                other.filterType == filterType));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType, filterType);
+
+  @override
+  String toString() {
+    return 'ListProductState.filterEmpty(filterType: $filterType)';
+  }
+}
+
+/// @nodoc
+abstract mixin class _$UserStateFilterEmptyCopyWith<$Res>
+    implements $ListProductStateCopyWith<$Res> {
+  factory _$UserStateFilterEmptyCopyWith(_UserStateFilterEmpty value,
+          $Res Function(_UserStateFilterEmpty) _then) =
+      __$UserStateFilterEmptyCopyWithImpl;
+  @useResult
+  $Res call({String filterType});
+}
+
+/// @nodoc
+class __$UserStateFilterEmptyCopyWithImpl<$Res>
+    implements _$UserStateFilterEmptyCopyWith<$Res> {
+  __$UserStateFilterEmptyCopyWithImpl(this._self, this._then);
+
+  final _UserStateFilterEmpty _self;
+  final $Res Function(_UserStateFilterEmpty) _then;
+
+  /// Create a copy of ListProductState
+  /// with the given fields replaced by the non-null parameter values.
+  @pragma('vm:prefer-inline')
+  $Res call({
+    Object? filterType = null,
+  }) {
+    return _then(_UserStateFilterEmpty(
+      null == filterType
+          ? _self.filterType
+          : filterType // ignore: cast_nullable_to_non_nullable
+              as String,
+    ));
   }
 }
 

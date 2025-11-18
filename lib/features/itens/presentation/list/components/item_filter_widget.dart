@@ -10,54 +10,50 @@ class ItemFilterWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final filters = ['Todos', 'Carros', 'Motos', 'Caminhões'];
+    final filters = ['Todos', 'Carro', 'Motocicleta', 'Caminhão'];
 
     return SizedBox(
-      height: 40,
-      child: ListView.separated(
-        scrollDirection: Axis.horizontal,
-        padding: const EdgeInsets.symmetric(horizontal: 16),
-        itemCount: filters.length,
-        separatorBuilder: (context, index) => const SizedBox(width: 6),
-        itemBuilder: (context, index) {
-          final filter = filters[index];
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: filters.map((filter) {
           final isSelected = selectedFilter == filter;
-
-          return Material(
-            color: Colors.transparent,
-            child: InkWell(
-              borderRadius: BorderRadius.circular(20),
-              onTap: () => onFilterChanged(filter),
-              child: Container(
-                constraints: const BoxConstraints(
-                  minWidth: 70,
-                ),
-                padding:
-                    const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-                decoration: BoxDecoration(
-                  color:
-                      isSelected ? AppColors.primaryColor : Colors.transparent,
-                  borderRadius: BorderRadius.circular(20),
-                  border: Border.all(
-                    color:
-                        isSelected ? AppColors.primaryColor : Colors.grey[300]!,
-                    width: 1.2,
+          return Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 6),
+            child: Material(
+              color: Colors.transparent,
+              child: InkWell(
+                borderRadius: BorderRadius.circular(90),
+                onTap: () => onFilterChanged(filter),
+                child: Container(
+                  constraints: const BoxConstraints(minWidth: 70),
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+                  decoration: BoxDecoration(
+                    color: isSelected
+                        ? AppColors.primaryColor
+                        : Colors.transparent,
+                    borderRadius: BorderRadius.circular(100),
+                    border: Border.all(
+                      color: isSelected
+                          ? AppColors.primaryColor
+                          : Colors.grey[300]!,
+                      width: 1.2,
+                    ),
                   ),
-                ),
-                child: Center(
-                  child: Text(
-                    filter,
-                    style: Theme.of(context).textTheme.labelMedium?.copyWith(
-                          fontWeight: FontWeight.w600,
-                          color: isSelected ? Colors.white : Colors.grey[700],
-                        ),
-                    textAlign: TextAlign.center,
+                  child: Center(
+                    child: Text(
+                      filter,
+                      style: Theme.of(context).textTheme.labelMedium?.copyWith(
+                            fontWeight: FontWeight.w600,
+                            color: isSelected ? Colors.white : Colors.grey[700],
+                          ),
+                    ),
                   ),
                 ),
               ),
             ),
           );
-        },
+        }).toList(),
       ),
     );
   }

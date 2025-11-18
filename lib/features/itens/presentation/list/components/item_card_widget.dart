@@ -4,33 +4,38 @@ import 'package:deehelp/features/itens/presentation/list/components/status_badge
 import 'package:flutter/material.dart';
 
 import 'item_header_widget.dart';
+import 'item_menu_widget.dart';
 
 class ItemCardWidget extends StatelessWidget {
   final Item item;
   final int index;
+  final VoidCallback? onMenuPress;
 
   const ItemCardWidget({
     super.key,
     required this.item,
     required this.index,
+    this.onMenuPress,
   });
 
   @override
   Widget build(BuildContext context) {
     return Container(
+      margin: const EdgeInsets.only(bottom: 15),
       decoration: BoxDecoration(
         color: Colors.white,
-        borderRadius: switch (index) {
-          0 => const BorderRadius.only(
-              topLeft: Radius.circular(20),
-              topRight: Radius.circular(20),
-            ),
-          -1 => const BorderRadius.only(
-              bottomLeft: Radius.circular(20),
-              bottomRight: Radius.circular(20),
-            ),
-          _ => BorderRadius.circular(1),
-        },
+        // borderRadius: switch (index) {
+        //   0 => const BorderRadius.only(
+        //       topLeft: Radius.circular(20),
+        //       topRight: Radius.circular(20),
+        //     ),
+        //   -1 => const BorderRadius.only(
+        //       bottomLeft: Radius.circular(20),
+        //       bottomRight: Radius.circular(20),
+        //     ),
+        //   _ => BorderRadius.circular(1),
+        // },
+        borderRadius: const BorderRadius.all(Radius.circular(8)),
         boxShadow: [
           BoxShadow(
             color: Colors.grey.withValues(alpha: 0.04),
@@ -62,7 +67,13 @@ class ItemCardWidget extends StatelessWidget {
                     spacing: 15,
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      ItemHeaderWidget(item: item),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          ItemHeaderWidget(item: item),
+                          ItemMenuWidget(press: onMenuPress ?? () {})
+                        ],
+                      ),
                       StatusBadgeWidget(status: item.status),
                     ],
                   ),

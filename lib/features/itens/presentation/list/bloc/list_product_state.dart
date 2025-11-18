@@ -7,8 +7,13 @@ part 'list_product_state.freezed.dart';
 class ListProductState with _$ListProductState {
   const factory ListProductState.initial() = _ListProductStateInitial;
   const factory ListProductState.loading() = _ListProductStateLoading;
-  const factory ListProductState.success(List<Item> items) =
-      _ListProductStateSuccess;
+  const factory ListProductState.success(
+    List<Item> items,
+    String selectedFilter,
+  ) = _ListProductStateSuccess;
+
   const factory ListProductState.error(String message) = _ListProductStateError;
   const factory ListProductState.empty() = _UserStateEmpty;
+  const factory ListProductState.filterEmpty(String filterType) =
+      _UserStateFilterEmpty;
 }
