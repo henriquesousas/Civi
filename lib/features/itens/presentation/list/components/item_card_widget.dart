@@ -1,4 +1,5 @@
 import 'package:deehelp/core/components/images/ui_network_image_with_loader.dart';
+import 'package:deehelp/core/theme/app_colors.dart';
 import 'package:deehelp/features/itens/domain/entities/my_items.dart';
 import 'package:deehelp/features/itens/presentation/list/components/status_badge_widget.dart';
 import 'package:flutter/material.dart';
@@ -37,7 +38,7 @@ class ItemCardWidget extends StatelessWidget {
         //     ),
         //   _ => BorderRadius.circular(1),
         // },
-        borderRadius: const BorderRadius.all(Radius.circular(8)),
+        borderRadius: const BorderRadius.all(Radius.circular(12)),
         boxShadow: [
           BoxShadow(
             color: Colors.grey.withValues(alpha: 0.04),
@@ -45,7 +46,10 @@ class ItemCardWidget extends StatelessWidget {
             offset: const Offset(0, 3),
           ),
         ],
-        border: Border.all(color: Colors.grey[200]!),
+        // border: Border.all(color: AppColors.lightGreyColor),
+        border: BoxBorder.all(
+          color: AppColors.primaryColor.withValues(alpha: 0.1),
+        ),
       ),
       child: Material(
         color: Colors.transparent,
@@ -60,13 +64,14 @@ class ItemCardWidget extends StatelessWidget {
               children: [
                 UINetworkImageWithLoader(
                   src: item.imageUrl ?? "",
+                  radius: 90,
                   width: 90,
                   height: 90,
                 ),
                 const SizedBox(width: 16),
                 Expanded(
                   child: Column(
-                    spacing: 15,
+                    spacing: 10,
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Row(
@@ -74,6 +79,67 @@ class ItemCardWidget extends StatelessWidget {
                         children: [
                           ItemHeaderWidget(item: item),
                           ItemMenuWidget(press: onMenuPress ?? () {})
+                        ],
+                      ),
+                      Row(
+                        spacing: 5,
+                        children: [
+                          Container(
+                            padding: const EdgeInsets.symmetric(
+                                horizontal: 10, vertical: 4),
+                            decoration: BoxDecoration(
+                              color: AppColors.greyColor.withValues(alpha: 0.1),
+                              borderRadius: BorderRadius.circular(8),
+                              border: Border.all(
+                                  color: AppColors.greyColor
+                                      .withValues(alpha: 0.3),
+                                  width: 1),
+                            ),
+                            child: Row(
+                              mainAxisSize: MainAxisSize.min,
+                              children: [
+                                Text(
+                                  "Wolkagen",
+                                  style: Theme.of(context)
+                                      .textTheme
+                                      .labelSmall
+                                      ?.copyWith(
+                                        color: AppColors.greyColor,
+                                        fontWeight: FontWeight.w600,
+                                        fontSize: 10,
+                                      ),
+                                ),
+                              ],
+                            ),
+                          ),
+                          Container(
+                            padding: const EdgeInsets.symmetric(
+                                horizontal: 10, vertical: 4),
+                            decoration: BoxDecoration(
+                              color: AppColors.greyColor.withValues(alpha: 0.1),
+                              borderRadius: BorderRadius.circular(8),
+                              border: Border.all(
+                                  color: AppColors.greyColor
+                                      .withValues(alpha: 0.3),
+                                  width: 1),
+                            ),
+                            child: Row(
+                              mainAxisSize: MainAxisSize.min,
+                              children: [
+                                Text(
+                                  "Vermelho",
+                                  style: Theme.of(context)
+                                      .textTheme
+                                      .labelSmall
+                                      ?.copyWith(
+                                        color: AppColors.greyColor,
+                                        fontWeight: FontWeight.w600,
+                                        fontSize: 10,
+                                      ),
+                                ),
+                              ],
+                            ),
+                          ),
                         ],
                       ),
                       StatusBadgeWidget(status: item.status),

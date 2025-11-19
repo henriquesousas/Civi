@@ -74,7 +74,7 @@ class _ItemEditPageState extends State<ItemEditPage> {
       body: FadeSlideTransitionAnimator(
         child: SingleChildScrollView(
           physics: const BouncingScrollPhysics(),
-          padding: const EdgeInsets.all(12),
+          padding: const EdgeInsets.all(18),
           child: Column(
             spacing: 10,
             children: [
