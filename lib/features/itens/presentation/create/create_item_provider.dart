@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:deehelp/core/constants.dart';
 import 'package:deehelp/core/services/upload/media_storage.dart';
 import 'package:deehelp/core/services/upload/r2_media_storage.dart';
 import 'package:deehelp/features/itens/data/item_repository_firebase_storage.dart';
@@ -29,7 +30,7 @@ class CreateItemProvider extends StatelessWidget {
           create: (context) => CreateItemUsecase(
             media: context.read<MediaStorage>(),
             repository: context.read<ItemRepository>(),
-            bucket: 'deehelp',
+            bucket: Constants.imageBucket,
             imageName:
                 'products/${DateTime.now().millisecondsSinceEpoch.toString()}.${"jpeg"}',
           ),

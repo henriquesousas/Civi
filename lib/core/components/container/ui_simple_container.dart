@@ -4,10 +4,12 @@ import 'package:flutter/material.dart';
 class UISimpleContainer extends StatelessWidget {
   final List<Widget> children;
   final VoidCallback? press;
+  final EdgeInsets? padding;
   const UISimpleContainer({
     super.key,
     required this.children,
     this.press,
+    this.padding,
   });
 
   @override
@@ -15,7 +17,7 @@ class UISimpleContainer extends StatelessWidget {
     return GestureDetector(
       onTap: press,
       child: Container(
-        padding: const EdgeInsets.all(20),
+        padding: padding ?? const EdgeInsets.all(20),
         decoration: BoxDecoration(
           color: Colors.white,
           borderRadius: BorderRadius.circular(12),

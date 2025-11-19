@@ -1,3 +1,5 @@
+import 'package:deehelp/core/domain/exception/app_exception.dart';
+
 import '../domain/type/result.dart';
 
 class CommandCubit {
@@ -10,19 +12,21 @@ class CommandCubit {
   static Future<void> execute<T extends Object, State>({
     required void Function(State) emit,
     required Future<EitherResult<T>> Function() command,
-    required State Function() onLoading,
+    State Function()? onLoading,
     required State Function(T result) onSuccess,
-    required State Function(Exception error) onError,
+    required State Function(AppException error) onError,
   }) async {
     try {
-      emit(onLoading());
+      if (onLoading != null) {
+        emit(onLoading());
+      }
       final result = await command();
       result.fold(
         (error) => emit(onError(error)),
         (success) => emit(onSuccess(success)),
       );
     } catch (e) {
-      emit(onError(e is Exception ? e : Exception(e.toString())));
+      emit(onError(AppException(message: "Erro desconhecido")));
     }
   }
 }

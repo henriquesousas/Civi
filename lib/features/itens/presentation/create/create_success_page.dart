@@ -44,7 +44,7 @@ class _CreateSuccessPageState extends State<CreateSuccessPage> {
                     spacing: 20,
                     children: [
                       Text(
-                        "Whoooo!",
+                        "Parabéns!",
                         style: Theme.of(context)
                             .textTheme
                             .headlineMedium

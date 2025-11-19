@@ -68,6 +68,25 @@ class PtBr with TranslationParts implements Translation {
   String get defaultMessageError =>
       "Não foi possível realizar essa operação, tente novamente mai tarde :(";
 
+  @override
+  String get productDeletedSuccess => "Produto deletado com sucesso";
+
+  @override
+  String get productDeleting => "Deletando...";
+
+  @override
+  String get userNotFound => "Usuário não encontrado";
+
+  @override
+  String get add => "Adicionar";
+
+  @override
+  String get productNoFound => "Nenhum item encontrado";
+
+  @override
+  String get productMessageEmpty =>
+      "Comece adicionando seu primeiro item à plataforma para gerenciar seus veículos, celulares e outros itens";
+
   //Onboarding
   //============================================================================
   @override

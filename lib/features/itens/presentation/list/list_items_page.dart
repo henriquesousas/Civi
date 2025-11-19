@@ -1,10 +1,12 @@
 import 'package:deehelp/core/components/custom_modal_bottom_sheet.dart';
+import 'package:deehelp/core/components/dialogs/dialog_extension.dart';
+import 'package:deehelp/core/components/loader/loading.dart';
 import 'package:deehelp/core/components/ui_app_bar.dart';
+import 'package:deehelp/features/itens/domain/entities/my_items.dart';
 import 'package:deehelp/features/itens/presentation/list/bloc/list_product_state.dart';
 import 'package:deehelp/features/itens/presentation/list/components/item_add_new_widget.dart';
 import 'package:deehelp/features/itens/presentation/list/components/item_modal_widget.dart';
 import 'package:deehelp/shared/animation/fade_slide_transition_animator.dart';
-import 'package:deehelp/shared/extensions/screen_size_extension.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
@@ -31,6 +33,20 @@ class _ListItemPageState extends State<ListItemPage> {
     super.initState();
   }
 
+  void _navigateCreateNewProduct() {
+    context.push(RouterConstant.createNewItem);
+  }
+
+  void _onDelete(Item item) async {
+    final cubit = context.read<ListProductCubit>();
+    final yes = await context.showQuestionDialog(
+        "Apagar", "Deletar produto ${item.name}");
+
+    if (yes) {
+      cubit.delete(item);
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -47,13 +63,29 @@ class _ListItemPageState extends State<ListItemPage> {
       ),
       body: FadeSlideTransitionAnimator(
         child: BlocConsumer<ListProductCubit, ListProductState>(
-          listener: (context, state) {},
-          builder: (context, state) => state.maybeWhen(
-            loading: () => const Center(
-              child: CircularProgressIndicator(
-                valueColor: AlwaysStoppedAnimation(AppColors.primaryColor),
-              ),
-            ),
+            listener: (context, state) {
+          state.maybeWhen(
+            deleteLoading: () => Loading.instance()
+                .show(context: context, text: R.strings.productDeleting),
+            deleteSuccess: () {
+              context.showSnackBar(R.strings.productDeletedSuccess);
+              Loading.instance().hide();
+            },
+            error: (message) {
+              context.showSnackBar(message, type: DialogType.error);
+              Loading.instance().hide();
+            },
+            orElse: () {},
+          );
+        }, builder: (context, state) {
+          return state.maybeWhen(
+            loading: () {
+              return const Center(
+                child: CircularProgressIndicator(
+                  valueColor: AlwaysStoppedAnimation(AppColors.primaryColor),
+                ),
+              );
+            },
             error: (message) => Center(child: Text(message)),
             success: (items, filter) {
               return Column(
@@ -71,7 +103,8 @@ class _ListItemPageState extends State<ListItemPage> {
                     ),
                   ),
                   const SizedBox(height: 8),
-                  if (items.isEmpty) const EmptyStateWidget(),
+                  if (items.isEmpty)
+                    EmptyStateWidget(press: () => _navigateCreateNewProduct()),
                   Expanded(
                     child: RefreshIndicator(
                       backgroundColor: AppColors.primaryColor,
@@ -94,16 +127,18 @@ class _ListItemPageState extends State<ListItemPage> {
                             child: ItemCardWidget(
                               item: item,
                               index: index,
+                              press: () =>
+                                  context.push(RouterConstant.itemEdit),
                               onMenuPress: () {
                                 customModalBottomSheet(
                                   context,
-                                  height: context.percentHeight(0.3),
+                                  // height: context.percentHeight(0.35),
                                   child: ItemModalWidget(
                                     item: item,
-                                    onDelete: () => context
-                                        .read<ListProductCubit>()
-                                        .delete(),
-                                    onEdit: () {},
+                                    onDelete: () => _onDelete(item),
+                                    onEdit: () =>
+                                        context.push(RouterConstant.itemEdit),
+                                    onClose: () => context.pop(),
                                   ),
                                 );
                               },
@@ -116,9 +151,10 @@ class _ListItemPageState extends State<ListItemPage> {
                 ],
               );
             },
-            orElse: () => const EmptyStateWidget(),
-          ),
-        ),
+            orElse: () =>
+                EmptyStateWidget(press: () => _navigateCreateNewProduct()),
+          );
+        }),
       ),
     );
   }

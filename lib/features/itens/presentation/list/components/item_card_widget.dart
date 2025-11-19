@@ -10,12 +10,14 @@ class ItemCardWidget extends StatelessWidget {
   final Item item;
   final int index;
   final VoidCallback? onMenuPress;
+  final VoidCallback press;
 
   const ItemCardWidget({
     super.key,
     required this.item,
     required this.index,
     this.onMenuPress,
+    required this.press,
   });
 
   @override
@@ -49,7 +51,7 @@ class ItemCardWidget extends StatelessWidget {
         color: Colors.transparent,
         child: InkWell(
           borderRadius: BorderRadius.circular(6),
-          onTap: () {},
+          onTap: press,
           splashColor: Colors.grey[300],
           highlightColor: Colors.grey[100],
           child: Padding(

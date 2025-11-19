@@ -1,11 +1,14 @@
 import 'package:dartz/dartz.dart';
 import 'package:deehelp/core/wrapper/command_cubit.dart';
 import 'package:deehelp/features/itens/domain/entities/my_items.dart';
+import 'package:deehelp/features/itens/domain/usecases/delete/delete_product_dto.dart';
 import 'package:deehelp/features/itens/domain/usecases/delete/delete_product_usecase.dart';
 import 'package:deehelp/features/itens/domain/usecases/list/get_products_by_user_usecase.dart';
 import 'package:deehelp/features/itens/presentation/list/bloc/list_product_state.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+
+import '../../../../../core/resources/resources.dart';
 
 //TODO: Nao usar firebase para recuperar a sessap
 class ListProductCubit extends Cubit<ListProductState> {
@@ -32,9 +35,9 @@ class ListProductCubit extends Cubit<ListProductState> {
       onError: (error) => const ListProductState.empty(),
       onSuccess: (items) {
         _items = items;
-        return items.isEmpty
-            ? const ListProductState.empty()
-            : ListProductState.success(items, _todos);
+        return _items.isNotEmpty
+            ? ListProductState.success(_items, _todos)
+            : const ListProductState.empty();
       },
     );
   }
@@ -52,15 +55,34 @@ class ListProductCubit extends Cubit<ListProductState> {
     }
   }
 
-  Future<void> delete() async {
+  Future<void> delete(Item item) async {
     final userId = FirebaseAuth.instance.currentUser?.uid;
-    if (userId == null) emit(const ListProductState.error("Any"));
+    if (userId == null) {
+      emit(ListProductState.error(R.strings.userNotFound));
+    }
+    final dto = DeleteProductDto(
+      itemId: item.id,
+      userId: userId!,
+      imageUrl: item.imageUrl!,
+    );
     await CommandCubit.execute<Unit, ListProductState>(
       emit: emit,
-      command: () => _deleteProductUsecase.execute(userId!),
-      onLoading: () => const ListProductState.loading(),
-      onError: (error) => const ListProductState.empty(),
-      onSuccess: (unit) => const ListProductState.delete(),
+      command: () => _deleteProductUsecase.execute(dto),
+      onLoading: () {
+        emit(const ListProductState.deleteLoading());
+        return ListProductState.success(_items, _todos);
+      },
+      onError: (error) {
+        emit(ListProductState.error(error.message));
+        return ListProductState.success(_items, _todos);
+      },
+      onSuccess: (_) {
+        _items.remove(item);
+        emit(const ListProductState.deleteSuccess());
+        return _items.isNotEmpty
+            ? ListProductState.success(_items, _todos)
+            : const ListProductState.empty();
+      },
     );
   }
 }

@@ -1,3 +1,5 @@
+import 'package:uuid/uuid.dart';
+
 import '../item_status.dart';
 import '../usecases/create/create_item_dto.dart';
 
@@ -29,7 +31,7 @@ class Item {
 
   factory Item.from(CreateItemDto dto) {
     return Item(
-      id: "456",
+      id: const Uuid().v1(),
       name: dto.name,
       code: dto.code,
       type: dto.type,

@@ -31,45 +31,42 @@ class ModalSelectBrand extends StatelessWidget {
       {'name': 'Dodge'},
       {'name': 'BYD'},
     ];
-    return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
-      child: Column(
-        children: [
-          // Container(
-          //   margin: const EdgeInsets.only(bottom: 8),
-          //   width: 40,
-          //   height: 4,
-          //   decoration: BoxDecoration(
-          //     color: Colors.grey[300],
-          //     borderRadius: BorderRadius.circular(2),
-          //   ),
-          // ),
-          Text(R.strings.selectBrand),
-          Expanded(
-            child: ListView.separated(
-              separatorBuilder: (context, index) => Divider(
-                height: 1,
-                thickness: 1,
-                color: Colors.grey.shade300,
-              ),
-              itemCount: brands.length,
-              itemBuilder: (context, index) {
-                final color = brands[index];
-                return ListTile(
-                  onTap: () {
-                    onChange(color["name"].toString());
-                    //context.pop();
-                  },
-                  title: Text(
-                    color["name"].toString(),
-                    style: Theme.of(context).textTheme.titleSmall,
+
+    return Column(
+      children: [
+        Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
+          child: Column(
+            children: [
+              Text(R.strings.selectBrand),
+              const SizedBox(height: 16),
+              SizedBox(
+                height: MediaQuery.of(context).size.height * 0.6,
+                child: ListView.separated(
+                  separatorBuilder: (context, index) => Divider(
+                    height: 1,
+                    thickness: 1,
+                    color: Colors.grey.shade300,
                   ),
-                );
-              },
-            ),
+                  itemCount: brands.length,
+                  itemBuilder: (context, index) {
+                    final brand = brands[index];
+                    return ListTile(
+                      onTap: () {
+                        onChange(brand["name"].toString());
+                      },
+                      title: Text(
+                        brand["name"].toString(),
+                        style: Theme.of(context).textTheme.titleSmall,
+                      ),
+                    );
+                  },
+                ),
+              ),
+            ],
           ),
-        ],
-      ),
+        ),
+      ],
     );
   }
 }

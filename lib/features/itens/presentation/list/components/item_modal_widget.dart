@@ -7,12 +7,14 @@ class ItemModalWidget extends StatelessWidget {
   final Item item;
   final VoidCallback onDelete;
   final VoidCallback onEdit;
+  final VoidCallback onClose;
 
   const ItemModalWidget(
       {super.key,
       required this.item,
       required this.onDelete,
-      required this.onEdit});
+      required this.onEdit,
+      required this.onClose});
 
   @override
   Widget build(BuildContext context) {
@@ -40,6 +42,12 @@ class ItemModalWidget extends StatelessWidget {
             title: 'Excluir',
             color: AppColors.errorColor,
             onTap: onDelete,
+          ),
+          ItemListTileModalWidget(
+            icon: Icons.close,
+            title: 'Fechar',
+            color: AppColors.greyColor,
+            onTap: onClose,
           ),
           const SizedBox(height: 16),
         ],

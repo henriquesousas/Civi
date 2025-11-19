@@ -38,12 +38,12 @@ class ItemRepositoryFirebaseStorage implements ItemRepository {
   }
 
   @override
-  Future<void> delete(String userId) async {
+  Future<void> delete(String itemId, String userId) async {
     await _firestore
         .collection("users")
         .doc(userId)
         .collection("products")
-        .doc("123")
+        .doc(itemId)
         .delete();
   }
 }

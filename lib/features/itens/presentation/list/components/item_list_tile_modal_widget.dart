@@ -29,8 +29,8 @@ class ItemListTileModalWidget extends StatelessWidget {
         title,
         style: Theme.of(context)
             .textTheme
-            .titleSmall
-            ?.copyWith(fontWeight: FontWeight.normal),
+            .titleMedium
+            ?.copyWith(fontWeight: FontWeight.w400),
       ),
       trailing: Icon(Icons.chevron_right, color: Colors.grey[400], size: 20),
       contentPadding: const EdgeInsets.symmetric(vertical: 4),

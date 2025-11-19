@@ -57,6 +57,9 @@ extension ListProductStatePatterns on ListProductState {
     TResult Function(_ListProductStateError value)? error,
     TResult Function(_ListProductStateEmpty value)? empty,
     TResult Function(_ListProductStateDelete value)? delete,
+    TResult Function(_ListProductStateDeleteLoading value)? deleteLoading,
+    TResult Function(_ListProductStateDeleteSuccess value)? deleteSuccess,
+    TResult Function(_ListProductStateDeleteError value)? deleteError,
     required TResult orElse(),
   }) {
     final _that = this;
@@ -73,6 +76,12 @@ extension ListProductStatePatterns on ListProductState {
         return empty(_that);
       case _ListProductStateDelete() when delete != null:
         return delete(_that);
+      case _ListProductStateDeleteLoading() when deleteLoading != null:
+        return deleteLoading(_that);
+      case _ListProductStateDeleteSuccess() when deleteSuccess != null:
+        return deleteSuccess(_that);
+      case _ListProductStateDeleteError() when deleteError != null:
+        return deleteError(_that);
       case _:
         return orElse();
     }
@@ -99,6 +108,11 @@ extension ListProductStatePatterns on ListProductState {
     required TResult Function(_ListProductStateError value) error,
     required TResult Function(_ListProductStateEmpty value) empty,
     required TResult Function(_ListProductStateDelete value) delete,
+    required TResult Function(_ListProductStateDeleteLoading value)
+        deleteLoading,
+    required TResult Function(_ListProductStateDeleteSuccess value)
+        deleteSuccess,
+    required TResult Function(_ListProductStateDeleteError value) deleteError,
   }) {
     final _that = this;
     switch (_that) {
@@ -114,6 +128,12 @@ extension ListProductStatePatterns on ListProductState {
         return empty(_that);
       case _ListProductStateDelete():
         return delete(_that);
+      case _ListProductStateDeleteLoading():
+        return deleteLoading(_that);
+      case _ListProductStateDeleteSuccess():
+        return deleteSuccess(_that);
+      case _ListProductStateDeleteError():
+        return deleteError(_that);
       case _:
         throw StateError('Unexpected subclass');
     }
@@ -139,6 +159,9 @@ extension ListProductStatePatterns on ListProductState {
     TResult? Function(_ListProductStateError value)? error,
     TResult? Function(_ListProductStateEmpty value)? empty,
     TResult? Function(_ListProductStateDelete value)? delete,
+    TResult? Function(_ListProductStateDeleteLoading value)? deleteLoading,
+    TResult? Function(_ListProductStateDeleteSuccess value)? deleteSuccess,
+    TResult? Function(_ListProductStateDeleteError value)? deleteError,
   }) {
     final _that = this;
     switch (_that) {
@@ -154,6 +177,12 @@ extension ListProductStatePatterns on ListProductState {
         return empty(_that);
       case _ListProductStateDelete() when delete != null:
         return delete(_that);
+      case _ListProductStateDeleteLoading() when deleteLoading != null:
+        return deleteLoading(_that);
+      case _ListProductStateDeleteSuccess() when deleteSuccess != null:
+        return deleteSuccess(_that);
+      case _ListProductStateDeleteError() when deleteError != null:
+        return deleteError(_that);
       case _:
         return null;
     }
@@ -179,6 +208,9 @@ extension ListProductStatePatterns on ListProductState {
     TResult Function(String message)? error,
     TResult Function()? empty,
     TResult Function()? delete,
+    TResult Function()? deleteLoading,
+    TResult Function()? deleteSuccess,
+    TResult Function()? deleteError,
     required TResult orElse(),
   }) {
     final _that = this;
@@ -195,6 +227,12 @@ extension ListProductStatePatterns on ListProductState {
         return empty();
       case _ListProductStateDelete() when delete != null:
         return delete();
+      case _ListProductStateDeleteLoading() when deleteLoading != null:
+        return deleteLoading();
+      case _ListProductStateDeleteSuccess() when deleteSuccess != null:
+        return deleteSuccess();
+      case _ListProductStateDeleteError() when deleteError != null:
+        return deleteError();
       case _:
         return orElse();
     }
@@ -221,6 +259,9 @@ extension ListProductStatePatterns on ListProductState {
     required TResult Function(String message) error,
     required TResult Function() empty,
     required TResult Function() delete,
+    required TResult Function() deleteLoading,
+    required TResult Function() deleteSuccess,
+    required TResult Function() deleteError,
   }) {
     final _that = this;
     switch (_that) {
@@ -236,6 +277,12 @@ extension ListProductStatePatterns on ListProductState {
         return empty();
       case _ListProductStateDelete():
         return delete();
+      case _ListProductStateDeleteLoading():
+        return deleteLoading();
+      case _ListProductStateDeleteSuccess():
+        return deleteSuccess();
+      case _ListProductStateDeleteError():
+        return deleteError();
       case _:
         throw StateError('Unexpected subclass');
     }
@@ -261,6 +308,9 @@ extension ListProductStatePatterns on ListProductState {
     TResult? Function(String message)? error,
     TResult? Function()? empty,
     TResult? Function()? delete,
+    TResult? Function()? deleteLoading,
+    TResult? Function()? deleteSuccess,
+    TResult? Function()? deleteError,
   }) {
     final _that = this;
     switch (_that) {
@@ -276,6 +326,12 @@ extension ListProductStatePatterns on ListProductState {
         return empty();
       case _ListProductStateDelete() when delete != null:
         return delete();
+      case _ListProductStateDeleteLoading() when deleteLoading != null:
+        return deleteLoading();
+      case _ListProductStateDeleteSuccess() when deleteSuccess != null:
+        return deleteSuccess();
+      case _ListProductStateDeleteError() when deleteError != null:
+        return deleteError();
       case _:
         return null;
     }
@@ -505,6 +561,69 @@ class _ListProductStateDelete implements ListProductState {
   @override
   String toString() {
     return 'ListProductState.delete()';
+  }
+}
+
+/// @nodoc
+
+class _ListProductStateDeleteLoading implements ListProductState {
+  const _ListProductStateDeleteLoading();
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _ListProductStateDeleteLoading);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  String toString() {
+    return 'ListProductState.deleteLoading()';
+  }
+}
+
+/// @nodoc
+
+class _ListProductStateDeleteSuccess implements ListProductState {
+  const _ListProductStateDeleteSuccess();
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _ListProductStateDeleteSuccess);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  String toString() {
+    return 'ListProductState.deleteSuccess()';
+  }
+}
+
+/// @nodoc
+
+class _ListProductStateDeleteError implements ListProductState {
+  const _ListProductStateDeleteError();
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _ListProductStateDeleteError);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  String toString() {
+    return 'ListProductState.deleteError()';
   }
 }
 

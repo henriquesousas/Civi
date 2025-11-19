@@ -5,7 +5,6 @@ import 'package:deehelp/core/components/textfields/ui_primary_text_field.dart';
 import 'package:deehelp/features/itens/presentation/create/bloc/create_item_bloc.dart';
 import 'package:deehelp/features/itens/presentation/create/bloc/item_event.dart';
 import 'package:deehelp/features/itens/presentation/create/components/modal_select_color.dart';
-import 'package:deehelp/shared/extensions/screen_size_extension.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -45,7 +44,7 @@ class _StepItemDetailPageState extends State<StepItemDetailPage> {
     customModalBottomSheet(
       context,
       child: modalBuilder(onResult),
-      height: context.percentHeight(0.5),
+      // height: context.percentHeight(0.5),
     );
 
     final T? result = await completer.future;

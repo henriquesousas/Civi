@@ -7,19 +7,21 @@ class ItemHeaderWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Text(
-          item.name,
-          style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                fontWeight: FontWeight.bold,
-                color: Colors.black87,
-                // fontSize: 18,
-              ),
-        ),
-        Text(item.code, style: Theme.of(context).textTheme.bodySmall),
-      ],
+    return Expanded(
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(
+            item.name,
+            style: Theme.of(context).textTheme.titleMedium?.copyWith(
+                  fontWeight: FontWeight.bold,
+                  color: Colors.black87,
+                  // fontSize: 18,
+                ),
+          ),
+          Text(item.code, style: Theme.of(context).textTheme.bodySmall),
+        ],
+      ),
     );
   }
 }

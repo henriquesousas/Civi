@@ -20,6 +20,12 @@ abstract class Translation with TranslationParts {
   String get next;
   String get goAhead;
   String get defaultMessageError;
+  String get userNotFound;
+  String get productDeletedSuccess;
+  String get productDeleting;
+  String get add;
+  String get productNoFound;
+  String get productMessageEmpty;
   // Login
   String get loginInfo;
   String get enterCreateAccount;

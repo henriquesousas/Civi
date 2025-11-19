@@ -1,4 +1,5 @@
 import 'package:deehelp/features/itens/domain/entities/my_items.dart';
+import 'package:deehelp/features/itens/presentation/list/bloc/list_product_cubit.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 part 'list_product_state.freezed.dart';
@@ -15,4 +16,9 @@ class ListProductState with _$ListProductState {
   const factory ListProductState.error(String message) = _ListProductStateError;
   const factory ListProductState.empty() = _ListProductStateEmpty;
   const factory ListProductState.delete() = _ListProductStateDelete;
+  const factory ListProductState.deleteLoading() =
+      _ListProductStateDeleteLoading;
+  const factory ListProductState.deleteSuccess() =
+      _ListProductStateDeleteSuccess;
+  const factory ListProductState.deleteError() = _ListProductStateDeleteError;
 }
