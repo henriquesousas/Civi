@@ -27,17 +27,6 @@ class ItemCardWidget extends StatelessWidget {
       margin: const EdgeInsets.only(bottom: 15),
       decoration: BoxDecoration(
         color: Colors.white,
-        // borderRadius: switch (index) {
-        //   0 => const BorderRadius.only(
-        //       topLeft: Radius.circular(20),
-        //       topRight: Radius.circular(20),
-        //     ),
-        //   -1 => const BorderRadius.only(
-        //       bottomLeft: Radius.circular(20),
-        //       bottomRight: Radius.circular(20),
-        //     ),
-        //   _ => BorderRadius.circular(1),
-        // },
         borderRadius: const BorderRadius.all(Radius.circular(12)),
         boxShadow: [
           BoxShadow(
@@ -99,7 +88,7 @@ class ItemCardWidget extends StatelessWidget {
                               mainAxisSize: MainAxisSize.min,
                               children: [
                                 Text(
-                                  "Wolkagen",
+                                  item.brand,
                                   style: Theme.of(context)
                                       .textTheme
                                       .labelSmall
@@ -127,7 +116,7 @@ class ItemCardWidget extends StatelessWidget {
                               mainAxisSize: MainAxisSize.min,
                               children: [
                                 Text(
-                                  "Vermelho",
+                                  item.color,
                                   style: Theme.of(context)
                                       .textTheme
                                       .labelSmall

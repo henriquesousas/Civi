@@ -12,7 +12,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../../core/constants.dart';
 
 class ListProductProvider extends StatelessWidget {
-  const ListProductProvider({super.key});
+  final bool showBackButton;
+  const ListProductProvider({super.key, this.showBackButton = false});
 
   @override
   Widget build(BuildContext context) {
@@ -45,7 +46,7 @@ class ListProductProvider extends StatelessWidget {
           ),
         ),
       ],
-      child: const ListItemPage(),
+      child: ListItemPage(showBackButton: showBackButton),
     );
   }
 }

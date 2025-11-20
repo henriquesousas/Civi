@@ -158,72 +158,88 @@ class _CreateItemPageState extends State<CreateItemPage> {
         }
       },
       builder: (context, state) {
-        return Scaffold(
-          backgroundColor: Colors.grey[50],
-          appBar: UIAppBar(
-            title: R.strings.appNewItemTitle,
-            leading: IconButton(
-              onPressed: () async {
-                final exit = await context.showQuestionDialog(
-                    R.strings.cancelRegister, R.strings.cancelRegisterMessage);
+        return PopScope(
+          canPop: false,
+          onPopInvokedWithResult: (didPop, result) async {
+            if (!mounted) return;
 
-                if (!mounted) return;
+            final exit = await context.showQuestionDialog(
+                R.strings.cancelRegister, R.strings.cancelRegisterMessage);
 
-                if (exit) {
-                  Navigator.of(context).pop();
-                }
-              },
-              icon: const Icon(Icons.arrow_back),
+            if (exit) {
+              Navigator.of(context).pop();
+            }
+          },
+          child: Scaffold(
+            backgroundColor: Colors.grey[50],
+            appBar: UIAppBar(
+              title: R.strings.appNewItemTitle,
+              leading: IconButton(
+                onPressed: () async {
+                  final exit = await context.showQuestionDialog(
+                      R.strings.cancelRegister,
+                      R.strings.cancelRegisterMessage);
+
+                  if (!mounted) return;
+
+                  if (exit) {
+                    Navigator.of(context).pop();
+                  }
+                },
+                icon: const Icon(Icons.arrow_back),
+              ),
             ),
-          ),
-          bottomNavigationBar: Padding(
-            padding: const EdgeInsets.all(24),
-            child: Row(
-              spacing: 10,
-              children: [
-                if (_currentStepIndex > 0)
-                  Expanded(
-                    child: UIOutlineButton(
-                      text: context.strings.back,
-                      press: _previous,
-                    ),
-                  ),
-                Expanded(
-                  child: UIPrimaryButton(
-                    text: _handleButtonText(state),
-                    press: _handleButtonState(state)
-                        ? (_currentStepIndex == 4 ? () => _save(state) : _next)
-                        : null,
-                  ),
-                ),
-              ],
-            ),
-          ),
-          body: SafeArea(
-            child: Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 24),
-              child: Column(
+            bottomNavigationBar: Padding(
+              padding: const EdgeInsets.all(24),
+              child: Row(
+                spacing: 10,
                 children: [
-                  StepIndicator(
-                    step: _currentStepIndex,
-                    labels: R.strings.createItemSteps,
-                  ),
-                  Expanded(
-                    child: FadeSlideTransitionAnimator(
-                      child: PageView(
-                        controller: _pageController,
-                        physics: const NeverScrollableScrollPhysics(),
-                        children: const [
-                          StepChooseTypePage(),
-                          StepItemDetailPage(),
-                          StepObsPage(),
-                          StepAddPhotoPage(),
-                          StepSummaryPage(),
-                        ],
+                  if (_currentStepIndex > 0)
+                    Expanded(
+                      child: UIOutlineButton(
+                        text: context.strings.back,
+                        press: _previous,
                       ),
+                    ),
+                  Expanded(
+                    child: UIPrimaryButton(
+                      text: _handleButtonText(state),
+                      press: _handleButtonState(state)
+                          ? (_currentStepIndex == 4
+                              ? () => _save(state)
+                              : _next)
+                          : null,
                     ),
                   ),
                 ],
+              ),
+            ),
+            body: SafeArea(
+              child: Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 24),
+                child: Column(
+                  children: [
+                    StepIndicator(
+                      step: _currentStepIndex,
+                      labels: R.strings.createItemSteps,
+                    ),
+                    Expanded(
+                      child: FadeSlideTransitionAnimator(
+                        child: PageView(
+                          controller: _pageController,
+                          physics: const NeverScrollableScrollPhysics(),
+                          children: const [
+                            StepChooseTypePage(),
+                            StepItemDetailPage(),
+                            StepObsPage(),
+                            StepAddPhotoPage(),
+                            StepSummaryPage(),
+                          ],
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
               ),
             ),
           ),

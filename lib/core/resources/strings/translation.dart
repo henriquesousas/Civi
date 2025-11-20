@@ -26,6 +26,18 @@ abstract class Translation with TranslationParts {
   String get add;
   String get productNoFound;
   String get productMessageEmpty;
+  String get detail;
+  String get brand;
+  String get name;
+  String get plate;
+  String get type;
+  String get photos;
+  String get color;
+  String get confirmUpdate;
+  String get permanentlyDeleteVehicle;
+  String get errorMessageVehicle;
+  String get errorMessageModel;
+  String get errorMessageYear;
   // Login
   String get loginInfo;
   String get enterCreateAccount;
@@ -69,7 +81,6 @@ abstract class Translation with TranslationParts {
   String get stepOneBody;
   String get stepItemDetailHeader;
   String get stepItemDetailBody;
-  String get errorMessageVehicle;
   String get hintTextVehicleCode;
   String get selectColor;
   String get selectBrand;

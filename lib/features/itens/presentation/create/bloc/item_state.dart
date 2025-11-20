@@ -4,6 +4,8 @@ import 'package:deehelp/features/itens/presentation/create/bloc/detail_brand_sta
 import 'package:deehelp/features/itens/presentation/create/bloc/detail_code_state.dart';
 import 'package:deehelp/features/itens/presentation/create/bloc/detail_color_state.dart';
 import 'package:deehelp/features/itens/presentation/create/bloc/detail_item_state.dart';
+import 'package:deehelp/features/itens/presentation/create/bloc/detail_model_state.dart';
+import 'package:deehelp/features/itens/presentation/create/bloc/detail_year_state.dart';
 import 'package:deehelp/features/itens/presentation/create/bloc/item_obs_state.dart';
 import 'package:equatable/equatable.dart';
 
@@ -27,6 +29,8 @@ class ItemState extends Equatable {
   final DetailCodeState detailCode;
   final DetailColorState detailColor;
   final DetailBrandState detailBrand;
+  final DetailModelState detailModel;
+  final DetailYearState detailYear;
   final ItemObsState itemObs;
   final File? photoUrl;
   final int? page;
@@ -38,6 +42,8 @@ class ItemState extends Equatable {
     required this.detailColor,
     required this.detailBrand,
     required this.itemObs,
+    required this.detailModel,
+    required this.detailYear,
     this.errorMessage,
     this.photoUrl,
     this.page,
@@ -53,7 +59,9 @@ class ItemState extends Equatable {
     if (detailColor.color != null &&
         detailCode.code != null &&
         detailCode.error == null &&
-        detailBrand.brand != null) {
+        detailBrand.brand != null &&
+        detailModel.value != null &&
+        detailYear.value != null) {
       return true;
     }
 
@@ -64,8 +72,8 @@ class ItemState extends Equatable {
     return {
       "Placa": detailCode.code ?? "",
       "Marca": detailBrand.brand ?? "",
-      "Modelo": "any",
-      "Ano": "2020",
+      "Modelo": detailModel.value ?? '',
+      "Ano": detailYear.value ?? '',
       "Cor": detailColor.color ?? "",
     };
   }
@@ -76,6 +84,8 @@ class ItemState extends Equatable {
         detailCode: DetailCodeState(),
         detailColor: DetailColorState(),
         detailBrand: DetailBrandState(),
+        detailModel: DetailModelState(),
+        detailYear: DetailYearState(),
         itemObs: ItemObsState(),
       );
 
@@ -86,6 +96,8 @@ class ItemState extends Equatable {
     DetailCodeState? detailCode,
     DetailColorState? detailColor,
     DetailBrandState? detailBrand,
+    DetailModelState? detailModel,
+    DetailYearState? detailYear,
     ItemObsState? itemObs,
     int? page,
     File? photoUrl,
@@ -94,6 +106,8 @@ class ItemState extends Equatable {
       status: status ?? this.status,
       detailItem: detailItem ?? this.detailItem,
       detailCode: detailCode ?? this.detailCode,
+      detailModel: detailModel ?? this.detailModel,
+      detailYear: detailYear ?? this.detailYear,
       detailColor: detailColor ?? this.detailColor,
       detailBrand: detailBrand ?? this.detailBrand,
       itemObs: itemObs ?? this.itemObs,
@@ -105,6 +119,16 @@ class ItemState extends Equatable {
 
   ItemState updateCode(String code, {String? error}) => copyWith(
         detailCode: detailCode.copyWith(code: code, error: error),
+        itemObs: itemObs,
+      );
+
+  ItemState updateModel(String value, {String? error}) => copyWith(
+        detailModel: detailModel.copyWith(value: value, error: error),
+        itemObs: itemObs,
+      );
+
+  ItemState updateYear(String value, {String? error}) => copyWith(
+        detailYear: detailYear.copyWith(value: value, error: error),
         itemObs: itemObs,
       );
 
@@ -146,6 +170,8 @@ class ItemState extends Equatable {
         errorMessage,
         detailItem,
         detailCode,
+        detailModel,
+        detailYear,
         detailColor,
         detailBrand,
         photoUrl,

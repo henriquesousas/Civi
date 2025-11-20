@@ -1,10 +1,11 @@
+import 'package:equatable/equatable.dart';
 import 'package:uuid/uuid.dart';
 
 import '../item_status.dart';
 import '../usecases/create/create_item_dto.dart';
 
 //TODO: Renomear para product
-class Item {
+class Item extends Equatable {
   final String id;
   final String name;
   final String code;
@@ -12,6 +13,9 @@ class Item {
   final ItemStatus status;
   final String type;
   final String userId;
+  final String brand;
+  final String color;
+  final String? obs;
   String? imageUrl;
   DateTime? createdAt;
 
@@ -24,6 +28,9 @@ class Item {
     required this.status,
     required this.type,
     required this.userId,
+    required this.color,
+    required this.brand,
+    required this.obs,
     this.createdAt,
   }) {
     createdAt = DateTime.now();
@@ -35,6 +42,9 @@ class Item {
       name: dto.name,
       code: dto.code,
       type: dto.type,
+      color: dto.color,
+      brand: dto.brand,
+      obs: dto.obs,
       year: dto.year,
       imageUrl: dto.imageUrl,
       userId: dto.userId,
@@ -45,4 +55,7 @@ class Item {
   void changeUrl(final String newUrl) {
     imageUrl = newUrl;
   }
+
+  @override
+  List<Object?> get props => [id, name, imageUrl];
 }

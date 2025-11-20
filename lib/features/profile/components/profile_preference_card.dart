@@ -1,6 +1,8 @@
+import 'package:deehelp/core/router/router_constants.dart';
 import 'package:deehelp/features/profile/components/profile_box_decoration.dart';
 import 'package:deehelp/features/profile/components/profile_menu_item_list_tile.dart';
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 
 import '../../../core/resources/resources.dart';
 
@@ -24,7 +26,8 @@ class ProfilePreferenceCard extends StatelessWidget {
                 ProfileMenuListTile(
                   text: R.strings.myProducts,
                   svgSrc: R.images.svgOrder,
-                  press: () {},
+                  press: () =>
+                      context.push(RouterConstant.myItems, extra: true),
                 ),
                 ProfileMenuListTile(
                   text: R.strings.lastOccurrences,

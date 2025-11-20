@@ -106,10 +106,11 @@ class _EntryPointState extends State<EntryPoint> {
               ? Colors.white
               : const Color(0xFF101015),
           type: BottomNavigationBarType.fixed,
-          // selectedLabelStyle: TextStyle(color: primaryColor),
-          selectedFontSize: 12,
+          selectedLabelStyle: const TextStyle(fontWeight: FontWeight.w500),
+          selectedFontSize: 13,
           selectedItemColor: AppColors.primaryColor,
           unselectedItemColor: Colors.transparent,
+          enableFeedback: true,
           items: [
             BottomNavigationBarItem(
               icon: svgIcon(R.images.svgCategory),
@@ -118,9 +119,9 @@ class _EntryPointState extends State<EntryPoint> {
               label: R.strings.bottomBarHome,
             ),
             BottomNavigationBarItem(
-              icon: svgIcon(R.images.svgCategory),
+              icon: svgIcon(R.images.svgOrder),
               activeIcon:
-                  svgIcon(R.images.svgCategory, color: AppColors.primaryColor),
+                  svgIcon(R.images.svgOrder, color: AppColors.primaryColor),
               label: R.strings.myProducts,
             ),
             BottomNavigationBarItem(

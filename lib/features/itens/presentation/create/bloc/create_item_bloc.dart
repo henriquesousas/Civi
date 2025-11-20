@@ -19,6 +19,8 @@ class CreateItemBloc extends Bloc<ItemEvent, ItemState> {
     on<ItemSelectedEvent>(onItemSelect);
     on<LoadItemsEvent>(onLoadItems);
     on<ItemCodeChangeEvent>(onCodeChange);
+    on<ItemModelEvent>(onModelChange);
+    on<ItemYearEvent>(onYearChange);
     on<ItemColorChangeEvent>(onColorChange);
     on<ItemBrandChangeEvent>(onBrandChange);
     on<ItemObsChangeEvent>(onItemObsChange);
@@ -33,11 +35,14 @@ class CreateItemBloc extends Bloc<ItemEvent, ItemState> {
   ) async {
     final dto = CreateItemDto(
       userId: FirebaseAuth.instance.currentUser!.uid,
-      imageUrl: state.photoUrl!.path,
-      name: "name",
-      code: state.detailCode.code!,
-      year: 0000,
+      name: state.detailModel.value!,
+      year: int.parse(state.detailYear.value!),
       type: state.detailItem.selectedItem!.name,
+      imageUrl: state.photoUrl!.path,
+      code: state.detailCode.code!,
+      color: state.detailColor.color!,
+      brand: state.detailBrand.brand!,
+      obs: state.itemObs.value,
     );
     await BlocCommandWrapper.execute<Unit, ItemState>(
       currentState: state,
@@ -61,6 +66,32 @@ class CreateItemBloc extends Bloc<ItemEvent, ItemState> {
     final isValid = code.length > 5;
     final error = isValid ? null : R.strings.errorMessageVehicle;
     final newState = state.updateCode(code, error: error);
+
+    emit(newState);
+  }
+
+  void onModelChange(
+    ItemModelEvent event,
+    Emitter<ItemState> emit,
+  ) {
+    final value = event.value;
+    final isValid = value.length > 3;
+    final error = isValid ? null : R.strings.errorMessageModel;
+    final newState = state.updateModel(value, error: error);
+
+    emit(newState);
+  }
+
+  void onYearChange(
+    ItemYearEvent event,
+    Emitter<ItemState> emit,
+  ) {
+    final value = event.value;
+    final valueParse = int.parse(value);
+    final isValid = valueParse >= 1900 && valueParse <= DateTime.now().year + 1;
+
+    final error = isValid ? null : R.strings.errorMessageYear;
+    final newState = state.updateYear(value, error: error);
 
     emit(newState);
   }

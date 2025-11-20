@@ -20,7 +20,8 @@ import 'components/item_card_widget.dart';
 import 'components/item_filter_widget.dart';
 
 class ListItemPage extends StatefulWidget {
-  const ListItemPage({super.key});
+  final bool showBackButton;
+  const ListItemPage({super.key, this.showBackButton = false});
 
   @override
   State<ListItemPage> createState() => _ListItemPageState();
@@ -31,6 +32,11 @@ class _ListItemPageState extends State<ListItemPage> {
   void initState() {
     context.read<ListProductCubit>().fetchItems();
     super.initState();
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
   }
 
   void _navigateCreateNewProduct() {
@@ -53,6 +59,11 @@ class _ListItemPageState extends State<ListItemPage> {
       backgroundColor: Colors.grey[50],
       appBar: UIAppBar(
         title: R.strings.myProducts,
+        leading: widget.showBackButton
+            ? IconButton(
+                onPressed: () => context.pop(),
+                icon: const Icon(Icons.arrow_back))
+            : null,
         actions: [
           ItemAddNewWidget(
             press: () async {
@@ -127,17 +138,17 @@ class _ListItemPageState extends State<ListItemPage> {
                             child: ItemCardWidget(
                               item: item,
                               index: index,
-                              press: () =>
-                                  context.push(RouterConstant.itemEdit),
+                              press: () => context.push(RouterConstant.itemEdit,
+                                  extra: item),
                               onMenuPress: () {
                                 customModalBottomSheet(
                                   context,
-                                  // height: context.percentHeight(0.35),
                                   child: ItemModalWidget(
                                     item: item,
                                     onDelete: () => _onDelete(item),
-                                    onEdit: () =>
-                                        context.push(RouterConstant.itemEdit),
+                                    onEdit: () => context.push(
+                                        RouterConstant.itemEdit,
+                                        extra: item),
                                     onClose: () => context.pop(),
                                   ),
                                 );

@@ -18,6 +18,7 @@ class UIPrimaryTextField extends StatelessWidget {
   final OutlineInputBorder? enabledBorder;
   final String? initialValue;
   final FocusNode? focusNode;
+  final int? maxLength;
 
   const UIPrimaryTextField({
     super.key,
@@ -35,6 +36,7 @@ class UIPrimaryTextField extends StatelessWidget {
     this.initialValue,
     this.upperCase = false,
     this.focusNode,
+    this.maxLength,
   });
   @override
   Widget build(BuildContext context) {
@@ -49,6 +51,12 @@ class UIPrimaryTextField extends StatelessWidget {
           textInputAction: TextInputAction.done,
           obscureText: obscureText ?? false,
           maxLines: maxLine,
+          maxLength: maxLength,
+          buildCounter: (context,
+                  {required currentLength,
+                  required isFocused,
+                  required maxLength}) =>
+              null,
           inputFormatters: upperCase ? [UpperCaseTextFormatter()] : null,
           decoration: InputDecoration(
             enabledBorder: enabledBorder,

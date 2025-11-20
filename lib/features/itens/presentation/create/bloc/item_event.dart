@@ -20,6 +20,18 @@ class ItemCodeChangeEvent extends ItemEvent {
   ItemCodeChangeEvent({required this.code});
 }
 
+class ItemModelEvent extends ItemEvent {
+  final String value;
+
+  ItemModelEvent({required this.value});
+}
+
+class ItemYearEvent extends ItemEvent {
+  final String value;
+
+  ItemYearEvent({required this.value});
+}
+
 class ItemColorChangeEvent extends ItemEvent {
   final String color;
 

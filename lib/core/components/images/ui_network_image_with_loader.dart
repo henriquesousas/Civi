@@ -25,10 +25,7 @@ class UINetworkImageWithLoader extends StatelessWidget {
     return Container(
       padding: const EdgeInsets.all(2),
       decoration: BoxDecoration(
-        border: Border.all(
-          color: AppColors.primaryColor,
-          width: 2,
-        ),
+        border: Border.all(color: AppColors.primaryColor, width: 2),
         borderRadius: BorderRadius.circular(radius),
       ),
       child: ClipRRect(

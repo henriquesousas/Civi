@@ -83,6 +83,14 @@ class _StepItemDetailPageState extends State<StepItemDetailPage> {
         .add(ItemCodeChangeEvent(code: code.toUpperCase()));
   }
 
+  void _changeModel(String value) {
+    context.read<CreateItemBloc>().add(ItemModelEvent(value: value));
+  }
+
+  void _changeYear(String value) {
+    context.read<CreateItemBloc>().add(ItemYearEvent(value: value));
+  }
+
   void _unFocus() {
     if (_txtFocusNodes.hasFocus) {
       _txtFocusNodes.unfocus();
@@ -104,14 +112,18 @@ class _StepItemDetailPageState extends State<StepItemDetailPage> {
           final hasBrand = state.detailBrand.brand != null;
           final hasColor = state.detailColor.color != null;
           final hasCode = state.detailCode.code != null;
+          final hasModel = state.detailModel.value != null;
+          final hasYear = state.detailYear.value != null;
+
           final selectedLabelStyle =
               Theme.of(context).textTheme.bodyLarge?.copyWith();
           final activeBorder = outlineInputBorder.copyWith(
             borderSide: const BorderSide(
               color: AppColors.primaryColor,
-              width: 1.0,
+              width: 1,
             ),
           );
+
           return Column(
             crossAxisAlignment: CrossAxisAlignment.center,
             spacing: 10,
@@ -122,6 +134,15 @@ class _StepItemDetailPageState extends State<StepItemDetailPage> {
               ),
               const SizedBox(height: 32),
               UIPrimaryTextField(
+                initialValue: state.detailModel.value,
+                labelText: "Modelo",
+                errorText: state.detailModel.error,
+                labelStyle: hasModel ? selectedLabelStyle : null,
+                enabledBorder: hasModel ? activeBorder : null,
+                upperCase: true,
+                onChanged: (value) => _changeModel(value),
+              ),
+              UIPrimaryTextField(
                 focusNode: _txtFocusNodes,
                 initialValue: state.detailCode.code,
                 labelText: R.strings.hintTextVehicleCode,
@@ -129,7 +150,18 @@ class _StepItemDetailPageState extends State<StepItemDetailPage> {
                 labelStyle: hasCode ? selectedLabelStyle : null,
                 enabledBorder: hasCode ? activeBorder : null,
                 upperCase: true,
+                maxLength: 7,
                 onChanged: (value) => _changeVehicleCode(value),
+              ),
+              UIPrimaryTextField(
+                initialValue: state.detailYear.value,
+                labelText: "Ano",
+                errorText: state.detailYear.error,
+                labelStyle: hasYear ? selectedLabelStyle : null,
+                enabledBorder: hasYear ? activeBorder : null,
+                maxLength: 4,
+                textInputType: TextInputType.number,
+                onChanged: (value) => _changeYear(value),
               ),
               UIPrimaryTextField(
                 labelText: state.detailBrand.brand ?? R.strings.selectBrand,

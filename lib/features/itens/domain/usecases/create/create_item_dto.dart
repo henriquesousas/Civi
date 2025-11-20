@@ -5,6 +5,9 @@ class CreateItemDto {
   final String code;
   final int year;
   final String type;
+  final String brand;
+  final String color;
+  final String? obs;
 
   CreateItemDto({
     required this.userId,
@@ -13,5 +16,8 @@ class CreateItemDto {
     required this.code,
     required this.year,
     required this.type,
+    required this.brand,
+    required this.color,
+    required this.obs,
   });
 }

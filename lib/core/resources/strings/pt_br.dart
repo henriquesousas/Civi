@@ -87,6 +87,34 @@ class PtBr with TranslationParts implements Translation {
   String get productMessageEmpty =>
       "Comece adicionando seu primeiro item à plataforma para gerenciar seus veículos, celulares e outros itens";
 
+  @override
+  String get brand => "Marca";
+
+  @override
+  String get detail => "Detalhes";
+
+  @override
+  String get name => "Nome";
+
+  @override
+  String get photos => "Fotos";
+
+  @override
+  String get plate => "Placa";
+
+  @override
+  String get type => "Tipo";
+
+  @override
+  String get color => "Color";
+
+  @override
+  String get permanentlyDeleteVehicle =>
+      "Para deletar esse veículo permanentemente | Clique aqui";
+
+  @override
+  String get confirmUpdate => "Confirmar alterações";
+
   //Onboarding
   //============================================================================
   @override
@@ -213,9 +241,11 @@ class PtBr with TranslationParts implements Translation {
 
   @override
   String get errorMessageVehicle => "Placa inválida";
+  String get errorMessageModel => "Modelo inválido";
+  String get errorMessageYear => "Ano inválido";
 
   @override
-  String get hintTextVehicleCode => "Número da placa";
+  String get hintTextVehicleCode => "Placa";
 
   @override
   String get selectColor => "Selecione uma cor";
