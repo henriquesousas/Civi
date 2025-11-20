@@ -1,7 +1,9 @@
 import 'package:deehelp/core/theme/app_colors.dart';
 import 'package:deehelp/features/itens/domain/entities/my_items.dart';
-import 'package:deehelp/features/itens/presentation/list/components/item_list_tile_modal_widget.dart';
+import 'package:deehelp/features/itens/presentation/list/components/item_modal_action_tile.dart';
 import 'package:flutter/material.dart';
+
+import '../../../../../core/components/buttons/ui_outline_button.dart';
 
 class ItemModalWidget extends StatelessWidget {
   final Item item;
@@ -9,47 +11,83 @@ class ItemModalWidget extends StatelessWidget {
   final VoidCallback onEdit;
   final VoidCallback onClose;
 
-  const ItemModalWidget(
-      {super.key,
-      required this.item,
-      required this.onDelete,
-      required this.onEdit,
-      required this.onClose});
+  const ItemModalWidget({
+    super.key,
+    required this.item,
+    required this.onDelete,
+    required this.onEdit,
+    required this.onClose,
+  });
 
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 16),
+      padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 24),
       child: Column(
         mainAxisSize: MainAxisSize.min,
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text(
-            item.name,
-            style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                  fontWeight: FontWeight.w600,
+          Row(
+            children: [
+              Container(
+                padding: const EdgeInsets.all(8),
+                decoration: BoxDecoration(
+                  color: AppColors.primaryColor.withValues(alpha: 0.1),
+                  shape: BoxShape.circle,
                 ),
+                child: const Icon(
+                  Icons.directions_car,
+                  color: AppColors.primaryColor,
+                  size: 20,
+                ),
+              ),
+              const SizedBox(width: 12),
+              Expanded(
+                child: Text(
+                  item.name,
+                  style: Theme.of(context).textTheme.titleLarge?.copyWith(
+                        fontWeight: FontWeight.w600,
+                        color: AppColors.textPrimary,
+                      ),
+                  overflow: TextOverflow.ellipsis,
+                ),
+              ),
+            ],
+          ),
+          const SizedBox(height: 24),
+          Container(
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(12),
+              border: Border.all(color: AppColors.lightGreyColor30),
+            ),
+            child: Column(
+              children: [
+                ItemModalActionTile(
+                  icon: Icons.edit_outlined,
+                  title: 'Editar Veículo',
+                  subtitle: 'Modificar informações',
+                  color: AppColors.primaryColor,
+                  onTap: onEdit,
+                  showDivider: true,
+                ),
+                ItemModalActionTile(
+                  icon: Icons.delete_outline,
+                  title: 'Excluir Veículo',
+                  subtitle: 'Remover permanentemente',
+                  color: AppColors.errorColor,
+                  onTap: onDelete,
+                  showDivider: false,
+                ),
+              ],
+            ),
           ),
           const SizedBox(height: 16),
-          const Divider(height: 1, color: AppColors.lightGreyColor),
-          ItemListTileModalWidget(
-            icon: Icons.edit_outlined,
-            title: 'Editar',
-            color: AppColors.darkGreyColor10,
-            onTap: onEdit,
-          ),
-          ItemListTileModalWidget(
-            icon: Icons.delete_outline,
-            title: 'Excluir',
-            color: AppColors.errorColor,
-            onTap: onDelete,
-          ),
-          ItemListTileModalWidget(
-            icon: Icons.close,
-            title: 'Fechar',
-            color: AppColors.greyColor,
-            onTap: onClose,
-          ),
-          const SizedBox(height: 16),
+          UIOutlineButton(
+            text: 'Fechar',
+            press: onClose,
+            textColor: AppColors.primaryColorDark,
+            borderColor: AppColors.primaryColorDark,
+          )
         ],
       ),
     );

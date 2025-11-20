@@ -145,10 +145,17 @@ class _ListItemPageState extends State<ListItemPage> {
                                   context,
                                   child: ItemModalWidget(
                                     item: item,
-                                    onDelete: () => _onDelete(item),
-                                    onEdit: () => context.push(
+                                    onDelete: () {
+                                      context.pop();
+                                      _onDelete(item);
+                                    },
+                                    onEdit: () {
+                                      context.pop();
+                                      context.push(
                                         RouterConstant.itemEdit,
-                                        extra: item),
+                                        extra: item,
+                                      );
+                                    },
                                     onClose: () => context.pop(),
                                   ),
                                 );

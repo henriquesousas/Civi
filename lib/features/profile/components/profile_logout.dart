@@ -1,6 +1,5 @@
 import 'package:deehelp/core/components/custom_modal_bottom_sheet.dart';
 import 'package:deehelp/features/profile/components/logout_modal.dart';
-import 'package:deehelp/shared/extensions/screen_size_extension.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
@@ -18,7 +17,7 @@ class ProfileLogout extends StatelessWidget {
         onTap: () {
           customModalBottomSheet(
             context,
-            height: context.percentHeight(0.25),
+            // height: context.percentHeight(0.25),
             child: const LogoutModal(),
           );
         },
