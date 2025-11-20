@@ -115,6 +115,9 @@ class PtBr with TranslationParts implements Translation {
   @override
   String get confirmUpdate => "Confirmar alterações";
 
+  @override
+  String get cancel => "Cancelar";
+
   //Onboarding
   //============================================================================
   @override

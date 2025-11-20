@@ -4,7 +4,6 @@ import 'package:uuid/uuid.dart';
 import '../item_status.dart';
 import '../usecases/create/create_item_dto.dart';
 
-//TODO: Renomear para product
 class Item extends Equatable {
   final String id;
   final String name;
@@ -57,5 +56,17 @@ class Item extends Equatable {
   }
 
   @override
-  List<Object?> get props => [id, name, imageUrl];
+  List<Object?> get props => [
+        id,
+        name,
+        code,
+        year,
+        status,
+        type,
+        userId,
+        brand,
+        obs,
+        imageUrl,
+        createdAt
+      ];
 }

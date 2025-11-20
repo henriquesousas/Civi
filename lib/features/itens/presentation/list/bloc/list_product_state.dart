@@ -1,5 +1,4 @@
 import 'package:deehelp/features/itens/domain/entities/my_items.dart';
-import 'package:deehelp/features/itens/presentation/list/bloc/list_product_cubit.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 part 'list_product_state.freezed.dart';

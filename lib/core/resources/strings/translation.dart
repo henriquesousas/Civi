@@ -38,6 +38,7 @@ abstract class Translation with TranslationParts {
   String get errorMessageVehicle;
   String get errorMessageModel;
   String get errorMessageYear;
+  String get cancel;
   // Login
   String get loginInfo;
   String get enterCreateAccount;

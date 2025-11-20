@@ -37,7 +37,7 @@ class UIPrimaryButton extends StatelessWidget {
           elevation: 0,
           backgroundColor: bgColor,
           shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(12),
+            borderRadius: BorderRadius.circular(borderRadius ?? 12),
           ),
         ),
         child: loading
