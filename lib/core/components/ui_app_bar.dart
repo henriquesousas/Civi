@@ -19,7 +19,7 @@ class UIAppBar extends StatelessWidget implements PreferredSizeWidget {
       centerTitle: false,
       title: Text(
         title,
-        style: Theme.of(context).textTheme.titleLarge?.copyWith(
+        style: Theme.of(context).textTheme.bodyLarge?.copyWith(
               fontWeight: FontWeight.bold,
             ),
       ),

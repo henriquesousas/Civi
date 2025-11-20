@@ -1,7 +1,6 @@
-import 'package:deehelp/app/localization/image_config.dart';
 import 'package:deehelp/app/localization/string_config.dart';
-import 'package:deehelp/app/theme/app_colors_v2.dart';
 import 'package:deehelp/app/theme/size_config.dart';
+import 'package:deehelp/core/components/ui_app_bar.dart';
 import 'package:deehelp/features/settings/faq/components/ui_expansion_tile.dart';
 import 'package:deehelp/features/settings/faq/state/faq_bloc.dart';
 import 'package:deehelp/features/settings/faq/state/faq_event.dart';
@@ -31,52 +30,59 @@ class FaqPage extends StatelessWidget {
 
     return Scaffold(
       backgroundColor: Colors.grey[50],
-      appBar: AppBar(
-        // backgroundColor: AppColorsV2.backgroundColor,
-        elevation: 0,
-        automaticallyImplyLeading: false,
-        title: Padding(
-          padding: const EdgeInsets.only(
-            left: 5,
-          ),
-          child: Row(
-            children: [
-              GestureDetector(
-                onTap: () => context.pop(),
-                child: const Image(
-                  image: AssetImage(ImageConfig.backArrow),
-                  width: 24,
-                  height: 24,
-                  color: AppColorsV2.primaryColor,
-                ),
-              ),
-              const SizedBox(width: 10),
-              Text(
-                StringConfig.frequentlyQuestion,
-                style: Theme.of(context).textTheme.titleMedium,
-                // style: context.getTextStyle.medium,
-              ),
-            ],
-          ),
+      // appBar: AppBar(
+      //   // backgroundColor: AppColorsV2.backgroundColor,
+      //   elevation: 0,
+      //   automaticallyImplyLeading: false,
+      //   // title: Padding(
+      //   //   padding: const EdgeInsets.only(
+      //   //     left: 5,
+      //   //   ),
+      //   //   child: Row(
+      //   //     children: [
+      //   //       GestureDetector(
+      //   //         onTap: () => context.pop(),
+      //   //         child: const Image(
+      //   //           image: AssetImage(ImageConfig.backArrow),
+      //   //           width: 24,
+      //   //           height: 24,
+      //   //           color: AppColorsV2.primaryColor,
+      //   //         ),
+      //   //       ),
+      //   //       const SizedBox(width: 10),
+      //   //       Text(
+      //   //         StringConfig.frequentlyQuestion,
+      //   //         style: Theme.of(context).textTheme.titleMedium,
+      //   //         // style: context.getTextStyle.medium,
+      //   //       ),
+      //   //     ],
+      //   //   ),
+      //   // ),
+      //   actions: [
+      //     Padding(
+      //       padding: const EdgeInsets.only(
+      //         right: SizeConfig.padding24,
+      //         left: SizeConfig.padding24,
+      //         top: SizeConfig.padding10,
+      //         bottom: SizeConfig.padding10,
+      //       ),
+      //       child: GestureDetector(
+      //         child: const Image(
+      //           image: AssetImage(ImageConfig.search),
+      //           width: SizeConfig.width20,
+      //           height: SizeConfig.height20,
+      //           color: AppColorsV2.primaryColor,
+      //         ),
+      //       ),
+      //     )
+      //   ],
+      // ),
+      appBar: UIAppBar(
+        title: StringConfig.frequentlyQuestion,
+        leading: IconButton(
+          onPressed: () => context.pop(),
+          icon: const Icon(Icons.arrow_back),
         ),
-        actions: [
-          Padding(
-            padding: const EdgeInsets.only(
-              right: SizeConfig.padding24,
-              left: SizeConfig.padding24,
-              top: SizeConfig.padding10,
-              bottom: SizeConfig.padding10,
-            ),
-            child: GestureDetector(
-              child: const Image(
-                image: AssetImage(ImageConfig.search),
-                width: SizeConfig.width20,
-                height: SizeConfig.height20,
-                color: AppColorsV2.primaryColor,
-              ),
-            ),
-          )
-        ],
       ),
       body: BlocBuilder<FaqBloc, FaqState>(
         builder: (context, state) {
