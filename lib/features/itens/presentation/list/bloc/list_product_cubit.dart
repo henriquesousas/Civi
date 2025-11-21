@@ -61,7 +61,7 @@ class ListProductCubit extends Cubit<ListProductState> {
       emit(ListProductState.error(R.strings.userNotFound));
     }
     final dto = DeleteProductDto(
-      itemId: item.id,
+      itemId: item.id.value,
       userId: userId!,
       imageUrl: item.imageUrl!,
     );

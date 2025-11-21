@@ -12,5 +12,5 @@ abstract class Entity<ID extends Identifier> extends Equatable {
   void validate(ValidationHandler handler);
 
   @override
-  List<Object?> get props => [id];
+  List<Object?> get props => [id, notification];
 }

@@ -48,6 +48,7 @@ class AppColors {
 
   static const Color textPrimary = Color(0xFF1A1A1A);
   static const Color textSecondary = Color(0xFF6C757D);
+  static const Color background = Color(0xFFF8F9FA);
 
   static const LinearGradient primaryGradient = LinearGradient(
     begin: Alignment.topLeft,

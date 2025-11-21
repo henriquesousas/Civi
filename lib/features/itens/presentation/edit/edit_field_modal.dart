@@ -8,7 +8,7 @@ import '../../../../core/components/textfields/ui_secondary_textfield.dart';
 import '../../../../core/resources/resources.dart';
 import '../../../../core/theme/app_colors.dart';
 
-class EditFieldModal extends StatelessWidget {
+class EditFieldModal extends StatefulWidget {
   final String title;
   final String description;
   final String hintText;
@@ -17,6 +17,9 @@ class EditFieldModal extends StatelessWidget {
   final IconData prefixIcon;
   final Color prefixIconColor;
   final ValueChanged<String>? onConfirm;
+  final ValueChanged<String>? onChange;
+  final VoidCallback? onCancel;
+  final String? errorText;
 
   const EditFieldModal({
     super.key,
@@ -28,7 +31,43 @@ class EditFieldModal extends StatelessWidget {
     this.prefixIcon = Icons.edit,
     this.prefixIconColor = AppColors.primaryColor,
     this.onConfirm,
+    this.onCancel,
+    this.onChange,
+    this.errorText,
   });
+
+  @override
+  State<EditFieldModal> createState() => _EditFieldModalState();
+}
+
+class _EditFieldModalState extends State<EditFieldModal> {
+  late TextEditingController _controller;
+
+  @override
+  void initState() {
+    super.initState();
+    _controller = TextEditingController(text: widget.initialValue);
+  }
+
+  @override
+  void dispose() {
+    _controller.dispose();
+    super.dispose();
+  }
+
+  void _onConfirm() {
+    widget.onConfirm?.call(_controller.text);
+    Navigator.of(context).pop();
+  }
+
+  void _onChange(String value) {
+    widget.onChange?.call(value);
+  }
+
+  void _onCancel() {
+    widget.onCancel?.call();
+    Navigator.of(context).pop();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -43,7 +82,7 @@ class EditFieldModal extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Text(
-                  "Editar $title",
+                  "Editar ${widget.title}",
                   style: Theme.of(context).textTheme.headlineSmall?.copyWith(
                         fontWeight: FontWeight.w600,
                         color: AppColors.textPrimary,
@@ -55,28 +94,30 @@ class EditFieldModal extends StatelessWidget {
             ),
             const SizedBox(height: 8),
             Text(
-              description,
+              widget.description,
               style: Theme.of(context).textTheme.bodyMedium?.copyWith(
                     color: AppColors.textSecondary,
                   ),
             ),
             const SizedBox(height: 32),
             UISecondaryTextField(
-              labelText: hintText,
-              hintText: hintText,
-              initialValue: initialValue,
+              labelText: widget.hintText,
+              hintText: widget.hintText,
+              //initialValue: widget.initialValue,
+              controller: _controller,
               prefixIcon: Icon(
-                prefixIcon,
+                widget.prefixIcon,
                 color: AppColors.primaryColor,
               ),
               filled: true,
-              fillColor: AppColorsV2.background,
+              fillColor: AppColors.background,
               textInputAction: TextInputAction.done,
-              onFieldSubmitted: (value) {},
+              onChanged: _onChange,
+              errorText: widget.errorText,
             ),
             const SizedBox(height: 8),
             Text(
-              examples,
+              widget.examples,
               style: Theme.of(context).textTheme.bodySmall?.copyWith(
                     color: AppColorsV2.textTertiary,
                   ),
@@ -97,7 +138,7 @@ class EditFieldModal extends StatelessWidget {
                   child: UIPrimaryButton(
                     text: R.strings.confirm,
                     borderRadius: 12,
-                    press: () {},
+                    press: widget.onConfirm != null ? _onConfirm : null,
                   ),
                 ),
               ],

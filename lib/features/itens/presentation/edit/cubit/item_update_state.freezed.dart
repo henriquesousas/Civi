@@ -53,6 +53,7 @@ extension ItemUpdateStatePatterns on ItemUpdateState {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_ItemUpdateStateInitial value)? initial,
     TResult Function(_ItemUpdateStateLoad value)? load,
+    TResult Function(_ItemUpdateStateChangeModel value)? changeModel,
     required TResult orElse(),
   }) {
     final _that = this;
@@ -61,6 +62,8 @@ extension ItemUpdateStatePatterns on ItemUpdateState {
         return initial(_that);
       case _ItemUpdateStateLoad() when load != null:
         return load(_that);
+      case _ItemUpdateStateChangeModel() when changeModel != null:
+        return changeModel(_that);
       case _:
         return orElse();
     }
@@ -83,6 +86,7 @@ extension ItemUpdateStatePatterns on ItemUpdateState {
   TResult map<TResult extends Object?>({
     required TResult Function(_ItemUpdateStateInitial value) initial,
     required TResult Function(_ItemUpdateStateLoad value) load,
+    required TResult Function(_ItemUpdateStateChangeModel value) changeModel,
   }) {
     final _that = this;
     switch (_that) {
@@ -90,6 +94,8 @@ extension ItemUpdateStatePatterns on ItemUpdateState {
         return initial(_that);
       case _ItemUpdateStateLoad():
         return load(_that);
+      case _ItemUpdateStateChangeModel():
+        return changeModel(_that);
       case _:
         throw StateError('Unexpected subclass');
     }
@@ -111,6 +117,7 @@ extension ItemUpdateStatePatterns on ItemUpdateState {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_ItemUpdateStateInitial value)? initial,
     TResult? Function(_ItemUpdateStateLoad value)? load,
+    TResult? Function(_ItemUpdateStateChangeModel value)? changeModel,
   }) {
     final _that = this;
     switch (_that) {
@@ -118,6 +125,8 @@ extension ItemUpdateStatePatterns on ItemUpdateState {
         return initial(_that);
       case _ItemUpdateStateLoad() when load != null:
         return load(_that);
+      case _ItemUpdateStateChangeModel() when changeModel != null:
+        return changeModel(_that);
       case _:
         return null;
     }
@@ -139,6 +148,7 @@ extension ItemUpdateStatePatterns on ItemUpdateState {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function(Item tem)? load,
+    TResult Function(String value)? changeModel,
     required TResult orElse(),
   }) {
     final _that = this;
@@ -147,6 +157,8 @@ extension ItemUpdateStatePatterns on ItemUpdateState {
         return initial();
       case _ItemUpdateStateLoad() when load != null:
         return load(_that.tem);
+      case _ItemUpdateStateChangeModel() when changeModel != null:
+        return changeModel(_that.value);
       case _:
         return orElse();
     }
@@ -169,6 +181,7 @@ extension ItemUpdateStatePatterns on ItemUpdateState {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function(Item tem) load,
+    required TResult Function(String value) changeModel,
   }) {
     final _that = this;
     switch (_that) {
@@ -176,6 +189,8 @@ extension ItemUpdateStatePatterns on ItemUpdateState {
         return initial();
       case _ItemUpdateStateLoad():
         return load(_that.tem);
+      case _ItemUpdateStateChangeModel():
+        return changeModel(_that.value);
       case _:
         throw StateError('Unexpected subclass');
     }
@@ -197,6 +212,7 @@ extension ItemUpdateStatePatterns on ItemUpdateState {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function(Item tem)? load,
+    TResult? Function(String value)? changeModel,
   }) {
     final _that = this;
     switch (_that) {
@@ -204,6 +220,8 @@ extension ItemUpdateStatePatterns on ItemUpdateState {
         return initial();
       case _ItemUpdateStateLoad() when load != null:
         return load(_that.tem);
+      case _ItemUpdateStateChangeModel() when changeModel != null:
+        return changeModel(_that.value);
       case _:
         return null;
     }
@@ -291,6 +309,72 @@ class __$ItemUpdateStateLoadCopyWithImpl<$Res>
           ? _self.tem
           : tem // ignore: cast_nullable_to_non_nullable
               as Item,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _ItemUpdateStateChangeModel implements ItemUpdateState {
+  const _ItemUpdateStateChangeModel(this.value);
+
+  final String value;
+
+  /// Create a copy of ItemUpdateState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @pragma('vm:prefer-inline')
+  _$ItemUpdateStateChangeModelCopyWith<_ItemUpdateStateChangeModel>
+      get copyWith => __$ItemUpdateStateChangeModelCopyWithImpl<
+          _ItemUpdateStateChangeModel>(this, _$identity);
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _ItemUpdateStateChangeModel &&
+            (identical(other.value, value) || other.value == value));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType, value);
+
+  @override
+  String toString() {
+    return 'ItemUpdateState.changeModel(value: $value)';
+  }
+}
+
+/// @nodoc
+abstract mixin class _$ItemUpdateStateChangeModelCopyWith<$Res>
+    implements $ItemUpdateStateCopyWith<$Res> {
+  factory _$ItemUpdateStateChangeModelCopyWith(
+          _ItemUpdateStateChangeModel value,
+          $Res Function(_ItemUpdateStateChangeModel) _then) =
+      __$ItemUpdateStateChangeModelCopyWithImpl;
+  @useResult
+  $Res call({String value});
+}
+
+/// @nodoc
+class __$ItemUpdateStateChangeModelCopyWithImpl<$Res>
+    implements _$ItemUpdateStateChangeModelCopyWith<$Res> {
+  __$ItemUpdateStateChangeModelCopyWithImpl(this._self, this._then);
+
+  final _ItemUpdateStateChangeModel _self;
+  final $Res Function(_ItemUpdateStateChangeModel) _then;
+
+  /// Create a copy of ItemUpdateState
+  /// with the given fields replaced by the non-null parameter values.
+  @pragma('vm:prefer-inline')
+  $Res call({
+    Object? value = null,
+  }) {
+    return _then(_ItemUpdateStateChangeModel(
+      null == value
+          ? _self.value
+          : value // ignore: cast_nullable_to_non_nullable
+              as String,
     ));
   }
 }

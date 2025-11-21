@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:deehelp/core/components/custom_modal_bottom_sheet.dart';
 import 'package:deehelp/core/components/textfields/ui_primary_text_field.dart';
+import 'package:deehelp/features/itens/data/data.dart';
 import 'package:deehelp/features/itens/presentation/create/bloc/create_item_bloc.dart';
 import 'package:deehelp/features/itens/presentation/create/bloc/item_event.dart';
 import 'package:deehelp/features/itens/presentation/create/components/modal_select_color.dart';
@@ -57,6 +58,7 @@ class _StepItemDetailPageState extends State<StepItemDetailPage> {
     _handleModal<String>(
       context: context,
       modalBuilder: (onComplete) => ModalSelectBrand(
+        values: brands,
         onChange: (brand) => onComplete(brand),
       ),
       updateBloc: (result) => context

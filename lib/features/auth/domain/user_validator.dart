@@ -19,9 +19,6 @@ class UserValidator extends Validator {
       user.name.notification,
       user.email.notification,
       user.photoUrl?.notification,
-      // user.surName.notification,
-      // user.password.notification,
-      // user.phone.notification,
     ];
 
     notifications.forEach((notification) => copyIfHasError(notification));

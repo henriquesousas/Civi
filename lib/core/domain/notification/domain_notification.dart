@@ -28,6 +28,10 @@ class DomainNotification implements ValidationHandler {
     return this;
   }
 
+  void clear() {
+    _notifications.clear();
+  }
+
   @override
   ValidationHandler appendAll(List<NotificationMessage> notifications) {
     _notifications.addAll(notifications);

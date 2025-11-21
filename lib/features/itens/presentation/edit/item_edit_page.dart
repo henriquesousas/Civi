@@ -1,8 +1,8 @@
 import 'package:deehelp/core/components/container/ui_simple_container.dart';
 import 'package:deehelp/core/components/custom_modal_bottom_sheet.dart';
 import 'package:deehelp/core/components/ui_app_bar.dart';
+import 'package:deehelp/features/itens/data/data.dart';
 import 'package:deehelp/features/itens/domain/entities/my_items.dart';
-import 'package:deehelp/features/itens/presentation/create/components/modal_select_brand.dart';
 import 'package:deehelp/features/itens/presentation/create/components/modal_select_color.dart';
 import 'package:deehelp/features/itens/presentation/edit/cubit/item_update_cubit.dart';
 import 'package:deehelp/features/itens/presentation/edit/cubit/item_update_state.dart';
@@ -17,6 +17,9 @@ import '../../../../app/theme/app_colors_v2.dart';
 import '../../../../core/components/images/ui_network_image_with_loader.dart';
 import '../../../../core/resources/resources.dart';
 import '../../../../shared/animation/fade_slide_transition_animator.dart';
+import '../create/components/modal_select_brand.dart';
+import 'cubit/modal/item_modal_cubit.dart';
+import 'cubit/modal/item_modal_state.dart';
 import 'item_detail_tile.dart';
 import 'item_edit_footer.dart';
 
@@ -81,32 +84,51 @@ class _ItemEditPageState extends State<ItemEditPage> {
                                 title: R.strings.brand,
                                 subtitle: item.brand,
                                 press: () {
+                                  final modalCubit =
+                                      context.read<ItemModalCubit>();
+                                  final mainCubit =
+                                      context.read<ItemUpdateCubit>();
+
+                                  modalCubit.initializeSafeCopy(item);
+
                                   customModalBottomSheet(
                                     context,
-                                    child: ModalSelectBrand(
-                                      onChange: (c) {},
+                                    child: BlocProvider.value(
+                                      value: modalCubit,
+                                      child: BlocBuilder<ItemModalCubit,
+                                          ItemModalState>(
+                                        builder: (context, modalState) {
+                                          return ModalSelectBrand(
+                                            values: brands,
+                                            onChange: (value) {
+                                              mainCubit.applyBrandChange(value);
+                                              context.pop();
+                                            },
+                                          );
+                                        },
+                                      ),
                                     ),
                                   );
                                 },
                               ),
                               ItemDetailTile(
-                                title: "Modelo",
+                                title: R.strings.model,
                                 subtitle: item.name,
-                                press: () {
-                                  customModalBottomSheet(
-                                    context,
-                                    child: EditFieldModal(
-                                      title: "Modelo",
-                                      hintText: "Modelo",
-                                      description:
-                                          "Atualize informações do modelo do veículo",
-                                      examples:
-                                          "Exemplos: Civic, Corolla, Onix, HB20",
-                                      initialValue: item.name,
-                                      prefixIcon: Icons.directions_car,
-                                    ),
-                                  );
-                                },
+                                press: () => _showTextFieldModal(
+                                  context: context,
+                                  item: item,
+                                  title: R.strings.model,
+                                  description: R.strings.modelUpdateDescription,
+                                  examples: R.strings.modelUpdateExample,
+                                  icon: Icons.directions_car,
+                                  field: 'model',
+                                  onChange: (value) => context
+                                      .read<ItemModalCubit>()
+                                      .changeModel(value),
+                                  onApplyChange: (value) => context
+                                      .read<ItemUpdateCubit>()
+                                      .applyModelChange(value),
+                                ),
                               ),
                               ItemDetailTile(
                                 title: R.strings.plate,
@@ -119,10 +141,26 @@ class _ItemEditPageState extends State<ItemEditPage> {
                                 subtitle: item.color,
                                 showDivider: false,
                                 press: () {
+                                  final modalCubit =
+                                      context.read<ItemModalCubit>();
+                                  final mainCubit =
+                                      context.read<ItemUpdateCubit>();
+
                                   customModalBottomSheet(
                                     context,
-                                    child: ModalSelectColor(
-                                      onChange: (c) {},
+                                    child: BlocProvider.value(
+                                      value: modalCubit,
+                                      child: BlocBuilder<ItemModalCubit,
+                                          ItemModalState>(
+                                        builder: (context, modalState) {
+                                          return ModalSelectColor(
+                                            onChange: (value) {
+                                              mainCubit.applyColorChange(value);
+                                              context.pop();
+                                            },
+                                          );
+                                        },
+                                      ),
                                     ),
                                   );
                                 },
@@ -140,9 +178,37 @@ class _ItemEditPageState extends State<ItemEditPage> {
                             spacing: 3,
                             children: [
                               ItemDetailTile(
-                                  title: R.strings.type,
-                                  subtitle: item.type,
-                                  showDivider: false),
+                                title: R.strings.type,
+                                subtitle: item.type,
+                                showDivider: false,
+                                press: () {
+                                  final modalCubit =
+                                      context.read<ItemModalCubit>();
+                                  final mainCubit =
+                                      context.read<ItemUpdateCubit>();
+
+                                  modalCubit.initializeSafeCopy(item);
+
+                                  customModalBottomSheet(
+                                    context,
+                                    child: BlocProvider.value(
+                                      value: modalCubit,
+                                      child: BlocBuilder<ItemModalCubit,
+                                          ItemModalState>(
+                                        builder: (context, modalState) {
+                                          return ModalSelectBrand(
+                                            values: types,
+                                            onChange: (value) {
+                                              mainCubit.applyTypeChange(value);
+                                              context.pop();
+                                            },
+                                          );
+                                        },
+                                      ),
+                                    ),
+                                  );
+                                },
+                              ),
                             ],
                           ),
                         ],
@@ -159,21 +225,21 @@ class _ItemEditPageState extends State<ItemEditPage> {
                                 title: R.strings.detail,
                                 subtitle: item.obs ?? '',
                                 showDivider: false,
-                                press: () {
-                                  customModalBottomSheet(
-                                    context,
-                                    child: EditFieldModal(
-                                      title: "Detalhes",
-                                      hintText: "Detalhes",
-                                      description:
-                                          "Adicione observações sobre o estado do veículo",
-                                      examples:
-                                          "Exemplos: Amassado na porta, Risco na lateral, Parachoque traseiro quebrado",
-                                      initialValue: item.obs ?? "",
-                                      prefixIcon: Icons.description,
-                                    ),
-                                  );
-                                },
+                                press: () => _showTextFieldModal(
+                                  context: context,
+                                  item: item,
+                                  title: R.strings.detail,
+                                  description: R.strings.obsUpdateDescription,
+                                  examples: R.strings.obsUpdateExample,
+                                  icon: Icons.description,
+                                  field: 'obs',
+                                  onChange: (value) => context
+                                      .read<ItemModalCubit>()
+                                      .changeObs(value),
+                                  onApplyChange: (value) => context
+                                      .read<ItemUpdateCubit>()
+                                      .applyObsChange(value),
+                                ),
                               )
                             ],
                           ),
@@ -221,5 +287,62 @@ class _ItemEditPageState extends State<ItemEditPage> {
         );
       },
     );
+  }
+
+  void _showTextFieldModal({
+    required BuildContext context,
+    required Item item,
+    required String title,
+    required String description,
+    required String examples,
+    required IconData icon,
+    required String field,
+    required Function(String) onChange,
+    required Function(String) onApplyChange,
+  }) {
+    final modalCubit = context.read<ItemModalCubit>();
+
+    modalCubit.initializeSafeCopy(item);
+
+    customModalBottomSheet(
+      context,
+      child: BlocProvider.value(
+        value: modalCubit,
+        child: BlocBuilder<ItemModalCubit, ItemModalState>(
+          builder: (context, state) {
+            final modalCubit = context.read<ItemModalCubit>();
+            final errorText = state.maybeMap(
+              validation: (state) => state.field == field ? state.error : null,
+              orElse: () => null,
+            );
+
+            return EditFieldModal(
+              title: title,
+              hintText: title,
+              description: description,
+              examples: examples,
+              prefixIcon: icon,
+              initialValue: _getFieldValue(modalCubit, field),
+              errorText: errorText,
+              onConfirm:
+                  errorText == null ? (value) => onApplyChange(value) : null,
+              onCancel: () => context.pop(),
+              onChange: onChange,
+            );
+          },
+        ),
+      ),
+    );
+  }
+
+  String _getFieldValue(ItemModalCubit cubit, String field) {
+    switch (field) {
+      case 'model':
+        return cubit.currentModel;
+      case 'obs':
+        return cubit.currentObservation;
+      default:
+        return '';
+    }
   }
 }

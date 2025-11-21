@@ -17,7 +17,7 @@ class ItemRepositoryFirebaseStorage implements ItemRepository {
         .collection("users")
         .doc(item.userId)
         .collection("products")
-        .doc(item.id)
+        .doc(item.id.value)
         .set(data);
   }
 

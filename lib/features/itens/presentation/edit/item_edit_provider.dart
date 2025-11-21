@@ -1,5 +1,6 @@
 import 'package:deehelp/features/itens/domain/entities/my_items.dart';
 import 'package:deehelp/features/itens/presentation/edit/cubit/item_update_cubit.dart';
+import 'package:deehelp/features/itens/presentation/edit/cubit/modal/item_modal_cubit.dart';
 import 'package:deehelp/features/itens/presentation/edit/item_edit_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -34,6 +35,9 @@ class ItemEditProvider extends StatelessWidget {
         // ),
         BlocProvider<ItemUpdateCubit>(
           create: (context) => ItemUpdateCubit(),
+        ),
+        BlocProvider<ItemModalCubit>(
+          create: (context) => ItemModalCubit(),
         ),
       ],
       child: ItemEditPage(item: item),

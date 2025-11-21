@@ -39,6 +39,11 @@ abstract class Translation with TranslationParts {
   String get errorMessageModel;
   String get errorMessageYear;
   String get cancel;
+  String get model;
+  String get modelUpdateDescription;
+  String get modelUpdateExample;
+  String get obsUpdateExample;
+  String get obsUpdateDescription;
   // Login
   String get loginInfo;
   String get enterCreateAccount;

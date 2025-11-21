@@ -1,3 +1,4 @@
+import 'package:deehelp/features/itens/domain/entities/item_id.dart';
 import 'package:deehelp/features/itens/domain/entities/my_items.dart';
 
 import '../domain/item_status.dart';
@@ -23,7 +24,7 @@ class ItemModel {
 
   static Item fromMap(Map<String, dynamic> map) {
     return Item(
-      id: map['id'],
+      id: ItemId.from(map['id']),
       name: map['name'],
       code: map['code'],
       color: map['color'],

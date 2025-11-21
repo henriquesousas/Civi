@@ -244,7 +244,9 @@ class PtBr with TranslationParts implements Translation {
 
   @override
   String get errorMessageVehicle => "Placa inválida";
+  @override
   String get errorMessageModel => "Modelo inválido";
+  @override
   String get errorMessageYear => "Ano inválido";
 
   @override
@@ -289,4 +291,22 @@ class PtBr with TranslationParts implements Translation {
 
   @override
   List<String> get listItems => ["Carro", "Caminhão", "Motocicleta"];
+
+  @override
+  String get modelUpdateExample => "Exemplos: Civic, Corolla, Onix, HB20";
+
+  @override
+  String get modelUpdateDescription =>
+      "Atualize informações do modelo do veículo";
+
+  @override
+  String get model => "Modelo";
+
+  @override
+  String get obsUpdateExample =>
+      "Exemplos: Amassado na porta, Risco na lateral, Parachoque traseiro quebrado";
+
+  @override
+  String get obsUpdateDescription =>
+      "Adicione observações sobre o estado do veículo";
 }
