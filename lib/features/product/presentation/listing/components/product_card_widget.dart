@@ -53,9 +53,9 @@ class ProductCardWidget extends StatelessWidget {
               children: [
                 UINetworkImageWithLoader(
                   src: item.image?.file.path ?? "",
-                  radius: 90,
-                  width: 90,
-                  height: 90,
+                  radius: 12,
+                  width: 100,
+                  height: 100,
                 ),
                 const SizedBox(width: 16),
                 Expanded(

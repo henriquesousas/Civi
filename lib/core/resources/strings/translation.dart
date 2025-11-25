@@ -73,8 +73,9 @@ abstract class Translation with TranslationParts {
   String get search;
   // BottomBar
   String get bottomBarProfile;
-  String get bottomBarMyItems;
-  String get bottomBarHome;
+  String get bottomBarMyProducts;
+  String get bottomBarExplore;
+  String get bottomBarOccurrence;
   // Logout
   String get logoutConfirmButton;
   String get logoutExitMessage;

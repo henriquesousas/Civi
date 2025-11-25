@@ -63,26 +63,27 @@ class _UpdateProductPageState extends State<UpdateProductPage> {
       listener: (context, state) {
         state.maybeMap(
           editing: (value) {
-            Loading.instance().show(context: context, text: "Aguarde...");
+            // Loading.instance().show(context: context, text: "Aguarde...");
           },
-          success: (state) {
-            context.showSnackBar("Produto alterado com sucesso.");
-            Loading.instance().hide();
+          success: (state) async {
+            // Loading.instance().hide();
             context.pop({
               'action': "update",
+              'message': "Produto alterado com sucesso.",
               'value': state.product,
             });
           },
           deleting: (state) {
-            context.showSnackBar("Produto removido com sucesso.");
-            Loading.instance().hide();
+            // context.showSnackBar("Produto removido com sucesso.");
+            // Loading.instance().hide();
             context.pop({
               'action': "delete",
+              'message': "Produto removido com sucesso.",
               'value': state.product,
             });
           },
           error: (value) {
-            Loading.instance().hide();
+            // Loading.instance().hide();
           },
           orElse: () => Loading.instance().hide(),
         );

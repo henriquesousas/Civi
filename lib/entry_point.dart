@@ -6,7 +6,6 @@ import 'package:flutter_svg/flutter_svg.dart';
 
 import 'core/resources/resources.dart';
 import 'core/theme/constants.dart';
-import 'features/home/home_view.dart';
 import 'features/product/presentation/listing/list_product_provider.dart';
 
 class EntryPoint extends StatefulWidget {
@@ -18,22 +17,24 @@ class EntryPoint extends StatefulWidget {
 
 class _EntryPointState extends State<EntryPoint> {
   final List _pages = const [
-    HomeView(),
+    // HomeView(),
+    SizedBox(),
+    SizedBox(),
     ListProductProvider(),
     ProfilePage(),
   ];
   int _currentIndex = 0;
 
-  String _geTitleTopBar() {
-    if (_currentIndex == 1) {
-      return "Meus Produtos";
-    }
-
-    if (_currentIndex == 2) {
-      return "Profile";
-    }
-    return "Explorar";
-  }
+  // String _geTitleTopBar() {
+  //   if (_currentIndex == 1) {
+  //     return "Meus Produtos";
+  //   }
+  //
+  //   if (_currentIndex == 2) {
+  //     return "Profile";
+  //   }
+  //   return "Explorar";
+  // }
 
   @override
   Widget build(BuildContext context) {
@@ -42,12 +43,14 @@ class _EntryPointState extends State<EntryPoint> {
         src,
         height: 24,
         colorFilter: ColorFilter.mode(
-            color ??
-                Theme.of(context).iconTheme.color!.withValues(
+          color ??
+              Theme.of(context).iconTheme.color!.withValues(
                     alpha: Theme.of(context).brightness == Brightness.dark
                         ? 0.3
-                        : 1),
-            BlendMode.srcIn),
+                        : 1,
+                  ),
+          BlendMode.srcIn,
+        ),
       );
     }
 
@@ -88,13 +91,25 @@ class _EntryPointState extends State<EntryPoint> {
         },
         child: _pages[_currentIndex],
       ),
-      bottomNavigationBar: Container(
-        padding: const EdgeInsets.only(top: defaultPadding / 2),
-        color: Theme.of(context).brightness == Brightness.light
-            ? Colors.white
-            : const Color(0xFF101015),
+
+      bottomNavigationBar: Theme(
+        data: Theme.of(context).copyWith(
+          splashColor: Colors.transparent, // Remove o splash geral
+          highlightColor: Colors.grey, // Remove o highlight geral
+          bottomNavigationBarTheme: BottomNavigationBarThemeData(
+            backgroundColor:
+                Theme.of(context).bottomNavigationBarTheme.backgroundColor,
+            // selectedItemColor: AppColors.primaryColor,
+            // type: BottomNavigationBarType.fixed,
+            // showSelectedLabels: true,
+            // showUnselectedLabels: true,
+          ),
+        ),
         child: BottomNavigationBar(
+          type: BottomNavigationBarType.fixed,
           currentIndex: _currentIndex,
+          selectedLabelStyle: const TextStyle(fontWeight: FontWeight.w300),
+          enableFeedback: false,
           onTap: (index) {
             if (index != _currentIndex) {
               setState(() {
@@ -102,27 +117,24 @@ class _EntryPointState extends State<EntryPoint> {
               });
             }
           },
-          backgroundColor: Theme.of(context).brightness == Brightness.light
-              ? Colors.white
-              : const Color(0xFF101015),
-          type: BottomNavigationBarType.fixed,
-          selectedLabelStyle: const TextStyle(fontWeight: FontWeight.w500),
-          selectedFontSize: 13,
-          selectedItemColor: AppColors.primaryColor,
-          unselectedItemColor: Colors.transparent,
-          enableFeedback: true,
           items: [
+            BottomNavigationBarItem(
+              icon: svgIcon(R.images.svgLocation),
+              activeIcon:
+                  svgIcon(R.images.svgLocation, color: AppColors.primaryColor),
+              label: R.strings.bottomBarExplore,
+            ),
             BottomNavigationBarItem(
               icon: svgIcon(R.images.svgCategory),
               activeIcon:
                   svgIcon(R.images.svgCategory, color: AppColors.primaryColor),
-              label: R.strings.bottomBarHome,
+              label: R.strings.bottomBarOccurrence,
             ),
             BottomNavigationBarItem(
-              icon: svgIcon(R.images.svgOrder),
+              icon: svgIcon(R.images.svgProduct),
               activeIcon:
-                  svgIcon(R.images.svgOrder, color: AppColors.primaryColor),
-              label: R.strings.myProducts,
+                  svgIcon(R.images.svgProduct, color: AppColors.primaryColor),
+              label: R.strings.bottomBarMyProducts,
             ),
             BottomNavigationBarItem(
               icon: svgIcon(R.images.svgProfile),

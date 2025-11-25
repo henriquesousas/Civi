@@ -3,12 +3,12 @@ import 'package:deehelp/core/wrapper/command_cubit.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../../../../../core/resources/resources.dart';
-import '../../../domain/entities/product.dart';
-import '../../../domain/usecases/delete/delete_product_dto.dart';
-import '../../../domain/usecases/delete/delete_product_usecase.dart';
-import '../../../domain/usecases/list/get_products_by_user_usecase.dart';
-import 'list_product_state.dart';
+import '../../../../core/resources/resources.dart';
+import '../../domain/entities/product.dart';
+import '../../domain/usecases/delete/delete_product_dto.dart';
+import '../../domain/usecases/delete/delete_product_usecase.dart';
+import '../../domain/usecases/list/get_products_by_user_usecase.dart';
+import 'state/list_product_state.dart';
 
 //TODO: Nao usar firebase para recuperar a sessap
 class ProductListingCubit extends Cubit<ListProductState> {

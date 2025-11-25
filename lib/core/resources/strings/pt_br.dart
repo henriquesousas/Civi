@@ -200,13 +200,16 @@ class PtBr with TranslationParts implements Translation {
   // BottomBar
   //============================================================================
   @override
-  String get bottomBarHome => "Discover";
+  String get bottomBarExplore => "Exlorar";
 
   @override
-  String get bottomBarMyItems => "Meus Itens";
+  String get bottomBarMyProducts => "Produtos";
 
   @override
   String get bottomBarProfile => "Profile";
+
+  @override
+  String get bottomBarOccurrence => "Ocorrências";
 
   // Logout
   //============================================================================

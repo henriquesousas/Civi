@@ -33,42 +33,41 @@ class ModalSelectColor extends StatelessWidget {
     return Column(
       children: [
         Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
-          child: Column(
-            children: [
-              Text(R.strings.selectColor),
-              SizedBox(
-                height: MediaQuery.of(context).size.height * 0.6,
-                child: ListView.separated(
-                  separatorBuilder: (context, index) => Divider(
-                    height: 1,
-                    thickness: 1,
-                    color: Colors.grey.shade300,
+          padding: const EdgeInsets.all(16),
+          child: Text(
+            R.strings.selectColor,
+          ),
+        ),
+        Flexible(
+          child: ListView.separated(
+            shrinkWrap: true,
+            physics: const ClampingScrollPhysics(),
+            separatorBuilder: (context, index) => Divider(
+              height: 1,
+              thickness: 1,
+              color: Colors.grey.shade300,
+            ),
+            itemCount: colors.length,
+            itemBuilder: (context, index) {
+              final color = colors[index];
+              return ListTile(
+                onTap: () {
+                  onChange(color["name"].toString());
+                },
+                leading: Container(
+                  width: 30,
+                  height: 30,
+                  decoration: BoxDecoration(
+                    color: Color(
+                        int.parse(color["hex"]!.replaceFirst('#', '0xFF'))),
+                    borderRadius: BorderRadius.circular(8),
+                    border: Border.all(color: Colors.grey.shade300),
                   ),
-                  itemCount: colors.length,
-                  itemBuilder: (context, index) {
-                    final color = colors[index];
-                    return ListTile(
-                      onTap: () {
-                        onChange(color["name"].toString());
-                      },
-                      leading: Container(
-                        width: 30,
-                        height: 30,
-                        decoration: BoxDecoration(
-                          color: Color(int.parse(
-                              color["hex"]!.replaceFirst('#', '0xFF'))),
-                          borderRadius: BorderRadius.circular(8),
-                          border: Border.all(color: Colors.grey.shade300),
-                        ),
-                      ),
-                      title: Text(color["name"].toString(),
-                          style: Theme.of(context).textTheme.titleSmall),
-                    );
-                  },
                 ),
-              ),
-            ],
+                title: Text(color["name"].toString(),
+                    style: Theme.of(context).textTheme.titleSmall),
+              );
+            },
           ),
         ),
       ],

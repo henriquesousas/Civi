@@ -9,7 +9,7 @@ import '../../data/product_repository_firebase_storage.dart';
 import '../../domain/product_repository.dart';
 import '../../domain/usecases/delete/delete_product_usecase.dart';
 import '../../domain/usecases/list/get_products_by_user_usecase.dart';
-import 'bloc/product_listing_cubit.dart';
+import 'product_listing_cubit.dart';
 
 class ListProductProvider extends StatelessWidget {
   final bool showBackButton;

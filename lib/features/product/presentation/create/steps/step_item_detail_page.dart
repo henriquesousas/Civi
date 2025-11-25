@@ -45,7 +45,7 @@ class _StepItemDetailPageState extends State<StepItemDetailPage> {
     customModalBottomSheet(
       context,
       child: modalBuilder(onResult),
-      // height: context.percentHeight(0.5),
+      // height: context.percentHeight(0.9),
     );
 
     final T? result = await completer.future;
@@ -55,6 +55,7 @@ class _StepItemDetailPageState extends State<StepItemDetailPage> {
   }
 
   void _selectBrand(BuildContext context) {
+    _unFocus();
     _handleModal<String>(
       context: context,
       modalBuilder: (onComplete) => ModalSelectBrand(

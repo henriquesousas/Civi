@@ -43,14 +43,11 @@ extension DialogExtension on BuildContext {
     ScaffoldMessenger.of(this).showSnackBar(
       SnackBar(
         content: Text(message),
-        backgroundColor: type == DialogType.success ?  const Color(0xFF1F2937) :  AppColors.errorColor,
+        backgroundColor: type == DialogType.success
+            ? const Color(0xFF1F2937)
+            : AppColors.errorColor,
         behavior: SnackBarBehavior.floating,
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
-        // action: SnackBarAction(
-        //   label: 'Desfazer',
-        //   textColor: Colors.white,
-        //   onPressed: () {},
-        // ),
       ),
     );
   }

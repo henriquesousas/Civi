@@ -45,7 +45,10 @@ class UpdateProductCubit extends Cubit<ProductUpdateState> {
             ProductUpdateState.error((error as ProductException).message));
   }
 
+  //TODO: Validar se UsuarioId é null
   Future<void> delete(Product product) async {
+    emit(ProductUpdateState.deleting(product));
+    return;
     final userId = FirebaseAuth.instance.currentUser?.uid;
     if (userId == null) {}
 

@@ -2,7 +2,6 @@ import 'package:deehelp/core/components/custom_modal_bottom_sheet.dart';
 import 'package:deehelp/core/components/dialogs/dialog_extension.dart';
 import 'package:deehelp/core/components/loader/loading.dart';
 import 'package:deehelp/core/components/ui_app_bar.dart';
-import 'package:deehelp/features/product/presentation/update/update_product_page.dart';
 import 'package:deehelp/shared/animation/fade_slide_transition_animator.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -13,12 +12,13 @@ import '../../../../core/resources/resources.dart';
 import '../../../../core/router/router_constants.dart';
 import '../../../../core/theme/app_colors.dart';
 import '../../domain/entities/product.dart';
-import 'bloc/list_product_state.dart';
-import 'bloc/product_listing_cubit.dart';
+import '../update/update_product_page.dart';
 import 'components/add_new_product_widget.dart';
 import 'components/product_card_widget.dart';
 import 'components/product_filter_widget.dart';
 import 'components/product_modal_widget.dart';
+import 'product_listing_cubit.dart';
+import 'state/list_product_state.dart';
 
 class ProductListingPage extends StatefulWidget {
   final bool showBackButton;
@@ -61,10 +61,17 @@ class _ProductListingPageState extends State<ProductListingPage> {
   void _onEdit(Product product) async {
     final cubit = context.read<ProductListingCubit>();
     final result = await UpdateProductPage.navigate(context, product);
+
     if (result != null) {
       final action = result['action'];
-      final p = result['value'];
-      await cubit.refresh(p, action);
+      final productUpdated = result['value'];
+      final message = result['message'];
+
+      if (mounted) {
+        context.showSnackBar(message);
+      }
+
+      await cubit.refresh(productUpdated, action);
     }
   }
 
@@ -157,7 +164,10 @@ class _ProductListingPageState extends State<ProductListingPage> {
                                     child: ProductModalWidget(
                                       item: item,
                                       onDelete: () => _onDelete(item),
-                                      onEdit: () => _onEdit(item),
+                                      onEdit: () {
+                                        context.pop();
+                                        _onEdit(item);
+                                      },
                                       onClose: () => context.pop(),
                                     ),
                                   );
