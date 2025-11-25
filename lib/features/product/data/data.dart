@@ -1,4 +1,4 @@
-List<String> brands = [
+List<String> kBrands = [
   "Toyota",
   "Volkswagen",
   "Ford",
@@ -19,7 +19,7 @@ List<String> brands = [
   "BYD",
 ];
 
-List<String> types = [
+List<String> kTypes = [
   "Carro",
   "Motocicleta",
   "Caminhão",

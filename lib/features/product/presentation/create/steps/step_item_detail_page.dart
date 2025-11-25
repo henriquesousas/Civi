@@ -58,7 +58,7 @@ class _StepItemDetailPageState extends State<StepItemDetailPage> {
     _handleModal<String>(
       context: context,
       modalBuilder: (onComplete) => ModalSelectBrand(
-        values: brands,
+        values: kBrands,
         onChange: (brand) => onComplete(brand),
       ),
       updateBloc: (result) => context

@@ -2,6 +2,7 @@ import 'package:deehelp/core/components/custom_modal_bottom_sheet.dart';
 import 'package:deehelp/core/components/dialogs/dialog_extension.dart';
 import 'package:deehelp/core/components/loader/loading.dart';
 import 'package:deehelp/core/components/ui_app_bar.dart';
+import 'package:deehelp/features/product/presentation/update/update_product_page.dart';
 import 'package:deehelp/shared/animation/fade_slide_transition_animator.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -21,6 +22,7 @@ import 'components/product_modal_widget.dart';
 
 class ProductListingPage extends StatefulWidget {
   final bool showBackButton;
+
   const ProductListingPage({super.key, this.showBackButton = false});
 
   @override
@@ -39,17 +41,30 @@ class _ProductListingPageState extends State<ProductListingPage> {
     super.dispose();
   }
 
-  void _navigateCreateNewProduct() {
+  void _add() {
     context.push(RouterConstant.createNewItem);
   }
 
   void _onDelete(Product item) async {
+    context.pop();
     final cubit = context.read<ProductListingCubit>();
     final yes = await context.showQuestionDialog(
-        "Apagar", "Deletar produto ${item.name}");
+      "Apagar",
+      "Deletar produto ${item.name}",
+    );
 
     if (yes) {
       cubit.delete(item);
+    }
+  }
+
+  void _onEdit(Product product) async {
+    final cubit = context.read<ProductListingCubit>();
+    final result = await UpdateProductPage.navigate(context, product);
+    if (result != null) {
+      final action = result['action'];
+      final p = result['value'];
+      await cubit.refresh(p, action);
     }
   }
 
@@ -74,105 +89,92 @@ class _ProductListingPageState extends State<ProductListingPage> {
       ),
       body: FadeSlideTransitionAnimator(
         child: BlocConsumer<ProductListingCubit, ListProductState>(
-            listener: (context, state) {
-          state.maybeWhen(
-            deleteLoading: () => Loading.instance()
-                .show(context: context, text: R.strings.productDeleting),
-            deleteSuccess: () {
-              context.showSnackBar(R.strings.productDeletedSuccess);
-              Loading.instance().hide();
-            },
-            error: (message) {
-              context.showSnackBar(message, type: DialogType.error);
-              Loading.instance().hide();
-            },
-            orElse: () {},
-          );
-        }, builder: (context, state) {
-          return state.maybeWhen(
-            loading: () {
-              return const Center(
-                child: CircularProgressIndicator(
-                  valueColor: AlwaysStoppedAnimation(AppColors.primaryColor),
-                ),
-              );
-            },
-            error: (message) => Center(child: Text(message)),
-            success: (items, filter) {
-              return Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  const SizedBox(height: 20),
-                  Align(
-                    alignment: Alignment.center,
-                    child: ProductFilterWidget(
-                      selectedFilter: filter,
-                      onFilterChanged: (value) {
-                        context.read<ProductListingCubit>().filter(value);
-                      },
-                    ),
+          listener: (context, state) {
+            state.maybeWhen(
+              deleteLoading: () => Loading.instance()
+                  .show(context: context, text: R.strings.productDeleting),
+              deleteSuccess: () {
+                Loading.instance().hide();
+                context.showSnackBar(R.strings.productDeletedSuccess);
+              },
+              error: (message) {
+                Loading.instance().hide();
+                context.showSnackBar(message, type: DialogType.error);
+              },
+              orElse: () {},
+            );
+          },
+          builder: (context, state) {
+            return state.maybeWhen(
+              loading: () {
+                return const Center(
+                  child: CircularProgressIndicator(
+                    valueColor: AlwaysStoppedAnimation(AppColors.primaryColor),
                   ),
-                  const SizedBox(height: 8),
-                  if (items.isEmpty)
-                    EmptyStateWidget(press: () => _navigateCreateNewProduct()),
-                  Expanded(
-                    child: RefreshIndicator(
-                      backgroundColor: AppColors.primaryColor,
-                      color: Colors.white,
-                      onRefresh: () async {
-                        context.read<ProductListingCubit>().fetchItems();
-                      },
-                      child: ListView.builder(
-                        padding: const EdgeInsets.symmetric(horizontal: 16),
-                        itemCount: items.length,
-                        itemBuilder: (context, index) {
-                          final item = items[index];
-                          if (index == (items.length - 1)) {
-                            index = -1;
-                          }
-                          return AnimatedContainer(
-                            duration:
-                                Duration(milliseconds: 300 + (index * 100)),
-                            curve: Curves.easeOut,
-                            child: ProductCardWidget(
-                              item: item,
-                              index: index,
-                              press: () => context.push(RouterConstant.itemEdit,
-                                  extra: item),
-                              onMenuPress: () {
-                                customModalBottomSheet(
-                                  context,
-                                  child: ProductModalWidget(
-                                    item: item,
-                                    onDelete: () {
-                                      context.pop();
-                                      _onDelete(item);
-                                    },
-                                    onEdit: () {
-                                      context.pop();
-                                      context.push(
-                                        RouterConstant.itemEdit,
-                                        extra: item,
-                                      );
-                                    },
-                                    onClose: () => context.pop(),
-                                  ),
-                                );
-                              },
-                            ),
-                          );
+                );
+              },
+              error: (message) => Center(child: Text(message)),
+              success: (items, filter) {
+                return Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    const SizedBox(height: 20),
+                    Align(
+                      alignment: Alignment.center,
+                      child: ProductFilterWidget(
+                        selectedFilter: filter,
+                        onFilterChanged: (value) {
+                          context.read<ProductListingCubit>().filter(value);
                         },
                       ),
                     ),
-                  ),
-                ],
-              );
-            },
-            orElse: () =>
-                EmptyStateWidget(press: () => _navigateCreateNewProduct()),
-          );
-        }),
+                    const SizedBox(height: 8),
+                    if (items.isEmpty) EmptyStateWidget(press: () => _add()),
+                    Expanded(
+                      child: RefreshIndicator(
+                        backgroundColor: AppColors.primaryColor,
+                        color: Colors.white,
+                        onRefresh: () async {
+                          context.read<ProductListingCubit>().fetchItems();
+                        },
+                        child: ListView.builder(
+                          padding: const EdgeInsets.symmetric(horizontal: 16),
+                          itemCount: items.length,
+                          itemBuilder: (context, index) {
+                            final item = items[index];
+                            return AnimatedContainer(
+                              duration:
+                                  Duration(milliseconds: 300 + (index * 100)),
+                              curve: Curves.easeOut,
+                              child: ProductCardWidget(
+                                item: item,
+                                index: index,
+                                press: () => _onEdit(item),
+                                onMenuPress: () {
+                                  customModalBottomSheet(
+                                    context,
+                                    child: ProductModalWidget(
+                                      item: item,
+                                      onDelete: () => _onDelete(item),
+                                      onEdit: () => _onEdit(item),
+                                      onClose: () => context.pop(),
+                                    ),
+                                  );
+                                },
+                              ),
+                            );
+                          },
+                        ),
+                      ),
+                    ),
+                  ],
+                );
+              },
+              orElse: () => EmptyStateWidget(press: () => _add()),
+            );
+          },
+        ),
       ),
     );
   }

@@ -1,11 +1,11 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../../../../domain/entities/product.dart';
-import 'item_modal_state.dart';
+import '../../domain/entities/product.dart';
+import 'state/item_modal_state.dart';
 
-class ItemModalCubit extends Cubit<ItemModalState> {
+class ProductEditModalCubit extends Cubit<ItemModalState> {
   Product? _workingItem;
-  ItemModalCubit() : super(const ItemModalState.initial());
+  ProductEditModalCubit() : super(const ItemModalState.initial());
 
   void initializeSafeCopy(Product item) {
     _workingItem = item;

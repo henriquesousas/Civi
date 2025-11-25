@@ -11,10 +11,12 @@ class Loading {
 
   factory Loading.instance() => _shared;
   static final Loading _shared = Loading._sharedInstance();
+  bool _isShowing = false;
 
   void hide() {
     _controller?.close();
     _controller = null;
+    _isShowing = false;
   }
 
   void show({
@@ -24,7 +26,13 @@ class Loading {
     if (_controller?.update(text) ?? false) {
       return;
     }
+
+    if (_isShowing) {
+      hide();
+    }
+
     _controller = _showOverlay(context: context, text: text);
+    _isShowing = true;
   }
 
   LoadingController _showOverlay(

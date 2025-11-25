@@ -53,7 +53,8 @@ extension ProductUpdateStatePatterns on ProductUpdateState {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Initial value)? initial,
     TResult Function(_Load value)? load,
-    TResult Function(_ProductUpdateStateEditing value)? editing,
+    TResult Function(_Editing value)? editing,
+    TResult Function(_Deleting value)? deleting,
     TResult Function(_Success value)? success,
     TResult Function(_Error value)? error,
     required TResult orElse(),
@@ -64,8 +65,10 @@ extension ProductUpdateStatePatterns on ProductUpdateState {
         return initial(_that);
       case _Load() when load != null:
         return load(_that);
-      case _ProductUpdateStateEditing() when editing != null:
+      case _Editing() when editing != null:
         return editing(_that);
+      case _Deleting() when deleting != null:
+        return deleting(_that);
       case _Success() when success != null:
         return success(_that);
       case _Error() when error != null:
@@ -92,7 +95,8 @@ extension ProductUpdateStatePatterns on ProductUpdateState {
   TResult map<TResult extends Object?>({
     required TResult Function(_Initial value) initial,
     required TResult Function(_Load value) load,
-    required TResult Function(_ProductUpdateStateEditing value) editing,
+    required TResult Function(_Editing value) editing,
+    required TResult Function(_Deleting value) deleting,
     required TResult Function(_Success value) success,
     required TResult Function(_Error value) error,
   }) {
@@ -102,8 +106,10 @@ extension ProductUpdateStatePatterns on ProductUpdateState {
         return initial(_that);
       case _Load():
         return load(_that);
-      case _ProductUpdateStateEditing():
+      case _Editing():
         return editing(_that);
+      case _Deleting():
+        return deleting(_that);
       case _Success():
         return success(_that);
       case _Error():
@@ -129,7 +135,8 @@ extension ProductUpdateStatePatterns on ProductUpdateState {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Initial value)? initial,
     TResult? Function(_Load value)? load,
-    TResult? Function(_ProductUpdateStateEditing value)? editing,
+    TResult? Function(_Editing value)? editing,
+    TResult? Function(_Deleting value)? deleting,
     TResult? Function(_Success value)? success,
     TResult? Function(_Error value)? error,
   }) {
@@ -139,8 +146,10 @@ extension ProductUpdateStatePatterns on ProductUpdateState {
         return initial(_that);
       case _Load() when load != null:
         return load(_that);
-      case _ProductUpdateStateEditing() when editing != null:
+      case _Editing() when editing != null:
         return editing(_that);
+      case _Deleting() when deleting != null:
+        return deleting(_that);
       case _Success() when success != null:
         return success(_that);
       case _Error() when error != null:
@@ -167,7 +176,8 @@ extension ProductUpdateStatePatterns on ProductUpdateState {
     TResult Function()? initial,
     TResult Function(Product product)? load,
     TResult Function(Product product)? editing,
-    TResult Function()? success,
+    TResult Function(Product product)? deleting,
+    TResult Function(Product product)? success,
     TResult Function(String message)? error,
     required TResult orElse(),
   }) {
@@ -177,10 +187,12 @@ extension ProductUpdateStatePatterns on ProductUpdateState {
         return initial();
       case _Load() when load != null:
         return load(_that.product);
-      case _ProductUpdateStateEditing() when editing != null:
+      case _Editing() when editing != null:
         return editing(_that.product);
+      case _Deleting() when deleting != null:
+        return deleting(_that.product);
       case _Success() when success != null:
-        return success();
+        return success(_that.product);
       case _Error() when error != null:
         return error(_that.message);
       case _:
@@ -206,7 +218,8 @@ extension ProductUpdateStatePatterns on ProductUpdateState {
     required TResult Function() initial,
     required TResult Function(Product product) load,
     required TResult Function(Product product) editing,
-    required TResult Function() success,
+    required TResult Function(Product product) deleting,
+    required TResult Function(Product product) success,
     required TResult Function(String message) error,
   }) {
     final _that = this;
@@ -215,10 +228,12 @@ extension ProductUpdateStatePatterns on ProductUpdateState {
         return initial();
       case _Load():
         return load(_that.product);
-      case _ProductUpdateStateEditing():
+      case _Editing():
         return editing(_that.product);
+      case _Deleting():
+        return deleting(_that.product);
       case _Success():
-        return success();
+        return success(_that.product);
       case _Error():
         return error(_that.message);
       case _:
@@ -243,7 +258,8 @@ extension ProductUpdateStatePatterns on ProductUpdateState {
     TResult? Function()? initial,
     TResult? Function(Product product)? load,
     TResult? Function(Product product)? editing,
-    TResult? Function()? success,
+    TResult? Function(Product product)? deleting,
+    TResult? Function(Product product)? success,
     TResult? Function(String message)? error,
   }) {
     final _that = this;
@@ -252,10 +268,12 @@ extension ProductUpdateStatePatterns on ProductUpdateState {
         return initial();
       case _Load() when load != null:
         return load(_that.product);
-      case _ProductUpdateStateEditing() when editing != null:
+      case _Editing() when editing != null:
         return editing(_that.product);
+      case _Deleting() when deleting != null:
+        return deleting(_that.product);
       case _Success() when success != null:
-        return success();
+        return success(_that.product);
       case _Error() when error != null:
         return error(_that.message);
       case _:
@@ -348,8 +366,8 @@ class __$LoadCopyWithImpl<$Res> implements _$LoadCopyWith<$Res> {
 
 /// @nodoc
 
-class _ProductUpdateStateEditing implements ProductUpdateState {
-  const _ProductUpdateStateEditing(this.product);
+class _Editing implements ProductUpdateState {
+  const _Editing(this.product);
 
   final Product product;
 
@@ -357,16 +375,14 @@ class _ProductUpdateStateEditing implements ProductUpdateState {
   /// with the given fields replaced by the non-null parameter values.
   @JsonKey(includeFromJson: false, includeToJson: false)
   @pragma('vm:prefer-inline')
-  _$ProductUpdateStateEditingCopyWith<_ProductUpdateStateEditing>
-      get copyWith =>
-          __$ProductUpdateStateEditingCopyWithImpl<_ProductUpdateStateEditing>(
-              this, _$identity);
+  _$EditingCopyWith<_Editing> get copyWith =>
+      __$EditingCopyWithImpl<_Editing>(this, _$identity);
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _ProductUpdateStateEditing &&
+            other is _Editing &&
             (identical(other.product, product) || other.product == product));
   }
 
@@ -380,22 +396,20 @@ class _ProductUpdateStateEditing implements ProductUpdateState {
 }
 
 /// @nodoc
-abstract mixin class _$ProductUpdateStateEditingCopyWith<$Res>
+abstract mixin class _$EditingCopyWith<$Res>
     implements $ProductUpdateStateCopyWith<$Res> {
-  factory _$ProductUpdateStateEditingCopyWith(_ProductUpdateStateEditing value,
-          $Res Function(_ProductUpdateStateEditing) _then) =
-      __$ProductUpdateStateEditingCopyWithImpl;
+  factory _$EditingCopyWith(_Editing value, $Res Function(_Editing) _then) =
+      __$EditingCopyWithImpl;
   @useResult
   $Res call({Product product});
 }
 
 /// @nodoc
-class __$ProductUpdateStateEditingCopyWithImpl<$Res>
-    implements _$ProductUpdateStateEditingCopyWith<$Res> {
-  __$ProductUpdateStateEditingCopyWithImpl(this._self, this._then);
+class __$EditingCopyWithImpl<$Res> implements _$EditingCopyWith<$Res> {
+  __$EditingCopyWithImpl(this._self, this._then);
 
-  final _ProductUpdateStateEditing _self;
-  final $Res Function(_ProductUpdateStateEditing) _then;
+  final _Editing _self;
+  final $Res Function(_Editing) _then;
 
   /// Create a copy of ProductUpdateState
   /// with the given fields replaced by the non-null parameter values.
@@ -403,7 +417,69 @@ class __$ProductUpdateStateEditingCopyWithImpl<$Res>
   $Res call({
     Object? product = null,
   }) {
-    return _then(_ProductUpdateStateEditing(
+    return _then(_Editing(
+      null == product
+          ? _self.product
+          : product // ignore: cast_nullable_to_non_nullable
+              as Product,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _Deleting implements ProductUpdateState {
+  const _Deleting(this.product);
+
+  final Product product;
+
+  /// Create a copy of ProductUpdateState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @pragma('vm:prefer-inline')
+  _$DeletingCopyWith<_Deleting> get copyWith =>
+      __$DeletingCopyWithImpl<_Deleting>(this, _$identity);
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _Deleting &&
+            (identical(other.product, product) || other.product == product));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType, product);
+
+  @override
+  String toString() {
+    return 'ProductUpdateState.deleting(product: $product)';
+  }
+}
+
+/// @nodoc
+abstract mixin class _$DeletingCopyWith<$Res>
+    implements $ProductUpdateStateCopyWith<$Res> {
+  factory _$DeletingCopyWith(_Deleting value, $Res Function(_Deleting) _then) =
+      __$DeletingCopyWithImpl;
+  @useResult
+  $Res call({Product product});
+}
+
+/// @nodoc
+class __$DeletingCopyWithImpl<$Res> implements _$DeletingCopyWith<$Res> {
+  __$DeletingCopyWithImpl(this._self, this._then);
+
+  final _Deleting _self;
+  final $Res Function(_Deleting) _then;
+
+  /// Create a copy of ProductUpdateState
+  /// with the given fields replaced by the non-null parameter values.
+  @pragma('vm:prefer-inline')
+  $Res call({
+    Object? product = null,
+  }) {
+    return _then(_Deleting(
       null == product
           ? _self.product
           : product // ignore: cast_nullable_to_non_nullable
@@ -415,20 +491,62 @@ class __$ProductUpdateStateEditingCopyWithImpl<$Res>
 /// @nodoc
 
 class _Success implements ProductUpdateState {
-  const _Success();
+  const _Success(this.product);
+
+  final Product product;
+
+  /// Create a copy of ProductUpdateState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @pragma('vm:prefer-inline')
+  _$SuccessCopyWith<_Success> get copyWith =>
+      __$SuccessCopyWithImpl<_Success>(this, _$identity);
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _Success);
+        (other.runtimeType == runtimeType &&
+            other is _Success &&
+            (identical(other.product, product) || other.product == product));
   }
 
   @override
-  int get hashCode => runtimeType.hashCode;
+  int get hashCode => Object.hash(runtimeType, product);
 
   @override
   String toString() {
-    return 'ProductUpdateState.success()';
+    return 'ProductUpdateState.success(product: $product)';
+  }
+}
+
+/// @nodoc
+abstract mixin class _$SuccessCopyWith<$Res>
+    implements $ProductUpdateStateCopyWith<$Res> {
+  factory _$SuccessCopyWith(_Success value, $Res Function(_Success) _then) =
+      __$SuccessCopyWithImpl;
+  @useResult
+  $Res call({Product product});
+}
+
+/// @nodoc
+class __$SuccessCopyWithImpl<$Res> implements _$SuccessCopyWith<$Res> {
+  __$SuccessCopyWithImpl(this._self, this._then);
+
+  final _Success _self;
+  final $Res Function(_Success) _then;
+
+  /// Create a copy of ProductUpdateState
+  /// with the given fields replaced by the non-null parameter values.
+  @pragma('vm:prefer-inline')
+  $Res call({
+    Object? product = null,
+  }) {
+    return _then(_Success(
+      null == product
+          ? _self.product
+          : product // ignore: cast_nullable_to_non_nullable
+              as Product,
+    ));
   }
 }
 

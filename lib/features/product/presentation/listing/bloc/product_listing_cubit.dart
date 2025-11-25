@@ -42,6 +42,31 @@ class ProductListingCubit extends Cubit<ListProductState> {
     );
   }
 
+  Future<void> refresh(Product product, String action) async {
+    final newItems = List<Product>.from(_items);
+    newItems.removeWhere((p) => p.id == product.id);
+
+    if (action == 'delete') {
+      _items = newItems;
+      _items.remove(product);
+    }
+
+    if (action == 'update') {
+      final index = _items.indexWhere((p) => p.id == product.id);
+      if (index != -1) {
+        final newItems = List<Product>.from(_items);
+        newItems[index] = product;
+        _items = newItems;
+      }
+    }
+
+    if (_items.isEmpty) {
+      emit(const ListProductState.empty());
+    } else {
+      emit(ListProductState.success(List.from(_items), _todos));
+    }
+  }
+
   Future<void> filter(String param) async {
     if (param == _todos) {
       emit(ListProductState.success(_items, _todos));
