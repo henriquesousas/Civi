@@ -1,6 +1,5 @@
 import 'package:animations/animations.dart';
 import 'package:deehelp/core/theme/app_colors.dart';
-import 'package:deehelp/features/itens/presentation/list/list_product_provider.dart';
 import 'package:deehelp/features/profile/profile_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -8,6 +7,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'core/resources/resources.dart';
 import 'core/theme/constants.dart';
 import 'features/home/home_view.dart';
+import 'features/product/presentation/listing/list_product_provider.dart';
 
 class EntryPoint extends StatefulWidget {
   const EntryPoint({super.key});
