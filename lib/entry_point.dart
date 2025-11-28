@@ -1,5 +1,7 @@
 import 'package:animations/animations.dart';
+import 'package:deehelp/core/components/test_page.dart';
 import 'package:deehelp/core/theme/app_colors.dart';
+import 'package:deehelp/features/occurrence/occurrence_page.dart';
 import 'package:deehelp/features/profile/profile_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -16,12 +18,13 @@ class EntryPoint extends StatefulWidget {
 }
 
 class _EntryPointState extends State<EntryPoint> {
-  final List _pages = const [
+  final List _pages = [
     // HomeView(),
-    SizedBox(),
-    SizedBox(),
-    ListProductProvider(),
-    ProfilePage(),
+    // MeusVeiculosPage(),
+    TestPage(),
+    OccurrencePage(),
+    const ListProductProvider(),
+    const ProfilePage(),
   ];
   int _currentIndex = 0;
 

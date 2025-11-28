@@ -1,11 +1,12 @@
 import 'package:deehelp/core/theme/app_colors.dart';
+import 'package:deehelp/core/theme/dimens.dart';
 import 'package:flutter/material.dart';
 
 import 'constants.dart';
 
 ElevatedButtonThemeData elevatedButtonThemeData = ElevatedButtonThemeData(
   style: ElevatedButton.styleFrom(
-    padding: const EdgeInsets.all(defaultPadding),
+    padding: const EdgeInsets.all(Dimens.defaultPadding),
     backgroundColor: AppColors.primaryColor,
     foregroundColor: Colors.white,
     minimumSize: const Size(double.infinity, 32),
@@ -22,7 +23,7 @@ OutlinedButtonThemeData outlinedButtonTheme({
   return OutlinedButtonThemeData(
     style: OutlinedButton.styleFrom(
       backgroundColor: bgColor,
-      padding: const EdgeInsets.all(defaultPadding),
+      padding: const EdgeInsets.all(Dimens.defaultPadding),
       minimumSize: const Size(double.infinity, 32),
       side: BorderSide(width: 1, color: borderColor ?? AppColors.primaryColor),
       shape: const RoundedRectangleBorder(

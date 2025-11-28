@@ -1,5 +1,4 @@
 import 'package:deehelp/core/theme/app_colors.dart';
-import 'package:deehelp/core/theme/constants.dart';
 import 'package:flutter/material.dart';
 
 class UIExpansionTile extends StatelessWidget {
@@ -36,31 +35,39 @@ class UIExpansionTile extends StatelessWidget {
           collapsedIconColor: AppColors.greyColor,
           iconColor: AppColors.greyColor,
           title: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: defaultPadding),
+            // padding: const EdgeInsets.symmetric(horizontal: defaultPadding),
+            padding: const EdgeInsets.symmetric(horizontal: 0),
             child: Text(
               question,
               style: Theme.of(context).textTheme.titleSmall,
             ),
           ),
           shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(defaultPadding),
+            // borderRadius: BorderRadius.circular(defaultPadding),
+            borderRadius: BorderRadius.circular(0),
             side: const BorderSide(
               width: 1,
               color: AppColors.lightGreyColor20,
             ),
           ),
           collapsedShape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(defaultPadding),
+            // borderRadius: BorderRadius.circular(defaultPadding),
+            borderRadius: BorderRadius.circular(0),
             side: const BorderSide(
               width: 1,
               color: AppColors.whileColor80,
             ),
           ),
           clipBehavior: Clip.antiAlias,
+          // childrenPadding: const EdgeInsets.only(
+          //   bottom: defaultPadding,
+          //   right: defaultPadding,
+          //   left: defaultPadding,
+          // ),
           childrenPadding: const EdgeInsets.only(
-            bottom: defaultPadding,
-            right: defaultPadding,
-            left: defaultPadding,
+            bottom: 0,
+            right: 0,
+            left: 0,
           ),
           onExpansionChanged: (value) {
             if (onExpansionChanged != null) {

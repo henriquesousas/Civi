@@ -32,7 +32,7 @@ class MainRouter {
         path: RouterConstant.occurrences,
         pageBuilder: (context, state) => slideTransitionPage(
           key: state.pageKey,
-          child: const OccurrencePage(),
+          child: OccurrencePage(),
         ),
       ),
       GoRoute(

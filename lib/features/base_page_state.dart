@@ -1,5 +1,4 @@
 import 'package:deehelp/features/base_page.dart';
-import 'package:deehelp/shared/animation/fade_slide_transition_animator.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
@@ -24,14 +23,12 @@ abstract class BasePageState<T extends StateStreamable<S>, S,
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: buildAppBar(context),
-      body: FadeSlideTransitionAnimator(
-        child: BlocConsumer<T, S>(
-          bloc: cubit,
-          listener: listener,
-          builder: (context, state) {
-            return buildPage(context, state);
-          },
-        ),
+      body: BlocConsumer<T, S>(
+        bloc: cubit,
+        listener: listener,
+        builder: (context, state) {
+          return buildPage(context, state);
+        },
       ),
     );
   }

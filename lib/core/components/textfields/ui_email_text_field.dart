@@ -4,7 +4,6 @@ import 'package:flutter_svg/svg.dart';
 
 import '../../resources/resources.dart';
 import '../../theme/app_colors.dart';
-import '../../theme/constants.dart';
 
 class UIEmailTextField extends StatelessWidget {
   final String? errorText;
@@ -22,7 +21,8 @@ class UIEmailTextField extends StatelessWidget {
       errorText: errorText,
       onChanged: onChanged,
       prefixIcon: Padding(
-        padding: const EdgeInsets.symmetric(vertical: defaultPadding * 0.75),
+        // padding: const EdgeInsets.symmetric(vertical: defaultPadding * 0.75),
+        padding: const EdgeInsets.symmetric(vertical: 0),
         child: SvgPicture.asset(
           R.images.svgEmail,
           height: 24,

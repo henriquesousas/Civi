@@ -41,11 +41,17 @@ class ProfileCard extends StatelessWidget {
             maxLines: 1,
             overflow: TextOverflow.ellipsis,
           ),
-          const SizedBox(width: defaultPadding / 2),
+          // const SizedBox(width: defaultPadding / 2),
           if (isPro)
             Container(
+              // padding: const EdgeInsets.symmetric(
+              //   horizontal: defaultPadding / 2,
+              //   vertical: defaultPadding / 4,
+              // ),
               padding: const EdgeInsets.symmetric(
-                  horizontal: defaultPadding / 2, vertical: defaultPadding / 4),
+                horizontal: 0,
+                vertical: 0,
+              ),
               decoration: const BoxDecoration(
                 color: AppColors.primaryColor,
                 borderRadius:

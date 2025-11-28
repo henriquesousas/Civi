@@ -4,7 +4,6 @@ import 'package:flutter_svg/svg.dart';
 
 import '../../resources/resources.dart';
 import '../../theme/app_colors.dart';
-import '../../theme/constants.dart';
 
 class UIPasswordTextField extends StatelessWidget {
   final String? errorText;
@@ -28,7 +27,8 @@ class UIPasswordTextField extends StatelessWidget {
       obscureText: obscureText,
       onChanged: onChanged,
       prefixIcon: Padding(
-        padding: const EdgeInsets.symmetric(vertical: defaultPadding * 0.75),
+        // padding: const EdgeInsets.symmetric(vertical: defaultPadding * 0.75),
+        padding: const EdgeInsets.symmetric(vertical: 0),
         child: SvgPicture.asset(
           R.images.svgLock,
           height: 24,
@@ -40,7 +40,8 @@ class UIPasswordTextField extends StatelessWidget {
         ),
       ),
       suffixIcon: Padding(
-        padding: const EdgeInsets.symmetric(vertical: defaultPadding * 0.75),
+        // padding: const EdgeInsets.symmetric(vertical: defaultPadding * 0.75),
+        padding: const EdgeInsets.symmetric(vertical: 0),
         child: SvgPicture.asset(
           suffixIcon,
           height: 24,

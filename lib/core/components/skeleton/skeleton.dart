@@ -1,14 +1,15 @@
 import 'package:flutter/material.dart';
 
-import '../../theme/constants.dart';
+import '../../theme/dimens.dart';
 
 class Skeleton extends StatelessWidget {
-  const Skeleton(
-      {super.key,
-      this.height,
-      this.width,
-      this.layer = 1,
-      this.radius = defaultPadding});
+  const Skeleton({
+    super.key,
+    this.height,
+    this.width,
+    this.layer = 1,
+    this.radius = Dimens.defaultPadding,
+  });
 
   final double? height, width;
   final int layer;
@@ -19,7 +20,8 @@ class Skeleton extends StatelessWidget {
     return Container(
       height: height,
       width: width,
-      padding: const EdgeInsets.all(defaultPadding / 2),
+      // padding: const EdgeInsets.all(defaultPadding / 2),
+      padding: const EdgeInsets.all(0),
       decoration: BoxDecoration(
           color: Theme.of(context)
               .iconTheme

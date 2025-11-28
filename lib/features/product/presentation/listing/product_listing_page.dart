@@ -54,7 +54,7 @@ class _ProductListingPage extends BasePageState<ProductListingCubit,
   }
 
   void _onEdit(Product product) async {
-    final result =   await UpdateProductPage.navigate(context, product);
+    final result = await UpdateProductPage.navigate(context, product);
 
     if (result != null) {
       final action = result['action'];

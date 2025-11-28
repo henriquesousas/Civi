@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 
 import '../../../core/components/images/ui_network_image_with_loader.dart';
-import '../../../core/theme/constants.dart';
 
 class ProfileBanner extends StatelessWidget {
   const ProfileBanner({super.key});
@@ -9,8 +8,11 @@ class ProfileBanner extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.symmetric(
-          horizontal: defaultPadding, vertical: defaultPadding * 1.5),
+      // padding: const EdgeInsets.symmetric(
+      //   horizontal: defaultPadding,
+      //   vertical: defaultPadding * 1.5,
+      // ),
+      padding: EdgeInsets.all(0),
       child: GestureDetector(
         onTap: () {},
         child: const AspectRatio(

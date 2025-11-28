@@ -1,24 +1,29 @@
 import 'package:flutter/material.dart';
 
 class UIICon extends StatelessWidget {
-  final IconData iconData;
-  final Color color;
-  final double size;
-  const UIICon(
-      {super.key, required this.iconData, required this.color, this.size = 20});
+  final Color bgColor;
+  final Widget icon;
+  final double radius;
+  final double padding;
+  const UIICon({
+    super.key,
+    this.padding = 12,
+    this.radius = 50,
+    required this.bgColor,
+    required this.icon,
+  });
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      padding: const EdgeInsets.all(12),
-      decoration: BoxDecoration(
-        color: color.withValues(alpha: 0.1),
-        borderRadius: BorderRadius.circular(20),
-      ),
-      child: Icon(
-        iconData,
-        color: color,
-        size: size,
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 12),
+      child: Container(
+        padding: EdgeInsets.all(padding),
+        decoration: BoxDecoration(
+          color: bgColor,
+          borderRadius: BorderRadius.circular(radius),
+        ),
+        child: icon,
       ),
     );
   }

@@ -1,4 +1,3 @@
-import 'package:deehelp/core/theme/constants.dart';
 import 'package:deehelp/features/profile/components/profile_banner.dart';
 import 'package:deehelp/features/profile/components/profile_card.dart';
 import 'package:deehelp/features/profile/components/profile_logout.dart';
@@ -19,7 +18,7 @@ class ProfilePage extends StatelessWidget {
         physics: const BouncingScrollPhysics(),
         children: [
           ProfileCard(
-            name: user?.displayName ?? '',
+            name: user?.displayName ?? 'sas',
             email: user?.email ?? '',
             photoUrl: FirebaseAuth.instance.currentUser?.photoURL ?? "",
             isPro: true,
@@ -29,7 +28,7 @@ class ProfilePage extends StatelessWidget {
           const ProfilePreferenceCard(),
           const SizedBox(height: 30),
           const ProfileSharedSupportCard(),
-          const SizedBox(height: defaultPadding / 2),
+          // const SizedBox(height: defaultPadding / 2),
           const ProfileLogout()
         ],
       ),

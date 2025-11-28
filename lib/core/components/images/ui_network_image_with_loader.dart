@@ -1,6 +1,5 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:deehelp/core/components/images/ui_image_place_holder_widget.dart';
-import 'package:deehelp/core/theme/app_colors.dart';
 import 'package:deehelp/core/theme/constants.dart';
 import 'package:flutter/material.dart';
 
@@ -25,7 +24,7 @@ class UINetworkImageWithLoader extends StatelessWidget {
     return Container(
       padding: const EdgeInsets.all(2),
       decoration: BoxDecoration(
-        border: Border.all(color: AppColors.primaryColor, width: 2),
+        // border: Border.all(color: AppColors.primaryColor, width: 2),
         borderRadius: BorderRadius.circular(radius),
       ),
       child: ClipRRect(

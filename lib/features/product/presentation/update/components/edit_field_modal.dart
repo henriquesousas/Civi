@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import '../../../../../app/theme/app_colors_v2.dart';
 import '../../../../../core/components/buttons/ui_outline_button.dart';
 import '../../../../../core/components/buttons/ui_primary_button.dart';
-import '../../../../../core/components/icon/ui_icon.dart';
+import '../../../../../core/components/icon/ui_icon_alpha.dart';
 import '../../../../../core/components/textfields/ui_secondary_textfield.dart';
 import '../../../../../core/resources/resources.dart';
 import '../../../../../core/theme/app_colors.dart';
@@ -88,7 +88,7 @@ class _EditFieldModalState extends State<EditFieldModal> {
                         color: AppColors.textPrimary,
                       ),
                 ),
-                const UIICon(
+                const UIIConAlpha(
                     iconData: Icons.close, color: AppColors.darkGreyColor10),
               ],
             ),

@@ -17,13 +17,13 @@ class UIAppBar extends StatelessWidget implements PreferredSizeWidget {
       backgroundColor: Theme.of(context).scaffoldBackgroundColor,
       leadingWidth: leading != null ? null : 0,
       centerTitle: false,
+      elevation: 0,
       title: Text(
         title,
         style: Theme.of(context).textTheme.bodyLarge?.copyWith(
               fontWeight: FontWeight.bold,
             ),
       ),
-      elevation: 0,
       leading: leading,
       actions: actions,
       automaticallyImplyLeading: false,

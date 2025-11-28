@@ -1,4 +1,4 @@
-import 'package:deehelp/core/components/icon/ui_icon.dart';
+import 'package:deehelp/core/components/icon/ui_icon_alpha.dart';
 import 'package:deehelp/core/theme/app_colors.dart';
 import 'package:flutter/material.dart';
 
@@ -43,7 +43,7 @@ class ItemDetailTile extends StatelessWidget {
                         color: AppColors.greyColor,
                       ),
                     )
-                  : const UIICon(
+                  : const UIIConAlpha(
                       iconData: Icons.camera_alt,
                       color: AppColors.primaryColor,
                     )

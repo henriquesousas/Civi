@@ -20,6 +20,9 @@ class Images {
   String svgPallet = 'assets/svg/pallete.svg';
   String svgProduct = 'assets/svg/product.svg';
   String svgLocation = 'assets/svg/location.svg';
+  String svgArrowFront = 'assets/svg/arrow_front.svg';
+  String svgArrowBackCircle = 'assets/svg/arrow_back_circle.svg';
+  String svgUploadIcon = 'assets/svg/upload_icon.svg';
   //Images
   String successLight = 'assets/images/success.png';
   String successDark = 'assets/images/success_dark.png';

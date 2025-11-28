@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+//TODO: Colocar no core
 enum ProductSatus {
   active("active"),
   inactive("inactive"),

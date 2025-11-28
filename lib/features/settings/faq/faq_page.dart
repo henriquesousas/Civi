@@ -10,8 +10,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 
-import '../../../core/theme/constants.dart';
-
 enum FAQ { faq1, faq2, faq3, faq4, faq5, faq6, faq7 }
 
 class FaqPage extends StatelessWidget {
@@ -87,11 +85,17 @@ class FaqPage extends StatelessWidget {
       body: BlocBuilder<FaqBloc, FaqState>(
         builder: (context, state) {
           return Padding(
+            // padding: const EdgeInsets.only(
+            //   left: defaultPadding,
+            //   right: defaultPadding,
+            //   top: defaultPadding,
+            //   bottom: defaultPadding,
+            // ),
             padding: const EdgeInsets.only(
-              left: defaultPadding,
-              right: defaultPadding,
-              top: defaultPadding,
-              bottom: defaultPadding,
+              left: 0,
+              right: 0,
+              top: 0,
+              bottom: 0,
             ),
             child: SingleChildScrollView(
               child: Column(
