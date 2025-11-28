@@ -1,9 +1,9 @@
 import 'package:deehelp/core/router/router_constants.dart';
 import 'package:deehelp/core/router/slide_transition_page.dart';
+import 'package:deehelp/features/faq/faq_provider.dart';
 import 'package:deehelp/features/home/home_view.dart';
 import 'package:deehelp/features/occurrence/occurrence_detail_page.dart';
 import 'package:deehelp/features/occurrence/occurrence_page.dart';
-import 'package:deehelp/features/settings/faq/faq_provider.dart';
 import 'package:deehelp/features/settings/help/help_page.dart';
 import 'package:deehelp/features/splash/splash_page.dart';
 import 'package:deehelp/features/welcome/old/welcome_provider.dart';

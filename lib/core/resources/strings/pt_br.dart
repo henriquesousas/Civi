@@ -38,7 +38,7 @@ class PtBr with TranslationParts implements Translation {
   String get version => "Versão";
 
   @override
-  String get exitApp => "Sair";
+  String get exitApp => "Sair da conta";
 
   @override
   String get waiting => "Aguarde...";
@@ -177,7 +177,7 @@ class PtBr with TranslationParts implements Translation {
   String get preferences => "Preferências";
 
   @override
-  String get faq => "FAQ";
+  String get faq => "Perguntas frequentes";
 
   @override
   String get favorites => "Favoritos";

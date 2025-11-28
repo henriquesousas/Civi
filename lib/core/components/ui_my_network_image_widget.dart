@@ -1,5 +1,6 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:deehelp/core/components/random_color_avatar.dart';
+import 'package:deehelp/core/theme/app_colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:skeletonizer/skeletonizer.dart';
@@ -115,8 +116,7 @@ class UIMyNetworkImageWidget extends StatelessWidget {
                         replacement: Bone.circle(size: (height ?? 20) / 2),
                         child: Icon(
                           Icons.image,
-                          color: const Color(
-                              0xFF475569), //MyColor.getBodyTextColor(),
+                          color: AppColors.bodyText,
                           size: (height ?? 20) / 2,
                         ),
                       ),
@@ -131,7 +131,7 @@ class UIMyNetworkImageWidget extends StatelessWidget {
                       replacement: Bone.circle(size: (height ?? 20) / 2),
                       child: Icon(
                         Icons.image,
-                        color: Color(0xFF475569), //MyColor.getBodyTextColor(),
+                        color: AppColors.bodyText,
                         size: (height ?? 20) / 2,
                       ),
                     ),

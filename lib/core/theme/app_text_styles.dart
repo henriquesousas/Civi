@@ -1,3 +1,4 @@
+import 'package:deehelp/core/theme/app_colors.dart';
 import 'package:flutter/material.dart';
 
 const Color _kPrimaryTextColor = Color(0xFF1E293B);
@@ -34,7 +35,18 @@ class AppTextStyles {
       fontWeight: FontWeight.w600,
       height: 20 / 15,
       letterSpacing: -0.5,
-      color: color,
+      color: AppColors.textColorHeader,
+    );
+  }
+
+  TextStyle get sectionTitle {
+    final color = _textTheme.titleMedium?.color ?? _kPrimaryTextColor;
+    return _baseStyle.copyWith(
+      fontSize: 17,
+      fontWeight: FontWeight.w600,
+      height: 22 / 17,
+      letterSpacing: -0.408,
+      color: AppColors.textColorHeader,
     );
   }
 
@@ -47,6 +59,16 @@ class AppTextStyles {
       letterSpacing: -0.078,
       color: color,
     );
+  }
+
+  TextStyle get sectionBodyTextStyle {
+    final color = _textTheme.titleSmall?.color ?? _kPrimaryTextColor;
+    return _baseStyle.copyWith(
+        fontSize: 15,
+        fontWeight: FontWeight.w400,
+        height: 20 / 15,
+        letterSpacing: -0.24,
+        color: AppColors.textColorHeader);
   }
 
   TextStyle get caption1Style {
@@ -81,6 +103,16 @@ class AppTextStyles {
       color: color,
     );
   }
+
+  TextStyle bodyTextStyle2 = const TextStyle(
+    fontFamily: 'AlbertSans',
+    fontSize: 17,
+    fontWeight: FontWeight.w400, // Bold
+    height: 22 / 17,
+    letterSpacing: -0.408,
+    color: AppColors.textColorHeader,
+    fontFamilyFallback: ['sans-serif'],
+  );
 
   TextStyle get buttonTextStyle1 {
     final color = _textTheme.labelLarge?.color ?? Colors.white;

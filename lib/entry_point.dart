@@ -1,6 +1,6 @@
 import 'package:animations/animations.dart';
-import 'package:deehelp/core/components/test_page.dart';
 import 'package:deehelp/core/theme/app_colors.dart';
+import 'package:deehelp/features/faq/faq_provider.dart';
 import 'package:deehelp/features/occurrence/occurrence_page.dart';
 import 'package:deehelp/features/profile/profile_page.dart';
 import 'package:flutter/material.dart';
@@ -21,23 +21,12 @@ class _EntryPointState extends State<EntryPoint> {
   final List _pages = [
     // HomeView(),
     // MeusVeiculosPage(),
-    TestPage(),
+    FaqProvider.page,
     OccurrencePage(),
     const ListProductProvider(),
     const ProfilePage(),
   ];
   int _currentIndex = 0;
-
-  // String _geTitleTopBar() {
-  //   if (_currentIndex == 1) {
-  //     return "Meus Produtos";
-  //   }
-  //
-  //   if (_currentIndex == 2) {
-  //     return "Profile";
-  //   }
-  //   return "Explorar";
-  // }
 
   @override
   Widget build(BuildContext context) {

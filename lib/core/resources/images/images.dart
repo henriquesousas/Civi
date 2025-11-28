@@ -8,7 +8,7 @@ class Images {
   String svgNotification = 'assets/svg/notification.svg';
   String svgHelp = 'assets/svg/help.svg';
   String svgFaq = 'assets/svg/faq.svg';
-  String svgLogout = 'assets/svg/logout.svg';
+  String svgLogout = 'assets/svg/logou.svg';
   String svgWishlist = 'assets/svg/wishlist.svg';
   String svgSearch = 'assets/svg/search.svg';
   String svgCall = 'assets/svg/call.svg';
@@ -23,6 +23,7 @@ class Images {
   String svgArrowFront = 'assets/svg/arrow_front.svg';
   String svgArrowBackCircle = 'assets/svg/arrow_back_circle.svg';
   String svgUploadIcon = 'assets/svg/upload_icon.svg';
+  String svgProfileInactive = 'assets/svg/profile_inactive.svg';
   //Images
   String successLight = 'assets/images/success.png';
   String successDark = 'assets/images/success_dark.png';

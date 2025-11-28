@@ -12,6 +12,8 @@ abstract final class Dimens {
   static const defaultPadding = 12.0;
   static const defaultRadius = 12.0;
   static const cardExtraRadius = 20.0;
+  static const defaultListTilePadding = 40.0;
+  static const defaultArrowForward = 12.0;
 
   /// Horizontal padding for screen edges
   double get paddingScreenHorizontal;
