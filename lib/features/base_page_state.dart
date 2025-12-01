@@ -1,6 +1,5 @@
 import 'package:deehelp/core/widgets/card/ui_custom_scaffold.dart';
 import 'package:deehelp/features/base_page.dart';
-import 'package:deehelp/features/product/presentation/listing/components/add_new_product_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
@@ -27,11 +26,11 @@ abstract class BasePageState<T extends StateStreamable<S>, S,
   Widget build(BuildContext context) {
     return UICustomScaffold(
       // appBar: buildAppBar(context),
-      actionButton: [
-        AddNewProductWidget(
-          press: () {},
-        )
-      ],
+      // actionButton: [
+      //   AddNewProductWidget(
+      //     press: () {},
+      //   )
+      // ],
       pageTitle: pageTitle(),
       body: BlocConsumer<T, S>(
         bloc: cubit,

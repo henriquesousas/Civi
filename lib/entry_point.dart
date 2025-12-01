@@ -48,31 +48,6 @@ class _EntryPointState extends State<EntryPoint> {
     }
 
     return Scaffold(
-      // appBar: UIAppBar(
-      //   title: _geTitleTopBar(),
-      //   actions: [
-      //     IconButton(
-      //       onPressed: () {},
-      //       icon: SvgPicture.asset(
-      //         R.images.svgSearch,
-      //         height: 24,
-      //         colorFilter: ColorFilter.mode(
-      //             Theme.of(context).textTheme.bodyLarge!.color!,
-      //             BlendMode.srcIn),
-      //       ),
-      //     ),
-      //     IconButton(
-      //       onPressed: () {},
-      //       icon: SvgPicture.asset(
-      //         R.images.svgNotification,
-      //         height: 24,
-      //         colorFilter: ColorFilter.mode(
-      //             Theme.of(context).textTheme.bodyLarge!.color!,
-      //             BlendMode.srcIn),
-      //       ),
-      //     ),
-      //   ],
-      // ),
       body: PageTransitionSwitcher(
         duration: defaultDuration,
         transitionBuilder: (child, animation, secondAnimation) {
@@ -84,7 +59,6 @@ class _EntryPointState extends State<EntryPoint> {
         },
         child: _pages[_currentIndex],
       ),
-
       bottomNavigationBar: Theme(
         data: Theme.of(context).copyWith(
           splashColor: Colors.transparent, // Remove o splash geral
@@ -101,7 +75,7 @@ class _EntryPointState extends State<EntryPoint> {
         child: BottomNavigationBar(
           type: BottomNavigationBarType.fixed,
           currentIndex: _currentIndex,
-          selectedLabelStyle: const TextStyle(fontWeight: FontWeight.w300),
+          selectedItemColor: AppColors.primaryColor,
           enableFeedback: false,
           onTap: (index) {
             if (index != _currentIndex) {
@@ -113,26 +87,35 @@ class _EntryPointState extends State<EntryPoint> {
           items: [
             BottomNavigationBarItem(
               icon: svgIcon(R.images.svgLocation),
-              activeIcon:
-                  svgIcon(R.images.svgLocation, color: AppColors.primaryColor),
+              activeIcon: svgIcon(
+                R.images.svgLocationActive,
+                color: AppColors.primaryColor,
+              ),
               label: R.strings.bottomBarExplore,
             ),
             BottomNavigationBarItem(
-              icon: svgIcon(R.images.svgCategory),
-              activeIcon:
-                  svgIcon(R.images.svgCategory, color: AppColors.primaryColor),
+              icon: svgIcon(R.images.svgOccurrenceInactive),
+              activeIcon: svgIcon(
+                R.images.svgOccurrenceActive,
+                color: AppColors.primaryColor,
+              ),
               label: R.strings.bottomBarOccurrence,
             ),
             BottomNavigationBarItem(
-              icon: svgIcon(R.images.svgProduct),
-              activeIcon:
-                  svgIcon(R.images.svgProduct, color: AppColors.primaryColor),
+              icon: svgIcon(R.images.svgStatementInactive),
+              activeIcon: svgIcon(R.images.svgStatementActive,
+                  color: AppColors.primaryColor),
               label: R.strings.bottomBarMyProducts,
             ),
             BottomNavigationBarItem(
-              icon: svgIcon(R.images.svgProfile),
-              activeIcon:
-                  svgIcon(R.images.svgProfile, color: AppColors.primaryColor),
+              icon: svgIcon(
+                R.images.svgProfileInactive,
+                color: AppColors.primaryColor,
+              ),
+              activeIcon: svgIcon(
+                R.images.svgProfile,
+                color: AppColors.primaryColor,
+              ),
               label: R.strings.bottomBarProfile,
             ),
           ],

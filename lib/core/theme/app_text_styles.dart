@@ -11,7 +11,8 @@ class AppTextStyles {
   /// Estilo base para todos os textos. Define a família de fontes e fallback.
   TextStyle get _baseStyle {
     return const TextStyle(
-      fontFamily: 'AlbertSans',
+      fontFamily: 'Plus Jakarta',
+      // fontFamily: 'AlbertSans',
       fontFamilyFallback: ['sans-serif'],
     );
   }
@@ -21,6 +22,17 @@ class AppTextStyles {
     final color = _textTheme.headlineSmall?.color ?? _kPrimaryTextColor;
     return _baseStyle.copyWith(
       fontSize: 20,
+      fontWeight: FontWeight.w600,
+      height: 25 / 20,
+      letterSpacing: 0.38,
+      color: color,
+    );
+  }
+
+  TextStyle get bottomBar {
+    final color = _textTheme.headlineSmall?.color ?? _kPrimaryTextColor;
+    return _baseStyle.copyWith(
+      fontSize: 14,
       fontWeight: FontWeight.w600,
       height: 25 / 20,
       letterSpacing: 0.38,

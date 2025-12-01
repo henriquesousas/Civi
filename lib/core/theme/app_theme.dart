@@ -15,7 +15,7 @@ class AppTheme {
 
     return ThemeData(
       brightness: Brightness.light,
-      fontFamily: "AlbertSans",
+      fontFamily: "Plus Jakarta",
       colorScheme: baseColorScheme,
       primarySwatch: AppColors.primaryMaterialColor,
       primaryColor: AppColors.primaryColor,

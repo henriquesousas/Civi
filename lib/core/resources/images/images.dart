@@ -15,15 +15,21 @@ class Images {
   String svgMessage = 'assets/svg/message.svg';
   String svgWhatsapp = 'assets/svg/whatsapp.svg';
   String svgCategory = 'assets/svg/category.svg';
-  String svgProfile = 'assets/svg/profile.svg';
+  String svgProfile = 'assets/svg/profile_active.svg';
   String svgBookmark = 'assets/svg/bookmark.svg';
   String svgPallet = 'assets/svg/pallete.svg';
   String svgProduct = 'assets/svg/product.svg';
   String svgLocation = 'assets/svg/location.svg';
+  String svgLocationActive = 'assets/svg/location_active.svg';
   String svgArrowFront = 'assets/svg/arrow_front.svg';
   String svgArrowBackCircle = 'assets/svg/arrow_back_circle.svg';
   String svgUploadIcon = 'assets/svg/upload_icon.svg';
   String svgProfileInactive = 'assets/svg/profile_inactive.svg';
+  String svgArrowForward = 'assets/svg/arrow_forward.svg';
+  String svgStatementInactive = 'assets/svg/statement_inactive.svg';
+  String svgStatementActive = 'assets/svg/statement_active.svg';
+  String svgOccurrenceInactive = 'assets/svg/occurrence_inactivee.svg';
+  String svgOccurrenceActive = 'assets/svg/occurrence_active.svg';
   //Images
   String successLight = 'assets/images/success.png';
   String successDark = 'assets/images/success_dark.png';

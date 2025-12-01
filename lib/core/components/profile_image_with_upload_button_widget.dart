@@ -3,12 +3,15 @@ import 'dart:io';
 import 'package:deehelp/core/components/dimens_test.dart';
 import 'package:deehelp/core/components/ui_my_assets_image_widget.dart';
 import 'package:deehelp/core/components/ui_my_network_image_widget.dart';
+import 'package:deehelp/core/theme/app_colors.dart';
+import 'package:deehelp/core/theme/dimens.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:skeletonizer/skeletonizer.dart';
 
 import '../resources/resources.dart';
 
+//TODO: Renomear por que vai ser reutilizavel em varios locais
 class ProfileImageWithUploadButtonWidget extends StatefulWidget {
   const ProfileImageWithUploadButtonWidget({
     super.key,
@@ -42,29 +45,27 @@ class _ProfileImageWithUploadButtonWidgetState
           Container(
             decoration: BoxDecoration(
               border: Border.all(
-                color: const Color(0xFF2B5BEE).withValues(
-                    alpha:
-                        0.15), //MyColor.getPrimaryColor().withValues(alpha: 0.15),
+                color: AppColors.primaryColor.withValues(alpha: 0.15),
                 width: DimensTest.space4,
               ),
-              borderRadius: BorderRadius.circular(DimensTest.radiusProMax),
+              borderRadius: BorderRadius.circular(Dimens.defaultRadius),
             ),
             child: Container(
               decoration: BoxDecoration(
                 border: Border.all(
-                  color: const Color(0xFF2B5BEE),
+                  color: AppColors.primaryColor,
                   width: 1,
                 ),
-                borderRadius: BorderRadius.circular(DimensTest.radiusProMax),
+                borderRadius: BorderRadius.circular(Dimens.defaultRadius),
               ),
               child: Container(
                 decoration: BoxDecoration(
                   border: Border.all(
-                    color: const Color(0xFF2B5BEE).withValues(alpha: 0.15),
+                    color: AppColors.primaryColor.withValues(alpha: 0.15),
                     width: DimensTest.space3,
                   ),
                   borderRadius: BorderRadius.circular(
-                    DimensTest.radiusProMax,
+                    Dimens.defaultRadius,
                   ),
                 ),
                 child: _imageFile == null
@@ -75,7 +76,7 @@ class _ProfileImageWithUploadButtonWidgetState
                           imageUrl: widget.imageUrl,
                           isProfile: true,
                           imageAlt: widget.imageAlt,
-                          radius: DimensTest.radiusMax,
+                          radius: Dimens.defaultRadius,
                           width: 80,
                           height: 80,
                           boxFit: BoxFit.cover,
@@ -84,7 +85,7 @@ class _ProfileImageWithUploadButtonWidgetState
                     : UIMyAssetsImageWidget(
                         assetPath: _imageFile?.path ?? '',
                         isFile: true,
-                        radius: DimensTest.radiusMax,
+                        radius: Dimens.defaultRadius,
                         boxFit: BoxFit.cover,
                         width: 80,
                         height: 80,
@@ -98,22 +99,21 @@ class _ProfileImageWithUploadButtonWidgetState
               end: 2,
               child: Container(
                 decoration: BoxDecoration(
-                  color: const Color(0XFFFFFFFF), // or any background
+                  color: const Color(0XFFFFFFFF),
                   borderRadius: BorderRadius.circular(DimensTest.radiusMax),
                   boxShadow: const [
                     BoxShadow(
-                      color: Color(
-                          0xFF2B5BEE), // MyColor.getPrimaryColor().withValues(alpha: 0.3),
-                      blurRadius: 5,
+                      color: AppColors.primaryColor,
+                      blurRadius: 100,
                       offset: Offset(-3, -8),
                     ),
                   ],
                 ),
                 width: 30,
                 height: 30,
-                padding: EdgeInsetsDirectional.all(5),
+                padding: const EdgeInsetsDirectional.all(5),
                 child: UIMyAssetsImageWidget(
-                  color: Color(0xFF2B5BEE),
+                  color: AppColors.primaryColor,
                   isSvg: true,
                   assetPath: R.images.svgUploadIcon,
                   width: 24,

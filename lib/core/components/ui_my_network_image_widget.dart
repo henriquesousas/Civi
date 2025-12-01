@@ -54,10 +54,7 @@ class UIMyNetworkImageWidget extends StatelessWidget {
 
   Widget _buildCachedImage() {
     return Container(
-      padding: const EdgeInsets.all(2),
       decoration: BoxDecoration(
-        border: Border.all(
-            color: AppColors.primaryColor.withValues(alpha: 1), width: 0),
         borderRadius: BorderRadius.circular(radius),
       ),
       child: CachedNetworkImage(
