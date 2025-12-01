@@ -3,18 +3,18 @@ import 'package:deehelp/core/theme/app_colors.dart';
 import 'package:deehelp/core/widgets/buttons/ui_elevated_icon_button.dart';
 import 'package:deehelp/features/base_page.dart';
 import 'package:deehelp/features/base_page_state.dart';
-import 'package:deehelp/features/product/presentation/listing/listing_my_products_shimmer.dart';
-import 'package:deehelp/features/product/presentation/listing/status_info_text.dart';
+import 'package:deehelp/features/product/presentation/listing/components/listing_my_products_shimmer.dart';
+import 'package:deehelp/features/product/presentation/listing/components/status_info_text.dart';
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 
 import '../../../../core/components/empty_state_widget.dart';
 import '../../../../core/components/loader/loading.dart';
 import '../../../../core/resources/resources.dart';
 import '../../../../core/router/router_constants.dart';
 import '../../domain/entities/product.dart';
-import '../update/update_product_page.dart';
+import 'components/my_products_list_tile_card.dart';
 import 'listing_my_products_cubit.dart';
-import 'my_products_list_tile_card.dart';
 import 'state/list_product_state.dart';
 
 class ListingMyProductsPage
@@ -38,7 +38,10 @@ class _ProductListingPage extends BasePageState<ProductListingCubit,
   void _add() => navigate(RouterConstant.createNewItem);
 
   void _onEdit(Product product) async {
-    final result = await UpdateProductPage.navigate(context, product);
+    final result = await context.push<Map<String, dynamic>?>(
+      RouterConstant.itemEdit,
+      extra: product,
+    );
 
     if (result != null) {
       final action = result['action'];
@@ -89,7 +92,7 @@ class _ProductListingPage extends BasePageState<ProductListingCubit,
               bgColor: AppColors.whiteColor,
               borderColor: AppColors.primaryColor,
               textColor: AppColors.primaryColor,
-              onTap: () {},
+              onTap: () => _add(),
             ),
             Expanded(
               child: Column(

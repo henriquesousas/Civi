@@ -58,6 +58,7 @@ class AppColors {
   static const Color textSecondary = Color(0xFF6C757D);
   static const Color textColorHeader = Color(0xFF1E293B);
   static const Color textColorBody = Color(0xFF475569);
+  static const Color textTertiary = Color(0xFF9EA3A8);
 
   static const Color background = Color(0xFFF8F9FA);
   static const Color blue = Color(0xFF1E3A8A);

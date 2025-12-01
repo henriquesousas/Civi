@@ -1,10 +1,11 @@
 // item_edit_footer.dart
 
-import 'package:deehelp/core/components/buttons/ui_primary_button.dart';
 import 'package:deehelp/core/theme/app_colors.dart';
+import 'package:deehelp/core/theme/app_text_styles.dart';
 import 'package:flutter/material.dart';
 
 import '../../../../../core/resources/resources.dart';
+import '../../../../../core/widgets/buttons/ui_elevated_button.dart';
 
 class ItemEditFooter extends StatelessWidget {
   final VoidCallback onConfirm;
@@ -20,33 +21,30 @@ class ItemEditFooter extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        UIPrimaryButton(
+        UIElevatedButton(
           text: R.strings.confirmUpdate,
-          press: onConfirm,
+          onTap: onConfirm,
         ),
-        Padding(
-          padding: const EdgeInsets.all(8.0),
-          child: Column(
-            children: [
-              Text(R.strings
-                  .parts(text: R.strings.permanentlyDeleteVehicle)
-                  .first),
-              GestureDetector(
-                onTap: onDelete,
-                child: Text(
-                  R.strings
-                      .parts(text: R.strings.permanentlyDeleteVehicle)
-                      .last,
-                  style: Theme.of(context).textTheme.titleSmall?.copyWith(
-                        color: AppColors.errorColor,
-                        fontWeight: FontWeight.bold,
-                      ),
+        const SizedBox(height: 10),
+        Column(
+          children: [
+            Text(
+              R.strings.parts(text: R.strings.permanentlyDeleteVehicle).first,
+              style: context.appTextStyles.caption1Style,
+            ),
+            GestureDetector(
+              onTap: onDelete,
+              child: Text(
+                R.strings.parts(text: R.strings.permanentlyDeleteVehicle).last,
+                style: context.appTextStyles.caption1Style.copyWith(
+                  color: AppColors.errorColor,
+                  fontWeight: FontWeight.bold,
                 ),
               ),
-            ],
-          ),
+            ),
+          ],
         ),
-        const SizedBox(height: 30),
+        // const SizedBox(height: 30),
       ],
     );
   }

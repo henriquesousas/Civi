@@ -1,6 +1,6 @@
 import 'package:deehelp/core/widgets/card/ui_custom_app_card.dart';
 import 'package:deehelp/features/product/domain/entities/product.dart';
-import 'package:deehelp/features/product/presentation/listing/my_products_list_tile_card.dart';
+import 'package:deehelp/features/product/presentation/listing/components/my_products_list_tile_card.dart';
 import 'package:flutter/material.dart';
 import 'package:skeletonizer/skeletonizer.dart';
 

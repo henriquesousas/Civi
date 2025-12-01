@@ -1,6 +1,8 @@
+import 'package:deehelp/core/theme/app_text_styles.dart';
 import 'package:flutter/material.dart';
 
 import '../../../../../core/resources/resources.dart';
+import '../../../../../core/theme/app_colors.dart';
 
 class ModalSelectColor extends StatelessWidget {
   final Function(String) onChange;
@@ -36,6 +38,8 @@ class ModalSelectColor extends StatelessWidget {
           padding: const EdgeInsets.all(16),
           child: Text(
             R.strings.selectColor,
+            style: context.appTextStyles.bodyTextStyle1
+                .copyWith(color: AppColors.textSecondary),
           ),
         ),
         Flexible(
@@ -51,22 +55,21 @@ class ModalSelectColor extends StatelessWidget {
             itemBuilder: (context, index) {
               final color = colors[index];
               return ListTile(
-                onTap: () {
-                  onChange(color["name"].toString());
-                },
-                leading: Container(
-                  width: 30,
-                  height: 30,
-                  decoration: BoxDecoration(
-                    color: Color(
-                        int.parse(color["hex"]!.replaceFirst('#', '0xFF'))),
-                    borderRadius: BorderRadius.circular(8),
-                    border: Border.all(color: Colors.grey.shade300),
+                  onTap: () {
+                    onChange(color["name"].toString());
+                  },
+                  leading: Container(
+                    width: 30,
+                    height: 30,
+                    decoration: BoxDecoration(
+                      color: Color(
+                          int.parse(color["hex"]!.replaceFirst('#', '0xFF'))),
+                      borderRadius: BorderRadius.circular(8),
+                      border: Border.all(color: Colors.grey.shade300),
+                    ),
                   ),
-                ),
-                title: Text(color["name"].toString(),
-                    style: Theme.of(context).textTheme.titleSmall),
-              );
+                  title: Text(color["name"].toString(),
+                      style: context.appTextStyles.sectionSubTitle1));
             },
           ),
         ),

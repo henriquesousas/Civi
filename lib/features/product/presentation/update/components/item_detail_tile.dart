@@ -1,5 +1,6 @@
 import 'package:deehelp/core/components/icon/ui_icon_alpha.dart';
 import 'package:deehelp/core/theme/app_colors.dart';
+import 'package:deehelp/core/theme/app_text_styles.dart';
 import 'package:flutter/material.dart';
 
 class ItemDetailTile extends StatelessWidget {
@@ -28,11 +29,13 @@ class ItemDetailTile extends StatelessWidget {
           onTap: press,
           title: Text(
             title,
-            style: Theme.of(context).textTheme.titleMedium,
+            style: context.appTextStyles.sectionTitle,
           ),
           subtitle: Text(
             subtitle,
-            style: Theme.of(context).textTheme.bodyMedium,
+            style: context.appTextStyles.bodyTextStyle1.copyWith(
+              color: AppColors.textSecondary.withValues(alpha: 0.7),
+            ),
           ),
           trailing: showIconEdit
               ? !showCam

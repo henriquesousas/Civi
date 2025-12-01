@@ -1,40 +1,29 @@
 import 'package:deehelp/core/components/dialogs/dialog_extension.dart';
 import 'package:deehelp/core/components/loader/loading.dart';
-import 'package:deehelp/core/components/ui_app_bar.dart';
+import 'package:deehelp/features/base_page.dart';
+import 'package:deehelp/features/base_page_state.dart';
 import 'package:deehelp/features/product/presentation/update/components/product_form.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 
 import '../../../../core/resources/resources.dart';
-import '../../../../core/router/router_constants.dart';
-import '../../../../core/theme/app_colors.dart';
-import '../../../../shared/animation/fade_slide_transition_animator.dart';
 import '../../domain/entities/product.dart';
-import '../listing/components/status_badge_widget.dart';
 import 'state/product_update_state.dart';
 import 'update_product_cubit.dart';
 
-class UpdateProductPage extends StatefulWidget {
+class UpdateProductPage
+    extends BasePage<UpdateProductCubit, ProductUpdateState> {
   final Product product;
 
   const UpdateProductPage({super.key, required this.product});
 
-  static Future<Map<String, dynamic>?> navigate(
-    BuildContext context,
-    Product product,
-  ) async {
-    return await context.push<Map<String, dynamic>?>(
-      RouterConstant.itemEdit,
-      extra: product,
-    );
-  }
-
   @override
-  State<UpdateProductPage> createState() => _UpdateProductPageState();
+  State<StatefulWidget> createState() => _UpdateProductPageState();
 }
 
-class _UpdateProductPageState extends State<UpdateProductPage> {
+class _UpdateProductPageState extends BasePageState<UpdateProductCubit,
+    ProductUpdateState, UpdateProductPage> {
   @override
   void initState() {
     context.read<UpdateProductCubit>().load(widget.product);
@@ -48,8 +37,8 @@ class _UpdateProductPageState extends State<UpdateProductPage> {
   void _onDelete(Product product) async {
     final cubit = context.read<UpdateProductCubit>();
     final yes = await context.showQuestionDialog(
-      "Apagar",
-      "Deletar produto ${product.name}",
+      "Deletar",
+      "Deletar produto ${product.name} ?",
     );
 
     if (yes) {
@@ -58,82 +47,60 @@ class _UpdateProductPageState extends State<UpdateProductPage> {
   }
 
   @override
-  Widget build(BuildContext context) {
-    return BlocConsumer<UpdateProductCubit, ProductUpdateState>(
-      listener: (context, state) {
-        state.maybeMap(
-          editing: (value) {
-            // Loading.instance().show(context: context, text: "Aguarde...");
-          },
-          success: (state) async {
-            // Loading.instance().hide();
-            context.pop({
-              'action': "update",
-              'message': "Produto alterado com sucesso.",
-              'value': state.product,
-            });
-          },
-          deleting: (state) {
-            // context.showSnackBar("Produto removido com sucesso.");
-            // Loading.instance().hide();
-            context.pop({
-              'action': "delete",
-              'message': "Produto removido com sucesso.",
-              'value': state.product,
-            });
-          },
-          error: (value) {
-            // Loading.instance().hide();
-          },
-          orElse: () => Loading.instance().hide(),
-        );
+  String? pageTitle() => R.strings.detail;
+
+  @override
+  void listener(BuildContext context, ProductUpdateState state) {
+    state.maybeMap(
+      editing: (value) {
+        // Loading.instance().show(context: context, text: "Aguarde...");
       },
-      builder: (context, state) {
-        return Scaffold(
-          backgroundColor: AppColors.background,
-          appBar: UIAppBar(
-            title: R.strings.detail,
-            leading: IconButton(
-              onPressed: () => context.pop(),
-              icon: const Icon(Icons.arrow_back),
-            ),
-            actions: state.whenOrNull(
-              load: (item) {
-                return [
-                  Padding(
-                    padding: const EdgeInsets.only(right: 20),
-                    child: StatusBadgeWidget(status: item.status),
-                  ),
-                ];
-              },
-            ),
-          ),
-          body: FadeSlideTransitionAnimator(
-            child: SingleChildScrollView(
-              physics: const BouncingScrollPhysics(),
-              padding: const EdgeInsets.all(18),
-              child: state.maybeMap(
-                load: (state) => ProductForm(
-                  product: state.product,
-                  onConfirm: _onConfirm,
-                  onDelete: () => _onDelete(state.product),
-                ),
-                editing: (state) => ProductForm(
-                  product: state.product,
-                  onConfirm: _onConfirm,
-                  onDelete: () => _onDelete(state.product),
-                ),
-                deleting: (state) => ProductForm(
-                  product: state.product,
-                  onConfirm: _onConfirm,
-                  onDelete: () => _onDelete(state.product),
-                ),
-                orElse: () => const Center(child: CircularProgressIndicator()),
-              ),
-            ),
-          ),
-        );
+      success: (state) async {
+        // Loading.instance().hide();
+        context.pop({
+          'action': "update",
+          'message': "Produto alterado com sucesso.",
+          'value': state.product,
+        });
       },
+      deleting: (state) {
+        // context.showSnackBar("Produto removido com sucesso.");
+        // Loading.instance().hide();
+        context.pop({
+          'action': "delete",
+          'message': "Produto removido com sucesso.",
+          'value': state.product,
+        });
+      },
+      error: (value) {
+        // Loading.instance().hide();
+      },
+      orElse: () => Loading.instance().hide(),
+    );
+  }
+
+  @override
+  Widget buildPage(BuildContext context, ProductUpdateState state) {
+    return SingleChildScrollView(
+      physics: const BouncingScrollPhysics(),
+      child: state.maybeMap(
+        load: (state) => ProductForm(
+          product: state.product,
+          onConfirm: _onConfirm,
+          onDelete: () => _onDelete(state.product),
+        ),
+        editing: (state) => ProductForm(
+          product: state.product,
+          onConfirm: _onConfirm,
+          onDelete: () => _onDelete(state.product),
+        ),
+        deleting: (state) => ProductForm(
+          product: state.product,
+          onConfirm: _onConfirm,
+          onDelete: () => _onDelete(state.product),
+        ),
+        orElse: () => const Center(child: CircularProgressIndicator()),
+      ),
     );
   }
 }

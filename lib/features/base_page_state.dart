@@ -31,6 +31,7 @@ abstract class BasePageState<T extends StateStreamable<S>, S,
       //     press: () {},
       //   )
       // ],
+
       pageTitle: pageTitle(),
       body: BlocConsumer<T, S>(
         bloc: cubit,

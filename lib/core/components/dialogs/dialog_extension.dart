@@ -1,4 +1,5 @@
 import 'package:deehelp/core/theme/app_colors.dart';
+import 'package:deehelp/core/theme/app_text_styles.dart';
 import 'package:flutter/material.dart';
 
 enum DialogType {
@@ -18,18 +19,31 @@ extension DialogExtension on BuildContext {
       builder: (ctx) => AlertDialog(
         title: Text(
           title,
-          style: Theme.of(this).textTheme.titleMedium,
+          style: appTextStyles.sectionTitle,
         ),
         content: Text(
           message,
+          style: appTextStyles.bodyTextStyle1.copyWith(
+            color: AppColors.textTertiary,
+          ),
         ),
         actions: [
           TextButton(
-            child: Text(textCancelButton),
+            child: Text(
+              textCancelButton,
+              style: appTextStyles.buttonTextStyle1.copyWith(
+                color: AppColors.primaryColor,
+              ),
+            ),
             onPressed: () => Navigator.of(ctx).pop(false),
           ),
           TextButton(
-            child: Text(textConfirmButton),
+            child: Text(
+              textConfirmButton,
+              style: appTextStyles.buttonTextStyle1.copyWith(
+                color: AppColors.primaryColor,
+              ),
+            ),
             onPressed: () => Navigator.of(ctx).pop(true),
           ),
         ],
@@ -42,7 +56,10 @@ extension DialogExtension on BuildContext {
   void showSnackBar(String message, {DialogType type = DialogType.success}) {
     ScaffoldMessenger.of(this).showSnackBar(
       SnackBar(
-        content: Text(message),
+        content: Text(
+          message,
+          style: appTextStyles.sectionTitle,
+        ),
         backgroundColor: type == DialogType.success
             ? const Color(0xFF1F2937)
             : AppColors.errorColor,

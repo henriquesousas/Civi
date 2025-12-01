@@ -1,8 +1,8 @@
+import 'package:deehelp/core/theme/app_text_styles.dart';
+import 'package:deehelp/core/widgets/buttons/ui_elevated_button.dart';
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 
-import '../../../../../app/theme/app_colors_v2.dart';
-import '../../../../../core/components/buttons/ui_outline_button.dart';
-import '../../../../../core/components/buttons/ui_primary_button.dart';
 import '../../../../../core/components/icon/ui_icon_alpha.dart';
 import '../../../../../core/components/textfields/ui_secondary_textfield.dart';
 import '../../../../../core/resources/resources.dart';
@@ -83,21 +83,21 @@ class _EditFieldModalState extends State<EditFieldModal> {
               children: [
                 Text(
                   "Editar ${widget.title}",
-                  style: Theme.of(context).textTheme.headlineSmall?.copyWith(
-                        fontWeight: FontWeight.w600,
-                        color: AppColors.textPrimary,
-                      ),
+                  style: context.appTextStyles.sectionTitle,
                 ),
-                const UIIConAlpha(
-                    iconData: Icons.close, color: AppColors.darkGreyColor10),
+                UIIConAlpha(
+                  iconData: Icons.close,
+                  color: AppColors.darkGreyColor10,
+                  press: () => context.pop(),
+                ),
               ],
             ),
             const SizedBox(height: 8),
             Text(
               widget.description,
-              style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                    color: AppColors.textSecondary,
-                  ),
+              style: context.appTextStyles.caption2Style.copyWith(
+                color: AppColors.textSecondary,
+              ),
             ),
             const SizedBox(height: 32),
             UISecondaryTextField(
@@ -118,27 +118,27 @@ class _EditFieldModalState extends State<EditFieldModal> {
             const SizedBox(height: 8),
             Text(
               widget.examples,
-              style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                    color: AppColorsV2.textTertiary,
-                  ),
+              style: context.appTextStyles.caption2Style.copyWith(
+                color: AppColors.textTertiary,
+              ),
             ),
             const SizedBox(height: 40),
             Row(
               children: [
                 Expanded(
-                  child: UIOutlineButton(
+                  child: UIElevatedButton(
                     text: R.strings.cancel,
-                    press: () => Navigator.of(context).pop(),
-                    textColor: AppColors.textSecondary,
+                    onTap: () => Navigator.of(context).pop(),
+                    textColor: AppColors.primaryColor,
                     borderColor: AppColors.primaryColor,
+                    bgColor: AppColors.whiteColor,
                   ),
                 ),
                 const SizedBox(width: 12),
                 Expanded(
-                  child: UIPrimaryButton(
+                  child: UIElevatedButton(
                     text: R.strings.confirm,
-                    borderRadius: 12,
-                    press: widget.onConfirm != null ? _onConfirm : null,
+                    onTap: () => widget.onConfirm != null ? _onConfirm : null,
                   ),
                 ),
               ],
