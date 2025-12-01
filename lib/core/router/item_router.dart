@@ -6,7 +6,7 @@ import 'package:go_router/go_router.dart';
 import '../../features/product/domain/entities/product.dart';
 import '../../features/product/presentation/create/create_item_provider.dart';
 import '../../features/product/presentation/create/create_success_page.dart';
-import '../../features/product/presentation/listing/list_product_provider.dart';
+import '../../features/product/presentation/listing/listing_my_products_provider.dart';
 import '../../features/product/presentation/update/update_product_provider.dart';
 
 final itemRoutes = [
@@ -16,7 +16,7 @@ final itemRoutes = [
         final bool showBackButton = state.extra as bool;
         return slideTransitionPage(
           key: state.pageKey,
-          child: ListProductProvider(showBackButton: showBackButton),
+          child: ListingMyProductsProvider(showBackButton: showBackButton),
         );
       }),
   GoRoute(

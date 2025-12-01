@@ -1,6 +1,6 @@
 import 'package:animations/animations.dart';
+import 'package:deehelp/core/components/test_page.dart';
 import 'package:deehelp/core/theme/app_colors.dart';
-import 'package:deehelp/features/faq/faq_provider.dart';
 import 'package:deehelp/features/occurrence/occurrence_page.dart';
 import 'package:deehelp/features/profile/profile_page.dart';
 import 'package:flutter/material.dart';
@@ -8,7 +8,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 
 import 'core/resources/resources.dart';
 import 'core/theme/constants.dart';
-import 'features/product/presentation/listing/list_product_provider.dart';
+import 'features/product/presentation/listing/listing_my_products_provider.dart';
 
 class EntryPoint extends StatefulWidget {
   const EntryPoint({super.key});
@@ -21,9 +21,10 @@ class _EntryPointState extends State<EntryPoint> {
   final List _pages = [
     // HomeView(),
     // MeusVeiculosPage(),
-    FaqProvider.page,
+    // FaqProvider.page,
+    TestPage(),
     OccurrencePage(),
-    const ListProductProvider(),
+    const ListingMyProductsProvider(),
     const ProfilePage(),
   ];
   int _currentIndex = 0;

@@ -85,6 +85,22 @@ class Product extends Entity<ProductId> {
     );
   }
 
+  factory Product.shimmer() {
+    return Product(
+      id: ProductId.unique(),
+      name: "any",
+      code: "000000",
+      type: "any type",
+      color: "any",
+      brand: "any",
+      obs: "any",
+      year: 20010,
+      image: null,
+      userId: "any",
+      status: ProductSatus.active,
+    );
+  }
+
   void changeImage(ImageMedia image) {
     this.image = image;
   }

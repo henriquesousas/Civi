@@ -53,25 +53,33 @@ class UIMyNetworkImageWidget extends StatelessWidget {
   }
 
   Widget _buildCachedImage() {
-    return CachedNetworkImage(
-      imageUrl: imageUrl,
-      color: color,
-      imageBuilder: (context, imageProvider) => Container(
-        height: height,
-        width: width,
-        decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(radius),
-          image: DecorationImage(
-            image: imageProvider,
-            fit: boxFit,
-            colorFilter: color != null
-                ? ColorFilter.mode(color!, BlendMode.srcIn)
-                : null,
+    return Container(
+      padding: const EdgeInsets.all(2),
+      decoration: BoxDecoration(
+        border: Border.all(
+            color: AppColors.primaryColor.withValues(alpha: 1), width: 0),
+        borderRadius: BorderRadius.circular(radius),
+      ),
+      child: CachedNetworkImage(
+        imageUrl: imageUrl,
+        color: color,
+        imageBuilder: (context, imageProvider) => Container(
+          height: height,
+          width: width,
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(radius),
+            image: DecorationImage(
+              image: imageProvider,
+              fit: boxFit,
+              colorFilter: color != null
+                  ? ColorFilter.mode(color!, BlendMode.srcIn)
+                  : null,
+            ),
           ),
         ),
+        placeholder: (context, url) => _buildPlaceholderWidget(),
+        errorWidget: (context, url, error) => _buildErrorWidget(),
       ),
-      placeholder: (context, url) => _buildPlaceholderWidget(),
-      errorWidget: (context, url, error) => _buildErrorWidget(),
     );
   }
 
@@ -82,13 +90,12 @@ class UIMyNetworkImageWidget extends StatelessWidget {
       child: ClipRRect(
         borderRadius: BorderRadius.circular(radius),
         child: Center(
-          // child: SpinKitFadingCube(
-          //   color: MyColor.getPrimaryColor().withValues(alpha: 0.3),
-          //   size: 20,
-          // ),
-          child: CircularProgressIndicator(
-            color: Color(
-                0xFF2B5BEE), // MyColor.getPrimaryColor().withValues(alpha: 0.3),
+          child: SizedBox(
+            width: 16,
+            height: 16,
+            child: CircularProgressIndicator(
+              color: AppColors.primaryColor.withValues(alpha: 1),
+            ),
           ),
         ),
       ),

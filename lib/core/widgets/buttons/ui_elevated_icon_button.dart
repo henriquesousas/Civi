@@ -11,8 +11,11 @@ class UIElevatedIconButton extends UIElevatedButton {
       required super.text,
       required super.onTap,
       super.bgColor,
+      super.width,
       super.borderColor,
-      super.textColor});
+      super.textColor,
+      super.elevation,
+      super.radius = 120});
 
   @override
   Widget build(BuildContext context) {

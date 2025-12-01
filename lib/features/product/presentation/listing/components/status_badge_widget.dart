@@ -1,3 +1,4 @@
+import 'package:deehelp/core/theme/app_text_styles.dart';
 import 'package:flutter/material.dart';
 
 import '../../../domain/product_status.dart';
@@ -10,7 +11,7 @@ class StatusBadgeWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
+      padding: const EdgeInsets.symmetric(horizontal: 5, vertical: 4),
       decoration: BoxDecoration(
         color: status.color.withValues(alpha: 0.1),
         borderRadius: BorderRadius.circular(8),
@@ -28,11 +29,11 @@ class StatusBadgeWidget extends StatelessWidget {
           const SizedBox(width: 4),
           Text(
             status.label,
-            style: Theme.of(context).textTheme.labelSmall?.copyWith(
-                  color: status.color,
-                  fontWeight: FontWeight.w600,
-                  fontSize: 10,
-                ),
+            style: context.appTextStyles.caption2Style.copyWith(
+              color: status.color,
+              fontWeight: FontWeight.bold,
+              fontSize: 10,
+            ),
           ),
         ],
       ),
