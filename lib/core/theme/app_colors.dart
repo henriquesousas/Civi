@@ -64,6 +64,9 @@ class AppColors {
   static const Color blue = Color(0xFF1E3A8A);
   static const Color accent1 = Color(0xFF77AAFF);
 
+  static const Color primaryLight = Color(0xFF8E7BF0);
+  static const Color secondary = Color(0xFF00D4B4);
+
   static const LinearGradient primaryGradient = LinearGradient(
     begin: Alignment.topLeft,
     end: Alignment.bottomRight,

@@ -1,14 +1,12 @@
+import 'package:deehelp/core/animation/slide_fade_transition_animator.dart';
 import 'package:deehelp/core/components/ui_app_bar.dart';
+import 'package:deehelp/core/extensions/context_extension.dart';
 import 'package:deehelp/core/router/router_constants.dart';
-import 'package:deehelp/shared/animation/slide_fade_transition_animator.dart';
-import 'package:deehelp/shared/components/buttons/primary_button.dart';
-import 'package:deehelp/shared/extensions/context_extension.dart';
+import 'package:deehelp/core/widgets/buttons/ui_elevated_button.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
-import '../../../../app/theme/app_colors_v2.dart';
-import '../../../../shared/components/buttons/secondary_outline_button.dart';
-import '../../../../shared/components/progress_indicator/step_indicator.dart';
+import '../../../../core/widgets/progress_indicator/step_indicator.dart';
 import 'components/form_contact_info.dart';
 import 'components/form_personal_info.dart';
 import 'components/form_security_info.dart';
@@ -60,7 +58,7 @@ class _RegisterAccountPageState extends State<RegisterAccountPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: AppColorsV2.background,
+      // backgroundColor: AppColorsV2.background,
       appBar: UIAppBar(title: context.strings.registerAccountAppbar),
       body: SafeArea(
         child: SlideFadeTransitionAnimator(
@@ -93,15 +91,15 @@ class _RegisterAccountPageState extends State<RegisterAccountPage> {
                   children: [
                     if (_currentStep > 0)
                       Expanded(
-                        child: SecondaryOutlineButton(
+                        child: UIElevatedButton(
                           text: context.strings.back,
-                          onPressed: _previousStep,
+                          onTap: _previousStep,
                         ),
                       ),
                     Expanded(
-                      child: PrimaryButton(
+                      child: UIElevatedButton(
                         text: context.strings.next,
-                        onPressed: _nextStep,
+                        onTap: _nextStep,
                       ),
                     ),
                   ],

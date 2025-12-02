@@ -1,5 +1,3 @@
-import 'package:deehelp/app/theme/app_colors_v2.dart';
-import 'package:deehelp/shared/extensions/text_style_extension.dart';
 import 'package:flutter/material.dart';
 
 import '../../../../../core/resources/resources.dart';
@@ -17,9 +15,9 @@ class LoginOr extends StatelessWidget {
           padding: const EdgeInsetsGeometry.all(16),
           child: Text(
             R.strings.or,
-            style: context.getTextStyle.regular.copyWith(
-              color: AppColorsV2.textTertiary,
-            ),
+            // style: context.getTextStyle.regular.copyWith(
+            //   color: AppColorsV2.textTertiary,
+            // ),
           ),
         ),
         const Expanded(child: Divider(color: AppColors.lightGreyColor20)),

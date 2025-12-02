@@ -30,6 +30,9 @@ class Images {
   String svgStatementActive = 'assets/svg/statement_active.svg';
   String svgOccurrenceInactive = 'assets/svg/occurrence_inactivee.svg';
   String svgOccurrenceActive = 'assets/svg/occurrence_active.svg';
+  String svgIconCon = 'assets/svg/icon_con.svg';
+  String svgIconTruck = 'assets/svg/icon_truck.svg';
+  String svgIconMotorcycle = 'assets/svg/icon_motorcycle.svg';
   //Images
   String successLight = 'assets/images/success.png';
   String successDark = 'assets/images/success_dark.png';

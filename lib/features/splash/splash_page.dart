@@ -1,12 +1,12 @@
+import 'package:deehelp/core/animation/slide_fade_transition_animator.dart';
+import 'package:deehelp/core/animation/transform_scale_opacity_animator.dart';
+import 'package:deehelp/core/animation/transition_animator.dart';
+import 'package:deehelp/core/extensions/screen_size_extension.dart';
 import 'package:deehelp/features/splash/components/splash_background_animation.dart';
 import 'package:deehelp/features/splash/components/splash_bottom_section.dart';
 import 'package:deehelp/features/splash/components/splash_content.dart';
 import 'package:deehelp/features/splash/components/splash_line_indicator.dart';
 import 'package:deehelp/features/splash/components/splash_logo.dart';
-import 'package:deehelp/shared/animation/slide_fade_transition_animator.dart';
-import 'package:deehelp/shared/animation/transform_scale_opacity_animator.dart';
-import 'package:deehelp/shared/animation/transition_animator.dart';
-import 'package:deehelp/shared/extensions/screen_size_extension.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';

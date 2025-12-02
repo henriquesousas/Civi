@@ -1,7 +1,5 @@
-import 'package:deehelp/shared/components/icons/primary_icon.dart';
 import 'package:flutter/material.dart';
 
-import '../../../../../app/theme/app_colors_v2.dart';
 import '../../../../../core/resources/resources.dart';
 
 class LoginWelcomeSection extends StatelessWidget {
@@ -12,13 +10,13 @@ class LoginWelcomeSection extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        const PrimaryIcon(
-          icon: Icon(
-            Icons.directions_car_rounded,
-            color: Colors.white,
-            size: 32,
-          ),
-        ),
+        // const PrimaryIcon(
+        //   icon: Icon(
+        //     Icons.directions_car_rounded,
+        //     color: Colors.white,
+        //     size: 32,
+        //   ),
+        // ),
         const SizedBox(height: 24),
         Text(
           R.strings.welcome,
@@ -28,9 +26,9 @@ class LoginWelcomeSection extends StatelessWidget {
         ),
         Text(
           R.strings.loginInfo,
-          style: Theme.of(context).textTheme.labelMedium?.copyWith(
-                color: AppColorsV2.textSecondary,
-              ),
+          // style: Theme.of(context).textTheme.labelMedium?.copyWith(
+          //       color: AppColorsV2.textSecondary,
+          //     ),
         ),
       ],
     );

@@ -1,10 +1,10 @@
 import 'package:deehelp/core/components/buttons/ui_google_button.dart';
 import 'package:deehelp/core/components/buttons/ui_outline_button.dart';
+import 'package:deehelp/core/extensions/screen_size_extension.dart';
 import 'package:deehelp/core/theme/app_colors.dart';
 import 'package:deehelp/features/auth/presentation/login/bloc/auth_state.dart';
 import 'package:deehelp/features/auth/presentation/login/bloc/login_bloc.dart';
 import 'package:deehelp/features/splash/components/splash_background_animation.dart';
-import 'package:deehelp/shared/extensions/screen_size_extension.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';

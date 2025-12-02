@@ -1,8 +1,5 @@
-import 'package:deehelp/shared/extensions/context_extension.dart';
-import 'package:deehelp/shared/extensions/text_style_extension.dart';
+import 'package:deehelp/core/extensions/context_extension.dart';
 import 'package:flutter/material.dart';
-
-import '../../../../../app/theme/app_colors_v2.dart';
 
 class OtpResendCode extends StatelessWidget {
   const OtpResendCode({super.key});
@@ -16,15 +13,12 @@ class OtpResendCode extends StatelessWidget {
           children: [
             const Icon(
               Icons.timer_outlined,
-              color: AppColorsV2.textSecondary,
+              // color: AppColorsV2.textSecondary,
               size: 20,
             ),
             const SizedBox(width: 8),
             Text(
               "${context.strings.otpResendCode} $_formattedCountdown",
-              style: context.getTextStyle.smallMedium.copyWith(
-                color: AppColorsV2.textSecondary,
-              ),
             ),
           ],
         ),

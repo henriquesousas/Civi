@@ -1,7 +1,7 @@
+import 'package:deehelp/core/extensions/context_extension.dart';
+import 'package:deehelp/core/extensions/screen_size_extension.dart';
 import 'package:deehelp/core/theme/app_colors.dart';
-import 'package:deehelp/shared/components/indicator/primary_progress_indicator.dart';
-import 'package:deehelp/shared/extensions/context_extension.dart';
-import 'package:deehelp/shared/extensions/screen_size_extension.dart';
+import 'package:deehelp/features/onboarding/components/primary_progress_indicator.dart';
 import 'package:flutter/material.dart';
 
 import '../../../core/components/buttons/ui_outline_button.dart';

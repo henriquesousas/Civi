@@ -8,7 +8,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 
 import 'core/resources/resources.dart';
 import 'core/theme/constants.dart';
-import 'features/product/presentation/listing/listing_my_products_provider.dart';
+import 'features/my_products/presentation/listing/listing_my_products_provider.dart';
 
 class EntryPoint extends StatefulWidget {
   const EntryPoint({super.key});

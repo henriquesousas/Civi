@@ -1,11 +1,10 @@
+import 'package:deehelp/core/animation/slide_fade_transition_animator.dart';
+import 'package:deehelp/core/extensions/screen_size_extension.dart';
+import 'package:deehelp/core/theme/app_colors.dart';
 import 'package:deehelp/features/onboarding/components/onboading_text_section.dart';
 import 'package:deehelp/features/onboarding/components/onboarding_logo.dart';
 import 'package:deehelp/features/onboarding/onboarding_item.dart';
-import 'package:deehelp/shared/animation/slide_fade_transition_animator.dart';
-import 'package:deehelp/shared/extensions/screen_size_extension.dart';
 import 'package:flutter/material.dart';
-
-import '../../../app/theme/app_colors_v2.dart';
 
 class OnboardingContent extends StatefulWidget {
   final OnboardingItem page;
@@ -31,7 +30,7 @@ class _OnboardingContentState extends State<OnboardingContent>
                 child: OnboardingLogo(
                     icon: Icon(
                   widget.page.icon,
-                  color: AppColorsV2.primary,
+                  color: AppColors.primaryColor,
                   size: context.responsiveRadius(0.1),
                 )),
               ),

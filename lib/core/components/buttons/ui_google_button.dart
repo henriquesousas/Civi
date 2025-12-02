@@ -1,6 +1,6 @@
+import 'package:deehelp/core/extensions/screen_size_extension.dart';
 import 'package:deehelp/core/theme/app_colors.dart';
 import 'package:deehelp/core/theme/button_theme.dart';
-import 'package:deehelp/shared/extensions/screen_size_extension.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 

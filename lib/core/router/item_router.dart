@@ -3,11 +3,11 @@ import 'package:deehelp/core/router/slide_transition_page.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
-import '../../features/product/domain/entities/product.dart';
-import '../../features/product/presentation/create/create_item_provider.dart';
-import '../../features/product/presentation/create/create_success_page.dart';
-import '../../features/product/presentation/listing/listing_my_products_provider.dart';
-import '../../features/product/presentation/update/update_product_provider.dart';
+import '../../features/my_products/domain/entities/product.dart';
+import '../../features/my_products/presentation/create/create_item_provider.dart';
+import '../../features/my_products/presentation/create/create_success_page.dart';
+import '../../features/my_products/presentation/listing/listing_my_products_provider.dart';
+import '../../features/my_products/presentation/update/update_product_provider.dart';
 
 final itemRoutes = [
   GoRoute(

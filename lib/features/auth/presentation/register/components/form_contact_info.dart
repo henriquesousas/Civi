@@ -1,9 +1,6 @@
+import 'package:deehelp/core/extensions/context_extension.dart';
 import 'package:deehelp/features/auth/presentation/register/components/register_account_header_title.dart';
-import 'package:deehelp/shared/components/inputs/primary_text_field.dart';
-import 'package:deehelp/shared/extensions/context_extension.dart';
 import 'package:flutter/material.dart';
-
-import '../../../../../app/theme/app_colors_v2.dart';
 
 class FormContactInfo extends StatelessWidget {
   const FormContactInfo({super.key});
@@ -20,25 +17,25 @@ class FormContactInfo extends StatelessWidget {
             subtitle: context.strings.formContactSubtitle,
           ),
           const SizedBox(height: 32),
-          PrimaryTextField(
-            labelText: context.strings.labelTextEmail,
-            hintText: context.strings.hintEmail,
-            prefixIcon: const Icon(
-              Icons.email_outlined,
-              color: AppColorsV2.textSecondary,
-              size: 20,
-            ),
-          ),
+          // PrimaryTextField(
+          //   labelText: context.strings.labelTextEmail,
+          //   hintText: context.strings.hintEmail,
+          //   prefixIcon: const Icon(
+          //     Icons.email_outlined,
+          //     color: AppColorsV2.textSecondary,
+          //     size: 20,
+          //   ),
+          // ),
           const SizedBox(height: 10),
-          PrimaryTextField(
-            labelText: context.strings.registerAccountLabelTextPhone,
-            hintText: context.strings.registerAccountLabelHintPhone,
-            prefixIcon: const Icon(
-              Icons.phone_outlined,
-              color: AppColorsV2.textSecondary,
-              size: 20,
-            ),
-          ),
+          // PrimaryTextField(
+          //   labelText: context.strings.registerAccountLabelTextPhone,
+          //   hintText: context.strings.registerAccountLabelHintPhone,
+          //   prefixIcon: const Icon(
+          //     Icons.phone_outlined,
+          //     color: AppColorsV2.textSecondary,
+          //     size: 20,
+          //   ),
+          // ),
         ],
       ),
     );

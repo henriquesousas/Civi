@@ -130,7 +130,7 @@ class AppTextStyles {
     final color = _textTheme.labelLarge?.color ?? Colors.white;
     return _baseStyle.copyWith(
       fontSize: 16,
-      fontWeight: FontWeight.w500,
+      fontWeight: FontWeight.w400,
       height: 19.2 / 16,
       letterSpacing: 0,
       color: color,

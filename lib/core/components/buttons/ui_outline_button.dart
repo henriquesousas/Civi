@@ -1,5 +1,5 @@
+import 'package:deehelp/core/extensions/screen_size_extension.dart';
 import 'package:deehelp/core/theme/button_theme.dart';
-import 'package:deehelp/shared/extensions/screen_size_extension.dart';
 import 'package:flutter/material.dart';
 
 import '../../theme/app_colors.dart';

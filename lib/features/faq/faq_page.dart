@@ -1,4 +1,3 @@
-import 'package:deehelp/app/localization/string_config.dart';
 import 'package:deehelp/core/widgets/card/ui_custom_scaffold.dart';
 import 'package:deehelp/features/faq/faq.dart';
 import 'package:deehelp/features/faq/state/faq_bloc.dart';
@@ -8,7 +7,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 
-import 'faq_list_item_widget.dart';
+import 'widgets/faq_list_item_widget.dart';
 
 class FaqPage extends StatelessWidget {
   const FaqPage({super.key});
@@ -16,7 +15,7 @@ class FaqPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return UICustomScaffold(
-      pageTitle: StringConfig.frequentlyQuestion,
+      pageTitle: "Perguntas frequentes",
       onBackButtonTap: () => context.pop(),
       body: BlocBuilder<FaqBloc, FaqState>(
         builder: (context, state) {

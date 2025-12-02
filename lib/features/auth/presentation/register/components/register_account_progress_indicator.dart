@@ -1,8 +1,7 @@
+import 'package:deehelp/core/extensions/context_extension.dart';
+import 'package:deehelp/core/theme/app_colors.dart';
 import 'package:deehelp/features/auth/presentation/register/components/progress_indicator_label.dart';
-import 'package:deehelp/shared/extensions/context_extension.dart';
 import 'package:flutter/material.dart';
-
-import '../../../../../app/theme/app_colors_v2.dart';
 //
 // import '../../../../app/theme/app_colors.dart' show AppColors;
 
@@ -50,8 +49,8 @@ class _RegisterAccountProgressIndicatorState
                           height: 4,
                           decoration: BoxDecoration(
                             color: isActive
-                                ? AppColorsV2.primary
-                                : AppColorsV2.border,
+                                ? AppColors.primaryColor
+                                : AppColors.greyColor,
                             borderRadius: BorderRadius.circular(2),
                           ),
                         ),

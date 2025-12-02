@@ -1,4 +1,4 @@
-import 'package:deehelp/app/theme/app_colors_v2.dart';
+import 'package:deehelp/core/theme/app_colors.dart';
 import 'package:flutter/material.dart';
 
 class SplashLogo extends StatelessWidget {
@@ -25,7 +25,7 @@ class SplashLogo extends StatelessWidget {
         child: Icon(
           Icons.directions_car_rounded,
           size: 60,
-          color: AppColorsV2.primary,
+          color: AppColors.primaryColor,
         ),
       ),
     );

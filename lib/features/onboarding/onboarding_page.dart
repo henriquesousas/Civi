@@ -1,10 +1,9 @@
+import 'package:deehelp/core/extensions/context_extension.dart';
 import 'package:deehelp/core/router/router_constants.dart';
 import 'package:deehelp/features/onboarding/components/onboarding_bottom_section.dart';
 import 'package:deehelp/features/onboarding/components/onboarding_content.dart';
 import 'package:deehelp/features/onboarding/components/skip_button.dart';
 import 'package:deehelp/features/onboarding/onboarding_item.dart';
-import 'package:deehelp/shared/components/pageview/page_view_builder.dart';
-import 'package:deehelp/shared/extensions/context_extension.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:go_router/go_router.dart';
@@ -93,15 +92,18 @@ class _OnboardingPageState extends State<OnboardingPage> {
         ),
         child: Stack(
           children: [
-            PageViewBuilder(
+            PageView.builder(
               onPageChanged: _onPageChanged,
               itemCount: OnboardingItem.pages().length,
-              initialPage: 0,
-              itemBuilder: (context, index, controller) {
-                pageController = controller;
+              itemBuilder: (context, index) {
                 final page = OnboardingItem.pages()[index];
                 return OnboardingContent(page: page);
               },
+              // itemBuilder: (context, index, controller) {
+              //   pageController = controller;
+              //   final page = OnboardingItem.pages()[index];
+              //   return OnboardingContent(page: page);
+              // },
             ),
             SkipButton(onSkip: _onSkip),
             OnboardingBottomSection(
