@@ -41,7 +41,7 @@ class LogoutModal extends StatelessWidget {
                     padding: const EdgeInsets.symmetric(vertical: 0),
                     child: UIElevatedButton(
                       text: R.strings.logoutConfirmButton,
-                      onTap: () {
+                      press: () {
                         final instance = FirebaseAuth.instance;
                         if (instance.currentUser != null) {
                           instance.signOut();
@@ -57,7 +57,7 @@ class LogoutModal extends StatelessWidget {
                       borderColor: AppColors.errorColorDark,
                       textColor: AppColors.errorColorDark,
                       text: "Cancelar",
-                      onTap: () {
+                      press: () {
                         context.pop();
                       },
                     ),

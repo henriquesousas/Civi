@@ -7,7 +7,6 @@ import '../../theme/dimens.dart';
 
 class UIElevatedButton extends StatelessWidget {
   final String text;
-  final void Function() onTap;
   final double radius;
   final double elevation;
   final Color? bgColor;
@@ -18,12 +17,14 @@ class UIElevatedButton extends StatelessWidget {
   final double height;
   final Widget? icon;
   final bool isLoading;
+  final bool isEnabled;
   final IconAlignment iconAlignment;
+  final void Function() press;
 
   const UIElevatedButton({
     super.key,
     required this.text,
-    required this.onTap,
+    required this.press,
     this.radius = Dimens.defaultRadius,
     this.elevation = 0,
     this.bgColor,
@@ -32,6 +33,7 @@ class UIElevatedButton extends StatelessWidget {
     this.height = 50,
     this.icon,
     this.isLoading = false,
+    this.isEnabled = true,
     this.textColor = Colors.white,
     this.borderColor = Colors.transparent,
     this.iconAlignment = IconAlignment.start,
@@ -46,12 +48,13 @@ class UIElevatedButton extends StatelessWidget {
             icon: isLoading
                 ? const SizedBox.shrink()
                 : icon ?? const SizedBox.shrink(),
-            onPressed: () {
-              if (isLoading == false) {
-                // MyUtils.clearAllTypeFocusNodes();
-                onTap();
-              }
-            },
+            // onPressed: () {
+            //   if (isLoading == false) {
+            //     // MyUtils.clearAllTypeFocusNodes();
+            //     press();
+            //   }
+            // },
+            onPressed: null,
             style: ElevatedButton.styleFrom(
               backgroundColor: bgColor ?? primary,
               elevation: elevation,
@@ -81,13 +84,18 @@ class UIElevatedButton extends StatelessWidget {
           )
         : ElevatedButton(
             onPressed: () {
+              if (isEnabled == false) return;
               if (isLoading == false) {
                 // MyUtils.clearAllTypeFocusNodes();
-                onTap();
+                press();
               }
             },
             style: ElevatedButton.styleFrom(
-              backgroundColor: bgColor ?? primary,
+              // backgroundColor: bgColor ?? primary,
+              // backgroundColor:   Colors.grey.withValues(alpha: 0.5),
+              backgroundColor: isEnabled
+                  ? (bgColor ?? primary)
+                  : Colors.grey.withValues(alpha: 0.5),
               elevation: elevation,
               shadowColor: shadowColor ?? primary.withValues(alpha: 0.5),
               overlayColor: bgColor ?? primary.withValues(alpha: 0.1),

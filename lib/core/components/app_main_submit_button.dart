@@ -33,7 +33,7 @@ class AppMainSubmitButton extends StatelessWidget {
             : Color(0xFF2B5BEE), //MyColor.getPrimaryColor(),
         borderColor: isActive ? Colors.transparent : Color(0xFF2B5BEE),
         text: text,
-        onTap: onTap, // Disable onTap when loading
+        press: onTap, // Disable onTap when loading
         isLoading: isLoading,
       ),
     );

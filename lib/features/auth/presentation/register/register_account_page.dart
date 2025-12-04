@@ -93,13 +93,13 @@ class _RegisterAccountPageState extends State<RegisterAccountPage> {
                       Expanded(
                         child: UIElevatedButton(
                           text: context.strings.back,
-                          onTap: _previousStep,
+                          press: _previousStep,
                         ),
                       ),
                     Expanded(
                       child: UIElevatedButton(
                         text: context.strings.next,
-                        onTap: _nextStep,
+                        press: _nextStep,
                       ),
                     ),
                   ],

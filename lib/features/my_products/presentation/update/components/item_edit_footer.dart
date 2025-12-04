@@ -23,7 +23,7 @@ class ItemEditFooter extends StatelessWidget {
       children: [
         UIElevatedButton(
           text: R.strings.confirmUpdate,
-          onTap: onConfirm,
+          press: onConfirm,
         ),
         const SizedBox(height: 10),
         Column(

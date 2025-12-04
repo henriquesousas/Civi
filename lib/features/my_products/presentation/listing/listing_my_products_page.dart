@@ -93,7 +93,7 @@ class _ProductListingPage extends BasePageState<ProductListingCubit,
               bgColor: AppColors.whiteColor,
               borderColor: AppColors.primaryColor,
               textColor: AppColors.primaryColor,
-              onTap: () => _add(),
+              press: () => _add(),
             ),
             Expanded(
               child: Column(

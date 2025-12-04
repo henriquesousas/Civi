@@ -9,7 +9,7 @@ class UIElevatedIconButton extends UIElevatedButton {
       {super.key,
       required super.icon,
       required super.text,
-      required super.onTap,
+      required super.press,
       super.bgColor,
       super.width,
       super.borderColor,
@@ -27,7 +27,7 @@ class UIElevatedIconButton extends UIElevatedButton {
       onPressed: () {
         if (isLoading == false) {
           // MyUtils.clearAllTypeFocusNodes();
-          onTap();
+          press();
         }
       },
       style: ElevatedButton.styleFrom(

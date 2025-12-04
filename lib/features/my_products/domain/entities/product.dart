@@ -1,6 +1,5 @@
 import 'package:deehelp/core/domain/entity.dart';
 import 'package:deehelp/features/my_products/domain/entities/product_id.dart';
-import 'package:logging/logging.dart';
 
 import '../../../../core/domain/validation/validation_handler.dart';
 import '../../../../core/resources/resources.dart';
@@ -9,7 +8,6 @@ import '../usecases/create/create_product_dto.dart';
 import 'image_media.dart';
 
 class Product extends Entity<ProductId> {
-  static final _logger = Logger("Item");
   final ProductId id;
   String name;
   final String code;
@@ -100,7 +98,6 @@ class Product extends Entity<ProductId> {
       item.notification.append("Modelo", R.strings.errorMessageModel);
     }
 
-    _logger.info("Item: ${notification.getErrors}");
     return item;
   }
 

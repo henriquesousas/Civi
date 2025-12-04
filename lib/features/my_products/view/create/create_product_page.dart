@@ -1,13 +1,17 @@
 import 'package:deehelp/core/theme/app_colors.dart';
+import 'package:deehelp/core/theme/app_text_styles.dart';
 import 'package:deehelp/core/theme/dimens.dart';
 import 'package:deehelp/core/widgets/buttons/ui_elevated_button.dart';
-import 'package:deehelp/core/widgets/card/ui_custom_app_card.dart';
 import 'package:deehelp/core/widgets/card/ui_custom_scaffold.dart';
-import 'package:deehelp/features/my_products/view/create/create_product_step_choose_type_page.dart';
-import 'package:deehelp/features/my_products/view/create/header_text_card.dart';
+import 'package:deehelp/features/my_products/view/create/create_product_cubit.dart';
+import 'package:deehelp/features/my_products/view/create/steps/step_choose_type_product.dart';
+import 'package:deehelp/features/my_products/view/create/steps/step_add_info_detal.dart';
+import 'package:deehelp/features/my_products/view/create/steps/step_add_obs.dart';
+import 'package:deehelp/features/my_products/view/create/steps/step_add_photo.dart';
+import 'package:deehelp/features/my_products/view/create/state/create_product_state.dart';
+import 'package:deehelp/features/my_products/view/create/steps/create_product_steps.dart';
 import 'package:flutter/material.dart';
-
-import '../../../../core/widgets/text-field/ui_text_field_rounded.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 class CreateProductPage extends StatefulWidget {
   const CreateProductPage({Key? key}) : super(key: key);
@@ -24,6 +28,7 @@ class _CreateProductPageState extends State<CreateProductPage> {
   void initState() {
     super.initState();
     _pageController.addListener(_pageChangeListener);
+    context.read<CreateProductCubit>().loadTypes();
   }
 
   @override
@@ -64,157 +69,35 @@ class _CreateProductPageState extends State<CreateProductPage> {
 
   @override
   Widget build(BuildContext context) {
-    return UICustomScaffold(
-      padding: EdgeInsets.zero,
-      onBackButtonTap: () {
-        if (_currentPage != 0) {
-          _previousPage();
-        } else {
-          // controller.clearCreationData();
-          // Get.back();
-        }
-      },
-      pageTitle: "Criar novo produto",
-      body: PageView(
-        controller: _pageController,
-        physics: const NeverScrollableScrollPhysics(),
-        children: [
-          CreateProductStepChooseTypePage(
-            press: () => _nextPage(goToPage: 1),
-          ),
-          _buildForm(),
-        ],
-      ),
-    );
-  }
-
-  WidgetStateColor _connectoControls() {
-    return WidgetStateColor.resolveWith((states) {
-      if (states.contains(WidgetState.selected)) {
-        return AppColors.primaryColor;
-      }
-      if (states.contains(WidgetState.disabled)) {
-        return AppColors.primaryColor.withValues(alpha: 0.5);
-      }
-      return AppColors.lightGreyColor20;
-    });
-  }
-
-  void _onStepCancel() {
-    // if (controller.currentStep > 0) {
-    //   controller.setCurrentStep(
-    //     controller.currentStep - 1,
-    //     steps.length,
-    //   );
-    // }
-  }
-
-  Widget _controlsBuilder(BuildContext context, ControlsDetails details) {
-    return Padding(
-      padding: const EdgeInsets.only(top: 16),
-      child: Row(
-        children: [
-          // controller.currentStep > 0
-          if (true)
-            Expanded(
-              child: Padding(
-                padding: const EdgeInsetsDirectional.only(
-                  end: 16,
-                ),
-                child: UIElevatedButton(
-                  radius: Dimens.defaultRadius,
-                  borderColor: AppColors.lightGreyColor20,
-                  bgColor: AppColors.whiteColor,
-                  textColor: AppColors.textColorBody,
-                  text: "Previous",
-                  onTap: details.onStepCancel ?? () {},
-                ),
+    return BlocConsumer<CreateProductCubit, CreateProductState>(
+      listener: (context, state) {},
+      builder: (context, state) {
+        return UICustomScaffold(
+          padding: EdgeInsets.zero,
+          onBackButtonTap: () {
+            if (_currentPage != 0) {
+              _previousPage();
+            } else {
+              // controller.clearCreationData();
+              // Get.back();
+            }
+          },
+          pageTitle: "Criar novo produto",
+          body: PageView(
+            controller: _pageController,
+            physics: const NeverScrollableScrollPhysics(),
+            onPageChanged: (index) {
+              if (index == 0) context.read<CreateProductCubit>().loadTypes();
+            },
+            children: [
+              StepChooseTypeProduct(
+                press: () => _nextPage(goToPage: 1),
               ),
-            ),
-          Expanded(
-            child: UIElevatedButton(
-              radius: Dimens.defaultRadius,
-              bgColor: AppColors.primaryColor,
-              text: "Confirm",
-              // text: controller.currentStep == steps.length - 1
-              //     ? MyStrings.confirm
-              //     : MyStrings.next,
-              // isLoading: controller.currentStep == steps.length - 1
-              //     ? controller.isCardCreateLoadings
-              //     : false,
-              isLoading: false,
-              onTap: details.onStepContinue ?? () {},
-            ),
+              const CreateProductSteps()
+            ],
           ),
-        ],
-      ),
-    );
-  }
-
-  Widget _formDetails() {
-    return UICustomAppCard(
-      child: Column(
-        children: [
-          HeaderTextCard(
-            header: "sasasas",
-            text: "sasasas",
-          ),
-          UITextFieldRounded(
-            isRequired: true,
-            showLabelText: false,
-            instructions: "Instruction",
-            labelText: "label",
-            hintText: "hint",
-            textInputAction: TextInputAction.next,
-            keyboardType: TextInputType.text,
-            onChanged: (value) {
-              // controller.selectedCardHolder?.name = value;
-            },
-            validator: (value) {
-              // controller.selectedCardHolder?.name = value;
-              // if (value.toString().trim().isEmpty) {
-              //   return MyStrings.kNameNullError.tr;
-              // } else {
-              //   return null;
-              // }
-            },
-          ),
-        ],
-      ),
-    );
-  }
-
-  Widget _buildForm() {
-    final steps = [
-      Step(
-        title: Text("sasas"),
-        content: _formDetails(),
-      ),
-      Step(
-        title: Text("sasas"),
-        content: Column(
-          children: [
-            Text("2 dsadsasas "),
-            Text("2 dsadsasas"),
-            Text("2 dsadsasas"),
-          ],
-        ),
-      ),
-    ];
-    return Column(
-      children: [
-        Expanded(
-          child: Stepper(
-            connectorColor: _connectoControls(),
-            onStepCancel: () => _onStepCancel(),
-            controlsBuilder: (context, details) =>
-                _controlsBuilder(context, details),
-            type: StepperType.vertical,
-            currentStep: 0,
-            steps: steps,
-          ),
-        )
-      ],
+        );
+      },
     );
   }
 }

@@ -34,6 +34,7 @@ class UITextFieldRounded extends StatefulWidget {
   final bool showLabelText;
   final int maxLine;
   final String? instructions;
+  final String? error;
 
   const UITextFieldRounded({
     super.key,
@@ -66,6 +67,7 @@ class UITextFieldRounded extends StatefulWidget {
     this.showLabelText = true,
     this.maxLine = 1,
     this.instructions,
+    this.error,
   });
 
   @override
@@ -98,11 +100,12 @@ class _UITextFieldRoundedState extends State<UITextFieldRounded> {
               ),
           decoration: InputDecoration(
             floatingLabelBehavior: FloatingLabelBehavior.always,
-
             floatingLabelStyle:
                 context.appTextStyles.sectionBodyTextStyle.copyWith(
               color: AppColors.textColorBody,
             ),
+            // error: widget.error != null ? Text(widget.error!) : null,
+            errorText: widget.error,
             contentPadding: widget.contentPadding ??
                 const EdgeInsetsDirectional.symmetric(
                   horizontal: 20,
@@ -161,6 +164,7 @@ class _UITextFieldRoundedState extends State<UITextFieldRounded> {
               color: widget.focusBorderColor,
             ),
             errorBorder: _getInputBorder(isError: true),
+            errorStyle: const TextStyle(color: AppColors.errorColor),
             focusedErrorBorder: _getInputBorder(isFocused: true, isError: true),
           ),
           validator: widget.validator,

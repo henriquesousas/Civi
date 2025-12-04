@@ -128,7 +128,7 @@ class _EditFieldModalState extends State<EditFieldModal> {
                 Expanded(
                   child: UIElevatedButton(
                     text: R.strings.cancel,
-                    onTap: () => Navigator.of(context).pop(),
+                    press: () => Navigator.of(context).pop(),
                     textColor: AppColors.primaryColor,
                     borderColor: AppColors.primaryColor,
                     bgColor: AppColors.whiteColor,
@@ -138,7 +138,7 @@ class _EditFieldModalState extends State<EditFieldModal> {
                 Expanded(
                   child: UIElevatedButton(
                     text: R.strings.confirm,
-                    onTap: () => widget.onConfirm != null ? _onConfirm : null,
+                    press: () => widget.onConfirm != null ? _onConfirm : null,
                   ),
                 ),
               ],

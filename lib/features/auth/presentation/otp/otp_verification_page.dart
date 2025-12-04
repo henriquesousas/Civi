@@ -54,7 +54,7 @@ class _OtpVerificationPageState extends State<OtpVerificationPage> {
                 SizedBox(height: context.percentHeight(0.15)),
                 UIElevatedButton(
                     text: context.strings.otpButtonResendCode,
-                    onTap: () => context.push(RouterConstant.welcome)),
+                    press: () => context.push(RouterConstant.welcome)),
                 const SizedBox(height: 20),
                 const OtpChangeNumber(),
               ],

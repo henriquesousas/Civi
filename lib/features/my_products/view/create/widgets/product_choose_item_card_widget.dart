@@ -1,73 +1,26 @@
 import 'package:deehelp/core/theme/app_text_styles.dart';
+import 'package:deehelp/features/my_products/domain/entities/item_product.dart';
 import 'package:deehelp/features/my_products/view/create/widgets/small_text.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../../../core/components/ui_my_assets_image_widget.dart';
-import '../../../../../core/resources/resources.dart';
 import '../../../../../core/theme/app_colors.dart';
 import '../../../../../core/theme/dimens.dart';
 import '../../../../../core/widgets/card/ui_custom_app_card.dart';
+import '../create_product_cubit.dart';
 import 'header_text.dart';
 import 'label_text.dart';
 
-class ChooseTypeCardModel {
+class ProductChooseItemCardWidget extends StatelessWidget {
   final String title;
-  final String srcImage;
-
-  ChooseTypeCardModel({required this.title, required this.srcImage});
-}
-
-class ChooseTypeModel {
-  final String textHeader;
-  final String textBody;
-  final List<ChooseTypeCardModel> items;
-
-  ChooseTypeModel({
-    required this.textHeader,
-    required this.textBody,
-    required this.items,
-  });
-
-  factory ChooseTypeModel.buildVehicleOption() {
-    final items = [
-      ChooseTypeCardModel(
-        title: "Veículos leves",
-        srcImage: R.images.svgIconCon,
-      ),
-      ChooseTypeCardModel(
-        title: "Veículos pesados",
-        srcImage: R.images.svgIconTruck,
-      ),
-    ];
-    return ChooseTypeModel(
-      textHeader: "Veículos e Utiliários",
-      textBody:
-          "Você está cadastrando um veículo de quatro rodas, podendo ser: (Carro, Pick-up, SUV ou Van)",
-      items: items,
-    );
-  }
-
-  factory ChooseTypeModel.buildMotorcycleOption() {
-    final items = [
-      ChooseTypeCardModel(
-        title: "Veículos de duas rodas",
-        srcImage: R.images.svgIconMotorcycle,
-      ),
-    ];
-    return ChooseTypeModel(
-      textHeader: "Motos",
-      textBody:
-          "Você está cadastrando um veículo de duas rodas, podendo ser: Moto,Scooter, Ciclomotor)",
-      items: items,
-    );
-  }
-}
-
-class ProductChooseTypeCard extends StatelessWidget {
-  final ChooseTypeModel type;
-  const ProductChooseTypeCard({
+  final String subTitle;
+  final List<ItemProduct> types;
+  const ProductChooseItemCardWidget({
     super.key,
-    required this.type,
+    required this.types,
+    required this.title,
+    required this.subTitle,
   });
 
   @override
@@ -80,11 +33,11 @@ class ProductChooseTypeCard extends StatelessWidget {
         children: [
           LabelText(
             textAlign: TextAlign.start,
-            text: type.textHeader,
+            text: title,
             isRequired: true,
           ),
           SmallText(
-            text: type.textBody,
+            text: subTitle,
             textAlign: TextAlign.start,
             maxLine: 100,
             textStyle: context.appTextStyles.caption2Style.copyWith(
@@ -97,20 +50,28 @@ class ProductChooseTypeCard extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.center,
               children: List.generate(
-                type.items.length,
+                types.length,
                 (index) {
+                  final currentType = types[index];
                   return Expanded(
                     child: UICustomAppCard(
+                      onPressed: () => context
+                          .read<CreateProductCubit>()
+                          .selectType(currentType),
                       margin: index == 0
                           ? const EdgeInsetsDirectional.only(
                               end: 10,
                             )
                           : EdgeInsets.zero,
-                      backgroundColor: AppColors.whiteColor,
-                      borderColor: AppColors.lightGreyColor20,
+                      backgroundColor: currentType.isSelected
+                          ? AppColors.primaryColor.withValues(alpha: 0.2)
+                          : AppColors.whiteColor,
+                      borderColor: currentType.isSelected
+                          ? AppColors.primaryColor
+                          : AppColors.lightGreyColor20,
                       padding: const EdgeInsets.symmetric(
-                        vertical: 20,
-                        horizontal: 20,
+                        vertical: 40,
+                        horizontal: 40,
                       ),
                       radius: Dimens.cardExtraRadius,
                       child: Column(
@@ -119,18 +80,14 @@ class ProductChooseTypeCard extends StatelessWidget {
                         children: [
                           UIMyAssetsImageWidget(
                             isSvg: true,
-                            assetPath: index == 0
-                                ? R.images.svgIconCon
-                                : R.images.svgIconTruck,
+                            assetPath: currentType.srcImage,
                             boxFit: BoxFit.contain,
                             width: double.infinity,
                             height: 25,
                             color: AppColors.blackColor.withValues(alpha: 1),
                           ),
                           HeaderText(
-                            text: index == 0
-                                ? "Veículos leves"
-                                : "Veículos pesados",
+                            text: currentType.description,
                             textStyle:
                                 context.appTextStyles.caption1Style.copyWith(
                               color: AppColors.textSecondary,
