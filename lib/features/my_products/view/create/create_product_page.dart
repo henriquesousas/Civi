@@ -1,13 +1,6 @@
-import 'package:deehelp/core/theme/app_colors.dart';
-import 'package:deehelp/core/theme/app_text_styles.dart';
-import 'package:deehelp/core/theme/dimens.dart';
-import 'package:deehelp/core/widgets/buttons/ui_elevated_button.dart';
 import 'package:deehelp/core/widgets/card/ui_custom_scaffold.dart';
 import 'package:deehelp/features/my_products/view/create/create_product_cubit.dart';
 import 'package:deehelp/features/my_products/view/create/steps/step_choose_type_product.dart';
-import 'package:deehelp/features/my_products/view/create/steps/step_add_info_detal.dart';
-import 'package:deehelp/features/my_products/view/create/steps/step_add_obs.dart';
-import 'package:deehelp/features/my_products/view/create/steps/step_add_photo.dart';
 import 'package:deehelp/features/my_products/view/create/state/create_product_state.dart';
 import 'package:deehelp/features/my_products/view/create/steps/create_product_steps.dart';
 import 'package:flutter/material.dart';

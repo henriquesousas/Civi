@@ -52,14 +52,14 @@ extension CreateProductStatePatterns on CreateProductState {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Initial value)? initial,
-    TResult Function(Data value)? data,
+    TResult Function(_Data value)? data,
     required TResult orElse(),
   }) {
     final _that = this;
     switch (_that) {
       case _Initial() when initial != null:
         return initial(_that);
-      case Data() when data != null:
+      case _Data() when data != null:
         return data(_that);
       case _:
         return orElse();
@@ -82,13 +82,13 @@ extension CreateProductStatePatterns on CreateProductState {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_Initial value) initial,
-    required TResult Function(Data value) data,
+    required TResult Function(_Data value) data,
   }) {
     final _that = this;
     switch (_that) {
       case _Initial():
         return initial(_that);
-      case Data():
+      case _Data():
         return data(_that);
       case _:
         throw StateError('Unexpected subclass');
@@ -110,13 +110,13 @@ extension CreateProductStatePatterns on CreateProductState {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Initial value)? initial,
-    TResult? Function(Data value)? data,
+    TResult? Function(_Data value)? data,
   }) {
     final _that = this;
     switch (_that) {
       case _Initial() when initial != null:
         return initial(_that);
-      case Data() when data != null:
+      case _Data() when data != null:
         return data(_that);
       case _:
         return null;
@@ -150,7 +150,7 @@ extension CreateProductStatePatterns on CreateProductState {
             String? errorYear,
             String? brand,
             String? color,
-            bool step1Valid,
+            bool? step1Valid,
             bool step2Valid,
             bool step3Valid,
             bool isLoading,
@@ -163,7 +163,7 @@ extension CreateProductStatePatterns on CreateProductState {
     switch (_that) {
       case _Initial() when initial != null:
         return initial();
-      case Data() when data != null:
+      case _Data() when data != null:
         return data(
             _that.currentStep,
             _that.items,
@@ -215,7 +215,7 @@ extension CreateProductStatePatterns on CreateProductState {
             String? errorYear,
             String? brand,
             String? color,
-            bool step1Valid,
+            bool? step1Valid,
             bool step2Valid,
             bool step3Valid,
             bool isLoading,
@@ -227,7 +227,7 @@ extension CreateProductStatePatterns on CreateProductState {
     switch (_that) {
       case _Initial():
         return initial();
-      case Data():
+      case _Data():
         return data(
             _that.currentStep,
             _that.items,
@@ -278,7 +278,7 @@ extension CreateProductStatePatterns on CreateProductState {
             String? errorYear,
             String? brand,
             String? color,
-            bool step1Valid,
+            bool? step1Valid,
             bool step2Valid,
             bool step3Valid,
             bool isLoading,
@@ -290,7 +290,7 @@ extension CreateProductStatePatterns on CreateProductState {
     switch (_that) {
       case _Initial() when initial != null:
         return initial();
-      case Data() when data != null:
+      case _Data() when data != null:
         return data(
             _that.currentStep,
             _that.items,
@@ -337,8 +337,8 @@ class _Initial extends CreateProductState {
 
 /// @nodoc
 
-class Data extends CreateProductState {
-  const Data(
+class _Data extends CreateProductState {
+  const _Data(
       {this.currentStep = 0,
       final List<ItemProduct> items = const [],
       this.hasItemSelected = false,
@@ -350,7 +350,7 @@ class Data extends CreateProductState {
       this.errorYear,
       this.brand,
       this.color,
-      this.step1Valid = false,
+      this.step1Valid,
       this.step2Valid = false,
       this.step3Valid = false,
       this.isLoading = false,
@@ -380,8 +380,7 @@ class Data extends CreateProductState {
   final String? errorYear;
   final String? brand;
   final String? color;
-  @JsonKey()
-  final bool step1Valid;
+  final bool? step1Valid;
 // Step 2
   @JsonKey()
   final bool step2Valid;
@@ -398,14 +397,14 @@ class Data extends CreateProductState {
   /// with the given fields replaced by the non-null parameter values.
   @JsonKey(includeFromJson: false, includeToJson: false)
   @pragma('vm:prefer-inline')
-  $DataCopyWith<Data> get copyWith =>
-      _$DataCopyWithImpl<Data>(this, _$identity);
+  _$DataCopyWith<_Data> get copyWith =>
+      __$DataCopyWithImpl<_Data>(this, _$identity);
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is Data &&
+            other is _Data &&
             (identical(other.currentStep, currentStep) ||
                 other.currentStep == currentStep) &&
             const DeepCollectionEquality().equals(other._items, _items) &&
@@ -465,10 +464,10 @@ class Data extends CreateProductState {
 }
 
 /// @nodoc
-abstract mixin class $DataCopyWith<$Res>
+abstract mixin class _$DataCopyWith<$Res>
     implements $CreateProductStateCopyWith<$Res> {
-  factory $DataCopyWith(Data value, $Res Function(Data) _then) =
-      _$DataCopyWithImpl;
+  factory _$DataCopyWith(_Data value, $Res Function(_Data) _then) =
+      __$DataCopyWithImpl;
   @useResult
   $Res call(
       {int currentStep,
@@ -482,7 +481,7 @@ abstract mixin class $DataCopyWith<$Res>
       String? errorYear,
       String? brand,
       String? color,
-      bool step1Valid,
+      bool? step1Valid,
       bool step2Valid,
       bool step3Valid,
       bool isLoading,
@@ -491,11 +490,11 @@ abstract mixin class $DataCopyWith<$Res>
 }
 
 /// @nodoc
-class _$DataCopyWithImpl<$Res> implements $DataCopyWith<$Res> {
-  _$DataCopyWithImpl(this._self, this._then);
+class __$DataCopyWithImpl<$Res> implements _$DataCopyWith<$Res> {
+  __$DataCopyWithImpl(this._self, this._then);
 
-  final Data _self;
-  final $Res Function(Data) _then;
+  final _Data _self;
+  final $Res Function(_Data) _then;
 
   /// Create a copy of CreateProductState
   /// with the given fields replaced by the non-null parameter values.
@@ -512,14 +511,14 @@ class _$DataCopyWithImpl<$Res> implements $DataCopyWith<$Res> {
     Object? errorYear = freezed,
     Object? brand = freezed,
     Object? color = freezed,
-    Object? step1Valid = null,
+    Object? step1Valid = freezed,
     Object? step2Valid = null,
     Object? step3Valid = null,
     Object? isLoading = null,
     Object? isSuccess = null,
     Object? errorMessage = freezed,
   }) {
-    return _then(Data(
+    return _then(_Data(
       currentStep: null == currentStep
           ? _self.currentStep
           : currentStep // ignore: cast_nullable_to_non_nullable
@@ -564,10 +563,10 @@ class _$DataCopyWithImpl<$Res> implements $DataCopyWith<$Res> {
           ? _self.color
           : color // ignore: cast_nullable_to_non_nullable
               as String?,
-      step1Valid: null == step1Valid
+      step1Valid: freezed == step1Valid
           ? _self.step1Valid
           : step1Valid // ignore: cast_nullable_to_non_nullable
-              as bool,
+              as bool?,
       step2Valid: null == step2Valid
           ? _self.step2Valid
           : step2Valid // ignore: cast_nullable_to_non_nullable

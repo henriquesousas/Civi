@@ -21,6 +21,7 @@ class StepAddInfoDetail extends StatefulWidget {
 }
 
 class _StepAddInfoDetailState extends State<StepAddInfoDetail> {
+  //TODO: Separar esse help
   void _handleModal<T>({
     required BuildContext context,
     required Widget Function(void Function(T result) onComplete) modalBuilder,
@@ -106,10 +107,7 @@ class _StepAddInfoDetailState extends State<StepAddInfoDetail> {
                     onChanged: (value) => context
                         .read<CreateProductCubit>()
                         .onLicencePlateChange(value),
-                    error: state.maybeMap(
-                      data: (value) => value.errorLicencePlate,
-                      orElse: () => null,
-                    ),
+                    error: state.errorLicencePlate,
                   ),
                   const SizedBox(height: 10),
                   UITextFieldRounded(
@@ -132,14 +130,12 @@ class _StepAddInfoDetailState extends State<StepAddInfoDetail> {
                     showLabelText: false,
                     labelText: "Marca",
                     hintText: "Marca",
+                    readOnly: true,
                     textInputAction: TextInputAction.next,
                     keyboardType: TextInputType.text,
                     onTap: () => _selectBrand(),
                     controller: TextEditingController(
-                      text: state.maybeMap(
-                        data: (value) => value.brand,
-                        orElse: () => "",
-                      ),
+                      text: state.brand,
                     ),
                   ),
                   const SizedBox(height: 10),
@@ -148,6 +144,7 @@ class _StepAddInfoDetailState extends State<StepAddInfoDetail> {
                     showLabelText: false,
                     labelText: "Cor",
                     hintText: "Cor",
+                    readOnly: true,
                     textInputAction: TextInputAction.next,
                     keyboardType: TextInputType.text,
                     onTap: () => _selectColor(),

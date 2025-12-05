@@ -2,7 +2,7 @@ import 'package:deehelp/core/theme/app_text_styles.dart';
 import 'package:deehelp/features/my_products/view/create/create_product_cubit.dart';
 import 'package:deehelp/features/my_products/view/create/state/create_product_state.dart';
 import 'package:deehelp/features/my_products/view/create/steps/step_add_photo.dart';
-import 'package:flutter/foundation.dart';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -21,7 +21,6 @@ class CreateProductSteps extends StatefulWidget {
 
 class _CreateProductStepsState extends State<CreateProductSteps> {
   List<Step> _steps = [];
-  // int _currentStep = 0;
 
   void _buildSteps(int currentStep) {
     _steps = [
@@ -46,10 +45,17 @@ class _CreateProductStepsState extends State<CreateProductSteps> {
     ];
   }
 
-  // @override
-  // void didChangeDependencies() {
-  //   super.didChangeDependencies();
-  //   _steps = _buildSteps();
+  void _nextStep(int currentStep) {
+    context.read<CreateProductCubit>().nextStep(currentStep);
+  }
+
+  // bool _isNextButtonEnabled(CreateProductState state) {
+  //   state.maybeMap(
+  //     data: (value) => currentStep == 0 && value.step1Valid,
+  //     orElse: () => false,
+  //   );
+  //   return state.currentStep == 0 && state.step1Valid;
+  //   return false;
   // }
 
   @override
@@ -58,14 +64,16 @@ class _CreateProductStepsState extends State<CreateProductSteps> {
       children: [
         BlocConsumer<CreateProductCubit, CreateProductState>(
           listener: (context, state) {
-            state.maybeMap(
-              data: (state) {
-                // setState(() {
-                //   _currentStep = state.currentStep;
-                // });
-              },
-              orElse: () => 0,
-            );
+            // state.maybeMap(
+            //   data: (currentState) {
+            //     if (currentState.currentStep == 0) {
+            //       setState(() {
+            //         _isEnabledButton = currentState.step1Valid;
+            //       });
+            //     }
+            //   },
+            //   orElse: () => false,
+            // );
           },
           builder: (context, state) {
             return state.maybeMap(
@@ -96,24 +104,23 @@ class _CreateProductStepsState extends State<CreateProductSteps> {
                         child: Row(
                           children: [
                             if (state.currentStep > 0)
-                              if (true)
-                                Expanded(
-                                  child: Padding(
-                                    padding: const EdgeInsetsDirectional.only(
-                                      end: 16,
-                                    ),
-                                    child: UIElevatedButton(
-                                      radius: Dimens.defaultRadius,
-                                      borderColor: AppColors.lightGreyColor20,
-                                      bgColor: AppColors.whiteColor,
-                                      textColor: AppColors.textColorBody,
-                                      text: "Voltar",
-                                      press: () => context
-                                          .read<CreateProductCubit>()
-                                          .previous(details.currentStep),
-                                    ),
+                              Expanded(
+                                child: Padding(
+                                  padding: const EdgeInsetsDirectional.only(
+                                    end: 16,
+                                  ),
+                                  child: UIElevatedButton(
+                                    radius: Dimens.defaultRadius,
+                                    borderColor: AppColors.lightGreyColor20,
+                                    bgColor: AppColors.whiteColor,
+                                    textColor: AppColors.textColorBody,
+                                    text: "Voltar",
+                                    press: () => context
+                                        .read<CreateProductCubit>()
+                                        .previous(details.currentStep),
                                   ),
                                 ),
+                              ),
                             Expanded(
                               child: UIElevatedButton(
                                 radius: Dimens.defaultRadius,
@@ -126,11 +133,8 @@ class _CreateProductStepsState extends State<CreateProductSteps> {
                                 //     ? controller.isCardCreateLoadings
                                 //     : false,
                                 isLoading: false,
-                                isEnabled: true,
-                                // press: details.onStepContinue ?? () {},
-                                press: () => context
-                                    .read<CreateProductCubit>()
-                                    .nextStep(details.currentStep),
+                                isEnabled: state.step1Valid ?? false,
+                                press: () => _nextStep(details.currentStep),
                               ),
                             ),
                           ],

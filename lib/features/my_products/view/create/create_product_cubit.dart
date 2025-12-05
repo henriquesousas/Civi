@@ -9,11 +9,12 @@ import '../../domain/usecases/create/create_product_usecase.dart';
 class CreateProductCubit extends Cubit<CreateProductState> {
   final CreateProductUseCase _createProductUseCase;
   int currentStep = 0;
+
   CreateProductCubit({required CreateProductUseCase usecase})
       : _createProductUseCase = usecase,
         super(const CreateProductState.initial());
 
-  Future<void> loadTypes() async {
+  void loadTypes() async {
     final vehiclesTypes = [
       ItemProduct(
         isSelected: false,
@@ -43,7 +44,7 @@ class CreateProductCubit extends Cubit<CreateProductState> {
     );
   }
 
-  Future<void> selectType(ItemProduct itemSelected) async {
+  void selectType(ItemProduct itemSelected) async {
     final currentTypes = state.maybeMap(
       data: (state) => state.items,
       orElse: () => <ItemProduct>[],
@@ -59,49 +60,46 @@ class CreateProductCubit extends Cubit<CreateProductState> {
   }
 
   void onModelChange(String value) {
-    _updateState(
-      value,
-      (v) => v.length > 3 ? null : R.strings.errorMessageModel,
-      (currentState, value, error) =>
-          currentState.copyWith(model: value, errorModel: error),
+    final isError = value.length > 3 ? null : R.strings.errorMessageModel;
+    _updateDataState(
+      (data) => data.copyWith(
+        model: value,
+        errorModel: isError,
+      ),
     );
   }
 
   void onLicencePlateChange(String value) {
-    _updateState(
-      value,
-      (v) => value.length > 5 ? null : R.strings.errorMessageVehicle,
-      (currentState, value, error) =>
-          currentState.copyWith(licencePlate: value, errorLicencePlate: error),
+    final isError = value.length > 5 ? null : R.strings.errorMessageVehicle;
+    _updateDataState(
+      (data) => data.copyWith(
+        licencePlate: value,
+        errorLicencePlate: isError,
+      ),
     );
   }
 
   void onYearChange(String value) {
     final year = int.tryParse(value) ?? 0;
-    _updateState(
-      year,
-      (v) {
-        final isValid = year >= 1900 && year <= DateTime.now().year + 1;
-        return isValid ? null : R.strings.errorMessageYear;
-      },
-      (currentState, value, error) =>
-          currentState.copyWith(year: value, errorYear: error),
+    final isValid = year >= 1900 && year <= DateTime.now().year + 1;
+    final isError = isValid ? null : R.strings.errorMessageYear;
+    _updateDataState(
+      (data) => data.copyWith(
+        year: year,
+        errorYear: isError,
+      ),
     );
   }
 
   void onBrandChange(String value) {
-    _updateState(
-      value,
-      (v) => null,
-      (currentState, value, error) => currentState.copyWith(brand: value),
+    _updateDataState(
+      (data) => data.copyWith(brand: value),
     );
   }
 
   void onColorChange(String value) {
-    _updateState(
-      value,
-      (v) => null,
-      (currentState, value, error) => currentState.copyWith(color: value),
+    _updateDataState(
+      (data) => data.copyWith(color: value),
     );
   }
 
@@ -125,17 +123,34 @@ class CreateProductCubit extends Cubit<CreateProductState> {
     );
   }
 
-  void _updateState<T>(
-    T value,
-    String? Function(T) validate,
-    CreateProductState Function(Data state, T value, String? error) update,
-  ) {
-    final error = validate(value);
+  void _updateDataState(DataUpdater updater) {
     state.maybeMap(
       data: (currentState) {
-        emit(update(currentState, value, error));
+        final newData = updater(currentState);
+        final bool newStep1Valid = _calculateStep1Validity(newData);
+        final newState = newData.copyWith(step1Valid: newStep1Valid);
+        emit(newState);
       },
-      orElse: () => null,
+      orElse: () {},
+    );
+  }
+
+  bool _calculateStep1Validity(CreateProductState stateToValidate) {
+    return stateToValidate.maybeMap(
+      data: (data) {
+        final bool areFieldsFilled = (data.model?.isNotEmpty ?? false) &&
+            (data.brand?.isNotEmpty ?? false) &&
+            (data.year != null && data.year! > 0) &&
+            (data.color?.isNotEmpty ?? false) &&
+            (data.licencePlate?.isNotEmpty ?? false);
+
+        final bool noValidationErrors = data.errorModel == null &&
+            data.errorLicencePlate == null &&
+            data.errorYear == null;
+
+        return areFieldsFilled && noValidationErrors;
+      },
+      orElse: () => false,
     );
   }
 }
