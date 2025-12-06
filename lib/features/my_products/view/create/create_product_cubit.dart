@@ -1,5 +1,4 @@
 import 'package:dartz/dartz.dart';
-import 'package:deehelp/core/domain/exception/app_exception.dart';
 import 'package:deehelp/core/wrapper/command_cubit.dart';
 import 'package:deehelp/features/my_products/domain/entities/image_media.dart';
 import 'package:deehelp/features/my_products/domain/entities/item_product.dart';
