@@ -80,7 +80,7 @@ class _StepAddInfoDetailState extends State<StepAddInfoDetail> {
               child: Column(
                 children: [
                   const HeaderTextCard(
-                    header: "Informe os detalhes",
+                    header: "Detalhes do veículo",
                     text:
                         "Preencha as informações importantes do seu veículo, como modelo, cor, placa.",
                   ),
@@ -89,7 +89,7 @@ class _StepAddInfoDetailState extends State<StepAddInfoDetail> {
                     isRequired: true,
                     showLabelText: false,
                     labelText: "Modelo",
-                    hintText: "Modelo",
+                    hintText: "Ex: Honda Civic",
                     textInputAction: TextInputAction.next,
                     keyboardType: TextInputType.text,
                     onChanged: (value) =>

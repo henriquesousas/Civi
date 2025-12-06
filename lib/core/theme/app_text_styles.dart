@@ -76,11 +76,12 @@ class AppTextStyles {
   TextStyle get sectionBodyTextStyle {
     final color = _textTheme.titleSmall?.color ?? _kPrimaryTextColor;
     return _baseStyle.copyWith(
-        fontSize: 15,
-        fontWeight: FontWeight.w400,
-        height: 20 / 15,
-        letterSpacing: -0.24,
-        color: AppColors.textColorHeader);
+      fontSize: 15,
+      fontWeight: FontWeight.w400,
+      height: 20 / 15,
+      letterSpacing: -0.24,
+      color: AppColors.textColorHeader,
+    );
   }
 
   TextStyle get caption1Style {

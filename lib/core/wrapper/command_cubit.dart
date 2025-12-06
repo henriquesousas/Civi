@@ -26,7 +26,9 @@ class CommandCubit {
         (success) => emit(onSuccess(success)),
       );
     } catch (e) {
-      emit(onError(AppException(message: "Erro desconhecido")));
+      emit(onError(AppException(
+          message:
+              "Não foi possível realizar operação, tente novamente mais tarde...")));
     }
   }
 }

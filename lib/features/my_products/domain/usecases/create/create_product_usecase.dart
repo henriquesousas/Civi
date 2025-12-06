@@ -47,9 +47,7 @@ class CreateProductUseCase extends UseCase<CreateProductDto, Unit> {
       return right(unit);
     } catch (e) {
       await _media.delete(_imageName, _bucket);
-      throw ProductException(
-        message: R.strings.defaultMessageError,
-      );
+      return left(ProductException(message: R.strings.defaultMessageError));
     }
   }
 }

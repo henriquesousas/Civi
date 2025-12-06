@@ -1,9 +1,15 @@
+import 'package:dartz/dartz.dart';
+import 'package:deehelp/core/domain/exception/app_exception.dart';
+import 'package:deehelp/core/wrapper/command_cubit.dart';
+import 'package:deehelp/features/my_products/domain/entities/image_media.dart';
 import 'package:deehelp/features/my_products/domain/entities/item_product.dart';
 import 'package:deehelp/features/my_products/view/create/state/create_product_state.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../../core/resources/resources.dart';
+import '../../domain/usecases/create/create_product_dto.dart';
 import '../../domain/usecases/create/create_product_usecase.dart';
 
 class CreateProductCubit extends Cubit<CreateProductState> {
@@ -103,6 +109,20 @@ class CreateProductCubit extends Cubit<CreateProductState> {
     );
   }
 
+  void onObsChange(String value) {
+    _updateDataState(
+      (data) => data.copyWith(
+        obs: value,
+      ),
+    );
+  }
+
+  void addPhoto(ImageMedia image) {
+    _updateDataState(
+      (data) => data.copyWith(imageMedia: image),
+    );
+  }
+
   void nextStep(int steper) {
     state.maybeMap(
       data: (currentState) {
@@ -127,15 +147,63 @@ class CreateProductCubit extends Cubit<CreateProductState> {
     state.maybeMap(
       data: (currentState) {
         final newData = updater(currentState);
-        final bool newStep1Valid = _calculateStep1Validity(newData);
-        final newState = newData.copyWith(step1Valid: newStep1Valid);
+        final bool stepAddoProductInfoDetailValid =
+            _calculateStepAddProductInfoDetailValidity(newData);
+
+        final bool stepAddPhotoValid = _calculateStepAddPhotoValidity(newData);
+
+        final newState = newData.copyWith(
+          stepAddProductInfoDetailValid: stepAddoProductInfoDetailValid,
+          stepAddPhotoValid: stepAddPhotoValid,
+        );
         emit(newState);
       },
       orElse: () {},
     );
   }
 
-  bool _calculateStep1Validity(CreateProductState stateToValidate) {
+  void save() {
+    state.maybeMap(
+      data: (data) async {
+        final selectedItem =
+            data.items.where((el) => el.isSelected == true).first;
+
+        final dto = CreateProductDto(
+          userId: FirebaseAuth.instance.currentUser!.uid,
+          name: data.model!,
+          year: data.year!,
+          type: selectedItem.description,
+          image: data.imageMedia!,
+          code: data.licencePlate!,
+          color: data.color!,
+          brand: data.brand!,
+          obs: data.obs,
+        );
+
+        await CommandCubit.execute<Unit, CreateProductState>(
+          emit: emit,
+          command: () => _createProductUseCase.execute(dto),
+          onLoading: () {
+            return data.copyWith(isLoading: true);
+          },
+          onSuccess: (result) {
+            return data.copyWith(isSuccess: true);
+          },
+          onError: (error) {
+            return data.copyWith(
+              // errorMessage: (error as ProductException).message,
+              errorMessage: error.message,
+              isLoading: false,
+            );
+          },
+        );
+      },
+      orElse: () {},
+    );
+  }
+
+  bool _calculateStepAddProductInfoDetailValidity(
+      CreateProductState stateToValidate) {
     return stateToValidate.maybeMap(
       data: (data) {
         final bool areFieldsFilled = (data.model?.isNotEmpty ?? false) &&
@@ -150,6 +218,13 @@ class CreateProductCubit extends Cubit<CreateProductState> {
 
         return areFieldsFilled && noValidationErrors;
       },
+      orElse: () => false,
+    );
+  }
+
+  bool _calculateStepAddPhotoValidity(CreateProductState stateToValidate) {
+    return stateToValidate.maybeMap(
+      data: (data) => (data.imageMedia?.value.isNotEmpty ?? false),
       orElse: () => false,
     );
   }

@@ -1,5 +1,8 @@
 import 'package:deehelp/core/components/buttons/ui_secondary_button.dart';
 import 'package:deehelp/core/extensions/screen_size_extension.dart';
+import 'package:deehelp/core/theme/app_colors.dart';
+import 'package:deehelp/core/theme/app_text_styles.dart';
+import 'package:deehelp/core/widgets/buttons/ui_elevated_button.dart';
 import 'package:deehelp/features/splash/components/splash_background_animation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -41,47 +44,45 @@ class _CreateSuccessPageState extends State<CreateSuccessPage> {
                 const SizedBox(height: 40),
                 SlideFadeTransitionAnimator(
                   child: Column(
-                    spacing: 20,
+                    spacing: 10,
                     children: [
                       Text(
                         "Parabéns!",
-                        style: Theme.of(context)
-                            .textTheme
-                            .headlineMedium
-                            ?.copyWith(
-                              color: Colors.white,
-                              fontWeight: FontWeight.bold,
-                              letterSpacing: 1.2,
-                            ),
+                        style: context.appTextStyles.bodyTextStyle1.copyWith(
+                          color: Colors.white,
+                          fontWeight: FontWeight.bold,
+                          letterSpacing: 1.2,
+                          fontSize: context.responsiveText(0.05),
+                        ),
                       ),
                       Text(
                         R.strings.itemRegisterReceiver,
                         textAlign: TextAlign.center,
                         style:
-                            Theme.of(context).textTheme.titleMedium?.copyWith(
-                                  color: Colors.white.withValues(alpha: 0.9),
-                                  fontWeight: FontWeight.w500,
-                                ),
+                            context.appTextStyles.sectionBodyTextStyle.copyWith(
+                          color: Colors.white.withValues(alpha: 0.9),
+                          fontWeight: FontWeight.w500,
+                        ),
                       ),
                       Padding(
                         padding: const EdgeInsets.all(8.0),
                         child: Text(
                           R.strings.itemRegisterSuccessMessage,
                           textAlign: TextAlign.center,
-                          style:
-                              Theme.of(context).textTheme.titleSmall?.copyWith(
-                                    color: Colors.white.withValues(alpha: 0.7),
-                                    fontWeight: FontWeight.w300,
-                                  ),
+                          style: context.appTextStyles.caption1Style.copyWith(
+                            color: Colors.white.withValues(alpha: 0.9),
+                            fontWeight: FontWeight.w300,
+                            fontSize: context.responsiveText(0.03),
+                          ),
                         ),
                       ),
-                      UISecondaryButton(
-                        borderRadius: 90,
-                        text: R.strings.goAhead,
+                      UIElevatedButton(
                         width: context.percentWidth(0.8),
-                        press: () {
-                          Navigator.popUntil(context, (route) => route.isFirst);
-                        },
+                        bgColor: AppColors.whiteColor,
+                        textColor: AppColors.primaryColor,
+                        text: R.strings.goAhead,
+                        press: () => Navigator.popUntil(
+                            context, (route) => route.isFirst),
                       )
                     ],
                   ),

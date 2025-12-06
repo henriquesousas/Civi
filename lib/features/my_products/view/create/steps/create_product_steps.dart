@@ -1,3 +1,4 @@
+import 'package:deehelp/core/services/media/image_picker_service.dart';
 import 'package:deehelp/core/theme/app_text_styles.dart';
 import 'package:deehelp/features/my_products/view/create/create_product_cubit.dart';
 import 'package:deehelp/features/my_products/view/create/state/create_product_state.dart';
@@ -5,7 +6,9 @@ import 'package:deehelp/features/my_products/view/create/steps/step_add_photo.da
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
 
+import '../../../../../core/router/router_constants.dart';
 import '../../../../../core/theme/app_colors.dart';
 import '../../../../../core/theme/dimens.dart';
 import '../../../../../core/widgets/buttons/ui_elevated_button.dart';
@@ -39,24 +42,43 @@ class _CreateProductStepsState extends State<CreateProductSteps> {
       ),
       Step(
         title: Text("Foto", style: context.appTextStyles.bodyTextStyle1),
-        content: const StepAddPhoto(),
+        content: StepAddPhoto(
+          imagePicker: ImagePickerService(),
+        ),
         isActive: currentStep == 2,
       ),
     ];
   }
 
   void _nextStep(int currentStep) {
+    if (currentStep == 2) {
+      context.read<CreateProductCubit>().save();
+      return;
+    }
     context.read<CreateProductCubit>().nextStep(currentStep);
   }
 
-  // bool _isNextButtonEnabled(CreateProductState state) {
-  //   state.maybeMap(
-  //     data: (value) => currentStep == 0 && value.step1Valid,
-  //     orElse: () => false,
-  //   );
-  //   return state.currentStep == 0 && state.step1Valid;
-  //   return false;
-  // }
+//TODO: Refactor
+  bool _isCurrentStepValid(CreateProductState state) {
+    final isValid = state.maybeMap(
+      data: (data) {
+        if (data.currentStep == 0) {
+          return data.stepAddProductInfoDetailValid ?? false;
+        }
+
+        if (data.currentStep == 1) {
+          return true;
+        }
+
+        if (data.currentStep == 2) {
+          return data.stepAddPhotoValid;
+        }
+      },
+      orElse: () => false,
+    );
+
+    return isValid!;
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -64,16 +86,24 @@ class _CreateProductStepsState extends State<CreateProductSteps> {
       children: [
         BlocConsumer<CreateProductCubit, CreateProductState>(
           listener: (context, state) {
-            // state.maybeMap(
-            //   data: (currentState) {
-            //     if (currentState.currentStep == 0) {
-            //       setState(() {
-            //         _isEnabledButton = currentState.step1Valid;
-            //       });
-            //     }
-            //   },
-            //   orElse: () => false,
-            // );
+            state.maybeMap(
+              data: (data) {
+                if (data.isSuccess) {
+                  context.pushReplacement(RouterConstant.itemRegisterSuccess);
+                  return;
+                }
+                if (data.errorMessage != null) {
+                  final snackBar = SnackBar(
+                    backgroundColor: AppColors.errorColor,
+                    content: Text(data.errorMessage ?? ''),
+                    duration: const Duration(seconds: 4),
+                  );
+
+                  ScaffoldMessenger.of(context).showSnackBar(snackBar);
+                }
+              },
+              orElse: () {},
+            );
           },
           builder: (context, state) {
             return state.maybeMap(
@@ -125,15 +155,11 @@ class _CreateProductStepsState extends State<CreateProductSteps> {
                               child: UIElevatedButton(
                                 radius: Dimens.defaultRadius,
                                 bgColor: AppColors.primaryColor,
-                                text: "Próximo",
-                                // text: controller.currentStep == steps.length - 1
-                                //     ? MyStrings.confirm
-                                //     : MyStrings.next,
-                                // isLoading: controller.currentStep == steps.length - 1
-                                //     ? controller.isCardCreateLoadings
-                                //     : false,
-                                isLoading: false,
-                                isEnabled: state.step1Valid ?? false,
+                                text: state.currentStep == _steps.length - 1
+                                    ? "Confirmar"
+                                    : "Próximo",
+                                isLoading: state.isLoading,
+                                isEnabled: _isCurrentStepValid(state),
                                 press: () => _nextStep(details.currentStep),
                               ),
                             ),

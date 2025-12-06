@@ -12,6 +12,6 @@ class AppException implements Exception {
 
   @override
   String toString() {
-    return 'DomainException: $message${code != null ? ' (Code: $code)' : ''}';
+    return 'AppException: $message${code != null ? ' (Code: $code)' : ''}';
   }
 }

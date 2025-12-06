@@ -150,9 +150,10 @@ extension CreateProductStatePatterns on CreateProductState {
             String? errorYear,
             String? brand,
             String? color,
-            bool? step1Valid,
-            bool step2Valid,
-            bool step3Valid,
+            bool? stepAddProductInfoDetailValid,
+            String? obs,
+            ImageMedia? imageMedia,
+            bool stepAddPhotoValid,
             bool isLoading,
             bool isSuccess,
             String? errorMessage)?
@@ -176,9 +177,10 @@ extension CreateProductStatePatterns on CreateProductState {
             _that.errorYear,
             _that.brand,
             _that.color,
-            _that.step1Valid,
-            _that.step2Valid,
-            _that.step3Valid,
+            _that.stepAddProductInfoDetailValid,
+            _that.obs,
+            _that.imageMedia,
+            _that.stepAddPhotoValid,
             _that.isLoading,
             _that.isSuccess,
             _that.errorMessage);
@@ -215,9 +217,10 @@ extension CreateProductStatePatterns on CreateProductState {
             String? errorYear,
             String? brand,
             String? color,
-            bool? step1Valid,
-            bool step2Valid,
-            bool step3Valid,
+            bool? stepAddProductInfoDetailValid,
+            String? obs,
+            ImageMedia? imageMedia,
+            bool stepAddPhotoValid,
             bool isLoading,
             bool isSuccess,
             String? errorMessage)
@@ -240,9 +243,10 @@ extension CreateProductStatePatterns on CreateProductState {
             _that.errorYear,
             _that.brand,
             _that.color,
-            _that.step1Valid,
-            _that.step2Valid,
-            _that.step3Valid,
+            _that.stepAddProductInfoDetailValid,
+            _that.obs,
+            _that.imageMedia,
+            _that.stepAddPhotoValid,
             _that.isLoading,
             _that.isSuccess,
             _that.errorMessage);
@@ -278,9 +282,10 @@ extension CreateProductStatePatterns on CreateProductState {
             String? errorYear,
             String? brand,
             String? color,
-            bool? step1Valid,
-            bool step2Valid,
-            bool step3Valid,
+            bool? stepAddProductInfoDetailValid,
+            String? obs,
+            ImageMedia? imageMedia,
+            bool stepAddPhotoValid,
             bool isLoading,
             bool isSuccess,
             String? errorMessage)?
@@ -303,9 +308,10 @@ extension CreateProductStatePatterns on CreateProductState {
             _that.errorYear,
             _that.brand,
             _that.color,
-            _that.step1Valid,
-            _that.step2Valid,
-            _that.step3Valid,
+            _that.stepAddProductInfoDetailValid,
+            _that.obs,
+            _that.imageMedia,
+            _that.stepAddPhotoValid,
             _that.isLoading,
             _that.isSuccess,
             _that.errorMessage);
@@ -350,9 +356,10 @@ class _Data extends CreateProductState {
       this.errorYear,
       this.brand,
       this.color,
-      this.step1Valid,
-      this.step2Valid = false,
-      this.step3Valid = false,
+      this.stepAddProductInfoDetailValid,
+      this.obs,
+      this.imageMedia,
+      this.stepAddPhotoValid = false,
       this.isLoading = false,
       this.isSuccess = false,
       this.errorMessage})
@@ -371,7 +378,7 @@ class _Data extends CreateProductState {
 
   @JsonKey()
   final bool hasItemSelected;
-// Step 1
+// Step 0
   final String? model;
   final String? errorModel;
   final String? licencePlate;
@@ -380,13 +387,13 @@ class _Data extends CreateProductState {
   final String? errorYear;
   final String? brand;
   final String? color;
-  final bool? step1Valid;
+  final bool? stepAddProductInfoDetailValid;
 // Step 2
+  final String? obs;
+// Step 2
+  final ImageMedia? imageMedia;
   @JsonKey()
-  final bool step2Valid;
-// Step 3
-  @JsonKey()
-  final bool step3Valid;
+  final bool stepAddPhotoValid;
   @JsonKey()
   final bool isLoading;
   @JsonKey()
@@ -422,12 +429,15 @@ class _Data extends CreateProductState {
                 other.errorYear == errorYear) &&
             (identical(other.brand, brand) || other.brand == brand) &&
             (identical(other.color, color) || other.color == color) &&
-            (identical(other.step1Valid, step1Valid) ||
-                other.step1Valid == step1Valid) &&
-            (identical(other.step2Valid, step2Valid) ||
-                other.step2Valid == step2Valid) &&
-            (identical(other.step3Valid, step3Valid) ||
-                other.step3Valid == step3Valid) &&
+            (identical(other.stepAddProductInfoDetailValid,
+                    stepAddProductInfoDetailValid) ||
+                other.stepAddProductInfoDetailValid ==
+                    stepAddProductInfoDetailValid) &&
+            (identical(other.obs, obs) || other.obs == obs) &&
+            (identical(other.imageMedia, imageMedia) ||
+                other.imageMedia == imageMedia) &&
+            (identical(other.stepAddPhotoValid, stepAddPhotoValid) ||
+                other.stepAddPhotoValid == stepAddPhotoValid) &&
             (identical(other.isLoading, isLoading) ||
                 other.isLoading == isLoading) &&
             (identical(other.isSuccess, isSuccess) ||
@@ -450,16 +460,17 @@ class _Data extends CreateProductState {
       errorYear,
       brand,
       color,
-      step1Valid,
-      step2Valid,
-      step3Valid,
+      stepAddProductInfoDetailValid,
+      obs,
+      imageMedia,
+      stepAddPhotoValid,
       isLoading,
       isSuccess,
       errorMessage);
 
   @override
   String toString() {
-    return 'CreateProductState.data(currentStep: $currentStep, items: $items, hasItemSelected: $hasItemSelected, model: $model, errorModel: $errorModel, licencePlate: $licencePlate, errorLicencePlate: $errorLicencePlate, year: $year, errorYear: $errorYear, brand: $brand, color: $color, step1Valid: $step1Valid, step2Valid: $step2Valid, step3Valid: $step3Valid, isLoading: $isLoading, isSuccess: $isSuccess, errorMessage: $errorMessage)';
+    return 'CreateProductState.data(currentStep: $currentStep, items: $items, hasItemSelected: $hasItemSelected, model: $model, errorModel: $errorModel, licencePlate: $licencePlate, errorLicencePlate: $errorLicencePlate, year: $year, errorYear: $errorYear, brand: $brand, color: $color, stepAddProductInfoDetailValid: $stepAddProductInfoDetailValid, obs: $obs, imageMedia: $imageMedia, stepAddPhotoValid: $stepAddPhotoValid, isLoading: $isLoading, isSuccess: $isSuccess, errorMessage: $errorMessage)';
   }
 }
 
@@ -481,9 +492,10 @@ abstract mixin class _$DataCopyWith<$Res>
       String? errorYear,
       String? brand,
       String? color,
-      bool? step1Valid,
-      bool step2Valid,
-      bool step3Valid,
+      bool? stepAddProductInfoDetailValid,
+      String? obs,
+      ImageMedia? imageMedia,
+      bool stepAddPhotoValid,
       bool isLoading,
       bool isSuccess,
       String? errorMessage});
@@ -511,9 +523,10 @@ class __$DataCopyWithImpl<$Res> implements _$DataCopyWith<$Res> {
     Object? errorYear = freezed,
     Object? brand = freezed,
     Object? color = freezed,
-    Object? step1Valid = freezed,
-    Object? step2Valid = null,
-    Object? step3Valid = null,
+    Object? stepAddProductInfoDetailValid = freezed,
+    Object? obs = freezed,
+    Object? imageMedia = freezed,
+    Object? stepAddPhotoValid = null,
     Object? isLoading = null,
     Object? isSuccess = null,
     Object? errorMessage = freezed,
@@ -563,17 +576,21 @@ class __$DataCopyWithImpl<$Res> implements _$DataCopyWith<$Res> {
           ? _self.color
           : color // ignore: cast_nullable_to_non_nullable
               as String?,
-      step1Valid: freezed == step1Valid
-          ? _self.step1Valid
-          : step1Valid // ignore: cast_nullable_to_non_nullable
+      stepAddProductInfoDetailValid: freezed == stepAddProductInfoDetailValid
+          ? _self.stepAddProductInfoDetailValid
+          : stepAddProductInfoDetailValid // ignore: cast_nullable_to_non_nullable
               as bool?,
-      step2Valid: null == step2Valid
-          ? _self.step2Valid
-          : step2Valid // ignore: cast_nullable_to_non_nullable
-              as bool,
-      step3Valid: null == step3Valid
-          ? _self.step3Valid
-          : step3Valid // ignore: cast_nullable_to_non_nullable
+      obs: freezed == obs
+          ? _self.obs
+          : obs // ignore: cast_nullable_to_non_nullable
+              as String?,
+      imageMedia: freezed == imageMedia
+          ? _self.imageMedia
+          : imageMedia // ignore: cast_nullable_to_non_nullable
+              as ImageMedia?,
+      stepAddPhotoValid: null == stepAddPhotoValid
+          ? _self.stepAddPhotoValid
+          : stepAddPhotoValid // ignore: cast_nullable_to_non_nullable
               as bool,
       isLoading: null == isLoading
           ? _self.isLoading

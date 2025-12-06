@@ -1,3 +1,4 @@
+import 'package:deehelp/features/my_products/domain/entities/image_media.dart';
 import 'package:deehelp/features/my_products/domain/entities/item_product.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
@@ -16,7 +17,7 @@ class CreateProductState with _$CreateProductState {
     @Default(0) int currentStep,
     @Default([]) List<ItemProduct> items,
     @Default(false) bool hasItemSelected,
-    // Step 1
+    // Step 0
     String? model,
     String? errorModel,
     String? licencePlate,
@@ -25,11 +26,12 @@ class CreateProductState with _$CreateProductState {
     String? errorYear,
     String? brand,
     String? color,
-    bool? step1Valid,
+    bool? stepAddProductInfoDetailValid,
     // Step 2
-    @Default(false) bool step2Valid,
-    // Step 3
-    @Default(false) bool step3Valid,
+    String? obs,
+    // Step 2
+    ImageMedia? imageMedia,
+    @Default(false) bool stepAddPhotoValid,
     @Default(false) bool isLoading,
     @Default(false) bool isSuccess,
     String? errorMessage,
