@@ -33,6 +33,8 @@ class Images {
   String svgIconCon = 'assets/svg/icon_con.svg';
   String svgIconTruck = 'assets/svg/icon_truck.svg';
   String svgIconMotorcycle = 'assets/svg/icon_motorcycle.svg';
+  String svgFilter = 'assets/svg/filter_v2.svg';
+  String svgMapInfo = 'assets/svg/map_info.svg';
   //Images
   String successLight = 'assets/images/success.png';
   String successDark = 'assets/images/success_dark.png';

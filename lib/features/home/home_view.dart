@@ -1,13 +1,21 @@
-import 'package:deehelp/core/extensions/screen_size_extension.dart';
-import 'package:deehelp/core/router/router_constants.dart';
-import 'package:deehelp/features/home/occurrence_location.dart';
+import 'package:deehelp/core/components/icon/ui_icon.dart';
+import 'package:deehelp/core/components/profile_image_with_upload_button_widget.dart';
+import 'package:deehelp/core/components/ui_my_assets_image_widget.dart';
+import 'package:deehelp/core/theme/app_colors.dart';
+import 'package:deehelp/core/theme/app_text_styles.dart';
+import 'package:deehelp/core/theme/dimens.dart';
+import 'package:deehelp/features/home/widgets/button_info.dart';
+import 'package:deehelp/features/home/widgets/button_menu_top.dart';
+import 'package:deehelp/features/home/widgets/marker_current_use.dart';
+import 'package:deehelp/features/home/widgets/osm_map.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_map/flutter_map.dart';
-import 'package:go_router/go_router.dart';
 import 'package:latlong2/latlong.dart';
+import 'package:flutter_map/flutter_map.dart';
 
-import '../../core/theme/app_colors.dart';
+import '../../core/components/ui_my_network_image_widget.dart';
+import '../../core/resources/resources.dart';
 
 class HomeView extends StatefulWidget {
   const HomeView({super.key});
@@ -17,136 +25,41 @@ class HomeView extends StatefulWidget {
 }
 
 class _HomeViewState extends State<HomeView> with TickerProviderStateMixin {
-  static const String fakeMoto1 = "assets/images/fakeMoto1.jpg";
-  static const String fakeCarro1 = "assets/images/fakeCarro1.jpg";
-  static const String fakeCarro2 = "assets/images/fakeCarro2.jpg";
-  static const String fakeCarro3 = "assets/images/fakeGolBranco.jpg";
-  static const String fakeCarro4 = "assets/images/fakeCarro4.jpg";
-  static const String description = "assets/images/description.png";
-
+  // Controllers
   late AnimationController _animationController;
   late AnimationController _mapController;
-  late AnimationController _cardController;
+  final MapController _flutterMapController = MapController();
+  final TextEditingController _searchController = TextEditingController();
+
+  final LatLng _centerLocation = const LatLng(-23.550520, -46.633308);
+  double _panelHeight = 200;
+  bool _isPanelDragging = false;
+  double _panelPosition = 0.3; // Posição in
 
   // Animations
   late Animation<double> _fadeAnimation;
   late Animation<Offset> _slideAnimation;
   late Animation<double> _mapAnimation;
-  late Animation<double> _cardAnimation;
 
-  // Map related variables
-  final MapController _flutterMapController = MapController();
-  LatLng _currentLocation = const LatLng(
-    37.7749,
-    -122.4194,
-  ); // Default: San Francisco
+  // Map data
+  LatLng _currentLocation = const LatLng(37.7749, -122.4194);
   LatLng? _destinationLocation = const LatLng(37.8049, -122.4094);
-  bool _isLoadingLocation = true;
+  List<LatLng> _routePoints = [];
 
-  // UI state
+  // UI states
   bool _isMapExpanded = false;
-  String _selectedVehicleType = 'Standard';
+  bool _isSearchVisible = false;
+  bool _isTrafficVisible = true;
+  bool _isSatelliteView = false;
+  double _zoomLevel = 14.0;
 
-  final String _userName = "Alex";
-  final List<String> _recentDestinations = [
+  // Mock data
+  // Mock data
+  final List<String> _recentSearches = [
     'Downtown Mall',
     'Central Park',
     'Airport Terminal 1',
     'Business District',
-    'Downtown Mall',
-    'Central Park',
-    'Airport Terminal 1',
-    'Business District',
-    'Downtown Mall',
-    'Central Park',
-    'Airport Terminal 1',
-    'Business District',
-  ];
-
-  final List<OccurrenceLocation> _nearbyDrivers = [
-    OccurrenceLocation(
-      id: 'driver_1',
-      position: LatLng(37.7839, -122.4194),
-      bearing: 45,
-      image: fakeCarro3,
-      date: 'Hoje',
-      rating: 4.8,
-      plateNumber: 'ABC-123',
-      icon: Icons.drive_eta,
-    ),
-    OccurrenceLocation(
-      id: 'driver_2',
-      position: const LatLng(37.7659, -122.4194),
-      bearing: 180,
-      image: fakeCarro2,
-      date: 'Ontem',
-      rating: 4.9,
-      plateNumber: 'XYZ-789',
-      isVerified: false,
-      icon: Icons.drive_eta,
-    ),
-    OccurrenceLocation(
-      id: 'driver_3',
-      position: const LatLng(37.7749, -122.4084),
-      bearing: 270,
-      image: fakeCarro1,
-      date: 'Há 3 dias',
-      rating: 4.7,
-      plateNumber: 'DEF-456',
-      icon: Icons.drive_eta,
-    ),
-    OccurrenceLocation(
-      id: 'driver_4',
-      position: LatLng(37.7749, -122.4304),
-      bearing: 270,
-      image: fakeCarro4,
-      date: 'Há 1 anos',
-      rating: 4.7,
-      plateNumber: 'DEF-456',
-      isVerified: false,
-      icon: Icons.local_shipping,
-    ),
-    OccurrenceLocation(
-      id: 'driver_5',
-      position: LatLng(37.7558, -122.4375),
-      bearing: 270,
-      image: fakeMoto1,
-      date: 'Hoje',
-      rating: 4.7,
-      plateNumber: 'DEF-456',
-      icon: Icons.electric_moped,
-    ),
-    OccurrenceLocation(
-      id: 'driver_6',
-      position: LatLng(37.7839, -122.4304),
-      bearing: 270,
-      image: fakeCarro4,
-      date: 'Há 6 meses',
-      rating: 4.7,
-      plateNumber: 'DEF-456',
-      icon: Icons.phone_android,
-    ),
-    OccurrenceLocation(
-      id: 'driver_7',
-      position: LatLng(37.7581, -122.4399),
-      bearing: 270,
-      image: fakeMoto1,
-      date: 'Ontem',
-      rating: 4.7,
-      plateNumber: 'DEF-456',
-      icon: Icons.local_shipping,
-    ),
-    OccurrenceLocation(
-      id: 'driver_8',
-      position: LatLng(37.7839, -122.4084),
-      bearing: 270,
-      image: fakeMoto1,
-      date: 'Há 10 anos',
-      rating: 4.7,
-      plateNumber: 'DEF-456',
-      isVerified: false,
-      icon: Icons.directions_bike_outlined,
-    ),
   ];
 
   @override
@@ -154,858 +67,396 @@ class _HomeViewState extends State<HomeView> with TickerProviderStateMixin {
     super.initState();
     _initializeAnimations();
     _startAnimations();
-    // _loadUserLocation();
+    _setupMockRoute();
   }
 
   void _initializeAnimations() {
-    // Main animation controller for overall screen fade-in
     _animationController = AnimationController(
-      duration: const Duration(milliseconds: 1200),
-      vsync: this,
-    );
-
-    // Map expansion/collapse animation controller
-    _mapController = AnimationController(
       duration: const Duration(milliseconds: 800),
       vsync: this,
     );
 
-    // Card entrance animation controller
-    _cardController = AnimationController(
-      duration: const Duration(milliseconds: 600),
+    _mapController = AnimationController(
+      duration: const Duration(milliseconds: 500),
       vsync: this,
     );
 
-    // Fade animation for overall screen
     _fadeAnimation = Tween<double>(begin: 0.0, end: 1.0).animate(
       CurvedAnimation(
         parent: _animationController,
-        curve: const Interval(0.0, 0.6, curve: Curves.easeOut),
+        curve: Curves.easeOut,
       ),
     );
 
-    // Slide animation for content overlay
-    _slideAnimation =
-        Tween<Offset>(begin: const Offset(0, 0.3), end: Offset.zero).animate(
+    _slideAnimation = Tween<Offset>(
+      begin: const Offset(0, 0.2),
+      end: Offset.zero,
+    ).animate(
       CurvedAnimation(
         parent: _animationController,
-        curve: const Interval(0.2, 0.8, curve: Curves.easeOutBack),
+        curve: Curves.easeOutBack,
       ),
-    );
-
-    // Map expansion animation
-    _mapAnimation = Tween<double>(
-      begin: 0.0,
-      end: 1.0,
-    ).animate(CurvedAnimation(parent: _mapController, curve: Curves.easeInOut));
-
-    // Card scale animation
-    _cardAnimation = Tween<double>(begin: 0.0, end: 1.0).animate(
-      CurvedAnimation(parent: _cardController, curve: Curves.easeOutBack),
     );
   }
 
   void _startAnimations() {
-    // Start main animation immediately
     _animationController.forward();
+  }
 
-    // Delay card animation for staggered effect
-    Future.delayed(const Duration(milliseconds: 500), () {
-      if (mounted) {
-        _cardController.forward();
-      }
-    });
+  void _setupMockRoute() {
+    // Simulate a route from current location to destination
+    _routePoints = [
+      _currentLocation,
+      const LatLng(37.7800, -122.4180),
+      const LatLng(37.7850, -122.4160),
+      const LatLng(37.7900, -122.4140),
+      const LatLng(37.7950, -122.4120),
+      _destinationLocation!,
+    ];
   }
 
   @override
   void dispose() {
     _animationController.dispose();
     _mapController.dispose();
-    _cardController.dispose();
-    // _pickupController.dispose();
-    // _destinationController.dispose();
     _flutterMapController.dispose();
+    _searchController.dispose();
     super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: AppColors.background,
-      // appBar: PrimaryAppBar(title: "Home"),
       body: Stack(
         children: [
-          _buildMapSection(),
-          // _buildContentOverlay(),
-          _buildMapControls(context),
-          _buildCard(),
+          OsmMap(
+            controller: _flutterMapController,
+            currentLocation: _currentLocation,
+            onPositionChanged: (camera, hasGesture) {
+              if (hasGesture) {
+                setState(() {
+                  _zoomLevel = camera.zoom;
+                });
+              }
+            },
+            markerCurrentUser: marker(
+              context: context,
+              point: _currentLocation,
+            ),
+          ),
+          const ButtonMenuTop(),
+          const ButtonInfo()
         ],
       ),
+    );
+  }
+
+  // void _handlePanelDragUpdate(DragUpdateDetails details) {
+  //   setState(() {
+  //     _isPanelDragging = true;
+
+  //     // Calcular nova posição do panel
+  //     final dragAmount = details.delta.dy / MediaQuery.of(context).size.height;
+  //     _panelPosition -= dragAmount;
+
+  //     // Limitar entre 0.15 (quase fechado) e 0.8 (quase aberto)
+  //     if (_panelPosition < 0.15) _panelPosition = 0.15;
+  //     if (_panelPosition > 0.8) _panelPosition = 0.8;
+  //   });
+  // }
+
+  // void _handlePanelDragEnd(DragEndDetails details) {
+  //   setState(() {
+  //     _isPanelDragging = false;
+
+  //     // Snap para posições específicas
+  //     if (_panelPosition < 0.4) {
+  //       // Snap para baixo (fechado)
+  //       _panelPosition = 0.15;
+  //     } else if (_panelPosition < 0.6) {
+  //       // Snap para meio
+  //       _panelPosition = 0.5;
+  //     } else {
+  //       // Snap para cima (aberto)
+  //       _panelPosition = 0.8;
+  //     }
+  //   });
+  // }
+
+  // Widget _buildTopButtonMenu() {
+  //   return Positioned(
+  //     top: MediaQuery.of(context).padding.top + 16,
+  //     left: 10,
+  //     child: const UIICon(
+  //       radius: 10,
+  //       bgColor: AppColors.whiteColor,
+  //       icon: Icon(
+  //         Icons.menu,
+  //         size: 32,
+  //       ),
+  //     ),
+  //   );
+  // }
+
+  Widget _buildProfile() {
+    return Positioned(
+      top: MediaQuery.of(context).padding.top,
+      right: MediaQuery.of(context).padding.right + 16,
+      child: ProfileImageWithUploadButtonWidget(
+        radius: 100,
+        width: 40,
+        height: 40,
+        imageUrl: FirebaseAuth.instance.currentUser?.photoURL ?? '',
+        imageAlt: "avatar",
+      ),
+      // child: const UIICon(
+      //   radius: 10,
+      //   bgColor: AppColors.whiteColor,
+      //   icon: Icon(
+      //     Icons.menu,
+      //     size: 32,
+      //   ),
+      // ),
     );
   }
 
   Widget _buildMapSection() {
-    return AnimatedBuilder(
-      animation: _mapController,
-      builder: (context, child) {
-        return AnimatedContainer(
-          duration: const Duration(milliseconds: 800),
-          height: context.screenHeight,
-          child: FlutterMap(
-            mapController: _flutterMapController,
-            options: MapOptions(
-              initialCenter: _currentLocation,
-              initialZoom: 14.0,
-              maxZoom: 18.0,
-              minZoom: 10.0,
-              interactionOptions: const InteractionOptions(
-                flags: InteractiveFlag.all,
-              ),
-              onTap: (tapPosition, point) {
-                print(point.latitude);
-                print(point.longitude);
-              },
-            ),
-            children: [
-              TileLayer(
-                urlTemplate: 'https://tile.openstreetmap.org/{z}/{x}/{y}.png',
-                userAgentPackageName: 'br.com.atomos.yousafe',
-                maxZoom: 18,
-              ),
-              MarkerLayer(
-                markers: [
-                  // Current location marker
-                  Marker(
-                    point: _currentLocation,
-                    width: 70,
-                    height: 70,
-                    child: _buildLocationMarker(
-                      color: AppColors.primaryColor,
-                      icon: Icons.my_location,
-                      label: 'Você',
-                    ),
-                  ),
-
-                  // Destination marker
-                  if (_destinationLocation != null)
-                    Marker(
-                      point: _destinationLocation!,
-                      width: 70,
-                      height: 70,
-                      child: _buildLocationMarker(
-                        color: AppColors.errorColor,
-                        icon: Icons.location_on,
-                        label: 'Destino',
-                      ),
-                    ),
-
-                  // Driver markers
-                  ..._nearbyDrivers
-                      .map(
-                        (driver) => Marker(
-                          point: driver.position,
-                          width: 35,
-                          height: 35,
-                          child: _buildDriverMarker(driver),
-                        ),
-                      )
-                      .toList(),
-                ],
-              ),
-            ],
-          ),
-        );
-      },
-    );
-  }
-
-  Widget _buildLocationMarker({
-    required Color color,
-    required IconData icon,
-    required String label,
-  }) {
-    return Column(
+    return FlutterMap(
+      mapController: _flutterMapController,
+      options: MapOptions(
+        initialCenter: _currentLocation,
+        initialZoom: _zoomLevel,
+        maxZoom: 18.0,
+        minZoom: 10.0,
+        interactionOptions: const InteractionOptions(
+          flags: InteractiveFlag.all,
+        ),
+        onPositionChanged: (position, hasGesture) {
+          if (hasGesture) {
+            setState(() {
+              _zoomLevel = position.zoom!;
+            });
+          }
+        },
+      ),
       children: [
-        Container(
-          padding: EdgeInsets.all(8),
-          decoration: BoxDecoration(
-            color: color,
-            borderRadius: BorderRadius.circular(20),
-            boxShadow: [
-              BoxShadow(
-                color: color.withOpacity(0.3),
-                offset: const Offset(0, 4),
-                blurRadius: 12,
-                spreadRadius: 0,
-              ),
-            ],
-          ),
-          child: Icon(
-            icon,
-            color: Colors.white,
-            size: 20,
-          ),
+        TileLayer(
+          // urlTemplate: _isSatelliteView
+          //     ? 'https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}'
+          //     : 'https://tile.openstreetmap.org/{z}/{x}/{y}.png',
+          urlTemplate: 'https://tile.openstreetmap.org/{z}/{x}/{y}.png',
+          userAgentPackageName: 'br.com.atomos.yousafe',
+          maxZoom: 18,
         ),
-        SizedBox(height: 4),
-        Container(
-          padding: EdgeInsets.symmetric(horizontal: 8, vertical: 4),
-          decoration: BoxDecoration(
-            color: Colors.white,
-            borderRadius: BorderRadius.circular(8),
-            boxShadow: [
-              BoxShadow(
-                color: Colors.black.withOpacity(0.1),
-                offset: const Offset(0, 2),
-                blurRadius: 8,
-                spreadRadius: 0,
-              ),
-            ],
-          ),
-          child: Text(
-            label,
-            // style: context.getTextStyle.small.copyWith(
-            //   color: AppColorsV2.textPrimary,
-            //   fontWeight: FontWeight.w600,
-            // ),
-          ),
-        ),
-      ],
-    );
-  }
-
-  Widget _buildDriverMarker(OccurrenceLocation driver) {
-    return Container(
-      decoration: BoxDecoration(
-        color: AppColors.primaryColor,
-        borderRadius: BorderRadius.circular(16),
-        boxShadow: [
-          BoxShadow(
-            color: AppColors.primaryColor.withOpacity(0.3),
-            offset: const Offset(0, 2),
-            blurRadius: 8,
-            spreadRadius: 0,
-          ),
-        ],
-      ),
-      child: Icon(
-        driver.icon,
-        color: Colors.white,
-        size: 16,
-      ),
-    );
-  }
-
-  Widget _buildMapControlButton({
-    required IconData icon,
-    required VoidCallback onPressed,
-  }) {
-    return Container(
-      decoration: BoxDecoration(
-        color: Colors.white,
-        borderRadius: BorderRadius.circular(12),
-        boxShadow: [
-          BoxShadow(
-            color: Colors.black.withOpacity(0.1),
-            offset: const Offset(0, 2),
-            blurRadius: 8,
-            spreadRadius: 0,
-          ),
-        ],
-      ),
-      child: IconButton(
-        onPressed: onPressed,
-        icon: Icon(
-          icon,
-          color: AppColors.textTertiary,
-          size: 20,
-        ),
-      ),
-    );
-  }
-
-  Widget _buildMapControls(BuildContext context) {
-    return Positioned(
-      // top: SizeConfig.safeAreaTop + SizeConfig.getLayoutSpacing(16),
-      top: context.topPadding + 16,
-      right: 16,
-      child: Column(
-        children: [
-          _buildMapControlButton(
-            icon: _isMapExpanded
-                ? Icons.fullscreen_exit
-                : Icons.filter_list_sharp,
-            // onPressed: _toggleMapView,
-            onPressed: () {},
-          ),
-          SizedBox(height: 8),
-          _buildMapControlButton(
-            icon: Icons.my_location,
-            onPressed: _centerOnCurrentLocation,
-          ),
-          SizedBox(height: 8),
-          _buildMapControlButton(
-            icon: Icons.layers,
-            onPressed: () {
-              // TODO: Switch map layers
-              HapticFeedback.lightImpact();
-            },
-          ),
-        ],
-      ),
-    );
-  }
-
-  Widget _buildContentOverlay() {
-    return AnimatedBuilder(
-      animation: _animationController,
-      builder: (context, child) {
-        return FadeTransition(
-          opacity: _fadeAnimation,
-          child: SlideTransition(
-            position: _slideAnimation,
-            child: DraggableScrollableSheet(
-              initialChildSize: _isMapExpanded ? 0.35 : 0.65,
-              minChildSize: 0.3,
-              maxChildSize: 0.9,
-              builder: (context, scrollController) {
-                return Container(
-                  decoration: BoxDecoration(
-                    color: Colors.white,
-                    borderRadius: BorderRadius.only(
-                      topLeft: Radius.circular(24),
-                      topRight: Radius.circular(24),
-                    ),
-                    boxShadow: [
-                      BoxShadow(
-                        color: Colors.black.withOpacity(0.1),
-                        offset: const Offset(0, -4),
-                        blurRadius: 20,
-                        spreadRadius: 0,
-                      ),
-                    ],
-                  ),
-                  child: Column(
-                    children: [
-                      // Handle
-                      Container(
-                        margin: EdgeInsets.only(top: 12),
-                        width: 40,
-                        height: 4,
-                        decoration: BoxDecoration(
-                          color: AppColors.primaryColor,
-                          borderRadius: BorderRadius.circular(2),
-                        ),
-                      ),
-
-                      // Content
-                      // _buildWelcomeSection(),
-                      // AQUI LISTA DE TEXT
-                      // Expanded(
-                      //   child: ListView.builder(
-                      //     controller: scrollController,
-                      //     padding: const EdgeInsets.only(
-                      //       // bottom: 100,
-                      //       left: 24,
-                      //       right: 24,
-                      //     ),
-                      //     itemCount: 500,
-                      //     itemBuilder: (context, index) {
-                      //       return Padding(
-                      //         padding: const EdgeInsets.symmetric(vertical: 8),
-                      //         child: Text(
-                      //           "Texto número ${index + 1}",
-                      //           style: const TextStyle(
-                      //               fontSize: 16, color: Colors.black87),
-                      //         ),
-                      //       );
-                      //     },
-                      //   ),
-                      // ),
-                      Expanded(
-                        child: ListView(
-                          controller: scrollController,
-                          padding: EdgeInsets.all(24),
-                          children: [
-                            _buildWelcomeSection(),
-
-                            //COLOCAR LISTVIEW de Text
-                            // Column(
-                            //   crossAxisAlignment: CrossAxisAlignment.start,
-                            //   children: List.generate(
-                            //     200,
-                            //     (index) => Padding(
-                            //       padding:
-                            //           const EdgeInsets.symmetric(vertical: 8),
-                            //       child: Text(
-                            //         "Texto número ${index + 1}",
-                            //         style: const TextStyle(
-                            //             fontSize: 16, color: Colors.black87),
-                            //       ),
-                            //     ),
-                            //   ),
-                            // ),
-
-                            // SizedBox(height: 20),
-                            // _buildLocationInputSection(),
-                            // SizedBox(height: SizeConfig.getLayoutSpacing(24)),
-                            // _buildVehicleTypeSection(),
-                            // SizedBox(height: SizeConfig.getLayoutSpacing(24)),
-                            // _buildRecentDestinationsSection(),
-
-                            // SizedBox(
-                            //   height: SizeConfig.getLayoutSpacing(100),
-                            // ), // Bottom padding
-                          ],
-                        ),
-                      ),
-                    ],
-                  ),
-                );
-              },
+        MarkerLayer(
+          markers: [
+            marker(
+              context: context,
+              point: _currentLocation,
             ),
-          ),
-        );
-      },
-    );
-  }
-
-  Widget _buildWelcomeSection() {
-    return Row(
-      children: [
-        Expanded(
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text(
-                'Bom dia Paulo',
-                // style: context.getTextStyle.regular.copyWith(
-                //   color: AppColorsV2.textPrimary,
-                //   fontWeight: FontWeight.bold,
-                //   fontSize: context.responsiveText(0.06),
-                // ),
-              ),
-              SizedBox(height: 4),
-              Text(
-                'Avenida Jão Ventura dos santos 3060, Osasco - SP',
-                // style: context.getTextStyle.smallMedium.copyWith(
-                //   color: AppColorsV2.textSecondary,
-                //   fontWeight: FontWeight.w500,
-                // ),
-              ),
-            ],
-          ),
+            ..._buildOccurrences(),
+            // ..._buildPOIMarkers(),
+          ],
         ),
-        SizedBox(width: 30),
-        Container(
-          padding: EdgeInsets.all(12),
-          decoration: BoxDecoration(
-            gradient: AppColors.primaryGradient,
-            borderRadius: BorderRadius.circular(16),
-          ),
-          child: Icon(
-            Icons.pin_drop_rounded,
-            color: Colors.white,
-            size: 24,
-          ),
-        ),
-      ],
-    );
-  }
-
-  Widget _buildRecentDestinationsSection() {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Row(
-          children: [
-            Icon(
-              Icons.history,
-              color: AppColors.textSecondary,
-              size: 20,
-            ),
-            SizedBox(width: 8),
-            Text(
-              'Ocorrências nesta região',
-              // style: context.getTextStyle.smallMedium.copyWith(
-              //   color: AppColorsV2.textPrimary,
-              //   fontWeight: FontWeight.w600,
-              // ),
+        RichAttributionWidget(
+          attributions: [
+            TextSourceAttribution(
+              'OpenStreetMap contributors',
+              onTap: () => debugPrint('OpenStreetMap tapped'),
             ),
           ],
         ),
-        SizedBox(height: 12),
-        ...(_recentDestinations.map(
-          (destination) => _buildRecentDestinationItem(destination),
-        )).toList(),
       ],
     );
   }
 
-  Widget _buildCard() {
+  Widget _buildTopBar() {
     return Positioned(
-      left: 0,
-      right: 0,
-      bottom: context.percentHeight(0.15),
-      child: SizedBox(
-        // width: context.screenWidth,
-        height: context.percentHeight(0.24),
-        // child: GridView.builder(
-        //   scrollDirection: Axis.horizontal,
-        //   padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-        //   gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-        //     crossAxisCount: 1,
-        //     mainAxisSpacing: 10, // espaço entre itens na horizontal
-        //     crossAxisSpacing: 10, // espaço entre linhas (se houver)
-        //     childAspectRatio: 0.45, // largura/altura de cada item
-        //   ),
-        //   itemCount: _nearbyDrivers.length,
-        //   itemBuilder: (context, index) {
-        //     final occurrence = _nearbyDrivers[index];
-        //     return Container(
-        //       decoration: BoxDecoration(
-        //         color: Colors.white,
-        //         borderRadius: BorderRadius.circular(12),
-        //         border: Border.all(color: AppColors.borderDark),
-        //         boxShadow: [
-        //           BoxShadow(
-        //             color: Colors.black.withOpacity(0.31),
-        //             offset: const Offset(0, 3),
-        //             blurRadius: 2,
-        //             spreadRadius: 0,
-        //           ),
-        //         ],
-        //       ),
-        //       padding: const EdgeInsets.all(10),
-        //       child: Column(
-        //         crossAxisAlignment: CrossAxisAlignment.start,
-        //         children: [
-        //           Row(
-        //             crossAxisAlignment: CrossAxisAlignment.start,
-        //             children: [
-        //               ClipRRect(
-        //                 borderRadius: BorderRadius.circular(12),
-        //                 child: Image.asset(
-        //                   occurrence.image,
-        //                   width: 80,
-        //                   height: 80,
-        //                   fit: BoxFit.cover,
-        //                 ),
-        //               ),
-        //               const SizedBox(width: 8),
-        //               Expanded(
-        //                 child: Column(
-        //                   crossAxisAlignment: CrossAxisAlignment.start,
-        //                   children: [
-        //                     Row(
-        //                       children: [
-        //                         Text(
-        //                           occurrence.date ?? "",
-        //                           style: context.getTextStyle.small.copyWith(
-        //                             fontWeight: FontWeight.w600,
-        //                           ),
-        //                         ),
-        //                         const SizedBox(width: 4),
-        //                         Text(
-        //                           "12:45",
-        //                           style: context.getTextStyle.small.copyWith(
-        //                             color: AppColors.textSecondary,
-        //                             fontSize: 11,
-        //                           ),
-        //                         ),
-        //                         const Spacer(),
-        //                         // UIVerificationFlag(isVerified: true),
-        //                         Container(
-        //                           padding: const EdgeInsets.symmetric(
-        //                               horizontal: 8, vertical: 4),
-        //                           decoration: BoxDecoration(
-        //                             color: occurrence.isVerified
-        //                                 ? AppColors.success.withOpacity(0.1)
-        //                                 : AppColors.error.withOpacity(0.1),
-        //                             borderRadius: BorderRadius.circular(8),
-        //                           ),
-        //                           child: Text(
-        //                             occurrence.isVerified
-        //                                 ? "Verificado"
-        //                                 : "Não verificado",
-        //                             style: context.getTextStyle.small.copyWith(
-        //                               color: occurrence.isVerified
-        //                                   ? AppColors.success
-        //                                   : AppColors.error,
-        //                               fontWeight: FontWeight.w600,
-        //                               fontSize: 9,
-        //                             ),
-        //                           ),
-        //                         ),
-        //                       ],
-        //                     ),
-        //                     const SizedBox(height: 5),
-        //                     Text(
-        //                       "Avenida rua teste 1500 Osasco - São Paulo",
-        //                       style: context.getTextStyle.small.copyWith(
-        //                         fontWeight: FontWeight.w400,
-        //                         color: AppColors.textSecondary,
-        //                         fontSize: 11,
-        //                       ),
-        //                     ),
-        //                     const SizedBox(height: 10),
-        //                     Row(
-        //                       spacing: 5,
-        //                       children: [
-        //                         Icon(
-        //                           Icons.directions_car,
-        //                           color: AppColors.textSecondary,
-        //                           size: 16,
-        //                         ),
-        //                         Text(
-        //                           "Gol G3",
-        //                           style: context.getTextStyle.small.copyWith(
-        //                             fontWeight: FontWeight.normal,
-        //                             color: AppColors.textSecondary,
-        //                             fontSize: 11,
-        //                           ),
-        //                         ),
-        //                         Text(
-        //                           "DND0171",
-        //                           style: context.getTextStyle.small.copyWith(
-        //                             fontWeight: FontWeight.normal,
-        //                             color: AppColors.textSecondary,
-        //                             fontSize: 11,
-        //                           ),
-        //                         ),
-        //                       ],
-        //                     ),
-        //                     const SizedBox(height: 10),
-        //                     Container(
-        //                       padding: const EdgeInsets.symmetric(
-        //                           horizontal: 8, vertical: 4),
-        //                       decoration: BoxDecoration(
-        //                         color: occurrence.isVerified
-        //                             ? AppColors.success.withOpacity(0.1)
-        //                             : AppColors.error.withOpacity(0.1),
-        //                         borderRadius: BorderRadius.circular(8),
-        //                       ),
-        //                       child: Text(
-        //                         occurrence.isVerified
-        //                             ? "Verificado"
-        //                             : "Não verificado",
-        //                         style: context.getTextStyle.small.copyWith(
-        //                           color: occurrence.isVerified
-        //                               ? AppColors.success
-        //                               : AppColors.error,
-        //                           fontWeight: FontWeight.w600,
-        //                           fontSize: 9,
-        //                         ),
-        //                       ),
-        //                     ),
-        //                   ],
-        //                 ),
-        //               )
-        //             ],
-        //           ),
-        //         ],
-        //       ),
-        //     );
-        //   },
-        // ),
-        child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 8),
-          child: ListView.builder(
-            scrollDirection: Axis.horizontal,
-            itemCount: _nearbyDrivers.length,
-            physics: BouncingScrollPhysics(),
-            itemBuilder: (context, index) {
-              final occurrence = _nearbyDrivers[index];
-              return GestureDetector(
-                onTap: () => context.push(RouterConstant.productDetail),
-                child: Container(
-                  width: 190,
-                  margin: const EdgeInsets.only(right: 12),
-                  // decoration: BoxDecoration(
-                  //   color: AppColors.secondaryColor,
-                  //   borderRadius:
-                  //       BorderRadius.circular(SizeConfig.borderRadius14),
-                  // ),
-                  decoration: BoxDecoration(
-                    color: Colors.white,
-                    borderRadius: BorderRadius.circular(12),
-                    border: Border.all(color: AppColors.textTertiary),
-                    boxShadow: [
-                      BoxShadow(
-                        color: Colors.black.withOpacity(0.31),
-                        offset: const Offset(0, 1),
-                        blurRadius: 1,
-                        spreadRadius: 0,
-                      ),
-                    ],
-                  ),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      ClipRRect(
-                        borderRadius: const BorderRadius.vertical(
-                          top: Radius.circular(14),
-                        ),
-                        child: Image.asset(
-                          occurrence.image,
-                          width: context.screenWidth,
-                          height: 100,
-                          fit: BoxFit.cover,
-                        ),
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.all(8),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Row(
-                              spacing: 5,
-                              children: [
-                                Text(
-                                  occurrence.date ?? "",
-                                  // style: context.getTextStyle.small.copyWith(
-                                  //   fontWeight: FontWeight.w600,
-                                  // ),
-                                  maxLines: 1,
-                                  overflow: TextOverflow.ellipsis,
-                                ),
-                                Text(
-                                  "12:45",
-                                  // style: context.getTextStyle.small.copyWith(
-                                  //     fontWeight: FontWeight.normal,
-                                  //     color: AppColorsV2.textSecondary,
-                                  //     fontSize: 11),
-                                  maxLines: 1,
-                                  overflow: TextOverflow.ellipsis,
-                                ),
-                              ],
-                            ),
-                            const SizedBox(height: 4),
-                            Text(
-                              "Rua João do meriti 1245, Osasco- São Paulo",
-                              // style: context.getTextStyle.small.copyWith(
-                              //   fontSize: 10,
-                              //   color: AppColorsV2.textSecondary,
-                              // ),
-                              // overflow: TextOverflow.ellipsis,
-                            ),
-                            const SizedBox(height: 8),
-                            Row(
-                              spacing: 5,
-                              children: [
-                                Icon(
-                                  Icons.directions_car,
-                                  color: AppColors.textSecondary,
-                                  size: 16,
-                                ),
-                                Text(
-                                  "Gol G3",
-                                  // style: context.getTextStyle.small.copyWith(
-                                  //   fontWeight: FontWeight.normal,
-                                  //   color: AppColorsV2.textSecondary,
-                                  //   fontSize: 11,
-                                  // ),
-                                ),
-                                Text(
-                                  "DND0171",
-                                  // style: context.getTextStyle.small.copyWith(
-                                  //   fontWeight: FontWeight.normal,
-                                  //   color: AppColorsV2.textSecondary,
-                                  //   fontSize: 11,
-                                  // ),
-                                ),
-                              ],
-                            ),
-                            const SizedBox(height: 8),
-                            Container(
-                              padding: const EdgeInsets.symmetric(
-                                  horizontal: 8, vertical: 4),
-                              decoration: BoxDecoration(
-                                color: occurrence.isVerified
-                                    ? AppColors.greyColor.withOpacity(0.1)
-                                    : Colors.grey.withOpacity(0.1),
-                                borderRadius: BorderRadius.circular(8),
-                              ),
-                              child: Text(
-                                occurrence.isVerified
-                                    ? "Verificado"
-                                    : "Não verificado",
-                                // style: context.getTextStyle.small.copyWith(
-                                //   color: occurrence.isVerified
-                                //       ? AppColorsV2.success
-                                //       : Colors.grey,
-                                //   fontWeight: FontWeight.w600,
-                                //   fontSize: 9,
-                                // ),
-                              ),
-                            ),
-                            // const SizedBox(height: 8),
-                            // Align(
-                            //   alignment: Alignment.centerRight,
-                            //   child: Icon(
-                            //     Icons.arrow_forward_ios,
-                            //     size: 12,
-                            //     color: AppColors.textSecondary,
-                            //   ),
-                            // ),
-                          ],
-                        ),
-                      ),
-                    ],
-                  ),
+      top: MediaQuery.of(context).padding.top + 16,
+      right: 16,
+      child: AnimatedBuilder(
+        animation: _animationController,
+        builder: (context, child) {
+          return FadeTransition(
+            opacity: _fadeAnimation,
+            child: SlideTransition(
+              position: _slideAnimation,
+              child: Container(
+                height: 56,
+                decoration: BoxDecoration(
+                  color: Colors.white,
+                  borderRadius: BorderRadius.circular(16),
+                  boxShadow: [
+                    BoxShadow(
+                      color: Colors.black.withOpacity(0.1),
+                      blurRadius: 20,
+                      offset: const Offset(0, 4),
+                    ),
+                  ],
                 ),
-              );
-            },
-          ),
-        ),
+                child: Row(
+                  children: [
+                    // Menu Button
+                    _buildIconButton(
+                      icon: Icons.menu,
+                      onPressed: () => _toggleMenu(),
+                    ),
+
+                    // Search Bar
+                    Expanded(
+                      child: GestureDetector(
+                        onTap: () => setState(() => _isSearchVisible = true),
+                        child: Container(
+                          padding: const EdgeInsets.symmetric(horizontal: 16),
+                          child: Row(
+                            children: [
+                              Icon(
+                                Icons.search,
+                                color: Colors.grey[600],
+                                size: 20,
+                              ),
+                              const SizedBox(width: 12),
+                              Text(
+                                'Para onde vamos?',
+                                style: TextStyle(
+                                  color: Colors.grey[600],
+                                  fontSize: 16,
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ),
+                    ),
+
+                    // Notifications
+                    _buildIconButton(
+                      icon: Icons.notifications_none,
+                      badgeCount: 3,
+                      onPressed: () => _showNotifications(),
+                    ),
+
+                    // Profile
+                    _buildProfileButton(),
+                  ],
+                ),
+              ),
+            ),
+          );
+        },
       ),
     );
   }
 
-  Widget _buildRecentDestinationItem(String destination) {
-    return Container(
-      margin: EdgeInsets.only(bottom: 8),
-      child: GestureDetector(
-        onTap: () {
-          setState(() {
-            // _destinationController.text = destination;
-            // In a real app, you would geocode this address to get coordinates
-            // For demo purposes, we'll set a sample destination location
-            _destinationLocation = LatLng(
-              _currentLocation.latitude +
-                  (0.01 * (1 + _recentDestinations.indexOf(destination))),
-              _currentLocation.longitude +
-                  (0.01 * (1 + _recentDestinations.indexOf(destination))),
-            );
-          });
-          HapticFeedback.lightImpact();
-        },
+  Widget _buildRightSideControls() {
+    return Positioned(
+      right: 16,
+      top: MediaQuery.of(context).padding.top + 88,
+      child: Column(
+        children: [
+          // Map Layers Toggle
+          _buildFloatingButton(
+            icon: _isSatelliteView ? Icons.map : Icons.satellite,
+            label: _isSatelliteView ? 'Mapa' : 'Satélite',
+            onPressed: _toggleMapView,
+          ),
+          const SizedBox(height: 12),
+
+          // Traffic Toggle
+          _buildFloatingButton(
+            icon: _isTrafficVisible ? Icons.traffic : Icons.traffic_outlined,
+            label: 'Trânsito',
+            onPressed: _toggleTraffic,
+            isActive: _isTrafficVisible,
+          ),
+          const SizedBox(height: 12),
+
+          // Locate Me
+          _buildFloatingButton(
+            icon: Icons.my_location,
+            label: 'Localizar',
+            onPressed: _centerOnCurrentLocation,
+          ),
+          const SizedBox(height: 12),
+
+          // Zoom In
+          _buildFloatingButton(
+            icon: Icons.add,
+            label: 'Zoom',
+            onPressed: _zoomIn,
+          ),
+          const SizedBox(height: 12),
+
+          // Zoom Out
+          _buildFloatingButton(
+            icon: Icons.remove,
+            label: 'Zoom',
+            onPressed: _zoomOut,
+          ),
+          const SizedBox(height: 12),
+
+          // Report Incident
+          _buildFloatingButton(
+            icon: Icons.report,
+            label: 'Reportar',
+            onPressed: _reportIncident,
+            color: Colors.red,
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildBottomNavigation() {
+    return Positioned(
+      bottom: 0,
+      left: 0,
+      right: 0,
+      child: SafeArea(
         child: Container(
-          padding: EdgeInsets.all(16),
+          height: 80,
           decoration: BoxDecoration(
             color: Colors.white,
-            borderRadius: BorderRadius.circular(12),
-            border: Border.all(color: AppColors.textSecondary),
+            borderRadius: const BorderRadius.only(
+              topLeft: Radius.circular(24),
+              topRight: Radius.circular(24),
+            ),
+            boxShadow: [
+              BoxShadow(
+                color: Colors.black.withOpacity(0.15),
+                blurRadius: 30,
+                offset: const Offset(0, -5),
+              ),
+            ],
           ),
           child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [
-              Icon(
-                Icons.schedule,
-                color: AppColors.textSecondary,
-                size: 18,
+              _buildNavItem(
+                icon: Icons.home_filled,
+                label: 'Início',
+                isActive: true,
+                onTap: () {},
               ),
-              SizedBox(width: 12),
-              Expanded(
-                child: Text(
-                  destination,
-                  // style: context.getTextStyle.smallMedium.copyWith(
-                  //   color: AppColorsV2.textPrimary,
-                  // ),
-                ),
+              _buildNavItem(
+                icon: Icons.explore,
+                label: 'Explorar',
+                onTap: () {},
               ),
-              Icon(
-                Icons.chevron_right,
-                color: AppColors.textSecondary,
-                size: 18,
+              _buildNavItem(
+                icon: Icons.navigation,
+                label: 'Navegar',
+                onTap: () => _startNavigation(),
+              ),
+              _buildNavItem(
+                icon: Icons.history,
+                label: 'Histórico',
+                onTap: () {},
+              ),
+              _buildNavItem(
+                icon: Icons.more_horiz,
+                label: 'Mais',
+                onTap: () {},
               ),
             ],
           ),
@@ -1014,8 +465,805 @@ class _HomeViewState extends State<HomeView> with TickerProviderStateMixin {
     );
   }
 
-  void _centerOnCurrentLocation() {
-    HapticFeedback.lightImpact();
-    _flutterMapController.move(_currentLocation, 16.0);
+  Widget _buildInfoPanel() {
+    return Positioned(
+      left: 16,
+      top: MediaQuery.of(context).padding.top + 88,
+      child: AnimatedBuilder(
+        animation: _animationController,
+        builder: (context, child) {
+          return FadeTransition(
+            opacity: _fadeAnimation,
+            child: Container(
+              width: 140,
+              padding: const EdgeInsets.all(12),
+              decoration: BoxDecoration(
+                color: Colors.white.withOpacity(0.95),
+                borderRadius: BorderRadius.circular(16),
+                boxShadow: [
+                  BoxShadow(
+                    color: Colors.black.withOpacity(0.1),
+                    blurRadius: 15,
+                    offset: const Offset(0, 4),
+                  ),
+                ],
+              ),
+              child: Column(
+                children: [
+                  // Speed
+                  Text(
+                    '65',
+                    style: TextStyle(
+                      fontSize: 32,
+                      fontWeight: FontWeight.bold,
+                      color: Colors.blue[700],
+                    ),
+                  ),
+                  Text(
+                    'km/h',
+                    style: TextStyle(
+                      color: Colors.grey[600],
+                      fontSize: 12,
+                    ),
+                  ),
+                  const Divider(height: 16),
+
+                  // ETA
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Icon(Icons.access_time,
+                          size: 14, color: Colors.grey[600]),
+                      const SizedBox(width: 4),
+                      Text(
+                        '25 min',
+                        style: TextStyle(
+                          fontWeight: FontWeight.w600,
+                          color: Colors.grey[800],
+                        ),
+                      ),
+                    ],
+                  ),
+                  const SizedBox(height: 4),
+
+                  // Distance
+                  Text(
+                    '12.5 km',
+                    style: TextStyle(
+                      color: Colors.grey[600],
+                      fontSize: 12,
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          );
+        },
+      ),
+    );
   }
+
+  Widget _buildSearchOverlay() {
+    return Positioned.fill(
+      child: Container(
+        color: Colors.black.withOpacity(0.5),
+        child: SafeArea(
+          child: Column(
+            children: [
+              // Search Header
+              Container(
+                padding: const EdgeInsets.all(16),
+                color: Colors.white,
+                child: Row(
+                  children: [
+                    IconButton(
+                      icon: const Icon(Icons.arrow_back),
+                      onPressed: () => setState(() => _isSearchVisible = false),
+                    ),
+                    Expanded(
+                      child: TextField(
+                        controller: _searchController,
+                        autofocus: true,
+                        decoration: InputDecoration(
+                          hintText: 'Buscar destino...',
+                          border: InputBorder.none,
+                          suffixIcon: _searchController.text.isNotEmpty
+                              ? IconButton(
+                                  icon: const Icon(Icons.clear),
+                                  onPressed: () => _searchController.clear(),
+                                )
+                              : null,
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+
+              // Search Results
+              Expanded(
+                child: Container(
+                  color: Colors.white,
+                  child: ListView(
+                    children: [
+                      // Recent Searches
+                      if (_recentSearches.isNotEmpty)
+                        _buildSearchSection(
+                          title: 'Buscas recentes',
+                          items: _recentSearches,
+                          icon: Icons.history,
+                        ),
+
+                      // Favorites
+                      _buildSearchSection(
+                        title: 'Favoritos',
+                        items: ['Casa', 'Trabalho', 'Academia'],
+                        icon: Icons.star_border,
+                      ),
+
+                      // Popular Places
+                      _buildSearchSection(
+                        title: 'Locais populares',
+                        items: ['Shopping', 'Aeroporto', 'Centro'],
+                        icon: Icons.place,
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+
+  Widget _buildSearchSection({
+    required String title,
+    required List<String> items,
+    required IconData icon,
+  }) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Padding(
+          padding: const EdgeInsets.all(16),
+          child: Text(
+            title,
+            style: const TextStyle(
+              fontWeight: FontWeight.w600,
+              fontSize: 14,
+              color: Colors.grey,
+            ),
+          ),
+        ),
+        ...items.map((item) => ListTile(
+              leading: Icon(icon, color: Colors.grey[600]),
+              title: Text(item),
+              trailing: const Icon(Icons.arrow_forward_ios, size: 14),
+              onTap: () => _selectDestination(item),
+            )),
+      ],
+    );
+  }
+
+  // Marker _buildUserMarker({
+  //   required LatLng point,
+  //   required IconData icon,
+  //   required Color color,
+  //   required String label,
+  // }) {
+  //   return Marker(
+  //     point: point,
+  //     width: 80,
+  //     height: 80,
+  //     child: Column(
+  //       spacing: 2,
+  //       children: [
+  //         Container(
+  //           decoration: BoxDecoration(
+  //             color: Colors.white,
+  //             borderRadius: BorderRadius.circular(100),
+  //           ),
+  //           child: Container(
+  //             padding: const EdgeInsets.all(2),
+  //             decoration: BoxDecoration(
+  //               color: AppColors.whiteColor,
+  //               borderRadius: BorderRadius.circular(100),
+  //             ),
+  //             child: UIMyNetworkImageWidget(
+  //               width: 50,
+  //               height: 50,
+  //               radius: 100,
+  //               // imageUrl: FirebaseAuth.instance.currentUser?.photoURL ?? '',
+  //               imageUrl:
+  //                   "https://www.meionews.com/uploads/imagens/2024/11/17/carro-roubado-de-comitiva-do-g20-e-achado-em-favela-no-rio-de-janeiro-922b8399-7578-4726-b6c7-de616d8ebb49.jpg" ??
+  //                       '',
+  //             ),
+  //             // child: const Icon(
+  //             //   Icons.person_pin_circle,
+  //             //   color: Colors.white,
+  //             // ),
+  //           ),
+  //         ),
+  //         Container(
+  //           padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+  //           decoration: BoxDecoration(
+  //             color: Colors.white,
+  //             borderRadius: BorderRadius.circular(8),
+  //             boxShadow: [
+  //               BoxShadow(
+  //                 color: Colors.black.withValues(alpha: 0.1),
+  //                 offset: const Offset(0, 2),
+  //                 blurRadius: 8,
+  //                 spreadRadius: 0,
+  //               ),
+  //             ],
+  //           ),
+  //           child: Text(
+  //             label,
+  //             style: context.appTextStyles.caption1Style.copyWith(
+  //               fontWeight: FontWeight.bold,
+  //             ),
+  //           ),
+  //         ),
+  //       ],
+  //     ),
+  //   );
+  // }
+
+  Marker _buildDestinationMarker() {
+    return Marker(
+      point: _destinationLocation!,
+      width: 70,
+      height: 70,
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          Container(
+            padding: const EdgeInsets.all(10),
+            decoration: BoxDecoration(
+              color: Colors.red,
+              shape: BoxShape.circle,
+              boxShadow: [
+                BoxShadow(
+                  color: Colors.red.withOpacity(0.5),
+                  blurRadius: 10,
+                  spreadRadius: 2,
+                ),
+              ],
+            ),
+            child: const Icon(Icons.location_on, color: Colors.white, size: 20),
+          ),
+          const SizedBox(height: 4),
+          Container(
+            padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+            decoration: BoxDecoration(
+              color: Colors.white,
+              borderRadius: BorderRadius.circular(8),
+            ),
+            child: const Text(
+              'Destino',
+              style: TextStyle(
+                fontSize: 10,
+                fontWeight: FontWeight.w600,
+                color: Colors.red,
+              ),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  List<Marker> _buildOccurrences() {
+    return [
+      Marker(
+        point: const LatLng(37.7800, -122.4180),
+        width: 90,
+        height: 90,
+        child: Column(
+          children: [
+            Container(
+              padding: const EdgeInsets.all(6),
+              decoration: BoxDecoration(
+                color: AppColors.primaryColor.withValues(alpha: 0.9),
+                shape: BoxShape.circle,
+                border: Border.all(color: Colors.white, width: 2),
+              ),
+              child: const Center(
+                child: Icon(Icons.motorcycle, size: 22, color: Colors.white),
+              ),
+            ),
+            Container(
+              padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+              decoration: BoxDecoration(
+                color: Colors.white,
+                borderRadius: BorderRadius.circular(8),
+                boxShadow: [
+                  BoxShadow(
+                    color: Colors.black.withValues(alpha: 0.1),
+                    offset: const Offset(0, 2),
+                    blurRadius: 8,
+                    spreadRadius: 0,
+                  ),
+                ],
+              ),
+              child: Text(
+                "DND-0171",
+                style: context.appTextStyles.caption1Style.copyWith(
+                  fontWeight: FontWeight.bold,
+                  fontSize: 10,
+                ),
+              ),
+            ),
+          ],
+        ),
+      ),
+      // Add more traffic markers as needed
+    ];
+  }
+
+//  Gasolina
+  List<Marker> _buildPOIMarkers() {
+    return [
+      Marker(
+        point: const LatLng(37.7850, -122.4160),
+        width: 50,
+        height: 50,
+        child: Container(
+          padding: const EdgeInsets.all(8),
+          decoration: BoxDecoration(
+            color: Colors.green,
+            borderRadius: BorderRadius.circular(12),
+            boxShadow: [
+              BoxShadow(
+                color: Colors.green.withValues(alpha: 0.3),
+                blurRadius: 8,
+              ),
+            ],
+          ),
+          child: const Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              Icon(Icons.local_gas_station, color: Colors.white, size: 16),
+              SizedBox(height: 2),
+              Text(
+                'R\$ 5,89',
+                style: TextStyle(
+                  color: Colors.white,
+                  fontSize: 8,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+            ],
+          ),
+        ),
+      ),
+    ];
+  }
+
+  Widget _buildIconButton({
+    required IconData icon,
+    int badgeCount = 0,
+    required VoidCallback onPressed,
+  }) {
+    return Stack(
+      children: [
+        Container(
+          width: 40,
+          height: 40,
+          decoration: BoxDecoration(
+            shape: BoxShape.circle,
+            color: Colors.grey[100],
+          ),
+          child: IconButton(
+            icon: Icon(icon, size: 20),
+            onPressed: onPressed,
+            splashRadius: 20,
+          ),
+        ),
+        if (badgeCount > 0)
+          Positioned(
+            right: 0,
+            top: 0,
+            child: Container(
+              padding: const EdgeInsets.all(2),
+              decoration: const BoxDecoration(
+                color: Colors.red,
+                shape: BoxShape.circle,
+              ),
+              constraints: const BoxConstraints(minWidth: 16, minHeight: 16),
+              child: Text(
+                badgeCount.toString(),
+                style: const TextStyle(
+                  color: Colors.white,
+                  fontSize: 10,
+                  fontWeight: FontWeight.bold,
+                ),
+                textAlign: TextAlign.center,
+              ),
+            ),
+          ),
+      ],
+    );
+  }
+
+  Widget _buildProfileButton() {
+    return GestureDetector(
+      onTap: () => _showProfile(),
+      child: Container(
+        width: 40,
+        height: 40,
+        decoration: BoxDecoration(
+          shape: BoxShape.circle,
+          border: Border.all(color: Colors.blue, width: 2),
+        ),
+        child: ClipOval(
+          child: Image.asset(
+            'assets/images/profile_placeholder.jpg',
+            fit: BoxFit.cover,
+          ),
+        ),
+      ),
+    );
+  }
+
+  Widget _buildFloatingButton({
+    required IconData icon,
+    required String label,
+    required VoidCallback onPressed,
+    Color color = Colors.blue,
+    bool isActive = false,
+  }) {
+    return Column(
+      mainAxisSize: MainAxisSize.min,
+      children: [
+        Container(
+          width: 44,
+          height: 44,
+          decoration: BoxDecoration(
+            color: isActive ? color : Colors.white,
+            shape: BoxShape.circle,
+            boxShadow: [
+              BoxShadow(
+                color: Colors.black.withOpacity(0.1),
+                blurRadius: 10,
+                offset: const Offset(0, 4),
+              ),
+            ],
+            border: isActive ? null : Border.all(color: Colors.grey[200]!),
+          ),
+          child: IconButton(
+            icon: Icon(
+              icon,
+              size: 20,
+              color: isActive ? Colors.white : color,
+            ),
+            onPressed: onPressed,
+          ),
+        ),
+        const SizedBox(height: 4),
+        Text(
+          label,
+          style: TextStyle(
+            fontSize: 10,
+            color: Colors.grey[700],
+          ),
+        ),
+      ],
+    );
+  }
+
+  Widget _buildNavItem({
+    required IconData icon,
+    required String label,
+    bool isActive = false,
+    required VoidCallback onTap,
+  }) {
+    return GestureDetector(
+      onTap: onTap,
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          Container(
+            padding: const EdgeInsets.all(8),
+            decoration: BoxDecoration(
+              color:
+                  isActive ? Colors.blue.withOpacity(0.1) : Colors.transparent,
+              shape: BoxShape.circle,
+            ),
+            child: Icon(
+              icon,
+              color: isActive ? Colors.blue : Colors.grey[600],
+              size: 24,
+            ),
+          ),
+          const SizedBox(height: 4),
+          Text(
+            label,
+            style: TextStyle(
+              fontSize: 12,
+              color: isActive ? Colors.blue : Colors.grey[600],
+              fontWeight: isActive ? FontWeight.w600 : FontWeight.normal,
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  // Action Methods
+  void _toggleMenu() {
+    HapticFeedback.lightImpact();
+    // TODO: Open drawer or side menu
+  }
+
+  void _toggleMapView() {
+    setState(() {
+      _isSatelliteView = !_isSatelliteView;
+    });
+    HapticFeedback.lightImpact();
+  }
+
+  void _toggleTraffic() {
+    setState(() {
+      _isTrafficVisible = !_isTrafficVisible;
+    });
+    HapticFeedback.lightImpact();
+  }
+
+  void _centerOnCurrentLocation() {
+    _flutterMapController.move(_currentLocation, 16.0);
+    HapticFeedback.lightImpact();
+  }
+
+  void _zoomIn() {
+    setState(() {
+      _zoomLevel = (_zoomLevel + 1).clamp(10.0, 18.0);
+    });
+    _flutterMapController.move(_currentLocation, _zoomLevel);
+    HapticFeedback.lightImpact();
+  }
+
+  void _zoomOut() {
+    setState(() {
+      _zoomLevel = (_zoomLevel - 1).clamp(10.0, 18.0);
+    });
+    _flutterMapController.move(_currentLocation, _zoomLevel);
+    HapticFeedback.lightImpact();
+  }
+
+  void _reportIncident() {
+    // TODO: Show incident reporting dialog
+    HapticFeedback.lightImpact();
+  }
+
+  void _showNotifications() {
+    // TODO: Show notifications panel
+    HapticFeedback.lightImpact();
+  }
+
+  void _showProfile() {
+    // TODO: Navigate to profile
+    HapticFeedback.lightImpact();
+  }
+
+  void _startNavigation() {
+    // TODO: Start navigation to destination
+    HapticFeedback.lightImpact();
+  }
+
+  void _selectDestination(String destination) {
+    setState(() {
+      _isSearchVisible = false;
+      // TODO: Set destination and calculate route
+    });
+    HapticFeedback.lightImpact();
+  }
+
+  // Widget _buildSlidingPanel() {
+  //   return Container(
+  //     decoration: BoxDecoration(
+  //       color: Colors.white,
+  //       borderRadius: const BorderRadius.only(
+  //         topLeft: Radius.circular(24),
+  //         topRight: Radius.circular(24),
+  //       ),
+  //       boxShadow: [
+  //         BoxShadow(
+  //           color: Colors.black.withOpacity(0.2),
+  //           blurRadius: 20,
+  //           spreadRadius: 0,
+  //           offset: const Offset(0, -5),
+  //         ),
+  //       ],
+  //     ),
+  //     child: Column(
+  //       children: [
+  //         // Handle do panel
+  //         Padding(
+  //           padding: const EdgeInsets.only(top: 16),
+  //           child: Center(
+  //             child: Container(
+  //               width: 40,
+  //               height: 4,
+  //               decoration: BoxDecoration(
+  //                 color: Colors.grey[300],
+  //                 borderRadius: BorderRadius.circular(2),
+  //               ),
+  //             ),
+  //           ),
+  //         ),
+
+  //         // Conteúdo do panel
+  //         Expanded(
+  //           child: ListView(
+  //             padding: const EdgeInsets.all(20),
+  //             children: [
+  //               const SizedBox(height: 16),
+
+  //               // Título
+  //               const Text(
+  //                 'Localização',
+  //                 style: TextStyle(
+  //                   fontSize: 28,
+  //                   fontWeight: FontWeight.bold,
+  //                   color: Colors.black87,
+  //                 ),
+  //               ),
+
+  //               const SizedBox(height: 8),
+
+  //               // Descrição
+  //               Text(
+  //                 'Área Central de São Paulo',
+  //                 style: TextStyle(
+  //                   fontSize: 16,
+  //                   color: Colors.grey[600],
+  //                 ),
+  //               ),
+
+  //               const SizedBox(height: 32),
+
+  //               // Informações
+  //               _buildInfoItem(
+  //                 icon: Icons.location_pin,
+  //                 title: 'Coordenadas',
+  //                 subtitle: '-23.5505° S, -46.6333° W',
+  //               ),
+
+  //               _buildInfoItem(
+  //                 icon: Icons.zoom_in,
+  //                 title: 'Zoom atual',
+  //                 subtitle:
+  //                     '${_mapController.camera.zoom?.toStringAsFixed(1) ?? '13.0'}x',
+  //               ),
+
+  //               _buildInfoItem(
+  //                 icon: Icons.map,
+  //                 title: 'Tipo de mapa',
+  //                 subtitle: 'OpenStreetMap',
+  //               ),
+
+  //               const SizedBox(height: 32),
+
+  //               // Ações
+  //               _buildActionButton(
+  //                 icon: Icons.my_location,
+  //                 label: 'Centralizar',
+  //                 onPressed: _centerMap,
+  //               ),
+
+  //               _buildActionButton(
+  //                 icon: Icons.fullscreen,
+  //                 label: 'Expandir mapa',
+  //                 onPressed: _expandMap,
+  //               ),
+  //             ],
+  //           ),
+  //         ),
+  //       ],
+  //     ),
+  //   );
+  // }
+
+  // Widget _buildInfoItem({
+  //   required IconData icon,
+  //   required String title,
+  //   required String subtitle,
+  // }) {
+  //   return Padding(
+  //     padding: const EdgeInsets.symmetric(vertical: 12),
+  //     child: Row(
+  //       children: [
+  //         Container(
+  //           width: 40,
+  //           height: 40,
+  //           decoration: BoxDecoration(
+  //             color: Colors.blue.withOpacity(0.1),
+  //             borderRadius: BorderRadius.circular(12),
+  //           ),
+  //           child: Icon(
+  //             icon,
+  //             color: Colors.blue,
+  //             size: 20,
+  //           ),
+  //         ),
+  //         const SizedBox(width: 16),
+  //         Expanded(
+  //           child: Column(
+  //             crossAxisAlignment: CrossAxisAlignment.start,
+  //             children: [
+  //               Text(
+  //                 title,
+  //                 style: const TextStyle(
+  //                   fontSize: 16,
+  //                   fontWeight: FontWeight.w500,
+  //                   color: Colors.black87,
+  //                 ),
+  //               ),
+  //               const SizedBox(height: 4),
+  //               Text(
+  //                 subtitle,
+  //                 style: TextStyle(
+  //                   fontSize: 14,
+  //                   color: Colors.grey[600],
+  //                 ),
+  //               ),
+  //             ],
+  //           ),
+  //         ),
+  //       ],
+  //     ),
+  //   );
+  // }
+
+  // Widget _buildActionButton({
+  //   required IconData icon,
+  //   required String label,
+  //   required VoidCallback onPressed,
+  // }) {
+  //   return Container(
+  //     margin: const EdgeInsets.only(bottom: 12),
+  //     decoration: BoxDecoration(
+  //       color: Colors.blue,
+  //       borderRadius: BorderRadius.circular(12),
+  //     ),
+  //     child: Material(
+  //       color: Colors.transparent,
+  //       child: InkWell(
+  //         onTap: onPressed,
+  //         borderRadius: BorderRadius.circular(12),
+  //         child: Padding(
+  //           padding: const EdgeInsets.all(16),
+  //           child: Row(
+  //             children: [
+  //               Icon(
+  //                 icon,
+  //                 color: Colors.white,
+  //                 size: 20,
+  //               ),
+  //               const SizedBox(width: 16),
+  //               Text(
+  //                 label,
+  //                 style: const TextStyle(
+  //                   color: Colors.white,
+  //                   fontSize: 16,
+  //                   fontWeight: FontWeight.w500,
+  //                 ),
+  //               ),
+  //               const Spacer(),
+  //               const Icon(
+  //                 Icons.chevron_right,
+  //                 color: Colors.white,
+  //                 size: 20,
+  //               ),
+  //             ],
+  //           ),
+  //         ),
+  //       ),
+  //     ),
+  //   );
+  // }
 }

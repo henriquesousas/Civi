@@ -36,7 +36,8 @@ class _SplashPageState extends State<SplashPage> {
       final user = FirebaseAuth.instance.currentUser;
 
       if (user != null) {
-        context.pushReplacement(RouterConstant.bottomView);
+        // context.pushReplacement(RouterConstant.bottomView);
+        context.pushReplacement(RouterConstant.home);
       } else {
         context.pushReplacement(RouterConstant.onboarding);
       }

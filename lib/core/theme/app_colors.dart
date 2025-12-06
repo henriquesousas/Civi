@@ -50,6 +50,7 @@ class AppColors {
 
   static const Color purpleColor = Color(0xFF7B61FF);
   static const Color successColor = Color(0xFF2ED573);
+  static const Color successColor2 = Color(0xFF72a859);
   static const Color warningColor = Color(0xFFFFBE21);
   static const Color errorColor = Color(0xFFEA5B5B);
   static const Color errorColorDark = Color(0xFFe13535);

@@ -13,20 +13,26 @@ import '../resources/resources.dart';
 
 //TODO: Renomear por que vai ser reutilizavel em varios locais
 class ProfileImageWithUploadButtonWidget extends StatefulWidget {
+  final String imageUrl;
+  final String imageAlt;
+  final bool showUploadIcon;
+  final VoidCallback? onTap;
+  final double radius;
+  final double width;
+  final double height;
+  final Function(File)? onChanged;
+
   const ProfileImageWithUploadButtonWidget({
     super.key,
     required this.imageUrl,
     this.showUploadIcon = true,
     this.onTap,
     this.onChanged,
+    this.radius = Dimens.defaultRadius,
+    this.width = 80,
+    this.height = 80,
     required this.imageAlt,
   });
-  final String imageUrl;
-  final String imageAlt;
-  final bool showUploadIcon;
-  final VoidCallback? onTap;
-  final Function(File)? onChanged;
-
   @override
   State<ProfileImageWithUploadButtonWidget> createState() =>
       _ProfileImageWithUploadButtonWidgetState();
@@ -48,15 +54,15 @@ class _ProfileImageWithUploadButtonWidgetState
                 color: AppColors.primaryColor.withValues(alpha: 0.15),
                 width: DimensTest.space4,
               ),
-              borderRadius: BorderRadius.circular(Dimens.defaultRadius),
+              borderRadius: BorderRadius.circular(widget.radius),
             ),
             child: Container(
               decoration: BoxDecoration(
                 border: Border.all(
                   color: AppColors.primaryColor,
-                  width: 1,
+                  width: 2,
                 ),
-                borderRadius: BorderRadius.circular(Dimens.defaultRadius),
+                borderRadius: BorderRadius.circular(widget.radius),
               ),
               child: Container(
                 decoration: BoxDecoration(
@@ -76,19 +82,19 @@ class _ProfileImageWithUploadButtonWidgetState
                           imageUrl: widget.imageUrl,
                           isProfile: true,
                           imageAlt: widget.imageAlt,
-                          radius: Dimens.defaultRadius,
-                          width: 80,
-                          height: 80,
+                          radius: widget.radius,
+                          width: widget.width,
+                          height: widget.height,
                           boxFit: BoxFit.cover,
                         ),
                       )
                     : UIMyAssetsImageWidget(
                         assetPath: _imageFile?.path ?? '',
                         isFile: true,
-                        radius: Dimens.defaultRadius,
+                        radius: widget.radius,
                         boxFit: BoxFit.cover,
-                        width: 80,
-                        height: 80,
+                        width: widget.width,
+                        height: widget.height,
                       ),
               ),
             ),
@@ -109,15 +115,13 @@ class _ProfileImageWithUploadButtonWidgetState
                     ),
                   ],
                 ),
-                width: 30,
-                height: 30,
+                width: widget.width / 2,
+                height: widget.height / 2,
                 padding: const EdgeInsetsDirectional.all(5),
                 child: UIMyAssetsImageWidget(
                   color: AppColors.primaryColor,
                   isSvg: true,
                   assetPath: R.images.svgUploadIcon,
-                  width: 24,
-                  height: 24,
                 ),
               ),
             ),
