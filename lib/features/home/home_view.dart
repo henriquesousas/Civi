@@ -1,21 +1,12 @@
-import 'package:deehelp/core/components/icon/ui_icon.dart';
-import 'package:deehelp/core/components/profile_image_with_upload_button_widget.dart';
-import 'package:deehelp/core/components/ui_my_assets_image_widget.dart';
+import 'package:deehelp/core/components/icon/ui_icon_alpha.dart';
+import 'package:deehelp/core/resources/resources.dart';
 import 'package:deehelp/core/theme/app_colors.dart';
-import 'package:deehelp/core/theme/app_text_styles.dart';
-import 'package:deehelp/core/theme/dimens.dart';
-import 'package:deehelp/features/home/widgets/button_info.dart';
-import 'package:deehelp/features/home/widgets/button_menu_top.dart';
-import 'package:deehelp/features/home/widgets/marker_current_use.dart';
-import 'package:deehelp/features/home/widgets/osm_map.dart';
-import 'package:firebase_auth/firebase_auth.dart';
+import 'package:deehelp/features/profile/profile_page.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
-import 'package:latlong2/latlong.dart';
 import 'package:flutter_map/flutter_map.dart';
-
-import '../../core/components/ui_my_network_image_widget.dart';
-import '../../core/resources/resources.dart';
+import 'package:flutter_svg/svg.dart';
+import 'package:latlong2/latlong.dart';
+import 'package:sliding_up_panel/sliding_up_panel.dart';
 
 class HomeView extends StatefulWidget {
   const HomeView({super.key});
@@ -24,730 +15,279 @@ class HomeView extends StatefulWidget {
   State<HomeView> createState() => _HomeViewState();
 }
 
-class _HomeViewState extends State<HomeView> with TickerProviderStateMixin {
-  // Controllers
-  late AnimationController _animationController;
-  late AnimationController _mapController;
-  final MapController _flutterMapController = MapController();
-  final TextEditingController _searchController = TextEditingController();
+class _HomeViewState extends State<HomeView> {
+  final MapController _mapController = MapController();
+  final PanelController _panelController = PanelController();
 
-  final LatLng _centerLocation = const LatLng(-23.550520, -46.633308);
-  double _panelHeight = 200;
-  bool _isPanelDragging = false;
-  double _panelPosition = 0.3; // Posição in
+  double _panelPosition = 0.0; // 0 = fechado, 1 = aberto
 
-  // Animations
-  late Animation<double> _fadeAnimation;
-  late Animation<Offset> _slideAnimation;
-  late Animation<double> _mapAnimation;
-
-  // Map data
-  LatLng _currentLocation = const LatLng(37.7749, -122.4194);
-  LatLng? _destinationLocation = const LatLng(37.8049, -122.4094);
-  List<LatLng> _routePoints = [];
-
-  // UI states
-  bool _isMapExpanded = false;
-  bool _isSearchVisible = false;
-  bool _isTrafficVisible = true;
-  bool _isSatelliteView = false;
-  double _zoomLevel = 14.0;
-
-  // Mock data
-  // Mock data
-  final List<String> _recentSearches = [
-    'Downtown Mall',
-    'Central Park',
-    'Airport Terminal 1',
-    'Business District',
+  final List<RouboMarker> _roubos = [
+    RouboMarker(
+        "Roubo de celular",
+        DateTime(2025, 12, 1, 18, 20),
+        "Vítima abordada próximo ao ponto de ônibus",
+        LatLng(-23.5045, -46.8750)),
+    RouboMarker("Roubo de bicicleta", DateTime(2025, 12, 3, 7, 45),
+        "Ocorrência em ciclovia durante a manhã", LatLng(-23.5160, -46.8825)),
+    RouboMarker("Roubo a pedestre", DateTime(2025, 12, 4, 22, 10),
+        "Dois indivíduos em moto, sem feridos", LatLng(-23.5120, -46.8690)),
+    RouboMarker("Roubo de carro", DateTime(2025, 12, 5, 20, 30),
+        "Veículo levado em estacionamento", LatLng(-23.5150, -46.8700)),
+    RouboMarker("Tentativa de assalto", DateTime(2025, 12, 6, 15, 10),
+        "Suspeitos fugiram sem levar nada", LatLng(-23.5180, -46.8720)),
   ];
-
-  @override
-  void initState() {
-    super.initState();
-    _initializeAnimations();
-    _startAnimations();
-    _setupMockRoute();
-  }
-
-  void _initializeAnimations() {
-    _animationController = AnimationController(
-      duration: const Duration(milliseconds: 800),
-      vsync: this,
-    );
-
-    _mapController = AnimationController(
-      duration: const Duration(milliseconds: 500),
-      vsync: this,
-    );
-
-    _fadeAnimation = Tween<double>(begin: 0.0, end: 1.0).animate(
-      CurvedAnimation(
-        parent: _animationController,
-        curve: Curves.easeOut,
-      ),
-    );
-
-    _slideAnimation = Tween<Offset>(
-      begin: const Offset(0, 0.2),
-      end: Offset.zero,
-    ).animate(
-      CurvedAnimation(
-        parent: _animationController,
-        curve: Curves.easeOutBack,
-      ),
-    );
-  }
-
-  void _startAnimations() {
-    _animationController.forward();
-  }
-
-  void _setupMockRoute() {
-    // Simulate a route from current location to destination
-    _routePoints = [
-      _currentLocation,
-      const LatLng(37.7800, -122.4180),
-      const LatLng(37.7850, -122.4160),
-      const LatLng(37.7900, -122.4140),
-      const LatLng(37.7950, -122.4120),
-      _destinationLocation!,
-    ];
-  }
-
-  @override
-  void dispose() {
-    _animationController.dispose();
-    _mapController.dispose();
-    _flutterMapController.dispose();
-    _searchController.dispose();
-    super.dispose();
-  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: Stack(
         children: [
-          OsmMap(
-            controller: _flutterMapController,
-            currentLocation: _currentLocation,
-            onPositionChanged: (camera, hasGesture) {
-              if (hasGesture) {
-                setState(() {
-                  _zoomLevel = camera.zoom;
-                });
-              }
-            },
-            markerCurrentUser: marker(
-              context: context,
-              point: _currentLocation,
-            ),
-          ),
-          const ButtonMenuTop(),
-          const ButtonInfo()
-        ],
-      ),
-    );
-  }
-
-  // void _handlePanelDragUpdate(DragUpdateDetails details) {
-  //   setState(() {
-  //     _isPanelDragging = true;
-
-  //     // Calcular nova posição do panel
-  //     final dragAmount = details.delta.dy / MediaQuery.of(context).size.height;
-  //     _panelPosition -= dragAmount;
-
-  //     // Limitar entre 0.15 (quase fechado) e 0.8 (quase aberto)
-  //     if (_panelPosition < 0.15) _panelPosition = 0.15;
-  //     if (_panelPosition > 0.8) _panelPosition = 0.8;
-  //   });
-  // }
-
-  // void _handlePanelDragEnd(DragEndDetails details) {
-  //   setState(() {
-  //     _isPanelDragging = false;
-
-  //     // Snap para posições específicas
-  //     if (_panelPosition < 0.4) {
-  //       // Snap para baixo (fechado)
-  //       _panelPosition = 0.15;
-  //     } else if (_panelPosition < 0.6) {
-  //       // Snap para meio
-  //       _panelPosition = 0.5;
-  //     } else {
-  //       // Snap para cima (aberto)
-  //       _panelPosition = 0.8;
-  //     }
-  //   });
-  // }
-
-  // Widget _buildTopButtonMenu() {
-  //   return Positioned(
-  //     top: MediaQuery.of(context).padding.top + 16,
-  //     left: 10,
-  //     child: const UIICon(
-  //       radius: 10,
-  //       bgColor: AppColors.whiteColor,
-  //       icon: Icon(
-  //         Icons.menu,
-  //         size: 32,
-  //       ),
-  //     ),
-  //   );
-  // }
-
-  Widget _buildProfile() {
-    return Positioned(
-      top: MediaQuery.of(context).padding.top,
-      right: MediaQuery.of(context).padding.right + 16,
-      child: ProfileImageWithUploadButtonWidget(
-        radius: 100,
-        width: 40,
-        height: 40,
-        imageUrl: FirebaseAuth.instance.currentUser?.photoURL ?? '',
-        imageAlt: "avatar",
-      ),
-      // child: const UIICon(
-      //   radius: 10,
-      //   bgColor: AppColors.whiteColor,
-      //   icon: Icon(
-      //     Icons.menu,
-      //     size: 32,
-      //   ),
-      // ),
-    );
-  }
-
-  Widget _buildMapSection() {
-    return FlutterMap(
-      mapController: _flutterMapController,
-      options: MapOptions(
-        initialCenter: _currentLocation,
-        initialZoom: _zoomLevel,
-        maxZoom: 18.0,
-        minZoom: 10.0,
-        interactionOptions: const InteractionOptions(
-          flags: InteractiveFlag.all,
-        ),
-        onPositionChanged: (position, hasGesture) {
-          if (hasGesture) {
-            setState(() {
-              _zoomLevel = position.zoom!;
-            });
-          }
-        },
-      ),
-      children: [
-        TileLayer(
-          // urlTemplate: _isSatelliteView
-          //     ? 'https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}'
-          //     : 'https://tile.openstreetmap.org/{z}/{x}/{y}.png',
-          urlTemplate: 'https://tile.openstreetmap.org/{z}/{x}/{y}.png',
-          userAgentPackageName: 'br.com.atomos.yousafe',
-          maxZoom: 18,
-        ),
-        MarkerLayer(
-          markers: [
-            marker(
-              context: context,
-              point: _currentLocation,
-            ),
-            ..._buildOccurrences(),
-            // ..._buildPOIMarkers(),
-          ],
-        ),
-        RichAttributionWidget(
-          attributions: [
-            TextSourceAttribution(
-              'OpenStreetMap contributors',
-              onTap: () => debugPrint('OpenStreetMap tapped'),
-            ),
-          ],
-        ),
-      ],
-    );
-  }
-
-  Widget _buildTopBar() {
-    return Positioned(
-      top: MediaQuery.of(context).padding.top + 16,
-      right: 16,
-      child: AnimatedBuilder(
-        animation: _animationController,
-        builder: (context, child) {
-          return FadeTransition(
-            opacity: _fadeAnimation,
-            child: SlideTransition(
-              position: _slideAnimation,
-              child: Container(
-                height: 56,
-                decoration: BoxDecoration(
-                  color: Colors.white,
-                  borderRadius: BorderRadius.circular(16),
-                  boxShadow: [
-                    BoxShadow(
-                      color: Colors.black.withOpacity(0.1),
-                      blurRadius: 20,
-                      offset: const Offset(0, 4),
-                    ),
-                  ],
+          SlidingUpPanel(
+            controller: _panelController,
+            minHeight: 120,
+            maxHeight: MediaQuery.of(context).size.height -
+                MediaQuery.of(context).padding.top -
+                MediaQuery.of(context).padding.bottom,
+            borderRadius: const BorderRadius.vertical(top: Radius.circular(16)),
+            panel: _buildPanel(),
+            body: FlutterMap(
+              mapController: _mapController,
+              options: MapOptions(
+                initialCenter: LatLng(-23.5107, -46.8764),
+                initialZoom: 13.0,
+              ),
+              children: [
+                TileLayer(
+                  urlTemplate:
+                      'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
+                  subdomains: const ['a', 'b', 'c'],
                 ),
-                child: Row(
-                  children: [
-                    // Menu Button
-                    _buildIconButton(
-                      icon: Icons.menu,
-                      onPressed: () => _toggleMenu(),
-                    ),
-
-                    // Search Bar
-                    Expanded(
-                      child: GestureDetector(
-                        onTap: () => setState(() => _isSearchVisible = true),
-                        child: Container(
-                          padding: const EdgeInsets.symmetric(horizontal: 16),
-                          child: Row(
-                            children: [
-                              Icon(
-                                Icons.search,
-                                color: Colors.grey[600],
-                                size: 20,
+                MarkerLayer(
+                  markers: _roubos
+                      .map(
+                        (r) => Marker(
+                          point: r.pos,
+                          width: 40,
+                          height: 40,
+                          child: GestureDetector(
+                            onTap: () => _mostrarDetalhes(r),
+                            child: Container(
+                              padding: EdgeInsets.all(2),
+                              decoration: BoxDecoration(
+                                color: AppColors.whiteColor,
+                                shape: BoxShape.circle,
                               ),
-                              const SizedBox(width: 12),
-                              Text(
-                                'Para onde vamos?',
-                                style: TextStyle(
-                                  color: Colors.grey[600],
-                                  fontSize: 16,
+                              child: Container(
+                                decoration: BoxDecoration(
+                                  color: AppColors.primaryColor,
+                                  shape: BoxShape.circle,
+                                  border: Border.all(
+                                      color: AppColors.primaryColor, width: 2),
+                                  boxShadow: [
+                                    BoxShadow(
+                                      color: Colors.black.withOpacity(0.1),
+                                      blurRadius: 4,
+                                      offset: const Offset(0, 2),
+                                    ),
+                                  ],
+                                ),
+                                child: const Center(
+                                  child: Icon(Icons.motorcycle,
+                                      color: Colors.white, size: 22),
                                 ),
                               ),
-                            ],
+                            ),
                           ),
                         ),
-                      ),
-                    ),
-
-                    // Notifications
-                    _buildIconButton(
-                      icon: Icons.notifications_none,
-                      badgeCount: 3,
-                      onPressed: () => _showNotifications(),
-                    ),
-
-                    // Profile
-                    _buildProfileButton(),
-                  ],
-                ),
-              ),
-            ),
-          );
-        },
-      ),
-    );
-  }
-
-  Widget _buildRightSideControls() {
-    return Positioned(
-      right: 16,
-      top: MediaQuery.of(context).padding.top + 88,
-      child: Column(
-        children: [
-          // Map Layers Toggle
-          _buildFloatingButton(
-            icon: _isSatelliteView ? Icons.map : Icons.satellite,
-            label: _isSatelliteView ? 'Mapa' : 'Satélite',
-            onPressed: _toggleMapView,
-          ),
-          const SizedBox(height: 12),
-
-          // Traffic Toggle
-          _buildFloatingButton(
-            icon: _isTrafficVisible ? Icons.traffic : Icons.traffic_outlined,
-            label: 'Trânsito',
-            onPressed: _toggleTraffic,
-            isActive: _isTrafficVisible,
-          ),
-          const SizedBox(height: 12),
-
-          // Locate Me
-          _buildFloatingButton(
-            icon: Icons.my_location,
-            label: 'Localizar',
-            onPressed: _centerOnCurrentLocation,
-          ),
-          const SizedBox(height: 12),
-
-          // Zoom In
-          _buildFloatingButton(
-            icon: Icons.add,
-            label: 'Zoom',
-            onPressed: _zoomIn,
-          ),
-          const SizedBox(height: 12),
-
-          // Zoom Out
-          _buildFloatingButton(
-            icon: Icons.remove,
-            label: 'Zoom',
-            onPressed: _zoomOut,
-          ),
-          const SizedBox(height: 12),
-
-          // Report Incident
-          _buildFloatingButton(
-            icon: Icons.report,
-            label: 'Reportar',
-            onPressed: _reportIncident,
-            color: Colors.red,
-          ),
-        ],
-      ),
-    );
-  }
-
-  Widget _buildBottomNavigation() {
-    return Positioned(
-      bottom: 0,
-      left: 0,
-      right: 0,
-      child: SafeArea(
-        child: Container(
-          height: 80,
-          decoration: BoxDecoration(
-            color: Colors.white,
-            borderRadius: const BorderRadius.only(
-              topLeft: Radius.circular(24),
-              topRight: Radius.circular(24),
-            ),
-            boxShadow: [
-              BoxShadow(
-                color: Colors.black.withOpacity(0.15),
-                blurRadius: 30,
-                offset: const Offset(0, -5),
-              ),
-            ],
-          ),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceAround,
-            children: [
-              _buildNavItem(
-                icon: Icons.home_filled,
-                label: 'Início',
-                isActive: true,
-                onTap: () {},
-              ),
-              _buildNavItem(
-                icon: Icons.explore,
-                label: 'Explorar',
-                onTap: () {},
-              ),
-              _buildNavItem(
-                icon: Icons.navigation,
-                label: 'Navegar',
-                onTap: () => _startNavigation(),
-              ),
-              _buildNavItem(
-                icon: Icons.history,
-                label: 'Histórico',
-                onTap: () {},
-              ),
-              _buildNavItem(
-                icon: Icons.more_horiz,
-                label: 'Mais',
-                onTap: () {},
-              ),
-            ],
-          ),
-        ),
-      ),
-    );
-  }
-
-  Widget _buildInfoPanel() {
-    return Positioned(
-      left: 16,
-      top: MediaQuery.of(context).padding.top + 88,
-      child: AnimatedBuilder(
-        animation: _animationController,
-        builder: (context, child) {
-          return FadeTransition(
-            opacity: _fadeAnimation,
-            child: Container(
-              width: 140,
-              padding: const EdgeInsets.all(12),
-              decoration: BoxDecoration(
-                color: Colors.white.withOpacity(0.95),
-                borderRadius: BorderRadius.circular(16),
-                boxShadow: [
-                  BoxShadow(
-                    color: Colors.black.withOpacity(0.1),
-                    blurRadius: 15,
-                    offset: const Offset(0, 4),
-                  ),
-                ],
-              ),
-              child: Column(
-                children: [
-                  // Speed
-                  Text(
-                    '65',
-                    style: TextStyle(
-                      fontSize: 32,
-                      fontWeight: FontWeight.bold,
-                      color: Colors.blue[700],
-                    ),
-                  ),
-                  Text(
-                    'km/h',
-                    style: TextStyle(
-                      color: Colors.grey[600],
-                      fontSize: 12,
-                    ),
-                  ),
-                  const Divider(height: 16),
-
-                  // ETA
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Icon(Icons.access_time,
-                          size: 14, color: Colors.grey[600]),
-                      const SizedBox(width: 4),
-                      Text(
-                        '25 min',
-                        style: TextStyle(
-                          fontWeight: FontWeight.w600,
-                          color: Colors.grey[800],
-                        ),
-                      ),
-                    ],
-                  ),
-                  const SizedBox(height: 4),
-
-                  // Distance
-                  Text(
-                    '12.5 km',
-                    style: TextStyle(
-                      color: Colors.grey[600],
-                      fontSize: 12,
-                    ),
-                  ),
-                ],
-              ),
-            ),
-          );
-        },
-      ),
-    );
-  }
-
-  Widget _buildSearchOverlay() {
-    return Positioned.fill(
-      child: Container(
-        color: Colors.black.withOpacity(0.5),
-        child: SafeArea(
-          child: Column(
-            children: [
-              // Search Header
-              Container(
-                padding: const EdgeInsets.all(16),
-                color: Colors.white,
-                child: Row(
-                  children: [
-                    IconButton(
-                      icon: const Icon(Icons.arrow_back),
-                      onPressed: () => setState(() => _isSearchVisible = false),
-                    ),
-                    Expanded(
-                      child: TextField(
-                        controller: _searchController,
-                        autofocus: true,
-                        decoration: InputDecoration(
-                          hintText: 'Buscar destino...',
-                          border: InputBorder.none,
-                          suffixIcon: _searchController.text.isNotEmpty
-                              ? IconButton(
-                                  icon: const Icon(Icons.clear),
-                                  onPressed: () => _searchController.clear(),
-                                )
-                              : null,
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-
-              // Search Results
-              Expanded(
-                child: Container(
-                  color: Colors.white,
-                  child: ListView(
-                    children: [
-                      // Recent Searches
-                      if (_recentSearches.isNotEmpty)
-                        _buildSearchSection(
-                          title: 'Buscas recentes',
-                          items: _recentSearches,
-                          icon: Icons.history,
-                        ),
-
-                      // Favorites
-                      _buildSearchSection(
-                        title: 'Favoritos',
-                        items: ['Casa', 'Trabalho', 'Academia'],
-                        icon: Icons.star_border,
-                      ),
-
-                      // Popular Places
-                      _buildSearchSection(
-                        title: 'Locais populares',
-                        items: ['Shopping', 'Aeroporto', 'Centro'],
-                        icon: Icons.place,
-                      ),
-                    ],
-                  ),
-                ),
-              ),
-            ],
-          ),
-        ),
-      ),
-    );
-  }
-
-  Widget _buildSearchSection({
-    required String title,
-    required List<String> items,
-    required IconData icon,
-  }) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Padding(
-          padding: const EdgeInsets.all(16),
-          child: Text(
-            title,
-            style: const TextStyle(
-              fontWeight: FontWeight.w600,
-              fontSize: 14,
-              color: Colors.grey,
-            ),
-          ),
-        ),
-        ...items.map((item) => ListTile(
-              leading: Icon(icon, color: Colors.grey[600]),
-              title: Text(item),
-              trailing: const Icon(Icons.arrow_forward_ios, size: 14),
-              onTap: () => _selectDestination(item),
-            )),
-      ],
-    );
-  }
-
-  // Marker _buildUserMarker({
-  //   required LatLng point,
-  //   required IconData icon,
-  //   required Color color,
-  //   required String label,
-  // }) {
-  //   return Marker(
-  //     point: point,
-  //     width: 80,
-  //     height: 80,
-  //     child: Column(
-  //       spacing: 2,
-  //       children: [
-  //         Container(
-  //           decoration: BoxDecoration(
-  //             color: Colors.white,
-  //             borderRadius: BorderRadius.circular(100),
-  //           ),
-  //           child: Container(
-  //             padding: const EdgeInsets.all(2),
-  //             decoration: BoxDecoration(
-  //               color: AppColors.whiteColor,
-  //               borderRadius: BorderRadius.circular(100),
-  //             ),
-  //             child: UIMyNetworkImageWidget(
-  //               width: 50,
-  //               height: 50,
-  //               radius: 100,
-  //               // imageUrl: FirebaseAuth.instance.currentUser?.photoURL ?? '',
-  //               imageUrl:
-  //                   "https://www.meionews.com/uploads/imagens/2024/11/17/carro-roubado-de-comitiva-do-g20-e-achado-em-favela-no-rio-de-janeiro-922b8399-7578-4726-b6c7-de616d8ebb49.jpg" ??
-  //                       '',
-  //             ),
-  //             // child: const Icon(
-  //             //   Icons.person_pin_circle,
-  //             //   color: Colors.white,
-  //             // ),
-  //           ),
-  //         ),
-  //         Container(
-  //           padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
-  //           decoration: BoxDecoration(
-  //             color: Colors.white,
-  //             borderRadius: BorderRadius.circular(8),
-  //             boxShadow: [
-  //               BoxShadow(
-  //                 color: Colors.black.withValues(alpha: 0.1),
-  //                 offset: const Offset(0, 2),
-  //                 blurRadius: 8,
-  //                 spreadRadius: 0,
-  //               ),
-  //             ],
-  //           ),
-  //           child: Text(
-  //             label,
-  //             style: context.appTextStyles.caption1Style.copyWith(
-  //               fontWeight: FontWeight.bold,
-  //             ),
-  //           ),
-  //         ),
-  //       ],
-  //     ),
-  //   );
-  // }
-
-  Marker _buildDestinationMarker() {
-    return Marker(
-      point: _destinationLocation!,
-      width: 70,
-      height: 70,
-      child: Column(
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          Container(
-            padding: const EdgeInsets.all(10),
-            decoration: BoxDecoration(
-              color: Colors.red,
-              shape: BoxShape.circle,
-              boxShadow: [
-                BoxShadow(
-                  color: Colors.red.withOpacity(0.5),
-                  blurRadius: 10,
-                  spreadRadius: 2,
+                        // (r) => Marker(
+                        //   point: r.pos,
+                        //   width: 40,
+                        //   height: 40,
+                        //   child: GestureDetector(
+                        //     onTap: () => _mostrarDetalhes(r),
+                        //     child: const Icon(
+                        //       Icons.location_on,
+                        //       color: Colors.red,
+                        //       size: 36,
+                        //     ),
+                        //   ),
+                        // ),
+                      )
+                      .toList(),
                 ),
               ],
             ),
-            child: const Icon(Icons.location_on, color: Colors.white, size: 20),
+            onPanelSlide: (pos) {
+              setState(() {
+                _panelPosition = pos;
+              });
+            },
           ),
-          const SizedBox(height: 4),
-          Container(
-            padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
-            decoration: BoxDecoration(
-              color: Colors.white,
-              borderRadius: BorderRadius.circular(8),
+
+          Positioned(
+            top: MediaQuery.of(context).padding.top + 12,
+            left: 12,
+            child: AnimatedSlide(
+              // só inicia a saída quando o painel >= 90%
+              offset:
+                  _panelPosition >= 0.7 ? const Offset(-1.5, 0) : Offset.zero,
+              duration: const Duration(milliseconds: 350),
+              curve: Curves.easeInOut,
+              child: FloatingActionButton(
+                heroTag: 'menu_fab',
+                elevation: 3,
+                backgroundColor: Colors.white,
+                foregroundColor: Colors.black,
+                child: const Icon(Icons.menu, size: 30),
+                onPressed: () {
+                  _abrirMenuBottomSheet(context);
+                },
+              ),
             ),
-            child: const Text(
-              'Destino',
-              style: TextStyle(
-                fontSize: 10,
-                fontWeight: FontWeight.w600,
-                color: Colors.red,
+          ),
+
+          // Card com informação da localização
+          Positioned(
+            top: MediaQuery.of(context).padding.top + 12,
+            right: 16,
+            child: AnimatedSlide(
+              offset:
+                  _panelPosition >= 0.7 ? const Offset(1.5, 0) : Offset.zero,
+              duration: const Duration(milliseconds: 350),
+              curve: Curves.easeInOut,
+              child: Material(
+                color: Colors.transparent, // não interfere no fundo
+                borderRadius: BorderRadius.circular(20),
+                child: InkWell(
+                  borderRadius: BorderRadius.circular(20),
+                  onTap: () {
+                    // ação ao clicar
+                  },
+                  child: Container(
+                    padding: const EdgeInsets.symmetric(
+                        horizontal: 16, vertical: 10),
+                    decoration: BoxDecoration(
+                      color: Colors.white,
+                      borderRadius: BorderRadius.circular(20),
+                      border: Border.all(color: Colors.grey.shade300),
+                    ),
+                    child: Row(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        // Ícone dentro de círculo colorido
+                        Container(
+                          width: 26,
+                          height: 26,
+                          decoration: BoxDecoration(
+                            shape: BoxShape.circle,
+                            color: Colors.red.withOpacity(0.2),
+                          ),
+                          child: const Center(
+                            child: Icon(Icons.location_on,
+                                color: Colors.red, size: 16),
+                          ),
+                        ),
+                        const SizedBox(width: 8),
+                        const Text(
+                          "Barueri",
+                          style: TextStyle(
+                            fontWeight: FontWeight.w600,
+                            fontSize: 16,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+              ),
+            ),
+          ),
+
+          Positioned(
+            bottom: 210,
+            right: 16,
+            child: AnimatedSlide(
+              offset:
+                  _panelPosition >= 0.01 ? const Offset(2.0, 0) : Offset.zero,
+              duration: const Duration(milliseconds: 350),
+              curve: Curves.easeInOut,
+              child: FloatingActionButton(
+                heroTag: 'center_fab',
+                elevation: 2,
+                backgroundColor: AppColors.primaryColor,
+                foregroundColor: Colors.white,
+                child: const Icon(Icons.my_location, size: 28),
+                onPressed: () {
+                  _mapController.move(LatLng(-23.5107, -46.8764), 13.0);
+                },
+              ),
+            ),
+          ),
+
+          // Botão alerta amarelo logo abaixo
+          Positioned(
+            bottom: 140, // fica abaixo do center fab
+            right: 16,
+            child: AnimatedSlide(
+              offset:
+                  _panelPosition >= 0.001 ? const Offset(2.0, 0) : Offset.zero,
+              duration: const Duration(milliseconds: 350),
+              curve: Curves.easeInOut,
+              child: FloatingActionButton(
+                heroTag: 'alert_fab',
+                elevation: 2,
+                backgroundColor: Colors.white,
+                foregroundColor: Colors.amber,
+                // child: const Icon(Icons.warning, size: 28),
+                child: SvgPicture.asset(
+                  R.images.svgMapInfo,
+                  width: 28,
+                ),
+                onPressed: () {
+                  // TODO: ação do alerta
+                  debugPrint("Botão de alerta clicado!");
+                  showModalBottomSheet(
+                    context: context,
+                    shape: const RoundedRectangleBorder(
+                      borderRadius:
+                          BorderRadius.vertical(top: Radius.circular(20)),
+                    ),
+                    builder: (context) => _bottomSheetInfoButton(),
+                  );
+                },
+              ),
+            ),
+          ),
+
+          // Vai aparecer em determinado momento
+          Positioned(
+            bottom: 150, // ajuste conforme altura do seu SlidingUpPanel
+            left: 0,
+            right: 0,
+            child: Center(
+              child: Container(
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+                decoration: BoxDecoration(
+                  color: Colors.white,
+                  borderRadius: BorderRadius.circular(20),
+                  border: Border.all(color: Colors.grey.shade300),
+                  boxShadow: [
+                    BoxShadow(
+                      color: Colors.black.withOpacity(0.1),
+                      blurRadius: 6,
+                      offset: const Offset(0, 3),
+                    ),
+                  ],
+                ),
+                child: Text(
+                  "Total de ocorrências: 12", // variável dinâmica
+                  style: const TextStyle(
+                    fontSize: 14,
+                    fontWeight: FontWeight.w500,
+                    color: Colors.black87,
+                  ),
+                ),
               ),
             ),
           ),
@@ -756,514 +296,314 @@ class _HomeViewState extends State<HomeView> with TickerProviderStateMixin {
     );
   }
 
-  List<Marker> _buildOccurrences() {
-    return [
-      Marker(
-        point: const LatLng(37.7800, -122.4180),
-        width: 90,
-        height: 90,
-        child: Column(
-          children: [
-            Container(
-              padding: const EdgeInsets.all(6),
-              decoration: BoxDecoration(
-                color: AppColors.primaryColor.withValues(alpha: 0.9),
-                shape: BoxShape.circle,
-                border: Border.all(color: Colors.white, width: 2),
-              ),
-              child: const Center(
-                child: Icon(Icons.motorcycle, size: 22, color: Colors.white),
-              ),
+  Widget _bottomSheetInfoButton() {
+    return Padding(
+      padding: const EdgeInsets.all(20),
+      child: Column(
+        spacing: 20,
+        mainAxisSize: MainAxisSize.min,
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          const Text(
+            "O que você deseja fazer",
+            style: TextStyle(
+              fontSize: 18,
+              fontWeight: FontWeight.bold,
             ),
-            Container(
-              padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
-              decoration: BoxDecoration(
-                color: Colors.white,
-                borderRadius: BorderRadius.circular(8),
-                boxShadow: [
-                  BoxShadow(
-                    color: Colors.black.withValues(alpha: 0.1),
-                    offset: const Offset(0, 2),
-                    blurRadius: 8,
-                    spreadRadius: 0,
+          ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceAround,
+            children: [
+              Container(
+                width: 90,
+                height: 90,
+                decoration: BoxDecoration(
+                  // color: Colors.red, // cor de fundo
+                  color: AppColors.lightGreyColor30,
+                  shape: BoxShape.circle, // deixa o container circular
+                  border: BoxBorder.all(
+                    color: AppColors.lightGreyColor20,
+                    width: 1,
                   ),
-                ],
-              ),
-              child: Text(
-                "DND-0171",
-                style: context.appTextStyles.caption1Style.copyWith(
-                  fontWeight: FontWeight.bold,
-                  fontSize: 10,
+                ),
+                child: Padding(
+                  padding: const EdgeInsets.all(12),
+                  child: SvgPicture.asset(
+                    R.images.svgPoliceman,
+                  ),
                 ),
               ),
+              Container(
+                width: 90,
+                height: 90,
+                decoration: BoxDecoration(
+                  // color: Colors.red, // cor de fundo
+                  color: AppColors.lightGreyColor30,
+                  shape: BoxShape.circle, // deixa o container circular
+                  border: BoxBorder.all(
+                    color: AppColors.lightGreyColor20,
+                    width: 1,
+                  ),
+                ),
+                child: Padding(
+                  padding: const EdgeInsets.all(12),
+                  child: SvgPicture.asset(
+                    R.images.svgMapBell,
+                  ),
+                ),
+              ),
+              Container(
+                width: 90,
+                height: 90,
+                decoration: BoxDecoration(
+                  color: AppColors.lightGreyColor30,
+                  shape: BoxShape.circle,
+                  border: BoxBorder.all(
+                    color: AppColors.lightGreyColor20,
+                    width: 1,
+                  ),
+                ),
+                child: Padding(
+                  padding: const EdgeInsets.all(12),
+                  child: SvgPicture.asset(
+                    R.images.svgMapAddNewProd,
+                  ),
+                ),
+              ),
+            ],
+          ),
+          SizedBox(height: 20),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildPanel() {
+    return Column(
+      children: [
+        Container(
+          margin: const EdgeInsets.symmetric(vertical: 8),
+          height: 4,
+          width: 40,
+          decoration: BoxDecoration(
+            color: Colors.grey[400],
+            borderRadius: BorderRadius.circular(2),
+          ),
+        ),
+        // Padding(
+        //   padding: const EdgeInsets.symmetric(horizontal: 16),
+        //   child: TextField(
+        //     decoration: InputDecoration(
+        //       hintText: "Buscar ocorrência...",
+        //       prefixIcon: const Icon(Icons.search),
+        //       border: OutlineInputBorder(
+        //         borderRadius: BorderRadius.circular(12),
+        //       ),
+        //     ),
+        //   ),
+        // ),
+        Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 16),
+          child: Container(
+            decoration: BoxDecoration(
+              color: Colors.white, // fundo do container externo
+              borderRadius: BorderRadius.circular(24),
+              border: Border.all(
+                color: Colors.grey.shade300,
+                width: 1.2,
+              ),
+              boxShadow: [
+                BoxShadow(
+                  color: Colors.black.withOpacity(0.05),
+                  blurRadius: 6,
+                  offset: const Offset(0, 3),
+                ),
+              ],
             ),
+            child: Row(
+              children: [
+                const SizedBox(width: 12),
+                Icon(Icons.search, color: Colors.grey.shade600),
+                const SizedBox(width: 8),
+                Expanded(
+                  child: TextField(
+                    decoration: const InputDecoration(
+                      hintText: "Buscar ocorrência...",
+                      border: InputBorder.none, // sem borda
+                      filled: false, // sem background
+                      isDense: true,
+                      contentPadding: EdgeInsets.symmetric(vertical: 14),
+                    ),
+                    style: const TextStyle(fontSize: 16),
+                    onSubmitted: (query) {
+                      // TODO: aplicar filtro
+                    },
+                  ),
+                ),
+                IconButton(
+                  icon: Icon(Icons.mic, color: Colors.grey.shade600),
+                  onPressed: () {
+                    // TODO: integrar reconhecimento de voz
+                  },
+                ),
+              ],
+            ),
+          ),
+        ),
+
+        const SizedBox(height: 12),
+        // Expanded(
+        //   child: ListView.builder(
+        //     itemCount: _roubos.length,
+        //     itemBuilder: (context, index) {
+        //       final r = _roubos[index];
+        //       return ListTile(
+        //         leading: const Icon(Icons.warning, color: Colors.red),
+        //         title: Text(r.titulo),
+        //         subtitle:
+        //             Text("${_formatarDataHora(r.dataHora)} • ${r.descricao}"),
+        //         onTap: () {
+        //           _mapController.move(r.pos, 15.0);
+        //         },
+        //       );
+        //     },
+        //   ),
+        // ),
+        Expanded(
+          child: ListView.builder(
+            itemCount: _roubos.length,
+            padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+            itemBuilder: (context, index) {
+              final r = _roubos[index];
+              return Container(
+                margin: const EdgeInsets.symmetric(vertical: 6),
+                padding: const EdgeInsets.all(14),
+                decoration: BoxDecoration(
+                  color: Colors.white,
+                  borderRadius: BorderRadius.circular(12),
+                  border: Border.all(
+                    color: Colors.grey.shade300,
+                    width: 1,
+                  ),
+                ),
+                child: Row(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    // Ícone em destaque
+                    Container(
+                      decoration: BoxDecoration(
+                        color: Colors.red.withOpacity(0.1),
+                        borderRadius: BorderRadius.circular(8),
+                      ),
+                      padding: const EdgeInsets.all(8),
+                      child: const Icon(Icons.warning,
+                          color: Colors.red, size: 26),
+                    ),
+
+                    const SizedBox(width: 12),
+
+                    // Texto
+                    Expanded(
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          // Título
+                          Text(
+                            r.titulo,
+                            style: Theme.of(context)
+                                .textTheme
+                                .titleMedium
+                                ?.copyWith(
+                                  fontWeight: FontWeight.w600,
+                                ),
+                          ),
+
+                          const SizedBox(height: 4),
+
+                          // Data/hora
+                          Text(
+                            _formatarDataHora(r.dataHora),
+                            style:
+                                Theme.of(context).textTheme.bodySmall?.copyWith(
+                                      color: Colors.grey.shade600,
+                                    ),
+                          ),
+
+                          const SizedBox(height: 6),
+
+                          // Descrição
+                          Text(
+                            r.descricao,
+                            style: Theme.of(context).textTheme.bodyMedium,
+                          ),
+                        ],
+                      ),
+                    ),
+                  ],
+                ),
+              );
+            },
+          ),
+        ),
+      ],
+    );
+  }
+
+  void _abrirMenuBottomSheet(BuildContext context) {
+    showModalBottomSheet(
+      context: context,
+      isScrollControlled: true, // permite controlar altura
+      backgroundColor: Colors.white,
+      shape: const RoundedRectangleBorder(
+        borderRadius: BorderRadius.vertical(top: Radius.circular(24)),
+      ),
+      builder: (context) {
+        return const FractionallySizedBox(
+          heightFactor: 0.8, // ocupa 90% da tela
+          child: ProfilePage(),
+        );
+      },
+    );
+  }
+
+  void _mostrarDetalhes(RouboMarker r) {
+    showModalBottomSheet(
+      context: context,
+      builder: (_) => Padding(
+        padding: const EdgeInsets.all(16),
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(r.titulo,
+                style: Theme.of(context)
+                    .textTheme
+                    .titleMedium
+                    ?.copyWith(fontWeight: FontWeight.bold)),
+            const SizedBox(height: 8),
+            Text(_formatarDataHora(r.dataHora)),
+            const SizedBox(height: 8),
+            Text(r.descricao),
           ],
         ),
       ),
-      // Add more traffic markers as needed
-    ];
-  }
-
-//  Gasolina
-  List<Marker> _buildPOIMarkers() {
-    return [
-      Marker(
-        point: const LatLng(37.7850, -122.4160),
-        width: 50,
-        height: 50,
-        child: Container(
-          padding: const EdgeInsets.all(8),
-          decoration: BoxDecoration(
-            color: Colors.green,
-            borderRadius: BorderRadius.circular(12),
-            boxShadow: [
-              BoxShadow(
-                color: Colors.green.withValues(alpha: 0.3),
-                blurRadius: 8,
-              ),
-            ],
-          ),
-          child: const Column(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              Icon(Icons.local_gas_station, color: Colors.white, size: 16),
-              SizedBox(height: 2),
-              Text(
-                'R\$ 5,89',
-                style: TextStyle(
-                  color: Colors.white,
-                  fontSize: 8,
-                  fontWeight: FontWeight.bold,
-                ),
-              ),
-            ],
-          ),
-        ),
-      ),
-    ];
-  }
-
-  Widget _buildIconButton({
-    required IconData icon,
-    int badgeCount = 0,
-    required VoidCallback onPressed,
-  }) {
-    return Stack(
-      children: [
-        Container(
-          width: 40,
-          height: 40,
-          decoration: BoxDecoration(
-            shape: BoxShape.circle,
-            color: Colors.grey[100],
-          ),
-          child: IconButton(
-            icon: Icon(icon, size: 20),
-            onPressed: onPressed,
-            splashRadius: 20,
-          ),
-        ),
-        if (badgeCount > 0)
-          Positioned(
-            right: 0,
-            top: 0,
-            child: Container(
-              padding: const EdgeInsets.all(2),
-              decoration: const BoxDecoration(
-                color: Colors.red,
-                shape: BoxShape.circle,
-              ),
-              constraints: const BoxConstraints(minWidth: 16, minHeight: 16),
-              child: Text(
-                badgeCount.toString(),
-                style: const TextStyle(
-                  color: Colors.white,
-                  fontSize: 10,
-                  fontWeight: FontWeight.bold,
-                ),
-                textAlign: TextAlign.center,
-              ),
-            ),
-          ),
-      ],
     );
   }
 
-  Widget _buildProfileButton() {
-    return GestureDetector(
-      onTap: () => _showProfile(),
-      child: Container(
-        width: 40,
-        height: 40,
-        decoration: BoxDecoration(
-          shape: BoxShape.circle,
-          border: Border.all(color: Colors.blue, width: 2),
-        ),
-        child: ClipOval(
-          child: Image.asset(
-            'assets/images/profile_placeholder.jpg',
-            fit: BoxFit.cover,
-          ),
-        ),
-      ),
-    );
+  String _formatarDataHora(DateTime dt) {
+    final dia =
+        '${dt.day.toString().padLeft(2, '0')}/${dt.month.toString().padLeft(2, '0')}/${dt.year}';
+    final hora =
+        '${dt.hour.toString().padLeft(2, '0')}:${dt.minute.toString().padLeft(2, '0')}';
+    return '$dia às $hora';
   }
+}
 
-  Widget _buildFloatingButton({
-    required IconData icon,
-    required String label,
-    required VoidCallback onPressed,
-    Color color = Colors.blue,
-    bool isActive = false,
-  }) {
-    return Column(
-      mainAxisSize: MainAxisSize.min,
-      children: [
-        Container(
-          width: 44,
-          height: 44,
-          decoration: BoxDecoration(
-            color: isActive ? color : Colors.white,
-            shape: BoxShape.circle,
-            boxShadow: [
-              BoxShadow(
-                color: Colors.black.withOpacity(0.1),
-                blurRadius: 10,
-                offset: const Offset(0, 4),
-              ),
-            ],
-            border: isActive ? null : Border.all(color: Colors.grey[200]!),
-          ),
-          child: IconButton(
-            icon: Icon(
-              icon,
-              size: 20,
-              color: isActive ? Colors.white : color,
-            ),
-            onPressed: onPressed,
-          ),
-        ),
-        const SizedBox(height: 4),
-        Text(
-          label,
-          style: TextStyle(
-            fontSize: 10,
-            color: Colors.grey[700],
-          ),
-        ),
-      ],
-    );
-  }
+class RouboMarker {
+  final String titulo;
+  final DateTime dataHora;
+  final String descricao;
+  final LatLng pos;
 
-  Widget _buildNavItem({
-    required IconData icon,
-    required String label,
-    bool isActive = false,
-    required VoidCallback onTap,
-  }) {
-    return GestureDetector(
-      onTap: onTap,
-      child: Column(
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          Container(
-            padding: const EdgeInsets.all(8),
-            decoration: BoxDecoration(
-              color:
-                  isActive ? Colors.blue.withOpacity(0.1) : Colors.transparent,
-              shape: BoxShape.circle,
-            ),
-            child: Icon(
-              icon,
-              color: isActive ? Colors.blue : Colors.grey[600],
-              size: 24,
-            ),
-          ),
-          const SizedBox(height: 4),
-          Text(
-            label,
-            style: TextStyle(
-              fontSize: 12,
-              color: isActive ? Colors.blue : Colors.grey[600],
-              fontWeight: isActive ? FontWeight.w600 : FontWeight.normal,
-            ),
-          ),
-        ],
-      ),
-    );
-  }
-
-  // Action Methods
-  void _toggleMenu() {
-    HapticFeedback.lightImpact();
-    // TODO: Open drawer or side menu
-  }
-
-  void _toggleMapView() {
-    setState(() {
-      _isSatelliteView = !_isSatelliteView;
-    });
-    HapticFeedback.lightImpact();
-  }
-
-  void _toggleTraffic() {
-    setState(() {
-      _isTrafficVisible = !_isTrafficVisible;
-    });
-    HapticFeedback.lightImpact();
-  }
-
-  void _centerOnCurrentLocation() {
-    _flutterMapController.move(_currentLocation, 16.0);
-    HapticFeedback.lightImpact();
-  }
-
-  void _zoomIn() {
-    setState(() {
-      _zoomLevel = (_zoomLevel + 1).clamp(10.0, 18.0);
-    });
-    _flutterMapController.move(_currentLocation, _zoomLevel);
-    HapticFeedback.lightImpact();
-  }
-
-  void _zoomOut() {
-    setState(() {
-      _zoomLevel = (_zoomLevel - 1).clamp(10.0, 18.0);
-    });
-    _flutterMapController.move(_currentLocation, _zoomLevel);
-    HapticFeedback.lightImpact();
-  }
-
-  void _reportIncident() {
-    // TODO: Show incident reporting dialog
-    HapticFeedback.lightImpact();
-  }
-
-  void _showNotifications() {
-    // TODO: Show notifications panel
-    HapticFeedback.lightImpact();
-  }
-
-  void _showProfile() {
-    // TODO: Navigate to profile
-    HapticFeedback.lightImpact();
-  }
-
-  void _startNavigation() {
-    // TODO: Start navigation to destination
-    HapticFeedback.lightImpact();
-  }
-
-  void _selectDestination(String destination) {
-    setState(() {
-      _isSearchVisible = false;
-      // TODO: Set destination and calculate route
-    });
-    HapticFeedback.lightImpact();
-  }
-
-  // Widget _buildSlidingPanel() {
-  //   return Container(
-  //     decoration: BoxDecoration(
-  //       color: Colors.white,
-  //       borderRadius: const BorderRadius.only(
-  //         topLeft: Radius.circular(24),
-  //         topRight: Radius.circular(24),
-  //       ),
-  //       boxShadow: [
-  //         BoxShadow(
-  //           color: Colors.black.withOpacity(0.2),
-  //           blurRadius: 20,
-  //           spreadRadius: 0,
-  //           offset: const Offset(0, -5),
-  //         ),
-  //       ],
-  //     ),
-  //     child: Column(
-  //       children: [
-  //         // Handle do panel
-  //         Padding(
-  //           padding: const EdgeInsets.only(top: 16),
-  //           child: Center(
-  //             child: Container(
-  //               width: 40,
-  //               height: 4,
-  //               decoration: BoxDecoration(
-  //                 color: Colors.grey[300],
-  //                 borderRadius: BorderRadius.circular(2),
-  //               ),
-  //             ),
-  //           ),
-  //         ),
-
-  //         // Conteúdo do panel
-  //         Expanded(
-  //           child: ListView(
-  //             padding: const EdgeInsets.all(20),
-  //             children: [
-  //               const SizedBox(height: 16),
-
-  //               // Título
-  //               const Text(
-  //                 'Localização',
-  //                 style: TextStyle(
-  //                   fontSize: 28,
-  //                   fontWeight: FontWeight.bold,
-  //                   color: Colors.black87,
-  //                 ),
-  //               ),
-
-  //               const SizedBox(height: 8),
-
-  //               // Descrição
-  //               Text(
-  //                 'Área Central de São Paulo',
-  //                 style: TextStyle(
-  //                   fontSize: 16,
-  //                   color: Colors.grey[600],
-  //                 ),
-  //               ),
-
-  //               const SizedBox(height: 32),
-
-  //               // Informações
-  //               _buildInfoItem(
-  //                 icon: Icons.location_pin,
-  //                 title: 'Coordenadas',
-  //                 subtitle: '-23.5505° S, -46.6333° W',
-  //               ),
-
-  //               _buildInfoItem(
-  //                 icon: Icons.zoom_in,
-  //                 title: 'Zoom atual',
-  //                 subtitle:
-  //                     '${_mapController.camera.zoom?.toStringAsFixed(1) ?? '13.0'}x',
-  //               ),
-
-  //               _buildInfoItem(
-  //                 icon: Icons.map,
-  //                 title: 'Tipo de mapa',
-  //                 subtitle: 'OpenStreetMap',
-  //               ),
-
-  //               const SizedBox(height: 32),
-
-  //               // Ações
-  //               _buildActionButton(
-  //                 icon: Icons.my_location,
-  //                 label: 'Centralizar',
-  //                 onPressed: _centerMap,
-  //               ),
-
-  //               _buildActionButton(
-  //                 icon: Icons.fullscreen,
-  //                 label: 'Expandir mapa',
-  //                 onPressed: _expandMap,
-  //               ),
-  //             ],
-  //           ),
-  //         ),
-  //       ],
-  //     ),
-  //   );
-  // }
-
-  // Widget _buildInfoItem({
-  //   required IconData icon,
-  //   required String title,
-  //   required String subtitle,
-  // }) {
-  //   return Padding(
-  //     padding: const EdgeInsets.symmetric(vertical: 12),
-  //     child: Row(
-  //       children: [
-  //         Container(
-  //           width: 40,
-  //           height: 40,
-  //           decoration: BoxDecoration(
-  //             color: Colors.blue.withOpacity(0.1),
-  //             borderRadius: BorderRadius.circular(12),
-  //           ),
-  //           child: Icon(
-  //             icon,
-  //             color: Colors.blue,
-  //             size: 20,
-  //           ),
-  //         ),
-  //         const SizedBox(width: 16),
-  //         Expanded(
-  //           child: Column(
-  //             crossAxisAlignment: CrossAxisAlignment.start,
-  //             children: [
-  //               Text(
-  //                 title,
-  //                 style: const TextStyle(
-  //                   fontSize: 16,
-  //                   fontWeight: FontWeight.w500,
-  //                   color: Colors.black87,
-  //                 ),
-  //               ),
-  //               const SizedBox(height: 4),
-  //               Text(
-  //                 subtitle,
-  //                 style: TextStyle(
-  //                   fontSize: 14,
-  //                   color: Colors.grey[600],
-  //                 ),
-  //               ),
-  //             ],
-  //           ),
-  //         ),
-  //       ],
-  //     ),
-  //   );
-  // }
-
-  // Widget _buildActionButton({
-  //   required IconData icon,
-  //   required String label,
-  //   required VoidCallback onPressed,
-  // }) {
-  //   return Container(
-  //     margin: const EdgeInsets.only(bottom: 12),
-  //     decoration: BoxDecoration(
-  //       color: Colors.blue,
-  //       borderRadius: BorderRadius.circular(12),
-  //     ),
-  //     child: Material(
-  //       color: Colors.transparent,
-  //       child: InkWell(
-  //         onTap: onPressed,
-  //         borderRadius: BorderRadius.circular(12),
-  //         child: Padding(
-  //           padding: const EdgeInsets.all(16),
-  //           child: Row(
-  //             children: [
-  //               Icon(
-  //                 icon,
-  //                 color: Colors.white,
-  //                 size: 20,
-  //               ),
-  //               const SizedBox(width: 16),
-  //               Text(
-  //                 label,
-  //                 style: const TextStyle(
-  //                   color: Colors.white,
-  //                   fontSize: 16,
-  //                   fontWeight: FontWeight.w500,
-  //                 ),
-  //               ),
-  //               const Spacer(),
-  //               const Icon(
-  //                 Icons.chevron_right,
-  //                 color: Colors.white,
-  //                 size: 20,
-  //               ),
-  //             ],
-  //           ),
-  //         ),
-  //       ),
-  //     ),
-  //   );
-  // }
+  RouboMarker(this.titulo, this.dataHora, this.descricao, this.pos);
 }

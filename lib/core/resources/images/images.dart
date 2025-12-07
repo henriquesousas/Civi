@@ -35,6 +35,10 @@ class Images {
   String svgIconMotorcycle = 'assets/svg/icon_motorcycle.svg';
   String svgFilter = 'assets/svg/filter_v2.svg';
   String svgMapInfo = 'assets/svg/map_info.svg';
+  String svgPoliceman = 'assets/svg/policeman.svg';
+  String svgMapBell = 'assets/svg/map_bell.svg';
+  String svgMapAddNewProd = 'assets/svg/map_add_new_prod.svg';
+  String svgMapSettings = 'assets/svg/map_settings.svg';
   //Images
   String successLight = 'assets/images/success.png';
   String successDark = 'assets/images/success_dark.png';
