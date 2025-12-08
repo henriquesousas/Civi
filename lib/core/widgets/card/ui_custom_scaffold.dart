@@ -17,6 +17,7 @@ class UICustomScaffold extends StatelessWidget {
   final bool centerTitle;
   final VoidCallback? onBackButtonTap;
   final Widget? floatingActionButton;
+  final Widget? bottomNavigationBar;
 
   const UICustomScaffold({
     super.key,
@@ -31,6 +32,7 @@ class UICustomScaffold extends StatelessWidget {
     this.centerTitle = false,
     this.onBackButtonTap,
     this.floatingActionButton,
+    this.bottomNavigationBar,
   });
 
   @override
@@ -39,6 +41,7 @@ class UICustomScaffold extends StatelessWidget {
       statusBarColor: appBarBgColor ?? Colors.white,
       systemNavigationBarColor: appBarBgColor ?? Colors.white,
       child: Scaffold(
+        bottomNavigationBar: bottomNavigationBar,
         backgroundColor: bgColor ?? const Color(0xFFF8FAFC),
         resizeToAvoidBottomInset: false,
         appBar: hideAppBar == true

@@ -1,4 +1,5 @@
 import 'package:deehelp/core/components/profile_image_with_upload_button_widget.dart';
+import 'package:deehelp/core/components/ui_my_network_image_widget.dart';
 import 'package:deehelp/core/theme/app_text_styles.dart';
 import 'package:deehelp/core/widgets/card/ui_custom_app_card.dart';
 import 'package:deehelp/features/my_products/domain/entities/product.dart';
@@ -30,6 +31,9 @@ class MyProductsListTileCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return UICustomAppCard(
       margin: margin ?? const EdgeInsets.symmetric(vertical: 5),
+      borderColor: AppColors.greyColor,
+      radius: 9,
+      borderWidth: 1,
       padding: EdgeInsets.zero,
       child: Material(
         color: Colors.transparent,
@@ -49,10 +53,10 @@ class MyProductsListTileCard extends StatelessWidget {
               spacing: 10,
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                ProfileImageWithUploadButtonWidget(
+                UIMyNetworkImageWidget(
                   imageUrl: product.image?.value ?? '',
-                  imageAlt: "Imagem do veiculo",
-                  showUploadIcon: true,
+                  width: 60,
+                  height: 60,
                 ),
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -77,6 +81,11 @@ class MyProductsListTileCard extends StatelessWidget {
                   ],
                 ),
                 const Spacer(),
+                Container(
+                  width: 1,
+                  height: 40,
+                  color: AppColors.lightGreyColor20,
+                ),
                 StatusBadgeWidget(status: product.status),
               ],
             ),

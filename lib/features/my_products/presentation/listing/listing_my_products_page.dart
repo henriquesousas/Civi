@@ -1,4 +1,5 @@
 import 'package:deehelp/core/components/dialogs/dialog_extension.dart';
+import 'package:deehelp/core/theme/app_text_styles.dart';
 import 'package:deehelp/features/base_page.dart';
 import 'package:deehelp/features/base_page_state.dart';
 import 'package:deehelp/features/my_products/presentation/listing/components/listing_my_products_shimmer.dart';
@@ -78,23 +79,50 @@ class _ProductListingPage extends BasePageState<ProductListingCubit,
   }
 
   @override
+  Widget? buildBottomNavigationBar() {
+    return SafeArea(
+      child: Padding(
+        padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 20),
+        child: UIElevatedIconButton(
+          icon: const Icon(
+            Icons.add,
+            color: AppColors.whiteColor,
+          ),
+          text: "Adiconar novo",
+          press: () => _add(),
+        ),
+      ),
+    );
+  }
+
+  @override
   Widget buildPage(BuildContext context, ListProductState state) {
     return state.maybeWhen(
       success: (products, filter) {
         return Column(
           spacing: 5,
           children: [
-            UIElevatedIconButton(
-              icon: const Icon(
-                Icons.add_circle,
-                color: AppColors.primaryColor,
+            // UIElevatedIconButton(
+            //   icon: const Icon(
+            //     Icons.add,
+            //     color: AppColors.whiteColor,
+            //   ),
+            //   text: "Adiconar novo",
+            //   press: () => _add(),
+            // ),
+            const Text(
+              "Por questões de segurança, todo bem cadastrado passa por uma validação interna antes de ser liberado no aplicativo.",
+              textAlign: TextAlign.center,
+              style: TextStyle(
+                color: AppColors.textSecondary,
+                letterSpacing: 1.2,
               ),
-              text: "Novo produto",
-              bgColor: AppColors.whiteColor,
-              borderColor: AppColors.primaryColor,
-              textColor: AppColors.primaryColor,
-              press: () => _add(),
+              // style: context.appTextStyles.appBarTitle.copyWith(
+              //   // color: AppColors.textSecondary,
+              //   letterSpacing: 1.2,
+              // ),
             ),
+            const SizedBox(height: 5),
             Expanded(
               child: Column(
                 mainAxisSize: MainAxisSize.min,
@@ -116,7 +144,7 @@ class _ProductListingPage extends BasePageState<ProductListingCubit,
                       },
                     ),
                   ),
-                  StatusInfoText(onLearnMoreTap: () {}),
+                  // StatusInfoText(onLearnMoreTap: () {}),
                 ],
               ),
             ),

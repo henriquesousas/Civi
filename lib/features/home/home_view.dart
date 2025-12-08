@@ -259,12 +259,12 @@ class _HomeViewState extends State<HomeView> with TickerProviderStateMixin {
                       .map(
                         (r) => Marker(
                           point: r.pos,
-                          width: r.placaVeiculo != null ? 90 : 0,
+                          width: 90,
                           height: 35,
                           child: GestureDetector(
                             onTap: () => _mostrarDetalhes(r),
                             child: WazeStyleMarker(
-                              label: r.placaVeiculo ?? '',
+                              label: r.placaVeiculo ?? 'ABC-7245',
                               icon: r.icone,
                             ),
                           ),
@@ -589,61 +589,94 @@ class _HomeViewState extends State<HomeView> with TickerProviderStateMixin {
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [
-              Container(
-                width: 90,
-                height: 90,
-                decoration: BoxDecoration(
-                  // color: Colors.red, // cor de fundo
-                  color: AppColors.lightGreyColor30,
-                  shape: BoxShape.circle, // deixa o container circular
-                  border: BoxBorder.all(
-                    color: AppColors.lightGreyColor20,
-                    width: 1,
+              Column(
+                children: [
+                  Container(
+                    width: 90,
+                    height: 90,
+                    decoration: BoxDecoration(
+                      // color: Colors.red, // cor de fundo
+                      color: AppColors.lightGreyColor30,
+                      shape: BoxShape.circle, // deixa o container circular
+                      border: BoxBorder.all(
+                        color: AppColors.lightGreyColor20,
+                        width: 1,
+                      ),
+                    ),
+                    child: Padding(
+                      padding: const EdgeInsets.all(12),
+                      child: SvgPicture.asset(
+                        R.images.svgPoliceman,
+                      ),
+                    ),
                   ),
-                ),
-                child: Padding(
-                  padding: const EdgeInsets.all(12),
-                  child: SvgPicture.asset(
-                    R.images.svgPoliceman,
-                  ),
-                ),
+                  Text(
+                    "Policia",
+                    style: TextStyle(
+                      fontWeight: FontWeight.bold,
+                      color: AppColors.darkGreyColor10,
+                    ),
+                  )
+                ],
               ),
-              Container(
-                width: 90,
-                height: 90,
-                decoration: BoxDecoration(
-                  // color: Colors.red, // cor de fundo
-                  color: AppColors.lightGreyColor30,
-                  shape: BoxShape.circle, // deixa o container circular
-                  border: BoxBorder.all(
-                    color: AppColors.lightGreyColor20,
-                    width: 1,
+              Column(
+                children: [
+                  Container(
+                    width: 90,
+                    height: 90,
+                    decoration: BoxDecoration(
+                      // color: Colors.red, // cor de fundo
+                      color: AppColors.lightGreyColor30,
+                      shape: BoxShape.circle, // deixa o container circular
+                      border: BoxBorder.all(
+                        color: AppColors.lightGreyColor20,
+                        width: 1,
+                      ),
+                    ),
+                    child: Padding(
+                      padding: const EdgeInsets.all(12),
+                      child: SvgPicture.asset(
+                        R.images.svgMapBell,
+                      ),
+                    ),
                   ),
-                ),
-                child: Padding(
-                  padding: const EdgeInsets.all(12),
-                  child: SvgPicture.asset(
-                    R.images.svgMapBell,
+                  Text(
+                    "Nova ocorrência",
+                    style: TextStyle(
+                      fontWeight: FontWeight.bold,
+                      color: AppColors.darkGreyColor10,
+                    ),
                   ),
-                ),
+                ],
               ),
-              Container(
-                width: 90,
-                height: 90,
-                decoration: BoxDecoration(
-                  color: AppColors.lightGreyColor30,
-                  shape: BoxShape.circle,
-                  border: BoxBorder.all(
-                    color: AppColors.lightGreyColor20,
-                    width: 1,
+              Column(
+                children: [
+                  Container(
+                    width: 90,
+                    height: 90,
+                    decoration: BoxDecoration(
+                      color: AppColors.lightGreyColor30,
+                      shape: BoxShape.circle,
+                      border: BoxBorder.all(
+                        color: AppColors.lightGreyColor20,
+                        width: 1,
+                      ),
+                    ),
+                    child: Padding(
+                      padding: const EdgeInsets.all(12),
+                      child: SvgPicture.asset(
+                        R.images.svgMapAddNewProd,
+                      ),
+                    ),
                   ),
-                ),
-                child: Padding(
-                  padding: const EdgeInsets.all(12),
-                  child: SvgPicture.asset(
-                    R.images.svgMapAddNewProd,
+                  Text(
+                    "Novo bem",
+                    style: TextStyle(
+                      fontWeight: FontWeight.bold,
+                      color: AppColors.darkGreyColor10,
+                    ),
                   ),
-                ),
+                ],
               ),
             ],
           ),

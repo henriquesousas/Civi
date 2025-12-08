@@ -15,6 +15,7 @@ abstract class BasePageState<T extends StateStreamable<S>, S,
   }
 
   PreferredSizeWidget? buildAppBar(BuildContext context) => null;
+  Widget? buildBottomNavigationBar() => null;
 
   void listener(BuildContext context, S state) {}
 
@@ -31,7 +32,7 @@ abstract class BasePageState<T extends StateStreamable<S>, S,
       //     press: () {},
       //   )
       // ],
-
+      bottomNavigationBar: buildBottomNavigationBar(),
       pageTitle: pageTitle(),
       body: BlocConsumer<T, S>(
         bloc: cubit,
