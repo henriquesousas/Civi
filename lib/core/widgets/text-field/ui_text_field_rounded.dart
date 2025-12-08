@@ -184,7 +184,7 @@ class _UITextFieldRoundedState extends State<UITextFieldRounded> {
           start: 15,
           child: widget.showLabelText
               ? Container(
-                  padding: EdgeInsetsDirectional.symmetric(
+                  padding: const EdgeInsetsDirectional.symmetric(
                     horizontal: 5,
                   ),
                   decoration: BoxDecoration(
@@ -248,7 +248,7 @@ class _UITextFieldRoundedState extends State<UITextFieldRounded> {
     switch (widget.borderType) {
       case InputBorderType.outline:
         return OutlineInputBorder(
-          borderRadius: BorderRadius.circular(12),
+          borderRadius: BorderRadius.circular(90),
           borderSide: BorderSide(
             color: isError
                 ? AppColors.errorColor

@@ -39,6 +39,7 @@ class Images {
   String svgMapBell = 'assets/svg/map_bell.svg';
   String svgMapAddNewProd = 'assets/svg/map_add_new_prod.svg';
   String svgMapSettings = 'assets/svg/map_settings.svg';
+  String svgMapMic = 'assets/svg/map_mic.svg';
   //Images
   String successLight = 'assets/images/success.png';
   String successDark = 'assets/images/success_dark.png';

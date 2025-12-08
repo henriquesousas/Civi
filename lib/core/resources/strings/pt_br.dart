@@ -192,7 +192,7 @@ class PtBr with TranslationParts implements Translation {
   String get lastOccurrences => "Útimas ocorrências";
 
   @override
-  String get myProducts => "Meus produtos";
+  String get myProducts => "Meus bens";
 
   @override
   String get search => "Consultar";
