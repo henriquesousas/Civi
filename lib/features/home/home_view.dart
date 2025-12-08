@@ -1,7 +1,10 @@
+import 'package:deehelp/core/components/icon/ui_icon.dart';
 import 'package:deehelp/core/components/icon/ui_icon_alpha.dart';
 import 'package:deehelp/core/components/ui_app_bar.dart';
 import 'package:deehelp/core/resources/resources.dart';
 import 'package:deehelp/core/theme/app_colors.dart';
+import 'package:deehelp/core/widgets/buttons/ui_elevated_button.dart';
+import 'package:deehelp/core/widgets/buttons/ui_elevated_icon_button.dart';
 import 'package:deehelp/core/widgets/search/ui_search_field.dart';
 import 'package:deehelp/core/widgets/text-field/ui_text_field_rounded.dart';
 import 'package:deehelp/features/profile/profile_page.dart';
@@ -57,6 +60,21 @@ class _HomeViewState extends State<HomeView> with TickerProviderStateMixin {
       parent: _appBarController,
       curve: Curves.easeInOut,
     );
+
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      // final myLocation = LatLng(-23.5107, -46.8764);
+      // final bounds = LatLngBounds.fromPoints([
+      //   LatLng(myLocation.latitude + 0.018, myLocation.longitude + 0.018),
+      //   LatLng(myLocation.latitude - 0.018, myLocation.longitude - 0.018),
+      // ]);
+
+      // final cameraFit = CameraFit.bounds(
+      //   bounds: bounds,
+      //   padding: const EdgeInsets.all(50),
+      // );
+
+      // _mapController.fitCamera(cameraFit);
+    });
   }
 
   @override
@@ -262,7 +280,7 @@ class _HomeViewState extends State<HomeView> with TickerProviderStateMixin {
                           width: 90,
                           height: 35,
                           child: GestureDetector(
-                            onTap: () => _mostrarDetalhes(r),
+                            onTap: () => _mostrarDetalhes2(r, context),
                             child: WazeStyleMarker(
                               label: r.placaVeiculo ?? 'ABC-7245',
                               icon: r.icone,
@@ -285,6 +303,37 @@ class _HomeViewState extends State<HomeView> with TickerProviderStateMixin {
                       )
                       .toList(),
                 ),
+                CircleLayer(
+                  circles: [
+                    CircleMarker(
+                        point: LatLng(-23.5107, -46.8764),
+                        color: Colors.blue
+                            .withOpacity(0.2), // preenchimento transparente
+                        borderStrokeWidth: 2,
+                        borderColor: Colors.blue,
+                        radius: 500, // raio em metros
+                        useRadiusInMeter: true),
+                  ],
+                ),
+                // HeatMapLayer(
+                //   heatMapDataSource: [
+                //     WeightedLatLng(
+                //         point: LatLng(-23.5329, -46.6395), weight: 1),
+                //     WeightedLatLng(
+                //         point: LatLng(-23.5505, -46.6333), weight: 0.8),
+                //     WeightedLatLng(
+                //         point: LatLng(-23.5045, -46.8750), weight: 0.6),
+                //   ],
+                //   heatMapOptions: HeatMapOptions(
+                //     radius: 40.0, // tamanho do "ponto quente"
+                //     blur: 30.0, // suavização
+                //     gradient: {
+                //       0.0: Colors.green,
+                //       0.5: Colors.yellow,
+                //       1.0: Colors.red,
+                //     },
+                //   ),
+                // ),
               ],
             ),
             onPanelSlide: (pos) {
@@ -378,6 +427,7 @@ class _HomeViewState extends State<HomeView> with TickerProviderStateMixin {
                   borderRadius: BorderRadius.circular(20),
                   onTap: () {
                     // ação ao clicar
+                    _focusOnCircle();
                   },
                   child: Container(
                     padding: const EdgeInsets.symmetric(
@@ -569,6 +619,21 @@ class _HomeViewState extends State<HomeView> with TickerProviderStateMixin {
         ],
       ),
     );
+  }
+
+  void _focusOnCircle() {
+    final myLocation = LatLng(-23.5107, -46.8764);
+    final bounds = LatLngBounds.fromPoints([
+      LatLng(myLocation.latitude + 0.018, myLocation.longitude + 0.018),
+      LatLng(myLocation.latitude - 0.018, myLocation.longitude - 0.018),
+    ]);
+
+    final cameraFit = CameraFit.bounds(
+      bounds: bounds,
+      padding: const EdgeInsets.all(50),
+    );
+
+    _mapController.fitCamera(cameraFit);
   }
 
   Widget _bottomSheetInfoButton() {
@@ -892,27 +957,131 @@ class _HomeViewState extends State<HomeView> with TickerProviderStateMixin {
     );
   }
 
+  void _focusOnMarker(LatLng position) {
+    _mapController.move(position, 15); // 👈 move a câmera para o marker
+  }
+
   void _mostrarDetalhes(RouboMarker r) {
     showModalBottomSheet(
       context: context,
-      builder: (_) => Padding(
-        padding: const EdgeInsets.all(16),
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Text(r.titulo,
-                style: Theme.of(context)
-                    .textTheme
-                    .titleMedium
-                    ?.copyWith(fontWeight: FontWeight.bold)),
-            const SizedBox(height: 8),
-            Text(_formatarDataHora(r.dataHora)),
-            const SizedBox(height: 8),
-            Text(r.descricao),
-          ],
-        ),
+      isScrollControlled: true,
+      backgroundColor: Colors.transparent,
+      shape: const RoundedRectangleBorder(
+        borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
       ),
+      builder: (context) {
+        return SafeArea(
+          child: Container(
+            margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
+            decoration: BoxDecoration(
+              color: AppColors.whiteColor,
+              borderRadius: BorderRadius.circular(16),
+              boxShadow: [
+                BoxShadow(
+                  color: Colors.black.withOpacity(0.08),
+                  blurRadius: 6,
+                  offset: const Offset(0, 3),
+                ),
+              ],
+            ),
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                // Header com botão de fechar
+                Padding(
+                  padding: const EdgeInsets.only(top: 12, right: 12),
+                  child: Align(
+                    alignment: Alignment.topRight,
+                    child: UIIConAlpha(
+                      iconData: Icons.close,
+                      color: AppColors.darkGreyColor,
+                    ),
+                  ),
+                ),
+
+                // Conteúdo principal
+                Padding(
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 20, vertical: 12),
+                  child: Row(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      ClipRRect(
+                        borderRadius: BorderRadius.circular(12),
+                        child: Image.network(
+                          "https://canalve.com.br/wp-content/uploads/2023/07/VW-ID.4-3.jpg",
+                          height: 90,
+                          width: 120,
+                          fit: BoxFit.cover,
+                        ),
+                      ),
+                      const SizedBox(width: 12),
+                      Expanded(
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: const [
+                            Text(
+                              "Ontem",
+                              style: TextStyle(
+                                fontSize: 13,
+                                color: Colors.grey,
+                              ),
+                            ),
+                            SizedBox(height: 4),
+                            Text(
+                              "Honda Civic 2.0",
+                              style: TextStyle(
+                                fontSize: 18,
+                                fontWeight: FontWeight.bold,
+                                color: Colors.black87,
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+
+                const Divider(height: 1, color: AppColors.lightGreyColor30),
+
+                // Descrição
+                Padding(
+                  padding: const EdgeInsets.all(20),
+                  child: const Text(
+                    "Ocorrência: veículo envolvido em incidente de trânsito. "
+                    "Informações em validação interna.",
+                    style: TextStyle(
+                      fontSize: 14,
+                      color: Colors.black87,
+                      height: 1.4,
+                    ),
+                  ),
+                ),
+
+                const Divider(height: 1, color: AppColors.lightGreyColor30),
+
+                // Footer com botão
+                ClipRRect(
+                  borderRadius: const BorderRadius.vertical(
+                    bottom: Radius.circular(16),
+                  ),
+                  child: Container(
+                    padding: const EdgeInsets.all(20),
+                    color: AppColors.whiteColor,
+                    child: UIElevatedButton(
+                      radius: 90,
+                      text: "Ver detalhes",
+                      press: () {},
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          ),
+        );
+      },
     );
   }
 
@@ -1160,38 +1329,594 @@ class UISearchButton extends StatelessWidget {
   }
 }
 
+// TODO: Vai aparecer em determinado momento
+// Positioned(
+//   bottom: 150, // ajuste conforme altura do seu SlidingUpPanel
+//   left: 0,
+//   right: 0,
+//   child: Center(
+//     child: Container(
+//       padding:
+//           const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+//       decoration: BoxDecoration(
+//         color: Colors.white,
+//         borderRadius: BorderRadius.circular(20),
+//         border: Border.all(color: Colors.grey.shade300),
+//         boxShadow: [
+//           BoxShadow(
+//             color: Colors.black.withOpacity(0.1),
+//             blurRadius: 6,
+//             offset: const Offset(0, 3),
+//           ),
+//         ],
+//       ),
+//       child: Text(
+//         "Total de ocorrências: 12", // variável dinâmica
+//         style: const TextStyle(
+//           fontSize: 14,
+//           fontWeight: FontWeight.w500,
+//           color: Colors.black87,
+//         ),
+//       ),
+//     ),
+//   ),
+// ),
 
+void _mostrarDetalhes2(RouboMarker roubo, BuildContext context) {
+  showModalBottomSheet(
+    context: context,
+    isScrollControlled: true,
+    backgroundColor: Colors.transparent,
+    useSafeArea: true,
+    shape: const RoundedRectangleBorder(
+      borderRadius: BorderRadius.vertical(top: Radius.circular(24)),
+    ),
+    builder: (context) {
+      return Container(
+        constraints: BoxConstraints(
+          maxHeight: MediaQuery.of(context).size.height * 0.85,
+        ),
+        margin: const EdgeInsets.all(8),
+        decoration: BoxDecoration(
+          color: AppColors.whiteColor,
+          borderRadius: BorderRadius.circular(24),
+          boxShadow: [
+            BoxShadow(
+              color: Colors.black.withOpacity(0.15),
+              blurRadius: 20,
+              spreadRadius: 0,
+              offset: const Offset(0, 4),
+            ),
+          ],
+        ),
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: [
+            // Header com indicador
+            _buildHeader(),
 
- // TODO: Vai aparecer em determinado momento
-          // Positioned(
-          //   bottom: 150, // ajuste conforme altura do seu SlidingUpPanel
-          //   left: 0,
-          //   right: 0,
-          //   child: Center(
-          //     child: Container(
-          //       padding:
-          //           const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-          //       decoration: BoxDecoration(
-          //         color: Colors.white,
-          //         borderRadius: BorderRadius.circular(20),
-          //         border: Border.all(color: Colors.grey.shade300),
-          //         boxShadow: [
-          //           BoxShadow(
-          //             color: Colors.black.withOpacity(0.1),
-          //             blurRadius: 6,
-          //             offset: const Offset(0, 3),
-          //           ),
-          //         ],
-          //       ),
-          //       child: Text(
-          //         "Total de ocorrências: 12", // variável dinâmica
-          //         style: const TextStyle(
-          //           fontSize: 14,
-          //           fontWeight: FontWeight.w500,
-          //           color: Colors.black87,
-          //         ),
-          //       ),
-          //     ),
-          //   ),
-          // ),
+            _buildVehicleInfo(roubo),
+            _buildDetailsSection(roubo),
+            _buildLocationSection(roubo),
+            // _buildAdditionalInfo(roubo),
 
+            // Conteúdo rolável
+            // Expanded(
+            //   child: SingleChildScrollView(
+            //     physics: const BouncingScrollPhysics(),
+            //     child: Column(
+            //       crossAxisAlignment: CrossAxisAlignment.stretch,
+            //       children: [
+            //         // Informações do veículo
+            //         _buildVehicleInfo(roubo),
+
+            //         // Seção de detalhes
+            //         _buildDetailsSection(roubo),
+
+            //         // Informações adicionais
+            //         // _buildAdditionalInfo(roubo),
+
+            //         // Localização
+            //         _buildLocationSection(roubo),
+            //       ],
+            //     ),
+            //   ),
+            // ),
+
+            // Ações
+            _buildActionButtons(roubo),
+          ],
+        ),
+      );
+    },
+  );
+}
+
+// Métodos auxiliares refatorados
+
+Widget _buildHeader() {
+  return Column(
+    children: [
+      const SizedBox(height: 8),
+      Container(
+        width: 40,
+        height: 4,
+        decoration: BoxDecoration(
+          color: AppColors.lightGreyColor20,
+          borderRadius: BorderRadius.circular(2),
+        ),
+      ),
+      Padding(
+        padding: const EdgeInsets.symmetric(vertical: 12, horizontal: 20),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            Text(
+              "Detalhes da Ocorrência",
+              style: TextStyle(
+                fontSize: 18,
+                fontWeight: FontWeight.w700,
+                color: AppColors.darkGreyColor,
+              ),
+            ),
+            IconButton(
+              onPressed: () {},
+              icon: Icon(Icons.close, color: AppColors.darkGreyColor),
+              padding: EdgeInsets.zero,
+              constraints: const BoxConstraints(),
+              iconSize: 20,
+            ),
+          ],
+        ),
+      ),
+      Divider(height: 1, color: AppColors.lightGreyColor30),
+    ],
+  );
+}
+
+Widget _buildVehicleInfo(RouboMarker roubo) {
+  return Padding(
+    padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 16),
+    child: Row(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        // Imagem do veículo com badge
+        Stack(
+          children: [
+            Container(
+              width: 110,
+              height: 80,
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(12),
+                color: AppColors.lightGreyColor20,
+              ),
+              child: ClipRRect(
+                borderRadius: BorderRadius.circular(12),
+                child: Image.network(
+                  _getVehicleImage(roubo.tipoVeiculo),
+                  width: 110,
+                  height: 80,
+                  fit: BoxFit.cover,
+                  loadingBuilder: (context, child, loadingProgress) {
+                    if (loadingProgress == null) return child;
+                    return Center(
+                      child: CircularProgressIndicator(
+                        value: loadingProgress.expectedTotalBytes != null
+                            ? loadingProgress.cumulativeBytesLoaded /
+                                loadingProgress.expectedTotalBytes!
+                            : null,
+                        strokeWidth: 2,
+                      ),
+                    );
+                  },
+                  errorBuilder: (context, error, stackTrace) {
+                    return Container(
+                      color: AppColors.lightGreyColor20,
+                      child: Icon(
+                        roubo.icone,
+                        color: AppColors.lightGreyColor30,
+                        size: 36,
+                      ),
+                    );
+                  },
+                ),
+              ),
+            ),
+            if (roubo.placaVeiculo != null)
+              Positioned(
+                top: 6,
+                right: 6,
+                child: Container(
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
+                  decoration: BoxDecoration(
+                    color: AppColors.primaryColor.withOpacity(0.9),
+                    borderRadius: BorderRadius.circular(4),
+                  ),
+                  child: Text(
+                    roubo.placaVeiculo!,
+                    style: const TextStyle(
+                      fontSize: 10,
+                      fontWeight: FontWeight.w600,
+                      color: Colors.white,
+                      letterSpacing: 0.5,
+                    ),
+                  ),
+                ),
+              ),
+          ],
+        ),
+
+        const SizedBox(width: 16),
+
+        // Informações do veículo
+        Expanded(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              // Tipo e status
+              Row(
+                children: [
+                  Container(
+                    padding:
+                        const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+                    decoration: BoxDecoration(
+                      color:
+                          _getStatusColor(roubo.tipoVeiculo).withOpacity(0.1),
+                      borderRadius: BorderRadius.circular(6),
+                    ),
+                    child: Text(
+                      _getVehicleTypeLabel(roubo.tipoVeiculo),
+                      style: TextStyle(
+                        fontSize: 11,
+                        fontWeight: FontWeight.w600,
+                        color: _getStatusColor(roubo.tipoVeiculo),
+                      ),
+                    ),
+                  ),
+                  const Spacer(),
+                  Icon(
+                    Icons.circle,
+                    color: _getStatusColor(roubo.tipoVeiculo),
+                    size: 8,
+                  ),
+                  const SizedBox(width: 4),
+                  Text(
+                    "Ativo",
+                    style: TextStyle(
+                      fontSize: 12,
+                      color: AppColors.darkGreyColor,
+                    ),
+                  ),
+                ],
+              ),
+
+              const SizedBox(height: 8),
+
+              // Título
+              Text(
+                roubo.titulo,
+                style: const TextStyle(
+                  fontSize: 18,
+                  fontWeight: FontWeight.w700,
+                  color: AppColors.darkGreyColor,
+                  height: 1.3,
+                ),
+                maxLines: 2,
+                overflow: TextOverflow.ellipsis,
+              ),
+
+              const SizedBox(height: 8),
+
+              // Data e hora
+              Row(
+                children: [
+                  Icon(
+                    Icons.access_time,
+                    size: 14,
+                    color: AppColors.lightGreyColor30,
+                  ),
+                  const SizedBox(width: 6),
+                  Text(
+                    _formatDateTime(roubo.dataHora),
+                    style: TextStyle(
+                      fontSize: 13,
+                      color: AppColors.darkGreyColor,
+                    ),
+                  ),
+                ],
+              ),
+            ],
+          ),
+        ),
+      ],
+    ),
+  );
+}
+
+Widget _buildDetailsSection(RouboMarker roubo) {
+  return Padding(
+    padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 12),
+    child: Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Text(
+          "Descrição",
+          style: TextStyle(
+            fontSize: 15,
+            fontWeight: FontWeight.w600,
+            color: AppColors.darkGreyColor,
+          ),
+        ),
+        const SizedBox(height: 8),
+        Container(
+          padding: const EdgeInsets.all(16),
+          decoration: BoxDecoration(
+            color: AppColors.lightGreyColor,
+            borderRadius: BorderRadius.circular(12),
+          ),
+          child: Text(
+            roubo.descricao,
+            style: const TextStyle(
+              fontSize: 14,
+              color: AppColors.darkGreyColor,
+              height: 1.5,
+            ),
+          ),
+        ),
+      ],
+    ),
+  );
+}
+
+Widget _buildAdditionalInfo(RouboMarker roubo) {
+  return Padding(
+    padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 12),
+    child: Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Text(
+          "Informações Adicionais",
+          style: TextStyle(
+            fontSize: 15,
+            fontWeight: FontWeight.w600,
+            color: AppColors.darkGreyColor,
+          ),
+        ),
+        const SizedBox(height: 12),
+        Row(
+          children: [
+            _buildInfoItem(
+              icon: Icons.person_outline,
+              title: "Tipo",
+              value: _getVehicleTypeLabel(roubo.tipoVeiculo),
+            ),
+            const SizedBox(width: 20),
+            _buildInfoItem(
+              icon: Icons.local_police_outlined,
+              title: "Status",
+              value: "Registrado",
+            ),
+          ],
+        ),
+        // const SizedBox(height: 12),
+        // _buildInfoItem(
+        //   icon: Icons.assignment_outlined,
+        //   title: "Protocolo",
+        //   value: "INC - 456",
+        // ),
+      ],
+    ),
+  );
+}
+
+Widget _buildLocationSection(RouboMarker roubo) {
+  return Padding(
+    padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 12),
+    child: Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Text(
+          "Localização",
+          style: TextStyle(
+            fontSize: 15,
+            fontWeight: FontWeight.w600,
+            color: AppColors.darkGreyColor,
+          ),
+        ),
+        const SizedBox(height: 8),
+        Container(
+          padding: const EdgeInsets.all(16),
+          decoration: BoxDecoration(
+            color: AppColors.lightGreyColor,
+            borderRadius: BorderRadius.circular(12),
+          ),
+          child: Row(
+            children: [
+              Icon(
+                Icons.location_on_outlined,
+                color: AppColors.primaryColor,
+                size: 20,
+              ),
+              const SizedBox(width: 12),
+              Expanded(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      "R. das Flores, 123 - Centro",
+                      style: TextStyle(
+                        fontSize: 14,
+                        fontWeight: FontWeight.w500,
+                        color: AppColors.darkGreyColor,
+                      ),
+                    ),
+                    const SizedBox(height: 4),
+                    Text(
+                      "São Paulo - SP",
+                      style: TextStyle(
+                        fontSize: 13,
+                        color: AppColors.darkGreyColor,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              IconButton(
+                onPressed: () {},
+                icon: Icon(
+                  Icons.navigate_next,
+                  color: AppColors.primaryColor,
+                ),
+              ),
+            ],
+          ),
+        ),
+      ],
+    ),
+  );
+}
+
+Widget _buildActionButtons(RouboMarker roubo) {
+  return Padding(
+    padding: const EdgeInsets.all(20),
+    child: Column(
+      children: [
+        Row(
+          children: [
+            Expanded(
+              child: OutlinedButton(
+                onPressed: () {},
+                style: OutlinedButton.styleFrom(
+                  padding: const EdgeInsets.symmetric(vertical: 14),
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(12),
+                  ),
+                  side: BorderSide(color: AppColors.lightGreyColor20),
+                ),
+                child: Text(
+                  "Fechar",
+                  style: TextStyle(
+                    fontSize: 15,
+                    fontWeight: FontWeight.w600,
+                    color: AppColors.darkGreyColor,
+                  ),
+                ),
+              ),
+            ),
+            const SizedBox(width: 12),
+            Expanded(
+              child: ElevatedButton(
+                onPressed: () {},
+                style: ElevatedButton.styleFrom(
+                  padding: const EdgeInsets.symmetric(vertical: 14),
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(12),
+                  ),
+                  backgroundColor: AppColors.primaryColor,
+                ),
+                child: const Text(
+                  "Ver Detalhes",
+                  style: TextStyle(
+                    fontSize: 15,
+                    fontWeight: FontWeight.w600,
+                    color: Colors.white,
+                  ),
+                ),
+              ),
+            ),
+          ],
+        ),
+      ],
+    ),
+  );
+}
+
+// Métodos utilitários
+
+String _getVehicleImage(TipoVeiculo tipo) {
+  switch (tipo) {
+    case TipoVeiculo.motocicleta:
+      return "https://images.unsplash.com/photo-1558981806-ec527fa84c39?w=400&h=300&fit=crop";
+    case TipoVeiculo.veiculoLeve:
+      return "https://images.unsplash.com/photo-1549399542-7e3f8b79c341?w-400&h-300&fit-crop";
+    case TipoVeiculo.veiculoPesado:
+      return "https://images.unsplash.com/photo-1575361204480-aadea25e6e68?w-400&h-300&fit-crop";
+    default:
+      return "https://images.unsplash.com/photo-1568605117036-5fe5e7bab0b7?w-400&h-300&fit-crop";
+  }
+}
+
+Color _getStatusColor(TipoVeiculo tipo) {
+  switch (tipo) {
+    case TipoVeiculo.motocicleta:
+      return Colors.orange;
+    case TipoVeiculo.veiculoLeve:
+      return Colors.blue;
+    case TipoVeiculo.veiculoPesado:
+      return Colors.red;
+    default:
+      return Colors.grey;
+  }
+}
+
+String _getVehicleTypeLabel(TipoVeiculo tipo) {
+  switch (tipo) {
+    case TipoVeiculo.motocicleta:
+      return "MOTOCICLETA";
+    case TipoVeiculo.veiculoLeve:
+      return "VEÍCULO LEVE";
+    case TipoVeiculo.veiculoPesado:
+      return "VEÍCULO PESADO";
+    default:
+      return "OUTRO";
+  }
+}
+
+String _formatDateTime(DateTime dateTime) {
+  return "${dateTime.day.toString().padLeft(2, '0')}/${dateTime.month.toString().padLeft(2, '0')}/${dateTime.year} • ${dateTime.hour.toString().padLeft(2, '0')}:${dateTime.minute.toString().padLeft(2, '0')}";
+}
+
+Widget _buildInfoItem({
+  required IconData icon,
+  required String title,
+  required String value,
+}) {
+  return Expanded(
+    child: Container(
+      padding: const EdgeInsets.all(12),
+      decoration: BoxDecoration(
+        color: AppColors.lightGreyColor30,
+        borderRadius: BorderRadius.circular(8),
+      ),
+      child: Row(
+        children: [
+          Icon(icon, size: 18, color: AppColors.lightGreyColor30),
+          const SizedBox(width: 8),
+          Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                title,
+                style: TextStyle(
+                  fontSize: 11,
+                  color: AppColors.darkGreyColor,
+                ),
+              ),
+              const SizedBox(height: 2),
+              Text(
+                value,
+                style: const TextStyle(
+                  fontSize: 13,
+                  fontWeight: FontWeight.w600,
+                  color: AppColors.dark,
+                ),
+              ),
+            ],
+          ),
+        ],
+      ),
+    ),
+  );
+}

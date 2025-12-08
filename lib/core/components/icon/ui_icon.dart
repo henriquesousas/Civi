@@ -27,7 +27,7 @@ class UIICon extends StatelessWidget {
           borderRadius: BorderRadius.circular(radius),
           boxShadow: [
             BoxShadow(
-              color: Colors.black.withValues(alpha: 0.3),
+              color: Colors.black.withValues(alpha: 0.1),
               blurRadius: 15,
               spreadRadius: 0,
               offset: const Offset(0, 5),

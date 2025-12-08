@@ -248,7 +248,7 @@ class _UITextFieldRoundedState extends State<UITextFieldRounded> {
     switch (widget.borderType) {
       case InputBorderType.outline:
         return OutlineInputBorder(
-          borderRadius: BorderRadius.circular(90),
+          borderRadius: BorderRadius.circular(12),
           borderSide: BorderSide(
             color: isError
                 ? AppColors.errorColor

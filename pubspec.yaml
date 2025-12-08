@@ -41,6 +41,8 @@ dependencies:
   # https://pub.dev/packages/flutter_bloc
   flutter_bloc: ^8.1.6
   flutter_map: ^8.1.1
+  # Mapa de calor
+  # flutter_map_heatmap: ^0.0.8
   latlong2: ^0.9.1
   #  https://pub.dev/packages/google_sign_in/install
   google_sign_in: ^7.2.0
