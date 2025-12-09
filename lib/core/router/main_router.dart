@@ -9,11 +9,11 @@ import 'package:go_router/go_router.dart';
 import '../../entry_point.dart';
 import 'auth_router.dart';
 import 'item_router.dart';
-import 'onboarding_router.dart';
+import '../../features/onboarding/page/onboard_router.dart';
 
 class MainRouter {
   static var router = GoRouter(
-    initialLocation: RouterConstant.splash,
+    initialLocation: RouterConstant.onboarding,
     debugLogDiagnostics: true,
     // redirect: _redirect,
     // refreshListenable: authRepository,

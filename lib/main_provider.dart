@@ -1,4 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:deehelp/core/services/cache/user_preferences_repository.dart';
+import 'package:deehelp/core/services/cache/user_preferences_shared_prefs_repository.dart';
 import 'package:deehelp/features/auth/data/firebase/firebase_auth_repository.dart';
 import 'package:deehelp/features/auth/data/firebase/firebase_auth_service.dart';
 import 'package:deehelp/features/auth/data/firebase/firebase_firestore_service.dart';
@@ -28,6 +30,9 @@ class ApplicationProvider extends StatelessWidget {
         // BlocProvider<BottomNavigationBloc>(
         //   create: (context) => BottomNavigationBloc(),
         // ),
+        Provider<UserPreferencesRepository>(
+          create: (context) => UserPreferencesSharedPrefsRepository(),
+        ),
         Provider<GoogleSignInService>(
           create: (context) => GoogleSignInService(),
         ),

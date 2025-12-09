@@ -58,10 +58,12 @@ extension DialogExtension on BuildContext {
       SnackBar(
         content: Text(
           message,
-          style: appTextStyles.sectionTitle,
+          style: appTextStyles.sectionTitle3.copyWith(
+            color: AppColors.whiteColor,
+          ),
         ),
         backgroundColor: type == DialogType.success
-            ? const Color(0xFF1F2937)
+            ? AppColors.successColor
             : AppColors.errorColor,
         behavior: SnackBarBehavior.floating,
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),

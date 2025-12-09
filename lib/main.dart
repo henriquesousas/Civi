@@ -1,7 +1,9 @@
 import 'package:cloudflare_r2/cloudflare_r2.dart';
+import 'package:deehelp/core/extensions/screen_size_extension.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import 'core/env.dart';
 import 'core/router/main_router.dart';
@@ -32,23 +34,36 @@ class MainApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ApplicationProvider(
-      child: MaterialApp.router(
-        localizationsDelegates: AppLocalizations.localizationsDelegates,
-        supportedLocales: L10n.all,
-        localeResolutionCallback: (locale, supportedLocales) {
-          if (locale?.languageCode == 'en') {
-            return const Locale('en', 'US');
-          }
-          return locale;
-        },
-        locale: const Locale("en"),
-        routerConfig: MainRouter.router,
-        theme: AppTheme.lightTheme(context),
-        themeMode: ThemeMode.light,
-        title: "DeeHelp",
-        debugShowCheckedModeBanner: false,
-      ),
+    return OrientationBuilder(
+      builder: (context, orientation) {
+        return ScreenUtilInit(
+          designSize: context.designSize(),
+          minTextAdapt: true,
+          splitScreenMode: true,
+          useInheritedMediaQuery: true,
+          rebuildFactor: (old, data) => true,
+          builder: (context, child) {
+            return ApplicationProvider(
+              child: MaterialApp.router(
+                localizationsDelegates: AppLocalizations.localizationsDelegates,
+                supportedLocales: L10n.all,
+                localeResolutionCallback: (locale, supportedLocales) {
+                  if (locale?.languageCode == 'en') {
+                    return const Locale('en', 'US');
+                  }
+                  return locale;
+                },
+                locale: const Locale("en"),
+                routerConfig: MainRouter.router,
+                theme: AppTheme.lightTheme(context),
+                themeMode: ThemeMode.light,
+                title: "DeeHelp",
+                debugShowCheckedModeBanner: false,
+              ),
+            );
+          },
+        );
+      },
     );
   }
 }

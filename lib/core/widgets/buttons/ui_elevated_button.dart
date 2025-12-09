@@ -25,7 +25,7 @@ class UIElevatedButton extends StatelessWidget {
     super.key,
     required this.text,
     required this.press,
-    this.radius = Dimens.defaultRadius,
+    this.radius = Dimens.defaultButtonRadius,
     this.elevation = 0,
     this.bgColor,
     this.shadowColor,
@@ -48,13 +48,12 @@ class UIElevatedButton extends StatelessWidget {
             icon: isLoading
                 ? const SizedBox.shrink()
                 : icon ?? const SizedBox.shrink(),
-            // onPressed: () {
-            //   if (isLoading == false) {
-            //     // MyUtils.clearAllTypeFocusNodes();
-            //     press();
-            //   }
-            // },
-            onPressed: null,
+            onPressed: () {
+              if (isLoading == false) {
+                // MyUtils.clearAllTypeFocusNodes();
+                press();
+              }
+            },
             style: ElevatedButton.styleFrom(
               backgroundColor: bgColor ?? primary,
               elevation: elevation,

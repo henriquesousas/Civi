@@ -1,5 +1,6 @@
 import 'package:deehelp/core/theme/app_colors.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 const Color _kPrimaryTextColor = Color(0xFF1E293B);
 
@@ -19,122 +20,109 @@ class AppTextStyles {
 
   TextStyle get appBarTitle {
     // Tenta usar a cor 'onSurface' ou 'primary' do tema.
-    final color = _textTheme.headlineSmall?.color ?? _kPrimaryTextColor;
+    // final color = _textTheme.headlineSmall?.color ?? _kPrimaryTextColor;
     return _baseStyle.copyWith(
-      fontSize: 20,
+      fontSize: 20.sp,
       fontWeight: FontWeight.w600,
-      height: 25 / 20,
+      // height: 25 / 20,
       letterSpacing: 0.38,
-      color: color,
     );
   }
 
   TextStyle get bottomBar {
-    final color = _textTheme.headlineSmall?.color ?? _kPrimaryTextColor;
+    // final color = _textTheme.headlineSmall?.color ?? _kPrimaryTextColor;
     return _baseStyle.copyWith(
-      fontSize: 14,
+      fontSize: 14.sp,
       fontWeight: FontWeight.w600,
-      height: 25 / 20,
+      // height: 25 / 20,
       letterSpacing: 0.38,
-      color: color,
     );
   }
 
   TextStyle get sectionTitle3 {
-    final color = _textTheme.titleMedium?.color ?? _kPrimaryTextColor;
+    // final color = _textTheme.titleMedium?.color ?? _kPrimaryTextColor;
     return _baseStyle.copyWith(
-      fontSize: 15,
+      fontSize: 15.sp,
       fontWeight: FontWeight.w600,
-      height: 20 / 15,
+      // height: 20 / 15,
       letterSpacing: -0.5,
       color: AppColors.textColorHeader,
     );
   }
 
   TextStyle get sectionTitle {
-    final color = _textTheme.titleMedium?.color ?? _kPrimaryTextColor;
     return _baseStyle.copyWith(
-      fontSize: 17,
+      fontSize: 17.sp,
       fontWeight: FontWeight.w600,
-      height: 22 / 17,
+      // height: 22 / 17,
       letterSpacing: -0.408,
       color: AppColors.textColorHeader,
     );
   }
 
   TextStyle get sectionSubTitle1 {
-    final color = _textTheme.titleSmall?.color ?? _kPrimaryTextColor;
+    // final color = _textTheme.titleSmall?.color ?? _kPrimaryTextColor;
     return _baseStyle.copyWith(
-      fontSize: 13,
+      fontSize: 13.sp,
       fontWeight: FontWeight.w400,
-      height: 18 / 13,
+      // height: 18 / 13,
       letterSpacing: -0.078,
-      color: color,
     );
   }
 
   TextStyle get sectionBodyTextStyle {
-    final color = _textTheme.titleSmall?.color ?? _kPrimaryTextColor;
     return _baseStyle.copyWith(
-      fontSize: 15,
+      fontSize: 15.sp,
       fontWeight: FontWeight.w400,
-      height: 20 / 15,
+      // height: 20 / 15,
       letterSpacing: -0.24,
       color: AppColors.textColorHeader,
     );
   }
 
   TextStyle get caption1Style {
-    final color = _textTheme.bodySmall?.color ?? _kPrimaryTextColor;
+    // final color = _textTheme.bodySmall?.color ?? _kPrimaryTextColor;
     return _baseStyle.copyWith(
-      fontSize: 12,
+      fontSize: 12.sp,
       fontWeight: FontWeight.w400,
-      height: 16 / 12,
+      // height: 16 / 12,
       letterSpacing: 0,
-      color: color,
     );
   }
 
   TextStyle get caption2Style {
-    final color = _textTheme.labelSmall?.color ?? _kPrimaryTextColor;
     return _baseStyle.copyWith(
-      fontSize: 11,
+      fontSize: 11.sp,
       fontWeight: FontWeight.w400,
-      height: 13 / 11,
+      // height: 13 / 11,
       letterSpacing: 0.06,
-      color: color,
     );
   }
 
   TextStyle get bodyTextStyle1 {
-    final color = _textTheme.bodyLarge?.color ?? Colors.white;
+    // final color = _textTheme.bodyLarge?.color ?? Colors.white;
     return _baseStyle.copyWith(
-      fontSize: 16,
+      fontSize: 16.sp,
       fontWeight: FontWeight.w400,
-      height: 21 / 16,
+      // height: 21 / 16,
       letterSpacing: -0.32,
-      color: color,
     );
   }
 
-  TextStyle bodyTextStyle2 = const TextStyle(
-    fontFamily: 'AlbertSans',
-    fontSize: 17,
+  TextStyle bodyTextStyle2 = TextStyle(
+    fontSize: 17.sp,
     fontWeight: FontWeight.w400, // Bold
     height: 22 / 17,
     letterSpacing: -0.408,
     color: AppColors.textColorHeader,
-    fontFamilyFallback: ['sans-serif'],
   );
 
   TextStyle get buttonTextStyle1 {
-    final color = _textTheme.labelLarge?.color ?? Colors.white;
     return _baseStyle.copyWith(
-      fontSize: 16,
+      fontSize: 16.sp,
       fontWeight: FontWeight.w400,
-      height: 19.2 / 16,
+      // height: 19.2 / 16,
       letterSpacing: 0,
-      color: color,
     );
   }
 }

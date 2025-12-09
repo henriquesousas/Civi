@@ -190,7 +190,6 @@ class CreateProductCubit extends Cubit<CreateProductState> {
           },
           onError: (error) {
             return data.copyWith(
-              // errorMessage: (error as ProductException).message,
               errorMessage: error.message,
               isLoading: false,
             );

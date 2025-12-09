@@ -7,10 +7,12 @@ import 'package:flutter/material.dart';
 abstract final class Dimens {
   const Dimens();
 
+  static const size10 = 10.0;
   static const paddingHorizontal = 20.0;
   static const paddingVertical = 24.0;
   static const defaultPadding = 12.0;
   static const defaultRadius = 12.0;
+  static const defaultButtonRadius = 90.0;
   static const cardExtraRadius = 20.0;
   static const defaultListTilePadding = 40.0;
   static const defaultArrowForward = 12.0;

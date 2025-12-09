@@ -1,16 +1,14 @@
 import 'package:flutter/material.dart';
 
-class PrimaryProgressIndicator extends StatelessWidget {
+import '../../../../core/theme/app_colors.dart';
+
+class OnboardPageIndicator extends StatelessWidget {
   final int currentPage;
   final int totalPage;
-  final Color? selectedColor;
-  final Color? unselectedColor;
-  const PrimaryProgressIndicator({
+  const OnboardPageIndicator({
     super.key,
     required this.currentPage,
     required this.totalPage,
-    this.selectedColor = Colors.white,
-    this.unselectedColor = Colors.white,
   });
 
   @override
@@ -28,7 +26,9 @@ class PrimaryProgressIndicator extends StatelessWidget {
             width: currentPage == index ? 32 : 8,
             height: 8,
             decoration: BoxDecoration(
-              color: currentPage == index ? selectedColor : unselectedColor,
+              color: currentPage == index
+                  ? AppColors.primaryColor
+                  : AppColors.primaryColor.withValues(alpha: 0.3),
               borderRadius: BorderRadius.circular(4),
             ),
           );
