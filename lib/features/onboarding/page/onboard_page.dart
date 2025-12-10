@@ -28,7 +28,7 @@ class _OnboardPageState extends State<OnboardPage> {
     super.initState();
     _pageController = PageController(initialPage: _currentPage);
     WidgetsBinding.instance.addPostFrameCallback((_) {
-      _scheduleChangePageAutomatically();
+      _taskChangePage();
     });
   }
 
@@ -39,7 +39,7 @@ class _OnboardPageState extends State<OnboardPage> {
     super.dispose();
   }
 
-  void _scheduleChangePageAutomatically() {
+  void _taskChangePage() {
     _timer?.cancel();
     _timer = Timer.periodic(const Duration(seconds: 5), (timer) {
       _currentPage++;
@@ -57,7 +57,7 @@ class _OnboardPageState extends State<OnboardPage> {
     setState(() {
       _currentPage = page;
     });
-    _scheduleChangePageAutomatically();
+    _taskChangePage();
   }
 
   void _loginWithGoogle() {
