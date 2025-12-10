@@ -1,5 +1,9 @@
+import 'package:deehelp/core/theme/app_colors.dart';
+import 'package:deehelp/core/theme/app_text_styles.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
+import '../../../core/animation/slide_fade_transition_animator.dart';
 import '../../../core/ui/assets/resources.dart';
 
 class SplashContent extends StatelessWidget {
@@ -7,25 +11,28 @@ class SplashContent extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        Text(
-          "DeeHelp",
-          style: Theme.of(context).textTheme.headlineMedium?.copyWith(
-                color: Colors.white,
-                fontWeight: FontWeight.bold,
-                letterSpacing: 1.2,
-              ),
-        ),
-        const SizedBox(height: 10),
-        Text(
-          "R.strings.bottomBarExplore",
-          textAlign: TextAlign.center,
-          style: Theme.of(context).textTheme.labelMedium?.copyWith(
-              color: Colors.white.withValues(alpha: 0.7),
-              fontWeight: FontWeight.w400),
-        ),
-      ],
+    return SlideFadeTransitionAnimator(
+      child: Column(
+        children: [
+          Text(
+            "[LABEL]",
+            style: context.appTextStyles.bodyTextStyle1.copyWith(
+              fontWeight: FontWeight.bold,
+              color: AppColors.whiteColor,
+              fontSize: 22.sp,
+              letterSpacing: 1.2,
+            ),
+          ),
+          const SizedBox(height: 10),
+          Text(
+            R.strings.splashHeadline,
+            textAlign: TextAlign.center,
+            style: context.appTextStyles.sectionSubTitle1.copyWith(
+              color: AppColors.whiteColor,
+            ),
+          ),
+        ],
+      ),
     );
   }
 }

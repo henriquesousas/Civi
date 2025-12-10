@@ -3,11 +3,14 @@ abstract class Translation {
   String get quickHelp;
   String get alets;
   String get security;
+  String get waiting;
+  String get version;
+  String get enterWithGoogle;
+  String get continueWithoutLogin;
+  String get loginWithGoogleError;
   String get onboardWelcomeDescription;
   String get onboardQuickHelpDescription;
   String get onboardAlertsDescription;
   String get onboardSecurityDescription;
-  String get enterWithGoogle;
-  String get continueWithoutLogin;
-  String get loginWithGoogleError;
+  String get splashHeadline;
 }

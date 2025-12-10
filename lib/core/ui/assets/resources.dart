@@ -1,7 +1,7 @@
 import 'dart:ui';
 
+import 'package:deehelp/core/ui/assets/lottie_assets.dart';
 import 'package:deehelp/core/ui/assets/svg_assets.dart';
-import 'package:deehelp/core/ui/localization/en_us.dart';
 import 'package:deehelp/core/ui/localization/pt_br.dart';
 import 'package:deehelp/core/ui/localization/translation.dart';
 
@@ -12,11 +12,12 @@ class R {
   static Translation get strings => _strings;
   static Images images = Images();
   static SvgAssets svg = SvgAssets();
+  static LottieAssets lottie = LottieAssets();
 
   static void load(Locale locale) {
     switch (locale.languageCode) {
       case "en":
-        _strings = EnUs();
+        _strings = PtBr();
         break;
       default:
         _strings = PtBr();

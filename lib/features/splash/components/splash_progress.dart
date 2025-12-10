@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 
 import '../../../core/ui/assets/resources.dart';
 
-class SplashLineIndicator extends StatelessWidget {
-  const SplashLineIndicator({super.key});
+class SplashProgress extends StatelessWidget {
+  const SplashProgress({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -21,7 +21,7 @@ class SplashLineIndicator extends StatelessWidget {
         ),
         const SizedBox(height: 16),
         Text(
-          " R.strings.waiting",
+          "${R.strings.waiting}...",
           style: Theme.of(context).textTheme.labelSmall?.copyWith(
                 color: Colors.white.withValues(alpha: 0.7),
                 fontWeight: FontWeight.w400,

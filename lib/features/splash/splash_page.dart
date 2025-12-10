@@ -1,17 +1,17 @@
-import 'package:deehelp/core/animation/slide_fade_transition_animator.dart';
-import 'package:deehelp/core/animation/transform_scale_opacity_animator.dart';
-import 'package:deehelp/core/animation/transition_animator.dart';
 import 'package:deehelp/core/extensions/screen_size_extension.dart';
-import 'package:deehelp/features/splash/components/splash_background_animation.dart';
-import 'package:deehelp/features/splash/components/splash_bottom_section.dart';
+import 'package:deehelp/core/theme/app_colors.dart';
+import 'package:deehelp/core/theme/app_text_styles.dart';
+import 'package:deehelp/core/theme/dimens.dart';
+import 'package:deehelp/features/splash/components/splash_bg.dart';
 import 'package:deehelp/features/splash/components/splash_content.dart';
-import 'package:deehelp/features/splash/components/splash_line_indicator.dart';
+import 'package:deehelp/features/splash/components/splash_progress.dart';
 import 'package:deehelp/features/splash/components/splash_logo.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
 
+import '../../core/animation/transition_animator.dart';
 import '../../core/router/router_constants.dart';
 
 class SplashPage extends StatefulWidget {
@@ -30,17 +30,14 @@ class _SplashPageState extends State<SplashPage> {
 
   void _navigateToNextScreen() async {
     await Future.delayed(const Duration(milliseconds: 5000));
-
-    //TODO: Refactor pra nao deixar aqui essa implementacao com o firebase, ja tem um service pra isso
     WidgetsBinding.instance.addPostFrameCallback((_) {
-      final user = FirebaseAuth.instance.currentUser;
-
-      if (user != null) {
-        // context.pushReplacement(RouterConstant.bottomView);
-        context.pushReplacement(RouterConstant.home);
-      } else {
-        context.pushReplacement(RouterConstant.onboarding);
-      }
+      context.push(RouterConstant.onboarding);
+      // if (user != null) {
+      //   // context.pushReplacement(RouterConstant.bottomView);
+      //   context.pushReplacement(RouterConstant.home);
+      // } else {
+      //   context.pushReplacement(RouterConstant.onboarding);
+      // }
     });
   }
 
@@ -51,7 +48,7 @@ class _SplashPageState extends State<SplashPage> {
         value: SystemUiOverlayStyle.light.copyWith(
           statusBarColor: Colors.transparent,
         ),
-        child: SplashBackgroundAnimation(
+        child: SplashBg(
           child: SafeArea(
             child: Column(
               children: [
@@ -59,18 +56,24 @@ class _SplashPageState extends State<SplashPage> {
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      const TransformScaleOpacityAnimator(
-                        duration: Duration(milliseconds: 1500),
-                        child: SplashLogo(),
-                      ),
-                      const SizedBox(height: 40),
-                      const SlideFadeTransitionAnimator(child: SplashContent()),
+                      const SplashLogo(),
+                      SizedBox(height: Dimens.size40.h),
+                      const SplashContent(),
                       SizedBox(height: context.percentHeight(0.1)),
-                      const SplashLineIndicator(),
+                      const SplashProgress(),
                     ],
                   ),
                 ),
-                const TransitionAnimator(child: SplashBottomSection()),
+                TransitionAnimator(
+                  child: Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Text(
+                      "Versão 1.0",
+                      style: context.appTextStyles.caption1Style
+                          .copyWith(color: AppColors.whiteColor),
+                    ),
+                  ),
+                ),
               ],
             ),
           ),

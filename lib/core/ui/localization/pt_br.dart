@@ -31,11 +31,20 @@ class PtBr implements Translation {
       "Proteção em tempo real. Relate ocorrências e ajude a manter todos seguros";
 
   @override
-  String get quickHelp => "Ajuda rápida";
+  String get quickHelp => "Sinalize";
 
   @override
-  String get security => "Segurança";
+  String get security => "Verificação";
 
   @override
   String get welcome => "Bem vindo";
+
+  @override
+  String get splashHeadline => "Segurança colaborativa na palma da sua mão.";
+
+  @override
+  String get version => "Versão";
+
+  @override
+  String get waiting => "Aguarde";
 }

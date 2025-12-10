@@ -1,31 +1,33 @@
 import 'package:deehelp/core/theme/app_colors.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_svg/svg.dart';
+
+import '../../../core/animation/transform_scale_opacity_animator.dart';
+import '../../../core/ui/assets/resources.dart';
+import '../../../core/ui/widgets/pin/ui_custom_pin.dart';
 
 class SplashLogo extends StatelessWidget {
   const SplashLogo({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      width: 120,
-      height: 120,
-      decoration: BoxDecoration(
-        color: Colors.white,
-        borderRadius: BorderRadius.circular(30),
-        boxShadow: [
-          BoxShadow(
-            color: Colors.black.withValues(alpha: 0.2),
-            offset: const Offset(0, 10),
-            blurRadius: 30,
-            spreadRadius: 0,
+    return TransformScaleOpacityAnimator(
+      duration: const Duration(milliseconds: 1500),
+      child: Center(
+        child: UICustomPin(
+          size: 90.w,
+          tailHeight: 12, // deixe pequeno para ponta curta
+          roundness: 10, // levemente arredondado
+          color: AppColors.whiteColor,
+          icon: SvgPicture.asset(
+            R.svg.hands,
+            width: 40.w,
+            colorFilter: const ColorFilter.mode(
+              AppColors.primaryColor,
+              BlendMode.srcIn,
+            ),
           ),
-        ],
-      ),
-      child: const Center(
-        child: Icon(
-          Icons.directions_car_rounded,
-          size: 60,
-          color: AppColors.primaryColor,
         ),
       ),
     );

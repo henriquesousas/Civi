@@ -94,7 +94,7 @@ class Product extends Entity<ProductId> {
     }
 
     if (value.length < 3) {
-      item.notification.append("Modelo", "Modelo inválido");
+      item.notification.append("Modelo", "Modelo inv");
     }
 
     return item;

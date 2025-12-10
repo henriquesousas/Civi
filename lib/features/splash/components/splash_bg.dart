@@ -1,20 +1,21 @@
 import 'package:deehelp/core/theme/app_colors.dart';
 import 'package:flutter/material.dart';
 
-//TODO: Background para qualquer tela
-class SplashBackgroundAnimation extends StatefulWidget {
+class SplashBg extends StatefulWidget {
   final Widget child;
-  const SplashBackgroundAnimation({super.key, required this.child});
+  const SplashBg({super.key, required this.child});
 
   @override
-  State<SplashBackgroundAnimation> createState() =>
-      _SplashBackgroundAnimationState();
+  State<SplashBg> createState() => _SplashBgState();
 }
 
-class _SplashBackgroundAnimationState extends State<SplashBackgroundAnimation>
-    with TickerProviderStateMixin {
+class _SplashBgState extends State<SplashBg> with TickerProviderStateMixin {
   late AnimationController _backgroundController;
   late Animation<double> _backgroundAnimation;
+
+  final _startColor = AppColors.primaryColorDark;
+  final _middleColor = AppColors.primaryColor;
+  final _endColor = AppColors.primaryColorDark;
 
   @override
   void initState() {
@@ -47,10 +48,10 @@ class _SplashBackgroundAnimationState extends State<SplashBackgroundAnimation>
             gradient: LinearGradient(
               begin: Alignment.topLeft,
               end: Alignment.bottomRight,
-              colors: const [
-                AppColors.primaryColor,
-                AppColors.primaryLight,
-                AppColors.secondary,
+              colors: [
+                _startColor,
+                _middleColor,
+                _endColor,
               ],
               stops: [0.0, 0.6 + (_backgroundAnimation.value * 0.2), 1.0],
             ),

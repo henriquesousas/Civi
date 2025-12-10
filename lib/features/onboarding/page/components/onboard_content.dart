@@ -1,4 +1,5 @@
 import 'package:deehelp/core/theme/app_text_styles.dart';
+import 'package:deehelp/core/theme/dimens.dart';
 import 'package:deehelp/features/onboarding/page/onboard_item.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -17,38 +18,29 @@ class _OnboardContentState extends State<OnboardContent> {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Padding(
-        padding: const EdgeInsetsGeometry.all(24),
+        padding: const EdgeInsetsGeometry.all(32),
         child: Column(
           children: [
-            Expanded(
-              flex: 2,
-              child: Lottie.asset(
-                widget.page.lottieAsset ?? "",
-                animate: false,
-                width: 250.w,
+            Lottie.asset(
+              widget.page.lottieAsset ?? "",
+              animate: false,
+              width: 250.w,
+            ),
+            const SizedBox(height: Dimens.size10),
+            Text(
+              widget.page.title,
+              style: context.appTextStyles.bodyTextStyle2.copyWith(
+                fontSize: 32.sp,
+                fontWeight: FontWeight.bold,
               ),
             ),
-            Expanded(
-              flex: 3,
-              child: Column(
-                spacing: 10,
-                children: [
-                  Text(
-                    widget.page.title,
-                    style: context.appTextStyles.bodyTextStyle2.copyWith(
-                      fontSize: 32.sp,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                  Text(
-                    widget.page.description,
-                    textAlign: TextAlign.center,
-                    overflow: TextOverflow.ellipsis,
-                    maxLines: 4,
-                    style: context.appTextStyles.bodyTextStyle1,
-                  ),
-                ],
-              ),
+            const SizedBox(height: Dimens.size10),
+            Text(
+              widget.page.description,
+              textAlign: TextAlign.center,
+              overflow: TextOverflow.ellipsis,
+              maxLines: 4,
+              style: context.appTextStyles.bodyTextStyle1,
             ),
           ],
         ),

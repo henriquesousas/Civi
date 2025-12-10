@@ -14,24 +14,24 @@ class OnboardItem {
   static List<OnboardItem> pages() {
     return [
       OnboardItem(
-        title: R.strings.welcome,
+        title: "[LABEL]",
         description: R.strings.onboardWelcomeDescription,
-        lottieAsset: "assets/lottie/map.json",
+        lottieAsset: R.lottie.map,
       ),
       OnboardItem(
         title: R.strings.quickHelp,
         description: R.strings.onboardQuickHelpDescription,
-        lottieAsset: "assets/lottie/warning.json",
+        lottieAsset: R.lottie.warning,
       ),
       OnboardItem(
         title: R.strings.alets,
         description: R.strings.onboardAlertsDescription,
-        lottieAsset: "assets/lottie/chatting.json",
+        lottieAsset: R.lottie.alerts,
       ),
       OnboardItem(
         title: R.strings.security,
         description: R.strings.onboardSecurityDescription,
-        lottieAsset: "assets/lottie/security.json",
+        lottieAsset: R.lottie.secutiry,
       ),
     ];
   }

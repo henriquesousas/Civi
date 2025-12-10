@@ -45,7 +45,7 @@ class AppTextStyles {
       fontSize: 15.sp,
       fontWeight: FontWeight.w600,
       // height: 20 / 15,
-      letterSpacing: -0.5,
+      // letterSpacing: -0.5,
       color: AppColors.textColorHeader,
     );
   }
@@ -55,18 +55,15 @@ class AppTextStyles {
       fontSize: 17.sp,
       fontWeight: FontWeight.w600,
       // height: 22 / 17,
-      letterSpacing: -0.408,
+      // letterSpacing: -0.408,
       color: AppColors.textColorHeader,
     );
   }
 
   TextStyle get sectionSubTitle1 {
-    // final color = _textTheme.titleSmall?.color ?? _kPrimaryTextColor;
     return _baseStyle.copyWith(
       fontSize: 13.sp,
       fontWeight: FontWeight.w400,
-      // height: 18 / 13,
-      letterSpacing: -0.078,
     );
   }
 

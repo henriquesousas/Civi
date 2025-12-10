@@ -13,7 +13,7 @@ import '../../features/onboarding/page/onboard_router.dart';
 
 class MainRouter {
   static var router = GoRouter(
-    initialLocation: RouterConstant.onboarding,
+    initialLocation: RouterConstant.splash,
     debugLogDiagnostics: true,
     // redirect: _redirect,
     // refreshListenable: authRepository,
