@@ -7,7 +7,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:provider/provider.dart';
 
-import '../../../../../core/resources/resources.dart';
+import '../../../../../core/ui/localization/resources.dart';
 import '../bloc/auth_state.dart';
 import '../bloc/email_state.dart';
 import '../bloc/login_bloc.dart';
@@ -80,11 +80,11 @@ class _LoginFormState extends State<LoginForm> {
                   minimumSize: Size.zero,
                   tapTargetSize: MaterialTapTargetSize.shrinkWrap,
                 ),
-                child: Text(R.strings.forgotPassword),
+                child: Text("Esqueceu senha"),
               ),
             ),
             UIPrimaryButton(
-                text: R.strings.enter,
+                text: "Entrar",
                 press: () => state.isFormValid
                     ? () => loginActions.submitLogin(state)
                     : null),

@@ -3,7 +3,7 @@ import 'package:deehelp/core/components/ui_my_assets_image_widget.dart';
 import 'package:deehelp/core/theme/app_text_styles.dart';
 import 'package:flutter/material.dart';
 
-import '../../resources/resources.dart';
+import '../../ui/localization/resources.dart';
 
 class UICustomScaffold extends StatelessWidget {
   final String? pageTitle;

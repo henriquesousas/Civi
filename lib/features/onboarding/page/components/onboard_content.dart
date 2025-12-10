@@ -25,7 +25,7 @@ class _OnboardContentState extends State<OnboardContent> {
               child: Lottie.asset(
                 widget.page.lottieAsset ?? "",
                 animate: false,
-                width: 220.w,
+                width: 250.w,
               ),
             ),
             Expanded(
@@ -36,8 +36,8 @@ class _OnboardContentState extends State<OnboardContent> {
                   Text(
                     widget.page.title,
                     style: context.appTextStyles.bodyTextStyle2.copyWith(
-                      fontSize: 28.sp,
-                      fontWeight: FontWeight.w500,
+                      fontSize: 32.sp,
+                      fontWeight: FontWeight.bold,
                     ),
                   ),
                   Text(

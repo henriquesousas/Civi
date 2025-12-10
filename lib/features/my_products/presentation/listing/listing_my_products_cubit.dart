@@ -3,7 +3,7 @@ import 'package:deehelp/core/wrapper/command_cubit.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../../../../core/resources/resources.dart';
+import '../../../../core/ui/localization/resources.dart';
 import '../../domain/entities/product.dart';
 import '../../domain/usecases/delete/delete_product_dto.dart';
 import '../../domain/usecases/delete/delete_product_usecase.dart';
@@ -83,7 +83,7 @@ class ProductListingCubit extends Cubit<ListProductState> {
   Future<void> delete(Product item) async {
     final userId = FirebaseAuth.instance.currentUser?.uid;
     if (userId == null) {
-      emit(ListProductState.error(R.strings.userNotFound));
+      emit(ListProductState.error("R.strings.userNotFound"));
     }
     final dto = DeleteProductDto(
       itemId: item.id.value,

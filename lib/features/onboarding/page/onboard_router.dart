@@ -4,7 +4,6 @@ import 'package:deehelp/features/onboarding/page/onboard_cubit.dart';
 import 'package:deehelp/features/onboarding/page/onboard_page.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
-import 'package:provider/provider.dart';
 
 final onboardingRoutes = [
   GoRoute(
@@ -13,7 +12,7 @@ final onboardingRoutes = [
       key: state.pageKey,
       child: MultiBlocProvider(
         providers: [
-          Provider<OnboardCubit>(
+          BlocProvider<OnboardCubit>(
             create: (context) => OnboardCubit(
               loginWithGoogleUsecase: context.read(),
               session: context.read(),

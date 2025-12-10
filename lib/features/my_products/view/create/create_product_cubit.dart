@@ -7,7 +7,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../../../../core/resources/resources.dart';
+import '../../../../core/ui/localization/resources.dart';
 import '../../domain/usecases/create/create_product_dto.dart';
 import '../../domain/usecases/create/create_product_usecase.dart';
 
@@ -65,7 +65,7 @@ class CreateProductCubit extends Cubit<CreateProductState> {
   }
 
   void onModelChange(String value) {
-    final isError = value.length > 3 ? null : R.strings.errorMessageModel;
+    final isError = value.length > 3 ? null : "Modelo inválido";
     _updateDataState(
       (data) => data.copyWith(
         model: value,
@@ -75,7 +75,7 @@ class CreateProductCubit extends Cubit<CreateProductState> {
   }
 
   void onLicencePlateChange(String value) {
-    final isError = value.length > 5 ? null : R.strings.errorMessageVehicle;
+    final isError = value.length > 5 ? null : "Placa inválida";
     _updateDataState(
       (data) => data.copyWith(
         licencePlate: value,
@@ -87,7 +87,7 @@ class CreateProductCubit extends Cubit<CreateProductState> {
   void onYearChange(String value) {
     final year = int.tryParse(value) ?? 0;
     final isValid = year >= 1900 && year <= DateTime.now().year + 1;
-    final isError = isValid ? null : R.strings.errorMessageYear;
+    final isError = isValid ? null : "Ano inválido";
     _updateDataState(
       (data) => data.copyWith(
         year: year,

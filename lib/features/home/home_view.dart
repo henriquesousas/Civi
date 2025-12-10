@@ -1,7 +1,7 @@
 import 'package:deehelp/core/components/icon/ui_icon.dart';
 import 'package:deehelp/core/components/icon/ui_icon_alpha.dart';
 import 'package:deehelp/core/components/ui_app_bar.dart';
-import 'package:deehelp/core/resources/resources.dart';
+import 'package:deehelp/core/ui/localization/resources.dart';
 import 'package:deehelp/core/theme/app_colors.dart';
 import 'package:deehelp/core/widgets/buttons/ui_elevated_button.dart';
 import 'package:deehelp/core/widgets/buttons/ui_elevated_icon_button.dart';

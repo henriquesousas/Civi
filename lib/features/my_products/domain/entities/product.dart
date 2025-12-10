@@ -2,7 +2,6 @@ import 'package:deehelp/core/domain/entity.dart';
 import 'package:deehelp/features/my_products/domain/entities/product_id.dart';
 
 import '../../../../core/domain/validation/validation_handler.dart';
-import '../../../../core/resources/resources.dart';
 import '../product_status.dart';
 import '../usecases/create/create_product_dto.dart';
 import 'image_media.dart';
@@ -95,7 +94,7 @@ class Product extends Entity<ProductId> {
     }
 
     if (value.length < 3) {
-      item.notification.append("Modelo", R.strings.errorMessageModel);
+      item.notification.append("Modelo", "Modelo inválido");
     }
 
     return item;

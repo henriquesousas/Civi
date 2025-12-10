@@ -26,25 +26,26 @@ final itemRoutes = [
       child: const CreateItemProvider(),
     ),
   ),
-  GoRoute(
-      path: RouterConstant.itemEdit,
-      pageBuilder: (context, state) {
-        final Product? item = state.extra as Product?;
-        if (item == null) {
-          return slideTransitionPage(
-              key: state.pageKey,
-              child: const Scaffold(
-                body: Center(
-                  child: Text("Item não encontrado..."),
-                ),
-              ));
-        }
+  // GoRoute(
+  //   path: RouterConstant.itemEdit,
+  //   pageBuilder: (context, state) {
+  //     final Product? item = state.extra as Product?;
+  //     if (item == null) {
+  //       return slideTransitionPage(
+  //           key: state.pageKey,
+  //           child: const Scaffold(
+  //             body: Center(
+  //               child: Text("Item não encontrado..."),
+  //             ),
+  //           ));
+  //     }
 
-        return slideTransitionPage(
-          key: state.pageKey,
-          child: UpdateProductProvider(item: item),
-        );
-      }),
+  //     return slideTransitionPage(
+  //       key: state.pageKey,
+  //       child: UpdateProductProvider(item: item),
+  //     );
+  //   },
+  // ),
   GoRoute(
     path: RouterConstant.itemRegisterSuccess,
     pageBuilder: (context, state) => slideTransitionPage(

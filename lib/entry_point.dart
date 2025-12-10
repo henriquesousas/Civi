@@ -6,7 +6,7 @@ import 'package:deehelp/features/profile/profile_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
-import 'core/resources/resources.dart';
+import 'core/ui/localization/resources.dart';
 import 'core/theme/constants.dart';
 import 'features/my_products/presentation/listing/listing_my_products_provider.dart';
 
@@ -91,7 +91,7 @@ class _EntryPointState extends State<EntryPoint> {
                 R.images.svgLocationActive,
                 color: AppColors.primaryColor,
               ),
-              label: R.strings.bottomBarExplore,
+              label: "Explorar",
             ),
             BottomNavigationBarItem(
               icon: svgIcon(R.images.svgOccurrenceInactive),
@@ -99,13 +99,13 @@ class _EntryPointState extends State<EntryPoint> {
                 R.images.svgOccurrenceActive,
                 color: AppColors.primaryColor,
               ),
-              label: R.strings.bottomBarOccurrence,
+              label: "Ocorrencias",
             ),
             BottomNavigationBarItem(
               icon: svgIcon(R.images.svgStatementInactive),
               activeIcon: svgIcon(R.images.svgStatementActive,
                   color: AppColors.primaryColor),
-              label: R.strings.bottomBarMyProducts,
+              label: "Meus bens",
             ),
             BottomNavigationBarItem(
               icon: svgIcon(
@@ -116,7 +116,7 @@ class _EntryPointState extends State<EntryPoint> {
                 R.images.svgProfile,
                 color: AppColors.primaryColor,
               ),
-              label: R.strings.bottomBarProfile,
+              label: "Profile",
             ),
           ],
         ),

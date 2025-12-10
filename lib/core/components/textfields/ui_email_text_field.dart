@@ -2,7 +2,7 @@ import 'package:deehelp/core/components/textfields/ui_primary_text_field.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 
-import '../../resources/resources.dart';
+import '../../ui/localization/resources.dart';
 import '../../theme/app_colors.dart';
 
 class UIEmailTextField extends StatelessWidget {
@@ -17,7 +17,7 @@ class UIEmailTextField extends StatelessWidget {
         : AppColors.errorColor;
 
     return UIPrimaryTextField(
-      labelText: R.strings.email,
+      labelText: "Email",
       errorText: errorText,
       onChanged: onChanged,
       prefixIcon: Padding(

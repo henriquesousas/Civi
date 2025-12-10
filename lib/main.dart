@@ -6,6 +6,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import 'core/env.dart';
+import 'core/ui/localization/resources.dart';
 import 'core/router/main_router.dart';
 import 'core/theme/app_theme.dart';
 import 'firebase_options.dart';
@@ -46,11 +47,19 @@ class MainApp extends StatelessWidget {
             return ApplicationProvider(
               child: MaterialApp.router(
                 localizationsDelegates: AppLocalizations.localizationsDelegates,
-                supportedLocales: L10n.all,
+                // supportedLocales: L10n.all,
+                supportedLocales: const [
+                  Locale('en', 'US'),
+                  Locale('pt', 'BR'),
+                ],
+                // localeResolutionCallback: (locale, supportedLocales) {
+                //   if (locale?.languageCode == 'en') {
+                //     return const Locale('en', 'US');
+                //   }
+                //   return locale;
+                // },
                 localeResolutionCallback: (locale, supportedLocales) {
-                  if (locale?.languageCode == 'en') {
-                    return const Locale('en', 'US');
-                  }
+                  R.load(locale ?? const Locale('pt', 'BR'));
                   return locale;
                 },
                 locale: const Locale("en"),

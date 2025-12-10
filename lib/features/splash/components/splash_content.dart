@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../../../core/resources/resources.dart';
+import '../../../core/ui/localization/resources.dart';
 
 class SplashContent extends StatelessWidget {
   const SplashContent({super.key});
@@ -19,7 +19,7 @@ class SplashContent extends StatelessWidget {
         ),
         const SizedBox(height: 10),
         Text(
-          R.strings.splashHeadline,
+          "R.strings.bottomBarExplore",
           textAlign: TextAlign.center,
           style: Theme.of(context).textTheme.labelMedium?.copyWith(
               color: Colors.white.withValues(alpha: 0.7),

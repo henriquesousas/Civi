@@ -4,7 +4,7 @@ import 'package:deehelp/core/widgets/empty/ui_simple_empty_value.dart';
 import 'package:deehelp/core/widgets/search/ui_search_field.dart';
 import 'package:flutter/material.dart';
 
-import '../../../../../core/resources/resources.dart';
+import '../../../../../core/ui/localization/resources.dart';
 
 class ModalSelectBrand extends StatefulWidget {
   final List<String> values;
@@ -59,7 +59,7 @@ class _ModalSelectBrandState extends State<ModalSelectBrand> {
         Padding(
           padding: const EdgeInsets.all(16),
           child: Text(
-            R.strings.selectBrand,
+            "Selecionar marca",
             style: context.appTextStyles.bodyTextStyle1
                 .copyWith(color: AppColors.textSecondary),
           ),

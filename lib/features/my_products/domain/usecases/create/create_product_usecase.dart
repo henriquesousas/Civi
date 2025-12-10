@@ -4,7 +4,6 @@ import 'package:deehelp/core/domain/use_case.dart';
 import 'package:deehelp/core/services/media/interfaces/media_storage.dart';
 import 'package:logging/logging.dart';
 
-import '../../../../../core/resources/resources.dart';
 import '../../../../../core/services/media/media_storage_info.dart';
 import '../../entities/image_media.dart';
 import '../../entities/product.dart';
@@ -47,7 +46,7 @@ class CreateProductUseCase extends UseCase<CreateProductDto, Unit> {
       return right(unit);
     } catch (e) {
       await _media.delete(_imageName, _bucket);
-      return left(ProductException(message: R.strings.defaultMessageError));
+      return left(ProductException(message: "R.strings.defaultMessageError"));
     }
   }
 }

@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 
-import '../../../core/resources/resources.dart';
+import '../../../core/ui/localization/resources.dart';
 import '../../../core/theme/app_colors.dart';
 import '../../../core/theme/dimens.dart';
 import '../../../core/widgets/buttons/ui_elevated_button.dart';
@@ -15,17 +15,18 @@ class OnboardView extends StatelessWidget {
   final bool isLoading;
   final VoidCallback pressLoginWithGoogle;
   final VoidCallback pressEnterWithoutLogin;
-  const OnboardView(
-      {super.key,
-      required this.currentPage,
-      required this.pressLoginWithGoogle,
-      required this.pressEnterWithoutLogin,
-      required this.isLoading});
+  const OnboardView({
+    super.key,
+    required this.currentPage,
+    required this.pressLoginWithGoogle,
+    required this.pressEnterWithoutLogin,
+    this.isLoading = false,
+  });
 
   @override
   Widget build(BuildContext context) {
     return Positioned(
-      bottom: context.percentHeight(0.02),
+      bottom: context.percentHeight(0.05),
       left: context.percentHeight(0.02),
       right: context.percentHeight(0.02),
       child: Column(

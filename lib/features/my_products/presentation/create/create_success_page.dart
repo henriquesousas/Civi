@@ -10,7 +10,7 @@ import 'package:lottie/lottie.dart';
 
 import '../../../../core/animation/slide_fade_transition_animator.dart';
 import '../../../../core/animation/transform_scale_opacity_animator.dart';
-import '../../../../core/resources/resources.dart';
+import '../../../../core/ui/localization/resources.dart';
 
 class CreateSuccessPage extends StatefulWidget {
   const CreateSuccessPage({super.key});
@@ -56,7 +56,7 @@ class _CreateSuccessPageState extends State<CreateSuccessPage> {
                         ),
                       ),
                       Text(
-                        R.strings.itemRegisterReceiver,
+                        "R.strings.itemRegisterReceiver",
                         textAlign: TextAlign.center,
                         style:
                             context.appTextStyles.sectionBodyTextStyle.copyWith(
@@ -67,7 +67,7 @@ class _CreateSuccessPageState extends State<CreateSuccessPage> {
                       Padding(
                         padding: const EdgeInsets.all(8.0),
                         child: Text(
-                          R.strings.itemRegisterSuccessMessage,
+                          "itemRegisterSuccessMessage",
                           textAlign: TextAlign.center,
                           style: context.appTextStyles.caption1Style.copyWith(
                             color: Colors.white.withValues(alpha: 0.9),
@@ -80,7 +80,7 @@ class _CreateSuccessPageState extends State<CreateSuccessPage> {
                         width: context.percentWidth(0.8),
                         bgColor: AppColors.whiteColor,
                         textColor: AppColors.primaryColor,
-                        text: R.strings.goAhead,
+                        text: "R.strings.goAhead",
                         press: () => Navigator.popUntil(
                             context, (route) => route.isFirst),
                       )

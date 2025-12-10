@@ -1,6 +1,6 @@
-import 'package:deehelp/core/resources/strings/translation.dart';
+import 'package:deehelp/core/resources/strings/old_translation.dart';
 
-class PtBr with TranslationParts implements Translation {
+class OldPtBr with TranslationParts implements OldTranslation {
   @override
   String get appName => "DeeHelp";
 

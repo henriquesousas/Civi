@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../../../core/resources/resources.dart';
+import '../../../core/ui/localization/resources.dart';
 
 class SplashLineIndicator extends StatelessWidget {
   const SplashLineIndicator({super.key});
@@ -21,7 +21,7 @@ class SplashLineIndicator extends StatelessWidget {
         ),
         const SizedBox(height: 16),
         Text(
-          R.strings.waiting,
+          " R.strings.waiting",
           style: Theme.of(context).textTheme.labelSmall?.copyWith(
                 color: Colors.white.withValues(alpha: 0.7),
                 fontWeight: FontWeight.w400,

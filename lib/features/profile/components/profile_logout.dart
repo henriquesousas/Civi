@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 
 import '../../../core/components/custom_modal_bottom_sheet.dart';
 import '../../../core/components/ui_my_assets_image_widget.dart';
-import '../../../core/resources/resources.dart';
+import '../../../core/ui/localization/resources.dart';
 import '../../../core/theme/app_colors.dart';
 import '../../../core/theme/dimens.dart';
 import '../../../core/widgets/card/ui_custom_app_card.dart';
@@ -18,7 +18,7 @@ class ProfileLogout extends StatelessWidget {
     return UICustomAppCard(
       padding: Dimens.of(context).edgeInsetsScreenHorizontal,
       child: UICustomListTileCard(
-        title: R.strings.exitApp,
+        title: "R.strings.exitApp",
         showBorder: false,
         titleStyle: context.appTextStyles.bodyTextStyle1.copyWith(
           color: AppColors.textColorBody,

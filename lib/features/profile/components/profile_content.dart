@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
 import '../../../core/components/ui_my_assets_image_widget.dart';
-import '../../../core/resources/resources.dart';
+import '../../../core/ui/localization/resources.dart';
 import '../../../core/router/router_constants.dart';
 import '../../../core/theme/app_colors.dart';
 import '../../../core/theme/dimens.dart';
@@ -26,7 +26,7 @@ class ProfileContent extends StatelessWidget {
               padding: const EdgeInsetsDirectional.symmetric(
                 vertical: Dimens.defaultPadding,
               ),
-              title: R.strings.myProducts,
+              title: "Meus bens",
               showBorder: true,
               titleStyle: context.appTextStyles.bodyTextStyle1.copyWith(
                 color: AppColors.textColorBody,
@@ -50,7 +50,8 @@ class ProfileContent extends StatelessWidget {
               padding: const EdgeInsetsDirectional.symmetric(
                 vertical: Dimens.defaultPadding,
               ),
-              title: R.strings.lastOccurrences,
+              // title: "R.strings.lastOccurrences",
+              title: "ûltimas ocorrëncias",
               showBorder: true,
               titleStyle: context.appTextStyles.bodyTextStyle1.copyWith(
                 color: AppColors.textColorBody,
@@ -74,7 +75,8 @@ class ProfileContent extends StatelessWidget {
               padding: const EdgeInsetsDirectional.symmetric(
                 vertical: Dimens.defaultPadding,
               ),
-              title: R.strings.favorites,
+              // title: R.strings.favorites,
+              title: "Favoritos",
               showBorder: true,
               titleStyle: context.appTextStyles.bodyTextStyle1.copyWith(
                 color: AppColors.textColorBody,
@@ -98,7 +100,7 @@ class ProfileContent extends StatelessWidget {
               padding: const EdgeInsetsDirectional.symmetric(
                 vertical: Dimens.defaultPadding,
               ),
-              title: R.strings.search,
+              title: "Pesquisar",
               showBorder: true,
               titleStyle: context.appTextStyles.bodyTextStyle1.copyWith(
                 color: AppColors.textColorBody,
@@ -176,7 +178,7 @@ class ProfileContent extends StatelessWidget {
               padding: const EdgeInsetsDirectional.symmetric(
                 vertical: Dimens.defaultPadding,
               ),
-              title: R.strings.faq,
+              title: "FAQ",
               showBorder: false,
               titleStyle: context.appTextStyles.bodyTextStyle1.copyWith(
                 color: AppColors.textColorBody,

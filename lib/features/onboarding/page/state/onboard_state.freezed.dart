@@ -50,19 +50,25 @@ extension OnboardStatePatterns on OnboardState {
 
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(_OnboardStateInitial value)? initial,
-    TResult Function(_OnboardStateLoginSuccess value)? loginSuccess,
-    TResult Function(_OnboardStateLoginError value)? loginError,
+    TResult Function(_Initial value)? initial,
+    TResult Function(_Loading value)? loading,
+    TResult Function(_LoginSuccess value)? loginSucceeded,
+    TResult Function(_SessionReady value)? sessionReady,
+    TResult Function(_LoginFailed value)? loginFailed,
     required TResult orElse(),
   }) {
     final _that = this;
     switch (_that) {
-      case _OnboardStateInitial() when initial != null:
+      case _Initial() when initial != null:
         return initial(_that);
-      case _OnboardStateLoginSuccess() when loginSuccess != null:
-        return loginSuccess(_that);
-      case _OnboardStateLoginError() when loginError != null:
-        return loginError(_that);
+      case _Loading() when loading != null:
+        return loading(_that);
+      case _LoginSuccess() when loginSucceeded != null:
+        return loginSucceeded(_that);
+      case _SessionReady() when sessionReady != null:
+        return sessionReady(_that);
+      case _LoginFailed() when loginFailed != null:
+        return loginFailed(_that);
       case _:
         return orElse();
     }
@@ -83,18 +89,24 @@ extension OnboardStatePatterns on OnboardState {
 
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(_OnboardStateInitial value) initial,
-    required TResult Function(_OnboardStateLoginSuccess value) loginSuccess,
-    required TResult Function(_OnboardStateLoginError value) loginError,
+    required TResult Function(_Initial value) initial,
+    required TResult Function(_Loading value) loading,
+    required TResult Function(_LoginSuccess value) loginSucceeded,
+    required TResult Function(_SessionReady value) sessionReady,
+    required TResult Function(_LoginFailed value) loginFailed,
   }) {
     final _that = this;
     switch (_that) {
-      case _OnboardStateInitial():
+      case _Initial():
         return initial(_that);
-      case _OnboardStateLoginSuccess():
-        return loginSuccess(_that);
-      case _OnboardStateLoginError():
-        return loginError(_that);
+      case _Loading():
+        return loading(_that);
+      case _LoginSuccess():
+        return loginSucceeded(_that);
+      case _SessionReady():
+        return sessionReady(_that);
+      case _LoginFailed():
+        return loginFailed(_that);
       case _:
         throw StateError('Unexpected subclass');
     }
@@ -114,18 +126,24 @@ extension OnboardStatePatterns on OnboardState {
 
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(_OnboardStateInitial value)? initial,
-    TResult? Function(_OnboardStateLoginSuccess value)? loginSuccess,
-    TResult? Function(_OnboardStateLoginError value)? loginError,
+    TResult? Function(_Initial value)? initial,
+    TResult? Function(_Loading value)? loading,
+    TResult? Function(_LoginSuccess value)? loginSucceeded,
+    TResult? Function(_SessionReady value)? sessionReady,
+    TResult? Function(_LoginFailed value)? loginFailed,
   }) {
     final _that = this;
     switch (_that) {
-      case _OnboardStateInitial() when initial != null:
+      case _Initial() when initial != null:
         return initial(_that);
-      case _OnboardStateLoginSuccess() when loginSuccess != null:
-        return loginSuccess(_that);
-      case _OnboardStateLoginError() when loginError != null:
-        return loginError(_that);
+      case _Loading() when loading != null:
+        return loading(_that);
+      case _LoginSuccess() when loginSucceeded != null:
+        return loginSucceeded(_that);
+      case _SessionReady() when sessionReady != null:
+        return sessionReady(_that);
+      case _LoginFailed() when loginFailed != null:
+        return loginFailed(_that);
       case _:
         return null;
     }
@@ -146,18 +164,24 @@ extension OnboardStatePatterns on OnboardState {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
-    TResult Function()? loginSuccess,
-    TResult Function()? loginError,
+    TResult Function()? loading,
+    TResult Function(User user)? loginSucceeded,
+    TResult Function()? sessionReady,
+    TResult Function()? loginFailed,
     required TResult orElse(),
   }) {
     final _that = this;
     switch (_that) {
-      case _OnboardStateInitial() when initial != null:
+      case _Initial() when initial != null:
         return initial();
-      case _OnboardStateLoginSuccess() when loginSuccess != null:
-        return loginSuccess();
-      case _OnboardStateLoginError() when loginError != null:
-        return loginError();
+      case _Loading() when loading != null:
+        return loading();
+      case _LoginSuccess() when loginSucceeded != null:
+        return loginSucceeded(_that.user);
+      case _SessionReady() when sessionReady != null:
+        return sessionReady();
+      case _LoginFailed() when loginFailed != null:
+        return loginFailed();
       case _:
         return orElse();
     }
@@ -179,17 +203,23 @@ extension OnboardStatePatterns on OnboardState {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
-    required TResult Function() loginSuccess,
-    required TResult Function() loginError,
+    required TResult Function() loading,
+    required TResult Function(User user) loginSucceeded,
+    required TResult Function() sessionReady,
+    required TResult Function() loginFailed,
   }) {
     final _that = this;
     switch (_that) {
-      case _OnboardStateInitial():
+      case _Initial():
         return initial();
-      case _OnboardStateLoginSuccess():
-        return loginSuccess();
-      case _OnboardStateLoginError():
-        return loginError();
+      case _Loading():
+        return loading();
+      case _LoginSuccess():
+        return loginSucceeded(_that.user);
+      case _SessionReady():
+        return sessionReady();
+      case _LoginFailed():
+        return loginFailed();
       case _:
         throw StateError('Unexpected subclass');
     }
@@ -210,17 +240,23 @@ extension OnboardStatePatterns on OnboardState {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
-    TResult? Function()? loginSuccess,
-    TResult? Function()? loginError,
+    TResult? Function()? loading,
+    TResult? Function(User user)? loginSucceeded,
+    TResult? Function()? sessionReady,
+    TResult? Function()? loginFailed,
   }) {
     final _that = this;
     switch (_that) {
-      case _OnboardStateInitial() when initial != null:
+      case _Initial() when initial != null:
         return initial();
-      case _OnboardStateLoginSuccess() when loginSuccess != null:
-        return loginSuccess();
-      case _OnboardStateLoginError() when loginError != null:
-        return loginError();
+      case _Loading() when loading != null:
+        return loading();
+      case _LoginSuccess() when loginSucceeded != null:
+        return loginSucceeded(_that.user);
+      case _SessionReady() when sessionReady != null:
+        return sessionReady();
+      case _LoginFailed() when loginFailed != null:
+        return loginFailed();
       case _:
         return null;
     }
@@ -229,13 +265,13 @@ extension OnboardStatePatterns on OnboardState {
 
 /// @nodoc
 
-class _OnboardStateInitial implements OnboardState {
-  const _OnboardStateInitial();
+class _Initial implements OnboardState {
+  const _Initial();
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _OnboardStateInitial);
+        (other.runtimeType == runtimeType && other is _Initial);
   }
 
   @override
@@ -249,14 +285,13 @@ class _OnboardStateInitial implements OnboardState {
 
 /// @nodoc
 
-class _OnboardStateLoginSuccess implements OnboardState {
-  const _OnboardStateLoginSuccess();
+class _Loading implements OnboardState {
+  const _Loading();
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType &&
-            other is _OnboardStateLoginSuccess);
+        (other.runtimeType == runtimeType && other is _Loading);
   }
 
   @override
@@ -264,19 +299,83 @@ class _OnboardStateLoginSuccess implements OnboardState {
 
   @override
   String toString() {
-    return 'OnboardState.loginSuccess()';
+    return 'OnboardState.loading()';
   }
 }
 
 /// @nodoc
 
-class _OnboardStateLoginError implements OnboardState {
-  const _OnboardStateLoginError();
+class _LoginSuccess implements OnboardState {
+  const _LoginSuccess(this.user);
+
+  final User user;
+
+  /// Create a copy of OnboardState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @pragma('vm:prefer-inline')
+  _$LoginSuccessCopyWith<_LoginSuccess> get copyWith =>
+      __$LoginSuccessCopyWithImpl<_LoginSuccess>(this, _$identity);
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _OnboardStateLoginError);
+        (other.runtimeType == runtimeType &&
+            other is _LoginSuccess &&
+            (identical(other.user, user) || other.user == user));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType, user);
+
+  @override
+  String toString() {
+    return 'OnboardState.loginSucceeded(user: $user)';
+  }
+}
+
+/// @nodoc
+abstract mixin class _$LoginSuccessCopyWith<$Res>
+    implements $OnboardStateCopyWith<$Res> {
+  factory _$LoginSuccessCopyWith(
+          _LoginSuccess value, $Res Function(_LoginSuccess) _then) =
+      __$LoginSuccessCopyWithImpl;
+  @useResult
+  $Res call({User user});
+}
+
+/// @nodoc
+class __$LoginSuccessCopyWithImpl<$Res>
+    implements _$LoginSuccessCopyWith<$Res> {
+  __$LoginSuccessCopyWithImpl(this._self, this._then);
+
+  final _LoginSuccess _self;
+  final $Res Function(_LoginSuccess) _then;
+
+  /// Create a copy of OnboardState
+  /// with the given fields replaced by the non-null parameter values.
+  @pragma('vm:prefer-inline')
+  $Res call({
+    Object? user = null,
+  }) {
+    return _then(_LoginSuccess(
+      null == user
+          ? _self.user
+          : user // ignore: cast_nullable_to_non_nullable
+              as User,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _SessionReady implements OnboardState {
+  const _SessionReady();
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType && other is _SessionReady);
   }
 
   @override
@@ -284,7 +383,27 @@ class _OnboardStateLoginError implements OnboardState {
 
   @override
   String toString() {
-    return 'OnboardState.loginError()';
+    return 'OnboardState.sessionReady()';
+  }
+}
+
+/// @nodoc
+
+class _LoginFailed implements OnboardState {
+  const _LoginFailed();
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType && other is _LoginFailed);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  String toString() {
+    return 'OnboardState.loginFailed()';
   }
 }
 

@@ -1,4 +1,4 @@
-import '../../../core/resources/resources.dart';
+import '../../../core/ui/localization/resources.dart';
 
 class OnboardItem {
   final String title;
@@ -14,23 +14,23 @@ class OnboardItem {
   static List<OnboardItem> pages() {
     return [
       OnboardItem(
-        title: R.strings.onboardingWelcomeHead,
-        description: R.strings.onboardingWelcomeBody,
+        title: R.strings.welcome,
+        description: R.strings.onboardWelcomeDescription,
         lottieAsset: "assets/lottie/map.json",
       ),
       OnboardItem(
-        title: R.strings.onboardingHelpHead,
-        description: R.strings.onboardingHelpBody,
+        title: R.strings.quickHelp,
+        description: R.strings.onboardQuickHelpDescription,
         lottieAsset: "assets/lottie/warning.json",
       ),
       OnboardItem(
-        title: R.strings.onboardingAlertsRealTimeHead,
-        description: R.strings.onboardingAlertsRealTimeBody,
+        title: R.strings.alets,
+        description: R.strings.onboardAlertsDescription,
         lottieAsset: "assets/lottie/chatting.json",
       ),
       OnboardItem(
-        title: R.strings.onboardingSecurityHead,
-        description: R.strings.onboardingSecurityBody,
+        title: R.strings.security,
+        description: R.strings.onboardSecurityDescription,
         lottieAsset: "assets/lottie/security.json",
       ),
     ];

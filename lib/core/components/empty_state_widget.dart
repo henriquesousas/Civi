@@ -2,7 +2,7 @@ import 'package:deehelp/core/extensions/screen_size_extension.dart';
 import 'package:deehelp/core/theme/app_colors.dart';
 import 'package:flutter/material.dart';
 
-import '../resources/resources.dart';
+import '../ui/localization/resources.dart';
 
 class EmptyStateWidget extends StatelessWidget {
   final VoidCallback press;
@@ -33,7 +33,7 @@ class EmptyStateWidget extends StatelessWidget {
               ),
             ),
             Text(
-              R.strings.productNoFound,
+              "R.strings.productNoFound",
               style: Theme.of(context).textTheme.bodyLarge?.copyWith(
                     fontWeight: FontWeight.w500,
                   ),
@@ -41,7 +41,7 @@ class EmptyStateWidget extends StatelessWidget {
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 20),
               child: Text(
-                R.strings.productMessageEmpty,
+                "R.strings.productMessageEmpty",
                 textAlign: TextAlign.center,
               ),
             ),
@@ -57,7 +57,7 @@ class EmptyStateWidget extends StatelessWidget {
                   ),
                 ),
                 icon: const Icon(Icons.add, size: 16),
-                label: Text(R.strings.add),
+                label: Text("R.strings.add"),
               ),
             )
           ],

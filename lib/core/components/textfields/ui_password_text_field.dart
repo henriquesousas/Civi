@@ -2,7 +2,7 @@ import 'package:deehelp/core/components/textfields/ui_primary_text_field.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 
-import '../../resources/resources.dart';
+import '../../ui/localization/resources.dart';
 import '../../theme/app_colors.dart';
 
 class UIPasswordTextField extends StatelessWidget {
@@ -22,7 +22,7 @@ class UIPasswordTextField extends StatelessWidget {
         obscureText ? R.images.svgVisibilityOff : R.images.svgVisibility;
 
     return UIPrimaryTextField(
-      labelText: R.strings.password,
+      labelText: "Senha",
       errorText: errorText,
       obscureText: obscureText,
       onChanged: onChanged,

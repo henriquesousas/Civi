@@ -1,5 +1,5 @@
 import 'package:dartz/dartz.dart';
-import 'package:deehelp/core/resources/resources.dart';
+import 'package:deehelp/core/ui/localization/resources.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
 class FirebaseAuthService {
@@ -17,7 +17,7 @@ class FirebaseAuthService {
 
     if (credentials.user == null) {
       return Left(FirebaseAuthException(
-          message: R.strings.loginInvalidCredentialsError,
+          message: "R.strings.loginInvalidCredentialsError",
           code: "invalid-credential"));
     }
 
@@ -36,7 +36,7 @@ class FirebaseAuthService {
     );
     if (credentials.user == null) {
       return Left(FirebaseAuthException(
-          message: R.strings.loginInvalidCredentialsError,
+          message: "R.strings.loginInvalidCredentialsError",
           code: "invalid-credential"));
     }
 

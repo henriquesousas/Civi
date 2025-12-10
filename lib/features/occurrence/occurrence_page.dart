@@ -5,7 +5,7 @@ import 'package:deehelp/features/occurrence/presentation/search_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 
-import '../../core/resources/resources.dart';
+import '../../core/ui/localization/resources.dart';
 import '../../core/theme/app_colors.dart';
 
 // --- 1. ENUMS E EXTENSIONS ---

@@ -1,6 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dartz/dartz.dart';
-import 'package:deehelp/core/resources/resources.dart';
+import 'package:deehelp/core/ui/localization/resources.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
 class FirebaseFirestoreService {
@@ -16,7 +16,7 @@ class FirebaseFirestoreService {
     if (!doc.exists) {
       return Left(FirebaseAuthException(
         code: "user-not-found",
-        message: R.strings.loginInvalidCredentialsError,
+        message: "loginInvalidCredentialsError",
       ));
     }
 

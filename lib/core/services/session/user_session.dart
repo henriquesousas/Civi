@@ -10,4 +10,13 @@ class UserSession {
     required this.email,
     required this.photoUrl,
   });
+
+  factory UserSession.from({
+    required String id,
+    required String name,
+    required String email,
+    required String photoUrl,
+  }) {
+    return UserSession(id: id, name: name, email: email, photoUrl: photoUrl);
+  }
 }

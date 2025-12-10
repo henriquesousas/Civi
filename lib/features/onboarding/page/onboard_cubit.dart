@@ -1,3 +1,4 @@
+import 'package:deehelp/core/services/session/user_session.dart';
 import 'package:deehelp/core/services/session/user_session_service.dart';
 import 'package:deehelp/core/wrapper/command_cubit.dart';
 import 'package:deehelp/features/auth/domain/usecases/login/login_with_google_usecase.dart';
@@ -21,21 +22,20 @@ class OnboardCubit extends Cubit<OnboardState> {
     await CommandCubit.execute<User, OnboardState>(
       emit: emit,
       command: () => _loginWithGoogleUsecase.execute(),
-      onLoading: () => const OnboardState.initial(),
-      onSuccess: (result) => const OnboardState.loginSuccess(),
-      onError: (error) => const OnboardState.loginError(),
+      onLoading: () => const OnboardState.loading(),
+      onSuccess: (user) => OnboardState.loginSucceeded(user),
+      onError: (error) => const OnboardState.loginFailed(),
     );
   }
 
-  // OnboardState _saveSession() {
-  //   // final session = UserSession(
-  //   //   id: "",
-  //   //   name: "",
-  //   //   email: "",
-  //   //   photoUrl: "",
-  //   // );
-  //   // final prefs = UserPreferences.from(session: session);
-  //   // _prefs.savePreferences(prefs);
-  //   // return OnboardState.loginSuccess();
-  // }
+  void saveSesion(User user) async {
+    final session = UserSession(
+      id: user.id.value,
+      name: user.name.value,
+      email: user.email.value,
+      photoUrl: user.photoUrl?.value ?? '',
+    );
+    _session.save(session);
+    emit(const OnboardState.sessionReady());
+  }
 }

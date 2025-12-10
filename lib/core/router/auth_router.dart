@@ -22,13 +22,13 @@ final authRoutes = [
       child: const LoginPage(),
     ),
   ),
-  GoRoute(
-    path: RouterConstant.loginWithGoogle,
-    pageBuilder: (context, state) => slideTransitionPage(
-      key: state.pageKey,
-      child: const LoginWithGooglePage(),
-    ),
-  ),
+  // GoRoute(
+  //   path: RouterConstant.loginWithGoogle,
+  //   pageBuilder: (context, state) => slideTransitionPage(
+  //     key: state.pageKey,
+  //     child: const LoginWithGooglePage(),
+  //   ),
+  // ),
   GoRoute(
     path: RouterConstant.otpVerification,
     pageBuilder: (context, state) => slideTransitionPage(

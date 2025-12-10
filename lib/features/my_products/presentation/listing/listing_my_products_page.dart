@@ -1,5 +1,4 @@
 import 'package:deehelp/core/components/dialogs/dialog_extension.dart';
-import 'package:deehelp/core/theme/app_text_styles.dart';
 import 'package:deehelp/features/base_page.dart';
 import 'package:deehelp/features/base_page_state.dart';
 import 'package:deehelp/features/my_products/presentation/listing/components/listing_my_products_shimmer.dart';
@@ -8,14 +7,12 @@ import 'package:go_router/go_router.dart';
 
 import '../../../../core/components/empty_state_widget.dart';
 import '../../../../core/components/loader/loading.dart';
-import '../../../../core/resources/resources.dart';
 import '../../../../core/router/router_constants.dart';
 import '../../../../core/theme/app_colors.dart';
-import '../../../../core/widgets/buttons/ui_elevated_icon_button.dart'
-    show UIElevatedIconButton;
+
+import '../../../../core/widgets/buttons/ui_elevated_icon_button.dart';
 import '../../domain/entities/product.dart';
 import 'components/my_products_list_tile_card.dart';
-import 'components/status_info_text.dart';
 import 'listing_my_products_cubit.dart';
 import 'state/list_product_state.dart';
 
@@ -59,16 +56,16 @@ class _ProductListingPage extends BasePageState<ProductListingCubit,
   }
 
   @override
-  String? pageTitle() => R.strings.myProducts;
+  String? pageTitle() => "Meus bens";
 
   @override
   void listener(BuildContext context, ListProductState state) {
     state.maybeWhen(
       deleteLoading: () => Loading.instance()
-          .show(context: context, text: R.strings.productDeleting),
+          .show(context: context, text: " R.strings.productDeleting"),
       deleteSuccess: () {
         Loading.instance().hide();
-        context.showSnackBar(R.strings.productDeletedSuccess);
+        context.showSnackBar("R.strings.productDeletedSuccess");
       },
       error: (message) {
         Loading.instance().hide();

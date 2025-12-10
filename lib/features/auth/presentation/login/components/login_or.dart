@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 
-import '../../../../../core/resources/resources.dart';
 import '../../../../../core/theme/app_colors.dart';
 
 class LoginOr extends StatelessWidget {
@@ -14,7 +13,7 @@ class LoginOr extends StatelessWidget {
         Padding(
           padding: const EdgeInsetsGeometry.all(16),
           child: Text(
-            R.strings.or,
+            "OU",
             // style: context.getTextStyle.regular.copyWith(
             //   color: AppColorsV2.textTertiary,
             // ),

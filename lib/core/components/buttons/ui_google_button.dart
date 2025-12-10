@@ -4,7 +4,7 @@ import 'package:deehelp/core/theme/button_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 
-import '../../resources/resources.dart';
+import '../../ui/localization/resources.dart';
 
 class UIGoogleButton extends StatelessWidget {
   final VoidCallback? press;

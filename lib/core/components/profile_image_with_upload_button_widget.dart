@@ -9,7 +9,7 @@ import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:skeletonizer/skeletonizer.dart';
 
-import '../resources/resources.dart';
+import '../ui/localization/resources.dart';
 
 //TODO: Renomear por que vai ser reutilizavel em varios locais
 class ProfileImageWithUploadButtonWidget extends StatefulWidget {

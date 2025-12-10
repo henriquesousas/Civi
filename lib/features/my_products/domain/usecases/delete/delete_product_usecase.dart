@@ -5,7 +5,7 @@ import 'package:deehelp/core/image_utils.dart';
 import 'package:deehelp/core/services/media/interfaces/media_storage.dart';
 import 'package:logging/logging.dart';
 
-import '../../../../../core/resources/resources.dart';
+import '../../../../../core/ui/localization/resources.dart';
 import '../../product_exception.dart';
 import '../../product_repository.dart';
 import 'delete_product_dto.dart';
@@ -28,7 +28,7 @@ class DeleteProductUsecase extends UseCase<DeleteProductDto, Unit> {
   Future<EitherResult<Unit>> execute(DeleteProductDto dto) async {
     final imageName = ImageUtils.extractImagePath(dto.imageUrl);
     if (imageName == null) {
-      return left(ProductException.from(R.strings.userNotFound));
+      return left(ProductException.from("R.strings.userNotFound"));
     }
     _logger.info("Deletando imagem : $imageName");
     _mediaStorage.delete(imageName, _bucket);

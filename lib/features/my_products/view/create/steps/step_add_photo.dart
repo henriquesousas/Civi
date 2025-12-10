@@ -1,6 +1,5 @@
 import 'package:deehelp/core/components/icon/ui_icon.dart';
 import 'package:deehelp/core/components/ui_my_assets_image_widget.dart';
-import 'package:deehelp/core/components/ui_my_network_image_widget.dart';
 import 'package:deehelp/core/extensions/screen_size_extension.dart';
 import 'package:deehelp/core/theme/app_text_styles.dart';
 import 'package:deehelp/features/my_products/view/create/create_product_cubit.dart';
@@ -9,7 +8,7 @@ import 'package:dotted_border/dotted_border.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../../../../../core/resources/resources.dart';
+import '../../../../../core/ui/localization/resources.dart';
 import '../../../../../core/services/media/image_picker_service.dart';
 import '../../../../../core/theme/app_colors.dart';
 import '../../../../../core/widgets/card/ui_custom_app_card.dart';
@@ -96,7 +95,7 @@ class StepAddPhoto extends StatelessWidget {
               ),
             ),
             Text(
-              R.strings.addPhoto,
+              "Adicionar foto",
               style: context.appTextStyles.caption1Style,
             ),
           ],

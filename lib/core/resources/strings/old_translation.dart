@@ -1,4 +1,4 @@
-abstract class Translation with TranslationParts {
+abstract class OldTranslation with TranslationParts {
   String get appName;
   String get welcome;
   String get email;

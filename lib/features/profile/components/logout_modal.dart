@@ -6,7 +6,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
-import '../../../core/resources/resources.dart';
+import '../../../core/ui/localization/resources.dart';
 
 class LogoutModal extends StatelessWidget {
   const LogoutModal({super.key});
@@ -21,13 +21,13 @@ class LogoutModal extends StatelessWidget {
             mainAxisSize: MainAxisSize.min,
             children: [
               Text(
-                R.strings.logoutExitTitle,
+                "R.strings.logoutExitTitle",
                 style: context.appTextStyles.sectionTitle,
               ),
               const SizedBox(height: 10),
               Text(
                 textAlign: TextAlign.center,
-                R.strings.logoutExitMessage,
+                "R.strings.logoutExitMessage",
                 style: context.appTextStyles.sectionSubTitle1.copyWith(
                   color: AppColors.textColorBody,
                 ),
@@ -40,7 +40,7 @@ class LogoutModal extends StatelessWidget {
                   Padding(
                     padding: const EdgeInsets.symmetric(vertical: 0),
                     child: UIElevatedButton(
-                      text: R.strings.logoutConfirmButton,
+                      text: "R.strings.logoutConfirmButton",
                       press: () {
                         final instance = FirebaseAuth.instance;
                         if (instance.currentUser != null) {
