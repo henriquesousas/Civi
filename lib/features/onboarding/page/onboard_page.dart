@@ -7,8 +7,9 @@ import 'package:deehelp/features/onboarding/page/onboard_item.dart';
 import 'package:deehelp/features/onboarding/page/onboard_view.dart';
 import 'package:deehelp/features/onboarding/page/state/onboard_state.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+
+import '../../../core/ui/localization/resources.dart';
 
 class OnboardPage extends StatefulWidget {
   const OnboardPage({super.key});
@@ -68,51 +69,41 @@ class _OnboardPageState extends State<OnboardPage> {
     final pages = OnboardItem.pages();
 
     return Scaffold(
-      body: AnnotatedRegion<SystemUiOverlayStyle>(
-        value: SystemUiOverlayStyle.light.copyWith(
-          statusBarColor: Colors.transparent,
-        ),
-        child: Stack(
-          children: [
-            PageView.builder(
-              controller: _pageController,
-              onPageChanged: _onPageChanged,
-              itemBuilder: (context, index) {
-                final realIndex = index % pages.length;
-                final page = pages[realIndex];
-                return OnboardContent(page: page);
-              },
-            ),
-            BlocConsumer<OnboardCubit, OnboardState>(
-              listener: (context, state) {
-                state.maybeMap(
-                  loginFailed: (value) {
-                    context.showSnackBar(
-                      type: DialogType.error,
-                      "Não foi possível se autenticar com o google !",
-                    );
-                  },
-                  loginSucceeded: (value) =>
-                      context.read<OnboardCubit>().saveSesion(value.user),
-                  sessionReady: (value) => {
-                    context.showSnackBar(
-                      type: DialogType.success,
-                      "Sucesso",
-                    )
-                  },
-                  orElse: () => const CircularProgressIndicator(),
-                );
-              },
-              builder: (context, state) {
-                return state.maybeMap(
-                  loading: (value) => _buildActions(stateButton: true),
-                  loginFailed: (value) => _buildActions(),
-                  orElse: () => _buildActions(),
-                );
-              },
-            ),
-          ],
-        ),
+      body: Stack(
+        children: [
+          PageView.builder(
+            controller: _pageController,
+            onPageChanged: _onPageChanged,
+            itemBuilder: (context, index) {
+              final realIndex = index % pages.length;
+              final page = pages[realIndex];
+              return OnboardContent(page: page);
+            },
+          ),
+          BlocConsumer<OnboardCubit, OnboardState>(
+            listener: (context, state) {
+              state.maybeMap(
+                loginFailed: (value) {
+                  context.showSnackBar(
+                    type: DialogType.error,
+                    R.strings.loginWithGoogleError,
+                  );
+                },
+                loginSucceeded: (value) =>
+                    context.read<OnboardCubit>().saveSesion(value.user),
+                sessionReady: (value) => {},
+                orElse: () => const CircularProgressIndicator(),
+              );
+            },
+            builder: (context, state) {
+              return state.maybeMap(
+                loading: (value) => _buildActions(stateButton: true),
+                loginFailed: (value) => _buildActions(),
+                orElse: () => _buildActions(),
+              );
+            },
+          ),
+        ],
       ),
     );
   }
