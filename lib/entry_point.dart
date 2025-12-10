@@ -6,7 +6,7 @@ import 'package:deehelp/features/profile/profile_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
-import 'core/ui/localization/resources.dart';
+import 'core/ui/assets/resources.dart';
 import 'core/theme/constants.dart';
 import 'features/my_products/presentation/listing/listing_my_products_provider.dart';
 

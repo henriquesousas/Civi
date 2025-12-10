@@ -10,7 +10,7 @@ import 'package:lottie/lottie.dart';
 
 import '../../../../core/animation/slide_fade_transition_animator.dart';
 import '../../../../core/animation/transform_scale_opacity_animator.dart';
-import '../../../../core/ui/localization/resources.dart';
+import '../../../../core/ui/assets/resources.dart';
 
 class CreateSuccessPage extends StatefulWidget {
   const CreateSuccessPage({super.key});

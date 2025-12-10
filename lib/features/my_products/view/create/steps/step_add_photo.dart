@@ -8,7 +8,7 @@ import 'package:dotted_border/dotted_border.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../../../../../core/ui/localization/resources.dart';
+import '../../../../../core/ui/assets/resources.dart';
 import '../../../../../core/services/media/image_picker_service.dart';
 import '../../../../../core/theme/app_colors.dart';
 import '../../../../../core/widgets/card/ui_custom_app_card.dart';

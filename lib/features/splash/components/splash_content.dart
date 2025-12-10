@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../../../core/ui/localization/resources.dart';
+import '../../../core/ui/assets/resources.dart';
 
 class SplashContent extends StatelessWidget {
   const SplashContent({super.key});

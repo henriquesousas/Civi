@@ -2,7 +2,7 @@ import 'package:deehelp/core/extensions/screen_size_extension.dart';
 import 'package:deehelp/core/theme/app_colors.dart';
 import 'package:flutter/material.dart';
 
-import '../ui/localization/resources.dart';
+import '../ui/assets/resources.dart';
 
 class EmptyStateWidget extends StatelessWidget {
   final VoidCallback press;

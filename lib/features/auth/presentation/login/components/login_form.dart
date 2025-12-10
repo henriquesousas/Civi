@@ -7,7 +7,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:provider/provider.dart';
 
-import '../../../../../core/ui/localization/resources.dart';
+import '../../../../../core/ui/assets/resources.dart';
 import '../bloc/auth_state.dart';
 import '../bloc/email_state.dart';
 import '../bloc/login_bloc.dart';

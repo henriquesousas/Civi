@@ -1,5 +1,5 @@
 import 'package:dartz/dartz.dart';
-import 'package:deehelp/core/ui/localization/resources.dart';
+import 'package:deehelp/core/ui/assets/resources.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
 class FirebaseAuthService {

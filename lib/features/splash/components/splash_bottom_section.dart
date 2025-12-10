@@ -1,7 +1,7 @@
 import 'package:deehelp/core/theme/app_colors.dart';
 import 'package:flutter/material.dart';
 
-import '../../../core/ui/localization/resources.dart';
+import '../../../core/ui/assets/resources.dart';
 
 class SplashBottomSection extends StatelessWidget {
   const SplashBottomSection({super.key});

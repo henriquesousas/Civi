@@ -4,7 +4,7 @@ import 'package:deehelp/core/widgets/empty/ui_simple_empty_value.dart';
 import 'package:deehelp/core/widgets/search/ui_search_field.dart';
 import 'package:flutter/material.dart';
 
-import '../../../../../core/ui/localization/resources.dart';
+import '../../../../../core/ui/assets/resources.dart';
 
 class ModalSelectBrand extends StatefulWidget {
   final List<String> values;

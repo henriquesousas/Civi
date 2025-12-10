@@ -1,4 +1,4 @@
-import 'package:deehelp/core/ui/localization/resources.dart';
+import 'package:deehelp/core/ui/assets/resources.dart';
 import 'package:flutter/material.dart';
 
 import '../../../core/components/ui_my_assets_image_widget.dart';

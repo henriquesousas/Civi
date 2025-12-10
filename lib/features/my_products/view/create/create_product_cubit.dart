@@ -7,7 +7,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../../../../core/ui/localization/resources.dart';
+import '../../../../core/ui/assets/resources.dart';
 import '../../domain/usecases/create/create_product_dto.dart';
 import '../../domain/usecases/create/create_product_usecase.dart';
 

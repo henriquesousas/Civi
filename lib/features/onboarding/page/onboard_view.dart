@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 
-import '../../../core/ui/localization/resources.dart';
+import '../../../core/ui/assets/resources.dart';
 import '../../../core/theme/app_colors.dart';
 import '../../../core/theme/dimens.dart';
 import '../../../core/widgets/buttons/ui_elevated_button.dart';
@@ -38,10 +38,10 @@ class OnboardView extends StatelessWidget {
           ),
           const SizedBox(height: Dimens.size10),
           UIElevatedButton(
-            text: "Entrar com Google",
+            text: R.strings.enterWithGoogle,
             isLoading: isLoading,
             icon: SvgPicture.asset(
-              R.images.svgGoogleIcon,
+              R.svg.google,
               width: 20.w,
               height: 20.h,
             ),
@@ -50,7 +50,7 @@ class OnboardView extends StatelessWidget {
           UIElevatedButton(
             borderColor: AppColors.primaryColor,
             bgColor: AppColors.whiteColor,
-            text: "Continuar sem login",
+            text: R.strings.continueWithoutLogin,
             textColor: AppColors.primaryColor,
             press: pressEnterWithoutLogin,
           ),

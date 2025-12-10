@@ -5,7 +5,7 @@ import 'package:deehelp/core/image_utils.dart';
 import 'package:deehelp/core/services/media/interfaces/media_storage.dart';
 import 'package:logging/logging.dart';
 
-import '../../../../../core/ui/localization/resources.dart';
+import '../../../../../core/ui/assets/resources.dart';
 import '../../product_exception.dart';
 import '../../product_repository.dart';
 import 'delete_product_dto.dart';

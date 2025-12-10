@@ -9,7 +9,7 @@ import 'package:deehelp/features/onboarding/page/state/onboard_state.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../../../core/ui/localization/resources.dart';
+import '../../../core/ui/assets/resources.dart';
 
 class OnboardPage extends StatefulWidget {
   const OnboardPage({super.key});

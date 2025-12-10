@@ -1,5 +1,5 @@
 import 'package:dartz/dartz.dart';
-import 'package:deehelp/core/ui/localization/resources.dart';
+import 'package:deehelp/core/ui/assets/resources.dart';
 import 'package:deehelp/features/auth/data/auth_result.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
