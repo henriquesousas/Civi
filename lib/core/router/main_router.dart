@@ -26,12 +26,16 @@ class MainRouter {
         builder: (context, state) => const SplashPage(),
       ),
       GoRoute(
-        path: RouterConstant.occurrences,
-        pageBuilder: (context, state) => slideTransitionPage(
-          key: state.pageKey,
-          child: OccurrencePage(),
-        ),
+        path: RouterConstant.home,
+        builder: (context, state) => HomeView(),
       ),
+      // GoRoute(
+      //   path: RouterConstant.occurrences,
+      //   pageBuilder: (context, state) => slideTransitionPage(
+      //     key: state.pageKey,
+      //     child: OccurrencePage(),
+      //   ),
+      // ),
       GoRoute(
         path: RouterConstant.faq,
         pageBuilder: (context, state) => slideTransitionPage(
@@ -57,14 +61,11 @@ class MainRouter {
       //   path: RouterConstant.onboarding2,
       //   builder: (context, state) => WelcomeProvider.page,
       // ),
-      GoRoute(
-        path: RouterConstant.home,
-        builder: (context, state) => HomeView(),
-      ),
-      GoRoute(
-        path: RouterConstant.bottomView,
-        builder: (context, state) => const EntryPoint(), //MainPage(),
-      ),
+
+      // GoRoute(
+      //   path: RouterConstant.bottomView,
+      //   builder: (context, state) => const EntryPoint(), //MainPage(),
+      // ),
     ],
   );
 }
