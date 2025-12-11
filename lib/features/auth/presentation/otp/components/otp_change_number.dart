@@ -1,4 +1,4 @@
-import 'package:deehelp/core/extensions/context_extension.dart';
+import 'package:deehelp/core/ui/extensions/context_extension.dart';
 import 'package:flutter/material.dart';
 
 class OtpChangeNumber extends StatelessWidget {
@@ -24,7 +24,7 @@ class OtpChangeNumber extends StatelessWidget {
           ),
           const SizedBox(width: 8),
           Text(
-            context.strings.otpChangePhoneNumber,
+            "Mudar número de telefone",
           ),
         ],
       ),

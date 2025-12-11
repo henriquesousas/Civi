@@ -38,7 +38,7 @@ class _SplashPageState extends State<SplashPage> {
       if (!mounted) return;
 
       if (session != null) {
-        context.pushReplacement(RouterConstant.home);
+        context.pushReplacement(RouterConstant.map);
       } else {
         context.pushReplacement(RouterConstant.onboarding);
       }

@@ -1,4 +1,4 @@
-import 'package:deehelp/core/extensions/context_extension.dart';
+import 'package:deehelp/core/ui/extensions/context_extension.dart';
 import 'package:deehelp/features/auth/presentation/register/components/register_account_header_title.dart';
 import 'package:flutter/material.dart';
 
@@ -15,8 +15,8 @@ class FormSecurityInfo extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           RegisterAccountHeaderTitle(
-            title: context.strings.formSecurityTitle,
-            subtitle: context.strings.formSecuritySubtitle,
+            title: "Seguranca",
+            subtitle: "Crie uma senha segura",
           ),
           SizedBox(height: 32),
           // PrimaryTextField(
@@ -57,7 +57,7 @@ class FormSecurityInfo extends StatelessWidget {
           SizedBox(height: 10),
           CheckTerms(
             value: true,
-            title: context.strings.labelAgreeTerms,
+            title: "Eu concordo com os Termos e Condições",
             isRequired: true,
             onChanged: (value) {},
           ),

@@ -8,6 +8,7 @@ abstract final class Dimens {
   const Dimens();
 
   static const size10 = 10.0;
+  static const size20 = 20.0;
   static const size40 = 40.0;
   static const paddingHorizontal = 20.0;
   static const paddingVertical = 24.0;

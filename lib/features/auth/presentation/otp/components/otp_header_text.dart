@@ -1,4 +1,4 @@
-import 'package:deehelp/core/extensions/context_extension.dart';
+import 'package:deehelp/core/ui/extensions/context_extension.dart';
 import 'package:flutter/material.dart';
 
 class OtpHeaderText extends StatelessWidget {
@@ -10,7 +10,7 @@ class OtpHeaderText extends StatelessWidget {
     return Column(
       children: [
         Text(
-          context.strings.otpInsertVerificationCode,
+          "Insira o código de verificação",
           textAlign: TextAlign.center,
         ),
         const SizedBox(height: 16),
@@ -19,7 +19,8 @@ class OtpHeaderText extends StatelessWidget {
           text: TextSpan(
             children: [
               TextSpan(
-                text: ' ${context.strings.otpWeSentCode}\n',
+                text:
+                    'Enviamos um código com 6-digitos para o telefone com final',
               ),
               TextSpan(
                 text: _maskedPhoneNumber,

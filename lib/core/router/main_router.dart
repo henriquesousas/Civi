@@ -1,12 +1,10 @@
 import 'package:deehelp/core/router/router_constants.dart';
 import 'package:deehelp/core/router/slide_transition_page.dart';
 import 'package:deehelp/features/faq/faq_provider.dart';
-import 'package:deehelp/features/home/home_view.dart';
-import 'package:deehelp/features/occurrence/occurrence_page.dart';
+import 'package:deehelp/features/map/map_page.dart';
 import 'package:deehelp/features/splash/splash_page.dart';
 import 'package:go_router/go_router.dart';
 
-import '../../entry_point.dart';
 import 'auth_router.dart';
 import 'item_router.dart';
 import '../../features/onboarding/page/onboard_router.dart';
@@ -26,8 +24,8 @@ class MainRouter {
         builder: (context, state) => const SplashPage(),
       ),
       GoRoute(
-        path: RouterConstant.home,
-        builder: (context, state) => HomeView(),
+        path: RouterConstant.map,
+        builder: (context, state) => MapPage(),
       ),
       // GoRoute(
       //   path: RouterConstant.occurrences,

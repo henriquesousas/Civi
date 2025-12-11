@@ -1,4 +1,4 @@
-import 'package:deehelp/core/extensions/context_extension.dart';
+import 'package:deehelp/core/ui/extensions/context_extension.dart';
 import 'package:deehelp/core/theme/app_colors.dart';
 import 'package:deehelp/features/auth/presentation/register/components/progress_indicator_label.dart';
 import 'package:flutter/material.dart';
@@ -67,15 +67,15 @@ class _RegisterAccountProgressIndicatorState
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               ProgressIndicatorLabel(
-                label: context.strings.registerAccountStepPersonal,
+                label: "Criar conta",
                 isActive: Steps.personal.value == widget.currentStep,
               ),
               ProgressIndicatorLabel(
-                label: context.strings.registerAccountStepContact,
+                label: "Contato",
                 isActive: Steps.contact.value == widget.currentStep,
               ),
               ProgressIndicatorLabel(
-                label: context.strings.registerAccountSecurity,
+                label: "Senha",
                 isActive: Steps.security.value == widget.currentStep,
               ),
             ],

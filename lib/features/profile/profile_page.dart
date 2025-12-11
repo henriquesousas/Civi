@@ -5,8 +5,11 @@ import 'package:deehelp/features/profile/components/profile_logout.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
+import '../../core/ui/assets/resources.dart';
+
 class ProfilePage extends StatelessWidget {
-  const ProfilePage({super.key});
+  final VoidCallback? onBackButtonPress;
+  const ProfilePage({super.key, this.onBackButtonPress});
 
   @override
   Widget build(BuildContext context) {
@@ -14,10 +17,14 @@ class ProfilePage extends StatelessWidget {
     final name = user?.displayName ?? '';
     final email = user?.email ?? '';
     return UICustomScaffold(
-      pageTitle: "Perfil",
+      hideAppBar: false,
+      assettBackButton: R.svg.circleBackButton,
+      onBackButtonTap: onBackButtonPress,
       body: SingleChildScrollView(
         clipBehavior: Clip.none,
         child: Column(
+          mainAxisAlignment: MainAxisAlignment.start,
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             ProfileHeader(name: name, email: email),
             const ProfileContent(),

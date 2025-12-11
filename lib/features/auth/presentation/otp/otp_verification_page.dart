@@ -1,4 +1,4 @@
-import 'package:deehelp/core/extensions/context_extension.dart';
+import 'package:deehelp/core/ui/extensions/context_extension.dart';
 import 'package:deehelp/core/extensions/screen_size_extension.dart';
 import 'package:deehelp/core/router/router_constants.dart';
 import 'package:deehelp/core/widgets/buttons/ui_elevated_button.dart';
@@ -23,7 +23,7 @@ class _OtpVerificationPageState extends State<OtpVerificationPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       // backgroundColor: AppColorsV2.background,
-      appBar: UIAppBar(title: context.strings.otpAppBar),
+      // appBar: UIAppBar(title: context.strings.otpAppBar),
       body: SafeArea(
         child: SingleChildScrollView(
           padding: const EdgeInsets.all(24),
@@ -53,7 +53,7 @@ class _OtpVerificationPageState extends State<OtpVerificationPage> {
                 const OtpResendCode(),
                 SizedBox(height: context.percentHeight(0.15)),
                 UIElevatedButton(
-                    text: context.strings.otpButtonResendCode,
+                    text: "Reenviar código",
                     press: () => context.push(RouterConstant.welcome)),
                 const SizedBox(height: 20),
                 const OtpChangeNumber(),

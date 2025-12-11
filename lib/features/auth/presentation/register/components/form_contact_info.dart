@@ -1,4 +1,4 @@
-import 'package:deehelp/core/extensions/context_extension.dart';
+import 'package:deehelp/core/ui/extensions/context_extension.dart';
 import 'package:deehelp/features/auth/presentation/register/components/register_account_header_title.dart';
 import 'package:flutter/material.dart';
 
@@ -13,8 +13,8 @@ class FormContactInfo extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           RegisterAccountHeaderTitle(
-            title: context.strings.formContactTitle,
-            subtitle: context.strings.formContactSubtitle,
+            title: "nformações de contato",
+            subtitle: "Como podemos falar com você?",
           ),
           const SizedBox(height: 32),
           // PrimaryTextField(

@@ -1,6 +1,6 @@
 import 'package:deehelp/core/animation/slide_fade_transition_animator.dart';
 import 'package:deehelp/core/components/ui_app_bar.dart';
-import 'package:deehelp/core/extensions/context_extension.dart';
+import 'package:deehelp/core/ui/extensions/context_extension.dart';
 import 'package:deehelp/core/router/router_constants.dart';
 import 'package:deehelp/core/widgets/buttons/ui_elevated_button.dart';
 import 'package:flutter/material.dart';
@@ -59,7 +59,7 @@ class _RegisterAccountPageState extends State<RegisterAccountPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       // backgroundColor: AppColorsV2.background,
-      appBar: UIAppBar(title: context.strings.registerAccountAppbar),
+      // appBar: UIAppBar(title: context.strings.registerAccountAppbar),
       body: SafeArea(
         child: SlideFadeTransitionAnimator(
           delay: const Duration(milliseconds: 100),
@@ -92,13 +92,13 @@ class _RegisterAccountPageState extends State<RegisterAccountPage> {
                     if (_currentStep > 0)
                       Expanded(
                         child: UIElevatedButton(
-                          text: context.strings.back,
+                          text: "Voltar",
                           press: _previousStep,
                         ),
                       ),
                     Expanded(
                       child: UIElevatedButton(
-                        text: context.strings.next,
+                        text: "Próximo",
                         press: _nextStep,
                       ),
                     ),

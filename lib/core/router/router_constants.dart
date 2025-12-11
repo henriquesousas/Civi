@@ -1,5 +1,5 @@
 class RouterConstant {
-  // TODO: rename from bottomView to main
+  static const map = "/map";
   static const bottomView = "/main";
   static const splash = "/splash";
   static const onboarding = "/onboarding";
@@ -21,7 +21,7 @@ class RouterConstant {
   static const occurrences = "/occurrences";
 
   // OLD
-  static const home = "/home";
+
   static const onboarding2 = "/onboarding";
   static const profile = "/profile";
   static const myProfile = "/my_profile";

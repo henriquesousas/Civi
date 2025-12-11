@@ -1,4 +1,4 @@
-import 'package:deehelp/core/extensions/context_extension.dart';
+import 'package:deehelp/core/ui/extensions/context_extension.dart';
 import 'package:flutter/material.dart';
 
 class OtpResendCode extends StatelessWidget {
@@ -18,7 +18,7 @@ class OtpResendCode extends StatelessWidget {
             ),
             const SizedBox(width: 8),
             Text(
-              "${context.strings.otpResendCode} $_formattedCountdown",
+              "Reenciar codigo $_formattedCountdown",
             ),
           ],
         ),

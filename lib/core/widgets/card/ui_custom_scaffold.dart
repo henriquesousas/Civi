@@ -18,10 +18,11 @@ class UICustomScaffold extends StatelessWidget {
   final VoidCallback? onBackButtonTap;
   final Widget? floatingActionButton;
   final Widget? bottomNavigationBar;
+  final String? assettBackButton;
 
   const UICustomScaffold({
     super.key,
-    this.pageTitle = "PageTitle",
+    this.pageTitle = "",
     this.actionButton,
     this.body,
     this.hideAppBar,
@@ -33,6 +34,7 @@ class UICustomScaffold extends StatelessWidget {
     this.onBackButtonTap,
     this.floatingActionButton,
     this.bottomNavigationBar,
+    this.assettBackButton,
   });
 
   @override
@@ -61,7 +63,7 @@ class UICustomScaffold extends StatelessWidget {
                     icon: UIMyAssetsImageWidget(
                       color: const Color(0xFF2B5BEE),
                       isSvg: true,
-                      assetPath: R.images.svgArrowBackCircle,
+                      assetPath: assettBackButton ?? R.svg.circleBackButton,
                       width: 35,
                       height: 35,
                     ),

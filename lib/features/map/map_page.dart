@@ -1,27 +1,35 @@
-import 'package:deehelp/core/components/icon/ui_icon.dart';
 import 'package:deehelp/core/components/icon/ui_icon_alpha.dart';
-import 'package:deehelp/core/components/ui_app_bar.dart';
+import 'package:deehelp/core/components/ui_my_network_image_widget.dart';
+import 'package:deehelp/core/extensions/screen_size_extension.dart';
+import 'package:deehelp/core/theme/app_text_styles.dart';
 import 'package:deehelp/core/ui/assets/resources.dart';
 import 'package:deehelp/core/theme/app_colors.dart';
+import 'package:deehelp/core/ui/widgets/pin/ui_custom_pin.dart';
 import 'package:deehelp/core/widgets/buttons/ui_elevated_button.dart';
-import 'package:deehelp/core/widgets/buttons/ui_elevated_icon_button.dart';
-import 'package:deehelp/core/widgets/search/ui_search_field.dart';
-import 'package:deehelp/core/widgets/text-field/ui_text_field_rounded.dart';
+import 'package:deehelp/features/map/widgets/map_card_user_location.dart';
+import 'package:deehelp/features/map/widgets/map_search.dart';
+import 'package:deehelp/features/map/widgets/map_custom_sliding_up.dart';
+import 'package:deehelp/features/map/widgets/map_floating_button.dart';
+import 'package:deehelp/features/map/widgets/map_top_menu_button.dart';
+import 'package:deehelp/features/map/widgets/osm.dart';
 import 'package:deehelp/features/profile/profile_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_map/flutter_map.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:latlong2/latlong.dart';
 import 'package:sliding_up_panel/sliding_up_panel.dart';
 
-class HomeView extends StatefulWidget {
-  const HomeView({super.key});
+import '../../core/ui/widgets/pin/ui_custom_pinv2.dart';
+
+class MapPage extends StatefulWidget {
+  const MapPage({super.key});
 
   @override
-  State<HomeView> createState() => _HomeViewState();
+  State<MapPage> createState() => _MapPageState();
 }
 
-class _HomeViewState extends State<HomeView> with TickerProviderStateMixin {
+class _MapPageState extends State<MapPage> with TickerProviderStateMixin {
   final MapController _mapController = MapController();
   final PanelController _panelController = PanelController();
 
@@ -250,280 +258,95 @@ class _HomeViewState extends State<HomeView> with TickerProviderStateMixin {
     return Scaffold(
       body: Stack(
         children: [
-          //SlidingUp do search
-          SlidingUpPanel(
-            // defaultPanelState: PanelState.OPEN,
+          // Map (Open Street Map)
+          Osm(
+            controller: _mapController,
+            initial: const LatLng(-23.5107, -46.8764),
+            item: _roubos,
+            press: (r) => _mostrarDetalhes2(r, context),
+          ),
+
+          // Card com a localização do usuário
+          MapCardUserLocation(
+            offset: _panelPosition >= 0.7 ? const Offset(1.5, 0) : Offset.zero,
+            press: () {},
+            location: "Avenida joão ventura dos santos",
+          ),
+
+          // SlidingUp do search
+          MapCustomSlidingUp(
             controller: _panelController,
-            minHeight: 120,
-            maxHeight: MediaQuery.of(context).size.height -
-                MediaQuery.of(context).padding.top -
-                MediaQuery.of(context).padding.bottom,
+            minHeight: 120.w,
+            maxHeight: context.percentHeight(0.9),
             borderRadius: const BorderRadius.vertical(top: Radius.circular(16)),
             panel: _buildPanel(),
-            body: FlutterMap(
-              mapController: _mapController,
-              options: MapOptions(
-                initialCenter: LatLng(-23.5107, -46.8764),
-                initialZoom: 13.0,
-              ),
-              children: [
-                TileLayer(
-                  urlTemplate:
-                      'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
-                  subdomains: const ['a', 'b', 'c'],
-                ),
-                MarkerLayer(
-                  markers: _roubos
-                      .map(
-                        (r) => Marker(
-                          point: r.pos,
-                          width: 90,
-                          height: 35,
-                          child: GestureDetector(
-                            onTap: () => _mostrarDetalhes2(r, context),
-                            child: WazeStyleMarker(
-                              label: r.placaVeiculo ?? 'ABC-7245',
-                              icon: r.icone,
-                            ),
-                          ),
-                        ),
-                        // (r) => Marker(
-                        //   point: r.pos,
-                        //   width: 40,
-                        //   height: 40,
-                        //   child: GestureDetector(
-                        //     onTap: () => _mostrarDetalhes(r),
-                        //     child: const Icon(
-                        //       Icons.location_on,
-                        //       color: Colors.red,
-                        //       size: 36,
-                        //     ),
-                        //   ),
-                        // ),
-                      )
-                      .toList(),
-                ),
-                CircleLayer(
-                  circles: [
-                    CircleMarker(
-                        point: LatLng(-23.5107, -46.8764),
-                        color: Colors.blue
-                            .withOpacity(0.2), // preenchimento transparente
-                        borderStrokeWidth: 2,
-                        borderColor: Colors.blue,
-                        radius: 500, // raio em metros
-                        useRadiusInMeter: true),
-                  ],
-                ),
-                // HeatMapLayer(
-                //   heatMapDataSource: [
-                //     WeightedLatLng(
-                //         point: LatLng(-23.5329, -46.6395), weight: 1),
-                //     WeightedLatLng(
-                //         point: LatLng(-23.5505, -46.6333), weight: 0.8),
-                //     WeightedLatLng(
-                //         point: LatLng(-23.5045, -46.8750), weight: 0.6),
-                //   ],
-                //   heatMapOptions: HeatMapOptions(
-                //     radius: 40.0, // tamanho do "ponto quente"
-                //     blur: 30.0, // suavização
-                //     gradient: {
-                //       0.0: Colors.green,
-                //       0.5: Colors.yellow,
-                //       1.0: Colors.red,
-                //     },
-                //   ),
-                // ),
-              ],
-            ),
-            onPanelSlide: (pos) {
+            onPanelSlide: (position) {
               setState(() {
-                _panelPosition = pos;
-                // dispara animação quando painel >= 70%
-                if (_panelPosition >= 0.15) {
-                  _menuController.reverse();
-                } else {
-                  _menuController.forward();
-                }
-
-                // if (_panelPosition >= 0.7) {
-                //   _appBarController.forward(); // aparece
-                // } else {
-                //   _appBarController.reverse(); // some
-                // }
+                _panelPosition = position;
+                _menuController.value =
+                    (1 - (_panelPosition / 0.80)).clamp(0.0, 1.0);
               });
             },
           ),
 
           //SlidingUp do Profile
-          SlidingUpPanel(
-            defaultPanelState: PanelState.CLOSED,
+          MapCustomSlidingUp(
             controller: _panelController,
             minHeight: 0,
-            isDraggable: true,
-            maxHeight: MediaQuery.of(context).size.height,
-            // maxHeight: MediaQuery.of(context).size.height -
-            //     MediaQuery.of(context).padding.top -
-            //     MediaQuery.of(context).padding.bottom,
+            maxHeight: context.screenHeight,
             borderRadius: const BorderRadius.vertical(top: Radius.circular(16)),
-            panel: ProfilePage(),
-            // body: ProfilePage(),
-            onPanelSlide: (pos) {
+            panel: ProfilePage(
+              onBackButtonPress: () => _panelController.close(),
+            ),
+            onPanelSlide: (positon) {
               setState(() {
-                _panelPosition = pos;
+                _panelPosition = positon;
                 if (_panelPosition >= 0.15) {
                   _menuController.reverse();
                 } else {
                   _menuController.forward();
                 }
-                // if (_panelPosition >= 0.7) {
-                //   _appBarController.forward(); // aparece
-                // } else {
-                //   _appBarController.reverse(); // some
-                // }
               });
             },
           ),
 
-          // Menu Fab
-          Positioned(
-            top: MediaQuery.of(context).padding.top + 12,
-            left: 12,
-            child: FadeTransition(
-              opacity: _menuController,
-              child: ScaleTransition(
-                scale: _menuController,
-                child: FloatingActionButton(
-                  heroTag: 'menu_fab',
-                  elevation: 3,
-                  backgroundColor: Colors.white,
-                  foregroundColor: Colors.black,
-                  child: const Icon(Icons.menu, size: 30),
-                  onPressed: () {
-                    // _abrirMenuBottomSheet(context);
-                    _panelController.open();
-                    // WidgetsBinding.instance.addPostFrameCallback((_) {
-                    //   _panelController.open();
-                    // });
-                  },
-                ),
-              ),
-            ),
-          ),
-
-          // Card com informação da localização
-          Positioned(
-            top: MediaQuery.of(context).padding.top + 12,
-            right: 16,
-            child: AnimatedSlide(
-              offset:
-                  _panelPosition >= 0.7 ? const Offset(1.5, 0) : Offset.zero,
-              duration: const Duration(milliseconds: 350),
-              curve: Curves.easeInOut,
-              child: Material(
-                color: Colors.transparent, // não interfere no fundo
-                borderRadius: BorderRadius.circular(20),
-                child: InkWell(
-                  borderRadius: BorderRadius.circular(20),
-                  onTap: () {
-                    // ação ao clicar
-                    _focusOnCircle();
-                  },
-                  child: Container(
-                    padding: const EdgeInsets.symmetric(
-                        horizontal: 16, vertical: 10),
-                    decoration: BoxDecoration(
-                      color: Colors.white,
-                      borderRadius: BorderRadius.circular(20),
-                      border: Border.all(color: Colors.grey.shade300),
-                    ),
-                    child: Row(
-                      mainAxisSize: MainAxisSize.min,
-                      children: [
-                        // Ícone dentro de círculo colorido
-                        Container(
-                          width: 26,
-                          height: 26,
-                          decoration: BoxDecoration(
-                            shape: BoxShape.circle,
-                            color: Colors.red.withOpacity(0.2),
-                          ),
-                          child: const Center(
-                            child: Icon(Icons.location_on,
-                                color: Colors.red, size: 16),
-                          ),
-                        ),
-                        const SizedBox(width: 8),
-                        const Text(
-                          "Barueri",
-                          style: TextStyle(
-                            fontWeight: FontWeight.w600,
-                            fontSize: 16,
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                ),
-              ),
-            ),
+          // Top menu button
+          MapTopMenuButton(
+            animationMenuController: _menuController,
+            press: () => _panelController.open(),
           ),
 
           // My Location FAB
-          Positioned(
-            bottom: 210,
-            right: 16,
-            child: AnimatedSlide(
-              offset:
-                  _panelPosition >= 0.01 ? const Offset(2.0, 0) : Offset.zero,
-              duration: const Duration(milliseconds: 350),
-              curve: Curves.easeInOut,
-              child: FloatingActionButton(
-                heroTag: 'center_fab',
-                elevation: 2,
-                backgroundColor: AppColors.primaryColor,
-                foregroundColor: Colors.white,
-                child: const Icon(Icons.my_location, size: 28),
-                onPressed: () {
-                  _mapController.move(LatLng(-23.5107, -46.8764), 13.0);
-                },
-              ),
-            ),
+          MapFloatButton(
+            bottom: 210.h,
+            right: 16.w,
+            offset: _panelPosition >= 0.01 ? const Offset(2.0, 0) : Offset.zero,
+            backgroundColor: AppColors.primaryColor,
+            foregroundColor: AppColors.whiteColor,
+            child: Icon(Icons.my_location, size: 18.w),
+            press: () =>
+                _mapController.move(const LatLng(-23.5107, -46.8764), 13.0),
           ),
 
-          // Botão alerta amarelo logo abaixo
-          Positioned(
-            bottom: 140, // fica abaixo do center fab
-            right: 16,
-            child: AnimatedSlide(
-              offset:
-                  _panelPosition >= 0.001 ? const Offset(2.0, 0) : Offset.zero,
-              duration: const Duration(milliseconds: 350),
-              curve: Curves.easeInOut,
-              child: FloatingActionButton(
-                heroTag: 'alert_fab',
-                elevation: 2,
-                backgroundColor: Colors.white,
-                foregroundColor: Colors.amber,
-                // child: const Icon(Icons.warning, size: 28),
-                child: SvgPicture.asset(
-                  R.images.svgMapInfo,
-                  width: 28,
-                ),
-                onPressed: () {
-                  // TODO: ação do alerta
-                  debugPrint("Botão de alerta clicado!");
-                  showModalBottomSheet(
-                    context: context,
-                    shape: const RoundedRectangleBorder(
-                      borderRadius:
-                          BorderRadius.vertical(top: Radius.circular(20)),
-                    ),
-                    builder: (context) => _bottomSheetInfoButton(),
-                  );
-                },
-              ),
+          // Fab button acoes rapidas
+          MapFloatButton(
+            bottom: 140.h,
+            right: 16.w,
+            offset:
+                _panelPosition >= 0.001 ? const Offset(2.0, 0) : Offset.zero,
+            child: SvgPicture.asset(
+              R.images.svgMapInfo,
+              width: 28.w,
             ),
+            press: () {
+              showModalBottomSheet(
+                context: context,
+                shape: const RoundedRectangleBorder(
+                  borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
+                ),
+                builder: (context) => _bottomSheetInfoButton(),
+              );
+            },
           ),
 
           //APPbar
@@ -535,7 +358,7 @@ class _HomeViewState extends State<HomeView> with TickerProviderStateMixin {
           //     position: _slideAnimation,
           //     child: FadeTransition(
           //       opacity: _fadeAnimation,
-          //       child: UIAppBar(title: "Appbar"),
+          //       child: const UIAppBar(title: "Appbar"),
           //     ),
           //   ),
           // ),
@@ -544,82 +367,82 @@ class _HomeViewState extends State<HomeView> with TickerProviderStateMixin {
     );
   }
 
-  Widget _buildMarker() {
-    return Container(
-      decoration: BoxDecoration(
-        color: AppColors.whiteColor,
-        borderRadius: BorderRadius.circular(8),
-        border: Border.all(
-          // 👈 aqui adiciona a borda cinza
-          color: Colors.grey.shade400, // ou Colors.grey
-          width: 1.5,
-        ),
-      ),
-      child: Row(
-        spacing: 2,
-        children: [
-          const SizedBox(width: 2),
-          // Container(
-          //   decoration: BoxDecoration(
-          //     color: AppColors.primaryColor,
-          //     shape: BoxShape.circle,
-          //     border: Border.all(
-          //       color: AppColors.primaryColor,
-          //       width: 2,
-          //     ),
-          //     boxShadow: [
-          //       BoxShadow(
-          //         color: Colors.black.withOpacity(0.1),
-          //         blurRadius: 4,
-          //         offset: const Offset(0, 2),
-          //       ),
-          //     ],
-          //   ),
-          //   child: const Center(
-          //     child: Icon(
-          //       Icons.motorcycle,
-          //       color: Colors.white,
-          //       size: 18,
-          //     ),
-          //   ),
-          // ),
-          Container(
-            decoration: BoxDecoration(
-              color: AppColors.primaryColor,
-              shape: BoxShape.circle,
-              border: Border.all(
-                color: AppColors.primaryColorDark, // 👈 borda branca
-                width: 4, // 👈 2 pixels
-              ),
-              // boxShadow: [
-              //   BoxShadow(
-              //     color: Colors.black.withOpacity(0.1),
-              //     blurRadius: 4,
-              //     offset: const Offset(0, 2),
-              //   ),
-              // ],
-            ),
-            child: Center(
-              child: Icon(
-                Icons.motorcycle,
-                color: AppColors.whiteColor,
-                size: 22,
-              ),
-            ),
-          ),
+  // Widget _buildMarker() {
+  //   return Container(
+  //     decoration: BoxDecoration(
+  //       color: AppColors.whiteColor,
+  //       borderRadius: BorderRadius.circular(8),
+  //       border: Border.all(
+  //         // 👈 aqui adiciona a borda cinza
+  //         color: Colors.grey.shade400, // ou Colors.grey
+  //         width: 1.5,
+  //       ),
+  //     ),
+  //     child: Row(
+  //       spacing: 2,
+  //       children: [
+  //         const SizedBox(width: 2),
+  //         // Container(
+  //         //   decoration: BoxDecoration(
+  //         //     color: AppColors.primaryColor,
+  //         //     shape: BoxShape.circle,
+  //         //     border: Border.all(
+  //         //       color: AppColors.primaryColor,
+  //         //       width: 2,
+  //         //     ),
+  //         //     boxShadow: [
+  //         //       BoxShadow(
+  //         //         color: Colors.black.withOpacity(0.1),
+  //         //         blurRadius: 4,
+  //         //         offset: const Offset(0, 2),
+  //         //       ),
+  //         //     ],
+  //         //   ),
+  //         //   child: const Center(
+  //         //     child: Icon(
+  //         //       Icons.motorcycle,
+  //         //       color: Colors.white,
+  //         //       size: 18,
+  //         //     ),
+  //         //   ),
+  //         // ),
+  //         Container(
+  //           decoration: BoxDecoration(
+  //             color: AppColors.primaryColor,
+  //             shape: BoxShape.circle,
+  //             border: Border.all(
+  //               color: AppColors.primaryColorDark, // 👈 borda branca
+  //               width: 4, // 👈 2 pixels
+  //             ),
+  //             // boxShadow: [
+  //             //   BoxShadow(
+  //             //     color: Colors.black.withOpacity(0.1),
+  //             //     blurRadius: 4,
+  //             //     offset: const Offset(0, 2),
+  //             //   ),
+  //             // ],
+  //           ),
+  //           child: Center(
+  //             child: Icon(
+  //               Icons.motorcycle,
+  //               color: AppColors.whiteColor,
+  //               size: 22,
+  //             ),
+  //           ),
+  //         ),
 
-          const Text(
-            "DND-0171",
-            style: TextStyle(
-              fontSize: 9,
-              fontWeight: FontWeight.bold,
-              color: Colors.black,
-            ),
-          ),
-        ],
-      ),
-    );
-  }
+  //         const Text(
+  //           "DND-0171",
+  //           style: TextStyle(
+  //             fontSize: 9,
+  //             fontWeight: FontWeight.bold,
+  //             color: Colors.black,
+  //           ),
+  //         ),
+  //       ],
+  //     ),
+  //   );
+  // }
 
   void _focusOnCircle() {
     final myLocation = LatLng(-23.5107, -46.8764);
@@ -754,112 +577,7 @@ class _HomeViewState extends State<HomeView> with TickerProviderStateMixin {
   Widget _buildPanel() {
     return Column(
       children: [
-        Container(
-          margin: const EdgeInsets.symmetric(vertical: 8),
-          height: 4,
-          width: 40,
-          decoration: BoxDecoration(
-            color: Colors.grey[400],
-            borderRadius: BorderRadius.circular(2),
-          ),
-        ),
-        Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 16),
-          child: Container(
-            decoration: BoxDecoration(
-              color: AppColors.lightGreyColor,
-              borderRadius: BorderRadius.circular(24),
-              border: Border.all(
-                color: Colors.grey.shade300,
-                width: 1.2,
-              ),
-              boxShadow: [
-                BoxShadow(
-                  color: Colors.black.withOpacity(0.05),
-                  blurRadius: 6,
-                  offset: const Offset(0, 3),
-                ),
-              ],
-            ),
-            child: Row(
-              // mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                const SizedBox(width: 12),
-                // Icon(Icons.search, color: Colors.grey.shade600),
-                SvgPicture.asset(
-                  R.images.svgSearch,
-                  width: 24,
-                  colorFilter: ColorFilter.mode(
-                    AppColors.greyColor,
-                    BlendMode.srcIn,
-                  ),
-                ),
-                const SizedBox(width: 8),
-                // Expanded(
-                //   child: TextField(
-                //     decoration: const InputDecoration(
-                //       hintText: "Buscar ocorrência...",
-                //       border: InputBorder.none, // sem borda
-                //       filled: false, // sem background
-                //       isDense: true,
-                //       contentPadding: EdgeInsets.symmetric(vertical: 14),
-                //     ),
-                //     style: const TextStyle(fontSize: 16),
-                //     onSubmitted: (query) {
-                //       // TODO: aplicar filtro
-                //     },
-                //   ),
-                // ),
-                Padding(
-                  padding: EdgeInsets.symmetric(vertical: 14),
-                  child: Text("Buscar ocorrência..."),
-                ),
-                Spacer(),
-                // IconButton(
-                //   icon: Icon(Icons.mic, color: Colors.grey.shade600),
-                //   onPressed: () {
-                //     // TODO: integrar reconhecimento de voz
-                //   },
-                // ),
-                Padding(
-                  padding: const EdgeInsets.only(right: 8),
-                  child: SvgPicture.asset(
-                    R.images.svgMapMic,
-                    width: 24,
-                    // colorFilter: ColorFilter.mode(
-                    //   AppColors.greyColor,
-                    //   BlendMode.srcIn,
-                    // ),
-                  ),
-                ),
-              ],
-            ),
-          ),
-        ),
-        // Padding(
-        //   padding: const EdgeInsets.symmetric(horizontal: 16),
-        //   child: UISearchButton(
-        //     onPressed: () {},
-        //   ),
-        //   // child: UITextFieldRounded(
-        //   //   isRequired: true,
-        //   //   showLabelText: false,
-        //   //   labelText: "Marca",
-        //   //   hintText: "Marca",
-        //   //   readOnly: true,
-        //   //   textInputAction: TextInputAction.next,
-        //   //   keyboardType: TextInputType.text,
-        //   //   fillColor: AppColors.lightGreyColor,
-        //   //   suffixIcon: Icon(Icons.mic, color: Colors.grey.shade600),
-        //   //   prefixIcon: Icon(Icons.search, color: Colors.grey.shade600),
-        //   //   focusBorderColor: null,
-        //   //   onTap: () => (),
-        //   //   // controller: TextEditingController(
-        //   //   //   text: state.brand,
-        //   //   // ),
-        //   // ),
-        // ),
-        const SizedBox(height: 12),
+        const MapSearch(),
         Expanded(
           child: ListView.builder(
             itemCount: _roubos.length,
@@ -1211,28 +929,53 @@ class WazeStyleMarker extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return DecoratedBox(
-      decoration: BoxDecoration(
-        color: Colors.white,
-        borderRadius: BorderRadius.circular(20),
-        border: Border.all(color: Colors.grey.shade400, width: 2),
-      ),
-      child: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
-        child: Row(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            _IconCircle(icon: icon, iconColor: iconColor),
-            const SizedBox(width: 1),
-            Text(
-              label,
-              style: const TextStyle(
-                fontSize: 8,
-                fontWeight: FontWeight.bold,
-                color: Colors.black87,
+    return Center(
+      child: DecoratedBox(
+        decoration: BoxDecoration(
+          color: Colors.white,
+          borderRadius: BorderRadius.circular(8),
+          border: Border.all(color: AppColors.greyColor, width: 1),
+        ),
+        child: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 5, vertical: 5),
+          child: Row(
+            spacing: 2,
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              // _IconCircle(icon: icon, iconColor: iconColor),
+              Container(
+                width: 26.w,
+                height: 26.h,
+                decoration: BoxDecoration(
+                  shape: BoxShape.circle,
+                  color: AppColors.primaryColor.withValues(alpha: 0.2),
+                ),
+                child: Center(
+                  child: Icon(
+                    icon,
+                    color: AppColors.primaryColor,
+                    size: 16,
+                  ),
+                ),
               ),
-            ),
-          ],
+              // const UIMyNetworkImageWidget(
+              //   imageUrl:
+              //       "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRewiAg6uDxPVB3LGRRgI12-IUmsSmL1PixMQ&s",
+              //   width: 42,
+              //   height: 42,
+              //   boxFit: BoxFit.cover,
+              //   radius: 90,
+              // ),
+              Text(
+                label,
+                style: context.appTextStyles.caption1Style.copyWith(
+                  color: AppColors.darkGreyColor,
+                  fontWeight: FontWeight.bold,
+                  fontSize: 8,
+                ),
+              ),
+            ],
+          ),
         ),
       ),
     );
@@ -1248,14 +991,14 @@ class _IconCircle extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      width: 26,
-      height: 26,
-      decoration: BoxDecoration(
+      width: 22.w,
+      height: 22.w,
+      decoration: const BoxDecoration(
         shape: BoxShape.circle,
-        color: Colors.white,
-        border: Border.all(color: AppColors.primaryColor, width: 4),
+        color: AppColors.primaryColor,
+        // border: Border.all(color: AppColors.errorColor, width: 4),
       ),
-      child: Icon(icon, color: AppColors.primaryColor, size: 16),
+      child: Icon(icon, color: AppColors.whiteColor, size: 12.w),
     );
   }
 }

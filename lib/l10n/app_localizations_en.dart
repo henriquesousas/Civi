@@ -42,31 +42,36 @@ class AppLocalizationsEn extends AppLocalizations {
   String get onboardingTitleOne => 'Bem vindo';
 
   @override
-  String get onboardingDescriptionOne => 'Proteção em tempo real. Relate ocorrências e ajude a manter todos seguros.';
+  String get onboardingDescriptionOne =>
+      'Proteção em tempo real. Relate ocorrências e ajude a manter todos seguros.';
 
   @override
   String get onboardingTitleTwo => 'Ajuda Rápida';
 
   @override
-  String get onboardingDescriptionTwo => 'Escolha o tipo de ocorrência - Furto, Roubo, Violência ou Emergência. Respostas adequadas para cada situação de risco.';
+  String get onboardingDescriptionTwo =>
+      'Escolha o tipo de ocorrência - Furto, Roubo, Violência ou Emergência. Respostas adequadas para cada situação de risco.';
 
   @override
   String get onboardingTitleThree => 'Alertas tempo real';
 
   @override
-  String get onboardingDescriptionThree => 'Fique por dentro das ocorrências próximas a você e acompanhe atualizações instantaneamente, onde quer que esteja.';
+  String get onboardingDescriptionThree =>
+      'Fique por dentro das ocorrências próximas a você e acompanhe atualizações instantaneamente, onde quer que esteja.';
 
   @override
   String get onboardingTitleFour => 'Segurança';
 
   @override
-  String get onboardingDescriptionFour => 'Todas as ocorrências passam por verificação e cada alerta é monitorado para manter você informado e seguro';
+  String get onboardingDescriptionFour =>
+      'Todas as ocorrências passam por verificação e cada alerta é monitorado para manter você informado e seguro';
 
   @override
   String get loginTitle => 'Bem-vindo!';
 
   @override
-  String get loginSubtitle => 'Faça login e continue acompanhando as ocorrências na sua região.';
+  String get loginSubtitle =>
+      'Faça login e continue acompanhando as ocorrências na sua região.';
 
   @override
   String get labelTextEmail => 'Email';
@@ -144,7 +149,8 @@ class AppLocalizationsEn extends AppLocalizations {
   String get otpInsertVerificationCode => 'Insira o código de verificação';
 
   @override
-  String get otpWeSentCode => 'Enviamos um código com 6-digitos para o telefone com final';
+  String get otpWeSentCode =>
+      'Enviamos um código com 6-digitos para o telefone com final';
 
   @override
   String get otpResendCode => 'Reenviar código';
@@ -162,7 +168,8 @@ class AppLocalizationsEn extends AppLocalizations {
   String get welcomeHeader => 'Bem-vindo';
 
   @override
-  String get welcomeAccountCreatedSuccess => 'Conta criada com sucesso! \nVamos ajustar algumas configurações para você começar a relatar ocorrências.';
+  String get welcomeAccountCreatedSuccess =>
+      'Conta criada com sucesso! \nVamos ajustar algumas configurações para você começar a relatar ocorrências.';
 
   @override
   String get welcomeOnboardingTitle1 => 'Localização';
@@ -174,13 +181,16 @@ class AppLocalizationsEn extends AppLocalizations {
   String get welcomeOnboardingTitle3 => 'Nascemos agora :)';
 
   @override
-  String get welcomeOnboardingDesc1 => 'Precisamos da sua localização para enviar alertas e ocorrências relevantes da sua região em tempo real';
+  String get welcomeOnboardingDesc1 =>
+      'Precisamos da sua localização para enviar alertas e ocorrências relevantes da sua região em tempo real';
 
   @override
-  String get welcomeOnboardingDesc2 => 'Ao cadastrar carros, motos, caminhões e celulares, você poderá relatar ocorrências rapidamente caso algo aconteça.';
+  String get welcomeOnboardingDesc2 =>
+      'Ao cadastrar carros, motos, caminhões e celulares, você poderá relatar ocorrências rapidamente caso algo aconteça.';
 
   @override
-  String get welcomeOnboardingDesc3 => 'Estamos evoluindo rapidamente para oferecer mais recursos e tornar seu uso mais fácil e seguros';
+  String get welcomeOnboardingDesc3 =>
+      'Estamos evoluindo rapidamente para oferecer mais recursos e tornar seu uso mais fácil e seguros';
 
   @override
   String get preferences => 'Preferência';
