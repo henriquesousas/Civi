@@ -1,4 +1,7 @@
+import 'package:deehelp/core/theme/app_colors.dart';
+import 'package:deehelp/core/ui/widgets/pin/ui_custom_pinv2.dart';
 import 'package:deehelp/features/map/map_page.dart';
+import 'package:deehelp/features/map/widgets/map_custom_marker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_map/flutter_map.dart';
 import 'package:latlong2/latlong.dart';
@@ -43,8 +46,8 @@ class Osm extends StatelessWidget {
                     // onTap: () => _mostrarDetalhes2(r, context),
                     onTap: () => press(r),
                     child: IntrinsicWidth(
-                      child: WazeStyleMarker(
-                        label: r.placaVeiculo ?? 'ABC-7245',
+                      child: MapCustomMarker(
+                        label: "label",
                         icon: r.icone,
                       ),
                     ),

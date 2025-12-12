@@ -21,7 +21,7 @@ class SplashLogo extends StatelessWidget {
           roundness: 10, // levemente arredondado
           color: AppColors.whiteColor,
           icon: SvgPicture.asset(
-            R.svg.hands,
+            R.svg.pin,
             width: 40.w,
             colorFilter: const ColorFilter.mode(
               AppColors.primaryColor,

@@ -1,26 +1,26 @@
 import 'package:deehelp/core/components/icon/ui_icon_alpha.dart';
-import 'package:deehelp/core/components/ui_my_network_image_widget.dart';
 import 'package:deehelp/core/extensions/screen_size_extension.dart';
+import 'package:deehelp/core/router/router_constants.dart';
 import 'package:deehelp/core/theme/app_text_styles.dart';
 import 'package:deehelp/core/ui/assets/resources.dart';
 import 'package:deehelp/core/theme/app_colors.dart';
-import 'package:deehelp/core/ui/widgets/pin/ui_custom_pin.dart';
 import 'package:deehelp/core/widgets/buttons/ui_elevated_button.dart';
+import 'package:deehelp/features/map/widgets/map_bottom_content.dart';
 import 'package:deehelp/features/map/widgets/map_card_user_location.dart';
 import 'package:deehelp/features/map/widgets/map_search.dart';
 import 'package:deehelp/features/map/widgets/map_custom_sliding_up.dart';
 import 'package:deehelp/features/map/widgets/map_floating_button.dart';
 import 'package:deehelp/features/map/widgets/map_top_menu_button.dart';
 import 'package:deehelp/features/map/widgets/osm.dart';
+import 'package:deehelp/features/map/widgets/sliding_occurrences_panel.dart';
 import 'package:deehelp/features/profile/profile_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_map/flutter_map.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:go_router/go_router.dart';
 import 'package:latlong2/latlong.dart';
 import 'package:sliding_up_panel/sliding_up_panel.dart';
-
-import '../../core/ui/widgets/pin/ui_custom_pinv2.dart';
 
 class MapPage extends StatefulWidget {
   const MapPage({super.key});
@@ -68,21 +68,6 @@ class _MapPageState extends State<MapPage> with TickerProviderStateMixin {
       parent: _appBarController,
       curve: Curves.easeInOut,
     );
-
-    WidgetsBinding.instance.addPostFrameCallback((_) {
-      // final myLocation = LatLng(-23.5107, -46.8764);
-      // final bounds = LatLngBounds.fromPoints([
-      //   LatLng(myLocation.latitude + 0.018, myLocation.longitude + 0.018),
-      //   LatLng(myLocation.latitude - 0.018, myLocation.longitude - 0.018),
-      // ]);
-
-      // final cameraFit = CameraFit.bounds(
-      //   bounds: bounds,
-      //   padding: const EdgeInsets.all(50),
-      // );
-
-      // _mapController.fitCamera(cameraFit);
-    });
   }
 
   @override
@@ -266,20 +251,16 @@ class _MapPageState extends State<MapPage> with TickerProviderStateMixin {
             press: (r) => _mostrarDetalhes2(r, context),
           ),
 
-          // Card com a localização do usuário
-          MapCardUserLocation(
-            offset: _panelPosition >= 0.7 ? const Offset(1.5, 0) : Offset.zero,
-            press: () {},
-            location: "Avenida joão ventura dos santos",
-          ),
-
           // SlidingUp do search
           MapCustomSlidingUp(
             controller: _panelController,
-            minHeight: 120.w,
+            minHeight: 125.w,
             maxHeight: context.percentHeight(0.9),
-            borderRadius: const BorderRadius.vertical(top: Radius.circular(16)),
-            panel: _buildPanel(),
+            borderRadius: const BorderRadius.vertical(top: Radius.circular(8)),
+            panel: SlidingOccurrencesPanel(
+              occurrences: _roubos,
+              panelPosition: _panelPosition,
+            ),
             onPanelSlide: (position) {
               setState(() {
                 _panelPosition = position;
@@ -316,37 +297,43 @@ class _MapPageState extends State<MapPage> with TickerProviderStateMixin {
             press: () => _panelController.open(),
           ),
 
-          // My Location FAB
+          // Fab button localizacao
           MapFloatButton(
-            bottom: 210.h,
+            bottom: 140.h,
             right: 16.w,
             offset: _panelPosition >= 0.01 ? const Offset(2.0, 0) : Offset.zero,
             backgroundColor: AppColors.primaryColor,
             foregroundColor: AppColors.whiteColor,
-            child: Icon(Icons.my_location, size: 18.w),
+            child: Icon(Icons.explore, size: 18.w),
             press: () =>
                 _mapController.move(const LatLng(-23.5107, -46.8764), 13.0),
           ),
 
           // Fab button acoes rapidas
-          MapFloatButton(
-            bottom: 140.h,
-            right: 16.w,
-            offset:
-                _panelPosition >= 0.001 ? const Offset(2.0, 0) : Offset.zero,
-            child: SvgPicture.asset(
-              R.images.svgMapInfo,
-              width: 28.w,
-            ),
-            press: () {
-              showModalBottomSheet(
-                context: context,
-                shape: const RoundedRectangleBorder(
-                  borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
-                ),
-                builder: (context) => _bottomSheetInfoButton(),
-              );
-            },
+          // MapFloatButton(
+          //   bottom: 140.h,
+          //   right: 16.w,
+          //   offset:
+          //       _panelPosition >= 0.001 ? const Offset(2.0, 0) : Offset.zero,
+          //   child: SvgPicture.asset(
+          //     R.images.svgMapInfo,
+          //     width: 28.w,
+          //   ),
+          //   press: () {
+          //     showModalBottomSheet(
+          //       context: context,
+          //       shape: const RoundedRectangleBorder(
+          //         borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
+          //       ),
+          //       builder: (context) => _bottomSheetInfoButton(),
+          //     );
+          //   },
+          // ),
+
+          // Conteudo fixo em baixo da tela
+          MapBottomContent(
+            onNewBemPress: () => context.push(RouterConstant.myItems),
+            onSinalizePress: () => {},
           ),
 
           //APPbar
@@ -366,83 +353,6 @@ class _MapPageState extends State<MapPage> with TickerProviderStateMixin {
       ),
     );
   }
-
-  // Widget _buildMarker() {
-  //   return Container(
-  //     decoration: BoxDecoration(
-  //       color: AppColors.whiteColor,
-  //       borderRadius: BorderRadius.circular(8),
-  //       border: Border.all(
-  //         // 👈 aqui adiciona a borda cinza
-  //         color: Colors.grey.shade400, // ou Colors.grey
-  //         width: 1.5,
-  //       ),
-  //     ),
-  //     child: Row(
-  //       spacing: 2,
-  //       children: [
-  //         const SizedBox(width: 2),
-  //         // Container(
-  //         //   decoration: BoxDecoration(
-  //         //     color: AppColors.primaryColor,
-  //         //     shape: BoxShape.circle,
-  //         //     border: Border.all(
-  //         //       color: AppColors.primaryColor,
-  //         //       width: 2,
-  //         //     ),
-  //         //     boxShadow: [
-  //         //       BoxShadow(
-  //         //         color: Colors.black.withOpacity(0.1),
-  //         //         blurRadius: 4,
-  //         //         offset: const Offset(0, 2),
-  //         //       ),
-  //         //     ],
-  //         //   ),
-  //         //   child: const Center(
-  //         //     child: Icon(
-  //         //       Icons.motorcycle,
-  //         //       color: Colors.white,
-  //         //       size: 18,
-  //         //     ),
-  //         //   ),
-  //         // ),
-  //         Container(
-  //           decoration: BoxDecoration(
-  //             color: AppColors.primaryColor,
-  //             shape: BoxShape.circle,
-  //             border: Border.all(
-  //               color: AppColors.primaryColorDark, // 👈 borda branca
-  //               width: 4, // 👈 2 pixels
-  //             ),
-  //             // boxShadow: [
-  //             //   BoxShadow(
-  //             //     color: Colors.black.withOpacity(0.1),
-  //             //     blurRadius: 4,
-  //             //     offset: const Offset(0, 2),
-  //             //   ),
-  //             // ],
-  //           ),
-  //           child: Center(
-  //             child: Icon(
-  //               Icons.motorcycle,
-  //               color: AppColors.whiteColor,
-  //               size: 22,
-  //             ),
-  //           ),
-  //         ),
-
-  //         const Text(
-  //           "DND-0171",
-  //           style: TextStyle(
-  //             fontSize: 9,
-  //             fontWeight: FontWeight.bold,
-  //             color: Colors.black,
-  //           ),
-  //         ),
-  //       ],
-  //     ),
-  //   );
-  // }
 
   void _focusOnCircle() {
     final myLocation = LatLng(-23.5107, -46.8764);
@@ -574,107 +484,6 @@ class _MapPageState extends State<MapPage> with TickerProviderStateMixin {
     );
   }
 
-  Widget _buildPanel() {
-    return Column(
-      children: [
-        const MapSearch(),
-        Expanded(
-          child: ListView.builder(
-            itemCount: _roubos.length,
-            padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-            itemBuilder: (context, index) {
-              final r = _roubos[index];
-              return Container(
-                margin: const EdgeInsets.symmetric(vertical: 6),
-                padding: const EdgeInsets.all(14),
-                decoration: BoxDecoration(
-                  color: Colors.white,
-                  borderRadius: BorderRadius.circular(12),
-                  border: Border.all(
-                    color: Colors.grey.shade300,
-                    width: 1,
-                  ),
-                ),
-                child: Row(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    // Ícone em destaque
-                    Container(
-                      decoration: BoxDecoration(
-                        color: Colors.red.withOpacity(0.1),
-                        borderRadius: BorderRadius.circular(8),
-                      ),
-                      padding: const EdgeInsets.all(8),
-                      child: const Icon(Icons.warning,
-                          color: Colors.red, size: 26),
-                    ),
-
-                    const SizedBox(width: 12),
-
-                    // Texto
-                    Expanded(
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          // Título
-                          Text(
-                            r.titulo,
-                            style: Theme.of(context)
-                                .textTheme
-                                .titleMedium
-                                ?.copyWith(
-                                  fontWeight: FontWeight.w600,
-                                ),
-                          ),
-
-                          const SizedBox(height: 4),
-
-                          // Data/hora
-                          Text(
-                            _formatarDataHora(r.dataHora),
-                            style:
-                                Theme.of(context).textTheme.bodySmall?.copyWith(
-                                      color: Colors.grey.shade600,
-                                    ),
-                          ),
-
-                          const SizedBox(height: 6),
-
-                          // Descrição
-                          Text(
-                            r.descricao,
-                            style: Theme.of(context).textTheme.bodyMedium,
-                          ),
-                        ],
-                      ),
-                    ),
-                  ],
-                ),
-              );
-            },
-          ),
-        ),
-      ],
-    );
-  }
-
-  void _abrirMenuBottomSheet(BuildContext context) {
-    showModalBottomSheet(
-      context: context,
-      isScrollControlled: true, // permite controlar altura
-      backgroundColor: Colors.white,
-      shape: const RoundedRectangleBorder(
-        borderRadius: BorderRadius.vertical(top: Radius.circular(24)),
-      ),
-      builder: (context) {
-        return const FractionallySizedBox(
-          heightFactor: 0.8, // ocupa 90% da tela
-          child: ProfilePage(),
-        );
-      },
-    );
-  }
-
   void _focusOnMarker(LatLng position) {
     _mapController.move(position, 15); // 👈 move a câmera para o marker
   }
@@ -803,13 +612,13 @@ class _MapPageState extends State<MapPage> with TickerProviderStateMixin {
     );
   }
 
-  String _formatarDataHora(DateTime dt) {
-    final dia =
-        '${dt.day.toString().padLeft(2, '0')}/${dt.month.toString().padLeft(2, '0')}/${dt.year}';
-    final hora =
-        '${dt.hour.toString().padLeft(2, '0')}:${dt.minute.toString().padLeft(2, '0')}';
-    return '$dia às $hora';
-  }
+  // String _formatarDataHora(DateTime dt) {
+  //   final dia =
+  //       '${dt.day.toString().padLeft(2, '0')}/${dt.month.toString().padLeft(2, '0')}/${dt.year}';
+  //   final hora =
+  //       '${dt.hour.toString().padLeft(2, '0')}:${dt.minute.toString().padLeft(2, '0')}';
+  //   return '$dia às $hora';
+  // }
 }
 
 enum TipoVeiculo {
@@ -850,260 +659,6 @@ class RouboMarker {
     }
   }
 }
-
-class CustomMarker extends StatelessWidget {
-  final String label;
-  final IconData icon;
-
-  const CustomMarker({
-    Key? key,
-    required this.label,
-    this.icon = Icons.motorcycle,
-  }) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
-      decoration: BoxDecoration(
-        color: Colors.white, // fundo branco
-        borderRadius: BorderRadius.circular(90),
-        border: Border.all(
-          color: Colors.grey.shade400, // 👈 borda cinza estilo Waze
-          width: 2.5,
-        ),
-        boxShadow: [
-          BoxShadow(
-            color: Colors.black.withOpacity(0.08),
-            blurRadius: 4,
-            offset: const Offset(0, 2),
-          ),
-        ],
-      ),
-      child: Row(
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          // Ícone circular
-          Container(
-            padding: const EdgeInsets.all(6),
-            decoration: BoxDecoration(
-              color: Colors.white,
-              shape: BoxShape.circle,
-              border: Border.all(
-                color: Colors.grey.shade400, // 👈 borda cinza no círculo também
-                width: 2,
-              ),
-            ),
-            child: Icon(
-              icon,
-              color: Colors.blue, // ícone azul
-              size: 18,
-            ),
-          ),
-          const SizedBox(width: 6),
-          Text(
-            label,
-            style: const TextStyle(
-              fontSize: 11,
-              fontWeight: FontWeight.w600,
-              color: Colors.black87,
-            ),
-          ),
-        ],
-      ),
-    );
-  }
-}
-
-class WazeStyleMarker extends StatelessWidget {
-  final String label;
-  final IconData icon;
-  final Color iconColor;
-
-  const WazeStyleMarker({
-    super.key,
-    required this.label,
-    this.icon = Icons.motorcycle,
-    this.iconColor = Colors.blue,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    return Center(
-      child: DecoratedBox(
-        decoration: BoxDecoration(
-          color: Colors.white,
-          borderRadius: BorderRadius.circular(8),
-          border: Border.all(color: AppColors.greyColor, width: 1),
-        ),
-        child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 5, vertical: 5),
-          child: Row(
-            spacing: 2,
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              // _IconCircle(icon: icon, iconColor: iconColor),
-              Container(
-                width: 26.w,
-                height: 26.h,
-                decoration: BoxDecoration(
-                  shape: BoxShape.circle,
-                  color: AppColors.primaryColor.withValues(alpha: 0.2),
-                ),
-                child: Center(
-                  child: Icon(
-                    icon,
-                    color: AppColors.primaryColor,
-                    size: 16,
-                  ),
-                ),
-              ),
-              // const UIMyNetworkImageWidget(
-              //   imageUrl:
-              //       "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRewiAg6uDxPVB3LGRRgI12-IUmsSmL1PixMQ&s",
-              //   width: 42,
-              //   height: 42,
-              //   boxFit: BoxFit.cover,
-              //   radius: 90,
-              // ),
-              Text(
-                label,
-                style: context.appTextStyles.caption1Style.copyWith(
-                  color: AppColors.darkGreyColor,
-                  fontWeight: FontWeight.bold,
-                  fontSize: 8,
-                ),
-              ),
-            ],
-          ),
-        ),
-      ),
-    );
-  }
-}
-
-class _IconCircle extends StatelessWidget {
-  final IconData icon;
-  final Color iconColor;
-
-  const _IconCircle({required this.icon, required this.iconColor});
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      width: 22.w,
-      height: 22.w,
-      decoration: const BoxDecoration(
-        shape: BoxShape.circle,
-        color: AppColors.primaryColor,
-        // border: Border.all(color: AppColors.errorColor, width: 4),
-      ),
-      child: Icon(icon, color: AppColors.whiteColor, size: 12.w),
-    );
-  }
-}
-
-class UISearchButton extends StatelessWidget {
-  final VoidCallback onPressed;
-  final String hintText;
-  final Color? backgroundColor;
-  final Color? iconColor;
-  final Color? borderColor;
-
-  const UISearchButton({
-    super.key,
-    required this.onPressed,
-    this.hintText = 'Pesquisar...',
-    this.backgroundColor,
-    this.iconColor,
-    this.borderColor,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    final theme = Theme.of(context);
-    final defaultBackgroundColor = backgroundColor ?? Colors.grey.shade50;
-    final defaultIconColor = iconColor ?? theme.primaryColor;
-    final defaultBorderColor = borderColor ?? Colors.grey.shade300;
-
-    return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 0, vertical: 0),
-      child: Material(
-        color: Colors.transparent,
-        child: InkWell(
-          onTap: onPressed,
-          borderRadius: BorderRadius.circular(90),
-          child: Container(
-            padding: const EdgeInsets.symmetric(
-              vertical: 12,
-              horizontal: 16,
-            ),
-            decoration: BoxDecoration(
-              color: defaultBackgroundColor,
-              borderRadius: BorderRadius.circular(90),
-              border: Border.all(
-                color: defaultBorderColor,
-                width: 1,
-              ),
-            ),
-            child: Row(
-              children: [
-                Icon(
-                  Icons.search,
-                  color: defaultIconColor,
-                  size: 20,
-                ),
-                const SizedBox(width: 12),
-                Expanded(
-                  child: Text(
-                    hintText,
-                    style: TextStyle(
-                      color: Colors.grey.shade600,
-                      fontSize: 14,
-                    ),
-                  ),
-                ),
-              ],
-            ),
-          ),
-        ),
-      ),
-    );
-  }
-}
-
-// TODO: Vai aparecer em determinado momento
-// Positioned(
-//   bottom: 150, // ajuste conforme altura do seu SlidingUpPanel
-//   left: 0,
-//   right: 0,
-//   child: Center(
-//     child: Container(
-//       padding:
-//           const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-//       decoration: BoxDecoration(
-//         color: Colors.white,
-//         borderRadius: BorderRadius.circular(20),
-//         border: Border.all(color: Colors.grey.shade300),
-//         boxShadow: [
-//           BoxShadow(
-//             color: Colors.black.withOpacity(0.1),
-//             blurRadius: 6,
-//             offset: const Offset(0, 3),
-//           ),
-//         ],
-//       ),
-//       child: Text(
-//         "Total de ocorrências: 12", // variável dinâmica
-//         style: const TextStyle(
-//           fontSize: 14,
-//           fontWeight: FontWeight.w500,
-//           color: Colors.black87,
-//         ),
-//       ),
-//     ),
-//   ),
-// ),
 
 void _mostrarDetalhes2(RouboMarker roubo, BuildContext context) {
   showModalBottomSheet(
@@ -1175,8 +730,6 @@ void _mostrarDetalhes2(RouboMarker roubo, BuildContext context) {
     },
   );
 }
-
-// Métodos auxiliares refatorados
 
 Widget _buildHeader() {
   return Column(
@@ -1575,8 +1128,6 @@ Widget _buildActionButtons(RouboMarker roubo) {
     ),
   );
 }
-
-// Métodos utilitários
 
 String _getVehicleImage(TipoVeiculo tipo) {
   switch (tipo) {

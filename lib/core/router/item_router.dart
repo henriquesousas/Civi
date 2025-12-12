@@ -1,24 +1,22 @@
 import 'package:deehelp/core/router/router_constants.dart';
 import 'package:deehelp/core/router/slide_transition_page.dart';
-import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
-import '../../features/my_products/domain/entities/product.dart';
 import '../../features/my_products/presentation/create/create_item_provider.dart';
 import '../../features/my_products/presentation/create/create_success_page.dart';
 import '../../features/my_products/presentation/listing/listing_my_products_provider.dart';
-import '../../features/my_products/presentation/update/update_product_provider.dart';
 
 final itemRoutes = [
   GoRoute(
-      path: RouterConstant.myItems,
-      pageBuilder: (context, state) {
-        final bool showBackButton = state.extra as bool;
-        return slideTransitionPage(
-          key: state.pageKey,
-          child: ListingMyProductsProvider(showBackButton: showBackButton),
-        );
-      }),
+    path: RouterConstant.myItems,
+    pageBuilder: (context, state) {
+      final bool showBackButton = state.extra as bool;
+      return slideTransitionPage(
+        key: state.pageKey,
+        child: ListingMyProductsProvider(showBackButton: showBackButton),
+      );
+    },
+  ),
   GoRoute(
     path: RouterConstant.createNewItem,
     pageBuilder: (context, state) => slideTransitionPage(

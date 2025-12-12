@@ -35,40 +35,43 @@ class UITextFieldRounded extends StatefulWidget {
   final int maxLine;
   final String? instructions;
   final String? error;
+  final Color? borderColor;
+  final double borderRadius;
 
-  const UITextFieldRounded({
-    super.key,
-    required this.labelText,
-    required this.hintText,
-    this.controller,
-    this.isRequired = false,
-    this.focusNode,
-    this.nextFocus,
-    this.keyboardType = TextInputType.text,
-    this.isPassword = false,
-    this.forceShowSuffixDesign = false,
-    this.prefixIcon,
-    this.suffixIcon,
-    this.fillColor = Colors.white,
-    this.focusBorderColor,
-    this.validator,
-    this.borderType = InputBorderType.outline, // default border type
-    this.maxLength,
-    this.textInputAction,
-    this.textStyle,
-    this.hintStyle,
-    this.textInputFormatter,
-    this.onTap,
-    this.onChanged,
-    this.onFieldSubmitted,
-    this.contentPadding,
-    this.readOnly = false,
-    this.forceFillColor = true,
-    this.showLabelText = true,
-    this.maxLine = 1,
-    this.instructions,
-    this.error,
-  });
+  const UITextFieldRounded(
+      {super.key,
+      required this.labelText,
+      required this.hintText,
+      this.controller,
+      this.isRequired = false,
+      this.focusNode,
+      this.nextFocus,
+      this.keyboardType = TextInputType.text,
+      this.isPassword = false,
+      this.forceShowSuffixDesign = false,
+      this.prefixIcon,
+      this.suffixIcon,
+      this.fillColor = Colors.white,
+      this.focusBorderColor,
+      this.validator,
+      this.borderType = InputBorderType.outline, // default border type
+      this.maxLength,
+      this.textInputAction,
+      this.textStyle,
+      this.hintStyle,
+      this.textInputFormatter,
+      this.onTap,
+      this.onChanged,
+      this.onFieldSubmitted,
+      this.contentPadding,
+      this.readOnly = false,
+      this.forceFillColor = true,
+      this.showLabelText = true,
+      this.maxLine = 1,
+      this.instructions,
+      this.error,
+      this.borderColor,
+      this.borderRadius = 12});
 
   @override
   State<UITextFieldRounded> createState() => _UITextFieldRoundedState();
@@ -94,10 +97,14 @@ class _UITextFieldRoundedState extends State<UITextFieldRounded> {
           inputFormatters: widget.textInputFormatter,
           maxLines: widget.maxLine,
           cursorColor: AppColors.textColorBody,
-          style: widget.textStyle ??
-              context.appTextStyles.sectionBodyTextStyle.copyWith(
-                color: AppColors.textColorHeader,
-              ),
+          // style: widget.textStyle ??
+          //     context.appTextStyles.sectionBodyTextStyle.copyWith(
+          //       color: AppColors.textColorHeader,
+          //     ),
+          style: context.appTextStyles.sectionBodyTextStyle.copyWith(
+            color: AppColors.errorColor,
+            fontWeight: FontWeight.bold,
+          ),
           decoration: InputDecoration(
             floatingLabelBehavior: FloatingLabelBehavior.always,
             floatingLabelStyle:
@@ -157,12 +164,14 @@ class _UITextFieldRoundedState extends State<UITextFieldRounded> {
                 : widget.readOnly
                     ? AppColors.dark.withValues(alpha: 0.02)
                     : widget.fillColor,
-            border: _getInputBorder(),
-            enabledBorder: _getInputBorder(),
+            border: _getInputBorder(borderRadius: widget.borderRadius),
+            enabledBorder: _getInputBorder(
+                borderColor: widget.borderColor,
+                borderRadius: widget.borderRadius),
             focusedBorder: _getInputBorder(
-              isFocused: true,
-              color: AppColors.primaryColor,
-            ),
+                isFocused: true,
+                color: AppColors.primaryColor,
+                borderRadius: widget.borderRadius),
             errorBorder: _getInputBorder(isError: true),
             errorStyle: const TextStyle(color: AppColors.errorColor),
             focusedErrorBorder: _getInputBorder(isFocused: true, isError: true),
@@ -189,9 +198,7 @@ class _UITextFieldRoundedState extends State<UITextFieldRounded> {
                   ),
                   decoration: BoxDecoration(
                     color: widget.fillColor,
-                    borderRadius: BorderRadius.circular(
-                      4,
-                    ),
+                    borderRadius: BorderRadius.circular(4),
                   ),
                   child: Row(
                     children: [
@@ -234,7 +241,7 @@ class _UITextFieldRoundedState extends State<UITextFieldRounded> {
                     ],
                   ),
                 )
-              : SizedBox(),
+              : const SizedBox(),
         ),
       ],
     );
@@ -244,17 +251,19 @@ class _UITextFieldRoundedState extends State<UITextFieldRounded> {
     bool isFocused = false,
     bool isError = false,
     Color? color,
+    Color? borderColor,
+    double borderRadius = 12,
   }) {
     switch (widget.borderType) {
       case InputBorderType.outline:
         return OutlineInputBorder(
-          borderRadius: BorderRadius.circular(12),
+          borderRadius: BorderRadius.circular(borderRadius),
           borderSide: BorderSide(
             color: isError
                 ? AppColors.errorColor
                 : isFocused
                     ? color ?? AppColors.lightGreyColor30
-                    : AppColors.lightGreyColor30,
+                    : borderColor ?? AppColors.lightGreyColor30,
             width: 1,
           ),
         );

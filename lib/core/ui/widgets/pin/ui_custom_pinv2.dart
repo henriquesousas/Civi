@@ -1,80 +1,157 @@
-import 'package:flutter/material.dart';
+// import 'package:deehelp/core/theme/app_colors.dart';
+// import 'package:flutter/material.dart';
 
-class UICustomPinv2 extends StatelessWidget {
-  final double width;
-  final double height;
-  final Color color;
-  final Color borderColor;
-  final double borderWidth;
-  final Widget child;
+// import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-  const UICustomPinv2({
-    super.key,
-    required this.child,
-    this.width = 60,
-    this.height = 80,
-    this.color = Colors.white,
-    this.borderColor = Colors.black26,
-    this.borderWidth = 1.5,
-  });
+// class UICustompinV2 extends StatelessWidget {
+//   final String label;
+//   final IconData icon;
+//   final Color iconColor;
+//   final Color borderColor;
+//   final Color backgroundColor;
 
-  @override
-  Widget build(BuildContext context) {
-    return CustomPaint(
-      painter: _PinPainter(
-        color: color,
-        borderColor: borderColor,
-        borderWidth: borderWidth,
-      ),
-      child: SizedBox(
-        width: width,
-        height: height,
-        child: Center(child: child),
-      ),
-    );
-  }
-}
+//   const UICustompinV2({
+//     super.key,
+//     required this.label,
+//     this.icon = Icons.motorcycle,
+//     this.iconColor = AppColors.primaryColor,
+//     this.borderColor = AppColors.primaryColor,
+//     this.backgroundColor = Colors.white,
+//   });
 
-class _PinPainter extends CustomPainter {
-  final Color color;
-  final Color borderColor;
-  final double borderWidth;
+//   @override
+//   Widget build(BuildContext context) {
+//     return Center(
+//       child: CustomPaint(
+//         painter: MarkerPainter(
+//           borderColor: borderColor,
+//           fillColor: backgroundColor,
+//         ),
+//         child: Container(
+//           width: 22.w,
+//           height: 26.h,
+//           padding: EdgeInsets.only(bottom: 4.h),
+//           child: Center(
+//             child: Icon(
+//               icon,
+//               color: iconColor,
+//               size: 14.sp,
+//             ),
+//           ),
+//         ),
+//       ),
+//     );
+//   }
+// }
 
-  _PinPainter({
-    required this.color,
-    required this.borderColor,
-    required this.borderWidth,
-  });
+// class MarkerPainter extends CustomPainter {
+//   final Color borderColor;
+//   final Color fillColor;
 
-  @override
-  void paint(Canvas canvas, Size size) {
-    final paintFill = Paint()
-      ..color = color
-      ..style = PaintingStyle.fill;
+//   MarkerPainter({
+//     required this.borderColor,
+//     required this.fillColor,
+//   });
 
-    final paintBorder = Paint()
-      ..color = borderColor
-      ..style = PaintingStyle.stroke
-      ..strokeWidth = borderWidth;
+//   @override
+//   void paint(Canvas canvas, Size size) {
+//     final paint = Paint()
+//       ..color = fillColor
+//       ..style = PaintingStyle.fill;
 
-    final path = Path();
+//     final borderPaint = Paint()
+//       ..color = borderColor
+//       ..style = PaintingStyle.stroke // Use = em vez de :
+//       ..strokeWidth = 1.0
+//       ..strokeJoin = StrokeJoin.round;
 
-    // parte superior arredondada
-    path.addRRect(RRect.fromRectAndRadius(
-      Rect.fromLTWH(0, 0, size.width, size.height * 0.75),
-      Radius.circular(size.width / 2),
-    ));
+//     final path = Path();
 
-    // ponta inferior (triângulo)
-    path.moveTo(size.width / 2 - 12, size.height * 0.75);
-    path.lineTo(size.width / 2, size.height);
-    path.lineTo(size.width / 2 + 12, size.height * 0.75);
-    path.close();
+//     // Dimensões fixas para garantir simetria
+//     final cornerRadius = 4.0;
+//     final pointerHeight = 6.0;
+//     final pointerBaseWidth = 8.0;
+//     final pointerTipCurve = 1.5; // Controla o arredondamento da ponta
 
-    canvas.drawPath(path, paintFill);
-    canvas.drawPath(path, paintBorder);
-  }
+//     // Calcula pontos centrais para garantir simetria
+//     final centerX = size.width / 2;
+//     final bodyBottom = size.height - pointerHeight;
 
-  @override
-  bool shouldRepaint(covariant CustomPainter oldDelegate) => false;
-}
+//     // 1. COMEÇA NO CANTO SUPERIOR ESQUERDO
+//     path.moveTo(cornerRadius, 0);
+
+//     // 2. LADO SUPERIOR
+//     // Canto superior direito
+//     path.lineTo(size.width - cornerRadius, 0);
+//     path.arcToPoint(
+//       Offset(size.width, cornerRadius),
+//       radius: Radius.circular(cornerRadius),
+//     );
+
+//     // 3. LADO DIREITO
+//     path.lineTo(size.width, bodyBottom - cornerRadius);
+
+//     // 4. CANTO INFERIOR DIREITO (do corpo)
+//     path.arcToPoint(
+//       Offset(size.width - cornerRadius, bodyBottom),
+//       radius: Radius.circular(cornerRadius),
+//     );
+
+//     // 5. TRANSIÇÃO PARA A SETA - LADO DIREITO
+//     // Ponto inicial da curva (início da transição para seta)
+//     final rightArrowStartX = centerX + (pointerBaseWidth / 2);
+
+//     // Se precisarmos de uma curva suave, usamos bezier
+//     // Caso contrário, linha reta até o início da ponta
+//     path.lineTo(rightArrowStartX, bodyBottom);
+
+//     // 6. PONTA DA SETA - LADO DIREITO COM CURVA
+//     // Ponto de controle para curva (garantindo simetria com lado esquerdo)
+//     final rightControlX = centerX + pointerTipCurve;
+//     final rightControlY = size.height - pointerTipCurve;
+
+//     path.quadraticBezierTo(
+//       rightControlX, rightControlY, // Ponto de controle
+//       centerX, size.height, // Ponto final (ponta da seta)
+//     );
+
+//     // 7. PONTA DA SETA - LADO ESQUERDO COM CURVA
+//     // Ponto de controle simétrico ao direito
+//     final leftControlX = centerX - pointerTipCurve;
+//     final leftControlY = size.height - pointerTipCurve;
+
+//     path.quadraticBezierTo(
+//       leftControlX, leftControlY, // Ponto de controle
+//       centerX - (pointerBaseWidth / 2), bodyBottom, // Ponto final
+//     );
+
+//     // 8. LADO ESQUERDO DA SETA
+//     path.lineTo(cornerRadius, bodyBottom);
+
+//     // 9. CANTO INFERIOR ESQUERDO (do corpo)
+//     path.arcToPoint(
+//       Offset(0, bodyBottom - cornerRadius),
+//       radius: Radius.circular(cornerRadius),
+//     );
+
+//     // 10. LADO ESQUERDO
+//     path.lineTo(0, cornerRadius);
+
+//     // 11. CANTO SUPERIOR ESQUERDO
+//     path.arcToPoint(
+//       Offset(cornerRadius, 0),
+//       radius: Radius.circular(cornerRadius),
+//     );
+
+//     path.close();
+
+//     // Desenhar
+//     canvas.drawPath(path, paint);
+//     canvas.drawPath(path, borderPaint);
+//   }
+
+//   @override
+//   bool shouldRepaint(MarkerPainter oldDelegate) =>
+//       oldDelegate.borderColor != borderColor ||
+//       oldDelegate.fillColor != fillColor;
+// }
