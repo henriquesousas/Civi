@@ -10,7 +10,7 @@ final itemRoutes = [
   GoRoute(
     path: RouterConstant.myItems,
     pageBuilder: (context, state) {
-      final bool showBackButton = state.extra as bool;
+      final showBackButton = state.extra == null ? false : state.extra as bool;
       return slideTransitionPage(
         key: state.pageKey,
         child: ListingMyProductsProvider(showBackButton: showBackButton),

@@ -114,10 +114,6 @@ class _ProductListingPage extends BasePageState<ProductListingCubit,
                 color: AppColors.textSecondary,
                 letterSpacing: 1.2,
               ),
-              // style: context.appTextStyles.appBarTitle.copyWith(
-              //   // color: AppColors.textSecondary,
-              //   letterSpacing: 1.2,
-              // ),
             ),
             const SizedBox(height: 5),
             Expanded(
