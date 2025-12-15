@@ -1,7 +1,7 @@
 import 'package:dartz/dartz.dart';
 import 'package:deehelp/core/domain/type/result.dart';
 import 'package:deehelp/core/domain/use_case.dart';
-import 'package:deehelp/core/image_utils.dart';
+import 'package:deehelp/core/utils/image_utils.dart';
 import 'package:deehelp/core/services/media/interfaces/media_storage.dart';
 import 'package:logging/logging.dart';
 

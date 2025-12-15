@@ -1,16 +1,15 @@
 import 'dart:io';
 
-import 'package:deehelp/core/components/dimens_test.dart';
 import 'package:deehelp/core/ui/widgets/image/ui_my_assets_image_widget.dart';
 import 'package:deehelp/core/ui/widgets/image/ui_my_network_image_widget.dart';
-import 'package:deehelp/core/theme/app_colors.dart';
-import 'package:deehelp/core/theme/dimens.dart';
+import 'package:deehelp/core/ui/theme/app_colors.dart';
+import 'package:deehelp/core/ui/theme/dimens.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:skeletonizer/skeletonizer.dart';
 
-import '../ui/assets/resources.dart';
+import '../../assets/resources.dart';
 
 //TODO: Renomear por que vai ser reutilizavel em varios locais
 class ProfileImageWithUploadButtonWidget extends StatefulWidget {

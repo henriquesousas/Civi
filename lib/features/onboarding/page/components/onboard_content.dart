@@ -1,5 +1,5 @@
-import 'package:deehelp/core/theme/app_text_styles.dart';
-import 'package:deehelp/core/theme/dimens.dart';
+import 'package:deehelp/core/ui/theme/app_text_styles.dart';
+import 'package:deehelp/core/ui/theme/dimens.dart';
 import 'package:deehelp/features/onboarding/page/onboard_item.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';

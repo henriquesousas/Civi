@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../../core/ui/assets/resources.dart';
 
@@ -10,7 +11,7 @@ class SplashProgress extends StatelessWidget {
     return Column(
       children: [
         SizedBox(
-          width: 60,
+          width: 60.w,
           child: LinearProgressIndicator(
             backgroundColor: Colors.white.withValues(alpha: 0.3),
             valueColor: AlwaysStoppedAnimation<Color>(
@@ -19,7 +20,7 @@ class SplashProgress extends StatelessWidget {
             minHeight: 3,
           ),
         ),
-        const SizedBox(height: 16),
+        SizedBox(height: 16.h),
         Text(
           "${R.strings.waiting}...",
           style: Theme.of(context).textTheme.labelSmall?.copyWith(

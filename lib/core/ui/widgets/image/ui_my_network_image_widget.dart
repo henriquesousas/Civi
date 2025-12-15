@@ -1,6 +1,6 @@
 import 'package:cached_network_image/cached_network_image.dart';
-import 'package:deehelp/core/components/random_color_avatar.dart';
-import 'package:deehelp/core/theme/app_colors.dart';
+import 'package:deehelp/core/ui/widgets/avatar/random_color_avatar.dart';
+import 'package:deehelp/core/ui/theme/app_colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:skeletonizer/skeletonizer.dart';

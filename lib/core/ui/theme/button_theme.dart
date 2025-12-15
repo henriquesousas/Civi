@@ -1,5 +1,5 @@
-import 'package:deehelp/core/theme/app_colors.dart';
-import 'package:deehelp/core/theme/dimens.dart';
+import 'package:deehelp/core/ui/theme/app_colors.dart';
+import 'package:deehelp/core/ui/theme/dimens.dart';
 import 'package:flutter/material.dart';
 
 import 'constants.dart';

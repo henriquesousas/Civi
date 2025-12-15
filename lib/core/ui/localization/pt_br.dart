@@ -2,6 +2,9 @@ import 'package:deehelp/core/ui/localization/translation.dart';
 
 class PtBr implements Translation {
   @override
+  String get appName => "[LABEL]";
+
+  @override
   String get alets => "Alertas";
 
   @override

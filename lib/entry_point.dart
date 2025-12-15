@@ -1,13 +1,11 @@
 import 'package:animations/animations.dart';
-import 'package:deehelp/core/components/test_page.dart';
-import 'package:deehelp/core/theme/app_colors.dart';
-import 'package:deehelp/features/occurrence/occurrence_page.dart';
+import 'package:deehelp/core/ui/theme/app_colors.dart';
 import 'package:deehelp/features/profile/profile_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
 import 'core/ui/assets/resources.dart';
-import 'core/theme/constants.dart';
+import 'core/ui/theme/constants.dart';
 import 'features/my_products/presentation/listing/listing_my_products_provider.dart';
 
 class EntryPoint extends StatefulWidget {

@@ -1,5 +1,5 @@
 import 'package:cloudflare_r2/cloudflare_r2.dart';
-import 'package:deehelp/core/extensions/screen_size_extension.dart';
+import 'package:deehelp/core/ui/extensions/screen_size_extension.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -8,9 +8,8 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'core/env.dart';
 import 'core/ui/assets/resources.dart';
 import 'core/router/main_router.dart';
-import 'core/theme/app_theme.dart';
+import 'core/ui/theme/app_theme.dart';
 import 'firebase_options.dart';
-import 'l10n/app_localizations.dart';
 import 'main_provider.dart';
 
 void main() async {
@@ -45,7 +44,7 @@ class MainApp extends StatelessWidget {
           builder: (context, child) {
             return ApplicationProvider(
               child: MaterialApp.router(
-                localizationsDelegates: AppLocalizations.localizationsDelegates,
+                // localizationsDelegates: AppLocalizations.localizationsDelegates,
                 supportedLocales: const [
                   Locale('en', 'US'),
                   Locale('pt', 'BR'),

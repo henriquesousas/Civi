@@ -4,7 +4,7 @@ import 'package:deehelp/features/auth/domain/usecases/login/login_with_google_us
 import 'package:deehelp/features/auth/presentation/login/bloc/auth_event.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../../../../../core/wrapper/bloc_command_wrapper.dart';
+import '../../../../../core/utils/bloc_command_wrapper.dart';
 import '../../../domain/auth_exception.dart';
 import '../../../domain/entity/user.dart';
 import 'auth_state.dart';

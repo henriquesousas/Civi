@@ -1,8 +1,9 @@
-import 'package:deehelp/core/components/ui_annotated_region_widget.dart';
 import 'package:deehelp/core/ui/widgets/image/ui_my_assets_image_widget.dart';
-import 'package:deehelp/core/theme/app_text_styles.dart';
+import 'package:deehelp/core/ui/theme/app_text_styles.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
+import '../ui_annotated_region_widget.dart';
 import '../../assets/resources.dart';
 
 class UICustomScaffold extends StatelessWidget {
@@ -18,7 +19,7 @@ class UICustomScaffold extends StatelessWidget {
   final VoidCallback? onBackButtonTap;
   final Widget? floatingActionButton;
   final Widget? bottomNavigationBar;
-  final String? assettBackButton;
+  final String? assetBackButton;
 
   const UICustomScaffold({
     super.key,
@@ -34,7 +35,7 @@ class UICustomScaffold extends StatelessWidget {
     this.onBackButtonTap,
     this.floatingActionButton,
     this.bottomNavigationBar,
-    this.assettBackButton,
+    this.assetBackButton,
   });
 
   @override
@@ -63,9 +64,9 @@ class UICustomScaffold extends StatelessWidget {
                     icon: UIMyAssetsImageWidget(
                       color: const Color(0xFF2B5BEE),
                       isSvg: true,
-                      assetPath: assettBackButton ?? R.svg.circleBackButton,
-                      width: 35,
-                      height: 35,
+                      assetPath: assetBackButton ?? R.svg.circleBackButton,
+                      width: 35.w,
+                      height: 35.h,
                     ),
                   ),
                   titleSpacing: 0,

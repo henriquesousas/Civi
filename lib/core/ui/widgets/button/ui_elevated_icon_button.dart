@@ -1,8 +1,8 @@
-import 'package:deehelp/core/theme/app_text_styles.dart';
+import 'package:deehelp/core/ui/theme/app_text_styles.dart';
 import 'package:deehelp/core/ui/widgets/button/ui_elevated_button.dart';
 import 'package:flutter/material.dart';
 
-import '../../../theme/app_colors.dart';
+import '../../theme/app_colors.dart';
 
 class UIElevatedIconButton extends UIElevatedButton {
   const UIElevatedIconButton(

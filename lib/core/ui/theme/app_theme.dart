@@ -1,5 +1,5 @@
-import 'package:deehelp/core/theme/app_colors.dart';
-import 'package:deehelp/core/theme/text_button_theme.dart';
+import 'package:deehelp/core/ui/theme/app_colors.dart';
+import 'package:deehelp/core/ui/theme/text_button_theme.dart';
 import 'package:flutter/material.dart';
 
 import 'button_theme.dart';

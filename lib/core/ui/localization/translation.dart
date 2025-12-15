@@ -1,4 +1,5 @@
 abstract class Translation {
+  String get appName;
   String get welcome;
   String get quickHelp;
   String get alets;

@@ -1,4 +1,4 @@
-import 'package:deehelp/core/image_utils.dart';
+import 'package:deehelp/core/utils/image_utils.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 void main() {

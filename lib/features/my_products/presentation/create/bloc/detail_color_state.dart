@@ -1,13 +1,13 @@
-class DetailColorState {
-  final String? color;
+// class DetailColorState {
+//   final String? color;
 
-  DetailColorState({this.color});
+//   DetailColorState({this.color});
 
-  DetailColorState copyWith({
-    String? color,
-  }) {
-    return DetailColorState(
-      color: color,
-    );
-  }
-}
+//   DetailColorState copyWith({
+//     String? color,
+//   }) {
+//     return DetailColorState(
+//       color: color,
+//     );
+//   }
+// }

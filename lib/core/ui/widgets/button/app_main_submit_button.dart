@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 
 import 'ui_elevated_button.dart';
-import '../../../components/dimens_test.dart';
 
 class AppMainSubmitButton extends StatelessWidget {
   final String text;

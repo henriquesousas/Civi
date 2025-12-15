@@ -18,7 +18,7 @@ class ProfilePage extends StatelessWidget {
     final email = user?.email ?? '';
     return UICustomScaffold(
       hideAppBar: false,
-      assettBackButton: R.svg.circleBackButton,
+      assetBackButton: R.svg.close,
       onBackButtonTap: onBackButtonPress,
       body: SingleChildScrollView(
         clipBehavior: Clip.none,

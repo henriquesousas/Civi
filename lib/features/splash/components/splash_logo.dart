@@ -1,4 +1,5 @@
-import 'package:deehelp/core/theme/app_colors.dart';
+import 'package:deehelp/core/ui/theme/app_colors.dart';
+import 'package:deehelp/core/ui/theme/dimens.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
@@ -16,13 +17,13 @@ class SplashLogo extends StatelessWidget {
       duration: const Duration(milliseconds: 1500),
       child: Center(
         child: UICustomPin(
-          size: 90.w,
-          tailHeight: 12, // deixe pequeno para ponta curta
-          roundness: 10, // levemente arredondado
+          size: Dimens.size90.w,
+          tailHeight: 12,
+          roundness: 10,
           color: AppColors.whiteColor,
           icon: SvgPicture.asset(
             R.svg.pin,
-            width: 40.w,
+            width: Dimens.size40.w,
             colorFilter: const ColorFilter.mode(
               AppColors.primaryColor,
               BlendMode.srcIn,

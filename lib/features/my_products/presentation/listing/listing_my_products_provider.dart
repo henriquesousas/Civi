@@ -4,7 +4,7 @@ import 'package:deehelp/features/my_products/presentation/listing/listing_my_pro
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../../../../core/constants.dart';
+import '../../../../core/ui/constants.dart';
 import '../../data/product_repository_firebase_storage.dart';
 import '../../domain/product_repository.dart';
 import '../../domain/usecases/delete/delete_product_usecase.dart';

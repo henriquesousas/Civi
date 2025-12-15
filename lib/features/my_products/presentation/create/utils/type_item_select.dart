@@ -1,17 +1,17 @@
-import 'package:flutter/material.dart';
+// import 'package:flutter/material.dart';
 
-class TypeItemSelect {
-  final String name;
-  final IconData icon;
-  bool isSelected;
+// class TypeItemSelect {
+//   final String name;
+//   final IconData icon;
+//   bool isSelected;
 
-  TypeItemSelect(this.name, this.icon, this.isSelected);
+//   TypeItemSelect(this.name, this.icon, this.isSelected);
 
-  select() {
-    isSelected = true;
-  }
+//   select() {
+//     isSelected = true;
+//   }
 
-  unselect() {
-    isSelected = false;
-  }
-}
+//   unselect() {
+//     isSelected = false;
+//   }
+// }

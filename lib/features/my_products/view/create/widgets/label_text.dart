@@ -1,5 +1,5 @@
-import 'package:deehelp/core/theme/app_colors.dart';
-import 'package:deehelp/core/theme/app_text_styles.dart';
+import 'package:deehelp/core/ui/theme/app_colors.dart';
+import 'package:deehelp/core/ui/theme/app_text_styles.dart';
 import 'package:flutter/material.dart';
 
 class LabelText extends StatelessWidget {

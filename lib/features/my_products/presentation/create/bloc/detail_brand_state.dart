@@ -1,13 +1,13 @@
-class DetailBrandState {
-  final String? brand;
+// class DetailBrandState {
+//   final String? brand;
 
-  DetailBrandState({this.brand});
+//   DetailBrandState({this.brand});
 
-  DetailBrandState copyWith({
-    String? brand,
-  }) {
-    return DetailBrandState(
-      brand: brand,
-    );
-  }
-}
+//   DetailBrandState copyWith({
+//     String? brand,
+//   }) {
+//     return DetailBrandState(
+//       brand: brand,
+//     );
+//   }
+// }

@@ -1,5 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:deehelp/core/constants.dart';
+import 'package:deehelp/core/ui/constants.dart';
 import 'package:deehelp/core/services/media/interfaces/media_storage.dart';
 import 'package:deehelp/core/services/media/r2_cloudflare_media_storage.dart';
 import 'package:deehelp/features/my_products/view/create/create_product_cubit.dart';

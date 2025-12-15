@@ -1,5 +1,5 @@
 import 'package:deehelp/core/ui/animation/slide_fade_transition_animator.dart';
-import 'package:deehelp/core/components/ui_app_bar.dart';
+import 'package:deehelp/core/ui/widgets/app_bar/ui_app_bar.dart';
 import 'package:deehelp/core/ui/extensions/context_extension.dart';
 import 'package:deehelp/core/router/router_constants.dart';
 import 'package:deehelp/core/ui/widgets/button/ui_elevated_button.dart';

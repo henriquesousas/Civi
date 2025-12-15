@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../../../../../core/theme/app_colors.dart';
+import '../../../../../core/ui/theme/app_colors.dart';
 
 class LoginOr extends StatelessWidget {
   const LoginOr({super.key});

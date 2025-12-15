@@ -1,5 +1,5 @@
 import 'package:deehelp/core/ui/extensions/context_extension.dart';
-import 'package:deehelp/core/theme/app_colors.dart';
+import 'package:deehelp/core/ui/theme/app_colors.dart';
 import 'package:deehelp/features/auth/presentation/register/components/progress_indicator_label.dart';
 import 'package:flutter/material.dart';
 //

@@ -1,5 +1,5 @@
 import 'package:dartz/dartz.dart';
-import 'package:deehelp/core/wrapper/command_cubit.dart';
+import 'package:deehelp/core/utils/command_cubit.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 

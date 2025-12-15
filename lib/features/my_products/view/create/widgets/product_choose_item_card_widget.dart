@@ -1,12 +1,12 @@
-import 'package:deehelp/core/theme/app_text_styles.dart';
+import 'package:deehelp/core/ui/theme/app_text_styles.dart';
 import 'package:deehelp/features/my_products/domain/entities/item_product.dart';
 import 'package:deehelp/features/my_products/view/create/widgets/small_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../../../core/ui/widgets/image/ui_my_assets_image_widget.dart';
-import '../../../../../core/theme/app_colors.dart';
-import '../../../../../core/theme/dimens.dart';
+import '../../../../../core/ui/theme/app_colors.dart';
+import '../../../../../core/ui/theme/dimens.dart';
 import '../../../../../core/ui/widgets/card/ui_custom_app_card.dart';
 import '../create_product_cubit.dart';
 import 'header_text.dart';

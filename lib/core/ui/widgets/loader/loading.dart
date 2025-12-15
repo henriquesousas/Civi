@@ -1,7 +1,7 @@
 import 'dart:async';
 
 import 'package:deehelp/core/ui/widgets/loader/loading_controller.dart';
-import 'package:deehelp/core/theme/app_colors.dart';
+import 'package:deehelp/core/ui/theme/app_colors.dart';
 import 'package:flutter/material.dart';
 
 class Loading {

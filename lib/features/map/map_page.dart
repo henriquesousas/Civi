@@ -1,11 +1,11 @@
 import 'package:deehelp/core/ui/widgets/icon/ui_icon.dart';
-import 'package:deehelp/core/components/ui_app_bar.dart';
+import 'package:deehelp/core/ui/widgets/app_bar/ui_app_bar.dart';
 import 'package:deehelp/core/ui/widgets/image/ui_my_network_image_widget.dart';
-import 'package:deehelp/core/extensions/screen_size_extension.dart';
+import 'package:deehelp/core/ui/extensions/screen_size_extension.dart';
 import 'package:deehelp/core/router/router_constants.dart';
-import 'package:deehelp/core/theme/app_text_styles.dart';
+import 'package:deehelp/core/ui/theme/app_text_styles.dart';
 import 'package:deehelp/core/ui/assets/resources.dart';
-import 'package:deehelp/core/theme/app_colors.dart';
+import 'package:deehelp/core/ui/theme/app_colors.dart';
 import 'package:deehelp/core/ui/widgets/divider/ui_divider.dart';
 import 'package:deehelp/core/ui/widgets/badge/ui_badge_widget.dart';
 import 'package:deehelp/core/ui/widgets/button/ui_elevated_button.dart';
@@ -23,6 +23,7 @@ import 'package:deehelp/features/my_products/presentation/listing/components/sta
 import 'package:deehelp/features/occurrence/presentation/plate_number_widget.dart';
 import 'package:deehelp/features/profile/profile_page.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_map/flutter_map.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
@@ -30,7 +31,7 @@ import 'package:go_router/go_router.dart';
 import 'package:latlong2/latlong.dart';
 import 'package:sliding_up_panel/sliding_up_panel.dart';
 
-import '../../core/theme/dimens.dart';
+import '../../core/ui/theme/dimens.dart';
 
 class MapPage extends StatefulWidget {
   const MapPage({super.key});
@@ -251,115 +252,121 @@ class _MapPageState extends State<MapPage> with TickerProviderStateMixin {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Stack(
-        children: [
-          // Map (Open Street Map)
-          Osm(
-            controller: _mapController,
-            initial: const LatLng(-23.5107, -46.8764),
-            item: _roubos,
-            press: (r) => _mostrarDetalhes2(r, context),
-          ),
-
-          // SlidingUp do search
-          MapCustomSlidingUp(
-            controller: _panelController,
-            minHeight: 125.w,
-            maxHeight: context.percentHeight(0.9),
-            borderRadius: const BorderRadius.vertical(top: Radius.circular(8)),
-            panel: SlidingOccurrencesPanel(
-              occurrences: _roubos,
-              panelPosition: _panelPosition,
+      body: AnnotatedRegion<SystemUiOverlayStyle>(
+        value: SystemUiOverlayStyle.dark,
+        child: Stack(
+          children: [
+            // Map (Open Street Map)
+            Osm(
+              controller: _mapController,
+              initial: const LatLng(-23.5107, -46.8764),
+              item: _roubos,
+              press: (r) => _mostrarDetalhes2(r, context),
             ),
-            onPanelSlide: (position) {
-              setState(() {
-                _panelPosition = position;
-                _menuController.value =
-                    (1 - (_panelPosition / 0.80)).clamp(0.0, 1.0);
-              });
-            },
-          ),
 
-          //SlidingUp do Profile
-          MapCustomSlidingUp(
-            controller: _panelController,
-            minHeight: 0,
-            maxHeight: context.screenHeight,
-            borderRadius: const BorderRadius.vertical(top: Radius.circular(16)),
-            panel: ProfilePage(
-              onBackButtonPress: () => _panelController.close(),
+            // SlidingUp do search
+            MapCustomSlidingUp(
+              controller: _panelController,
+              minHeight: 125.w,
+              maxHeight: context.percentHeight(0.9),
+              borderRadius:
+                  const BorderRadius.vertical(top: Radius.circular(8)),
+              panel: SlidingOccurrencesPanel(
+                occurrences: _roubos,
+                panelPosition: _panelPosition,
+              ),
+              onPanelSlide: (position) {
+                setState(() {
+                  _panelPosition = position;
+                  _menuController.value =
+                      (1 - (_panelPosition / 0.80)).clamp(0.0, 1.0);
+                });
+              },
             ),
-            onPanelSlide: (positon) {
-              setState(() {
-                _panelPosition = positon;
-                if (_panelPosition >= 0.15) {
-                  _menuController.reverse();
-                } else {
-                  _menuController.forward();
-                }
-              });
-            },
-          ),
 
-          // Top menu button
-          MapTopMenuButton(
-            animationMenuController: _menuController,
-            press: () => _panelController.open(),
-          ),
+            //SlidingUp do Profile
+            MapCustomSlidingUp(
+              controller: _panelController,
+              minHeight: 0,
+              maxHeight: context.screenHeight,
+              borderRadius:
+                  const BorderRadius.vertical(top: Radius.circular(16)),
+              panel: ProfilePage(
+                onBackButtonPress: () => _panelController.close(),
+              ),
+              onPanelSlide: (positon) {
+                setState(() {
+                  _panelPosition = positon;
+                  if (_panelPosition >= 0.15) {
+                    _menuController.reverse();
+                  } else {
+                    _menuController.forward();
+                  }
+                });
+              },
+            ),
 
-          // Fab button localizacao
-          MapFloatButton(
-            bottom: 140.h,
-            right: 16.w,
-            offset: _panelPosition >= 0.01 ? const Offset(2.0, 0) : Offset.zero,
-            backgroundColor: AppColors.primaryColor,
-            foregroundColor: AppColors.whiteColor,
-            child: Icon(Icons.explore, size: 18.w),
-            press: () =>
-                _mapController.move(const LatLng(-23.5107, -46.8764), 13.0),
-          ),
+            // Top menu button
+            MapTopMenuButton(
+              animationMenuController: _menuController,
+              press: () => _panelController.open(),
+            ),
 
-          // Fab button acoes rapidas
-          // MapFloatButton(
-          //   bottom: 140.h,
-          //   right: 16.w,
-          //   offset:
-          //       _panelPosition >= 0.001 ? const Offset(2.0, 0) : Offset.zero,
-          //   child: SvgPicture.asset(
-          //     R.images.svgMapInfo,
-          //     width: 28.w,
-          //   ),
-          //   press: () {
-          //     showModalBottomSheet(
-          //       context: context,
-          //       shape: const RoundedRectangleBorder(
-          //         borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
-          //       ),
-          //       builder: (context) => _bottomSheetInfoButton(),
-          //     );
-          //   },
-          // ),
+            // Fab button localizacao
+            MapFloatButton(
+              bottom: 140.h,
+              right: 16.w,
+              offset:
+                  _panelPosition >= 0.01 ? const Offset(2.0, 0) : Offset.zero,
+              backgroundColor: AppColors.primaryColor,
+              foregroundColor: AppColors.whiteColor,
+              child: Icon(Icons.explore, size: 18.w),
+              press: () =>
+                  _mapController.move(const LatLng(-23.5107, -46.8764), 13.0),
+            ),
 
-          // Conteudo fixo em baixo da tela
-          MapBottomContent(
-            onNewBemPress: () => context.push(RouterConstant.myItems),
-            onSinalizePress: () => {},
-          ),
+            // Fab button acoes rapidas
+            // MapFloatButton(
+            //   bottom: 140.h,
+            //   right: 16.w,
+            //   offset:
+            //       _panelPosition >= 0.001 ? const Offset(2.0, 0) : Offset.zero,
+            //   child: SvgPicture.asset(
+            //     R.images.svgMapInfo,
+            //     width: 28.w,
+            //   ),
+            //   press: () {
+            //     showModalBottomSheet(
+            //       context: context,
+            //       shape: const RoundedRectangleBorder(
+            //         borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
+            //       ),
+            //       builder: (context) => _bottomSheetInfoButton(),
+            //     );
+            //   },
+            // ),
 
-          //APPbar
-          // Positioned(
-          //   top: 0,
-          //   left: 0,
-          //   right: 0,
-          //   child: SlideTransition(
-          //     position: _slideAnimation,
-          //     child: FadeTransition(
-          //       opacity: _fadeAnimation,
-          //       child: const UIAppBar(title: "Appbar"),
-          //     ),
-          //   ),
-          // ),
-        ],
+            // Conteudo fixo em baixo da tela
+            MapBottomContent(
+              onNewBemPress: () => context.push(RouterConstant.myItems),
+              onSinalizePress: () => {},
+            ),
+
+            //APPbar
+            // Positioned(
+            //   top: 0,
+            //   left: 0,
+            //   right: 0,
+            //   child: SlideTransition(
+            //     position: _slideAnimation,
+            //     child: FadeTransition(
+            //       opacity: _fadeAnimation,
+            //       child: const UIAppBar(title: "Appbar"),
+            //     ),
+            //   ),
+            // ),
+          ],
+        ),
       ),
     );
   }
