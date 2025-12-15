@@ -5,11 +5,11 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:skeletonizer/skeletonizer.dart';
 
-import '../../../core/components/ui_my_network_image_widget.dart';
+import '../../../core/ui/widgets/image/ui_my_network_image_widget.dart';
 import '../../../core/theme/app_colors.dart';
 import '../../../core/theme/dimens.dart';
-import '../../../core/widgets/card/ui_custom_app_card.dart';
-import '../../../core/widgets/card/ui_custon_list_tile_card.dart';
+import '../../../core/ui/widgets/card/ui_custom_app_card.dart';
+import '../../../core/ui/widgets/card/ui_custon_list_tile_card.dart';
 
 class ProfileHeader extends StatelessWidget {
   final String name;

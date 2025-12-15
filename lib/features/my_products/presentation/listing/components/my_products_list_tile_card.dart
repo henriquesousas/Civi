@@ -1,6 +1,6 @@
-import 'package:deehelp/core/components/ui_my_network_image_widget.dart';
+import 'package:deehelp/core/ui/widgets/image/ui_my_network_image_widget.dart';
 import 'package:deehelp/core/theme/app_text_styles.dart';
-import 'package:deehelp/core/widgets/card/ui_custom_app_card.dart';
+import 'package:deehelp/core/ui/widgets/card/ui_custom_app_card.dart';
 import 'package:deehelp/features/my_products/domain/entities/product.dart';
 import 'package:deehelp/features/my_products/presentation/listing/components/status_badge_widget.dart';
 import 'package:flutter/material.dart';

@@ -1,12 +1,12 @@
-import 'package:deehelp/core/animation/slide_fade_transition_animator.dart';
+import 'package:deehelp/core/ui/animation/slide_fade_transition_animator.dart';
 import 'package:deehelp/core/components/ui_app_bar.dart';
 import 'package:deehelp/core/ui/extensions/context_extension.dart';
 import 'package:deehelp/core/router/router_constants.dart';
-import 'package:deehelp/core/widgets/buttons/ui_elevated_button.dart';
+import 'package:deehelp/core/ui/widgets/button/ui_elevated_button.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
-import '../../../../core/widgets/progress_indicator/step_indicator.dart';
+import '../../../../core/ui/widgets/progress_indicator/step_indicator.dart';
 import 'components/form_contact_info.dart';
 import 'components/form_personal_info.dart';
 import 'components/form_security_info.dart';

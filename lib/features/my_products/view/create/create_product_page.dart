@@ -1,4 +1,4 @@
-import 'package:deehelp/core/widgets/card/ui_custom_scaffold.dart';
+import 'package:deehelp/core/ui/widgets/card/ui_custom_scaffold.dart';
 import 'package:deehelp/features/my_products/view/create/create_product_cubit.dart';
 import 'package:deehelp/features/my_products/view/create/steps/step_choose_type_product.dart';
 import 'package:deehelp/features/my_products/view/create/state/create_product_state.dart';

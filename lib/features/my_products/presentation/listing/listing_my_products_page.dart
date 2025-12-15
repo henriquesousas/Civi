@@ -1,4 +1,4 @@
-import 'package:deehelp/core/components/dialogs/dialog_extension.dart';
+import 'package:deehelp/core/ui/extensions/dialog_extension.dart';
 import 'package:deehelp/features/base_page.dart';
 import 'package:deehelp/features/base_page_state.dart';
 import 'package:deehelp/features/my_products/presentation/listing/components/listing_my_products_shimmer.dart';
@@ -6,11 +6,11 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
 import '../../../../core/components/empty_state_widget.dart';
-import '../../../../core/components/loader/loading.dart';
+import '../../../../core/ui/widgets/loader/loading.dart';
 import '../../../../core/router/router_constants.dart';
 import '../../../../core/theme/app_colors.dart';
 
-import '../../../../core/widgets/buttons/ui_elevated_icon_button.dart';
+import '../../../../core/ui/widgets/button/ui_elevated_icon_button.dart';
 import '../../domain/entities/product.dart';
 import 'components/my_products_list_tile_card.dart';
 import 'listing_my_products_cubit.dart';

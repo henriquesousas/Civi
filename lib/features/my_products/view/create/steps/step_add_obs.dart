@@ -3,8 +3,8 @@ import 'package:deehelp/features/my_products/view/create/state/create_product_st
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../../../../../core/widgets/card/ui_custom_app_card.dart';
-import '../../../../../core/widgets/text-field/ui_text_field_rounded.dart';
+import '../../../../../core/ui/widgets/card/ui_custom_app_card.dart';
+import '../../../../../core/ui/widgets/textfield/ui_text_field_rounded.dart';
 import '../widgets/header_text_card.dart';
 
 class StepAddObs extends StatelessWidget {

@@ -1,6 +1,6 @@
 import 'dart:async';
 
-import 'package:deehelp/core/components/dialogs/dialog_extension.dart';
+import 'package:deehelp/core/ui/extensions/dialog_extension.dart';
 import 'package:deehelp/features/onboarding/page/components/onboard_content.dart';
 import 'package:deehelp/features/onboarding/page/onboard_cubit.dart';
 import 'package:deehelp/features/onboarding/page/onboard_item.dart';

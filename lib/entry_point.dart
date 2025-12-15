@@ -22,8 +22,9 @@ class _EntryPointState extends State<EntryPoint> {
     // HomeView(),
     // MeusVeiculosPage(),
     // FaqProvider.page,
-    TestPage(),
-    OccurrencePage(),
+    // TestPage(),
+    SizedBox(),
+    SizedBox(),
     const ListingMyProductsProvider(),
     const ProfilePage(),
   ];

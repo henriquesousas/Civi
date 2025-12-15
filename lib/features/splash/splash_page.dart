@@ -13,7 +13,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
 
-import '../../core/animation/transition_animator.dart';
+import '../../core/ui/animation/transition_animator.dart';
 import '../../core/router/router_constants.dart';
 
 class SplashPage extends StatefulWidget {

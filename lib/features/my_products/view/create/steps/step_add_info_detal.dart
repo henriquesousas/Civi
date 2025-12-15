@@ -6,8 +6,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../../../core/components/custom_modal_bottom_sheet.dart';
-import '../../../../../core/widgets/card/ui_custom_app_card.dart';
-import '../../../../../core/widgets/text-field/ui_text_field_rounded.dart';
+import '../../../../../core/ui/widgets/card/ui_custom_app_card.dart';
+import '../../../../../core/ui/widgets/textfield/ui_text_field_rounded.dart';
 import '../../../data/data.dart';
 import '../../../presentation/create/components/modal_select_brand.dart';
 import '../../../presentation/create/components/modal_select_color.dart';

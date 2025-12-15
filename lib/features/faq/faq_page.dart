@@ -1,4 +1,4 @@
-import 'package:deehelp/core/widgets/card/ui_custom_scaffold.dart';
+import 'package:deehelp/core/ui/widgets/card/ui_custom_scaffold.dart';
 import 'package:deehelp/features/faq/faq.dart';
 import 'package:deehelp/features/faq/state/faq_bloc.dart';
 import 'package:deehelp/features/faq/state/faq_event.dart';

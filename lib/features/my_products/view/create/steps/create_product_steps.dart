@@ -11,7 +11,7 @@ import 'package:go_router/go_router.dart';
 import '../../../../../core/router/router_constants.dart';
 import '../../../../../core/theme/app_colors.dart';
 import '../../../../../core/theme/dimens.dart';
-import '../../../../../core/widgets/buttons/ui_elevated_button.dart';
+import '../../../../../core/ui/widgets/button/ui_elevated_button.dart';
 import 'step_add_info_detal.dart';
 import 'step_add_obs.dart';
 

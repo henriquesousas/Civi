@@ -7,7 +7,7 @@ import 'package:flutter_svg/svg.dart';
 import '../../../core/ui/assets/resources.dart';
 import '../../../core/theme/app_colors.dart';
 import '../../../core/theme/dimens.dart';
-import '../../../core/widgets/buttons/ui_elevated_button.dart';
+import '../../../core/ui/widgets/button/ui_elevated_button.dart';
 import 'components/onboard_page_indicator.dart';
 
 class OnboardView extends StatelessWidget {

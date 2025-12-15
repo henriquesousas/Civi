@@ -1,8 +1,6 @@
 import 'package:deehelp/core/extensions/screen_size_extension.dart';
 import 'package:flutter/material.dart';
 
-import '../../../core/components/icon/ui_icon_alpha.dart';
-
 class OccurrenceInfoRowWidget extends StatelessWidget {
   final IconData icon;
   final String text;
@@ -18,13 +16,13 @@ class OccurrenceInfoRowWidget extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.start,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          UIIConAlpha(
-            iconData: Icons.location_on_outlined,
-            iconSize: 12,
-            color: color,
-            borderRadius: 12,
-            padding: 6,
-          ),
+          // UIIConAlpha(
+          //   iconData: Icons.location_on_outlined,
+          //   iconSize: 12,
+          //   color: color,
+          //   borderRadius: 12,
+          //   padding: 6,
+          // ),
           const SizedBox(width: 3),
           Expanded(
             child: Text(

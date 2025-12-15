@@ -3,8 +3,8 @@ import 'package:deehelp/features/my_products/view/create/state/create_product_st
 import 'package:deehelp/features/my_products/view/create/widgets/product_choose_item_card_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import '../../../../../core/widgets/buttons/ui_elevated_button.dart';
-import '../../../../../core/widgets/card/ui_custom_app_card.dart';
+import '../../../../../core/ui/widgets/button/ui_elevated_button.dart';
+import '../../../../../core/ui/widgets/card/ui_custom_app_card.dart';
 
 class StepChooseTypeProduct extends StatelessWidget {
   final VoidCallback press;

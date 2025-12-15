@@ -1,4 +1,4 @@
-import 'package:deehelp/core/widgets/card/ui_custom_app_card.dart';
+import 'package:deehelp/core/ui/widgets/card/ui_custom_app_card.dart';
 import 'package:deehelp/features/my_products/domain/entities/product.dart';
 import 'package:deehelp/features/my_products/presentation/listing/components/my_products_list_tile_card.dart';
 import 'package:flutter/material.dart';

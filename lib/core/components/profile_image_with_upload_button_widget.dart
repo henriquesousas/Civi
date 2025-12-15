@@ -1,11 +1,12 @@
 import 'dart:io';
 
 import 'package:deehelp/core/components/dimens_test.dart';
-import 'package:deehelp/core/components/ui_my_assets_image_widget.dart';
-import 'package:deehelp/core/components/ui_my_network_image_widget.dart';
+import 'package:deehelp/core/ui/widgets/image/ui_my_assets_image_widget.dart';
+import 'package:deehelp/core/ui/widgets/image/ui_my_network_image_widget.dart';
 import 'package:deehelp/core/theme/app_colors.dart';
 import 'package:deehelp/core/theme/dimens.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:skeletonizer/skeletonizer.dart';
 
@@ -52,7 +53,7 @@ class _ProfileImageWithUploadButtonWidgetState
             decoration: BoxDecoration(
               border: Border.all(
                 color: AppColors.primaryColor.withValues(alpha: 0.15),
-                width: DimensTest.space4,
+                width: 4.w,
               ),
               borderRadius: BorderRadius.circular(widget.radius),
             ),
@@ -68,7 +69,7 @@ class _ProfileImageWithUploadButtonWidgetState
                 decoration: BoxDecoration(
                   border: Border.all(
                     color: AppColors.primaryColor.withValues(alpha: 0.15),
-                    width: DimensTest.space3,
+                    width: 3.w,
                   ),
                   borderRadius: BorderRadius.circular(
                     Dimens.defaultRadius,
@@ -106,7 +107,7 @@ class _ProfileImageWithUploadButtonWidgetState
               child: Container(
                 decoration: BoxDecoration(
                   color: const Color(0XFFFFFFFF),
-                  borderRadius: BorderRadius.circular(DimensTest.radiusMax),
+                  borderRadius: BorderRadius.circular(20),
                   boxShadow: const [
                     BoxShadow(
                       color: AppColors.primaryColor,

@@ -1,4 +1,4 @@
-import 'package:deehelp/core/animation/slide_fade_transition_animator.dart';
+import 'package:deehelp/core/ui/animation/slide_fade_transition_animator.dart';
 import 'package:deehelp/core/extensions/screen_size_extension.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';

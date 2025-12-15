@@ -1,13 +1,9 @@
-import 'package:deehelp/core/components/buttons/ui_google_button.dart';
-import 'package:deehelp/core/components/buttons/ui_primary_button.dart';
-import 'package:deehelp/core/components/textfields/ui_email_text_field.dart';
-import 'package:deehelp/core/components/textfields/ui_password_text_field.dart';
+import 'package:deehelp/core/ui/widgets/textfield/ui_text_field_rounded.dart';
 import 'package:deehelp/features/auth/presentation/login/components/login_or.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:provider/provider.dart';
 
-import '../../../../../core/ui/assets/resources.dart';
 import '../bloc/auth_state.dart';
 import '../bloc/email_state.dart';
 import '../bloc/login_bloc.dart';
@@ -55,19 +51,22 @@ class _LoginFormState extends State<LoginForm> {
             Selector<LoginBloc, EmailState>(
               selector: (_, bloc) => state.email,
               builder: (context, emailState, child) {
-                return UIEmailTextField(
-                  errorText: state.email.error,
+                return UITextFieldRounded(
+                  // errorText: state.email.error,
+                  onTap: () {},
                   onChanged: (value) => loginActions.onEmailChange(value),
+                  labelText: '', hintText: '',
                 );
               },
             ),
             Selector<LoginBloc, PasswordState>(
               selector: (_, bloc) => bloc.state.password,
               builder: (context, passwordState, child) {
-                return UIPasswordTextField(
-                    obscureText: state.password.obscureText,
-                    errorText: state.password.error,
-                    onChanged: (value) => loginActions.onPasswordChange(value));
+                return SizedBox.shrink();
+                // return UIPasswordTextField(
+                //     obscureText: state.password.obscureText,
+                //     errorText: state.password.error,
+                //     onChanged: (value) => loginActions.onPasswordChange(value));
               },
             ),
             Align(
@@ -83,14 +82,14 @@ class _LoginFormState extends State<LoginForm> {
                 child: Text("Esqueceu senha"),
               ),
             ),
-            UIPrimaryButton(
-                text: "Entrar",
-                press: () => state.isFormValid
-                    ? () => loginActions.submitLogin(state)
-                    : null),
+            // UIPrimaryButton(
+            //     text: "Entrar",
+            //     press: () => state.isFormValid
+            //         ? () => loginActions.submitLogin(state)
+            //         : null),
             const LoginOr(),
-            UIGoogleButton(
-                press: () => loginActions.submitLoginWithGoogle(state))
+            // UIGoogleButton(
+            //     press: () => loginActions.submitLoginWithGoogle(state))
           ],
         );
       },

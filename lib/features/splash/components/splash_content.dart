@@ -3,7 +3,7 @@ import 'package:deehelp/core/theme/app_text_styles.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-import '../../../core/animation/slide_fade_transition_animator.dart';
+import '../../../core/ui/animation/slide_fade_transition_animator.dart';
 import '../../../core/ui/assets/resources.dart';
 
 class SplashContent extends StatelessWidget {

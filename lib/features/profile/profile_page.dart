@@ -1,4 +1,4 @@
-import 'package:deehelp/core/widgets/card/ui_custom_scaffold.dart';
+import 'package:deehelp/core/ui/widgets/card/ui_custom_scaffold.dart';
 import 'package:deehelp/features/profile/components/profile_content.dart';
 import 'package:deehelp/features/profile/components/profile_header.dart';
 import 'package:deehelp/features/profile/components/profile_logout.dart';

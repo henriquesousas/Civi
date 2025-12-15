@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 
-import '../../../core/animation/transform_scale_opacity_animator.dart';
+import '../../../core/ui/animation/transform_scale_opacity_animator.dart';
 import '../../../core/ui/assets/resources.dart';
 import '../../../core/ui/widgets/pin/ui_custom_pin.dart';
 

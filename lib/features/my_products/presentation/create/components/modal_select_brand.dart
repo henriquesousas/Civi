@@ -1,7 +1,7 @@
 import 'package:deehelp/core/theme/app_colors.dart';
 import 'package:deehelp/core/theme/app_text_styles.dart';
-import 'package:deehelp/core/widgets/empty/ui_simple_empty_value.dart';
-import 'package:deehelp/core/widgets/search/ui_search_field.dart';
+import 'package:deehelp/core/ui/widgets/empty/ui_simple_empty_value.dart';
+import 'package:deehelp/core/ui/widgets/search/ui_search_field.dart';
 import 'package:flutter/material.dart';
 
 import '../../../../../core/ui/assets/resources.dart';

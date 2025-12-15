@@ -1,7 +1,7 @@
 import 'package:deehelp/core/ui/extensions/context_extension.dart';
 import 'package:deehelp/core/extensions/screen_size_extension.dart';
 import 'package:deehelp/core/router/router_constants.dart';
-import 'package:deehelp/core/widgets/buttons/ui_elevated_button.dart';
+import 'package:deehelp/core/ui/widgets/button/ui_elevated_button.dart';
 import 'package:deehelp/features/auth/presentation/otp/components/otp_header_text.dart';
 import 'package:deehelp/features/auth/presentation/otp/components/otp_resend_code.dart';
 import 'package:flutter/material.dart';

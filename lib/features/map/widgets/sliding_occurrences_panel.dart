@@ -1,7 +1,7 @@
-import 'package:deehelp/core/components/icon/ui_icon_alpha.dart';
+import 'package:deehelp/core/ui/widgets/icon/ui_icon.dart';
 import 'package:deehelp/core/theme/app_text_styles.dart';
 import 'package:deehelp/core/ui/widgets/divider/ui_divider.dart';
-import 'package:deehelp/core/widgets/text-field/ui_text_field_rounded.dart';
+import 'package:deehelp/core/ui/widgets/textfield/ui_text_field_rounded.dart';
 import 'package:deehelp/features/map/map_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -71,9 +71,10 @@ class SlidingOccurrencesPanel extends StatelessWidget {
                   spacing: 2,
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
-                    const UIIConAlpha(
-                      iconData: Icons.close,
-                      color: AppColors.blackColor,
+                    const UIICon(
+                      isAlpha: true,
+                      icon: Icon(Icons.close),
+                      bgColor: AppColors.blackColor,
                     ),
                     Expanded(
                       child: UITextFieldRounded(

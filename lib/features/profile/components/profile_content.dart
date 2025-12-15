@@ -3,13 +3,13 @@ import 'package:deehelp/core/utils/url_launcher_utils.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
-import '../../../core/components/ui_my_assets_image_widget.dart';
+import '../../../core/ui/widgets/image/ui_my_assets_image_widget.dart';
 import '../../../core/ui/assets/resources.dart';
 import '../../../core/router/router_constants.dart';
 import '../../../core/theme/app_colors.dart';
 import '../../../core/theme/dimens.dart';
-import '../../../core/widgets/card/ui_custom_app_card.dart';
-import '../../../core/widgets/card/ui_custon_list_tile_card.dart';
+import '../../../core/ui/widgets/card/ui_custom_app_card.dart';
+import '../../../core/ui/widgets/card/ui_custon_list_tile_card.dart';
 
 class ProfileContent extends StatelessWidget {
   const ProfileContent({super.key});
