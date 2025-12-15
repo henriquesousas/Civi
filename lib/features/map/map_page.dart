@@ -1,10 +1,15 @@
 import 'package:deehelp/core/components/icon/ui_icon_alpha.dart';
+import 'package:deehelp/core/components/ui_app_bar.dart';
+import 'package:deehelp/core/components/ui_my_network_image_widget.dart';
 import 'package:deehelp/core/extensions/screen_size_extension.dart';
 import 'package:deehelp/core/router/router_constants.dart';
 import 'package:deehelp/core/theme/app_text_styles.dart';
 import 'package:deehelp/core/ui/assets/resources.dart';
 import 'package:deehelp/core/theme/app_colors.dart';
+import 'package:deehelp/core/ui/widgets/divider/ui_divider.dart';
+import 'package:deehelp/core/widgets/badge/ui_badge_widget.dart';
 import 'package:deehelp/core/widgets/buttons/ui_elevated_button.dart';
+import 'package:deehelp/core/widgets/card/ui_custon_list_tile_card.dart';
 import 'package:deehelp/features/map/widgets/map_bottom_content.dart';
 import 'package:deehelp/features/map/widgets/map_card_user_location.dart';
 import 'package:deehelp/features/map/widgets/map_search.dart';
@@ -13,6 +18,9 @@ import 'package:deehelp/features/map/widgets/map_floating_button.dart';
 import 'package:deehelp/features/map/widgets/map_top_menu_button.dart';
 import 'package:deehelp/features/map/widgets/osm.dart';
 import 'package:deehelp/features/map/widgets/sliding_occurrences_panel.dart';
+import 'package:deehelp/features/my_products/domain/product_status.dart';
+import 'package:deehelp/features/my_products/presentation/listing/components/status_badge_widget.dart';
+import 'package:deehelp/features/occurrence/presentation/plate_number_widget.dart';
 import 'package:deehelp/features/profile/profile_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_map/flutter_map.dart';
@@ -21,6 +29,8 @@ import 'package:flutter_svg/svg.dart';
 import 'package:go_router/go_router.dart';
 import 'package:latlong2/latlong.dart';
 import 'package:sliding_up_panel/sliding_up_panel.dart';
+
+import '../../core/theme/dimens.dart';
 
 class MapPage extends StatefulWidget {
   const MapPage({super.key});
@@ -488,129 +498,129 @@ class _MapPageState extends State<MapPage> with TickerProviderStateMixin {
     _mapController.move(position, 15); // 👈 move a câmera para o marker
   }
 
-  void _mostrarDetalhes(RouboMarker r) {
-    showModalBottomSheet(
-      context: context,
-      isScrollControlled: true,
-      backgroundColor: Colors.transparent,
-      shape: const RoundedRectangleBorder(
-        borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
-      ),
-      builder: (context) {
-        return SafeArea(
-          child: Container(
-            margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
-            decoration: BoxDecoration(
-              color: AppColors.whiteColor,
-              borderRadius: BorderRadius.circular(16),
-              boxShadow: [
-                BoxShadow(
-                  color: Colors.black.withOpacity(0.08),
-                  blurRadius: 6,
-                  offset: const Offset(0, 3),
-                ),
-              ],
-            ),
-            child: Column(
-              mainAxisSize: MainAxisSize.min,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                // Header com botão de fechar
-                Padding(
-                  padding: const EdgeInsets.only(top: 12, right: 12),
-                  child: Align(
-                    alignment: Alignment.topRight,
-                    child: UIIConAlpha(
-                      iconData: Icons.close,
-                      color: AppColors.darkGreyColor,
-                    ),
-                  ),
-                ),
+  // void _mostrarDetalhes(RouboMarker r) {
+  //   showModalBottomSheet(
+  //     context: context,
+  //     isScrollControlled: true,
+  //     backgroundColor: Colors.transparent,
+  //     shape: const RoundedRectangleBorder(
+  //       borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
+  //     ),
+  //     builder: (context) {
+  //       return SafeArea(
+  //         child: Container(
+  //           margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
+  //           decoration: BoxDecoration(
+  //             color: AppColors.whiteColor,
+  //             borderRadius: BorderRadius.circular(16),
+  //             boxShadow: [
+  //               BoxShadow(
+  //                 color: Colors.black.withOpacity(0.08),
+  //                 blurRadius: 6,
+  //                 offset: const Offset(0, 3),
+  //               ),
+  //             ],
+  //           ),
+  //           child: Column(
+  //             mainAxisSize: MainAxisSize.min,
+  //             crossAxisAlignment: CrossAxisAlignment.start,
+  //             children: [
+  //               // Header com botão de fechar
+  //               Padding(
+  //                 padding: const EdgeInsets.only(top: 12, right: 12),
+  //                 child: Align(
+  //                   alignment: Alignment.topRight,
+  //                   child: UIIConAlpha(
+  //                     iconData: Icons.close,
+  //                     color: AppColors.darkGreyColor,
+  //                   ),
+  //                 ),
+  //               ),
 
-                // Conteúdo principal
-                Padding(
-                  padding:
-                      const EdgeInsets.symmetric(horizontal: 20, vertical: 12),
-                  child: Row(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      ClipRRect(
-                        borderRadius: BorderRadius.circular(12),
-                        child: Image.network(
-                          "https://canalve.com.br/wp-content/uploads/2023/07/VW-ID.4-3.jpg",
-                          height: 90,
-                          width: 120,
-                          fit: BoxFit.cover,
-                        ),
-                      ),
-                      const SizedBox(width: 12),
-                      Expanded(
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: const [
-                            Text(
-                              "Ontem",
-                              style: TextStyle(
-                                fontSize: 13,
-                                color: Colors.grey,
-                              ),
-                            ),
-                            SizedBox(height: 4),
-                            Text(
-                              "Honda Civic 2.0",
-                              style: TextStyle(
-                                fontSize: 18,
-                                fontWeight: FontWeight.bold,
-                                color: Colors.black87,
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
+  //               // Conteúdo principal
+  //               Padding(
+  //                 padding:
+  //                     const EdgeInsets.symmetric(horizontal: 20, vertical: 12),
+  //                 child: Row(
+  //                   crossAxisAlignment: CrossAxisAlignment.start,
+  //                   children: [
+  //                     ClipRRect(
+  //                       borderRadius: BorderRadius.circular(12),
+  //                       child: Image.network(
+  //                         "https://canalve.com.br/wp-content/uploads/2023/07/VW-ID.4-3.jpg",
+  //                         height: 90,
+  //                         width: 120,
+  //                         fit: BoxFit.cover,
+  //                       ),
+  //                     ),
+  //                     const SizedBox(width: 12),
+  //                     Expanded(
+  //                       child: Column(
+  //                         crossAxisAlignment: CrossAxisAlignment.start,
+  //                         children: const [
+  //                           Text(
+  //                             "Ontem",
+  //                             style: TextStyle(
+  //                               fontSize: 13,
+  //                               color: Colors.grey,
+  //                             ),
+  //                           ),
+  //                           SizedBox(height: 4),
+  //                           Text(
+  //                             "Honda Civic 2.0",
+  //                             style: TextStyle(
+  //                               fontSize: 18,
+  //                               fontWeight: FontWeight.bold,
+  //                               color: Colors.black87,
+  //                             ),
+  //                           ),
+  //                         ],
+  //                       ),
+  //                     ),
+  //                   ],
+  //                 ),
+  //               ),
 
-                const Divider(height: 1, color: AppColors.lightGreyColor30),
+  //               const Divider(height: 1, color: AppColors.lightGreyColor30),
 
-                // Descrição
-                Padding(
-                  padding: const EdgeInsets.all(20),
-                  child: const Text(
-                    "Ocorrência: veículo envolvido em incidente de trânsito. "
-                    "Informações em validação interna.",
-                    style: TextStyle(
-                      fontSize: 14,
-                      color: Colors.black87,
-                      height: 1.4,
-                    ),
-                  ),
-                ),
+  //               // Descrição
+  //               Padding(
+  //                 padding: const EdgeInsets.all(20),
+  //                 child: const Text(
+  //                   "Ocorrência: veículo envolvido em incidente de trânsito. "
+  //                   "Informações em validação interna.",
+  //                   style: TextStyle(
+  //                     fontSize: 14,
+  //                     color: Colors.black87,
+  //                     height: 1.4,
+  //                   ),
+  //                 ),
+  //               ),
 
-                const Divider(height: 1, color: AppColors.lightGreyColor30),
+  //               const Divider(height: 1, color: AppColors.lightGreyColor30),
 
-                // Footer com botão
-                ClipRRect(
-                  borderRadius: const BorderRadius.vertical(
-                    bottom: Radius.circular(16),
-                  ),
-                  child: Container(
-                    padding: const EdgeInsets.all(20),
-                    color: AppColors.whiteColor,
-                    child: UIElevatedButton(
-                      radius: 90,
-                      text: "Ver detalhes",
-                      press: () {},
-                    ),
-                  ),
-                ),
-              ],
-            ),
-          ),
-        );
-      },
-    );
-  }
+  //               // Footer com botão
+  //               ClipRRect(
+  //                 borderRadius: const BorderRadius.vertical(
+  //                   bottom: Radius.circular(16),
+  //                 ),
+  //                 child: Container(
+  //                   padding: const EdgeInsets.all(20),
+  //                   color: AppColors.whiteColor,
+  //                   child: UIElevatedButton(
+  //                     radius: 90,
+  //                     text: "Ver detalhes",
+  //                     press: () {},
+  //                   ),
+  //                 ),
+  //               ),
+  //             ],
+  //           ),
+  //         ),
+  //       );
+  //     },
+  //   );
+  // }
 
   // String _formatarDataHora(DateTime dt) {
   //   final dia =
@@ -664,110 +674,423 @@ void _mostrarDetalhes2(RouboMarker roubo, BuildContext context) {
   showModalBottomSheet(
     context: context,
     isScrollControlled: true,
-    backgroundColor: Colors.transparent,
+    // backgroundColor: Colors.transparent,
     useSafeArea: true,
     shape: const RoundedRectangleBorder(
-      borderRadius: BorderRadius.vertical(top: Radius.circular(24)),
+      borderRadius: BorderRadius.vertical(top: Radius.circular(12)),
     ),
     builder: (context) {
       return Container(
-        constraints: BoxConstraints(
-          maxHeight: MediaQuery.of(context).size.height * 0.85,
-        ),
-        margin: const EdgeInsets.all(8),
-        decoration: BoxDecoration(
-          color: AppColors.whiteColor,
-          borderRadius: BorderRadius.circular(24),
-          boxShadow: [
-            BoxShadow(
-              color: Colors.black.withOpacity(0.15),
-              blurRadius: 20,
-              spreadRadius: 0,
-              offset: const Offset(0, 4),
+        // constraints: BoxConstraints(
+        //   maxHeight: MediaQuery.of(context).size.height * 0.85,
+        // ),
+        margin: const EdgeInsets.all(10),
+        // decoration: BoxDecoration(
+        //   color: AppColors.whiteColor,
+        //   borderRadius: BorderRadius.circular(24),
+        //   boxShadow: [
+        //     BoxShadow(
+        //       color: Colors.black.withOpacity(0.15),
+        //       blurRadius: 20,
+        //       spreadRadius: 0,
+        //       offset: const Offset(0, 4),
+        //     ),
+        //   ],
+        // ),
+        child: Scaffold(
+          backgroundColor: const Color(0xFFF8FAFC),
+          appBar: UIAppBar(
+            title: "Roubo a veículo",
+            centerTitle: true,
+            textStyle: context.appTextStyles.bodyTextStyle1.copyWith(
+              fontWeight: FontWeight.w600,
             ),
-          ],
-        ),
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-          children: [
-            // Header com indicador
-            _buildHeader(),
-
-            _buildVehicleInfo(roubo),
-            _buildDetailsSection(roubo),
-            _buildLocationSection(roubo),
-            // _buildAdditionalInfo(roubo),
-
-            // Conteúdo rolável
-            // Expanded(
-            //   child: SingleChildScrollView(
-            //     physics: const BouncingScrollPhysics(),
-            //     child: Column(
-            //       crossAxisAlignment: CrossAxisAlignment.stretch,
-            //       children: [
-            //         // Informações do veículo
-            //         _buildVehicleInfo(roubo),
-
-            //         // Seção de detalhes
-            //         _buildDetailsSection(roubo),
-
-            //         // Informações adicionais
-            //         // _buildAdditionalInfo(roubo),
-
-            //         // Localização
-            //         _buildLocationSection(roubo),
-            //       ],
-            //     ),
-            //   ),
-            // ),
-
-            // Ações
-            _buildActionButtons(roubo),
-          ],
+            leading: IconButton(
+              onPressed: () {},
+              icon: const Icon(Icons.close),
+            ),
+            // actions: [
+            //   IconButton(
+            //     onPressed: () {},
+            //     icon: const Icon(Icons.help_outline),
+            //   )
+            // ],
+          ),
+          body: SingleChildScrollView(
+            child: Column(
+              spacing: 3,
+              mainAxisSize: MainAxisSize.min,
+              crossAxisAlignment: CrossAxisAlignment.stretch,
+              children: [
+                // Header com indicador
+                _buildHeader(context),
+                _buildInfo(context),
+                _buildDetails(context),
+                _buidOwnSection(context),
+                Padding(
+                  padding: const EdgeInsets.all(16),
+                  child: UIElevatedButton(
+                    // radius: 8,
+                    width: context.percentWidth(0.5),
+                    text: "Confirmar",
+                    press: () {},
+                  ),
+                ),
+              ],
+            ),
+          ),
         ),
       );
     },
   );
 }
 
-Widget _buildHeader() {
-  return Column(
-    children: [
-      const SizedBox(height: 8),
-      Container(
-        width: 40,
-        height: 4,
-        decoration: BoxDecoration(
-          color: AppColors.lightGreyColor20,
-          borderRadius: BorderRadius.circular(2),
+Widget _buildHeader(BuildContext context) {
+  return Container(
+    decoration: BoxDecoration(
+      color: AppColors.whiteColor,
+      borderRadius: BorderRadius.circular(4),
+      border: const Border(
+        bottom: BorderSide(
+          color: AppColors.lightGreyColor30,
+          width: 1.0,
         ),
       ),
-      Padding(
-        padding: const EdgeInsets.symmetric(vertical: 12, horizontal: 20),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            Text(
-              "Detalhes da Ocorrência",
-              style: TextStyle(
-                fontSize: 18,
-                fontWeight: FontWeight.w700,
-                color: AppColors.darkGreyColor,
+    ),
+    child: Padding(
+      padding: const EdgeInsets.all(16),
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.start,
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Row(
+            spacing: 10,
+            children: [
+              const StatusBadgeWidget(status: ProductSatus.active),
+              Container(
+                  padding: const EdgeInsets.symmetric(horizontal: 5),
+                  decoration: BoxDecoration(
+                    border: Border.all(color: AppColors.lightGreyColor30),
+                    borderRadius: BorderRadius.circular(4),
+                  ),
+                  child: Text(
+                    "Vitima#123",
+                    style: context.appTextStyles.caption2Style,
+                  ))
+            ],
+          ),
+          const SizedBox(height: 20),
+          Text(
+            "Ford Focus 2.0",
+            style: context.appTextStyles.bodyTextStyle2.copyWith(
+              fontWeight: FontWeight.bold,
+              fontSize: Dimens.size20.sp,
+            ),
+          ),
+          Text(
+            "Osasco - São Paulo, próximo Avenida João ventura dos Santos",
+            style: context.appTextStyles.bodyTextStyle2.copyWith(
+              color: AppColors.textColorBody,
+              fontSize: Dimens.size14.sp,
+            ),
+          ),
+        ],
+      ),
+    ),
+  );
+}
+
+Widget _buildInfo(BuildContext context) {
+  return Container(
+    decoration: BoxDecoration(
+      color: AppColors.whiteColor,
+      borderRadius: BorderRadius.circular(4),
+      border: const Border(
+        bottom: BorderSide(
+          color: AppColors.lightGreyColor30,
+          width: 1.0,
+        ),
+      ),
+    ),
+    child: Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 20),
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.start,
+        crossAxisAlignment: CrossAxisAlignment.start,
+        spacing: 15,
+        children: [
+          Row(
+            mainAxisAlignment: MainAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            spacing: 10,
+            children: [
+              SvgPicture.asset(
+                R.images.svgStatementInactive,
+                height: 16,
+                colorFilter: const ColorFilter.mode(
+                  AppColors.textColorBody,
+                  BlendMode.srcIn,
+                ),
               ),
-            ),
-            IconButton(
-              onPressed: () {},
-              icon: Icon(Icons.close, color: AppColors.darkGreyColor),
-              padding: EdgeInsets.zero,
-              constraints: const BoxConstraints(),
-              iconSize: 20,
-            ),
-          ],
+              Expanded(
+                child: Text(
+                  "Lorem Ipsum is simply dummy text of the printing and typesetting y. Lorem Ipsum has been the industry's standard, Lorem Ipsum is simply dummy text of the printing and typesetting y. Lorem Ipsum has been the industry's standard, ",
+                  style: context.appTextStyles.bodyTextStyle2.copyWith(
+                    color: AppColors.textColorBody,
+                    fontSize: Dimens.size14.sp,
+                  ),
+                  maxLines: 4,
+                  overflow: TextOverflow.ellipsis,
+                ),
+              ),
+            ],
+          ),
+          const UIMyNetworkImageWidget(
+            imageUrl:
+                "https://www.remaza.com.br/uploads/bc51be65-9c0a-415c-92bf-d41442c9bed7/fiat-strada-marcas-de-carros-remaza.png",
+          ),
+        ],
+      ),
+    ),
+  );
+}
+
+Widget _buildDetails(BuildContext context) {
+  return Container(
+    decoration: BoxDecoration(
+      color: AppColors.whiteColor,
+      borderRadius: BorderRadius.circular(4),
+      // border: Border.all(
+      //   color: AppColors.lightGreyColor20,
+      // ),
+      border: const Border(
+        bottom: BorderSide(
+          color: AppColors.lightGreyColor30,
+          width: 1.0,
         ),
       ),
-      Divider(height: 1, color: AppColors.lightGreyColor30),
-    ],
+    ),
+    child: Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 20),
+      child: Column(
+        spacing: 12,
+        children: [
+          Row(
+            mainAxisAlignment: MainAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            spacing: 5,
+            children: [
+              SvgPicture.asset(
+                R.images.svgStatementInactive,
+                height: 16,
+                colorFilter: const ColorFilter.mode(
+                  AppColors.textColorBody,
+                  BlendMode.srcIn,
+                ),
+              ),
+              Text(
+                "Placa",
+                style: context.appTextStyles.bodyTextStyle2.copyWith(
+                  color: AppColors.textColorBody,
+                  fontSize: Dimens.size14.sp,
+                ),
+              ),
+              const Spacer(),
+              Container(
+                padding: const EdgeInsets.all(4),
+                decoration: BoxDecoration(
+                  color: AppColors.primaryColor.withValues(alpha: 0.1),
+                  borderRadius: BorderRadius.circular(4),
+                ),
+                child: Text(
+                  "DND-0171",
+                  style: context.appTextStyles.caption2Style.copyWith(
+                    color: AppColors.primaryColorDark,
+                    fontWeight: FontWeight.w500,
+                  ),
+                ),
+              ),
+              // const PlateNumberWidget(plateNumber: 'DND0171'),
+            ],
+          ),
+
+          //Linha 2
+          Row(
+            mainAxisAlignment: MainAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            spacing: 5,
+            children: [
+              SvgPicture.asset(
+                R.svg.time,
+                height: 16,
+                colorFilter: const ColorFilter.mode(
+                  AppColors.textColorBody,
+                  BlendMode.srcIn,
+                ),
+              ),
+              Text(
+                "Hora aproximada",
+                style: context.appTextStyles.bodyTextStyle2.copyWith(
+                  color: AppColors.textColorBody,
+                  fontSize: Dimens.size14.sp,
+                ),
+              ),
+              const Spacer(),
+              Text(
+                "00:00",
+                style: context.appTextStyles.caption2Style.copyWith(
+                  color: AppColors.textColorBody,
+                ),
+              ),
+            ],
+          ),
+
+          //Linha 3
+          Row(
+            mainAxisAlignment: MainAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            spacing: 5,
+            children: [
+              SvgPicture.asset(
+                R.svg.date,
+                height: 16,
+                colorFilter: const ColorFilter.mode(
+                  AppColors.textColorBody,
+                  BlendMode.srcIn,
+                ),
+              ),
+              Text(
+                "Data",
+                style: context.appTextStyles.bodyTextStyle2.copyWith(
+                  color: AppColors.textColorBody,
+                  fontSize: Dimens.size14.sp,
+                ),
+              ),
+              const Spacer(),
+              Text(
+                "15 de outubro de 2023",
+                style: context.appTextStyles.caption2Style.copyWith(
+                  color: AppColors.textColorBody,
+                ),
+              ),
+            ],
+          ),
+
+          // Linha 4
+          Row(
+            mainAxisAlignment: MainAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            spacing: 5,
+            children: [
+              SvgPicture.asset(
+                R.images.svgCategory,
+                height: 16,
+                colorFilter: const ColorFilter.mode(
+                  AppColors.textColorBody,
+                  BlendMode.srcIn,
+                ),
+              ),
+              Text(
+                "Tipo",
+                style: context.appTextStyles.bodyTextStyle2.copyWith(
+                  color: AppColors.textColorBody,
+                  fontSize: Dimens.size14.sp,
+                ),
+              ),
+              const Spacer(),
+              Container(
+                padding: const EdgeInsets.all(4),
+                decoration: BoxDecoration(
+                  color: AppColors.primaryColor.withValues(alpha: 0.1),
+                  borderRadius: BorderRadius.circular(4),
+                ),
+                child: Text(
+                  "Carro",
+                  style: context.appTextStyles.caption2Style.copyWith(
+                    color: AppColors.primaryColorDark,
+                    fontWeight: FontWeight.w500,
+                  ),
+                ),
+              ),
+            ],
+          ),
+        ],
+      ),
+    ),
+  );
+}
+
+Widget _buidOwnSection(BuildContext context) {
+  return Container(
+    decoration: BoxDecoration(
+      color: AppColors.lightGreyColor,
+      borderRadius: BorderRadius.circular(4),
+      // border: const Border(
+      //   bottom: BorderSide(
+      //     color: AppColors.lightGreyColor30,
+      //     width: 1.0,
+      //   ),
+      // ),
+    ),
+    child: Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 20),
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.start,
+        crossAxisAlignment: CrossAxisAlignment.start,
+        spacing: 20,
+        children: [
+          Row(
+            mainAxisAlignment: MainAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            spacing: 5,
+            children: [
+              const Icon(
+                Icons.visibility_outlined,
+                color: AppColors.textColorBody,
+              ),
+              Text(
+                "Visivel",
+                style: context.appTextStyles.bodyTextStyle2.copyWith(
+                  color: AppColors.textColorBody,
+                  fontSize: Dimens.size14.sp,
+                ),
+              ),
+              const Spacer(),
+              TextToggleButtons(),
+            ],
+          ),
+
+          //LInha 2
+          Row(
+            mainAxisAlignment: MainAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            spacing: 5,
+            children: [
+              const Icon(
+                Icons.delete_outlined,
+                color: AppColors.errorColor,
+              ),
+              Text(
+                "Remover",
+                style: context.appTextStyles.bodyTextStyle2.copyWith(
+                  color: AppColors.errorColorDark,
+                  fontSize: Dimens.size14.sp,
+                ),
+              ),
+              const Spacer(),
+              SvgPicture.asset(
+                R.images.svgArrowFront,
+                height: 16,
+                colorFilter: const ColorFilter.mode(
+                  AppColors.textColorBody,
+                  BlendMode.srcIn,
+                ),
+              ),
+            ],
+          )
+        ],
+      ),
+    ),
   );
 }
 
@@ -1081,27 +1404,27 @@ Widget _buildActionButtons(RouboMarker roubo) {
       children: [
         Row(
           children: [
-            Expanded(
-              child: OutlinedButton(
-                onPressed: () {},
-                style: OutlinedButton.styleFrom(
-                  padding: const EdgeInsets.symmetric(vertical: 14),
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(12),
-                  ),
-                  side: BorderSide(color: AppColors.lightGreyColor20),
-                ),
-                child: Text(
-                  "Fechar",
-                  style: TextStyle(
-                    fontSize: 15,
-                    fontWeight: FontWeight.w600,
-                    color: AppColors.darkGreyColor,
-                  ),
-                ),
-              ),
-            ),
-            const SizedBox(width: 12),
+            // Expanded(
+            //   child: OutlinedButton(
+            //     onPressed: () {},
+            //     style: OutlinedButton.styleFrom(
+            //       padding: const EdgeInsets.symmetric(vertical: 14),
+            //       shape: RoundedRectangleBorder(
+            //         borderRadius: BorderRadius.circular(12),
+            //       ),
+            //       side: BorderSide(color: AppColors.lightGreyColor20),
+            //     ),
+            //     child: Text(
+            //       "Fechar",
+            //       style: TextStyle(
+            //         fontSize: 15,
+            //         fontWeight: FontWeight.w600,
+            //         color: AppColors.darkGreyColor,
+            //       ),
+            //     ),
+            //   ),
+            // ),
+            // const SizedBox(width: 12),
             Expanded(
               child: ElevatedButton(
                 onPressed: () {},
@@ -1213,4 +1536,41 @@ Widget _buildInfoItem({
       ),
     ),
   );
+}
+
+class TextToggleButtons extends StatefulWidget {
+  @override
+  _TextToggleButtonsState createState() => _TextToggleButtonsState();
+}
+
+class _TextToggleButtonsState extends State<TextToggleButtons> {
+  List<bool> _isSelected = [true, false];
+
+  @override
+  Widget build(BuildContext context) {
+    return ToggleButtons(
+      isSelected: _isSelected,
+      borderRadius: BorderRadius.circular(8),
+      selectedColor: AppColors.whiteColor,
+      selectedBorderColor: AppColors.primaryColorDark,
+      fillColor: AppColors.primaryColorDark,
+      onPressed: (int index) {
+        setState(() {
+          for (int i = 0; i < _isSelected.length; i++) {
+            _isSelected[i] = i == index;
+          }
+        });
+      },
+      children: const [
+        Padding(
+          padding: EdgeInsets.symmetric(horizontal: 10),
+          child: Text('Sim'),
+        ),
+        Padding(
+          padding: EdgeInsets.symmetric(horizontal: 10),
+          child: Text('Näo'),
+        ),
+      ],
+    );
+  }
 }

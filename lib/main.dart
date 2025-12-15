@@ -11,7 +11,6 @@ import 'core/router/main_router.dart';
 import 'core/theme/app_theme.dart';
 import 'firebase_options.dart';
 import 'l10n/app_localizations.dart';
-import 'l10n/l10n.dart';
 import 'main_provider.dart';
 
 void main() async {
