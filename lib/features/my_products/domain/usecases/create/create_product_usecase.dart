@@ -38,7 +38,7 @@ class CreateProductUseCase extends UseCase<CreateProductDto, Unit> {
         ContentType.jpeg,
         "jpeg",
       );
-      final item = Product.from(dto);
+      final item = Product.fromDto(dto);
       final newUrl = await _media.upload(info);
       item.changeImage(ImageMedia.fromWeb(url: newUrl, metadata: const {}));
       await _repository.save(item);

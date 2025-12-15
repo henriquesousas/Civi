@@ -1,0 +1,212 @@
+import 'dart:io';
+
+import 'package:deehelp/features/incident/domain/creator.dart';
+import 'package:deehelp/features/incident/domain/incident.dart';
+import 'package:deehelp/features/incident/domain/incident_local.dart';
+import 'package:deehelp/features/incident/domain/incident_status.dart';
+import 'package:deehelp/features/incident/domain/incident_type.dart';
+import 'package:deehelp/features/incident/domain/privacy_level.dart';
+import 'package:deehelp/features/my_products/domain/entities/image_media.dart';
+import 'package:deehelp/features/my_products/domain/entities/product.dart';
+
+import '../../my_products/domain/entities/product_id.dart';
+import '../../my_products/domain/product_status.dart';
+
+final p1 = Product(
+  id: ProductId.unique(),
+  name: "Nome do produto",
+  code: "DDD0000",
+  type: "Carro",
+  color: "Verde",
+  brand: "Ma",
+  obs: "Obsercao",
+  year: 2010,
+  image: ImageMedia(
+      file: File(
+          "https://pemavel.com.br/wp-content/uploads/2024/08/imagick_convert.webp"),
+      source: MediaSource.api,
+      metadata: const {}),
+  userId: "456",
+  status: ProductSatus.active,
+);
+
+final List<Incident> fakeIncidents = [
+  Incident(
+    id: "123",
+    creator: Creator.user,
+    status: IncidentStatus.confirmed,
+    type: IncidentType.theft,
+    level: PrivacyLevel.public,
+    local: IncidentLocal(
+        latitue: -23.5045,
+        longitude: -46.8750,
+        address: "Rua joao ventura dos Santos",
+        neighborhood: "Baronesa",
+        city: "São Paulo"),
+    howTo: "lorem ipsum",
+    product: p1,
+    occurredAt: DateTime.now(),
+    createdAt: DateTime.now(),
+  )
+];
+
+// final List<RouboMarker> fakeData = [
+//   RouboMarker(
+//     titulo: "Roubo de celular",
+//     dataHora: DateTime(2025, 12, 1, 18, 20),
+//     descricao: "Vítima abordada próximo ao ponto de ônibus",
+//     pos: const LatLng(-23.5045, -46.8750),
+//   ),
+//   RouboMarker(
+//     titulo: "Roubo de bicicleta",
+//     dataHora: DateTime(2025, 12, 3, 7, 45),
+//     descricao: "Ocorrência em ciclovia durante a manhã",
+//     pos: const LatLng(-23.5160, -46.8825),
+//   ),
+//   RouboMarker(
+//     titulo: "Roubo a pedestre",
+//     dataHora: DateTime(2025, 12, 4, 22, 10),
+//     descricao: "Dois indivíduos em moto, sem feridos",
+//     pos: const LatLng(-23.5120, -46.8690),
+//     placaVeiculo: "XYZ-9A34",
+//     tipoVeiculo: TipoVeiculo.motocicleta,
+//   ),
+//   RouboMarker(
+//     titulo: "Roubo de carro",
+//     dataHora: DateTime(2025, 12, 5, 20, 30),
+//     descricao: "Veículo levado em estacionamento",
+//     pos: const LatLng(-23.5150, -46.8700),
+//     placaVeiculo: "ABC-1D23",
+//     tipoVeiculo: TipoVeiculo.veiculoLeve,
+//   ),
+//   RouboMarker(
+//     titulo: "Tentativa de assalto",
+//     dataHora: DateTime(2025, 12, 6, 15, 10),
+//     descricao: "Suspeitos fugiram sem levar nada",
+//     pos: const LatLng(-23.5180, -46.8720),
+//     placaVeiculo: "DEF-4G56",
+//     tipoVeiculo: TipoVeiculo.motocicleta,
+//   ),
+//   RouboMarker(
+//     titulo: "Roubo de carteira",
+//     dataHora: DateTime(2025, 12, 1, 9, 15),
+//     descricao: "Vítima no terminal de ônibus",
+//     pos: const LatLng(-23.5200, -46.8770),
+//   ),
+//   RouboMarker(
+//     titulo: "Roubo de bolsa",
+//     dataHora: DateTime(2025, 12, 2, 21, 30),
+//     descricao: "Em frente ao shopping center",
+//     pos: const LatLng(-23.5080, -46.8790),
+//   ),
+//   RouboMarker(
+//     titulo: "Roubo de motocicleta",
+//     dataHora: DateTime(2025, 12, 3, 23, 45),
+//     descricao: "Moto roubada em semáforo",
+//     pos: const LatLng(-23.5130, -46.8680),
+//     // placaVeiculo: "MNO-7P89",
+//     tipoVeiculo: TipoVeiculo.motocicleta,
+//   ),
+//   RouboMarker(
+//     titulo: "Arrastão",
+//     dataHora: DateTime(2025, 12, 4, 19, 20),
+//     descricao: "Grupo em carro abordou pedestres",
+//     pos: const LatLng(-23.5090, -46.8730),
+//     placaVeiculo: "GHI-2J45",
+//     tipoVeiculo: TipoVeiculo.veiculoLeve,
+//   ),
+//   RouboMarker(
+//     titulo: "Roubo de caminhão",
+//     dataHora: DateTime(2025, 12, 10, 14, 30),
+//     descricao: "Carga de alimentos roubada",
+//     pos: const LatLng(-23.5115, -46.8765),
+//     placaVeiculo: "QRS-8T12",
+//     tipoVeiculo: TipoVeiculo.veiculoPesado,
+//   ),
+//   RouboMarker(
+//     titulo: "Roubo de furgão",
+//     dataHora: DateTime(2025, 12, 12, 8, 45),
+//     descricao: "Veículo de entrega roubado",
+//     pos: const LatLng(-23.5140, -46.8790),
+//     placaVeiculo: "UVW-3X67",
+//     tipoVeiculo: TipoVeiculo.veiculoLeve,
+//   ),
+//   RouboMarker(
+//     titulo: "Roubo de ônibus escolar",
+//     dataHora: DateTime(2025, 12, 15, 16, 20),
+//     descricao: "Veículo escolar roubado durante a noite",
+//     pos: const LatLng(-23.5170, -46.8740),
+//     placaVeiculo: "KLM-0N90",
+//     tipoVeiculo: TipoVeiculo.veiculoPesado,
+//   ),
+//   RouboMarker(
+//     titulo: "Roubo de van",
+//     dataHora: DateTime(2025, 12, 18, 22, 10),
+//     descricao: "Van de transporte roubada",
+//     pos: const LatLng(-23.5095, -46.8805),
+//     placaVeiculo: "BCD-5E78",
+//     tipoVeiculo: TipoVeiculo.veiculoLeve,
+//   ),
+//   RouboMarker(
+//     titulo: "Roubo de carreta",
+//     dataHora: DateTime(2025, 12, 20, 3, 15),
+//     descricao: "Carreta com carga de eletrônicos",
+//     pos: const LatLng(-23.5125, -46.8775),
+//     placaVeiculo: "FGH-6I91",
+//     tipoVeiculo: TipoVeiculo.veiculoPesado,
+//   ),
+//   RouboMarker(
+//     titulo: "Roubo de scooter",
+//     dataHora: DateTime(2025, 12, 22, 11, 40),
+//     descricao: "Scooter elétrica roubada",
+//     pos: const LatLng(-23.5155, -46.8755),
+//     placaVeiculo: "JKL-7M23",
+//     tipoVeiculo: TipoVeiculo.motocicleta,
+//   ),
+//   RouboMarker(
+//     titulo: "Roubo de utilitário",
+//     dataHora: DateTime(2025, 12, 25, 19, 30),
+//     descricao: "Pick-up roubada em postos de gasolina",
+//     pos: const LatLng(-23.5100, -46.8780),
+//     placaVeiculo: "NOP-8Q34",
+//     tipoVeiculo: TipoVeiculo.veiculoLeve,
+//   ),
+//   RouboMarker(
+//     titulo: "Roubo de caminhão betoneira",
+//     dataHora: DateTime(2025, 12, 28, 6, 50),
+//     descricao: "Veículo de construção civil",
+//     pos: const LatLng(-23.5130, -46.8810),
+//     placaVeiculo: "RST-9U45",
+//     tipoVeiculo: TipoVeiculo.veiculoPesado,
+//   ),
+//   RouboMarker(
+//     titulo: "Roubo de moto de alta cilindrada",
+//     dataHora: DateTime(2025, 12, 30, 21, 15),
+//     descricao: "Moto esportiva roubada",
+//     pos: const LatLng(-23.5160, -46.8760),
+//     placaVeiculo: "VWX-0Y56",
+//     tipoVeiculo: TipoVeiculo.motocicleta,
+//   ),
+//   RouboMarker(
+//     titulo: "Roubo de carro de luxo",
+//     dataHora: DateTime(2026, 1, 2, 13, 25),
+//     descricao: "Veículo de alto valor roubado",
+//     pos: const LatLng(-23.5085, -46.8735),
+//     placaVeiculo: "YZA-1B67",
+//     tipoVeiculo: TipoVeiculo.veiculoLeve,
+//   ),
+//   RouboMarker(
+//     titulo: "Roubo de caminhão frigorífico",
+//     dataHora: DateTime(2026, 1, 5, 4, 40),
+//     descricao: "Carga de alimentos congelados",
+//     pos: const LatLng(-23.5110, -46.8795),
+//     placaVeiculo: "CDE-2F78",
+//     tipoVeiculo: TipoVeiculo.veiculoPesado,
+//   ),
+//   RouboMarker(
+//     titulo: "Roubo de equipamentos de ginástica laboral",
+//     dataHora: DateTime(2026, 1, 19, 17, 50),
+//     descricao: "Clínica de fisioterapia",
+//     pos: const LatLng(-23.5085, -46.8775),
+//   ),
+// ];

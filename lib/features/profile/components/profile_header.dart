@@ -1,7 +1,7 @@
 import 'package:deehelp/core/ui/extensions/screen_size_extension.dart';
 import 'package:deehelp/core/ui/theme/app_text_styles.dart';
 import 'package:deehelp/features/profile/components/profile_pro_indicator_badge.dart';
-import 'package:firebase_auth/firebase_auth.dart';
+// import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:skeletonizer/skeletonizer.dart';
 
@@ -14,7 +14,9 @@ import '../../../core/ui/widgets/card/ui_custon_list_tile_card.dart';
 class ProfileHeader extends StatelessWidget {
   final String name;
   final String email;
-  const ProfileHeader({super.key, required this.name, required this.email});
+  final String? imageUrl;
+  const ProfileHeader(
+      {super.key, required this.name, required this.email, this.imageUrl});
 
   @override
   Widget build(BuildContext context) {
@@ -25,7 +27,7 @@ class ProfileHeader extends StatelessWidget {
           replacement: const Bone.square(size: 80),
           child: UIMyNetworkImageWidget(
             radius: Dimens.defaultRadius,
-            imageUrl: FirebaseAuth.instance.currentUser?.photoURL ?? "",
+            imageUrl: imageUrl ?? "",
             isProfile: true,
             width: context.responsiveRadius(0.13),
             height: context.responsiveRadius(0.13),

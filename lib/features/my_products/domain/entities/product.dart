@@ -6,6 +6,7 @@ import '../product_status.dart';
 import '../usecases/create/create_product_dto.dart';
 import 'image_media.dart';
 
+//TODO: Refactor
 class Product extends Entity<ProductId> {
   final ProductId id;
   String name;
@@ -66,7 +67,7 @@ class Product extends Entity<ProductId> {
     );
   }
 
-  factory Product.from(CreateProductDto dto) {
+  factory Product.fromDto(CreateProductDto dto) {
     return Product(
       id: ProductId.unique(),
       name: dto.name,

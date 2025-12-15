@@ -1,17 +1,16 @@
-import 'package:deehelp/core/ui/theme/app_colors.dart';
-import 'package:deehelp/core/ui/widgets/pin/ui_custom_pinv2.dart';
-import 'package:deehelp/features/map/map_page.dart';
+import 'package:deehelp/features/incident/domain/incident.dart';
 import 'package:deehelp/features/map/widgets/map_custom_marker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_map/flutter_map.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:latlong2/latlong.dart';
 
 class Osm extends StatelessWidget {
-  final List<RouboMarker> item;
+  final List<Incident> item;
   final MapController controller;
   final LatLng initial;
   final double initialZoom;
-  final Function(RouboMarker) press;
+  final Function(Incident) press;
   const Osm({
     super.key,
     required this.controller,
@@ -39,16 +38,15 @@ class Osm extends StatelessWidget {
           markers: item
               .map(
                 (r) => Marker(
-                  point: r.pos,
-                  width: 120,
-                  height: 50,
+                  point: LatLng(r.local!.latitue!, r.local!.longitude!),
+                  width: 120.w,
+                  height: 50.h,
                   child: GestureDetector(
                     // onTap: () => _mostrarDetalhes2(r, context),
                     onTap: () => press(r),
-                    child: IntrinsicWidth(
+                    child: const IntrinsicWidth(
                       child: MapCustomMarker(
                         label: "label",
-                        icon: r.icone,
                       ),
                     ),
                   ),

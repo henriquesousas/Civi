@@ -11,8 +11,11 @@ abstract final class Dimens {
   static const size14 = 14.0;
   static const size16 = 16.0;
   static const size20 = 20.0;
+  static const size22 = 22.0;
   static const size40 = 40.0;
   static const size90 = 90.0;
+  static const size125 = 125.0;
+  static const size140 = 140.0;
   static const paddingHorizontal = 20.0;
   static const paddingVertical = 24.0;
   static const defaultPadding = 12.0;

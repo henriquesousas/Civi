@@ -1,4 +1,5 @@
 import 'package:deehelp/core/ui/theme/app_colors.dart';
+import 'package:deehelp/core/ui/theme/dimens.dart';
 import 'package:flutter/material.dart';
 
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -9,7 +10,7 @@ class MapCustomMarker extends StatelessWidget {
   final Color iconColor;
   final Color borderColor;
   final Color backgroundColor;
-  final double arrowSize; // 1.0 = tamanho original, 0.8 = 20% menor, etc.
+  final double arrowSize;
 
   const MapCustomMarker({
     super.key,
@@ -18,7 +19,7 @@ class MapCustomMarker extends StatelessWidget {
     this.iconColor = AppColors.primaryColor,
     this.borderColor = AppColors.primaryColor,
     this.backgroundColor = AppColors.whiteColor,
-    this.arrowSize = 0.8, // Tamanho reduzido em 20%
+    this.arrowSize = 0.8,
   });
 
   @override
@@ -31,8 +32,8 @@ class MapCustomMarker extends StatelessWidget {
           arrowSize: arrowSize,
         ),
         child: Container(
-          width: 22.w,
-          height: 22.w + (6.h * arrowSize), // Altura dinâmica
+          width: Dimens.size22.w,
+          height: Dimens.size22.w + (6.h * arrowSize),
           padding: EdgeInsets.only(bottom: 4.h * arrowSize),
           child: Center(
             child: Icon(

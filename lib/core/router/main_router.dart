@@ -1,7 +1,7 @@
 import 'package:deehelp/core/router/router_constants.dart';
 import 'package:deehelp/core/router/slide_transition_page.dart';
 import 'package:deehelp/features/faq/faq_provider.dart';
-import 'package:deehelp/features/map/map_page.dart';
+import 'package:deehelp/features/map/presentation/map_page.dart';
 import 'package:deehelp/features/splash/splash_page.dart';
 import 'package:go_router/go_router.dart';
 

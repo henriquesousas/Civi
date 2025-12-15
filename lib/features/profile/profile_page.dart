@@ -7,6 +7,7 @@ import 'package:flutter/material.dart';
 
 import '../../core/ui/assets/resources.dart';
 
+//TODO: Usar Session
 class ProfilePage extends StatelessWidget {
   final VoidCallback? onBackButtonPress;
   const ProfilePage({super.key, this.onBackButtonPress});
@@ -16,6 +17,7 @@ class ProfilePage extends StatelessWidget {
     final user = FirebaseAuth.instance.currentUser;
     final name = user?.displayName ?? '';
     final email = user?.email ?? '';
+    final imageUrl = user?.photoURL ?? '';
     return UICustomScaffold(
       hideAppBar: false,
       assetBackButton: R.svg.close,
@@ -26,7 +28,11 @@ class ProfilePage extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.start,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            ProfileHeader(name: name, email: email),
+            ProfileHeader(
+              name: name,
+              email: email,
+              imageUrl: imageUrl,
+            ),
             const ProfileContent(),
             const ProfileLogout(),
           ],
