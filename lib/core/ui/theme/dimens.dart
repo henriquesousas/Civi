@@ -16,6 +16,7 @@ abstract final class Dimens {
   static const size90 = 90.0;
   static const size125 = 125.0;
   static const size140 = 140.0;
+  static const size210 = 210.0;
   static const paddingHorizontal = 20.0;
   static const paddingVertical = 24.0;
   static const defaultPadding = 12.0;
@@ -24,6 +25,8 @@ abstract final class Dimens {
   static const cardExtraRadius = 20.0;
   static const defaultListTilePadding = 40.0;
   static const defaultArrowForward = 12.0;
+  static const profileImage = 90.0;
+  static const profileImageRadius = 90.0;
 
   /// Horizontal padding for screen edges
   double get paddingScreenHorizontal;

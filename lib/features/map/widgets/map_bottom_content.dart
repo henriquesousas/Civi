@@ -1,5 +1,4 @@
 import 'package:deehelp/core/ui/extensions/screen_size_extension.dart';
-import 'package:deehelp/core/ui/theme/app_text_styles.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -30,39 +29,35 @@ class MapBottomContent extends StatelessWidget {
         // height: 90,
 
         child: Padding(
-          padding: EdgeInsets.symmetric(horizontal: 20.w, vertical: 10.h),
+          padding: EdgeInsets.all(30.w),
           child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceAround,
+            crossAxisAlignment: CrossAxisAlignment.center,
             spacing: 5,
             children: [
-              Text(
-                "Total: 32",
-                style: context.appTextStyles.sectionSubTitle1.copyWith(
-                  color: AppColors.successColor2,
-                  fontSize: 18,
-                  fontWeight: FontWeight.w500,
+              Expanded(
+                child: UIElevatedButton(
+                  text: "Novo bem",
+                  radius: 6,
+                  icon: const Icon(
+                    Icons.add,
+                    color: AppColors.primaryColor,
+                  ),
+                  bgColor: AppColors.whiteColor,
+                  textColor: AppColors.primaryColor,
+                  borderColor: AppColors.primaryColor,
+                  press: onNewBemPress,
                 ),
               ),
-              const Spacer(),
-              UIElevatedButton(
-                width: context.percentWidth(0.3),
-                text: "Novo bem",
-                radius: 6,
-                icon: const Icon(
-                  Icons.add,
-                  color: AppColors.primaryColor,
+              Expanded(
+                child: UIElevatedButton(
+                  // width: context.percentWidth(0.3),
+                  text: "Sinalizar",
+                  radius: 6,
+                  icon: const Icon(Icons.campaign),
+                  bgColor: AppColors.primaryColor,
+                  press: onSinalizePress,
                 ),
-                bgColor: AppColors.whiteColor,
-                textColor: AppColors.primaryColor,
-                borderColor: AppColors.primaryColor,
-                press: onNewBemPress,
-              ),
-              UIElevatedButton(
-                width: context.percentWidth(0.3),
-                text: "Sinalizar",
-                radius: 6,
-                icon: const Icon(Icons.campaign),
-                bgColor: AppColors.primaryColor,
-                press: onSinalizePress,
               ),
             ],
           ),

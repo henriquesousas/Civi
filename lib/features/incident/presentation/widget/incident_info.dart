@@ -20,16 +20,30 @@ class IncidentInfo extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
+      // decoration: BoxDecoration(
+      //   color: AppColors.whiteColor,
+      //   borderRadius: BorderRadius.circular(4),
+      //   border: const Border(
+      //     bottom: BorderSide(
+      //       color: AppColors.lightGreyColor30,
+      //       width: 1.0,
+      //     ),
+      //   ),
+      // ),
+      padding: const EdgeInsets.all(10),
       decoration: BoxDecoration(
-        color: AppColors.whiteColor,
-        borderRadius: BorderRadius.circular(4),
-        border: const Border(
-          bottom: BorderSide(
+          color: AppColors.whiteColor,
+          borderRadius: BorderRadius.circular(16),
+          border: Border.all(
             color: AppColors.lightGreyColor30,
-            width: 1.0,
+          )
+          // border: const Border(
+          //   bottom: BorderSide(
+          //     color: AppColors.lightGreyColor30,
+          //     width: 1.0,
+          //   ),
+          // ),
           ),
-        ),
-      ),
       child: Padding(
         padding: EdgeInsets.symmetric(
             horizontal: Dimens.size10.w, vertical: Dimens.size20.w),
@@ -38,6 +52,7 @@ class IncidentInfo extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           spacing: 15,
           children: [
+            Text("Como foi", style: context.appTextStyles.sectionTitle),
             Row(
               mainAxisAlignment: MainAxisAlignment.start,
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -56,7 +71,6 @@ class IncidentInfo extends StatelessWidget {
                     howTo,
                     style: context.appTextStyles.bodyTextStyle2.copyWith(
                       color: AppColors.textColorBody,
-                      fontSize: Dimens.size14.sp,
                     ),
                     maxLines: 4,
                     overflow: TextOverflow.ellipsis,

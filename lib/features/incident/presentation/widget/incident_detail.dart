@@ -25,22 +25,31 @@ class IncidentDetail extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
+      padding: const EdgeInsets.all(10),
       decoration: BoxDecoration(
-        color: AppColors.whiteColor,
-        borderRadius: BorderRadius.circular(4),
-        border: const Border(
-          bottom: BorderSide(
+          color: AppColors.whiteColor,
+          borderRadius: BorderRadius.circular(16),
+          border: Border.all(
             color: AppColors.lightGreyColor30,
-            width: 1.0,
+          )
+          // border: const Border(
+          //   bottom: BorderSide(
+          //     color: AppColors.lightGreyColor30,
+          //     width: 1.0,
+          //   ),
+          // ),
           ),
-        ),
-      ),
       child: Padding(
         padding: EdgeInsets.symmetric(
-            horizontal: Dimens.size10.w, vertical: Dimens.size20.h),
+          horizontal: Dimens.size10.w,
+          vertical: Dimens.size20.h,
+        ),
         child: Column(
+          mainAxisAlignment: MainAxisAlignment.start,
+          crossAxisAlignment: CrossAxisAlignment.start,
           spacing: 12,
           children: [
+            Text("Mais detalhes", style: context.appTextStyles.sectionTitle),
             //Placa
             Row(
               mainAxisAlignment: MainAxisAlignment.start,
@@ -59,7 +68,6 @@ class IncidentDetail extends StatelessWidget {
                   "Placa",
                   style: context.appTextStyles.bodyTextStyle2.copyWith(
                     color: AppColors.textColorBody,
-                    fontSize: Dimens.size14.sp,
                   ),
                 ),
                 const Spacer(),
@@ -71,7 +79,7 @@ class IncidentDetail extends StatelessWidget {
                   ),
                   child: Text(
                     plateNumber,
-                    style: context.appTextStyles.caption2Style.copyWith(
+                    style: context.appTextStyles.sectionBodyTextStyle.copyWith(
                       color: AppColors.primaryColorDark,
                       fontWeight: FontWeight.w500,
                     ),
@@ -98,13 +106,12 @@ class IncidentDetail extends StatelessWidget {
                   "Hora aproximada",
                   style: context.appTextStyles.bodyTextStyle2.copyWith(
                     color: AppColors.textColorBody,
-                    fontSize: Dimens.size14.sp,
                   ),
                 ),
                 const Spacer(),
                 Text(
                   "00:00",
-                  style: context.appTextStyles.caption2Style.copyWith(
+                  style: context.appTextStyles.sectionBodyTextStyle.copyWith(
                     color: AppColors.textColorBody,
                   ),
                 ),
@@ -128,13 +135,12 @@ class IncidentDetail extends StatelessWidget {
                   "Data",
                   style: context.appTextStyles.bodyTextStyle2.copyWith(
                     color: AppColors.textColorBody,
-                    fontSize: Dimens.size14.sp,
                   ),
                 ),
                 const Spacer(),
                 Text(
                   occurredOn.toDateWithFullMonth(),
-                  style: context.appTextStyles.caption2Style.copyWith(
+                  style: context.appTextStyles.sectionBodyTextStyle.copyWith(
                     color: AppColors.textColorBody,
                   ),
                 ),
@@ -158,7 +164,6 @@ class IncidentDetail extends StatelessWidget {
                   "Tipo",
                   style: context.appTextStyles.bodyTextStyle2.copyWith(
                     color: AppColors.textColorBody,
-                    fontSize: Dimens.size14.sp,
                   ),
                 ),
                 const Spacer(),
@@ -170,7 +175,7 @@ class IncidentDetail extends StatelessWidget {
                   ),
                   child: Text(
                     "Any",
-                    style: context.appTextStyles.caption2Style.copyWith(
+                    style: context.appTextStyles.sectionBodyTextStyle.copyWith(
                       color: AppColors.primaryColorDark,
                       fontWeight: FontWeight.w500,
                     ),

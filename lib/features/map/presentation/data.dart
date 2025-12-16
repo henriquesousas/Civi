@@ -14,16 +14,17 @@ import '../../my_products/domain/product_status.dart';
 
 final p1 = Product(
   id: ProductId.unique(),
-  name: "Nome do produto",
+  name: "Honda Civic",
   code: "DDD0000",
   type: "Carro",
   color: "Verde",
-  brand: "Ma",
+  brand: "Honda",
   obs: "Obsercao",
   year: 2010,
   image: ImageMedia(
       file: File(
-          "https://pemavel.com.br/wp-content/uploads/2024/08/imagick_convert.webp"),
+        "https://pemavel.com.br/wp-content/uploads/2024/08/imagick_convert.webp",
+      ),
       source: MediaSource.api,
       metadata: const {}),
   userId: "456",
@@ -43,7 +44,8 @@ final List<Incident> fakeIncidents = [
         address: "Rua joao ventura dos Santos",
         neighborhood: "Baronesa",
         city: "São Paulo"),
-    howTo: "lorem ipsum",
+    howTo:
+        "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley",
     product: p1,
     occurredAt: DateTime.now(),
     createdAt: DateTime.now(),

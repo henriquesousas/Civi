@@ -1,6 +1,8 @@
 import 'package:deehelp/core/ui/theme/app_text_styles.dart';
+import 'package:deehelp/core/ui/theme/dimens.dart';
 import 'package:deehelp/features/map/presentation/widget/incident_modal_own_section.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../../../core/ui/widgets/app_bar/ui_app_bar.dart';
 import '../../../incident/domain/incident_type.dart';
@@ -15,46 +17,39 @@ class IncidentModal extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: const EdgeInsets.all(10),
-      child: Scaffold(
-        backgroundColor: const Color(0xFFF8FAFC),
-        appBar: UIAppBar(
-          title: "Roubo a veículo",
-          centerTitle: true,
-          textStyle: context.appTextStyles.bodyTextStyle1.copyWith(
-            fontWeight: FontWeight.w600,
-          ),
-          leading: IconButton(
-            onPressed: () {},
-            icon: const Icon(Icons.close),
-          ),
-          // actions: [
-          //   IconButton(
-          //     onPressed: () {},
-          //     icon: const Icon(Icons.help_outline),
-          //   )
-          // ],
-        ),
-        body: SingleChildScrollView(
-          child: Column(
-            spacing: 3,
-            mainAxisSize: MainAxisSize.min,
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-            children: [
-              IncidentHeader(incident: fakeIncidents[0]),
-              IncidentInfo(
-                howTo: fakeIncidents[0].howTo ?? 'Nao informado',
-                imageUrl: fakeIncidents[0].product.image?.value ?? '',
+      color: const Color(0xFFF8FAFC),
+      margin: const EdgeInsets.all(15),
+      child: SingleChildScrollView(
+        child: Column(
+          spacing: 3,
+          mainAxisSize: MainAxisSize.min,
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: [
+            UIAppBar(
+              title: "Roubo a veículo",
+              centerTitle: true,
+              textStyle: context.appTextStyles.appBarTitle.copyWith(
+                fontWeight: FontWeight.w600,
               ),
-              IncidentDetail(
-                plateNumber: "DND0172",
-                occurredOn: DateTime.now(),
-                createdAt: DateTime.now(),
-                incidentType: IncidentType.theft,
+              leading: IconButton(
+                onPressed: () {},
+                icon: const Icon(Icons.close),
               ),
-              const IncidentModalOwnSection(),
-            ],
-          ),
+            ),
+            IncidentHeader(incident: fakeIncidents[0]),
+            IncidentInfo(
+              howTo: fakeIncidents[0].howTo ?? 'Nao informado',
+              imageUrl: fakeIncidents[0].product.image?.value ?? '',
+            ),
+            IncidentDetail(
+              plateNumber: "DND0172",
+              occurredOn: DateTime.now(),
+              createdAt: DateTime.now(),
+              incidentType: IncidentType.theft,
+            ),
+            const IncidentModalOwnSection(),
+            SizedBox(height: Dimens.size40.h),
+          ],
         ),
       ),
     );

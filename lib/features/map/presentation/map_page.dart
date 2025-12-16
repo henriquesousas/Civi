@@ -10,7 +10,6 @@ import 'package:deehelp/features/map/widgets/map_floating_button.dart';
 import 'package:deehelp/features/map/widgets/map_top_menu_button.dart';
 import 'package:deehelp/features/map/widgets/osm.dart';
 import 'package:deehelp/features/map/widgets/sliding_occurrences_panel.dart';
-import 'package:deehelp/features/profile/profile_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_map/flutter_map.dart';
@@ -58,7 +57,7 @@ class _MapPageState extends State<MapPage> with TickerProviderStateMixin {
           children: [
             _buildMap(),
             _buildOccurrencesPanel(),
-            _buildProfilePanel(),
+            // _buildProfilePanel(),
             _buildTopMenuButton(),
             _buildLocationButton(),
             _buildBottomContent(),
@@ -100,7 +99,7 @@ class _MapPageState extends State<MapPage> with TickerProviderStateMixin {
   Widget _buildOccurrencesPanel() {
     return MapCustomSlidingUp(
       controller: _panelController,
-      minHeight: Dimens.size125.w,
+      minHeight: Dimens.size210.h, //context.percentHeight(0.25.h),
       maxHeight: context.percentHeight(0.9),
       borderRadius: const BorderRadius.vertical(top: Radius.circular(8)),
       panel: SlidingOccurrencesPanel(
@@ -123,40 +122,40 @@ class _MapPageState extends State<MapPage> with TickerProviderStateMixin {
     _menuAnimationController.value = animationValue;
   }
 
-  Widget _buildProfilePanel() {
-    return MapCustomSlidingUp(
-      controller: _panelController,
-      minHeight: 0,
-      maxHeight: context.screenHeight,
-      borderRadius: const BorderRadius.vertical(top: Radius.circular(16)),
-      panel: ProfilePage(
-        onBackButtonPress: _panelController.close,
-      ),
-      onPanelSlide: _handleProfilePanelSlide,
-    );
-  }
+  // Widget _buildProfilePanel() {
+  //   return MapCustomSlidingUp(
+  //     controller: _panelController,
+  //     minHeight: 0,
+  //     maxHeight: context.screenHeight,
+  //     borderRadius: const BorderRadius.vertical(top: Radius.circular(16)),
+  //     panel: ProfilePage(
+  //       onBackButtonPress: _panelController.close,
+  //     ),
+  //     onPanelSlide: _handleProfilePanelSlide,
+  //   );
+  // }
 
-  void _handleProfilePanelSlide(double position) {
-    setState(() {
-      _panelPosition = position;
-      if (_panelPosition >= 0.15) {
-        _menuAnimationController.reverse();
-      } else {
-        _menuAnimationController.forward();
-      }
-    });
-  }
+  // void _handleProfilePanelSlide(double position) {
+  //   setState(() {
+  //     _panelPosition = position;
+  //     if (_panelPosition >= 0.15) {
+  //       _menuAnimationController.reverse();
+  //     } else {
+  //       _menuAnimationController.forward();
+  //     }
+  //   });
+  // }
 
   Widget _buildTopMenuButton() {
     return MapTopMenuButton(
       animationMenuController: _menuAnimationController,
-      press: _panelController.open,
+      press: () => context.push(RouterConstant.profile),
     );
   }
 
   Widget _buildLocationButton() {
     return MapFloatButton(
-      bottom: Dimens.size140.h,
+      bottom: context.percentHeight(0.3.w),
       right: Dimens.size16.w,
       offset: _getLocationButtonOffset(),
       backgroundColor: AppColors.primaryColor,

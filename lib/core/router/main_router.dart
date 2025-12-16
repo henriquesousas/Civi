@@ -2,6 +2,7 @@ import 'package:deehelp/core/router/router_constants.dart';
 import 'package:deehelp/core/router/slide_transition_page.dart';
 import 'package:deehelp/features/faq/faq_provider.dart';
 import 'package:deehelp/features/map/presentation/map_page.dart';
+import 'package:deehelp/features/profile/profile_page.dart';
 import 'package:deehelp/features/splash/splash_page.dart';
 import 'package:go_router/go_router.dart';
 
@@ -26,6 +27,13 @@ class MainRouter {
       GoRoute(
         path: RouterConstant.map,
         builder: (context, state) => const MapPage(),
+      ),
+      GoRoute(
+        path: RouterConstant.profile,
+        pageBuilder: (context, state) => slideTransitionPage(
+          key: state.pageKey,
+          child: const ProfilePage(),
+        ),
       ),
       GoRoute(
         path: RouterConstant.faq,

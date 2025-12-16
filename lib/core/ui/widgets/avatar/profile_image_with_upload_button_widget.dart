@@ -66,10 +66,10 @@ class _ProfileImageWithUploadButtonWidgetState
               ),
               child: Container(
                 decoration: BoxDecoration(
-                  border: Border.all(
-                    color: AppColors.primaryColor.withValues(alpha: 0.15),
-                    width: 3.w,
-                  ),
+                  // border: Border.all(
+                  //   color: AppColors.primaryColor.withValues(alpha: 0.15),
+                  //   width: 3.w,
+                  // ),
                   borderRadius: BorderRadius.circular(
                     Dimens.defaultRadius,
                   ),

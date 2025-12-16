@@ -1,9 +1,6 @@
-import 'package:deehelp/core/ui/assets/resources.dart';
 import 'package:deehelp/core/ui/theme/app_text_styles.dart';
 import 'package:deehelp/features/map/presentation/widget/toogle_buttons.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:flutter_svg/svg.dart';
 
 import '../../../../core/ui/theme/app_colors.dart';
 import '../../../../core/ui/theme/dimens.dart';
@@ -14,18 +11,45 @@ class IncidentModalOwnSection extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
+      // decoration: BoxDecoration(
+      //   color: AppColors.lightGreyColor,
+      //   borderRadius: BorderRadius.circular(4),
+      // ),
+      padding: const EdgeInsets.all(10),
       decoration: BoxDecoration(
-        color: AppColors.lightGreyColor,
-        borderRadius: BorderRadius.circular(4),
-      ),
+          color: AppColors.lightGreyColor,
+          borderRadius: BorderRadius.circular(16),
+          border: Border.all(
+            color: AppColors.lightGreyColor20,
+          )
+          // border: const Border(
+          //   bottom: BorderSide(
+          //     color: AppColors.lightGreyColor30,
+          //     width: 1.0,
+          //   ),
+          // ),
+          ),
       child: Padding(
         padding: const EdgeInsets.symmetric(
             horizontal: Dimens.size10, vertical: Dimens.size20),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.start,
           crossAxisAlignment: CrossAxisAlignment.start,
-          spacing: 20,
+          spacing: 5,
           children: [
+            Container(
+              padding: EdgeInsets.symmetric(horizontal: 10, vertical: 5),
+              decoration: BoxDecoration(
+                color: AppColors.lightGreyColor30,
+                borderRadius: BorderRadius.circular(20),
+              ),
+              child: Text(
+                "Àrea logada",
+                style: context.appTextStyles.sectionTitle.copyWith(
+                  color: AppColors.dark,
+                ),
+              ),
+            ),
             Row(
               mainAxisAlignment: MainAxisAlignment.start,
               crossAxisAlignment: CrossAxisAlignment.center,
@@ -36,10 +60,9 @@ class IncidentModalOwnSection extends StatelessWidget {
                   color: AppColors.textColorBody,
                 ),
                 Text(
-                  "Visivel",
+                  "Deixar visivel",
                   style: context.appTextStyles.bodyTextStyle2.copyWith(
                     color: AppColors.textColorBody,
-                    fontSize: Dimens.size14.sp,
                   ),
                 ),
                 const Spacer(),
@@ -48,29 +71,24 @@ class IncidentModalOwnSection extends StatelessWidget {
             ),
 
             //LInha 2
+
             Row(
               mainAxisAlignment: MainAxisAlignment.start,
               crossAxisAlignment: CrossAxisAlignment.center,
-              spacing: 5,
               children: [
                 const Icon(
                   Icons.delete_outlined,
                   color: AppColors.errorColor,
                 ),
-                Text(
-                  "Remover",
-                  style: context.appTextStyles.bodyTextStyle2.copyWith(
-                    color: AppColors.errorColorDark,
-                    fontSize: Dimens.size14.sp,
-                  ),
-                ),
-                const Spacer(),
-                SvgPicture.asset(
-                  R.images.svgArrowFront,
-                  height: Dimens.size16.h,
-                  colorFilter: const ColorFilter.mode(
-                    AppColors.textColorBody,
-                    BlendMode.srcIn,
+                TextButton(
+                  onPressed: () {},
+                  child: Text(
+                    "Remover",
+                    style: context.appTextStyles.bodyTextStyle1.copyWith(
+                      color: AppColors.errorColorDark,
+                      fontWeight: FontWeight.w500,
+                    ),
+                    textAlign: TextAlign.right,
                   ),
                 ),
               ],

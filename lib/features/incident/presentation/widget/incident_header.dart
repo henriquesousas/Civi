@@ -13,16 +13,30 @@ class IncidentHeader extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
+      // decoration: BoxDecoration(
+      //   color: AppColors.whiteColor,
+      //   borderRadius: BorderRadius.circular(4),
+      //   border: const Border(
+      //     bottom: BorderSide(
+      //       color: AppColors.lightGreyColor30,
+      //       width: 1.0,
+      //     ),
+      //   ),
+      // ),
+      padding: const EdgeInsets.all(10),
       decoration: BoxDecoration(
-        color: AppColors.whiteColor,
-        borderRadius: BorderRadius.circular(4),
-        border: const Border(
-          bottom: BorderSide(
+          color: AppColors.whiteColor,
+          borderRadius: BorderRadius.circular(16),
+          border: Border.all(
             color: AppColors.lightGreyColor30,
-            width: 1.0,
+          )
+          // border: const Border(
+          //   bottom: BorderSide(
+          //     color: AppColors.lightGreyColor30,
+          //     width: 1.0,
+          //   ),
+          // ),
           ),
-        ),
-      ),
       child: Padding(
         padding: const EdgeInsets.all(16),
         child: Column(
@@ -30,7 +44,6 @@ class IncidentHeader extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Row(
-              spacing: 10,
               children: [
                 // const StatusBadgeWidget(status: ProductSatus.active),
                 Container(
@@ -60,7 +73,7 @@ class IncidentHeader extends StatelessWidget {
                   : "Não informado",
               style: context.appTextStyles.bodyTextStyle2.copyWith(
                 color: AppColors.textColorBody,
-                fontSize: Dimens.size14.sp,
+                // fontSize: Dimens.size14.sp,
               ),
             ),
           ],

@@ -4,8 +4,7 @@ import 'package:deehelp/features/profile/components/profile_header.dart';
 import 'package:deehelp/features/profile/components/profile_logout.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-
-import '../../core/ui/assets/resources.dart';
+import 'package:go_router/go_router.dart';
 
 //TODO: Usar Session
 class ProfilePage extends StatelessWidget {
@@ -20,8 +19,9 @@ class ProfilePage extends StatelessWidget {
     final imageUrl = user?.photoURL ?? '';
     return UICustomScaffold(
       hideAppBar: false,
-      assetBackButton: R.svg.close,
-      onBackButtonTap: onBackButtonPress,
+      pageTitle: "Meus dados",
+      // assetBackButton: R.svg.close,
+      onBackButtonTap: () => context.pop(),
       body: SingleChildScrollView(
         clipBehavior: Clip.none,
         child: Column(

@@ -6,5 +6,6 @@ class SvgAssets {
   String time = 'assets/svg/time.svg';
   String date = 'assets/svg/date.svg';
   String type = 'assets/svg/type.svg';
+  String search = 'assets/svg/search.svg';
   String circleBackButton = 'assets/svg/arrow_back_circle.svg';
 }

@@ -1,3 +1,4 @@
+import 'package:deehelp/core/ui/theme/dimens.dart';
 import 'package:deehelp/core/ui/widgets/icon/ui_icon.dart';
 import 'package:deehelp/core/ui/theme/app_text_styles.dart';
 import 'package:deehelp/core/ui/widgets/divider/ui_divider.dart';
@@ -5,7 +6,9 @@ import 'package:deehelp/core/ui/widgets/textfield/ui_text_field_rounded.dart';
 import 'package:deehelp/features/incident/domain/incident.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 
+import '../../../core/ui/assets/resources.dart';
 import '../../../core/ui/theme/app_colors.dart';
 
 class SlidingOccurrencesPanel extends StatelessWidget {
@@ -36,22 +39,27 @@ class SlidingOccurrencesPanel extends StatelessWidget {
               child: Column(
                 children: [
                   Padding(
-                    padding:
-                        const EdgeInsets.symmetric(horizontal: 14, vertical: 4),
+                    padding: EdgeInsets.all(Dimens.size20.w),
                     child: Row(
                       children: [
-                        Text(
-                          "Ocorrências nesta região 35",
-                          style:
-                              context.appTextStyles.sectionSubTitle1.copyWith(
-                            color: AppColors.bodyText,
+                        Expanded(
+                          child: Text(
+                            "Avenida João ventura dos santos , Osasco - São Paulo",
+                            maxLines: 2,
+                            style:
+                                context.appTextStyles.sectionSubTitle1.copyWith(
+                              color: AppColors.bodyText,
+                            ),
                           ),
                         ),
-                        const Spacer(),
-                        Icon(
-                          Icons.search,
-                          color: AppColors.bodyText.withValues(alpha: 0.6),
-                        ),
+                        // const Spacer(),
+                        const SizedBox(width: 10),
+                        SvgPicture.asset(
+                          R.svg.search,
+                          width: Dimens.size20.w,
+                          colorFilter: const ColorFilter.mode(
+                              AppColors.textColorBody, BlendMode.srcIn),
+                        )
                       ],
                     ),
                   ),
@@ -114,16 +122,18 @@ class SlidingOccurrencesPanel extends StatelessWidget {
             itemCount: occurrences.length,
             padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 20),
             itemBuilder: (context, index) {
-              final occurrence = occurrences[index];
+              final incident = occurrences[index];
               return ListTile(
                 title: Text(
-                  "Titulo",
+                  "${incident.product.name}, placa ${incident.product.code} roubado.",
                   style: context.appTextStyles.bodyTextStyle1.copyWith(
                     fontWeight: FontWeight.w500,
                   ),
                 ),
                 subtitle: Text(
-                  "Osasco - Barueri Rua Chico Mendes",
+                  incident.local != null
+                      ? "${incident.local?.neighborhood},${incident.local?.city}, ${incident.local?.address}"
+                      : '',
                   style: context.appTextStyles.bodyTextStyle2.copyWith(),
                 ),
                 leading: Container(
@@ -133,6 +143,10 @@ class SlidingOccurrencesPanel extends StatelessWidget {
                     // size: 18,
                     color: AppColors.blackColor60,
                   ),
+                ),
+                trailing: Text(
+                  "12KM",
+                  style: context.appTextStyles.caption1Style,
                 ),
               );
             },

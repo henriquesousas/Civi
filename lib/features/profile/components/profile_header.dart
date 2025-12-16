@@ -1,15 +1,13 @@
 import 'package:deehelp/core/ui/extensions/screen_size_extension.dart';
 import 'package:deehelp/core/ui/theme/app_text_styles.dart';
+import 'package:deehelp/core/ui/widgets/avatar/profile_image_with_upload_button_widget.dart';
 import 'package:deehelp/features/profile/components/profile_pro_indicator_badge.dart';
-// import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:skeletonizer/skeletonizer.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-import '../../../core/ui/widgets/image/ui_my_network_image_widget.dart';
 import '../../../core/ui/theme/app_colors.dart';
 import '../../../core/ui/theme/dimens.dart';
 import '../../../core/ui/widgets/card/ui_custom_app_card.dart';
-import '../../../core/ui/widgets/card/ui_custon_list_tile_card.dart';
 
 class ProfileHeader extends StatelessWidget {
   final String name;
@@ -21,30 +19,33 @@ class ProfileHeader extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return UICustomAppCard(
-      child: UICustomListTileCard(
-        leading: Skeleton.replace(
-          replace: true,
-          replacement: const Bone.square(size: 80),
-          child: UIMyNetworkImageWidget(
-            radius: Dimens.defaultRadius,
-            imageUrl: imageUrl ?? "",
-            isProfile: true,
-            width: context.responsiveRadius(0.13),
-            height: context.responsiveRadius(0.13),
-            imageAlt: name,
+      width: context.percentWidth(1),
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: [
+          ProfileImageWithUploadButtonWidget(
+            imageUrl: imageUrl ?? '',
+            imageAlt: "Profile",
+            showUploadIcon: false,
+            height: Dimens.profileImage.h,
+            width: Dimens.profileImage.w,
+            radius: Dimens.profileImageRadius.w,
           ),
-        ),
-        title: name,
-        subtitle: email,
-        titleStyle: context.appTextStyles.sectionTitle.copyWith(
-          color: AppColors.dark,
-        ),
-        subtitleStyle: context.appTextStyles.sectionBodyTextStyle.copyWith(
-          color: AppColors.textColorBody,
-        ),
-        showBorder: false,
-        trailing: const ProfileProIndicatorBadge(),
-        press: () {},
+          SizedBox(height: 5.h),
+          Text(
+            name,
+            style: context.appTextStyles.sectionTitle,
+          ),
+          Text(
+            email,
+            style: context.appTextStyles.sectionBodyTextStyle.copyWith(
+              color: AppColors.textColorBody,
+            ),
+          ),
+          SizedBox(height: Dimens.size10.h),
+          const ProfileProIndicatorBadge(),
+        ],
       ),
     );
   }
