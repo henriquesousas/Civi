@@ -1,6 +1,5 @@
 import 'package:deehelp/core/ui/theme/app_text_styles.dart';
 import 'package:deehelp/core/ui/theme/dimens.dart';
-import 'package:deehelp/core/ui/widgets/button/ui_hold_confirm_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -69,19 +68,6 @@ class CardTypeIncident extends StatelessWidget {
           ),
           const SizedBox(height: 10),
           child,
-          // Visibility(
-          //   visible: selected,
-          //   child: UIHoldConfirmButton(
-          //     hapticFeedback: true,
-          //     title: "Segure pra confirmar",
-          //     textColor: AppColors.whiteColor,
-          //     backgroundColor: AppColors.primaryColorDark,
-          //     contentPadding: const EdgeInsets.all(22),
-          //     onProgressCompleted: () async {},
-          //     onApiCall: () async {},
-          //     onProgressChange: (v) {},
-          //   ),
-          // )
         ],
       ),
     );

@@ -17,7 +17,7 @@ class IncidentModalOwnSection extends StatelessWidget {
       // ),
       padding: const EdgeInsets.all(10),
       decoration: BoxDecoration(
-          color: AppColors.lightGreyColor,
+          color: AppColors.lightGreyColor30,
           borderRadius: BorderRadius.circular(16),
           border: Border.all(
             color: AppColors.lightGreyColor20,
@@ -38,7 +38,7 @@ class IncidentModalOwnSection extends StatelessWidget {
           spacing: 5,
           children: [
             Container(
-              padding: EdgeInsets.symmetric(horizontal: 10, vertical: 5),
+              padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
               decoration: BoxDecoration(
                 color: AppColors.lightGreyColor30,
                 borderRadius: BorderRadius.circular(20),
@@ -71,7 +71,6 @@ class IncidentModalOwnSection extends StatelessWidget {
             ),
 
             //LInha 2
-
             Row(
               mainAxisAlignment: MainAxisAlignment.start,
               crossAxisAlignment: CrossAxisAlignment.center,

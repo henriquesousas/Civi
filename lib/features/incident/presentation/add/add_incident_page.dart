@@ -3,17 +3,11 @@ import 'package:deehelp/core/ui/theme/app_colors.dart';
 import 'package:deehelp/core/ui/theme/app_text_styles.dart';
 import 'package:deehelp/core/ui/widgets/button/ui_elevated_button.dart';
 import 'package:deehelp/core/ui/widgets/button/ui_hold_confirm_button.dart';
-import 'package:deehelp/core/ui/widgets/card/ui_custom_app_card.dart';
 import 'package:deehelp/core/ui/widgets/card/ui_custom_scaffold.dart';
-import 'package:deehelp/core/ui/widgets/image/ui_my_network_image_widget.dart';
 import 'package:deehelp/features/incident/presentation/add/widget/card_select_image.dart';
 import 'package:deehelp/features/incident/presentation/add/widget/card_type_incident.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:flutter_svg/svg.dart';
 import 'package:go_router/go_router.dart';
-
-import '../../../../core/ui/assets/resources.dart';
 
 enum TypeAlert {
   immediately,

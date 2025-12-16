@@ -92,7 +92,8 @@ class _MapPageState extends State<MapPage> with TickerProviderStateMixin {
       shape: const RoundedRectangleBorder(
         borderRadius: BorderRadius.vertical(top: Radius.circular(12)),
       ),
-      builder: (context) => const IncidentModal(),
+      builder: (context) => Container(
+          color: const Color(0xFFF8FAFC), child: const IncidentModal()),
     );
   }
 
