@@ -134,7 +134,7 @@ class UIMyNetworkImageWidget extends StatelessWidget {
                       replace: true,
                       replacement: Bone.circle(size: (height ?? 20) / 2),
                       child: Icon(
-                        Icons.image,
+                        Icons.photo,
                         color: AppColors.bodyText,
                         size: (height ?? 20) / 2,
                       ),
