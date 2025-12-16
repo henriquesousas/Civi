@@ -25,6 +25,9 @@ class UIHoldConfirmButton extends StatefulWidget {
     ),
     this.border,
     this.zoomScale = true,
+    required this.title,
+    this.textStyle,
+    this.textColor,
   })  : assert(
           duration >= _minDuration,
           'HoldToConfirmButton duration must be at least $_minHoldDuration milliseconds.',
@@ -46,6 +49,9 @@ class UIHoldConfirmButton extends StatefulWidget {
   final BorderRadius borderRadius;
   final EdgeInsets contentPadding;
   final bool zoomScale;
+  final String title;
+  final TextStyle? textStyle;
+  final Color? textColor;
 
   @override
   State<UIHoldConfirmButton> createState() => _UIHoldConfirmButtonState();
@@ -202,16 +208,17 @@ class _UIHoldConfirmButtonState extends State<UIHoldConfirmButton>
                         strokeWidth: 3,
                       )
                     : Text(
-                        "Holde me", // Display percentage
+                        widget.title, // Display percentage
                         key: ValueKey<bool>(
                           !isCompleted,
                         ), // Key to switch back to progress text
                         textAlign: TextAlign.center,
-                        style: context.appTextStyles.bodyTextStyle1.copyWith(
-                          color: (progressController.value * 100) > 40
-                              ? AppColors.whiteColor
-                              : const Color(0xFF475569),
-                        ),
+                        style: widget.textStyle ??
+                            context.appTextStyles.bodyTextStyle1.copyWith(
+                              color: (progressController.value * 100) > 40
+                                  ? AppColors.whiteColor
+                                  : widget.textColor ?? const Color(0xFF475569),
+                            ),
                       ),
               ),
             ],

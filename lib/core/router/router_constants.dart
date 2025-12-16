@@ -19,11 +19,13 @@ class RouterConstant {
   static const itemEdit = "/item-edit";
   static const itemRegisterSuccess = "/item-register-success";
   static const occurrences = "/occurrences";
+  static const profile = "/profile";
+  static const addIncident = "/add-incident";
 
   // OLD
 
   static const onboarding2 = "/onboarding";
-  static const profile = "/profile";
+
   static const myProfile = "/my_profile";
   static const favorites = "/favorites";
   static const aboutUs = "/about_us";

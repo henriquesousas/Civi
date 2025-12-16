@@ -27,18 +27,12 @@ class IncidentDetail extends StatelessWidget {
     return Container(
       padding: const EdgeInsets.all(10),
       decoration: BoxDecoration(
-          color: AppColors.whiteColor,
-          borderRadius: BorderRadius.circular(16),
-          border: Border.all(
-            color: AppColors.lightGreyColor30,
-          )
-          // border: const Border(
-          //   bottom: BorderSide(
-          //     color: AppColors.lightGreyColor30,
-          //     width: 1.0,
-          //   ),
-          // ),
-          ),
+        color: AppColors.whiteColor,
+        borderRadius: BorderRadius.circular(16),
+        border: Border.all(
+          color: AppColors.lightGreyColor30,
+        ),
+      ),
       child: Padding(
         padding: EdgeInsets.symmetric(
           horizontal: Dimens.size10.w,

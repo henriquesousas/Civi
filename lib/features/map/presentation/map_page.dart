@@ -185,6 +185,6 @@ class _MapPageState extends State<MapPage> with TickerProviderStateMixin {
   }
 
   void _handleSinalizePress() {
-    // TODO: Implementar funcionalidade de sinalização
+    context.push(RouterConstant.addIncident);
   }
 }

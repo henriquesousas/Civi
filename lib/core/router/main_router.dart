@@ -1,6 +1,7 @@
 import 'package:deehelp/core/router/router_constants.dart';
 import 'package:deehelp/core/router/slide_transition_page.dart';
 import 'package:deehelp/features/faq/faq_provider.dart';
+import 'package:deehelp/features/incident/presentation/add/add_incident_page.dart';
 import 'package:deehelp/features/map/presentation/map_page.dart';
 import 'package:deehelp/features/profile/profile_page.dart';
 import 'package:deehelp/features/splash/splash_page.dart';
@@ -40,6 +41,13 @@ class MainRouter {
         pageBuilder: (context, state) => slideTransitionPage(
           key: state.pageKey,
           child: FaqProvider.page,
+        ),
+      ),
+      GoRoute(
+        path: RouterConstant.addIncident,
+        pageBuilder: (context, state) => slideTransitionPage(
+          key: state.pageKey,
+          child: const AddIncidentPage(),
         ),
       ),
     ],
