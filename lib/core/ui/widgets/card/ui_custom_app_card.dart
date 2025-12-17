@@ -15,6 +15,7 @@ class UICustomAppCard extends StatelessWidget {
   final Widget child;
   final BoxBorder? boxBorder;
   final bool showBorder;
+  final bool showShadow;
 
   const UICustomAppCard({
     super.key,
@@ -30,6 +31,7 @@ class UICustomAppCard extends StatelessWidget {
     this.margin,
     this.boxBorder,
     this.showBorder = true,
+    this.showShadow = false,
   });
 
   @override
@@ -46,6 +48,21 @@ class UICustomAppCard extends StatelessWidget {
           borderRadius: BorderRadius.circular(radius),
           border: showBorder
               ? boxBorder ?? Border.all(color: borderColor, width: borderWidth)
+              : null,
+          boxShadow: showShadow
+              ? [
+                  BoxShadow(
+                    color: Colors.black.withOpacity(0.15),
+                    blurRadius: 20,
+                    spreadRadius: 0,
+                    offset: Offset(0, 8),
+                  ),
+                  BoxShadow(
+                    color: Colors.black.withOpacity(0.06),
+                    blurRadius: 6,
+                    offset: Offset(0, 2),
+                  ),
+                ]
               : null,
         ),
         child: child,

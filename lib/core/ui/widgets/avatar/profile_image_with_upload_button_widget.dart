@@ -45,7 +45,7 @@ class _ProfileImageWithUploadButtonWidgetState
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      onTap: () {},
+      onTap: widget.onTap ?? () {},
       child: Stack(
         children: [
           Container(

@@ -38,7 +38,6 @@ class MapBottomContent extends StatelessWidget {
               Expanded(
                 child: UIElevatedButton(
                   text: "Novo bem",
-                  radius: 6,
                   icon: const Icon(
                     Icons.add,
                     color: AppColors.primaryColor,
@@ -53,7 +52,6 @@ class MapBottomContent extends StatelessWidget {
                 child: UIElevatedButton(
                   // width: context.percentWidth(0.3),
                   text: "Sinalizar",
-                  radius: 6,
                   icon: const Icon(Icons.campaign),
                   bgColor: AppColors.primaryColor,
                   press: onSinalizePress,

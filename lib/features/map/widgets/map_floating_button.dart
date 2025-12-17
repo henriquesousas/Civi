@@ -27,23 +27,14 @@ class MapFloatButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Positioned(
-      bottom: bottom,
-      right: right,
-      child: AnimatedSlide(
-        offset: offset,
-        duration: const Duration(milliseconds: 350),
-        curve: Curves.easeInOut,
-        child: FloatingActionButton(
-          heroTag: 'center_fab',
-          elevation: 2,
-          mini: true,
-          backgroundColor: backgroundColor,
-          foregroundColor: foregroundColor,
-          onPressed: press,
-          child: child,
-        ),
-      ),
+    return FloatingActionButton(
+      heroTag: 'center_fab',
+      elevation: 2,
+      mini: true,
+      backgroundColor: backgroundColor,
+      foregroundColor: foregroundColor,
+      onPressed: press,
+      child: child,
     );
   }
 }

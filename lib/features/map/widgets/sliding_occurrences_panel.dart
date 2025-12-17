@@ -31,91 +31,91 @@ class SlidingOccurrencesPanel extends StatelessWidget {
     return Column(
       children: [
         const UIDivider(),
-        if (!showTextField) ...[
-          Opacity(
-            opacity: textOpacity,
-            child: IgnorePointer(
-              ignoring: panelPosition > 0.7,
-              child: Column(
-                children: [
-                  Padding(
-                    padding: EdgeInsets.all(Dimens.size20.w),
-                    child: Row(
-                      children: [
-                        Expanded(
-                          child: Text(
-                            "Avenida João ventura dos santos , Osasco - São Paulo",
-                            maxLines: 2,
-                            style:
-                                context.appTextStyles.sectionSubTitle1.copyWith(
-                              color: AppColors.bodyText,
-                            ),
-                          ),
-                        ),
-                        // const Spacer(),
-                        const SizedBox(width: 10),
-                        SvgPicture.asset(
-                          R.svg.search,
-                          width: Dimens.size20.w,
-                          colorFilter: const ColorFilter.mode(
-                              AppColors.textColorBody, BlendMode.srcIn),
-                        )
-                      ],
-                    ),
-                  ),
-                ],
-              ),
-            ),
-          ),
-        ],
-        if (showTextField) ...[
-          Opacity(
-            opacity: textFieldOpacity,
-            child: IgnorePointer(
-              ignoring: panelPosition < 0.7,
-              child: Padding(
-                padding: EdgeInsets.symmetric(horizontal: 10.w, vertical: 16.w),
-                child: Row(
-                  spacing: 2,
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    const UIICon(
-                      isAlpha: true,
-                      icon: Icon(Icons.close),
-                      bgColor: AppColors.blackColor,
-                    ),
-                    Expanded(
-                      child: UITextFieldRounded(
-                        labelText: "",
-                        hintText: "Toque para pesquisar...",
-                        showLabelText: false,
-                        contentPadding: EdgeInsets.zero,
-                        prefixIcon: Icon(
-                          Icons.search,
-                          color: iconColor,
-                        ),
-                        suffixIcon: Icon(
-                          Icons.mic_none,
-                          color: iconColor,
-                        ),
-                        fillColor: AppColors.bodyText.withValues(alpha: 0.1),
-                        focusBorderColor: AppColors.primaryColor,
-                        borderColor:
-                            AppColors.textTertiary.withValues(alpha: 0.4),
-                        borderRadius: 8,
-                        hintStyle:
-                            context.appTextStyles.bodyTextStyle1.copyWith(
-                          fontWeight: FontWeight.w500,
-                          color: AppColors.textColorBody.withValues(alpha: 0.8),
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-            ),
-          ),
-        ],
+        // if (!showTextField) ...[
+        //   Opacity(
+        //     opacity: textOpacity,
+        //     child: IgnorePointer(
+        //       ignoring: panelPosition > 0.7,
+        //       child: Column(
+        //         children: [
+        //           Padding(
+        //             padding: EdgeInsets.all(Dimens.size20.w),
+        //             child: Row(
+        //               children: [
+        //                 Expanded(
+        //                   child: Text(
+        //                     "Avenida João ventura dos santos , Osasco - São Paulo",
+        //                     maxLines: 2,
+        //                     style:
+        //                         context.appTextStyles.sectionSubTitle1.copyWith(
+        //                       color: AppColors.bodyText,
+        //                     ),
+        //                   ),
+        //                 ),
+        //                 // const Spacer(),
+        //                 const SizedBox(width: 10),
+        //                 SvgPicture.asset(
+        //                   R.svg.search,
+        //                   width: Dimens.size20.w,
+        //                   colorFilter: const ColorFilter.mode(
+        //                       AppColors.textColorBody, BlendMode.srcIn),
+        //                 )
+        //               ],
+        //             ),
+        //           ),
+        //         ],
+        //       ),
+        //     ),
+        //   ),
+        // ],
+        // if (showTextField) ...[
+        //   Opacity(
+        //     opacity: textFieldOpacity,
+        //     child: IgnorePointer(
+        //       ignoring: panelPosition < 0.7,
+        //       child: Padding(
+        //         padding: EdgeInsets.symmetric(horizontal: 10.w, vertical: 16.w),
+        //         child: Row(
+        //           spacing: 2,
+        //           crossAxisAlignment: CrossAxisAlignment.center,
+        //           children: [
+        //             const UIICon(
+        //               isAlpha: true,
+        //               icon: Icon(Icons.close),
+        //               bgColor: AppColors.blackColor,
+        //             ),
+        //             Expanded(
+        //               child: UITextFieldRounded(
+        //                 labelText: "",
+        //                 hintText: "Toque para pesquisar...",
+        //                 showLabelText: false,
+        //                 contentPadding: EdgeInsets.zero,
+        //                 prefixIcon: Icon(
+        //                   Icons.search,
+        //                   color: iconColor,
+        //                 ),
+        //                 suffixIcon: Icon(
+        //                   Icons.mic_none,
+        //                   color: iconColor,
+        //                 ),
+        //                 fillColor: AppColors.bodyText.withValues(alpha: 0.1),
+        //                 focusBorderColor: AppColors.primaryColor,
+        //                 borderColor:
+        //                     AppColors.textTertiary.withValues(alpha: 0.4),
+        //                 borderRadius: 8,
+        //                 hintStyle:
+        //                     context.appTextStyles.bodyTextStyle1.copyWith(
+        //                   fontWeight: FontWeight.w500,
+        //                   color: AppColors.textColorBody.withValues(alpha: 0.8),
+        //                 ),
+        //               ),
+        //             ),
+        //           ],
+        //         ),
+        //       ),
+        //     ),
+        //   ),
+        // ],
         Expanded(
           child: ListView.builder(
             physics: const BouncingScrollPhysics(),
