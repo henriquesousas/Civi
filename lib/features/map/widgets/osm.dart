@@ -6,7 +6,7 @@ import 'package:flutter_map_animations/flutter_map_animations.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:latlong2/latlong.dart';
 
-class Osm extends StatelessWidget {
+class Osm extends StatefulWidget {
   final List<Incident> item;
   final MapController controller;
   final LatLng initial;
@@ -26,15 +26,28 @@ class Osm extends StatelessWidget {
   });
 
   @override
+  State<Osm> createState() => _OsmState();
+}
+
+class _OsmState extends State<Osm> {
+  double _getRadius(double zoom) {
+    // const baseRadius = 1000;
+    // return baseRadius / (zoom / 10);
+
+    const baseRadius = 1000; // 1 km
+    return baseRadius * (zoom / 10);
+  }
+
+  @override
   Widget build(BuildContext context) {
     return FlutterMap(
-      mapController: animatedMapController.mapController,
+      mapController: widget.animatedMapController.mapController,
       options: MapOptions(
-        initialCenter: initial,
-        initialZoom: initialZoom,
+        initialCenter: widget.initial,
+        initialZoom: widget.initialZoom,
         onMapEvent: (event) {
           if (event is MapEventMoveStart) {
-            onMapEventMove();
+            widget.onMapEventMove();
           }
         },
       ),
@@ -43,21 +56,21 @@ class Osm extends StatelessWidget {
           urlTemplate: 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
           subdomains: const ['a', 'b', 'c'],
         ),
-        // CircleLayer(
-        //   circles: [
-        //     CircleMarker(
-        //         point: LatLng(-23.5107, -46.8764),
-        //         color:
-        //             Colors.blue.withOpacity(0.2), // preenchimento transparente
-        //         borderStrokeWidth: 2,
-        //         borderColor: Colors.blue,
-        //         radius: 800, // raio em metros
-        //         useRadiusInMeter: true),
-        //   ],
-        // ),
+        CircleLayer(
+          circles: [
+            CircleMarker(
+              point: widget.initial,
+              color: Colors.red.withValues(alpha: 0.2),
+              borderStrokeWidth: 2,
+              borderColor: Colors.red,
+              radius: _getRadius(widget.initialZoom), // raio em metros
+              useRadiusInMeter: true,
+            ),
+          ],
+        ),
         //TODO: PIN AQUI
         MarkerLayer(
-          markers: item
+          markers: widget.item
               .map(
                 (r) => Marker(
                   point: LatLng(r.local!.latitue!, r.local!.longitude!),
@@ -65,7 +78,7 @@ class Osm extends StatelessWidget {
                   height: 90.h,
                   child: GestureDetector(
                     // onTap: () => _mostrarDetalhes2(r, context),
-                    onTap: () => press(r),
+                    onTap: () => widget.press(r),
                     child: const IntrinsicWidth(
                       child: MapCustomMarker(
                         label: "label",

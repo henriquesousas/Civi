@@ -261,6 +261,7 @@ class _MapPageState extends State<MapPage> with TickerProviderStateMixin {
   Widget _buildCardProduct(String url) {
     return UICustomAppCard(
       borderColor: AppColors.lightGreyColor20,
+      showShadow: true,
       child: SizedBox(
         width: context.percentWidth(0.7),
         child: Column(
@@ -481,7 +482,13 @@ class _MapPageState extends State<MapPage> with TickerProviderStateMixin {
   }
 
   void _moveToInitialLocation() {
-    _mapController.move(_initialLocation, _initialZoom);
+    // _mapController.move(_initialLocation, _initialZoom);
+    animatedMapController.animateTo(
+      dest: _initialLocation,
+      zoom: 14,
+      curve: Curves.easeInOut,
+      duration: const Duration(seconds: 1),
+    );
   }
 
   Widget _buildBottomContent() {
