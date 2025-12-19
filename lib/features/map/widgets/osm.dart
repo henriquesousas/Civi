@@ -63,7 +63,7 @@ class _OsmState extends State<Osm> {
               color: Colors.red.withValues(alpha: 0.2),
               borderStrokeWidth: 2,
               borderColor: Colors.red,
-              radius: _getRadius(widget.initialZoom), // raio em metros
+              radius: _getRadius(widget.initialZoom), // raio em mesros
               useRadiusInMeter: true,
             ),
           ],

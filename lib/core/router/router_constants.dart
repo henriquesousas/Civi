@@ -21,6 +21,7 @@ class RouterConstant {
   static const occurrences = "/occurrences";
   static const profile = "/profile";
   static const addIncident = "/add-incident";
+  static const addNickname = "/add-nickname";
 
   // OLD
 

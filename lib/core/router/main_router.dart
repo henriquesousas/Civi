@@ -1,5 +1,6 @@
 import 'package:deehelp/core/router/router_constants.dart';
 import 'package:deehelp/core/router/slide_transition_page.dart';
+import 'package:deehelp/features/auth/presentation/add_nickname/add_nickname_page.dart';
 import 'package:deehelp/features/faq/faq_provider.dart';
 import 'package:deehelp/features/incident/presentation/add/add_incident_page.dart';
 import 'package:deehelp/features/map/presentation/map_page.dart';
@@ -13,7 +14,7 @@ import '../../features/onboarding/page/onboard_router.dart';
 
 class MainRouter {
   static var router = GoRouter(
-    initialLocation: RouterConstant.splash,
+    initialLocation: RouterConstant.addNickname,
     debugLogDiagnostics: true,
     // redirect: _redirect,
     // refreshListenable: authRepository,
@@ -48,6 +49,13 @@ class MainRouter {
         pageBuilder: (context, state) => slideTransitionPage(
           key: state.pageKey,
           child: const AddIncidentPage(),
+        ),
+      ),
+      GoRoute(
+        path: RouterConstant.addNickname,
+        pageBuilder: (context, state) => slideTransitionPage(
+          key: state.pageKey,
+          child: const AddNicknamePage(),
         ),
       ),
     ],
