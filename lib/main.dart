@@ -3,22 +3,31 @@ import 'package:deehelp/core/ui/extensions/screen_size_extension.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:intl/date_symbol_data_local.dart';
+import 'package:supabase_flutter/supabase_flutter.dart';
 
 import 'core/env.dart';
 import 'core/ui/assets/resources.dart';
 import 'core/router/main_router.dart';
 import 'core/ui/theme/app_theme.dart';
 import 'firebase_options.dart';
-import 'main_provider.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+
   await initializeDateFormatting('pt_BR', null);
+
+  await Supabase.initialize(
+    url: "https://qyqwuyrigoqubqpnayde.supabase.co",
+    anonKey: "sb_publishable_d4aHVgwM22a71tnZ7BZsIg_b9DPt9wD",
+  );
+
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
+
   await CloudFlareR2.init(
     accountId: Env.r2AccountId,
     accessKeyId: Env.r2AccessKeyId,
@@ -27,7 +36,7 @@ void main() async {
   SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(
     statusBarColor: Colors.transparent,
   ));
-  runApp(const MainApp());
+  runApp(const ProviderScope(child: MainApp()));
 }
 
 class MainApp extends StatelessWidget {
@@ -44,24 +53,22 @@ class MainApp extends StatelessWidget {
           useInheritedMediaQuery: true,
           rebuildFactor: (old, data) => true,
           builder: (context, child) {
-            return ApplicationProvider(
-              child: MaterialApp.router(
-                // localizationsDelegates: AppLocalizations.localizationsDelegates,
-                supportedLocales: const [
-                  Locale('en', 'US'),
-                  Locale('pt', 'BR'),
-                ],
-                localeResolutionCallback: (locale, supportedLocales) {
-                  R.load(locale ?? const Locale('pt', 'BR'));
-                  return locale;
-                },
-                locale: const Locale("en"),
-                routerConfig: MainRouter.router,
-                theme: AppTheme.lightTheme(context),
-                themeMode: ThemeMode.light,
-                title: "DeeHelp",
-                debugShowCheckedModeBanner: false,
-              ),
+            return MaterialApp.router(
+              // localizationsDelegates: AppLocalizations.localizationsDelegates,
+              supportedLocales: const [
+                Locale('en', 'US'),
+                Locale('pt', 'BR'),
+              ],
+              localeResolutionCallback: (locale, supportedLocales) {
+                R.load(locale ?? const Locale('pt', 'BR'));
+                return locale;
+              },
+              locale: const Locale("en"),
+              routerConfig: MainRouter.router,
+              theme: AppTheme.lightTheme(context),
+              themeMode: ThemeMode.light,
+              title: "DeeHelp",
+              debugShowCheckedModeBanner: false,
             );
           },
         );

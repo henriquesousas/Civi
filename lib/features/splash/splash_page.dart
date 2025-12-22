@@ -1,5 +1,4 @@
 import 'package:deehelp/core/ui/extensions/screen_size_extension.dart';
-import 'package:deehelp/core/services/session/user_session_service.dart';
 import 'package:deehelp/core/ui/theme/app_colors.dart';
 import 'package:deehelp/core/ui/theme/app_text_styles.dart';
 import 'package:deehelp/core/ui/theme/dimens.dart';
@@ -9,7 +8,6 @@ import 'package:deehelp/features/splash/components/splash_progress.dart';
 import 'package:deehelp/features/splash/components/splash_logo.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
 
@@ -32,16 +30,16 @@ class _SplashPageState extends State<SplashPage> {
 
   void _navigateToNextScreen() async {
     await Future.delayed(const Duration(milliseconds: 5000));
+    // context.pushReplacement(RouterConstant.onboarding);
     WidgetsBinding.instance.addPostFrameCallback((_) async {
-      final session = await context.read<UserSessionService>().load();
-
-      if (!mounted) return;
-
-      if (session != null) {
-        context.pushReplacement(RouterConstant.map);
-      } else {
-        context.pushReplacement(RouterConstant.onboarding);
-      }
+      context.pushReplacement(RouterConstant.onboarding);
+      // final session = await context.read<UserSessionService>().load();
+      // if (!mounted) return;
+      // if (session != null) {
+      //   context.pushReplacement(RouterConstant.map);
+      // } else {
+      //   context.pushReplacement(RouterConstant.onboarding);
+      // }
     });
   }
 

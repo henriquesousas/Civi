@@ -11,7 +11,7 @@ import '../../product_exception.dart';
 import '../../product_repository.dart';
 import 'create_product_dto.dart';
 
-class CreateProductUseCase extends UseCase<CreateProductDto, Unit> {
+class CreateProductUseCase extends OldUseCase<CreateProductDto, Unit> {
   static final _logger = Logger("CreateItemUsecase");
   final ProductRepository _repository;
   final MediaStorage _media;

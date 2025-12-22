@@ -1,24 +1,24 @@
 import 'dart:async';
 
+import 'package:deehelp/core/providers/view_models_provider.dart';
+import 'package:deehelp/core/router/router_constants.dart';
 import 'package:deehelp/core/ui/extensions/dialog_extension.dart';
+import 'package:deehelp/features/auth/presentation/state/auth_state.dart';
 import 'package:deehelp/features/onboarding/page/components/onboard_content.dart';
-import 'package:deehelp/features/onboarding/page/onboard_cubit.dart';
 import 'package:deehelp/features/onboarding/page/onboard_item.dart';
 import 'package:deehelp/features/onboarding/page/onboard_view.dart';
-import 'package:deehelp/features/onboarding/page/state/onboard_state.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:go_router/go_router.dart';
 
-import '../../../core/ui/assets/resources.dart';
-
-class OnboardPage extends StatefulWidget {
+class OnboardPage extends ConsumerStatefulWidget {
   const OnboardPage({super.key});
 
   @override
-  State<OnboardPage> createState() => _OnboardPageState();
+  ConsumerState<OnboardPage> createState() => _OnboardPageState();
 }
 
-class _OnboardPageState extends State<OnboardPage> {
+class _OnboardPageState extends ConsumerState<OnboardPage> {
   late PageController _pageController;
   Timer? _timer;
   int _currentPage = 1000;
@@ -61,12 +61,15 @@ class _OnboardPageState extends State<OnboardPage> {
   }
 
   void _loginWithGoogle() {
-    context.read<OnboardCubit>().loginWithGoogle();
+    ref.watch(authViewViewModelProvider.notifier).signInWithGoogle();
   }
 
   @override
   Widget build(BuildContext context) {
+    final state = ref.watch(authViewViewModelProvider);
     final pages = OnboardItem.pages();
+
+    listeners();
 
     return Scaffold(
       body: Stack(
@@ -80,40 +83,40 @@ class _OnboardPageState extends State<OnboardPage> {
               return OnboardContent(page: page);
             },
           ),
-          BlocConsumer<OnboardCubit, OnboardState>(
-            listener: (context, state) {
-              state.maybeMap(
-                loginFailed: (value) {
-                  context.showSnackBar(
-                    type: DialogType.error,
-                    R.strings.loginWithGoogleError,
-                  );
-                },
-                loginSucceeded: (value) =>
-                    context.read<OnboardCubit>().saveSesion(value.user),
-                sessionReady: (value) => {},
-                orElse: () => const CircularProgressIndicator(),
-              );
-            },
-            builder: (context, state) {
-              return state.maybeMap(
-                loading: (value) => _buildActions(stateButton: true),
-                loginFailed: (value) => _buildActions(),
-                orElse: () => _buildActions(),
-              );
-            },
+          state.maybeWhen(
+            loading: () => _buildView(isLoading: true),
+            orElse: () => _buildView(),
           ),
         ],
       ),
     );
   }
 
-  Widget _buildActions({bool stateButton = false}) {
+  void listeners() {
+    ref.listen<AuthState>(
+      authViewViewModelProvider,
+      (previousState, currentState) {
+        if (currentState is AuthStateError &&
+            previousState is! AuthStateError) {
+          context.showSnackBar(
+            type: DialogType.error,
+            currentState.error,
+          );
+        }
+
+        if (currentState is AuthStateAuthenticated) {
+          context.push(RouterConstant.addNickname);
+        }
+      },
+    );
+  }
+
+  Widget _buildView({bool isLoading = false}) {
     return OnboardView(
       currentPage: _currentPage % OnboardItem.pages().length,
       pressLoginWithGoogle: () => _loginWithGoogle(),
       pressEnterWithoutLogin: () {},
-      isLoading: stateButton,
+      isLoading: isLoading,
     );
   }
 }

@@ -5,7 +5,7 @@ import 'package:deehelp/core/domain/use_case.dart';
 import '../../entities/product.dart';
 import '../../product_repository.dart';
 
-class UpdateProductUseCase extends UseCase<Product, Unit> {
+class UpdateProductUseCase extends OldUseCase<Product, Unit> {
   final ProductRepository _repository;
 
   UpdateProductUseCase({required ProductRepository repository})

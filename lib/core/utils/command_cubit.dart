@@ -1,4 +1,7 @@
+import 'dart:ffi';
+
 import 'package:deehelp/core/domain/exception/app_exception.dart';
+import 'package:deehelp/features/auth/presentation/state/auth_state.dart';
 
 import '../domain/type/result.dart';
 
@@ -29,6 +32,26 @@ class CommandCubit {
       emit(onError(AppException(
           message:
               "Não foi possível realizar operação, tente novamente mais tarde...")));
+    }
+  }
+}
+
+class UseCaseCommand {
+  static void execute({
+    required AuthState state,
+    required Function() onLoading,
+    required Function() onError,
+  }) {
+    try {
+      state = onLoading();
+      state = onLoading();
+      // final result = await _loginWithGoogleUsecase.execute();
+      // result.when(
+      //   success: (session) => state = const AuthState.authenticated(),
+      //   failure: (error) => onError(),
+      // );
+    } catch (e) {
+      state = onError();
     }
   }
 }

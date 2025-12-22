@@ -10,7 +10,7 @@ import '../../product_exception.dart';
 import '../../product_repository.dart';
 import 'delete_product_dto.dart';
 
-class DeleteProductUsecase extends UseCase<DeleteProductDto, Unit> {
+class DeleteProductUsecase extends OldUseCase<DeleteProductDto, Unit> {
   static final _logger = Logger("DeleteProductUsecase");
   final ProductRepository _repository;
   final MediaStorage _mediaStorage;

@@ -5,7 +5,7 @@ import 'package:deehelp/core/domain/use_case.dart';
 import '../../entities/product.dart';
 import '../../product_repository.dart';
 
-class GetProductsByUserUsecase extends UseCase<String, List<Product>> {
+class GetProductsByUserUsecase extends OldUseCase<String, List<Product>> {
   final ProductRepository _repository;
 
   GetProductsByUserUsecase({required ProductRepository repository})
