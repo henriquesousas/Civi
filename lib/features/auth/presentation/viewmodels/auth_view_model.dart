@@ -1,5 +1,6 @@
 import 'package:deehelp/core/utils/command_state_notifier.dart';
 import 'package:deehelp/features/auth/domain/entity/authenticated_user.dart';
+import 'package:deehelp/features/auth/domain/exceptions/auth_failure.dart';
 import 'package:deehelp/features/auth/domain/usecases/get_authenticated_user_usecase.dart';
 import 'package:deehelp/features/auth/domain/usecases/sign_in_with_google_usecase.dart';
 import 'package:deehelp/features/auth/domain/usecases/sign_out_usecase.dart';
@@ -26,7 +27,10 @@ class AuthViewModel extends StateNotifier<AuthState> {
       command: () async => await _signInWithGoogleUseCase.execute(),
       onLoading: () => const AuthState.loading(),
       onSuccess: (session) => const AuthState.authenticated(),
-      onError: (error) => AuthState.error(error),
+      onError: (error) {
+        final status = (error as AuthFailure);
+        return AuthState.error(error.message, status.operationStatus);
+      },
     );
   }
 

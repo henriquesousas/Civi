@@ -1,6 +1,6 @@
 import 'package:deehelp/core/unit.dart';
-import 'package:deehelp/features/auth/domain/entity/authenticated_user.dart';
 import 'package:deehelp/core/utils/result.dart';
+import 'package:deehelp/features/auth/domain/entity/authenticated_user.dart';
 import 'package:deehelp/features/auth/domain/exceptions/get_current_user_failure.dart';
 import 'package:deehelp/features/auth/domain/repositories/auth_repository.dart';
 import 'package:deehelp/features/auth/domain/exceptions/sign_out_failure.dart';

@@ -157,7 +157,7 @@ extension AuthStatePatterns on AuthState {
     TResult Function()? initial,
     TResult Function()? loading,
     TResult Function()? authenticated,
-    TResult Function(String error)? error,
+    TResult Function(String error, OperationStatus status)? error,
     required TResult orElse(),
   }) {
     final _that = this;
@@ -169,7 +169,7 @@ extension AuthStatePatterns on AuthState {
       case AuthStateAuthenticated() when authenticated != null:
         return authenticated();
       case AuthStateError() when error != null:
-        return error(_that.error);
+        return error(_that.error, _that.status);
       case _:
         return orElse();
     }
@@ -193,7 +193,7 @@ extension AuthStatePatterns on AuthState {
     required TResult Function() initial,
     required TResult Function() loading,
     required TResult Function() authenticated,
-    required TResult Function(String error) error,
+    required TResult Function(String error, OperationStatus status) error,
   }) {
     final _that = this;
     switch (_that) {
@@ -204,7 +204,7 @@ extension AuthStatePatterns on AuthState {
       case AuthStateAuthenticated():
         return authenticated();
       case AuthStateError():
-        return error(_that.error);
+        return error(_that.error, _that.status);
       case _:
         throw StateError('Unexpected subclass');
     }
@@ -227,7 +227,7 @@ extension AuthStatePatterns on AuthState {
     TResult? Function()? initial,
     TResult? Function()? loading,
     TResult? Function()? authenticated,
-    TResult? Function(String error)? error,
+    TResult? Function(String error, OperationStatus status)? error,
   }) {
     final _that = this;
     switch (_that) {
@@ -238,7 +238,7 @@ extension AuthStatePatterns on AuthState {
       case AuthStateAuthenticated() when authenticated != null:
         return authenticated();
       case AuthStateError() when error != null:
-        return error(_that.error);
+        return error(_that.error, _that.status);
       case _:
         return null;
     }
@@ -308,9 +308,10 @@ class AuthStateAuthenticated implements AuthState {
 /// @nodoc
 
 class AuthStateError implements AuthState {
-  const AuthStateError(this.error);
+  const AuthStateError(this.error, this.status);
 
   final String error;
+  final OperationStatus status;
 
   /// Create a copy of AuthState
   /// with the given fields replaced by the non-null parameter values.
@@ -324,15 +325,16 @@ class AuthStateError implements AuthState {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is AuthStateError &&
-            (identical(other.error, error) || other.error == error));
+            (identical(other.error, error) || other.error == error) &&
+            (identical(other.status, status) || other.status == status));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, error);
+  int get hashCode => Object.hash(runtimeType, error, status);
 
   @override
   String toString() {
-    return 'AuthState.error(error: $error)';
+    return 'AuthState.error(error: $error, status: $status)';
   }
 }
 
@@ -343,7 +345,7 @@ abstract mixin class $AuthStateErrorCopyWith<$Res>
           AuthStateError value, $Res Function(AuthStateError) _then) =
       _$AuthStateErrorCopyWithImpl;
   @useResult
-  $Res call({String error});
+  $Res call({String error, OperationStatus status});
 }
 
 /// @nodoc
@@ -359,12 +361,17 @@ class _$AuthStateErrorCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   $Res call({
     Object? error = null,
+    Object? status = null,
   }) {
     return _then(AuthStateError(
       null == error
           ? _self.error
           : error // ignore: cast_nullable_to_non_nullable
               as String,
+      null == status
+          ? _self.status
+          : status // ignore: cast_nullable_to_non_nullable
+              as OperationStatus,
     ));
   }
 }

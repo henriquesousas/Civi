@@ -1,4 +1,5 @@
-import 'package:deehelp/core/errors/failure.dart';
+import 'package:deehelp/features/auth/domain/exceptions/auth_failure.dart';
+import 'package:deehelp/features/auth/domain/services/operation_status.dart';
 import 'package:deehelp/features/auth/domain/services/google_credentials.dart';
 import 'package:deehelp/features/auth/domain/services/google_auth_service.dart';
 import 'package:deehelp/core/ui/assets/resources.dart';
@@ -27,20 +28,17 @@ class DefaultGoogleAuthService implements GoogleAuthService {
       final idToken = googleAccount.authentication.idToken;
       final authorizationClient = googleAccount.authorizationClient;
 
+      final scopes = ['email', 'profile'];
       GoogleSignInClientAuthorization? authorization =
-          await authorizationClient.authorizationForScopes(
-        ['email', 'profile'],
-      );
+          await authorizationClient.authorizationForScopes(scopes);
       final accessToken = authorization?.accessToken;
 
       if (accessToken == null) {
-        final authorization2 = await authorizationClient.authorizationForScopes(
-          ['email', 'profile'],
-        );
+        final authorization2 =
+            await authorizationClient.authorizationForScopes(scopes);
 
         if (authorization2?.accessToken == null) {
-          return Result.failure(
-              AuthenticationFailure(R.strings.loginWithGoogleError));
+          return Result.failure(AuthFailure(R.strings.loginWithGoogleError));
         }
         authorization = authorization2;
       }
@@ -50,9 +48,18 @@ class DefaultGoogleAuthService implements GoogleAuthService {
         accessToken: accessToken!,
       );
       return Result.success(credentials);
-    } catch (e, _) {
+    } on GoogleSignInException catch (e, _) {
+      final operationStatus = e.code == GoogleSignInExceptionCode.canceled
+          ? OperationStatus.canceled
+          : OperationStatus.failure;
+
+      final message = e.code == GoogleSignInExceptionCode.canceled
+          ? "Cancelado pelo usuário"
+          : R.strings.loginWithGoogleError;
+
       return Result.failure(
-          AuthenticationFailure(R.strings.loginWithGoogleError));
+        AuthFailure(message, operationStatus: operationStatus),
+      );
     }
   }
 }

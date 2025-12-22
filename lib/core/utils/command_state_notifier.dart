@@ -1,3 +1,4 @@
+import 'package:deehelp/core/errors/failure.dart';
 import 'package:deehelp/core/utils/result.dart';
 
 class CommandStateNotifier {
@@ -8,8 +9,8 @@ class CommandStateNotifier {
     required Future<Result<T>> Function() command,
     required State Function() onLoading,
     required State Function(T result) onSuccess,
-    required State Function(String error) onError,
-    String unexpectedErrorMessage = "Erro inesperado",
+    required State Function(Failure) onError,
+    String unexpectedErrorMessage = "Error inesperado",
   }) async {
     try {
       // 1. Loading
@@ -21,10 +22,10 @@ class CommandStateNotifier {
       // 3. Processa resultado
       result.when(
         success: (data) => updateState(onSuccess(data)),
-        failure: (error) => updateState(onError(error.message)),
+        failure: (error) => updateState(onError(error)),
       );
     } catch (e) {
-      updateState(onError("$unexpectedErrorMessage: ${e.toString()}"));
+      // updateState(onError("$unexpectedErrorMessage: ${e.toString()}"));
     }
   }
 }

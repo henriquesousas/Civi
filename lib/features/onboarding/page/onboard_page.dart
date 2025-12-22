@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:deehelp/core/providers/view_models_provider.dart';
 import 'package:deehelp/core/router/router_constants.dart';
 import 'package:deehelp/core/ui/extensions/dialog_extension.dart';
+import 'package:deehelp/features/auth/domain/services/operation_status.dart';
 import 'package:deehelp/features/auth/presentation/state/auth_state.dart';
 import 'package:deehelp/features/onboarding/page/components/onboard_content.dart';
 import 'package:deehelp/features/onboarding/page/onboard_item.dart';
@@ -98,10 +99,12 @@ class _OnboardPageState extends ConsumerState<OnboardPage> {
       (previousState, currentState) {
         if (currentState is AuthStateError &&
             previousState is! AuthStateError) {
-          context.showSnackBar(
-            type: DialogType.error,
-            currentState.error,
-          );
+          if (currentState.status != OperationStatus.canceled) {
+            context.showSnackBar(
+              type: DialogType.error,
+              currentState.error,
+            );
+          }
         }
 
         if (currentState is AuthStateAuthenticated) {

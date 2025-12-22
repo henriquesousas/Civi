@@ -26,7 +26,3 @@ class NetworkFailure extends Failure {
 class ValidationFailure extends Failure {
   const ValidationFailure(String message) : super(message);
 }
-
-class AuthenticationFailure extends Failure {
-  const AuthenticationFailure(String message) : super(message);
-}
