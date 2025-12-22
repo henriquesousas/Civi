@@ -1,6 +1,6 @@
 import 'package:animations/animations.dart';
 import 'package:deehelp/core/ui/theme/app_colors.dart';
-import 'package:deehelp/features/profile/profile_page.dart';
+import 'package:deehelp/features/profile/presentation/view/profile_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 

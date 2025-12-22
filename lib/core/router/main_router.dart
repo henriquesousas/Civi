@@ -1,10 +1,10 @@
 import 'package:deehelp/core/router/router_constants.dart';
 import 'package:deehelp/core/router/slide_transition_page.dart';
-import 'package:deehelp/features/profile/add_nickname_page.dart';
+import 'package:deehelp/features/profile/presentation/view/add_nickname_page.dart';
 import 'package:deehelp/features/faq/faq_provider.dart';
 import 'package:deehelp/features/incident/presentation/add/add_incident_page.dart';
 import 'package:deehelp/features/map/presentation/map_page.dart';
-import 'package:deehelp/features/profile/profile_page.dart';
+import 'package:deehelp/features/profile/presentation/view/profile_page.dart';
 import 'package:deehelp/features/splash/splash_page.dart';
 import 'package:go_router/go_router.dart';
 

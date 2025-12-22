@@ -20,12 +20,7 @@ class UserValidator extends Validator {
       user.email.notification,
       user.photoUrl?.notification,
     ];
-
     notifications.forEach((notification) => copyIfHasError(notification));
-
-    if (user.gender == null) {
-      handler.append("gender", "Gênero inválido");
-    }
   }
 
   void copyIfHasError(final DomainNotification? notification) {

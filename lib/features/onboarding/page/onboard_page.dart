@@ -68,6 +68,7 @@ class _OnboardPageState extends ConsumerState<OnboardPage> {
   @override
   Widget build(BuildContext context) {
     final state = ref.watch(authViewViewModelProvider);
+
     final pages = OnboardItem.pages();
 
     listeners();

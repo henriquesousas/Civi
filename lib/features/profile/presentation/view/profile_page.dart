@@ -6,7 +6,6 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
-//TODO: Usar Session
 class ProfilePage extends StatelessWidget {
   final VoidCallback? onBackButtonPress;
   const ProfilePage({super.key, this.onBackButtonPress});

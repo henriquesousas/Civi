@@ -102,7 +102,7 @@ class _UITextFieldRoundedState extends State<UITextFieldRounded> {
           //       color: AppColors.textColorHeader,
           //     ),
           style: context.appTextStyles.sectionBodyTextStyle.copyWith(
-            color: AppColors.errorColor,
+            color: AppColors.textColorBody,
             fontWeight: FontWeight.bold,
           ),
           decoration: InputDecoration(
