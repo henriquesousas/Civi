@@ -25,7 +25,7 @@ class CommandStateNotifier {
         failure: (error) => updateState(onError(error)),
       );
     } catch (e) {
-      // updateState(onError("$unexpectedErrorMessage: ${e.toString()}"));
+      updateState(onError(const DefaultFailure()));
     }
   }
 }

@@ -1,11 +1,13 @@
 import 'package:deehelp/core/utils/command_state_notifier.dart';
 import 'package:deehelp/features/auth/domain/entity/authenticated_user.dart';
-import 'package:deehelp/features/auth/domain/exceptions/auth_failure.dart';
+import 'package:deehelp/features/auth/domain/services/operation_status.dart';
 import 'package:deehelp/features/auth/domain/usecases/get_authenticated_user_usecase.dart';
 import 'package:deehelp/features/auth/domain/usecases/sign_in_with_google_usecase.dart';
 import 'package:deehelp/features/auth/domain/usecases/sign_out_usecase.dart';
 import 'package:deehelp/features/auth/presentation/state/auth_state.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+
+import '../../../../core/errors/handler_error.dart';
 
 class AuthViewModel extends StateNotifier<AuthState> {
   final SignInWithGoogleUseCase _signInWithGoogleUseCase;
@@ -28,8 +30,14 @@ class AuthViewModel extends StateNotifier<AuthState> {
       onLoading: () => const AuthState.loading(),
       onSuccess: (session) => const AuthState.authenticated(),
       onError: (error) {
-        final status = (error as AuthFailure);
-        return AuthState.error(error.message, status.operationStatus);
+        return handleError<AuthState>(
+          error,
+          (message, extra) {
+            final status =
+                extra is OperationStatus ? extra : OperationStatus.failure;
+            return AuthState.error(message, status);
+          },
+        );
       },
     );
   }

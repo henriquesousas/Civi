@@ -10,6 +10,12 @@ abstract class Failure extends Equatable {
   List<Object?> get props => [message, statusCode];
 }
 
+class DefaultFailure extends Failure {
+  const DefaultFailure()
+      : super(
+            "Falha ao realizar operação, por favor tente novamente mais tarde.");
+}
+
 class ServerFailure extends Failure {
   const ServerFailure(String message, {int? statusCode})
       : super(message, statusCode: statusCode);
