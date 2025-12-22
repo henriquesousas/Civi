@@ -28,7 +28,7 @@ class AuthViewModel extends StateNotifier<AuthState> {
       updateState: (newState) => state = newState,
       command: () async => await _signInWithGoogleUseCase.execute(),
       onLoading: () => const AuthState.loading(),
-      onSuccess: (session) => const AuthState.authenticated(),
+      onSuccess: (session) => AuthState.authenticated(session.name),
       onError: (error) {
         return handleError<AuthState>(
           error,
@@ -42,7 +42,11 @@ class AuthViewModel extends StateNotifier<AuthState> {
     );
   }
 
-  void signOut() {}
+  void signOut() {
+    throw UnimplementedError("not implemented");
+  }
 
-  void getAuthenticatedUser() {}
+  void getAuthenticatedUser() {
+    throw UnimplementedError("not implemented");
+  }
 }

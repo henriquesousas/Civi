@@ -156,7 +156,7 @@ extension AuthStatePatterns on AuthState {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function()? authenticated,
+    TResult Function(String userName)? authenticated,
     TResult Function(String error, OperationStatus status)? error,
     required TResult orElse(),
   }) {
@@ -167,7 +167,7 @@ extension AuthStatePatterns on AuthState {
       case AuthStateLoading() when loading != null:
         return loading();
       case AuthStateAuthenticated() when authenticated != null:
-        return authenticated();
+        return authenticated(_that.userName);
       case AuthStateError() when error != null:
         return error(_that.error, _that.status);
       case _:
@@ -192,7 +192,7 @@ extension AuthStatePatterns on AuthState {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loading,
-    required TResult Function() authenticated,
+    required TResult Function(String userName) authenticated,
     required TResult Function(String error, OperationStatus status) error,
   }) {
     final _that = this;
@@ -202,7 +202,7 @@ extension AuthStatePatterns on AuthState {
       case AuthStateLoading():
         return loading();
       case AuthStateAuthenticated():
-        return authenticated();
+        return authenticated(_that.userName);
       case AuthStateError():
         return error(_that.error, _that.status);
       case _:
@@ -226,7 +226,7 @@ extension AuthStatePatterns on AuthState {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function()? loading,
-    TResult? Function()? authenticated,
+    TResult? Function(String userName)? authenticated,
     TResult? Function(String error, OperationStatus status)? error,
   }) {
     final _that = this;
@@ -236,7 +236,7 @@ extension AuthStatePatterns on AuthState {
       case AuthStateLoading() when loading != null:
         return loading();
       case AuthStateAuthenticated() when authenticated != null:
-        return authenticated();
+        return authenticated(_that.userName);
       case AuthStateError() when error != null:
         return error(_that.error, _that.status);
       case _:
@@ -288,20 +288,66 @@ class AuthStateLoading implements AuthState {
 /// @nodoc
 
 class AuthStateAuthenticated implements AuthState {
-  const AuthStateAuthenticated();
+  const AuthStateAuthenticated(this.userName);
+
+  final String userName;
+
+  /// Create a copy of AuthState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @pragma('vm:prefer-inline')
+  $AuthStateAuthenticatedCopyWith<AuthStateAuthenticated> get copyWith =>
+      _$AuthStateAuthenticatedCopyWithImpl<AuthStateAuthenticated>(
+          this, _$identity);
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is AuthStateAuthenticated);
+        (other.runtimeType == runtimeType &&
+            other is AuthStateAuthenticated &&
+            (identical(other.userName, userName) ||
+                other.userName == userName));
   }
 
   @override
-  int get hashCode => runtimeType.hashCode;
+  int get hashCode => Object.hash(runtimeType, userName);
 
   @override
   String toString() {
-    return 'AuthState.authenticated()';
+    return 'AuthState.authenticated(userName: $userName)';
+  }
+}
+
+/// @nodoc
+abstract mixin class $AuthStateAuthenticatedCopyWith<$Res>
+    implements $AuthStateCopyWith<$Res> {
+  factory $AuthStateAuthenticatedCopyWith(AuthStateAuthenticated value,
+          $Res Function(AuthStateAuthenticated) _then) =
+      _$AuthStateAuthenticatedCopyWithImpl;
+  @useResult
+  $Res call({String userName});
+}
+
+/// @nodoc
+class _$AuthStateAuthenticatedCopyWithImpl<$Res>
+    implements $AuthStateAuthenticatedCopyWith<$Res> {
+  _$AuthStateAuthenticatedCopyWithImpl(this._self, this._then);
+
+  final AuthStateAuthenticated _self;
+  final $Res Function(AuthStateAuthenticated) _then;
+
+  /// Create a copy of AuthState
+  /// with the given fields replaced by the non-null parameter values.
+  @pragma('vm:prefer-inline')
+  $Res call({
+    Object? userName = null,
+  }) {
+    return _then(AuthStateAuthenticated(
+      null == userName
+          ? _self.userName
+          : userName // ignore: cast_nullable_to_non_nullable
+              as String,
+    ));
   }
 }
 

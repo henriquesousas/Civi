@@ -1,6 +1,6 @@
 import 'package:deehelp/core/router/router_constants.dart';
 import 'package:deehelp/core/router/slide_transition_page.dart';
-import 'package:deehelp/features/auth/presentation/views/add_nickname_page.dart';
+import 'package:deehelp/features/profile/add_nickname_page.dart';
 import 'package:deehelp/features/faq/faq_provider.dart';
 import 'package:deehelp/features/incident/presentation/add/add_incident_page.dart';
 import 'package:deehelp/features/map/presentation/map_page.dart';
@@ -51,10 +51,16 @@ class MainRouter {
       ),
       GoRoute(
         path: RouterConstant.addNickname,
-        pageBuilder: (context, state) => slideTransitionPage(
-          key: state.pageKey,
-          child: const AddNicknamePage(),
-        ),
+        pageBuilder: (context, state) {
+          final authenticatedUserName =
+              state.extra != null ? state.extra as String : '';
+          return slideTransitionPage(
+            key: state.pageKey,
+            child: AddNicknamePage(
+              userName: authenticatedUserName,
+            ),
+          );
+        },
       ),
     ],
   );
