@@ -20,11 +20,15 @@ class AddNicknamePage extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final viewModel = ref.watch(profileViewModelProvider.notifier);
     final state = ref.watch(profileViewModelProvider);
-    final userSession = ref.watch(userSessionProvider);
+    final userSessionNotifier = ref.watch(userSessionProvider.notifier);
+    final authenticatedUser = ref.watch(userSessionProvider);
 
     ref.listen<ProfileState>(profileViewModelProvider,
         (previous, currentState) {
       if (currentState.isSuccess) {
+        userSessionNotifier.setNickname(
+          currentState.nickname!,
+        );
         context.pushReplacement(RouterConstant.map);
       }
     });
@@ -48,7 +52,7 @@ class AddNicknamePage extends ConsumerWidget {
                     ),
                   ),
                   TextSpan(
-                    text: "${userSession?.name} ",
+                    text: "${authenticatedUser?.name} ",
                     style: context.appTextStyles.sectionSubTitle1.copyWith(
                       color: AppColors.blackColor,
                       fontWeight: FontWeight.bold,
@@ -93,7 +97,7 @@ class AddNicknamePage extends ConsumerWidget {
             UIElevatedButton(
               text: "Confimar apelido",
               isEnabled: state.isFormValid,
-              press: () => viewModel.addNickname(userSession!),
+              press: () => viewModel.addNickname(authenticatedUser!),
               isLoading: state.isLoading,
             ),
             UIElevatedButton(

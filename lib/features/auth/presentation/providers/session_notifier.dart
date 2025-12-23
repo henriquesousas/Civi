@@ -7,6 +7,19 @@ class SessionNotifier extends StateNotifier<AuthenticatedUser?> {
     state = session;
   }
 
+  //O certo seria criar um novo método que atualiza apenas o nickname
+  void setNickname(String nickname) {
+    if (state != null) {
+      state = AuthenticatedUser(
+        id: state!.id,
+        name: state!.name,
+        email: state!.email,
+        photoUrl: state!.photoUrl,
+        nickName: nickname,
+      );
+    }
+  }
+
   void clearSession() {
     state = null;
   }
