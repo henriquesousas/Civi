@@ -53,15 +53,9 @@ class MainRouter {
       GoRoute(
         path: RouterConstant.addNickname,
         pageBuilder: (context, state) {
-          if (state.extra == null) {
-            throw Exception("AuthenticatedUser is required");
-          }
-          final authenticatedUser = state.extra as AuthenticatedUser;
           return slideTransitionPage(
             key: state.pageKey,
-            child: AddNicknamePage(
-              authenticatedUser: authenticatedUser,
-            ),
+            child: AddNicknamePage(),
           );
         },
       ),

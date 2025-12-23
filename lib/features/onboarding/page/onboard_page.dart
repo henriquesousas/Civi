@@ -1,6 +1,6 @@
 import 'dart:async';
 
-import 'package:deehelp/core/providers/view_models_provider.dart';
+import 'package:deehelp/features/auth/presentation/providers/auth_view_model_provider.dart';
 import 'package:deehelp/core/router/router_constants.dart';
 import 'package:deehelp/core/ui/extensions/dialog_extension.dart';
 import 'package:deehelp/features/auth/domain/services/operation_status.dart';
@@ -12,6 +12,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
+
+import '../../auth/presentation/providers/session_provider.dart';
 
 class OnboardPage extends ConsumerStatefulWidget {
   const OnboardPage({super.key});
@@ -68,8 +70,6 @@ class _OnboardPageState extends ConsumerState<OnboardPage> {
 
   @override
   Widget build(BuildContext context) {
-    final state = ref.watch(authViewViewModelProvider);
-
     final pages = OnboardItem.pages();
 
     listeners();
@@ -88,10 +88,10 @@ class _OnboardPageState extends ConsumerState<OnboardPage> {
                 return OnboardContent(page: page);
               },
             ),
-            state.maybeWhen(
-              loading: () => _buildView(isLoading: true),
-              orElse: () => _buildView(),
-            ),
+            ref.watch(authViewViewModelProvider).maybeWhen(
+                  loading: () => _buildView(isLoading: true),
+                  orElse: () => _buildView(),
+                ),
           ],
         ),
       ),
@@ -113,6 +113,8 @@ class _OnboardPageState extends ConsumerState<OnboardPage> {
         }
 
         if (currentState is AuthStateAuthenticated) {
+          ref.read(userSessionProvider.notifier).setSession(currentState.user);
+
           context.pushReplacement(
             RouterConstant.addNickname,
             extra: currentState.user,

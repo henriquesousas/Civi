@@ -1,10 +1,10 @@
+import 'package:deehelp/features/auth/presentation/providers/session_provider.dart';
 import 'package:deehelp/core/router/router_constants.dart';
 import 'package:deehelp/core/ui/theme/app_colors.dart';
 import 'package:deehelp/core/ui/theme/app_text_styles.dart';
 import 'package:deehelp/core/ui/widgets/button/ui_elevated_button.dart';
 import 'package:deehelp/core/ui/widgets/card/ui_custom_scaffold.dart';
 import 'package:deehelp/core/ui/widgets/textfield/ui_text_field_rounded.dart';
-import 'package:deehelp/features/auth/domain/entity/authenticated_user.dart';
 import 'package:deehelp/features/profile/presentation/providers/profile_view_model.provider.dart';
 import 'package:deehelp/features/profile/presentation/view/widget/suggest_name.dart';
 import 'package:deehelp/features/profile/presentation/viewmodel/state/profile_state.dart';
@@ -13,14 +13,14 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
 class AddNicknamePage extends ConsumerWidget {
-  final AuthenticatedUser authenticatedUser;
   final TextEditingController _controller = TextEditingController();
-  AddNicknamePage({super.key, required this.authenticatedUser});
+  AddNicknamePage({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final viewModel = ref.watch(profileViewModelProvider.notifier);
     final state = ref.watch(profileViewModelProvider);
+    final userSession = ref.watch(userSessionProvider);
 
     ref.listen<ProfileState>(profileViewModelProvider,
         (previous, currentState) {
@@ -48,7 +48,7 @@ class AddNicknamePage extends ConsumerWidget {
                     ),
                   ),
                   TextSpan(
-                    text: "${authenticatedUser.name}! ",
+                    text: "${userSession?.name} ",
                     style: context.appTextStyles.sectionSubTitle1.copyWith(
                       color: AppColors.blackColor,
                       fontWeight: FontWeight.bold,
@@ -93,7 +93,7 @@ class AddNicknamePage extends ConsumerWidget {
             UIElevatedButton(
               text: "Confimar apelido",
               isEnabled: state.isFormValid,
-              press: () => viewModel.addNickname(authenticatedUser),
+              press: () => viewModel.addNickname(userSession!),
               isLoading: state.isLoading,
             ),
             UIElevatedButton(
