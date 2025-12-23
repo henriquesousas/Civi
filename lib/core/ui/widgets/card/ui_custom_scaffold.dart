@@ -1,3 +1,4 @@
+import 'package:deehelp/core/ui/theme/dimens.dart';
 import 'package:deehelp/core/ui/widgets/image/ui_my_assets_image_widget.dart';
 import 'package:deehelp/core/ui/theme/app_text_styles.dart';
 import 'package:flutter/material.dart';
@@ -20,6 +21,7 @@ class UICustomScaffold extends StatelessWidget {
   final Widget? floatingActionButton;
   final Widget? bottomNavigationBar;
   final String? assetBackButton;
+  final bool showBackButton;
 
   const UICustomScaffold({
     super.key,
@@ -36,6 +38,7 @@ class UICustomScaffold extends StatelessWidget {
     this.floatingActionButton,
     this.bottomNavigationBar,
     this.assetBackButton,
+    this.showBackButton = true,
   });
 
   @override
@@ -55,25 +58,32 @@ class UICustomScaffold extends StatelessWidget {
                   surfaceTintColor: Colors.transparent,
                   centerTitle: centerTitle,
                   backgroundColor: appBarBgColor ?? Colors.white,
-                  leading: IconButton(
-                    onPressed: () {
-                      if (onBackButtonTap != null) {
-                        onBackButtonTap!();
-                      } else {}
-                    },
-                    icon: UIMyAssetsImageWidget(
-                      color: const Color(0xFF2B5BEE),
-                      isSvg: true,
-                      assetPath: assetBackButton ?? R.svg.circleBackButton,
-                      width: 35.w,
-                      height: 35.h,
-                    ),
-                  ),
+                  leading: showBackButton
+                      ? IconButton(
+                          onPressed: () {
+                            if (onBackButtonTap != null) {
+                              onBackButtonTap!();
+                            } else {}
+                          },
+                          icon: UIMyAssetsImageWidget(
+                            color: const Color(0xFF2B5BEE),
+                            isSvg: true,
+                            assetPath:
+                                assetBackButton ?? R.svg.circleBackButton,
+                            width: 35.w,
+                            height: 35.h,
+                          ),
+                        )
+                      : null,
                   titleSpacing: 0,
-                  title: Text(
-                    "$pageTitle",
-                    style: context.appTextStyles.appBarTitle.copyWith(
-                      fontWeight: FontWeight.w600,
+                  title: Padding(
+                    padding: EdgeInsets.only(
+                        left: showBackButton ? 0 : Dimens.size10.w),
+                    child: Text(
+                      "$pageTitle",
+                      style: context.appTextStyles.appBarTitle.copyWith(
+                        fontWeight: FontWeight.w600,
+                      ),
                     ),
                   ),
                   actions: [

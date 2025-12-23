@@ -28,7 +28,8 @@ class AuthViewModel extends StateNotifier<AuthState> {
       updateState: (newState) => state = newState,
       command: () async => await _signInWithGoogleUseCase.execute(),
       onLoading: () => const AuthState.loading(),
-      onSuccess: (session) => AuthState.authenticated(session.name),
+      onSuccess: (authenticatedUser) =>
+          AuthState.authenticated(authenticatedUser),
       onError: (error) {
         return handleError<AuthState>(
           error,

@@ -156,7 +156,7 @@ extension AuthStatePatterns on AuthState {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function(String userName)? authenticated,
+    TResult Function(AuthenticatedUser user)? authenticated,
     TResult Function(String error, OperationStatus status)? error,
     required TResult orElse(),
   }) {
@@ -167,7 +167,7 @@ extension AuthStatePatterns on AuthState {
       case AuthStateLoading() when loading != null:
         return loading();
       case AuthStateAuthenticated() when authenticated != null:
-        return authenticated(_that.userName);
+        return authenticated(_that.user);
       case AuthStateError() when error != null:
         return error(_that.error, _that.status);
       case _:
@@ -192,7 +192,7 @@ extension AuthStatePatterns on AuthState {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loading,
-    required TResult Function(String userName) authenticated,
+    required TResult Function(AuthenticatedUser user) authenticated,
     required TResult Function(String error, OperationStatus status) error,
   }) {
     final _that = this;
@@ -202,7 +202,7 @@ extension AuthStatePatterns on AuthState {
       case AuthStateLoading():
         return loading();
       case AuthStateAuthenticated():
-        return authenticated(_that.userName);
+        return authenticated(_that.user);
       case AuthStateError():
         return error(_that.error, _that.status);
       case _:
@@ -226,7 +226,7 @@ extension AuthStatePatterns on AuthState {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function()? loading,
-    TResult? Function(String userName)? authenticated,
+    TResult? Function(AuthenticatedUser user)? authenticated,
     TResult? Function(String error, OperationStatus status)? error,
   }) {
     final _that = this;
@@ -236,7 +236,7 @@ extension AuthStatePatterns on AuthState {
       case AuthStateLoading() when loading != null:
         return loading();
       case AuthStateAuthenticated() when authenticated != null:
-        return authenticated(_that.userName);
+        return authenticated(_that.user);
       case AuthStateError() when error != null:
         return error(_that.error, _that.status);
       case _:
@@ -288,9 +288,9 @@ class AuthStateLoading implements AuthState {
 /// @nodoc
 
 class AuthStateAuthenticated implements AuthState {
-  const AuthStateAuthenticated(this.userName);
+  const AuthStateAuthenticated(this.user);
 
-  final String userName;
+  final AuthenticatedUser user;
 
   /// Create a copy of AuthState
   /// with the given fields replaced by the non-null parameter values.
@@ -305,16 +305,15 @@ class AuthStateAuthenticated implements AuthState {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is AuthStateAuthenticated &&
-            (identical(other.userName, userName) ||
-                other.userName == userName));
+            (identical(other.user, user) || other.user == user));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, userName);
+  int get hashCode => Object.hash(runtimeType, user);
 
   @override
   String toString() {
-    return 'AuthState.authenticated(userName: $userName)';
+    return 'AuthState.authenticated(user: $user)';
   }
 }
 
@@ -325,7 +324,7 @@ abstract mixin class $AuthStateAuthenticatedCopyWith<$Res>
           $Res Function(AuthStateAuthenticated) _then) =
       _$AuthStateAuthenticatedCopyWithImpl;
   @useResult
-  $Res call({String userName});
+  $Res call({AuthenticatedUser user});
 }
 
 /// @nodoc
@@ -340,13 +339,13 @@ class _$AuthStateAuthenticatedCopyWithImpl<$Res>
   /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   $Res call({
-    Object? userName = null,
+    Object? user = null,
   }) {
     return _then(AuthStateAuthenticated(
-      null == userName
-          ? _self.userName
-          : userName // ignore: cast_nullable_to_non_nullable
-              as String,
+      null == user
+          ? _self.user
+          : user // ignore: cast_nullable_to_non_nullable
+              as AuthenticatedUser,
     ));
   }
 }

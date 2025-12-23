@@ -109,9 +109,9 @@ class _OnboardPageState extends ConsumerState<OnboardPage> {
         }
 
         if (currentState is AuthStateAuthenticated) {
-          context.push(
+          context.pushReplacement(
             RouterConstant.addNickname,
-            extra: currentState.userName,
+            extra: currentState.user,
           );
         }
       },

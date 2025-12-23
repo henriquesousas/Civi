@@ -14,24 +14,117 @@ T _$identity<T>(T value) => value;
 
 /// @nodoc
 mixin _$ProfileState {
+  String? get nickname;
+  String? get errorMessage;
+  bool get isLoading;
+  bool get isSuccess;
+  bool get isFormValid;
+  List<String> get suggestedNicknames;
+
+  /// Create a copy of ProfileState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @pragma('vm:prefer-inline')
+  $ProfileStateCopyWith<ProfileState> get copyWith =>
+      _$ProfileStateCopyWithImpl<ProfileState>(
+          this as ProfileState, _$identity);
+
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is ProfileState);
+        (other.runtimeType == runtimeType &&
+            other is ProfileState &&
+            (identical(other.nickname, nickname) ||
+                other.nickname == nickname) &&
+            (identical(other.errorMessage, errorMessage) ||
+                other.errorMessage == errorMessage) &&
+            (identical(other.isLoading, isLoading) ||
+                other.isLoading == isLoading) &&
+            (identical(other.isSuccess, isSuccess) ||
+                other.isSuccess == isSuccess) &&
+            (identical(other.isFormValid, isFormValid) ||
+                other.isFormValid == isFormValid) &&
+            const DeepCollectionEquality()
+                .equals(other.suggestedNicknames, suggestedNicknames));
   }
 
   @override
-  int get hashCode => runtimeType.hashCode;
+  int get hashCode => Object.hash(
+      runtimeType,
+      nickname,
+      errorMessage,
+      isLoading,
+      isSuccess,
+      isFormValid,
+      const DeepCollectionEquality().hash(suggestedNicknames));
 
   @override
   String toString() {
-    return 'ProfileState()';
+    return 'ProfileState(nickname: $nickname, errorMessage: $errorMessage, isLoading: $isLoading, isSuccess: $isSuccess, isFormValid: $isFormValid, suggestedNicknames: $suggestedNicknames)';
   }
 }
 
 /// @nodoc
-class $ProfileStateCopyWith<$Res> {
-  $ProfileStateCopyWith(ProfileState _, $Res Function(ProfileState) __);
+abstract mixin class $ProfileStateCopyWith<$Res> {
+  factory $ProfileStateCopyWith(
+          ProfileState value, $Res Function(ProfileState) _then) =
+      _$ProfileStateCopyWithImpl;
+  @useResult
+  $Res call(
+      {String? nickname,
+      String? errorMessage,
+      bool isLoading,
+      bool isSuccess,
+      bool isFormValid,
+      List<String> suggestedNicknames});
+}
+
+/// @nodoc
+class _$ProfileStateCopyWithImpl<$Res> implements $ProfileStateCopyWith<$Res> {
+  _$ProfileStateCopyWithImpl(this._self, this._then);
+
+  final ProfileState _self;
+  final $Res Function(ProfileState) _then;
+
+  /// Create a copy of ProfileState
+  /// with the given fields replaced by the non-null parameter values.
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? nickname = freezed,
+    Object? errorMessage = freezed,
+    Object? isLoading = null,
+    Object? isSuccess = null,
+    Object? isFormValid = null,
+    Object? suggestedNicknames = null,
+  }) {
+    return _then(_self.copyWith(
+      nickname: freezed == nickname
+          ? _self.nickname
+          : nickname // ignore: cast_nullable_to_non_nullable
+              as String?,
+      errorMessage: freezed == errorMessage
+          ? _self.errorMessage
+          : errorMessage // ignore: cast_nullable_to_non_nullable
+              as String?,
+      isLoading: null == isLoading
+          ? _self.isLoading
+          : isLoading // ignore: cast_nullable_to_non_nullable
+              as bool,
+      isSuccess: null == isSuccess
+          ? _self.isSuccess
+          : isSuccess // ignore: cast_nullable_to_non_nullable
+              as bool,
+      isFormValid: null == isFormValid
+          ? _self.isFormValid
+          : isFormValid // ignore: cast_nullable_to_non_nullable
+              as bool,
+      suggestedNicknames: null == suggestedNicknames
+          ? _self.suggestedNicknames
+          : suggestedNicknames // ignore: cast_nullable_to_non_nullable
+              as List<String>,
+    ));
+  }
 }
 
 /// Adds pattern-matching-related methods to [ProfileState].
@@ -49,17 +142,14 @@ extension ProfileStatePatterns on ProfileState {
   /// ```
 
   @optionalTypeArgs
-  TResult maybeMap<TResult extends Object?>({
-    TResult Function(ProfileStateInitial value)? initial,
-    TResult Function(_Data value)? data,
+  TResult maybeMap<TResult extends Object?>(
+    TResult Function(_ProfileState value)? $default, {
     required TResult orElse(),
   }) {
     final _that = this;
     switch (_that) {
-      case ProfileStateInitial() when initial != null:
-        return initial(_that);
-      case _Data() when data != null:
-        return data(_that);
+      case _ProfileState() when $default != null:
+        return $default(_that);
       case _:
         return orElse();
     }
@@ -79,16 +169,13 @@ extension ProfileStatePatterns on ProfileState {
   /// ```
 
   @optionalTypeArgs
-  TResult map<TResult extends Object?>({
-    required TResult Function(ProfileStateInitial value) initial,
-    required TResult Function(_Data value) data,
-  }) {
+  TResult map<TResult extends Object?>(
+    TResult Function(_ProfileState value) $default,
+  ) {
     final _that = this;
     switch (_that) {
-      case ProfileStateInitial():
-        return initial(_that);
-      case _Data():
-        return data(_that);
+      case _ProfileState():
+        return $default(_that);
       case _:
         throw StateError('Unexpected subclass');
     }
@@ -107,16 +194,13 @@ extension ProfileStatePatterns on ProfileState {
   /// ```
 
   @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(ProfileStateInitial value)? initial,
-    TResult? Function(_Data value)? data,
-  }) {
+  TResult? mapOrNull<TResult extends Object?>(
+    TResult? Function(_ProfileState value)? $default,
+  ) {
     final _that = this;
     switch (_that) {
-      case ProfileStateInitial() when initial != null:
-        return initial(_that);
-      case _Data() when data != null:
-        return data(_that);
+      case _ProfileState() when $default != null:
+        return $default(_that);
       case _:
         return null;
     }
@@ -135,25 +219,17 @@ extension ProfileStatePatterns on ProfileState {
   /// ```
 
   @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? initial,
-    TResult Function(
-            String? nickname,
-            String? validationError,
-            String? errorMessage,
-            bool isLoading,
-            bool isSuccess,
-            bool isFormValid)?
-        data,
+  TResult maybeWhen<TResult extends Object?>(
+    TResult Function(String? nickname, String? errorMessage, bool isLoading,
+            bool isSuccess, bool isFormValid, List<String> suggestedNicknames)?
+        $default, {
     required TResult orElse(),
   }) {
     final _that = this;
     switch (_that) {
-      case ProfileStateInitial() when initial != null:
-        return initial();
-      case _Data() when data != null:
-        return data(_that.nickname, _that.validationError, _that.errorMessage,
-            _that.isLoading, _that.isSuccess, _that.isFormValid);
+      case _ProfileState() when $default != null:
+        return $default(_that.nickname, _that.errorMessage, _that.isLoading,
+            _that.isSuccess, _that.isFormValid, _that.suggestedNicknames);
       case _:
         return orElse();
     }
@@ -173,24 +249,16 @@ extension ProfileStatePatterns on ProfileState {
   /// ```
 
   @optionalTypeArgs
-  TResult when<TResult extends Object?>({
-    required TResult Function() initial,
-    required TResult Function(
-            String? nickname,
-            String? validationError,
-            String? errorMessage,
-            bool isLoading,
-            bool isSuccess,
-            bool isFormValid)
-        data,
-  }) {
+  TResult when<TResult extends Object?>(
+    TResult Function(String? nickname, String? errorMessage, bool isLoading,
+            bool isSuccess, bool isFormValid, List<String> suggestedNicknames)
+        $default,
+  ) {
     final _that = this;
     switch (_that) {
-      case ProfileStateInitial():
-        return initial();
-      case _Data():
-        return data(_that.nickname, _that.validationError, _that.errorMessage,
-            _that.isLoading, _that.isSuccess, _that.isFormValid);
+      case _ProfileState():
+        return $default(_that.nickname, _that.errorMessage, _that.isLoading,
+            _that.isSuccess, _that.isFormValid, _that.suggestedNicknames);
       case _:
         throw StateError('Unexpected subclass');
     }
@@ -209,24 +277,16 @@ extension ProfileStatePatterns on ProfileState {
   /// ```
 
   @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? initial,
-    TResult? Function(
-            String? nickname,
-            String? validationError,
-            String? errorMessage,
-            bool isLoading,
-            bool isSuccess,
-            bool isFormValid)?
-        data,
-  }) {
+  TResult? whenOrNull<TResult extends Object?>(
+    TResult? Function(String? nickname, String? errorMessage, bool isLoading,
+            bool isSuccess, bool isFormValid, List<String> suggestedNicknames)?
+        $default,
+  ) {
     final _that = this;
     switch (_that) {
-      case ProfileStateInitial() when initial != null:
-        return initial();
-      case _Data() when data != null:
-        return data(_that.nickname, _that.validationError, _that.errorMessage,
-            _that.isLoading, _that.isSuccess, _that.isFormValid);
+      case _ProfileState() when $default != null:
+        return $default(_that.nickname, _that.errorMessage, _that.isLoading,
+            _that.isSuccess, _that.isFormValid, _that.suggestedNicknames);
       case _:
         return null;
     }
@@ -235,61 +295,54 @@ extension ProfileStatePatterns on ProfileState {
 
 /// @nodoc
 
-class ProfileStateInitial implements ProfileState {
-  const ProfileStateInitial();
-
-  @override
-  bool operator ==(Object other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is ProfileStateInitial);
-  }
-
-  @override
-  int get hashCode => runtimeType.hashCode;
-
-  @override
-  String toString() {
-    return 'ProfileState.initial()';
-  }
-}
-
-/// @nodoc
-
-class _Data implements ProfileState {
-  const _Data(
+class _ProfileState implements ProfileState {
+  const _ProfileState(
       {this.nickname,
-      this.validationError,
       this.errorMessage,
       this.isLoading = false,
       this.isSuccess = false,
-      this.isFormValid = false});
+      this.isFormValid = false,
+      final List<String> suggestedNicknames = const []})
+      : _suggestedNicknames = suggestedNicknames;
 
+  @override
   final String? nickname;
-  final String? validationError;
+  @override
   final String? errorMessage;
+  @override
   @JsonKey()
   final bool isLoading;
+  @override
   @JsonKey()
   final bool isSuccess;
+  @override
   @JsonKey()
   final bool isFormValid;
+  final List<String> _suggestedNicknames;
+  @override
+  @JsonKey()
+  List<String> get suggestedNicknames {
+    if (_suggestedNicknames is EqualUnmodifiableListView)
+      return _suggestedNicknames;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_suggestedNicknames);
+  }
 
   /// Create a copy of ProfileState
   /// with the given fields replaced by the non-null parameter values.
+  @override
   @JsonKey(includeFromJson: false, includeToJson: false)
   @pragma('vm:prefer-inline')
-  _$DataCopyWith<_Data> get copyWith =>
-      __$DataCopyWithImpl<_Data>(this, _$identity);
+  _$ProfileStateCopyWith<_ProfileState> get copyWith =>
+      __$ProfileStateCopyWithImpl<_ProfileState>(this, _$identity);
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _Data &&
+            other is _ProfileState &&
             (identical(other.nickname, nickname) ||
                 other.nickname == nickname) &&
-            (identical(other.validationError, validationError) ||
-                other.validationError == validationError) &&
             (identical(other.errorMessage, errorMessage) ||
                 other.errorMessage == errorMessage) &&
             (identical(other.isLoading, isLoading) ||
@@ -297,60 +350,68 @@ class _Data implements ProfileState {
             (identical(other.isSuccess, isSuccess) ||
                 other.isSuccess == isSuccess) &&
             (identical(other.isFormValid, isFormValid) ||
-                other.isFormValid == isFormValid));
+                other.isFormValid == isFormValid) &&
+            const DeepCollectionEquality()
+                .equals(other._suggestedNicknames, _suggestedNicknames));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, nickname, validationError,
-      errorMessage, isLoading, isSuccess, isFormValid);
+  int get hashCode => Object.hash(
+      runtimeType,
+      nickname,
+      errorMessage,
+      isLoading,
+      isSuccess,
+      isFormValid,
+      const DeepCollectionEquality().hash(_suggestedNicknames));
 
   @override
   String toString() {
-    return 'ProfileState.data(nickname: $nickname, validationError: $validationError, errorMessage: $errorMessage, isLoading: $isLoading, isSuccess: $isSuccess, isFormValid: $isFormValid)';
+    return 'ProfileState(nickname: $nickname, errorMessage: $errorMessage, isLoading: $isLoading, isSuccess: $isSuccess, isFormValid: $isFormValid, suggestedNicknames: $suggestedNicknames)';
   }
 }
 
 /// @nodoc
-abstract mixin class _$DataCopyWith<$Res>
+abstract mixin class _$ProfileStateCopyWith<$Res>
     implements $ProfileStateCopyWith<$Res> {
-  factory _$DataCopyWith(_Data value, $Res Function(_Data) _then) =
-      __$DataCopyWithImpl;
+  factory _$ProfileStateCopyWith(
+          _ProfileState value, $Res Function(_ProfileState) _then) =
+      __$ProfileStateCopyWithImpl;
+  @override
   @useResult
   $Res call(
       {String? nickname,
-      String? validationError,
       String? errorMessage,
       bool isLoading,
       bool isSuccess,
-      bool isFormValid});
+      bool isFormValid,
+      List<String> suggestedNicknames});
 }
 
 /// @nodoc
-class __$DataCopyWithImpl<$Res> implements _$DataCopyWith<$Res> {
-  __$DataCopyWithImpl(this._self, this._then);
+class __$ProfileStateCopyWithImpl<$Res>
+    implements _$ProfileStateCopyWith<$Res> {
+  __$ProfileStateCopyWithImpl(this._self, this._then);
 
-  final _Data _self;
-  final $Res Function(_Data) _then;
+  final _ProfileState _self;
+  final $Res Function(_ProfileState) _then;
 
   /// Create a copy of ProfileState
   /// with the given fields replaced by the non-null parameter values.
+  @override
   @pragma('vm:prefer-inline')
   $Res call({
     Object? nickname = freezed,
-    Object? validationError = freezed,
     Object? errorMessage = freezed,
     Object? isLoading = null,
     Object? isSuccess = null,
     Object? isFormValid = null,
+    Object? suggestedNicknames = null,
   }) {
-    return _then(_Data(
+    return _then(_ProfileState(
       nickname: freezed == nickname
           ? _self.nickname
           : nickname // ignore: cast_nullable_to_non_nullable
-              as String?,
-      validationError: freezed == validationError
-          ? _self.validationError
-          : validationError // ignore: cast_nullable_to_non_nullable
               as String?,
       errorMessage: freezed == errorMessage
           ? _self.errorMessage
@@ -368,6 +429,10 @@ class __$DataCopyWithImpl<$Res> implements _$DataCopyWith<$Res> {
           ? _self.isFormValid
           : isFormValid // ignore: cast_nullable_to_non_nullable
               as bool,
+      suggestedNicknames: null == suggestedNicknames
+          ? _self._suggestedNicknames
+          : suggestedNicknames // ignore: cast_nullable_to_non_nullable
+              as List<String>,
     ));
   }
 }
