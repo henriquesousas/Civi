@@ -9,6 +9,7 @@ import 'package:deehelp/features/onboarding/page/components/onboard_content.dart
 import 'package:deehelp/features/onboarding/page/onboard_item.dart';
 import 'package:deehelp/features/onboarding/page/onboard_view.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
@@ -74,22 +75,25 @@ class _OnboardPageState extends ConsumerState<OnboardPage> {
     listeners();
 
     return Scaffold(
-      body: Stack(
-        children: [
-          PageView.builder(
-            controller: _pageController,
-            onPageChanged: _onPageChanged,
-            itemBuilder: (context, index) {
-              final realIndex = index % pages.length;
-              final page = pages[realIndex];
-              return OnboardContent(page: page);
-            },
-          ),
-          state.maybeWhen(
-            loading: () => _buildView(isLoading: true),
-            orElse: () => _buildView(),
-          ),
-        ],
+      body: AnnotatedRegion<SystemUiOverlayStyle>(
+        value: SystemUiOverlayStyle.dark,
+        child: Stack(
+          children: [
+            PageView.builder(
+              controller: _pageController,
+              onPageChanged: _onPageChanged,
+              itemBuilder: (context, index) {
+                final realIndex = index % pages.length;
+                final page = pages[realIndex];
+                return OnboardContent(page: page);
+              },
+            ),
+            state.maybeWhen(
+              loading: () => _buildView(isLoading: true),
+              orElse: () => _buildView(),
+            ),
+          ],
+        ),
       ),
     );
   }

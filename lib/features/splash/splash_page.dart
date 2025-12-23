@@ -30,7 +30,6 @@ class _SplashPageState extends State<SplashPage> {
 
   void _navigateToNextScreen() async {
     await Future.delayed(const Duration(milliseconds: 5000));
-    // context.pushReplacement(RouterConstant.onboarding);
     WidgetsBinding.instance.addPostFrameCallback((_) async {
       context.pushReplacement(RouterConstant.onboarding);
       // final session = await context.read<UserSessionService>().load();
