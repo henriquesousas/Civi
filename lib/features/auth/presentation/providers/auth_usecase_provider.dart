@@ -21,6 +21,9 @@ final signOutUseCaseProvider = Provider<SignOutUsecase>((ref) {
 });
 
 final getAuthenticatedUserUsecaseProvider =
-    Provider<GetAuthenticatedUserUsecase>((ref) {
-  return GetAuthenticatedUserUsecase();
+    Provider.autoDispose<GetAuthenticatedUserUsecase>((ref) {
+  final sessionRepository =
+      ref.watch(sharedPreferencesSessionRepositoryProvider);
+
+  return GetAuthenticatedUserUsecase(sessionRepository: sessionRepository);
 });

@@ -45,12 +45,15 @@ class SupabaseAuthRepository extends AuthRepository {
       return Result.failure(const GetCurrentUserFailure());
     }
 
-    final name = user.userMetadata?['name'] as String?;
+    final userId = user.id;
+    final name = user.userMetadata?['name'].toString() ?? '';
+    final email = user.email ?? '';
     final photoUrl = user.userMetadata?['avatar_url'] as String?;
+
     final authenticatedUser = AuthenticatedUser(
-      id: user.id,
-      name: name ?? '',
-      email: user.email ?? '',
+      id: userId,
+      name: name,
+      email: email,
       photoUrl: photoUrl,
     );
     return Result.success(authenticatedUser);

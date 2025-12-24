@@ -2,26 +2,30 @@ import 'package:deehelp/core/ui/extensions/screen_size_extension.dart';
 import 'package:deehelp/core/ui/theme/app_colors.dart';
 import 'package:deehelp/core/ui/theme/app_text_styles.dart';
 import 'package:deehelp/core/ui/theme/dimens.dart';
+import 'package:deehelp/core/utils/result_extension.dart';
+import 'package:deehelp/features/auth/presentation/providers/auth_usecase_provider.dart';
+import 'package:deehelp/features/auth/presentation/providers/session_provider.dart';
 import 'package:deehelp/features/splash/components/splash_bg.dart';
 import 'package:deehelp/features/splash/components/splash_content.dart';
 import 'package:deehelp/features/splash/components/splash_progress.dart';
 import 'package:deehelp/features/splash/components/splash_logo.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
 
 import '../../core/ui/animation/transition_animator.dart';
 import '../../core/router/router_constants.dart';
 
-class SplashPage extends StatefulWidget {
+class SplashPage extends ConsumerStatefulWidget {
   const SplashPage({super.key});
 
   @override
-  State<SplashPage> createState() => _SplashPageState();
+  ConsumerState<SplashPage> createState() => _SplashPageState();
 }
 
-class _SplashPageState extends State<SplashPage> {
+class _SplashPageState extends ConsumerState<SplashPage> {
   @override
   void initState() {
     super.initState();
@@ -31,14 +35,17 @@ class _SplashPageState extends State<SplashPage> {
   void _navigateToNextScreen() async {
     await Future.delayed(const Duration(milliseconds: 5000));
     WidgetsBinding.instance.addPostFrameCallback((_) async {
-      context.pushReplacement(RouterConstant.onboarding);
-      // final session = await context.read<UserSessionService>().load();
-      // if (!mounted) return;
-      // if (session != null) {
-      //   context.pushReplacement(RouterConstant.map);
-      // } else {
-      //   context.pushReplacement(RouterConstant.onboarding);
-      // }
+      final result =
+          await ref.read(getAuthenticatedUserUsecaseProvider).execute();
+      result.when(
+        success: (user) {
+          ref.watch(userSessionProvider.notifier).setSession(user);
+          context.pushReplacement(RouterConstant.map);
+        },
+        failure: (_) {
+          context.pushReplacement(RouterConstant.onboarding);
+        },
+      );
     });
   }
 

@@ -3,4 +3,5 @@ import '../../../../core/utils/result.dart';
 
 abstract class ProfileRepository {
   Future<Result<Unit>> addNickname(String nickname, String userId);
+  Future<Result<String?>> getNickName(String userId);
 }

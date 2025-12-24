@@ -1,26 +1,37 @@
 import 'package:deehelp/features/auth/domain/entity/authenticated_user.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+import '../../domain/repositories/session_repository.dart';
+
 class SessionNotifier extends StateNotifier<AuthenticatedUser?> {
-  SessionNotifier() : super(null);
-  void setSession(AuthenticatedUser session) {
+  final SessionRepository _sessionRepository;
+
+  SessionNotifier({
+    required SessionRepository sessionRepository,
+  })  : _sessionRepository = sessionRepository,
+        super(null);
+
+  void setSession(AuthenticatedUser session) async {
+    await _sessionRepository.save(session);
     state = session;
   }
 
-  //O certo seria criar um novo método que atualiza apenas o nickname
-  void setNickname(String nickname) {
+  void setNickname(String nickname) async {
     if (state != null) {
-      state = AuthenticatedUser(
+      final newAuthenticatedUserInstance = AuthenticatedUser(
         id: state!.id,
         name: state!.name,
         email: state!.email,
         photoUrl: state!.photoUrl,
         nickName: nickname,
       );
+      await _sessionRepository.save(newAuthenticatedUserInstance);
+      state = newAuthenticatedUserInstance;
     }
   }
 
   void clearSession() {
+    _sessionRepository.clear();
     state = null;
   }
 }

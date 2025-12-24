@@ -36,6 +36,11 @@ extension ResultExtensions<T> on Result<T> {
     );
   }
 
+  T? get data => when(success: (value) => value, failure: (_) => null);
+  Object? get error => when(success: (_) => null, failure: (err) => err);
+  bool get isSuccess => data != null;
+  bool get isFailure => error != null;
+
   /// Mapeia o valor de sucesso sem mudar o tipo Result
   // Future<Result<U>> map<U>(
   //   Future<U> Function(T value) mapper,
@@ -80,18 +85,3 @@ extension FutureResultExtensions<T> on Future<Result<T>> {
     );
   }
 }
-
-// lib/core/extensions/result_extensions.dart
-// extension ResultExtensions2<T> on Result<T> {
-//   Future<Result<T>> tap(
-//     Future<void> Function(T value) action,
-//   ) async {
-//     return when(
-//       success: (value) async {
-//         await action(value);
-//         return Result.success(value);
-//       },
-//       failure: (f) => Result.failure(f),
-//     );
-//   }
-// }
