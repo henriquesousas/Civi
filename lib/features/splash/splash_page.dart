@@ -1,10 +1,11 @@
 import 'package:deehelp/core/ui/extensions/screen_size_extension.dart';
+import 'package:deehelp/core/ui/extensions/string_extension.dart';
 import 'package:deehelp/core/ui/theme/app_colors.dart';
 import 'package:deehelp/core/ui/theme/app_text_styles.dart';
 import 'package:deehelp/core/ui/theme/dimens.dart';
-import 'package:deehelp/core/utils/result_extension.dart';
-import 'package:deehelp/features/auth/presentation/providers/auth_usecase_provider.dart';
-import 'package:deehelp/features/auth/presentation/providers/session_provider.dart';
+import 'package:deehelp/features/auth/domain/entity/authenticated_user.dart';
+import 'package:deehelp/features/auth/presentation/auth/providers/auth_view_model_provider.dart';
+import 'package:deehelp/features/auth/presentation/auth/state/auth_state.dart';
 import 'package:deehelp/features/splash/components/splash_bg.dart';
 import 'package:deehelp/features/splash/components/splash_content.dart';
 import 'package:deehelp/features/splash/components/splash_progress.dart';
@@ -29,28 +30,34 @@ class _SplashPageState extends ConsumerState<SplashPage> {
   @override
   void initState() {
     super.initState();
-    _navigateToNextScreen();
+    _checkUserAuthentication();
   }
 
-  void _navigateToNextScreen() async {
+  void _checkUserAuthentication() async {
     await Future.delayed(const Duration(milliseconds: 5000));
     WidgetsBinding.instance.addPostFrameCallback((_) async {
-      final result =
-          await ref.read(getAuthenticatedUserUsecaseProvider).execute();
-      result.when(
-        success: (user) {
-          ref.watch(userSessionProvider.notifier).setSession(user);
-          context.pushReplacement(RouterConstant.map);
-        },
-        failure: (_) {
-          context.pushReplacement(RouterConstant.onboarding);
-        },
-      );
+      ref.watch(authViewViewModelProvider.notifier).getAuthenticatedUser();
     });
   }
 
   @override
   Widget build(BuildContext context) {
+    ref.listen<AuthState>(authViewViewModelProvider, (previous, currentState) {
+      switch (currentState) {
+        case AuthStateAuthenticated(:final user):
+          if (user.authMethod == AuthMethod.google &&
+              user.nickName.isNullOrEmpty()) {
+            context.pushReplacement(RouterConstant.addNickname);
+          } else {
+            context.pushReplacement(RouterConstant.map);
+          }
+          return;
+        case AuthStateUnAuthenticated():
+          context.pushReplacement(RouterConstant.onboarding);
+          break;
+      }
+    });
+
     return Scaffold(
       body: AnnotatedRegion<SystemUiOverlayStyle>(
         value: SystemUiOverlayStyle.light.copyWith(

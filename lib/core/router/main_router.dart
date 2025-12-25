@@ -1,7 +1,7 @@
 import 'package:deehelp/core/router/router_constants.dart';
 import 'package:deehelp/core/router/slide_transition_page.dart';
 import 'package:deehelp/features/auth/domain/entity/authenticated_user.dart';
-import 'package:deehelp/features/profile/presentation/view/add_nickname_page.dart';
+import 'package:deehelp/features/auth/presentation/nickname/add_nickname_page.dart';
 import 'package:deehelp/features/faq/faq_provider.dart';
 import 'package:deehelp/features/incident/presentation/add/add_incident_page.dart';
 import 'package:deehelp/features/map/presentation/map_page.dart';

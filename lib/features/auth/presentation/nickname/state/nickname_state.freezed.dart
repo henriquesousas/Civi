@@ -3,7 +3,7 @@
 // ignore_for_file: type=lint
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
-part of 'profile_state.dart';
+part of 'nickname_state.dart';
 
 // **************************************************************************
 // FreezedGenerator
@@ -13,7 +13,7 @@ part of 'profile_state.dart';
 T _$identity<T>(T value) => value;
 
 /// @nodoc
-mixin _$ProfileState {
+mixin _$NicknameState {
   String? get nickname;
   String? get errorMessage;
   bool get isLoading;
@@ -21,19 +21,19 @@ mixin _$ProfileState {
   bool get isFormValid;
   List<String> get suggestedNicknames;
 
-  /// Create a copy of ProfileState
+  /// Create a copy of NicknameState
   /// with the given fields replaced by the non-null parameter values.
   @JsonKey(includeFromJson: false, includeToJson: false)
   @pragma('vm:prefer-inline')
-  $ProfileStateCopyWith<ProfileState> get copyWith =>
-      _$ProfileStateCopyWithImpl<ProfileState>(
-          this as ProfileState, _$identity);
+  $NicknameStateCopyWith<NicknameState> get copyWith =>
+      _$NicknameStateCopyWithImpl<NicknameState>(
+          this as NicknameState, _$identity);
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is ProfileState &&
+            other is NicknameState &&
             (identical(other.nickname, nickname) ||
                 other.nickname == nickname) &&
             (identical(other.errorMessage, errorMessage) ||
@@ -60,15 +60,15 @@ mixin _$ProfileState {
 
   @override
   String toString() {
-    return 'ProfileState(nickname: $nickname, errorMessage: $errorMessage, isLoading: $isLoading, isSuccess: $isSuccess, isFormValid: $isFormValid, suggestedNicknames: $suggestedNicknames)';
+    return 'NicknameState(nickname: $nickname, errorMessage: $errorMessage, isLoading: $isLoading, isSuccess: $isSuccess, isFormValid: $isFormValid, suggestedNicknames: $suggestedNicknames)';
   }
 }
 
 /// @nodoc
-abstract mixin class $ProfileStateCopyWith<$Res> {
-  factory $ProfileStateCopyWith(
-          ProfileState value, $Res Function(ProfileState) _then) =
-      _$ProfileStateCopyWithImpl;
+abstract mixin class $NicknameStateCopyWith<$Res> {
+  factory $NicknameStateCopyWith(
+          NicknameState value, $Res Function(NicknameState) _then) =
+      _$NicknameStateCopyWithImpl;
   @useResult
   $Res call(
       {String? nickname,
@@ -80,13 +80,14 @@ abstract mixin class $ProfileStateCopyWith<$Res> {
 }
 
 /// @nodoc
-class _$ProfileStateCopyWithImpl<$Res> implements $ProfileStateCopyWith<$Res> {
-  _$ProfileStateCopyWithImpl(this._self, this._then);
+class _$NicknameStateCopyWithImpl<$Res>
+    implements $NicknameStateCopyWith<$Res> {
+  _$NicknameStateCopyWithImpl(this._self, this._then);
 
-  final ProfileState _self;
-  final $Res Function(ProfileState) _then;
+  final NicknameState _self;
+  final $Res Function(NicknameState) _then;
 
-  /// Create a copy of ProfileState
+  /// Create a copy of NicknameState
   /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
@@ -127,8 +128,8 @@ class _$ProfileStateCopyWithImpl<$Res> implements $ProfileStateCopyWith<$Res> {
   }
 }
 
-/// Adds pattern-matching-related methods to [ProfileState].
-extension ProfileStatePatterns on ProfileState {
+/// Adds pattern-matching-related methods to [NicknameState].
+extension NicknameStatePatterns on NicknameState {
   /// A variant of `map` that fallback to returning `orElse`.
   ///
   /// It is equivalent to doing:
@@ -143,12 +144,12 @@ extension ProfileStatePatterns on ProfileState {
 
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>(
-    TResult Function(_ProfileState value)? $default, {
+    TResult Function(_NicknameState value)? $default, {
     required TResult orElse(),
   }) {
     final _that = this;
     switch (_that) {
-      case _ProfileState() when $default != null:
+      case _NicknameState() when $default != null:
         return $default(_that);
       case _:
         return orElse();
@@ -170,11 +171,11 @@ extension ProfileStatePatterns on ProfileState {
 
   @optionalTypeArgs
   TResult map<TResult extends Object?>(
-    TResult Function(_ProfileState value) $default,
+    TResult Function(_NicknameState value) $default,
   ) {
     final _that = this;
     switch (_that) {
-      case _ProfileState():
+      case _NicknameState():
         return $default(_that);
       case _:
         throw StateError('Unexpected subclass');
@@ -195,11 +196,11 @@ extension ProfileStatePatterns on ProfileState {
 
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>(
-    TResult? Function(_ProfileState value)? $default,
+    TResult? Function(_NicknameState value)? $default,
   ) {
     final _that = this;
     switch (_that) {
-      case _ProfileState() when $default != null:
+      case _NicknameState() when $default != null:
         return $default(_that);
       case _:
         return null;
@@ -227,7 +228,7 @@ extension ProfileStatePatterns on ProfileState {
   }) {
     final _that = this;
     switch (_that) {
-      case _ProfileState() when $default != null:
+      case _NicknameState() when $default != null:
         return $default(_that.nickname, _that.errorMessage, _that.isLoading,
             _that.isSuccess, _that.isFormValid, _that.suggestedNicknames);
       case _:
@@ -256,7 +257,7 @@ extension ProfileStatePatterns on ProfileState {
   ) {
     final _that = this;
     switch (_that) {
-      case _ProfileState():
+      case _NicknameState():
         return $default(_that.nickname, _that.errorMessage, _that.isLoading,
             _that.isSuccess, _that.isFormValid, _that.suggestedNicknames);
       case _:
@@ -284,7 +285,7 @@ extension ProfileStatePatterns on ProfileState {
   ) {
     final _that = this;
     switch (_that) {
-      case _ProfileState() when $default != null:
+      case _NicknameState() when $default != null:
         return $default(_that.nickname, _that.errorMessage, _that.isLoading,
             _that.isSuccess, _that.isFormValid, _that.suggestedNicknames);
       case _:
@@ -295,8 +296,8 @@ extension ProfileStatePatterns on ProfileState {
 
 /// @nodoc
 
-class _ProfileState implements ProfileState {
-  const _ProfileState(
+class _NicknameState implements NicknameState {
+  const _NicknameState(
       {this.nickname,
       this.errorMessage,
       this.isLoading = false,
@@ -328,19 +329,19 @@ class _ProfileState implements ProfileState {
     return EqualUnmodifiableListView(_suggestedNicknames);
   }
 
-  /// Create a copy of ProfileState
+  /// Create a copy of NicknameState
   /// with the given fields replaced by the non-null parameter values.
   @override
   @JsonKey(includeFromJson: false, includeToJson: false)
   @pragma('vm:prefer-inline')
-  _$ProfileStateCopyWith<_ProfileState> get copyWith =>
-      __$ProfileStateCopyWithImpl<_ProfileState>(this, _$identity);
+  _$NicknameStateCopyWith<_NicknameState> get copyWith =>
+      __$NicknameStateCopyWithImpl<_NicknameState>(this, _$identity);
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _ProfileState &&
+            other is _NicknameState &&
             (identical(other.nickname, nickname) ||
                 other.nickname == nickname) &&
             (identical(other.errorMessage, errorMessage) ||
@@ -367,16 +368,16 @@ class _ProfileState implements ProfileState {
 
   @override
   String toString() {
-    return 'ProfileState(nickname: $nickname, errorMessage: $errorMessage, isLoading: $isLoading, isSuccess: $isSuccess, isFormValid: $isFormValid, suggestedNicknames: $suggestedNicknames)';
+    return 'NicknameState(nickname: $nickname, errorMessage: $errorMessage, isLoading: $isLoading, isSuccess: $isSuccess, isFormValid: $isFormValid, suggestedNicknames: $suggestedNicknames)';
   }
 }
 
 /// @nodoc
-abstract mixin class _$ProfileStateCopyWith<$Res>
-    implements $ProfileStateCopyWith<$Res> {
-  factory _$ProfileStateCopyWith(
-          _ProfileState value, $Res Function(_ProfileState) _then) =
-      __$ProfileStateCopyWithImpl;
+abstract mixin class _$NicknameStateCopyWith<$Res>
+    implements $NicknameStateCopyWith<$Res> {
+  factory _$NicknameStateCopyWith(
+          _NicknameState value, $Res Function(_NicknameState) _then) =
+      __$NicknameStateCopyWithImpl;
   @override
   @useResult
   $Res call(
@@ -389,14 +390,14 @@ abstract mixin class _$ProfileStateCopyWith<$Res>
 }
 
 /// @nodoc
-class __$ProfileStateCopyWithImpl<$Res>
-    implements _$ProfileStateCopyWith<$Res> {
-  __$ProfileStateCopyWithImpl(this._self, this._then);
+class __$NicknameStateCopyWithImpl<$Res>
+    implements _$NicknameStateCopyWith<$Res> {
+  __$NicknameStateCopyWithImpl(this._self, this._then);
 
-  final _ProfileState _self;
-  final $Res Function(_ProfileState) _then;
+  final _NicknameState _self;
+  final $Res Function(_NicknameState) _then;
 
-  /// Create a copy of ProfileState
+  /// Create a copy of NicknameState
   /// with the given fields replaced by the non-null parameter values.
   @override
   @pragma('vm:prefer-inline')
@@ -408,7 +409,7 @@ class __$ProfileStateCopyWithImpl<$Res>
     Object? isFormValid = null,
     Object? suggestedNicknames = null,
   }) {
-    return _then(_ProfileState(
+    return _then(_NicknameState(
       nickname: freezed == nickname
           ? _self.nickname
           : nickname // ignore: cast_nullable_to_non_nullable

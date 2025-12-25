@@ -1,13 +1,14 @@
-import 'package:deehelp/features/auth/presentation/providers/session_provider.dart';
+import 'package:deehelp/features/auth/presentation/nickname/providers/nickname_viewmodel_provider.dart';
+import 'package:deehelp/features/auth/presentation/auth/providers/auth_view_model_provider.dart';
+import 'package:deehelp/features/auth/presentation/session/session_provider.dart';
 import 'package:deehelp/core/router/router_constants.dart';
 import 'package:deehelp/core/ui/theme/app_colors.dart';
 import 'package:deehelp/core/ui/theme/app_text_styles.dart';
 import 'package:deehelp/core/ui/widgets/button/ui_elevated_button.dart';
 import 'package:deehelp/core/ui/widgets/card/ui_custom_scaffold.dart';
 import 'package:deehelp/core/ui/widgets/textfield/ui_text_field_rounded.dart';
-import 'package:deehelp/features/profile/presentation/providers/profile_view_model.provider.dart';
 import 'package:deehelp/features/profile/presentation/view/widget/suggest_name.dart';
-import 'package:deehelp/features/profile/presentation/viewmodel/state/profile_state.dart';
+import 'package:deehelp/features/auth/presentation/nickname/state/nickname_state.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
@@ -18,12 +19,12 @@ class AddNicknamePage extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final viewModel = ref.watch(profileViewModelProvider.notifier);
-    final state = ref.watch(profileViewModelProvider);
+    final viewModel = ref.watch(nicknameViewModelProvider.notifier);
+    final state = ref.watch(nicknameViewModelProvider);
     final userSessionNotifier = ref.watch(userSessionProvider.notifier);
     final authenticatedUser = ref.watch(userSessionProvider);
 
-    ref.listen<ProfileState>(profileViewModelProvider,
+    ref.listen<NicknameState>(nicknameViewModelProvider,
         (previous, currentState) {
       if (currentState.isSuccess) {
         userSessionNotifier.setNickname(

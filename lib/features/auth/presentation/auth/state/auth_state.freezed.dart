@@ -52,7 +52,10 @@ extension AuthStatePatterns on AuthState {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(AuthStateInitial value)? initial,
     TResult Function(AuthStateLoading value)? loading,
+    TResult Function(AuthStateLoadingAuthWithoutAccount value)?
+        loadingAuthWithoutAccount,
     TResult Function(AuthStateAuthenticated value)? authenticated,
+    TResult Function(AuthStateUnAuthenticated value)? unauthenticated,
     TResult Function(AuthStateError value)? error,
     required TResult orElse(),
   }) {
@@ -62,8 +65,13 @@ extension AuthStatePatterns on AuthState {
         return initial(_that);
       case AuthStateLoading() when loading != null:
         return loading(_that);
+      case AuthStateLoadingAuthWithoutAccount()
+          when loadingAuthWithoutAccount != null:
+        return loadingAuthWithoutAccount(_that);
       case AuthStateAuthenticated() when authenticated != null:
         return authenticated(_that);
+      case AuthStateUnAuthenticated() when unauthenticated != null:
+        return unauthenticated(_that);
       case AuthStateError() when error != null:
         return error(_that);
       case _:
@@ -88,7 +96,10 @@ extension AuthStatePatterns on AuthState {
   TResult map<TResult extends Object?>({
     required TResult Function(AuthStateInitial value) initial,
     required TResult Function(AuthStateLoading value) loading,
+    required TResult Function(AuthStateLoadingAuthWithoutAccount value)
+        loadingAuthWithoutAccount,
     required TResult Function(AuthStateAuthenticated value) authenticated,
+    required TResult Function(AuthStateUnAuthenticated value) unauthenticated,
     required TResult Function(AuthStateError value) error,
   }) {
     final _that = this;
@@ -97,8 +108,12 @@ extension AuthStatePatterns on AuthState {
         return initial(_that);
       case AuthStateLoading():
         return loading(_that);
+      case AuthStateLoadingAuthWithoutAccount():
+        return loadingAuthWithoutAccount(_that);
       case AuthStateAuthenticated():
         return authenticated(_that);
+      case AuthStateUnAuthenticated():
+        return unauthenticated(_that);
       case AuthStateError():
         return error(_that);
       case _:
@@ -122,7 +137,10 @@ extension AuthStatePatterns on AuthState {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(AuthStateInitial value)? initial,
     TResult? Function(AuthStateLoading value)? loading,
+    TResult? Function(AuthStateLoadingAuthWithoutAccount value)?
+        loadingAuthWithoutAccount,
     TResult? Function(AuthStateAuthenticated value)? authenticated,
+    TResult? Function(AuthStateUnAuthenticated value)? unauthenticated,
     TResult? Function(AuthStateError value)? error,
   }) {
     final _that = this;
@@ -131,8 +149,13 @@ extension AuthStatePatterns on AuthState {
         return initial(_that);
       case AuthStateLoading() when loading != null:
         return loading(_that);
+      case AuthStateLoadingAuthWithoutAccount()
+          when loadingAuthWithoutAccount != null:
+        return loadingAuthWithoutAccount(_that);
       case AuthStateAuthenticated() when authenticated != null:
         return authenticated(_that);
+      case AuthStateUnAuthenticated() when unauthenticated != null:
+        return unauthenticated(_that);
       case AuthStateError() when error != null:
         return error(_that);
       case _:
@@ -156,7 +179,9 @@ extension AuthStatePatterns on AuthState {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
+    TResult Function()? loadingAuthWithoutAccount,
     TResult Function(AuthenticatedUser user)? authenticated,
+    TResult Function()? unauthenticated,
     TResult Function(String error, OperationStatus status)? error,
     required TResult orElse(),
   }) {
@@ -166,8 +191,13 @@ extension AuthStatePatterns on AuthState {
         return initial();
       case AuthStateLoading() when loading != null:
         return loading();
+      case AuthStateLoadingAuthWithoutAccount()
+          when loadingAuthWithoutAccount != null:
+        return loadingAuthWithoutAccount();
       case AuthStateAuthenticated() when authenticated != null:
         return authenticated(_that.user);
+      case AuthStateUnAuthenticated() when unauthenticated != null:
+        return unauthenticated();
       case AuthStateError() when error != null:
         return error(_that.error, _that.status);
       case _:
@@ -192,7 +222,9 @@ extension AuthStatePatterns on AuthState {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loading,
+    required TResult Function() loadingAuthWithoutAccount,
     required TResult Function(AuthenticatedUser user) authenticated,
+    required TResult Function() unauthenticated,
     required TResult Function(String error, OperationStatus status) error,
   }) {
     final _that = this;
@@ -201,8 +233,12 @@ extension AuthStatePatterns on AuthState {
         return initial();
       case AuthStateLoading():
         return loading();
+      case AuthStateLoadingAuthWithoutAccount():
+        return loadingAuthWithoutAccount();
       case AuthStateAuthenticated():
         return authenticated(_that.user);
+      case AuthStateUnAuthenticated():
+        return unauthenticated();
       case AuthStateError():
         return error(_that.error, _that.status);
       case _:
@@ -226,7 +262,9 @@ extension AuthStatePatterns on AuthState {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function()? loading,
+    TResult? Function()? loadingAuthWithoutAccount,
     TResult? Function(AuthenticatedUser user)? authenticated,
+    TResult? Function()? unauthenticated,
     TResult? Function(String error, OperationStatus status)? error,
   }) {
     final _that = this;
@@ -235,8 +273,13 @@ extension AuthStatePatterns on AuthState {
         return initial();
       case AuthStateLoading() when loading != null:
         return loading();
+      case AuthStateLoadingAuthWithoutAccount()
+          when loadingAuthWithoutAccount != null:
+        return loadingAuthWithoutAccount();
       case AuthStateAuthenticated() when authenticated != null:
         return authenticated(_that.user);
+      case AuthStateUnAuthenticated() when unauthenticated != null:
+        return unauthenticated();
       case AuthStateError() when error != null:
         return error(_that.error, _that.status);
       case _:
@@ -282,6 +325,27 @@ class AuthStateLoading implements AuthState {
   @override
   String toString() {
     return 'AuthState.loading()';
+  }
+}
+
+/// @nodoc
+
+class AuthStateLoadingAuthWithoutAccount implements AuthState {
+  const AuthStateLoadingAuthWithoutAccount();
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is AuthStateLoadingAuthWithoutAccount);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  String toString() {
+    return 'AuthState.loadingAuthWithoutAccount()';
   }
 }
 
@@ -347,6 +411,26 @@ class _$AuthStateAuthenticatedCopyWithImpl<$Res>
           : user // ignore: cast_nullable_to_non_nullable
               as AuthenticatedUser,
     ));
+  }
+}
+
+/// @nodoc
+
+class AuthStateUnAuthenticated implements AuthState {
+  const AuthStateUnAuthenticated();
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType && other is AuthStateUnAuthenticated);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  String toString() {
+    return 'AuthState.unauthenticated()';
   }
 }
 

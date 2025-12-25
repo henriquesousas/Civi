@@ -8,6 +8,7 @@ class SharedPreferencesSessionRepository implements SessionRepository {
   final _keyEmail = "_keyEmail";
   final _keyNickName = "_keyNickName";
   final _keyPhotoUrl = "_keyPhotoUrl";
+  final _keyAuthMethod = "_keyAuthMethod";
   @override
   Future<void> clear() async {
     final sp = await SharedPreferences.getInstance();
@@ -28,6 +29,10 @@ class SharedPreferencesSessionRepository implements SessionRepository {
       email: sp.getString(_keyEmail)!,
       nickName: sp.getString(_keyNickName),
       photoUrl: sp.getString(_keyPhotoUrl),
+      authMethod: AuthMethod.values.firstWhere(
+        (e) => e.name == sp.getString(_keyAuthMethod),
+        orElse: () => AuthMethod.anonymous,
+      ),
     );
   }
 
@@ -39,5 +44,6 @@ class SharedPreferencesSessionRepository implements SessionRepository {
     await sp.setString(_keyEmail, user.email);
     await sp.setString(_keyNickName, user.nickName ?? '');
     await sp.setString(_keyPhotoUrl, user.photoUrl ?? '');
+    await sp.setString(_keyAuthMethod, user.authMethod.name);
   }
 }

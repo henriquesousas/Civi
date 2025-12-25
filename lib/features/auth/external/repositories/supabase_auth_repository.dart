@@ -1,7 +1,7 @@
 import 'package:deehelp/core/unit.dart';
 import 'package:deehelp/core/utils/result.dart';
 import 'package:deehelp/features/auth/domain/entity/authenticated_user.dart';
-import 'package:deehelp/features/auth/domain/exceptions/get_current_user_failure.dart';
+import 'package:deehelp/features/auth/domain/exceptions/unauthenticated_failure.dart';
 import 'package:deehelp/features/auth/domain/repositories/auth_repository.dart';
 import 'package:deehelp/features/auth/domain/exceptions/sign_out_failure.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
@@ -33,6 +33,7 @@ class SupabaseAuthRepository extends AuthRepository {
       name: dysplayName,
       email: user.email ?? '',
       photoUrl: photoUrl,
+      authMethod: AuthMethod.google,
     );
 
     return Result.success(authenticatedUser);
@@ -42,7 +43,7 @@ class SupabaseAuthRepository extends AuthRepository {
   Future<Result<AuthenticatedUser>> getCurrentUser() async {
     final user = _client.auth.currentUser;
     if (user == null) {
-      return Result.failure(const GetCurrentUserFailure());
+      return Result.failure(const UnauthenticatedFailure());
     }
 
     final userId = user.id;

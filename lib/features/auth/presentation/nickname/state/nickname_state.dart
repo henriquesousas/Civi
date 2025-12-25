@@ -1,17 +1,17 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
 
-part 'profile_state.freezed.dart';
+part 'nickname_state.freezed.dart';
 
 @freezed
-abstract class ProfileState with _$ProfileState {
-  const factory ProfileState({
+abstract class NicknameState with _$NicknameState {
+  const factory NicknameState({
     String? nickname,
     String? errorMessage,
     @Default(false) bool isLoading,
     @Default(false) bool isSuccess,
     @Default(false) bool isFormValid,
     @Default([]) List<String> suggestedNicknames,
-  }) = _ProfileState;
+  }) = _NicknameState;
 
-  factory ProfileState.initial() => const ProfileState();
+  factory NicknameState.initial() => const NicknameState();
 }

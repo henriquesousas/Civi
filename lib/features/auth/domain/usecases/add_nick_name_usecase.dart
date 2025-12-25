@@ -1,13 +1,13 @@
 import 'package:deehelp/core/domain/use_case.dart';
 import 'package:deehelp/core/unit.dart';
 import 'package:deehelp/core/utils/result.dart';
-import 'package:deehelp/features/profile/domain/repository/profile_repository.dart';
-import 'package:deehelp/features/profile/domain/usecases/add_nickname/add_nick_name_dto.dart';
+import 'package:deehelp/features/auth/domain/repositories/nickname_repository.dart';
+import 'package:deehelp/features/auth/domain/usecases/add_nick_name_dto.dart';
 
 class AddNickNameUsecase implements UseCase<AddNickNameDto, Unit> {
-  final ProfileRepository _repository;
+  final NicknameRepository _repository;
 
-  AddNickNameUsecase({required ProfileRepository repository})
+  AddNickNameUsecase({required NicknameRepository repository})
       : _repository = repository;
 
   @override

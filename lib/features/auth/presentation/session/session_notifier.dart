@@ -23,6 +23,7 @@ class SessionNotifier extends StateNotifier<AuthenticatedUser?> {
         name: state!.name,
         email: state!.email,
         photoUrl: state!.photoUrl,
+        authMethod: state!.authMethod,
         nickName: nickname,
       );
       await _sessionRepository.save(newAuthenticatedUserInstance);

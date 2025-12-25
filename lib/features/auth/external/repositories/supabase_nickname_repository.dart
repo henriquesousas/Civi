@@ -1,15 +1,15 @@
 import 'package:deehelp/core/unit.dart';
 import 'package:deehelp/core/utils/result.dart';
-import 'package:deehelp/features/profile/domain/repository/profile_repository.dart';
+import 'package:deehelp/features/auth/domain/repositories/nickname_repository.dart';
 import 'package:logging/logging.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
-class SupabaseProfileRepository extends ProfileRepository {
+class SupabaseNicknameRepository extends NicknameRepository {
   static final _logger = Logger("SupabaseProfileRepository");
   final _profileTable = "profile";
   final SupabaseClient _client;
 
-  SupabaseProfileRepository({required SupabaseClient client})
+  SupabaseNicknameRepository({required SupabaseClient client})
       : _client = client;
 
   @override

@@ -1,10 +1,9 @@
 import 'dart:async';
 
-import 'package:deehelp/features/auth/presentation/providers/auth_view_model_provider.dart';
+import 'package:deehelp/features/auth/presentation/auth/providers/auth_view_model_provider.dart';
 import 'package:deehelp/core/router/router_constants.dart';
 import 'package:deehelp/core/ui/extensions/dialog_extension.dart';
-import 'package:deehelp/features/auth/domain/services/operation_status.dart';
-import 'package:deehelp/features/auth/presentation/state/auth_state.dart';
+import 'package:deehelp/features/auth/presentation/auth/state/auth_state.dart';
 import 'package:deehelp/features/onboarding/page/components/onboard_content.dart';
 import 'package:deehelp/features/onboarding/page/onboard_item.dart';
 import 'package:deehelp/features/onboarding/page/onboard_view.dart';
@@ -13,7 +12,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
-import '../../auth/presentation/providers/session_provider.dart';
+import '../../auth/domain/entity/authenticated_user.dart';
 
 class OnboardPage extends ConsumerStatefulWidget {
   const OnboardPage({super.key});
@@ -68,6 +67,10 @@ class _OnboardPageState extends ConsumerState<OnboardPage> {
     ref.watch(authViewViewModelProvider.notifier).signInWithGoogle();
   }
 
+  void _continueWithoutAccount() {
+    ref.watch(authViewViewModelProvider.notifier).continueWithoutAccount();
+  }
+
   @override
   Widget build(BuildContext context) {
     final pages = OnboardItem.pages();
@@ -90,6 +93,8 @@ class _OnboardPageState extends ConsumerState<OnboardPage> {
             ),
             ref.watch(authViewViewModelProvider).maybeWhen(
                   loading: () => _buildView(isLoading: true),
+                  loadingAuthWithoutAccount: () =>
+                      _buildView(isLoadingAuthWithoutAccount: true),
                   orElse: () => _buildView(),
                 ),
           ],
@@ -102,34 +107,34 @@ class _OnboardPageState extends ConsumerState<OnboardPage> {
     ref.listen<AuthState>(
       authViewViewModelProvider,
       (previousState, currentState) {
-        if (currentState is AuthStateError &&
-            previousState is! AuthStateError) {
-          if (currentState.status != OperationStatus.canceled) {
-            context.showSnackBar(
-              type: DialogType.error,
-              currentState.error,
-            );
-          }
-        }
-
-        if (currentState is AuthStateAuthenticated) {
-          ref.read(userSessionProvider.notifier).setSession(currentState.user);
-
-          context.pushReplacement(
-            RouterConstant.addNickname,
-            extra: currentState.user,
-          );
+        switch (currentState) {
+          case AuthStateAuthenticated(:final user):
+            final router = user.authMethod == AuthMethod.google
+                ? RouterConstant.addNickname
+                : RouterConstant.map;
+            context.pushReplacement(router);
+            return;
+          case AuthStateError(:final error):
+            {
+              context.showSnackBar(
+                type: DialogType.error,
+                error,
+              );
+            }
+            break;
         }
       },
     );
   }
 
-  Widget _buildView({bool isLoading = false}) {
+  Widget _buildView(
+      {bool isLoading = false, bool isLoadingAuthWithoutAccount = false}) {
     return OnboardView(
       currentPage: _currentPage % OnboardItem.pages().length,
       pressLoginWithGoogle: () => _loginWithGoogle(),
-      pressEnterWithoutLogin: () {},
+      pressEnterWithoutLogin: () => _continueWithoutAccount(),
       isLoading: isLoading,
+      isLoadingAuthWithoutAccount: isLoadingAuthWithoutAccount,
     );
   }
 }

@@ -13,6 +13,7 @@ import 'components/onboard_page_indicator.dart';
 class OnboardView extends StatelessWidget {
   final int currentPage;
   final bool isLoading;
+  final bool isLoadingAuthWithoutAccount;
   final VoidCallback pressLoginWithGoogle;
   final VoidCallback pressEnterWithoutLogin;
   const OnboardView({
@@ -21,6 +22,7 @@ class OnboardView extends StatelessWidget {
     required this.pressLoginWithGoogle,
     required this.pressEnterWithoutLogin,
     this.isLoading = false,
+    this.isLoadingAuthWithoutAccount = false,
   });
 
   @override
@@ -48,9 +50,10 @@ class OnboardView extends StatelessWidget {
             press: pressLoginWithGoogle,
           ),
           UIElevatedButton(
+            text: R.strings.continueWithoutLogin,
+            isLoading: isLoadingAuthWithoutAccount,
             borderColor: AppColors.primaryColor,
             bgColor: AppColors.whiteColor,
-            text: R.strings.continueWithoutLogin,
             textColor: AppColors.primaryColor,
             press: pressEnterWithoutLogin,
           ),
