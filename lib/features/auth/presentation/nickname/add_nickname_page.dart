@@ -1,5 +1,4 @@
 import 'package:deehelp/features/auth/presentation/nickname/providers/nickname_viewmodel_provider.dart';
-import 'package:deehelp/features/auth/presentation/auth/providers/auth_view_model_provider.dart';
 import 'package:deehelp/features/auth/presentation/session/session_provider.dart';
 import 'package:deehelp/core/router/router_constants.dart';
 import 'package:deehelp/core/ui/theme/app_colors.dart';

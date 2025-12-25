@@ -49,7 +49,7 @@ class _SplashPageState extends ConsumerState<SplashPage> {
               user.nickName.isNullOrEmpty()) {
             context.pushReplacement(RouterConstant.addNickname);
           } else {
-            context.pushReplacement(RouterConstant.map);
+            context.pushReplacement(RouterConstant.dashboard);
           }
           return;
         case AuthStateUnAuthenticated():

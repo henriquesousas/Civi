@@ -1,3 +1,4 @@
+import 'package:deehelp/core/ui/theme/app_colors.dart';
 import 'package:flutter/material.dart';
 
 class UIICon extends StatelessWidget {
@@ -6,6 +7,7 @@ class UIICon extends StatelessWidget {
   final double radius;
   final double padding;
   final bool isAlpha;
+  final Border? border;
   const UIICon({
     super.key,
     required this.bgColor,
@@ -13,6 +15,7 @@ class UIICon extends StatelessWidget {
     this.padding = 12,
     this.radius = 50,
     this.isAlpha = false,
+    this.border,
   });
 
   @override
@@ -20,9 +23,9 @@ class UIICon extends StatelessWidget {
     return Container(
       padding: EdgeInsets.all(padding),
       decoration: BoxDecoration(
-        color: isAlpha ? bgColor.withValues(alpha: 0.1) : bgColor,
-        borderRadius: BorderRadius.circular(radius),
-      ),
+          color: isAlpha ? bgColor.withValues(alpha: 0.1) : bgColor,
+          borderRadius: BorderRadius.circular(radius),
+          border: border),
       child: icon,
     );
   }

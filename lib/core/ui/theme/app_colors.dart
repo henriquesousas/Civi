@@ -33,12 +33,13 @@ class AppColors {
   static const Color blackColor5 = Color(0xFFF3F3F4);
   static const Color dark = Color(0xFF1F2937);
 
-  static const Color greyColor = Color(0xFFB8B5C3);
+  static const Color greyColor = Color(0xFF009561);
   static const Color lightGreyColor = Color(0xFFF8F8F9);
   static const Color lightGreyColor20 = Color(0xFFdfdfe0);
   static const Color lightGreyColor30 = Color(0xFFebebec);
   static const Color darkGreyColor10 = Color(0xFF6B7280);
   static const Color darkGreyColor = Color(0xFF1C1C25);
+  static const Color grenColor = Color(0xFF209550);
 
   static const Color whiteColor = Colors.white;
   static const Color whileColor80 = Color(0xFFCCCCCC);

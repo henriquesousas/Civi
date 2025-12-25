@@ -10,7 +10,6 @@ class SupabaseAuthRepository extends AuthRepository {
   final SupabaseClient _client;
 
   SupabaseAuthRepository({required SupabaseClient client}) : _client = client;
-
   @override
   Future<Result<AuthenticatedUser>> signInWithCredentials(
     String idToken,
@@ -69,4 +68,12 @@ class SupabaseAuthRepository extends AuthRepository {
       return Result.failure(SignOutFailure(e.toString()));
     }
   }
+
+  // void authEvent() {
+  //   _client.auth.onAuthStateChange.listen((data) {
+  //     final event = data.event;
+  //     final session = data.session;
+  //     debugPrint('Auth event: $event, Session: $session');
+  //   });
+  // }
 }

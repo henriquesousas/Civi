@@ -1,4 +1,5 @@
 class RouterConstant {
+  static const dashboard = "/dasboard";
   static const map = "/map";
   static const bottomView = "/main";
   static const splash = "/splash";
