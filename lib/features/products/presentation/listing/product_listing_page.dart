@@ -38,6 +38,13 @@ class _ProductListingPageState
   String? pageTitle() => "Patrimônio";
 
   @override
+  VoidCallback? onBackPress() {
+    return () {
+      context.pop();
+    };
+  }
+
+  @override
   Widget? buildBottomNavigationBar() {
     return ref.watch(productListingViewmodelProvider).maybeWhen(
           success: (items, selectedFilter) => SafeArea(

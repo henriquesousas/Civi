@@ -16,10 +16,13 @@ abstract class RiverpodBasePageState<T extends RiverpodBasePage>
 
   void listener() {}
 
+  VoidCallback? onBackPress() => null;
+
   @override
   Widget build(BuildContext context) {
     listener();
     return UICustomScaffold(
+      onBackButtonTap: onBackPress(),
       bottomNavigationBar: buildBottomNavigationBar(),
       pageTitle: pageTitle(),
       body: buildPage(context),
