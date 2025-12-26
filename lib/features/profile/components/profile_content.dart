@@ -1,6 +1,9 @@
 import 'package:deehelp/core/ui/theme/app_text_styles.dart';
 import 'package:deehelp/core/utils/url_launcher_utils.dart';
+import 'package:deehelp/features/auth/presentation/session/session_provider.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
 
 import '../../../core/ui/widgets/image/ui_my_assets_image_widget.dart';
@@ -11,11 +14,12 @@ import '../../../core/ui/theme/dimens.dart';
 import '../../../core/ui/widgets/card/ui_custom_app_card.dart';
 import '../../../core/ui/widgets/card/ui_custon_list_tile_card.dart';
 
-class ProfileContent extends StatelessWidget {
+class ProfileContent extends ConsumerWidget {
   const ProfileContent({super.key});
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    final session = ref.watch(userSessionProvider);
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: Dimens.defaultPadding),
       child: UICustomAppCard(
@@ -26,7 +30,7 @@ class ProfileContent extends StatelessWidget {
               padding: const EdgeInsetsDirectional.symmetric(
                 vertical: Dimens.defaultPadding,
               ),
-              title: "Meus bens",
+              title: "Patrimônio",
               showBorder: true,
               titleStyle: context.appTextStyles.bodyTextStyle1.copyWith(
                 color: AppColors.textColorBody,
@@ -51,7 +55,7 @@ class ProfileContent extends StatelessWidget {
                 vertical: Dimens.defaultPadding,
               ),
               // title: "R.strings.lastOccurrences",
-              title: "ûltimas ocorrëncias",
+              title: "Ocorrências",
               showBorder: true,
               titleStyle: context.appTextStyles.bodyTextStyle1.copyWith(
                 color: AppColors.textColorBody,
@@ -83,7 +87,7 @@ class ProfileContent extends StatelessWidget {
               ),
               leading: UIMyAssetsImageWidget(
                 isSvg: true,
-                assetPath: R.images.svgWishlist,
+                assetPath: R.images.svgBookmark,
                 width: 24,
                 height: 24,
                 boxFit: BoxFit.scaleDown,
@@ -124,7 +128,7 @@ class ProfileContent extends StatelessWidget {
               padding: const EdgeInsetsDirectional.symmetric(
                 vertical: Dimens.defaultPadding,
               ),
-              title: "Avaliar aplicativo",
+              title: "Avaliar",
               showBorder: true,
               titleStyle: context.appTextStyles.bodyTextStyle1.copyWith(
                 color: AppColors.textColorBody,
@@ -151,7 +155,7 @@ class ProfileContent extends StatelessWidget {
               padding: const EdgeInsetsDirectional.symmetric(
                 vertical: Dimens.defaultPadding,
               ),
-              title: "Enviar mensagem",
+              title: "Fale conosco",
               showBorder: true,
               titleStyle: context.appTextStyles.bodyTextStyle1.copyWith(
                 color: AppColors.textColorBody,
@@ -174,11 +178,46 @@ class ProfileContent extends StatelessWidget {
                   "+5511972732245",
                   "Olá! 👋 Queremos a sua ajuda para melhorar o app DeeHelp. Diga-nos: Qual é a sua dúvida ou sugestão sobre o funcionamento ou segurança? Sua opinião é essencial!"),
             ),
+            if (session != null) ...[
+              UICustomListTileCard(
+                padding: const EdgeInsetsDirectional.symmetric(
+                  vertical: Dimens.defaultPadding,
+                ),
+                title: "Meu apelido",
+                showBorder: true,
+                titleStyle: context.appTextStyles.bodyTextStyle1.copyWith(
+                  color: AppColors.textColorBody,
+                ),
+                leading: UIMyAssetsImageWidget(
+                  isSvg: true,
+                  assetPath: R.images.svgProfileInactive,
+                  width: 24,
+                  height: 24,
+                  boxFit: BoxFit.scaleDown,
+                  color: AppColors.primaryColor,
+                ),
+                trailing: Container(
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 6, vertical: 4),
+                  decoration: BoxDecoration(
+                    color: AppColors.lightGreyColor20,
+                    borderRadius: BorderRadius.circular(20.w),
+                  ),
+                  child: Text(
+                    session.nickName ?? '',
+                    style: context.appTextStyles.caption2Style.copyWith(
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                ),
+                press: () => context.push(RouterConstant.faq),
+              ),
+            ],
             UICustomListTileCard(
               padding: const EdgeInsetsDirectional.symmetric(
                 vertical: Dimens.defaultPadding,
               ),
-              title: "FAQ",
+              title: "Perguntas e respostas",
               showBorder: false,
               titleStyle: context.appTextStyles.bodyTextStyle1.copyWith(
                 color: AppColors.textColorBody,

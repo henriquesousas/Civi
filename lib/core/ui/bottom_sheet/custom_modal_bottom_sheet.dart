@@ -1,4 +1,6 @@
+import 'package:deehelp/core/ui/theme/dimens.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../theme/constants.dart';
 
@@ -26,13 +28,13 @@ Future<dynamic> customModalBottomSheet(
         maxHeight: maxHeight ?? MediaQuery.of(context).size.height * 0.9,
       ),
       child: Column(
-        mainAxisSize: MainAxisSize.min, // CRUCIAL para altura flexível
+        mainAxisSize: MainAxisSize.min,
         children: [
           const SizedBox(height: 12),
           Center(
             child: Container(
-              width: 40,
-              height: 4,
+              width: Dimens.size40.w,
+              height: 4.h,
               decoration: BoxDecoration(
                 color: Colors.grey[300],
                 borderRadius: BorderRadius.circular(2),

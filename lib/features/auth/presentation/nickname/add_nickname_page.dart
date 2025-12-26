@@ -6,7 +6,7 @@ import 'package:deehelp/core/ui/theme/app_text_styles.dart';
 import 'package:deehelp/core/ui/widgets/button/ui_elevated_button.dart';
 import 'package:deehelp/core/ui/widgets/card/ui_custom_scaffold.dart';
 import 'package:deehelp/core/ui/widgets/textfield/ui_text_field_rounded.dart';
-import 'package:deehelp/features/profile/presentation/view/widget/suggest_name.dart';
+import 'package:deehelp/features/auth/presentation/nickname/widget/suggest_name.dart';
 import 'package:deehelp/features/auth/presentation/nickname/state/nickname_state.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';

@@ -17,7 +17,8 @@ final signInWithGoogleUseCaseProvider =
 });
 
 final signOutUseCaseProvider = Provider<SignOutUsecase>((ref) {
-  return SignOutUsecase();
+  final authRepository = ref.watch(supabaseAuthRepositoryProvider);
+  return SignOutUsecase(repository: authRepository);
 });
 
 final getAuthenticatedUserUsecaseProvider =

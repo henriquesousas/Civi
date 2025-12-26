@@ -2,15 +2,16 @@ import 'package:deehelp/core/router/router_constants.dart';
 import 'package:deehelp/core/ui/theme/app_colors.dart';
 import 'package:deehelp/core/ui/theme/app_text_styles.dart';
 import 'package:deehelp/core/ui/widgets/button/ui_elevated_button.dart';
-import 'package:firebase_auth/firebase_auth.dart';
+import 'package:deehelp/features/auth/presentation/auth/providers/auth_view_model_provider.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
-class LogoutModal extends StatelessWidget {
+class LogoutModal extends ConsumerWidget {
   const LogoutModal({super.key});
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     return SingleChildScrollView(
       child: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 20),
@@ -19,14 +20,14 @@ class LogoutModal extends StatelessWidget {
             mainAxisSize: MainAxisSize.min,
             children: [
               Text(
-                "R.strings.logoutExitTitle",
+                "Sair da conta",
                 style: context.appTextStyles.sectionTitle,
               ),
-              const SizedBox(height: 10),
+              const SizedBox(height: 20),
               Text(
                 textAlign: TextAlign.center,
-                "R.strings.logoutExitMessage",
-                style: context.appTextStyles.sectionSubTitle1.copyWith(
+                "Tem certeza que deseja sair da sua conta? Você precisará fazer login novamente para acessar o aplicativo.",
+                style: context.appTextStyles.bodyTextStyle1.copyWith(
                   color: AppColors.textColorBody,
                 ),
               ),
@@ -38,12 +39,9 @@ class LogoutModal extends StatelessWidget {
                   Padding(
                     padding: const EdgeInsets.symmetric(vertical: 0),
                     child: UIElevatedButton(
-                      text: "R.strings.logoutConfirmButton",
+                      text: "Sim, quero sair",
                       press: () {
-                        final instance = FirebaseAuth.instance;
-                        if (instance.currentUser != null) {
-                          instance.signOut();
-                        }
+                        ref.watch(authViewViewModelProvider.notifier).signOut();
                         context.pushReplacement(RouterConstant.splash);
                       },
                     ),

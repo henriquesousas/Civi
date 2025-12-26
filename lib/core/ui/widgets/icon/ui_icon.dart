@@ -1,4 +1,3 @@
-import 'package:deehelp/core/ui/theme/app_colors.dart';
 import 'package:flutter/material.dart';
 
 class UIICon extends StatelessWidget {
@@ -23,9 +22,10 @@ class UIICon extends StatelessWidget {
     return Container(
       padding: EdgeInsets.all(padding),
       decoration: BoxDecoration(
-          color: isAlpha ? bgColor.withValues(alpha: 0.1) : bgColor,
-          borderRadius: BorderRadius.circular(radius),
-          border: border),
+        color: isAlpha ? bgColor.withValues(alpha: 0.1) : bgColor,
+        borderRadius: BorderRadius.circular(radius),
+        border: border,
+      ),
       child: icon,
     );
   }

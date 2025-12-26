@@ -56,8 +56,9 @@ class AuthViewModel extends StateNotifier<AuthState> {
     state = AuthState.authenticated(authenticatedUser);
   }
 
-  void signOut() {
-    throw UnimplementedError("not implemented");
+  void signOut() async {
+    await _signOutUsecase.execute();
+    _sessionNotifier.clearSession();
   }
 
   void getAuthenticatedUser() async {

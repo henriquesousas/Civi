@@ -9,7 +9,7 @@ final List<Color> avatarColors = [
   Colors.orange, // D
   Colors.purple, // E
   Colors.teal, // F
-  Colors.yellow, // G
+  Colors.lightBlue, //Colors.yellow, // G
   Colors.pink, // H
   Colors.brown, // I
   Colors.indigo, // J
@@ -18,7 +18,7 @@ final List<Color> avatarColors = [
   Colors.amber, // M
   Colors.deepOrange, // N
   Colors.deepPurple, // O
-  Colors.lightGreen, // P
+  Colors.deepPurple, //Colors.lightGreen, // P
   Colors.lightBlue, // Q
   Colors.lightBlueAccent, // R
   Colors.blueGrey, // S

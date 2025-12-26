@@ -40,8 +40,6 @@ class ProfileImageWithUploadButtonWidget extends StatefulWidget {
 
 class _ProfileImageWithUploadButtonWidgetState
     extends State<ProfileImageWithUploadButtonWidget> {
-  XFile? _imageFile;
-
   @override
   Widget build(BuildContext context) {
     return InkWell(
@@ -52,29 +50,25 @@ class _ProfileImageWithUploadButtonWidgetState
             decoration: BoxDecoration(
               border: Border.all(
                 color: AppColors.primaryColor.withValues(alpha: 0.15),
-                width: 4.w,
+                width: 2.w,
               ),
               borderRadius: BorderRadius.circular(widget.radius),
             ),
             child: Container(
               decoration: BoxDecoration(
-                border: Border.all(
-                  color: AppColors.primaryColor,
-                  width: 2,
-                ),
+                // border: Border.all(
+                //   color: AppColors.primaryColor,
+                //   width: 2,
+                // ),
                 borderRadius: BorderRadius.circular(widget.radius),
               ),
               child: Container(
                 decoration: BoxDecoration(
-                  // border: Border.all(
-                  //   color: AppColors.primaryColor.withValues(alpha: 0.15),
-                  //   width: 3.w,
-                  // ),
                   borderRadius: BorderRadius.circular(
                     Dimens.defaultRadius,
                   ),
                 ),
-                child: _imageFile == null
+                child: widget.imageUrl.isNotEmpty
                     ? Skeleton.replace(
                         replace: true,
                         replacement: const Bone.circle(size: 80),
@@ -89,7 +83,7 @@ class _ProfileImageWithUploadButtonWidgetState
                         ),
                       )
                     : UIMyAssetsImageWidget(
-                        assetPath: _imageFile?.path ?? '',
+                        assetPath: widget.imageUrl,
                         isFile: true,
                         radius: widget.radius,
                         boxFit: BoxFit.cover,

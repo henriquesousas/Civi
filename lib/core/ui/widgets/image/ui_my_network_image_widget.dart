@@ -2,6 +2,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:deehelp/core/ui/widgets/avatar/random_color_avatar.dart';
 import 'package:deehelp/core/ui/theme/app_colors.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:skeletonizer/skeletonizer.dart';
 
@@ -107,10 +108,10 @@ class UIMyNetworkImageWidget extends StatelessWidget {
         fit: boxFit,
         child: isProfile
             ? (imageAlt != null && imageAlt!.isNotEmpty
-                ? const RandomColorAvatar(
-                    width: 40,
-                    height: 40,
-                    name: "j",
+                ? RandomColorAvatar(
+                    width: 40.w,
+                    height: 40.h,
+                    name: imageAlt!,
                   )
                 : ClipRRect(
                     borderRadius: BorderRadius.circular(radius),
