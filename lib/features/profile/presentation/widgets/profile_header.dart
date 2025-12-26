@@ -8,8 +8,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-import '../../../core/ui/theme/app_colors.dart';
-import '../../../core/ui/theme/dimens.dart';
+import '../../../../core/ui/theme/app_colors.dart';
+import '../../../../core/ui/theme/dimens.dart';
 
 class ProfileHeader extends ConsumerWidget {
   const ProfileHeader({super.key});

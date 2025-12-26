@@ -1,5 +1,3 @@
-import 'dart:ffi';
-
 import 'package:deehelp/core/domain/exception/app_exception.dart';
 import 'package:deehelp/features/auth/presentation/auth/state/auth_state.dart';
 

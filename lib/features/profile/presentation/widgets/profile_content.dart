@@ -6,13 +6,13 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
 
-import '../../../core/ui/widgets/image/ui_my_assets_image_widget.dart';
-import '../../../core/ui/assets/resources.dart';
-import '../../../core/router/router_constants.dart';
-import '../../../core/ui/theme/app_colors.dart';
-import '../../../core/ui/theme/dimens.dart';
-import '../../../core/ui/widgets/card/ui_custom_app_card.dart';
-import '../../../core/ui/widgets/card/ui_custon_list_tile_card.dart';
+import '../../../../core/ui/widgets/image/ui_my_assets_image_widget.dart';
+import '../../../../core/ui/assets/resources.dart';
+import '../../../../core/router/router_constants.dart';
+import '../../../../core/ui/theme/app_colors.dart';
+import '../../../../core/ui/theme/dimens.dart';
+import '../../../../core/ui/widgets/card/ui_custom_app_card.dart';
+import '../../../../core/ui/widgets/card/ui_custon_list_tile_card.dart';
 
 class ProfileContent extends ConsumerWidget {
   const ProfileContent({super.key});
