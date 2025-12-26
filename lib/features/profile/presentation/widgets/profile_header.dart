@@ -61,11 +61,11 @@ class ProfileHeader extends ConsumerWidget {
             ),
             SizedBox(height: 5.h),
             Text(
-              session?.name ?? '',
+              session.name,
               style: context.appTextStyles.sectionTitle,
             ),
             Text(
-              session?.email ?? '',
+              session.email,
               style: context.appTextStyles.sectionBodyTextStyle.copyWith(
                 color: AppColors.textColorBody,
               ),
