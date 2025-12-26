@@ -1,0 +1,42 @@
+import 'package:deehelp/features/products/domain/entities/product.dart';
+import 'package:deehelp/features/products/domain/product_repository.dart';
+import 'package:deehelp/features/products/external/repository/product_model.dart';
+import 'package:supabase_flutter/supabase_flutter.dart';
+
+class SupabaseProductRepository implements ProductRepository {
+  final table = "product";
+
+  final SupabaseClient _client;
+
+  SupabaseProductRepository({required SupabaseClient client})
+      : _client = client;
+
+  @override
+  Future<void> save(Product product) {
+    // TODO: implement save
+    throw UnimplementedError();
+  }
+
+  @override
+  Future<List<Product>> getByUser(String userId) async {
+    final data = await _client.from(table).select("*,image (*)").eq(
+          "user_id",
+          userId,
+        );
+    return data.isNotEmpty
+        ? data.map((el) => ProductModel.fromMap(el)).toList()
+        : [];
+  }
+
+  @override
+  Future<void> delete(String itemId, String userId) {
+    // TODO: implement delete
+    throw UnimplementedError();
+  }
+
+  @override
+  Future<void> update(Product product) {
+    // TODO: implement update
+    throw UnimplementedError();
+  }
+}

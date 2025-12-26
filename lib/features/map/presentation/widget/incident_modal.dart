@@ -38,11 +38,11 @@ class IncidentModal extends StatelessWidget {
             child: Column(
               spacing: 5,
               children: [
-                IncidentHeader(incident: fakeIncidents[0]),
-                IncidentInfo(
-                  howTo: fakeIncidents[0].howTo ?? 'Nao informado',
-                  imageUrl: fakeIncidents[0].product.image?.value ?? '',
-                ),
+                // IncidentHeader(incident: fakeIncidents[0]),
+                // IncidentInfo(
+                //   howTo: fakeIncidents[0].howTo ?? 'Nao informado',
+                //   imageUrl: fakeIncidents[0].product.image?.value ?? '',
+                // ),
                 IncidentDetail(
                   plateNumber: "DND0172",
                   occurredOn: DateTime.now(),

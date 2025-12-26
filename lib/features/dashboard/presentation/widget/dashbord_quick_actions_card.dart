@@ -1,3 +1,4 @@
+import 'package:deehelp/core/router/router_constants.dart';
 import 'package:deehelp/core/ui/theme/app_colors.dart';
 import 'package:deehelp/core/ui/theme/app_text_styles.dart';
 import 'package:deehelp/core/ui/theme/dimens.dart';
@@ -5,6 +6,7 @@ import 'package:deehelp/core/ui/widgets/card/ui_custom_app_card.dart';
 import 'package:deehelp/features/dashboard/presentation/widget/quick_action_item.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:go_router/go_router.dart';
 
 class DashbordQuickActionsCard extends StatelessWidget {
   const DashbordQuickActionsCard({super.key});
@@ -31,7 +33,7 @@ class DashbordQuickActionsCard extends StatelessWidget {
                 title: "Novo\nPatrimônio",
                 color: AppColors.primaryColor,
                 icon: const Icon(Icons.add, color: AppColors.whiteColor),
-                onTap: () => debugPrint("clicked"),
+                onTap: () => context.push(RouterConstant.myItems),
               ),
               QuickActionItem(
                 title: "Novo\nAlertar",

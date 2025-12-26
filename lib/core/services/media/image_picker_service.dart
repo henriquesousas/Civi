@@ -1,6 +1,6 @@
 import 'package:image_picker/image_picker.dart';
 
-import '../../../features/my_products/domain/entities/image_media.dart';
+import '../../../features/products/domain/entities/image_media.dart';
 
 //TODO: Injetar ImagePicker
 class ImagePickerService {

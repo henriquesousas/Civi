@@ -1,6 +1,10 @@
 import 'package:deehelp/core/ui/extensions/screen_size_extension.dart';
 import 'package:deehelp/core/ui/theme/app_colors.dart';
+import 'package:deehelp/core/ui/theme/app_text_styles.dart';
+import 'package:deehelp/core/ui/theme/dimens.dart';
+import 'package:deehelp/core/ui/widgets/button/ui_elevated_button.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class EmptyStateWidget extends StatelessWidget {
   final VoidCallback press;
@@ -17,8 +21,8 @@ class EmptyStateWidget extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Container(
-              width: 120,
-              height: 120,
+              width: Dimens.size125.w,
+              height: Dimens.size125.h,
               decoration: BoxDecoration(
                 color: color,
                 shape: BoxShape.circle,
@@ -31,31 +35,23 @@ class EmptyStateWidget extends StatelessWidget {
               ),
             ),
             Text(
-              "R.strings.productNoFound",
-              style: Theme.of(context).textTheme.bodyLarge?.copyWith(
-                    fontWeight: FontWeight.w500,
-                  ),
+              "Nenhum item encontrado",
+              style: context.appTextStyles.sectionTitle,
             ),
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 20),
+            //TODO: Mudar essa frase
+            const Padding(
+              padding: EdgeInsets.symmetric(horizontal: 20),
               child: Text(
-                "R.strings.productMessageEmpty",
+                "Comece adicionando seu primeiro item à plataforma para gerenciar seus veículos, celulares e outros itens",
                 textAlign: TextAlign.center,
               ),
             ),
             SizedBox(
               width: context.percentWidth(0.6),
-              child: ElevatedButton.icon(
-                onPressed: press,
-                style: ElevatedButton.styleFrom(
-                  padding:
-                      const EdgeInsets.symmetric(horizontal: 12, vertical: 12),
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(20),
-                  ),
-                ),
-                icon: const Icon(Icons.add, size: 16),
-                label: Text("R.strings.add"),
+              child: UIElevatedButton(
+                text: "Adicionar",
+                press: press,
+                icon: Icon(Icons.add, size: Dimens.size16.w),
               ),
             )
           ],

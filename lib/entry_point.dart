@@ -1,12 +1,10 @@
 import 'package:animations/animations.dart';
 import 'package:deehelp/core/ui/theme/app_colors.dart';
-import 'package:deehelp/features/profile/presentation/profile_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
 import 'core/ui/assets/resources.dart';
 import 'core/ui/theme/constants.dart';
-import 'features/my_products/presentation/listing/listing_my_products_provider.dart';
 
 class EntryPoint extends StatefulWidget {
   const EntryPoint({super.key});
@@ -23,8 +21,8 @@ class _EntryPointState extends State<EntryPoint> {
     // TestPage(),
     SizedBox(),
     SizedBox(),
-    const ListingMyProductsProvider(),
-    const ProfilePage(),
+    SizedBox(),
+    SizedBox(),
   ];
   int _currentIndex = 0;
 

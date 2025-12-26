@@ -1,15 +1,14 @@
-import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-// T é o seu Cubit (ex: ProductCubit)
-// S é o seu State (ex: ProductState)
-abstract class BasePage<T extends StateStreamable<S>, S>
-    extends StatefulWidget {
-  final T? bloc;
+// P é o Provider
+// S é o seu State
+abstract class BasePage<P extends ProviderListenable<S>, S>
+    extends ConsumerStatefulWidget {
+  final P provider;
 
   const BasePage({
     super.key,
-    this.bloc,
+    required this.provider,
   });
 
 // Note: O método createState() é abstrato e deve ser implementado pela subclasse

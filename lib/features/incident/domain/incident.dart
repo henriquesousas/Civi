@@ -3,7 +3,7 @@ import 'package:deehelp/features/incident/domain/incident_local.dart';
 import 'package:deehelp/features/incident/domain/incident_status.dart';
 import 'package:deehelp/features/incident/domain/incident_type.dart';
 import 'package:deehelp/features/incident/domain/privacy_level.dart';
-import 'package:deehelp/features/my_products/domain/entities/product.dart';
+import 'package:deehelp/features/products/domain/entities/product.dart';
 
 class Incident {
   final String id;

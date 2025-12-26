@@ -1,3 +1,4 @@
+import 'package:deehelp/core/router/item_router.dart';
 import 'package:deehelp/core/router/router_constants.dart';
 import 'package:deehelp/core/router/slide_transition_page.dart';
 import 'package:deehelp/features/auth/presentation/nickname/add_nickname_page.dart';
@@ -5,12 +6,10 @@ import 'package:deehelp/features/dashboard/presentation/dashsboard_page.dart';
 import 'package:deehelp/features/faq/faq_provider.dart';
 import 'package:deehelp/features/incident/presentation/add/add_incident_page.dart';
 import 'package:deehelp/features/map/presentation/map_page.dart';
+import 'package:deehelp/features/onboarding/page/onboard_router.dart';
 import 'package:deehelp/features/profile/presentation/profile_page.dart';
 import 'package:deehelp/features/splash/splash_page.dart';
 import 'package:go_router/go_router.dart';
-
-import 'item_router.dart';
-import '../../features/onboarding/page/onboard_router.dart';
 
 class MainRouter {
   static var router = GoRouter(

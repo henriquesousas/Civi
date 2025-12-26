@@ -103,7 +103,7 @@ class _MapPageState extends State<MapPage> with TickerProviderStateMixin {
       controller: _mapController,
       animatedMapController: animatedMapController,
       initial: _initialLocation,
-      item: fakeIncidents,
+      item: [],
       press: (value) {
         setState(() {
           // _mapController.move(
