@@ -93,9 +93,9 @@ class UICustomScaffold extends StatelessWidget {
               ),
         body: Padding(
           padding: padding ??
-              const EdgeInsetsDirectional.symmetric(
-                horizontal: 16,
-                vertical: 16,
+              EdgeInsetsDirectional.symmetric(
+                horizontal: Dimens.defaultScafoldPadding.w,
+                vertical: Dimens.defaultScafoldPadding.h,
               ),
           child: body,
         ),

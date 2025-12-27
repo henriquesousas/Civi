@@ -32,6 +32,7 @@ abstract final class Dimens {
   static const defaultArrowForward = 12.0;
   static const profileImage = 90.0;
   static const profileImageRadius = 90.0;
+  static const defaultScafoldPadding = 14.0;
 
   /// Horizontal padding for screen edges
   double get paddingScreenHorizontal;

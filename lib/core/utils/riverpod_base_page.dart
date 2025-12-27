@@ -22,6 +22,7 @@ abstract class RiverpodBasePageState<T extends RiverpodBasePage>
   Widget build(BuildContext context) {
     listener();
     return UICustomScaffold(
+      padding: EdgeInsets.zero,
       onBackButtonTap: onBackPress(),
       bottomNavigationBar: buildBottomNavigationBar(),
       pageTitle: pageTitle(),
