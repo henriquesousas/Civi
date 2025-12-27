@@ -23,8 +23,9 @@ class LabelText extends StatelessWidget {
       text: TextSpan(
         text: text,
         style: textStyle ??
-            context.appTextStyles.sectionTitle3.copyWith(
+            context.appTextStyles.buttonTextStyle1.copyWith(
               color: AppColors.textColorHeader,
+              fontWeight: FontWeight.bold,
             ),
         children: isRequired
             ? [

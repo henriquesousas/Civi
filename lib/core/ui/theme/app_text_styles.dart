@@ -109,7 +109,7 @@ class AppTextStyles {
   TextStyle bodyTextStyle2 = TextStyle(
     fontSize: 17.sp,
     fontWeight: FontWeight.w400, // Bold
-    height: 22 / 17,
+    // height: 22 / 17,
     letterSpacing: -0.408,
     color: AppColors.textColorHeader,
   );

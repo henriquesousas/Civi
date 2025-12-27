@@ -39,7 +39,7 @@ class ProductChooseItemCardWidget extends ConsumerWidget {
             text: subTitle,
             textAlign: TextAlign.start,
             maxLine: 100,
-            textStyle: context.appTextStyles.caption2Style.copyWith(
+            textStyle: context.appTextStyles.caption1Style.copyWith(
               color: AppColors.textSecondary,
             ),
           ),
@@ -72,7 +72,7 @@ class ProductChooseItemCardWidget extends ConsumerWidget {
                         vertical: 40,
                         horizontal: 40,
                       ),
-                      radius: Dimens.cardExtraRadius,
+                      radius: Dimens.defaultRadius,
                       child: Column(
                         mainAxisAlignment: MainAxisAlignment.center,
                         crossAxisAlignment: CrossAxisAlignment.center,

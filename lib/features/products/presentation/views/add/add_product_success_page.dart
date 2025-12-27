@@ -10,14 +10,14 @@ import 'package:lottie/lottie.dart';
 import '../../../../../core/ui/animation/slide_fade_transition_animator.dart';
 import '../../../../../core/ui/animation/transform_scale_opacity_animator.dart';
 
-class CreateSuccessPage extends StatefulWidget {
-  const CreateSuccessPage({super.key});
+class AddProductSuccessPage extends StatefulWidget {
+  const AddProductSuccessPage({super.key});
 
   @override
-  State<CreateSuccessPage> createState() => _CreateSuccessPageState();
+  State<AddProductSuccessPage> createState() => _AddProductSuccessPageState();
 }
 
-class _CreateSuccessPageState extends State<CreateSuccessPage> {
+class _AddProductSuccessPageState extends State<AddProductSuccessPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -54,7 +54,7 @@ class _CreateSuccessPageState extends State<CreateSuccessPage> {
                         ),
                       ),
                       Text(
-                        "R.strings.itemRegisterReceiver",
+                        "Cadastro recebido",
                         textAlign: TextAlign.center,
                         style:
                             context.appTextStyles.sectionBodyTextStyle.copyWith(
@@ -65,7 +65,7 @@ class _CreateSuccessPageState extends State<CreateSuccessPage> {
                       Padding(
                         padding: const EdgeInsets.all(8.0),
                         child: Text(
-                          "itemRegisterSuccessMessage",
+                          "Obrigado pelo cadastro! Todos os produtos passam por verificação interna para sua segurança. Em breve estará disponível.",
                           textAlign: TextAlign.center,
                           style: context.appTextStyles.caption1Style.copyWith(
                             color: Colors.white.withValues(alpha: 0.9),
