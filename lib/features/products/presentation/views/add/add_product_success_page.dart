@@ -78,7 +78,7 @@ class _AddProductSuccessPageState extends State<AddProductSuccessPage> {
                         width: context.percentWidth(0.8),
                         bgColor: AppColors.whiteColor,
                         textColor: AppColors.primaryColor,
-                        text: "R.strings.goAhead",
+                        text: "Fechar",
                         press: () => Navigator.popUntil(
                             context, (route) => route.isFirst),
                       )

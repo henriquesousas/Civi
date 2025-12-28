@@ -5,7 +5,7 @@ import 'package:deehelp/core/utils/image_utils.dart';
 import 'package:deehelp/core/services/media/interfaces/media_storage.dart';
 import 'package:logging/logging.dart';
 
-import '../product_exception.dart';
+import '../add_product_failure.dart';
 import '../product_repository.dart';
 import 'dtos/delete_product_dto.dart';
 
@@ -25,15 +25,16 @@ class DeleteProductUsecase extends OldUseCase<DeleteProductDto, Unit> {
 
   @override
   Future<EitherResult<Unit>> execute(DeleteProductDto dto) async {
-    final imageName = ImageUtils.extractImagePath(dto.imageUrl);
-    if (imageName == null) {
-      return left(ProductException.from("R.strings.userNotFound"));
-    }
-    _logger.info("Deletando imagem : $imageName");
-    _mediaStorage.delete(imageName, _bucket);
-    _logger.info("Deletando produto : ${dto.toString()}");
-    await _repository.delete(dto.itemId, dto.userId);
-    _logger.info("Produto deletado com sucesso");
-    return right(unit);
+    // final imageName = ImageUtils.extractImagePath(dto.imageUrl);
+    // if (imageName == null) {
+    //   return left(AddProductFailure.from("R.strings.userNotFound"));
+    // }
+    // _logger.info("Deletando imagem : $imageName");
+    // _mediaStorage.delete(imageName, _bucket);
+    // _logger.info("Deletando produto : ${dto.toString()}");
+    // await _repository.delete(dto.itemId, dto.userId);
+    // _logger.info("Produto deletado com sucesso");
+    // return right(unit);
+    throw Exception("any");
   }
 }

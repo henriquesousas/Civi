@@ -6,7 +6,7 @@ import 'package:logging/logging.dart';
 import 'media_storage_info.dart';
 
 class R2CloudFlareMediaStorage implements MediaStorage {
-  static final _logger = Logger("R2MediaStorage");
+  static final _logger = Logger("R2CloudFlareMediaStorage");
   static final statusCode = 200;
   @override
   Future<String> upload(MediaStorageInfo info) async {

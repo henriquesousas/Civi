@@ -8,7 +8,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../domain/entities/image_media.dart';
 import '../../../domain/entities/product.dart';
-import '../../../domain/product_exception.dart';
+import '../../../domain/add_product_failure.dart';
 import 'state/product_update_state.dart';
 
 class UpdateProductCubit extends Cubit<ProductUpdateState> {
@@ -36,13 +36,13 @@ class UpdateProductCubit extends Cubit<ProductUpdateState> {
 
     //TODO: Validar se o produto é null
 
-    await CommandCubit.execute<Unit, ProductUpdateState>(
-        emit: emit,
-        command: () => _updateProductUseCase.execute(product!),
-        onLoading: () => ProductUpdateState.editing(product!),
-        onSuccess: (result) => ProductUpdateState.success(product!),
-        onError: (error) =>
-            ProductUpdateState.error((error as ProductException).message));
+    // await CommandCubit.execute<Unit, ProductUpdateState>(
+    //     emit: emit,
+    //     command: () => _updateProductUseCase.execute(product!),
+    //     onLoading: () => ProductUpdateState.editing(product!),
+    //     onSuccess: (result) => ProductUpdateState.success(product!),
+    //     onError: (error) =>
+    //         ProductUpdateState.error((error as ProductException).message));
   }
 
   //TODO: Validar se UsuarioId é null

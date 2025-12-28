@@ -59,11 +59,11 @@ class _AddProductStepPageState extends ConsumerState<AddProductStepPage> {
   }
 
   void _nextStep(int currentStep, AddProductViewmodel viewModel) {
-    if (currentStep == PageStep.photo.value) {
-      // viewModel.save();
-      return;
-    }
     viewModel.nextStep(currentStep);
+  }
+
+  void _save(AddProductViewmodel viewModel) {
+    viewModel.save("a5c33b3e-7c0e-4ea9-99ae-2c87d3f2da46");
   }
 
   void _previousStep(int currentStep, AddProductViewmodel viewModel) {
@@ -156,14 +156,19 @@ class _AddProductStepPageState extends ConsumerState<AddProductStepPage> {
                       ),
                     Expanded(
                       child: UIElevatedButton(
-                        bgColor: AppColors.primaryColor,
-                        text: state.currentStep == _steps.length - 1
-                            ? "Confirmar"
-                            : "Próximo",
-                        isLoading: state.isLoading,
-                        isEnabled: isValidStep(state),
-                        press: () => _nextStep(details.currentStep, viewModel),
-                      ),
+                          bgColor: AppColors.primaryColor,
+                          text: state.currentStep == _steps.length - 1
+                              ? "Confirmar"
+                              : "Próximo",
+                          isLoading: state.isLoading,
+                          isEnabled: isValidStep(state),
+                          press: () {
+                            if (details.currentStep == PageStep.photo.value) {
+                              _save(viewModel);
+                              return;
+                            }
+                            _nextStep(details.currentStep, viewModel);
+                          }),
                     ),
                   ],
                 ),

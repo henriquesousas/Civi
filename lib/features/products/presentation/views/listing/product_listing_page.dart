@@ -57,7 +57,7 @@ class _ProductListingPageState
                   Icons.add,
                   color: AppColors.whiteColor,
                 ),
-                text: "Adiconar novo",
+                text: "Adicionar novo",
                 press: () => _add(),
               ),
             ),
@@ -95,7 +95,8 @@ class _ProductListingPageState
       success: (value) => _buildView(value.items),
       loading: (_) => ShimmerAnimation(
           enabled: true, child: _buildView(productListShimmer)),
-      orElse: () => EmptyStateWidget(press: () {}),
+      orElse: () => EmptyStateWidget(
+          press: () => context.push(RouterConstant.createNewItem)),
     );
   }
 

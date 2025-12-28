@@ -4,6 +4,10 @@ import 'package:deehelp/core/utils/result.dart';
 class CommandStateNotifier {
   /// Helper genérico para executar comandos em StateNotifiers
   /// Recebe callbacks para atualizar o estado
+  ///
+  ///T é a resposta com command
+  ///
+  ///State representa o state do provider
   static Future<void> execute<T, State>({
     required void Function(State newState) updateState,
     required Future<Result<T>> Function() command,

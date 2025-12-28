@@ -18,11 +18,13 @@ abstract class RiverpodBasePageState<T extends RiverpodBasePage>
 
   VoidCallback? onBackPress() => null;
 
+  EdgeInsetsGeometry? padding() => null;
+
   @override
   Widget build(BuildContext context) {
     listener();
     return UICustomScaffold(
-      padding: EdgeInsets.zero,
+      padding: padding(),
       onBackButtonTap: onBackPress(),
       bottomNavigationBar: buildBottomNavigationBar(),
       pageTitle: pageTitle(),

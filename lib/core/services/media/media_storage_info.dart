@@ -37,19 +37,14 @@ class MediaStorageInfo {
     required this.extension,
   });
 
-  factory MediaStorageInfo.from(
-    File file,
-    String bucket,
-    String objectName,
-    ContentType type,
-    String extension,
-  ) {
+  factory MediaStorageInfo.fromJpeg(
+      File file, String bucket, String objectName) {
     return MediaStorageInfo._(
       file: file,
       bucket: bucket,
       objectName: objectName,
-      contentType: type,
-      extension: extension,
+      contentType: ContentType.jpeg,
+      extension: "jpeg",
     );
   }
 }

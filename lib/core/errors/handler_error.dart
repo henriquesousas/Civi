@@ -2,9 +2,10 @@ import 'package:deehelp/core/errors/failure.dart';
 
 import '../../features/auth/domain/exceptions/auth_failure.dart';
 
-STATE handleError<STATE>(
+//S estado que esta sendo gerenciado
+S handleError<S>(
   Failure error,
-  STATE Function(String message, Object? extra) errorFactory,
+  S Function(String message, Object? extra) errorFactory,
 ) {
   switch (error) {
     case AuthFailure(:final operationStatus):

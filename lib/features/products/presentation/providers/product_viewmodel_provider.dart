@@ -20,6 +20,9 @@ final productListingViewmodelProvider = StateNotifierProvider.autoDispose<
 final addProductViewModelProvider =
     StateNotifierProvider.autoDispose<AddProductViewmodel, AddProductState>(
   (ref) {
-    return AddProductViewmodel();
+    final usecase = ref.watch(addProductUsecaseProvider);
+    return AddProductViewmodel(
+      addProductUseCase: usecase,
+    );
   },
 );

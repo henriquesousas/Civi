@@ -3,7 +3,7 @@ import 'package:deehelp/features/products/domain/entities/product_id.dart';
 
 import '../../../../core/domain/validation/validation_handler.dart';
 import '../product_status.dart';
-import '../usecases/dtos/create_product_dto.dart';
+import '../usecases/dtos/add_product_dto.dart';
 import 'image_media.dart';
 
 //TODO: Refactor
@@ -67,7 +67,7 @@ class Product extends Entity<ProductId> {
     );
   }
 
-  factory Product.fromDto(CreateProductDto dto) {
+  factory Product.fromDto(AddProductDto dto) {
     return Product(
       id: ProductId.unique(),
       name: dto.name,
@@ -83,8 +83,8 @@ class Product extends Entity<ProductId> {
     );
   }
 
-  void changeImage(ImageMedia image) {
-    //this.image = image;
+  void changeImage(List<ImageMedia> images) {
+    this.images = images;
   }
 
   Product changeModel(final String value) {

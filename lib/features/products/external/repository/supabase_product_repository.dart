@@ -12,14 +12,19 @@ class SupabaseProductRepository implements ProductRepository {
       : _client = client;
 
   @override
-  Future<void> save(Product product) {
-    // TODO: implement save
-    throw UnimplementedError();
+  Future<void> save(Product product) async {
+    final map = ProductModel.toMap(product);
+    final urls = product.images.map((e) => e.file.toString()).toList();
+
+    await _client.rpc("add_product_with_image_transaction", params: {
+      'product_data': map,
+      'urls_imagens': urls,
+    });
   }
 
   @override
   Future<List<Product>> getByUser(String userId) async {
-    final data = await _client.from(table).select("*,image (*)").eq(
+    final data = await _client.from(table).select("*,images (*)").eq(
           "user_id",
           userId,
         );

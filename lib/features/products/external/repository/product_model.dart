@@ -5,28 +5,25 @@ import '../../domain/entities/product.dart';
 import '../../domain/product_status.dart';
 
 class ProductModel {
-  static Map<String, dynamic> toMap(Product item) {
-    // return {
-    //   'id': item.id.value,
-    //   'name': item.name,
-    //   'code': item.code,
-    //   'color': item.color,
-    //   'brand': item.brand,
-    //   'obs': item.obs,
-    //   'year': item.year,
-    //   'imageUrl': item.image?.file.path,
-    //   'status': item.status.toString(),
-    //   'type': item.type,
-    //   'userId': item.userId,
-    //   'createdAt': item.createdAt?.millisecondsSinceEpoch ??
-    //       DateTime.now().microsecondsSinceEpoch,
-    // };
-    throw Exception("");
+  static Map<String, dynamic> toMap(Product product) {
+    return {
+      'id': product.id.value,
+      'name': product.name,
+      'code': product.code,
+      'color': product.color,
+      'brand': product.brand,
+      'obs': product.obs,
+      'year': product.year,
+      'status': product.status.toString(),
+      'type': product.type,
+      'user_id': product.userId,
+      'created_at': product.createdAt?.toUtc().toIso8601String(),
+    };
   }
 
   static Product fromMap(Map<String, dynamic> map) {
     final images =
-        (map["image"] as List).map((e) => ImageMediaModel.fromMap(e)).toList();
+        (map["images"] as List).map((e) => ImageMediaModel.fromMap(e)).toList();
     return Product(
       id: ProductId.from(map['id']),
       name: map['name'],

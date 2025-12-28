@@ -1,5 +1,6 @@
 import 'package:deehelp/core/router/router_constants.dart';
 import 'package:deehelp/core/router/slide_transition_page.dart';
+import 'package:deehelp/features/products/presentation/views/add/add_product_success_page.dart';
 import 'package:deehelp/features/products/presentation/views/listing/product_listing_page.dart';
 import 'package:deehelp/features/products/presentation/views/add/add_product_page.dart';
 import 'package:go_router/go_router.dart';
@@ -41,11 +42,11 @@ final itemRoutes = [
   //     );
   //   },
   // ),
-  // GoRoute(
-  //   path: RouterConstant.itemRegisterSuccess,
-  //   pageBuilder: (context, state) => slideTransitionPage(
-  //     key: state.pageKey,
-  //     child: const CreateSuccessPage(),
-  //   ),
-  // ),
+  GoRoute(
+    path: RouterConstant.itemRegisterSuccess,
+    pageBuilder: (context, state) => slideTransitionPage(
+      key: state.pageKey,
+      child: const AddProductSuccessPage(),
+    ),
+  ),
 ];

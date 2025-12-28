@@ -1,10 +1,51 @@
+import 'package:dartz/dartz.dart';
+import 'package:deehelp/core/errors/handler_error.dart';
+import 'package:deehelp/core/utils/command_state_notifier.dart';
 import 'package:deehelp/features/products/domain/entities/image_media.dart';
 import 'package:deehelp/features/products/domain/entities/product_type.dart';
+import 'package:deehelp/features/products/domain/usecases/add_product_usecase.dart';
+import 'package:deehelp/features/products/domain/usecases/dtos/add_product_dto.dart';
 import 'package:deehelp/features/products/presentation/views/add/state/add_product_state.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 class AddProductViewmodel extends StateNotifier<AddProductState> {
-  AddProductViewmodel() : super(AddProductState.initial());
+  final AddProductUseCase _addProductUseCase;
+  AddProductViewmodel({
+    required AddProductUseCase addProductUseCase,
+  })  : _addProductUseCase = addProductUseCase,
+        super(AddProductState.initial());
+
+  void save(String userId) async {
+    final selectedProductType =
+        state.productTypes.where((el) => el.isSelected == true).first;
+
+    final dto = AddProductDto(
+      userId: userId,
+      name: state.model!,
+      year: state.year!,
+      type: selectedProductType.description,
+      images: [state.imageMedia!],
+      code: state.licencePlate!,
+      color: state.color!,
+      brand: state.brand!,
+      obs: state.obs,
+    );
+
+    await CommandStateNotifier.execute<Unit, AddProductState>(
+      updateState: (newState) => state = newState,
+      command: () => _addProductUseCase.execute(dto),
+      onLoading: () => state.copyWith(isLoading: true),
+      onSuccess: (result) => state.copyWith(isSuccess: true, isLoading: false),
+      onError: (error) {
+        return handleError<AddProductState>(
+          error,
+          (message, _) {
+            return state.copyWith(errorMessage: message, isLoading: false);
+          },
+        );
+      },
+    );
+  }
 
   void selectProductType(ProductType productType) async {
     if (state.productTypes.isEmpty) return;
@@ -103,43 +144,4 @@ class AddProductViewmodel extends StateNotifier<AddProductState> {
 
     state = state.copyWith(stepAddProductInfoDetailValid: isValid);
   }
-
-//   void save() {
-//     // state.maybeMap(
-//     //   data: (data) async {
-//     //     final selectedItem =
-//     //         data.items.where((el) => el.isSelected == true).first;
-
-//     //     final dto = CreateProductDto(
-//     //       userId: FirebaseAuth.instance.currentUser!.uid,
-//     //       name: data.model!,
-//     //       year: data.year!,
-//     //       type: selectedItem.description,
-//     //       image: data.imageMedia!,
-//     //       code: data.licencePlate!,
-//     //       color: data.color!,
-//     //       brand: data.brand!,
-//     //       obs: data.obs,
-//     //     );
-
-//     //     await CommandCubit.execute<Unit, CreateProductState>(
-//     //       emit: emit,
-//     //       command: () => _createProductUseCase.execute(dto),
-//     //       onLoading: () {
-//     //         return data.copyWith(isLoading: true);
-//     //       },
-//     //       onSuccess: (result) {
-//     //         return data.copyWith(isSuccess: true);
-//     //       },
-//     //       onError: (error) {
-//     //         return data.copyWith(
-//     //           errorMessage: error.message,
-//     //           isLoading: false,
-//     //         );
-//     //       },
-//     //     );
-//     //   },
-//     //   orElse: () {},
-//     // );
-//   }
 }

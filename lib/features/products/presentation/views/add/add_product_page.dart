@@ -73,6 +73,9 @@ class _AddProductPageState extends RiverpodBasePageState<AddProductPage> {
   String? pageTitle() => "Cadastrar patrimônio";
 
   @override
+  EdgeInsetsGeometry? padding() => EdgeInsets.zero;
+
+  @override
   Widget buildPage(BuildContext context) {
     return PageView(
       controller: _pageController,

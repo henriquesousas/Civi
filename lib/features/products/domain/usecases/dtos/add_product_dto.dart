@@ -1,6 +1,6 @@
 import '../../entities/image_media.dart';
 
-class CreateProductDto {
+class AddProductDto {
   final String userId;
   final List<ImageMedia> images;
   final String name;
@@ -11,7 +11,7 @@ class CreateProductDto {
   final String color;
   final String? obs;
 
-  CreateProductDto({
+  AddProductDto({
     required this.userId,
     required this.images,
     required this.name,
