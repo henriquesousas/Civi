@@ -8,7 +8,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../../../core/services/media/interfaces/media_storage.dart';
-import '../../../../../core/services/media/r2_cloudflare_media_storage.dart';
+import '../../../../../core/services/media/r2_cloudflare_image_upload.dart';
 import '../../../../../core/ui/constants.dart';
 import '../../../domain/entities/product.dart';
 import 'product_edit_modal_cubit.dart';
@@ -22,9 +22,9 @@ class UpdateProductProvider extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiBlocProvider(
       providers: [
-        RepositoryProvider<MediaStorage>(
-          create: (context) => R2CloudFlareMediaStorage(),
-        ),
+        // RepositoryProvider<MediaStorage>(
+        //   create: (context) => R2CloudFlareStorage(),
+        // ),
         RepositoryProvider<ProductRepository>(
           create: (context) => ProductRepositoryFirebaseStorage(
             firestore: context.read<FirebaseFirestore>(),
@@ -37,7 +37,7 @@ class UpdateProductProvider extends StatelessWidget {
         RepositoryProvider<DeleteProductUsecase>(
           create: (context) => DeleteProductUsecase(
             repository: context.read<ProductRepository>(),
-            mediaStorage: context.read<MediaStorage>(),
+            mediaStorage: context.read<ImageUpload>(),
             bucket: Constants.imageBucket,
           ),
         ),

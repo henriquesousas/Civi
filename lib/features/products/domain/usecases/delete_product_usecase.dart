@@ -12,12 +12,12 @@ import 'dtos/delete_product_dto.dart';
 class DeleteProductUsecase extends OldUseCase<DeleteProductDto, Unit> {
   static final _logger = Logger("DeleteProductUsecase");
   final ProductRepository _repository;
-  final MediaStorage _mediaStorage;
+  final ImageUpload _mediaStorage;
   final String _bucket;
 
   DeleteProductUsecase({
     required ProductRepository repository,
-    required MediaStorage mediaStorage,
+    required ImageUpload mediaStorage,
     required String bucket,
   })  : _repository = repository,
         _mediaStorage = mediaStorage,

@@ -1,6 +1,6 @@
-import 'package:deehelp/core/services/media/media_storage_info.dart';
+import 'package:deehelp/features/products/domain/entities/image_media.dart';
 
-abstract class MediaStorage {
-  Future<String> upload(MediaStorageInfo info);
+abstract class ImageUpload {
+  Future<String> upload(ImageMedia image);
   Future<void> delete(String imageName, String bucket);
 }

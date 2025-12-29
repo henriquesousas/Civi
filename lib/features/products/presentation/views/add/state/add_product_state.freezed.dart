@@ -27,7 +27,7 @@ mixin _$AddProductState {
   String? get color;
   bool? get stepAddProductInfoDetailValid; // Step 2
   String? get obs; // Step 3
-  ImageMedia? get imageMedia;
+  List<ImageMedia> get imageMedia;
   bool get stepAddPhotoValid;
   bool get isLoading;
   bool get isSuccess;
@@ -69,8 +69,8 @@ mixin _$AddProductState {
                 other.stepAddProductInfoDetailValid ==
                     stepAddProductInfoDetailValid) &&
             (identical(other.obs, obs) || other.obs == obs) &&
-            (identical(other.imageMedia, imageMedia) ||
-                other.imageMedia == imageMedia) &&
+            const DeepCollectionEquality()
+                .equals(other.imageMedia, imageMedia) &&
             (identical(other.stepAddPhotoValid, stepAddPhotoValid) ||
                 other.stepAddPhotoValid == stepAddPhotoValid) &&
             (identical(other.isLoading, isLoading) ||
@@ -97,7 +97,7 @@ mixin _$AddProductState {
       color,
       stepAddProductInfoDetailValid,
       obs,
-      imageMedia,
+      const DeepCollectionEquality().hash(imageMedia),
       stepAddPhotoValid,
       isLoading,
       isSuccess,
@@ -129,7 +129,7 @@ abstract mixin class $AddProductStateCopyWith<$Res> {
       String? color,
       bool? stepAddProductInfoDetailValid,
       String? obs,
-      ImageMedia? imageMedia,
+      List<ImageMedia> imageMedia,
       bool stepAddPhotoValid,
       bool isLoading,
       bool isSuccess,
@@ -162,7 +162,7 @@ class _$AddProductStateCopyWithImpl<$Res>
     Object? color = freezed,
     Object? stepAddProductInfoDetailValid = freezed,
     Object? obs = freezed,
-    Object? imageMedia = freezed,
+    Object? imageMedia = null,
     Object? stepAddPhotoValid = null,
     Object? isLoading = null,
     Object? isSuccess = null,
@@ -221,10 +221,10 @@ class _$AddProductStateCopyWithImpl<$Res>
           ? _self.obs
           : obs // ignore: cast_nullable_to_non_nullable
               as String?,
-      imageMedia: freezed == imageMedia
+      imageMedia: null == imageMedia
           ? _self.imageMedia
           : imageMedia // ignore: cast_nullable_to_non_nullable
-              as ImageMedia?,
+              as List<ImageMedia>,
       stepAddPhotoValid: null == stepAddPhotoValid
           ? _self.stepAddPhotoValid
           : stepAddPhotoValid // ignore: cast_nullable_to_non_nullable
@@ -352,7 +352,7 @@ extension AddProductStatePatterns on AddProductState {
             String? color,
             bool? stepAddProductInfoDetailValid,
             String? obs,
-            ImageMedia? imageMedia,
+            List<ImageMedia> imageMedia,
             bool stepAddPhotoValid,
             bool isLoading,
             bool isSuccess,
@@ -416,7 +416,7 @@ extension AddProductStatePatterns on AddProductState {
             String? color,
             bool? stepAddProductInfoDetailValid,
             String? obs,
-            ImageMedia? imageMedia,
+            List<ImageMedia> imageMedia,
             bool stepAddPhotoValid,
             bool isLoading,
             bool isSuccess,
@@ -478,7 +478,7 @@ extension AddProductStatePatterns on AddProductState {
             String? color,
             bool? stepAddProductInfoDetailValid,
             String? obs,
-            ImageMedia? imageMedia,
+            List<ImageMedia> imageMedia,
             bool stepAddPhotoValid,
             bool isLoading,
             bool isSuccess,
@@ -530,12 +530,13 @@ class _AddProductState implements AddProductState {
       this.color,
       this.stepAddProductInfoDetailValid,
       this.obs,
-      this.imageMedia,
+      final List<ImageMedia> imageMedia = const [],
       this.stepAddPhotoValid = false,
       this.isLoading = false,
       this.isSuccess = false,
       this.errorMessage})
-      : _productTypes = productTypes;
+      : _productTypes = productTypes,
+        _imageMedia = imageMedia;
 
   @override
   @JsonKey()
@@ -575,8 +576,16 @@ class _AddProductState implements AddProductState {
   @override
   final String? obs;
 // Step 3
+  final List<ImageMedia> _imageMedia;
+// Step 3
   @override
-  final ImageMedia? imageMedia;
+  @JsonKey()
+  List<ImageMedia> get imageMedia {
+    if (_imageMedia is EqualUnmodifiableListView) return _imageMedia;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_imageMedia);
+  }
+
   @override
   @JsonKey()
   final bool stepAddPhotoValid;
@@ -625,8 +634,8 @@ class _AddProductState implements AddProductState {
                 other.stepAddProductInfoDetailValid ==
                     stepAddProductInfoDetailValid) &&
             (identical(other.obs, obs) || other.obs == obs) &&
-            (identical(other.imageMedia, imageMedia) ||
-                other.imageMedia == imageMedia) &&
+            const DeepCollectionEquality()
+                .equals(other._imageMedia, _imageMedia) &&
             (identical(other.stepAddPhotoValid, stepAddPhotoValid) ||
                 other.stepAddPhotoValid == stepAddPhotoValid) &&
             (identical(other.isLoading, isLoading) ||
@@ -653,7 +662,7 @@ class _AddProductState implements AddProductState {
       color,
       stepAddProductInfoDetailValid,
       obs,
-      imageMedia,
+      const DeepCollectionEquality().hash(_imageMedia),
       stepAddPhotoValid,
       isLoading,
       isSuccess,
@@ -687,7 +696,7 @@ abstract mixin class _$AddProductStateCopyWith<$Res>
       String? color,
       bool? stepAddProductInfoDetailValid,
       String? obs,
-      ImageMedia? imageMedia,
+      List<ImageMedia> imageMedia,
       bool stepAddPhotoValid,
       bool isLoading,
       bool isSuccess,
@@ -720,7 +729,7 @@ class __$AddProductStateCopyWithImpl<$Res>
     Object? color = freezed,
     Object? stepAddProductInfoDetailValid = freezed,
     Object? obs = freezed,
-    Object? imageMedia = freezed,
+    Object? imageMedia = null,
     Object? stepAddPhotoValid = null,
     Object? isLoading = null,
     Object? isSuccess = null,
@@ -779,10 +788,10 @@ class __$AddProductStateCopyWithImpl<$Res>
           ? _self.obs
           : obs // ignore: cast_nullable_to_non_nullable
               as String?,
-      imageMedia: freezed == imageMedia
-          ? _self.imageMedia
+      imageMedia: null == imageMedia
+          ? _self._imageMedia
           : imageMedia // ignore: cast_nullable_to_non_nullable
-              as ImageMedia?,
+              as List<ImageMedia>,
       stepAddPhotoValid: null == stepAddPhotoValid
           ? _self.stepAddPhotoValid
           : stepAddPhotoValid // ignore: cast_nullable_to_non_nullable

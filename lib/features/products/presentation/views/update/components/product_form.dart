@@ -2,7 +2,7 @@ import 'package:deehelp/features/products/presentation/widgets/modal_select_bran
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
-import '../../../../../../core/services/media/image_picker_service.dart';
+import '../../../../../../core/services/media/default_image_picker.dart';
 import '../../../../../../core/ui/widgets/bottom_sheet/custom_modal_bottom_sheet.dart';
 import '../../../../../../core/ui/widgets/card/ui_custom_app_card.dart';
 import '../../../../external/repository/data.dart';
@@ -199,12 +199,12 @@ class ProductForm extends StatelessWidget {
                 showDivider: false,
                 showCam: true,
                 press: () async {
-                  final cubit = context.read<UpdateProductCubit>();
-                  final image =
-                      await ImagePickerService().pickImageFromGallery();
-                  if (image != null) {
-                    cubit.applyImageChange(image);
-                  }
+                  // final cubit = context.read<UpdateProductCubit>();
+                  // final image =
+                  //     await DefaultImagePicker().pickImageFromGallery();
+                  // if (image != null) {
+                  //   cubit.applyImageChange(image);
+                  // }
                 },
               ),
               // Padding(

@@ -47,7 +47,7 @@ abstract class AddProductState with _$AddProductState {
     // Step 2
     String? obs,
     // Step 3
-    ImageMedia? imageMedia,
+    @Default([]) List<ImageMedia> imageMedia,
     @Default(false) bool stepAddPhotoValid,
     @Default(false) bool isLoading,
     @Default(false) bool isSuccess,

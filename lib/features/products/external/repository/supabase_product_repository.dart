@@ -1,5 +1,6 @@
 import 'package:deehelp/features/products/domain/entities/product.dart';
 import 'package:deehelp/features/products/domain/product_repository.dart';
+import 'package:deehelp/features/products/external/repository/image_media_model.dart';
 import 'package:deehelp/features/products/external/repository/product_model.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
@@ -14,11 +15,11 @@ class SupabaseProductRepository implements ProductRepository {
   @override
   Future<void> save(Product product) async {
     final map = ProductModel.toMap(product);
-    final urls = product.images.map((e) => e.file.toString()).toList();
+    final images = ImageMediaModel.toMap(product.images);
 
     await _client.rpc("add_product_with_image_transaction", params: {
       'product_data': map,
-      'urls_imagens': urls,
+      'imagens': images,
     });
   }
 

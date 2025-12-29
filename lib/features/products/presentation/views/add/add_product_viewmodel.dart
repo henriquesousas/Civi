@@ -24,7 +24,7 @@ class AddProductViewmodel extends StateNotifier<AddProductState> {
       name: state.model!,
       year: state.year!,
       type: selectedProductType.description,
-      images: [state.imageMedia!],
+      images: state.imageMedia,
       code: state.licencePlate!,
       color: state.color!,
       brand: state.brand!,
@@ -113,10 +113,24 @@ class AddProductViewmodel extends StateNotifier<AddProductState> {
   }
 
   void addPhoto(ImageMedia image) {
+    final newImages = List<ImageMedia>.from(state.imageMedia);
+    newImages.add(image);
     state = state.copyWith(
-      imageMedia: image,
+      imageMedia: newImages,
       stepAddPhotoValid: (image.value.isNotEmpty),
     );
+  }
+
+  void removePhoto(int index) {
+    final newImages = List<ImageMedia>.from(state.imageMedia);
+    if (index >= 0 && index < newImages.length) {
+      newImages.removeAt(index);
+
+      state = state.copyWith(
+        imageMedia: newImages,
+        stepAddPhotoValid: newImages.isNotEmpty,
+      );
+    }
   }
 
   void nextStep(int steper) {

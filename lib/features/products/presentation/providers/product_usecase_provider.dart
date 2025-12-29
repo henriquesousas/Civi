@@ -1,5 +1,7 @@
-import 'package:deehelp/core/services/media/r2_cloudflare_media_storage.dart';
-import 'package:deehelp/core/ui/constants.dart';
+import 'package:deehelp/core/env.dart';
+import 'package:deehelp/core/services/media/r2_cloudflare_image_upload.dart';
+import 'package:deehelp/features/auth/presentation/session/session_provider.dart';
+
 import 'package:deehelp/features/products/domain/usecases/add_product_usecase.dart';
 import 'package:deehelp/features/products/domain/usecases/get_products_by_user_usecase.dart';
 import 'package:deehelp/features/products/presentation/providers/product_repository_provider.dart';
@@ -14,11 +16,14 @@ final getProductsByUserUsecaseProvider =
 final addProductUsecaseProvider =
     Provider.autoDispose<AddProductUseCase>((ref) {
   final repository = ref.watch(productRepositoryProvider);
+  final authenticatedUser = ref.watch(userSessionProvider);
+
   return AddProductUseCase(
     repository: repository,
-    media: R2CloudFlareMediaStorage(),
-    bucket: Constants.imageBucket,
-    imageName:
-        'products/${DateTime.now().millisecondsSinceEpoch.toString()}.${"jpeg"}',
+    imageUpload: R2CloudFlareImageUpload(
+      bucketName: "deehelp",
+      baseFolder: "products/${authenticatedUser!.id}",
+      cdnUrl: Env.r2BaseUrl,
+    ),
   );
 });

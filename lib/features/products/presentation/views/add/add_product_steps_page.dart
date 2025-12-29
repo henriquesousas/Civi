@@ -1,5 +1,4 @@
 import 'package:deehelp/core/router/router_constants.dart';
-import 'package:deehelp/core/services/media/image_picker_service.dart';
 import 'package:deehelp/core/ui/theme/app_colors.dart';
 import 'package:deehelp/core/ui/theme/app_text_styles.dart';
 import 'package:deehelp/core/ui/widgets/button/ui_elevated_button.dart';
@@ -50,9 +49,7 @@ class _AddProductStepPageState extends ConsumerState<AddProductStepPage> {
       ),
       Step(
         title: Text("Foto", style: context.appTextStyles.bodyTextStyle1),
-        content: StepAddPhoto(
-          imagePicker: ImagePickerService(),
-        ),
+        content: const StepAddPhoto(),
         isActive: currentStep == 2,
       ),
     ];

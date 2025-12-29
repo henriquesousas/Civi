@@ -4,38 +4,47 @@ import 'package:deehelp/core/domain/valueobject/value_object.dart';
 
 enum MediaSource { api, camera, gallery, assets }
 
-//TODO: Validar values objetos
 class ImageMedia extends ValueObject<String> {
   final File file;
   final MediaSource source;
-  final Map<String, dynamic> metadata;
+  final int size;
+  final String mimeType;
+  final String imageName;
 
   ImageMedia({
     required this.file,
     required this.source,
-    required this.metadata,
+    required this.size,
+    required this.mimeType,
+    required this.imageName,
   }) : super(file.path);
 
   factory ImageMedia.fromGallery({
     required String url,
-    required Map<String, dynamic> metadata,
+    required int size,
+    required String mimeType,
+    required String imageName,
   }) {
     return ImageMedia(
-      file: File(url),
-      source: MediaSource.gallery,
-      metadata: metadata,
-    );
+        file: File(url),
+        source: MediaSource.gallery,
+        size: size,
+        mimeType: mimeType,
+        imageName: imageName);
   }
 
   factory ImageMedia.fromWeb({
     required String url,
-    required Map<String, dynamic> metadata,
+    required int size,
+    required String mimeType,
+    required String imageName,
   }) {
     return ImageMedia(
-      file: File(url),
-      source: MediaSource.api,
-      metadata: metadata,
-    );
+        file: File(url),
+        source: MediaSource.api,
+        size: size,
+        mimeType: mimeType,
+        imageName: imageName);
   }
 
   @override
