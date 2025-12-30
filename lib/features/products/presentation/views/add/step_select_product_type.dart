@@ -1,68 +1,75 @@
-import 'package:deehelp/core/ui/theme/dimens.dart';
+import 'package:deehelp/core/ui/assets/resources.dart';
+import 'package:deehelp/core/ui/theme/app_colors.dart';
 import 'package:deehelp/core/ui/widgets/button/ui_elevated_button.dart';
-import 'package:deehelp/core/ui/widgets/card/ui_custom_app_card.dart';
 import 'package:deehelp/features/products/presentation/providers/product_viewmodel_provider.dart';
-import 'package:deehelp/features/products/presentation/views/add/widget/product_choose_item_card_widget.dart';
+import 'package:deehelp/features/products/presentation/views/add/state/add_product_state.dart';
+import 'package:deehelp/features/products/presentation/views/add/widget/product_type_card.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class StepSelectProductType extends ConsumerWidget {
-  final VoidCallback press;
-  const StepSelectProductType({super.key, required this.press});
+  final VoidCallback onContinue;
+  const StepSelectProductType({
+    super.key,
+    required this.onContinue,
+  });
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final state = ref.watch(addProductViewModelProvider);
+    final viewModel = ref.read(addProductViewModelProvider.notifier);
 
-    return SingleChildScrollView(
-      child: Padding(
-        padding: EdgeInsetsDirectional.symmetric(
-          horizontal: Dimens.defaultPadding.w,
-          vertical: Dimens.defaultPadding.h,
-        ),
-        child: Column(
-          spacing: 10,
-          children: [
-            UICustomAppCard(
-              width: double.infinity,
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  ProductChooseItemCardWidget(
-                    types: state.productTypes
-                        .where((element) => element.identifier == 0)
-                        .toList(),
-                    title: "Veículos e Utiliários",
-                    subTitle:
-                        "Você está cadastrando um veículo de quatro rodas, podendo ser: (Carro, Pick-up, SUV ou Van)",
+    return Scaffold(
+      body: CustomScrollView(
+        slivers: [
+          SliverPadding(
+            padding: EdgeInsets.symmetric(horizontal: 20.w, vertical: 20.w),
+            sliver: SliverList(
+              delegate: SliverChildListDelegate(
+                [
+                  Text(
+                    'Escolha uma das opções abaixo para continuar',
+                    style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                          color: AppColors.textColorBody,
+                        ),
+                  ),
+                  const SizedBox(height: 10),
+                  ProductTypeCard(
+                    title: "Veiculos leves",
+                    description: "Carros de passeio e utilitários leves",
+                    imageSrc: R.images.svgIconCon,
+                    isSelected: state.productType == ProductType.car,
+                    press: () => viewModel.selectProductType(ProductType.car),
+                  ),
+                  const SizedBox(height: 5),
+                  ProductTypeCard(
+                    title: "Veiculos pesados",
+                    description: "Caminhões e veículos de carga pesada",
+                    imageSrc: R.images.svgIconTruck,
+                    isSelected: state.productType == ProductType.truck,
+                    press: () => viewModel.selectProductType(ProductType.truck),
+                  ),
+                  const SizedBox(height: 5),
+                  ProductTypeCard(
+                    title: "Veiculos de duas rodas",
+                    description: "Motos, Scooters, Ciclomotores e similares",
+                    imageSrc: R.images.svgIconMotorcycle,
+                    isSelected: state.productType == ProductType.motorcycle,
+                    press: () =>
+                        viewModel.selectProductType(ProductType.motorcycle),
+                  ),
+                  const SizedBox(height: 20),
+                  UIElevatedButton(
+                    text: 'Continuar',
+                    press: onContinue,
+                    isEnabled: state.hasProductTypeSelected,
                   ),
                 ],
               ),
             ),
-            UICustomAppCard(
-              width: double.infinity,
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  ProductChooseItemCardWidget(
-                    types: state.productTypes
-                        .where((element) => element.identifier == 1)
-                        .toList(),
-                    title: "Motos",
-                    subTitle:
-                        "Você está cadastrando um veículo de duas rodas, podendo ser: (Moto, Scooters,Ciclomotores)",
-                  ),
-                ],
-              ),
-            ),
-            UIElevatedButton(
-              text: "Confirmar",
-              press: press,
-              isEnabled: state.hasProductTypeSelected,
-            ),
-          ],
-        ),
+          ),
+        ],
       ),
     );
   }

@@ -2,7 +2,6 @@ import 'package:dartz/dartz.dart';
 import 'package:deehelp/core/errors/handler_error.dart';
 import 'package:deehelp/core/utils/command_state_notifier.dart';
 import 'package:deehelp/features/products/domain/entities/image_media.dart';
-import 'package:deehelp/features/products/domain/entities/product_type.dart';
 import 'package:deehelp/features/products/domain/usecases/add_product_usecase.dart';
 import 'package:deehelp/features/products/domain/usecases/dtos/add_product_dto.dart';
 import 'package:deehelp/features/products/presentation/views/add/state/add_product_state.dart';
@@ -16,14 +15,14 @@ class AddProductViewmodel extends StateNotifier<AddProductState> {
         super(AddProductState.initial());
 
   void save(String userId) async {
-    final selectedProductType =
-        state.productTypes.where((el) => el.isSelected == true).first;
+    // final selectedProductType =
+    //     state.productTypes.where((el) => el.isSelected == true).first;
 
     final dto = AddProductDto(
       userId: userId,
       name: state.model!,
       year: state.year!,
-      type: selectedProductType.description,
+      type: state.productType.name,
       images: state.imageMedia,
       code: state.licencePlate!,
       color: state.color!,
@@ -48,14 +47,18 @@ class AddProductViewmodel extends StateNotifier<AddProductState> {
   }
 
   void selectProductType(ProductType productType) async {
-    if (state.productTypes.isEmpty) return;
-    final updatedItems = state.productTypes.map((type) {
-      final bool isThisSelected = type.description == productType.description;
-      return type.copyWith(isSelected: isThisSelected);
-    }).toList();
+    // if (state.productTypes.isEmpty) return;
+    // final updatedItems = state.productTypes.map((type) {
+    //   final bool isThisSelected = type.description == productType.description;
+    //   return type.copyWith(isSelected: isThisSelected);
+    // }).toList();
 
+    // state = state.copyWith(
+    //   productTypes: updatedItems,
+    //   hasProductTypeSelected: true,
+    // );
     state = state.copyWith(
-      productTypes: updatedItems,
+      productType: productType,
       hasProductTypeSelected: true,
     );
   }

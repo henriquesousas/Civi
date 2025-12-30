@@ -1,3 +1,4 @@
+import 'package:deehelp/features/products/domain/add_product_failure.dart';
 import 'package:deehelp/features/products/domain/entities/product.dart';
 import 'package:deehelp/features/products/domain/product_repository.dart';
 import 'package:deehelp/features/products/external/repository/image_media_model.dart';
@@ -17,15 +18,19 @@ class SupabaseProductRepository implements ProductRepository {
     final map = ProductModel.toMap(product);
     final images = ImageMediaModel.toMap(product.images);
 
-    await _client.rpc("add_product_with_image_transaction", params: {
+    final response =
+        await _client.rpc("add_product_with_image_transaction", params: {
       'product_data': map,
       'imagens': images,
     });
+    if (!response["status"]) {
+      throw const AddProductFailure();
+    }
   }
 
   @override
   Future<List<Product>> getByUser(String userId) async {
-    final data = await _client.from(table).select("*,images (*)").eq(
+    final data = await _client.from(table).select("*,product_images (*)").eq(
           "user_id",
           userId,
         );

@@ -22,8 +22,9 @@ class ProductModel {
   }
 
   static Product fromMap(Map<String, dynamic> map) {
-    final images =
-        (map["images"] as List).map((e) => ImageMediaModel.fromMap(e)).toList();
+    final images = (map["product_images"] as List)
+        .map((e) => ImageMediaModel.fromMap(e))
+        .toList();
     return Product(
       id: ProductId.from(map['id']),
       name: map['name'],

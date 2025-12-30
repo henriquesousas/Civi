@@ -15,7 +15,7 @@ T _$identity<T>(T value) => value;
 /// @nodoc
 mixin _$AddProductState {
   int get currentStep;
-  List<ProductType> get productTypes;
+  ProductType get productType;
   bool get hasProductTypeSelected; // Step 1
   String? get model;
   String? get errorModel;
@@ -48,8 +48,8 @@ mixin _$AddProductState {
             other is AddProductState &&
             (identical(other.currentStep, currentStep) ||
                 other.currentStep == currentStep) &&
-            const DeepCollectionEquality()
-                .equals(other.productTypes, productTypes) &&
+            (identical(other.productType, productType) ||
+                other.productType == productType) &&
             (identical(other.hasProductTypeSelected, hasProductTypeSelected) ||
                 other.hasProductTypeSelected == hasProductTypeSelected) &&
             (identical(other.model, model) || other.model == model) &&
@@ -85,7 +85,7 @@ mixin _$AddProductState {
   int get hashCode => Object.hash(
       runtimeType,
       currentStep,
-      const DeepCollectionEquality().hash(productTypes),
+      productType,
       hasProductTypeSelected,
       model,
       errorModel,
@@ -105,7 +105,7 @@ mixin _$AddProductState {
 
   @override
   String toString() {
-    return 'AddProductState(currentStep: $currentStep, productTypes: $productTypes, hasProductTypeSelected: $hasProductTypeSelected, model: $model, errorModel: $errorModel, licencePlate: $licencePlate, errorLicencePlate: $errorLicencePlate, year: $year, errorYear: $errorYear, brand: $brand, color: $color, stepAddProductInfoDetailValid: $stepAddProductInfoDetailValid, obs: $obs, imageMedia: $imageMedia, stepAddPhotoValid: $stepAddPhotoValid, isLoading: $isLoading, isSuccess: $isSuccess, errorMessage: $errorMessage)';
+    return 'AddProductState(currentStep: $currentStep, productType: $productType, hasProductTypeSelected: $hasProductTypeSelected, model: $model, errorModel: $errorModel, licencePlate: $licencePlate, errorLicencePlate: $errorLicencePlate, year: $year, errorYear: $errorYear, brand: $brand, color: $color, stepAddProductInfoDetailValid: $stepAddProductInfoDetailValid, obs: $obs, imageMedia: $imageMedia, stepAddPhotoValid: $stepAddPhotoValid, isLoading: $isLoading, isSuccess: $isSuccess, errorMessage: $errorMessage)';
   }
 }
 
@@ -117,7 +117,7 @@ abstract mixin class $AddProductStateCopyWith<$Res> {
   @useResult
   $Res call(
       {int currentStep,
-      List<ProductType> productTypes,
+      ProductType productType,
       bool hasProductTypeSelected,
       String? model,
       String? errorModel,
@@ -150,7 +150,7 @@ class _$AddProductStateCopyWithImpl<$Res>
   @override
   $Res call({
     Object? currentStep = null,
-    Object? productTypes = null,
+    Object? productType = null,
     Object? hasProductTypeSelected = null,
     Object? model = freezed,
     Object? errorModel = freezed,
@@ -173,10 +173,10 @@ class _$AddProductStateCopyWithImpl<$Res>
           ? _self.currentStep
           : currentStep // ignore: cast_nullable_to_non_nullable
               as int,
-      productTypes: null == productTypes
-          ? _self.productTypes
-          : productTypes // ignore: cast_nullable_to_non_nullable
-              as List<ProductType>,
+      productType: null == productType
+          ? _self.productType
+          : productType // ignore: cast_nullable_to_non_nullable
+              as ProductType,
       hasProductTypeSelected: null == hasProductTypeSelected
           ? _self.hasProductTypeSelected
           : hasProductTypeSelected // ignore: cast_nullable_to_non_nullable
@@ -340,7 +340,7 @@ extension AddProductStatePatterns on AddProductState {
   TResult maybeWhen<TResult extends Object?>(
     TResult Function(
             int currentStep,
-            List<ProductType> productTypes,
+            ProductType productType,
             bool hasProductTypeSelected,
             String? model,
             String? errorModel,
@@ -365,7 +365,7 @@ extension AddProductStatePatterns on AddProductState {
       case _AddProductState() when $default != null:
         return $default(
             _that.currentStep,
-            _that.productTypes,
+            _that.productType,
             _that.hasProductTypeSelected,
             _that.model,
             _that.errorModel,
@@ -404,7 +404,7 @@ extension AddProductStatePatterns on AddProductState {
   TResult when<TResult extends Object?>(
     TResult Function(
             int currentStep,
-            List<ProductType> productTypes,
+            ProductType productType,
             bool hasProductTypeSelected,
             String? model,
             String? errorModel,
@@ -428,7 +428,7 @@ extension AddProductStatePatterns on AddProductState {
       case _AddProductState():
         return $default(
             _that.currentStep,
-            _that.productTypes,
+            _that.productType,
             _that.hasProductTypeSelected,
             _that.model,
             _that.errorModel,
@@ -466,7 +466,7 @@ extension AddProductStatePatterns on AddProductState {
   TResult? whenOrNull<TResult extends Object?>(
     TResult? Function(
             int currentStep,
-            List<ProductType> productTypes,
+            ProductType productType,
             bool hasProductTypeSelected,
             String? model,
             String? errorModel,
@@ -490,7 +490,7 @@ extension AddProductStatePatterns on AddProductState {
       case _AddProductState() when $default != null:
         return $default(
             _that.currentStep,
-            _that.productTypes,
+            _that.productType,
             _that.hasProductTypeSelected,
             _that.model,
             _that.errorModel,
@@ -518,7 +518,7 @@ extension AddProductStatePatterns on AddProductState {
 class _AddProductState implements AddProductState {
   const _AddProductState(
       {this.currentStep = 0,
-      final List<ProductType> productTypes = const [],
+      this.productType = ProductType.none,
       this.hasProductTypeSelected = false,
       this.model,
       this.errorModel,
@@ -535,21 +535,14 @@ class _AddProductState implements AddProductState {
       this.isLoading = false,
       this.isSuccess = false,
       this.errorMessage})
-      : _productTypes = productTypes,
-        _imageMedia = imageMedia;
+      : _imageMedia = imageMedia;
 
   @override
   @JsonKey()
   final int currentStep;
-  final List<ProductType> _productTypes;
   @override
   @JsonKey()
-  List<ProductType> get productTypes {
-    if (_productTypes is EqualUnmodifiableListView) return _productTypes;
-    // ignore: implicit_dynamic_type
-    return EqualUnmodifiableListView(_productTypes);
-  }
-
+  final ProductType productType;
   @override
   @JsonKey()
   final bool hasProductTypeSelected;
@@ -613,8 +606,8 @@ class _AddProductState implements AddProductState {
             other is _AddProductState &&
             (identical(other.currentStep, currentStep) ||
                 other.currentStep == currentStep) &&
-            const DeepCollectionEquality()
-                .equals(other._productTypes, _productTypes) &&
+            (identical(other.productType, productType) ||
+                other.productType == productType) &&
             (identical(other.hasProductTypeSelected, hasProductTypeSelected) ||
                 other.hasProductTypeSelected == hasProductTypeSelected) &&
             (identical(other.model, model) || other.model == model) &&
@@ -650,7 +643,7 @@ class _AddProductState implements AddProductState {
   int get hashCode => Object.hash(
       runtimeType,
       currentStep,
-      const DeepCollectionEquality().hash(_productTypes),
+      productType,
       hasProductTypeSelected,
       model,
       errorModel,
@@ -670,7 +663,7 @@ class _AddProductState implements AddProductState {
 
   @override
   String toString() {
-    return 'AddProductState(currentStep: $currentStep, productTypes: $productTypes, hasProductTypeSelected: $hasProductTypeSelected, model: $model, errorModel: $errorModel, licencePlate: $licencePlate, errorLicencePlate: $errorLicencePlate, year: $year, errorYear: $errorYear, brand: $brand, color: $color, stepAddProductInfoDetailValid: $stepAddProductInfoDetailValid, obs: $obs, imageMedia: $imageMedia, stepAddPhotoValid: $stepAddPhotoValid, isLoading: $isLoading, isSuccess: $isSuccess, errorMessage: $errorMessage)';
+    return 'AddProductState(currentStep: $currentStep, productType: $productType, hasProductTypeSelected: $hasProductTypeSelected, model: $model, errorModel: $errorModel, licencePlate: $licencePlate, errorLicencePlate: $errorLicencePlate, year: $year, errorYear: $errorYear, brand: $brand, color: $color, stepAddProductInfoDetailValid: $stepAddProductInfoDetailValid, obs: $obs, imageMedia: $imageMedia, stepAddPhotoValid: $stepAddPhotoValid, isLoading: $isLoading, isSuccess: $isSuccess, errorMessage: $errorMessage)';
   }
 }
 
@@ -684,7 +677,7 @@ abstract mixin class _$AddProductStateCopyWith<$Res>
   @useResult
   $Res call(
       {int currentStep,
-      List<ProductType> productTypes,
+      ProductType productType,
       bool hasProductTypeSelected,
       String? model,
       String? errorModel,
@@ -717,7 +710,7 @@ class __$AddProductStateCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   $Res call({
     Object? currentStep = null,
-    Object? productTypes = null,
+    Object? productType = null,
     Object? hasProductTypeSelected = null,
     Object? model = freezed,
     Object? errorModel = freezed,
@@ -740,10 +733,10 @@ class __$AddProductStateCopyWithImpl<$Res>
           ? _self.currentStep
           : currentStep // ignore: cast_nullable_to_non_nullable
               as int,
-      productTypes: null == productTypes
-          ? _self._productTypes
-          : productTypes // ignore: cast_nullable_to_non_nullable
-              as List<ProductType>,
+      productType: null == productType
+          ? _self.productType
+          : productType // ignore: cast_nullable_to_non_nullable
+              as ProductType,
       hasProductTypeSelected: null == hasProductTypeSelected
           ? _self.hasProductTypeSelected
           : hasProductTypeSelected // ignore: cast_nullable_to_non_nullable

@@ -70,7 +70,7 @@ class _AddProductPageState extends RiverpodBasePageState<AddProductPage> {
   }
 
   @override
-  String? pageTitle() => "Cadastrar patrimônio";
+  String? pageTitle() => "Novo bem";
 
   @override
   EdgeInsetsGeometry? padding() => EdgeInsets.zero;
@@ -82,7 +82,9 @@ class _AddProductPageState extends RiverpodBasePageState<AddProductPage> {
       physics: const NeverScrollableScrollPhysics(),
       onPageChanged: (index) {},
       children: [
-        StepSelectProductType(press: () => _nextPage(goToPage: 1)),
+        StepSelectProductType(
+          onContinue: () => _nextPage(goToPage: 1),
+        ),
         const AddProductStepPage()
       ],
     );

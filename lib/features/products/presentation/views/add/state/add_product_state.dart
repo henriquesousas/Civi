@@ -1,38 +1,46 @@
-import 'package:deehelp/core/ui/assets/resources.dart';
 import 'package:deehelp/features/products/domain/entities/image_media.dart';
-import 'package:deehelp/features/products/domain/entities/product_type.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 part 'add_product_state.freezed.dart';
 
-List<ProductType> getDefaultProductTypes() {
-  return [
-    ProductType(
-      isSelected: false,
-      description: 'Veículos leves',
-      srcImage: R.images.svgIconCon,
-      identifier: 0,
-    ),
-    ProductType(
-      isSelected: false,
-      description: 'Veículos pesados',
-      srcImage: R.images.svgIconTruck,
-      identifier: 0,
-    ),
-    ProductType(
-      isSelected: false,
-      description: 'Veículos de duas rodas',
-      srcImage: R.images.svgIconMotorcycle,
-      identifier: 1,
-    )
-  ];
+// List<ProductType> getDefaultProductTypes() {
+//   return [
+//     ProductType(
+//       isSelected: false,
+//       description: 'Veículos leves',
+//       srcImage: R.images.svgIconCon,
+//       identifier: 0,
+//     ),
+//     ProductType(
+//       isSelected: false,
+//       description: 'Veículos pesados',
+//       srcImage: R.images.svgIconTruck,
+//       identifier: 0,
+//     ),
+//     ProductType(
+//       isSelected: false,
+//       description: 'Veículos de duas rodas',
+//       srcImage: R.images.svgIconMotorcycle,
+//       identifier: 1,
+//     )
+//   ];
+// }
+
+enum ProductType {
+  none(-1),
+  car(0),
+  truck(1),
+  motorcycle(2);
+
+  final int value;
+  const ProductType(this.value);
 }
 
 @freezed
 abstract class AddProductState with _$AddProductState {
   const factory AddProductState({
     @Default(0) int currentStep,
-    @Default([]) List<ProductType> productTypes,
+    @Default(ProductType.none) ProductType productType,
     @Default(false) bool hasProductTypeSelected,
     // Step 1
     String? model,
@@ -55,6 +63,6 @@ abstract class AddProductState with _$AddProductState {
   }) = _AddProductState;
 
   factory AddProductState.initial() => AddProductState(
-        productTypes: getDefaultProductTypes(),
+        productType: ProductType.none,
       );
 }

@@ -64,4 +64,8 @@ class ImageMedia extends ValueObject<String> {
   String get path {
     return file.path;
   }
+
+  String get fullPath {
+    return "${file.path}/$imageName";
+  }
 }
