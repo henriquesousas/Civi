@@ -14,7 +14,7 @@ class ImageMediaModel {
     return images
         .map(
           (e) => {
-            "url": e.filePath,
+            "url": e.path,
             "size": e.size,
             "mime_type": e.mimeType,
           },

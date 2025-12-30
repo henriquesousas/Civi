@@ -45,7 +45,13 @@ class AddProductUseCase extends UseCase<AddProductDto, Unit> {
       _logger.info("Produto cadastrado com sucesso");
       return Result.success(unit);
     } catch (e) {
-      // await _media.delete(_dir, _bucket);
+      await Future.wait(
+        dto.images.map(
+          (currentImageMedia) async {
+            await _imageUpload.delete(currentImageMedia.imageName);
+          },
+        ),
+      );
       return Result.failure(const AddProductFailure());
     }
   }

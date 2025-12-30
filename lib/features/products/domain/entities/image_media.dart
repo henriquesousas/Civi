@@ -52,13 +52,16 @@ class ImageMedia extends ValueObject<String> {
     //TODO: Validar se a url é válida
   }
 
-  String get fileExtension {
+  String get filePath {
     final uri = Uri.tryParse(file.path);
     final path = uri?.path ?? file.path;
+    if (path.startsWith('/')) {
+      return path.substring(1);
+    }
     return path.split('.').last.toLowerCase();
   }
 
-  String get filePath {
+  String get path {
     return file.path;
   }
 }

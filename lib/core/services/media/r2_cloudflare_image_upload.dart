@@ -35,10 +35,11 @@ class R2CloudFlareImageUpload implements ImageUpload {
   }
 
   @override
-  Future<void> delete(String imageName, String bucket) async {
+  Future<void> delete(String imageName) async {
+    final name = "$baseFolder/$imageName";
     await CloudFlareR2.deleteObject(
-      objectName: imageName,
-      bucket: bucket,
+      objectName: name,
+      bucket: bucketName,
     );
   }
 }
