@@ -6,7 +6,7 @@ class ImageMediaModel {
       url: map["url"],
       size: map["size"],
       mimeType: map["mime_type"],
-      imageName: 'image_name',
+      imageName: '',
     );
   }
 

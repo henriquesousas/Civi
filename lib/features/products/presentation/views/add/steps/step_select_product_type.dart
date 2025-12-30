@@ -1,6 +1,9 @@
 import 'package:deehelp/core/ui/assets/resources.dart';
 import 'package:deehelp/core/ui/theme/app_colors.dart';
+import 'package:deehelp/core/ui/theme/app_text_styles.dart';
+import 'package:deehelp/core/ui/theme/dimens.dart';
 import 'package:deehelp/core/ui/widgets/button/ui_elevated_button.dart';
+import 'package:deehelp/core/ui/widgets/card/ui_custom_scaffold.dart';
 import 'package:deehelp/features/products/presentation/providers/product_viewmodel_provider.dart';
 import 'package:deehelp/features/products/presentation/views/add/state/add_product_state.dart';
 import 'package:deehelp/features/products/presentation/views/add/widget/product_type_card.dart';
@@ -20,20 +23,33 @@ class StepSelectProductType extends ConsumerWidget {
     final state = ref.watch(addProductViewModelProvider);
     final viewModel = ref.read(addProductViewModelProvider.notifier);
 
-    return Scaffold(
+    return UICustomScaffold(
+      hideAppBar: true,
+      bottomNavigationBar: Container(
+        margin: EdgeInsets.symmetric(
+          horizontal: Dimens.defaultPadding.w,
+          vertical: Dimens.defaultPadding.w,
+        ),
+        padding: const EdgeInsets.all(10),
+        decoration: BoxDecoration(
+          color: AppColors.lightGreyColor30,
+          borderRadius: BorderRadius.circular(8),
+        ),
+        child: Text(
+          "Pré-cadastre seu veículo para facilitar e acelerar o registro de ocorrências. Em caso de roubo ou furto, você poderá fazer a denúncia rapidamente, usando os dados já salvos, sem perder tempo preenchendo formulários extensos.",
+          textAlign: TextAlign.center,
+          style: context.appTextStyles.sectionSubTitle1.copyWith(
+            color: AppColors.darkGreyColor,
+          ),
+        ),
+      ),
       body: CustomScrollView(
         slivers: [
           SliverPadding(
-            padding: EdgeInsets.symmetric(horizontal: 20.w, vertical: 20.w),
+            padding: EdgeInsets.zero,
             sliver: SliverList(
               delegate: SliverChildListDelegate(
                 [
-                  Text(
-                    'Escolha uma das opções abaixo para continuar',
-                    style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                          color: AppColors.textColorBody,
-                        ),
-                  ),
                   const SizedBox(height: 10),
                   ProductTypeCard(
                     title: "Veiculos leves",
@@ -65,6 +81,21 @@ class StepSelectProductType extends ConsumerWidget {
                     press: onContinue,
                     isEnabled: state.hasProductTypeSelected,
                   ),
+                  const SizedBox(height: 20),
+                  // Container(
+                  //   padding: const EdgeInsets.all(10),
+                  //   decoration: BoxDecoration(
+                  //     color: AppColors.lightGreyColor30,
+                  //     borderRadius: BorderRadius.circular(8),
+                  //   ),
+                  //   child: Text(
+                  //     "Pré-cadastre seu veículo para facilitar e acelerar o registro de ocorrências. Em caso de roubo ou furto, você poderá fazer a denúncia rapidamente, usando os dados já salvos, sem perder tempo preenchendo formulários extensos.",
+                  //     textAlign: TextAlign.center,
+                  //     style: context.appTextStyles.sectionSubTitle1.copyWith(
+                  //       color: AppColors.darkGreyColor,
+                  //     ),
+                  //   ),
+                  // ),
                 ],
               ),
             ),

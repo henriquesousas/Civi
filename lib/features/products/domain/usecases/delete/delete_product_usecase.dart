@@ -5,9 +5,9 @@ import 'package:deehelp/core/utils/image_utils.dart';
 import 'package:deehelp/core/services/media/interfaces/media_storage.dart';
 import 'package:logging/logging.dart';
 
-import '../add_product_failure.dart';
-import '../product_repository.dart';
-import 'dtos/delete_product_dto.dart';
+import '../../add_product_failure.dart';
+import '../../product_repository.dart';
+import 'delete_product_dto.dart';
 
 class DeleteProductUsecase extends OldUseCase<DeleteProductDto, Unit> {
   static final _logger = Logger("DeleteProductUsecase");

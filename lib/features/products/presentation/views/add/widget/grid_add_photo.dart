@@ -1,13 +1,14 @@
-import 'dart:io';
-
 import 'package:deehelp/core/ui/theme/app_colors.dart';
 import 'package:deehelp/core/ui/theme/app_text_styles.dart';
 import 'package:deehelp/core/ui/theme/dimens.dart';
+import 'package:deehelp/core/ui/widgets/image/ui_my_assets_image_widget.dart';
+import 'package:deehelp/core/ui/widgets/image/ui_my_network_image_widget.dart';
+import 'package:deehelp/features/products/domain/entities/image_media.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class GridAddPhoto extends StatelessWidget {
-  final List<File> photos;
+  final List<ImageMedia> photos;
   final VoidCallback? onAdd;
   final Function(int)? onRemove;
   final int maxPhotos;
@@ -37,7 +38,7 @@ class GridAddPhoto extends StatelessWidget {
           itemCount: photos.length + (photos.length < maxPhotos ? 1 : 0),
           itemBuilder: (context, index) {
             if (index < photos.length) {
-              return _buildFotoCard(photos[index], index);
+              return _buildPhotoCard(photos[index], index);
             } else {
               return _buildAddButton(context);
             }
@@ -47,7 +48,7 @@ class GridAddPhoto extends StatelessWidget {
     );
   }
 
-  Widget _buildFotoCard(File foto, int index) {
+  Widget _buildPhotoCard(ImageMedia image, int index) {
     return Stack(
       children: [
         Container(
@@ -55,15 +56,21 @@ class GridAddPhoto extends StatelessWidget {
             borderRadius: BorderRadius.circular(8),
             border: Border.all(color: Colors.grey[300]!),
           ),
-          child: ClipRRect(
-            borderRadius: BorderRadius.circular(8),
-            child: Image.file(
-              foto,
-              fit: BoxFit.cover,
-              width: double.infinity,
-              height: double.infinity,
-            ),
-          ),
+          child: image.source == MediaSource.api
+              ? UIMyNetworkImageWidget(
+                  radius: 8.0,
+                  imageUrl: image.value,
+                  width: double.infinity,
+                  height: double.infinity,
+                )
+              : UIMyAssetsImageWidget(
+                  radius: 8.0,
+                  isFile: true,
+                  boxFit: BoxFit.cover,
+                  assetPath: image.value,
+                  width: double.infinity,
+                  height: double.infinity,
+                ),
         ),
         if (onRemove != null)
           Positioned(

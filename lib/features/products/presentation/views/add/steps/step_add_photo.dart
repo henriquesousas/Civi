@@ -34,7 +34,7 @@ class _StepAddPhotoState extends ConsumerState<StepAddPhoto> {
           const SizedBox(height: 10),
           GridAddPhoto(
             maxPhotos: 2,
-            photos: state.imageMedia.map((e) => e.file).toList(),
+            photos: state.imageMedia,
             onAdd: () async {
               final imageMedia = await imagePicker.pickImageFromGallery();
               if (imageMedia.isFailure) {

@@ -1,6 +1,7 @@
 import 'package:deehelp/core/ui/extensions/dialog_extension.dart';
 import 'package:deehelp/core/ui/widgets/base_page.dart';
 import 'package:deehelp/core/ui/widgets/base_page_state.dart';
+import 'package:deehelp/core/ui/widgets/card/ui_custom_scaffold.dart';
 import 'package:deehelp/features/products/presentation/views/update/components/product_form.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -11,7 +12,8 @@ import 'state/product_update_state.dart';
 import 'update_product_cubit.dart';
 
 class UpdateProductPage extends StatefulWidget {
-  const UpdateProductPage({super.key});
+  final Product product;
+  const UpdateProductPage({super.key, required this.product});
 
   @override
   State<UpdateProductPage> createState() => _ProState();
@@ -20,7 +22,14 @@ class UpdateProductPage extends StatefulWidget {
 class _ProState extends State<UpdateProductPage> {
   @override
   Widget build(BuildContext context) {
-    return const Placeholder();
+    return UICustomScaffold(
+      pageTitle: "Detalhes",
+      body: ProductForm(
+        product: widget.product,
+        onConfirm: () {},
+        onDelete: () {},
+      ),
+    );
   }
 }
 

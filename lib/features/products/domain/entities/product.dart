@@ -3,7 +3,7 @@ import 'package:deehelp/features/products/domain/entities/product_id.dart';
 
 import '../../../../core/domain/validation/validation_handler.dart';
 import '../product_status.dart';
-import '../usecases/dtos/add_product_dto.dart';
+import '../usecases/add/add_product_dto.dart';
 import 'image_media.dart';
 
 //TODO: Refactor

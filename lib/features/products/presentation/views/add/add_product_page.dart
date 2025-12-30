@@ -1,6 +1,6 @@
 import 'package:deehelp/core/utils/riverpod_base_page.dart';
-import 'package:deehelp/features/products/presentation/views/add/step_select_product_type.dart';
-import 'package:deehelp/features/products/presentation/views/add/add_product_steps_page.dart';
+import 'package:deehelp/features/products/presentation/views/add/steps/step_select_product_type.dart';
+import 'package:deehelp/features/products/presentation/views/add/steps/add_product_steps_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';

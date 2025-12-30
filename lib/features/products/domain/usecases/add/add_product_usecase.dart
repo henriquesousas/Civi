@@ -6,7 +6,7 @@ import 'package:deehelp/features/products/domain/add_product_failure.dart';
 import 'package:deehelp/features/products/domain/entities/image_media.dart';
 import 'package:deehelp/features/products/domain/entities/product.dart';
 import 'package:deehelp/features/products/domain/product_repository.dart';
-import 'package:deehelp/features/products/domain/usecases/dtos/add_product_dto.dart';
+import 'package:deehelp/features/products/domain/usecases/add/add_product_dto.dart';
 import 'package:logging/logging.dart';
 
 class AddProductUseCase extends UseCase<AddProductDto, Unit> {

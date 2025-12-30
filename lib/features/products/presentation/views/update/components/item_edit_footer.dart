@@ -1,4 +1,3 @@
-import 'package:deehelp/core/ui/theme/app_text_styles.dart';
 import 'package:flutter/material.dart';
 
 import '../../../../../../core/ui/theme/app_colors.dart';
@@ -23,25 +22,13 @@ class ItemEditFooter extends StatelessWidget {
           press: onConfirm,
         ),
         const SizedBox(height: 10),
-        Column(
-          children: [
-            Text(
-              "Para deletar esse",
-              style: context.appTextStyles.caption1Style,
-            ),
-            GestureDetector(
-              onTap: onDelete,
-              child: Text(
-                "Clique aqui",
-                style: context.appTextStyles.caption1Style.copyWith(
-                  color: AppColors.errorColor,
-                  fontWeight: FontWeight.bold,
-                ),
-              ),
-            ),
-          ],
+        UIElevatedButton(
+          bgColor: Colors.transparent,
+          borderColor: AppColors.errorColorDark,
+          textColor: AppColors.errorColor,
+          text: "Deletar",
+          press: onDelete,
         ),
-        // const SizedBox(height: 30),
       ],
     );
   }

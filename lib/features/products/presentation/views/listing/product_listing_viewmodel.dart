@@ -1,7 +1,7 @@
 import 'package:deehelp/core/errors/handler_error.dart';
 import 'package:deehelp/core/utils/command_state_notifier.dart';
 import 'package:deehelp/features/products/domain/entities/product.dart';
-import 'package:deehelp/features/products/domain/usecases/get_products_by_user_usecase.dart';
+import 'package:deehelp/features/products/domain/usecases/listing/get_products_by_user_usecase.dart';
 import 'package:deehelp/features/products/presentation/views/listing/state/list_product_state.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 

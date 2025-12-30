@@ -37,7 +37,7 @@ class _ProductListingPageState
   }
 
   @override
-  String? pageTitle() => "Patrimônio";
+  String? pageTitle() => "Lista de bens";
 
   @override
   VoidCallback? onBackPress() {
@@ -69,10 +69,10 @@ class _ProductListingPageState
   void _add() => context.push(RouterConstant.createNewItem);
 
   void _onEdit(Product product) async {
-    // final result = await context.push<Map<String, dynamic>?>(
-    //   RouterConstant.itemEdit,
-    //   extra: product,
-    // );
+    final result = await context.push<Map<String, dynamic>?>(
+      RouterConstant.itemEdit,
+      extra: product,
+    );
 
     // if (result != null) {
     //   final action = result['action'];

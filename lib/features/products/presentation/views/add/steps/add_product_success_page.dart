@@ -7,8 +7,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:lottie/lottie.dart';
 
-import '../../../../../core/ui/animation/slide_fade_transition_animator.dart';
-import '../../../../../core/ui/animation/transform_scale_opacity_animator.dart';
+import '../../../../../../core/ui/animation/slide_fade_transition_animator.dart';
+import '../../../../../../core/ui/animation/transform_scale_opacity_animator.dart';
 
 class AddProductSuccessPage extends StatefulWidget {
   const AddProductSuccessPage({super.key});
