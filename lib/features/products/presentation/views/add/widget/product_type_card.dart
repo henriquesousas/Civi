@@ -1,4 +1,5 @@
 import 'package:deehelp/core/ui/theme/app_colors.dart';
+import 'package:deehelp/core/ui/theme/app_text_styles.dart';
 import 'package:deehelp/core/ui/theme/dimens.dart';
 import 'package:deehelp/core/ui/widgets/image/ui_my_assets_image_widget.dart';
 import 'package:flutter/material.dart';
@@ -89,25 +90,21 @@ class _ProductTypeCardState extends State<ProductTypeCard> {
                     children: [
                       Text(
                         widget.title,
-                        style:
-                            Theme.of(context).textTheme.titleMedium?.copyWith(
-                                  fontWeight: widget.isSelected
-                                      ? FontWeight.w600
-                                      : FontWeight.w500,
-                                  color: widget.isSelected
-                                      ? AppColors.primaryColor
-                                      : Theme.of(context).colorScheme.onSurface,
-                                ),
+                        maxLines: 2,
+                        overflow: TextOverflow.ellipsis,
+                        style: context.appTextStyles.sectionTitle.copyWith(
+                          fontWeight: FontWeight.w600,
+                          color: AppColors.textColorBody,
+                        ),
                       ),
                       SizedBox(height: 4.h),
                       Text(
                         widget.description,
-                        style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                              color: Theme.of(context)
-                                  .colorScheme
-                                  .onSurfaceVariant,
-                            ),
-                      ),
+                        overflow: TextOverflow.ellipsis,
+                        style: context.appTextStyles.caption1Style.copyWith(
+                          color: AppColors.textSecondary,
+                        ),
+                      )
                     ],
                   ),
                 ),
