@@ -76,3 +76,29 @@ class MainApp extends StatelessWidget {
     );
   }
 }
+
+/**
+ * 
+
+core
+	ui
+	providers
+	errors
+	utils
+	validation
+	notification
+	valueobjects
+	router
+	localization
+	res
+	base
+		entity.dart
+		usecase.dart
+		riverpod_base_page.dart
+feature
+	auth
+	dashboard
+	map
+	faq
+	profile
+ */

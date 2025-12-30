@@ -5,7 +5,7 @@ import 'package:deehelp/features/auth/domain/usecases/add_nick_name_usecase.dart
 import 'package:deehelp/features/auth/presentation/nickname/state/nickname_state.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import '../../../../core/unit.dart';
+import '../../../../core/ui/unit.dart';
 import '../../../../core/utils/command_state_notifier.dart';
 import '../../domain/usecases/add_nick_name_dto.dart';
 

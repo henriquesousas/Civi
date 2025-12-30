@@ -1,4 +1,4 @@
-import 'package:deehelp/core/unit.dart';
+import 'package:deehelp/core/ui/unit.dart';
 import 'package:deehelp/core/utils/result.dart';
 import 'package:deehelp/features/auth/domain/entity/authenticated_user.dart';
 import 'package:deehelp/features/auth/domain/exceptions/unauthenticated_failure.dart';

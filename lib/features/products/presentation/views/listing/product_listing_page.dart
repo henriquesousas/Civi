@@ -69,7 +69,7 @@ class _ProductListingPageState
   void _add() => context.push(RouterConstant.createNewItem);
 
   void _onEdit(Product product) async {
-    final result = await context.push<Map<String, dynamic>?>(
+    await context.push<Map<String, dynamic>?>(
       RouterConstant.itemEdit,
       extra: product,
     );

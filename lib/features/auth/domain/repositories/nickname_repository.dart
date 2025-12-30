@@ -1,4 +1,4 @@
-import '../../../../core/unit.dart';
+import '../../../../core/ui/unit.dart';
 import '../../../../core/utils/result.dart';
 
 abstract class NicknameRepository {

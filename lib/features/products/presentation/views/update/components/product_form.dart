@@ -27,223 +27,235 @@ class ProductForm extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      spacing: 10,
-      children: [
-        // UICustomAppCard(
-        //   padding: EdgeInsets.zero,
-        //   child: Column(
-        //     mainAxisAlignment: MainAxisAlignment.start,
-        //     crossAxisAlignment: CrossAxisAlignment.start,
-        //     spacing: 3,
-        //     children: [
-        //       ItemDetailTile(
-        //         title: "Marca",
-        //         subtitle: product.brand,
-        //         press: () {
-        //           final modalCubit = context.read<ProductEditModalCubit>();
-        //           final mainCubit = context.read<UpdateProductCubit>();
+    return SingleChildScrollView(
+      physics: const BouncingScrollPhysics(),
+      child: Column(
+        spacing: 10,
+        children: [
+          UICustomAppCard(
+            padding: EdgeInsets.zero,
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.start,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              spacing: 3,
+              children: [
+                ItemDetailTile(
+                  title: "Marca",
+                  subtitle: product.brand,
+                  press: () {
+                    // final modalCubit = context.read<ProductEditModalCubit>();
+                    // final mainCubit = context.read<UpdateProductCubit>();
 
-        //           modalCubit.initializeSafeCopy(product);
+                    // modalCubit.initializeSafeCopy(product);
 
-        //           customModalBottomSheet(
-        //             context,
-        //             child: BlocProvider.value(
-        //               value: modalCubit,
-        //               child: BlocBuilder<ProductEditModalCubit, ItemModalState>(
-        //                 builder: (context, modalState) {
-        //                   return ModalSelectBrand(
-        //                     values: kBrands,
-        //                     onChange: (value) {
-        //                       mainCubit.applyBrandChange(value);
-        //                       context.pop();
-        //                     },
-        //                   );
-        //                 },
-        //               ),
-        //             ),
-        //           );
-        //         },
-        //       ),
-        //       ItemDetailTile(
-        //         title: "Modelo",
-        //         subtitle: product.name,
-        //         press: () => _showTextFieldModal(
-        //           context: context,
-        //           item: product,
-        //           title: "Modelo",
-        //           description: "Atualize informações do modelo do veículo",
-        //           examples: "Exemplos: Civic, Corolla, Onix, HB20",
-        //           icon: Icons.directions_car,
-        //           field: 'model',
-        //           onChange: (value) =>
-        //               context.read<ProductEditModalCubit>().changeModel(value),
-        //           onApplyChange: (value) => context
-        //               .read<UpdateProductCubit>()
-        //               .applyModelChange(value),
-        //         ),
-        //       ),
-        //       ItemDetailTile(
-        //         title: "Placa",
-        //         subtitle: product.code,
-        //         showIconEdit: false,
-        //         press: () {},
-        //       ),
-        //       ItemDetailTile(
-        //         title: "Cor",
-        //         subtitle: product.color,
-        //         showDivider: false,
-        //         press: () {
-        //           final modalCubit = context.read<ProductEditModalCubit>();
-        //           final mainCubit = context.read<UpdateProductCubit>();
-
-        //           customModalBottomSheet(
-        //             context,
-        //             child: BlocProvider.value(
-        //               value: modalCubit,
-        //               child: BlocBuilder<ProductEditModalCubit, ItemModalState>(
-        //                 builder: (context, modalState) {
-        //                   return ModalSelectColor(
-        //                     onChange: (value) {
-        //                       mainCubit.applyColorChange(value);
-        //                       context.pop();
-        //                     },
-        //                   );
-        //                 },
-        //               ),
-        //             ),
-        //           );
-        //         },
-        //       ),
-        //     ],
-        //   ),
-        // ),
-        UICustomAppCard(
-          padding: EdgeInsets.zero,
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.start,
-            crossAxisAlignment: CrossAxisAlignment.start,
-            spacing: 3,
-            children: [
-              ItemDetailTile(
-                title: "Tipo",
-                subtitle: product.type,
-                showDivider: false,
-                press: () {
-                  final modalCubit = context.read<ProductEditModalCubit>();
-                  final mainCubit = context.read<UpdateProductCubit>();
-
-                  modalCubit.initializeSafeCopy(product);
-
-                  customModalBottomSheet(
-                    context,
-                    child: BlocProvider.value(
-                      value: modalCubit,
-                      child: BlocBuilder<ProductEditModalCubit, ItemModalState>(
-                        builder: (context, modalState) {
-                          return ModalSelectBrand(
-                            values: kTypes,
-                            onChange: (value) {
-                              mainCubit.applyTypeChange(value);
-                              context.pop();
-                            },
-                          );
-                        },
-                      ),
-                    ),
-                  );
-                },
-              ),
-            ],
-          ),
-        ),
-        UICustomAppCard(
-          padding: EdgeInsets.zero,
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.start,
-            crossAxisAlignment: CrossAxisAlignment.start,
-            spacing: 3,
-            children: [
-              ItemDetailTile(
-                title: "Detalhes",
-                subtitle: product.obs ?? '',
-                showDivider: false,
-                press: () => _showTextFieldModal(
-                  context: context,
-                  item: product,
-                  title: "Detalhes",
-                  description: "Adicione observações sobre o estado do veículo",
-                  examples:
-                      "Exemplos: Amassado na porta, Risco na lateral, Parachoque traseiro quebrado",
-                  icon: Icons.description,
-                  field: 'obs',
-                  onChange: (value) =>
-                      context.read<ProductEditModalCubit>().changeObs(value),
-                  onApplyChange: (value) =>
-                      context.read<UpdateProductCubit>().applyObsChange(value),
+                    // customModalBottomSheet(
+                    //   context,
+                    //   child: BlocProvider.value(
+                    //     value: modalCubit,
+                    //     child:
+                    //         BlocBuilder<ProductEditModalCubit, ItemModalState>(
+                    //       builder: (context, modalState) {
+                    //         return ModalSelectBrand(
+                    //           values: kBrands,
+                    //           onChange: (value) {
+                    //             mainCubit.applyBrandChange(value);
+                    //             context.pop();
+                    //           },
+                    //         );
+                    //       },
+                    //     ),
+                    //   ),
+                    // );
+                  },
                 ),
-              )
-            ],
-          ),
-        ),
-        UICustomAppCard(
-          padding: EdgeInsets.zero,
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.start,
-            crossAxisAlignment: CrossAxisAlignment.start,
-            spacing: 3,
-            children: [
-              ItemDetailTile(
-                title: "Fotos",
-                subtitle: "1 Foto(s)",
-                showDivider: false,
-                showCam: true,
-                press: () async {
-                  // final cubit = context.read<UpdateProductCubit>();
-                  // final image =
-                  //     await DefaultImagePicker().pickImageFromGallery();
-                  // if (image != null) {
-                  //   cubit.applyImageChange(image);
-                  // }
-                },
-              ),
-              GridAddPhoto(
-                photos: product.images,
-                onRemove: (_) {},
-              )
+                ItemDetailTile(
+                  title: "Modelo",
+                  subtitle: product.name,
+                  press: () => _showTextFieldModal(
+                      context: context,
+                      item: product,
+                      title: "Modelo",
+                      description: "Atualize informações do modelo do veículo",
+                      examples: "Exemplos: Civic, Corolla, Onix, HB20",
+                      icon: Icons.directions_car,
+                      field: 'model',
+                      onChange: (value) => context
+                          .read<ProductEditModalCubit>()
+                          .changeModel(value),
+                      onApplyChange: (_) {}
+                      // onApplyChange: (value) => context
+                      //     .read<UpdateProductCubit>()
+                      //     .applyModelChange(value),
+                      ),
+                ),
+                ItemDetailTile(
+                  title: "Placa",
+                  subtitle: product.code,
+                  showIconEdit: false,
+                  press: () {},
+                ),
+                ItemDetailTile(
+                  title: "Cor",
+                  subtitle: product.color,
+                  showDivider: false,
+                  press: () {
+                    // final modalCubit = context.read<ProductEditModalCubit>();
+                    // final mainCubit = context.read<UpdateProductCubit>();
 
-              // Padding(
-              //   padding: const EdgeInsets.all(8.0),
-              //   child: product.image?.source == MediaSource.api
-              //       ? UIMyAssetsImageWidget(
-              //           assetPath: 'product.image?.file.path ?? ""',
-              //           width: context.percentWidth(0.9),
-              //           height: context.percentHeight(0.3),
-              //         )
-              //       : Container(
-              //           width: context.percentWidth(0.9),
-              //           height: context.percentHeight(0.3),
-              //           decoration: BoxDecoration(
-              //             border: Border.all(
-              //               color: AppColors.primaryColor,
-              //               width: 3.0,
-              //             ),
-              //             borderRadius: BorderRadius.circular(20),
-              //             image: DecorationImage(
-              //               image: FileImage(product.image!.file),
-              //               fit: BoxFit.cover,
-              //             ),
-              //           ),
-              //         ),
-              // ),
-            ],
+                    // customModalBottomSheet(
+                    //   context,
+                    //   child: BlocProvider.value(
+                    //     value: modalCubit,
+                    //     child:
+                    //         BlocBuilder<ProductEditModalCubit, ItemModalState>(
+                    //       builder: (context, modalState) {
+                    //         return ModalSelectColor(
+                    //           onChange: (value) {
+                    //             mainCubit.applyColorChange(value);
+                    //             context.pop();
+                    //           },
+                    //         );
+                    //       },
+                    //     ),
+                    //   ),
+                    // );
+                  },
+                ),
+              ],
+            ),
           ),
-        ),
-        ItemEditFooter(
-          onConfirm: onConfirm,
-          onDelete: onDelete,
-        ),
-      ],
+          UICustomAppCard(
+            padding: EdgeInsets.zero,
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.start,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              spacing: 3,
+              children: [
+                ItemDetailTile(
+                  title: "Tipo",
+                  subtitle: product.type,
+                  showDivider: false,
+                  press: () {
+                    // final modalCubit = context.read<ProductEditModalCubit>();
+                    // final mainCubit = context.read<UpdateProductCubit>();
+
+                    // modalCubit.initializeSafeCopy(product);
+
+                    // customModalBottomSheet(
+                    //   context,
+                    //   child: BlocProvider.value(
+                    //     value: modalCubit,
+                    //     child:
+                    //         BlocBuilder<ProductEditModalCubit, ItemModalState>(
+                    //       builder: (context, modalState) {
+                    //         return ModalSelectBrand(
+                    //           values: kTypes,
+                    //           onChange: (value) {
+                    //             mainCubit.applyTypeChange(value);
+                    //             context.pop();
+                    //           },
+                    //         );
+                    //       },
+                    //     ),
+                    //   ),
+                    // );
+                  },
+                ),
+              ],
+            ),
+          ),
+          UICustomAppCard(
+            padding: EdgeInsets.zero,
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.start,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              spacing: 3,
+              children: [
+                ItemDetailTile(
+                  title: "Detalhes",
+                  subtitle: product.obs ?? '',
+                  showDivider: false,
+                  press: () => _showTextFieldModal(
+                      context: context,
+                      item: product,
+                      title: "Detalhes",
+                      description:
+                          "Adicione observações sobre o estado do veículo",
+                      examples:
+                          "Exemplos: Amassado na porta, Risco na lateral, Parachoque traseiro quebrado",
+                      icon: Icons.description,
+                      field: 'obs',
+                      onChange: (value) => context
+                          .read<ProductEditModalCubit>()
+                          .changeObs(value),
+                      onApplyChange: (_) {}
+                      // onApplyChange: (value) => context
+                      //     .read<UpdateProductCubit>()
+                      //     .applyObsChange(value),
+                      ),
+                )
+              ],
+            ),
+          ),
+          UICustomAppCard(
+            padding: EdgeInsets.zero,
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.start,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              spacing: 3,
+              children: [
+                ItemDetailTile(
+                  title: "Fotos",
+                  subtitle: "1 Foto(s)",
+                  showDivider: false,
+                  showCam: true,
+                  press: () async {
+                    // final cubit = context.read<UpdateProductCubit>();
+                    // final image =
+                    //     await DefaultImagePicker().pickImageFromGallery();
+                    // if (image != null) {
+                    //   cubit.applyImageChange(image);
+                    // }
+                  },
+                ),
+                GridAddPhoto(
+                  photos: product.images,
+                  onRemove: (_) {},
+                )
+
+                // Padding(
+                //   padding: const EdgeInsets.all(8.0),
+                //   child: product.image?.source == MediaSource.api
+                //       ? UIMyAssetsImageWidget(
+                //           assetPath: 'product.image?.file.path ?? ""',
+                //           width: context.percentWidth(0.9),
+                //           height: context.percentHeight(0.3),
+                //         )
+                //       : Container(
+                //           width: context.percentWidth(0.9),
+                //           height: context.percentHeight(0.3),
+                //           decoration: BoxDecoration(
+                //             border: Border.all(
+                //               color: AppColors.primaryColor,
+                //               width: 3.0,
+                //             ),
+                //             borderRadius: BorderRadius.circular(20),
+                //             image: DecorationImage(
+                //               image: FileImage(product.image!.file),
+                //               fit: BoxFit.cover,
+                //             ),
+                //           ),
+                //         ),
+                // ),
+              ],
+            ),
+          ),
+          ItemEditFooter(
+            onConfirm: onConfirm,
+            onDelete: onDelete,
+          ),
+        ],
+      ),
     );
   }
 

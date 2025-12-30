@@ -30,13 +30,13 @@ class DashbordQuickActionsCard extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               QuickActionItem(
-                title: "Novo\nPatrimônio",
+                title: "Bem\nPré cadastro",
                 color: AppColors.primaryColor,
                 icon: const Icon(Icons.add, color: AppColors.whiteColor),
                 onTap: () => context.push(RouterConstant.myItems),
               ),
               QuickActionItem(
-                title: "Novo\nAlertar",
+                title: "Reportar\nincidente",
                 color: AppColors.grenColor,
                 icon: const Icon(Icons.campaign_outlined,
                     color: AppColors.whiteColor),

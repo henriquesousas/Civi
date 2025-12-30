@@ -1,8 +1,5 @@
 class Unit {
   const Unit();
-
-  // static const Unit instance = Unit._();
-
   @override
   bool operator ==(Object other) => other is Unit;
 
