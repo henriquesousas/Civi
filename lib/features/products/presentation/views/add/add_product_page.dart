@@ -1,18 +1,18 @@
-import 'package:deehelp/core/utils/riverpod_base_page.dart';
+import 'package:deehelp/core/base/base_page.dart';
 import 'package:deehelp/features/products/presentation/views/add/steps/step_select_product_type.dart';
 import 'package:deehelp/features/products/presentation/views/add/steps/add_product_steps_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
-class AddProductPage extends RiverpodBasePage {
+class AddProductPage extends BasePage {
   const AddProductPage({Key? key}) : super(key: key);
 
   @override
   ConsumerState<AddProductPage> createState() => _AddProductPageState();
 }
 
-class _AddProductPageState extends RiverpodBasePageState<AddProductPage> {
+class _AddProductPageState extends BasePageState<AddProductPage> {
   final PageController _pageController = PageController();
   int _currentPage = 0;
 

@@ -1,11 +1,11 @@
-import 'package:deehelp/core/ui/extensions/date_extension.dart';
+import 'package:deehelp/core/extensions/date_extension.dart';
 import 'package:deehelp/core/ui/theme/app_text_styles.dart';
 import 'package:deehelp/features/incident/domain/incident_type.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 
-import '../../../../core/ui/assets/resources.dart';
+import '../../../../core/res/resources.dart';
 import '../../../../core/ui/theme/app_colors.dart';
 import '../../../../core/ui/theme/dimens.dart';
 
@@ -51,7 +51,7 @@ class IncidentDetail extends StatelessWidget {
               spacing: 5,
               children: [
                 SvgPicture.asset(
-                  R.images.svgStatementInactive,
+                  R.svg.listInactive,
                   height: Dimens.size16.h,
                   colorFilter: const ColorFilter.mode(
                     AppColors.textColorBody,
@@ -147,7 +147,7 @@ class IncidentDetail extends StatelessWidget {
               spacing: 5,
               children: [
                 SvgPicture.asset(
-                  R.images.svgCategory,
+                  R.svg.category,
                   height: 16,
                   colorFilter: const ColorFilter.mode(
                     AppColors.textColorBody,

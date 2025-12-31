@@ -3,29 +3,6 @@ import 'package:freezed_annotation/freezed_annotation.dart';
 
 part 'add_product_state.freezed.dart';
 
-// List<ProductType> getDefaultProductTypes() {
-//   return [
-//     ProductType(
-//       isSelected: false,
-//       description: 'Veículos leves',
-//       srcImage: R.images.svgIconCon,
-//       identifier: 0,
-//     ),
-//     ProductType(
-//       isSelected: false,
-//       description: 'Veículos pesados',
-//       srcImage: R.images.svgIconTruck,
-//       identifier: 0,
-//     ),
-//     ProductType(
-//       isSelected: false,
-//       description: 'Veículos de duas rodas',
-//       srcImage: R.images.svgIconMotorcycle,
-//       identifier: 1,
-//     )
-//   ];
-// }
-
 enum ProductType {
   none(-1),
   car(0),
@@ -62,7 +39,7 @@ abstract class AddProductState with _$AddProductState {
     String? errorMessage,
   }) = _AddProductState;
 
-  factory AddProductState.initial() => AddProductState(
+  factory AddProductState.initial() => const AddProductState(
         productType: ProductType.none,
       );
 }

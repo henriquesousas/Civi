@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 
 import '../../../core/ui/theme/app_colors.dart';
-import '../../../core/ui/assets/resources.dart';
+import '../../../core/res/resources.dart';
 
 class MapSearch extends StatelessWidget {
   const MapSearch({super.key});
@@ -33,7 +33,7 @@ class MapSearch extends StatelessWidget {
               children: [
                 const SizedBox(width: 12),
                 SvgPicture.asset(
-                  R.images.svgSearch,
+                  R.svg.search,
                   width: 24,
                   colorFilter: const ColorFilter.mode(
                     AppColors.greyColor,
@@ -49,7 +49,7 @@ class MapSearch extends StatelessWidget {
                 Padding(
                   padding: const EdgeInsets.only(right: 8),
                   child: SvgPicture.asset(
-                    R.images.svgMapMic,
+                    R.svg.mic,
                     width: 24,
                   ),
                 ),

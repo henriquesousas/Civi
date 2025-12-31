@@ -1,6 +1,6 @@
 import 'package:dartz/dartz.dart';
-import 'package:deehelp/core/errors/handler_error.dart';
-import 'package:deehelp/core/utils/command_state_notifier.dart';
+import 'package:deehelp/core/handlers/handler_error.dart';
+import 'package:deehelp/core/handlers/handle_command.dart';
 import 'package:deehelp/features/products/domain/entities/image_media.dart';
 import 'package:deehelp/features/products/domain/usecases/add/add_product_usecase.dart';
 import 'package:deehelp/features/products/domain/usecases/add/add_product_dto.dart';
@@ -15,9 +15,6 @@ class AddProductViewmodel extends StateNotifier<AddProductState> {
         super(AddProductState.initial());
 
   void save(String userId) async {
-    // final selectedProductType =
-    //     state.productTypes.where((el) => el.isSelected == true).first;
-
     final dto = AddProductDto(
       userId: userId,
       name: state.model!,
@@ -30,7 +27,7 @@ class AddProductViewmodel extends StateNotifier<AddProductState> {
       obs: state.obs,
     );
 
-    await CommandStateNotifier.execute<Unit, AddProductState>(
+    await HandleCommand.execute<Unit, AddProductState>(
       updateState: (newState) => state = newState,
       command: () => _addProductUseCase.execute(dto),
       onLoading: () => state.copyWith(isLoading: true),
@@ -47,16 +44,6 @@ class AddProductViewmodel extends StateNotifier<AddProductState> {
   }
 
   void selectProductType(ProductType productType) async {
-    // if (state.productTypes.isEmpty) return;
-    // final updatedItems = state.productTypes.map((type) {
-    //   final bool isThisSelected = type.description == productType.description;
-    //   return type.copyWith(isSelected: isThisSelected);
-    // }).toList();
-
-    // state = state.copyWith(
-    //   productTypes: updatedItems,
-    //   hasProductTypeSelected: true,
-    // );
     state = state.copyWith(
       productType: productType,
       hasProductTypeSelected: true,

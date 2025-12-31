@@ -4,7 +4,7 @@ import 'package:deehelp/features/products/domain/product_status.dart';
 
 final _shimmer = Product(
   id: ProductId.unique(),
-  name: "shimmer",
+  name: "shimmershimmer",
   code: "shimmer",
   year: 0000,
   images: const [],

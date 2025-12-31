@@ -1,5 +1,5 @@
 import 'package:cloudflare_r2/cloudflare_r2.dart';
-import 'package:deehelp/core/ui/extensions/screen_size_extension.dart';
+import 'package:deehelp/core/extensions/screen_size_extension.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -9,8 +9,8 @@ import 'package:intl/date_symbol_data_local.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
 import 'core/env.dart';
-import 'core/ui/assets/resources.dart';
-import 'core/router/main_router.dart';
+import 'core/res/resources.dart';
+import 'core/router/router.dart';
 import 'core/ui/theme/app_theme.dart';
 import 'firebase_options.dart';
 

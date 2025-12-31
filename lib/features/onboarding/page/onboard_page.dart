@@ -1,8 +1,8 @@
 import 'dart:async';
 
 import 'package:deehelp/features/auth/presentation/auth/providers/auth_view_model_provider.dart';
-import 'package:deehelp/core/router/router_constants.dart';
-import 'package:deehelp/core/ui/extensions/dialog_extension.dart';
+import 'package:deehelp/core/router/app_router.dart';
+import 'package:deehelp/core/extensions/dialog_extension.dart';
 import 'package:deehelp/features/auth/presentation/auth/state/auth_state.dart';
 import 'package:deehelp/features/onboarding/page/components/onboard_content.dart';
 import 'package:deehelp/features/onboarding/page/onboard_item.dart';
@@ -110,8 +110,8 @@ class _OnboardPageState extends ConsumerState<OnboardPage> {
         switch (currentState) {
           case AuthStateAuthenticated(:final user):
             final router = user.authMethod == AuthMethod.google
-                ? RouterConstant.addNickname
-                : RouterConstant.map;
+                ? AppRouter.addNickname
+                : AppRouter.map;
             context.pushReplacement(router);
             return;
           case AuthStateError(:final error):

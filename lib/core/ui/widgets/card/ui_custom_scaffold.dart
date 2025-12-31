@@ -1,11 +1,9 @@
 import 'package:deehelp/core/ui/theme/dimens.dart';
-import 'package:deehelp/core/ui/widgets/image/ui_my_assets_image_widget.dart';
 import 'package:deehelp/core/ui/theme/app_text_styles.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../ui_annotated_region_widget.dart';
-import '../../assets/resources.dart';
 
 class UICustomScaffold extends StatelessWidget {
   final String? pageTitle;
@@ -65,14 +63,16 @@ class UICustomScaffold extends StatelessWidget {
                               onBackButtonTap!();
                             } else {}
                           },
-                          icon: UIMyAssetsImageWidget(
-                            color: const Color(0xFF2B5BEE),
-                            isSvg: true,
-                            assetPath:
-                                assetBackButton ?? R.svg.circleBackButton,
-                            width: 35.w,
-                            height: 35.h,
+                          icon: const Icon(
+                            Icons.arrow_back,
                           ),
+                          // icon: UIMyAssetsImageWidget(
+                          //   color: const Color(0xFF2B5BEE),
+                          //   isSvg: true,
+                          //   assetPath: assetBackButton ?? R.svg.back,
+                          //   width: 35.w,
+                          //   height: 35.h,
+                          // ),
                         )
                       : null,
                   titleSpacing: 0,

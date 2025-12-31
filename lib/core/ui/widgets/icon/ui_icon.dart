@@ -7,6 +7,7 @@ class UIICon extends StatelessWidget {
   final double padding;
   final bool isAlpha;
   final Border? border;
+  final VoidCallback? press;
   const UIICon({
     super.key,
     required this.bgColor,
@@ -15,18 +16,22 @@ class UIICon extends StatelessWidget {
     this.radius = 50,
     this.isAlpha = false,
     this.border,
+    this.press,
   });
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      padding: EdgeInsets.all(padding),
-      decoration: BoxDecoration(
-        color: isAlpha ? bgColor.withValues(alpha: 0.1) : bgColor,
-        borderRadius: BorderRadius.circular(radius),
-        border: border,
+    return GestureDetector(
+      onTap: press,
+      child: Container(
+        padding: EdgeInsets.all(padding),
+        decoration: BoxDecoration(
+          color: isAlpha ? bgColor.withValues(alpha: 0.1) : bgColor,
+          borderRadius: BorderRadius.circular(radius),
+          border: border,
+        ),
+        child: icon,
       ),
-      child: icon,
     );
   }
 }

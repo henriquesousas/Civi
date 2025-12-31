@@ -1,7 +1,7 @@
-import 'package:deehelp/core/domain/entity.dart';
+import 'package:deehelp/core/base/entity.dart';
 import 'package:deehelp/features/products/domain/entities/product_id.dart';
 
-import '../../../../core/domain/validation/validation_handler.dart';
+import '../../../../core/validation/validation_handler.dart';
 import '../product_status.dart';
 import '../usecases/add/add_product_dto.dart';
 import 'image_media.dart';

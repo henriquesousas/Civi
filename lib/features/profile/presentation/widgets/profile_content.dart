@@ -7,8 +7,8 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
 
 import '../../../../core/ui/widgets/image/ui_my_assets_image_widget.dart';
-import '../../../../core/ui/assets/resources.dart';
-import '../../../../core/router/router_constants.dart';
+import '../../../../core/res/resources.dart';
+import '../../../../core/router/app_router.dart';
 import '../../../../core/ui/theme/app_colors.dart';
 import '../../../../core/ui/theme/dimens.dart';
 import '../../../../core/ui/widgets/card/ui_custom_app_card.dart';
@@ -30,16 +30,16 @@ class ProfileContent extends ConsumerWidget {
               padding: const EdgeInsetsDirectional.symmetric(
                 vertical: Dimens.defaultPadding,
               ),
-              title: "Patrimônio",
+              title: "Bens",
               showBorder: true,
               titleStyle: context.appTextStyles.bodyTextStyle1.copyWith(
                 color: AppColors.textColorBody,
               ),
               leading: UIMyAssetsImageWidget(
                 isSvg: true,
-                assetPath: R.images.svgOrder,
-                width: 24,
-                height: 24,
+                assetPath: R.svg.order,
+                width: Dimens.size24.w,
+                height: Dimens.size24.h,
                 boxFit: BoxFit.scaleDown,
                 color: AppColors.primaryColor,
               ),
@@ -48,7 +48,7 @@ class ProfileContent extends ConsumerWidget {
                 size: Dimens.defaultArrowForward,
                 color: AppColors.textColorHeader.withValues(alpha: 0.5),
               ),
-              press: () => context.push(RouterConstant.myItems, extra: true),
+              press: () => context.push(AppRouter.myProducts, extra: true),
             ),
             UICustomListTileCard(
               padding: const EdgeInsetsDirectional.symmetric(
@@ -62,9 +62,9 @@ class ProfileContent extends ConsumerWidget {
               ),
               leading: UIMyAssetsImageWidget(
                 isSvg: true,
-                assetPath: R.images.svgLock,
-                width: 24,
-                height: 24,
+                assetPath: R.svg.lock,
+                width: Dimens.size24.w,
+                height: Dimens.size24.h,
                 boxFit: BoxFit.scaleDown,
                 color: AppColors.primaryColor,
               ),
@@ -87,9 +87,9 @@ class ProfileContent extends ConsumerWidget {
               ),
               leading: UIMyAssetsImageWidget(
                 isSvg: true,
-                assetPath: R.images.svgBookmark,
-                width: 24,
-                height: 24,
+                assetPath: R.svg.bookmark,
+                width: Dimens.size24.w,
+                height: Dimens.size24.h,
                 boxFit: BoxFit.scaleDown,
                 color: AppColors.primaryColor,
               ),
@@ -111,9 +111,9 @@ class ProfileContent extends ConsumerWidget {
               ),
               leading: UIMyAssetsImageWidget(
                 isSvg: true,
-                assetPath: R.images.svgSearch,
-                width: 24,
-                height: 24,
+                assetPath: R.svg.search,
+                width: Dimens.size24.w,
+                height: Dimens.size24.h,
                 boxFit: BoxFit.scaleDown,
                 color: AppColors.primaryColor,
               ),
@@ -135,9 +135,9 @@ class ProfileContent extends ConsumerWidget {
               ),
               leading: UIMyAssetsImageWidget(
                 isSvg: true,
-                assetPath: R.images.svgWishlist,
-                width: 24,
-                height: 24,
+                assetPath: R.svg.wshlist,
+                width: Dimens.size24.w,
+                height: Dimens.size24.h,
                 boxFit: BoxFit.scaleDown,
                 color: AppColors.primaryColor,
               ),
@@ -162,9 +162,9 @@ class ProfileContent extends ConsumerWidget {
               ),
               leading: UIMyAssetsImageWidget(
                 isSvg: true,
-                assetPath: R.images.svgHelp,
-                width: 24,
-                height: 24,
+                assetPath: R.svg.help,
+                width: Dimens.size24.w,
+                height: Dimens.size24.h,
                 boxFit: BoxFit.scaleDown,
                 color: AppColors.primaryColor,
               ),
@@ -190,9 +190,9 @@ class ProfileContent extends ConsumerWidget {
                 ),
                 leading: UIMyAssetsImageWidget(
                   isSvg: true,
-                  assetPath: R.images.svgProfileInactive,
-                  width: 24,
-                  height: 24,
+                  assetPath: R.svg.inactiveProfile,
+                  width: Dimens.size24.w,
+                  height: Dimens.size24.h,
                   boxFit: BoxFit.scaleDown,
                   color: AppColors.primaryColor,
                 ),
@@ -210,7 +210,7 @@ class ProfileContent extends ConsumerWidget {
                     ),
                   ),
                 ),
-                press: () => context.push(RouterConstant.faq),
+                press: () => context.push(AppRouter.faq),
               ),
             ],
             UICustomListTileCard(
@@ -224,9 +224,9 @@ class ProfileContent extends ConsumerWidget {
               ),
               leading: UIMyAssetsImageWidget(
                 isSvg: true,
-                assetPath: R.images.svgFaq,
-                width: 24,
-                height: 24,
+                assetPath: R.svg.faq,
+                width: Dimens.size24.w,
+                height: Dimens.size24.h,
                 boxFit: BoxFit.scaleDown,
                 color: AppColors.primaryColor,
               ),
@@ -235,7 +235,7 @@ class ProfileContent extends ConsumerWidget {
                 size: Dimens.defaultArrowForward,
                 color: AppColors.textColorHeader.withValues(alpha: 0.5),
               ),
-              press: () => context.push(RouterConstant.faq),
+              press: () => context.push(AppRouter.faq),
             ),
           ],
         ),

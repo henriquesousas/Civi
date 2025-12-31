@@ -1,5 +1,5 @@
 import 'package:deehelp/core/utils/id_utils.dart';
-import 'package:deehelp/core/domain/valueobject/identifier.dart';
+import 'package:deehelp/core/valueobject/identifier.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 void main() {

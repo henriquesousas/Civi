@@ -1,4 +1,4 @@
-import 'package:deehelp/core/ui/assets/resources.dart';
+import 'package:deehelp/core/res/resources.dart';
 import 'package:deehelp/core/ui/theme/app_colors.dart';
 import 'package:deehelp/core/ui/theme/app_text_styles.dart';
 import 'package:deehelp/core/ui/theme/dimens.dart';
@@ -25,22 +25,15 @@ class StepSelectProductType extends ConsumerWidget {
 
     return UICustomScaffold(
       hideAppBar: true,
-      bottomNavigationBar: Container(
-        margin: EdgeInsets.symmetric(
+      bottomNavigationBar: Padding(
+        padding: EdgeInsets.symmetric(
           horizontal: Dimens.defaultPadding.w,
           vertical: Dimens.defaultPadding.w,
         ),
-        padding: const EdgeInsets.all(10),
-        decoration: BoxDecoration(
-          color: AppColors.lightGreyColor30,
-          borderRadius: BorderRadius.circular(8),
-        ),
-        child: Text(
-          "Pré-cadastre seu veículo para facilitar e acelerar o registro de ocorrências. Em caso de roubo ou furto, você poderá fazer a denúncia rapidamente, usando os dados já salvos, sem perder tempo preenchendo formulários extensos.",
-          textAlign: TextAlign.center,
-          style: context.appTextStyles.sectionSubTitle1.copyWith(
-            color: AppColors.darkGreyColor,
-          ),
+        child: UIElevatedButton(
+          text: 'Continuar',
+          press: onContinue,
+          isEnabled: state.hasProductTypeSelected,
         ),
       ),
       body: CustomScrollView(
@@ -52,36 +45,39 @@ class StepSelectProductType extends ConsumerWidget {
                 [
                   const SizedBox(height: 10),
                   ProductTypeCard(
-                    title: "Veiculos leves",
-                    description: "Carros de passeio e utilitários leves",
-                    imageSrc: R.images.svgIconCon,
+                    title: "Automóvel",
+                    description:
+                        "Registre roubo/furto de automóveis, vans e utilitários",
+                    imageSrc: R.svg.car,
                     isSelected: state.productType == ProductType.car,
                     press: () => viewModel.selectProductType(ProductType.car),
                   ),
                   const SizedBox(height: 5),
                   ProductTypeCard(
-                    title: "Veiculos pesados",
-                    description: "Caminhões e veículos de carga pesada",
-                    imageSrc: R.images.svgIconTruck,
+                    title: " Caminhões & Ônibus",
+                    description:
+                        "Registre roubo/furto de veículos pesados e transporte",
+                    imageSrc: R.svg.truck,
                     isSelected: state.productType == ProductType.truck,
                     press: () => viewModel.selectProductType(ProductType.truck),
                   ),
                   const SizedBox(height: 5),
                   ProductTypeCard(
-                    title: "Veiculos de duas rodas",
-                    description: "Motos, Scooters, Ciclomotores e similares",
-                    imageSrc: R.images.svgIconMotorcycle,
+                    title: "Motos",
+                    description:
+                        "Registre roubo/furto de motocicletas e motonetas",
+                    imageSrc: R.svg.motorcycle,
                     isSelected: state.productType == ProductType.motorcycle,
                     press: () =>
                         viewModel.selectProductType(ProductType.motorcycle),
                   ),
-                  const SizedBox(height: 20),
-                  UIElevatedButton(
-                    text: 'Continuar',
-                    press: onContinue,
-                    isEnabled: state.hasProductTypeSelected,
-                  ),
-                  const SizedBox(height: 20),
+                  SizedBox(height: Dimens.size20.w),
+                  _buildTextInfo(context),
+                  // UIElevatedButton(
+                  //   text: 'Continuar',
+                  //   press: onContinue,
+                  //   isEnabled: state.hasProductTypeSelected,
+                  // ),
                   // Container(
                   //   padding: const EdgeInsets.all(10),
                   //   decoration: BoxDecoration(
@@ -101,6 +97,27 @@ class StepSelectProductType extends ConsumerWidget {
             ),
           ),
         ],
+      ),
+    );
+  }
+
+  Widget _buildTextInfo(BuildContext context) {
+    return Container(
+      margin: EdgeInsets.symmetric(
+        horizontal: Dimens.defaultPadding.w,
+        vertical: Dimens.defaultPadding.w,
+      ),
+      padding: const EdgeInsets.all(10),
+      decoration: BoxDecoration(
+        color: AppColors.lightGreyColor30,
+        borderRadius: BorderRadius.circular(8),
+      ),
+      child: Text(
+        "Pré-cadastre seu veículo para facilitar e acelerar o registro de ocorrências. Em caso de roubo ou furto, você poderá fazer a denúncia rapidamente, usando os dados já salvos, sem perder tempo preenchendo formulários extensos.",
+        textAlign: TextAlign.center,
+        style: context.appTextStyles.sectionSubTitle1.copyWith(
+          color: AppColors.darkGreyColor,
+        ),
       ),
     );
   }

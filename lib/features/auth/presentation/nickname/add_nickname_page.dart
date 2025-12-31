@@ -1,6 +1,6 @@
 import 'package:deehelp/features/auth/presentation/nickname/providers/nickname_viewmodel_provider.dart';
 import 'package:deehelp/features/auth/presentation/session/session_provider.dart';
-import 'package:deehelp/core/router/router_constants.dart';
+import 'package:deehelp/core/router/app_router.dart';
 import 'package:deehelp/core/ui/theme/app_colors.dart';
 import 'package:deehelp/core/ui/theme/app_text_styles.dart';
 import 'package:deehelp/core/ui/widgets/button/ui_elevated_button.dart';
@@ -29,7 +29,7 @@ class AddNicknamePage extends ConsumerWidget {
         userSessionNotifier.setNickname(
           currentState.nickname!,
         );
-        context.pushReplacement(RouterConstant.map);
+        context.pushReplacement(AppRouter.map);
       }
     });
 

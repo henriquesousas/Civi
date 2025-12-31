@@ -1,4 +1,4 @@
-import 'package:deehelp/core/domain/valueobject/value_object.dart';
+import 'package:deehelp/core/valueobject/value_object.dart';
 
 class Password extends ValueObject<String> {
   static const _minLength = 3;

@@ -1,5 +1,5 @@
 import 'package:dartz/dartz.dart';
-import 'package:deehelp/core/domain/use_case.dart';
+import 'package:deehelp/core/base/use_case.dart';
 import 'package:deehelp/core/services/media/interfaces/media_storage.dart';
 import 'package:deehelp/core/utils/result.dart';
 import 'package:deehelp/features/products/domain/add_product_failure.dart';

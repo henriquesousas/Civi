@@ -1,4 +1,4 @@
-import 'package:deehelp/core/ui/unit.dart';
+import 'package:deehelp/core/utils/unit.dart';
 import 'package:deehelp/core/utils/result.dart';
 import 'package:deehelp/features/auth/domain/repositories/nickname_repository.dart';
 import 'package:logging/logging.dart';

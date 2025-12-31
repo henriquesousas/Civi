@@ -1,5 +1,5 @@
-import 'package:deehelp/core/ui/extensions/screen_size_extension.dart';
-import 'package:deehelp/core/ui/extensions/string_extension.dart';
+import 'package:deehelp/core/extensions/screen_size_extension.dart';
+import 'package:deehelp/core/extensions/string_extension.dart';
 import 'package:deehelp/core/ui/theme/app_colors.dart';
 import 'package:deehelp/core/ui/theme/app_text_styles.dart';
 import 'package:deehelp/core/ui/theme/dimens.dart';
@@ -17,7 +17,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
 
 import '../../core/ui/animation/transition_animator.dart';
-import '../../core/router/router_constants.dart';
+import '../../core/router/app_router.dart';
 
 class SplashPage extends ConsumerStatefulWidget {
   const SplashPage({super.key});
@@ -47,13 +47,13 @@ class _SplashPageState extends ConsumerState<SplashPage> {
         case AuthStateAuthenticated(:final user):
           if (user.authMethod == AuthMethod.google &&
               user.nickName.isNullOrEmpty()) {
-            context.pushReplacement(RouterConstant.addNickname);
+            context.pushReplacement(AppRouter.addNickname);
           } else {
-            context.pushReplacement(RouterConstant.dashboard);
+            context.pushReplacement(AppRouter.dashboard);
           }
           return;
         case AuthStateUnAuthenticated():
-          context.pushReplacement(RouterConstant.onboarding);
+          context.pushReplacement(AppRouter.onboarding);
           break;
       }
     });

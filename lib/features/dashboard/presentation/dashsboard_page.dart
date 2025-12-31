@@ -1,5 +1,5 @@
-import 'package:deehelp/core/router/router_constants.dart';
-import 'package:deehelp/core/ui/extensions/screen_size_extension.dart';
+import 'package:deehelp/core/router/app_router.dart';
+import 'package:deehelp/core/extensions/screen_size_extension.dart';
 import 'package:deehelp/core/ui/theme/app_colors.dart';
 import 'package:deehelp/core/ui/theme/app_text_styles.dart';
 import 'package:deehelp/core/ui/theme/dimens.dart';
@@ -32,7 +32,7 @@ class DashsboardPage extends ConsumerWidget {
                 children: [
                   if (session != null && session.photoUrl != null) ...[
                     ProfileImageWithUploadButtonWidget(
-                      onTap: () => context.push(RouterConstant.profile),
+                      onTap: () => context.push(AppRouter.profile),
                       imageUrl: session.name,
                       imageAlt: session.name,
                       showUploadIcon: false,
@@ -50,7 +50,7 @@ class DashsboardPage extends ConsumerWidget {
                           Icons.person,
                           color: AppColors.darkGreyColor10,
                         ),
-                        onPressed: () => context.push(RouterConstant.profile),
+                        onPressed: () => context.push(AppRouter.profile),
                       ),
                       border: Border.all(
                         color: AppColors.lightGreyColor30,

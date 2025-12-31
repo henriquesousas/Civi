@@ -1,0 +1,26 @@
+class SvgAssets {
+  String google = 'assets/svg/ic_google.svg';
+  String hands = 'assets/svg/hands.svg';
+  String close = 'assets/svg/close.svg';
+  String pin = 'assets/svg/pin.svg';
+  String time = 'assets/svg/time.svg';
+  String date = 'assets/svg/date.svg';
+  String type = 'assets/svg/type.svg';
+  String search = 'assets/svg/search.svg';
+  String back = 'assets/svg/arrow_back_circle.svg';
+  String order = 'assets/svg/order.svg';
+  String lock = 'assets/svg/lock.svg';
+  String bookmark = 'assets/svg/bookmark.svg';
+  String wshlist = 'assets/svg/wishlist.svg';
+  String help = 'assets/svg/help.svg';
+  String inactiveProfile = 'assets/svg/profile_inactive.svg';
+  String faq = 'assets/svg/faq.svg';
+  String logout = 'assets/svg/logou.svg';
+  String car = 'assets/svg/car.svg';
+  String truck = 'assets/svg/icon_truck.svg';
+  String motorcycle = 'assets/svg/icon_motorcycle.svg';
+  String upload = 'assets/svg/upload_icon.svg';
+  String mic = 'assets/svg/map_mic.svg';
+  String listInactive = 'assets/svg/statement_inactive.svg';
+  String category = 'assets/svg/category.svg';
+}

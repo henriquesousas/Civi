@@ -1,5 +1,5 @@
-import 'package:deehelp/core/errors/handler_error.dart';
-import 'package:deehelp/core/utils/command_state_notifier.dart';
+import 'package:deehelp/core/handlers/handler_error.dart';
+import 'package:deehelp/core/handlers/handle_command.dart';
 import 'package:deehelp/features/products/domain/entities/product.dart';
 import 'package:deehelp/features/products/domain/usecases/listing/get_products_by_user_usecase.dart';
 import 'package:deehelp/features/products/presentation/views/listing/state/list_product_state.dart';
@@ -13,7 +13,7 @@ class ProductListingViewmodel extends StateNotifier<ListProductState> {
         super(const ListProductState.initial());
 
   void getProducts(String userId) {
-    CommandStateNotifier.execute<List<Product>, ListProductState>(
+    HandleCommand.execute<List<Product>, ListProductState>(
       updateState: (newState) => state = newState,
       command: () async => await _getProductsByUserUsecase.execute(userId),
       onLoading: () => const ListProductState.loading(),

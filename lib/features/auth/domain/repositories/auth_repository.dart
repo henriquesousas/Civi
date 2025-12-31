@@ -1,7 +1,7 @@
 import 'package:deehelp/features/auth/domain/entity/authenticated_user.dart';
 
 import '../../../../core/utils/result.dart';
-import '../../../../core/ui/unit.dart';
+import '../../../../core/utils/unit.dart';
 
 abstract class AuthRepository {
   Future<Result<AuthenticatedUser>> signInWithCredentials(

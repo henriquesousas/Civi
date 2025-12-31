@@ -1,14 +1,14 @@
+import 'package:deehelp/core/res/resources.dart';
+import 'package:deehelp/core/ui/theme/app_colors.dart';
 import 'package:deehelp/core/ui/theme/app_text_styles.dart';
+import 'package:deehelp/core/ui/theme/dimens.dart';
+import 'package:deehelp/core/ui/widgets/bottom_sheet/custom_modal_bottom_sheet.dart';
+import 'package:deehelp/core/ui/widgets/card/ui_custom_app_card.dart';
+import 'package:deehelp/core/ui/widgets/card/ui_custon_list_tile_card.dart';
+import 'package:deehelp/core/ui/widgets/image/ui_my_assets_image_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-import '../../../../core/ui/widgets/bottom_sheet/custom_modal_bottom_sheet.dart';
-import '../../../../core/ui/widgets/image/ui_my_assets_image_widget.dart';
-import '../../../../core/ui/assets/resources.dart';
-import '../../../../core/ui/theme/app_colors.dart';
-import '../../../../core/ui/theme/dimens.dart';
-import '../../../../core/ui/widgets/card/ui_custom_app_card.dart';
-import '../../../../core/ui/widgets/card/ui_custon_list_tile_card.dart';
 import 'logout_modal.dart';
 
 class ProfileLogout extends StatelessWidget {
@@ -26,7 +26,7 @@ class ProfileLogout extends StatelessWidget {
         ),
         leading: UIMyAssetsImageWidget(
           isSvg: true,
-          assetPath: R.images.svgLogout,
+          assetPath: R.svg.logout,
           width: Dimens.size22.w,
           height: Dimens.size22.h,
           boxFit: BoxFit.scaleDown,

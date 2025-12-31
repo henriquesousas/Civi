@@ -1,5 +1,5 @@
-import 'package:deehelp/core/ui/extensions/screen_size_extension.dart';
-import 'package:deehelp/core/router/router_constants.dart';
+import 'package:deehelp/core/extensions/screen_size_extension.dart';
+import 'package:deehelp/core/router/app_router.dart';
 import 'package:deehelp/core/ui/theme/app_colors.dart';
 import 'package:deehelp/core/ui/theme/app_text_styles.dart';
 import 'package:deehelp/core/ui/widgets/avatar/profile_image_with_upload_button_widget.dart';
@@ -407,7 +407,7 @@ class _MapPageState extends State<MapPage> with TickerProviderStateMixin {
           keyboardType: TextInputType.text,
           trailing: [
             IconButton(
-              onPressed: () => context.push(RouterConstant.profile),
+              onPressed: () => context.push(AppRouter.profile),
               icon: const Icon(
                 Icons.filter_list,
                 color: AppColors.darkGreyColor,
@@ -432,7 +432,7 @@ class _MapPageState extends State<MapPage> with TickerProviderStateMixin {
             showUploadIcon: false,
             onTap: () {
               debugPrint("Clicou");
-              context.push(RouterConstant.profile);
+              context.push(AppRouter.profile);
             },
           ),
         ),
@@ -499,11 +499,11 @@ class _MapPageState extends State<MapPage> with TickerProviderStateMixin {
   }
 
   void _navigateToMyItems() {
-    context.push(RouterConstant.myItems);
+    context.push(AppRouter.myProducts);
   }
 
   void _handleSinalizePress() {
-    context.push(RouterConstant.addIncident);
+    context.push(AppRouter.addIncident);
   }
 }
 

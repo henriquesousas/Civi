@@ -1,12 +1,12 @@
-import 'package:deehelp/core/router/router_constants.dart';
+import 'package:deehelp/core/router/app_router.dart';
 import 'package:deehelp/core/ui/theme/app_colors.dart';
 import 'package:deehelp/core/ui/widgets/button/ui_elevated_icon_button.dart';
 import 'package:deehelp/core/ui/widgets/empty/empty_state_widget.dart';
 import 'package:deehelp/core/ui/widgets/shimmer_animation.dart';
 import 'package:deehelp/features/auth/presentation/session/session_provider.dart';
 import 'package:deehelp/features/products/domain/entities/product.dart';
-import 'package:deehelp/features/products/presentation/views/listing/components/product_list_card_tile.dart';
-import 'package:deehelp/core/utils/riverpod_base_page.dart';
+import 'package:deehelp/features/products/presentation/views/listing/widgets/product_list_card_tile.dart';
+import 'package:deehelp/core/base/base_page.dart';
 import 'package:deehelp/features/products/presentation/views/listing/product_listing_shimmer.dart';
 import 'package:deehelp/features/products/presentation/providers/product_viewmodel_provider.dart';
 import 'package:deehelp/features/products/presentation/views/listing/state/list_product_state.dart';
@@ -14,7 +14,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
-class ProductListingPage extends RiverpodBasePage {
+class ProductListingPage extends BasePage {
   final bool showBackButton;
   const ProductListingPage({
     super.key,
@@ -25,8 +25,7 @@ class ProductListingPage extends RiverpodBasePage {
   ConsumerState<ProductListingPage> createState() => _ProductListingPageState();
 }
 
-class _ProductListingPageState
-    extends RiverpodBasePageState<ProductListingPage> {
+class _ProductListingPageState extends BasePageState<ProductListingPage> {
   @override
   void initState() {
     super.initState();
@@ -66,11 +65,11 @@ class _ProductListingPageState
         );
   }
 
-  void _add() => context.push(RouterConstant.createNewItem);
+  void _add() => context.push(AppRouter.addProduct);
 
   void _onEdit(Product product) async {
     await context.push<Map<String, dynamic>?>(
-      RouterConstant.itemEdit,
+      AppRouter.editProduct,
       extra: product,
     );
 
@@ -94,9 +93,11 @@ class _ProductListingPageState
     return state.maybeMap(
       success: (value) => _buildView(value.items),
       loading: (_) => ShimmerAnimation(
-          enabled: true, child: _buildView(productListShimmer)),
-      orElse: () => EmptyStateWidget(
-          press: () => context.push(RouterConstant.createNewItem)),
+        enabled: true,
+        child: _buildView(productListShimmer),
+      ),
+      orElse: () =>
+          EmptyStateWidget(press: () => context.push(AppRouter.addProduct)),
     );
   }
 
@@ -134,7 +135,6 @@ class _ProductListingPageState
                   },
                 ),
               ),
-              // StatusInfoText(onLearnMoreTap: () {}),
             ],
           ),
         ),

@@ -1,0 +1,112 @@
+import 'package:deehelp/core/router/app_router.dart';
+import 'package:deehelp/core/router/slide_transition_page.dart';
+import 'package:deehelp/features/auth/presentation/nickname/add_nickname_page.dart';
+import 'package:deehelp/features/dashboard/presentation/dashsboard_page.dart';
+import 'package:deehelp/features/faq/faq_provider.dart';
+import 'package:deehelp/features/incident/presentation/add/add_incident_page.dart';
+import 'package:deehelp/features/map/presentation/map_page.dart';
+import 'package:deehelp/features/onboarding/page/onboard_page.dart';
+import 'package:deehelp/features/products/domain/entities/product.dart';
+import 'package:deehelp/features/products/presentation/views/add/add_product_page.dart';
+import 'package:deehelp/features/products/presentation/views/add/steps/add_product_success_page.dart';
+import 'package:deehelp/features/products/presentation/views/listing/product_listing_page.dart';
+import 'package:deehelp/features/products/presentation/views/update/update_product_page.dart';
+import 'package:deehelp/features/profile/presentation/profile_page.dart';
+import 'package:deehelp/features/splash/splash_page.dart';
+import 'package:go_router/go_router.dart';
+
+class MainRouter {
+  static var router = GoRouter(
+    initialLocation: AppRouter.splash,
+    debugLogDiagnostics: true,
+    // redirect: _redirect,
+    // refreshListenable: authRepository,
+    routes: [
+      GoRoute(
+        path: AppRouter.onboarding,
+        pageBuilder: (context, state) {
+          return slideTransitionPage(
+              key: state.pageKey, child: const OnboardPage());
+        },
+      ),
+      GoRoute(
+        path: AppRouter.myProducts,
+        pageBuilder: (context, state) {
+          return slideTransitionPage(
+            key: state.pageKey,
+            child: const ProductListingPage(),
+          );
+        },
+      ),
+      GoRoute(
+        path: AppRouter.addProduct,
+        pageBuilder: (context, state) => slideTransitionPage(
+          key: state.pageKey,
+          child: const AddProductPage(),
+        ),
+      ),
+      GoRoute(
+        path: AppRouter.editProduct,
+        pageBuilder: (context, state) {
+          final Product? product = state.extra as Product?;
+          return slideTransitionPage(
+            key: state.pageKey,
+            child: UpdateProductPage(product: product!),
+          );
+        },
+      ),
+      GoRoute(
+        path: AppRouter.addProductSuccess,
+        pageBuilder: (context, state) => slideTransitionPage(
+          key: state.pageKey,
+          child: const AddProductSuccessPage(),
+        ),
+      ),
+      GoRoute(
+        path: AppRouter.splash,
+        builder: (context, state) => const SplashPage(),
+      ),
+      GoRoute(
+        path: AppRouter.map,
+        builder: (context, state) => const MapPage(),
+      ),
+      GoRoute(
+        path: AppRouter.dashboard,
+        pageBuilder: (context, state) => slideTransitionPage(
+          key: state.pageKey,
+          child: const DashsboardPage(),
+        ),
+      ),
+      GoRoute(
+        path: AppRouter.profile,
+        pageBuilder: (context, state) => slideTransitionPage(
+          key: state.pageKey,
+          child: const ProfilePage(),
+        ),
+      ),
+      GoRoute(
+        path: AppRouter.faq,
+        pageBuilder: (context, state) => slideTransitionPage(
+          key: state.pageKey,
+          child: FaqProvider.page,
+        ),
+      ),
+      GoRoute(
+        path: AppRouter.addIncident,
+        pageBuilder: (context, state) => slideTransitionPage(
+          key: state.pageKey,
+          child: const AddIncidentPage(),
+        ),
+      ),
+      GoRoute(
+        path: AppRouter.addNickname,
+        pageBuilder: (context, state) {
+          return slideTransitionPage(
+            key: state.pageKey,
+            child: AddNicknamePage(),
+          );
+        },
+      ),
+    ],
+  );
+}

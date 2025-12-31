@@ -1,5 +1,5 @@
 import '../../../../core/utils/id_utils.dart';
-import '../../../../core/domain/valueobject/identifier.dart';
+import '../../../../core/valueobject/identifier.dart';
 
 class ProductId extends Identifier {
   ProductId(super.value);

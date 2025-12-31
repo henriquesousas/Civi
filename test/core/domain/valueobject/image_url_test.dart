@@ -1,4 +1,4 @@
-import 'package:deehelp/core/domain/valueobject/image_url.dart';
+import 'package:deehelp/core/valueobject/image_url.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 void main() {

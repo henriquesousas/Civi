@@ -1,4 +1,4 @@
-import 'package:deehelp/core/utils/command_state_notifier.dart';
+import 'package:deehelp/core/handlers/handle_command.dart';
 import 'package:deehelp/features/auth/domain/entity/authenticated_user.dart';
 import 'package:deehelp/features/auth/domain/services/operation_status.dart';
 import 'package:deehelp/features/auth/domain/usecases/get_authenticated_user_usecase.dart';
@@ -8,7 +8,7 @@ import 'package:deehelp/features/auth/presentation/auth/state/auth_state.dart';
 import 'package:deehelp/features/auth/presentation/session/session_notifier.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import '../../../../core/errors/handler_error.dart';
+import '../../../../core/handlers/handler_error.dart';
 
 class AuthViewModel extends StateNotifier<AuthState> {
   final SignInWithGoogleUseCase _signInWithGoogleUseCase;
@@ -28,7 +28,7 @@ class AuthViewModel extends StateNotifier<AuthState> {
         super(const AuthState.initial());
 
   void signInWithGoogle() async {
-    CommandStateNotifier.execute<AuthenticatedUser, AuthState>(
+    HandleCommand.execute<AuthenticatedUser, AuthState>(
       updateState: (newState) => state = newState,
       command: () async => await _signInWithGoogleUseCase.execute(),
       onLoading: () => const AuthState.loading(),

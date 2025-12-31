@@ -1,3 +1,4 @@
+import 'package:deehelp/core/ui/theme/app_colors.dart';
 import 'package:flutter/widgets.dart';
 import 'package:skeletonizer/skeletonizer.dart';
 
@@ -13,9 +14,10 @@ class ShimmerAnimation extends StatelessWidget {
       enabled: enabled,
       enableSwitchAnimation: true,
       effect: const ShimmerEffect(
-          baseColor: Color(0XFFDADADA),
-          highlightColor: Color(0XFFF2F2F2),
-          duration: Duration(microseconds: 1300)),
+        baseColor: AppColors.greyColor, //Color(0XFFDADADA),
+        highlightColor: AppColors.darkGreyColor10, //Color(0XFFF2F2F2),
+        duration: Duration(milliseconds: 1300),
+      ),
       child: child,
     );
   }

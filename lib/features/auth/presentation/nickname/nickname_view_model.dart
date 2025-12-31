@@ -1,12 +1,12 @@
-import 'package:deehelp/core/errors/handler_error.dart';
+import 'package:deehelp/core/handlers/handler_error.dart';
 import 'package:deehelp/features/auth/domain/entity/authenticated_user.dart';
 import 'package:deehelp/features/auth/domain/utils/nickname_utils.dart';
 import 'package:deehelp/features/auth/domain/usecases/add_nick_name_usecase.dart';
 import 'package:deehelp/features/auth/presentation/nickname/state/nickname_state.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import '../../../../core/ui/unit.dart';
-import '../../../../core/utils/command_state_notifier.dart';
+import '../../../../core/utils/unit.dart';
+import '../../../../core/handlers/handle_command.dart';
 import '../../domain/usecases/add_nick_name_dto.dart';
 
 class NicknameViewModel extends StateNotifier<NicknameState> {
@@ -38,7 +38,7 @@ class NicknameViewModel extends StateNotifier<NicknameState> {
       name: state.nickname!,
       userId: authenticatedUser.id,
     );
-    CommandStateNotifier.execute<Unit, NicknameState>(
+    HandleCommand.execute<Unit, NicknameState>(
       updateState: (newState) => state = newState,
       command: () => _addNickNameUsecase.execute(dto),
       onLoading: () => state.copyWith(isLoading: true),

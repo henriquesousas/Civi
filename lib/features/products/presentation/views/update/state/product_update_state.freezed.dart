@@ -14,25 +14,203 @@ T _$identity<T>(T value) => value;
 
 /// @nodoc
 mixin _$ProductUpdateState {
+  int get currentStep;
+  ProductType? get productType;
+  String? get model;
+  String? get errorModel;
+  String? get licencePlate;
+  String? get errorLicencePlate;
+  int? get year;
+  String? get errorYear;
+  String? get brand;
+  String? get color;
+  String? get obs;
+  List<ImageMedia> get imageMedia;
+  bool get isLoading;
+  bool get isSuccess;
+  String? get errorMessage;
+
+  /// Create a copy of ProductUpdateState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @pragma('vm:prefer-inline')
+  $ProductUpdateStateCopyWith<ProductUpdateState> get copyWith =>
+      _$ProductUpdateStateCopyWithImpl<ProductUpdateState>(
+          this as ProductUpdateState, _$identity);
+
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is ProductUpdateState);
+        (other.runtimeType == runtimeType &&
+            other is ProductUpdateState &&
+            (identical(other.currentStep, currentStep) ||
+                other.currentStep == currentStep) &&
+            (identical(other.productType, productType) ||
+                other.productType == productType) &&
+            (identical(other.model, model) || other.model == model) &&
+            (identical(other.errorModel, errorModel) ||
+                other.errorModel == errorModel) &&
+            (identical(other.licencePlate, licencePlate) ||
+                other.licencePlate == licencePlate) &&
+            (identical(other.errorLicencePlate, errorLicencePlate) ||
+                other.errorLicencePlate == errorLicencePlate) &&
+            (identical(other.year, year) || other.year == year) &&
+            (identical(other.errorYear, errorYear) ||
+                other.errorYear == errorYear) &&
+            (identical(other.brand, brand) || other.brand == brand) &&
+            (identical(other.color, color) || other.color == color) &&
+            (identical(other.obs, obs) || other.obs == obs) &&
+            const DeepCollectionEquality()
+                .equals(other.imageMedia, imageMedia) &&
+            (identical(other.isLoading, isLoading) ||
+                other.isLoading == isLoading) &&
+            (identical(other.isSuccess, isSuccess) ||
+                other.isSuccess == isSuccess) &&
+            (identical(other.errorMessage, errorMessage) ||
+                other.errorMessage == errorMessage));
   }
 
   @override
-  int get hashCode => runtimeType.hashCode;
+  int get hashCode => Object.hash(
+      runtimeType,
+      currentStep,
+      productType,
+      model,
+      errorModel,
+      licencePlate,
+      errorLicencePlate,
+      year,
+      errorYear,
+      brand,
+      color,
+      obs,
+      const DeepCollectionEquality().hash(imageMedia),
+      isLoading,
+      isSuccess,
+      errorMessage);
 
   @override
   String toString() {
-    return 'ProductUpdateState()';
+    return 'ProductUpdateState(currentStep: $currentStep, productType: $productType, model: $model, errorModel: $errorModel, licencePlate: $licencePlate, errorLicencePlate: $errorLicencePlate, year: $year, errorYear: $errorYear, brand: $brand, color: $color, obs: $obs, imageMedia: $imageMedia, isLoading: $isLoading, isSuccess: $isSuccess, errorMessage: $errorMessage)';
   }
 }
 
 /// @nodoc
-class $ProductUpdateStateCopyWith<$Res> {
-  $ProductUpdateStateCopyWith(
-      ProductUpdateState _, $Res Function(ProductUpdateState) __);
+abstract mixin class $ProductUpdateStateCopyWith<$Res> {
+  factory $ProductUpdateStateCopyWith(
+          ProductUpdateState value, $Res Function(ProductUpdateState) _then) =
+      _$ProductUpdateStateCopyWithImpl;
+  @useResult
+  $Res call(
+      {int currentStep,
+      ProductType? productType,
+      String? model,
+      String? errorModel,
+      String? licencePlate,
+      String? errorLicencePlate,
+      int? year,
+      String? errorYear,
+      String? brand,
+      String? color,
+      String? obs,
+      List<ImageMedia> imageMedia,
+      bool isLoading,
+      bool isSuccess,
+      String? errorMessage});
+}
+
+/// @nodoc
+class _$ProductUpdateStateCopyWithImpl<$Res>
+    implements $ProductUpdateStateCopyWith<$Res> {
+  _$ProductUpdateStateCopyWithImpl(this._self, this._then);
+
+  final ProductUpdateState _self;
+  final $Res Function(ProductUpdateState) _then;
+
+  /// Create a copy of ProductUpdateState
+  /// with the given fields replaced by the non-null parameter values.
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? currentStep = null,
+    Object? productType = freezed,
+    Object? model = freezed,
+    Object? errorModel = freezed,
+    Object? licencePlate = freezed,
+    Object? errorLicencePlate = freezed,
+    Object? year = freezed,
+    Object? errorYear = freezed,
+    Object? brand = freezed,
+    Object? color = freezed,
+    Object? obs = freezed,
+    Object? imageMedia = null,
+    Object? isLoading = null,
+    Object? isSuccess = null,
+    Object? errorMessage = freezed,
+  }) {
+    return _then(_self.copyWith(
+      currentStep: null == currentStep
+          ? _self.currentStep
+          : currentStep // ignore: cast_nullable_to_non_nullable
+              as int,
+      productType: freezed == productType
+          ? _self.productType
+          : productType // ignore: cast_nullable_to_non_nullable
+              as ProductType?,
+      model: freezed == model
+          ? _self.model
+          : model // ignore: cast_nullable_to_non_nullable
+              as String?,
+      errorModel: freezed == errorModel
+          ? _self.errorModel
+          : errorModel // ignore: cast_nullable_to_non_nullable
+              as String?,
+      licencePlate: freezed == licencePlate
+          ? _self.licencePlate
+          : licencePlate // ignore: cast_nullable_to_non_nullable
+              as String?,
+      errorLicencePlate: freezed == errorLicencePlate
+          ? _self.errorLicencePlate
+          : errorLicencePlate // ignore: cast_nullable_to_non_nullable
+              as String?,
+      year: freezed == year
+          ? _self.year
+          : year // ignore: cast_nullable_to_non_nullable
+              as int?,
+      errorYear: freezed == errorYear
+          ? _self.errorYear
+          : errorYear // ignore: cast_nullable_to_non_nullable
+              as String?,
+      brand: freezed == brand
+          ? _self.brand
+          : brand // ignore: cast_nullable_to_non_nullable
+              as String?,
+      color: freezed == color
+          ? _self.color
+          : color // ignore: cast_nullable_to_non_nullable
+              as String?,
+      obs: freezed == obs
+          ? _self.obs
+          : obs // ignore: cast_nullable_to_non_nullable
+              as String?,
+      imageMedia: null == imageMedia
+          ? _self.imageMedia
+          : imageMedia // ignore: cast_nullable_to_non_nullable
+              as List<ImageMedia>,
+      isLoading: null == isLoading
+          ? _self.isLoading
+          : isLoading // ignore: cast_nullable_to_non_nullable
+              as bool,
+      isSuccess: null == isSuccess
+          ? _self.isSuccess
+          : isSuccess // ignore: cast_nullable_to_non_nullable
+              as bool,
+      errorMessage: freezed == errorMessage
+          ? _self.errorMessage
+          : errorMessage // ignore: cast_nullable_to_non_nullable
+              as String?,
+    ));
+  }
 }
 
 /// Adds pattern-matching-related methods to [ProductUpdateState].
@@ -50,29 +228,14 @@ extension ProductUpdateStatePatterns on ProductUpdateState {
   /// ```
 
   @optionalTypeArgs
-  TResult maybeMap<TResult extends Object?>({
-    TResult Function(_Initial value)? initial,
-    TResult Function(_Load value)? load,
-    TResult Function(_Editing value)? editing,
-    TResult Function(_Deleting value)? deleting,
-    TResult Function(_Success value)? success,
-    TResult Function(_Error value)? error,
+  TResult maybeMap<TResult extends Object?>(
+    TResult Function(_ProductUpdateState value)? $default, {
     required TResult orElse(),
   }) {
     final _that = this;
     switch (_that) {
-      case _Initial() when initial != null:
-        return initial(_that);
-      case _Load() when load != null:
-        return load(_that);
-      case _Editing() when editing != null:
-        return editing(_that);
-      case _Deleting() when deleting != null:
-        return deleting(_that);
-      case _Success() when success != null:
-        return success(_that);
-      case _Error() when error != null:
-        return error(_that);
+      case _ProductUpdateState() when $default != null:
+        return $default(_that);
       case _:
         return orElse();
     }
@@ -92,28 +255,13 @@ extension ProductUpdateStatePatterns on ProductUpdateState {
   /// ```
 
   @optionalTypeArgs
-  TResult map<TResult extends Object?>({
-    required TResult Function(_Initial value) initial,
-    required TResult Function(_Load value) load,
-    required TResult Function(_Editing value) editing,
-    required TResult Function(_Deleting value) deleting,
-    required TResult Function(_Success value) success,
-    required TResult Function(_Error value) error,
-  }) {
+  TResult map<TResult extends Object?>(
+    TResult Function(_ProductUpdateState value) $default,
+  ) {
     final _that = this;
     switch (_that) {
-      case _Initial():
-        return initial(_that);
-      case _Load():
-        return load(_that);
-      case _Editing():
-        return editing(_that);
-      case _Deleting():
-        return deleting(_that);
-      case _Success():
-        return success(_that);
-      case _Error():
-        return error(_that);
+      case _ProductUpdateState():
+        return $default(_that);
       case _:
         throw StateError('Unexpected subclass');
     }
@@ -132,28 +280,13 @@ extension ProductUpdateStatePatterns on ProductUpdateState {
   /// ```
 
   @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(_Initial value)? initial,
-    TResult? Function(_Load value)? load,
-    TResult? Function(_Editing value)? editing,
-    TResult? Function(_Deleting value)? deleting,
-    TResult? Function(_Success value)? success,
-    TResult? Function(_Error value)? error,
-  }) {
+  TResult? mapOrNull<TResult extends Object?>(
+    TResult? Function(_ProductUpdateState value)? $default,
+  ) {
     final _that = this;
     switch (_that) {
-      case _Initial() when initial != null:
-        return initial(_that);
-      case _Load() when load != null:
-        return load(_that);
-      case _Editing() when editing != null:
-        return editing(_that);
-      case _Deleting() when deleting != null:
-        return deleting(_that);
-      case _Success() when success != null:
-        return success(_that);
-      case _Error() when error != null:
-        return error(_that);
+      case _ProductUpdateState() when $default != null:
+        return $default(_that);
       case _:
         return null;
     }
@@ -172,29 +305,45 @@ extension ProductUpdateStatePatterns on ProductUpdateState {
   /// ```
 
   @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? initial,
-    TResult Function(Product product)? load,
-    TResult Function(Product product)? editing,
-    TResult Function(Product product)? deleting,
-    TResult Function(Product product)? success,
-    TResult Function(String message)? error,
+  TResult maybeWhen<TResult extends Object?>(
+    TResult Function(
+            int currentStep,
+            ProductType? productType,
+            String? model,
+            String? errorModel,
+            String? licencePlate,
+            String? errorLicencePlate,
+            int? year,
+            String? errorYear,
+            String? brand,
+            String? color,
+            String? obs,
+            List<ImageMedia> imageMedia,
+            bool isLoading,
+            bool isSuccess,
+            String? errorMessage)?
+        $default, {
     required TResult orElse(),
   }) {
     final _that = this;
     switch (_that) {
-      case _Initial() when initial != null:
-        return initial();
-      case _Load() when load != null:
-        return load(_that.product);
-      case _Editing() when editing != null:
-        return editing(_that.product);
-      case _Deleting() when deleting != null:
-        return deleting(_that.product);
-      case _Success() when success != null:
-        return success(_that.product);
-      case _Error() when error != null:
-        return error(_that.message);
+      case _ProductUpdateState() when $default != null:
+        return $default(
+            _that.currentStep,
+            _that.productType,
+            _that.model,
+            _that.errorModel,
+            _that.licencePlate,
+            _that.errorLicencePlate,
+            _that.year,
+            _that.errorYear,
+            _that.brand,
+            _that.color,
+            _that.obs,
+            _that.imageMedia,
+            _that.isLoading,
+            _that.isSuccess,
+            _that.errorMessage);
       case _:
         return orElse();
     }
@@ -214,28 +363,44 @@ extension ProductUpdateStatePatterns on ProductUpdateState {
   /// ```
 
   @optionalTypeArgs
-  TResult when<TResult extends Object?>({
-    required TResult Function() initial,
-    required TResult Function(Product product) load,
-    required TResult Function(Product product) editing,
-    required TResult Function(Product product) deleting,
-    required TResult Function(Product product) success,
-    required TResult Function(String message) error,
-  }) {
+  TResult when<TResult extends Object?>(
+    TResult Function(
+            int currentStep,
+            ProductType? productType,
+            String? model,
+            String? errorModel,
+            String? licencePlate,
+            String? errorLicencePlate,
+            int? year,
+            String? errorYear,
+            String? brand,
+            String? color,
+            String? obs,
+            List<ImageMedia> imageMedia,
+            bool isLoading,
+            bool isSuccess,
+            String? errorMessage)
+        $default,
+  ) {
     final _that = this;
     switch (_that) {
-      case _Initial():
-        return initial();
-      case _Load():
-        return load(_that.product);
-      case _Editing():
-        return editing(_that.product);
-      case _Deleting():
-        return deleting(_that.product);
-      case _Success():
-        return success(_that.product);
-      case _Error():
-        return error(_that.message);
+      case _ProductUpdateState():
+        return $default(
+            _that.currentStep,
+            _that.productType,
+            _that.model,
+            _that.errorModel,
+            _that.licencePlate,
+            _that.errorLicencePlate,
+            _that.year,
+            _that.errorYear,
+            _that.brand,
+            _that.color,
+            _that.obs,
+            _that.imageMedia,
+            _that.isLoading,
+            _that.isSuccess,
+            _that.errorMessage);
       case _:
         throw StateError('Unexpected subclass');
     }
@@ -254,28 +419,44 @@ extension ProductUpdateStatePatterns on ProductUpdateState {
   /// ```
 
   @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? initial,
-    TResult? Function(Product product)? load,
-    TResult? Function(Product product)? editing,
-    TResult? Function(Product product)? deleting,
-    TResult? Function(Product product)? success,
-    TResult? Function(String message)? error,
-  }) {
+  TResult? whenOrNull<TResult extends Object?>(
+    TResult? Function(
+            int currentStep,
+            ProductType? productType,
+            String? model,
+            String? errorModel,
+            String? licencePlate,
+            String? errorLicencePlate,
+            int? year,
+            String? errorYear,
+            String? brand,
+            String? color,
+            String? obs,
+            List<ImageMedia> imageMedia,
+            bool isLoading,
+            bool isSuccess,
+            String? errorMessage)?
+        $default,
+  ) {
     final _that = this;
     switch (_that) {
-      case _Initial() when initial != null:
-        return initial();
-      case _Load() when load != null:
-        return load(_that.product);
-      case _Editing() when editing != null:
-        return editing(_that.product);
-      case _Deleting() when deleting != null:
-        return deleting(_that.product);
-      case _Success() when success != null:
-        return success(_that.product);
-      case _Error() when error != null:
-        return error(_that.message);
+      case _ProductUpdateState() when $default != null:
+        return $default(
+            _that.currentStep,
+            _that.productType,
+            _that.model,
+            _that.errorModel,
+            _that.licencePlate,
+            _that.errorLicencePlate,
+            _that.year,
+            _that.errorYear,
+            _that.brand,
+            _that.color,
+            _that.obs,
+            _that.imageMedia,
+            _that.isLoading,
+            _that.isSuccess,
+            _that.errorMessage);
       case _:
         return null;
     }
@@ -284,330 +465,247 @@ extension ProductUpdateStatePatterns on ProductUpdateState {
 
 /// @nodoc
 
-class _Initial implements ProductUpdateState {
-  const _Initial();
+class _ProductUpdateState implements ProductUpdateState {
+  const _ProductUpdateState(
+      {this.currentStep = 0,
+      this.productType,
+      this.model,
+      this.errorModel,
+      this.licencePlate,
+      this.errorLicencePlate,
+      this.year,
+      this.errorYear,
+      this.brand,
+      this.color,
+      this.obs,
+      final List<ImageMedia> imageMedia = const [],
+      this.isLoading = false,
+      this.isSuccess = false,
+      this.errorMessage})
+      : _imageMedia = imageMedia;
 
   @override
-  bool operator ==(Object other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _Initial);
+  @JsonKey()
+  final int currentStep;
+  @override
+  final ProductType? productType;
+  @override
+  final String? model;
+  @override
+  final String? errorModel;
+  @override
+  final String? licencePlate;
+  @override
+  final String? errorLicencePlate;
+  @override
+  final int? year;
+  @override
+  final String? errorYear;
+  @override
+  final String? brand;
+  @override
+  final String? color;
+  @override
+  final String? obs;
+  final List<ImageMedia> _imageMedia;
+  @override
+  @JsonKey()
+  List<ImageMedia> get imageMedia {
+    if (_imageMedia is EqualUnmodifiableListView) return _imageMedia;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_imageMedia);
   }
 
   @override
-  int get hashCode => runtimeType.hashCode;
-
+  @JsonKey()
+  final bool isLoading;
   @override
-  String toString() {
-    return 'ProductUpdateState.initial()';
-  }
-}
-
-/// @nodoc
-
-class _Load implements ProductUpdateState {
-  const _Load(this.product);
-
-  final Product product;
+  @JsonKey()
+  final bool isSuccess;
+  @override
+  final String? errorMessage;
 
   /// Create a copy of ProductUpdateState
   /// with the given fields replaced by the non-null parameter values.
+  @override
   @JsonKey(includeFromJson: false, includeToJson: false)
   @pragma('vm:prefer-inline')
-  _$LoadCopyWith<_Load> get copyWith =>
-      __$LoadCopyWithImpl<_Load>(this, _$identity);
+  _$ProductUpdateStateCopyWith<_ProductUpdateState> get copyWith =>
+      __$ProductUpdateStateCopyWithImpl<_ProductUpdateState>(this, _$identity);
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _Load &&
-            (identical(other.product, product) || other.product == product));
+            other is _ProductUpdateState &&
+            (identical(other.currentStep, currentStep) ||
+                other.currentStep == currentStep) &&
+            (identical(other.productType, productType) ||
+                other.productType == productType) &&
+            (identical(other.model, model) || other.model == model) &&
+            (identical(other.errorModel, errorModel) ||
+                other.errorModel == errorModel) &&
+            (identical(other.licencePlate, licencePlate) ||
+                other.licencePlate == licencePlate) &&
+            (identical(other.errorLicencePlate, errorLicencePlate) ||
+                other.errorLicencePlate == errorLicencePlate) &&
+            (identical(other.year, year) || other.year == year) &&
+            (identical(other.errorYear, errorYear) ||
+                other.errorYear == errorYear) &&
+            (identical(other.brand, brand) || other.brand == brand) &&
+            (identical(other.color, color) || other.color == color) &&
+            (identical(other.obs, obs) || other.obs == obs) &&
+            const DeepCollectionEquality()
+                .equals(other._imageMedia, _imageMedia) &&
+            (identical(other.isLoading, isLoading) ||
+                other.isLoading == isLoading) &&
+            (identical(other.isSuccess, isSuccess) ||
+                other.isSuccess == isSuccess) &&
+            (identical(other.errorMessage, errorMessage) ||
+                other.errorMessage == errorMessage));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, product);
-
-  @override
-  String toString() {
-    return 'ProductUpdateState.load(product: $product)';
-  }
-}
-
-/// @nodoc
-abstract mixin class _$LoadCopyWith<$Res>
-    implements $ProductUpdateStateCopyWith<$Res> {
-  factory _$LoadCopyWith(_Load value, $Res Function(_Load) _then) =
-      __$LoadCopyWithImpl;
-  @useResult
-  $Res call({Product product});
-}
-
-/// @nodoc
-class __$LoadCopyWithImpl<$Res> implements _$LoadCopyWith<$Res> {
-  __$LoadCopyWithImpl(this._self, this._then);
-
-  final _Load _self;
-  final $Res Function(_Load) _then;
-
-  /// Create a copy of ProductUpdateState
-  /// with the given fields replaced by the non-null parameter values.
-  @pragma('vm:prefer-inline')
-  $Res call({
-    Object? product = null,
-  }) {
-    return _then(_Load(
-      null == product
-          ? _self.product
-          : product // ignore: cast_nullable_to_non_nullable
-              as Product,
-    ));
-  }
-}
-
-/// @nodoc
-
-class _Editing implements ProductUpdateState {
-  const _Editing(this.product);
-
-  final Product product;
-
-  /// Create a copy of ProductUpdateState
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  @pragma('vm:prefer-inline')
-  _$EditingCopyWith<_Editing> get copyWith =>
-      __$EditingCopyWithImpl<_Editing>(this, _$identity);
-
-  @override
-  bool operator ==(Object other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType &&
-            other is _Editing &&
-            (identical(other.product, product) || other.product == product));
-  }
-
-  @override
-  int get hashCode => Object.hash(runtimeType, product);
+  int get hashCode => Object.hash(
+      runtimeType,
+      currentStep,
+      productType,
+      model,
+      errorModel,
+      licencePlate,
+      errorLicencePlate,
+      year,
+      errorYear,
+      brand,
+      color,
+      obs,
+      const DeepCollectionEquality().hash(_imageMedia),
+      isLoading,
+      isSuccess,
+      errorMessage);
 
   @override
   String toString() {
-    return 'ProductUpdateState.editing(product: $product)';
+    return 'ProductUpdateState(currentStep: $currentStep, productType: $productType, model: $model, errorModel: $errorModel, licencePlate: $licencePlate, errorLicencePlate: $errorLicencePlate, year: $year, errorYear: $errorYear, brand: $brand, color: $color, obs: $obs, imageMedia: $imageMedia, isLoading: $isLoading, isSuccess: $isSuccess, errorMessage: $errorMessage)';
   }
 }
 
 /// @nodoc
-abstract mixin class _$EditingCopyWith<$Res>
+abstract mixin class _$ProductUpdateStateCopyWith<$Res>
     implements $ProductUpdateStateCopyWith<$Res> {
-  factory _$EditingCopyWith(_Editing value, $Res Function(_Editing) _then) =
-      __$EditingCopyWithImpl;
+  factory _$ProductUpdateStateCopyWith(
+          _ProductUpdateState value, $Res Function(_ProductUpdateState) _then) =
+      __$ProductUpdateStateCopyWithImpl;
+  @override
   @useResult
-  $Res call({Product product});
+  $Res call(
+      {int currentStep,
+      ProductType? productType,
+      String? model,
+      String? errorModel,
+      String? licencePlate,
+      String? errorLicencePlate,
+      int? year,
+      String? errorYear,
+      String? brand,
+      String? color,
+      String? obs,
+      List<ImageMedia> imageMedia,
+      bool isLoading,
+      bool isSuccess,
+      String? errorMessage});
 }
 
 /// @nodoc
-class __$EditingCopyWithImpl<$Res> implements _$EditingCopyWith<$Res> {
-  __$EditingCopyWithImpl(this._self, this._then);
+class __$ProductUpdateStateCopyWithImpl<$Res>
+    implements _$ProductUpdateStateCopyWith<$Res> {
+  __$ProductUpdateStateCopyWithImpl(this._self, this._then);
 
-  final _Editing _self;
-  final $Res Function(_Editing) _then;
+  final _ProductUpdateState _self;
+  final $Res Function(_ProductUpdateState) _then;
 
   /// Create a copy of ProductUpdateState
   /// with the given fields replaced by the non-null parameter values.
+  @override
   @pragma('vm:prefer-inline')
   $Res call({
-    Object? product = null,
+    Object? currentStep = null,
+    Object? productType = freezed,
+    Object? model = freezed,
+    Object? errorModel = freezed,
+    Object? licencePlate = freezed,
+    Object? errorLicencePlate = freezed,
+    Object? year = freezed,
+    Object? errorYear = freezed,
+    Object? brand = freezed,
+    Object? color = freezed,
+    Object? obs = freezed,
+    Object? imageMedia = null,
+    Object? isLoading = null,
+    Object? isSuccess = null,
+    Object? errorMessage = freezed,
   }) {
-    return _then(_Editing(
-      null == product
-          ? _self.product
-          : product // ignore: cast_nullable_to_non_nullable
-              as Product,
-    ));
-  }
-}
-
-/// @nodoc
-
-class _Deleting implements ProductUpdateState {
-  const _Deleting(this.product);
-
-  final Product product;
-
-  /// Create a copy of ProductUpdateState
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  @pragma('vm:prefer-inline')
-  _$DeletingCopyWith<_Deleting> get copyWith =>
-      __$DeletingCopyWithImpl<_Deleting>(this, _$identity);
-
-  @override
-  bool operator ==(Object other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType &&
-            other is _Deleting &&
-            (identical(other.product, product) || other.product == product));
-  }
-
-  @override
-  int get hashCode => Object.hash(runtimeType, product);
-
-  @override
-  String toString() {
-    return 'ProductUpdateState.deleting(product: $product)';
-  }
-}
-
-/// @nodoc
-abstract mixin class _$DeletingCopyWith<$Res>
-    implements $ProductUpdateStateCopyWith<$Res> {
-  factory _$DeletingCopyWith(_Deleting value, $Res Function(_Deleting) _then) =
-      __$DeletingCopyWithImpl;
-  @useResult
-  $Res call({Product product});
-}
-
-/// @nodoc
-class __$DeletingCopyWithImpl<$Res> implements _$DeletingCopyWith<$Res> {
-  __$DeletingCopyWithImpl(this._self, this._then);
-
-  final _Deleting _self;
-  final $Res Function(_Deleting) _then;
-
-  /// Create a copy of ProductUpdateState
-  /// with the given fields replaced by the non-null parameter values.
-  @pragma('vm:prefer-inline')
-  $Res call({
-    Object? product = null,
-  }) {
-    return _then(_Deleting(
-      null == product
-          ? _self.product
-          : product // ignore: cast_nullable_to_non_nullable
-              as Product,
-    ));
-  }
-}
-
-/// @nodoc
-
-class _Success implements ProductUpdateState {
-  const _Success(this.product);
-
-  final Product product;
-
-  /// Create a copy of ProductUpdateState
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  @pragma('vm:prefer-inline')
-  _$SuccessCopyWith<_Success> get copyWith =>
-      __$SuccessCopyWithImpl<_Success>(this, _$identity);
-
-  @override
-  bool operator ==(Object other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType &&
-            other is _Success &&
-            (identical(other.product, product) || other.product == product));
-  }
-
-  @override
-  int get hashCode => Object.hash(runtimeType, product);
-
-  @override
-  String toString() {
-    return 'ProductUpdateState.success(product: $product)';
-  }
-}
-
-/// @nodoc
-abstract mixin class _$SuccessCopyWith<$Res>
-    implements $ProductUpdateStateCopyWith<$Res> {
-  factory _$SuccessCopyWith(_Success value, $Res Function(_Success) _then) =
-      __$SuccessCopyWithImpl;
-  @useResult
-  $Res call({Product product});
-}
-
-/// @nodoc
-class __$SuccessCopyWithImpl<$Res> implements _$SuccessCopyWith<$Res> {
-  __$SuccessCopyWithImpl(this._self, this._then);
-
-  final _Success _self;
-  final $Res Function(_Success) _then;
-
-  /// Create a copy of ProductUpdateState
-  /// with the given fields replaced by the non-null parameter values.
-  @pragma('vm:prefer-inline')
-  $Res call({
-    Object? product = null,
-  }) {
-    return _then(_Success(
-      null == product
-          ? _self.product
-          : product // ignore: cast_nullable_to_non_nullable
-              as Product,
-    ));
-  }
-}
-
-/// @nodoc
-
-class _Error implements ProductUpdateState {
-  const _Error(this.message);
-
-  final String message;
-
-  /// Create a copy of ProductUpdateState
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  @pragma('vm:prefer-inline')
-  _$ErrorCopyWith<_Error> get copyWith =>
-      __$ErrorCopyWithImpl<_Error>(this, _$identity);
-
-  @override
-  bool operator ==(Object other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType &&
-            other is _Error &&
-            (identical(other.message, message) || other.message == message));
-  }
-
-  @override
-  int get hashCode => Object.hash(runtimeType, message);
-
-  @override
-  String toString() {
-    return 'ProductUpdateState.error(message: $message)';
-  }
-}
-
-/// @nodoc
-abstract mixin class _$ErrorCopyWith<$Res>
-    implements $ProductUpdateStateCopyWith<$Res> {
-  factory _$ErrorCopyWith(_Error value, $Res Function(_Error) _then) =
-      __$ErrorCopyWithImpl;
-  @useResult
-  $Res call({String message});
-}
-
-/// @nodoc
-class __$ErrorCopyWithImpl<$Res> implements _$ErrorCopyWith<$Res> {
-  __$ErrorCopyWithImpl(this._self, this._then);
-
-  final _Error _self;
-  final $Res Function(_Error) _then;
-
-  /// Create a copy of ProductUpdateState
-  /// with the given fields replaced by the non-null parameter values.
-  @pragma('vm:prefer-inline')
-  $Res call({
-    Object? message = null,
-  }) {
-    return _then(_Error(
-      null == message
-          ? _self.message
-          : message // ignore: cast_nullable_to_non_nullable
-              as String,
+    return _then(_ProductUpdateState(
+      currentStep: null == currentStep
+          ? _self.currentStep
+          : currentStep // ignore: cast_nullable_to_non_nullable
+              as int,
+      productType: freezed == productType
+          ? _self.productType
+          : productType // ignore: cast_nullable_to_non_nullable
+              as ProductType?,
+      model: freezed == model
+          ? _self.model
+          : model // ignore: cast_nullable_to_non_nullable
+              as String?,
+      errorModel: freezed == errorModel
+          ? _self.errorModel
+          : errorModel // ignore: cast_nullable_to_non_nullable
+              as String?,
+      licencePlate: freezed == licencePlate
+          ? _self.licencePlate
+          : licencePlate // ignore: cast_nullable_to_non_nullable
+              as String?,
+      errorLicencePlate: freezed == errorLicencePlate
+          ? _self.errorLicencePlate
+          : errorLicencePlate // ignore: cast_nullable_to_non_nullable
+              as String?,
+      year: freezed == year
+          ? _self.year
+          : year // ignore: cast_nullable_to_non_nullable
+              as int?,
+      errorYear: freezed == errorYear
+          ? _self.errorYear
+          : errorYear // ignore: cast_nullable_to_non_nullable
+              as String?,
+      brand: freezed == brand
+          ? _self.brand
+          : brand // ignore: cast_nullable_to_non_nullable
+              as String?,
+      color: freezed == color
+          ? _self.color
+          : color // ignore: cast_nullable_to_non_nullable
+              as String?,
+      obs: freezed == obs
+          ? _self.obs
+          : obs // ignore: cast_nullable_to_non_nullable
+              as String?,
+      imageMedia: null == imageMedia
+          ? _self._imageMedia
+          : imageMedia // ignore: cast_nullable_to_non_nullable
+              as List<ImageMedia>,
+      isLoading: null == isLoading
+          ? _self.isLoading
+          : isLoading // ignore: cast_nullable_to_non_nullable
+              as bool,
+      isSuccess: null == isSuccess
+          ? _self.isSuccess
+          : isSuccess // ignore: cast_nullable_to_non_nullable
+              as bool,
+      errorMessage: freezed == errorMessage
+          ? _self.errorMessage
+          : errorMessage // ignore: cast_nullable_to_non_nullable
+              as String?,
     ));
   }
 }

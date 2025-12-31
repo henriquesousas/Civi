@@ -1,4 +1,4 @@
-import 'package:deehelp/core/domain/use_case.dart';
+import 'package:deehelp/core/base/use_case.dart';
 import 'package:deehelp/core/utils/result.dart';
 import 'package:deehelp/features/auth/domain/entity/authenticated_user.dart';
 import 'package:deehelp/features/auth/domain/repositories/session_repository.dart';

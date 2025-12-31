@@ -1,4 +1,4 @@
-import 'package:deehelp/core/router/router_constants.dart';
+import 'package:deehelp/core/router/app_router.dart';
 import 'package:deehelp/core/ui/theme/app_colors.dart';
 import 'package:deehelp/core/ui/theme/app_text_styles.dart';
 import 'package:deehelp/core/ui/theme/dimens.dart';
@@ -33,7 +33,7 @@ class DashbordQuickActionsCard extends StatelessWidget {
                 title: "Bem\nPré cadastro",
                 color: AppColors.primaryColor,
                 icon: const Icon(Icons.add, color: AppColors.whiteColor),
-                onTap: () => context.push(RouterConstant.myItems),
+                onTap: () => context.push(AppRouter.myProducts),
               ),
               QuickActionItem(
                 title: "Reportar\nincidente",

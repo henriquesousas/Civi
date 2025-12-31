@@ -1,7 +1,7 @@
-import 'package:deehelp/core/domain/entity.dart';
-import 'package:deehelp/core/domain/validation/validation_handler.dart';
-import 'package:deehelp/core/domain/valueobject/email.dart';
-import 'package:deehelp/core/domain/valueobject/image_url.dart';
+import 'package:deehelp/core/base/entity.dart';
+import 'package:deehelp/core/validation/validation_handler.dart';
+import 'package:deehelp/core/valueobject/email.dart';
+import 'package:deehelp/core/valueobject/image_url.dart';
 import 'package:deehelp/features/auth/domain/status.dart';
 import 'package:deehelp/features/auth/domain/user_validator.dart';
 import 'package:deehelp/features/auth/domain/valueobject/name.dart';

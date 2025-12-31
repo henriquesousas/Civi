@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-import '../../../core/ui/assets/resources.dart';
+import '../../../core/res/resources.dart';
 
 class SplashProgress extends StatelessWidget {
   const SplashProgress({super.key});

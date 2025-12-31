@@ -13,7 +13,7 @@ Future<dynamic> customModalBottomSheet(
   return showModalBottomSheet(
     context: context,
     clipBehavior: Clip.hardEdge,
-    isScrollControlled: true, // IMPORTANTE para conteúdo variável
+    isScrollControlled: true,
     isDismissible: isDismissible,
     enableDrag: isDismissible,
     backgroundColor: Theme.of(context).scaffoldBackgroundColor,
@@ -43,7 +43,6 @@ Future<dynamic> customModalBottomSheet(
           ),
           const SizedBox(height: 8),
           Flexible(
-            // Use Flexible para conteúdo variável
             child: Padding(
               padding: EdgeInsets.only(
                 bottom: MediaQuery.of(context).viewInsets.bottom,

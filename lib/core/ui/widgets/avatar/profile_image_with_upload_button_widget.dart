@@ -8,9 +8,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:skeletonizer/skeletonizer.dart';
 
-import '../../assets/resources.dart';
+import '../../../res/resources.dart';
 
-//TODO: Renomear por que vai ser reutilizavel em varios locais
 class ProfileImageWithUploadButtonWidget extends StatefulWidget {
   final String imageUrl;
   final String imageAlt;
@@ -114,7 +113,7 @@ class _ProfileImageWithUploadButtonWidgetState
                 child: UIMyAssetsImageWidget(
                   color: AppColors.primaryColor,
                   isSvg: true,
-                  assetPath: R.images.svgUploadIcon,
+                  assetPath: R.svg.upload,
                 ),
               ),
             ),
