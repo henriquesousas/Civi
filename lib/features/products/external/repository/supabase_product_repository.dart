@@ -8,18 +8,18 @@ import 'package:supabase_flutter/supabase_flutter.dart';
 class SupabaseProductRepository implements ProductRepository {
   final table = "product";
 
-  final SupabaseClient _client;
+  final SupabaseClient _supabaseClient;
 
   SupabaseProductRepository({required SupabaseClient client})
-      : _client = client;
+      : _supabaseClient = client;
 
   @override
   Future<void> save(Product product) async {
     final map = ProductModel.toMap(product);
     final images = ImageMediaModel.toMap(product.images);
 
-    final response =
-        await _client.rpc("add_product_with_image_transaction", params: {
+    final response = await _supabaseClient
+        .rpc("add_product_with_image_transaction", params: {
       'product_data': map,
       'imagens': images,
     });
@@ -30,10 +30,11 @@ class SupabaseProductRepository implements ProductRepository {
 
   @override
   Future<List<Product>> getByUser(String userId) async {
-    final data = await _client.from(table).select("*,product_images (*)").eq(
-          "user_id",
-          userId,
-        );
+    final data =
+        await _supabaseClient.from(table).select("*,product_images (*)").eq(
+              "user_id",
+              userId,
+            );
     return data.isNotEmpty
         ? data.map((el) => ProductModel.fromMap(el)).toList()
         : [];
@@ -46,8 +47,11 @@ class SupabaseProductRepository implements ProductRepository {
   }
 
   @override
-  Future<void> update(Product product) {
-    // TODO: implement update
-    throw UnimplementedError();
+  Future<void> update(Product product) async {
+    final productMap = ProductModel.toMap(product);
+    await _supabaseClient
+        .from(table)
+        .update(productMap)
+        .eq("id", product.id.value);
   }
 }

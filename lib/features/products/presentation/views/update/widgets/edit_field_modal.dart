@@ -3,11 +3,13 @@ import 'package:deehelp/core/ui/theme/dimens.dart';
 import 'package:deehelp/core/ui/widgets/button/ui_elevated_button.dart';
 import 'package:deehelp/core/ui/widgets/icon/ui_icon.dart';
 import 'package:deehelp/core/ui/widgets/textfield/ui_text_field_rounded.dart';
+import 'package:deehelp/features/products/presentation/providers/product_viewmodel_provider.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
 
-class EditFieldModal extends StatefulWidget {
+class EditFieldModal extends ConsumerStatefulWidget {
   final String title;
   final String description;
   final String hintText;
@@ -15,10 +17,8 @@ class EditFieldModal extends StatefulWidget {
   final String examples;
   final IconData prefixIcon;
   final Color prefixIconColor;
-  final ValueChanged<String>? onConfirm;
   final ValueChanged<String>? onChange;
   final VoidCallback? onCancel;
-  final String? errorText;
   final bool isObs;
 
   const EditFieldModal({
@@ -30,18 +30,16 @@ class EditFieldModal extends StatefulWidget {
     this.examples = '',
     this.prefixIcon = Icons.edit,
     this.prefixIconColor = AppColors.primaryColor,
-    this.onConfirm,
     this.onCancel,
     this.onChange,
-    this.errorText,
     this.isObs = false,
   });
 
   @override
-  State<EditFieldModal> createState() => _EditFieldModalState();
+  ConsumerState<EditFieldModal> createState() => _EditFieldModalState();
 }
 
-class _EditFieldModalState extends State<EditFieldModal> {
+class _EditFieldModalState extends ConsumerState<EditFieldModal> {
   late TextEditingController _controller;
 
   @override
@@ -56,22 +54,30 @@ class _EditFieldModalState extends State<EditFieldModal> {
     super.dispose();
   }
 
-  void _onConfirm() {
-    widget.onConfirm?.call(_controller.text);
-    Navigator.of(context).pop();
-  }
-
   void _onChange(String value) {
     widget.onChange?.call(value);
   }
 
-  void _onCancel() {
-    widget.onCancel?.call();
-    Navigator.of(context).pop();
-  }
-
   @override
   Widget build(BuildContext context) {
+    final errorValidation = ref.watch(
+      updateProductViewModelProvider.select(
+        (value) => (value.errorValidation),
+      ),
+    );
+
+    final errorText = ref.watch(
+      updateProductViewModelProvider.select(
+        (value) => (value.errorMessage),
+      ),
+    );
+
+    final loading = ref.watch(
+      updateProductViewModelProvider.select(
+        (value) => value.isLoading,
+      ),
+    );
+
     return SingleChildScrollView(
       child: Padding(
         padding: const EdgeInsets.all(20),
@@ -110,6 +116,8 @@ class _EditFieldModalState extends State<EditFieldModal> {
               controller: _controller,
               maxLength: widget.isObs ? 200 : null,
               maxLine: widget.isObs ? 4 : 1,
+              onChanged: _onChange,
+              error: errorValidation ?? errorText,
             ),
             Text(
               widget.examples,
@@ -123,7 +131,7 @@ class _EditFieldModalState extends State<EditFieldModal> {
                 Expanded(
                   child: UIElevatedButton(
                     text: "Cancelar",
-                    press: () => Navigator.of(context).pop(),
+                    press: widget.onCancel ?? () {},
                     textColor: AppColors.primaryColor,
                     borderColor: AppColors.primaryColor,
                     bgColor: AppColors.whiteColor,
@@ -133,7 +141,11 @@ class _EditFieldModalState extends State<EditFieldModal> {
                 Expanded(
                   child: UIElevatedButton(
                     text: "Confirmar",
-                    press: () => widget.onConfirm != null ? _onConfirm : null,
+                    press: () => ref
+                        .watch(updateProductViewModelProvider.notifier)
+                        .update(),
+                    isLoading: loading,
+                    isEnabled: errorValidation == null,
                   ),
                 ),
               ],

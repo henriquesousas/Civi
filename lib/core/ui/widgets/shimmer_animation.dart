@@ -13,6 +13,8 @@ class ShimmerAnimation extends StatelessWidget {
     return Skeletonizer(
       enabled: enabled,
       enableSwitchAnimation: true,
+      ignoreContainers: false,
+      containersColor: AppColors.lightGreyColor30,
       effect: const ShimmerEffect(
         baseColor: AppColors.greyColor, //Color(0XFFDADADA),
         highlightColor: AppColors.darkGreyColor10, //Color(0XFFF2F2F2),

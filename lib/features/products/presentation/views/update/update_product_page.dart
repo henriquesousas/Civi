@@ -1,7 +1,9 @@
 import 'package:deehelp/core/base/base_page.dart';
 import 'package:deehelp/features/products/domain/entities/product.dart';
+import 'package:deehelp/features/products/presentation/providers/product_viewmodel_provider.dart';
 import 'package:deehelp/features/products/presentation/views/update/widgets/product_form.dart';
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 
 class UpdateProductPage extends BasePage {
   final Product product;
@@ -16,11 +18,22 @@ class _UpdateProductPage extends BasePageState<UpdateProductPage> {
   String? pageTitle() => "Detalhes";
 
   @override
+  VoidCallback? onBackPress() {
+    return () => context.pop();
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      ref.read(updateProductViewModelProvider.notifier).initialize(
+            widget.product,
+          );
+    });
+  }
+
+  @override
   Widget buildPage(BuildContext context) {
-    return ProductForm(
-      product: widget.product,
-      onConfirm: () {},
-      onDelete: () {},
-    );
+    return const ProductForm();
   }
 }

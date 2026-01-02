@@ -14,20 +14,21 @@ T _$identity<T>(T value) => value;
 
 /// @nodoc
 mixin _$ProductUpdateState {
-  int get currentStep;
-  ProductType? get productType;
-  String? get model;
-  String? get errorModel;
-  String? get licencePlate;
-  String? get errorLicencePlate;
-  int? get year;
-  String? get errorYear;
-  String? get brand;
-  String? get color;
-  String? get obs;
-  List<ImageMedia> get imageMedia;
+// ProductType? productType,
+// String? model,
+// String? licencePlate,
+// String? errorLicencePlate,
+// int? year,
+// String? errorYear,
+// String? brand,
+// String? color,
+// String? obs,
+// @Default([]) List<ImageMedia> imageMedia,
   bool get isLoading;
   bool get isSuccess;
+  Product? get currentProduct;
+  String? get updateValue;
+  String? get errorValidation;
   String? get errorMessage;
 
   /// Create a copy of ProductUpdateState
@@ -43,55 +44,27 @@ mixin _$ProductUpdateState {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is ProductUpdateState &&
-            (identical(other.currentStep, currentStep) ||
-                other.currentStep == currentStep) &&
-            (identical(other.productType, productType) ||
-                other.productType == productType) &&
-            (identical(other.model, model) || other.model == model) &&
-            (identical(other.errorModel, errorModel) ||
-                other.errorModel == errorModel) &&
-            (identical(other.licencePlate, licencePlate) ||
-                other.licencePlate == licencePlate) &&
-            (identical(other.errorLicencePlate, errorLicencePlate) ||
-                other.errorLicencePlate == errorLicencePlate) &&
-            (identical(other.year, year) || other.year == year) &&
-            (identical(other.errorYear, errorYear) ||
-                other.errorYear == errorYear) &&
-            (identical(other.brand, brand) || other.brand == brand) &&
-            (identical(other.color, color) || other.color == color) &&
-            (identical(other.obs, obs) || other.obs == obs) &&
-            const DeepCollectionEquality()
-                .equals(other.imageMedia, imageMedia) &&
             (identical(other.isLoading, isLoading) ||
                 other.isLoading == isLoading) &&
             (identical(other.isSuccess, isSuccess) ||
                 other.isSuccess == isSuccess) &&
+            (identical(other.currentProduct, currentProduct) ||
+                other.currentProduct == currentProduct) &&
+            (identical(other.updateValue, updateValue) ||
+                other.updateValue == updateValue) &&
+            (identical(other.errorValidation, errorValidation) ||
+                other.errorValidation == errorValidation) &&
             (identical(other.errorMessage, errorMessage) ||
                 other.errorMessage == errorMessage));
   }
 
   @override
-  int get hashCode => Object.hash(
-      runtimeType,
-      currentStep,
-      productType,
-      model,
-      errorModel,
-      licencePlate,
-      errorLicencePlate,
-      year,
-      errorYear,
-      brand,
-      color,
-      obs,
-      const DeepCollectionEquality().hash(imageMedia),
-      isLoading,
-      isSuccess,
-      errorMessage);
+  int get hashCode => Object.hash(runtimeType, isLoading, isSuccess,
+      currentProduct, updateValue, errorValidation, errorMessage);
 
   @override
   String toString() {
-    return 'ProductUpdateState(currentStep: $currentStep, productType: $productType, model: $model, errorModel: $errorModel, licencePlate: $licencePlate, errorLicencePlate: $errorLicencePlate, year: $year, errorYear: $errorYear, brand: $brand, color: $color, obs: $obs, imageMedia: $imageMedia, isLoading: $isLoading, isSuccess: $isSuccess, errorMessage: $errorMessage)';
+    return 'ProductUpdateState(isLoading: $isLoading, isSuccess: $isSuccess, currentProduct: $currentProduct, updateValue: $updateValue, errorValidation: $errorValidation, errorMessage: $errorMessage)';
   }
 }
 
@@ -102,20 +75,11 @@ abstract mixin class $ProductUpdateStateCopyWith<$Res> {
       _$ProductUpdateStateCopyWithImpl;
   @useResult
   $Res call(
-      {int currentStep,
-      ProductType? productType,
-      String? model,
-      String? errorModel,
-      String? licencePlate,
-      String? errorLicencePlate,
-      int? year,
-      String? errorYear,
-      String? brand,
-      String? color,
-      String? obs,
-      List<ImageMedia> imageMedia,
-      bool isLoading,
+      {bool isLoading,
       bool isSuccess,
+      Product? currentProduct,
+      String? updateValue,
+      String? errorValidation,
       String? errorMessage});
 }
 
@@ -132,71 +96,14 @@ class _$ProductUpdateStateCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? currentStep = null,
-    Object? productType = freezed,
-    Object? model = freezed,
-    Object? errorModel = freezed,
-    Object? licencePlate = freezed,
-    Object? errorLicencePlate = freezed,
-    Object? year = freezed,
-    Object? errorYear = freezed,
-    Object? brand = freezed,
-    Object? color = freezed,
-    Object? obs = freezed,
-    Object? imageMedia = null,
     Object? isLoading = null,
     Object? isSuccess = null,
+    Object? currentProduct = freezed,
+    Object? updateValue = freezed,
+    Object? errorValidation = freezed,
     Object? errorMessage = freezed,
   }) {
     return _then(_self.copyWith(
-      currentStep: null == currentStep
-          ? _self.currentStep
-          : currentStep // ignore: cast_nullable_to_non_nullable
-              as int,
-      productType: freezed == productType
-          ? _self.productType
-          : productType // ignore: cast_nullable_to_non_nullable
-              as ProductType?,
-      model: freezed == model
-          ? _self.model
-          : model // ignore: cast_nullable_to_non_nullable
-              as String?,
-      errorModel: freezed == errorModel
-          ? _self.errorModel
-          : errorModel // ignore: cast_nullable_to_non_nullable
-              as String?,
-      licencePlate: freezed == licencePlate
-          ? _self.licencePlate
-          : licencePlate // ignore: cast_nullable_to_non_nullable
-              as String?,
-      errorLicencePlate: freezed == errorLicencePlate
-          ? _self.errorLicencePlate
-          : errorLicencePlate // ignore: cast_nullable_to_non_nullable
-              as String?,
-      year: freezed == year
-          ? _self.year
-          : year // ignore: cast_nullable_to_non_nullable
-              as int?,
-      errorYear: freezed == errorYear
-          ? _self.errorYear
-          : errorYear // ignore: cast_nullable_to_non_nullable
-              as String?,
-      brand: freezed == brand
-          ? _self.brand
-          : brand // ignore: cast_nullable_to_non_nullable
-              as String?,
-      color: freezed == color
-          ? _self.color
-          : color // ignore: cast_nullable_to_non_nullable
-              as String?,
-      obs: freezed == obs
-          ? _self.obs
-          : obs // ignore: cast_nullable_to_non_nullable
-              as String?,
-      imageMedia: null == imageMedia
-          ? _self.imageMedia
-          : imageMedia // ignore: cast_nullable_to_non_nullable
-              as List<ImageMedia>,
       isLoading: null == isLoading
           ? _self.isLoading
           : isLoading // ignore: cast_nullable_to_non_nullable
@@ -205,6 +112,18 @@ class _$ProductUpdateStateCopyWithImpl<$Res>
           ? _self.isSuccess
           : isSuccess // ignore: cast_nullable_to_non_nullable
               as bool,
+      currentProduct: freezed == currentProduct
+          ? _self.currentProduct
+          : currentProduct // ignore: cast_nullable_to_non_nullable
+              as Product?,
+      updateValue: freezed == updateValue
+          ? _self.updateValue
+          : updateValue // ignore: cast_nullable_to_non_nullable
+              as String?,
+      errorValidation: freezed == errorValidation
+          ? _self.errorValidation
+          : errorValidation // ignore: cast_nullable_to_non_nullable
+              as String?,
       errorMessage: freezed == errorMessage
           ? _self.errorMessage
           : errorMessage // ignore: cast_nullable_to_non_nullable
@@ -306,44 +225,16 @@ extension ProductUpdateStatePatterns on ProductUpdateState {
 
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>(
-    TResult Function(
-            int currentStep,
-            ProductType? productType,
-            String? model,
-            String? errorModel,
-            String? licencePlate,
-            String? errorLicencePlate,
-            int? year,
-            String? errorYear,
-            String? brand,
-            String? color,
-            String? obs,
-            List<ImageMedia> imageMedia,
-            bool isLoading,
-            bool isSuccess,
-            String? errorMessage)?
+    TResult Function(bool isLoading, bool isSuccess, Product? currentProduct,
+            String? updateValue, String? errorValidation, String? errorMessage)?
         $default, {
     required TResult orElse(),
   }) {
     final _that = this;
     switch (_that) {
       case _ProductUpdateState() when $default != null:
-        return $default(
-            _that.currentStep,
-            _that.productType,
-            _that.model,
-            _that.errorModel,
-            _that.licencePlate,
-            _that.errorLicencePlate,
-            _that.year,
-            _that.errorYear,
-            _that.brand,
-            _that.color,
-            _that.obs,
-            _that.imageMedia,
-            _that.isLoading,
-            _that.isSuccess,
-            _that.errorMessage);
+        return $default(_that.isLoading, _that.isSuccess, _that.currentProduct,
+            _that.updateValue, _that.errorValidation, _that.errorMessage);
       case _:
         return orElse();
     }
@@ -364,43 +255,15 @@ extension ProductUpdateStatePatterns on ProductUpdateState {
 
   @optionalTypeArgs
   TResult when<TResult extends Object?>(
-    TResult Function(
-            int currentStep,
-            ProductType? productType,
-            String? model,
-            String? errorModel,
-            String? licencePlate,
-            String? errorLicencePlate,
-            int? year,
-            String? errorYear,
-            String? brand,
-            String? color,
-            String? obs,
-            List<ImageMedia> imageMedia,
-            bool isLoading,
-            bool isSuccess,
-            String? errorMessage)
+    TResult Function(bool isLoading, bool isSuccess, Product? currentProduct,
+            String? updateValue, String? errorValidation, String? errorMessage)
         $default,
   ) {
     final _that = this;
     switch (_that) {
       case _ProductUpdateState():
-        return $default(
-            _that.currentStep,
-            _that.productType,
-            _that.model,
-            _that.errorModel,
-            _that.licencePlate,
-            _that.errorLicencePlate,
-            _that.year,
-            _that.errorYear,
-            _that.brand,
-            _that.color,
-            _that.obs,
-            _that.imageMedia,
-            _that.isLoading,
-            _that.isSuccess,
-            _that.errorMessage);
+        return $default(_that.isLoading, _that.isSuccess, _that.currentProduct,
+            _that.updateValue, _that.errorValidation, _that.errorMessage);
       case _:
         throw StateError('Unexpected subclass');
     }
@@ -420,43 +283,15 @@ extension ProductUpdateStatePatterns on ProductUpdateState {
 
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>(
-    TResult? Function(
-            int currentStep,
-            ProductType? productType,
-            String? model,
-            String? errorModel,
-            String? licencePlate,
-            String? errorLicencePlate,
-            int? year,
-            String? errorYear,
-            String? brand,
-            String? color,
-            String? obs,
-            List<ImageMedia> imageMedia,
-            bool isLoading,
-            bool isSuccess,
-            String? errorMessage)?
+    TResult? Function(bool isLoading, bool isSuccess, Product? currentProduct,
+            String? updateValue, String? errorValidation, String? errorMessage)?
         $default,
   ) {
     final _that = this;
     switch (_that) {
       case _ProductUpdateState() when $default != null:
-        return $default(
-            _that.currentStep,
-            _that.productType,
-            _that.model,
-            _that.errorModel,
-            _that.licencePlate,
-            _that.errorLicencePlate,
-            _that.year,
-            _that.errorYear,
-            _that.brand,
-            _that.color,
-            _that.obs,
-            _that.imageMedia,
-            _that.isLoading,
-            _that.isSuccess,
-            _that.errorMessage);
+        return $default(_that.isLoading, _that.isSuccess, _that.currentProduct,
+            _that.updateValue, _that.errorValidation, _that.errorMessage);
       case _:
         return null;
     }
@@ -467,61 +302,35 @@ extension ProductUpdateStatePatterns on ProductUpdateState {
 
 class _ProductUpdateState implements ProductUpdateState {
   const _ProductUpdateState(
-      {this.currentStep = 0,
-      this.productType,
-      this.model,
-      this.errorModel,
-      this.licencePlate,
-      this.errorLicencePlate,
-      this.year,
-      this.errorYear,
-      this.brand,
-      this.color,
-      this.obs,
-      final List<ImageMedia> imageMedia = const [],
-      this.isLoading = false,
+      {this.isLoading = false,
       this.isSuccess = false,
-      this.errorMessage})
-      : _imageMedia = imageMedia;
+      this.currentProduct,
+      this.updateValue,
+      this.errorValidation,
+      this.errorMessage});
 
-  @override
-  @JsonKey()
-  final int currentStep;
-  @override
-  final ProductType? productType;
-  @override
-  final String? model;
-  @override
-  final String? errorModel;
-  @override
-  final String? licencePlate;
-  @override
-  final String? errorLicencePlate;
-  @override
-  final int? year;
-  @override
-  final String? errorYear;
-  @override
-  final String? brand;
-  @override
-  final String? color;
-  @override
-  final String? obs;
-  final List<ImageMedia> _imageMedia;
-  @override
-  @JsonKey()
-  List<ImageMedia> get imageMedia {
-    if (_imageMedia is EqualUnmodifiableListView) return _imageMedia;
-    // ignore: implicit_dynamic_type
-    return EqualUnmodifiableListView(_imageMedia);
-  }
-
+// ProductType? productType,
+// String? model,
+// String? licencePlate,
+// String? errorLicencePlate,
+// int? year,
+// String? errorYear,
+// String? brand,
+// String? color,
+// String? obs,
+// @Default([]) List<ImageMedia> imageMedia,
   @override
   @JsonKey()
   final bool isLoading;
   @override
   @JsonKey()
   final bool isSuccess;
+  @override
+  final Product? currentProduct;
+  @override
+  final String? updateValue;
+  @override
+  final String? errorValidation;
   @override
   final String? errorMessage;
 
@@ -538,55 +347,27 @@ class _ProductUpdateState implements ProductUpdateState {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _ProductUpdateState &&
-            (identical(other.currentStep, currentStep) ||
-                other.currentStep == currentStep) &&
-            (identical(other.productType, productType) ||
-                other.productType == productType) &&
-            (identical(other.model, model) || other.model == model) &&
-            (identical(other.errorModel, errorModel) ||
-                other.errorModel == errorModel) &&
-            (identical(other.licencePlate, licencePlate) ||
-                other.licencePlate == licencePlate) &&
-            (identical(other.errorLicencePlate, errorLicencePlate) ||
-                other.errorLicencePlate == errorLicencePlate) &&
-            (identical(other.year, year) || other.year == year) &&
-            (identical(other.errorYear, errorYear) ||
-                other.errorYear == errorYear) &&
-            (identical(other.brand, brand) || other.brand == brand) &&
-            (identical(other.color, color) || other.color == color) &&
-            (identical(other.obs, obs) || other.obs == obs) &&
-            const DeepCollectionEquality()
-                .equals(other._imageMedia, _imageMedia) &&
             (identical(other.isLoading, isLoading) ||
                 other.isLoading == isLoading) &&
             (identical(other.isSuccess, isSuccess) ||
                 other.isSuccess == isSuccess) &&
+            (identical(other.currentProduct, currentProduct) ||
+                other.currentProduct == currentProduct) &&
+            (identical(other.updateValue, updateValue) ||
+                other.updateValue == updateValue) &&
+            (identical(other.errorValidation, errorValidation) ||
+                other.errorValidation == errorValidation) &&
             (identical(other.errorMessage, errorMessage) ||
                 other.errorMessage == errorMessage));
   }
 
   @override
-  int get hashCode => Object.hash(
-      runtimeType,
-      currentStep,
-      productType,
-      model,
-      errorModel,
-      licencePlate,
-      errorLicencePlate,
-      year,
-      errorYear,
-      brand,
-      color,
-      obs,
-      const DeepCollectionEquality().hash(_imageMedia),
-      isLoading,
-      isSuccess,
-      errorMessage);
+  int get hashCode => Object.hash(runtimeType, isLoading, isSuccess,
+      currentProduct, updateValue, errorValidation, errorMessage);
 
   @override
   String toString() {
-    return 'ProductUpdateState(currentStep: $currentStep, productType: $productType, model: $model, errorModel: $errorModel, licencePlate: $licencePlate, errorLicencePlate: $errorLicencePlate, year: $year, errorYear: $errorYear, brand: $brand, color: $color, obs: $obs, imageMedia: $imageMedia, isLoading: $isLoading, isSuccess: $isSuccess, errorMessage: $errorMessage)';
+    return 'ProductUpdateState(isLoading: $isLoading, isSuccess: $isSuccess, currentProduct: $currentProduct, updateValue: $updateValue, errorValidation: $errorValidation, errorMessage: $errorMessage)';
   }
 }
 
@@ -599,20 +380,11 @@ abstract mixin class _$ProductUpdateStateCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {int currentStep,
-      ProductType? productType,
-      String? model,
-      String? errorModel,
-      String? licencePlate,
-      String? errorLicencePlate,
-      int? year,
-      String? errorYear,
-      String? brand,
-      String? color,
-      String? obs,
-      List<ImageMedia> imageMedia,
-      bool isLoading,
+      {bool isLoading,
       bool isSuccess,
+      Product? currentProduct,
+      String? updateValue,
+      String? errorValidation,
       String? errorMessage});
 }
 
@@ -629,71 +401,14 @@ class __$ProductUpdateStateCopyWithImpl<$Res>
   @override
   @pragma('vm:prefer-inline')
   $Res call({
-    Object? currentStep = null,
-    Object? productType = freezed,
-    Object? model = freezed,
-    Object? errorModel = freezed,
-    Object? licencePlate = freezed,
-    Object? errorLicencePlate = freezed,
-    Object? year = freezed,
-    Object? errorYear = freezed,
-    Object? brand = freezed,
-    Object? color = freezed,
-    Object? obs = freezed,
-    Object? imageMedia = null,
     Object? isLoading = null,
     Object? isSuccess = null,
+    Object? currentProduct = freezed,
+    Object? updateValue = freezed,
+    Object? errorValidation = freezed,
     Object? errorMessage = freezed,
   }) {
     return _then(_ProductUpdateState(
-      currentStep: null == currentStep
-          ? _self.currentStep
-          : currentStep // ignore: cast_nullable_to_non_nullable
-              as int,
-      productType: freezed == productType
-          ? _self.productType
-          : productType // ignore: cast_nullable_to_non_nullable
-              as ProductType?,
-      model: freezed == model
-          ? _self.model
-          : model // ignore: cast_nullable_to_non_nullable
-              as String?,
-      errorModel: freezed == errorModel
-          ? _self.errorModel
-          : errorModel // ignore: cast_nullable_to_non_nullable
-              as String?,
-      licencePlate: freezed == licencePlate
-          ? _self.licencePlate
-          : licencePlate // ignore: cast_nullable_to_non_nullable
-              as String?,
-      errorLicencePlate: freezed == errorLicencePlate
-          ? _self.errorLicencePlate
-          : errorLicencePlate // ignore: cast_nullable_to_non_nullable
-              as String?,
-      year: freezed == year
-          ? _self.year
-          : year // ignore: cast_nullable_to_non_nullable
-              as int?,
-      errorYear: freezed == errorYear
-          ? _self.errorYear
-          : errorYear // ignore: cast_nullable_to_non_nullable
-              as String?,
-      brand: freezed == brand
-          ? _self.brand
-          : brand // ignore: cast_nullable_to_non_nullable
-              as String?,
-      color: freezed == color
-          ? _self.color
-          : color // ignore: cast_nullable_to_non_nullable
-              as String?,
-      obs: freezed == obs
-          ? _self.obs
-          : obs // ignore: cast_nullable_to_non_nullable
-              as String?,
-      imageMedia: null == imageMedia
-          ? _self._imageMedia
-          : imageMedia // ignore: cast_nullable_to_non_nullable
-              as List<ImageMedia>,
       isLoading: null == isLoading
           ? _self.isLoading
           : isLoading // ignore: cast_nullable_to_non_nullable
@@ -702,6 +417,18 @@ class __$ProductUpdateStateCopyWithImpl<$Res>
           ? _self.isSuccess
           : isSuccess // ignore: cast_nullable_to_non_nullable
               as bool,
+      currentProduct: freezed == currentProduct
+          ? _self.currentProduct
+          : currentProduct // ignore: cast_nullable_to_non_nullable
+              as Product?,
+      updateValue: freezed == updateValue
+          ? _self.updateValue
+          : updateValue // ignore: cast_nullable_to_non_nullable
+              as String?,
+      errorValidation: freezed == errorValidation
+          ? _self.errorValidation
+          : errorValidation // ignore: cast_nullable_to_non_nullable
+              as String?,
       errorMessage: freezed == errorMessage
           ? _self.errorMessage
           : errorMessage // ignore: cast_nullable_to_non_nullable

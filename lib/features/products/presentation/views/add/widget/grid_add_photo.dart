@@ -11,6 +11,8 @@ class GridAddPhoto extends StatelessWidget {
   final List<ImageMedia> photos;
   final VoidCallback? onAdd;
   final Function(int)? onRemove;
+  final double width;
+  final double height;
   final int maxPhotos;
 
   const GridAddPhoto({
@@ -18,6 +20,8 @@ class GridAddPhoto extends StatelessWidget {
     required this.photos,
     this.onAdd,
     this.onRemove,
+    this.width = double.infinity,
+    this.height = double.infinity,
     this.maxPhotos = 2,
   }) : super(key: key);
 
@@ -38,7 +42,7 @@ class GridAddPhoto extends StatelessWidget {
           itemCount: photos.length + (photos.length < maxPhotos ? 1 : 0),
           itemBuilder: (context, index) {
             if (index < photos.length) {
-              return _buildPhotoCard(photos[index], index);
+              return _buildPhotoCard(photos[index], index, context);
             } else {
               return _buildAddButton(context);
             }
@@ -48,7 +52,7 @@ class GridAddPhoto extends StatelessWidget {
     );
   }
 
-  Widget _buildPhotoCard(ImageMedia image, int index) {
+  Widget _buildPhotoCard(ImageMedia image, int index, BuildContext context) {
     return Stack(
       children: [
         Container(
@@ -60,16 +64,16 @@ class GridAddPhoto extends StatelessWidget {
               ? UIMyNetworkImageWidget(
                   radius: 8.0,
                   imageUrl: image.value,
-                  width: double.infinity,
-                  height: double.infinity,
+                  width: width,
+                  height: height,
                 )
               : UIMyAssetsImageWidget(
                   radius: 8.0,
                   isFile: true,
                   boxFit: BoxFit.cover,
                   assetPath: image.value,
-                  width: double.infinity,
-                  height: double.infinity,
+                  width: width,
+                  height: height,
                 ),
         ),
         if (onRemove != null)
