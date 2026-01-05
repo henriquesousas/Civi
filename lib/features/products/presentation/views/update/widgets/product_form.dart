@@ -28,7 +28,6 @@ class ProductForm extends ConsumerWidget {
       child: Column(
         spacing: 10,
         children: [
-          const PhotoSection(),
           BrandSection(
             onModelPress: (title, description, examples) => _showTextFieldModal(
               ctx: context,
@@ -55,20 +54,20 @@ class ProductForm extends ConsumerWidget {
               onModalClose: () => viewModel.restart(),
             ),
           ),
-          Visibility(
-            visible: state.hasChangeSomeField,
-            child: UIElevatedButton(
-              text: "Confirmar alterações",
-              isLoading: state.isLoading,
-              isEnabled: state.hasChangeSomeField,
-              press: () => viewModel.updatreProduct(),
-            ),
-          ),
-          UIElevatedButton(
-            bgColor: AppColors.errorColor,
-            text: "Apagar cadastro",
-            press: () {},
-          ),
+          const PhotoSection(),
+          // Visibility(
+          //   visible: true,
+          //   child: UIElevatedButton(
+          //     text: "Confirmar alterações",
+          //     isLoading: state.isLoading,
+          //     press: () => viewModel.updatreProduct(),
+          //   ),
+          // ),
+          // UIElevatedButton(
+          //   bgColor: AppColors.errorColor,
+          //   text: "Apagar cadastro",
+          //   press: () {},
+          // ),
         ],
       ),
     );
