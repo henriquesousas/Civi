@@ -14,22 +14,13 @@ T _$identity<T>(T value) => value;
 
 /// @nodoc
 mixin _$ProductUpdateState {
-// ProductType? productType,
-// String? model,
-// String? licencePlate,
-// String? errorLicencePlate,
-// int? year,
-// String? errorYear,
-// String? brand,
-// String? color,
-// String? obs,
-// @Default([]) List<ImageMedia> imageMedia,
   bool get isLoading;
   bool get isSuccess;
   Product? get currentProduct;
   String? get updateValue;
   String? get errorValidation;
   String? get errorMessage;
+  dynamic get hasChangeSomeField;
 
   /// Create a copy of ProductUpdateState
   /// with the given fields replaced by the non-null parameter values.
@@ -55,16 +46,25 @@ mixin _$ProductUpdateState {
             (identical(other.errorValidation, errorValidation) ||
                 other.errorValidation == errorValidation) &&
             (identical(other.errorMessage, errorMessage) ||
-                other.errorMessage == errorMessage));
+                other.errorMessage == errorMessage) &&
+            const DeepCollectionEquality()
+                .equals(other.hasChangeSomeField, hasChangeSomeField));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, isLoading, isSuccess,
-      currentProduct, updateValue, errorValidation, errorMessage);
+  int get hashCode => Object.hash(
+      runtimeType,
+      isLoading,
+      isSuccess,
+      currentProduct,
+      updateValue,
+      errorValidation,
+      errorMessage,
+      const DeepCollectionEquality().hash(hasChangeSomeField));
 
   @override
   String toString() {
-    return 'ProductUpdateState(isLoading: $isLoading, isSuccess: $isSuccess, currentProduct: $currentProduct, updateValue: $updateValue, errorValidation: $errorValidation, errorMessage: $errorMessage)';
+    return 'ProductUpdateState(isLoading: $isLoading, isSuccess: $isSuccess, currentProduct: $currentProduct, updateValue: $updateValue, errorValidation: $errorValidation, errorMessage: $errorMessage, hasChangeSomeField: $hasChangeSomeField)';
   }
 }
 
@@ -80,7 +80,8 @@ abstract mixin class $ProductUpdateStateCopyWith<$Res> {
       Product? currentProduct,
       String? updateValue,
       String? errorValidation,
-      String? errorMessage});
+      String? errorMessage,
+      dynamic hasChangeSomeField});
 }
 
 /// @nodoc
@@ -102,6 +103,7 @@ class _$ProductUpdateStateCopyWithImpl<$Res>
     Object? updateValue = freezed,
     Object? errorValidation = freezed,
     Object? errorMessage = freezed,
+    Object? hasChangeSomeField = freezed,
   }) {
     return _then(_self.copyWith(
       isLoading: null == isLoading
@@ -128,6 +130,10 @@ class _$ProductUpdateStateCopyWithImpl<$Res>
           ? _self.errorMessage
           : errorMessage // ignore: cast_nullable_to_non_nullable
               as String?,
+      hasChangeSomeField: freezed == hasChangeSomeField
+          ? _self.hasChangeSomeField
+          : hasChangeSomeField // ignore: cast_nullable_to_non_nullable
+              as dynamic,
     ));
   }
 }
@@ -225,16 +231,28 @@ extension ProductUpdateStatePatterns on ProductUpdateState {
 
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>(
-    TResult Function(bool isLoading, bool isSuccess, Product? currentProduct,
-            String? updateValue, String? errorValidation, String? errorMessage)?
+    TResult Function(
+            bool isLoading,
+            bool isSuccess,
+            Product? currentProduct,
+            String? updateValue,
+            String? errorValidation,
+            String? errorMessage,
+            dynamic hasChangeSomeField)?
         $default, {
     required TResult orElse(),
   }) {
     final _that = this;
     switch (_that) {
       case _ProductUpdateState() when $default != null:
-        return $default(_that.isLoading, _that.isSuccess, _that.currentProduct,
-            _that.updateValue, _that.errorValidation, _that.errorMessage);
+        return $default(
+            _that.isLoading,
+            _that.isSuccess,
+            _that.currentProduct,
+            _that.updateValue,
+            _that.errorValidation,
+            _that.errorMessage,
+            _that.hasChangeSomeField);
       case _:
         return orElse();
     }
@@ -255,15 +273,27 @@ extension ProductUpdateStatePatterns on ProductUpdateState {
 
   @optionalTypeArgs
   TResult when<TResult extends Object?>(
-    TResult Function(bool isLoading, bool isSuccess, Product? currentProduct,
-            String? updateValue, String? errorValidation, String? errorMessage)
+    TResult Function(
+            bool isLoading,
+            bool isSuccess,
+            Product? currentProduct,
+            String? updateValue,
+            String? errorValidation,
+            String? errorMessage,
+            dynamic hasChangeSomeField)
         $default,
   ) {
     final _that = this;
     switch (_that) {
       case _ProductUpdateState():
-        return $default(_that.isLoading, _that.isSuccess, _that.currentProduct,
-            _that.updateValue, _that.errorValidation, _that.errorMessage);
+        return $default(
+            _that.isLoading,
+            _that.isSuccess,
+            _that.currentProduct,
+            _that.updateValue,
+            _that.errorValidation,
+            _that.errorMessage,
+            _that.hasChangeSomeField);
       case _:
         throw StateError('Unexpected subclass');
     }
@@ -283,15 +313,27 @@ extension ProductUpdateStatePatterns on ProductUpdateState {
 
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>(
-    TResult? Function(bool isLoading, bool isSuccess, Product? currentProduct,
-            String? updateValue, String? errorValidation, String? errorMessage)?
+    TResult? Function(
+            bool isLoading,
+            bool isSuccess,
+            Product? currentProduct,
+            String? updateValue,
+            String? errorValidation,
+            String? errorMessage,
+            dynamic hasChangeSomeField)?
         $default,
   ) {
     final _that = this;
     switch (_that) {
       case _ProductUpdateState() when $default != null:
-        return $default(_that.isLoading, _that.isSuccess, _that.currentProduct,
-            _that.updateValue, _that.errorValidation, _that.errorMessage);
+        return $default(
+            _that.isLoading,
+            _that.isSuccess,
+            _that.currentProduct,
+            _that.updateValue,
+            _that.errorValidation,
+            _that.errorMessage,
+            _that.hasChangeSomeField);
       case _:
         return null;
     }
@@ -307,18 +349,9 @@ class _ProductUpdateState implements ProductUpdateState {
       this.currentProduct,
       this.updateValue,
       this.errorValidation,
-      this.errorMessage});
+      this.errorMessage,
+      this.hasChangeSomeField = false});
 
-// ProductType? productType,
-// String? model,
-// String? licencePlate,
-// String? errorLicencePlate,
-// int? year,
-// String? errorYear,
-// String? brand,
-// String? color,
-// String? obs,
-// @Default([]) List<ImageMedia> imageMedia,
   @override
   @JsonKey()
   final bool isLoading;
@@ -333,6 +366,9 @@ class _ProductUpdateState implements ProductUpdateState {
   final String? errorValidation;
   @override
   final String? errorMessage;
+  @override
+  @JsonKey()
+  final dynamic hasChangeSomeField;
 
   /// Create a copy of ProductUpdateState
   /// with the given fields replaced by the non-null parameter values.
@@ -358,16 +394,25 @@ class _ProductUpdateState implements ProductUpdateState {
             (identical(other.errorValidation, errorValidation) ||
                 other.errorValidation == errorValidation) &&
             (identical(other.errorMessage, errorMessage) ||
-                other.errorMessage == errorMessage));
+                other.errorMessage == errorMessage) &&
+            const DeepCollectionEquality()
+                .equals(other.hasChangeSomeField, hasChangeSomeField));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, isLoading, isSuccess,
-      currentProduct, updateValue, errorValidation, errorMessage);
+  int get hashCode => Object.hash(
+      runtimeType,
+      isLoading,
+      isSuccess,
+      currentProduct,
+      updateValue,
+      errorValidation,
+      errorMessage,
+      const DeepCollectionEquality().hash(hasChangeSomeField));
 
   @override
   String toString() {
-    return 'ProductUpdateState(isLoading: $isLoading, isSuccess: $isSuccess, currentProduct: $currentProduct, updateValue: $updateValue, errorValidation: $errorValidation, errorMessage: $errorMessage)';
+    return 'ProductUpdateState(isLoading: $isLoading, isSuccess: $isSuccess, currentProduct: $currentProduct, updateValue: $updateValue, errorValidation: $errorValidation, errorMessage: $errorMessage, hasChangeSomeField: $hasChangeSomeField)';
   }
 }
 
@@ -385,7 +430,8 @@ abstract mixin class _$ProductUpdateStateCopyWith<$Res>
       Product? currentProduct,
       String? updateValue,
       String? errorValidation,
-      String? errorMessage});
+      String? errorMessage,
+      dynamic hasChangeSomeField});
 }
 
 /// @nodoc
@@ -407,6 +453,7 @@ class __$ProductUpdateStateCopyWithImpl<$Res>
     Object? updateValue = freezed,
     Object? errorValidation = freezed,
     Object? errorMessage = freezed,
+    Object? hasChangeSomeField = freezed,
   }) {
     return _then(_ProductUpdateState(
       isLoading: null == isLoading
@@ -433,6 +480,10 @@ class __$ProductUpdateStateCopyWithImpl<$Res>
           ? _self.errorMessage
           : errorMessage // ignore: cast_nullable_to_non_nullable
               as String?,
+      hasChangeSomeField: freezed == hasChangeSomeField
+          ? _self.hasChangeSomeField
+          : hasChangeSomeField // ignore: cast_nullable_to_non_nullable
+              as dynamic,
     ));
   }
 }

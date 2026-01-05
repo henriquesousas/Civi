@@ -2,6 +2,7 @@ import 'package:deehelp/core/ui/widgets/bottom_sheet/custom_modal_bottom_sheet.d
 import 'package:deehelp/core/ui/widgets/card/ui_custom_app_card.dart';
 import 'package:deehelp/features/products/external/repository/data.dart';
 import 'package:deehelp/features/products/presentation/providers/product_viewmodel_provider.dart';
+import 'package:deehelp/features/products/presentation/views/update/product_update_manager.dart';
 import 'package:deehelp/features/products/presentation/views/update/widgets/item_detail_tile.dart';
 import 'package:deehelp/features/products/presentation/widgets/modal_select_brand.dart';
 import 'package:deehelp/features/products/presentation/widgets/modal_select_color.dart';
@@ -37,7 +38,11 @@ class BrandSection extends ConsumerWidget {
                 child: ModalSelectBrand(
                   values: kBrands,
                   onChange: (value) {
-                    debugPrint(value);
+                    viewModel.onValueChange(
+                      ProductField.brand,
+                      value,
+                      executeUpdate: true,
+                    );
                     context.pop();
                   },
                 ),
@@ -55,19 +60,24 @@ class BrandSection extends ConsumerWidget {
           ),
           ItemDetailTile(
             title: "Placa",
-            subtitle: "",
+            subtitle: state.currentProduct!.code,
             showIconEdit: false,
             press: () {},
           ),
           ItemDetailTile(
             title: "Cor",
-            subtitle: "",
+            subtitle: state.currentProduct!.color,
             showDivider: false,
             press: () {
               customModalBottomSheet(
                 context,
                 child: ModalSelectColor(
                   onChange: (value) {
+                    viewModel.onValueChange(
+                      ProductField.color,
+                      value,
+                      executeUpdate: true,
+                    );
                     context.pop();
                   },
                 ),

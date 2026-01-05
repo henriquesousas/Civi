@@ -141,9 +141,12 @@ class _EditFieldModalState extends ConsumerState<EditFieldModal> {
                 Expanded(
                   child: UIElevatedButton(
                     text: "Confirmar",
-                    press: () => ref
-                        .watch(updateProductViewModelProvider.notifier)
-                        .update(),
+                    press: () {
+                      ref
+                          .watch(updateProductViewModelProvider.notifier)
+                          .modalConfirm();
+                      context.pop();
+                    },
                     isLoading: loading,
                     isEnabled: errorValidation == null,
                   ),

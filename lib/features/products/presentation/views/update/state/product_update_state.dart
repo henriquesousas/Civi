@@ -12,6 +12,7 @@ abstract class ProductUpdateState with _$ProductUpdateState {
     String? updateValue,
     String? errorValidation,
     String? errorMessage,
+    @Default(false) hasChangeSomeField,
   }) = _ProductUpdateState;
 
   factory ProductUpdateState.initial() => const ProductUpdateState();

@@ -1,3 +1,4 @@
+import 'package:deehelp/core/extensions/dialog_extension.dart';
 import 'package:deehelp/core/ui/widgets/card/ui_custom_app_card.dart';
 import 'package:deehelp/features/products/presentation/providers/product_viewmodel_provider.dart';
 import 'package:deehelp/features/products/presentation/views/add/widget/grid_add_photo.dart';
@@ -10,6 +11,7 @@ class PhotoSection extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final viewModel = ref.watch(updateProductViewModelProvider.notifier);
     final state = ref.watch(updateProductViewModelProvider);
     return UICustomAppCard(
       padding: EdgeInsets.zero,
@@ -29,7 +31,16 @@ class PhotoSection extends ConsumerWidget {
             padding: const EdgeInsets.all(8.0),
             child: GridAddPhoto(
               photos: state.currentProduct!.images,
-              onRemove: (_) {},
+              onRemove: (index) async {
+                final yes = await context.showQuestionDialog(
+                  "Remover",
+                  "Deletar imagem ?",
+                );
+
+                if (yes) {
+                  viewModel.removePhoto(index);
+                }
+              },
             ),
           ),
         ],

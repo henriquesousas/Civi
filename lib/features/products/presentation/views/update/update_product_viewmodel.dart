@@ -1,15 +1,16 @@
 import 'package:deehelp/core/handlers/handle_command.dart';
 import 'package:deehelp/core/handlers/handler_error.dart';
 import 'package:deehelp/core/utils/unit.dart';
+import 'package:deehelp/features/products/domain/entities/image_media.dart';
 import 'package:deehelp/features/products/domain/entities/product.dart';
 import 'package:deehelp/features/products/domain/usecases/update/update_product_usecase.dart';
+import 'package:deehelp/features/products/presentation/views/update/product_update_manager.dart';
 import 'package:deehelp/features/products/presentation/views/update/state/product_update_state.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 class UpdateProductViewmodel extends StateNotifier<ProductUpdateState> {
   final UpdateProductUseCase _updateProductUseCase;
   Product? _product;
-  bool hasChanges = false;
   UpdateProductViewmodel({required UpdateProductUseCase updateProductUseCase})
       : _updateProductUseCase = updateProductUseCase,
         super(ProductUpdateState.initial());
@@ -20,8 +21,6 @@ class UpdateProductViewmodel extends StateNotifier<ProductUpdateState> {
   }
 
   void restart() {
-    hasChanges = false;
-
     state = state.copyWith(
       isSuccess: false,
       isLoading: false,
@@ -35,21 +34,21 @@ class UpdateProductViewmodel extends StateNotifier<ProductUpdateState> {
   }
 
   void update() async {
-    if (!hasChanges) {
-      state = state.copyWith(isLoading: false, isSuccess: true);
-      return;
-    }
-    if (_product == null) return;
+    // if (!hasChanges) {
+    //   state = state.copyWith(isLoading: false, isSuccess: true);
+    //   return;
+    // }
+    if (state.currentProduct == null) return;
 
     await HandleCommand.execute<Unit, ProductUpdateState>(
       updateState: (newState) => state = newState,
-      command: () => _updateProductUseCase.execute(_product!),
+      command: () => _updateProductUseCase.execute(state.currentProduct!),
       onLoading: () => state.copyWith(isLoading: true),
       onSuccess: (_) {
         return state.copyWith(
           isLoading: false,
           isSuccess: true,
-          currentProduct: _product!,
+          currentProduct: state.currentProduct!,
         );
       },
       onError: (error) {
@@ -66,17 +65,47 @@ class UpdateProductViewmodel extends StateNotifier<ProductUpdateState> {
     );
   }
 
-  // Solução 6: Com registro dinâmico de campos
-  void onValueChange(String value, String fieldName) {
-    if (_product == null) return;
-    hasChanges = true;
+  void deleteImage() {}
 
-    final error = value.length > 3 ? null : 'Modelo inválido';
+  void onValueChange(
+    ProductField field,
+    String value, {
+    bool executeUpdate = false,
+  }) {
+    final _updateManager = ProductUpdateManager();
+    if (state.currentProduct == null) return;
+
+    final error = _updateManager.validateField(field, value);
+
     state = state.copyWith(
       updateValue: value,
       errorValidation: error,
+      hasChangeSomeField: true,
     );
 
-    _product = _product!.changeModel(value);
+    if (error == null) {
+      _product = _updateManager.updateField(
+        product: state.currentProduct!,
+        field: field,
+        value: value,
+      );
+    }
+
+    if (executeUpdate) {
+      modalConfirm();
+    }
+  }
+
+  void modalConfirm() {
+    if (_product == null) return;
+    state = state.copyWith(currentProduct: _product);
+  }
+
+  void removePhoto(int index) {
+    if (_product == null) return;
+    _product!.removeImage(index);
+    state = state.copyWith(currentProduct: _product);
+
+    deleteImage();
   }
 }

@@ -2,6 +2,7 @@ import 'package:deehelp/core/ui/theme/app_colors.dart';
 import 'package:deehelp/core/ui/widgets/bottom_sheet/custom_modal_bottom_sheet.dart';
 import 'package:deehelp/core/ui/widgets/button/ui_elevated_button.dart';
 import 'package:deehelp/features/products/presentation/providers/product_viewmodel_provider.dart';
+import 'package:deehelp/features/products/presentation/views/update/product_update_manager.dart';
 import 'package:deehelp/features/products/presentation/views/update/state/product_update_state.dart';
 import 'package:deehelp/features/products/presentation/views/update/widgets/brand_section.dart';
 import 'package:deehelp/features/products/presentation/views/update/widgets/detail_section.dart';
@@ -35,15 +36,37 @@ class ProductForm extends ConsumerWidget {
               title: title,
               description: description,
               examples: examples,
-              onChange: (value) => viewModel.onValueChange(value, "model"),
+              onChange: (value) =>
+                  viewModel.onValueChange(ProductField.model, value),
               onModalClose: () => viewModel.restart(),
             ),
           ),
           const TypeSection(),
-          const DetailSection(),
+          DetailSection(
+            (title, description, examples) => _showTextFieldModal(
+              ctx: context,
+              title: title,
+              description: description,
+              examples: examples,
+              isObs: true,
+              onChange: (value) =>
+                  viewModel.onValueChange(ProductField.obs, value),
+              initialValue: state.currentProduct!.obs,
+              onModalClose: () => viewModel.restart(),
+            ),
+          ),
+          Visibility(
+            visible: state.hasChangeSomeField,
+            child: UIElevatedButton(
+              text: "Confirmar alterações",
+              isLoading: state.isLoading,
+              isEnabled: state.hasChangeSomeField,
+              press: () => viewModel.update(),
+            ),
+          ),
           UIElevatedButton(
             bgColor: AppColors.errorColor,
-            text: "Deletar",
+            text: "Apagar cadastro",
             press: () {},
           ),
         ],

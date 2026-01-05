@@ -104,6 +104,16 @@ class Product extends Entity<ProductId> {
   Product changeObs(final String value) => copyWith(obs: value);
 
   Product changeBrand(final String value) => copyWith(brand: value);
+  Product changeColor(final String value) => copyWith(color: value);
+  Product changeType(final String value) => copyWith(type: value);
+  Product removeImage(int index) {
+    final newImages = List<ImageMedia>.from(images);
+    if (index >= 0 && index < newImages.length) {
+      newImages.removeAt(index);
+      images = newImages;
+    }
+    return this;
+  }
 
   //TODO: Validar
   @override
