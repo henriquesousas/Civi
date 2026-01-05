@@ -49,6 +49,13 @@ class _UpdateProductPage extends BasePageState<UpdateProductPage> {
             type: DialogType.error,
           );
         }
+
+        if (currentState.isSuccess) {
+          context.pop();
+          context.showSnackBar(
+            currentState.successMessage ?? "Operação realizada com sucesso!",
+          );
+        }
       },
     );
     super.listener();
@@ -56,6 +63,9 @@ class _UpdateProductPage extends BasePageState<UpdateProductPage> {
 
   @override
   Widget? buildBottomNavigationBar() {
+    final state = ref.watch(updateProductViewModelProvider);
+    final viewModel = ref.watch(updateProductViewModelProvider.notifier);
+
     return Padding(
       padding: EdgeInsets.symmetric(
         horizontal: Dimens.defaultPadding.w,
@@ -74,14 +84,28 @@ class _UpdateProductPage extends BasePageState<UpdateProductPage> {
               borderColor: AppColors.errorColorDark,
               textColor: AppColors.errorColorDark,
               text: "Apagar cadastro",
-              press: () {},
+              isLoading: state.deletingProduct,
+              press: () async {
+                if (state.currentProduct != null) {
+                  final yes = await context.showQuestionDialog(
+                    "Apagar",
+                    "Tem certeza que deseja remover permanentemente o produto ${state.currentProduct?.name} da sua grade?",
+                  );
+
+                  if (yes) {
+                    viewModel.deleteProduct();
+                  }
+                }
+              },
             ),
           ),
           Expanded(
             child: UIElevatedButton(
               text: 'Confirmar',
-              press: () {},
-              // isEnabled: state.hasProductTypeSelected,
+              isLoading: ref.watch(updateProductViewModelProvider).isLoading,
+              press: () => ref
+                  .watch(updateProductViewModelProvider.notifier)
+                  .updatreProduct(),
             ),
           ),
         ],

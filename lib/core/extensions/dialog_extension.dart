@@ -65,8 +65,8 @@ extension DialogExtension on BuildContext {
         backgroundColor: type == DialogType.success
             ? AppColors.successColor
             : AppColors.errorColor,
-        behavior: SnackBarBehavior.floating,
-        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+        // behavior: SnackBarBehavior.fixed,
+        // shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
       ),
     );
   }

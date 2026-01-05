@@ -1,40 +1,42 @@
-// import 'package:dartz/dartz.dart';
-// import 'package:deehelp/core/domain/type/result.dart';
-// import 'package:deehelp/core/domain/use_case.dart';
-// import 'package:deehelp/core/utils/image_utils.dart';
-// import 'package:deehelp/core/services/media/interfaces/media_storage.dart';
-// import 'package:logging/logging.dart';
+import 'package:deehelp/core/base/use_case.dart';
+import 'package:deehelp/core/services/media/interfaces/media_storage.dart';
+import 'package:deehelp/core/utils/result.dart';
+import 'package:deehelp/core/utils/unit.dart';
+import 'package:deehelp/features/products/domain/entities/product.dart';
+import 'package:deehelp/features/products/domain/exceptions/delete_product_failure.dart';
+import 'package:deehelp/features/products/domain/product_repository.dart';
+import 'package:logging/logging.dart';
 
-// import '../../add_product_failure.dart';
-// import '../../product_repository.dart';
-// import 'delete_product_dto.dart';
+class DeleteProductUsecase extends UseCase<Product, Unit> {
+  static final _logger = Logger("DeleteProductUsecase");
+  final ProductRepository _repository;
+  final ImageUpload _imageUpload;
 
-// class DeleteProductUsecase extends OldUseCase<DeleteProductDto, Unit> {
-//   static final _logger = Logger("DeleteProductUsecase");
-//   final ProductRepository _repository;
-//   final ImageUpload _mediaStorage;
-//   final String _bucket;
+  DeleteProductUsecase({
+    required ProductRepository repository,
+    required ImageUpload imageUpload,
+  })  : _repository = repository,
+        _imageUpload = imageUpload;
 
-//   DeleteProductUsecase({
-//     required ProductRepository repository,
-//     required ImageUpload mediaStorage,
-//     required String bucket,
-//   })  : _repository = repository,
-//         _mediaStorage = mediaStorage,
-//         _bucket = bucket;
+  @override
+  Future<Result<Unit>> execute(Product product) async {
+    try {
+      _logger.info("Deletando produto : ${product.toString()}");
 
-//   @override
-//   Future<EitherResult<Unit>> execute(DeleteProductDto dto) async {
-//     // final imageName = ImageUtils.extractImagePath(dto.imageUrl);
-//     // if (imageName == null) {
-//     //   return left(AddProductFailure.from("R.strings.userNotFound"));
-//     // }
-//     // _logger.info("Deletando imagem : $imageName");
-//     // _mediaStorage.delete(imageName, _bucket);
-//     // _logger.info("Deletando produto : ${dto.toString()}");
-//     // await _repository.delete(dto.itemId, dto.userId);
-//     // _logger.info("Produto deletado com sucesso");
-//     // return right(unit);
-//     throw Exception("any");
-//   }
-// }
+      await Future.wait(
+        product.images.map(
+          (currentImageMedia) async {
+            await _imageUpload.delete(currentImageMedia.imageName);
+          },
+        ),
+      );
+      _logger.info("Todas as imagens foram apagadas");
+      await _repository.delete(product.id);
+      _logger.info("Produto deletado com sucesso");
+      return Result.success(const Unit());
+    } catch (e) {
+      _logger.severe("Não foi possível apagar o produto: ${e.toString()}");
+      return Result.failure(const DeleteProductFailure());
+    }
+  }
+}

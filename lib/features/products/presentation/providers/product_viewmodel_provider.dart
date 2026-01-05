@@ -35,9 +35,11 @@ final updateProductViewModelProvider = StateNotifierProvider.autoDispose<
     final updateProductUsecase = ref.watch(updateProductUsecaseProvider);
     final deleteImageUseCase = ref.watch(deleteImageUsecaseProvider);
     final addImageUseCase = ref.watch(addImageUsecaseProvider);
+    final deleteProductUseCase = ref.watch(deleteProductUsecaseProvider);
     return UpdateProductViewmodel(
         updateProductUseCase: updateProductUsecase,
         deleteImageUsecase: deleteImageUseCase,
-        addImageUsecase: addImageUseCase);
+        addImageUsecase: addImageUseCase,
+        deleteProductUsecase: deleteProductUseCase);
   },
 );

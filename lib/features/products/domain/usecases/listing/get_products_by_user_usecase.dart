@@ -12,7 +12,7 @@ class GetProductsByUserUsecase extends UseCase<String, List<Product>> {
 
   @override
   Future<Result<List<Product>>> execute(String userId) async {
-    final products = await _repository.getByUser(userId);
+    final products = await _repository.getAll(userId);
     return Result.success(products);
   }
 }

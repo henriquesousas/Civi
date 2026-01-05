@@ -6,6 +6,7 @@ import 'package:deehelp/features/products/domain/entities/product.dart';
 import 'package:deehelp/features/products/domain/usecases/add/dtos/add_image_dto.dart';
 import 'package:deehelp/features/products/domain/usecases/add/add_image_usecase.dart';
 import 'package:deehelp/features/products/domain/usecases/delete/delete_image_usecase.dart';
+import 'package:deehelp/features/products/domain/usecases/delete/delete_product_usecase.dart';
 import 'package:deehelp/features/products/domain/usecases/delete/dtos/delete_image_dto.dart';
 import 'package:deehelp/features/products/domain/usecases/update/update_product_usecase.dart';
 import 'package:deehelp/features/products/presentation/views/update/product_update_manager.dart';
@@ -16,14 +17,17 @@ class UpdateProductViewmodel extends StateNotifier<ProductUpdateState> {
   final UpdateProductUseCase _updateProductUseCase;
   final DeleteImageUsecase _deleteImageUsecase;
   final AddImageUsecase _addImageUsecase;
+  final DeleteProductUsecase _deleteProductUsecase;
   Product? _product;
   UpdateProductViewmodel({
     required UpdateProductUseCase updateProductUseCase,
     required DeleteImageUsecase deleteImageUsecase,
     required AddImageUsecase addImageUsecase,
+    required DeleteProductUsecase deleteProductUsecase,
   })  : _updateProductUseCase = updateProductUseCase,
         _deleteImageUsecase = deleteImageUsecase,
         _addImageUsecase = addImageUsecase,
+        _deleteProductUsecase = deleteProductUsecase,
         super(ProductUpdateState.initial());
 
   void initialize(Product product) {
@@ -45,6 +49,7 @@ class UpdateProductViewmodel extends StateNotifier<ProductUpdateState> {
   }
 
   void updatreProduct() async {
+    if (!state.hasChangeSomeField) return;
     if (state.currentProduct == null) return;
 
     await HandleCommand.execute<Unit, ProductUpdateState>(
@@ -56,6 +61,7 @@ class UpdateProductViewmodel extends StateNotifier<ProductUpdateState> {
           isLoading: false,
           isSuccess: true,
           currentProduct: state.currentProduct!,
+          successMessage: "Produto alterado com sucesso",
         );
       },
       onError: (error) {
@@ -65,6 +71,38 @@ class UpdateProductViewmodel extends StateNotifier<ProductUpdateState> {
             return state.copyWith(
               errorMessage: message,
               isLoading: false,
+            );
+          },
+        );
+      },
+    );
+  }
+
+  void deleteProduct() async {
+    if (state.currentProduct == null) return;
+
+    await HandleCommand.execute<Unit, ProductUpdateState>(
+      updateState: (newState) => state = newState,
+      command: () => _deleteProductUsecase.execute(state.currentProduct!),
+      onLoading: () => state.copyWith(
+        deletingProduct: true,
+        errorMessage: null,
+      ),
+      onSuccess: (_) {
+        return state.copyWith(
+          deletingProduct: false,
+          isSuccess: true,
+          currentProduct: state.currentProduct!,
+          successMessage: "Produto removido com sucesso",
+        );
+      },
+      onError: (error) {
+        return handleError<ProductUpdateState>(
+          error,
+          (message, extra) {
+            return state.copyWith(
+              errorMessage: message,
+              deletingProduct: false,
             );
           },
         );

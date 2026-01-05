@@ -8,11 +8,13 @@ abstract class ProductUpdateState with _$ProductUpdateState {
   const factory ProductUpdateState({
     @Default(false) bool isLoading,
     @Default(false) bool addingPhoto,
+    @Default(false) bool deletingProduct,
     @Default(false) bool isSuccess,
     Product? currentProduct,
     String? updateValue,
     String? errorValidation,
     String? errorMessage,
+    String? successMessage,
     @Default(false) hasChangeSomeField,
   }) = _ProductUpdateState;
 

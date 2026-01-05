@@ -16,11 +16,13 @@ T _$identity<T>(T value) => value;
 mixin _$ProductUpdateState {
   bool get isLoading;
   bool get addingPhoto;
+  bool get deletingProduct;
   bool get isSuccess;
   Product? get currentProduct;
   String? get updateValue;
   String? get errorValidation;
   String? get errorMessage;
+  String? get successMessage;
   dynamic get hasChangeSomeField;
 
   /// Create a copy of ProductUpdateState
@@ -40,6 +42,8 @@ mixin _$ProductUpdateState {
                 other.isLoading == isLoading) &&
             (identical(other.addingPhoto, addingPhoto) ||
                 other.addingPhoto == addingPhoto) &&
+            (identical(other.deletingProduct, deletingProduct) ||
+                other.deletingProduct == deletingProduct) &&
             (identical(other.isSuccess, isSuccess) ||
                 other.isSuccess == isSuccess) &&
             (identical(other.currentProduct, currentProduct) ||
@@ -50,6 +54,8 @@ mixin _$ProductUpdateState {
                 other.errorValidation == errorValidation) &&
             (identical(other.errorMessage, errorMessage) ||
                 other.errorMessage == errorMessage) &&
+            (identical(other.successMessage, successMessage) ||
+                other.successMessage == successMessage) &&
             const DeepCollectionEquality()
                 .equals(other.hasChangeSomeField, hasChangeSomeField));
   }
@@ -59,16 +65,18 @@ mixin _$ProductUpdateState {
       runtimeType,
       isLoading,
       addingPhoto,
+      deletingProduct,
       isSuccess,
       currentProduct,
       updateValue,
       errorValidation,
       errorMessage,
+      successMessage,
       const DeepCollectionEquality().hash(hasChangeSomeField));
 
   @override
   String toString() {
-    return 'ProductUpdateState(isLoading: $isLoading, addingPhoto: $addingPhoto, isSuccess: $isSuccess, currentProduct: $currentProduct, updateValue: $updateValue, errorValidation: $errorValidation, errorMessage: $errorMessage, hasChangeSomeField: $hasChangeSomeField)';
+    return 'ProductUpdateState(isLoading: $isLoading, addingPhoto: $addingPhoto, deletingProduct: $deletingProduct, isSuccess: $isSuccess, currentProduct: $currentProduct, updateValue: $updateValue, errorValidation: $errorValidation, errorMessage: $errorMessage, successMessage: $successMessage, hasChangeSomeField: $hasChangeSomeField)';
   }
 }
 
@@ -81,11 +89,13 @@ abstract mixin class $ProductUpdateStateCopyWith<$Res> {
   $Res call(
       {bool isLoading,
       bool addingPhoto,
+      bool deletingProduct,
       bool isSuccess,
       Product? currentProduct,
       String? updateValue,
       String? errorValidation,
       String? errorMessage,
+      String? successMessage,
       dynamic hasChangeSomeField});
 }
 
@@ -104,11 +114,13 @@ class _$ProductUpdateStateCopyWithImpl<$Res>
   $Res call({
     Object? isLoading = null,
     Object? addingPhoto = null,
+    Object? deletingProduct = null,
     Object? isSuccess = null,
     Object? currentProduct = freezed,
     Object? updateValue = freezed,
     Object? errorValidation = freezed,
     Object? errorMessage = freezed,
+    Object? successMessage = freezed,
     Object? hasChangeSomeField = freezed,
   }) {
     return _then(_self.copyWith(
@@ -119,6 +131,10 @@ class _$ProductUpdateStateCopyWithImpl<$Res>
       addingPhoto: null == addingPhoto
           ? _self.addingPhoto
           : addingPhoto // ignore: cast_nullable_to_non_nullable
+              as bool,
+      deletingProduct: null == deletingProduct
+          ? _self.deletingProduct
+          : deletingProduct // ignore: cast_nullable_to_non_nullable
               as bool,
       isSuccess: null == isSuccess
           ? _self.isSuccess
@@ -139,6 +155,10 @@ class _$ProductUpdateStateCopyWithImpl<$Res>
       errorMessage: freezed == errorMessage
           ? _self.errorMessage
           : errorMessage // ignore: cast_nullable_to_non_nullable
+              as String?,
+      successMessage: freezed == successMessage
+          ? _self.successMessage
+          : successMessage // ignore: cast_nullable_to_non_nullable
               as String?,
       hasChangeSomeField: freezed == hasChangeSomeField
           ? _self.hasChangeSomeField
@@ -244,11 +264,13 @@ extension ProductUpdateStatePatterns on ProductUpdateState {
     TResult Function(
             bool isLoading,
             bool addingPhoto,
+            bool deletingProduct,
             bool isSuccess,
             Product? currentProduct,
             String? updateValue,
             String? errorValidation,
             String? errorMessage,
+            String? successMessage,
             dynamic hasChangeSomeField)?
         $default, {
     required TResult orElse(),
@@ -259,11 +281,13 @@ extension ProductUpdateStatePatterns on ProductUpdateState {
         return $default(
             _that.isLoading,
             _that.addingPhoto,
+            _that.deletingProduct,
             _that.isSuccess,
             _that.currentProduct,
             _that.updateValue,
             _that.errorValidation,
             _that.errorMessage,
+            _that.successMessage,
             _that.hasChangeSomeField);
       case _:
         return orElse();
@@ -288,11 +312,13 @@ extension ProductUpdateStatePatterns on ProductUpdateState {
     TResult Function(
             bool isLoading,
             bool addingPhoto,
+            bool deletingProduct,
             bool isSuccess,
             Product? currentProduct,
             String? updateValue,
             String? errorValidation,
             String? errorMessage,
+            String? successMessage,
             dynamic hasChangeSomeField)
         $default,
   ) {
@@ -302,11 +328,13 @@ extension ProductUpdateStatePatterns on ProductUpdateState {
         return $default(
             _that.isLoading,
             _that.addingPhoto,
+            _that.deletingProduct,
             _that.isSuccess,
             _that.currentProduct,
             _that.updateValue,
             _that.errorValidation,
             _that.errorMessage,
+            _that.successMessage,
             _that.hasChangeSomeField);
       case _:
         throw StateError('Unexpected subclass');
@@ -330,11 +358,13 @@ extension ProductUpdateStatePatterns on ProductUpdateState {
     TResult? Function(
             bool isLoading,
             bool addingPhoto,
+            bool deletingProduct,
             bool isSuccess,
             Product? currentProduct,
             String? updateValue,
             String? errorValidation,
             String? errorMessage,
+            String? successMessage,
             dynamic hasChangeSomeField)?
         $default,
   ) {
@@ -344,11 +374,13 @@ extension ProductUpdateStatePatterns on ProductUpdateState {
         return $default(
             _that.isLoading,
             _that.addingPhoto,
+            _that.deletingProduct,
             _that.isSuccess,
             _that.currentProduct,
             _that.updateValue,
             _that.errorValidation,
             _that.errorMessage,
+            _that.successMessage,
             _that.hasChangeSomeField);
       case _:
         return null;
@@ -362,11 +394,13 @@ class _ProductUpdateState implements ProductUpdateState {
   const _ProductUpdateState(
       {this.isLoading = false,
       this.addingPhoto = false,
+      this.deletingProduct = false,
       this.isSuccess = false,
       this.currentProduct,
       this.updateValue,
       this.errorValidation,
       this.errorMessage,
+      this.successMessage,
       this.hasChangeSomeField = false});
 
   @override
@@ -375,6 +409,9 @@ class _ProductUpdateState implements ProductUpdateState {
   @override
   @JsonKey()
   final bool addingPhoto;
+  @override
+  @JsonKey()
+  final bool deletingProduct;
   @override
   @JsonKey()
   final bool isSuccess;
@@ -386,6 +423,8 @@ class _ProductUpdateState implements ProductUpdateState {
   final String? errorValidation;
   @override
   final String? errorMessage;
+  @override
+  final String? successMessage;
   @override
   @JsonKey()
   final dynamic hasChangeSomeField;
@@ -407,6 +446,8 @@ class _ProductUpdateState implements ProductUpdateState {
                 other.isLoading == isLoading) &&
             (identical(other.addingPhoto, addingPhoto) ||
                 other.addingPhoto == addingPhoto) &&
+            (identical(other.deletingProduct, deletingProduct) ||
+                other.deletingProduct == deletingProduct) &&
             (identical(other.isSuccess, isSuccess) ||
                 other.isSuccess == isSuccess) &&
             (identical(other.currentProduct, currentProduct) ||
@@ -417,6 +458,8 @@ class _ProductUpdateState implements ProductUpdateState {
                 other.errorValidation == errorValidation) &&
             (identical(other.errorMessage, errorMessage) ||
                 other.errorMessage == errorMessage) &&
+            (identical(other.successMessage, successMessage) ||
+                other.successMessage == successMessage) &&
             const DeepCollectionEquality()
                 .equals(other.hasChangeSomeField, hasChangeSomeField));
   }
@@ -426,16 +469,18 @@ class _ProductUpdateState implements ProductUpdateState {
       runtimeType,
       isLoading,
       addingPhoto,
+      deletingProduct,
       isSuccess,
       currentProduct,
       updateValue,
       errorValidation,
       errorMessage,
+      successMessage,
       const DeepCollectionEquality().hash(hasChangeSomeField));
 
   @override
   String toString() {
-    return 'ProductUpdateState(isLoading: $isLoading, addingPhoto: $addingPhoto, isSuccess: $isSuccess, currentProduct: $currentProduct, updateValue: $updateValue, errorValidation: $errorValidation, errorMessage: $errorMessage, hasChangeSomeField: $hasChangeSomeField)';
+    return 'ProductUpdateState(isLoading: $isLoading, addingPhoto: $addingPhoto, deletingProduct: $deletingProduct, isSuccess: $isSuccess, currentProduct: $currentProduct, updateValue: $updateValue, errorValidation: $errorValidation, errorMessage: $errorMessage, successMessage: $successMessage, hasChangeSomeField: $hasChangeSomeField)';
   }
 }
 
@@ -450,11 +495,13 @@ abstract mixin class _$ProductUpdateStateCopyWith<$Res>
   $Res call(
       {bool isLoading,
       bool addingPhoto,
+      bool deletingProduct,
       bool isSuccess,
       Product? currentProduct,
       String? updateValue,
       String? errorValidation,
       String? errorMessage,
+      String? successMessage,
       dynamic hasChangeSomeField});
 }
 
@@ -473,11 +520,13 @@ class __$ProductUpdateStateCopyWithImpl<$Res>
   $Res call({
     Object? isLoading = null,
     Object? addingPhoto = null,
+    Object? deletingProduct = null,
     Object? isSuccess = null,
     Object? currentProduct = freezed,
     Object? updateValue = freezed,
     Object? errorValidation = freezed,
     Object? errorMessage = freezed,
+    Object? successMessage = freezed,
     Object? hasChangeSomeField = freezed,
   }) {
     return _then(_ProductUpdateState(
@@ -488,6 +537,10 @@ class __$ProductUpdateStateCopyWithImpl<$Res>
       addingPhoto: null == addingPhoto
           ? _self.addingPhoto
           : addingPhoto // ignore: cast_nullable_to_non_nullable
+              as bool,
+      deletingProduct: null == deletingProduct
+          ? _self.deletingProduct
+          : deletingProduct // ignore: cast_nullable_to_non_nullable
               as bool,
       isSuccess: null == isSuccess
           ? _self.isSuccess
@@ -508,6 +561,10 @@ class __$ProductUpdateStateCopyWithImpl<$Res>
       errorMessage: freezed == errorMessage
           ? _self.errorMessage
           : errorMessage // ignore: cast_nullable_to_non_nullable
+              as String?,
+      successMessage: freezed == successMessage
+          ? _self.successMessage
+          : successMessage // ignore: cast_nullable_to_non_nullable
               as String?,
       hasChangeSomeField: freezed == hasChangeSomeField
           ? _self.hasChangeSomeField

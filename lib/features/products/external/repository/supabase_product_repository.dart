@@ -2,6 +2,7 @@ import 'package:deehelp/features/products/domain/entities/product_id.dart';
 import 'package:deehelp/features/products/domain/exceptions/add_product_failure.dart';
 import 'package:deehelp/features/products/domain/entities/image_media.dart';
 import 'package:deehelp/features/products/domain/entities/product.dart';
+import 'package:deehelp/features/products/domain/exceptions/delete_product_failure.dart';
 import 'package:deehelp/features/products/domain/product_repository.dart';
 import 'package:deehelp/features/products/external/repository/image_media_model.dart';
 import 'package:deehelp/features/products/external/repository/product_model.dart';
@@ -32,7 +33,7 @@ class SupabaseProductRepository implements ProductRepository {
   }
 
   @override
-  Future<List<Product>> getByUser(String userId) async {
+  Future<List<Product>> getAll(String userId) async {
     final data =
         await _supabaseClient.from(product).select("*,product_images (*)").eq(
               "user_id",
@@ -44,9 +45,16 @@ class SupabaseProductRepository implements ProductRepository {
   }
 
   @override
-  Future<void> delete(String itemId, String userId) {
-    // TODO: implement delete
-    throw UnimplementedError();
+  Future<void> delete(ProductId id) async {
+    final response = await _supabaseClient.rpc(
+      "remove_product_with_images_transaction",
+      params: {
+        'p_product_id': id.value,
+      },
+    );
+    if (!response["status"]) {
+      throw const DeleteProductFailure();
+    }
   }
 
   @override
