@@ -61,7 +61,7 @@ class ProductForm extends ConsumerWidget {
               text: "Confirmar alterações",
               isLoading: state.isLoading,
               isEnabled: state.hasChangeSomeField,
-              press: () => viewModel.update(),
+              press: () => viewModel.updatreProduct(),
             ),
           ),
           UIElevatedButton(

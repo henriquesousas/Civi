@@ -1,18 +1,29 @@
+// ignore_for_file: use_build_context_synchronously
+
 import 'package:deehelp/core/extensions/dialog_extension.dart';
+import 'package:deehelp/core/extensions/result_extension.dart';
 import 'package:deehelp/core/ui/widgets/card/ui_custom_app_card.dart';
+import 'package:deehelp/features/products/presentation/providers/image_picker_provider.dart';
 import 'package:deehelp/features/products/presentation/providers/product_viewmodel_provider.dart';
 import 'package:deehelp/features/products/presentation/views/add/widget/grid_add_photo.dart';
 import 'package:deehelp/features/products/presentation/views/update/widgets/item_detail_tile.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-class PhotoSection extends ConsumerWidget {
+class PhotoSection extends ConsumerStatefulWidget {
   const PhotoSection({super.key});
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
+  ConsumerState<PhotoSection> createState() => _PhotoSectionState();
+}
+
+class _PhotoSectionState extends ConsumerState<PhotoSection> {
+  @override
+  Widget build(BuildContext context) {
+    final imagePicker = ref.watch(imagePickerProvider);
     final viewModel = ref.watch(updateProductViewModelProvider.notifier);
     final state = ref.watch(updateProductViewModelProvider);
+
     return UICustomAppCard(
       padding: EdgeInsets.zero,
       child: Column(
@@ -30,7 +41,20 @@ class PhotoSection extends ConsumerWidget {
           Padding(
             padding: const EdgeInsets.all(8.0),
             child: GridAddPhoto(
+              isLoading: state.addingPhoto,
               photos: state.currentProduct!.images,
+              onAdd: () async {
+                final imageMedia = await imagePicker.pickImageFromGallery();
+                if (imageMedia.isFailure) {
+                  context.showSnackBar(
+                    imageMedia.error.toString(),
+                    type: DialogType.error,
+                  );
+                  return;
+                }
+                if (!mounted) return;
+                viewModel.addPhoto(imageMedia.data!);
+              },
               onRemove: (index) async {
                 final yes = await context.showQuestionDialog(
                   "Remover",
@@ -38,7 +62,7 @@ class PhotoSection extends ConsumerWidget {
                 );
 
                 if (yes) {
-                  viewModel.removePhoto(index);
+                  viewModel.deletePhoto(index);
                 }
               },
             ),

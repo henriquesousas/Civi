@@ -15,6 +15,7 @@ T _$identity<T>(T value) => value;
 /// @nodoc
 mixin _$ProductUpdateState {
   bool get isLoading;
+  bool get addingPhoto;
   bool get isSuccess;
   Product? get currentProduct;
   String? get updateValue;
@@ -37,6 +38,8 @@ mixin _$ProductUpdateState {
             other is ProductUpdateState &&
             (identical(other.isLoading, isLoading) ||
                 other.isLoading == isLoading) &&
+            (identical(other.addingPhoto, addingPhoto) ||
+                other.addingPhoto == addingPhoto) &&
             (identical(other.isSuccess, isSuccess) ||
                 other.isSuccess == isSuccess) &&
             (identical(other.currentProduct, currentProduct) ||
@@ -55,6 +58,7 @@ mixin _$ProductUpdateState {
   int get hashCode => Object.hash(
       runtimeType,
       isLoading,
+      addingPhoto,
       isSuccess,
       currentProduct,
       updateValue,
@@ -64,7 +68,7 @@ mixin _$ProductUpdateState {
 
   @override
   String toString() {
-    return 'ProductUpdateState(isLoading: $isLoading, isSuccess: $isSuccess, currentProduct: $currentProduct, updateValue: $updateValue, errorValidation: $errorValidation, errorMessage: $errorMessage, hasChangeSomeField: $hasChangeSomeField)';
+    return 'ProductUpdateState(isLoading: $isLoading, addingPhoto: $addingPhoto, isSuccess: $isSuccess, currentProduct: $currentProduct, updateValue: $updateValue, errorValidation: $errorValidation, errorMessage: $errorMessage, hasChangeSomeField: $hasChangeSomeField)';
   }
 }
 
@@ -76,6 +80,7 @@ abstract mixin class $ProductUpdateStateCopyWith<$Res> {
   @useResult
   $Res call(
       {bool isLoading,
+      bool addingPhoto,
       bool isSuccess,
       Product? currentProduct,
       String? updateValue,
@@ -98,6 +103,7 @@ class _$ProductUpdateStateCopyWithImpl<$Res>
   @override
   $Res call({
     Object? isLoading = null,
+    Object? addingPhoto = null,
     Object? isSuccess = null,
     Object? currentProduct = freezed,
     Object? updateValue = freezed,
@@ -109,6 +115,10 @@ class _$ProductUpdateStateCopyWithImpl<$Res>
       isLoading: null == isLoading
           ? _self.isLoading
           : isLoading // ignore: cast_nullable_to_non_nullable
+              as bool,
+      addingPhoto: null == addingPhoto
+          ? _self.addingPhoto
+          : addingPhoto // ignore: cast_nullable_to_non_nullable
               as bool,
       isSuccess: null == isSuccess
           ? _self.isSuccess
@@ -233,6 +243,7 @@ extension ProductUpdateStatePatterns on ProductUpdateState {
   TResult maybeWhen<TResult extends Object?>(
     TResult Function(
             bool isLoading,
+            bool addingPhoto,
             bool isSuccess,
             Product? currentProduct,
             String? updateValue,
@@ -247,6 +258,7 @@ extension ProductUpdateStatePatterns on ProductUpdateState {
       case _ProductUpdateState() when $default != null:
         return $default(
             _that.isLoading,
+            _that.addingPhoto,
             _that.isSuccess,
             _that.currentProduct,
             _that.updateValue,
@@ -275,6 +287,7 @@ extension ProductUpdateStatePatterns on ProductUpdateState {
   TResult when<TResult extends Object?>(
     TResult Function(
             bool isLoading,
+            bool addingPhoto,
             bool isSuccess,
             Product? currentProduct,
             String? updateValue,
@@ -288,6 +301,7 @@ extension ProductUpdateStatePatterns on ProductUpdateState {
       case _ProductUpdateState():
         return $default(
             _that.isLoading,
+            _that.addingPhoto,
             _that.isSuccess,
             _that.currentProduct,
             _that.updateValue,
@@ -315,6 +329,7 @@ extension ProductUpdateStatePatterns on ProductUpdateState {
   TResult? whenOrNull<TResult extends Object?>(
     TResult? Function(
             bool isLoading,
+            bool addingPhoto,
             bool isSuccess,
             Product? currentProduct,
             String? updateValue,
@@ -328,6 +343,7 @@ extension ProductUpdateStatePatterns on ProductUpdateState {
       case _ProductUpdateState() when $default != null:
         return $default(
             _that.isLoading,
+            _that.addingPhoto,
             _that.isSuccess,
             _that.currentProduct,
             _that.updateValue,
@@ -345,6 +361,7 @@ extension ProductUpdateStatePatterns on ProductUpdateState {
 class _ProductUpdateState implements ProductUpdateState {
   const _ProductUpdateState(
       {this.isLoading = false,
+      this.addingPhoto = false,
       this.isSuccess = false,
       this.currentProduct,
       this.updateValue,
@@ -355,6 +372,9 @@ class _ProductUpdateState implements ProductUpdateState {
   @override
   @JsonKey()
   final bool isLoading;
+  @override
+  @JsonKey()
+  final bool addingPhoto;
   @override
   @JsonKey()
   final bool isSuccess;
@@ -385,6 +405,8 @@ class _ProductUpdateState implements ProductUpdateState {
             other is _ProductUpdateState &&
             (identical(other.isLoading, isLoading) ||
                 other.isLoading == isLoading) &&
+            (identical(other.addingPhoto, addingPhoto) ||
+                other.addingPhoto == addingPhoto) &&
             (identical(other.isSuccess, isSuccess) ||
                 other.isSuccess == isSuccess) &&
             (identical(other.currentProduct, currentProduct) ||
@@ -403,6 +425,7 @@ class _ProductUpdateState implements ProductUpdateState {
   int get hashCode => Object.hash(
       runtimeType,
       isLoading,
+      addingPhoto,
       isSuccess,
       currentProduct,
       updateValue,
@@ -412,7 +435,7 @@ class _ProductUpdateState implements ProductUpdateState {
 
   @override
   String toString() {
-    return 'ProductUpdateState(isLoading: $isLoading, isSuccess: $isSuccess, currentProduct: $currentProduct, updateValue: $updateValue, errorValidation: $errorValidation, errorMessage: $errorMessage, hasChangeSomeField: $hasChangeSomeField)';
+    return 'ProductUpdateState(isLoading: $isLoading, addingPhoto: $addingPhoto, isSuccess: $isSuccess, currentProduct: $currentProduct, updateValue: $updateValue, errorValidation: $errorValidation, errorMessage: $errorMessage, hasChangeSomeField: $hasChangeSomeField)';
   }
 }
 
@@ -426,6 +449,7 @@ abstract mixin class _$ProductUpdateStateCopyWith<$Res>
   @useResult
   $Res call(
       {bool isLoading,
+      bool addingPhoto,
       bool isSuccess,
       Product? currentProduct,
       String? updateValue,
@@ -448,6 +472,7 @@ class __$ProductUpdateStateCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   $Res call({
     Object? isLoading = null,
+    Object? addingPhoto = null,
     Object? isSuccess = null,
     Object? currentProduct = freezed,
     Object? updateValue = freezed,
@@ -459,6 +484,10 @@ class __$ProductUpdateStateCopyWithImpl<$Res>
       isLoading: null == isLoading
           ? _self.isLoading
           : isLoading // ignore: cast_nullable_to_non_nullable
+              as bool,
+      addingPhoto: null == addingPhoto
+          ? _self.addingPhoto
+          : addingPhoto // ignore: cast_nullable_to_non_nullable
               as bool,
       isSuccess: null == isSuccess
           ? _self.isSuccess

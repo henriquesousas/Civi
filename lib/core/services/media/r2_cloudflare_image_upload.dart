@@ -3,6 +3,7 @@ import 'package:deehelp/core/services/media/interfaces/media_storage.dart';
 import 'package:deehelp/features/products/domain/entities/image_media.dart';
 import 'package:logging/logging.dart';
 
+//Retorna a nova da cloudflare
 class R2CloudFlareImageUpload implements ImageUpload {
   static final _logger = Logger("R2CloudFlareMediaStorage");
   static final statusCode = 200;
@@ -29,7 +30,7 @@ class R2CloudFlareImageUpload implements ImageUpload {
 
     if (status.status == statusCode) {
       _logger.info('Upload da imagem realizado com sucesso :$baseFolder');
-      return "$cdnUrl/$baseFolder";
+      return "$cdnUrl/$baseFolder/${image.imageName}";
     }
     throw Exception(status.message);
   }

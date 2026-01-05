@@ -6,10 +6,10 @@ enum MediaSource { api, camera, gallery, assets }
 
 class ImageMedia extends ValueObject<String> {
   final File file;
-  final MediaSource source;
   final int size;
   final String mimeType;
   final String imageName;
+  final MediaSource source;
 
   ImageMedia({
     required this.file,
@@ -26,11 +26,12 @@ class ImageMedia extends ValueObject<String> {
     required String imageName,
   }) {
     return ImageMedia(
-        file: File(url),
-        source: MediaSource.gallery,
-        size: size,
-        mimeType: mimeType,
-        imageName: imageName);
+      file: File(url),
+      source: MediaSource.gallery,
+      size: size,
+      mimeType: mimeType,
+      imageName: imageName,
+    );
   }
 
   factory ImageMedia.fromWeb({
@@ -65,7 +66,7 @@ class ImageMedia extends ValueObject<String> {
     return file.path;
   }
 
-  String get fullPath {
-    return "${file.path}/$imageName";
-  }
+  // String get fullPath {
+  //   return "${file.path}/$imageName";
+  // }
 }

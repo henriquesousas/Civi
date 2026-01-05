@@ -1,4 +1,4 @@
-import '../../entities/image_media.dart';
+import '../../../entities/image_media.dart';
 
 class AddProductDto {
   final String userId;

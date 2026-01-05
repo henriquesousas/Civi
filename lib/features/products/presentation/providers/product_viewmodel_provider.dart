@@ -32,9 +32,12 @@ final addProductViewModelProvider =
 final updateProductViewModelProvider = StateNotifierProvider.autoDispose<
     UpdateProductViewmodel, ProductUpdateState>(
   (ref) {
-    final usecase = ref.watch(updateProductUsecaseProvider);
+    final updateProductUsecase = ref.watch(updateProductUsecaseProvider);
+    final deleteImageUseCase = ref.watch(deleteImageUsecaseProvider);
+    final addImageUseCase = ref.watch(addImageUsecaseProvider);
     return UpdateProductViewmodel(
-      updateProductUseCase: usecase,
-    );
+        updateProductUseCase: updateProductUsecase,
+        deleteImageUsecase: deleteImageUseCase,
+        addImageUsecase: addImageUseCase);
   },
 );

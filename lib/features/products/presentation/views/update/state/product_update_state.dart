@@ -7,6 +7,7 @@ part 'product_update_state.freezed.dart';
 abstract class ProductUpdateState with _$ProductUpdateState {
   const factory ProductUpdateState({
     @Default(false) bool isLoading,
+    @Default(false) bool addingPhoto,
     @Default(false) bool isSuccess,
     Product? currentProduct,
     String? updateValue,

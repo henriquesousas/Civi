@@ -6,19 +6,20 @@ class ImageMediaModel {
       url: map["url"],
       size: map["size"],
       mimeType: map["mime_type"],
-      imageName: '',
+      imageName: map["image_name"],
     );
   }
 
-  static List<Map<String, dynamic>> toMap(List<ImageMedia> images) {
-    return images
-        .map(
-          (e) => {
-            "url": e.fullPath,
-            "size": e.size,
-            "mime_type": e.mimeType,
-          },
-        )
-        .toList();
+  static List<Map<String, dynamic>> toListMap(List<ImageMedia> images) {
+    return images.map((e) => toMap(e)).toList();
+  }
+
+  static Map<String, dynamic> toMap(ImageMedia image) {
+    return {
+      "url": image.path,
+      "size": image.size,
+      "mime_type": image.mimeType,
+      "image_name": image.imageName
+    };
   }
 }

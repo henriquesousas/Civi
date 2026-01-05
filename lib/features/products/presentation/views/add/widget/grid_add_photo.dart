@@ -14,6 +14,7 @@ class GridAddPhoto extends StatelessWidget {
   final double width;
   final double height;
   final int maxPhotos;
+  final bool isLoading;
 
   const GridAddPhoto({
     Key? key,
@@ -23,6 +24,7 @@ class GridAddPhoto extends StatelessWidget {
     this.width = double.infinity,
     this.height = double.infinity,
     this.maxPhotos = 2,
+    this.isLoading = false,
   }) : super(key: key);
 
   @override
@@ -112,29 +114,42 @@ class GridAddPhoto extends StatelessWidget {
           borderRadius: BorderRadius.circular(8),
           color: Theme.of(context).primaryColor.withValues(alpha: 0.1),
         ),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Icon(
-              Icons.camera_alt,
-              color: Theme.of(context).primaryColor,
-              size: Dimens.size22.w,
-            ),
-            const SizedBox(height: 4),
-            Text(
-              'Adicionar',
-              style: context.appTextStyles.bodyTextStyle1.copyWith(
-                color: Theme.of(context).primaryColor,
+        child: isLoading
+            ? Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  SizedBox(
+                    width: Dimens.size16.w,
+                    height: Dimens.size16.h,
+                    child: CircularProgressIndicator(
+                      color: AppColors.primaryColor.withValues(alpha: 1),
+                    ),
+                  ),
+                ],
+              )
+            : Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Icon(
+                    Icons.camera_alt,
+                    color: Theme.of(context).primaryColor,
+                    size: Dimens.size22.w,
+                  ),
+                  const SizedBox(height: 4),
+                  Text(
+                    'Adicionar',
+                    style: context.appTextStyles.bodyTextStyle1.copyWith(
+                      color: Theme.of(context).primaryColor,
+                    ),
+                  ),
+                  Text(
+                    '${photos.length}/$maxPhotos',
+                    style: context.appTextStyles.caption2Style.copyWith(
+                      color: Theme.of(context).primaryColor,
+                    ),
+                  ),
+                ],
               ),
-            ),
-            Text(
-              '${photos.length}/$maxPhotos',
-              style: context.appTextStyles.caption2Style.copyWith(
-                color: Theme.of(context).primaryColor,
-              ),
-            ),
-          ],
-        ),
       ),
     );
   }

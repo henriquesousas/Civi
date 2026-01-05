@@ -1,3 +1,6 @@
+import 'package:deehelp/features/products/domain/entities/image_media.dart';
+import 'package:deehelp/features/products/domain/entities/product_id.dart';
+
 import 'entities/product.dart';
 
 abstract class ProductRepository {
@@ -5,4 +8,7 @@ abstract class ProductRepository {
   Future<void> update(Product product);
   Future<void> delete(String itemId, String userId);
   Future<List<Product>> getByUser(String userId);
+  //TODO: Colocar em um repositorio separado
+  Future<void> saveImage(ProductId productId, ImageMedia image);
+  Future<void> deleteImage(ImageMedia image);
 }

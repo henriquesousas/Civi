@@ -2,11 +2,11 @@ import 'package:dartz/dartz.dart';
 import 'package:deehelp/core/base/use_case.dart';
 import 'package:deehelp/core/services/media/interfaces/media_storage.dart';
 import 'package:deehelp/core/utils/result.dart';
-import 'package:deehelp/features/products/domain/add_product_failure.dart';
+import 'package:deehelp/features/products/domain/exceptions/add_product_failure.dart';
 import 'package:deehelp/features/products/domain/entities/image_media.dart';
 import 'package:deehelp/features/products/domain/entities/product.dart';
 import 'package:deehelp/features/products/domain/product_repository.dart';
-import 'package:deehelp/features/products/domain/usecases/add/add_product_dto.dart';
+import 'package:deehelp/features/products/domain/usecases/add/dtos/add_product_dto.dart';
 import 'package:logging/logging.dart';
 
 class AddProductUseCase extends UseCase<AddProductDto, Unit> {
