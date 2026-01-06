@@ -1,4 +1,4 @@
-import 'package:deehelp/features/incident/domain/incident.dart';
+import 'package:deehelp/features/incident/domain/entity/incident.dart';
 import 'package:deehelp/features/map/widgets/map_custom_marker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_map/flutter_map.dart';

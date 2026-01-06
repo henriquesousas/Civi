@@ -4,6 +4,11 @@ import 'package:deehelp/core/ui/theme/app_text_styles.dart';
 import 'package:deehelp/core/ui/widgets/button/ui_elevated_button.dart';
 import 'package:deehelp/core/ui/widgets/button/ui_hold_confirm_button.dart';
 import 'package:deehelp/core/ui/widgets/card/ui_custom_scaffold.dart';
+import 'package:deehelp/features/auth/presentation/session/session_provider.dart';
+import 'package:deehelp/features/incident/domain/entity/type_alert.dart';
+import 'package:deehelp/features/incident/presentation/add/alert_error_screen.dart';
+import 'package:deehelp/features/incident/presentation/add/alert_sender.dart';
+import 'package:deehelp/features/incident/presentation/add/sending_alert_screen.dart';
 import 'package:deehelp/features/incident/presentation/add/widget/card_select_image.dart';
 import 'package:deehelp/features/incident/presentation/add/widget/card_type_incident.dart';
 import 'package:deehelp/features/incident/presentation/providers/incident_viewmodel_providers.dart';
@@ -13,11 +18,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
-enum TypeAlert {
-  immediately,
-  detailed,
-  none,
-}
+// enum TypeAlert {
+//   immediately,
+//   detailed,
+//   none,
+// }
 
 class AddIncidentPage extends ConsumerStatefulWidget {
   const AddIncidentPage({super.key});
@@ -28,9 +33,6 @@ class AddIncidentPage extends ConsumerStatefulWidget {
 
 class _AddIncidentPageState extends ConsumerState<AddIncidentPage>
     with SingleTickerProviderStateMixin {
-  bool _isExpanded = false;
-  bool _isProductSelected = false;
-  TypeAlert _typeAlert = TypeAlert.none;
   late AnimationController _controller;
 
   @override
@@ -48,20 +50,12 @@ class _AddIncidentPageState extends ConsumerState<AddIncidentPage>
     super.dispose();
   }
 
-  void _changeAlert(TypeAlert type) {
-    if (!_isProductSelected) {}
-    setState(() {
-      if (_typeAlert == type) return;
-      _typeAlert = type;
-
-      _isExpanded = _typeAlert == TypeAlert.detailed;
-    });
-  }
-
   @override
   Widget build(BuildContext context) {
     final state = ref.watch(addIncidentViewmodelProvider);
     final viewModel = ref.watch(addIncidentViewmodelProvider.notifier);
+    final session = ref.watch(userSessionProvider);
+
     return UICustomScaffold(
       pageTitle: "Registrar incidente",
       onBackButtonTap: () => context.pop(),
@@ -96,9 +90,44 @@ class _AddIncidentPageState extends ConsumerState<AddIncidentPage>
                   textColor: AppColors.whiteColor,
                   backgroundColor: AppColors.primaryColorDark,
                   contentPadding: const EdgeInsets.all(22),
-                  onProgressCompleted: () async {},
+                  onProgressCompleted: () async {
+                    if (session?.id != null) {
+                      // viewModel.save(session!.id);
+                      // await AlertSender.sendAlertAndShowSuccess(
+                      //   context: context,
+                      //   vehicleType: "Carro",
+                      //   location: "Rua teste",
+                      //   onSendComplete: () {
+                      //     // Callback opcional após sucesso
+                      //     print('Alerta enviado com sucesso!');
+                      //   },
+                      // );
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (_) => SendingAlertScreen(
+                            vehicleType: "Carro",
+                            location: 'Local não informado',
+                          ),
+                        ),
+                      );
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (_) => AlertErrorScreen(
+                            onRetry: () {
+                              Navigator.pop(context);
+                              // _submitIncident(); // Tenta novamente
+                            },
+                          ),
+                        ),
+                      );
+                    }
+                  },
                   onApiCall: () async {},
-                  onProgressChange: (v) {},
+                  onProgressChange: (v) {
+                    debugPrint(v.toString());
+                  },
                 ),
               ),
             ),
@@ -112,7 +141,7 @@ class _AddIncidentPageState extends ConsumerState<AddIncidentPage>
               subTitle:
                   "Registre o roubo do seu veículo com informações completas, como características do veículo, local e horário do ocorrido, ajudando na identificação e no acompanhamento do caso.",
               child: InkWell(
-                onTap: () => _changeAlert(TypeAlert.detailed),
+                onTap: () {},
                 child: AnimatedContainer(
                   duration: const Duration(milliseconds: 300),
                   curve: Curves.easeInOut,

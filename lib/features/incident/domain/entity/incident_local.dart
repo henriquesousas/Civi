@@ -1,14 +1,14 @@
 class IncidentLocal {
   final double? latitue;
   final double? longitude;
-  final String address;
-  final String neighborhood; //Bairro
   final String city;
+  final String state;
+  final String address;
 
   IncidentLocal({
     required this.address,
-    required this.neighborhood,
     required this.city,
+    required this.state,
     this.latitue,
     this.longitude,
   });

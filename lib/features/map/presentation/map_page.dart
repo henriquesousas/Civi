@@ -8,7 +8,7 @@ import 'package:deehelp/core/ui/widgets/button/ui_elevated_button.dart';
 import 'package:deehelp/core/ui/widgets/card/ui_custom_app_card.dart';
 import 'package:deehelp/core/ui/widgets/divider/ui_divider.dart';
 import 'package:deehelp/core/ui/widgets/image/ui_my_network_image_widget.dart';
-import 'package:deehelp/features/incident/domain/incident.dart';
+import 'package:deehelp/features/incident/domain/entity/incident.dart';
 import 'package:deehelp/features/map/presentation/data.dart';
 import 'package:deehelp/features/map/presentation/widget/incident_modal.dart';
 import 'package:deehelp/features/map/widgets/map_bottom_content.dart';

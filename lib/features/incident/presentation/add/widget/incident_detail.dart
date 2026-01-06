@@ -1,25 +1,24 @@
 import 'package:deehelp/core/extensions/date_extension.dart';
 import 'package:deehelp/core/ui/theme/app_text_styles.dart';
-import 'package:deehelp/features/incident/domain/incident_type.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 
-import '../../../../core/res/resources.dart';
-import '../../../../core/ui/theme/app_colors.dart';
-import '../../../../core/ui/theme/dimens.dart';
+import '../../../../../core/res/resources.dart';
+import '../../../../../core/ui/theme/app_colors.dart';
+import '../../../../../core/ui/theme/dimens.dart';
 
 class IncidentDetail extends StatelessWidget {
   final String plateNumber;
   final DateTime occurredOn;
   final DateTime createdAt;
-  final IncidentType incidentType;
+  // final IncidentType incidentType;
   const IncidentDetail({
     super.key,
     required this.plateNumber,
     required this.occurredOn,
     required this.createdAt,
-    required this.incidentType,
+    // required this.incidentType,
   });
 
   @override

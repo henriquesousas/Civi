@@ -1,4 +1,0 @@
-enum IncidentType {
-  theft,
-  assault,
-}

@@ -1,3 +1,4 @@
+import 'package:deehelp/features/incident/domain/entity/type_alert.dart';
 import 'package:deehelp/features/incident/presentation/add/add_incident_page.dart';
 import 'package:deehelp/features/products/domain/entities/product.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';

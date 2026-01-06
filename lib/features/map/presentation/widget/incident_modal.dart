@@ -6,10 +6,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../../../core/ui/widgets/app_bar/ui_app_bar.dart';
-import '../../../incident/domain/incident_type.dart';
-import '../../../incident/presentation/widget/incident_detail.dart';
-import '../../../incident/presentation/widget/incident_header.dart';
-import '../../../incident/presentation/widget/incident_info.dart';
+import '../../../incident/presentation/add/widget/incident_detail.dart';
+import '../../../incident/presentation/add/widget/incident_header.dart';
+import '../../../incident/presentation/add/widget/incident_info.dart';
 import '../data.dart';
 
 class IncidentModal extends StatelessWidget {
@@ -47,7 +46,6 @@ class IncidentModal extends StatelessWidget {
                   plateNumber: "DND0172",
                   occurredOn: DateTime.now(),
                   createdAt: DateTime.now(),
-                  incidentType: IncidentType.theft,
                 ),
                 const IncidentModalOwnSection(),
               ],

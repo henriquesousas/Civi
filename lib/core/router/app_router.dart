@@ -10,5 +10,7 @@ class AppRouter {
   static const addProductSuccess = "/add-product-success";
   static const profile = "/profile";
   static const addIncident = "/add-incident";
+  static const addIncidentSuccess = "/add-incident-success";
+  static const sendIncident = "/send-incident";
   static const addNickname = "/add-nickname";
 }

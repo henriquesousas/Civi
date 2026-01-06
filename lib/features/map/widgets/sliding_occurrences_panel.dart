@@ -3,7 +3,7 @@ import 'package:deehelp/core/ui/widgets/icon/ui_icon.dart';
 import 'package:deehelp/core/ui/theme/app_text_styles.dart';
 import 'package:deehelp/core/ui/widgets/divider/ui_divider.dart';
 import 'package:deehelp/core/ui/widgets/textfield/ui_text_field_rounded.dart';
-import 'package:deehelp/features/incident/domain/incident.dart';
+import 'package:deehelp/features/incident/domain/entity/incident.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -132,7 +132,7 @@ class SlidingOccurrencesPanel extends StatelessWidget {
                 ),
                 subtitle: Text(
                   incident.local != null
-                      ? "${incident.local?.neighborhood},${incident.local?.city}, ${incident.local?.address}"
+                      ? "${incident.local?.address},${incident.local?.city}, ${incident.local?.address}"
                       : '',
                   style: context.appTextStyles.bodyTextStyle2.copyWith(),
                 ),
