@@ -3,7 +3,7 @@
 import 'package:deehelp/core/extensions/dialog_extension.dart';
 import 'package:deehelp/core/extensions/result_extension.dart';
 import 'package:deehelp/core/ui/widgets/card/ui_custom_app_card.dart';
-import 'package:deehelp/features/products/presentation/providers/image_picker_provider.dart';
+import 'package:deehelp/core/providers/image_picker_provider.dart';
 import 'package:deehelp/features/products/presentation/providers/product_viewmodel_provider.dart';
 import 'package:deehelp/features/products/presentation/views/add/widget/grid_add_photo.dart';
 import 'package:deehelp/features/products/presentation/views/update/widgets/item_detail_tile.dart';

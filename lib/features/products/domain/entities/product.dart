@@ -1,3 +1,5 @@
+// ignore_for_file: must_be_immutable
+
 import 'package:deehelp/core/base/entity.dart';
 import 'package:deehelp/features/products/domain/entities/product_id.dart';
 
@@ -8,6 +10,7 @@ import 'image_media.dart';
 
 //TODO: Refactor
 class Product extends Entity<ProductId> {
+  @override
   final ProductId id;
   String name;
   final String code;

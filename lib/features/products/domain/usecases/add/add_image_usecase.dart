@@ -1,5 +1,5 @@
 import 'package:deehelp/core/base/use_case.dart';
-import 'package:deehelp/core/services/media/interfaces/media_storage.dart';
+import 'package:deehelp/core/services/media/interfaces/image_storage.dart';
 import 'package:deehelp/core/utils/result.dart';
 import 'package:deehelp/features/products/domain/entities/image_media.dart';
 import 'package:deehelp/features/products/domain/exceptions/upload_image_failure.dart';
@@ -8,18 +8,18 @@ import 'package:deehelp/features/products/domain/usecases/add/dtos/add_image_dto
 
 class AddImageUsecase extends UseCase<AddImageDto, List<ImageMedia>> {
   final ProductRepository _repository;
-  final ImageUpload _imageUpload;
+  final ImageStorage _imageStorage;
 
   AddImageUsecase({
-    required ImageUpload imageUpload,
+    required ImageStorage imageStorage,
     required ProductRepository repository,
-  })  : _imageUpload = imageUpload,
+  })  : _imageStorage = imageStorage,
         _repository = repository;
 
   @override
   Future<Result<List<ImageMedia>>> execute(AddImageDto dto) async {
     try {
-      final newUrl = await _imageUpload.upload(dto.image);
+      final newUrl = await _imageStorage.upload(dto.image);
       final newImageMedia = ImageMedia.fromWeb(
         url: newUrl,
         size: dto.image.size,
@@ -34,7 +34,7 @@ class AddImageUsecase extends UseCase<AddImageDto, List<ImageMedia>> {
 
       return Result.success(currentImages);
     } catch (e) {
-      await _imageUpload.delete(dto.image.imageName);
+      await _imageStorage.delete(dto.image.imageName);
       return Result.failure(const UploadImageFailure());
     }
   }

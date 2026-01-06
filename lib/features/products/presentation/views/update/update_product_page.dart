@@ -106,9 +106,13 @@ class _UpdateProductPage extends BasePageState<UpdateProductPage> {
             child: UIElevatedButton(
               text: 'Confirmar',
               isLoading: ref.watch(updateProductViewModelProvider).isLoading,
-              press: () => ref
-                  .watch(updateProductViewModelProvider.notifier)
-                  .updatreProduct(),
+              press: () {
+                if (!state.hasChangeSomeField) {
+                  context.pop();
+                  return;
+                }
+                viewModel.updatreProduct();
+              },
             ),
           ),
         ],

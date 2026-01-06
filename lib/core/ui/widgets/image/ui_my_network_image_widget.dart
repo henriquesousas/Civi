@@ -1,6 +1,7 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:deehelp/core/ui/widgets/avatar/random_color_avatar.dart';
 import 'package:deehelp/core/ui/theme/app_colors.dart';
+import 'package:deehelp/core/ui/widgets/shimmer_animation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -75,29 +76,38 @@ class UIMyNetworkImageWidget extends StatelessWidget {
             ),
           ),
         ),
-        placeholder: (context, url) => _buildPlaceholderWidget(),
+        placeholder: (context, url) =>
+            ShimmerAnimation(enabled: true, child: _buildPlaceholderWidget()),
         errorWidget: (context, url, error) => _buildErrorWidget(),
       ),
     );
   }
 
   Widget _buildPlaceholderWidget() {
-    return SizedBox(
+    return Container(
       height: height,
       width: width,
-      child: ClipRRect(
+      decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(radius),
-        child: Center(
-          child: SizedBox(
-            width: 16,
-            height: 16,
-            child: CircularProgressIndicator(
-              color: AppColors.primaryColor.withValues(alpha: 1),
-            ),
-          ),
-        ),
+        color: Colors.grey,
       ),
     );
+    // return SizedBox(
+    //   height: height,
+    //   width: width,
+    //   child: ClipRRect(
+    //     borderRadius: BorderRadius.circular(radius),
+    //     child: Center(
+    //       child: SizedBox(
+    //         width: Dimens.size16.w,
+    //         height: Dimens.size16.h,
+    //         child: CircularProgressIndicator(
+    //           color: AppColors.primaryColor.withValues(alpha: 1),
+    //         ),
+    //       ),
+    //     ),
+    //   ),
+    // );
   }
 
   Widget _buildErrorWidget() {

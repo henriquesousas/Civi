@@ -73,25 +73,6 @@ class StepSelectProductType extends ConsumerWidget {
                   ),
                   SizedBox(height: Dimens.size20.w),
                   _buildTextInfo(context),
-                  // UIElevatedButton(
-                  //   text: 'Continuar',
-                  //   press: onContinue,
-                  //   isEnabled: state.hasProductTypeSelected,
-                  // ),
-                  // Container(
-                  //   padding: const EdgeInsets.all(10),
-                  //   decoration: BoxDecoration(
-                  //     color: AppColors.lightGreyColor30,
-                  //     borderRadius: BorderRadius.circular(8),
-                  //   ),
-                  //   child: Text(
-                  //     "Pré-cadastre seu veículo para facilitar e acelerar o registro de ocorrências. Em caso de roubo ou furto, você poderá fazer a denúncia rapidamente, usando os dados já salvos, sem perder tempo preenchendo formulários extensos.",
-                  //     textAlign: TextAlign.center,
-                  //     style: context.appTextStyles.sectionSubTitle1.copyWith(
-                  //       color: AppColors.darkGreyColor,
-                  //     ),
-                  //   ),
-                  // ),
                 ],
               ),
             ),

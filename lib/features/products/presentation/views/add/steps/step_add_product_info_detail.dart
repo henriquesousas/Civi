@@ -37,6 +37,7 @@ class _StepAddProductInfoDetailState
     handleModal<String>(
       context: context,
       builder: (onComplete) => ModalSelectBrand(
+        title: "Selecione a marca do veículo",
         values: kBrands,
         onChange: (brand) => onComplete(brand),
       ),

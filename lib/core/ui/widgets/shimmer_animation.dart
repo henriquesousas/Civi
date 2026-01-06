@@ -5,8 +5,11 @@ import 'package:skeletonizer/skeletonizer.dart';
 class ShimmerAnimation extends StatelessWidget {
   final Widget child;
   final bool enabled;
-  const ShimmerAnimation(
-      {super.key, required this.child, required this.enabled});
+  const ShimmerAnimation({
+    super.key,
+    required this.child,
+    required this.enabled,
+  });
 
   @override
   Widget build(BuildContext context) {

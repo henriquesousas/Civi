@@ -1,6 +1,6 @@
 import 'package:dartz/dartz.dart';
 import 'package:deehelp/core/base/use_case.dart';
-import 'package:deehelp/core/services/media/interfaces/media_storage.dart';
+import 'package:deehelp/core/services/media/interfaces/image_storage.dart';
 import 'package:deehelp/core/utils/result.dart';
 import 'package:deehelp/features/products/domain/exceptions/add_product_failure.dart';
 import 'package:deehelp/features/products/domain/entities/image_media.dart';
@@ -12,13 +12,13 @@ import 'package:logging/logging.dart';
 class AddProductUseCase extends UseCase<AddProductDto, Unit> {
   static final _logger = Logger("AddProductUseCase");
   final ProductRepository _repository;
-  final ImageUpload _imageUpload;
+  final ImageStorage _imageStorage;
 
   AddProductUseCase({
     required ProductRepository repository,
-    required ImageUpload imageUpload,
+    required ImageStorage imageStorage,
   })  : _repository = repository,
-        _imageUpload = imageUpload;
+        _imageStorage = imageStorage;
 
   @override
   Future<Result<Unit>> execute(AddProductDto dto) async {
@@ -28,7 +28,7 @@ class AddProductUseCase extends UseCase<AddProductDto, Unit> {
       final newImagesMedia = await Future.wait(
         dto.images.map(
           (currentImageMedia) async {
-            final newUrl = await _imageUpload.upload(currentImageMedia);
+            final newUrl = await _imageStorage.upload(currentImageMedia);
             return ImageMedia.fromWeb(
               url: newUrl,
               size: currentImageMedia.size,
@@ -48,7 +48,7 @@ class AddProductUseCase extends UseCase<AddProductDto, Unit> {
       await Future.wait(
         dto.images.map(
           (currentImageMedia) async {
-            await _imageUpload.delete(currentImageMedia.imageName);
+            await _imageStorage.delete(currentImageMedia.imageName);
           },
         ),
       );

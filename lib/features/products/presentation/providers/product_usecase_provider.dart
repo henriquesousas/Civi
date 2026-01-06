@@ -1,8 +1,5 @@
-import 'package:deehelp/core/env.dart';
-import 'package:deehelp/core/services/media/r2_cloudflare_image_upload.dart';
-import 'package:deehelp/features/auth/presentation/session/session_provider.dart';
+import 'package:deehelp/core/providers/image_storage_provider.dart';
 import 'package:deehelp/features/products/domain/usecases/add/add_image_usecase.dart';
-
 import 'package:deehelp/features/products/domain/usecases/add/add_product_usecase.dart';
 import 'package:deehelp/features/products/domain/usecases/delete/delete_image_usecase.dart';
 import 'package:deehelp/features/products/domain/usecases/delete/delete_product_usecase.dart';
@@ -11,7 +8,6 @@ import 'package:deehelp/features/products/domain/usecases/update/update_product_
 import 'package:deehelp/features/products/presentation/providers/product_repository_provider.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-//TODO: Devolver instancia do => R2CloudFlareImageUpload
 final getProductsByUserUsecaseProvider =
     Provider.autoDispose<GetProductsByUserUsecase>((ref) {
   final repository = ref.watch(productRepositoryProvider);
@@ -27,58 +23,42 @@ final updateProductUsecaseProvider =
 final addProductUsecaseProvider =
     Provider.autoDispose<AddProductUseCase>((ref) {
   final repository = ref.watch(productRepositoryProvider);
-  final authenticatedUser = ref.watch(userSessionProvider);
+  final imageStorageService = ref.watch(imageStorageServiceProvider);
 
   return AddProductUseCase(
     repository: repository,
-    imageUpload: R2CloudFlareImageUpload(
-      bucketName: "deehelp",
-      baseFolder: "products/${authenticatedUser!.id}",
-      cdnUrl: Env.r2BaseUrl,
-    ),
+    imageStorage: imageStorageService,
   );
 });
 
 final deleteImageUsecaseProvider =
     Provider.autoDispose<DeleteImageUsecase>((ref) {
   final repository = ref.watch(productRepositoryProvider);
-  final authenticatedUser = ref.watch(userSessionProvider);
+  final imageStorageService = ref.watch(imageStorageServiceProvider);
 
   return DeleteImageUsecase(
     repository: repository,
-    imageUpload: R2CloudFlareImageUpload(
-      bucketName: "deehelp",
-      baseFolder: "products/${authenticatedUser!.id}",
-      cdnUrl: Env.r2BaseUrl,
-    ),
+    imageStorage: imageStorageService,
   );
 });
 
 final addImageUsecaseProvider = Provider.autoDispose<AddImageUsecase>((ref) {
   final repository = ref.watch(productRepositoryProvider);
-  final authenticatedUser = ref.watch(userSessionProvider);
+  final imageStorageService = ref.watch(imageStorageServiceProvider);
 
   return AddImageUsecase(
     repository: repository,
-    imageUpload: R2CloudFlareImageUpload(
-      bucketName: "deehelp",
-      baseFolder: "products/${authenticatedUser!.id}",
-      cdnUrl: Env.r2BaseUrl,
-    ),
+    imageStorage: imageStorageService,
   );
 });
 
 final deleteProductUsecaseProvider =
     Provider.autoDispose<DeleteProductUsecase>((ref) {
   final repository = ref.watch(productRepositoryProvider);
-  final authenticatedUser = ref.watch(userSessionProvider);
+  final imageStorageService = ref.watch(imageStorageServiceProvider);
 
   return DeleteProductUsecase(
     repository: repository,
-    imageUpload: R2CloudFlareImageUpload(
-      bucketName: "deehelp",
-      baseFolder: "products/${authenticatedUser!.id}",
-      cdnUrl: Env.r2BaseUrl,
-    ),
+    imageStorage: imageStorageService,
   );
 });

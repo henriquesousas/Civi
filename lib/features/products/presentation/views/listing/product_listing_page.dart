@@ -15,10 +15,13 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
 class ProductListingPage extends BasePage {
+  static final isAddIncidentKey = "isAddIncidentKey";
   final bool showBackButton;
+  final bool isAddIncident;
   const ProductListingPage({
     super.key,
     this.showBackButton = false,
+    this.isAddIncident = true,
   });
 
   @override
@@ -126,11 +129,19 @@ class _ProductListingPageState extends BasePageState<ProductListingPage> {
                     parent: AlwaysScrollableScrollPhysics(),
                   ),
                   itemCount: items.length,
-                  itemBuilder: (context, index) {
+                  itemBuilder: (ctx, index) {
                     final product = items[index];
                     return ProductListTileCard(
                       product: product,
-                      onPressed: () => _onEdit(product),
+                      onPressed: () {
+                        if (widget.isAddIncident) {
+                          debugPrint("Produto selecionado");
+                          context.pop(product);
+                          return;
+                        }
+
+                        _onEdit(product);
+                      },
                     );
                   },
                 ),

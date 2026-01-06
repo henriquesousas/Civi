@@ -36,6 +36,7 @@ class BrandSection extends ConsumerWidget {
               await customModalBottomSheet(
                 context,
                 child: ModalSelectBrand(
+                  title: "Selecione a marca do veículo",
                   values: kBrands,
                   onChange: (value) {
                     viewModel.onValueChange(

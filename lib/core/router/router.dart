@@ -32,9 +32,14 @@ class MainRouter {
       GoRoute(
         path: AppRouter.myProducts,
         pageBuilder: (context, state) {
+          final extra = state.extra as Map<String, dynamic>?;
+          final isAddIncident =
+              extra?[ProductListingPage.isAddIncidentKey] as bool? ?? false;
           return slideTransitionPage(
             key: state.pageKey,
-            child: const ProductListingPage(),
+            child: ProductListingPage(
+              isAddIncident: isAddIncident,
+            ),
           );
         },
       ),

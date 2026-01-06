@@ -1,11 +1,10 @@
 import 'package:cloudflare_r2/cloudflare_r2.dart';
-import 'package:deehelp/core/services/media/interfaces/media_storage.dart';
+import 'package:deehelp/core/services/media/interfaces/image_storage.dart';
 import 'package:deehelp/features/products/domain/entities/image_media.dart';
 import 'package:flutter/material.dart';
 import 'package:logging/logging.dart';
 
-//Retorna a nova da cloudflare
-class R2CloudFlareImageUpload implements ImageUpload {
+class R2CloudFlareImageStorage implements ImageStorage {
   static final _logger = Logger("R2CloudFlareMediaStorage");
   static final statusCode = 200;
 
@@ -13,7 +12,7 @@ class R2CloudFlareImageUpload implements ImageUpload {
   final String baseFolder;
   final String cdnUrl;
 
-  R2CloudFlareImageUpload({
+  R2CloudFlareImageStorage({
     required this.bucketName,
     required this.baseFolder,
     required this.cdnUrl,

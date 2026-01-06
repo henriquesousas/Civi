@@ -6,7 +6,11 @@ import 'package:deehelp/core/ui/widgets/button/ui_hold_confirm_button.dart';
 import 'package:deehelp/core/ui/widgets/card/ui_custom_scaffold.dart';
 import 'package:deehelp/features/incident/presentation/add/widget/card_select_image.dart';
 import 'package:deehelp/features/incident/presentation/add/widget/card_type_incident.dart';
+import 'package:deehelp/features/incident/presentation/providers/incident_viewmodel_providers.dart';
+import 'package:deehelp/features/products/domain/entities/product.dart';
+import 'package:deehelp/features/products/presentation/views/listing/product_listing_page.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
 enum TypeAlert {
@@ -15,14 +19,14 @@ enum TypeAlert {
   none,
 }
 
-class AddIncidentPage extends StatefulWidget {
+class AddIncidentPage extends ConsumerStatefulWidget {
   const AddIncidentPage({super.key});
 
   @override
-  State<AddIncidentPage> createState() => _AddIncidentPageState();
+  ConsumerState<AddIncidentPage> createState() => _AddIncidentPageState();
 }
 
-class _AddIncidentPageState extends State<AddIncidentPage>
+class _AddIncidentPageState extends ConsumerState<AddIncidentPage>
     with SingleTickerProviderStateMixin {
   bool _isExpanded = false;
   bool _isProductSelected = false;
@@ -56,6 +60,8 @@ class _AddIncidentPageState extends State<AddIncidentPage>
 
   @override
   Widget build(BuildContext context) {
+    final state = ref.watch(addIncidentViewmodelProvider);
+    final viewModel = ref.watch(addIncidentViewmodelProvider.notifier);
     return UICustomScaffold(
       pageTitle: "Registrar incidente",
       onBackButtonTap: () => context.pop(),
@@ -63,24 +69,27 @@ class _AddIncidentPageState extends State<AddIncidentPage>
         spacing: 10,
         children: [
           CardSelectImage(
-            isSelected: _isProductSelected,
-            press: () {
-              context.push(AppRouter.myProducts);
-              setState(() {
-                _isProductSelected = true;
-              });
+            product: state.product,
+            press: () async {
+              final product = await context.push<Product?>(
+                AppRouter.myProducts,
+                extra: {ProductListingPage.isAddIncidentKey: true},
+              );
+              if (product != null) {
+                viewModel.selectProduct(product);
+              }
             },
           ),
           Visibility(
-            visible: _isProductSelected,
+            visible: state.product != null,
             child: CardTypeIncident(
-              press: () => _changeAlert(TypeAlert.immediately),
-              selected: _typeAlert == TypeAlert.immediately,
+              press: () => viewModel.selectTypeAlert(TypeAlert.immediately),
+              selected: state.type == TypeAlert.immediately,
               title: "Aviso Imediato",
               subTitle:
                   "Ideal para situações urgentes. Com poucos toques, você envia um alerta instantâneo informando o roubo do seu veículo à comunidade.",
               child: Visibility(
-                visible: _typeAlert == TypeAlert.immediately,
+                visible: state.type == TypeAlert.immediately,
                 child: UIHoldConfirmButton(
                   hapticFeedback: true,
                   title: "Segure pra confirmar",
@@ -95,13 +104,13 @@ class _AddIncidentPageState extends State<AddIncidentPage>
             ),
           ),
           Visibility(
-            visible: _isProductSelected,
+            visible: state.product != null,
             child: CardTypeIncident(
-              press: () => _changeAlert(TypeAlert.detailed),
+              press: () => viewModel.selectTypeAlert(TypeAlert.detailed),
+              selected: state.type == TypeAlert.detailed,
               title: "Aviso detalhado",
               subTitle:
                   "Registre o roubo do seu veículo com informações completas, como características do veículo, local e horário do ocorrido, ajudando na identificação e no acompanhamento do caso.",
-              selected: _typeAlert == TypeAlert.detailed,
               child: InkWell(
                 onTap: () => _changeAlert(TypeAlert.detailed),
                 child: AnimatedContainer(
@@ -110,10 +119,11 @@ class _AddIncidentPageState extends State<AddIncidentPage>
                   child: AnimatedContainer(
                     duration: const Duration(milliseconds: 400),
                     curve: Curves.easeInOut,
-                    height: _isExpanded ? null : 0,
+                    // height: _isExpanded ? null : 0,
+                    height: state.type == TypeAlert.detailed ? null : 0,
                     child: AnimatedOpacity(
                       duration: const Duration(milliseconds: 300),
-                      opacity: _isExpanded ? 1 : 0,
+                      opacity: state.type == TypeAlert.detailed ? 1 : 0,
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [

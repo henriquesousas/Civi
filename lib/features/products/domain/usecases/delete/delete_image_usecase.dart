@@ -1,5 +1,5 @@
 import 'package:deehelp/core/base/use_case.dart';
-import 'package:deehelp/core/services/media/interfaces/media_storage.dart';
+import 'package:deehelp/core/services/media/interfaces/image_storage.dart';
 import 'package:deehelp/core/utils/result.dart';
 import 'package:deehelp/core/utils/unit.dart';
 import 'package:deehelp/features/products/domain/exceptions/delete_image_failure.dart';
@@ -10,13 +10,13 @@ import 'package:logging/logging.dart';
 class DeleteImageUsecase extends UseCase<DeleteImageDto, Unit> {
   static final _logger = Logger("DeleteImageUsecase");
   final ProductRepository _repository;
-  final ImageUpload _imageUpload;
+  final ImageStorage _imageStorage;
 
   DeleteImageUsecase({
     required ProductRepository repository,
-    required ImageUpload imageUpload,
+    required ImageStorage imageStorage,
   })  : _repository = repository,
-        _imageUpload = imageUpload;
+        _imageStorage = imageStorage;
 
   @override
   Future<Result<Unit>> execute(DeleteImageDto dto) async {
@@ -25,7 +25,7 @@ class DeleteImageUsecase extends UseCase<DeleteImageDto, Unit> {
       await _repository.deleteImage(dto.image);
       _logger.info(
           "Imagem deletada da base com sucesso, agora vamos deletar da cloud: ${dto.image.imageName}");
-      await _imageUpload.delete(dto.image.imageName);
+      await _imageStorage.delete(dto.image.imageName);
       return Result.success(const Unit());
     } catch (e) {
       _logger.info("Erro ao deletar imagem: ${e.toString()}");

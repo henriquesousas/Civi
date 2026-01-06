@@ -31,6 +31,7 @@ class TypeSection extends ConsumerWidget {
               customModalBottomSheet(
                 context,
                 child: ModalSelectBrand(
+                  title: "Tipo do seu produto",
                   values: kTypes,
                   onChange: (value) {
                     viewModel.onValueChange(

@@ -1,5 +1,5 @@
 import 'package:deehelp/core/base/use_case.dart';
-import 'package:deehelp/core/services/media/interfaces/media_storage.dart';
+import 'package:deehelp/core/services/media/interfaces/image_storage.dart';
 import 'package:deehelp/core/utils/result.dart';
 import 'package:deehelp/core/utils/unit.dart';
 import 'package:deehelp/features/products/domain/entities/product.dart';
@@ -10,13 +10,13 @@ import 'package:logging/logging.dart';
 class DeleteProductUsecase extends UseCase<Product, Unit> {
   static final _logger = Logger("DeleteProductUsecase");
   final ProductRepository _repository;
-  final ImageUpload _imageUpload;
+  final ImageStorage _imageStorage;
 
   DeleteProductUsecase({
     required ProductRepository repository,
-    required ImageUpload imageUpload,
+    required ImageStorage imageStorage,
   })  : _repository = repository,
-        _imageUpload = imageUpload;
+        _imageStorage = imageStorage;
 
   @override
   Future<Result<Unit>> execute(Product product) async {
@@ -27,7 +27,7 @@ class DeleteProductUsecase extends UseCase<Product, Unit> {
         product.images.map(
           (currentImageMedia) async {
             _logger.info("Deletando imagem: ${currentImageMedia.imageName}");
-            await _imageUpload.delete(currentImageMedia.imageName);
+            await _imageStorage.delete(currentImageMedia.imageName);
           },
         ),
       );

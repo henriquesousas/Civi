@@ -5,12 +5,14 @@ import 'package:deehelp/core/ui/widgets/search/ui_search_field.dart';
 import 'package:flutter/material.dart';
 
 class ModalSelectBrand extends StatefulWidget {
+  final String title;
   final List<String> values;
   final Function(String) onChange;
   const ModalSelectBrand({
     super.key,
     required this.onChange,
     required this.values,
+    required this.title,
   });
 
   @override
@@ -57,9 +59,11 @@ class _ModalSelectBrandState extends State<ModalSelectBrand> {
         Padding(
           padding: const EdgeInsets.all(16),
           child: Text(
-            "Selecionar marca",
-            style: context.appTextStyles.bodyTextStyle1
-                .copyWith(color: AppColors.textSecondary),
+            widget.title,
+            style: context.appTextStyles.bodyTextStyle1.copyWith(
+              color: AppColors.blackColor,
+              fontWeight: FontWeight.w500,
+            ),
           ),
         ),
         UISearchField(searchController: _searchController),
