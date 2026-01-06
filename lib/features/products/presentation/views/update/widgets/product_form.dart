@@ -1,6 +1,4 @@
-import 'package:deehelp/core/ui/theme/app_colors.dart';
 import 'package:deehelp/core/ui/widgets/bottom_sheet/custom_modal_bottom_sheet.dart';
-import 'package:deehelp/core/ui/widgets/button/ui_elevated_button.dart';
 import 'package:deehelp/features/products/presentation/providers/product_viewmodel_provider.dart';
 import 'package:deehelp/features/products/presentation/views/update/product_update_manager.dart';
 import 'package:deehelp/features/products/presentation/views/update/state/product_update_state.dart';
@@ -55,19 +53,6 @@ class ProductForm extends ConsumerWidget {
             ),
           ),
           const PhotoSection(),
-          // Visibility(
-          //   visible: true,
-          //   child: UIElevatedButton(
-          //     text: "Confirmar alterações",
-          //     isLoading: state.isLoading,
-          //     press: () => viewModel.updatreProduct(),
-          //   ),
-          // ),
-          // UIElevatedButton(
-          //   bgColor: AppColors.errorColor,
-          //   text: "Apagar cadastro",
-          //   press: () {},
-          // ),
         ],
       ),
     );

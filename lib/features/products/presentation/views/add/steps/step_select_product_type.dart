@@ -112,12 +112,24 @@ class StepSelectProductType extends ConsumerWidget {
         color: AppColors.lightGreyColor30,
         borderRadius: BorderRadius.circular(8),
       ),
-      child: Text(
-        "Pré-cadastre seu veículo para facilitar e acelerar o registro de ocorrências. Em caso de roubo ou furto, você poderá fazer a denúncia rapidamente, usando os dados já salvos, sem perder tempo preenchendo formulários extensos.",
-        textAlign: TextAlign.center,
-        style: context.appTextStyles.sectionSubTitle1.copyWith(
-          color: AppColors.darkGreyColor,
-        ),
+      child: Column(
+        spacing: 5,
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(
+            "O que é o pré cadastro",
+            style: context.appTextStyles.sectionTitle3.copyWith(
+              fontWeight: FontWeight.bold,
+            ),
+          ),
+          Text(
+            "Pré-cadastre seu veículo para facilitar e acelerar o registro de ocorrências. Em caso de roubo ou furto, você poderá fazer a denúncia rapidamente, usando os dados já salvos, sem perder tempo preenchendo formulários extensos.",
+            textAlign: TextAlign.center,
+            style: context.appTextStyles.sectionSubTitle1.copyWith(
+              color: AppColors.darkGreyColor,
+            ),
+          ),
+        ],
       ),
     );
   }

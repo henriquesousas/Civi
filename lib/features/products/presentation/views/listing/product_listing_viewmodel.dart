@@ -3,6 +3,8 @@ import 'package:deehelp/core/handlers/handle_command.dart';
 import 'package:deehelp/features/products/domain/entities/product.dart';
 import 'package:deehelp/features/products/domain/usecases/listing/get_products_by_user_usecase.dart';
 import 'package:deehelp/features/products/presentation/views/listing/state/list_product_state.dart';
+import 'package:flutter/material.dart';
+
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 class ProductListingViewmodel extends StateNotifier<ListProductState> {
@@ -30,6 +32,22 @@ class ProductListingViewmodel extends StateNotifier<ListProductState> {
           },
         );
       },
+    );
+  }
+
+  void refresh(Product product) {
+    debugPrint("Entrou para alterar no list");
+
+    state.maybeMap(
+      success: (value) {
+        final index = value.items.indexWhere((p) => p.id == product.id);
+        if (index != -1) {
+          final updatedProducts = List<Product>.from(value.items);
+          updatedProducts[index] = product;
+          state = ListProductState.success(updatedProducts, "All");
+        }
+      },
+      orElse: () => null,
     );
   }
 }

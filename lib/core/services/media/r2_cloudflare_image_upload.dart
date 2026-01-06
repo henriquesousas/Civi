@@ -1,6 +1,7 @@
 import 'package:cloudflare_r2/cloudflare_r2.dart';
 import 'package:deehelp/core/services/media/interfaces/media_storage.dart';
 import 'package:deehelp/features/products/domain/entities/image_media.dart';
+import 'package:flutter/material.dart';
 import 'package:logging/logging.dart';
 
 //Retorna a nova da cloudflare
@@ -37,10 +38,14 @@ class R2CloudFlareImageUpload implements ImageUpload {
 
   @override
   Future<void> delete(String imageName) async {
-    final name = "$baseFolder/$imageName";
-    await CloudFlareR2.deleteObject(
-      objectName: name,
-      bucket: bucketName,
-    );
+    try {
+      final name = "$baseFolder/$imageName";
+      await CloudFlareR2.deleteObject(
+        objectName: name,
+        bucket: bucketName,
+      );
+    } catch (e) {
+      debugPrint("Error Cloudflare: ${e.toString()}");
+    }
   }
 }

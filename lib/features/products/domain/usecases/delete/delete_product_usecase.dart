@@ -26,6 +26,7 @@ class DeleteProductUsecase extends UseCase<Product, Unit> {
       await Future.wait(
         product.images.map(
           (currentImageMedia) async {
+            _logger.info("Deletando imagem: ${currentImageMedia.imageName}");
             await _imageUpload.delete(currentImageMedia.imageName);
           },
         ),

@@ -55,6 +55,9 @@ class _UpdateProductPage extends BasePageState<UpdateProductPage> {
           context.showSnackBar(
             currentState.successMessage ?? "Operação realizada com sucesso!",
           );
+          ref
+              .watch(productListingViewmodelProvider.notifier)
+              .refresh(currentState.currentProduct!);
         }
       },
     );
