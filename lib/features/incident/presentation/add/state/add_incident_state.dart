@@ -1,5 +1,4 @@
 import 'package:deehelp/features/incident/domain/entity/type_alert.dart';
-import 'package:deehelp/features/incident/presentation/add/add_incident_page.dart';
 import 'package:deehelp/features/products/domain/entities/product.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
@@ -17,9 +16,8 @@ abstract class AddIncidentState with _$AddIncidentState {
     Product? product,
     @Default(TypeAlert.none) TypeAlert type,
     String? errorMessage,
+    String? successMessage,
   }) = _AddIncidentState;
 
   factory AddIncidentState.initial() => const AddIncidentState();
-  // factory AddIncidentState.setup(Product product) =>
-  //     ProductUpdateState(currentProduct: product);
 }

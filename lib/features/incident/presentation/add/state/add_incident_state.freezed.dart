@@ -23,6 +23,7 @@ mixin _$AddIncidentState {
   Product? get product;
   TypeAlert get type;
   String? get errorMessage;
+  String? get successMessage;
 
   /// Create a copy of AddIncidentState
   /// with the given fields replaced by the non-null parameter values.
@@ -40,15 +41,18 @@ mixin _$AddIncidentState {
             (identical(other.product, product) || other.product == product) &&
             (identical(other.type, type) || other.type == type) &&
             (identical(other.errorMessage, errorMessage) ||
-                other.errorMessage == errorMessage));
+                other.errorMessage == errorMessage) &&
+            (identical(other.successMessage, successMessage) ||
+                other.successMessage == successMessage));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, product, type, errorMessage);
+  int get hashCode =>
+      Object.hash(runtimeType, product, type, errorMessage, successMessage);
 
   @override
   String toString() {
-    return 'AddIncidentState(product: $product, type: $type, errorMessage: $errorMessage)';
+    return 'AddIncidentState(product: $product, type: $type, errorMessage: $errorMessage, successMessage: $successMessage)';
   }
 }
 
@@ -58,7 +62,11 @@ abstract mixin class $AddIncidentStateCopyWith<$Res> {
           AddIncidentState value, $Res Function(AddIncidentState) _then) =
       _$AddIncidentStateCopyWithImpl;
   @useResult
-  $Res call({Product? product, TypeAlert type, String? errorMessage});
+  $Res call(
+      {Product? product,
+      TypeAlert type,
+      String? errorMessage,
+      String? successMessage});
 }
 
 /// @nodoc
@@ -77,6 +85,7 @@ class _$AddIncidentStateCopyWithImpl<$Res>
     Object? product = freezed,
     Object? type = null,
     Object? errorMessage = freezed,
+    Object? successMessage = freezed,
   }) {
     return _then(_self.copyWith(
       product: freezed == product
@@ -90,6 +99,10 @@ class _$AddIncidentStateCopyWithImpl<$Res>
       errorMessage: freezed == errorMessage
           ? _self.errorMessage
           : errorMessage // ignore: cast_nullable_to_non_nullable
+              as String?,
+      successMessage: freezed == successMessage
+          ? _self.successMessage
+          : successMessage // ignore: cast_nullable_to_non_nullable
               as String?,
     ));
   }
@@ -188,14 +201,16 @@ extension AddIncidentStatePatterns on AddIncidentState {
 
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>(
-    TResult Function(Product? product, TypeAlert type, String? errorMessage)?
+    TResult Function(Product? product, TypeAlert type, String? errorMessage,
+            String? successMessage)?
         $default, {
     required TResult orElse(),
   }) {
     final _that = this;
     switch (_that) {
       case _AddIncidentState() when $default != null:
-        return $default(_that.product, _that.type, _that.errorMessage);
+        return $default(_that.product, _that.type, _that.errorMessage,
+            _that.successMessage);
       case _:
         return orElse();
     }
@@ -216,13 +231,15 @@ extension AddIncidentStatePatterns on AddIncidentState {
 
   @optionalTypeArgs
   TResult when<TResult extends Object?>(
-    TResult Function(Product? product, TypeAlert type, String? errorMessage)
+    TResult Function(Product? product, TypeAlert type, String? errorMessage,
+            String? successMessage)
         $default,
   ) {
     final _that = this;
     switch (_that) {
       case _AddIncidentState():
-        return $default(_that.product, _that.type, _that.errorMessage);
+        return $default(_that.product, _that.type, _that.errorMessage,
+            _that.successMessage);
       case _:
         throw StateError('Unexpected subclass');
     }
@@ -242,13 +259,15 @@ extension AddIncidentStatePatterns on AddIncidentState {
 
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>(
-    TResult? Function(Product? product, TypeAlert type, String? errorMessage)?
+    TResult? Function(Product? product, TypeAlert type, String? errorMessage,
+            String? successMessage)?
         $default,
   ) {
     final _that = this;
     switch (_that) {
       case _AddIncidentState() when $default != null:
-        return $default(_that.product, _that.type, _that.errorMessage);
+        return $default(_that.product, _that.type, _that.errorMessage,
+            _that.successMessage);
       case _:
         return null;
     }
@@ -259,7 +278,10 @@ extension AddIncidentStatePatterns on AddIncidentState {
 
 class _AddIncidentState implements AddIncidentState {
   const _AddIncidentState(
-      {this.product, this.type = TypeAlert.none, this.errorMessage});
+      {this.product,
+      this.type = TypeAlert.none,
+      this.errorMessage,
+      this.successMessage});
 
 // @Default(false) bool isLoading,
 // @Default(false) bool addingPhoto,
@@ -274,6 +296,8 @@ class _AddIncidentState implements AddIncidentState {
   final TypeAlert type;
   @override
   final String? errorMessage;
+  @override
+  final String? successMessage;
 
   /// Create a copy of AddIncidentState
   /// with the given fields replaced by the non-null parameter values.
@@ -291,15 +315,18 @@ class _AddIncidentState implements AddIncidentState {
             (identical(other.product, product) || other.product == product) &&
             (identical(other.type, type) || other.type == type) &&
             (identical(other.errorMessage, errorMessage) ||
-                other.errorMessage == errorMessage));
+                other.errorMessage == errorMessage) &&
+            (identical(other.successMessage, successMessage) ||
+                other.successMessage == successMessage));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, product, type, errorMessage);
+  int get hashCode =>
+      Object.hash(runtimeType, product, type, errorMessage, successMessage);
 
   @override
   String toString() {
-    return 'AddIncidentState(product: $product, type: $type, errorMessage: $errorMessage)';
+    return 'AddIncidentState(product: $product, type: $type, errorMessage: $errorMessage, successMessage: $successMessage)';
   }
 }
 
@@ -311,7 +338,11 @@ abstract mixin class _$AddIncidentStateCopyWith<$Res>
       __$AddIncidentStateCopyWithImpl;
   @override
   @useResult
-  $Res call({Product? product, TypeAlert type, String? errorMessage});
+  $Res call(
+      {Product? product,
+      TypeAlert type,
+      String? errorMessage,
+      String? successMessage});
 }
 
 /// @nodoc
@@ -330,6 +361,7 @@ class __$AddIncidentStateCopyWithImpl<$Res>
     Object? product = freezed,
     Object? type = null,
     Object? errorMessage = freezed,
+    Object? successMessage = freezed,
   }) {
     return _then(_AddIncidentState(
       product: freezed == product
@@ -343,6 +375,10 @@ class __$AddIncidentStateCopyWithImpl<$Res>
       errorMessage: freezed == errorMessage
           ? _self.errorMessage
           : errorMessage // ignore: cast_nullable_to_non_nullable
+              as String?,
+      successMessage: freezed == successMessage
+          ? _self.successMessage
+          : successMessage // ignore: cast_nullable_to_non_nullable
               as String?,
     ));
   }

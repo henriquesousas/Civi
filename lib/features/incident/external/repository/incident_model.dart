@@ -10,7 +10,7 @@ class IncidentModel {
       'city': incident.local?.city,
       'state': incident.local?.state,
       'approximate_address': incident.local?.address,
-      'occurred_at': incident.occurredAt,
+      'occurred_at': incident.occurredAt?.toUtc().toIso8601String(),
       'status': incident.status.name,
       'created_at': incident.createdAt.toUtc().toIso8601String(),
     };

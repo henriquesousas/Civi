@@ -22,6 +22,7 @@ class AddIncidentImmediatelyUsecase extends UseCase<AddIncidentDto, Unit> {
       type: TypeAlert.immediately,
       product: dto.product,
       userId: dto.userId,
+      occurredAt: DateTime.now(),
     );
     return await _repository.save(incident);
   }

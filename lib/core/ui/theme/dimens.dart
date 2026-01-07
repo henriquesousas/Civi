@@ -7,6 +7,7 @@ import 'package:flutter/material.dart';
 abstract final class Dimens {
   const Dimens();
 
+  static const size5 = 5.0;
   static const size10 = 10.0;
   static const size14 = 14.0;
   static const size15 = 15.0;

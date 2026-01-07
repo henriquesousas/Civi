@@ -1,5 +1,6 @@
 import 'package:deehelp/core/errors/failure.dart';
 import 'package:deehelp/core/utils/result.dart';
+import 'package:flutter/material.dart';
 
 class HandleCommand {
   /// Helper genérico para executar comandos em StateNotifiers
@@ -29,6 +30,7 @@ class HandleCommand {
         failure: (error) => updateState(onError(error)),
       );
     } catch (e) {
+      debugPrint("Error adding incident: ${e.toString()}");
       updateState(onError(const DefaultFailure()));
     }
   }

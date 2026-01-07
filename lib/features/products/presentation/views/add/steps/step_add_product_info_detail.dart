@@ -129,10 +129,10 @@ class _StepAddProductInfoDetailState
             showLabelText: false,
             labelText: "Marca",
             hintText: "Marca",
-            readOnly: true,
             textInputAction: TextInputAction.next,
             keyboardType: TextInputType.text,
             onTap: () => _showModalSelectBrand(),
+            readOnly: true,
             controller: TextEditingController(
               text: state.brand,
             ),

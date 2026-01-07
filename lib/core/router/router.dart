@@ -4,6 +4,7 @@ import 'package:deehelp/features/auth/presentation/nickname/add_nickname_page.da
 import 'package:deehelp/features/dashboard/presentation/dashsboard_page.dart';
 import 'package:deehelp/features/faq/faq_provider.dart';
 import 'package:deehelp/features/incident/presentation/add/add_incident_page.dart';
+import 'package:deehelp/features/incident/presentation/add/alert_error_screen.dart';
 import 'package:deehelp/features/incident/presentation/add/incide_success_screen.dart';
 import 'package:deehelp/features/incident/presentation/add/sending_alert_screen.dart';
 import 'package:deehelp/features/map/presentation/map_page.dart';
@@ -113,6 +114,15 @@ class MainRouter {
             vehicleType: 'carro',
             location: 'Centro, São Paulo - SP',
             incidentTime: DateTime.now(),
+          ),
+        ),
+      ),
+      GoRoute(
+        path: AppRouter.addIncidentError,
+        pageBuilder: (context, state) => slideTransitionPage(
+          key: state.pageKey,
+          child: AlertErrorScreen(
+            onRetry: () {},
           ),
         ),
       ),

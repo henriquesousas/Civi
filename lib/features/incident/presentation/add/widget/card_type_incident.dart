@@ -36,8 +36,8 @@ class CardTypeIncident extends StatelessWidget {
             spacing: 5,
             children: [
               Container(
-                width: Dimens.size15.w,
-                height: Dimens.size15.h,
+                width: Dimens.size20.w,
+                height: Dimens.size20.h,
                 decoration: BoxDecoration(
                   shape: BoxShape.circle,
                   color:
