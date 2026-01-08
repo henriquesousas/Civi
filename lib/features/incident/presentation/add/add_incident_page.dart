@@ -129,7 +129,7 @@ class _AddIncidentPageState extends ConsumerState<AddIncidentPage>
                                 contentPadding: const EdgeInsets.all(22),
                                 onProgressCompleted: () async {
                                   if (session?.id != null) {
-                                    viewModel.save(session!.id);
+                                    viewModel.saveImmediatelly(session!.id);
                                   }
                                 },
                                 onApiCall: () async {},

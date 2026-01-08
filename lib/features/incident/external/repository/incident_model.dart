@@ -1,6 +1,13 @@
 import 'package:deehelp/features/incident/domain/entity/incident.dart';
+import 'package:flutter/material.dart';
 
 class IncidentModel {
+  static String _timeOfDayToPostgresTime(TimeOfDay time) {
+    return '${time.hour.toString().padLeft(2, '0')}:'
+        '${time.minute.toString().padLeft(2, '0')}:'
+        '00'; // Segundos sempre 00
+  }
+
   static Map<String, dynamic> toMap(Incident incident) {
     return {
       'product_id': incident.product.id.value,
@@ -10,7 +17,8 @@ class IncidentModel {
       'city': incident.local?.city,
       'state': incident.local?.state,
       'approximate_address': incident.local?.address,
-      'occurred_at': incident.occurredAt?.toUtc().toIso8601String(),
+      'occurred_at': incident.occurredAt.toUtc().toIso8601String(),
+      'occurred_hour': _timeOfDayToPostgresTime(incident.occurredAtTime),
       'status': incident.status.name,
       'created_at': incident.createdAt.toUtc().toIso8601String(),
     };

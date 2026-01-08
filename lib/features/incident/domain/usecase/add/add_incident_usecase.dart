@@ -3,26 +3,28 @@ import 'package:deehelp/core/utils/id_utils.dart';
 import 'package:deehelp/core/utils/result.dart';
 import 'package:deehelp/core/utils/unit.dart';
 import 'package:deehelp/features/incident/domain/entity/incident.dart';
-import 'package:deehelp/features/incident/domain/entity/incident_status.dart';
-import 'package:deehelp/features/incident/domain/entity/type_alert.dart';
 import 'package:deehelp/features/incident/domain/incident_repository.dart';
 import 'package:deehelp/features/incident/domain/usecase/add/add_incident_dto.dart';
 
-class AddIncidentImmediatelyUsecase extends UseCase<AddIncidentDto, Unit> {
+class AddIncidentUsecase extends UseCase<AddIncidentDto, Unit> {
   final IncidentRepository _repository;
 
-  AddIncidentImmediatelyUsecase({required IncidentRepository repository})
+  AddIncidentUsecase({required IncidentRepository repository})
       : _repository = repository;
 
   @override
   Future<Result<Unit>> execute(AddIncidentDto dto) async {
     final incident = Incident(
       id: IdUtils.generate(),
-      status: IncidentStatus.active,
-      type: TypeAlert.immediately,
       product: dto.product,
       userId: dto.userId,
-      occurredAt: DateTime.now(),
+      type: dto.type,
+      status: dto.status,
+      occurredAt: dto.occurredAt,
+      occurredAtTime: dto.occurredAtTime,
+      howTo: dto.howTo,
+      local: dto.local,
+      createdAt: DateTime.now(),
     );
     return await _repository.save(incident);
   }

@@ -3,18 +3,20 @@ import 'package:deehelp/core/handlers/handle_command.dart';
 import 'package:deehelp/core/handlers/handler_error.dart';
 import 'package:deehelp/core/services/place.dart';
 import 'package:deehelp/core/utils/unit.dart';
+import 'package:deehelp/features/incident/domain/entity/incident_local.dart';
+import 'package:deehelp/features/incident/domain/entity/incident_status.dart';
 import 'package:deehelp/features/incident/domain/entity/type_alert.dart';
 import 'package:deehelp/features/incident/domain/usecase/add/add_incident_dto.dart';
-import 'package:deehelp/features/incident/domain/usecase/add/add_incident_immediately_usecase.dart';
+import 'package:deehelp/features/incident/domain/usecase/add/add_incident_usecase.dart';
 import 'package:deehelp/features/incident/presentation/add/state/add_incident_state.dart';
 import 'package:deehelp/features/products/domain/entities/product.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 class AddIncidentViewmodel extends StateNotifier<AddIncidentState> {
-  final AddIncidentImmediatelyUsecase _addIncidentImmediatelyUsecase;
+  final AddIncidentUsecase _addIncidentImmediatelyUsecase;
   AddIncidentViewmodel({
-    required AddIncidentImmediatelyUsecase addIncidentImmediatelyUsecase,
+    required AddIncidentUsecase addIncidentImmediatelyUsecase,
   })  : _addIncidentImmediatelyUsecase = addIncidentImmediatelyUsecase,
         super(AddIncidentState.initial());
 
@@ -32,26 +34,33 @@ class AddIncidentViewmodel extends StateNotifier<AddIncidentState> {
     );
   }
 
-  void save(String userId) async {
+  void saveImmediatelly(String userId) async {
+    final dto = AddIncidentDto(
+        product: state.product!,
+        userId: userId,
+        status: IncidentStatus.active,
+        type: TypeAlert.immediately,
+        occurredAt: DateTime.now(),
+        occurredAtTime: TimeOfDay.now());
+    _save(dto);
+  }
+
+  void saveDetailed(String userId) async {
     final dto = AddIncidentDto(
       product: state.product!,
       userId: userId,
+      status: IncidentStatus.pending,
+      type: TypeAlert.detailed,
+      howTo: state.howTo,
+      local: IncidentLocal(
+        address: state.fullAddress!,
+        city: state.cityController!.text,
+        state: state.stateController!.text,
+      ),
+      occurredAt: state.occurredAt ?? DateTime.now(),
+      occurredAtTime: state.timeOccurredAt ?? TimeOfDay.now(),
     );
-    await HandleCommand.execute<Unit, AddIncidentState>(
-      updateState: (newState) => state = newState,
-      command: () => _addIncidentImmediatelyUsecase.execute(dto),
-      onLoading: () => state.copyWith(errorMessage: null),
-      onSuccess: (result) => state =
-          state.copyWith(successMessage: "Incidente registrado com sucesso."),
-      onError: (error) {
-        return handleError<AddIncidentState>(
-          error,
-          (message, extra) {
-            return state.copyWith(errorMessage: message);
-          },
-        );
-      },
-    );
+    _save(dto);
   }
 
   void onCityChange(String value) {
@@ -127,6 +136,24 @@ class AddIncidentViewmodel extends StateNotifier<AddIncidentState> {
     final isValid = areFieldsFilled && noValidationErrors;
 
     state = state.copyWith(isFormValid: isValid);
+  }
+
+  void _save(AddIncidentDto dto) async {
+    await HandleCommand.execute<Unit, AddIncidentState>(
+      updateState: (newState) => state = newState,
+      command: () => _addIncidentImmediatelyUsecase.execute(dto),
+      onLoading: () => state.copyWith(errorMessage: null),
+      onSuccess: (result) => state =
+          state.copyWith(successMessage: "Incidente registrado com sucesso."),
+      onError: (error) {
+        return handleError<AddIncidentState>(
+          error,
+          (message, extra) {
+            return state.copyWith(errorMessage: message);
+          },
+        );
+      },
+    );
   }
 
   @override
