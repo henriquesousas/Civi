@@ -30,7 +30,7 @@ class HandleCommand {
         failure: (error) => updateState(onError(error)),
       );
     } catch (e) {
-      debugPrint("Error adding incident: ${e.toString()}");
+      debugPrint("Error: ${e.toString()}");
       updateState(onError(const DefaultFailure()));
     }
   }

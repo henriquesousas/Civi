@@ -1,16 +1,14 @@
 import 'package:deehelp/core/extensions/context_extension.dart';
 import 'package:deehelp/core/extensions/date_extension.dart';
 import 'package:deehelp/core/extensions/time_extension.dart';
-import 'package:deehelp/core/res/resources.dart';
 import 'package:deehelp/core/router/app_router.dart';
+import 'package:deehelp/core/services/location_service.dart';
 import 'package:deehelp/core/ui/theme/app_colors.dart';
 import 'package:deehelp/core/ui/theme/app_text_styles.dart';
 import 'package:deehelp/core/ui/theme/dimens.dart';
-import 'package:deehelp/core/ui/widgets/button/ui_category_button.dart';
 import 'package:deehelp/core/ui/widgets/button/ui_elevated_button.dart';
 import 'package:deehelp/core/ui/widgets/button/ui_hold_confirm_button.dart';
 import 'package:deehelp/core/ui/widgets/card/ui_custom_scaffold.dart';
-import 'package:deehelp/core/ui/widgets/icon/ui_icon.dart';
 import 'package:deehelp/core/ui/widgets/textfield/ui_text_field_rounded.dart';
 import 'package:deehelp/features/auth/presentation/session/session_provider.dart';
 import 'package:deehelp/features/incident/domain/entity/type_alert.dart';
@@ -23,10 +21,7 @@ import 'package:deehelp/features/products/presentation/views/listing/product_lis
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:flutter_svg/svg.dart';
 import 'package:go_router/go_router.dart';
-import 'package:geolocator/geolocator.dart';
-import 'package:geocoding/geocoding.dart';
 
 class AddIncidentPage extends ConsumerStatefulWidget {
   const AddIncidentPage({super.key});
@@ -37,75 +32,18 @@ class AddIncidentPage extends ConsumerStatefulWidget {
 
 class _AddIncidentPageState extends ConsumerState<AddIncidentPage>
     with SingleTickerProviderStateMixin {
-  late AnimationController _controller;
-  DateTime? _selectedDate;
-  TimeOfDay? _selectedTime;
-
   @override
   void initState() {
     super.initState();
-    _controller = AnimationController(
-      duration: const Duration(milliseconds: 400),
-      vsync: this,
+
+    LocationService().getCurrentPlace().then(
+      (place) {
+        if (!mounted) return null;
+        if (place == null) return null;
+        ref.read(addIncidentViewmodelProvider.notifier).addCurrentPlace(place);
+      },
     );
   }
-
-  @override
-  void dispose() {
-    _controller.dispose();
-    super.dispose();
-  }
-
-  // Future<Position> _getCurrentPosition() async {
-  //   bool serviceEnabled;
-  //   LocationPermission permission;
-
-  //   // Verifica se o serviço de localização está ativo
-  //   serviceEnabled = await Geolocator.isLocationServiceEnabled();
-  //   if (!serviceEnabled) {
-  //     throw Exception('Serviço de localização desativado');
-  //   }
-
-  //   // Verifica permissões
-  //   permission = await Geolocator.checkPermission();
-  //   if (permission == LocationPermission.denied) {
-  //     permission = await Geolocator.requestPermission();
-  //     if (permission == LocationPermission.denied) {
-  //       throw Exception('Permissão negada');
-  //     }
-  //   }
-
-  //   if (permission == LocationPermission.deniedForever) {
-  //     throw Exception('Permissão negada permanentemente');
-  //   }
-
-  //   // Retorna posição atual
-  //   return await Geolocator.getCurrentPosition(
-  //     desiredAccuracy: LocationAccuracy.high,
-  //   );
-  // }
-
-  // Future<void> _getCityAndState() async {
-  //   try {
-  //     Position position = await _getCurrentPosition();
-  //     List<Placemark> placemarks = await placemarkFromCoordinates(
-  //       position.latitude,
-  //       position.longitude,
-  //       localeIdentifier: "pt_BR",
-  //     );
-  //     if (placemarks.isNotEmpty) {
-  //       final state = placemarks
-  //           .map((e) => e.administrativeArea ?? e.locality ?? "")
-  //           .firstWhere((name) => name.isNotEmpty);
-
-  //       final city = placemarks
-  //           .map((e) => e.subAdministrativeArea ?? e.locality ?? "")
-  //           .firstWhere((name) => name.isNotEmpty);
-  //     }
-  //   } catch (e) {
-  //     print("Erro ao obter localização: $e");
-  //   }
-  // }
 
   @override
   Widget build(BuildContext context) {
@@ -115,11 +53,13 @@ class _AddIncidentPageState extends ConsumerState<AddIncidentPage>
 
     ref.listen<AddIncidentState>(
       addIncidentViewmodelProvider,
-      (previous, next) {
-        if (next.errorMessage != null && next.errorMessage != "") {
+      (previous, currentState) {
+        if (currentState.errorMessage != null &&
+            currentState.errorMessage != "") {
           // context.push(AppRouter.addIncidentError);
         }
-        if (next.successMessage != null && next.successMessage != "") {
+        if (currentState.successMessage != null &&
+            currentState.successMessage != "") {
           // context.pushReplacement(AppRouter.addIncidentSuccess);
         }
       },
@@ -127,7 +67,10 @@ class _AddIncidentPageState extends ConsumerState<AddIncidentPage>
 
     return UICustomScaffold(
       pageTitle: "Registrar incidente",
-      onBackButtonTap: () => context.pop(),
+      onBackButtonTap: () {
+        ref.invalidate(addIncidentViewmodelProvider);
+        context.pop();
+      },
       body: LayoutBuilder(
         builder: (context, constraints) {
           return SingleChildScrollView(
@@ -156,23 +99,6 @@ class _AddIncidentPageState extends ConsumerState<AddIncidentPage>
                         }
                       },
                     ),
-                    // Container(
-                    //   padding: EdgeInsets.symmetric(
-                    //     horizontal: Dimens.size10.w,
-                    //     vertical: Dimens.size10.h,
-                    //   ),
-                    //   decoration: BoxDecoration(
-                    //     borderRadius: BorderRadius.circular(8),
-                    //     color: AppColors.lightGreyColor30,
-                    //   ),
-                    //   child: Text(
-                    //     "Selecione o tipo de alerta:",
-                    //     style: context.appTextStyles.caption1Style.copyWith(
-                    //       color: AppColors.darkGreyColor,
-                    //       fontWeight: FontWeight.w600,
-                    //     ),
-                    //   ),
-                    // ),
                     Visibility(
                       visible: state.product != null,
                       child: CardTypeIncident(
@@ -274,13 +200,12 @@ class _AddIncidentPageState extends ConsumerState<AddIncidentPage>
                                             onTap: () async {
                                               final picked =
                                                   await context.pickDate(
-                                                initialDate: _selectedDate,
+                                                initialDate: state.occurredAt,
                                               );
                                               if (picked != null &&
-                                                  picked != _selectedDate) {
-                                                setState(() {
-                                                  _selectedDate = picked;
-                                                });
+                                                  picked != state.occurredAt) {
+                                                viewModel
+                                                    .onOccurredAtChange(picked);
                                               }
                                             },
                                             prefixIcon: const Icon(
@@ -289,11 +214,12 @@ class _AddIncidentPageState extends ConsumerState<AddIncidentPage>
                                             ),
                                             readOnly: true,
                                             controller: TextEditingController(
-                                              text: _selectedDate != null
-                                                  ? _selectedDate
+                                              text: state.occurredAt != null
+                                                  ? state.occurredAt
                                                       ?.toDayMonthYearFormat()
                                                   : "",
                                             ),
+                                            error: state.errorOccurredAt,
                                           ),
                                         ),
                                         Expanded(
@@ -302,9 +228,8 @@ class _AddIncidentPageState extends ConsumerState<AddIncidentPage>
                                             radius: 8,
                                             text: "Hoje",
                                             press: () {
-                                              setState(() {
-                                                _selectedDate = DateTime.now();
-                                              });
+                                              viewModel.onOccurredAtChange(
+                                                  DateTime.now());
                                             },
                                           ),
                                         )
@@ -317,13 +242,13 @@ class _AddIncidentPageState extends ConsumerState<AddIncidentPage>
                                       onTap: () {
                                         context
                                             .pickTime(
-                                                initialTime: _selectedTime)
+                                          initialTime: state.timeOccurredAt,
+                                        )
                                             .then((picked) {
                                           if (picked != null &&
-                                              picked != _selectedTime) {
-                                            setState(() {
-                                              _selectedTime = picked;
-                                            });
+                                              picked != state.timeOccurredAt) {
+                                            viewModel
+                                                .onTimeOccurredAtChange(picked);
                                           }
                                         });
                                       },
@@ -333,8 +258,9 @@ class _AddIncidentPageState extends ConsumerState<AddIncidentPage>
                                         color: AppColors.textColorBody,
                                       ),
                                       controller: TextEditingController(
-                                        text: _selectedTime != null
-                                            ? _selectedTime?.to24hFormat()
+                                        text: state.timeOccurredAt != null
+                                            ? state.timeOccurredAt
+                                                ?.to24hFormat()
                                             : "",
                                       ),
                                     ),
@@ -342,47 +268,41 @@ class _AddIncidentPageState extends ConsumerState<AddIncidentPage>
                                       showLabelText: false,
                                       labelText: "",
                                       hintText: "Estado...",
-                                      suffixIcon: IconButton(
-                                        onPressed: () {
-                                          debugPrint("Selecionar estado");
-                                        },
-                                        icon: const Icon(
-                                          Icons.arrow_circle_right,
-                                          color: AppColors.darkGreyColor10,
-                                          // size: 12,
-                                        ),
-                                      ),
+                                      controller: state.stateController,
+                                      onChanged: (value) =>
+                                          viewModel.onStateChange(value),
+                                      error: state.stateError,
                                     ),
                                     UITextFieldRounded(
                                       showLabelText: false,
                                       labelText: "",
-                                      hintText: "Bairro...",
-                                      suffixIcon: IconButton(
-                                        onPressed: () {
-                                          debugPrint("Selecionar bairro");
-                                        },
-                                        icon: const Icon(
-                                          Icons.arrow_circle_right,
-                                          color: AppColors.darkGreyColor10,
-                                          // size: 12,
-                                        ),
-                                      ),
+                                      hintText: "Cidade...",
+                                      controller: state.cityController,
+                                      onChanged: (value) =>
+                                          viewModel.onCityChange(value),
+                                      error: state.cityError,
                                     ),
-                                    const UITextFieldRounded(
+                                    UITextFieldRounded(
                                       showLabelText: false,
                                       labelText: "",
                                       hintText:
                                           "Rua,Avenida próximo (não precisa ser exato)",
+                                      onChanged: (v) =>
+                                          viewModel.onFullAddressChange(v),
+                                      error: state.errorFullAddress,
                                     ),
-                                    const UITextFieldRounded(
+                                    UITextFieldRounded(
                                       showLabelText: false,
                                       labelText: "",
                                       hintText:
                                           "Como acontence, conte mais detalhes...",
+                                      onChanged: (v) =>
+                                          viewModel.onHowToChange(v),
                                       maxLine: 8,
                                     ),
                                     UIElevatedButton(
                                       text: "Salvar incidente",
+                                      isEnabled: state.isFormValid,
                                       press: () {
                                         // Ação do botão
                                       },

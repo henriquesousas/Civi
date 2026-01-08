@@ -58,12 +58,14 @@ class _StepAddProductInfoDetailState
   }
 
   void _bindController() {
-    WidgetsBinding.instance.addPostFrameCallback((_) {
-      final state = ref.read(addProductViewModelProvider);
-      _licensePlateController.text = state.licencePlate ?? '';
-      _brandController.text = state.brand ?? '';
-      _yearController.text = state.year != null ? state.year.toString() : "";
-    });
+    WidgetsBinding.instance.addPostFrameCallback(
+      (_) {
+        final state = ref.read(addProductViewModelProvider);
+        _licensePlateController.text = state.licencePlate ?? '';
+        _brandController.text = state.brand ?? '';
+        _yearController.text = state.year != null ? state.year.toString() : "";
+      },
+    );
   }
 
   @override
