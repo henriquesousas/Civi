@@ -1,5 +1,5 @@
 import 'package:deehelp/core/base/use_case.dart';
-import 'package:deehelp/core/services/media/interfaces/image_storage.dart';
+import 'package:deehelp/core/services/storage/image_storage.dart';
 import 'package:deehelp/core/utils/result.dart';
 import 'package:deehelp/core/utils/unit.dart';
 import 'package:deehelp/features/products/domain/exceptions/delete_image_failure.dart';

@@ -1,6 +1,6 @@
-import 'package:deehelp/core/services/media/exception/image_picker_failure.dart';
-import 'package:deehelp/core/services/media/image_utils.dart';
-import 'package:deehelp/core/services/media/interfaces/image_compress.dart';
+import 'package:deehelp/core/services/image/image_picker_failure.dart';
+import 'package:deehelp/core/utils/image_utils.dart';
+import 'package:deehelp/core/services/image/image_compress.dart';
 import 'package:deehelp/core/utils/result.dart';
 import 'package:deehelp/features/products/domain/entities/image_media.dart';
 import 'package:image_picker/image_picker.dart';

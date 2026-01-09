@@ -1,4 +1,4 @@
-import 'package:deehelp/core/services/media/interfaces/image_compress.dart';
+import 'package:deehelp/core/services/image/image_compress.dart';
 import 'package:flutter_image_compress/flutter_image_compress.dart';
 
 class DefaultImageCompress implements ImageCompress {

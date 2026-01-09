@@ -1,6 +1,6 @@
 import 'package:deehelp/core/env.dart';
-import 'package:deehelp/core/services/media/interfaces/image_storage.dart';
-import 'package:deehelp/core/services/media/services/r2_cloudflare_image_storage.dart';
+import 'package:deehelp/core/services/storage/image_storage.dart';
+import 'package:deehelp/core/services/storage/r2_cloudflare_image_storage.dart';
 import 'package:deehelp/features/auth/external/di/authenticated_user_provider.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -12,7 +12,7 @@ final imageStorageServiceProvider = Provider<ImageStorage>((ref) {
   }
   return R2CloudFlareImageStorage(
     bucketName: "deehelp",
-    baseFolder: "products/${authenticatedUser!.id}",
+    baseFolder: "products/${authenticatedUser.id}",
     cdnUrl: Env.r2BaseUrl,
   );
 });

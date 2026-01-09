@@ -1,5 +1,5 @@
-import 'package:deehelp/core/services/media/services/default_image_compress.dart';
-import 'package:deehelp/core/services/media/services/default_image_picker.dart';
+import 'package:deehelp/core/services/image/default_image_compress.dart';
+import 'package:deehelp/core/services/image/default_image_picker.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 final imageCompressProvider = Provider<DefaultImageCompress>((ref) {

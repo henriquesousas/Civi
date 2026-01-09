@@ -1,4 +1,4 @@
-import 'package:deehelp/core/services/place.dart';
+import 'package:deehelp/core/services/location/place_model.dart';
 import 'package:geocoding/geocoding.dart';
 import 'package:geolocator/geolocator.dart';
 
@@ -44,7 +44,7 @@ class LocationService {
     );
   }
 
-  Future<Place?> getCurrentPlace() async {
+  Future<Placemodel?> getCurrentPlace() async {
     try {
       Position position = await LocationService().getCurrentPosition();
       List<Placemark> placemarks = await placemarkFromCoordinates(
@@ -52,7 +52,7 @@ class LocationService {
         position.longitude,
         localeIdentifier: "pt_BR",
       );
-      return Place.from(placemarks);
+      return Placemodel.from(placemarks);
     } catch (e) {
       return null;
     }

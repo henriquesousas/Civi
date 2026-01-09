@@ -1,6 +1,6 @@
 import 'package:dartz/dartz.dart';
 import 'package:deehelp/core/base/use_case.dart';
-import 'package:deehelp/core/services/media/interfaces/image_storage.dart';
+import 'package:deehelp/core/services/storage/image_storage.dart';
 import 'package:deehelp/core/utils/result.dart';
 import 'package:deehelp/features/products/domain/exceptions/add_product_failure.dart';
 import 'package:deehelp/features/products/domain/entities/image_media.dart';

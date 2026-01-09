@@ -1,7 +1,7 @@
 import 'package:deehelp/core/extensions/string_extension.dart';
 import 'package:deehelp/core/handlers/handle_command.dart';
 import 'package:deehelp/core/handlers/handler_error.dart';
-import 'package:deehelp/core/services/place.dart';
+import 'package:deehelp/core/services/location/place_model.dart';
 import 'package:deehelp/core/utils/unit.dart';
 import 'package:deehelp/features/incident/domain/entity/incident_local.dart';
 import 'package:deehelp/features/incident/domain/entity/incident_status.dart';
@@ -25,7 +25,7 @@ class AddIncidentViewmodel extends StateNotifier<AddIncidentState> {
 
   void selectTypeAlert(TypeAlert type) => state = state.copyWith(type: type);
 
-  void addCurrentPlace(Place place) {
+  void addCurrentPlace(Placemodel place) {
     state.stateController?.text = place.state;
     state.cityController?.text = place.city;
     state = state.copyWith(
