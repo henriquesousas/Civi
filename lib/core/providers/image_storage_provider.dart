@@ -1,11 +1,15 @@
 import 'package:deehelp/core/env.dart';
 import 'package:deehelp/core/services/media/interfaces/image_storage.dart';
 import 'package:deehelp/core/services/media/services/r2_cloudflare_image_storage.dart';
-import 'package:deehelp/features/auth/presentation/session/session_provider.dart';
+import 'package:deehelp/features/auth/external/di/authenticated_user_provider.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+//TODO: Acoplado a esse prover authenticatedUserProvider
 final imageStorageServiceProvider = Provider<ImageStorage>((ref) {
-  final authenticatedUser = ref.watch(userSessionProvider);
+  final authenticatedUser = ref.watch(authenticatedUserProvider);
+  if (authenticatedUser == null) {
+    throw Exception("User must be authenticated to access image storage.");
+  }
   return R2CloudFlareImageStorage(
     bucketName: "deehelp",
     baseFolder: "products/${authenticatedUser!.id}",

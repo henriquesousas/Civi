@@ -10,7 +10,7 @@ import 'package:deehelp/core/ui/widgets/button/ui_elevated_button.dart';
 import 'package:deehelp/core/ui/widgets/button/ui_hold_confirm_button.dart';
 import 'package:deehelp/core/ui/widgets/card/ui_custom_scaffold.dart';
 import 'package:deehelp/core/ui/widgets/textfield/ui_text_field_rounded.dart';
-import 'package:deehelp/features/auth/presentation/session/session_provider.dart';
+import 'package:deehelp/features/auth/external/di/authenticated_user_provider.dart';
 import 'package:deehelp/features/incident/domain/entity/type_alert.dart';
 import 'package:deehelp/features/incident/presentation/add/state/add_incident_state.dart';
 import 'package:deehelp/features/incident/presentation/add/widget/card_select_image.dart';
@@ -49,7 +49,7 @@ class _AddIncidentPageState extends ConsumerState<AddIncidentPage>
   Widget build(BuildContext context) {
     final state = ref.watch(addIncidentViewmodelProvider);
     final viewModel = ref.watch(addIncidentViewmodelProvider.notifier);
-    final session = ref.watch(userSessionProvider);
+    final session = ref.watch(authenticatedUserProvider);
 
     ref.listen<AddIncidentState>(
       addIncidentViewmodelProvider,

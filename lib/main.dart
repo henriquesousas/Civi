@@ -40,13 +40,15 @@ void main() async {
   runApp(const ProviderScope(child: MainApp()));
 }
 
-class MainApp extends StatelessWidget {
+class MainApp extends ConsumerWidget {
   const MainApp({super.key});
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     return OrientationBuilder(
       builder: (context, orientation) {
+        final router = ref.watch(goRouterProvider);
+
         return ScreenUtilInit(
           designSize: context.designSize(),
           minTextAdapt: true,
@@ -70,7 +72,7 @@ class MainApp extends StatelessWidget {
                 return locale;
               },
               locale: const Locale('pt', 'BR'),
-              routerConfig: MainRouter.router,
+              routerConfig: router,
               theme: AppTheme.lightTheme(context),
               themeMode: ThemeMode.light,
               title: "DeeHelp",
@@ -82,29 +84,3 @@ class MainApp extends StatelessWidget {
     );
   }
 }
-
-/**
- * 
-
-core
-	ui
-	providers
-	errors
-	utils
-	validation
-	notification
-	valueobjects
-	router
-	localization
-	res
-	base
-		entity.dart
-		usecase.dart
-		riverpod_base_page.dart
-feature
-	auth
-	dashboard
-	map
-	faq
-	profile
- */

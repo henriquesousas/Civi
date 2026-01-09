@@ -1,22 +1,22 @@
 import 'package:deehelp/core/extensions/screen_size_extension.dart';
+import 'package:deehelp/core/ui/theme/app_colors.dart';
 import 'package:deehelp/core/ui/theme/app_text_styles.dart';
+import 'package:deehelp/core/ui/theme/dimens.dart';
 import 'package:deehelp/core/ui/widgets/avatar/profile_image_with_upload_button_widget.dart';
 import 'package:deehelp/core/ui/widgets/button/ui_elevated_button.dart';
 import 'package:deehelp/core/ui/widgets/icon/ui_icon.dart';
-import 'package:deehelp/features/auth/presentation/session/session_provider.dart';
+import 'package:deehelp/features/auth/external/di/authenticated_user_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-
-import '../../../../core/ui/theme/app_colors.dart';
-import '../../../../core/ui/theme/dimens.dart';
 
 class ProfileHeader extends ConsumerWidget {
   const ProfileHeader({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final session = ref.watch(userSessionProvider);
+    // final session = ref.watch(userSessionProvider);
+    final session = ref.watch(authenticatedUserProvider);
 
     return SizedBox(
       width: context.percentWidth(1),

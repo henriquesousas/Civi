@@ -1,30 +1,21 @@
 import 'package:deehelp/core/handlers/handle_command.dart';
+import 'package:deehelp/core/handlers/handler_error.dart';
 import 'package:deehelp/features/auth/domain/entity/authenticated_user.dart';
 import 'package:deehelp/features/auth/domain/services/operation_status.dart';
-import 'package:deehelp/features/auth/domain/usecases/get_authenticated_user_usecase.dart';
 import 'package:deehelp/features/auth/domain/usecases/sign_in_with_google_usecase.dart';
 import 'package:deehelp/features/auth/domain/usecases/sign_out_usecase.dart';
 import 'package:deehelp/features/auth/presentation/auth/state/auth_state.dart';
-import 'package:deehelp/features/auth/presentation/session/session_notifier.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-
-import '../../../../core/handlers/handler_error.dart';
 
 class AuthViewModel extends StateNotifier<AuthState> {
   final SignInWithGoogleUseCase _signInWithGoogleUseCase;
   final SignOutUsecase _signOutUsecase;
-  final GetAuthenticatedUserUsecase _getAuthenticatedUserUsecase;
-  final SessionNotifier _sessionNotifier;
 
   AuthViewModel({
     required SignInWithGoogleUseCase signInWithGoogleUseCase,
     required SignOutUsecase signOutUsecase,
-    required GetAuthenticatedUserUsecase getAuthenticatedUserUsecase,
-    required SessionNotifier sessionNotifier,
   })  : _signInWithGoogleUseCase = signInWithGoogleUseCase,
         _signOutUsecase = signOutUsecase,
-        _getAuthenticatedUserUsecase = getAuthenticatedUserUsecase,
-        _sessionNotifier = sessionNotifier,
         super(const AuthState.initial());
 
   void signInWithGoogle() async {
@@ -32,10 +23,8 @@ class AuthViewModel extends StateNotifier<AuthState> {
       updateState: (newState) => state = newState,
       command: () async => await _signInWithGoogleUseCase.execute(),
       onLoading: () => const AuthState.loading(),
-      onSuccess: (authenticatedUser) {
-        _sessionNotifier.setSession(authenticatedUser);
-        return AuthState.authenticated(authenticatedUser);
-      },
+      onSuccess: (authenticatedUser) =>
+          AuthState.authenticated(authenticatedUser),
       onError: (error) {
         return handleError<AuthState>(
           error,
@@ -52,29 +41,10 @@ class AuthViewModel extends StateNotifier<AuthState> {
   void continueWithoutAccount() {
     state = const AuthState.loadingAuthWithoutAccount();
     final authenticatedUser = AuthenticatedUser.unauthenticated();
-    _sessionNotifier.setSession(authenticatedUser);
     state = AuthState.authenticated(authenticatedUser);
   }
 
   void signOut() async {
     await _signOutUsecase.execute();
-    _sessionNotifier.clearSession();
-  }
-
-  void getAuthenticatedUser() async {
-    try {
-      final getAuthenticatedUserResult =
-          await _getAuthenticatedUserUsecase.execute();
-      getAuthenticatedUserResult.when(
-        success: (user) async {
-          _sessionNotifier.setSession(user);
-          state = AuthState.authenticated(user);
-        },
-        failure: (error) => state = const AuthState.unauthenticated(),
-      );
-    } catch (e) {
-      state = AuthState.error(e.toString(), OperationStatus.failure);
-      return;
-    }
   }
 }

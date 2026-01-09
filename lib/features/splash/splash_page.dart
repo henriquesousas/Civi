@@ -4,7 +4,7 @@ import 'package:deehelp/core/ui/theme/app_colors.dart';
 import 'package:deehelp/core/ui/theme/app_text_styles.dart';
 import 'package:deehelp/core/ui/theme/dimens.dart';
 import 'package:deehelp/features/auth/domain/entity/authenticated_user.dart';
-import 'package:deehelp/features/auth/presentation/auth/providers/auth_view_model_provider.dart';
+import 'package:deehelp/features/auth/external/di/auth_view_model_provider.dart';
 import 'package:deehelp/features/auth/presentation/auth/state/auth_state.dart';
 import 'package:deehelp/features/splash/components/splash_bg.dart';
 import 'package:deehelp/features/splash/components/splash_content.dart';
@@ -34,9 +34,9 @@ class _SplashPageState extends ConsumerState<SplashPage> {
   }
 
   void _checkUserAuthentication() async {
-    await Future.delayed(const Duration(milliseconds: 5000));
+    await Future.delayed(const Duration(milliseconds: 3000));
     WidgetsBinding.instance.addPostFrameCallback((_) async {
-      ref.watch(authViewViewModelProvider.notifier).getAuthenticatedUser();
+      context.pushReplacement(AppRouter.onboarding);
     });
   }
 

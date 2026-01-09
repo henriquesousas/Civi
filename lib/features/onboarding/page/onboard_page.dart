@@ -1,7 +1,6 @@
 import 'dart:async';
 
-import 'package:deehelp/features/auth/presentation/auth/providers/auth_view_model_provider.dart';
-import 'package:deehelp/core/router/app_router.dart';
+import 'package:deehelp/features/auth/external/di/auth_view_model_provider.dart';
 import 'package:deehelp/core/extensions/dialog_extension.dart';
 import 'package:deehelp/features/auth/presentation/auth/state/auth_state.dart';
 import 'package:deehelp/features/onboarding/page/components/onboard_content.dart';
@@ -10,9 +9,6 @@ import 'package:deehelp/features/onboarding/page/onboard_view.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:go_router/go_router.dart';
-
-import '../../auth/domain/entity/authenticated_user.dart';
 
 class OnboardPage extends ConsumerStatefulWidget {
   const OnboardPage({super.key});
@@ -108,12 +104,12 @@ class _OnboardPageState extends ConsumerState<OnboardPage> {
       authViewViewModelProvider,
       (previousState, currentState) {
         switch (currentState) {
-          case AuthStateAuthenticated(:final user):
-            final router = user.authMethod == AuthMethod.google
-                ? AppRouter.addNickname
-                : AppRouter.map;
-            context.pushReplacement(router);
-            return;
+          // case AuthStateAuthenticated(:final user):
+          //   final router = user.authMethod == AuthMethod.google
+          //       ? AppRouter.addNickname
+          //       : AppRouter.map;
+          //   context.pushReplacement(router);
+          // return;
           case AuthStateError(:final error):
             {
               context.showSnackBar(

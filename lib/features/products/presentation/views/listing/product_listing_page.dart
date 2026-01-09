@@ -3,7 +3,7 @@ import 'package:deehelp/core/ui/theme/app_colors.dart';
 import 'package:deehelp/core/ui/widgets/button/ui_elevated_icon_button.dart';
 import 'package:deehelp/core/ui/widgets/empty/empty_state_widget.dart';
 import 'package:deehelp/core/ui/widgets/shimmer_animation.dart';
-import 'package:deehelp/features/auth/presentation/session/session_provider.dart';
+import 'package:deehelp/features/auth/external/di/authenticated_user_provider.dart';
 import 'package:deehelp/features/products/domain/entities/product.dart';
 import 'package:deehelp/features/products/presentation/views/listing/widgets/product_list_card_tile.dart';
 import 'package:deehelp/core/base/base_page.dart';
@@ -33,8 +33,10 @@ class _ProductListingPageState extends BasePageState<ProductListingPage> {
   void initState() {
     super.initState();
     WidgetsBinding.instance.addPostFrameCallback((_) {
-      final userId = ref.watch(userSessionProvider)!.id;
-      ref.read(productListingViewmodelProvider.notifier).getProducts(userId);
+      final userId = ref.watch(authenticatedUserProvider)?.id;
+      if (userId != null) {
+        ref.read(productListingViewmodelProvider.notifier).getProducts(userId);
+      }
     });
   }
 

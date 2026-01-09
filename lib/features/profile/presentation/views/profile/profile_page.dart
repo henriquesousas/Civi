@@ -1,7 +1,7 @@
 import 'package:deehelp/core/ui/widgets/card/ui_custom_scaffold.dart';
-import 'package:deehelp/features/profile/presentation/widgets/profile_content.dart';
-import 'package:deehelp/features/profile/presentation/widgets/profile_header.dart';
-import 'package:deehelp/features/profile/presentation/widgets/profile_logout.dart';
+import 'package:deehelp/features/profile/presentation/views/profile/widgets/profile_content.dart';
+import 'package:deehelp/features/profile/presentation/views/profile/widgets/profile_header.dart';
+import 'package:deehelp/features/profile/presentation/views/profile/widgets/profile_logout.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';

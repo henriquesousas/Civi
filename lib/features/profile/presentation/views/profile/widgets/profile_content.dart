@@ -1,25 +1,25 @@
 import 'package:deehelp/core/ui/theme/app_text_styles.dart';
 import 'package:deehelp/core/utils/url_launcher_utils.dart';
-import 'package:deehelp/features/auth/presentation/session/session_provider.dart';
+import 'package:deehelp/features/auth/external/di/authenticated_user_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
 
-import '../../../../core/ui/widgets/image/ui_my_assets_image_widget.dart';
-import '../../../../core/res/resources.dart';
-import '../../../../core/router/app_router.dart';
-import '../../../../core/ui/theme/app_colors.dart';
-import '../../../../core/ui/theme/dimens.dart';
-import '../../../../core/ui/widgets/card/ui_custom_app_card.dart';
-import '../../../../core/ui/widgets/card/ui_custon_list_tile_card.dart';
+import '../../../../../../core/ui/widgets/image/ui_my_assets_image_widget.dart';
+import '../../../../../../core/res/resources.dart';
+import '../../../../../../core/router/app_router.dart';
+import '../../../../../../core/ui/theme/app_colors.dart';
+import '../../../../../../core/ui/theme/dimens.dart';
+import '../../../../../../core/ui/widgets/card/ui_custom_app_card.dart';
+import '../../../../../../core/ui/widgets/card/ui_custon_list_tile_card.dart';
 
 class ProfileContent extends ConsumerWidget {
   const ProfileContent({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final session = ref.watch(userSessionProvider);
+    final session = ref.watch(authenticatedUserProvider);
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: Dimens.defaultPadding),
       child: UICustomAppCard(

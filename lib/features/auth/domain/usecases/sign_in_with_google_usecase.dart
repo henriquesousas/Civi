@@ -20,9 +20,10 @@ class SignInWithGoogleUseCase extends UseCaseWithoutParam<AuthenticatedUser> {
   Future<Result<AuthenticatedUser>> execute() async {
     final googleAuth = await _googleAuthService.auth();
 
-//TODO: Refatorar
     if (googleAuth.isFailure) {
-      return Result.failure(AuthFailure("sasasas"));
+      return Result.failure(const AuthFailure(
+        "Não foi possível se autenticar com o Google.",
+      ));
     }
 
     final credentials = googleAuth.data!;
@@ -30,12 +31,5 @@ class SignInWithGoogleUseCase extends UseCaseWithoutParam<AuthenticatedUser> {
       credentials.idToken,
       credentials.accessToken,
     );
-
-    // return await _googleAuthService.auth().flatMap(
-    //       (credential) => _authRepository.signInWithCredentials(
-    //         credential.idToken,
-    //         credential.accessToken,
-    //       ),
-    // );
   }
 }

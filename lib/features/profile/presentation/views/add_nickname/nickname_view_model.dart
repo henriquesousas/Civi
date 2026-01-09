@@ -1,13 +1,13 @@
 import 'package:deehelp/core/handlers/handler_error.dart';
 import 'package:deehelp/features/auth/domain/entity/authenticated_user.dart';
 import 'package:deehelp/features/auth/domain/utils/nickname_utils.dart';
-import 'package:deehelp/features/auth/domain/usecases/add_nick_name_usecase.dart';
-import 'package:deehelp/features/auth/presentation/nickname/state/nickname_state.dart';
+import 'package:deehelp/features/profile/domain/usecase/add-nickname/add_nick_name_usecase.dart';
+import 'package:deehelp/features/profile/presentation/views/add_nickname/state/nickname_state.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import '../../../../core/utils/unit.dart';
-import '../../../../core/handlers/handle_command.dart';
-import '../../domain/usecases/add_nick_name_dto.dart';
+import '../../../../../core/utils/unit.dart';
+import '../../../../../core/handlers/handle_command.dart';
+import '../../../domain/usecase/add-nickname/add_nick_name_dto.dart';
 
 class NicknameViewModel extends StateNotifier<NicknameState> {
   final AddNickNameUsecase _addNickNameUsecase;

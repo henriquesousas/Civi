@@ -1,12 +1,16 @@
 import 'package:deehelp/core/utils/unit.dart';
 import 'package:deehelp/core/utils/result.dart';
 import 'package:deehelp/features/auth/domain/entity/authenticated_user.dart';
-import 'package:deehelp/features/auth/domain/exceptions/unauthenticated_failure.dart';
 import 'package:deehelp/features/auth/domain/repositories/auth_repository.dart';
 import 'package:deehelp/features/auth/domain/exceptions/sign_out_failure.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
-class SupabaseAuthRepository extends AuthRepository {
+abstract class AuthStateChangeNotifier {
+  Stream<Session?> onAuthStateChanged();
+}
+
+class SupabaseAuthRepository
+    implements AuthRepository, AuthStateChangeNotifier {
   final SupabaseClient _client;
 
   SupabaseAuthRepository({required SupabaseClient client}) : _client = client;
@@ -39,27 +43,6 @@ class SupabaseAuthRepository extends AuthRepository {
   }
 
   @override
-  Future<Result<AuthenticatedUser>> getCurrentUser() async {
-    final user = _client.auth.currentUser;
-    if (user == null) {
-      return Result.failure(const UnauthenticatedFailure());
-    }
-
-    final userId = user.id;
-    final name = user.userMetadata?['name'].toString() ?? '';
-    final email = user.email ?? '';
-    final photoUrl = user.userMetadata?['avatar_url'] as String?;
-
-    final authenticatedUser = AuthenticatedUser(
-      id: userId,
-      name: name,
-      email: email,
-      photoUrl: photoUrl,
-    );
-    return Result.success(authenticatedUser);
-  }
-
-  @override
   Future<Result<Unit>> signOut() async {
     try {
       await _client.auth.signOut();
@@ -69,11 +52,10 @@ class SupabaseAuthRepository extends AuthRepository {
     }
   }
 
-  // void authEvent() {
-  //   _client.auth.onAuthStateChange.listen((data) {
-  //     final event = data.event;
-  //     final session = data.session;
-  //     debugPrint('Auth event: $event, Session: $session');
-  //   });
-  // }
+  @override
+  Stream<Session?> onAuthStateChanged() {
+    return _client.auth.onAuthStateChange.map(
+      (event) => event.session,
+    );
+  }
 }

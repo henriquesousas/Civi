@@ -2,7 +2,7 @@ import 'package:deehelp/core/router/app_router.dart';
 import 'package:deehelp/core/ui/theme/app_colors.dart';
 import 'package:deehelp/core/ui/theme/app_text_styles.dart';
 import 'package:deehelp/core/ui/widgets/button/ui_elevated_button.dart';
-import 'package:deehelp/features/auth/presentation/auth/providers/auth_view_model_provider.dart';
+import 'package:deehelp/features/auth/external/di/auth_view_model_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';

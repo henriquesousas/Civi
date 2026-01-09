@@ -6,7 +6,7 @@ import 'package:deehelp/core/ui/theme/dimens.dart';
 import 'package:deehelp/core/ui/widgets/avatar/profile_image_with_upload_button_widget.dart';
 import 'package:deehelp/core/ui/widgets/card/ui_custom_scaffold.dart';
 import 'package:deehelp/core/ui/widgets/icon/ui_icon.dart';
-import 'package:deehelp/features/auth/presentation/session/session_provider.dart';
+import 'package:deehelp/features/auth/external/di/authenticated_user_provider.dart';
 import 'package:deehelp/features/dashboard/presentation/widget/dashboard_search_container.dart';
 import 'package:deehelp/features/dashboard/presentation/widget/dashbord_quick_actions_card.dart';
 import 'package:flutter/material.dart';
@@ -19,7 +19,7 @@ class DashsboardPage extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final session = ref.watch(userSessionProvider);
+    final session = ref.watch(authenticatedUserProvider);
     return UICustomScaffold(
       hideAppBar: true,
       body: Column(
