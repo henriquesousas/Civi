@@ -20,8 +20,11 @@ class AddIncidentViewmodel extends StateNotifier<AddIncidentState> {
   })  : _addIncidentImmediatelyUsecase = addIncidentImmediatelyUsecase,
         super(AddIncidentState.initial());
 
-  void selectProduct(Product product) =>
-      state = state.copyWith(product: product);
+  void clear() => state = state.copyWith(errorMessage: null);
+
+  void selectProduct(Product product) => state = state.copyWith(
+        product: product,
+      );
 
   void selectTypeAlert(TypeAlert type) => state = state.copyWith(type: type);
 
@@ -143,8 +146,8 @@ class AddIncidentViewmodel extends StateNotifier<AddIncidentState> {
       updateState: (newState) => state = newState,
       command: () => _addIncidentImmediatelyUsecase.execute(dto),
       onLoading: () => state.copyWith(errorMessage: null),
-      onSuccess: (result) => state =
-          state.copyWith(successMessage: "Incidente registrado com sucesso."),
+      onSuccess: (result) =>
+          state = state.copyWith(registeredsuccessfully: true),
       onError: (error) {
         return handleError<AddIncidentState>(
           error,

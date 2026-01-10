@@ -16,12 +16,17 @@ abstract final class Dimens {
   static const size22 = 22.0;
   static const size24 = 24.0;
   static const size26 = 26.0;
+  static const size32 = 32.0;
+  static const size36 = 36.0;
   static const size40 = 40.0;
   static const size50 = 50.0;
   static const size64 = 64.0;
+  static const size70 = 70.0;
   static const size90 = 90.0;
+  static const size120 = 120.0;
   static const size125 = 125.0;
   static const size140 = 140.0;
+  static const size160 = 160.0;
   static const size180 = 180.0;
   static const size200 = 200.0;
   static const size210 = 210.0;
@@ -36,6 +41,7 @@ abstract final class Dimens {
   static const profileImage = 90.0;
   static const profileImageRadius = 90.0;
   static const defaultScafoldPadding = 14.0;
+  static const defaultImageIndicator = 200.0;
 
   /// Horizontal padding for screen edges
   double get paddingScreenHorizontal;

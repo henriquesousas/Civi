@@ -24,7 +24,7 @@ mixin _$AddIncidentState {
   TimeOfDay? get timeOccurredAt;
   String? get errorTimeOccurredAt;
   String? get errorMessage;
-  String? get successMessage;
+  dynamic get registeredsuccessfully;
   TextEditingController? get stateController;
   String? get stateError;
   TextEditingController? get cityController;
@@ -63,8 +63,8 @@ mixin _$AddIncidentState {
                 other.errorTimeOccurredAt == errorTimeOccurredAt) &&
             (identical(other.errorMessage, errorMessage) ||
                 other.errorMessage == errorMessage) &&
-            (identical(other.successMessage, successMessage) ||
-                other.successMessage == successMessage) &&
+            const DeepCollectionEquality()
+                .equals(other.registeredsuccessfully, registeredsuccessfully) &&
             (identical(other.stateController, stateController) ||
                 other.stateController == stateController) &&
             (identical(other.stateError, stateError) ||
@@ -91,7 +91,7 @@ mixin _$AddIncidentState {
       timeOccurredAt,
       errorTimeOccurredAt,
       errorMessage,
-      successMessage,
+      const DeepCollectionEquality().hash(registeredsuccessfully),
       stateController,
       stateError,
       cityController,
@@ -101,7 +101,7 @@ mixin _$AddIncidentState {
 
   @override
   String toString() {
-    return 'AddIncidentState(currentPlace: $currentPlace, product: $product, fullAddress: $fullAddress, errorFullAddress: $errorFullAddress, howTo: $howTo, occurredAt: $occurredAt, errorOccurredAt: $errorOccurredAt, timeOccurredAt: $timeOccurredAt, errorTimeOccurredAt: $errorTimeOccurredAt, errorMessage: $errorMessage, successMessage: $successMessage, stateController: $stateController, stateError: $stateError, cityController: $cityController, cityError: $cityError, type: $type, isFormValid: $isFormValid)';
+    return 'AddIncidentState(currentPlace: $currentPlace, product: $product, fullAddress: $fullAddress, errorFullAddress: $errorFullAddress, howTo: $howTo, occurredAt: $occurredAt, errorOccurredAt: $errorOccurredAt, timeOccurredAt: $timeOccurredAt, errorTimeOccurredAt: $errorTimeOccurredAt, errorMessage: $errorMessage, registeredsuccessfully: $registeredsuccessfully, stateController: $stateController, stateError: $stateError, cityController: $cityController, cityError: $cityError, type: $type, isFormValid: $isFormValid)';
   }
 }
 
@@ -122,7 +122,7 @@ abstract mixin class $AddIncidentStateCopyWith<$Res> {
       TimeOfDay? timeOccurredAt,
       String? errorTimeOccurredAt,
       String? errorMessage,
-      String? successMessage,
+      dynamic registeredsuccessfully,
       TextEditingController? stateController,
       String? stateError,
       TextEditingController? cityController,
@@ -154,7 +154,7 @@ class _$AddIncidentStateCopyWithImpl<$Res>
     Object? timeOccurredAt = freezed,
     Object? errorTimeOccurredAt = freezed,
     Object? errorMessage = freezed,
-    Object? successMessage = freezed,
+    Object? registeredsuccessfully = freezed,
     Object? stateController = freezed,
     Object? stateError = freezed,
     Object? cityController = freezed,
@@ -203,10 +203,10 @@ class _$AddIncidentStateCopyWithImpl<$Res>
           ? _self.errorMessage
           : errorMessage // ignore: cast_nullable_to_non_nullable
               as String?,
-      successMessage: freezed == successMessage
-          ? _self.successMessage
-          : successMessage // ignore: cast_nullable_to_non_nullable
-              as String?,
+      registeredsuccessfully: freezed == registeredsuccessfully
+          ? _self.registeredsuccessfully
+          : registeredsuccessfully // ignore: cast_nullable_to_non_nullable
+              as dynamic,
       stateController: freezed == stateController
           ? _self.stateController
           : stateController // ignore: cast_nullable_to_non_nullable
@@ -339,7 +339,7 @@ extension AddIncidentStatePatterns on AddIncidentState {
             TimeOfDay? timeOccurredAt,
             String? errorTimeOccurredAt,
             String? errorMessage,
-            String? successMessage,
+            dynamic registeredsuccessfully,
             TextEditingController? stateController,
             String? stateError,
             TextEditingController? cityController,
@@ -363,7 +363,7 @@ extension AddIncidentStatePatterns on AddIncidentState {
             _that.timeOccurredAt,
             _that.errorTimeOccurredAt,
             _that.errorMessage,
-            _that.successMessage,
+            _that.registeredsuccessfully,
             _that.stateController,
             _that.stateError,
             _that.cityController,
@@ -401,7 +401,7 @@ extension AddIncidentStatePatterns on AddIncidentState {
             TimeOfDay? timeOccurredAt,
             String? errorTimeOccurredAt,
             String? errorMessage,
-            String? successMessage,
+            dynamic registeredsuccessfully,
             TextEditingController? stateController,
             String? stateError,
             TextEditingController? cityController,
@@ -424,7 +424,7 @@ extension AddIncidentStatePatterns on AddIncidentState {
             _that.timeOccurredAt,
             _that.errorTimeOccurredAt,
             _that.errorMessage,
-            _that.successMessage,
+            _that.registeredsuccessfully,
             _that.stateController,
             _that.stateError,
             _that.cityController,
@@ -461,7 +461,7 @@ extension AddIncidentStatePatterns on AddIncidentState {
             TimeOfDay? timeOccurredAt,
             String? errorTimeOccurredAt,
             String? errorMessage,
-            String? successMessage,
+            dynamic registeredsuccessfully,
             TextEditingController? stateController,
             String? stateError,
             TextEditingController? cityController,
@@ -484,7 +484,7 @@ extension AddIncidentStatePatterns on AddIncidentState {
             _that.timeOccurredAt,
             _that.errorTimeOccurredAt,
             _that.errorMessage,
-            _that.successMessage,
+            _that.registeredsuccessfully,
             _that.stateController,
             _that.stateError,
             _that.cityController,
@@ -511,7 +511,7 @@ class _AddIncidentState implements AddIncidentState {
       this.timeOccurredAt,
       this.errorTimeOccurredAt,
       this.errorMessage,
-      this.successMessage,
+      this.registeredsuccessfully = false,
       this.stateController,
       this.stateError,
       this.cityController,
@@ -540,7 +540,8 @@ class _AddIncidentState implements AddIncidentState {
   @override
   final String? errorMessage;
   @override
-  final String? successMessage;
+  @JsonKey()
+  final dynamic registeredsuccessfully;
   @override
   final TextEditingController? stateController;
   @override
@@ -587,8 +588,8 @@ class _AddIncidentState implements AddIncidentState {
                 other.errorTimeOccurredAt == errorTimeOccurredAt) &&
             (identical(other.errorMessage, errorMessage) ||
                 other.errorMessage == errorMessage) &&
-            (identical(other.successMessage, successMessage) ||
-                other.successMessage == successMessage) &&
+            const DeepCollectionEquality()
+                .equals(other.registeredsuccessfully, registeredsuccessfully) &&
             (identical(other.stateController, stateController) ||
                 other.stateController == stateController) &&
             (identical(other.stateError, stateError) ||
@@ -615,7 +616,7 @@ class _AddIncidentState implements AddIncidentState {
       timeOccurredAt,
       errorTimeOccurredAt,
       errorMessage,
-      successMessage,
+      const DeepCollectionEquality().hash(registeredsuccessfully),
       stateController,
       stateError,
       cityController,
@@ -625,7 +626,7 @@ class _AddIncidentState implements AddIncidentState {
 
   @override
   String toString() {
-    return 'AddIncidentState(currentPlace: $currentPlace, product: $product, fullAddress: $fullAddress, errorFullAddress: $errorFullAddress, howTo: $howTo, occurredAt: $occurredAt, errorOccurredAt: $errorOccurredAt, timeOccurredAt: $timeOccurredAt, errorTimeOccurredAt: $errorTimeOccurredAt, errorMessage: $errorMessage, successMessage: $successMessage, stateController: $stateController, stateError: $stateError, cityController: $cityController, cityError: $cityError, type: $type, isFormValid: $isFormValid)';
+    return 'AddIncidentState(currentPlace: $currentPlace, product: $product, fullAddress: $fullAddress, errorFullAddress: $errorFullAddress, howTo: $howTo, occurredAt: $occurredAt, errorOccurredAt: $errorOccurredAt, timeOccurredAt: $timeOccurredAt, errorTimeOccurredAt: $errorTimeOccurredAt, errorMessage: $errorMessage, registeredsuccessfully: $registeredsuccessfully, stateController: $stateController, stateError: $stateError, cityController: $cityController, cityError: $cityError, type: $type, isFormValid: $isFormValid)';
   }
 }
 
@@ -648,7 +649,7 @@ abstract mixin class _$AddIncidentStateCopyWith<$Res>
       TimeOfDay? timeOccurredAt,
       String? errorTimeOccurredAt,
       String? errorMessage,
-      String? successMessage,
+      dynamic registeredsuccessfully,
       TextEditingController? stateController,
       String? stateError,
       TextEditingController? cityController,
@@ -680,7 +681,7 @@ class __$AddIncidentStateCopyWithImpl<$Res>
     Object? timeOccurredAt = freezed,
     Object? errorTimeOccurredAt = freezed,
     Object? errorMessage = freezed,
-    Object? successMessage = freezed,
+    Object? registeredsuccessfully = freezed,
     Object? stateController = freezed,
     Object? stateError = freezed,
     Object? cityController = freezed,
@@ -729,10 +730,10 @@ class __$AddIncidentStateCopyWithImpl<$Res>
           ? _self.errorMessage
           : errorMessage // ignore: cast_nullable_to_non_nullable
               as String?,
-      successMessage: freezed == successMessage
-          ? _self.successMessage
-          : successMessage // ignore: cast_nullable_to_non_nullable
-              as String?,
+      registeredsuccessfully: freezed == registeredsuccessfully
+          ? _self.registeredsuccessfully
+          : registeredsuccessfully // ignore: cast_nullable_to_non_nullable
+              as dynamic,
       stateController: freezed == stateController
           ? _self.stateController
           : stateController // ignore: cast_nullable_to_non_nullable

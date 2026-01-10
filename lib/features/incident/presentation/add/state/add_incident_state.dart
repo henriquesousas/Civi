@@ -19,7 +19,7 @@ abstract class AddIncidentState with _$AddIncidentState {
     TimeOfDay? timeOccurredAt,
     String? errorTimeOccurredAt,
     String? errorMessage,
-    String? successMessage,
+     @Default(false) registeredsuccessfully,
     TextEditingController? stateController,
     String? stateError,
     TextEditingController? cityController,

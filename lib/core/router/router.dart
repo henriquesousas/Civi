@@ -9,9 +9,7 @@ import 'package:deehelp/features/profile/presentation/views/add_nickname/add_nic
 import 'package:deehelp/features/dashboard/presentation/dashsboard_page.dart';
 import 'package:deehelp/features/faq/faq_provider.dart';
 import 'package:deehelp/features/incident/presentation/add/add_incident_page.dart';
-import 'package:deehelp/features/incident/presentation/add/alert_error_screen.dart';
-import 'package:deehelp/features/incident/presentation/add/incide_success_screen.dart';
-import 'package:deehelp/features/incident/presentation/add/sending_alert_screen.dart';
+import 'package:deehelp/features/incident/presentation/add/widget/error/incident_error_widget.dart';
 import 'package:deehelp/features/map/presentation/map_page.dart';
 import 'package:deehelp/features/onboarding/page/onboard_page.dart';
 import 'package:deehelp/features/products/domain/entities/product.dart';
@@ -160,36 +158,36 @@ var goRouterProvider = Provider<GoRouter>(
             child: const AddIncidentPage(),
           ),
         ),
-        GoRoute(
-          path: AppRouter.addIncidentSuccess,
-          pageBuilder: (context, state) => slideTransitionPage(
-            key: state.pageKey,
-            child: IncidentSuccessScreen(
-              vehicleType: 'carro',
-              location: 'Centro, São Paulo - SP',
-              incidentTime: DateTime.now(),
-            ),
-          ),
-        ),
+        // GoRoute(
+        //   path: AppRouter.addIncidentSuccess,
+        //   pageBuilder: (context, state) => slideTransitionPage(
+        //     key: state.pageKey,
+        //     child: IncidentRegisteredSuccessfullyWidget(
+        //       vehicleType: 'carro',
+        //       location: 'Centro, São Paulo - SP',
+        //       incidentTime: DateTime.now(),
+        //     ),
+        //   ),
+        // ),
         GoRoute(
           path: AppRouter.addIncidentError,
           pageBuilder: (context, state) => slideTransitionPage(
             key: state.pageKey,
-            child: AlertErrorScreen(
+            child: IncidentErrorWidget(
               onRetry: () {},
             ),
           ),
         ),
-        GoRoute(
-          path: AppRouter.sendIncident,
-          pageBuilder: (context, state) => slideTransitionPage(
-            key: state.pageKey,
-            child: const SendingAlertScreen(
-              vehicleType: 'carro',
-              location: 'Centro, São Paulo - SP',
-            ),
-          ),
-        ),
+        // GoRoute(
+        //   path: AppRouter.sendIncident,
+        //   pageBuilder: (context, state) => slideTransitionPage(
+        //     key: state.pageKey,
+        //     child: const SendingAlertScreen(
+        //       vehicleType: 'carro',
+        //       location: 'Centro, São Paulo - SP',
+        //     ),
+        //   ),
+        // ),
         GoRoute(
           path: AppRouter.addNickname,
           pageBuilder: (context, state) {

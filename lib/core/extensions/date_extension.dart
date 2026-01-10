@@ -10,13 +10,4 @@ extension DateExtension on DateTime {
     final format = DateFormat("d 'de' MMMM 'de' y", 'pt_BR');
     return format.format(this);
   }
-
-  //TODO: Formatar
-  // String formatDateTime(DateTime datetime) {
-  //   final day =
-  //       '${datetime.day.toString().padLeft(2, '0')}/${datetime.month.toString().padLeft(2, '0')}/${datetime.year}';
-  //   final hour =
-  //       '${datetime.hour.toString().padLeft(2, '0')}:${datetime.minute.toString().padLeft(2, '0')}';
-  //   return '$day às $hour';
-  // }
 }

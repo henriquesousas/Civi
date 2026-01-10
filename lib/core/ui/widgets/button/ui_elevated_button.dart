@@ -1,6 +1,7 @@
 import 'package:deehelp/core/ui/theme/app_colors.dart';
 import 'package:deehelp/core/ui/theme/app_text_styles.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../../theme/dimens.dart';
 
 class UIElevatedButton extends StatelessWidget {
@@ -17,6 +18,7 @@ class UIElevatedButton extends StatelessWidget {
   final bool isLoading;
   final bool isEnabled;
   final IconAlignment iconAlignment;
+  final TextStyle? textStyle;
   final void Function() press;
 
   const UIElevatedButton({
@@ -35,6 +37,7 @@ class UIElevatedButton extends StatelessWidget {
     this.textColor = Colors.white,
     this.borderColor = Colors.transparent,
     this.iconAlignment = IconAlignment.start,
+    this.textStyle,
   });
 
   @override
@@ -74,9 +77,10 @@ class UIElevatedButton extends StatelessWidget {
                   )
                 : Text(
                     text,
-                    style: context.appTextStyles.buttonTextStyle1.copyWith(
-                      color: textColor,
-                    ),
+                    style: textStyle ??
+                        context.appTextStyles.buttonTextStyle1.copyWith(
+                          color: textColor,
+                        ),
                   ),
           )
         : ElevatedButton(
@@ -106,15 +110,16 @@ class UIElevatedButton extends StatelessWidget {
             ),
             child: isLoading
                 ? SizedBox(
-                    height: 20,
-                    width: 20,
+                    height: Dimens.size20.h,
+                    width: Dimens.size20.w,
                     child: CircularProgressIndicator(color: textColor),
                   )
                 : Text(
                     text,
-                    style: context.appTextStyles.buttonTextStyle1.copyWith(
-                      color: textColor,
-                    ),
+                    style: textStyle ??
+                        context.appTextStyles.buttonTextStyle1.copyWith(
+                          color: textColor,
+                        ),
                   ),
           );
   }

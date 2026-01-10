@@ -12,9 +12,11 @@ import 'package:deehelp/core/ui/widgets/card/ui_custom_scaffold.dart';
 import 'package:deehelp/core/ui/widgets/textfield/ui_text_field_rounded.dart';
 import 'package:deehelp/features/auth/external/di/authenticated_user_provider.dart';
 import 'package:deehelp/features/incident/domain/entity/type_alert.dart';
-import 'package:deehelp/features/incident/presentation/add/state/add_incident_state.dart';
+import 'package:deehelp/features/incident/presentation/add/widget/loading/incident_loading_screen.dart';
 import 'package:deehelp/features/incident/presentation/add/widget/card_select_image.dart';
 import 'package:deehelp/features/incident/presentation/add/widget/card_type_incident.dart';
+import 'package:deehelp/features/incident/presentation/add/widget/error/incident_error_widget.dart';
+import 'package:deehelp/features/incident/presentation/add/widget/success/incident_registred_successfully_widget.dart';
 import 'package:deehelp/features/incident/presentation/providers/incident_viewmodel_providers.dart';
 import 'package:deehelp/features/products/domain/entities/product.dart';
 import 'package:deehelp/features/products/presentation/views/listing/product_listing_page.dart';
@@ -51,19 +53,26 @@ class _AddIncidentPageState extends ConsumerState<AddIncidentPage>
     final viewModel = ref.watch(addIncidentViewmodelProvider.notifier);
     final session = ref.watch(authenticatedUserProvider);
 
-    ref.listen<AddIncidentState>(
-      addIncidentViewmodelProvider,
-      (previous, currentState) {
-        if (currentState.errorMessage != null &&
-            currentState.errorMessage != "") {
-          // context.push(AppRouter.addIncidentError);
-        }
-        if (currentState.successMessage != null &&
-            currentState.successMessage != "") {
-          // context.pushReplacement(AppRouter.addIncidentSuccess);
-        }
+    return IncidentLoadingScreen(
+      incidentData: {
+        'tipo': 'Roubo de Celular',
+        'local': 'Centro, Rua Principal',
+        'data': DateTime.now(),
+        'descricao': 'Descrição do incidente...',
       },
     );
+
+    if (state.registeredsuccessfully) {
+      return const IncidentRegisteredSuccessfullyWidget();
+    }
+
+    if (state.errorMessage != null) {
+      return IncidentErrorWidget(
+        onRetry: () => viewModel.clear(),
+        errorCode: 0,
+        errorMessage: state.errorMessage,
+      );
+    }
 
     return UICustomScaffold(
       pageTitle: "Registrar incidente",
