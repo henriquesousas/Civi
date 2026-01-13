@@ -10,6 +10,7 @@ class IncidentModel {
 
   static Map<String, dynamic> toMap(Incident incident) {
     return {
+      'alert_id': incident.alertId,
       'product_id': incident.product.id.value,
       'user_id': incident.userId,
       'type': incident.type.name,

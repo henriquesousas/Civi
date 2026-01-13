@@ -82,7 +82,7 @@ class AppTextStyles {
     return _baseStyle.copyWith(
       fontSize: 12.sp,
       fontWeight: FontWeight.w400,
-      // height: 16 / 12,
+      height: 16 / 12,
       letterSpacing: 0,
     );
   }

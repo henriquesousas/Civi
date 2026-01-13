@@ -1,6 +1,6 @@
 import 'package:deehelp/core/ui/theme/app_text_styles.dart';
 import 'package:deehelp/core/ui/theme/dimens.dart';
-import 'package:deehelp/features/incident/presentation/add/widget/loading/incident_summary_tile_widget.dart';
+import 'package:deehelp/features/incident/presentation/add/widget/incident_summary_tile_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 

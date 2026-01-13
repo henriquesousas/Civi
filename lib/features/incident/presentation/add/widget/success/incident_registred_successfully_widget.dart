@@ -39,14 +39,14 @@ class IncidentRegisteredSuccessfullyWidget extends StatelessWidget {
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Padding(
-                    padding: const EdgeInsets.all(Dimens.size10),
-                    child: IconButton(
-                      icon: const Icon(Icons.close, color: Colors.white),
-                      onPressed: () => context.pop(),
-                      splashRadius: 20,
-                    ),
-                  ),
+                  // Padding(
+                  //   padding: const EdgeInsets.all(Dimens.size10),
+                  //   child: IconButton(
+                  //     icon: const Icon(Icons.close, color: Colors.white),
+                  //     onPressed: () => context.pop(),
+                  //     splashRadius: 20,
+                  //   ),
+                  // ),
                   Expanded(
                     child: SingleChildScrollView(
                       physics: const BouncingScrollPhysics(),

@@ -1,13 +1,16 @@
 import 'dart:math';
 
 import 'package:deehelp/core/extensions/date_extension.dart';
+import 'package:deehelp/core/extensions/time_extension.dart';
 import 'package:deehelp/core/ui/theme/app_text_styles.dart';
 import 'package:deehelp/core/ui/theme/dimens.dart';
 import 'package:deehelp/core/ui/widgets/image/ui_my_network_image_widget.dart';
+import 'package:deehelp/features/incident/presentation/add/state/add_incident_state.dart';
 import 'package:deehelp/features/incident/presentation/add/widget/success/registered_tile_info.dart';
 import 'package:deehelp/features/incident/presentation/providers/incident_viewmodel_providers.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class RegisteredProductInfo extends ConsumerWidget {
   const RegisteredProductInfo({super.key});
@@ -15,6 +18,7 @@ class RegisteredProductInfo extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final state = ref.watch(addIncidentViewmodelProvider);
+
     return Container(
       width: double.infinity,
       padding: const EdgeInsets.all(24),
@@ -46,14 +50,15 @@ class RegisteredProductInfo extends ConsumerWidget {
           Center(
             child: Column(
               children: [
-                const UIMyNetworkImageWidget(
-                  radius: 90,
-                  imageUrl:
-                      "https://garagem360.com.br/wp-content/uploads/2022/09/volkswagen_crossfox_1.jpg",
+                UIMyNetworkImageWidget(
+                  width: Dimens.size90.w,
+                  height: Dimens.size90.h,
+                  radius: 200,
+                  imageUrl: state.product?.images.first.value ?? '',
                 ),
                 const SizedBox(height: 12),
                 Text(
-                  "Citroen C3 Tendance",
+                  state.product?.name ?? '',
                   style: context.appTextStyles.sectionTitle.copyWith(
                     color: Colors.white,
                     letterSpacing: 1.5,
@@ -74,35 +79,49 @@ class RegisteredProductInfo extends ConsumerWidget {
                   '${state.cityController?.text} - ${state.stateController?.text} ',
             ),
           ],
-          if (state.occurredAt != null) ...[
-            const SizedBox(height: Dimens.size20),
-            RegisteredTileInfo(
-              icon: Icons.access_time_filled,
-              title: 'Horário',
-              value: "${state.occurredAt?.toDayMonthYearFormat() ?? ''} ",
-            ),
-          ],
           const SizedBox(height: Dimens.size20),
           RegisteredTileInfo(
-            icon: Icons.fingerprint,
-            title: 'ID do Alerta',
-            value: 'INC${generateIncidentId()}',
+            icon: Icons.access_time_filled,
+            title: 'Data',
+            value: _getDate(state),
           ),
+          const SizedBox(height: Dimens.size20),
+          if (state.alertId != null) ...[
+            RegisteredTileInfo(
+              icon: Icons.fingerprint,
+              title: 'ID do Alerta',
+              value: state.alertId!,
+            ),
+          ],
         ],
       ),
     );
   }
 
-  String generateIncidentId() {
-    final timestamp = DateTime.now().millisecondsSinceEpoch;
-    final random = Random().nextInt(9000) + 1000; // 1000-9999 (nunca 0)
-    final nano = DateTime.now().microsecondsSinceEpoch % 1000;
-
-    // Combina: últimos 8 dígitos do timestamp + random + nano
-    final timestampPart = (timestamp % 100000000).toString().padLeft(8, '0');
-    final randomPart = random.toString();
-    final nanoPart = nano.toString().padLeft(3, '0');
-
-    return timestampPart.substring(0, 8) + randomPart + nanoPart;
+  String _getDate(AddIncidentState state) {
+    if (state.occurredAt == null && state.timeOccurredAt == null) {
+      return "Agora";
+    }
+    return "${state.occurredAt?.toDayMonthYearFormat() ?? ''} ${state.timeOccurredAt?.to24hFormat()}";
   }
+
+  // String _generateIncidentId() {
+  //   final random = Random();
+  //   final now = DateTime.now();
+
+  //   // Usa segundos do dia (0-86399) + random
+  //   final secondsToday = now.hour * 3600 + now.minute * 60 + now.second;
+
+  //   // Pega últimos 4 dígitos dos segundos
+  //   final timePart = secondsToday % 10000;
+
+  //   // Dígito aleatório (1-9) na frente
+  //   final randomDigit = random.nextInt(9) + 1;
+
+  //   // Combina: random(1) + time(4)
+  //   final idNumber =
+  //       (randomDigit * 10000 + timePart).toString().padLeft(5, '0');
+
+  //   return 'INC$idNumber';
+  // }
 }

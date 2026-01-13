@@ -9,9 +9,11 @@ abstract final class Dimens {
 
   static const size5 = 5.0;
   static const size10 = 10.0;
+  static const size12 = 12.0;
   static const size14 = 14.0;
   static const size15 = 15.0;
   static const size16 = 16.0;
+  static const size18 = 18.0;
   static const size20 = 20.0;
   static const size22 = 22.0;
   static const size24 = 24.0;
@@ -20,6 +22,7 @@ abstract final class Dimens {
   static const size36 = 36.0;
   static const size40 = 40.0;
   static const size50 = 50.0;
+  static const size60 = 60.0;
   static const size64 = 64.0;
   static const size70 = 70.0;
   static const size90 = 90.0;

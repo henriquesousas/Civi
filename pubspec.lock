@@ -101,18 +101,18 @@ packages:
     dependency: transitive
     description:
       name: aws_common
-      sha256: "602604e5910b719b6cc0ce79361369b18aee620f30d800420ba2f762e0070d86"
+      sha256: eebeefcb82603e0fd50adec3f916817c373e8347a3e195d8d7ee51aa94599eec
       url: "https://pub.dev"
     source: hosted
-    version: "0.7.11"
+    version: "0.7.8"
   aws_signature_v4:
     dependency: transitive
     description:
       name: aws_signature_v4
-      sha256: "1549e077f93e07908f84d778ca95c9a2b6cd52b2f32c1e8d9029bca969595738"
+      sha256: "857b37ca4d963548bf92917cfe5a30e59b56a35de0e2d482626b74f9df393d4c"
       url: "https://pub.dev"
     source: hosted
-    version: "0.6.9"
+    version: "0.6.6"
   bloc:
     dependency: transitive
     description:
@@ -973,6 +973,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.0.5"
+  js:
+    dependency: transitive
+    description:
+      name: js
+      sha256: "53385261521cc4a0c4658fd0ad07a7d14591cf8fc33abbceae306ddb974888dc"
+      url: "https://pub.dev"
+    source: hosted
+    version: "0.7.2"
   json_annotation:
     dependency: transitive
     description:
@@ -1097,10 +1105,10 @@ packages:
     dependency: transitive
     description:
       name: mime
-      sha256: "41a20518f0cb1256669420fdba0cd90d21561e560ac240f26ef8322e45bb7ed6"
+      sha256: "801fd0b26f14a4a58ccb09d5892c3fbdeff209594300a542492cf13fba9d247a"
       url: "https://pub.dev"
     source: hosted
-    version: "2.0.0"
+    version: "1.0.6"
   mocktail:
     dependency: "direct dev"
     description:
@@ -1333,6 +1341,22 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "0.28.0"
+  share_plus:
+    dependency: "direct main"
+    description:
+      name: share_plus
+      sha256: "3ef39599b00059db0990ca2e30fca0a29d8b37aae924d60063f8e0184cf20900"
+      url: "https://pub.dev"
+    source: hosted
+    version: "7.2.2"
+  share_plus_platform_interface:
+    dependency: transitive
+    description:
+      name: share_plus_platform_interface
+      sha256: "251eb156a8b5fa9ce033747d73535bf53911071f8d3b6f4f0b578505ce0d4496"
+      url: "https://pub.dev"
+    source: hosted
+    version: "3.4.0"
   shared_preferences:
     dependency: "direct main"
     description:
@@ -1738,6 +1762,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "2.1.0"
+  win32:
+    dependency: transitive
+    description:
+      name: win32
+      sha256: d7cb55e04cd34096cd3a79b3330245f54cb96a370a1c27adb3c84b917de8b08e
+      url: "https://pub.dev"
+    source: hosted
+    version: "5.15.0"
   wkt_parser:
     dependency: transitive
     description:

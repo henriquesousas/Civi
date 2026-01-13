@@ -53,6 +53,22 @@ extension DialogExtension on BuildContext {
     return result ?? false;
   }
 
+  void showDilaog(String title, String message) {
+    showDialog(
+      context: this,
+      builder: (context) => AlertDialog(
+        title: Text(title),
+        content: Text(message),
+        actions: [
+          TextButton(
+            onPressed: () => Navigator.pop(context),
+            child: const Text('OK'),
+          ),
+        ],
+      ),
+    );
+  }
+
   void showSnackBar(String message, {DialogType type = DialogType.success}) {
     ScaffoldMessenger.of(this).showSnackBar(
       SnackBar(

@@ -1,3 +1,4 @@
+import 'package:deehelp/core/ui/theme/app_colors.dart';
 import 'package:deehelp/core/ui/theme/app_text_styles.dart';
 import 'package:deehelp/core/ui/theme/dimens.dart';
 import 'package:flutter/material.dart';
@@ -19,7 +20,7 @@ class IncidentWarningWidget extends StatelessWidget {
           const Icon(
             Icons.warning_amber,
             size: Dimens.size20,
-            color: Colors.white,
+            color: AppColors.textColorBody,
           ),
           const SizedBox(width: 12),
           Expanded(
@@ -28,9 +29,9 @@ class IncidentWarningWidget extends StatelessWidget {
               children: [
                 Text(
                   "EM CASO DE PERIGO IMEDIATO:",
-                  style: context.appTextStyles.caption1Style.copyWith(
-                    fontWeight: FontWeight.w700,
-                    color: Colors.white,
+                  style: context.appTextStyles.sectionSubTitle1.copyWith(
+                    fontWeight: FontWeight.bold,
+                    color: AppColors.textColorBody,
                     letterSpacing: 1.1,
                   ),
                 ),
@@ -38,8 +39,8 @@ class IncidentWarningWidget extends StatelessWidget {
                 Text(
                   "Ligue para a polícia → 190",
                   style: context.appTextStyles.sectionBodyTextStyle.copyWith(
-                    fontWeight: FontWeight.w600,
-                    color: Colors.white,
+                    // fontWeight: FontWeight.w400,
+                    color: AppColors.textColorBody,
                     letterSpacing: 1.1,
                   ),
                 ),

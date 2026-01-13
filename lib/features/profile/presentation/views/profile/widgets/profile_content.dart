@@ -174,9 +174,10 @@ class ProfileContent extends ConsumerWidget {
                 color: AppColors.textColorHeader.withValues(alpha: 0.5),
               ),
               press: () => UrlLauncherUtils.launchWhatsAppSupport(
-                  context,
-                  "+5511972732245",
-                  "Olá! 👋 Queremos a sua ajuda para melhorar o app DeeHelp. Diga-nos: Qual é a sua dúvida ou sugestão sobre o funcionamento ou segurança? Sua opinião é essencial!"),
+                context,
+                "+5511972732245",
+                "Olá! 👋 Queremos a sua ajuda para melhorar o app DeeHelp. Diga-nos: Qual é a sua dúvida ou sugestão sobre o funcionamento ou segurança? Sua opinião é essencial!",
+              ),
             ),
             if (session != null) ...[
               UICustomListTileCard(

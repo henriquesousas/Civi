@@ -54,7 +54,7 @@ class DashbordQuickActionsCard extends StatelessWidget {
                 color: AppColors.lightGreyColor,
                 icon: const Icon(Icons.contact_support_outlined,
                     color: AppColors.darkGreyColor10),
-                onTap: () => debugPrint("clicked"),
+                onTap: () async {},
               ),
             ],
           ),

@@ -1,4 +1,6 @@
+import 'package:deehelp/core/extensions/date_extension.dart';
 import 'package:flutter/material.dart';
+import 'package:share_plus/share_plus.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:whatsapp_unilink/whatsapp_unilink.dart';
 
@@ -69,5 +71,45 @@ class UrlLauncherUtils {
       );
     }
     return false;
+  }
+
+  static Future<void> shareIncident(
+      BuildContext context, String incidentId, DateTime date) async {
+    final message = '''
+🚨 **ALERTA DE SEGURANÇA** 🚨
+
+Acabei de registrar um incidente de roubo no aplicativo [LABEL].
+
+🔢 **ID do Caso:** $incidentId
+📅 **Registrado em:** ${date.toDateWithFullMonth()}
+
+⚠️ **Estou compartilhando para:**
+• Alertar amigos e familiares
+• Aumentar a segurança coletiva
+• Contribuir com dados confiáveis para a comunidade
+
+📱 **Compartilhado via [LABEL]**
+Este app ajuda a manter a comunidade mais segura.
+Baixe agora: https://play.google.com/store/apps/details?id=com.seu.app
+
+
+#SegurançaComunitária #Alerta #Caso$incidentId
+''';
+
+    await Share.share(
+      message,
+      subject: 'Alerta de Segurança - Caso $incidentId',
+    );
+  }
+
+  static Future<void> makePhoneCall(String number) async {
+    final Uri dialerUri = Uri(scheme: 'tel', path: number);
+
+    if (await canLaunchUrl(dialerUri)) {
+      await launchUrl(dialerUri);
+      return;
+    }
+
+    throw Exception('Could not make the call...');
   }
 }

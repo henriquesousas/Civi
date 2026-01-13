@@ -19,18 +19,20 @@ abstract class AddIncidentState with _$AddIncidentState {
     TimeOfDay? timeOccurredAt,
     String? errorTimeOccurredAt,
     String? errorMessage,
-     @Default(false) registeredsuccessfully,
+    @Default(false) registeredsuccessfully,
     TextEditingController? stateController,
     String? stateError,
     TextEditingController? cityController,
     String? cityError,
     @Default(TypeAlert.none) TypeAlert type,
     @Default(false) bool isFormValid,
+    @Default(false) bool isLoading,
+    @Default(false) bool isProgressDone,
+    String? alertId,
   }) = _AddIncidentState;
 
   factory AddIncidentState.initial() => AddIncidentState(
         stateController: TextEditingController(text: ''),
         cityController: TextEditingController(text: ''),
-        product: null,
       );
 }

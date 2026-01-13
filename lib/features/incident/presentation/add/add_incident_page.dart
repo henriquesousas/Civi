@@ -12,10 +12,12 @@ import 'package:deehelp/core/ui/widgets/card/ui_custom_scaffold.dart';
 import 'package:deehelp/core/ui/widgets/textfield/ui_text_field_rounded.dart';
 import 'package:deehelp/features/auth/external/di/authenticated_user_provider.dart';
 import 'package:deehelp/features/incident/domain/entity/type_alert.dart';
-import 'package:deehelp/features/incident/presentation/add/widget/loading/incident_loading_screen.dart';
+import 'package:deehelp/features/incident/presentation/add/state/add_incident_state.dart';
 import 'package:deehelp/features/incident/presentation/add/widget/card_select_image.dart';
 import 'package:deehelp/features/incident/presentation/add/widget/card_type_incident.dart';
 import 'package:deehelp/features/incident/presentation/add/widget/error/incident_error_widget.dart';
+import 'package:deehelp/features/incident/presentation/add/widget/form/incident_warning_widget.dart';
+import 'package:deehelp/features/incident/presentation/add/widget/loading/loading_progress_page.dart';
 import 'package:deehelp/features/incident/presentation/add/widget/success/incident_registred_successfully_widget.dart';
 import 'package:deehelp/features/incident/presentation/providers/incident_viewmodel_providers.dart';
 import 'package:deehelp/features/products/domain/entities/product.dart';
@@ -53,25 +55,30 @@ class _AddIncidentPageState extends ConsumerState<AddIncidentPage>
     final viewModel = ref.watch(addIncidentViewmodelProvider.notifier);
     final session = ref.watch(authenticatedUserProvider);
 
-    return IncidentLoadingScreen(
-      incidentData: {
-        'tipo': 'Roubo de Celular',
-        'local': 'Centro, Rua Principal',
-        'data': DateTime.now(),
-        'descricao': 'Descrição do incidente...',
+    ref.listen<AddIncidentState>(
+      addIncidentViewmodelProvider,
+      (oldState, currentState) {
+        if (oldState?.isProgressDone != currentState.isProgressDone &&
+            currentState.isProgressDone) {
+          if (state.type == TypeAlert.immediately) {
+            viewModel.saveImmediatelly(session!.id);
+          }
+        }
       },
     );
+
+    if (state.isLoading) {
+      if (state.type == TypeAlert.immediately) {
+        return const LoadingProgressPage();
+      }
+    }
 
     if (state.registeredsuccessfully) {
       return const IncidentRegisteredSuccessfullyWidget();
     }
 
     if (state.errorMessage != null) {
-      return IncidentErrorWidget(
-        onRetry: () => viewModel.clear(),
-        errorCode: 0,
-        errorMessage: state.errorMessage,
-      );
+      return IncidentErrorWidget(onRetry: () {});
     }
 
     return UICustomScaffold(
@@ -132,19 +139,21 @@ class _AddIncidentPageState extends ConsumerState<AddIncidentPage>
                               ),
                               UIHoldConfirmButton(
                                 hapticFeedback: true,
-                                title: "Segure pra confirmar",
+                                title: state.isLoading
+                                    ? "Aguarde..."
+                                    : "Segure pra confirmar",
                                 textColor: AppColors.whiteColor,
                                 backgroundColor: AppColors.primaryColorDark,
                                 contentPadding: const EdgeInsets.all(22),
                                 onProgressCompleted: () async {
                                   if (session?.id != null) {
-                                    viewModel.saveImmediatelly(session!.id);
+                                    viewModel.startSave(
+                                      TypeAlert.immediately,
+                                    );
                                   }
                                 },
                                 onApiCall: () async {},
-                                onProgressChange: (v) {
-                                  debugPrint(v.toString());
-                                },
+                                onProgressChange: (v) {},
                               ),
                             ],
                           ),
@@ -304,18 +313,17 @@ class _AddIncidentPageState extends ConsumerState<AddIncidentPage>
                                       showLabelText: false,
                                       labelText: "",
                                       hintText:
-                                          "Como acontence, conte mais detalhes...",
+                                          "Como acontenceu, conte mais detalhes...",
                                       onChanged: (v) =>
                                           viewModel.onHowToChange(v),
                                       maxLine: 8,
                                     ),
                                     UIElevatedButton(
-                                      text: "Salvar incidente",
-                                      isEnabled: state.isFormValid,
-                                      press: () {
-                                        // Ação do botão
-                                      },
-                                    ),
+                                        text: "Salvar incidente",
+                                        isEnabled: state.isFormValid,
+                                        isLoading: state.isLoading,
+                                        press: () => viewModel
+                                            .saveDetailed(session!.id)),
                                   ],
                                 ),
                               ),
@@ -324,6 +332,8 @@ class _AddIncidentPageState extends ConsumerState<AddIncidentPage>
                         ),
                       ),
                     ),
+                    const Spacer(),
+                    const IncidentWarningWidget(),
                   ],
                 ),
               ),

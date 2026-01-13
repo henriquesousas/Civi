@@ -1,8 +1,6 @@
 import 'package:deehelp/core/extensions/string_extension.dart';
 import 'package:deehelp/core/handlers/handle_command.dart';
-import 'package:deehelp/core/handlers/handler_error.dart';
 import 'package:deehelp/core/services/location/place_model.dart';
-import 'package:deehelp/core/utils/unit.dart';
 import 'package:deehelp/features/incident/domain/entity/incident_local.dart';
 import 'package:deehelp/features/incident/domain/entity/incident_status.dart';
 import 'package:deehelp/features/incident/domain/entity/type_alert.dart';
@@ -12,12 +10,14 @@ import 'package:deehelp/features/incident/presentation/add/state/add_incident_st
 import 'package:deehelp/features/products/domain/entities/product.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:logging/logging.dart';
 
 class AddIncidentViewmodel extends StateNotifier<AddIncidentState> {
-  final AddIncidentUsecase _addIncidentImmediatelyUsecase;
+  static final _logger = Logger("AddIncidentViewmodel");
+  final AddIncidentUsecase _addIncidentUsecase;
   AddIncidentViewmodel({
     required AddIncidentUsecase addIncidentImmediatelyUsecase,
-  })  : _addIncidentImmediatelyUsecase = addIncidentImmediatelyUsecase,
+  })  : _addIncidentUsecase = addIncidentImmediatelyUsecase,
         super(AddIncidentState.initial());
 
   void clear() => state = state.copyWith(errorMessage: null);
@@ -37,18 +37,31 @@ class AddIncidentViewmodel extends StateNotifier<AddIncidentState> {
     );
   }
 
+  void finalizeProgress() {
+    state = state.copyWith(isProgressDone: true);
+  }
+
+  void startSave(TypeAlert type) {
+    state = state.copyWith(
+      isLoading: true,
+      type: type,
+    );
+  }
+
   void saveImmediatelly(String userId) async {
     final dto = AddIncidentDto(
-        product: state.product!,
-        userId: userId,
-        status: IncidentStatus.active,
-        type: TypeAlert.immediately,
-        occurredAt: DateTime.now(),
-        occurredAtTime: TimeOfDay.now());
+      product: state.product!,
+      userId: userId,
+      status: IncidentStatus.active,
+      type: TypeAlert.immediately,
+      occurredAt: DateTime.now(),
+      occurredAtTime: TimeOfDay.now(),
+    );
     _save(dto);
   }
 
   void saveDetailed(String userId) async {
+    startSave(TypeAlert.detailed);
     final dto = AddIncidentDto(
       product: state.product!,
       userId: userId,
@@ -60,8 +73,8 @@ class AddIncidentViewmodel extends StateNotifier<AddIncidentState> {
         city: state.cityController!.text,
         state: state.stateController!.text,
       ),
-      occurredAt: state.occurredAt ?? DateTime.now(),
-      occurredAtTime: state.timeOccurredAt ?? TimeOfDay.now(),
+      occurredAt: state.occurredAt!,
+      occurredAtTime: state.timeOccurredAt!,
     );
     _save(dto);
   }
@@ -142,18 +155,25 @@ class AddIncidentViewmodel extends StateNotifier<AddIncidentState> {
   }
 
   void _save(AddIncidentDto dto) async {
-    await HandleCommand.execute<Unit, AddIncidentState>(
+    _logger.info("Iniciando chamada de salvar incidente...");
+
+    await HandleCommand.execute<String, AddIncidentState>(
       updateState: (newState) => state = newState,
-      command: () => _addIncidentImmediatelyUsecase.execute(dto),
-      onLoading: () => state.copyWith(errorMessage: null),
-      onSuccess: (result) =>
-          state = state.copyWith(registeredsuccessfully: true),
+      command: () => _addIncidentUsecase.execute(dto),
+      onLoading: () => state,
+      onSuccess: (alertId) {
+        _logger.info("Incident salvo com sucesso");
+        return state.copyWith(
+          registeredsuccessfully: true,
+          alertId: alertId,
+          isLoading: false,
+        );
+      },
       onError: (error) {
-        return handleError<AddIncidentState>(
-          error,
-          (message, extra) {
-            return state.copyWith(errorMessage: message);
-          },
+        _logger.info("Erro ao salvar incident ${error.toString()}");
+        return state.copyWith(
+          errorMessage: error.toString(),
+          isLoading: false,
         );
       },
     );

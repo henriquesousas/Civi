@@ -31,6 +31,9 @@ mixin _$AddIncidentState {
   String? get cityError;
   TypeAlert get type;
   bool get isFormValid;
+  bool get isLoading;
+  bool get isProgressDone;
+  String? get alertId;
 
   /// Create a copy of AddIncidentState
   /// with the given fields replaced by the non-null parameter values.
@@ -75,33 +78,42 @@ mixin _$AddIncidentState {
                 other.cityError == cityError) &&
             (identical(other.type, type) || other.type == type) &&
             (identical(other.isFormValid, isFormValid) ||
-                other.isFormValid == isFormValid));
+                other.isFormValid == isFormValid) &&
+            (identical(other.isLoading, isLoading) ||
+                other.isLoading == isLoading) &&
+            (identical(other.isProgressDone, isProgressDone) ||
+                other.isProgressDone == isProgressDone) &&
+            (identical(other.alertId, alertId) || other.alertId == alertId));
   }
 
   @override
-  int get hashCode => Object.hash(
-      runtimeType,
-      currentPlace,
-      product,
-      fullAddress,
-      errorFullAddress,
-      howTo,
-      occurredAt,
-      errorOccurredAt,
-      timeOccurredAt,
-      errorTimeOccurredAt,
-      errorMessage,
-      const DeepCollectionEquality().hash(registeredsuccessfully),
-      stateController,
-      stateError,
-      cityController,
-      cityError,
-      type,
-      isFormValid);
+  int get hashCode => Object.hashAll([
+        runtimeType,
+        currentPlace,
+        product,
+        fullAddress,
+        errorFullAddress,
+        howTo,
+        occurredAt,
+        errorOccurredAt,
+        timeOccurredAt,
+        errorTimeOccurredAt,
+        errorMessage,
+        const DeepCollectionEquality().hash(registeredsuccessfully),
+        stateController,
+        stateError,
+        cityController,
+        cityError,
+        type,
+        isFormValid,
+        isLoading,
+        isProgressDone,
+        alertId
+      ]);
 
   @override
   String toString() {
-    return 'AddIncidentState(currentPlace: $currentPlace, product: $product, fullAddress: $fullAddress, errorFullAddress: $errorFullAddress, howTo: $howTo, occurredAt: $occurredAt, errorOccurredAt: $errorOccurredAt, timeOccurredAt: $timeOccurredAt, errorTimeOccurredAt: $errorTimeOccurredAt, errorMessage: $errorMessage, registeredsuccessfully: $registeredsuccessfully, stateController: $stateController, stateError: $stateError, cityController: $cityController, cityError: $cityError, type: $type, isFormValid: $isFormValid)';
+    return 'AddIncidentState(currentPlace: $currentPlace, product: $product, fullAddress: $fullAddress, errorFullAddress: $errorFullAddress, howTo: $howTo, occurredAt: $occurredAt, errorOccurredAt: $errorOccurredAt, timeOccurredAt: $timeOccurredAt, errorTimeOccurredAt: $errorTimeOccurredAt, errorMessage: $errorMessage, registeredsuccessfully: $registeredsuccessfully, stateController: $stateController, stateError: $stateError, cityController: $cityController, cityError: $cityError, type: $type, isFormValid: $isFormValid, isLoading: $isLoading, isProgressDone: $isProgressDone, alertId: $alertId)';
   }
 }
 
@@ -128,7 +140,10 @@ abstract mixin class $AddIncidentStateCopyWith<$Res> {
       TextEditingController? cityController,
       String? cityError,
       TypeAlert type,
-      bool isFormValid});
+      bool isFormValid,
+      bool isLoading,
+      bool isProgressDone,
+      String? alertId});
 }
 
 /// @nodoc
@@ -161,6 +176,9 @@ class _$AddIncidentStateCopyWithImpl<$Res>
     Object? cityError = freezed,
     Object? type = null,
     Object? isFormValid = null,
+    Object? isLoading = null,
+    Object? isProgressDone = null,
+    Object? alertId = freezed,
   }) {
     return _then(_self.copyWith(
       currentPlace: freezed == currentPlace
@@ -231,6 +249,18 @@ class _$AddIncidentStateCopyWithImpl<$Res>
           ? _self.isFormValid
           : isFormValid // ignore: cast_nullable_to_non_nullable
               as bool,
+      isLoading: null == isLoading
+          ? _self.isLoading
+          : isLoading // ignore: cast_nullable_to_non_nullable
+              as bool,
+      isProgressDone: null == isProgressDone
+          ? _self.isProgressDone
+          : isProgressDone // ignore: cast_nullable_to_non_nullable
+              as bool,
+      alertId: freezed == alertId
+          ? _self.alertId
+          : alertId // ignore: cast_nullable_to_non_nullable
+              as String?,
     ));
   }
 }
@@ -345,7 +375,10 @@ extension AddIncidentStatePatterns on AddIncidentState {
             TextEditingController? cityController,
             String? cityError,
             TypeAlert type,
-            bool isFormValid)?
+            bool isFormValid,
+            bool isLoading,
+            bool isProgressDone,
+            String? alertId)?
         $default, {
     required TResult orElse(),
   }) {
@@ -369,7 +402,10 @@ extension AddIncidentStatePatterns on AddIncidentState {
             _that.cityController,
             _that.cityError,
             _that.type,
-            _that.isFormValid);
+            _that.isFormValid,
+            _that.isLoading,
+            _that.isProgressDone,
+            _that.alertId);
       case _:
         return orElse();
     }
@@ -407,7 +443,10 @@ extension AddIncidentStatePatterns on AddIncidentState {
             TextEditingController? cityController,
             String? cityError,
             TypeAlert type,
-            bool isFormValid)
+            bool isFormValid,
+            bool isLoading,
+            bool isProgressDone,
+            String? alertId)
         $default,
   ) {
     final _that = this;
@@ -430,7 +469,10 @@ extension AddIncidentStatePatterns on AddIncidentState {
             _that.cityController,
             _that.cityError,
             _that.type,
-            _that.isFormValid);
+            _that.isFormValid,
+            _that.isLoading,
+            _that.isProgressDone,
+            _that.alertId);
       case _:
         throw StateError('Unexpected subclass');
     }
@@ -467,7 +509,10 @@ extension AddIncidentStatePatterns on AddIncidentState {
             TextEditingController? cityController,
             String? cityError,
             TypeAlert type,
-            bool isFormValid)?
+            bool isFormValid,
+            bool isLoading,
+            bool isProgressDone,
+            String? alertId)?
         $default,
   ) {
     final _that = this;
@@ -490,7 +535,10 @@ extension AddIncidentStatePatterns on AddIncidentState {
             _that.cityController,
             _that.cityError,
             _that.type,
-            _that.isFormValid);
+            _that.isFormValid,
+            _that.isLoading,
+            _that.isProgressDone,
+            _that.alertId);
       case _:
         return null;
     }
@@ -517,7 +565,10 @@ class _AddIncidentState implements AddIncidentState {
       this.cityController,
       this.cityError,
       this.type = TypeAlert.none,
-      this.isFormValid = false});
+      this.isFormValid = false,
+      this.isLoading = false,
+      this.isProgressDone = false,
+      this.alertId});
 
   @override
   final Placemodel? currentPlace;
@@ -556,6 +607,14 @@ class _AddIncidentState implements AddIncidentState {
   @override
   @JsonKey()
   final bool isFormValid;
+  @override
+  @JsonKey()
+  final bool isLoading;
+  @override
+  @JsonKey()
+  final bool isProgressDone;
+  @override
+  final String? alertId;
 
   /// Create a copy of AddIncidentState
   /// with the given fields replaced by the non-null parameter values.
@@ -600,33 +659,42 @@ class _AddIncidentState implements AddIncidentState {
                 other.cityError == cityError) &&
             (identical(other.type, type) || other.type == type) &&
             (identical(other.isFormValid, isFormValid) ||
-                other.isFormValid == isFormValid));
+                other.isFormValid == isFormValid) &&
+            (identical(other.isLoading, isLoading) ||
+                other.isLoading == isLoading) &&
+            (identical(other.isProgressDone, isProgressDone) ||
+                other.isProgressDone == isProgressDone) &&
+            (identical(other.alertId, alertId) || other.alertId == alertId));
   }
 
   @override
-  int get hashCode => Object.hash(
-      runtimeType,
-      currentPlace,
-      product,
-      fullAddress,
-      errorFullAddress,
-      howTo,
-      occurredAt,
-      errorOccurredAt,
-      timeOccurredAt,
-      errorTimeOccurredAt,
-      errorMessage,
-      const DeepCollectionEquality().hash(registeredsuccessfully),
-      stateController,
-      stateError,
-      cityController,
-      cityError,
-      type,
-      isFormValid);
+  int get hashCode => Object.hashAll([
+        runtimeType,
+        currentPlace,
+        product,
+        fullAddress,
+        errorFullAddress,
+        howTo,
+        occurredAt,
+        errorOccurredAt,
+        timeOccurredAt,
+        errorTimeOccurredAt,
+        errorMessage,
+        const DeepCollectionEquality().hash(registeredsuccessfully),
+        stateController,
+        stateError,
+        cityController,
+        cityError,
+        type,
+        isFormValid,
+        isLoading,
+        isProgressDone,
+        alertId
+      ]);
 
   @override
   String toString() {
-    return 'AddIncidentState(currentPlace: $currentPlace, product: $product, fullAddress: $fullAddress, errorFullAddress: $errorFullAddress, howTo: $howTo, occurredAt: $occurredAt, errorOccurredAt: $errorOccurredAt, timeOccurredAt: $timeOccurredAt, errorTimeOccurredAt: $errorTimeOccurredAt, errorMessage: $errorMessage, registeredsuccessfully: $registeredsuccessfully, stateController: $stateController, stateError: $stateError, cityController: $cityController, cityError: $cityError, type: $type, isFormValid: $isFormValid)';
+    return 'AddIncidentState(currentPlace: $currentPlace, product: $product, fullAddress: $fullAddress, errorFullAddress: $errorFullAddress, howTo: $howTo, occurredAt: $occurredAt, errorOccurredAt: $errorOccurredAt, timeOccurredAt: $timeOccurredAt, errorTimeOccurredAt: $errorTimeOccurredAt, errorMessage: $errorMessage, registeredsuccessfully: $registeredsuccessfully, stateController: $stateController, stateError: $stateError, cityController: $cityController, cityError: $cityError, type: $type, isFormValid: $isFormValid, isLoading: $isLoading, isProgressDone: $isProgressDone, alertId: $alertId)';
   }
 }
 
@@ -655,7 +723,10 @@ abstract mixin class _$AddIncidentStateCopyWith<$Res>
       TextEditingController? cityController,
       String? cityError,
       TypeAlert type,
-      bool isFormValid});
+      bool isFormValid,
+      bool isLoading,
+      bool isProgressDone,
+      String? alertId});
 }
 
 /// @nodoc
@@ -688,6 +759,9 @@ class __$AddIncidentStateCopyWithImpl<$Res>
     Object? cityError = freezed,
     Object? type = null,
     Object? isFormValid = null,
+    Object? isLoading = null,
+    Object? isProgressDone = null,
+    Object? alertId = freezed,
   }) {
     return _then(_AddIncidentState(
       currentPlace: freezed == currentPlace
@@ -758,6 +832,18 @@ class __$AddIncidentStateCopyWithImpl<$Res>
           ? _self.isFormValid
           : isFormValid // ignore: cast_nullable_to_non_nullable
               as bool,
+      isLoading: null == isLoading
+          ? _self.isLoading
+          : isLoading // ignore: cast_nullable_to_non_nullable
+              as bool,
+      isProgressDone: null == isProgressDone
+          ? _self.isProgressDone
+          : isProgressDone // ignore: cast_nullable_to_non_nullable
+              as bool,
+      alertId: freezed == alertId
+          ? _self.alertId
+          : alertId // ignore: cast_nullable_to_non_nullable
+              as String?,
     ));
   }
 }

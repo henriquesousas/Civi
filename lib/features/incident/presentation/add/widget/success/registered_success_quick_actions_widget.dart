@@ -1,13 +1,21 @@
+import 'package:deehelp/core/extensions/dialog_extension.dart';
 import 'package:deehelp/core/ui/theme/dimens.dart';
+import 'package:deehelp/core/ui/widgets/bottom_sheet/custom_modal_bottom_sheet.dart';
+import 'package:deehelp/core/utils/url_launcher_utils.dart';
+import 'package:deehelp/features/incident/presentation/add/widget/success/incident_confirmation_screen.dart';
 import 'package:deehelp/features/incident/presentation/add/widget/success/quick_action_tile_widget.dart';
+import 'package:deehelp/features/incident/presentation/providers/incident_viewmodel_providers.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-class RegisteredSuccessQuickActionsWidget extends StatelessWidget {
-  const RegisteredSuccessQuickActionsWidget({super.key});
+class RegisteredSuccessQuickActionsWidget extends ConsumerWidget {
+  const RegisteredSuccessQuickActionsWidget({
+    super.key,
+  });
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     return Container(
       padding: EdgeInsets.all(Dimens.size20.w),
       decoration: BoxDecoration(
@@ -25,8 +33,12 @@ class RegisteredSuccessQuickActionsWidget extends StatelessWidget {
             icon: Icons.people_alt_rounded,
             value: 'Compartilhar',
             label: 'Amigos',
-            press: () {
-              debugPrint("Amigos");
+            press: () async {
+              await UrlLauncherUtils.shareIncident(
+                context,
+                ref.watch(addIncidentViewmodelProvider).alertId ?? '',
+                DateTime.now(),
+              );
             },
           ),
           Container(
@@ -38,7 +50,16 @@ class RegisteredSuccessQuickActionsWidget extends StatelessWidget {
             icon: Icons.local_police,
             value: 'Polícia',
             label: 'Ligar',
-            press: () {},
+            press: () {
+              try {
+                UrlLauncherUtils.makePhoneCall("190");
+              } catch (e) {
+                context.showDilaog(
+                  "Não foi possível fazer a ligação",
+                  "Por favor faça a ligação para 190 manualmente.",
+                );
+              }
+            },
           ),
           Container(
             width: 1,
@@ -49,7 +70,12 @@ class RegisteredSuccessQuickActionsWidget extends StatelessWidget {
             icon: Icons.shield,
             value: '100%',
             label: 'Confiabilidade',
-            press: () {},
+            press: () {
+              customModalBottomSheet(
+                context,
+                child: InformativoCardsPage(),
+              );
+            },
           ),
         ],
       ),

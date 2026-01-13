@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 
 class Incident {
   final String id;
+  final String? alertId;
   final IncidentStatus status;
   final TypeAlert type;
   final Product product;
@@ -18,6 +19,7 @@ class Incident {
 
   Incident({
     required this.id,
+    required this.alertId,
     required this.status,
     required this.type,
     required this.product,
