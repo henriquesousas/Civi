@@ -4,7 +4,7 @@ import 'package:deehelp/core/base/entity.dart';
 import 'package:deehelp/features/products/domain/entities/product_id.dart';
 
 import '../../../../core/validation/validation_handler.dart';
-import '../product_status.dart';
+import '../../product_status.dart';
 import '../usecases/add/dtos/add_product_dto.dart';
 import 'image_media.dart';
 
@@ -15,7 +15,7 @@ class Product extends Entity<ProductId> {
   String name;
   final String code;
   final int year;
-  final ProductSatus status;
+  final ProducStatus status;
   final String type;
   final String userId;
   final String brand;
@@ -45,7 +45,7 @@ class Product extends Entity<ProductId> {
     String? name,
     String? code,
     int? year,
-    ProductSatus? status,
+    ProducStatus? status,
     String? type,
     String? userId,
     String? brand,
@@ -82,7 +82,7 @@ class Product extends Entity<ProductId> {
       year: dto.year,
       images: dto.images,
       userId: dto.userId,
-      status: ProductSatus.pending,
+      status: ProducStatus.pending,
     );
   }
 

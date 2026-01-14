@@ -2,7 +2,7 @@ import 'package:deehelp/features/products/domain/entities/product_id.dart';
 import 'package:deehelp/features/products/external/repository/image_media_model.dart';
 
 import '../../domain/entities/product.dart';
-import '../../domain/product_status.dart';
+import '../../product_status.dart';
 
 class ProductModel {
   static Map<String, dynamic> toMap(Product product) {
@@ -34,7 +34,7 @@ class ProductModel {
       obs: map['obs'],
       year: map['year'],
       images: images,
-      status: ProductSatus.values.firstWhere((e) => e.name == map['status']),
+      status: ProducStatus.values.firstWhere((e) => e.name == map['status']),
       type: map['type'],
       userId: map['user_id'],
       createdAt: DateTime.parse(map['created_at']),

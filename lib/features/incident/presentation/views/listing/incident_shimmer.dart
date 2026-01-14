@@ -1,6 +1,6 @@
 import 'package:deehelp/features/incident/domain/entity/incident_local.dart';
-import 'package:deehelp/features/incident/domain/entity/incident_status.dart';
-import 'package:deehelp/features/incident/domain/entity/type_alert.dart';
+import 'package:deehelp/features/incident/domain/enum/incident_status.dart';
+import 'package:deehelp/features/incident/domain/enum/type_alert.dart';
 import 'package:deehelp/features/incident/domain/usecase/incident_output.dart';
 import 'package:deehelp/features/incident/domain/usecase/incident_product_output.dart';
 import 'package:flutter/material.dart';

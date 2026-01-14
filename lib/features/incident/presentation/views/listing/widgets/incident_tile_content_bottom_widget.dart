@@ -1,7 +1,7 @@
 import 'package:deehelp/core/ui/theme/app_colors.dart';
 import 'package:deehelp/core/ui/theme/app_text_styles.dart';
+import 'package:deehelp/features/incident/domain/enum/incident_status.dart';
 import 'package:deehelp/features/incident/domain/usecase/incident_output.dart';
-import 'package:deehelp/features/products/domain/product_status.dart';
 import 'package:deehelp/features/products/presentation/views/listing/widgets/status_badge_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -54,7 +54,11 @@ class IncidentTileContentBottomWidget extends StatelessWidget {
             ),
           ),
         ),
-        const StatusBadgeWidget(status: ProductSatus.active),
+        StatusBadgeWidget(
+          label: incident.status.label,
+          color: incident.status.color,
+          iconData: incident.status.icon,
+        ),
       ],
     );
   }

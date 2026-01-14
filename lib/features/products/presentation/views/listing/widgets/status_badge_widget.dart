@@ -1,33 +1,31 @@
-import 'package:deehelp/core/ui/theme/app_colors.dart';
 import 'package:deehelp/core/ui/theme/app_text_styles.dart';
-import 'package:deehelp/features/products/domain/product_status.dart';
+import 'package:deehelp/core/ui/theme/dimens.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class StatusBadgeWidget extends StatelessWidget {
   final bool isShimmer;
-  final ProductSatus status;
+  final String label;
+  final Color color;
+  final IconData iconData;
 
   const StatusBadgeWidget({
     super.key,
-    required this.status,
     this.isShimmer = false,
+    required this.label,
+    required this.color,
+    required this.iconData,
   });
 
   @override
   Widget build(BuildContext context) {
-    final shimmerColor = AppColors.greyColor.withValues(alpha: 0.1);
-    final bgColor =
-        isShimmer ? shimmerColor : status.color.withValues(alpha: 0.1);
-    final borderColor =
-        isShimmer ? shimmerColor : status.color.withValues(alpha: 0.3);
-
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 5, vertical: 4),
       decoration: BoxDecoration(
-        color: bgColor,
+        color: color.withValues(alpha: 0.1),
         borderRadius: BorderRadius.circular(8),
         border: Border.all(
-          color: borderColor,
+          color: color.withValues(alpha: 0.3),
           width: 1,
         ),
       ),
@@ -35,17 +33,16 @@ class StatusBadgeWidget extends StatelessWidget {
         mainAxisSize: MainAxisSize.min,
         children: [
           Icon(
-            status.icon,
-            size: 12,
-            color: status.color,
+            iconData,
+            size: Dimens.size12.w,
+            color: color,
           ),
           const SizedBox(width: 4),
           Text(
-            status.label,
+            label,
             style: context.appTextStyles.caption2Style.copyWith(
-              color: status.color,
+              color: color,
               fontWeight: FontWeight.bold,
-              fontSize: 10,
             ),
           ),
         ],

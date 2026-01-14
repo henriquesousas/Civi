@@ -1,12 +1,11 @@
 import 'package:flutter/material.dart';
 
-//TODO: deve virar um status compartilhado
-enum ProductSatus {
+enum ProducStatus {
   active("active"),
   inactive("inactive"),
   pending("pending");
 
-  const ProductSatus(this.value);
+  const ProducStatus(this.value);
   final String value;
 
   @override
@@ -14,33 +13,33 @@ enum ProductSatus {
 
   Color get color {
     switch (this) {
-      case ProductSatus.active:
+      case ProducStatus.active:
         return const Color(0xFF10B981);
-      case ProductSatus.pending:
+      case ProducStatus.pending:
         return const Color(0xFFF59E0B);
-      case ProductSatus.inactive:
+      case ProducStatus.inactive:
         return const Color(0xFFEF4444);
     }
   }
 
   IconData get icon {
     switch (this) {
-      case ProductSatus.active:
+      case ProducStatus.active:
         return Icons.check_circle;
-      case ProductSatus.pending:
+      case ProducStatus.pending:
         return Icons.pending;
-      case ProductSatus.inactive:
+      case ProducStatus.inactive:
         return Icons.cancel;
     }
   }
 
   String get label {
     switch (this) {
-      case ProductSatus.active:
+      case ProducStatus.active:
         return 'Ativo';
-      case ProductSatus.pending:
+      case ProducStatus.pending:
         return 'Pendente';
-      case ProductSatus.inactive:
+      case ProducStatus.inactive:
         return 'Inativo';
     }
   }

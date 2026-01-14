@@ -86,7 +86,11 @@ class ProductListTileCard extends StatelessWidget {
                   height: Dimens.size40.h,
                   color: AppColors.lightGreyColor20,
                 ),
-                StatusBadgeWidget(status: product.status),
+                StatusBadgeWidget(
+                  label: product.status.label,
+                  color: product.status.color,
+                  iconData: product.status.icon,
+                ),
               ],
             ),
           ),

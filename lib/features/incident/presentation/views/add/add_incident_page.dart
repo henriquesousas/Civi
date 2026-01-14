@@ -11,7 +11,7 @@ import 'package:deehelp/core/ui/widgets/button/ui_hold_confirm_button.dart';
 import 'package:deehelp/core/ui/widgets/card/ui_custom_scaffold.dart';
 import 'package:deehelp/core/ui/widgets/textfield/ui_text_field_rounded.dart';
 import 'package:deehelp/features/auth/external/di/authenticated_user_provider.dart';
-import 'package:deehelp/features/incident/domain/entity/type_alert.dart';
+import 'package:deehelp/features/incident/domain/enum/type_alert.dart';
 import 'package:deehelp/features/incident/presentation/views/add/state/add_incident_state.dart';
 import 'package:deehelp/features/incident/presentation/views/add/widgets/form/card_select_image.dart';
 import 'package:deehelp/features/incident/presentation/views/add/widgets/form/card_type_incident.dart';

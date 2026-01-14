@@ -1,7 +1,7 @@
 import 'package:deehelp/core/utils/result.dart';
 import 'package:deehelp/core/utils/unit.dart';
 import 'package:deehelp/features/incident/domain/entity/incident.dart';
-import 'package:deehelp/features/incident/domain/entity/incident_status.dart';
+import 'package:deehelp/features/incident/domain/enum/incident_status.dart';
 import 'package:deehelp/features/incident/domain/incident_repository.dart';
 import 'package:deehelp/features/incident/domain/usecase/incident_output.dart';
 import 'package:deehelp/features/incident/external/repository/incident_mapper.dart';
