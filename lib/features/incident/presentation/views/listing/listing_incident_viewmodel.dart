@@ -20,7 +20,11 @@ class ListingIncidentViewmodel extends StateNotifier<ListingIncidentState> {
       updateState: (newState) => state = newState,
       command: () => _getIncidentByUserUseCase.execute(_userId),
       onLoading: () => const ListingIncidentState.loading(),
-      onSuccess: (incidents) => ListingIncidentState.success(incidents, ""),
+      onSuccess: (incidents) {
+        return incidents.isEmpty
+            ? const ListingIncidentState.empty()
+            : ListingIncidentState.success(incidents, "");
+      },
       onError: (error) {
         return handleError<ListingIncidentState>(
           error,
