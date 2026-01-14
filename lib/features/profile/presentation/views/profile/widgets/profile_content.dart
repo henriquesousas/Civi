@@ -73,7 +73,7 @@ class ProfileContent extends ConsumerWidget {
                 size: Dimens.defaultArrowForward,
                 color: AppColors.textColorHeader.withValues(alpha: 0.5),
               ),
-              press: () {},
+              press: () => context.push(AppRouter.incidents),
             ),
             UICustomListTileCard(
               padding: const EdgeInsetsDirectional.symmetric(

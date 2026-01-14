@@ -5,11 +5,11 @@ import 'package:deehelp/core/router/slide_transition_page.dart';
 import 'package:deehelp/features/auth/external/di/auth_repository_provider.dart';
 import 'package:deehelp/features/auth/external/di/auth_state_provider.dart';
 import 'package:deehelp/features/auth/external/repositories/supabase_auth_repository.dart';
+import 'package:deehelp/features/incident/presentation/views/listing/listing_incident_page.dart';
 import 'package:deehelp/features/profile/presentation/views/add_nickname/add_nickname_page.dart';
 import 'package:deehelp/features/dashboard/presentation/dashsboard_page.dart';
 import 'package:deehelp/features/faq/faq_provider.dart';
-import 'package:deehelp/features/incident/presentation/add/add_incident_page.dart';
-import 'package:deehelp/features/incident/presentation/add/widget/error/incident_error_widget.dart';
+import 'package:deehelp/features/incident/presentation/views/add/add_incident_page.dart';
 import 'package:deehelp/features/map/presentation/map_page.dart';
 import 'package:deehelp/features/onboarding/page/onboard_page.dart';
 import 'package:deehelp/features/products/domain/entities/product.dart';
@@ -158,6 +158,13 @@ var goRouterProvider = Provider<GoRouter>(
             child: const AddIncidentPage(),
           ),
         ),
+        GoRoute(
+          path: AppRouter.incidents,
+          pageBuilder: (context, state) => slideTransitionPage(
+            key: state.pageKey,
+            child: const ListingIncidentPage(),
+          ),
+        ),
         // GoRoute(
         //   path: AppRouter.addIncidentSuccess,
         //   pageBuilder: (context, state) => slideTransitionPage(
@@ -169,15 +176,15 @@ var goRouterProvider = Provider<GoRouter>(
         //     ),
         //   ),
         // ),
-        GoRoute(
-          path: AppRouter.addIncidentError,
-          pageBuilder: (context, state) => slideTransitionPage(
-            key: state.pageKey,
-            child: IncidentErrorWidget(
-              onRetry: () {},
-            ),
-          ),
-        ),
+        // GoRoute(
+        //   path: AppRouter.addIncidentError,
+        //   pageBuilder: (context, state) => slideTransitionPage(
+        //     key: state.pageKey,
+        //     child: IncidentErrorWidget(
+        //       onRetry: () {},
+        //     ),
+        //   ),
+        // ),
         // GoRoute(
         //   path: AppRouter.sendIncident,
         //   pageBuilder: (context, state) => slideTransitionPage(

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+//TODO: deve virar um status compartilhado
 enum ProductSatus {
   active("active"),
   inactive("inactive"),

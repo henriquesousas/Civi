@@ -77,18 +77,6 @@ class _ProductListingPageState extends BasePageState<ProductListingPage> {
       AppRouter.editProduct,
       extra: product,
     );
-
-    // if (result != null) {
-    //   final action = result['action'];
-    //   final productUpdated = result['value'];
-    //   final message = result['message'];
-
-    //   if (mounted) {
-    //     context.showSnackBar(message);
-    //   }
-
-    //   await cubit.refresh(productUpdated, action);
-    // }
   }
 
   @override
@@ -137,7 +125,6 @@ class _ProductListingPageState extends BasePageState<ProductListingPage> {
                       product: product,
                       onPressed: () {
                         if (widget.isAddIncident) {
-                          debugPrint("Produto selecionado");
                           context.pop(product);
                           return;
                         }

@@ -52,15 +52,10 @@ class UICustomAppCard extends StatelessWidget {
           boxShadow: showShadow
               ? [
                   BoxShadow(
-                    color: Colors.black.withOpacity(0.15),
-                    blurRadius: 20,
+                    color: Colors.grey.withValues(alpha: 0.2),
+                    blurRadius: 5,
                     spreadRadius: 0,
-                    offset: Offset(0, 8),
-                  ),
-                  BoxShadow(
-                    color: Colors.black.withOpacity(0.06),
-                    blurRadius: 6,
-                    offset: Offset(0, 2),
+                    offset: const Offset(0, 5),
                   ),
                 ]
               : null,

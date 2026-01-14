@@ -7,8 +7,17 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class EmptyStateWidget extends StatelessWidget {
+  final String? title;
+  final String? subtitle;
+  final String? btnTitle;
   final VoidCallback press;
-  const EmptyStateWidget({super.key, required this.press});
+  const EmptyStateWidget({
+    super.key,
+    required this.press,
+    this.title,
+    this.subtitle,
+    this.btnTitle,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -30,26 +39,27 @@ class EmptyStateWidget extends StatelessWidget {
               ),
               child: Icon(
                 Icons.inventory_2_outlined,
-                size: 50,
+                size: Dimens.size50.w,
                 color: AppColors.primaryColor.withValues(alpha: 0.9),
               ),
             ),
             Text(
-              "Nenhum item encontrado",
+              title ?? "Nenhum registro encontrado",
+              textAlign: TextAlign.center,
               style: context.appTextStyles.sectionTitle,
             ),
-            //TODO: Mudar essa frase
-            const Padding(
-              padding: EdgeInsets.symmetric(horizontal: 20),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 20),
               child: Text(
-                "Comece adicionando seu primeiro item à plataforma para gerenciar seus veículos, celulares e outros itens",
+                subtitle ??
+                    "Sua lista está vazia. Toque no botão abaixo para adicionar seu primeiro item.",
                 textAlign: TextAlign.center,
               ),
             ),
             SizedBox(
               width: context.percentWidth(0.6),
               child: UIElevatedButton(
-                text: "Adicionar",
+                text: btnTitle ?? "Novo",
                 press: press,
                 icon: Icon(Icons.add, size: Dimens.size16.w),
               ),

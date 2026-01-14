@@ -1,7 +1,7 @@
 import 'package:deehelp/core/ui/theme/app_colors.dart';
 import 'package:flutter/material.dart';
 
-import '../../../domain/utils/plate_utils.dart';
+import '../../../../../domain/utils/plate_utils.dart';
 
 class PlateNumberWidget extends StatelessWidget {
   final String plateNumber;

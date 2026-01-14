@@ -1,6 +1,6 @@
 import 'package:deehelp/core/ui/theme/app_text_styles.dart';
 import 'package:deehelp/core/ui/theme/dimens.dart';
-import 'package:deehelp/features/incident/presentation/add/widget/error/error_solution_tile.dart';
+import 'package:deehelp/features/incident/presentation/views/add/widgets/error/error_solution_tile.dart';
 import 'package:flutter/material.dart';
 
 class ErrorIndicatorSolutions extends StatelessWidget {

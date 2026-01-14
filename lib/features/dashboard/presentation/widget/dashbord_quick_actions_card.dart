@@ -47,7 +47,7 @@ class DashbordQuickActionsCard extends StatelessWidget {
                 color: AppColors.lightGreyColor,
                 icon: const Icon(Icons.explore_outlined,
                     color: AppColors.darkGreyColor10),
-                onTap: () => debugPrint("clicked"),
+                onTap: () => context.push(AppRouter.map),
               ),
               QuickActionItem(
                 title: "Tirar\nDúvidas",

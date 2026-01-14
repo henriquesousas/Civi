@@ -1,8 +1,7 @@
 import 'package:deehelp/core/ui/theme/app_colors.dart';
 import 'package:deehelp/core/ui/theme/app_text_styles.dart';
+import 'package:deehelp/features/products/domain/product_status.dart';
 import 'package:flutter/material.dart';
-
-import '../../../../domain/product_status.dart';
 
 class StatusBadgeWidget extends StatelessWidget {
   final bool isShimmer;

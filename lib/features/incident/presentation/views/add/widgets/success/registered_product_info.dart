@@ -1,12 +1,10 @@
-import 'dart:math';
-
 import 'package:deehelp/core/extensions/date_extension.dart';
 import 'package:deehelp/core/extensions/time_extension.dart';
 import 'package:deehelp/core/ui/theme/app_text_styles.dart';
 import 'package:deehelp/core/ui/theme/dimens.dart';
 import 'package:deehelp/core/ui/widgets/image/ui_my_network_image_widget.dart';
-import 'package:deehelp/features/incident/presentation/add/state/add_incident_state.dart';
-import 'package:deehelp/features/incident/presentation/add/widget/success/registered_tile_info.dart';
+import 'package:deehelp/features/incident/presentation/views/add/state/add_incident_state.dart';
+import 'package:deehelp/features/incident/presentation/views/add/widgets/success/registered_tile_info.dart';
 import 'package:deehelp/features/incident/presentation/providers/incident_viewmodel_providers.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -104,24 +102,4 @@ class RegisteredProductInfo extends ConsumerWidget {
     }
     return "${state.occurredAt?.toDayMonthYearFormat() ?? ''} ${state.timeOccurredAt?.to24hFormat()}";
   }
-
-  // String _generateIncidentId() {
-  //   final random = Random();
-  //   final now = DateTime.now();
-
-  //   // Usa segundos do dia (0-86399) + random
-  //   final secondsToday = now.hour * 3600 + now.minute * 60 + now.second;
-
-  //   // Pega últimos 4 dígitos dos segundos
-  //   final timePart = secondsToday % 10000;
-
-  //   // Dígito aleatório (1-9) na frente
-  //   final randomDigit = random.nextInt(9) + 1;
-
-  //   // Combina: random(1) + time(4)
-  //   final idNumber =
-  //       (randomDigit * 10000 + timePart).toString().padLeft(5, '0');
-
-  //   return 'INC$idNumber';
-  // }
 }

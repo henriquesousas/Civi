@@ -1,9 +1,7 @@
 import 'package:deehelp/core/extensions/dialog_extension.dart';
 import 'package:deehelp/core/ui/theme/dimens.dart';
-import 'package:deehelp/core/ui/widgets/bottom_sheet/custom_modal_bottom_sheet.dart';
 import 'package:deehelp/core/utils/url_launcher_utils.dart';
-import 'package:deehelp/features/incident/presentation/add/widget/success/incident_confirmation_screen.dart';
-import 'package:deehelp/features/incident/presentation/add/widget/success/quick_action_tile_widget.dart';
+import 'package:deehelp/features/incident/presentation/views/add/widgets/success/quick_action_tile_widget.dart';
 import 'package:deehelp/features/incident/presentation/providers/incident_viewmodel_providers.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -61,22 +59,22 @@ class RegisteredSuccessQuickActionsWidget extends ConsumerWidget {
               }
             },
           ),
-          Container(
-            width: 1,
-            height: Dimens.size40.h,
-            color: Colors.white.withValues(alpha: 0.3),
-          ),
-          QuickActionTileWidget(
-            icon: Icons.shield,
-            value: '100%',
-            label: 'Confiabilidade',
-            press: () {
-              customModalBottomSheet(
-                context,
-                child: InformativoCardsPage(),
-              );
-            },
-          ),
+          // Container(
+          //   width: 1,
+          //   height: Dimens.size40.h,
+          //   color: Colors.white.withValues(alpha: 0.3),
+          // ),
+          // QuickActionTileWidget(
+          //   icon: Icons.shield,
+          //   value: '100%',
+          //   label: 'Confiabilidade',
+          //   press: () {
+          //     customModalBottomSheet(
+          //       context,
+          //       child: InformativoCardsPage(),
+          //     );
+          //   },
+          // ),
         ],
       ),
     );

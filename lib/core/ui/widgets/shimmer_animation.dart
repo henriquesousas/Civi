@@ -21,7 +21,9 @@ class ShimmerAnimation extends StatelessWidget {
       effect: const ShimmerEffect(
         baseColor: AppColors.greyColor, //Color(0XFFDADADA),
         highlightColor: AppColors.darkGreyColor10, //Color(0XFFF2F2F2),
-        duration: Duration(milliseconds: 1300),
+        duration: Duration(
+          milliseconds: 1300,
+        ),
       ),
       child: child,
     );

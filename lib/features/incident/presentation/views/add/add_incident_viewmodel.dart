@@ -6,7 +6,7 @@ import 'package:deehelp/features/incident/domain/entity/incident_status.dart';
 import 'package:deehelp/features/incident/domain/entity/type_alert.dart';
 import 'package:deehelp/features/incident/domain/usecase/add/add_incident_dto.dart';
 import 'package:deehelp/features/incident/domain/usecase/add/add_incident_usecase.dart';
-import 'package:deehelp/features/incident/presentation/add/state/add_incident_state.dart';
+import 'package:deehelp/features/incident/presentation/views/add/state/add_incident_state.dart';
 import 'package:deehelp/features/products/domain/entities/product.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';

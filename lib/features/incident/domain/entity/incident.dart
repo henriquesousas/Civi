@@ -4,6 +4,7 @@ import 'package:deehelp/features/incident/domain/entity/type_alert.dart';
 import 'package:deehelp/features/products/domain/entities/product.dart';
 import 'package:flutter/material.dart';
 
+//TODO: Nao passar todo o Product apenas o Id dele
 class Incident {
   final String id;
   final String? alertId;
