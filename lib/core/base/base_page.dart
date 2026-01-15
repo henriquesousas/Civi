@@ -22,12 +22,14 @@ abstract class BasePageState<T extends BasePage> extends ConsumerState<T> {
   @override
   Widget build(BuildContext context) {
     listener();
-    return UICustomScaffold(
-      padding: padding(),
-      onBackButtonTap: onBackPress(),
-      bottomNavigationBar: buildBottomNavigationBar(),
-      pageTitle: pageTitle(),
-      body: buildPage(context),
+    return ScaffoldMessenger(
+      child: UICustomScaffold(
+        padding: padding(),
+        onBackButtonTap: onBackPress(),
+        bottomNavigationBar: buildBottomNavigationBar(),
+        pageTitle: pageTitle(),
+        body: buildPage(context),
+      ),
     );
   }
 }

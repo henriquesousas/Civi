@@ -334,6 +334,9 @@ class _AddIncidentPageState extends ConsumerState<AddIncidentPage>
                     ),
                     const Spacer(),
                     const IncidentWarningWidget(),
+                    Container(
+                      color: AppColors.successColor,
+                    )
                   ],
                 ),
               ),

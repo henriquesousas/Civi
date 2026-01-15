@@ -4,6 +4,7 @@ import 'package:deehelp/features/incident/domain/entity/incident.dart';
 import 'package:deehelp/features/incident/domain/enum/incident_status.dart';
 import 'package:deehelp/features/incident/domain/incident_repository.dart';
 import 'package:deehelp/features/incident/domain/usecase/incident_output.dart';
+import 'package:deehelp/features/incident/domain/usecase/update/update_incident_dto.dart';
 import 'package:deehelp/features/incident/external/repository/incident_mapper.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
@@ -17,7 +18,21 @@ class SupabaseIncidentRepository extends IncidentRepository {
   @override
   Future<Result<Unit>> save(Incident incident) async {
     final map = IncidentMapper.toMap(incident);
-    await _supabaseClient.from(_table).insert(map);
+    await _supabaseClient.from(_table).insert(
+          map,
+        );
+    return Result.success(const Unit());
+  }
+
+  @override
+  Future<Result<Unit>> update(String incidentId, UpdateIncidentDto dto) async {
+    await _supabaseClient.from(_table).update({
+      "how_to": dto.howTo,
+      "city": dto.city,
+      "state": dto.state,
+      "approximate_address": dto.address,
+      'status': dto.status.name,
+    }).eq("id", incidentId);
     return Result.success(const Unit());
   }
 

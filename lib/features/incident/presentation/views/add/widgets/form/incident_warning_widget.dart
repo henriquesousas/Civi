@@ -11,9 +11,12 @@ class IncidentWarningWidget extends StatelessWidget {
     return Container(
       padding: const EdgeInsets.all(12),
       decoration: BoxDecoration(
-        color: Colors.red.withValues(alpha: 0.2),
+        color: AppColors.successColor
+            .withValues(alpha: 0.2), // Colors.red.withValues(alpha: 0.2),
         borderRadius: BorderRadius.circular(12),
-        border: Border.all(color: Colors.red.withValues(alpha: 0.3)),
+        border: Border.all(color: AppColors.successColor
+            //Colors.red.withValues(alpha: 0.3),
+            ),
       ),
       child: Row(
         children: [
@@ -50,7 +53,7 @@ class IncidentWarningWidget extends StatelessWidget {
           Container(
             padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
             decoration: BoxDecoration(
-              color: Colors.red,
+              color: AppColors.successColor,
               borderRadius: BorderRadius.circular(20),
             ),
             child: Text(

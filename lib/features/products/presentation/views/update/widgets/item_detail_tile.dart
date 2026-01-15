@@ -6,20 +6,24 @@ import '../../../../../../core/ui/theme/app_colors.dart';
 
 class ItemDetailTile extends StatelessWidget {
   final String title;
-  final String subtitle;
   final bool showDivider;
   final bool showCam;
   final bool showIconEdit;
   final VoidCallback? press;
+  final Widget? trailing;
+  final Widget? leading;
+  final String? subtitle;
 
   const ItemDetailTile({
     super.key,
     required this.title,
-    required this.subtitle,
+    this.subtitle,
     this.showDivider = true,
     this.showCam = false,
     this.showIconEdit = true,
     this.press,
+    this.trailing,
+    this.leading,
   });
 
   @override
@@ -30,32 +34,61 @@ class ItemDetailTile extends StatelessWidget {
           onTap: press,
           title: Text(
             title,
-            style: context.appTextStyles.sectionTitle,
-          ),
-          subtitle: Text(
-            subtitle,
             style: context.appTextStyles.bodyTextStyle1.copyWith(
-              color: AppColors.textSecondary.withValues(alpha: 0.7),
+              fontWeight: FontWeight.bold,
+              color: AppColors.textColorBody,
             ),
           ),
-          trailing: showIconEdit
-              ? !showCam
-                  ? IconButton(
-                      onPressed: press,
-                      icon: const Icon(
-                        Icons.edit,
-                        color: AppColors.greyColor,
-                      ),
-                    )
-                  : const UIICon(
-                      icon: Icon(Icons.camera_alt),
-                      bgColor: AppColors.primaryColor,
-                    )
+          subtitle: subtitle != null
+              ? Text(
+                  subtitle!,
+                  style: context.appTextStyles.sectionBodyTextStyle.copyWith(
+                    color: AppColors.textSecondary.withValues(alpha: 0.7),
+                  ),
+                )
               : null,
+
+          leading: leading,
+          trailing: _getTrailing(),
+          // trailing: trailing == null
+          //     ? showIconEdit
+          //         ? !showCam
+          //             ? IconButton(
+          //                 onPressed: press,
+          //                 icon: const Icon(
+          //                   Icons.edit,
+          //                   color: AppColors.greyColor,
+          //                 ),
+          //               )
+          //             : const UIICon(
+          //                 isAlpha: true,
+          //                 icon: Icon(Icons.camera_alt),
+          //                 bgColor: AppColors.primaryColor,
+          //               )
+          //         : null
+          //     : trailing!,
         ),
         if (showDivider)
           const Divider(color: AppColors.lightGreyColor30, height: 1),
       ],
     );
+  }
+
+  Widget? _getTrailing() {
+    if (trailing != null) return trailing;
+    if (!showIconEdit) return null;
+    return showCam
+        ? const UIICon(
+            isAlpha: true,
+            icon: Icon(Icons.camera_alt),
+            bgColor: AppColors.primaryColor,
+          )
+        : IconButton(
+            onPressed: press,
+            icon: const Icon(
+              Icons.edit,
+              color: AppColors.greyColor,
+            ),
+          );
   }
 }

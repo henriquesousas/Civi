@@ -17,10 +17,10 @@ class DetailSection extends ConsumerWidget {
     final state = ref.watch(updateProductViewModelProvider);
     return UICustomAppCard(
       padding: EdgeInsets.zero,
+      margin: EdgeInsets.zero,
       child: Column(
         mainAxisAlignment: MainAxisAlignment.start,
         crossAxisAlignment: CrossAxisAlignment.start,
-        spacing: 3,
         children: [
           ItemDetailTile(
             title: "Detalhes",
@@ -31,18 +31,6 @@ class DetailSection extends ConsumerWidget {
               "Adicione observações sobre o estado do veículo",
               "Exemplos: Amassado na porta, Risco na lateral, Parachoque traseiro quebrado",
             ),
-            //   press: () => _showTextFieldModal(
-            //       context: context,
-            //       title: "Detalhes",
-            //       initialValue: product.obs ?? '',
-            //       description:
-            //           "Adicione observações sobre o estado do veículo",
-            //       examples:
-            //           "Exemplos: Amassado na porta, Risco na lateral, Parachoque traseiro quebrado",
-            //       isObs: true,
-            //       onChange: (v) {},
-            //       errorSelector: (state) {},
-            //       onApplyChange: (_) {}),
           )
         ],
       ),

@@ -18,7 +18,7 @@ CustomTransitionPage<T> slideTransitionPage<T>({
 
       return SlideTransition(
         position: animation.drive(tween),
-        child: child,
+        child: ScaffoldMessenger(child: child),
       );
     },
   );

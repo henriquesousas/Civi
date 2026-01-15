@@ -18,10 +18,10 @@ class TypeSection extends ConsumerWidget {
     final state = ref.watch(updateProductViewModelProvider);
     return UICustomAppCard(
       padding: EdgeInsets.zero,
+      margin: EdgeInsets.zero,
       child: Column(
         mainAxisAlignment: MainAxisAlignment.start,
         crossAxisAlignment: CrossAxisAlignment.start,
-        spacing: 3,
         children: [
           ItemDetailTile(
             title: "Tipo",

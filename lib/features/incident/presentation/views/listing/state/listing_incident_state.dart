@@ -11,14 +11,12 @@ class ListingIncidentState with _$ListingIncidentState {
     List<IncidentOutput> items,
     String selectedFilter,
   ) = _ListIncidentStateSuccess;
+  const factory ListingIncidentState.guard(
+    IncidentOutput incident,
+    List<IncidentOutput> items,
+  ) = _ListIncidentStateGuard;
 
   const factory ListingIncidentState.error(String message) =
       _ListIncidentStateError;
   const factory ListingIncidentState.empty() = _ListIncidentStateEmpty;
-  // const factory ListProductState.delete() = _ListProductStateDelete;
-  // const factory ListProductState.deleteLoading() =
-  //     _ListProductStateDeleteLoading;
-  // const factory ListProductState.deleteSuccess() =
-  //     _ListProductStateDeleteSuccess;
-  // const factory ListProductState.deleteError() = _ListProductStateDeleteError;
 }

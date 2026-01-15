@@ -1,4 +1,6 @@
 import 'package:deehelp/core/base/base_page.dart';
+import 'package:deehelp/core/extensions/dialog_extension.dart';
+import 'package:deehelp/core/router/app_router.dart';
 import 'package:deehelp/core/ui/theme/app_colors.dart';
 import 'package:deehelp/core/ui/widgets/button/ui_elevated_icon_button.dart';
 import 'package:deehelp/core/ui/widgets/empty/empty_state_widget.dart';
@@ -6,6 +8,7 @@ import 'package:deehelp/core/ui/widgets/shimmer_animation.dart';
 import 'package:deehelp/features/incident/domain/usecase/incident_output.dart';
 import 'package:deehelp/features/incident/presentation/providers/incident_viewmodel_providers.dart';
 import 'package:deehelp/features/incident/presentation/views/listing/incident_shimmer.dart';
+import 'package:deehelp/features/incident/presentation/views/listing/listing_incident_viewmodel.dart';
 import 'package:deehelp/features/incident/presentation/views/listing/state/listing_incident_state.dart';
 import 'package:deehelp/features/incident/presentation/views/listing/widgets/incident_list_item_tile_widget.dart';
 import 'package:flutter/material.dart';
@@ -61,9 +64,11 @@ class _ListingIncidentPageState extends BasePageState<ListingIncidentPage> {
   @override
   Widget buildPage(BuildContext context) {
     final state = ref.watch(listingIncidentViewmodelProvider);
+    final viewModel = ref.watch(listingIncidentViewmodelProvider.notifier);
     return state.maybeMap(
-      success: (value) => _buildView(value.items),
-      loading: (value) => _buildView(listShimmer, isLoading: true),
+      success: (value) => _buildView(value.items, viewModel),
+      guard: (value) => _buildView(value.items, viewModel),
+      loading: (value) => _buildView(listShimmer, viewModel, isLoading: true),
       orElse: () => EmptyStateWidget(
         title: "Ótimo! Nenhum incidente para gerenciar no momento.",
         subtitle:
@@ -74,7 +79,11 @@ class _ListingIncidentPageState extends BasePageState<ListingIncidentPage> {
     );
   }
 
-  Widget _buildView(List<IncidentOutput> items, {bool isLoading = false}) {
+  Widget _buildView(
+    List<IncidentOutput> items,
+    ListingIncidentViewmodel viewModel, {
+    bool isLoading = false,
+  }) {
     return ShimmerAnimation(
       enabled: isLoading,
       child: Column(
@@ -92,13 +101,18 @@ class _ListingIncidentPageState extends BasePageState<ListingIncidentPage> {
                       parent: AlwaysScrollableScrollPhysics(),
                     ),
                     itemCount: items.length,
-                    itemBuilder: (ctx, index) {
+                    itemBuilder: (context, index) {
                       final incident = items[index];
                       return IncidentListItemTileWidget(
-                        incident: incident,
-                        isLoading: isLoading,
-                        onPressed: () {},
-                      );
+                          incident: incident,
+                          isLoading: isLoading,
+                          onPressed: () {
+                            context.push(
+                              AppRouter.updateIncident,
+                              extra: {},
+                            );
+                            viewModel.guardSelected(incident);
+                          });
                     },
                   ),
                 ),

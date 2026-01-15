@@ -24,6 +24,7 @@ class BrandSection extends ConsumerWidget {
     final viewModel = ref.watch(updateProductViewModelProvider.notifier);
     return UICustomAppCard(
       padding: EdgeInsets.zero,
+      margin: EdgeInsets.zero,
       child: Column(
         mainAxisAlignment: MainAxisAlignment.start,
         crossAxisAlignment: CrossAxisAlignment.start,

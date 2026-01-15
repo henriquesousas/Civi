@@ -6,6 +6,7 @@ import 'package:deehelp/features/incident/presentation/views/listing/state/listi
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 class ListingIncidentViewmodel extends StateNotifier<ListingIncidentState> {
+  List<IncidentOutput> _cacheIncidents = [];
   final String _userId;
   final GetIncidentByUserUseCase _getIncidentByUserUseCase;
   ListingIncidentViewmodel({
@@ -21,6 +22,7 @@ class ListingIncidentViewmodel extends StateNotifier<ListingIncidentState> {
       command: () => _getIncidentByUserUseCase.execute(_userId),
       onLoading: () => const ListingIncidentState.loading(),
       onSuccess: (incidents) {
+        _cacheIncidents = incidents;
         return incidents.isEmpty
             ? const ListingIncidentState.empty()
             : ListingIncidentState.success(incidents, "");
@@ -34,5 +36,9 @@ class ListingIncidentViewmodel extends StateNotifier<ListingIncidentState> {
         );
       },
     );
+  }
+
+  void guardSelected(IncidentOutput incident) {
+    state = ListingIncidentState.guard(incident, _cacheIncidents);
   }
 }

@@ -4,14 +4,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class StatusBadgeWidget extends StatelessWidget {
-  final bool isShimmer;
   final String label;
   final Color color;
   final IconData iconData;
 
   const StatusBadgeWidget({
     super.key,
-    this.isShimmer = false,
     required this.label,
     required this.color,
     required this.iconData,

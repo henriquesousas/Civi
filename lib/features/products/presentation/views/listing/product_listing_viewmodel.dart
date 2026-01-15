@@ -36,8 +36,6 @@ class ProductListingViewmodel extends StateNotifier<ListProductState> {
   }
 
   void refresh(Product product) {
-    debugPrint("Entrou para alterar no list");
-
     state.maybeMap(
       success: (value) {
         final index = value.items.indexWhere((p) => p.id == product.id);

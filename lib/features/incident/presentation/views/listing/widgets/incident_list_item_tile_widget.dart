@@ -56,9 +56,7 @@ class IncidentListItemTileWidget extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                IncidentTileTopWidget(
-                  incident: incident,
-                ),
+                IncidentTileTopWidget(incident: incident),
                 if (!isLoading) ...[
                   SizedBox(height: Dimens.size10.h),
                   IncidentTileHowToWidget(howTo: incident.howTo),

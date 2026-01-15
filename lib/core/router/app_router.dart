@@ -11,8 +11,10 @@ class AppRouter {
   static const profile = "/profile";
   static const addIncident = "/add-incident";
   static const incidents = "/incidents";
-  static const addIncidentSuccess = "/add-incident-success";
-  static const addIncidentError = "/add-incident-error";
-  static const sendIncident = "/send-incident";
+  static const updateIncident = "/update-incident";
+  static const updateIncidentTile = "/update-incident-tile";
+  // static const addIncidentSuccess = "/add-incident-success";
+  // static const addIncidentError = "/add-incident-error";
+  // static const sendIncident = "/send-incident";
   static const addNickname = "/add-nickname";
 }

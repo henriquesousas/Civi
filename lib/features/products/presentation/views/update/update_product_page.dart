@@ -121,6 +121,11 @@ class _UpdateProductPage extends BasePageState<UpdateProductPage> {
   }
 
   @override
+  EdgeInsetsGeometry? padding() {
+    return const EdgeInsets.symmetric(vertical: 10, horizontal: 10);
+  }
+
+  @override
   Widget buildPage(BuildContext context) {
     return const ProductForm();
   }
