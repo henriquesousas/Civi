@@ -39,71 +39,6 @@ class UpdateIncidentViewmodel extends StateNotifier<UpdateIncidentState> {
         );
       },
     );
-    // final dto = UpdateIncidentDto(
-    //   incidentId: _currentIncident.id,
-    //   status: _currentIncident.status,
-    //   howTo: _currentIncident.howTo ?? '',
-    //   city: _currentIncident.local?.city ?? '',
-    //   state: _currentIncident.local?.state ?? '',
-    //   address: _currentIncident.local?.address ?? '',
-    //   visibility: _currentIncident.visibilty,
-    // );
-
-    // await HandleCommand.execute<Unit, UpdateIncidentState>(
-    //   updateState: (newState) => state = newState,
-    //   command: () => _updateIncidentUsecase.execute(dto),
-    //   onLoading: () => state.copyWith(
-    //     isLoading: true,
-    //     errorMessage: null,
-    //     updatedSuccessfully: false,
-    //   ),
-    //   onSuccess: (_) => state.copyWith(
-    //     isLoading: false,
-    //     updatedSuccessfully: true,
-    //     updatedValue: _currentIncident,
-    //   ),
-    //   onError: (error) {
-    //     return handleError<UpdateIncidentState>(
-    //       error,
-    //       (message, extra) {
-    //         return state.copyWith(
-    //           isLoading: false,
-    //           errorMessage: message,
-    //           updatedSuccessfully: false,
-    //         );
-    //       },
-    //     );
-    //   },
-    // );
-  }
-
-  void _update2(UpdateIncidentState Function(Failure) onError) async {
-    final dto = UpdateIncidentDto(
-      incidentId: _currentIncident.id,
-      status: _currentIncident.status,
-      howTo: _currentIncident.howTo ?? '',
-      city: _currentIncident.local?.city ?? '',
-      state: _currentIncident.local?.state ?? '',
-      address: _currentIncident.local?.address ?? '',
-      visibility: _currentIncident.visibilty,
-    );
-
-    await HandleCommand.execute<Unit, UpdateIncidentState>(
-      updateState: (newState) => state = newState,
-      command: () => _updateIncidentUsecase.execute(dto),
-      onLoading: () => state.copyWith(
-        isLoading: true,
-        errorMessage: null,
-        errorUpdateStatusMessage: null,
-        updatedSuccessfully: false,
-      ),
-      onSuccess: (_) => state.copyWith(
-        isLoading: false,
-        updatedSuccessfully: true,
-        updatedValue: _currentIncident,
-      ),
-      onError: (error) => onError(error),
-    );
   }
 
   void updateStatus() async {
@@ -163,6 +98,35 @@ class UpdateIncidentViewmodel extends StateNotifier<UpdateIncidentState> {
     _updateIncidentField(IncidentField.howto, value);
   }
 
+  void _update2(UpdateIncidentState Function(Failure) onError) async {
+    final dto = UpdateIncidentDto(
+      incidentId: _currentIncident.id,
+      status: _currentIncident.status,
+      howTo: _currentIncident.howTo ?? '',
+      city: _currentIncident.local?.city ?? '',
+      state: _currentIncident.local?.state ?? '',
+      address: _currentIncident.local?.address ?? '',
+      visibility: _currentIncident.visibilty,
+    );
+
+    await HandleCommand.execute<Unit, UpdateIncidentState>(
+      updateState: (newState) => state = newState,
+      command: () => _updateIncidentUsecase.execute(dto),
+      onLoading: () => state.copyWith(
+        isLoading: true,
+        errorMessage: null,
+        errorUpdateStatusMessage: null,
+        updatedSuccessfully: false,
+      ),
+      onSuccess: (_) => state.copyWith(
+        isLoading: false,
+        updatedSuccessfully: true,
+        updatedValue: _currentIncident,
+      ),
+      onError: (error) => onError(error),
+    );
+  }
+
   void _updateIncidentField(IncidentField field, String value) {
     final updatedLocal = switch (field) {
       IncidentField.city => IncidentLocal(
@@ -183,7 +147,13 @@ class UpdateIncidentViewmodel extends StateNotifier<UpdateIncidentState> {
       _ => _currentIncident.local
     };
 
-    _currentIncident = _currentIncident.copyWith(local: updatedLocal);
+    final updateHowTo = switch (field) {
+      IncidentField.howto => value,
+      _ => _currentIncident.howTo
+    };
+
+    _currentIncident =
+        _currentIncident.copyWith(local: updatedLocal, howTo: updateHowTo);
     _validateField(field, value);
   }
 
