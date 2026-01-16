@@ -55,11 +55,11 @@ class DashbordQuickActionsCard extends StatelessWidget {
                 icon: const Icon(Icons.contact_support_outlined,
                     color: AppColors.darkGreyColor10),
                 onTap: () {
-                  // WidgetsBinding.instance.addPostFrameCallback((_) {
-                  //   ScaffoldMessenger.of(context).showSnackBar(
-                  //     SnackBar(content: Text("Operação realizada!")),
-                  //   );
-                  // });
+                  WidgetsBinding.instance.addPostFrameCallback((_) {
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      SnackBar(content: Text("Operação realizada!")),
+                    );
+                  });
                 },
               ),
             ],

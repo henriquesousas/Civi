@@ -14,6 +14,7 @@ class Incident {
   final String userId;
   final String? howTo;
   final IncidentLocal? local;
+  bool visibility;
   DateTime createdAt;
   DateTime occurredAt;
   TimeOfDay occurredAtTime;
@@ -25,6 +26,7 @@ class Incident {
     required this.type,
     required this.product,
     required this.userId,
+    this.visibility = true,
     this.howTo,
     this.local,
     DateTime? createdAt,

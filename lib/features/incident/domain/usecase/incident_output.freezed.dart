@@ -18,13 +18,14 @@ mixin _$IncidentOutput {
   String get userId;
   String get alertId;
   TypeAlert get type;
-  String? get howTo;
   IncidentProductOutput get product;
-  IncidentLocal? get local;
   IncidentStatus get status;
   DateTime get createdAt;
   DateTime get occurredAt;
   TimeOfDay get occurredAtTime;
+  IncidentLocal? get local;
+  String? get howTo;
+  bool get visibilty;
 
   /// Create a copy of IncidentOutput
   /// with the given fields replaced by the non-null parameter values.
@@ -43,25 +44,39 @@ mixin _$IncidentOutput {
             (identical(other.userId, userId) || other.userId == userId) &&
             (identical(other.alertId, alertId) || other.alertId == alertId) &&
             (identical(other.type, type) || other.type == type) &&
-            (identical(other.howTo, howTo) || other.howTo == howTo) &&
             (identical(other.product, product) || other.product == product) &&
-            (identical(other.local, local) || other.local == local) &&
             (identical(other.status, status) || other.status == status) &&
             (identical(other.createdAt, createdAt) ||
                 other.createdAt == createdAt) &&
             (identical(other.occurredAt, occurredAt) ||
                 other.occurredAt == occurredAt) &&
             (identical(other.occurredAtTime, occurredAtTime) ||
-                other.occurredAtTime == occurredAtTime));
+                other.occurredAtTime == occurredAtTime) &&
+            (identical(other.local, local) || other.local == local) &&
+            (identical(other.howTo, howTo) || other.howTo == howTo) &&
+            (identical(other.visibilty, visibilty) ||
+                other.visibilty == visibilty));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, id, userId, alertId, type, howTo,
-      product, local, status, createdAt, occurredAt, occurredAtTime);
+  int get hashCode => Object.hash(
+      runtimeType,
+      id,
+      userId,
+      alertId,
+      type,
+      product,
+      status,
+      createdAt,
+      occurredAt,
+      occurredAtTime,
+      local,
+      howTo,
+      visibilty);
 
   @override
   String toString() {
-    return 'IncidentOutput(id: $id, userId: $userId, alertId: $alertId, type: $type, howTo: $howTo, product: $product, local: $local, status: $status, createdAt: $createdAt, occurredAt: $occurredAt, occurredAtTime: $occurredAtTime)';
+    return 'IncidentOutput(id: $id, userId: $userId, alertId: $alertId, type: $type, product: $product, status: $status, createdAt: $createdAt, occurredAt: $occurredAt, occurredAtTime: $occurredAtTime, local: $local, howTo: $howTo, visibilty: $visibilty)';
   }
 }
 
@@ -76,13 +91,14 @@ abstract mixin class $IncidentOutputCopyWith<$Res> {
       String userId,
       String alertId,
       TypeAlert type,
-      String? howTo,
       IncidentProductOutput product,
-      IncidentLocal? local,
       IncidentStatus status,
       DateTime createdAt,
       DateTime occurredAt,
-      TimeOfDay occurredAtTime});
+      TimeOfDay occurredAtTime,
+      IncidentLocal? local,
+      String? howTo,
+      bool visibilty});
 }
 
 /// @nodoc
@@ -102,13 +118,14 @@ class _$IncidentOutputCopyWithImpl<$Res>
     Object? userId = null,
     Object? alertId = null,
     Object? type = null,
-    Object? howTo = freezed,
     Object? product = null,
-    Object? local = freezed,
     Object? status = null,
     Object? createdAt = null,
     Object? occurredAt = null,
     Object? occurredAtTime = null,
+    Object? local = freezed,
+    Object? howTo = freezed,
+    Object? visibilty = null,
   }) {
     return _then(_self.copyWith(
       id: null == id
@@ -127,18 +144,10 @@ class _$IncidentOutputCopyWithImpl<$Res>
           ? _self.type
           : type // ignore: cast_nullable_to_non_nullable
               as TypeAlert,
-      howTo: freezed == howTo
-          ? _self.howTo
-          : howTo // ignore: cast_nullable_to_non_nullable
-              as String?,
       product: null == product
           ? _self.product
           : product // ignore: cast_nullable_to_non_nullable
               as IncidentProductOutput,
-      local: freezed == local
-          ? _self.local
-          : local // ignore: cast_nullable_to_non_nullable
-              as IncidentLocal?,
       status: null == status
           ? _self.status
           : status // ignore: cast_nullable_to_non_nullable
@@ -155,6 +164,18 @@ class _$IncidentOutputCopyWithImpl<$Res>
           ? _self.occurredAtTime
           : occurredAtTime // ignore: cast_nullable_to_non_nullable
               as TimeOfDay,
+      local: freezed == local
+          ? _self.local
+          : local // ignore: cast_nullable_to_non_nullable
+              as IncidentLocal?,
+      howTo: freezed == howTo
+          ? _self.howTo
+          : howTo // ignore: cast_nullable_to_non_nullable
+              as String?,
+      visibilty: null == visibilty
+          ? _self.visibilty
+          : visibilty // ignore: cast_nullable_to_non_nullable
+              as bool,
     ));
   }
 }
@@ -257,13 +278,14 @@ extension IncidentOutputPatterns on IncidentOutput {
             String userId,
             String alertId,
             TypeAlert type,
-            String? howTo,
             IncidentProductOutput product,
-            IncidentLocal? local,
             IncidentStatus status,
             DateTime createdAt,
             DateTime occurredAt,
-            TimeOfDay occurredAtTime)?
+            TimeOfDay occurredAtTime,
+            IncidentLocal? local,
+            String? howTo,
+            bool visibilty)?
         $default, {
     required TResult orElse(),
   }) {
@@ -275,13 +297,14 @@ extension IncidentOutputPatterns on IncidentOutput {
             _that.userId,
             _that.alertId,
             _that.type,
-            _that.howTo,
             _that.product,
-            _that.local,
             _that.status,
             _that.createdAt,
             _that.occurredAt,
-            _that.occurredAtTime);
+            _that.occurredAtTime,
+            _that.local,
+            _that.howTo,
+            _that.visibilty);
       case _:
         return orElse();
     }
@@ -307,13 +330,14 @@ extension IncidentOutputPatterns on IncidentOutput {
             String userId,
             String alertId,
             TypeAlert type,
-            String? howTo,
             IncidentProductOutput product,
-            IncidentLocal? local,
             IncidentStatus status,
             DateTime createdAt,
             DateTime occurredAt,
-            TimeOfDay occurredAtTime)
+            TimeOfDay occurredAtTime,
+            IncidentLocal? local,
+            String? howTo,
+            bool visibilty)
         $default,
   ) {
     final _that = this;
@@ -324,13 +348,14 @@ extension IncidentOutputPatterns on IncidentOutput {
             _that.userId,
             _that.alertId,
             _that.type,
-            _that.howTo,
             _that.product,
-            _that.local,
             _that.status,
             _that.createdAt,
             _that.occurredAt,
-            _that.occurredAtTime);
+            _that.occurredAtTime,
+            _that.local,
+            _that.howTo,
+            _that.visibilty);
       case _:
         throw StateError('Unexpected subclass');
     }
@@ -355,13 +380,14 @@ extension IncidentOutputPatterns on IncidentOutput {
             String userId,
             String alertId,
             TypeAlert type,
-            String? howTo,
             IncidentProductOutput product,
-            IncidentLocal? local,
             IncidentStatus status,
             DateTime createdAt,
             DateTime occurredAt,
-            TimeOfDay occurredAtTime)?
+            TimeOfDay occurredAtTime,
+            IncidentLocal? local,
+            String? howTo,
+            bool visibilty)?
         $default,
   ) {
     final _that = this;
@@ -372,13 +398,14 @@ extension IncidentOutputPatterns on IncidentOutput {
             _that.userId,
             _that.alertId,
             _that.type,
-            _that.howTo,
             _that.product,
-            _that.local,
             _that.status,
             _that.createdAt,
             _that.occurredAt,
-            _that.occurredAtTime);
+            _that.occurredAtTime,
+            _that.local,
+            _that.howTo,
+            _that.visibilty);
       case _:
         return null;
     }
@@ -393,13 +420,14 @@ class _IncidentOutput implements IncidentOutput {
       required this.userId,
       required this.alertId,
       required this.type,
-      this.howTo,
       required this.product,
-      this.local,
       required this.status,
       required this.createdAt,
       required this.occurredAt,
-      required this.occurredAtTime});
+      required this.occurredAtTime,
+      this.local,
+      this.howTo,
+      this.visibilty = true});
 
   @override
   final String id;
@@ -410,11 +438,7 @@ class _IncidentOutput implements IncidentOutput {
   @override
   final TypeAlert type;
   @override
-  final String? howTo;
-  @override
   final IncidentProductOutput product;
-  @override
-  final IncidentLocal? local;
   @override
   final IncidentStatus status;
   @override
@@ -423,6 +447,13 @@ class _IncidentOutput implements IncidentOutput {
   final DateTime occurredAt;
   @override
   final TimeOfDay occurredAtTime;
+  @override
+  final IncidentLocal? local;
+  @override
+  final String? howTo;
+  @override
+  @JsonKey()
+  final bool visibilty;
 
   /// Create a copy of IncidentOutput
   /// with the given fields replaced by the non-null parameter values.
@@ -441,25 +472,39 @@ class _IncidentOutput implements IncidentOutput {
             (identical(other.userId, userId) || other.userId == userId) &&
             (identical(other.alertId, alertId) || other.alertId == alertId) &&
             (identical(other.type, type) || other.type == type) &&
-            (identical(other.howTo, howTo) || other.howTo == howTo) &&
             (identical(other.product, product) || other.product == product) &&
-            (identical(other.local, local) || other.local == local) &&
             (identical(other.status, status) || other.status == status) &&
             (identical(other.createdAt, createdAt) ||
                 other.createdAt == createdAt) &&
             (identical(other.occurredAt, occurredAt) ||
                 other.occurredAt == occurredAt) &&
             (identical(other.occurredAtTime, occurredAtTime) ||
-                other.occurredAtTime == occurredAtTime));
+                other.occurredAtTime == occurredAtTime) &&
+            (identical(other.local, local) || other.local == local) &&
+            (identical(other.howTo, howTo) || other.howTo == howTo) &&
+            (identical(other.visibilty, visibilty) ||
+                other.visibilty == visibilty));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, id, userId, alertId, type, howTo,
-      product, local, status, createdAt, occurredAt, occurredAtTime);
+  int get hashCode => Object.hash(
+      runtimeType,
+      id,
+      userId,
+      alertId,
+      type,
+      product,
+      status,
+      createdAt,
+      occurredAt,
+      occurredAtTime,
+      local,
+      howTo,
+      visibilty);
 
   @override
   String toString() {
-    return 'IncidentOutput(id: $id, userId: $userId, alertId: $alertId, type: $type, howTo: $howTo, product: $product, local: $local, status: $status, createdAt: $createdAt, occurredAt: $occurredAt, occurredAtTime: $occurredAtTime)';
+    return 'IncidentOutput(id: $id, userId: $userId, alertId: $alertId, type: $type, product: $product, status: $status, createdAt: $createdAt, occurredAt: $occurredAt, occurredAtTime: $occurredAtTime, local: $local, howTo: $howTo, visibilty: $visibilty)';
   }
 }
 
@@ -476,13 +521,14 @@ abstract mixin class _$IncidentOutputCopyWith<$Res>
       String userId,
       String alertId,
       TypeAlert type,
-      String? howTo,
       IncidentProductOutput product,
-      IncidentLocal? local,
       IncidentStatus status,
       DateTime createdAt,
       DateTime occurredAt,
-      TimeOfDay occurredAtTime});
+      TimeOfDay occurredAtTime,
+      IncidentLocal? local,
+      String? howTo,
+      bool visibilty});
 }
 
 /// @nodoc
@@ -502,13 +548,14 @@ class __$IncidentOutputCopyWithImpl<$Res>
     Object? userId = null,
     Object? alertId = null,
     Object? type = null,
-    Object? howTo = freezed,
     Object? product = null,
-    Object? local = freezed,
     Object? status = null,
     Object? createdAt = null,
     Object? occurredAt = null,
     Object? occurredAtTime = null,
+    Object? local = freezed,
+    Object? howTo = freezed,
+    Object? visibilty = null,
   }) {
     return _then(_IncidentOutput(
       id: null == id
@@ -527,18 +574,10 @@ class __$IncidentOutputCopyWithImpl<$Res>
           ? _self.type
           : type // ignore: cast_nullable_to_non_nullable
               as TypeAlert,
-      howTo: freezed == howTo
-          ? _self.howTo
-          : howTo // ignore: cast_nullable_to_non_nullable
-              as String?,
       product: null == product
           ? _self.product
           : product // ignore: cast_nullable_to_non_nullable
               as IncidentProductOutput,
-      local: freezed == local
-          ? _self.local
-          : local // ignore: cast_nullable_to_non_nullable
-              as IncidentLocal?,
       status: null == status
           ? _self.status
           : status // ignore: cast_nullable_to_non_nullable
@@ -555,6 +594,18 @@ class __$IncidentOutputCopyWithImpl<$Res>
           ? _self.occurredAtTime
           : occurredAtTime // ignore: cast_nullable_to_non_nullable
               as TimeOfDay,
+      local: freezed == local
+          ? _self.local
+          : local // ignore: cast_nullable_to_non_nullable
+              as IncidentLocal?,
+      howTo: freezed == howTo
+          ? _self.howTo
+          : howTo // ignore: cast_nullable_to_non_nullable
+              as String?,
+      visibilty: null == visibilty
+          ? _self.visibilty
+          : visibilty // ignore: cast_nullable_to_non_nullable
+              as bool,
     ));
   }
 }

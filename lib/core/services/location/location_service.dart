@@ -16,7 +16,7 @@ class LocationService {
   factory LocationService() => _instance;
   LocationService._internal();
 
-  Future<Position> getCurrentPosition() async {
+  Future<Position> _getCurrentPosition() async {
     bool serviceEnabled;
     LocationPermission permission;
 
@@ -46,7 +46,7 @@ class LocationService {
 
   Future<Placemodel?> getCurrentPlace() async {
     try {
-      Position position = await LocationService().getCurrentPosition();
+      Position position = await LocationService()._getCurrentPosition();
       List<Placemark> placemarks = await placemarkFromCoordinates(
         position.latitude,
         position.longitude,

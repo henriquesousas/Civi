@@ -32,6 +32,7 @@ class SupabaseIncidentRepository extends IncidentRepository {
       "state": dto.state,
       "approximate_address": dto.address,
       'status': dto.status.name,
+      'visibility': dto.visibility,
     }).eq("id", incidentId);
     return Result.success(const Unit());
   }

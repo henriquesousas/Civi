@@ -1,4 +1,5 @@
 import 'package:deehelp/features/auth/external/di/authenticated_user_provider.dart';
+import 'package:deehelp/features/incident/presentation/providers/incident_provider.dart';
 import 'package:deehelp/features/incident/presentation/views/add/add_incident_viewmodel.dart';
 import 'package:deehelp/features/incident/presentation/views/add/state/add_incident_state.dart';
 import 'package:deehelp/features/incident/presentation/providers/incident_usecase_providers.dart';
@@ -6,7 +7,6 @@ import 'package:deehelp/features/incident/presentation/views/listing/listing_inc
 import 'package:deehelp/features/incident/presentation/views/listing/state/listing_incident_state.dart';
 import 'package:deehelp/features/incident/presentation/views/update/state/update_incident_state.dart';
 import 'package:deehelp/features/incident/presentation/views/update/update_incident_viewmodel.dart';
-import 'package:deehelp/features/products/presentation/providers/product_usecase_provider.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 final addIncidentViewmodelProvider =
@@ -30,15 +30,9 @@ final listingIncidentViewmodelProvider = StateNotifierProvider.autoDispose<
 
 final updateIncidentViewmodelProvider = StateNotifierProvider.autoDispose<
     UpdateIncidentViewmodel, UpdateIncidentState>((ref) {
-  final authenticatedUser = ref.watch(authenticatedUserProvider);
   final updateIncidentUsecase = ref.watch(updateIncidentUsecaseProvider);
-  final currentIncidentSelected =
-      ref.watch(listingIncidentViewmodelProvider).maybeMap(
-            guard: (value) => value.incident,
-            orElse: () => null,
-          );
+  final currentIncidentSelected = ref.watch(incideSelectableProvider);
   return UpdateIncidentViewmodel(
-    userId: authenticatedUser!.id,
     currenIncident: currentIncidentSelected!,
     updateIncidentUsecase: updateIncidentUsecase,
   );

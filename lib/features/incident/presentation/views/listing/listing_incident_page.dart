@@ -6,6 +6,7 @@ import 'package:deehelp/core/ui/widgets/button/ui_elevated_icon_button.dart';
 import 'package:deehelp/core/ui/widgets/empty/empty_state_widget.dart';
 import 'package:deehelp/core/ui/widgets/shimmer_animation.dart';
 import 'package:deehelp/features/incident/domain/usecase/incident_output.dart';
+import 'package:deehelp/features/incident/presentation/providers/incident_provider.dart';
 import 'package:deehelp/features/incident/presentation/providers/incident_viewmodel_providers.dart';
 import 'package:deehelp/features/incident/presentation/views/listing/incident_shimmer.dart';
 import 'package:deehelp/features/incident/presentation/views/listing/listing_incident_viewmodel.dart';
@@ -62,6 +63,22 @@ class _ListingIncidentPageState extends BasePageState<ListingIncidentPage> {
   }
 
   @override
+  void listener() {
+    super.listener();
+    ref.listen<IncidentOutput?>(
+      incideSelectableProvider,
+      (oldItem, currentItem) {
+        if (oldItem != null && oldItem != currentItem) {
+          debugPrint("Produto alterado com sucesso");
+          ref
+              .watch(listingIncidentViewmodelProvider.notifier)
+              .refreshItem(currentItem!);
+        }
+      },
+    );
+  }
+
+  @override
   Widget buildPage(BuildContext context) {
     final state = ref.watch(listingIncidentViewmodelProvider);
     final viewModel = ref.watch(listingIncidentViewmodelProvider.notifier);
@@ -107,11 +124,9 @@ class _ListingIncidentPageState extends BasePageState<ListingIncidentPage> {
                           incident: incident,
                           isLoading: isLoading,
                           onPressed: () {
-                            context.push(
-                              AppRouter.updateIncident,
-                              extra: {},
-                            );
-                            viewModel.guardSelected(incident);
+                            ref.watch(incideSelectableProvider.notifier).state =
+                                incident;
+                            context.push(AppRouter.updateIncident);
                           });
                     },
                   ),

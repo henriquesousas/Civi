@@ -10,6 +10,7 @@ class UIElevatedButton extends StatelessWidget {
   final double elevation;
   final Color? bgColor;
   final Color? textColor;
+  final FontWeight? fontWeight;
   final Color borderColor;
   final Color? shadowColor;
   final double width;
@@ -35,6 +36,7 @@ class UIElevatedButton extends StatelessWidget {
     this.isLoading = false,
     this.isEnabled = true,
     this.textColor = Colors.white,
+    this.fontWeight,
     this.borderColor = Colors.transparent,
     this.iconAlignment = IconAlignment.start,
     this.textStyle,
@@ -71,8 +73,8 @@ class UIElevatedButton extends StatelessWidget {
             ),
             label: isLoading
                 ? SizedBox(
-                    height: 20,
-                    width: 20,
+                    height: Dimens.size20.h,
+                    width: Dimens.size20.w,
                     child: CircularProgressIndicator(color: textColor),
                   )
                 : Text(
@@ -80,6 +82,7 @@ class UIElevatedButton extends StatelessWidget {
                     style: textStyle ??
                         context.appTextStyles.buttonTextStyle1.copyWith(
                           color: textColor,
+                          fontWeight: fontWeight ?? FontWeight.w400,
                         ),
                   ),
           )
@@ -119,6 +122,7 @@ class UIElevatedButton extends StatelessWidget {
                     style: textStyle ??
                         context.appTextStyles.buttonTextStyle1.copyWith(
                           color: textColor,
+                          fontWeight: fontWeight ?? FontWeight.w400,
                         ),
                   ),
           );

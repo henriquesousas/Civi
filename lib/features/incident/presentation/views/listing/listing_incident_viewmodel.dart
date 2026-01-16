@@ -38,6 +38,15 @@ class ListingIncidentViewmodel extends StateNotifier<ListingIncidentState> {
     );
   }
 
+  void refreshItem(IncidentOutput current) {
+    final index = _cacheIncidents.indexWhere((inc) => inc.id == current.id);
+    if (index != -1) {
+      _cacheIncidents = List<IncidentOutput>.from(_cacheIncidents);
+      _cacheIncidents[index] = current;
+      state = ListingIncidentState.success(_cacheIncidents, "");
+    }
+  }
+
   void guardSelected(IncidentOutput incident) {
     state = ListingIncidentState.guard(incident, _cacheIncidents);
   }

@@ -55,6 +55,7 @@ class IncidentMapper {
       userId: map['user_id'],
       type: TypeAlert.values.firstWhere((e) => e.name == map['type']),
       howTo: map['how_to'],
+      visibilty: map['visibility'],
       local: IncidentLocal(
         address: map['approximate_address'] ?? '',
         city: map['city'] ?? '',

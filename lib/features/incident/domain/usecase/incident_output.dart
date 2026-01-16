@@ -14,40 +14,13 @@ abstract class IncidentOutput with _$IncidentOutput {
     required String userId,
     required String alertId,
     required TypeAlert type,
-    String? howTo,
     required IncidentProductOutput product,
-    IncidentLocal? local,
     required IncidentStatus status,
     required DateTime createdAt,
     required DateTime occurredAt,
     required TimeOfDay occurredAtTime,
+    IncidentLocal? local,
+    String? howTo,
+    @Default(true) bool visibilty,
   }) = _IncidentOutput;
 }
-
-// class IncidentOutput {
-//   final String id;
-//   final String userId;
-//   final String alertId;
-//   final TypeAlert type;
-//   final String? howTo;
-//   final IncidentProductOutput product;
-//   final IncidentLocal? local;
-//   final IncidentStatus status;
-//   DateTime createdAt;
-//   DateTime occurredAt;
-//   TimeOfDay occurredAtTime;
-
-//   IncidentOutput({
-//     required this.id,
-//     required this.userId,
-//     required this.alertId,
-//     required this.product,
-//     required this.status,
-//     required this.type,
-//     required this.howTo,
-//     required this.local,
-//     required this.createdAt,
-//     required this.occurredAt,
-//     required this.occurredAtTime,
-//   });
-// }

@@ -6,6 +6,7 @@ class UpdateIncidentDto {
   final String city;
   final String state;
   final String address;
+  final bool visibility;
   final IncidentStatus status;
 
   UpdateIncidentDto({
@@ -15,5 +16,6 @@ class UpdateIncidentDto {
     required this.state,
     required this.address,
     required this.status,
+    required this.visibility,
   });
 }

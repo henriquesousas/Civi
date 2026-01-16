@@ -14,17 +14,19 @@ T _$identity<T>(T value) => value;
 
 /// @nodoc
 mixin _$UpdateIncidentState {
-  String? get address;
-  String? get howTo;
-  String? get errorMessage;
   TextEditingController? get stateController;
-  TextEditingController? get cityController; // String? errorAddress,
-// String? stateError,
-// String? cityError,
+  TextEditingController? get cityController;
+  TextEditingController? get addressController;
+  TextEditingController? get howToController;
+  IncidentOutput? get updatedValue;
+  String? get updatedPlaceValue;
   String? get updateError;
-  dynamic get updatedSuccessfully;
+  String? get errorMessage;
+  String? get errorUpdateStatusMessage;
+  bool get updatedSuccessfully;
   bool get isFormValid;
   bool get isLoading;
+  bool get isGetCurrentLocattion;
 
   /// Create a copy of UpdateIncidentState
   /// with the given fields replaced by the non-null parameter values.
@@ -39,40 +41,55 @@ mixin _$UpdateIncidentState {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is UpdateIncidentState &&
-            (identical(other.address, address) || other.address == address) &&
-            (identical(other.howTo, howTo) || other.howTo == howTo) &&
-            (identical(other.errorMessage, errorMessage) ||
-                other.errorMessage == errorMessage) &&
             (identical(other.stateController, stateController) ||
                 other.stateController == stateController) &&
             (identical(other.cityController, cityController) ||
                 other.cityController == cityController) &&
+            (identical(other.addressController, addressController) ||
+                other.addressController == addressController) &&
+            (identical(other.howToController, howToController) ||
+                other.howToController == howToController) &&
+            (identical(other.updatedValue, updatedValue) ||
+                other.updatedValue == updatedValue) &&
+            (identical(other.updatedPlaceValue, updatedPlaceValue) ||
+                other.updatedPlaceValue == updatedPlaceValue) &&
             (identical(other.updateError, updateError) ||
                 other.updateError == updateError) &&
-            const DeepCollectionEquality()
-                .equals(other.updatedSuccessfully, updatedSuccessfully) &&
+            (identical(other.errorMessage, errorMessage) ||
+                other.errorMessage == errorMessage) &&
+            (identical(
+                    other.errorUpdateStatusMessage, errorUpdateStatusMessage) ||
+                other.errorUpdateStatusMessage == errorUpdateStatusMessage) &&
+            (identical(other.updatedSuccessfully, updatedSuccessfully) ||
+                other.updatedSuccessfully == updatedSuccessfully) &&
             (identical(other.isFormValid, isFormValid) ||
                 other.isFormValid == isFormValid) &&
             (identical(other.isLoading, isLoading) ||
-                other.isLoading == isLoading));
+                other.isLoading == isLoading) &&
+            (identical(other.isGetCurrentLocattion, isGetCurrentLocattion) ||
+                other.isGetCurrentLocattion == isGetCurrentLocattion));
   }
 
   @override
   int get hashCode => Object.hash(
       runtimeType,
-      address,
-      howTo,
-      errorMessage,
       stateController,
       cityController,
+      addressController,
+      howToController,
+      updatedValue,
+      updatedPlaceValue,
       updateError,
-      const DeepCollectionEquality().hash(updatedSuccessfully),
+      errorMessage,
+      errorUpdateStatusMessage,
+      updatedSuccessfully,
       isFormValid,
-      isLoading);
+      isLoading,
+      isGetCurrentLocattion);
 
   @override
   String toString() {
-    return 'UpdateIncidentState(address: $address, howTo: $howTo, errorMessage: $errorMessage, stateController: $stateController, cityController: $cityController, updateError: $updateError, updatedSuccessfully: $updatedSuccessfully, isFormValid: $isFormValid, isLoading: $isLoading)';
+    return 'UpdateIncidentState(stateController: $stateController, cityController: $cityController, addressController: $addressController, howToController: $howToController, updatedValue: $updatedValue, updatedPlaceValue: $updatedPlaceValue, updateError: $updateError, errorMessage: $errorMessage, errorUpdateStatusMessage: $errorUpdateStatusMessage, updatedSuccessfully: $updatedSuccessfully, isFormValid: $isFormValid, isLoading: $isLoading, isGetCurrentLocattion: $isGetCurrentLocattion)';
   }
 }
 
@@ -83,15 +100,21 @@ abstract mixin class $UpdateIncidentStateCopyWith<$Res> {
       _$UpdateIncidentStateCopyWithImpl;
   @useResult
   $Res call(
-      {String? address,
-      String? howTo,
-      String? errorMessage,
-      TextEditingController? stateController,
+      {TextEditingController? stateController,
       TextEditingController? cityController,
+      TextEditingController? addressController,
+      TextEditingController? howToController,
+      IncidentOutput? updatedValue,
+      String? updatedPlaceValue,
       String? updateError,
-      dynamic updatedSuccessfully,
+      String? errorMessage,
+      String? errorUpdateStatusMessage,
+      bool updatedSuccessfully,
       bool isFormValid,
-      bool isLoading});
+      bool isLoading,
+      bool isGetCurrentLocattion});
+
+  $IncidentOutputCopyWith<$Res>? get updatedValue;
 }
 
 /// @nodoc
@@ -107,29 +130,21 @@ class _$UpdateIncidentStateCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? address = freezed,
-    Object? howTo = freezed,
-    Object? errorMessage = freezed,
     Object? stateController = freezed,
     Object? cityController = freezed,
+    Object? addressController = freezed,
+    Object? howToController = freezed,
+    Object? updatedValue = freezed,
+    Object? updatedPlaceValue = freezed,
     Object? updateError = freezed,
-    Object? updatedSuccessfully = freezed,
+    Object? errorMessage = freezed,
+    Object? errorUpdateStatusMessage = freezed,
+    Object? updatedSuccessfully = null,
     Object? isFormValid = null,
     Object? isLoading = null,
+    Object? isGetCurrentLocattion = null,
   }) {
     return _then(_self.copyWith(
-      address: freezed == address
-          ? _self.address
-          : address // ignore: cast_nullable_to_non_nullable
-              as String?,
-      howTo: freezed == howTo
-          ? _self.howTo
-          : howTo // ignore: cast_nullable_to_non_nullable
-              as String?,
-      errorMessage: freezed == errorMessage
-          ? _self.errorMessage
-          : errorMessage // ignore: cast_nullable_to_non_nullable
-              as String?,
       stateController: freezed == stateController
           ? _self.stateController
           : stateController // ignore: cast_nullable_to_non_nullable
@@ -138,14 +153,38 @@ class _$UpdateIncidentStateCopyWithImpl<$Res>
           ? _self.cityController
           : cityController // ignore: cast_nullable_to_non_nullable
               as TextEditingController?,
+      addressController: freezed == addressController
+          ? _self.addressController
+          : addressController // ignore: cast_nullable_to_non_nullable
+              as TextEditingController?,
+      howToController: freezed == howToController
+          ? _self.howToController
+          : howToController // ignore: cast_nullable_to_non_nullable
+              as TextEditingController?,
+      updatedValue: freezed == updatedValue
+          ? _self.updatedValue
+          : updatedValue // ignore: cast_nullable_to_non_nullable
+              as IncidentOutput?,
+      updatedPlaceValue: freezed == updatedPlaceValue
+          ? _self.updatedPlaceValue
+          : updatedPlaceValue // ignore: cast_nullable_to_non_nullable
+              as String?,
       updateError: freezed == updateError
           ? _self.updateError
           : updateError // ignore: cast_nullable_to_non_nullable
               as String?,
-      updatedSuccessfully: freezed == updatedSuccessfully
+      errorMessage: freezed == errorMessage
+          ? _self.errorMessage
+          : errorMessage // ignore: cast_nullable_to_non_nullable
+              as String?,
+      errorUpdateStatusMessage: freezed == errorUpdateStatusMessage
+          ? _self.errorUpdateStatusMessage
+          : errorUpdateStatusMessage // ignore: cast_nullable_to_non_nullable
+              as String?,
+      updatedSuccessfully: null == updatedSuccessfully
           ? _self.updatedSuccessfully
           : updatedSuccessfully // ignore: cast_nullable_to_non_nullable
-              as dynamic,
+              as bool,
       isFormValid: null == isFormValid
           ? _self.isFormValid
           : isFormValid // ignore: cast_nullable_to_non_nullable
@@ -154,7 +193,25 @@ class _$UpdateIncidentStateCopyWithImpl<$Res>
           ? _self.isLoading
           : isLoading // ignore: cast_nullable_to_non_nullable
               as bool,
+      isGetCurrentLocattion: null == isGetCurrentLocattion
+          ? _self.isGetCurrentLocattion
+          : isGetCurrentLocattion // ignore: cast_nullable_to_non_nullable
+              as bool,
     ));
+  }
+
+  /// Create a copy of UpdateIncidentState
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @pragma('vm:prefer-inline')
+  $IncidentOutputCopyWith<$Res>? get updatedValue {
+    if (_self.updatedValue == null) {
+      return null;
+    }
+
+    return $IncidentOutputCopyWith<$Res>(_self.updatedValue!, (value) {
+      return _then(_self.copyWith(updatedValue: value));
+    });
   }
 }
 
@@ -252,15 +309,19 @@ extension UpdateIncidentStatePatterns on UpdateIncidentState {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>(
     TResult Function(
-            String? address,
-            String? howTo,
-            String? errorMessage,
             TextEditingController? stateController,
             TextEditingController? cityController,
+            TextEditingController? addressController,
+            TextEditingController? howToController,
+            IncidentOutput? updatedValue,
+            String? updatedPlaceValue,
             String? updateError,
-            dynamic updatedSuccessfully,
+            String? errorMessage,
+            String? errorUpdateStatusMessage,
+            bool updatedSuccessfully,
             bool isFormValid,
-            bool isLoading)?
+            bool isLoading,
+            bool isGetCurrentLocattion)?
         $default, {
     required TResult orElse(),
   }) {
@@ -268,15 +329,19 @@ extension UpdateIncidentStatePatterns on UpdateIncidentState {
     switch (_that) {
       case _UpdateIncidentState() when $default != null:
         return $default(
-            _that.address,
-            _that.howTo,
-            _that.errorMessage,
             _that.stateController,
             _that.cityController,
+            _that.addressController,
+            _that.howToController,
+            _that.updatedValue,
+            _that.updatedPlaceValue,
             _that.updateError,
+            _that.errorMessage,
+            _that.errorUpdateStatusMessage,
             _that.updatedSuccessfully,
             _that.isFormValid,
-            _that.isLoading);
+            _that.isLoading,
+            _that.isGetCurrentLocattion);
       case _:
         return orElse();
     }
@@ -298,30 +363,38 @@ extension UpdateIncidentStatePatterns on UpdateIncidentState {
   @optionalTypeArgs
   TResult when<TResult extends Object?>(
     TResult Function(
-            String? address,
-            String? howTo,
-            String? errorMessage,
             TextEditingController? stateController,
             TextEditingController? cityController,
+            TextEditingController? addressController,
+            TextEditingController? howToController,
+            IncidentOutput? updatedValue,
+            String? updatedPlaceValue,
             String? updateError,
-            dynamic updatedSuccessfully,
+            String? errorMessage,
+            String? errorUpdateStatusMessage,
+            bool updatedSuccessfully,
             bool isFormValid,
-            bool isLoading)
+            bool isLoading,
+            bool isGetCurrentLocattion)
         $default,
   ) {
     final _that = this;
     switch (_that) {
       case _UpdateIncidentState():
         return $default(
-            _that.address,
-            _that.howTo,
-            _that.errorMessage,
             _that.stateController,
             _that.cityController,
+            _that.addressController,
+            _that.howToController,
+            _that.updatedValue,
+            _that.updatedPlaceValue,
             _that.updateError,
+            _that.errorMessage,
+            _that.errorUpdateStatusMessage,
             _that.updatedSuccessfully,
             _that.isFormValid,
-            _that.isLoading);
+            _that.isLoading,
+            _that.isGetCurrentLocattion);
       case _:
         throw StateError('Unexpected subclass');
     }
@@ -342,30 +415,38 @@ extension UpdateIncidentStatePatterns on UpdateIncidentState {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>(
     TResult? Function(
-            String? address,
-            String? howTo,
-            String? errorMessage,
             TextEditingController? stateController,
             TextEditingController? cityController,
+            TextEditingController? addressController,
+            TextEditingController? howToController,
+            IncidentOutput? updatedValue,
+            String? updatedPlaceValue,
             String? updateError,
-            dynamic updatedSuccessfully,
+            String? errorMessage,
+            String? errorUpdateStatusMessage,
+            bool updatedSuccessfully,
             bool isFormValid,
-            bool isLoading)?
+            bool isLoading,
+            bool isGetCurrentLocattion)?
         $default,
   ) {
     final _that = this;
     switch (_that) {
       case _UpdateIncidentState() when $default != null:
         return $default(
-            _that.address,
-            _that.howTo,
-            _that.errorMessage,
             _that.stateController,
             _that.cityController,
+            _that.addressController,
+            _that.howToController,
+            _that.updatedValue,
+            _that.updatedPlaceValue,
             _that.updateError,
+            _that.errorMessage,
+            _that.errorUpdateStatusMessage,
             _that.updatedSuccessfully,
             _that.isFormValid,
-            _that.isLoading);
+            _that.isLoading,
+            _that.isGetCurrentLocattion);
       case _:
         return null;
     }
@@ -376,40 +457,50 @@ extension UpdateIncidentStatePatterns on UpdateIncidentState {
 
 class _UpdateIncidentState implements UpdateIncidentState {
   const _UpdateIncidentState(
-      {this.address,
-      this.howTo,
-      this.errorMessage,
-      this.stateController,
+      {this.stateController,
       this.cityController,
+      this.addressController,
+      this.howToController,
+      this.updatedValue,
+      this.updatedPlaceValue,
       this.updateError,
+      this.errorMessage,
+      this.errorUpdateStatusMessage,
       this.updatedSuccessfully = false,
       this.isFormValid = false,
-      this.isLoading = false});
+      this.isLoading = false,
+      this.isGetCurrentLocattion = false});
 
-  @override
-  final String? address;
-  @override
-  final String? howTo;
-  @override
-  final String? errorMessage;
   @override
   final TextEditingController? stateController;
   @override
   final TextEditingController? cityController;
-// String? errorAddress,
-// String? stateError,
-// String? cityError,
+  @override
+  final TextEditingController? addressController;
+  @override
+  final TextEditingController? howToController;
+  @override
+  final IncidentOutput? updatedValue;
+  @override
+  final String? updatedPlaceValue;
   @override
   final String? updateError;
   @override
+  final String? errorMessage;
+  @override
+  final String? errorUpdateStatusMessage;
+  @override
   @JsonKey()
-  final dynamic updatedSuccessfully;
+  final bool updatedSuccessfully;
   @override
   @JsonKey()
   final bool isFormValid;
   @override
   @JsonKey()
   final bool isLoading;
+  @override
+  @JsonKey()
+  final bool isGetCurrentLocattion;
 
   /// Create a copy of UpdateIncidentState
   /// with the given fields replaced by the non-null parameter values.
@@ -425,40 +516,55 @@ class _UpdateIncidentState implements UpdateIncidentState {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _UpdateIncidentState &&
-            (identical(other.address, address) || other.address == address) &&
-            (identical(other.howTo, howTo) || other.howTo == howTo) &&
-            (identical(other.errorMessage, errorMessage) ||
-                other.errorMessage == errorMessage) &&
             (identical(other.stateController, stateController) ||
                 other.stateController == stateController) &&
             (identical(other.cityController, cityController) ||
                 other.cityController == cityController) &&
+            (identical(other.addressController, addressController) ||
+                other.addressController == addressController) &&
+            (identical(other.howToController, howToController) ||
+                other.howToController == howToController) &&
+            (identical(other.updatedValue, updatedValue) ||
+                other.updatedValue == updatedValue) &&
+            (identical(other.updatedPlaceValue, updatedPlaceValue) ||
+                other.updatedPlaceValue == updatedPlaceValue) &&
             (identical(other.updateError, updateError) ||
                 other.updateError == updateError) &&
-            const DeepCollectionEquality()
-                .equals(other.updatedSuccessfully, updatedSuccessfully) &&
+            (identical(other.errorMessage, errorMessage) ||
+                other.errorMessage == errorMessage) &&
+            (identical(
+                    other.errorUpdateStatusMessage, errorUpdateStatusMessage) ||
+                other.errorUpdateStatusMessage == errorUpdateStatusMessage) &&
+            (identical(other.updatedSuccessfully, updatedSuccessfully) ||
+                other.updatedSuccessfully == updatedSuccessfully) &&
             (identical(other.isFormValid, isFormValid) ||
                 other.isFormValid == isFormValid) &&
             (identical(other.isLoading, isLoading) ||
-                other.isLoading == isLoading));
+                other.isLoading == isLoading) &&
+            (identical(other.isGetCurrentLocattion, isGetCurrentLocattion) ||
+                other.isGetCurrentLocattion == isGetCurrentLocattion));
   }
 
   @override
   int get hashCode => Object.hash(
       runtimeType,
-      address,
-      howTo,
-      errorMessage,
       stateController,
       cityController,
+      addressController,
+      howToController,
+      updatedValue,
+      updatedPlaceValue,
       updateError,
-      const DeepCollectionEquality().hash(updatedSuccessfully),
+      errorMessage,
+      errorUpdateStatusMessage,
+      updatedSuccessfully,
       isFormValid,
-      isLoading);
+      isLoading,
+      isGetCurrentLocattion);
 
   @override
   String toString() {
-    return 'UpdateIncidentState(address: $address, howTo: $howTo, errorMessage: $errorMessage, stateController: $stateController, cityController: $cityController, updateError: $updateError, updatedSuccessfully: $updatedSuccessfully, isFormValid: $isFormValid, isLoading: $isLoading)';
+    return 'UpdateIncidentState(stateController: $stateController, cityController: $cityController, addressController: $addressController, howToController: $howToController, updatedValue: $updatedValue, updatedPlaceValue: $updatedPlaceValue, updateError: $updateError, errorMessage: $errorMessage, errorUpdateStatusMessage: $errorUpdateStatusMessage, updatedSuccessfully: $updatedSuccessfully, isFormValid: $isFormValid, isLoading: $isLoading, isGetCurrentLocattion: $isGetCurrentLocattion)';
   }
 }
 
@@ -471,15 +577,22 @@ abstract mixin class _$UpdateIncidentStateCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {String? address,
-      String? howTo,
-      String? errorMessage,
-      TextEditingController? stateController,
+      {TextEditingController? stateController,
       TextEditingController? cityController,
+      TextEditingController? addressController,
+      TextEditingController? howToController,
+      IncidentOutput? updatedValue,
+      String? updatedPlaceValue,
       String? updateError,
-      dynamic updatedSuccessfully,
+      String? errorMessage,
+      String? errorUpdateStatusMessage,
+      bool updatedSuccessfully,
       bool isFormValid,
-      bool isLoading});
+      bool isLoading,
+      bool isGetCurrentLocattion});
+
+  @override
+  $IncidentOutputCopyWith<$Res>? get updatedValue;
 }
 
 /// @nodoc
@@ -495,29 +608,21 @@ class __$UpdateIncidentStateCopyWithImpl<$Res>
   @override
   @pragma('vm:prefer-inline')
   $Res call({
-    Object? address = freezed,
-    Object? howTo = freezed,
-    Object? errorMessage = freezed,
     Object? stateController = freezed,
     Object? cityController = freezed,
+    Object? addressController = freezed,
+    Object? howToController = freezed,
+    Object? updatedValue = freezed,
+    Object? updatedPlaceValue = freezed,
     Object? updateError = freezed,
-    Object? updatedSuccessfully = freezed,
+    Object? errorMessage = freezed,
+    Object? errorUpdateStatusMessage = freezed,
+    Object? updatedSuccessfully = null,
     Object? isFormValid = null,
     Object? isLoading = null,
+    Object? isGetCurrentLocattion = null,
   }) {
     return _then(_UpdateIncidentState(
-      address: freezed == address
-          ? _self.address
-          : address // ignore: cast_nullable_to_non_nullable
-              as String?,
-      howTo: freezed == howTo
-          ? _self.howTo
-          : howTo // ignore: cast_nullable_to_non_nullable
-              as String?,
-      errorMessage: freezed == errorMessage
-          ? _self.errorMessage
-          : errorMessage // ignore: cast_nullable_to_non_nullable
-              as String?,
       stateController: freezed == stateController
           ? _self.stateController
           : stateController // ignore: cast_nullable_to_non_nullable
@@ -526,14 +631,38 @@ class __$UpdateIncidentStateCopyWithImpl<$Res>
           ? _self.cityController
           : cityController // ignore: cast_nullable_to_non_nullable
               as TextEditingController?,
+      addressController: freezed == addressController
+          ? _self.addressController
+          : addressController // ignore: cast_nullable_to_non_nullable
+              as TextEditingController?,
+      howToController: freezed == howToController
+          ? _self.howToController
+          : howToController // ignore: cast_nullable_to_non_nullable
+              as TextEditingController?,
+      updatedValue: freezed == updatedValue
+          ? _self.updatedValue
+          : updatedValue // ignore: cast_nullable_to_non_nullable
+              as IncidentOutput?,
+      updatedPlaceValue: freezed == updatedPlaceValue
+          ? _self.updatedPlaceValue
+          : updatedPlaceValue // ignore: cast_nullable_to_non_nullable
+              as String?,
       updateError: freezed == updateError
           ? _self.updateError
           : updateError // ignore: cast_nullable_to_non_nullable
               as String?,
-      updatedSuccessfully: freezed == updatedSuccessfully
+      errorMessage: freezed == errorMessage
+          ? _self.errorMessage
+          : errorMessage // ignore: cast_nullable_to_non_nullable
+              as String?,
+      errorUpdateStatusMessage: freezed == errorUpdateStatusMessage
+          ? _self.errorUpdateStatusMessage
+          : errorUpdateStatusMessage // ignore: cast_nullable_to_non_nullable
+              as String?,
+      updatedSuccessfully: null == updatedSuccessfully
           ? _self.updatedSuccessfully
           : updatedSuccessfully // ignore: cast_nullable_to_non_nullable
-              as dynamic,
+              as bool,
       isFormValid: null == isFormValid
           ? _self.isFormValid
           : isFormValid // ignore: cast_nullable_to_non_nullable
@@ -542,7 +671,25 @@ class __$UpdateIncidentStateCopyWithImpl<$Res>
           ? _self.isLoading
           : isLoading // ignore: cast_nullable_to_non_nullable
               as bool,
+      isGetCurrentLocattion: null == isGetCurrentLocattion
+          ? _self.isGetCurrentLocattion
+          : isGetCurrentLocattion // ignore: cast_nullable_to_non_nullable
+              as bool,
     ));
+  }
+
+  /// Create a copy of UpdateIncidentState
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @pragma('vm:prefer-inline')
+  $IncidentOutputCopyWith<$Res>? get updatedValue {
+    if (_self.updatedValue == null) {
+      return null;
+    }
+
+    return $IncidentOutputCopyWith<$Res>(_self.updatedValue!, (value) {
+      return _then(_self.copyWith(updatedValue: value));
+    });
   }
 }
 

@@ -1,20 +1,16 @@
 import 'package:deehelp/core/extensions/date_extension.dart';
 import 'package:deehelp/core/extensions/dialog_extension.dart';
 import 'package:deehelp/core/extensions/string_extension.dart';
-import 'package:deehelp/core/extensions/time_extension.dart';
 import 'package:deehelp/core/router/app_router.dart';
 import 'package:deehelp/core/ui/theme/app_colors.dart';
-import 'package:deehelp/core/ui/theme/dimens.dart';
-import 'package:deehelp/core/ui/widgets/avatar/profile_image_with_upload_button_widget.dart';
 import 'package:deehelp/core/ui/widgets/button/ui_elevated_button.dart';
 import 'package:deehelp/core/ui/widgets/card/ui_card_tile.dart';
 import 'package:deehelp/core/ui/widgets/card/ui_custom_app_card.dart';
 import 'package:deehelp/core/ui/widgets/card/ui_custom_scaffold.dart';
-import 'package:deehelp/core/ui/widgets/image/ui_my_network_image_widget.dart';
 import 'package:deehelp/features/incident/domain/enum/incident_status.dart';
-import 'package:deehelp/features/incident/domain/enum/type_alert.dart';
+import 'package:deehelp/features/incident/presentation/providers/incident_provider.dart';
 import 'package:deehelp/features/incident/presentation/providers/incident_viewmodel_providers.dart';
-import 'package:deehelp/features/incident/presentation/views/listing/state/listing_incident_state.dart';
+import 'package:deehelp/features/incident/presentation/views/update/incident_field.dart';
 import 'package:deehelp/features/incident/presentation/views/update/state/update_incident_state.dart';
 import 'package:deehelp/features/incident/presentation/views/update/update_incident_args.dart';
 import 'package:deehelp/features/products/presentation/views/add/widget/grid_add_photo.dart';
@@ -22,7 +18,6 @@ import 'package:deehelp/features/products/presentation/views/listing/widgets/sta
 import 'package:deehelp/features/products/presentation/views/update/widgets/item_detail_tile.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
 
 class UpdateIncidentPage extends ConsumerStatefulWidget {
@@ -33,24 +28,28 @@ class UpdateIncidentPage extends ConsumerStatefulWidget {
 }
 
 class _UpdateIncidentPageState extends ConsumerState<UpdateIncidentPage> {
-  bool _visibility = false;
   @override
   Widget build(BuildContext context) {
-    final currentIncident =
-        ref.watch(listingIncidentViewmodelProvider).maybeMap(
-              guard: (value) => value.incident,
-              orElse: () => null,
-            );
-
-    if (currentIncident == null) context.pop();
+    final state = ref.watch(updateIncidentViewmodelProvider);
     ref.listen<UpdateIncidentState>(
       updateIncidentViewmodelProvider,
       (oldState, currentState) {
         if (currentState.updatedSuccessfully) {
           WidgetsBinding.instance.addPostFrameCallback((_) {
+            ref.watch(incideSelectableProvider.notifier).state =
+                currentState.updatedValue;
             context.showSnackBar("Registro alterado com sucesso");
           });
           return;
+        }
+
+        if (oldState?.errorUpdateStatusMessage !=
+                currentState.errorUpdateStatusMessage &&
+            currentState.errorUpdateStatusMessage != null) {
+          context.showSnackBar(
+            currentState.errorUpdateStatusMessage!,
+            type: DialogType.error,
+          );
         }
       },
     );
@@ -70,19 +69,20 @@ class _UpdateIncidentPageState extends ConsumerState<UpdateIncidentPage> {
                 children: [
                   ItemDetailTile(
                     title: "Veiculo roubado",
-                    subtitle: currentIncident?.product.name ?? '',
+                    subtitle: state.updatedValue?.product.name ?? '',
                     trailing: UiCardTile(
-                        label: currentIncident!.product.code,
-                        color: AppColors.accent1),
+                      label: state.updatedValue?.product.code ?? '',
+                      color: AppColors.accent1,
+                    ),
                     showIconEdit: false,
                     showDivider: true,
                     press: () {},
                   ),
                   ItemDetailTile(
                     title: "Como aconteceu",
-                    subtitle: currentIncident.howTo.isNullOrEmpty() == true
+                    subtitle: state.updatedValue?.howTo.isNullOrEmpty() == true
                         ? "Não informado"
-                        : currentIncident.howTo!,
+                        : state.updatedValue?.howTo!,
                     showIconEdit: true,
                     showDivider: false,
                     press: () => context.push(
@@ -92,7 +92,7 @@ class _UpdateIncidentPageState extends ConsumerState<UpdateIncidentPage> {
                         description:
                             "Aqui você pode revisar e atualizar a informação sobre como o incidente aconteceu, garantindo que o registro reflita da melhor forma a situação vivida.",
                         hint: "Conte-nos um pouco mais sobre o ocorrido",
-                        value: currentIncident.howTo ?? '',
+                        value: state.updatedValue?.howTo ?? '',
                         field: IncidentField.howto,
                         maxLength: 200,
                         maxLine: 6,
@@ -110,9 +110,9 @@ class _UpdateIncidentPageState extends ConsumerState<UpdateIncidentPage> {
                   ItemDetailTile(
                     title: "Cidade",
                     subtitle:
-                        currentIncident?.local?.city.isNullOrEmpty() == true
+                        state.updatedValue?.local?.city.isNullOrEmpty() == true
                             ? "Não informado"
-                            : currentIncident!.local!.city,
+                            : state.updatedValue?.local!.city,
                     showIconEdit: true,
                     showDivider: true,
                     press: () => context.push(
@@ -122,7 +122,7 @@ class _UpdateIncidentPageState extends ConsumerState<UpdateIncidentPage> {
                         description:
                             "Atualize a cidade vinculada ao incidente, garantindo que o registro esteja correto e reflita o local exato onde ocorreu.",
                         hint: "Informe a cidade",
-                        value: currentIncident?.local?.city ?? '',
+                        value: state.updatedValue?.local?.city ?? '',
                         field: IncidentField.city,
                       ),
                     ),
@@ -130,9 +130,9 @@ class _UpdateIncidentPageState extends ConsumerState<UpdateIncidentPage> {
                   ItemDetailTile(
                     title: "Estado",
                     subtitle:
-                        currentIncident?.local?.state.isNullOrEmpty() == true
+                        state.updatedValue?.local?.state.isNullOrEmpty() == true
                             ? "Não informado"
-                            : currentIncident!.local!.state,
+                            : state.updatedValue?.local!.state,
                     showIconEdit: true,
                     showDivider: true,
                     press: () => context.push(
@@ -142,7 +142,7 @@ class _UpdateIncidentPageState extends ConsumerState<UpdateIncidentPage> {
                         description:
                             "Atualize o estado vinculada ao incidente, garantindo que o registro esteja correto e reflita o local exato onde ocorreu.",
                         hint: "Informe o estado",
-                        value: currentIncident?.local?.state ?? '',
+                        value: state.updatedValue?.local?.state ?? '',
                         field: IncidentField.state,
                       ),
                     ),
@@ -150,9 +150,10 @@ class _UpdateIncidentPageState extends ConsumerState<UpdateIncidentPage> {
                   ItemDetailTile(
                     title: "Local aproximado",
                     subtitle:
-                        currentIncident?.local?.address.isNullOrEmpty() == true
+                        state.updatedValue?.local?.address.isNullOrEmpty() ==
+                                true
                             ? "Não informado"
-                            : currentIncident!.local!.address,
+                            : state.updatedValue?.local!.address,
                     showIconEdit: true,
                     showDivider: false,
                     press: () => context.push(
@@ -162,7 +163,7 @@ class _UpdateIncidentPageState extends ConsumerState<UpdateIncidentPage> {
                         description:
                             "Atualize o endereço aproxinado do ocorrido vinculada ao incidente, garantindo que o registro esteja correto e reflita o local exato onde ocorreu.",
                         hint: "Endereço próximo",
-                        value: currentIncident?.local?.address ?? '',
+                        value: state.updatedValue?.local?.address ?? '',
                         field: IncidentField.address,
                       ),
                     ),
@@ -178,30 +179,14 @@ class _UpdateIncidentPageState extends ConsumerState<UpdateIncidentPage> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   ItemDetailTile(
-                    title: "Postado por",
-                    subtitle: "anonimo",
-                    trailing: ProfileImageWithUploadButtonWidget(
-                      onTap: () {},
-                      imageUrl: "Anonimo",
-                      imageAlt: "Anonimo",
-                      showUploadIcon: false,
-                      height: Dimens.size32.h,
-                      width: Dimens.size32.w,
-                      radius: Dimens.profileImageRadius.w,
-                    ),
-                    showIconEdit: true,
-                    showDivider: true,
-                    press: () {},
-                  ),
-                  ItemDetailTile(
                     title: "Status",
                     subtitle: "Situação do cadastro",
                     showIconEdit: true,
                     showDivider: true,
                     trailing: StatusBadgeWidget(
-                      label: currentIncident!.status.label,
-                      color: currentIncident.status.color,
-                      iconData: currentIncident.status.icon,
+                      label: state.updatedValue?.status.label ?? '',
+                      color: state.updatedValue!.status.color,
+                      iconData: state.updatedValue!.status.icon,
                     ),
                     press: () {},
                   ),
@@ -211,15 +196,15 @@ class _UpdateIncidentPageState extends ConsumerState<UpdateIncidentPage> {
                     showIconEdit: true,
                     showDivider: true,
                     trailing: UiCardTile(
-                      label: currentIncident.alertId,
+                      label: state.updatedValue?.alertId ?? '',
                       color: AppColors.greyColor,
                     ),
                     press: () {},
                   ),
                   ItemDetailTile(
                     title: "Visível",
-                    // subtitle:
-                    //     "Toda a comunidade conseguirá ver esse cadastro (Recomendado)",
+                    subtitle:
+                        "Ao selecionar essa opção seu cadastro ficará invísivel para toda a comunidade",
                     showIconEdit: true,
                     showDivider: true,
                     trailing: Switch(
@@ -232,29 +217,30 @@ class _UpdateIncidentPageState extends ConsumerState<UpdateIncidentPage> {
                         }
                         return AppColors.greyColor;
                       }),
-                      value: _visibility,
+                      value: ref
+                              .watch(updateIncidentViewmodelProvider)
+                              .updatedValue
+                              ?.visibilty ==
+                          true,
                       onChanged: (value) {
-                        setState(() {
-                          _visibility = !_visibility;
-                        });
+                        ref
+                            .watch(updateIncidentViewmodelProvider.notifier)
+                            .updateStatus();
+                        // setState(() {
+                        //   _visibility = !_visibility;
+                        // });
                       },
                     ),
                     press: () {},
                   ),
                   ItemDetailTile(
                     title: "Data do ocorrido",
-                    subtitle: currentIncident.occurredAt.toDateWithFullMonth(),
+                    subtitle:
+                        state.updatedValue?.occurredAt.toDateWithFullMonth(),
                     showIconEdit: false,
                     showDivider: true,
                     press: () {},
                   ),
-                  // ItemDetailTile(
-                  //   title: "Criado em",
-                  //   subtitle: currentIncident.createdAt.toDayMonthYearFormat(),
-                  //   showIconEdit: false,
-                  //   showDivider: true,
-                  //   press: () {},
-                  // ),
                 ],
               ),
             ),
@@ -272,8 +258,8 @@ class _UpdateIncidentPageState extends ConsumerState<UpdateIncidentPage> {
                   Padding(
                     padding: const EdgeInsets.all(8.0),
                     child: GridAddPhoto(
-                      maxPhotos: currentIncident?.product.images.length ?? 0,
-                      photos: currentIncident?.product.images ?? [],
+                      maxPhotos: state.updatedValue?.product.images.length ?? 0,
+                      photos: state.updatedValue?.product.images ?? [],
                     ),
                   ),
                 ],

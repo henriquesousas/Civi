@@ -1,11 +1,14 @@
 import 'package:deehelp/core/base/base_page.dart';
 import 'package:deehelp/core/extensions/dialog_extension.dart';
+import 'package:deehelp/core/extensions/string_extension.dart';
 import 'package:deehelp/core/ui/theme/app_colors.dart';
 import 'package:deehelp/core/ui/widgets/button/ui_elevated_button.dart';
 import 'package:deehelp/core/ui/widgets/textfield/ui_text_field_rounded.dart';
 import 'package:deehelp/features/incident/presentation/providers/incident_viewmodel_providers.dart';
+import 'package:deehelp/features/incident/presentation/views/update/incident_field.dart';
 import 'package:deehelp/features/incident/presentation/views/update/state/update_incident_state.dart';
 import 'package:deehelp/features/incident/presentation/views/update/update_incident_args.dart';
+import 'package:deehelp/features/incident/presentation/views/update/update_incident_viewmodel.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
@@ -49,17 +52,50 @@ class _UpdateIncidentPageTileState
             if (!mounted) return;
             context.pop(true);
           });
-          return;
         }
-        if (oldState?.errorMessage != null &&
-            !currentState.updatedSuccessfully) {
-          context.showSnackBar(currentState.errorMessage!);
-          return;
+
+        if (oldState?.errorMessage != currentState.errorMessage &&
+            currentState.errorMessage != null) {
+          FocusScope.of(context).unfocus();
+          context.showSnackBar(
+            currentState.errorMessage!,
+            type: DialogType.error,
+          );
+        }
+
+        if (oldState?.updatedPlaceValue != currentState.updatedPlaceValue &&
+            currentState.updatedPlaceValue != null) {
+          final value = currentState.updatedPlaceValue;
+          if (value.isNullOrEmpty()) return;
+          _onChangeValue(
+            ref.watch(updateIncidentViewmodelProvider.notifier),
+            value!,
+          );
+          setState(() {
+            _controller = TextEditingController(text: value);
+          });
         }
       },
     );
 
     super.listener();
+  }
+
+  void _onChangeValue(UpdateIncidentViewmodel viewModel, String value) {
+    switch (widget.args.field) {
+      case IncidentField.city:
+        viewModel.onCityChange(value);
+        break;
+      case IncidentField.state:
+        viewModel.onStateChange(value);
+        break;
+      case IncidentField.address:
+        viewModel.onAddressChange(value);
+        break;
+      case IncidentField.howto:
+        viewModel.onHowToChange(value);
+        break;
+    }
   }
 
   @override
@@ -86,24 +122,28 @@ class _UpdateIncidentPageTileState
           maxLength: widget.args.maxLength,
           maxLine: widget.args.maxLine,
           controller: _controller,
-          onChanged: (value) {
-            switch (widget.args.field) {
-              case IncidentField.city:
-                viewModel.onCityChange(value);
-                break;
-              default:
-                {}
-            }
-          },
-          error: state.errorMessage,
+          onChanged: (value) => _onChangeValue(viewModel, value),
+          error: state.updateError,
         ),
         UIElevatedButton(
           text: "Confirmar",
           isLoading: state.isLoading,
           isEnabled: state.isFormValid,
-          press: () {
-            // FocusScope.of(context).unfocus();
-            viewModel.update();
+          press: () => viewModel.update(),
+        ),
+        UIElevatedButton(
+          bgColor: AppColors.greyColor.withValues(alpha: 0.4),
+          textColor: AppColors.textColorHeader,
+          fontWeight: FontWeight.w500,
+          text: "Usar minha localização",
+          isLoading: state.isGetCurrentLocattion,
+          isEnabled: state.isFormValid,
+          icon: const Icon(
+            Icons.gps_fixed,
+            color: AppColors.textColorBody,
+          ),
+          press: () async {
+            viewModel.getCurrentLocation(widget.args.value, widget.args.field);
           },
         )
       ],
