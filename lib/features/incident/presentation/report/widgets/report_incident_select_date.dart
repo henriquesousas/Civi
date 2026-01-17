@@ -1,0 +1,60 @@
+import 'package:deehelp/core/extensions/context_extension.dart';
+import 'package:deehelp/core/extensions/date_extension.dart';
+import 'package:deehelp/core/ui/theme/app_colors.dart';
+import 'package:deehelp/core/ui/widgets/button/ui_elevated_button.dart';
+import 'package:deehelp/core/ui/widgets/textfield/ui_text_field_rounded.dart';
+import 'package:deehelp/features/incident/presentation/providers/report_incident_viewmodel_provider.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+
+class ReportIncidentSelectDate extends ConsumerWidget {
+  const ReportIncidentSelectDate({super.key});
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    final viewModel = ref.watch(reportIncidentViewmodelProvider.notifier);
+    final state = ref.watch(reportIncidentViewmodelProvider);
+    return Row(
+      spacing: 5,
+      children: [
+        Expanded(
+          flex: 3,
+          child: UITextFieldRounded(
+            showLabelText: false,
+            labelText: "",
+            hintText: "Data do ocorrido...",
+            onTap: () async {
+              final picked = await context.pickDate(
+                initialDate: state.occurredAt,
+              );
+              if (picked != null && picked != state.occurredAt) {
+                viewModel.onOccurredAtChange(picked);
+              }
+            },
+            prefixIcon: const Icon(
+              Icons.calendar_month_outlined,
+              color: AppColors.textColorBody,
+            ),
+            readOnly: true,
+            controller: TextEditingController(
+              text: state.occurredAt != null
+                  ? state.occurredAt?.toDayMonthYearFormat()
+                  : "",
+            ),
+            error: state.errorOccurredAt,
+          ),
+        ),
+        Expanded(
+          flex: 1,
+          child: UIElevatedButton(
+            radius: 8,
+            text: "Hoje",
+            press: () {
+              viewModel.onOccurredAtChange(DateTime.now());
+            },
+          ),
+        )
+      ],
+    );
+  }
+}

@@ -34,7 +34,7 @@ class IncidentLocation extends StatelessWidget {
   }
 
   String _getLocation() {
-    if (local?.city.isEmpty == true && local?.state.isEmpty == true) {
+    if (local?.city?.isEmpty == true && local?.state?.isEmpty == true) {
       return "Local não informado.";
     }
 

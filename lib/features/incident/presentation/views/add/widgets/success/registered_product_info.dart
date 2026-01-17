@@ -3,10 +3,9 @@ import 'package:deehelp/core/extensions/time_extension.dart';
 import 'package:deehelp/core/ui/theme/app_text_styles.dart';
 import 'package:deehelp/core/ui/theme/dimens.dart';
 import 'package:deehelp/core/ui/widgets/image/ui_my_network_image_widget.dart';
-import 'package:deehelp/features/incident/presentation/providers/incident_report_viewmodel_provider.dart';
-import 'package:deehelp/features/incident/presentation/views/add/state/add_incident_state.dart';
+import 'package:deehelp/features/incident/presentation/providers/report_incident_viewmodel_provider.dart';
+import 'package:deehelp/features/incident/presentation/report/state/add_incident_state.dart';
 import 'package:deehelp/features/incident/presentation/views/add/widgets/success/registered_tile_info.dart';
-import 'package:deehelp/features/incident/presentation/providers/incident_viewmodel_providers.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -16,7 +15,7 @@ class RegisteredProductInfo extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final state = ref.watch(addIncidentViewmodelProvider);
+    final state = ref.watch(reportIncidentViewmodelProvider);
 
     return Container(
       width: double.infinity,

@@ -9,12 +9,11 @@ class AppRouter {
   static const editProduct = "/edit-product";
   static const addProductSuccess = "/add-product-success";
   static const profile = "/profile";
-  static const addIncident = "/add-incident";
   static const incidents = "/incidents";
   static const updateIncident = "/update-incident";
   static const updateIncidentTile = "/update-incident-tile";
-  // static const addIncidentSuccess = "/add-incident-success";
-  // static const addIncidentError = "/add-incident-error";
+  static const reportIncident = "/report-incident";
+  static const reportIncidentSuccess = "/report-incident-success";
   // static const sendIncident = "/send-incident";
   static const addNickname = "/add-nickname";
 }

@@ -10,8 +10,8 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
 import 'package:lottie/lottie.dart';
 
-class IncidentRegisteredSuccessfullyWidget extends StatelessWidget {
-  const IncidentRegisteredSuccessfullyWidget({
+class ReportIncidentSuccessfullyPage extends StatelessWidget {
+  const ReportIncidentSuccessfullyPage({
     Key? key,
   }) : super(key: key);
 

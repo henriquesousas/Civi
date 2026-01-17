@@ -1,70 +1,81 @@
 import 'package:deehelp/core/extensions/string_extension.dart';
 import 'package:deehelp/core/handlers/handle_command.dart';
 import 'package:deehelp/core/services/location/place_model.dart';
+import 'package:deehelp/features/auth/domain/entity/authenticated_user.dart';
 import 'package:deehelp/features/incident/domain/entity/incident_local.dart';
 import 'package:deehelp/features/incident/domain/enum/incident_status.dart';
 import 'package:deehelp/features/incident/domain/enum/type_alert.dart';
 import 'package:deehelp/features/incident/domain/usecase/add/add_incident_dto.dart';
 import 'package:deehelp/features/incident/domain/usecase/add/add_incident_usecase.dart';
-import 'package:deehelp/features/incident/presentation/views/add/state/add_incident_state.dart';
+import 'package:deehelp/features/incident/presentation/providers/report_incident_event_provider.dart';
+import 'package:deehelp/features/incident/presentation/report/events/report_incident_event.dart';
+import 'package:deehelp/features/incident/presentation/report/state/add_incident_state.dart';
 import 'package:deehelp/features/products/domain/entities/product.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:logging/logging.dart';
 
-class AddIncidentViewmodel extends StateNotifier<AddIncidentState> {
+class ReportIncidentViewmodel extends StateNotifier<AddIncidentState> {
   static final _logger = Logger("AddIncidentViewmodel");
+  final Ref _ref;
+  final AuthenticatedUser _authenticatedUser;
   final AddIncidentUsecase _addIncidentUsecase;
-  AddIncidentViewmodel({
+  ReportIncidentViewmodel({
+    required Ref ref,
     required AddIncidentUsecase addIncidentImmediatelyUsecase,
+    required AuthenticatedUser authenticatedUser,
   })  : _addIncidentUsecase = addIncidentImmediatelyUsecase,
+        _ref = ref,
+        _authenticatedUser = authenticatedUser,
         super(AddIncidentState.initial());
 
   void clear() => state = state.copyWith(errorMessage: null);
 
-  void selectProduct(Product product) => state = state.copyWith(
-        product: product,
-      );
+  void selectProduct(Product product) {
+    state = state.copyWith(product: product);
+  }
 
-  void selectTypeAlert(TypeAlert type) => state = state.copyWith(type: type);
+  void selectAlertType(TypeAlert type) => state = state.copyWith(type: type);
 
-  void addCurrentPlace(Placemodel place) {
-    state.stateController?.text = place.state;
-    state.cityController?.text = place.city;
+  void addCurrentPlace(Placemodel? place) {
+    if (place == null) return;
+    state.stateController?.text = place.state ?? '';
+    state.cityController?.text = place.city ?? '';
     state = state.copyWith(
       stateController: state.stateController,
       cityController: state.cityController,
     );
   }
 
-  void finalizeProgress() {
+  void stopSaveImediatelly() {
     state = state.copyWith(isProgressDone: true);
-  }
-
-  void startSave(TypeAlert type) {
-    state = state.copyWith(
-      isLoading: true,
-      type: type,
-    );
-  }
-
-  void saveImmediatelly(String userId) async {
     final dto = AddIncidentDto(
       product: state.product!,
-      userId: userId,
+      userId: _authenticatedUser.id,
       status: IncidentStatus.active,
       type: TypeAlert.immediately,
       occurredAt: DateTime.now(),
       occurredAtTime: TimeOfDay.now(),
+      local: IncidentLocal(
+        address: null,
+        city: state.cityController?.text,
+        state: state.stateController?.text,
+      ),
     );
     _save(dto);
   }
 
-  void saveDetailed(String userId) async {
-    startSave(TypeAlert.detailed);
+  void saveImmediatelly() {
+    // state = state.copyWith(isLoading: true, type: TypeAlert.immediately);
+    _ref.read(reportIncidentEventProvider.notifier).state =
+        const ReportIncidentEvent.loadProgress();
+  }
+
+  void saveDetailed() async {
+    state = state.copyWith(isLoading: true, type: TypeAlert.detailed);
     final dto = AddIncidentDto(
       product: state.product!,
-      userId: userId,
+      userId: _authenticatedUser.id,
       status: IncidentStatus.pending,
       type: TypeAlert.detailed,
       howTo: state.howTo,
@@ -76,6 +87,7 @@ class AddIncidentViewmodel extends StateNotifier<AddIncidentState> {
       occurredAt: state.occurredAt!,
       occurredAtTime: state.timeOccurredAt!,
     );
+    _logger.info("Iniciando chamada de salvar incidente...");
     _save(dto);
   }
 
@@ -156,25 +168,23 @@ class AddIncidentViewmodel extends StateNotifier<AddIncidentState> {
 
   void _save(AddIncidentDto dto) async {
     _logger.info("Iniciando chamada de salvar incidente...");
-
     await HandleCommand.execute<String, AddIncidentState>(
       updateState: (newState) => state = newState,
       command: () => _addIncidentUsecase.execute(dto),
-      onLoading: () => state,
+      onLoading: () {
+        return state.copyWith(isLoading: true);
+      },
       onSuccess: (alertId) {
         _logger.info("Incident salvo com sucesso");
-        return state.copyWith(
-          registeredsuccessfully: true,
-          alertId: alertId,
-          isLoading: false,
-        );
+        _ref.read(reportIncidentEventProvider.notifier).state =
+            const ReportIncidentEvent.successfully();
+        return state;
       },
       onError: (error) {
         _logger.info("Erro ao salvar incident ${error.toString()}");
-        return state.copyWith(
-          errorMessage: error.toString(),
-          isLoading: false,
-        );
+        _ref.read(reportIncidentEventProvider.notifier).state =
+            ReportIncidentEvent.error(error.toString());
+        return state;
       },
     );
   }

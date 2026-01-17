@@ -32,7 +32,7 @@ abstract class AddIncidentState with _$AddIncidentState {
   }) = _AddIncidentState;
 
   factory AddIncidentState.initial() => AddIncidentState(
-        stateController: TextEditingController(text: ''),
-        cityController: TextEditingController(text: ''),
+        stateController: TextEditingController(text: null),
+        cityController: TextEditingController(text: null),
       );
 }

@@ -3,8 +3,8 @@ import 'package:deehelp/features/incident/domain/entity/incident.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-import '../../../../../../../core/ui/theme/app_colors.dart';
-import '../../../../../../../core/ui/theme/dimens.dart';
+import '../../../../../core/ui/theme/app_colors.dart';
+import '../../../../../core/ui/theme/dimens.dart';
 
 class IncidentHeader extends StatelessWidget {
   final Incident incident;

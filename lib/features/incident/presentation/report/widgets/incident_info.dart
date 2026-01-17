@@ -3,10 +3,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 
-import '../../../../../../../core/res/resources.dart';
-import '../../../../../../../core/ui/theme/app_colors.dart';
-import '../../../../../../../core/ui/theme/dimens.dart';
-import '../../../../../../../core/ui/widgets/image/ui_my_network_image_widget.dart';
+import '../../../../../core/res/resources.dart';
+import '../../../../../core/ui/theme/app_colors.dart';
+import '../../../../../core/ui/theme/dimens.dart';
+import '../../../../../core/ui/widgets/image/ui_my_network_image_widget.dart';
 
 class IncidentInfo extends StatelessWidget {
   final String howTo;

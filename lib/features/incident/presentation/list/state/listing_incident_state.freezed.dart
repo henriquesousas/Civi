@@ -54,7 +54,6 @@ extension ListingIncidentStatePatterns on ListingIncidentState {
     TResult Function(_ListIncidentStateInitial value)? initial,
     TResult Function(_ListIncidentStateLoading value)? loading,
     TResult Function(_ListIncidentStateSuccess value)? success,
-    TResult Function(_ListIncidentStateGuard value)? guard,
     TResult Function(_ListIncidentStateError value)? error,
     TResult Function(_ListIncidentStateEmpty value)? empty,
     required TResult orElse(),
@@ -67,8 +66,6 @@ extension ListingIncidentStatePatterns on ListingIncidentState {
         return loading(_that);
       case _ListIncidentStateSuccess() when success != null:
         return success(_that);
-      case _ListIncidentStateGuard() when guard != null:
-        return guard(_that);
       case _ListIncidentStateError() when error != null:
         return error(_that);
       case _ListIncidentStateEmpty() when empty != null:
@@ -96,7 +93,6 @@ extension ListingIncidentStatePatterns on ListingIncidentState {
     required TResult Function(_ListIncidentStateInitial value) initial,
     required TResult Function(_ListIncidentStateLoading value) loading,
     required TResult Function(_ListIncidentStateSuccess value) success,
-    required TResult Function(_ListIncidentStateGuard value) guard,
     required TResult Function(_ListIncidentStateError value) error,
     required TResult Function(_ListIncidentStateEmpty value) empty,
   }) {
@@ -108,8 +104,6 @@ extension ListingIncidentStatePatterns on ListingIncidentState {
         return loading(_that);
       case _ListIncidentStateSuccess():
         return success(_that);
-      case _ListIncidentStateGuard():
-        return guard(_that);
       case _ListIncidentStateError():
         return error(_that);
       case _ListIncidentStateEmpty():
@@ -136,7 +130,6 @@ extension ListingIncidentStatePatterns on ListingIncidentState {
     TResult? Function(_ListIncidentStateInitial value)? initial,
     TResult? Function(_ListIncidentStateLoading value)? loading,
     TResult? Function(_ListIncidentStateSuccess value)? success,
-    TResult? Function(_ListIncidentStateGuard value)? guard,
     TResult? Function(_ListIncidentStateError value)? error,
     TResult? Function(_ListIncidentStateEmpty value)? empty,
   }) {
@@ -148,8 +141,6 @@ extension ListingIncidentStatePatterns on ListingIncidentState {
         return loading(_that);
       case _ListIncidentStateSuccess() when success != null:
         return success(_that);
-      case _ListIncidentStateGuard() when guard != null:
-        return guard(_that);
       case _ListIncidentStateError() when error != null:
         return error(_that);
       case _ListIncidentStateEmpty() when empty != null:
@@ -177,8 +168,6 @@ extension ListingIncidentStatePatterns on ListingIncidentState {
     TResult Function()? loading,
     TResult Function(List<IncidentOutput> items, String selectedFilter)?
         success,
-    TResult Function(IncidentOutput incident, List<IncidentOutput> items)?
-        guard,
     TResult Function(String message)? error,
     TResult Function()? empty,
     required TResult orElse(),
@@ -191,8 +180,6 @@ extension ListingIncidentStatePatterns on ListingIncidentState {
         return loading();
       case _ListIncidentStateSuccess() when success != null:
         return success(_that.items, _that.selectedFilter);
-      case _ListIncidentStateGuard() when guard != null:
-        return guard(_that.incident, _that.items);
       case _ListIncidentStateError() when error != null:
         return error(_that.message);
       case _ListIncidentStateEmpty() when empty != null:
@@ -221,9 +208,6 @@ extension ListingIncidentStatePatterns on ListingIncidentState {
     required TResult Function() loading,
     required TResult Function(List<IncidentOutput> items, String selectedFilter)
         success,
-    required TResult Function(
-            IncidentOutput incident, List<IncidentOutput> items)
-        guard,
     required TResult Function(String message) error,
     required TResult Function() empty,
   }) {
@@ -235,8 +219,6 @@ extension ListingIncidentStatePatterns on ListingIncidentState {
         return loading();
       case _ListIncidentStateSuccess():
         return success(_that.items, _that.selectedFilter);
-      case _ListIncidentStateGuard():
-        return guard(_that.incident, _that.items);
       case _ListIncidentStateError():
         return error(_that.message);
       case _ListIncidentStateEmpty():
@@ -264,8 +246,6 @@ extension ListingIncidentStatePatterns on ListingIncidentState {
     TResult? Function()? loading,
     TResult? Function(List<IncidentOutput> items, String selectedFilter)?
         success,
-    TResult? Function(IncidentOutput incident, List<IncidentOutput> items)?
-        guard,
     TResult? Function(String message)? error,
     TResult? Function()? empty,
   }) {
@@ -277,8 +257,6 @@ extension ListingIncidentStatePatterns on ListingIncidentState {
         return loading();
       case _ListIncidentStateSuccess() when success != null:
         return success(_that.items, _that.selectedFilter);
-      case _ListIncidentStateGuard() when guard != null:
-        return guard(_that.incident, _that.items);
       case _ListIncidentStateError() when error != null:
         return error(_that.message);
       case _ListIncidentStateEmpty() when empty != null:
@@ -410,98 +388,6 @@ class __$ListIncidentStateSuccessCopyWithImpl<$Res>
           : selectedFilter // ignore: cast_nullable_to_non_nullable
               as String,
     ));
-  }
-}
-
-/// @nodoc
-
-class _ListIncidentStateGuard implements ListingIncidentState {
-  const _ListIncidentStateGuard(this.incident, final List<IncidentOutput> items)
-      : _items = items;
-
-  final IncidentOutput incident;
-  final List<IncidentOutput> _items;
-  List<IncidentOutput> get items {
-    if (_items is EqualUnmodifiableListView) return _items;
-    // ignore: implicit_dynamic_type
-    return EqualUnmodifiableListView(_items);
-  }
-
-  /// Create a copy of ListingIncidentState
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  @pragma('vm:prefer-inline')
-  _$ListIncidentStateGuardCopyWith<_ListIncidentStateGuard> get copyWith =>
-      __$ListIncidentStateGuardCopyWithImpl<_ListIncidentStateGuard>(
-          this, _$identity);
-
-  @override
-  bool operator ==(Object other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType &&
-            other is _ListIncidentStateGuard &&
-            (identical(other.incident, incident) ||
-                other.incident == incident) &&
-            const DeepCollectionEquality().equals(other._items, _items));
-  }
-
-  @override
-  int get hashCode => Object.hash(
-      runtimeType, incident, const DeepCollectionEquality().hash(_items));
-
-  @override
-  String toString() {
-    return 'ListingIncidentState.guard(incident: $incident, items: $items)';
-  }
-}
-
-/// @nodoc
-abstract mixin class _$ListIncidentStateGuardCopyWith<$Res>
-    implements $ListingIncidentStateCopyWith<$Res> {
-  factory _$ListIncidentStateGuardCopyWith(_ListIncidentStateGuard value,
-          $Res Function(_ListIncidentStateGuard) _then) =
-      __$ListIncidentStateGuardCopyWithImpl;
-  @useResult
-  $Res call({IncidentOutput incident, List<IncidentOutput> items});
-
-  $IncidentOutputCopyWith<$Res> get incident;
-}
-
-/// @nodoc
-class __$ListIncidentStateGuardCopyWithImpl<$Res>
-    implements _$ListIncidentStateGuardCopyWith<$Res> {
-  __$ListIncidentStateGuardCopyWithImpl(this._self, this._then);
-
-  final _ListIncidentStateGuard _self;
-  final $Res Function(_ListIncidentStateGuard) _then;
-
-  /// Create a copy of ListingIncidentState
-  /// with the given fields replaced by the non-null parameter values.
-  @pragma('vm:prefer-inline')
-  $Res call({
-    Object? incident = null,
-    Object? items = null,
-  }) {
-    return _then(_ListIncidentStateGuard(
-      null == incident
-          ? _self.incident
-          : incident // ignore: cast_nullable_to_non_nullable
-              as IncidentOutput,
-      null == items
-          ? _self._items
-          : items // ignore: cast_nullable_to_non_nullable
-              as List<IncidentOutput>,
-    ));
-  }
-
-  /// Create a copy of ListingIncidentState
-  /// with the given fields replaced by the non-null parameter values.
-  @override
-  @pragma('vm:prefer-inline')
-  $IncidentOutputCopyWith<$Res> get incident {
-    return $IncidentOutputCopyWith<$Res>(_self.incident, (value) {
-      return _then(_self.copyWith(incident: value));
-    });
   }
 }
 

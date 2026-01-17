@@ -1,9 +1,8 @@
 import 'package:deehelp/core/extensions/dialog_extension.dart';
 import 'package:deehelp/core/ui/theme/dimens.dart';
 import 'package:deehelp/core/utils/url_launcher_utils.dart';
-import 'package:deehelp/features/incident/presentation/providers/incident_report_viewmodel_provider.dart';
+import 'package:deehelp/features/incident/presentation/providers/report_incident_viewmodel_provider.dart';
 import 'package:deehelp/features/incident/presentation/views/add/widgets/success/quick_action_tile_widget.dart';
-import 'package:deehelp/features/incident/presentation/providers/incident_viewmodel_providers.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -35,7 +34,7 @@ class RegisteredSuccessQuickActionsWidget extends ConsumerWidget {
             press: () async {
               await UrlLauncherUtils.shareIncident(
                 context,
-                ref.watch(addIncidentViewmodelProvider).alertId ?? '',
+                ref.watch(reportIncidentViewmodelProvider).alertId ?? '',
                 DateTime.now(),
               );
             },

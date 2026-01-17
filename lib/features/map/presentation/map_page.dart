@@ -503,7 +503,7 @@ class _MapPageState extends State<MapPage> with TickerProviderStateMixin {
   }
 
   void _handleSinalizePress() {
-    context.push(AppRouter.addIncident);
+    context.push(AppRouter.reportIncident);
   }
 }
 

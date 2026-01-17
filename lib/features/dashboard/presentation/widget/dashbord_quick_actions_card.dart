@@ -40,7 +40,7 @@ class DashbordQuickActionsCard extends StatelessWidget {
                 color: AppColors.grenColor,
                 icon: const Icon(Icons.campaign_outlined,
                     color: AppColors.whiteColor),
-                onTap: () => context.push(AppRouter.addIncident),
+                onTap: () => context.push(AppRouter.reportIncident),
               ),
               QuickActionItem(
                 title: "Ver\nMapa",

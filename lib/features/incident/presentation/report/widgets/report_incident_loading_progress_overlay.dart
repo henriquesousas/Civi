@@ -3,22 +3,22 @@ import 'package:deehelp/core/ui/animation/transform_scale_opacity_animator.dart'
 import 'package:deehelp/core/ui/theme/app_colors.dart';
 import 'package:deehelp/core/ui/theme/app_text_styles.dart';
 import 'package:deehelp/core/ui/theme/dimens.dart';
-import 'package:deehelp/features/incident/presentation/providers/incident_report_viewmodel_provider.dart';
-import 'package:deehelp/features/incident/presentation/providers/incident_viewmodel_providers.dart';
+import 'package:deehelp/features/incident/presentation/providers/report_incident_viewmodel_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:lottie/lottie.dart';
 
-class LoadingProgressPage extends ConsumerStatefulWidget {
-  const LoadingProgressPage({super.key});
+class ReportIncidentLoadingProgressOverlay extends ConsumerStatefulWidget {
+  const ReportIncidentLoadingProgressOverlay({super.key});
 
   @override
-  ConsumerState<LoadingProgressPage> createState() =>
+  ConsumerState<ReportIncidentLoadingProgressOverlay> createState() =>
       _LoadingProgressPageState();
 }
 
-class _LoadingProgressPageState extends ConsumerState<LoadingProgressPage> {
+class _LoadingProgressPageState
+    extends ConsumerState<ReportIncidentLoadingProgressOverlay> {
   double _progress = 0.0;
   String _message = "";
 
@@ -40,29 +40,38 @@ class _LoadingProgressPageState extends ConsumerState<LoadingProgressPage> {
     _updateProgress(0);
 
     for (int i = 1; i <= totalDuration; i++) {
-      Future.delayed(Duration(seconds: i), () {
-        if (mounted) {
-          setState(() {
-            if (i == totalDuration) {
-              _message = "Finalizando registro...";
-              _progress = 0.9;
-              Future.delayed(
-                const Duration(seconds: 2),
-                () {
-                  ref
-                      .read(addIncidentViewmodelProvider.notifier)
-                      .finalizeProgress();
-                },
-              );
+      Future.delayed(Duration(seconds: i), () async {
+        if (!mounted) return null;
 
-              return;
-            }
-            _progress = i / totalDuration;
-            _message = i < _messages.length ? _messages[i] : _messages.last;
-          });
+        if (i == totalDuration) {
+          _stopProgress();
+          return;
         }
+
+        setState(() {
+          _progress = i / totalDuration;
+          _message = i < _messages.length ? _messages[i] : _messages.last;
+        });
       });
     }
+  }
+
+  void _stopProgress() async {
+    setState(() {
+      _message = "Finalizando registro...";
+      _progress = 0.9;
+    });
+
+    await Future.delayed(
+      const Duration(seconds: 2),
+      () {
+        if (mounted) {
+          ref
+              .read(reportIncidentViewmodelProvider.notifier)
+              .stopSaveImediatelly();
+        }
+      },
+    );
   }
 
   void _updateProgress(int second) {
@@ -72,8 +81,8 @@ class _LoadingProgressPageState extends ConsumerState<LoadingProgressPage> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: Padding(
+    return Material(
+      child: Padding(
         padding: const EdgeInsets.all(Dimens.size32),
         child: Column(
           spacing: 10,

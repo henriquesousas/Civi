@@ -53,9 +53,9 @@ class IncidentErrorWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: const Color(0xFFB71C1C),
-      body: SafeArea(
+    return Material(
+      child: Container(
+        color: const Color(0xFFB71C1C),
         child: SingleChildScrollView(
           padding: const EdgeInsets.symmetric(vertical: 40),
           child: Column(
@@ -82,7 +82,6 @@ class IncidentErrorWidget extends StatelessWidget {
               const SizedBox(height: Dimens.size20),
               ErrorMessageIndicator(error: _getErrorMessage()),
               const ErrorIndicatorSolutions(),
-              // _buildErrorDetailCard(),
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 20),
                 child: Column(
@@ -123,57 +122,3 @@ class IncidentErrorWidget extends StatelessWidget {
     );
   }
 }
-
-/**
- * Widget _buildErrorDetailCard() {
-    return Container(
-      margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 0),
-      padding: const EdgeInsets.all(16),
-      decoration: BoxDecoration(
-        color: Colors.white.withOpacity(0.1),
-        borderRadius: BorderRadius.circular(16),
-        border: Border.all(color: Colors.white.withOpacity(0.2)),
-      ),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Row(
-            children: [
-              Icon(Icons.info_outline,
-                  color: Colors.white.withOpacity(0.8), size: 20),
-              const SizedBox(width: 8),
-              Text(
-                'DETALHES DO ERRO',
-                style: TextStyle(
-                  color: Colors.white.withOpacity(0.8),
-                  fontSize: 12,
-                  fontWeight: FontWeight.w600,
-                  letterSpacing: 0.5,
-                ),
-              ),
-            ],
-          ),
-          const SizedBox(height: 8),
-          Text(
-            'Código: ERR-${widget.errorCode.toString().padLeft(3, '0')}',
-            style: TextStyle(
-              color: Colors.white.withOpacity(0.9),
-              fontSize: 14,
-              fontWeight: FontWeight.w500,
-            ),
-          ),
-          if (_retryCount > 0) ...[
-            const SizedBox(height: 4),
-            Text(
-              'Tentativas: $_retryCount',
-              style: TextStyle(
-                color: Colors.white.withOpacity(0.8),
-                fontSize: 13,
-              ),
-            ),
-          ],
-        ],
-      ),
-    );
-  }
- */
