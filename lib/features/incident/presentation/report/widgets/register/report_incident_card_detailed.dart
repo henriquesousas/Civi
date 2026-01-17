@@ -5,10 +5,10 @@ import 'package:deehelp/core/ui/widgets/button/ui_elevated_button.dart';
 import 'package:deehelp/core/ui/widgets/textfield/ui_text_field_rounded.dart';
 import 'package:deehelp/features/incident/domain/enum/type_alert.dart';
 import 'package:deehelp/features/incident/presentation/providers/report_incident_viewmodel_provider.dart';
-import 'package:deehelp/features/incident/presentation/report/widgets/report_incident_card_animated.dart';
-import 'package:deehelp/features/incident/presentation/report/widgets/report_incident_info.dart';
-import 'package:deehelp/features/incident/presentation/report/widgets/report_incident_select_date.dart';
-import 'package:deehelp/features/incident/presentation/report/widgets/card_type_incident.dart';
+import 'package:deehelp/features/incident/presentation/report/widgets/register/report_incident_card_animated.dart';
+import 'package:deehelp/features/incident/presentation/report/widgets/register/report_incident_info.dart';
+import 'package:deehelp/features/incident/presentation/report/widgets/register/report_incident_select_date.dart';
+import 'package:deehelp/features/incident/presentation/report/widgets/register/card_type_incident.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 

@@ -3,8 +3,8 @@ import 'package:deehelp/core/ui/theme/app_colors.dart';
 import 'package:deehelp/core/ui/theme/app_text_styles.dart';
 import 'package:deehelp/core/ui/theme/dimens.dart';
 import 'package:deehelp/core/ui/widgets/button/ui_elevated_button.dart';
-import 'package:deehelp/features/incident/presentation/views/add/widgets/success/registered_product_info.dart';
-import 'package:deehelp/features/incident/presentation/views/add/widgets/success/registered_success_quick_actions_widget.dart';
+import 'package:deehelp/features/incident/presentation/report/widgets/success/registered_product_info.dart';
+import 'package:deehelp/features/incident/presentation/report/widgets/success/registered_incident_quick_actions.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
@@ -39,14 +39,6 @@ class ReportIncidentSuccessfullyPage extends StatelessWidget {
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  // Padding(
-                  //   padding: const EdgeInsets.all(Dimens.size10),
-                  //   child: IconButton(
-                  //     icon: const Icon(Icons.close, color: Colors.white),
-                  //     onPressed: () => context.pop(),
-                  //     splashRadius: 20,
-                  //   ),
-                  // ),
                   Expanded(
                     child: SingleChildScrollView(
                       physics: const BouncingScrollPhysics(),
@@ -96,7 +88,7 @@ class ReportIncidentSuccessfullyPage extends StatelessWidget {
                           const SizedBox(height: Dimens.size15),
                           const RegisteredProductInfo(),
                           const SizedBox(height: Dimens.size15),
-                          const RegisteredSuccessQuickActionsWidget(),
+                          const RegisteredIncidentQuickActions(),
                           const SizedBox(height: Dimens.size15),
                           UIElevatedButton(
                             bgColor: AppColors.whiteColor,

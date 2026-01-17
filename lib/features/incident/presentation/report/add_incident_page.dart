@@ -4,12 +4,12 @@ import 'package:deehelp/core/ui/widgets/card/ui_custom_scaffold.dart';
 import 'package:deehelp/features/incident/presentation/providers/report_incident_event_provider.dart';
 import 'package:deehelp/features/incident/presentation/providers/report_incident_viewmodel_provider.dart';
 import 'package:deehelp/features/incident/presentation/report/events/report_incident_event.dart';
-import 'package:deehelp/features/incident/presentation/report/widgets/report_incident_card_detailed.dart';
-import 'package:deehelp/features/incident/presentation/report/widgets/report_incident_card_immediately.dart';
-import 'package:deehelp/features/incident/presentation/report/widgets/card_select_image.dart';
-import 'package:deehelp/features/incident/presentation/views/add/widgets/error/incident_error_widget.dart';
-import 'package:deehelp/features/incident/presentation/report/widgets/report_incident_warning_indicator.dart';
-import 'package:deehelp/features/incident/presentation/report/widgets/report_incident_loading_progress_overlay.dart';
+import 'package:deehelp/features/incident/presentation/report/widgets/register/report_incident_card_detailed.dart';
+import 'package:deehelp/features/incident/presentation/report/widgets/register/report_incident_card_immediately.dart';
+import 'package:deehelp/features/incident/presentation/report/widgets/register/card_select_image.dart';
+import 'package:deehelp/features/incident/presentation/report/widgets/error/incident_error_overlay.dart';
+import 'package:deehelp/features/incident/presentation/report/widgets/register/report_incident_warning_indicator.dart';
+import 'package:deehelp/features/incident/presentation/report/widgets/register/report_incident_loading_progress_overlay.dart';
 import 'package:deehelp/features/products/domain/entities/product.dart';
 import 'package:deehelp/features/products/presentation/views/listing/product_listing_page.dart';
 import 'package:flutter/material.dart';
@@ -57,7 +57,7 @@ class _AddIncidentPageState extends ConsumerState<AddIncidentPage>
             context: context,
             barrierDismissible: false,
             barrierColor: Colors.transparent,
-            pageBuilder: (_, __, ___) => IncidentErrorWidget(onRetry: () {
+            pageBuilder: (_, __, ___) => IncidentErrorOverlay(onRetry: () {
               if (context.canPop()) {
                 context.pop();
               }

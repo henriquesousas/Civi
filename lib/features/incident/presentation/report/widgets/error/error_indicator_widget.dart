@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class ErrorIndicatorWidget extends StatelessWidget {
-  final String error;
+  final int error;
   const ErrorIndicatorWidget({super.key, required this.error});
 
   @override
@@ -11,7 +11,7 @@ class ErrorIndicatorWidget extends StatelessWidget {
     return Column(
       children: [
         Text(
-          error,
+          _getErrorTitle(error),
           style: context.appTextStyles.sectionTitle.copyWith(
             fontSize: 32.sp,
             fontWeight: FontWeight.w800,
@@ -36,5 +36,18 @@ class ErrorIndicatorWidget extends StatelessWidget {
         ),
       ],
     );
+  }
+
+  String _getErrorTitle(int error) {
+    switch (error) {
+      case 1:
+        return 'SEM CONEXÃO';
+      case 2:
+        return 'SERVIDOR INDISPONÍVEL';
+      case 3:
+        return 'TEMPO ESGOTADO';
+      default:
+        return 'FALHA NO ENVIO';
+    }
   }
 }

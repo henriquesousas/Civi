@@ -1,7 +1,6 @@
 import 'dart:math';
 
 import 'package:deehelp/core/base/use_case.dart';
-import 'package:deehelp/core/errors/failure.dart';
 import 'package:deehelp/core/utils/id_utils.dart';
 import 'package:deehelp/core/utils/result.dart';
 import 'package:deehelp/features/incident/domain/entity/incident.dart';
@@ -16,7 +15,6 @@ class AddIncidentUsecase extends UseCase<AddIncidentDto, String> {
 
   @override
   Future<Result<String>> execute(AddIncidentDto dto) async {
-    return Result.failure(CacheFailure('any'));
     final incident = Incident(
       id: IdUtils.generate(),
       alertId: _generateIncidentId(),

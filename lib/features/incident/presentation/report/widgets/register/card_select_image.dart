@@ -6,7 +6,7 @@ import 'package:deehelp/features/products/domain/entities/product.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-import '../../../../../core/ui/widgets/card/ui_custom_app_card.dart';
+import '../../../../../../core/ui/widgets/card/ui_custom_app_card.dart';
 
 class CardSelectImage extends StatelessWidget {
   final VoidCallback press;

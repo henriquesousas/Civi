@@ -3,7 +3,7 @@ import 'package:deehelp/core/ui/theme/app_text_styles.dart';
 import 'package:deehelp/core/ui/widgets/button/ui_hold_confirm_button.dart';
 import 'package:deehelp/features/incident/domain/enum/type_alert.dart';
 import 'package:deehelp/features/incident/presentation/providers/report_incident_viewmodel_provider.dart';
-import 'package:deehelp/features/incident/presentation/report/widgets/card_type_incident.dart';
+import 'package:deehelp/features/incident/presentation/report/widgets/register/card_type_incident.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 

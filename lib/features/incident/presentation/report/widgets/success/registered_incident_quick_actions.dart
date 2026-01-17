@@ -2,13 +2,13 @@ import 'package:deehelp/core/extensions/dialog_extension.dart';
 import 'package:deehelp/core/ui/theme/dimens.dart';
 import 'package:deehelp/core/utils/url_launcher_utils.dart';
 import 'package:deehelp/features/incident/presentation/providers/report_incident_viewmodel_provider.dart';
-import 'package:deehelp/features/incident/presentation/views/add/widgets/success/quick_action_tile_widget.dart';
+import 'package:deehelp/features/incident/presentation/report/widgets/success/registered_incident_quick_action_item.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-class RegisteredSuccessQuickActionsWidget extends ConsumerWidget {
-  const RegisteredSuccessQuickActionsWidget({
+class RegisteredIncidentQuickActions extends ConsumerWidget {
+  const RegisteredIncidentQuickActions({
     super.key,
   });
 
@@ -27,7 +27,7 @@ class RegisteredSuccessQuickActionsWidget extends ConsumerWidget {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceAround,
         children: [
-          QuickActionTileWidget(
+          RegisteredIncidentQuickActionItem(
             icon: Icons.people_alt_rounded,
             value: 'Compartilhar',
             label: 'Amigos',
@@ -44,7 +44,7 @@ class RegisteredSuccessQuickActionsWidget extends ConsumerWidget {
             height: Dimens.size40.h,
             color: Colors.white.withValues(alpha: 0.3),
           ),
-          QuickActionTileWidget(
+          RegisteredIncidentQuickActionItem(
             icon: Icons.local_police,
             value: 'Polícia',
             label: 'Ligar',

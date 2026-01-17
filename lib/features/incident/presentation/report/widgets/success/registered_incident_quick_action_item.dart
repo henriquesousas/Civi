@@ -4,12 +4,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-class QuickActionTileWidget extends StatelessWidget {
+class RegisteredIncidentQuickActionItem extends StatelessWidget {
   final IconData icon;
   final String value;
   final String label;
   final VoidCallback press;
-  const QuickActionTileWidget(
+  const RegisteredIncidentQuickActionItem(
       {super.key,
       required this.icon,
       required this.value,

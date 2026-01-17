@@ -6,9 +6,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../../../core/ui/widgets/app_bar/ui_app_bar.dart';
-import '../../../incident/presentation/report/widgets/incident_detail.dart';
-import '../../../incident/presentation/report/widgets/incident_header.dart';
-import '../../../incident/presentation/report/widgets/incident_info.dart';
+import '../../../incident/presentation/report/widgets/register/incident_detail.dart';
+import '../../../incident/presentation/report/widgets/register/incident_header.dart';
+import '../../../incident/presentation/report/widgets/register/incident_info.dart';
 import '../data.dart';
 
 class IncidentModal extends StatelessWidget {
