@@ -25,7 +25,7 @@ class UpdateIncidentViewmodel extends StateNotifier<UpdateIncidentState> {
         super(UpdateIncidentState.initial(currenIncident));
 
   void update() async {
-    _update2(
+    _updateIncident(
       (error) {
         return handleError<UpdateIncidentState>(
           error,
@@ -47,7 +47,7 @@ class UpdateIncidentViewmodel extends StateNotifier<UpdateIncidentState> {
     );
     state = state.copyWith(updatedValue: _currentIncident);
     await Future.delayed(const Duration(seconds: 1));
-    _update2(
+    _updateIncident(
       (error) {
         final rollbackVisibility = !_currentIncident.visibilty;
         _currentIncident =
@@ -98,7 +98,7 @@ class UpdateIncidentViewmodel extends StateNotifier<UpdateIncidentState> {
     _updateIncidentField(IncidentField.howto, value);
   }
 
-  void _update2(UpdateIncidentState Function(Failure) onError) async {
+  void _updateIncident(UpdateIncidentState Function(Failure) onError) async {
     final dto = UpdateIncidentDto(
       incidentId: _currentIncident.id,
       status: _currentIncident.status,

@@ -3,9 +3,9 @@ import 'package:deehelp/core/ui/theme/app_text_styles.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-class IncidentTileHowToWidget extends StatelessWidget {
+class IncidentHowTo extends StatelessWidget {
   final String? howTo;
-  const IncidentTileHowToWidget({super.key, required this.howTo});
+  const IncidentHowTo({super.key, required this.howTo});
 
   @override
   Widget build(BuildContext context) {

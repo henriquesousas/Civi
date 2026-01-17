@@ -1,11 +1,13 @@
+import 'package:deehelp/core/ui/widgets/shimmer_animation.dart';
 import 'package:deehelp/features/incident/domain/entity/incident_local.dart';
 import 'package:deehelp/features/incident/domain/enum/incident_status.dart';
 import 'package:deehelp/features/incident/domain/enum/type_alert.dart';
 import 'package:deehelp/features/incident/domain/usecase/incident_output.dart';
 import 'package:deehelp/features/incident/domain/usecase/incident_product_output.dart';
+import 'package:deehelp/features/incident/presentation/list/widgets/incident_list_item.dart';
 import 'package:flutter/material.dart';
 
-final _shimmer = IncidentOutput(
+final _fakeIncident = IncidentOutput(
   id: 'any',
   userId: 'any',
   alertId: 'any',
@@ -24,4 +26,21 @@ final _shimmer = IncidentOutput(
   occurredAtTime: TimeOfDay.now(),
 );
 
-final listShimmer = List.generate(10, (index) => _shimmer);
+class IncidentListShimmer extends StatelessWidget {
+  const IncidentListShimmer({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return ShimmerAnimation(
+      enabled: true,
+      child: ListView.builder(
+        itemCount: 6,
+        itemBuilder: (_, __) => IncidentListItem(
+          incident: _fakeIncident,
+          isLoading: true,
+          onPressed: () {},
+        ),
+      ),
+    );
+  }
+}

@@ -5,14 +5,10 @@ import 'package:deehelp/core/router/slide_transition_page.dart';
 import 'package:deehelp/features/auth/external/di/auth_repository_provider.dart';
 import 'package:deehelp/features/auth/external/di/auth_state_provider.dart';
 import 'package:deehelp/features/auth/external/repositories/supabase_auth_repository.dart';
-import 'package:deehelp/features/incident/presentation/views/listing/listing_incident_page.dart';
-import 'package:deehelp/features/incident/presentation/views/update/update_incident_args.dart';
-import 'package:deehelp/features/incident/presentation/views/update/update_incident_page.dart';
-import 'package:deehelp/features/incident/presentation/views/update/update_incident_page_tile.dart';
+import 'package:deehelp/features/incident/incident_module.dart';
 import 'package:deehelp/features/profile/presentation/views/add_nickname/add_nickname_page.dart';
 import 'package:deehelp/features/dashboard/presentation/dashsboard_page.dart';
 import 'package:deehelp/features/faq/faq_provider.dart';
-import 'package:deehelp/features/incident/presentation/views/add/add_incident_page.dart';
 import 'package:deehelp/features/map/presentation/map_page.dart';
 import 'package:deehelp/features/onboarding/page/onboard_page.dart';
 import 'package:deehelp/features/products/domain/entities/product.dart';
@@ -81,6 +77,7 @@ var goRouterProvider = Provider<GoRouter>(
         );
       },
       routes: [
+        ...IncidentModule.routers,
         GoRoute(
           path: '/',
           pageBuilder: (context, state) => slideTransitionPage(
@@ -162,39 +159,39 @@ var goRouterProvider = Provider<GoRouter>(
             child: FaqProvider.page,
           ),
         ),
-        GoRoute(
-          path: AppRouter.addIncident,
-          pageBuilder: (context, state) => slideTransitionPage(
-            key: state.pageKey,
-            child: const AddIncidentPage(),
-          ),
-        ),
-        GoRoute(
-          path: AppRouter.incidents,
-          pageBuilder: (context, state) => slideTransitionPage(
-            key: state.pageKey,
-            child: const ListingIncidentPage(),
-          ),
-        ),
-        GoRoute(
-          path: AppRouter.updateIncident,
-          pageBuilder: (context, state) => slideTransitionPage(
-            key: state.pageKey,
-            child: const UpdateIncidentPage(),
-          ),
-        ),
-        GoRoute(
-          path: AppRouter.updateIncidentTile,
-          pageBuilder: (context, state) {
-            final data = state.extra as Map<String, dynamic>;
-            final args = UpdateIncidentArgs.from(data);
+        // GoRoute(
+        //   path: AppRouter.addIncident,
+        //   pageBuilder: (context, state) => slideTransitionPage(
+        //     key: state.pageKey,
+        //     child: const AddIncidentPage(),
+        //   ),
+        // ),
+        // GoRoute(
+        //   path: AppRouter.incidents,
+        //   pageBuilder: (context, state) => slideTransitionPage(
+        //     key: state.pageKey,
+        //     child: const ListingIncidentPage(),
+        //   ),
+        // ),
+        // GoRoute(
+        //   path: AppRouter.updateIncident,
+        //   pageBuilder: (context, state) => slideTransitionPage(
+        //     key: state.pageKey,
+        //     child: const UpdateIncidentPage(),
+        //   ),
+        // ),
+        // GoRoute(
+        //   path: AppRouter.updateIncidentTile,
+        //   pageBuilder: (context, state) {
+        //     final data = state.extra as Map<String, dynamic>;
+        //     final args = UpdateIncidentArgs.from(data);
 
-            return slideTransitionPage(
-              key: state.pageKey,
-              child: UpdateIncidentPageTile(args: args),
-            );
-          },
-        ),
+        //     return slideTransitionPage(
+        //       key: state.pageKey,
+        //       child: UpdateIncidentPageTile(args: args),
+        //     );
+        //   },
+        // ),
         // GoRoute(
         //   path: AppRouter.addIncidentSuccess,
         //   pageBuilder: (context, state) => slideTransitionPage(

@@ -3,6 +3,7 @@ import 'package:deehelp/core/ui/animation/transform_scale_opacity_animator.dart'
 import 'package:deehelp/core/ui/theme/app_colors.dart';
 import 'package:deehelp/core/ui/theme/app_text_styles.dart';
 import 'package:deehelp/core/ui/theme/dimens.dart';
+import 'package:deehelp/features/incident/presentation/providers/incident_report_viewmodel_provider.dart';
 import 'package:deehelp/features/incident/presentation/providers/incident_viewmodel_providers.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';

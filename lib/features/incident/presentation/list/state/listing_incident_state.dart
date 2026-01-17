@@ -11,11 +11,6 @@ class ListingIncidentState with _$ListingIncidentState {
     List<IncidentOutput> items,
     String selectedFilter,
   ) = _ListIncidentStateSuccess;
-  const factory ListingIncidentState.guard(
-    IncidentOutput incident,
-    List<IncidentOutput> items,
-  ) = _ListIncidentStateGuard;
-
   const factory ListingIncidentState.error(String message) =
       _ListIncidentStateError;
   const factory ListingIncidentState.empty() = _ListIncidentStateEmpty;

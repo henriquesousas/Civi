@@ -8,8 +8,9 @@ import 'package:deehelp/core/ui/widgets/card/ui_card_tile.dart';
 import 'package:deehelp/core/ui/widgets/card/ui_custom_app_card.dart';
 import 'package:deehelp/core/ui/widgets/card/ui_custom_scaffold.dart';
 import 'package:deehelp/features/incident/domain/enum/incident_status.dart';
-import 'package:deehelp/features/incident/presentation/providers/incident_provider.dart';
+import 'package:deehelp/features/incident/presentation/providers/incident_selected_provider.dart';
 import 'package:deehelp/features/incident/presentation/providers/incident_viewmodel_providers.dart';
+import 'package:deehelp/features/incident/presentation/providers/update_incident_viewmodel_provider.dart';
 import 'package:deehelp/features/incident/presentation/views/update/incident_field.dart';
 import 'package:deehelp/features/incident/presentation/views/update/state/update_incident_state.dart';
 import 'package:deehelp/features/incident/presentation/views/update/update_incident_args.dart';
@@ -36,7 +37,7 @@ class _UpdateIncidentPageState extends ConsumerState<UpdateIncidentPage> {
       (oldState, currentState) {
         if (currentState.updatedSuccessfully) {
           WidgetsBinding.instance.addPostFrameCallback((_) {
-            ref.watch(incideSelectableProvider.notifier).state =
+            ref.watch(incidentSelectedProvider.notifier).state =
                 currentState.updatedValue;
             context.showSnackBar("Registro alterado com sucesso");
           });
