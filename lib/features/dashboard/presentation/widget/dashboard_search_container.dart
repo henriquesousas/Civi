@@ -21,7 +21,7 @@ class DashboardSearchContainer extends StatelessWidget {
         color: AppColors.whiteColor,
         borderRadius: BorderRadius.circular(Dimens.defaultButtonRadius.w),
         border: Border.all(
-          color: AppColors.lightGreyColor,
+          color: AppColors.lightGreyColor20,
         ),
       ),
       child: Row(
@@ -29,7 +29,9 @@ class DashboardSearchContainer extends StatelessWidget {
         children: [
           Text(
             'Faça uma pesquisa...',
-            style: context.appTextStyles.bodyTextStyle1,
+            style: context.appTextStyles.sectionBodyTextStyle.copyWith(
+              color: AppColors.textSecondary,
+            ),
           ),
           UIICon(
             padding: Dimens.size10.w,

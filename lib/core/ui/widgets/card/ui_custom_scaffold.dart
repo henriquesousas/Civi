@@ -17,6 +17,7 @@ class UICustomScaffold extends StatelessWidget {
   final bool centerTitle;
   final VoidCallback? onBackButtonTap;
   final Widget? floatingActionButton;
+  final Widget? leading;
   final Widget? bottomNavigationBar;
   final String? assetBackButton;
   final bool showBackButton;
@@ -37,6 +38,7 @@ class UICustomScaffold extends StatelessWidget {
     this.bottomNavigationBar,
     this.assetBackButton,
     this.showBackButton = true,
+    this.leading,
   });
 
   @override
@@ -56,25 +58,7 @@ class UICustomScaffold extends StatelessWidget {
                   surfaceTintColor: Colors.transparent,
                   centerTitle: centerTitle,
                   backgroundColor: appBarBgColor ?? Colors.white,
-                  leading: showBackButton
-                      ? IconButton(
-                          onPressed: () {
-                            if (onBackButtonTap != null) {
-                              onBackButtonTap!();
-                            } else {}
-                          },
-                          icon: const Icon(
-                            Icons.arrow_back,
-                          ),
-                          // icon: UIMyAssetsImageWidget(
-                          //   color: const Color(0xFF2B5BEE),
-                          //   isSvg: true,
-                          //   assetPath: assetBackButton ?? R.svg.back,
-                          //   width: 35.w,
-                          //   height: 35.h,
-                          // ),
-                        )
-                      : null,
+                  leading: _getLeading(),
                   titleSpacing: 0,
                   title: Padding(
                     padding: EdgeInsets.only(
@@ -102,5 +86,21 @@ class UICustomScaffold extends StatelessWidget {
         floatingActionButton: floatingActionButton,
       ),
     );
+  }
+
+  Widget? _getLeading() {
+    if (leading != null) return leading!;
+    return showBackButton
+        ? IconButton(
+            onPressed: () {
+              if (onBackButtonTap != null) {
+                onBackButtonTap!();
+              } else {}
+            },
+            icon: const Icon(
+              Icons.arrow_back,
+            ),
+          )
+        : null;
   }
 }
