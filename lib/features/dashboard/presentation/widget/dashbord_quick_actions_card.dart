@@ -33,7 +33,7 @@ class DashbordQuickActionsCard extends StatelessWidget {
                 title: "Bem\nPré cadastro",
                 color: AppColors.primaryColor,
                 icon: const Icon(Icons.add, color: AppColors.whiteColor),
-                onTap: () => context.push(AppRouter.myProducts),
+                onTap: () => context.push(AppRouter.addProduct),
               ),
               QuickActionItem(
                 title: "Reportar\nincidente",

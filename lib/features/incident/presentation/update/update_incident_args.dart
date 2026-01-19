@@ -1,4 +1,4 @@
-import 'package:deehelp/features/incident/presentation/views/update/incident_field.dart';
+import 'package:deehelp/features/incident/presentation/update/incident_field.dart';
 import 'package:flutter/material.dart';
 
 class UpdateIncidentArgs {

@@ -9,8 +9,8 @@ import 'package:deehelp/features/incident/domain/usecase/delete/delete_incident_
 import 'package:deehelp/features/incident/domain/usecase/incident_output.dart';
 import 'package:deehelp/features/incident/domain/usecase/update/update_incident_dto.dart';
 import 'package:deehelp/features/incident/domain/usecase/update/update_incident_usecase.dart';
-import 'package:deehelp/features/incident/presentation/views/update/incident_field.dart';
-import 'package:deehelp/features/incident/presentation/views/update/state/update_incident_state.dart';
+import 'package:deehelp/features/incident/presentation/update/incident_field.dart';
+import 'package:deehelp/features/incident/presentation/update/state/update_incident_state.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 class UpdateIncidentViewmodel extends StateNotifier<UpdateIncidentState> {

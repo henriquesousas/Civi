@@ -3,9 +3,9 @@ import 'package:deehelp/core/router/slide_transition_page.dart';
 import 'package:deehelp/features/incident/presentation/report/report_incident_page.dart';
 import 'package:deehelp/features/incident/presentation/list/incident_list_page.dart';
 import 'package:deehelp/features/incident/presentation/report/report_incident_successfully_page.dart';
-import 'package:deehelp/features/incident/presentation/views/update/update_incident_args.dart';
-import 'package:deehelp/features/incident/presentation/views/update/update_incident_page.dart';
-import 'package:deehelp/features/incident/presentation/views/update/update_incident_page_tile.dart';
+import 'package:deehelp/features/incident/presentation/update/update_incident_args.dart';
+import 'package:deehelp/features/incident/presentation/update/update_incident_page.dart';
+import 'package:deehelp/features/incident/presentation/update/update_incident_page_tile.dart';
 import 'package:go_router/go_router.dart';
 
 class IncidentModule {

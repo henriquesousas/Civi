@@ -1,6 +1,8 @@
+import 'package:deehelp/core/router/app_router.dart';
 import 'package:deehelp/core/ui/theme/app_colors.dart';
 import 'package:deehelp/core/ui/widgets/button/ui_elevated_icon_button.dart';
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 
 class IncidentButtonReport extends StatelessWidget {
   const IncidentButtonReport({super.key});
@@ -16,7 +18,7 @@ class IncidentButtonReport extends StatelessWidget {
             color: AppColors.whiteColor,
           ),
           text: "Adicionar novo",
-          press: () => {},
+          press: () => context.push(AppRouter.reportIncident),
         ),
       ),
     );
