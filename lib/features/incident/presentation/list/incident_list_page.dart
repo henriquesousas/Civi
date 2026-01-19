@@ -50,7 +50,7 @@ class _ListingIncidentPageState extends BasePageState<IncidentListPage> {
           debugPrint("Produto alterado com sucesso");
           ref
               .watch(incidentListViewModelProvider.notifier)
-              .refresh(currentItem!);
+              .updateAt(currentItem!);
         }
       },
     );

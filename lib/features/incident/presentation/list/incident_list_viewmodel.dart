@@ -27,11 +27,19 @@ class IncidentListViewModel
     return _cacheIncidents;
   }
 
-  void refresh(IncidentOutput current) {
+  void updateAt(IncidentOutput current) {
     final index = _cacheIncidents.indexWhere((inc) => inc.id == current.id);
     if (index != -1) {
       _cacheIncidents = List<IncidentOutput>.from(_cacheIncidents);
       _cacheIncidents[index] = current;
+      state = AsyncValue.data(_cacheIncidents);
+    }
+  }
+
+  void removeAt(IncidentOutput current) {
+    final index = _cacheIncidents.indexWhere((inc) => inc.id == current.id);
+    if (index != -1) {
+      _cacheIncidents.removeAt(index);
       state = AsyncValue.data(_cacheIncidents);
     }
   }

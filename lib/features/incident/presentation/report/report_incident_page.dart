@@ -16,14 +16,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
-class AddIncidentPage extends ConsumerStatefulWidget {
-  const AddIncidentPage({super.key});
+class ReportIncidentPage extends ConsumerStatefulWidget {
+  const ReportIncidentPage({super.key});
 
   @override
-  ConsumerState<AddIncidentPage> createState() => _AddIncidentPageState();
+  ConsumerState<ReportIncidentPage> createState() => _AddIncidentPageState();
 }
 
-class _AddIncidentPageState extends ConsumerState<AddIncidentPage>
+class _AddIncidentPageState extends ConsumerState<ReportIncidentPage>
     with SingleTickerProviderStateMixin {
   @override
   void initState() {

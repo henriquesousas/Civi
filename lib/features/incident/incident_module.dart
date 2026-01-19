@@ -1,6 +1,6 @@
 import 'package:deehelp/core/router/app_router.dart';
 import 'package:deehelp/core/router/slide_transition_page.dart';
-import 'package:deehelp/features/incident/presentation/report/add_incident_page.dart';
+import 'package:deehelp/features/incident/presentation/report/report_incident_page.dart';
 import 'package:deehelp/features/incident/presentation/list/incident_list_page.dart';
 import 'package:deehelp/features/incident/presentation/report/report_incident_successfully_page.dart';
 import 'package:deehelp/features/incident/presentation/views/update/update_incident_args.dart';
@@ -16,7 +16,7 @@ class IncidentModule {
           path: AppRouter.reportIncident,
           pageBuilder: (context, state) => slideTransitionPage(
             key: state.pageKey,
-            child: const AddIncidentPage(),
+            child: const ReportIncidentPage(),
           ),
         ),
         GoRoute(

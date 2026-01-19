@@ -10,6 +10,7 @@ class UpdateIncidentArgs {
   final IncidentField field;
   final int maxLine;
   final int? maxLength;
+  final bool showMyLocationButton;
   UpdateIncidentArgs({
     required this.toolbarTitle,
     required this.description,
@@ -19,6 +20,7 @@ class UpdateIncidentArgs {
     required this.field,
     this.maxLine = 1,
     this.maxLength,
+    this.showMyLocationButton = false,
   });
 
   factory UpdateIncidentArgs.from(Map<String, dynamic> args) {
@@ -31,6 +33,7 @@ class UpdateIncidentArgs {
       field: args['field'],
       maxLength: args['maxLength'],
       maxLine: args['maxLine'],
+      showMyLocationButton: args['showMyLocationButton'],
     );
   }
 
@@ -43,6 +46,7 @@ class UpdateIncidentArgs {
     TextInputType textInput = TextInputType.text,
     int? maxLength,
     int maxLine = 1,
+    bool showMyLocationButton = false,
   }) {
     return {
       'toolbarTitle': toolbarTitle,
@@ -53,6 +57,7 @@ class UpdateIncidentArgs {
       'field': field,
       'maxLine': maxLine,
       'maxLength': maxLength,
+      'showMyLocationButton': showMyLocationButton
     };
   }
 }

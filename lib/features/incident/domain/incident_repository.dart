@@ -8,6 +8,7 @@ import 'package:deehelp/features/incident/domain/usecase/update/update_incident_
 abstract class IncidentRepository {
   Future<Result<Unit>> save(Incident incident);
   Future<Result<Unit>> update(String incidentId, UpdateIncidentDto dto);
+  Future<Result<Unit>> delete(String incidentId);
   Future<Result<List<IncidentOutput>>> getByUser(
     String userId, {
     IncidentStatus? status,

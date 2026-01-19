@@ -24,6 +24,7 @@ mixin _$UpdateIncidentState {
   String? get errorMessage;
   String? get errorUpdateStatusMessage;
   bool get updatedSuccessfully;
+  bool get deletedSuccessfully;
   bool get isFormValid;
   bool get isLoading;
   bool get isGetCurrentLocattion;
@@ -62,6 +63,8 @@ mixin _$UpdateIncidentState {
                 other.errorUpdateStatusMessage == errorUpdateStatusMessage) &&
             (identical(other.updatedSuccessfully, updatedSuccessfully) ||
                 other.updatedSuccessfully == updatedSuccessfully) &&
+            (identical(other.deletedSuccessfully, deletedSuccessfully) ||
+                other.deletedSuccessfully == deletedSuccessfully) &&
             (identical(other.isFormValid, isFormValid) ||
                 other.isFormValid == isFormValid) &&
             (identical(other.isLoading, isLoading) ||
@@ -83,13 +86,14 @@ mixin _$UpdateIncidentState {
       errorMessage,
       errorUpdateStatusMessage,
       updatedSuccessfully,
+      deletedSuccessfully,
       isFormValid,
       isLoading,
       isGetCurrentLocattion);
 
   @override
   String toString() {
-    return 'UpdateIncidentState(stateController: $stateController, cityController: $cityController, addressController: $addressController, howToController: $howToController, updatedValue: $updatedValue, updatedPlaceValue: $updatedPlaceValue, updateError: $updateError, errorMessage: $errorMessage, errorUpdateStatusMessage: $errorUpdateStatusMessage, updatedSuccessfully: $updatedSuccessfully, isFormValid: $isFormValid, isLoading: $isLoading, isGetCurrentLocattion: $isGetCurrentLocattion)';
+    return 'UpdateIncidentState(stateController: $stateController, cityController: $cityController, addressController: $addressController, howToController: $howToController, updatedValue: $updatedValue, updatedPlaceValue: $updatedPlaceValue, updateError: $updateError, errorMessage: $errorMessage, errorUpdateStatusMessage: $errorUpdateStatusMessage, updatedSuccessfully: $updatedSuccessfully, deletedSuccessfully: $deletedSuccessfully, isFormValid: $isFormValid, isLoading: $isLoading, isGetCurrentLocattion: $isGetCurrentLocattion)';
   }
 }
 
@@ -110,6 +114,7 @@ abstract mixin class $UpdateIncidentStateCopyWith<$Res> {
       String? errorMessage,
       String? errorUpdateStatusMessage,
       bool updatedSuccessfully,
+      bool deletedSuccessfully,
       bool isFormValid,
       bool isLoading,
       bool isGetCurrentLocattion});
@@ -140,6 +145,7 @@ class _$UpdateIncidentStateCopyWithImpl<$Res>
     Object? errorMessage = freezed,
     Object? errorUpdateStatusMessage = freezed,
     Object? updatedSuccessfully = null,
+    Object? deletedSuccessfully = null,
     Object? isFormValid = null,
     Object? isLoading = null,
     Object? isGetCurrentLocattion = null,
@@ -184,6 +190,10 @@ class _$UpdateIncidentStateCopyWithImpl<$Res>
       updatedSuccessfully: null == updatedSuccessfully
           ? _self.updatedSuccessfully
           : updatedSuccessfully // ignore: cast_nullable_to_non_nullable
+              as bool,
+      deletedSuccessfully: null == deletedSuccessfully
+          ? _self.deletedSuccessfully
+          : deletedSuccessfully // ignore: cast_nullable_to_non_nullable
               as bool,
       isFormValid: null == isFormValid
           ? _self.isFormValid
@@ -319,6 +329,7 @@ extension UpdateIncidentStatePatterns on UpdateIncidentState {
             String? errorMessage,
             String? errorUpdateStatusMessage,
             bool updatedSuccessfully,
+            bool deletedSuccessfully,
             bool isFormValid,
             bool isLoading,
             bool isGetCurrentLocattion)?
@@ -339,6 +350,7 @@ extension UpdateIncidentStatePatterns on UpdateIncidentState {
             _that.errorMessage,
             _that.errorUpdateStatusMessage,
             _that.updatedSuccessfully,
+            _that.deletedSuccessfully,
             _that.isFormValid,
             _that.isLoading,
             _that.isGetCurrentLocattion);
@@ -373,6 +385,7 @@ extension UpdateIncidentStatePatterns on UpdateIncidentState {
             String? errorMessage,
             String? errorUpdateStatusMessage,
             bool updatedSuccessfully,
+            bool deletedSuccessfully,
             bool isFormValid,
             bool isLoading,
             bool isGetCurrentLocattion)
@@ -392,6 +405,7 @@ extension UpdateIncidentStatePatterns on UpdateIncidentState {
             _that.errorMessage,
             _that.errorUpdateStatusMessage,
             _that.updatedSuccessfully,
+            _that.deletedSuccessfully,
             _that.isFormValid,
             _that.isLoading,
             _that.isGetCurrentLocattion);
@@ -425,6 +439,7 @@ extension UpdateIncidentStatePatterns on UpdateIncidentState {
             String? errorMessage,
             String? errorUpdateStatusMessage,
             bool updatedSuccessfully,
+            bool deletedSuccessfully,
             bool isFormValid,
             bool isLoading,
             bool isGetCurrentLocattion)?
@@ -444,6 +459,7 @@ extension UpdateIncidentStatePatterns on UpdateIncidentState {
             _that.errorMessage,
             _that.errorUpdateStatusMessage,
             _that.updatedSuccessfully,
+            _that.deletedSuccessfully,
             _that.isFormValid,
             _that.isLoading,
             _that.isGetCurrentLocattion);
@@ -467,6 +483,7 @@ class _UpdateIncidentState implements UpdateIncidentState {
       this.errorMessage,
       this.errorUpdateStatusMessage,
       this.updatedSuccessfully = false,
+      this.deletedSuccessfully = false,
       this.isFormValid = false,
       this.isLoading = false,
       this.isGetCurrentLocattion = false});
@@ -492,6 +509,9 @@ class _UpdateIncidentState implements UpdateIncidentState {
   @override
   @JsonKey()
   final bool updatedSuccessfully;
+  @override
+  @JsonKey()
+  final bool deletedSuccessfully;
   @override
   @JsonKey()
   final bool isFormValid;
@@ -537,6 +557,8 @@ class _UpdateIncidentState implements UpdateIncidentState {
                 other.errorUpdateStatusMessage == errorUpdateStatusMessage) &&
             (identical(other.updatedSuccessfully, updatedSuccessfully) ||
                 other.updatedSuccessfully == updatedSuccessfully) &&
+            (identical(other.deletedSuccessfully, deletedSuccessfully) ||
+                other.deletedSuccessfully == deletedSuccessfully) &&
             (identical(other.isFormValid, isFormValid) ||
                 other.isFormValid == isFormValid) &&
             (identical(other.isLoading, isLoading) ||
@@ -558,13 +580,14 @@ class _UpdateIncidentState implements UpdateIncidentState {
       errorMessage,
       errorUpdateStatusMessage,
       updatedSuccessfully,
+      deletedSuccessfully,
       isFormValid,
       isLoading,
       isGetCurrentLocattion);
 
   @override
   String toString() {
-    return 'UpdateIncidentState(stateController: $stateController, cityController: $cityController, addressController: $addressController, howToController: $howToController, updatedValue: $updatedValue, updatedPlaceValue: $updatedPlaceValue, updateError: $updateError, errorMessage: $errorMessage, errorUpdateStatusMessage: $errorUpdateStatusMessage, updatedSuccessfully: $updatedSuccessfully, isFormValid: $isFormValid, isLoading: $isLoading, isGetCurrentLocattion: $isGetCurrentLocattion)';
+    return 'UpdateIncidentState(stateController: $stateController, cityController: $cityController, addressController: $addressController, howToController: $howToController, updatedValue: $updatedValue, updatedPlaceValue: $updatedPlaceValue, updateError: $updateError, errorMessage: $errorMessage, errorUpdateStatusMessage: $errorUpdateStatusMessage, updatedSuccessfully: $updatedSuccessfully, deletedSuccessfully: $deletedSuccessfully, isFormValid: $isFormValid, isLoading: $isLoading, isGetCurrentLocattion: $isGetCurrentLocattion)';
   }
 }
 
@@ -587,6 +610,7 @@ abstract mixin class _$UpdateIncidentStateCopyWith<$Res>
       String? errorMessage,
       String? errorUpdateStatusMessage,
       bool updatedSuccessfully,
+      bool deletedSuccessfully,
       bool isFormValid,
       bool isLoading,
       bool isGetCurrentLocattion});
@@ -618,6 +642,7 @@ class __$UpdateIncidentStateCopyWithImpl<$Res>
     Object? errorMessage = freezed,
     Object? errorUpdateStatusMessage = freezed,
     Object? updatedSuccessfully = null,
+    Object? deletedSuccessfully = null,
     Object? isFormValid = null,
     Object? isLoading = null,
     Object? isGetCurrentLocattion = null,
@@ -662,6 +687,10 @@ class __$UpdateIncidentStateCopyWithImpl<$Res>
       updatedSuccessfully: null == updatedSuccessfully
           ? _self.updatedSuccessfully
           : updatedSuccessfully // ignore: cast_nullable_to_non_nullable
+              as bool,
+      deletedSuccessfully: null == deletedSuccessfully
+          ? _self.deletedSuccessfully
+          : deletedSuccessfully // ignore: cast_nullable_to_non_nullable
               as bool,
       isFormValid: null == isFormValid
           ? _self.isFormValid

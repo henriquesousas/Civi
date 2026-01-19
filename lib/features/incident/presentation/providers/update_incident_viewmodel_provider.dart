@@ -8,8 +8,10 @@ final updateIncidentViewmodelProvider = StateNotifierProvider.autoDispose<
     UpdateIncidentViewmodel, UpdateIncidentState>((ref) {
   final updateIncidentUsecase = ref.watch(updateIncidentUsecaseProvider);
   final currentIncidentSelected = ref.watch(incidentSelectedProvider);
+  final deleteIncidentUsecase = ref.watch(deleteIncidentUsecaseProvider);
   return UpdateIncidentViewmodel(
     currenIncident: currentIncidentSelected!,
     updateIncidentUsecase: updateIncidentUsecase,
+    deleteIncidentUsecase: deleteIncidentUsecase,
   );
 });

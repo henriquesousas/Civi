@@ -8,6 +8,7 @@ import 'package:deehelp/core/ui/widgets/card/ui_card_tile.dart';
 import 'package:deehelp/core/ui/widgets/card/ui_custom_app_card.dart';
 import 'package:deehelp/core/ui/widgets/card/ui_custom_scaffold.dart';
 import 'package:deehelp/features/incident/domain/enum/incident_status.dart';
+import 'package:deehelp/features/incident/presentation/providers/incident_list_viewmodel_provider.dart';
 import 'package:deehelp/features/incident/presentation/providers/incident_selected_provider.dart';
 import 'package:deehelp/features/incident/presentation/providers/update_incident_viewmodel_provider.dart';
 import 'package:deehelp/features/incident/presentation/views/update/incident_field.dart';
@@ -48,6 +49,21 @@ class _UpdateIncidentPageState extends ConsumerState<UpdateIncidentPage> {
             currentState.errorUpdateStatusMessage != null) {
           context.showSnackBar(
             currentState.errorUpdateStatusMessage!,
+            type: DialogType.error,
+          );
+        }
+
+        if (currentState.deletedSuccessfully) {
+          ref
+              .watch(incidentListViewModelProvider.notifier)
+              .removeAt(currentState.updatedValue!);
+          if (context.canPop()) context.pop();
+        }
+
+        if (oldState?.errorMessage != currentState.errorMessage &&
+            currentState.errorMessage != null) {
+          context.showSnackBar(
+            currentState.errorMessage!,
             type: DialogType.error,
           );
         }
@@ -124,6 +140,7 @@ class _UpdateIncidentPageState extends ConsumerState<UpdateIncidentPage> {
                         hint: "Informe a cidade",
                         value: state.updatedValue?.local?.city ?? '',
                         field: IncidentField.city,
+                        showMyLocationButton: true,
                       ),
                     ),
                   ),
@@ -144,6 +161,7 @@ class _UpdateIncidentPageState extends ConsumerState<UpdateIncidentPage> {
                         hint: "Informe o estado",
                         value: state.updatedValue?.local?.state ?? '',
                         field: IncidentField.state,
+                        showMyLocationButton: true,
                       ),
                     ),
                   ),
@@ -165,6 +183,7 @@ class _UpdateIncidentPageState extends ConsumerState<UpdateIncidentPage> {
                         hint: "Endereço próximo",
                         value: state.updatedValue?.local?.address ?? '',
                         field: IncidentField.address,
+                        showMyLocationButton: true,
                       ),
                     ),
                   ),
@@ -226,9 +245,6 @@ class _UpdateIncidentPageState extends ConsumerState<UpdateIncidentPage> {
                         ref
                             .watch(updateIncidentViewmodelProvider.notifier)
                             .updateStatus();
-                        // setState(() {
-                        //   _visibility = !_visibility;
-                        // });
                       },
                     ),
                     press: () {},
@@ -266,26 +282,20 @@ class _UpdateIncidentPageState extends ConsumerState<UpdateIncidentPage> {
               ),
             ),
             UIElevatedButton(
-              bgColor: AppColors.errorColor,
-              text: "Deletar cadastro",
-              isEnabled: true,
-              isLoading: false,
-              press: () {
-                ScaffoldMessenger.of(context).showSnackBar(
-                  SnackBar(
-                    content: Text('Arquivo excluído'),
-                    duration: Duration(seconds: 5),
-                    action: SnackBarAction(
-                      label: 'DESFAZER',
-                      textColor: Colors.yellow,
-                      onPressed: () {
-                        // Ação ao clicar
-                      },
-                    ),
-                  ),
-                );
-              },
-            ),
+                bgColor: AppColors.errorColor,
+                text: "Deletar cadastro",
+                isEnabled: true,
+                isLoading: false,
+                press: () async {
+                  final yes = await context.showQuestionDialog("Atenção",
+                      'Deseja realmente deletar o incidente: ${state.updatedValue!.alertId} ?');
+
+                  if (yes) {
+                    ref.watch(updateIncidentViewmodelProvider.notifier).delete(
+                          state.updatedValue!.id,
+                        );
+                  }
+                }),
           ],
         ),
       ),

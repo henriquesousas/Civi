@@ -131,21 +131,24 @@ class _UpdateIncidentPageTileState
           isEnabled: state.isFormValid,
           press: () => viewModel.update(),
         ),
-        UIElevatedButton(
-          bgColor: AppColors.greyColor.withValues(alpha: 0.4),
-          textColor: AppColors.textColorHeader,
-          fontWeight: FontWeight.w500,
-          text: "Usar minha localização",
-          isLoading: state.isGetCurrentLocattion,
-          isEnabled: state.isFormValid,
-          icon: const Icon(
-            Icons.gps_fixed,
-            color: AppColors.textColorBody,
-          ),
-          press: () async {
-            viewModel.getCurrentLocation(widget.args.value, widget.args.field);
-          },
-        )
+        if (widget.args.showMyLocationButton) ...[
+          UIElevatedButton(
+            bgColor: AppColors.greyColor.withValues(alpha: 0.4),
+            textColor: AppColors.textColorHeader,
+            fontWeight: FontWeight.w500,
+            text: "Usar minha localização",
+            isLoading: state.isGetCurrentLocattion,
+            isEnabled: state.isFormValid,
+            icon: const Icon(
+              Icons.gps_fixed,
+              color: AppColors.textColorBody,
+            ),
+            press: () async {
+              viewModel.getCurrentLocation(
+                  widget.args.value, widget.args.field);
+            },
+          )
+        ],
       ],
     );
   }

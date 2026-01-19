@@ -5,6 +5,7 @@ import 'package:deehelp/core/handlers/handler_error.dart';
 import 'package:deehelp/core/services/location/location_service.dart';
 import 'package:deehelp/core/utils/unit.dart';
 import 'package:deehelp/features/incident/domain/entity/incident_local.dart';
+import 'package:deehelp/features/incident/domain/usecase/delete/delete_incident_usecase.dart';
 import 'package:deehelp/features/incident/domain/usecase/incident_output.dart';
 import 'package:deehelp/features/incident/domain/usecase/update/update_incident_dto.dart';
 import 'package:deehelp/features/incident/domain/usecase/update/update_incident_usecase.dart';
@@ -16,13 +17,39 @@ class UpdateIncidentViewmodel extends StateNotifier<UpdateIncidentState> {
   IncidentOutput _currentIncident;
   final Map<IncidentField, String?> _cachedPlaceValues = {};
   final UpdateIncidentUsecase _updateIncidentUsecase;
+  final DeleteIncidentUsecase _deleteIncidentUsecase;
 
   UpdateIncidentViewmodel({
     required IncidentOutput currenIncident,
     required UpdateIncidentUsecase updateIncidentUsecase,
+    required DeleteIncidentUsecase deleteIncidentUsecase,
   })  : _currentIncident = currenIncident,
         _updateIncidentUsecase = updateIncidentUsecase,
+        _deleteIncidentUsecase = deleteIncidentUsecase,
         super(UpdateIncidentState.initial(currenIncident));
+
+  void delete(String incidentId) async {
+    await HandleCommand.execute<Unit, UpdateIncidentState>(
+      updateState: (newState) => state = newState,
+      command: () => _deleteIncidentUsecase.execute(incidentId),
+      onLoading: () => state.copyWith(isLoading: true, errorMessage: null),
+      onSuccess: (result) {
+        return state.copyWith(deletedSuccessfully: true);
+      },
+      onError: (error) {
+        return handleError<UpdateIncidentState>(
+          error,
+          (message, extra) {
+            return state.copyWith(
+              isLoading: false,
+              errorMessage: message,
+              deletedSuccessfully: false,
+            );
+          },
+        );
+      },
+    );
+  }
 
   void update() async {
     _updateIncident(

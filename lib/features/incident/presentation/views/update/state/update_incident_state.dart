@@ -17,6 +17,7 @@ abstract class UpdateIncidentState with _$UpdateIncidentState {
     String? errorMessage,
     String? errorUpdateStatusMessage,
     @Default(false) bool updatedSuccessfully,
+    @Default(false) bool deletedSuccessfully,
     @Default(false) bool isFormValid,
     @Default(false) bool isLoading,
     @Default(false) bool isGetCurrentLocattion,

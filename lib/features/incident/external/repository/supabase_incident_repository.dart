@@ -55,4 +55,10 @@ class SupabaseIncidentRepository extends IncidentRepository {
 
     return Result.success(incidents);
   }
+
+  @override
+  Future<Result<Unit>> delete(String incidentId) async {
+    await _supabaseClient.from(_table).delete().eq('id', incidentId);
+    return Result.success(const Unit());
+  }
 }
