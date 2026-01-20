@@ -4,5 +4,5 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 final dashboardViewmodelProvider =
     AsyncNotifierProvider<DashboardViewmodel, List<IncidentOutput>>(
-  () => DashboardViewmodel(),
+  DashboardViewmodel.new,
 );

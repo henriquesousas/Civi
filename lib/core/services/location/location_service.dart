@@ -200,7 +200,7 @@ class LocationService {
         localeIdentifier: "pt_BR",
       );
 
-      return CurrentLocation.from(placemarks);
+      return CurrentLocation.from(placemarks, position);
     } catch (e) {
       rethrow;
     }

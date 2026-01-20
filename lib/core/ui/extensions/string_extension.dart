@@ -1,6 +1,12 @@
+import 'package:diacritic/diacritic.dart';
+
 extension StringExtension on String? {
   bool isNullOrEmpty() {
     return this == null || this!.isEmpty;
+  }
+
+  String removeAccents() {
+    return removeDiacritics(this!);
   }
 
   // bool isNotNullOrEmpty(String? texto) {
