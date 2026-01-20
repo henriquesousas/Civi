@@ -1,4 +1,4 @@
-import 'package:deehelp/core/services/location/place_model.dart';
+import 'package:deehelp/core/services/location/current_location.dart';
 
 enum IncidentField {
   howto,
@@ -8,7 +8,7 @@ enum IncidentField {
 }
 
 extension IncidentFieldExtension on IncidentField {
-  String? getPlaceValueFrom(Placemodel? place) {
+  String? getPlaceValueFrom(CurrentLocation? place) {
     if (place == null) return null;
     switch (this) {
       case IncidentField.city:

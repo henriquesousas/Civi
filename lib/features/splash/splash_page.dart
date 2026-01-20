@@ -1,5 +1,5 @@
-import 'package:deehelp/core/extensions/screen_size_extension.dart';
-import 'package:deehelp/core/extensions/string_extension.dart';
+import 'package:deehelp/core/ui/extensions/screen_size_extension.dart';
+import 'package:deehelp/core/ui/extensions/string_extension.dart';
 import 'package:deehelp/core/ui/theme/app_colors.dart';
 import 'package:deehelp/core/ui/theme/app_text_styles.dart';
 import 'package:deehelp/core/ui/theme/dimens.dart';
@@ -17,7 +17,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
 
 import '../../core/ui/animation/transition_animator.dart';
-import '../../core/router/app_router.dart';
+import '../../core/ui/router/app_router.dart';
 
 class SplashPage extends ConsumerStatefulWidget {
   const SplashPage({super.key});

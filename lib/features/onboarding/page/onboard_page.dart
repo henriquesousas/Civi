@@ -1,7 +1,7 @@
 import 'dart:async';
 
 import 'package:deehelp/features/auth/external/di/auth_view_model_provider.dart';
-import 'package:deehelp/core/extensions/dialog_extension.dart';
+import 'package:deehelp/core/ui/extensions/dialog_extension.dart';
 import 'package:deehelp/features/auth/presentation/auth/state/auth_state.dart';
 import 'package:deehelp/features/onboarding/page/components/onboard_content.dart';
 import 'package:deehelp/features/onboarding/page/onboard_item.dart';

@@ -1,4 +1,4 @@
-import 'package:deehelp/core/router/app_router.dart';
+import 'package:deehelp/core/ui/router/app_router.dart';
 import 'package:deehelp/core/ui/theme/app_colors.dart';
 import 'package:deehelp/core/ui/theme/dimens.dart';
 import 'package:deehelp/core/ui/widgets/avatar/profile_image_with_upload_button_widget.dart';

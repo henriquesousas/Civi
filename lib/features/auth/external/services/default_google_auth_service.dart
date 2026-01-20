@@ -2,7 +2,7 @@ import 'package:deehelp/features/auth/domain/exceptions/auth_failure.dart';
 import 'package:deehelp/features/auth/domain/services/operation_status.dart';
 import 'package:deehelp/features/auth/domain/services/google_credentials.dart';
 import 'package:deehelp/features/auth/domain/services/google_auth_service.dart';
-import 'package:deehelp/core/res/resources.dart';
+import 'package:deehelp/core/resources.dart';
 import 'package:deehelp/core/utils/result.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 

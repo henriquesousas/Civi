@@ -1,14 +1,17 @@
 import 'package:deehelp/core/utils/collection_utils.dart';
 import 'package:geocoding/geocoding.dart';
 
-class Placemodel {
+class CurrentLocation {
   final String? state;
   final String? city;
   final String? fullAddress;
-  Placemodel(
-      {required this.state, required this.city, required this.fullAddress});
+  CurrentLocation({
+    required this.state,
+    required this.city,
+    required this.fullAddress,
+  });
 
-  static Placemodel? from(List<Placemark> placemarks) {
+  static CurrentLocation? from(List<Placemark> placemarks) {
     if (placemarks.isEmpty) return null;
     final state = CollectionUtils.firstOrNull<Placemark, String>(
       placemarks.toList(),
@@ -30,7 +33,7 @@ class Placemodel {
 
     if (state == null && city == null) return null;
 
-    return Placemodel(
+    return CurrentLocation(
       state: state,
       city: city,
       fullAddress: fullAddress,

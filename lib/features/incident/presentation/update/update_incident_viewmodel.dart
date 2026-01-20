@@ -1,5 +1,5 @@
 import 'package:deehelp/core/errors/failure.dart';
-import 'package:deehelp/core/extensions/string_extension.dart';
+import 'package:deehelp/core/ui/extensions/string_extension.dart';
 import 'package:deehelp/core/handlers/handle_command.dart';
 import 'package:deehelp/core/handlers/handler_error.dart';
 import 'package:deehelp/core/services/location/location_service.dart';
@@ -103,7 +103,7 @@ class UpdateIncidentViewmodel extends StateNotifier<UpdateIncidentState> {
       return;
     }
 
-    final place = await LocationService().getCurrentPlace();
+    final place = await LocationService().getCurrentLocation();
     final placeValue = field.getPlaceValueFrom(place);
     _cachedPlaceValues[field] = placeValue;
     _updateStateWithPlaceValue(placeValue, field);

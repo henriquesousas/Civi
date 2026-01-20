@@ -1,6 +1,6 @@
 import 'dart:async';
 
-import 'package:deehelp/core/extensions/result_extension.dart';
+import 'package:deehelp/core/ui/extensions/result_extension.dart';
 import 'package:deehelp/features/auth/external/di/authenticated_user_provider.dart';
 import 'package:deehelp/features/incident/domain/usecase/incident_output.dart';
 import 'package:deehelp/features/incident/presentation/providers/incident_usecase_providers.dart';

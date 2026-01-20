@@ -7,8 +7,8 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
 
 import '../../../../../../core/ui/widgets/image/ui_my_assets_image_widget.dart';
-import '../../../../../../core/res/resources.dart';
-import '../../../../../../core/router/app_router.dart';
+import '../../../../../../core/resources.dart';
+import '../../../../../../core/ui/router/app_router.dart';
 import '../../../../../../core/ui/theme/app_colors.dart';
 import '../../../../../../core/ui/theme/dimens.dart';
 import '../../../../../../core/ui/widgets/card/ui_custom_app_card.dart';

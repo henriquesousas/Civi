@@ -1,5 +1,5 @@
-import 'package:deehelp/core/extensions/context_extension.dart';
-import 'package:deehelp/core/extensions/time_extension.dart';
+import 'package:deehelp/core/ui/extensions/context_extension.dart';
+import 'package:deehelp/core/ui/extensions/time_extension.dart';
 import 'package:deehelp/core/ui/theme/app_colors.dart';
 import 'package:deehelp/core/ui/widgets/button/ui_elevated_button.dart';
 import 'package:deehelp/core/ui/widgets/textfield/ui_text_field_rounded.dart';

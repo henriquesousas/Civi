@@ -1,4 +1,4 @@
-import '../../../core/res/resources.dart';
+import '../../../core/resources.dart';
 
 class OnboardItem {
   final String title;

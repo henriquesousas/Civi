@@ -1,7 +1,7 @@
 import 'dart:async';
 
-import 'package:deehelp/core/router/app_router.dart';
-import 'package:deehelp/core/router/slide_transition_page.dart';
+import 'package:deehelp/core/ui/router/app_router.dart';
+import 'package:deehelp/core/ui/router/slide_transition_page.dart';
 import 'package:deehelp/features/auth/external/di/auth_repository_provider.dart';
 import 'package:deehelp/features/auth/external/di/auth_state_provider.dart';
 import 'package:deehelp/features/auth/external/repositories/supabase_auth_repository.dart';

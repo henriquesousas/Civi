@@ -14,7 +14,7 @@ T _$identity<T>(T value) => value;
 
 /// @nodoc
 mixin _$AddIncidentState {
-  Placemodel? get currentPlace;
+  CurrentLocation? get currentPlace;
   Product? get product;
   String? get fullAddress;
   String? get errorFullAddress;
@@ -124,7 +124,7 @@ abstract mixin class $AddIncidentStateCopyWith<$Res> {
       _$AddIncidentStateCopyWithImpl;
   @useResult
   $Res call(
-      {Placemodel? currentPlace,
+      {CurrentLocation? currentPlace,
       Product? product,
       String? fullAddress,
       String? errorFullAddress,
@@ -184,7 +184,7 @@ class _$AddIncidentStateCopyWithImpl<$Res>
       currentPlace: freezed == currentPlace
           ? _self.currentPlace
           : currentPlace // ignore: cast_nullable_to_non_nullable
-              as Placemodel?,
+              as CurrentLocation?,
       product: freezed == product
           ? _self.product
           : product // ignore: cast_nullable_to_non_nullable
@@ -359,7 +359,7 @@ extension AddIncidentStatePatterns on AddIncidentState {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>(
     TResult Function(
-            Placemodel? currentPlace,
+            CurrentLocation? currentPlace,
             Product? product,
             String? fullAddress,
             String? errorFullAddress,
@@ -427,7 +427,7 @@ extension AddIncidentStatePatterns on AddIncidentState {
   @optionalTypeArgs
   TResult when<TResult extends Object?>(
     TResult Function(
-            Placemodel? currentPlace,
+            CurrentLocation? currentPlace,
             Product? product,
             String? fullAddress,
             String? errorFullAddress,
@@ -493,7 +493,7 @@ extension AddIncidentStatePatterns on AddIncidentState {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>(
     TResult? Function(
-            Placemodel? currentPlace,
+            CurrentLocation? currentPlace,
             Product? product,
             String? fullAddress,
             String? errorFullAddress,
@@ -571,7 +571,7 @@ class _AddIncidentState implements AddIncidentState {
       this.alertId});
 
   @override
-  final Placemodel? currentPlace;
+  final CurrentLocation? currentPlace;
   @override
   final Product? product;
   @override
@@ -707,7 +707,7 @@ abstract mixin class _$AddIncidentStateCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {Placemodel? currentPlace,
+      {CurrentLocation? currentPlace,
       Product? product,
       String? fullAddress,
       String? errorFullAddress,
@@ -767,7 +767,7 @@ class __$AddIncidentStateCopyWithImpl<$Res>
       currentPlace: freezed == currentPlace
           ? _self.currentPlace
           : currentPlace // ignore: cast_nullable_to_non_nullable
-              as Placemodel?,
+              as CurrentLocation?,
       product: freezed == product
           ? _self.product
           : product // ignore: cast_nullable_to_non_nullable

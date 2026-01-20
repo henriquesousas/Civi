@@ -1,4 +1,4 @@
-import 'package:deehelp/core/extensions/date_extension.dart';
+import 'package:deehelp/core/ui/extensions/date_extension.dart';
 import 'package:flutter/material.dart';
 import 'package:share_plus/share_plus.dart';
 import 'package:url_launcher/url_launcher.dart';

@@ -1,5 +1,5 @@
-import 'package:deehelp/core/extensions/date_extension.dart';
-import 'package:deehelp/core/extensions/time_extension.dart';
+import 'package:deehelp/core/ui/extensions/date_extension.dart';
+import 'package:deehelp/core/ui/extensions/time_extension.dart';
 import 'package:deehelp/core/ui/theme/app_text_styles.dart';
 import 'package:deehelp/core/ui/theme/dimens.dart';
 import 'package:deehelp/core/ui/widgets/image/ui_my_network_image_widget.dart';

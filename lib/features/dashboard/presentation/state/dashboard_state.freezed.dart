@@ -51,8 +51,6 @@ extension DashboardStatePatterns on DashboardState {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_DashboardStateInitial value)? initial,
-    TResult Function(_DashboardStateGetCurrentLocation value)?
-        getCurrentLocation,
     TResult Function(_DashboardStateLoading value)? loading,
     TResult Function(_DashboardStateSuccess value)? success,
     required TResult orElse(),
@@ -61,8 +59,6 @@ extension DashboardStatePatterns on DashboardState {
     switch (_that) {
       case _DashboardStateInitial() when initial != null:
         return initial(_that);
-      case _DashboardStateGetCurrentLocation() when getCurrentLocation != null:
-        return getCurrentLocation(_that);
       case _DashboardStateLoading() when loading != null:
         return loading(_that);
       case _DashboardStateSuccess() when success != null:
@@ -88,8 +84,6 @@ extension DashboardStatePatterns on DashboardState {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_DashboardStateInitial value) initial,
-    required TResult Function(_DashboardStateGetCurrentLocation value)
-        getCurrentLocation,
     required TResult Function(_DashboardStateLoading value) loading,
     required TResult Function(_DashboardStateSuccess value) success,
   }) {
@@ -97,8 +91,6 @@ extension DashboardStatePatterns on DashboardState {
     switch (_that) {
       case _DashboardStateInitial():
         return initial(_that);
-      case _DashboardStateGetCurrentLocation():
-        return getCurrentLocation(_that);
       case _DashboardStateLoading():
         return loading(_that);
       case _DashboardStateSuccess():
@@ -123,8 +115,6 @@ extension DashboardStatePatterns on DashboardState {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_DashboardStateInitial value)? initial,
-    TResult? Function(_DashboardStateGetCurrentLocation value)?
-        getCurrentLocation,
     TResult? Function(_DashboardStateLoading value)? loading,
     TResult? Function(_DashboardStateSuccess value)? success,
   }) {
@@ -132,8 +122,6 @@ extension DashboardStatePatterns on DashboardState {
     switch (_that) {
       case _DashboardStateInitial() when initial != null:
         return initial(_that);
-      case _DashboardStateGetCurrentLocation() when getCurrentLocation != null:
-        return getCurrentLocation(_that);
       case _DashboardStateLoading() when loading != null:
         return loading(_that);
       case _DashboardStateSuccess() when success != null:
@@ -158,7 +146,6 @@ extension DashboardStatePatterns on DashboardState {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
-    TResult Function(List<IncidentOutput> cache)? getCurrentLocation,
     TResult Function()? loading,
     TResult Function(List<IncidentOutput> items)? success,
     required TResult orElse(),
@@ -167,8 +154,6 @@ extension DashboardStatePatterns on DashboardState {
     switch (_that) {
       case _DashboardStateInitial() when initial != null:
         return initial();
-      case _DashboardStateGetCurrentLocation() when getCurrentLocation != null:
-        return getCurrentLocation(_that.cache);
       case _DashboardStateLoading() when loading != null:
         return loading();
       case _DashboardStateSuccess() when success != null:
@@ -194,7 +179,6 @@ extension DashboardStatePatterns on DashboardState {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
-    required TResult Function(List<IncidentOutput> cache) getCurrentLocation,
     required TResult Function() loading,
     required TResult Function(List<IncidentOutput> items) success,
   }) {
@@ -202,8 +186,6 @@ extension DashboardStatePatterns on DashboardState {
     switch (_that) {
       case _DashboardStateInitial():
         return initial();
-      case _DashboardStateGetCurrentLocation():
-        return getCurrentLocation(_that.cache);
       case _DashboardStateLoading():
         return loading();
       case _DashboardStateSuccess():
@@ -228,7 +210,6 @@ extension DashboardStatePatterns on DashboardState {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
-    TResult? Function(List<IncidentOutput> cache)? getCurrentLocation,
     TResult? Function()? loading,
     TResult? Function(List<IncidentOutput> items)? success,
   }) {
@@ -236,8 +217,6 @@ extension DashboardStatePatterns on DashboardState {
     switch (_that) {
       case _DashboardStateInitial() when initial != null:
         return initial();
-      case _DashboardStateGetCurrentLocation() when getCurrentLocation != null:
-        return getCurrentLocation(_that.cache);
       case _DashboardStateLoading() when loading != null:
         return loading();
       case _DashboardStateSuccess() when success != null:
@@ -265,79 +244,6 @@ class _DashboardStateInitial implements DashboardState {
   @override
   String toString() {
     return 'DashboardState.initial()';
-  }
-}
-
-/// @nodoc
-
-class _DashboardStateGetCurrentLocation implements DashboardState {
-  const _DashboardStateGetCurrentLocation(final List<IncidentOutput> cache)
-      : _cache = cache;
-
-  final List<IncidentOutput> _cache;
-  List<IncidentOutput> get cache {
-    if (_cache is EqualUnmodifiableListView) return _cache;
-    // ignore: implicit_dynamic_type
-    return EqualUnmodifiableListView(_cache);
-  }
-
-  /// Create a copy of DashboardState
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  @pragma('vm:prefer-inline')
-  _$DashboardStateGetCurrentLocationCopyWith<_DashboardStateGetCurrentLocation>
-      get copyWith => __$DashboardStateGetCurrentLocationCopyWithImpl<
-          _DashboardStateGetCurrentLocation>(this, _$identity);
-
-  @override
-  bool operator ==(Object other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType &&
-            other is _DashboardStateGetCurrentLocation &&
-            const DeepCollectionEquality().equals(other._cache, _cache));
-  }
-
-  @override
-  int get hashCode =>
-      Object.hash(runtimeType, const DeepCollectionEquality().hash(_cache));
-
-  @override
-  String toString() {
-    return 'DashboardState.getCurrentLocation(cache: $cache)';
-  }
-}
-
-/// @nodoc
-abstract mixin class _$DashboardStateGetCurrentLocationCopyWith<$Res>
-    implements $DashboardStateCopyWith<$Res> {
-  factory _$DashboardStateGetCurrentLocationCopyWith(
-          _DashboardStateGetCurrentLocation value,
-          $Res Function(_DashboardStateGetCurrentLocation) _then) =
-      __$DashboardStateGetCurrentLocationCopyWithImpl;
-  @useResult
-  $Res call({List<IncidentOutput> cache});
-}
-
-/// @nodoc
-class __$DashboardStateGetCurrentLocationCopyWithImpl<$Res>
-    implements _$DashboardStateGetCurrentLocationCopyWith<$Res> {
-  __$DashboardStateGetCurrentLocationCopyWithImpl(this._self, this._then);
-
-  final _DashboardStateGetCurrentLocation _self;
-  final $Res Function(_DashboardStateGetCurrentLocation) _then;
-
-  /// Create a copy of DashboardState
-  /// with the given fields replaced by the non-null parameter values.
-  @pragma('vm:prefer-inline')
-  $Res call({
-    Object? cache = null,
-  }) {
-    return _then(_DashboardStateGetCurrentLocation(
-      null == cache
-          ? _self._cache
-          : cache // ignore: cast_nullable_to_non_nullable
-              as List<IncidentOutput>,
-    ));
   }
 }
 

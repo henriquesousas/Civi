@@ -14,26 +14,25 @@ class Loading {
   bool _isShowing = false;
 
   void hide() {
-    // _controller?.close();
-    // _controller = null;
-    // _isShowing = false;
+    _controller?.close();
+    _controller = null;
+    _isShowing = false;
   }
 
-  //todo: Loading
   void show({
     required BuildContext context,
     required String text,
   }) {
-    // if (_controller?.update(text) ?? false) {
-    //   return;
-    // }
-    //
-    // if (_isShowing) {
-    //   hide();
-    // }
-    //
-    // _controller = _showOverlay(context: context, text: text);
-    // _isShowing = true;
+    if (_controller?.update(text) ?? false) {
+      return;
+    }
+
+    if (_isShowing) {
+      hide();
+    }
+
+    _controller = _showOverlay(context: context, text: text);
+    _isShowing = true;
   }
 
   LoadingController _showOverlay(

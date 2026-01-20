@@ -1,4 +1,4 @@
-import 'package:deehelp/core/extensions/screen_size_extension.dart';
+import 'package:deehelp/core/ui/extensions/screen_size_extension.dart';
 import 'package:deehelp/core/ui/theme/dimens.dart';
 import 'package:flutter/material.dart';
 

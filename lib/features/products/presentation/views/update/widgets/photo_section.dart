@@ -1,7 +1,7 @@
 // ignore_for_file: use_build_context_synchronously
 
-import 'package:deehelp/core/extensions/dialog_extension.dart';
-import 'package:deehelp/core/extensions/result_extension.dart';
+import 'package:deehelp/core/ui/extensions/dialog_extension.dart';
+import 'package:deehelp/core/ui/extensions/result_extension.dart';
 import 'package:deehelp/core/ui/widgets/card/ui_custom_app_card.dart';
 import 'package:deehelp/core/providers/image_picker_provider.dart';
 import 'package:deehelp/features/products/presentation/providers/product_viewmodel_provider.dart';

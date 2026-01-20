@@ -1,4 +1,4 @@
-import 'package:deehelp/core/extensions/date_extension.dart';
+import 'package:deehelp/core/ui/extensions/date_extension.dart';
 import 'package:deehelp/core/ui/theme/app_colors.dart';
 import 'package:deehelp/core/ui/theme/app_text_styles.dart';
 import 'package:deehelp/core/ui/theme/dimens.dart';

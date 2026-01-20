@@ -1,7 +1,7 @@
 import 'dart:ui';
 
-import 'package:deehelp/core/res/lottie_assets.dart';
-import 'package:deehelp/core/res/svg_assets.dart';
+import 'package:deehelp/core/ui/assets/lottie_assets.dart';
+import 'package:deehelp/core/ui/assets/svg_assets.dart';
 import 'package:deehelp/core/localization/pt_br.dart';
 import 'package:deehelp/core/localization/translation.dart';
 

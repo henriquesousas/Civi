@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../../core/ui/animation/slide_fade_transition_animator.dart';
-import '../../../core/res/resources.dart';
+import '../../../core/resources.dart';
 
 class SplashContent extends StatelessWidget {
   const SplashContent({super.key});

@@ -1,4 +1,4 @@
-import 'package:deehelp/core/router/app_router.dart';
+import 'package:deehelp/core/ui/router/app_router.dart';
 import 'package:deehelp/core/services/location/location_service.dart';
 import 'package:deehelp/core/ui/widgets/card/ui_custom_scaffold.dart';
 import 'package:deehelp/features/incident/presentation/providers/report_incident_event_provider.dart';
@@ -29,7 +29,7 @@ class _AddIncidentPageState extends ConsumerState<ReportIncidentPage>
   void initState() {
     super.initState();
 
-    LocationService().getCurrentPlace().then(
+    LocationService().getCurrentLocation().then(
       (place) {
         if (!mounted) return null;
         if (place == null) return null;

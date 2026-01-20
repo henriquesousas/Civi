@@ -1,6 +1,6 @@
 import 'package:deehelp/core/base/base_page.dart';
-import 'package:deehelp/core/extensions/dialog_extension.dart';
-import 'package:deehelp/core/extensions/string_extension.dart';
+import 'package:deehelp/core/ui/extensions/dialog_extension.dart';
+import 'package:deehelp/core/ui/extensions/string_extension.dart';
 import 'package:deehelp/core/ui/theme/app_colors.dart';
 import 'package:deehelp/core/ui/widgets/button/ui_elevated_button.dart';
 import 'package:deehelp/core/ui/widgets/textfield/ui_text_field_rounded.dart';

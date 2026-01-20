@@ -1,5 +1,5 @@
-import 'package:deehelp/core/router/app_router.dart';
-import 'package:deehelp/core/router/slide_transition_page.dart';
+import 'package:deehelp/core/ui/router/app_router.dart';
+import 'package:deehelp/core/ui/router/slide_transition_page.dart';
 import 'package:deehelp/features/incident/presentation/report/report_incident_page.dart';
 import 'package:deehelp/features/incident/presentation/list/incident_list_page.dart';
 import 'package:deehelp/features/incident/presentation/report/report_incident_successfully_page.dart';

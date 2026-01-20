@@ -1,5 +1,5 @@
 import 'package:deehelp/core/base/base_page.dart';
-import 'package:deehelp/core/extensions/dialog_extension.dart';
+import 'package:deehelp/core/ui/extensions/dialog_extension.dart';
 import 'package:deehelp/core/ui/theme/app_colors.dart';
 import 'package:deehelp/core/ui/theme/dimens.dart';
 import 'package:deehelp/core/ui/widgets/button/ui_elevated_button.dart';

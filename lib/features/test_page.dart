@@ -1,4 +1,4 @@
-import 'package:deehelp/core/extensions/dialog_extension.dart';
+import 'package:deehelp/core/ui/extensions/dialog_extension.dart';
 import 'package:deehelp/core/ui/widgets/button/ui_elevated_button.dart';
 import 'package:deehelp/core/ui/widgets/card/ui_custom_scaffold.dart';
 import 'package:flutter/material.dart';

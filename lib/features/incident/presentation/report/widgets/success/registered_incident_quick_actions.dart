@@ -1,4 +1,4 @@
-import 'package:deehelp/core/extensions/dialog_extension.dart';
+import 'package:deehelp/core/ui/extensions/dialog_extension.dart';
 import 'package:deehelp/core/ui/theme/dimens.dart';
 import 'package:deehelp/core/utils/url_launcher_utils.dart';
 import 'package:deehelp/features/incident/presentation/providers/report_incident_viewmodel_provider.dart';
