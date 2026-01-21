@@ -11,6 +11,7 @@ class GridAddPhoto extends StatelessWidget {
   final List<ImageMedia> photos;
   final VoidCallback? onAdd;
   final Function(int)? onRemove;
+  final Function(int)? press;
   final double width;
   final double height;
   final int maxPhotos;
@@ -21,6 +22,7 @@ class GridAddPhoto extends StatelessWidget {
     required this.photos,
     this.onAdd,
     this.onRemove,
+    this.press,
     this.width = double.infinity,
     this.height = double.infinity,
     this.maxPhotos = 2,
@@ -57,26 +59,33 @@ class GridAddPhoto extends StatelessWidget {
   Widget _buildPhotoCard(ImageMedia image, int index, BuildContext context) {
     return Stack(
       children: [
-        Container(
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(8),
-            border: Border.all(color: Colors.grey[300]!),
+        GestureDetector(
+          onTap: () {
+            if (press != null) {
+              press!(index);
+            }
+          },
+          child: Container(
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(8),
+              border: Border.all(color: Colors.grey[300]!),
+            ),
+            child: image.source == MediaSource.api
+                ? UIMyNetworkImageWidget(
+                    radius: 8.0,
+                    imageUrl: image.value,
+                    width: width,
+                    height: height,
+                  )
+                : UIMyAssetsImageWidget(
+                    radius: 8.0,
+                    isFile: true,
+                    boxFit: BoxFit.cover,
+                    assetPath: image.value,
+                    width: width,
+                    height: height,
+                  ),
           ),
-          child: image.source == MediaSource.api
-              ? UIMyNetworkImageWidget(
-                  radius: 8.0,
-                  imageUrl: image.value,
-                  width: width,
-                  height: height,
-                )
-              : UIMyAssetsImageWidget(
-                  radius: 8.0,
-                  isFile: true,
-                  boxFit: BoxFit.cover,
-                  assetPath: image.value,
-                  width: width,
-                  height: height,
-                ),
         ),
         if (onRemove != null)
           Positioned(

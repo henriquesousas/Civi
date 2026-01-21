@@ -86,7 +86,7 @@ class _UpdateIncidentPageState extends ConsumerState<UpdateIncidentPage> {
                   ItemDetailTile(
                     title: "Veiculo roubado",
                     subtitle: state.updatedValue?.product.name ?? '',
-                    trailing: UiCardTile(
+                    trailing: UICardTile(
                       label: state.updatedValue?.product.code ?? '',
                       color: AppColors.accent1,
                     ),
@@ -214,7 +214,7 @@ class _UpdateIncidentPageState extends ConsumerState<UpdateIncidentPage> {
                     // subtitle: "Código aleatório gerado automaticamente",
                     showIconEdit: true,
                     showDivider: true,
-                    trailing: UiCardTile(
+                    trailing: UICardTile(
                       label: state.updatedValue?.alertId ?? '',
                       color: AppColors.greyColor,
                     ),

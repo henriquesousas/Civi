@@ -1,10 +1,10 @@
 import 'package:deehelp/core/ui/theme/app_text_styles.dart';
 import 'package:flutter/material.dart';
 
-class UiCardTile extends StatelessWidget {
+class UICardTile extends StatelessWidget {
   final String label;
   final Color color;
-  const UiCardTile({super.key, required this.label, required this.color});
+  const UICardTile({super.key, required this.label, required this.color});
 
   @override
   Widget build(BuildContext context) {
@@ -31,7 +31,7 @@ class UiCardTile extends StatelessWidget {
             label,
             style: context.appTextStyles.caption2Style.copyWith(
               color: color,
-              fontWeight: FontWeight.bold,
+              fontWeight: FontWeight.w500,
             ),
           ),
         ],

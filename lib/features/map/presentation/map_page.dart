@@ -137,7 +137,9 @@ class _MapPageState extends State<MapPage> with TickerProviderStateMixin {
         borderRadius: BorderRadius.vertical(top: Radius.circular(12)),
       ),
       builder: (context) => Container(
-          color: const Color(0xFFF8FAFC), child: const IncidentModal()),
+        color: const Color(0xFFF8FAFC),
+        child: const IncidentModal(),
+      ),
     );
   }
 

@@ -7,7 +7,6 @@ import 'package:deehelp/core/services/location/location_service.dart';
 import 'package:deehelp/core/ui/theme/app_text_styles.dart';
 import 'package:deehelp/core/ui/theme/dimens.dart';
 import 'package:deehelp/core/ui/widgets/bottom_sheet/custom_modal_bottom_sheet.dart';
-import 'package:deehelp/core/ui/widgets/card/ui_custom_scaffold.dart';
 import 'package:deehelp/features/dashboard/presentation/dashboard_viewmode_provider.dart';
 import 'package:deehelp/features/dashboard/presentation/widget/dashboad_incidents_warning.dart';
 import 'package:deehelp/features/dashboard/presentation/widget/dashboard_incident_list.dart';
@@ -34,6 +33,7 @@ class _DashsboardPageState extends BasePageState<DashsboardPage>
     with WidgetsBindingObserver {
   late final AppLifecycleListener _listener;
   bool _waitingForSettings = false;
+  final ScrollController _scrollController = ScrollController();
   @override
   void initState() {
     super.initState();
@@ -53,6 +53,7 @@ class _DashsboardPageState extends BasePageState<DashsboardPage>
   @override
   void dispose() {
     _listener.dispose();
+    _scrollController.dispose();
     super.dispose();
   }
 
@@ -126,15 +127,12 @@ class _DashsboardPageState extends BasePageState<DashsboardPage>
     return Column(
       children: [
         SizedBox(height: context.topPadding),
-        const Padding(
-          padding: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-          child: Row(
-            spacing: 5,
-            children: [
-              DashboardProfile(),
-              DashboardLocation(),
-            ],
-          ),
+        const Row(
+          spacing: 5,
+          children: [
+            DashboardProfile(),
+            DashboardLocation(),
+          ],
         ),
         SizedBox(height: context.topPadding),
         Column(
@@ -156,7 +154,10 @@ class _DashsboardPageState extends BasePageState<DashsboardPage>
           data: (data) => _buildContent(data.value),
           orElse: () => const Expanded(child: DashboadIncidentsWarning()),
         ),
-        const DashbordQuickActionsCard(),
+        Visibility(
+          visible: context.isPortrait,
+          child: const DashbordQuickActionsCard(),
+        ),
       ],
     );
   }
