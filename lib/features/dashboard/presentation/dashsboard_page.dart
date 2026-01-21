@@ -1,3 +1,4 @@
+import 'package:deehelp/core/base/base_page.dart';
 import 'package:deehelp/core/ui/extensions/screen_size_extension.dart';
 import 'package:deehelp/core/providers/location_event_provider.dart';
 import 'package:deehelp/core/providers/location_notifier_provider.dart';
@@ -22,14 +23,14 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
 import 'package:permission_handler/permission_handler.dart';
 
-class DashsboardPage extends ConsumerStatefulWidget {
+class DashsboardPage extends BasePage {
   const DashsboardPage({super.key});
 
   @override
   ConsumerState<DashsboardPage> createState() => _DashsboardPageState();
 }
 
-class _DashsboardPageState extends ConsumerState<DashsboardPage>
+class _DashsboardPageState extends BasePageState<DashsboardPage>
     with WidgetsBindingObserver {
   late final AppLifecycleListener _listener;
   bool _waitingForSettings = false;
@@ -56,10 +57,10 @@ class _DashsboardPageState extends ConsumerState<DashsboardPage>
   }
 
   @override
-  Widget build(BuildContext context) {
-    // final locationNotifier = ref.watch(locationNotifierProvider.notifier);
-    final viewModel = ref.watch(dashboardViewmodelProvider.notifier);
-    final state = ref.watch(dashboardViewmodelProvider);
+  bool hideAppBar() => true;
+
+  @override
+  void listener() {
     ref.listen(
       locationServiceEventProvider,
       (oldEvent, event) {
@@ -107,56 +108,60 @@ class _DashsboardPageState extends ConsumerState<DashsboardPage>
           success: (value) {
             _waitingForSettings = false;
             if (context.canPop()) context.pop();
-            viewModel.loadData(value.currentPlace!.state!);
+            ref
+                .read(dashboardViewmodelProvider.notifier)
+                .loadData(value.currentPlace!.state!);
           },
           orElse: () => null,
         );
       },
     );
+    super.listener();
+  }
 
-    return UICustomScaffold(
-      hideAppBar: true,
-      body: Column(
-        children: [
-          SizedBox(height: context.topPadding),
-          const Row(
+  @override
+  Widget buildPage(BuildContext context) {
+    ref.watch(dashboardViewmodelProvider.notifier);
+    final state = ref.watch(dashboardViewmodelProvider);
+    return Column(
+      children: [
+        SizedBox(height: context.topPadding),
+        const Padding(
+          padding: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+          child: Row(
             spacing: 5,
             children: [
               DashboardProfile(),
               DashboardLocation(),
             ],
           ),
-          SizedBox(height: context.topPadding),
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 20),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                Text(
-                  'RASTRO',
-                  style: context.appTextStyles.sectionTitle.copyWith(
-                    fontSize: Dimens.size26.sp,
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
-                SizedBox(height: Dimens.size20.h),
-                const DashboardSearchContainer()
-              ],
+        ),
+        SizedBox(height: context.topPadding),
+        Column(
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            Text(
+              'RASTRO',
+              style: context.appTextStyles.sectionTitle.copyWith(
+                fontSize: Dimens.size26.sp,
+                fontWeight: FontWeight.bold,
+              ),
             ),
-          ),
-          SizedBox(height: Dimens.size10.h),
-          state.maybeMap(
-            data: (data) => _buildView(data.value),
-            orElse: () => const Expanded(child: DashboadIncidentsWarning()),
-          ),
-          SizedBox(height: Dimens.size10.h),
-          const DashbordQuickActionsCard(),
-        ],
-      ),
+            SizedBox(height: Dimens.size20.h),
+            const DashboardSearchContainer()
+          ],
+        ),
+        SizedBox(height: Dimens.size15.h),
+        state.maybeMap(
+          data: (data) => _buildContent(data.value),
+          orElse: () => const Expanded(child: DashboadIncidentsWarning()),
+        ),
+        const DashbordQuickActionsCard(),
+      ],
     );
   }
 
-  Widget _buildView(List<IncidentOutput> items) {
+  Widget _buildContent(List<IncidentOutput> items) {
     return Expanded(
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,

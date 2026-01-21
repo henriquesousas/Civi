@@ -19,10 +19,13 @@ abstract class BasePageState<T extends BasePage> extends ConsumerState<T> {
 
   EdgeInsetsGeometry? padding() => null;
 
+  bool hideAppBar() => false;
+
   @override
   Widget build(BuildContext context) {
     listener();
     return UICustomScaffold(
+      hideAppBar: hideAppBar(),
       padding: padding(),
       onBackButtonTap: onBackPress(),
       bottomNavigationBar: buildBottomNavigationBar(),
