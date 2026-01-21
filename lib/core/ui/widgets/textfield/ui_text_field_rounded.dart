@@ -101,10 +101,11 @@ class _UITextFieldRoundedState extends State<UITextFieldRounded> {
           //     context.appTextStyles.sectionBodyTextStyle.copyWith(
           //       color: AppColors.textColorHeader,
           //     ),
-          style: context.appTextStyles.sectionBodyTextStyle.copyWith(
-            color: AppColors.textColorBody,
-            fontWeight: FontWeight.bold,
-          ),
+          style: widget.textStyle ??
+              context.appTextStyles.sectionBodyTextStyle.copyWith(
+                color: AppColors.textColorBody,
+                fontWeight: FontWeight.bold,
+              ),
           decoration: InputDecoration(
             floatingLabelBehavior: FloatingLabelBehavior.always,
             floatingLabelStyle:

@@ -17,6 +17,7 @@ import 'package:deehelp/features/products/presentation/views/add/steps/add_produ
 import 'package:deehelp/features/products/presentation/views/listing/product_listing_page.dart';
 import 'package:deehelp/features/products/presentation/views/update/update_product_page.dart';
 import 'package:deehelp/features/profile/presentation/views/profile/profile_page.dart';
+import 'package:deehelp/features/search/search_page.dart';
 import 'package:deehelp/features/splash/splash_page.dart';
 import 'package:deehelp/features/test_page.dart';
 import 'package:flutter/material.dart';
@@ -228,6 +229,15 @@ var goRouterProvider = Provider<GoRouter>(
             return slideTransitionPage(
               key: state.pageKey,
               child: AddNicknamePage(),
+            );
+          },
+        ),
+        GoRoute(
+          path: AppRouter.search,
+          pageBuilder: (context, state) {
+            return slideTransitionPage(
+              key: state.pageKey,
+              child: SearchPage(),
             );
           },
         ),

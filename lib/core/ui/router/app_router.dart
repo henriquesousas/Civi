@@ -15,6 +15,6 @@ class AppRouter {
   static const reportIncident = "/report-incident";
   static const reportIncidentSuccess = "/report-incident-success";
   static const incidentDetail = "/incident-detail";
-  // static const sendIncident = "/send-incident";
   static const addNickname = "/add-nickname";
+  static const search = "/search";
 }
