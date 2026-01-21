@@ -1,3 +1,4 @@
+import 'package:deehelp/core/providers/location_notifier_provider.dart';
 import 'package:deehelp/core/ui/extensions/screen_size_extension.dart';
 import 'package:deehelp/core/ui/extensions/string_extension.dart';
 import 'package:deehelp/core/ui/theme/app_colors.dart';
@@ -42,6 +43,7 @@ class _SplashPageState extends ConsumerState<SplashPage> {
 
   @override
   Widget build(BuildContext context) {
+    ref.watch(locationNotifierProvider.notifier);
     ref.listen<AuthState>(authViewViewModelProvider, (previous, currentState) {
       switch (currentState) {
         case AuthStateAuthenticated(:final user):

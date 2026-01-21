@@ -2,10 +2,11 @@ import 'package:deehelp/core/ui/extensions/screen_size_extension.dart';
 import 'package:deehelp/core/ui/theme/app_colors.dart';
 import 'package:deehelp/core/ui/theme/app_text_styles.dart';
 import 'package:deehelp/core/ui/theme/dimens.dart';
+import 'package:deehelp/features/incident/domain/usecase/incident_output.dart';
 import 'package:flutter/material.dart';
 
 class DashboardIncidentList extends StatelessWidget {
-  final List<String> items;
+  final List<IncidentOutput> items;
   const DashboardIncidentList({super.key, required this.items});
 
   @override
@@ -69,13 +70,13 @@ class DashboardIncidentList extends StatelessWidget {
               children: [
                 ListTile(
                   title: Text(
-                    item,
+                    item.product.name,
                     style: context.appTextStyles.buttonTextStyle1.copyWith(
                       fontWeight: FontWeight.w400,
                     ),
                   ),
                   subtitle: Text(
-                    "DND0171",
+                    _getIncidentLocality(item) ?? '',
                     style: context.appTextStyles.caption2Style.copyWith(
                       color: AppColors.textColorBody,
                     ),
@@ -83,7 +84,6 @@ class DashboardIncidentList extends StatelessWidget {
                   trailing: const Icon(
                     Icons.arrow_right_alt_outlined,
                     color: AppColors.textSecondary,
-                    // size: 14.sp,
                   ),
                   onTap: () => {},
                 ),
@@ -93,5 +93,13 @@ class DashboardIncidentList extends StatelessWidget {
         },
       ),
     );
+  }
+
+  String? _getIncidentLocality(IncidentOutput item) {
+    if (item.local == null) return null;
+    if (item.local!.address != null && item.local!.address!.isNotEmpty) {
+      return 'Roubo aconteceu em ${item.local!.city}, ${item.local!.state}, próximo a ${item.local!.address}';
+    }
+    return 'Roubo aconteceu em ${item.local!.city}, ${item.local!.state}';
   }
 }

@@ -77,7 +77,9 @@ class SupabaseIncidentRepository extends IncidentRepository {
         .toList()
         .join(",");
 
-    dynamic query = _supabaseClient
+    PostgrestTransformBuilder<
+        List<
+            Map<String, dynamic>>> query = _supabaseClient
         .from(_table)
         .select("*,product (id,name,code, product_images (*))")
         .filter('visibility', 'eq', true)

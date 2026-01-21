@@ -3,11 +3,11 @@ import 'package:deehelp/core/providers/location_event_provider.dart';
 import 'package:deehelp/core/providers/location_notifier_provider.dart';
 import 'package:deehelp/core/services/location/events/location_service_event.dart';
 import 'package:deehelp/core/services/location/location_service.dart';
-import 'package:deehelp/core/ui/theme/app_colors.dart';
 import 'package:deehelp/core/ui/theme/app_text_styles.dart';
 import 'package:deehelp/core/ui/theme/dimens.dart';
 import 'package:deehelp/core/ui/widgets/bottom_sheet/custom_modal_bottom_sheet.dart';
 import 'package:deehelp/core/ui/widgets/card/ui_custom_scaffold.dart';
+import 'package:deehelp/features/dashboard/presentation/dashboard_viewmode_provider.dart';
 import 'package:deehelp/features/dashboard/presentation/widget/dashboad_incidents_warning.dart';
 import 'package:deehelp/features/dashboard/presentation/widget/dashboard_incident_list.dart';
 import 'package:deehelp/features/dashboard/presentation/widget/dashboard_location.dart';
@@ -15,19 +15,12 @@ import 'package:deehelp/features/dashboard/presentation/widget/dashboard_profile
 import 'package:deehelp/features/dashboard/presentation/widget/dashboard_search_container.dart';
 import 'package:deehelp/features/dashboard/presentation/widget/dashbord_quick_actions_card.dart';
 import 'package:deehelp/features/dashboard/presentation/widget/request_location_modal.dart';
+import 'package:deehelp/features/incident/domain/usecase/incident_output.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
 import 'package:permission_handler/permission_handler.dart';
-
-final items = [
-  "CG 150 titan vermelha",
-  "Honda fit 2008 prata",
-  "Citroen C3 Tendance branco 2007",
-  "Hornet preta 2007",
-  "Onix lt cinza 2007"
-];
 
 class DashsboardPage extends ConsumerStatefulWidget {
   const DashsboardPage({super.key});
@@ -64,8 +57,9 @@ class _DashsboardPageState extends ConsumerState<DashsboardPage>
 
   @override
   Widget build(BuildContext context) {
-    final locationNotifier = ref.watch(locationNotifierProvider.notifier);
-    final locationNotifierState = ref.watch(locationNotifierProvider);
+    // final locationNotifier = ref.watch(locationNotifierProvider.notifier);
+    final viewModel = ref.watch(dashboardViewmodelProvider.notifier);
+    final state = ref.watch(dashboardViewmodelProvider);
     ref.listen(
       locationServiceEventProvider,
       (oldEvent, event) {
@@ -75,10 +69,10 @@ class _DashsboardPageState extends ConsumerState<DashsboardPage>
           error: (value) {
             if (context.canPop()) context.pop();
             customModalBottomSheet(
-              isDismissible: false,
+              isDismissible: true,
               context,
               child: PopScope(
-                canPop: false,
+                canPop: true,
                 child: () {
                   switch (value.status) {
                     case LocationStatus.serviceDisabled:
@@ -86,7 +80,9 @@ class _DashsboardPageState extends ConsumerState<DashsboardPage>
                         message: value.message,
                         title: "GPS desligado",
                         buttonTitle: "Tentar novamente",
-                        press: () => locationNotifier.getCurrentLocation(),
+                        press: () => ref
+                            .read(locationNotifierProvider.notifier)
+                            .getCurrentLocation(),
                       );
                     case LocationStatus.permissionDeniedForever ||
                           LocationStatus.permissionDenied:
@@ -96,7 +92,9 @@ class _DashsboardPageState extends ConsumerState<DashsboardPage>
                         buttonTitle: "Abrir configurações",
                         press: () {
                           _waitingForSettings = true;
-                          locationNotifier.openNativePermissionSettings();
+                          ref
+                              .read(locationNotifierProvider.notifier)
+                              .openNativePermissionSettings();
                         },
                       );
                     default:
@@ -109,6 +107,7 @@ class _DashsboardPageState extends ConsumerState<DashsboardPage>
           success: (value) {
             _waitingForSettings = false;
             if (context.canPop()) context.pop();
+            viewModel.loadData(value.currentPlace!.state!);
           },
           orElse: () => null,
         );
@@ -134,56 +133,54 @@ class _DashsboardPageState extends ConsumerState<DashsboardPage>
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 Text(
-                  '[LABEL]',
-                  style: context.appTextStyles.sectionTitle
-                      .copyWith(fontSize: 22.sp),
+                  'RASTRO',
+                  style: context.appTextStyles.sectionTitle.copyWith(
+                    fontSize: Dimens.size26.sp,
+                    fontWeight: FontWeight.bold,
+                  ),
                 ),
-                SizedBox(height: 20.h),
+                SizedBox(height: Dimens.size20.h),
                 const DashboardSearchContainer()
               ],
             ),
           ),
           SizedBox(height: Dimens.size10.h),
-          Expanded(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                if (items.isEmpty)
-                  const Expanded(child: DashboadIncidentsWarning())
-                else
-                  Expanded(
-                    child: locationNotifierState.isLoading
-                        ? Center(
-                            child: SizedBox(
-                              width: Dimens.size20.w,
-                              height: Dimens.size20.h,
-                              child: const CircularProgressIndicator(
-                                color: AppColors.primaryColor,
-                              ),
-                            ),
-                          )
-                        : Column(
-                            mainAxisAlignment: MainAxisAlignment.start,
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            spacing: 5,
-                            children: [
-                              Padding(
-                                padding:
-                                    const EdgeInsets.symmetric(horizontal: 10),
-                                child: Text(
-                                  "Últimas ocorrências",
-                                  style: context.appTextStyles.caption1Style,
-                                ),
-                              ),
-                              DashboardIncidentList(items: items),
-                            ],
-                          ),
-                  ),
-                SizedBox(height: Dimens.size10.h),
-                const DashbordQuickActionsCard(),
-              ],
-            ),
+          state.maybeMap(
+            data: (data) => _buildView(data.value),
+            orElse: () => const Expanded(child: DashboadIncidentsWarning()),
           ),
+          SizedBox(height: Dimens.size10.h),
+          const DashbordQuickActionsCard(),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildView(List<IncidentOutput> items) {
+    return Expanded(
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          if (items.isEmpty)
+            const Expanded(child: DashboadIncidentsWarning())
+          else
+            Expanded(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                spacing: 5,
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 10),
+                    child: Text(
+                      "Últimas ocorrências",
+                      style: context.appTextStyles.caption1Style,
+                    ),
+                  ),
+                  DashboardIncidentList(items: items),
+                ],
+              ),
+            ),
         ],
       ),
     );

@@ -43,25 +43,34 @@ class DashbordQuickActionsCard extends StatelessWidget {
                 onTap: () => context.push(AppRouter.reportIncident),
               ),
               QuickActionItem(
+                title: "Ligar\nPolícia",
+                color: AppColors.lightGreyColor,
+                icon: const Icon(
+                  Icons.local_police,
+                  color: AppColors.darkGreyColor10,
+                ),
+                onTap: () {},
+              ),
+              QuickActionItem(
                 title: "Ver\nMapa",
                 color: AppColors.lightGreyColor,
                 icon: const Icon(Icons.explore_outlined,
                     color: AppColors.darkGreyColor10),
                 onTap: () => context.push(AppRouter.map),
               ),
-              QuickActionItem(
-                title: "Tirar\nDúvidas",
-                color: AppColors.lightGreyColor,
-                icon: const Icon(Icons.contact_support_outlined,
-                    color: AppColors.darkGreyColor10),
-                onTap: () {
-                  WidgetsBinding.instance.addPostFrameCallback((_) {
-                    ScaffoldMessenger.of(context).showSnackBar(
-                      SnackBar(content: Text("Operação realizada!")),
-                    );
-                  });
-                },
-              ),
+              // QuickActionItem(
+              //   title: "Tirar\nDúvidas",
+              //   color: AppColors.lightGreyColor,
+              //   icon: const Icon(Icons.contact_support_outlined,
+              //       color: AppColors.darkGreyColor10),
+              //   onTap: () {
+              //     WidgetsBinding.instance.addPostFrameCallback((_) {
+              //       ScaffoldMessenger.of(context).showSnackBar(
+              //         SnackBar(content: Text("Operação realizada!")),
+              //       );
+              //     });
+              //   },
+              // ),
             ],
           ),
         ],
