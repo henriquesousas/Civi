@@ -7,42 +7,53 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class EmptyStateWidget extends StatelessWidget {
+  final double width;
+  final double height;
   final String? title;
   final String? subtitle;
   final String? btnTitle;
-  final VoidCallback press;
+  final VoidCallback? press;
+  final Icon? icon;
+  final Color color;
   const EmptyStateWidget({
     super.key,
-    required this.press,
+    this.press,
     this.title,
     this.subtitle,
     this.btnTitle,
+    this.width = Dimens.size90,
+    this.height = Dimens.size90,
+    this.icon,
+    this.color = AppColors.primaryColor,
   });
 
   @override
   Widget build(BuildContext context) {
-    final color = AppColors.primaryColor.withValues(alpha: 0.1);
     return Center(
       child: Padding(
-        padding: const EdgeInsets.all(40),
+        padding: EdgeInsets.all(Dimens.size40.w),
         child: Column(
-          spacing: 16,
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Container(
-              width: Dimens.size125.w,
-              height: Dimens.size125.h,
+              width: width.w,
+              height: height.h,
               decoration: BoxDecoration(
-                color: color,
+                color: color.withValues(alpha: 0.1),
                 shape: BoxShape.circle,
-                border: Border.all(color: color, width: 1),
+                border: Border.all(
+                  color: color.withValues(alpha: 0.3),
+                  width: 1,
+                ),
               ),
-              child: Icon(
-                Icons.inventory_2_outlined,
-                size: Dimens.size50.w,
-                color: AppColors.primaryColor.withValues(alpha: 0.9),
-              ),
+              child: icon ??
+                  Icon(
+                    Icons.inventory_2_outlined,
+                    size: width / 2.5,
+                    color: AppColors.primaryColor.withValues(alpha: 0.9),
+                  ),
             ),
+            const SizedBox(height: 16),
             Text(
               title ?? "Nenhum registro encontrado",
               textAlign: TextAlign.center,
@@ -56,14 +67,15 @@ class EmptyStateWidget extends StatelessWidget {
                 textAlign: TextAlign.center,
               ),
             ),
-            SizedBox(
-              width: context.percentWidth(0.6),
-              child: UIElevatedButton(
-                text: btnTitle ?? "Novo",
-                press: press,
-                icon: Icon(Icons.add, size: Dimens.size16.w),
-              ),
-            )
+            if (press != null)
+              SizedBox(
+                width: context.percentWidth(0.6),
+                child: UIElevatedButton(
+                  text: btnTitle ?? "Novo",
+                  press: press ?? () {},
+                  icon: Icon(Icons.add, size: Dimens.size16.w),
+                ),
+              )
           ],
         ),
       ),
