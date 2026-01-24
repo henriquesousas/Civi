@@ -1,10 +1,10 @@
 import 'package:deehelp/core/ui/theme/app_colors.dart';
 import 'package:deehelp/core/ui/theme/app_text_styles.dart';
-import 'package:deehelp/features/search/presentation/widgets/topo_search.dart';
+import 'package:deehelp/features/incident/domain/usecase/incident_output.dart';
 import 'package:flutter/material.dart';
 
 class SearchItemList extends StatelessWidget {
-  final List<SearchResult> results;
+  final List<IncidentOutput> results;
   const SearchItemList({super.key, required this.results});
 
   @override
@@ -23,11 +23,11 @@ class SearchItemList extends StatelessWidget {
             color: AppColors.textSecondary,
           ),
           title: Text(
-            result.title,
+            result.product.name,
             style: context.appTextStyles.bodyTextStyle2,
           ),
           subtitle: Text(
-            result.subtitle,
+            result.local?.city ?? '',
             style: context.appTextStyles.caption2Style.copyWith(
               color: AppColors.textColorBody,
             ),

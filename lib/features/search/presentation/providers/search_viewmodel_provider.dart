@@ -1,0 +1,10 @@
+import 'package:deehelp/features/incident/domain/usecase/incident_output.dart';
+import 'package:deehelp/features/incident/presentation/providers/incident_usecase_providers.dart';
+import 'package:deehelp/features/search/presentation/search_viewmodel.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+
+final searchViewmodelProvider = StateNotifierProvider.autoDispose<
+    SearchViewmodel, AsyncValue<List<IncidentOutput>>>((ref) {
+  final getIncidentUseCase = ref.watch(getIncidentUsecaseProvider);
+  return SearchViewmodel(getIncidentUsecase: getIncidentUseCase);
+});

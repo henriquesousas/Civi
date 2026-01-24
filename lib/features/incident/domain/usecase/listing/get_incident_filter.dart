@@ -10,11 +10,11 @@ class GetIncidentFilter {
   final SortDirection direction;
   final String orderBy;
   final int? limit;
-  final String state;
+  final String term;
 
   GetIncidentFilter({
     required this.status,
-    required this.state,
+    required this.term,
     this.limit = 30,
     this.direction = SortDirection.desc,
     this.orderBy = "created_at",

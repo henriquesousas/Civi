@@ -1,6 +1,8 @@
 import 'package:deehelp/core/ui/theme/app_colors.dart';
 import 'package:deehelp/core/ui/widgets/card/ui_custom_scaffold.dart';
-import 'package:deehelp/features/search/presentation/widgets/search_chip.dart';
+import 'package:deehelp/features/search/presentation/providers/debounce_search_provider.dart';
+import 'package:deehelp/features/search/presentation/providers/is_loading_provider.dart';
+import 'package:deehelp/features/search/presentation/providers/search_viewmodel_provider.dart';
 import 'package:deehelp/features/search/presentation/widgets/search_info.dart';
 import 'package:deehelp/features/search/presentation/widgets/search_item_list.dart';
 import 'package:deehelp/features/search/presentation/widgets/search_loading_placeholder.dart';
@@ -14,8 +16,17 @@ class SearchPage extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final searchQuery = ref.watch(debouncedSearchProvider);
-    final searchResultsAsync = ref.watch(searchResultsProvider);
+    final searchViewModel = ref.watch(searchViewmodelProvider.notifier);
+    final searchViewModelResult = ref.watch(searchViewmodelProvider);
     // final isLoading = ref.watch(isLoadingProvider);
+    // final searchResultsAsync = ref.watch(searchResultsProvider);
+
+    ref.listen(
+      debouncedSearchProvider,
+      (previous, currentQuery) {
+        searchViewModel.search(currentQuery);
+      },
+    );
 
     return UICustomScaffold(
       padding: EdgeInsets.zero,
@@ -23,23 +34,29 @@ class SearchPage extends ConsumerWidget {
       body: LayoutBuilder(
         builder: (context, constraints) {
           return Column(
+            spacing: 5,
             crossAxisAlignment: CrossAxisAlignment.start,
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
               const TopoSearch(),
-              const SearchChip(),
               Expanded(
                 child: Container(
-                  decoration: const BoxDecoration(
+                  decoration: BoxDecoration(
                     color: AppColors.whiteColor,
+                    borderRadius: BorderRadius.circular(10),
+                    border: Border.all(
+                      color: AppColors.lightGreyColor30,
+                      width: 1,
+                    ),
                   ),
                   child: MediaQuery.removePadding(
                     context: context,
                     removeTop: true,
                     removeBottom: false,
-                    child: searchResultsAsync.when(
-                      loading: () =>
-                          SearchLoadingPlaceholder(query: searchQuery),
+                    child: searchViewModelResult.when(
+                      loading: () => SearchLoadingPlaceholder(
+                        query: searchQuery,
+                      ),
                       error: (error, stack) => SearchInfo(
                         title: "Erro na busca",
                         error: error.toString(),

@@ -10,9 +10,9 @@ abstract class IncidentRepository {
   Future<Result<Unit>> save(Incident incident);
   Future<Result<Unit>> update(String incidentId, UpdateIncidentDto dto);
   Future<Result<Unit>> delete(String incidentId);
-  Future<Result<List<IncidentOutput>>> getByUser(
+  Future<Result<List<IncidentOutput>>> getUserIncidents(
     String userId, {
     IncidentStatus? status,
   });
-  Future<Result<List<IncidentOutput>>> getByFilter(GetIncidentFilter filter);
+  Future<Result<List<IncidentOutput>>> getIncidents(GetIncidentFilter filter);
 }

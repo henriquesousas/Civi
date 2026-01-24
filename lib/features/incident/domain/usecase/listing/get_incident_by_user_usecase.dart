@@ -11,6 +11,6 @@ class GetIncidentByUserUseCase extends UseCase<String, List<IncidentOutput>> {
 
   @override
   Future<Result<List<IncidentOutput>>> execute(String userId) async {
-    return await _repository.getByUser(userId);
+    return await _repository.getUserIncidents(userId);
   }
 }

@@ -12,6 +12,6 @@ class GetIncidentUsecase
       : _repository = repository;
   @override
   Future<Result<List<IncidentOutput>>> execute(GetIncidentFilter filter) async {
-    return await _repository.getByFilter(filter);
+    return await _repository.getIncidents(filter);
   }
 }

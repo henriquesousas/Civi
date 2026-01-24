@@ -1,84 +1,82 @@
-import 'dart:async';
-
 import 'package:deehelp/core/ui/extensions/screen_size_extension.dart';
 import 'package:deehelp/core/ui/theme/app_colors.dart';
 import 'package:deehelp/core/ui/theme/app_text_styles.dart';
 import 'package:deehelp/core/ui/widgets/textfield/ui_text_field_rounded.dart';
-import 'package:deehelp/features/search/deboounce_search_notifier.dart';
+import 'package:deehelp/features/search/presentation/providers/debounce_search_provider.dart';
+import 'package:deehelp/features/search/presentation/providers/search_query_provider.dart';
+import 'package:deehelp/features/search/presentation/providers/search_viewmodel_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-class SearchResult {
-  final String id;
-  final String title;
-  final String subtitle;
-  final String? icon;
+// Future<List<IncidentOutput>> searchFromServer(String query) async {
+//   // Simulação - substitua pela sua API real
+//   await Future.delayed(const Duration(milliseconds: 500));
 
-  SearchResult({
-    required this.id,
-    required this.title,
-    required this.subtitle,
-    this.icon,
-  });
-}
+//   final allItems = [
+//     IncidentOutput(
+//       id: '',
+//       userId: '',
+//       alertId: '',
+//       type: TypeAlert.immediately,
+//       product: IncidentProductOutput(
+//           productId: '', name: "name1", code: '', images: []),
+//       local: IncidentLocal(address: "sasa", city: "sasaa", state: 'asasa'),
+//       status: IncidentStatus.active,
+//       createdAt: DateTime.now(),
+//       occurredAt: DateTime.now(),
+//       occurredAtTime: TimeOfDay.now(),
+//     ),
+//     IncidentOutput(
+//       id: '',
+//       userId: '',
+//       alertId: '',
+//       type: TypeAlert.immediately,
+//       product: IncidentProductOutput(
+//           productId: '', name: "name1", code: '', images: []),
+//       local: IncidentLocal(address: "sasa", city: "sasaa", state: 'asasa'),
+//       status: IncidentStatus.active,
+//       createdAt: DateTime.now(),
+//       occurredAt: DateTime.now(),
+//       occurredAtTime: TimeOfDay.now(),
+//     ),
+//     IncidentOutput(
+//       id: '',
+//       userId: '',
+//       alertId: '',
+//       type: TypeAlert.immediately,
+//       product: IncidentProductOutput(
+//           productId: '', name: "name1", code: '', images: []),
+//       local: IncidentLocal(address: "sasa", city: "sasaa", state: 'asasa'),
+//       status: IncidentStatus.active,
+//       createdAt: DateTime.now(),
+//       occurredAt: DateTime.now(),
+//       occurredAtTime: TimeOfDay.now(),
+//     ),
+//     IncidentOutput(
+//       id: '',
+//       userId: '',
+//       alertId: '',
+//       type: TypeAlert.immediately,
+//       product: IncidentProductOutput(
+//           productId: '', name: "name1 DND0171", code: 'DND0171', images: []),
+//       local: IncidentLocal(address: "sasa", city: "sasaa", state: 'asasa'),
+//       status: IncidentStatus.active,
+//       createdAt: DateTime.now(),
+//       occurredAt: DateTime.now(),
+//       occurredAtTime: TimeOfDay.now(),
+//     ),
+//   ];
 
-final debouncedSearchProvider =
-    StateNotifierProvider<DebouncedSearchNotifier, String>(
-  (ref) => DebouncedSearchNotifier(),
-);
+//   final list = allItems
+//       .where(
+//         (item) =>
+//             item.product.name.toLowerCase().contains(query.toLowerCase()) ||
+//             item.product.code.toLowerCase().contains(query.toLowerCase()),
+//       )
+//       .toList();
 
-final searchResultsProvider =
-    FutureProvider.autoDispose<List<SearchResult>>((ref) async {
-  final query = ref.watch(debouncedSearchProvider);
-
-  if (query.isEmpty) {
-    return [];
-  }
-
-  // Simula delay de rede
-  await Future.delayed(const Duration(milliseconds: 300));
-
-  return _searchFromServer(query);
-});
-
-final isLoadingProvider = Provider.autoDispose<bool>((ref) {
-  final query = ref.watch(debouncedSearchProvider);
-  final asyncValue = ref.watch(searchResultsProvider);
-
-  // Está carregando se há query e ainda não terminou
-  return query.isNotEmpty && asyncValue.isLoading;
-});
-
-final searchQueryProvider = StateProvider<String>((ref) => '');
-
-Future<List<SearchResult>> _searchFromServer(String query) async {
-  // Simulação - substitua pela sua API real
-  await Future.delayed(const Duration(milliseconds: 500));
-
-  final allItems = [
-    SearchResult(
-      id: '1',
-      title: 'CG titan 125 Cilindrada',
-      subtitle: 'Carapicuiba, São Paulo',
-    ),
-    SearchResult(
-      id: '2',
-      title: 'Toyota Corolla 2020',
-      subtitle: 'São Paulo, SP',
-    ),
-    SearchResult(
-      id: '3',
-      title: 'ABC-1234',
-      subtitle: 'Placa registrada',
-    ),
-  ];
-
-  final list = allItems
-      .where((item) => item.title.toLowerCase().contains(query.toLowerCase()))
-      .toList();
-
-  return list;
-}
+//   return list;
+// }
 
 class TopoSearch extends ConsumerStatefulWidget {
   const TopoSearch({super.key});
@@ -112,7 +110,6 @@ class _TopoSearchState extends ConsumerState<TopoSearch> {
   }
 
   void _onSearchChanged(String value) {
-    // Usa o notifier para debounce
     ref.read(debouncedSearchProvider.notifier).updateQuery(value);
   }
 
@@ -132,8 +129,10 @@ class _TopoSearchState extends ConsumerState<TopoSearch> {
   @override
   Widget build(BuildContext context) {
     // final isLoading = ref.watch(isLoadingProvider);
-    // final searchQuery = ref.watch(searchQueryProvider);
-    final isLoading = ref.watch(isLoadingProvider);
+    // final isLoading = ref.watch(isLoadingProvider);
+    final searchQuery = ref.watch(debouncedSearchProvider);
+    // ref.watch(searchQueryProvider);
+
     return Container(
       padding: EdgeInsets.only(
         top: context.topPadding + 8,
@@ -152,43 +151,70 @@ class _TopoSearchState extends ConsumerState<TopoSearch> {
       ),
       child: Row(
         children: [
-          IconButton(
-            icon: const Icon(
-              Icons.arrow_back,
-              color: AppColors.textSecondary,
-            ),
-            onPressed: () {
-              Navigator.pop(context);
-            },
-          ),
           Expanded(
-            child: UITextFieldRounded(
-              borderRadius: 90,
-              fillColor: Colors.transparent, // Colors.grey[100],
-              borderColor: Colors.transparent, //Colors.grey[300],
-              focusBorderColor: Colors.transparent, //Colors.grey[600],
-              borderType: InputBorderType.none,
-              showLabelText: false,
-              labelText: "",
-              hintText: "Ex: ABC-1234 ou Toyota Corolla",
-              suffixIcon: _controller.text.isNotEmpty
-                  ? IconButton(
-                      icon: const Icon(
-                        Icons.close,
-                        color: AppColors.textSecondary,
+            child: Padding(
+              padding: const EdgeInsets.only(left: 10, right: 10),
+              child: UITextFieldRounded(
+                contentPadding: const EdgeInsetsDirectional.symmetric(
+                  horizontal: 20,
+                ),
+                borderRadius: 90,
+                fillColor: Colors.grey[100],
+                borderColor: Colors.grey[300],
+                focusBorderColor: Colors.grey[300],
+                // borderType: InputBorderType.none,
+                showLabelText: false,
+                labelText: "",
+                hintText: "Digite aqui...",
+                prefixIcon: IconButton(
+                  icon: const Icon(
+                    Icons.arrow_back,
+                    color: AppColors.textSecondary,
+                  ),
+                  onPressed: () {
+                    Navigator.pop(context);
+                  },
+                ),
+                // suffixIcon: ref.watch(searchViewmodelProvider).when(
+                //       data: (data) {
+                //         return searchQuery.isNotEmpty
+                //             ? IconButton(
+                //                 icon: const Icon(Icons.close,
+                //                     color: AppColors.textSecondary),
+                //                 onPressed: () {
+
+                //                 },
+                //               )
+                //             : null;
+                //       },
+                //       loading: () {
+                //         return const SizedBox(
+                //           height: 16,
+                //           width: 16,
+                //           child: CircularProgressIndicator(strokeWidth: 2),
+                //         );
+                //       },
+                //       error: (_, __) => null,
+                //     ),
+                suffixIcon: searchQuery.isEmpty
+                    ? null
+                    : IconButton(
+                        icon: const Icon(
+                          Icons.close,
+                          color: AppColors.textSecondary,
+                        ),
+                        onPressed: _clearSearch,
                       ),
-                      onPressed: _clearSearch,
-                    )
-                  : null,
-              hintStyle: context.appTextStyles.bodyTextStyle2.copyWith(
-                color: AppColors.textTertiary,
+                hintStyle: context.appTextStyles.bodyTextStyle2.copyWith(
+                  color: AppColors.textTertiary,
+                ),
+                textStyle: context.appTextStyles.appBarTitle.copyWith(
+                  color: AppColors.textColorBody,
+                  fontWeight: FontWeight.bold,
+                ),
+                onChanged: (value) => _onSearchChanged(value),
+                controller: _controller,
               ),
-              textStyle: context.appTextStyles.bodyTextStyle2.copyWith(
-                color: AppColors.textColorBody,
-                fontWeight: FontWeight.bold,
-              ),
-              onChanged: (value) => _onSearchChanged(value),
-              controller: _controller,
             ),
           ),
         ],

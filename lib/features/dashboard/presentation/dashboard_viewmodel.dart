@@ -20,7 +20,7 @@ class DashboardViewmodel
     try {
       final filter = GetIncidentFilter(
         status: IncidentStatus.active,
-        state: userState,
+        term: userState,
         limit: 5,
       );
 

@@ -1,6 +1,4 @@
-import 'package:deehelp/core/ui/theme/app_colors.dart';
 import 'package:deehelp/core/ui/theme/app_text_styles.dart';
-import 'package:deehelp/core/ui/widgets/icon/ui_icon.dart';
 import 'package:flutter/material.dart';
 
 class DashboadIncidentsWarning extends StatelessWidget {
@@ -14,14 +12,14 @@ class DashboadIncidentsWarning extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.center,
         spacing: 10,
         children: [
-          const UIICon(
-            bgColor: AppColors.greyColor,
-            icon: Icon(
-              Icons.inventory,
-              color: AppColors.textColorBody,
-            ),
-            isAlpha: true,
-          ),
+          // const UIICon(
+          //   bgColor: AppColors.greyColor,
+          //   icon: Icon(
+          //     Icons.inventory,
+          //     color: AppColors.textColorBody,
+          //   ),
+          //   isAlpha: true,
+          // ),
           Text(
             textAlign: TextAlign.center,
             "Aqui aparecerá as ocorrências que foram \nregistradas nas últimas horas.",

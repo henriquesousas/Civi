@@ -170,9 +170,10 @@ class _UITextFieldRoundedState extends State<UITextFieldRounded> {
                 borderColor: widget.borderColor,
                 borderRadius: widget.borderRadius),
             focusedBorder: _getInputBorder(
-                isFocused: true,
-                color: AppColors.primaryColor,
-                borderRadius: widget.borderRadius),
+              isFocused: true,
+              color: widget.focusBorderColor ?? AppColors.primaryColor,
+              borderRadius: widget.borderRadius,
+            ),
             errorBorder: _getInputBorder(isError: true),
             errorStyle: const TextStyle(color: AppColors.errorColor),
             focusedErrorBorder: _getInputBorder(isFocused: true, isError: true),
