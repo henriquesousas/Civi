@@ -3,10 +3,10 @@ import 'package:deehelp/core/utils/result.dart';
 import 'package:deehelp/features/incident/domain/incident_repository.dart';
 import 'package:deehelp/features/incident/domain/usecase/incident_output.dart';
 
-class GetIncidentByUserUseCase extends UseCase<String, List<IncidentOutput>> {
+class GetUserIncidentsUseCase extends UseCase<String, List<IncidentOutput>> {
   final IncidentRepository _repository;
 
-  GetIncidentByUserUseCase({required IncidentRepository repository})
+  GetUserIncidentsUseCase({required IncidentRepository repository})
       : _repository = repository;
 
   @override

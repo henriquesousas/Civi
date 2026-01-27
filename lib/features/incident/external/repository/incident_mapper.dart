@@ -74,4 +74,12 @@ class IncidentMapper {
       occurredAtTime: _parseTimeFromString(map['occurred_hour']),
     );
   }
+
+  static List<IncidentOutput> toList(List<Map<String, dynamic>> data) {
+    if (data.isEmpty) return [];
+    return data.map<IncidentOutput>((dynamic item) {
+      final map = item as Map<String, dynamic>;
+      return IncidentMapper.fromMap(map);
+    }).toList();
+  }
 }

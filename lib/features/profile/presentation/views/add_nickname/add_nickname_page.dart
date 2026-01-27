@@ -101,7 +101,9 @@ class AddNicknamePage extends ConsumerWidget {
             ),
             UIElevatedButton(
               text: "Gerar apelido",
-              press: () => viewModel.suggestedNicknames(),
+              press: () {
+                viewModel.suggestedNicknames();
+              },
               bgColor: AppColors.whiteColor,
               borderColor: AppColors.primaryColor,
               textColor: AppColors.primaryColor,

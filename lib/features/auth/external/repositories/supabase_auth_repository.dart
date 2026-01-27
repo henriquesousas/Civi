@@ -14,6 +14,7 @@ class SupabaseAuthRepository
   final SupabaseClient _client;
 
   SupabaseAuthRepository({required SupabaseClient client}) : _client = client;
+
   @override
   Future<Result<AuthenticatedUser>> signInWithCredentials(
     String idToken,

@@ -74,7 +74,7 @@ class _RequestLocationModalState extends ConsumerState<RequestLocationModal> {
                     padding: const EdgeInsets.symmetric(vertical: 0),
                     child: UIElevatedButton(
                       text: widget.buttonTitle,
-                      isLoading: state.isLoading,
+                      // isLoading: state.isLoading,
                       press: widget.press,
                     ),
                   ),

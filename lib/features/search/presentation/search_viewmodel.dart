@@ -4,16 +4,16 @@ import 'package:deehelp/features/incident/domain/enum/incident_status.dart';
 import 'package:deehelp/features/incident/domain/enum/type_alert.dart';
 import 'package:deehelp/features/incident/domain/usecase/incident_output.dart';
 import 'package:deehelp/features/incident/domain/usecase/incident_product_output.dart';
-import 'package:deehelp/features/incident/domain/usecase/listing/get_incident_filter.dart';
-import 'package:deehelp/features/incident/domain/usecase/listing/get_incident_usecase.dart';
+import 'package:deehelp/features/incident/domain/usecase/listing/incident_filter.dart';
+import 'package:deehelp/features/incident/domain/usecase/listing/get_recent_incidents_by_location_usecase.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 class SearchViewmodel extends StateNotifier<AsyncValue<List<IncidentOutput>>> {
-  final GetIncidentUsecase _getIncidentUsecase;
+  final GetRecentIncidentsByLocationUseCase _getIncidentUsecase;
 
   SearchViewmodel({
-    required GetIncidentUsecase getIncidentUsecase,
+    required GetRecentIncidentsByLocationUseCase getIncidentUsecase,
   })  : _getIncidentUsecase = getIncidentUsecase,
         super(const AsyncData([]));
 
@@ -90,7 +90,7 @@ class SearchViewmodel extends StateNotifier<AsyncValue<List<IncidentOutput>>> {
     //     .toList();
 
     try {
-      final filter = GetIncidentFilter(
+      final filter = IncidentFilter(
         status: IncidentStatus.active,
         term: query,
         limit: 5,

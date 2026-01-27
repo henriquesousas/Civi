@@ -5,14 +5,14 @@ enum SortDirection {
   desc,
 }
 
-class GetIncidentFilter {
+class IncidentFilter {
   final IncidentStatus status;
   final SortDirection direction;
   final String orderBy;
-  final int? limit;
+  final int limit;
   final String term;
 
-  GetIncidentFilter({
+  IncidentFilter({
     required this.status,
     required this.term,
     this.limit = 30,

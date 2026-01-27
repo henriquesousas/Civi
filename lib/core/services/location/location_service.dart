@@ -20,6 +20,7 @@ class LocationService {
   LocationService._internal();
 
   // Método para verificar status atual
+  // ========================================================================
   Future<LocationStatus> checkLocationStatus() async {
     try {
       // Verifica se o serviço de localização está ativo
@@ -188,6 +189,13 @@ class LocationService {
           );
         }
       }
+      // LocationStatus status = await checkLocationStatus();
+      // if (status == LocationStatus.serviceDisabled) {
+      //   throw LocationFailure(
+      //     status: status,
+      //     message: getStatusMessage(status),
+      //   );
+      // }
 
       Position position = await _getCurrentPosition();
       if (position.latitude == 0.0 && position.longitude == 0.0) {
@@ -220,7 +228,7 @@ class LocationService {
         return 'Serviço de localização desativado. Ative o GPS nas configurações do dispositivo.';
       case LocationStatus.permissionDeniedForever ||
             LocationStatus.permissionDenied:
-        return 'A localização é necessária para o funcionamento do aplicativo. Abra as configurações e habilite manualmente';
+        return 'A localização é necessária para o funcionamento do aplicativo.';
       case LocationStatus.permissionGranted:
         return 'Localização ativada.';
       case LocationStatus.unknown:

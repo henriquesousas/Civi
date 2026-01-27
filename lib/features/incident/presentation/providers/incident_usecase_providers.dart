@@ -1,7 +1,7 @@
 import 'package:deehelp/features/incident/domain/usecase/add/add_incident_usecase.dart';
 import 'package:deehelp/features/incident/domain/usecase/delete/delete_incident_usecase.dart';
-import 'package:deehelp/features/incident/domain/usecase/listing/get_incident_by_user_usecase.dart';
-import 'package:deehelp/features/incident/domain/usecase/listing/get_incident_usecase.dart';
+import 'package:deehelp/features/incident/domain/usecase/listing/get_user_incidents_user_usecase.dart';
+import 'package:deehelp/features/incident/domain/usecase/listing/get_recent_incidents_by_location_usecase.dart';
 import 'package:deehelp/features/incident/domain/usecase/update/update_incident_usecase.dart';
 import 'package:deehelp/features/incident/external/di/incident_repository_providers.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -13,9 +13,9 @@ final addIncidentImmediatelyUseCaseProvider =
 });
 
 final getIncidentByUserUseCaseProvider =
-    Provider<GetIncidentByUserUseCase>((ref) {
+    Provider<GetUserIncidentsUseCase>((ref) {
   final repository = ref.watch(incidentRepositoryProvider);
-  return GetIncidentByUserUseCase(repository: repository);
+  return GetUserIncidentsUseCase(repository: repository);
 });
 
 final updateIncidentUsecaseProvider = Provider<UpdateIncidentUsecase>((ref) {
@@ -28,7 +28,8 @@ final deleteIncidentUsecaseProvider = Provider<DeleteIncidentUsecase>((ref) {
   return DeleteIncidentUsecase(repository: repository);
 });
 
-final getIncidentUsecaseProvider = Provider<GetIncidentUsecase>((ref) {
+final getIncidentUsecaseProvider =
+    Provider<GetRecentIncidentsByLocationUseCase>((ref) {
   final repository = ref.watch(incidentRepositoryProvider);
-  return GetIncidentUsecase(repository: repository);
+  return GetRecentIncidentsByLocationUseCase(repository: repository);
 });

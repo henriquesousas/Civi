@@ -1,12 +1,10 @@
-import 'package:deehelp/core/providers/location_notifier_provider.dart';
+import 'package:deehelp/app_bootstrap_provider.dart';
+import 'package:deehelp/core/ui/animation/transition_animator.dart';
 import 'package:deehelp/core/ui/extensions/screen_size_extension.dart';
-import 'package:deehelp/core/ui/extensions/string_extension.dart';
+import 'package:deehelp/core/ui/router/app_router.dart';
 import 'package:deehelp/core/ui/theme/app_colors.dart';
 import 'package:deehelp/core/ui/theme/app_text_styles.dart';
 import 'package:deehelp/core/ui/theme/dimens.dart';
-import 'package:deehelp/features/auth/domain/entity/authenticated_user.dart';
-import 'package:deehelp/features/auth/external/di/auth_view_model_provider.dart';
-import 'package:deehelp/features/auth/presentation/auth/state/auth_state.dart';
 import 'package:deehelp/features/splash/components/splash_bg.dart';
 import 'package:deehelp/features/splash/components/splash_content.dart';
 import 'package:deehelp/features/splash/components/splash_progress.dart';
@@ -16,9 +14,6 @@ import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
-
-import '../../core/ui/animation/transition_animator.dart';
-import '../../core/ui/router/app_router.dart';
 
 class SplashPage extends ConsumerStatefulWidget {
   const SplashPage({super.key});
@@ -31,35 +26,18 @@ class _SplashPageState extends ConsumerState<SplashPage> {
   @override
   void initState() {
     super.initState();
-    _checkUserAuthentication();
+    _dispatcher();
   }
 
-  void _checkUserAuthentication() async {
-    await Future.delayed(const Duration(milliseconds: 3000));
-    WidgetsBinding.instance.addPostFrameCallback((_) async {
-      context.pushReplacement(AppRouter.onboarding);
-    });
+  void _dispatcher() async {
+    // await Future.delayed(const Duration(milliseconds: 3000));
+    // WidgetsBinding.instance.addPostFrameCallback((_) async {
+    //   context.pushReplacement(AppRouter.onboarding);
+    // });
   }
 
   @override
   Widget build(BuildContext context) {
-    ref.watch(locationNotifierProvider.notifier);
-    ref.listen<AuthState>(authViewViewModelProvider, (previous, currentState) {
-      switch (currentState) {
-        case AuthStateAuthenticated(:final user):
-          if (user.authMethod == AuthMethod.google &&
-              user.nickName.isNullOrEmpty()) {
-            context.pushReplacement(AppRouter.addNickname);
-          } else {
-            context.pushReplacement(AppRouter.dashboard);
-          }
-          return;
-        case AuthStateUnAuthenticated():
-          context.pushReplacement(AppRouter.onboarding);
-          break;
-      }
-    });
-
     return Scaffold(
       body: AnnotatedRegion<SystemUiOverlayStyle>(
         value: SystemUiOverlayStyle.light.copyWith(

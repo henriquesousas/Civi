@@ -52,6 +52,8 @@ extension LocationServiceEventPatterns on LocationServiceEvent {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_LocationServiceEventError value)? error,
+    TResult Function(_LocationServiceEventLocationRequired value)?
+        locationRequired,
     TResult Function(_LocationServiceEventSuccess value)? success,
     required TResult orElse(),
   }) {
@@ -59,6 +61,9 @@ extension LocationServiceEventPatterns on LocationServiceEvent {
     switch (_that) {
       case _LocationServiceEventError() when error != null:
         return error(_that);
+      case _LocationServiceEventLocationRequired()
+          when locationRequired != null:
+        return locationRequired(_that);
       case _LocationServiceEventSuccess() when success != null:
         return success(_that);
       case _:
@@ -82,12 +87,16 @@ extension LocationServiceEventPatterns on LocationServiceEvent {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_LocationServiceEventError value) error,
+    required TResult Function(_LocationServiceEventLocationRequired value)
+        locationRequired,
     required TResult Function(_LocationServiceEventSuccess value) success,
   }) {
     final _that = this;
     switch (_that) {
       case _LocationServiceEventError():
         return error(_that);
+      case _LocationServiceEventLocationRequired():
+        return locationRequired(_that);
       case _LocationServiceEventSuccess():
         return success(_that);
       case _:
@@ -110,12 +119,17 @@ extension LocationServiceEventPatterns on LocationServiceEvent {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_LocationServiceEventError value)? error,
+    TResult? Function(_LocationServiceEventLocationRequired value)?
+        locationRequired,
     TResult? Function(_LocationServiceEventSuccess value)? success,
   }) {
     final _that = this;
     switch (_that) {
       case _LocationServiceEventError() when error != null:
         return error(_that);
+      case _LocationServiceEventLocationRequired()
+          when locationRequired != null:
+        return locationRequired(_that);
       case _LocationServiceEventSuccess() when success != null:
         return success(_that);
       case _:
@@ -137,15 +151,18 @@ extension LocationServiceEventPatterns on LocationServiceEvent {
 
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(LocationStatus status, String message, String title)?
-        error,
+    TResult Function(LocationStatus status, String message)? error,
+    TResult Function(LocationStatus status, String message)? locationRequired,
     TResult Function(CurrentLocation? currentPlace)? success,
     required TResult orElse(),
   }) {
     final _that = this;
     switch (_that) {
       case _LocationServiceEventError() when error != null:
-        return error(_that.status, _that.message, _that.title);
+        return error(_that.status, _that.message);
+      case _LocationServiceEventLocationRequired()
+          when locationRequired != null:
+        return locationRequired(_that.status, _that.message);
       case _LocationServiceEventSuccess() when success != null:
         return success(_that.currentPlace);
       case _:
@@ -168,15 +185,17 @@ extension LocationServiceEventPatterns on LocationServiceEvent {
 
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(
-            LocationStatus status, String message, String title)
-        error,
+    required TResult Function(LocationStatus status, String message) error,
+    required TResult Function(LocationStatus status, String message)
+        locationRequired,
     required TResult Function(CurrentLocation? currentPlace) success,
   }) {
     final _that = this;
     switch (_that) {
       case _LocationServiceEventError():
-        return error(_that.status, _that.message, _that.title);
+        return error(_that.status, _that.message);
+      case _LocationServiceEventLocationRequired():
+        return locationRequired(_that.status, _that.message);
       case _LocationServiceEventSuccess():
         return success(_that.currentPlace);
       case _:
@@ -198,14 +217,17 @@ extension LocationServiceEventPatterns on LocationServiceEvent {
 
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(LocationStatus status, String message, String title)?
-        error,
+    TResult? Function(LocationStatus status, String message)? error,
+    TResult? Function(LocationStatus status, String message)? locationRequired,
     TResult? Function(CurrentLocation? currentPlace)? success,
   }) {
     final _that = this;
     switch (_that) {
       case _LocationServiceEventError() when error != null:
-        return error(_that.status, _that.message, _that.title);
+        return error(_that.status, _that.message);
+      case _LocationServiceEventLocationRequired()
+          when locationRequired != null:
+        return locationRequired(_that.status, _that.message);
       case _LocationServiceEventSuccess() when success != null:
         return success(_that.currentPlace);
       case _:
@@ -217,11 +239,10 @@ extension LocationServiceEventPatterns on LocationServiceEvent {
 /// @nodoc
 
 class _LocationServiceEventError implements LocationServiceEvent {
-  const _LocationServiceEventError(this.status, this.message, this.title);
+  const _LocationServiceEventError(this.status, this.message);
 
   final LocationStatus status;
   final String message;
-  final String title;
 
   /// Create a copy of LocationServiceEvent
   /// with the given fields replaced by the non-null parameter values.
@@ -238,16 +259,15 @@ class _LocationServiceEventError implements LocationServiceEvent {
         (other.runtimeType == runtimeType &&
             other is _LocationServiceEventError &&
             (identical(other.status, status) || other.status == status) &&
-            (identical(other.message, message) || other.message == message) &&
-            (identical(other.title, title) || other.title == title));
+            (identical(other.message, message) || other.message == message));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, status, message, title);
+  int get hashCode => Object.hash(runtimeType, status, message);
 
   @override
   String toString() {
-    return 'LocationServiceEvent.error(status: $status, message: $message, title: $title)';
+    return 'LocationServiceEvent.error(status: $status, message: $message)';
   }
 }
 
@@ -258,7 +278,7 @@ abstract mixin class _$LocationServiceEventErrorCopyWith<$Res>
           $Res Function(_LocationServiceEventError) _then) =
       __$LocationServiceEventErrorCopyWithImpl;
   @useResult
-  $Res call({LocationStatus status, String message, String title});
+  $Res call({LocationStatus status, String message});
 }
 
 /// @nodoc
@@ -275,7 +295,6 @@ class __$LocationServiceEventErrorCopyWithImpl<$Res>
   $Res call({
     Object? status = null,
     Object? message = null,
-    Object? title = null,
   }) {
     return _then(_LocationServiceEventError(
       null == status
@@ -286,9 +305,79 @@ class __$LocationServiceEventErrorCopyWithImpl<$Res>
           ? _self.message
           : message // ignore: cast_nullable_to_non_nullable
               as String,
-      null == title
-          ? _self.title
-          : title // ignore: cast_nullable_to_non_nullable
+    ));
+  }
+}
+
+/// @nodoc
+
+class _LocationServiceEventLocationRequired implements LocationServiceEvent {
+  const _LocationServiceEventLocationRequired(this.status, this.message);
+
+  final LocationStatus status;
+  final String message;
+
+  /// Create a copy of LocationServiceEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @pragma('vm:prefer-inline')
+  _$LocationServiceEventLocationRequiredCopyWith<
+          _LocationServiceEventLocationRequired>
+      get copyWith => __$LocationServiceEventLocationRequiredCopyWithImpl<
+          _LocationServiceEventLocationRequired>(this, _$identity);
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _LocationServiceEventLocationRequired &&
+            (identical(other.status, status) || other.status == status) &&
+            (identical(other.message, message) || other.message == message));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType, status, message);
+
+  @override
+  String toString() {
+    return 'LocationServiceEvent.locationRequired(status: $status, message: $message)';
+  }
+}
+
+/// @nodoc
+abstract mixin class _$LocationServiceEventLocationRequiredCopyWith<$Res>
+    implements $LocationServiceEventCopyWith<$Res> {
+  factory _$LocationServiceEventLocationRequiredCopyWith(
+          _LocationServiceEventLocationRequired value,
+          $Res Function(_LocationServiceEventLocationRequired) _then) =
+      __$LocationServiceEventLocationRequiredCopyWithImpl;
+  @useResult
+  $Res call({LocationStatus status, String message});
+}
+
+/// @nodoc
+class __$LocationServiceEventLocationRequiredCopyWithImpl<$Res>
+    implements _$LocationServiceEventLocationRequiredCopyWith<$Res> {
+  __$LocationServiceEventLocationRequiredCopyWithImpl(this._self, this._then);
+
+  final _LocationServiceEventLocationRequired _self;
+  final $Res Function(_LocationServiceEventLocationRequired) _then;
+
+  /// Create a copy of LocationServiceEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @pragma('vm:prefer-inline')
+  $Res call({
+    Object? status = null,
+    Object? message = null,
+  }) {
+    return _then(_LocationServiceEventLocationRequired(
+      null == status
+          ? _self.status
+          : status // ignore: cast_nullable_to_non_nullable
+              as LocationStatus,
+      null == message
+          ? _self.message
+          : message // ignore: cast_nullable_to_non_nullable
               as String,
     ));
   }

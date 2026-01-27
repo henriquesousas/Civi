@@ -26,52 +26,42 @@ class DashbordQuickActionsCard extends StatelessWidget {
             ),
           ),
           SizedBox(height: 20.h),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              QuickActionItem(
-                title: "Bem\nPré cadastro",
-                color: AppColors.primaryColor,
-                icon: const Icon(Icons.add, color: AppColors.whiteColor),
-                onTap: () => context.push(AppRouter.addProduct),
-              ),
-              QuickActionItem(
-                title: "Reportar\nincidente",
-                color: AppColors.grenColor,
-                icon: const Icon(Icons.campaign_outlined,
-                    color: AppColors.whiteColor),
-                onTap: () => context.push(AppRouter.reportIncident),
-              ),
-              QuickActionItem(
-                title: "Ligar\nPolícia",
-                color: AppColors.lightGreyColor,
-                icon: const Icon(
-                  Icons.local_police,
-                  color: AppColors.darkGreyColor10,
+          SingleChildScrollView(
+            scrollDirection: Axis.horizontal,
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                QuickActionItem(
+                  title: "Bem\nPré cadastro",
+                  color: AppColors.primaryColor,
+                  icon: const Icon(Icons.add, color: AppColors.whiteColor),
+                  onTap: () => context.push(AppRouter.addProduct),
                 ),
-                onTap: () {},
-              ),
-              QuickActionItem(
-                title: "Ver\nMapa",
-                color: AppColors.lightGreyColor,
-                icon: const Icon(Icons.explore_outlined,
-                    color: AppColors.darkGreyColor10),
-                onTap: () => context.push(AppRouter.map),
-              ),
-              // QuickActionItem(
-              //   title: "Tirar\nDúvidas",
-              //   color: AppColors.lightGreyColor,
-              //   icon: const Icon(Icons.contact_support_outlined,
-              //       color: AppColors.darkGreyColor10),
-              //   onTap: () {
-              //     WidgetsBinding.instance.addPostFrameCallback((_) {
-              //       ScaffoldMessenger.of(context).showSnackBar(
-              //         SnackBar(content: Text("Operação realizada!")),
-              //       );
-              //     });
-              //   },
-              // ),
-            ],
+                QuickActionItem(
+                  title: "Reportar\nincidente",
+                  color: AppColors.grenColor,
+                  icon: const Icon(Icons.campaign_outlined,
+                      color: AppColors.whiteColor),
+                  onTap: () => context.push(AppRouter.reportIncident),
+                ),
+                QuickActionItem(
+                  title: "Ligar\nPolícia",
+                  color: AppColors.lightGreyColor,
+                  icon: const Icon(
+                    Icons.local_police,
+                    color: AppColors.darkGreyColor10,
+                  ),
+                  onTap: () {},
+                ),
+                QuickActionItem(
+                  title: "Ver\nMapa",
+                  color: AppColors.lightGreyColor,
+                  icon: const Icon(Icons.explore_outlined,
+                      color: AppColors.darkGreyColor10),
+                  onTap: () => context.push(AppRouter.map),
+                ),
+              ],
+            ),
           ),
         ],
       ),

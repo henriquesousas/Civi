@@ -6,9 +6,6 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 final locationNotifierProvider =
     StateNotifierProvider<LocationNotifier, LocationState>(
   (ref) {
-    return LocationNotifier(
-      service: LocationService(),
-      ref: ref,
-    );
+    return LocationNotifier(service: LocationService(), ref: ref);
   },
 );

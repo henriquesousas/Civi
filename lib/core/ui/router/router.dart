@@ -1,10 +1,16 @@
 import 'dart:async';
 
+import 'package:deehelp/app_startup_provider.dart';
+import 'package:deehelp/core/providers/location_notifier_provider.dart';
+import 'package:deehelp/core/services/location/state/location_state.dart';
 import 'package:deehelp/core/ui/router/app_router.dart';
 import 'package:deehelp/core/ui/router/slide_transition_page.dart';
+import 'package:deehelp/core/ui/widgets/bottom_sheet/custom_modal_bottom_sheet.dart';
+import 'package:deehelp/app_bootstrap_provider.dart';
 import 'package:deehelp/features/auth/external/di/auth_repository_provider.dart';
 import 'package:deehelp/features/auth/external/di/auth_state_provider.dart';
 import 'package:deehelp/features/auth/external/repositories/supabase_auth_repository.dart';
+import 'package:deehelp/features/dashboard/presentation/widget/request_location_modal.dart';
 import 'package:deehelp/features/incident/incident_module.dart';
 import 'package:deehelp/features/profile/presentation/views/add_nickname/add_nickname_page.dart';
 import 'package:deehelp/features/dashboard/presentation/dashsboard_page.dart';
@@ -20,6 +26,8 @@ import 'package:deehelp/features/profile/presentation/views/profile/profile_page
 import 'package:deehelp/features/search/search_page.dart';
 import 'package:deehelp/features/splash/splash_page.dart';
 import 'package:deehelp/features/test_page.dart';
+import 'package:deehelp/location_required_page.dart';
+import 'package:deehelp/router_refresh_notifier.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
@@ -42,40 +50,64 @@ class GoRouterRefreshStream extends ChangeNotifier {
 final _publicRoutes = [
   AppRouter.splash,
   AppRouter.onboarding,
+  AppRouter.locationRequired,
 ];
 
 var goRouterProvider = Provider<GoRouter>(
   (ref) {
-    final authRepo = ref.watch(authStateProvider);
-    final authRepository =
-        ref.watch(authRepositoryProvider) as AuthStateChangeNotifier;
+    // final authState = ref.watch(authStateProvider);
+    // final authNotifier =
+    //     ref.watch(authRepositoryProvider) as AuthStateChangeNotifier;
+    // final bootstrap = ref.watch(appBootstrapProvider);
+    // final locationState = ref.watch(locationNotifierProvider);
+    // final bootstrap = ref.watch(appBootstrapProvider);
+
+    final appStatus = ref.watch(appStartupProvider);
+
     return GoRouter(
       initialLocation: AppRouter.splash,
       debugLogDiagnostics: true,
-      refreshListenable: GoRouterRefreshStream(
-        authRepository.onAuthStateChanged(),
-      ),
+      // refreshListenable: GoRouterRefreshStream(
+      //   authNotifier.onAuthStateChanged(),
+      // ),
+      refreshListenable: RouterRefreshNotifier(ref),
       redirect: (context, state) {
-        return authRepo.when(
-          data: (session) {
-            final currentPath = state.matchedLocation;
-            final isSplash = currentPath == AppRouter.splash;
-            final isOnboarding = currentPath == AppRouter.onboarding;
-            final isPublicRoute = _publicRoutes.contains(currentPath);
+        final currentPath = state.matchedLocation;
+        final isPublicRoute = _publicRoutes.contains(currentPath);
+        switch (appStatus) {
+          case AppStatus.loading:
+            return AppRouter.splash;
+          case AppStatus.unauthenticated:
+            return AppRouter.onboarding;
+          case AppStatus.needLocation:
+            return AppRouter.locationRequired;
+          case AppStatus.gpsInactive:
+            return AppRouter.locationRequired;
+          case AppStatus.ready:
+            return isPublicRoute ? AppRouter.dashboard : null;
+        }
+        // return authState.when(
+        //   data: (session) {
+        //     final currentPath = state.matchedLocation;
+        //     final isSplash = currentPath == AppRouter.splash;
+        //     final isOnboarding = currentPath == AppRouter.onboarding;
+        //     // final isGpsRequiredScreen =
+        //     //     currentPath == AppRouter.locationRequired;
+        //     final isPublicRoute = _publicRoutes.contains(currentPath);
 
-            if (session == null) {
-              return isPublicRoute ? null : AppRouter.onboarding;
-            }
+        //     if (session == null) {
+        //       return isPublicRoute ? null : AppRouter.onboarding;
+        //     }
 
-            if (isSplash || isOnboarding) {
-              return AppRouter.dashboard;
-            }
+        //     if (isSplash || isOnboarding) {
+        //       return AppRouter.dashboard;
+        //     }
 
-            return null;
-          },
-          error: (v, s) => null,
-          loading: () => null,
-        );
+        //     return null;
+        //   },
+        //   error: (v, s) => null,
+        //   loading: () => null,
+        // );
       },
       routes: [
         ...IncidentModule.routers,
@@ -160,69 +192,6 @@ var goRouterProvider = Provider<GoRouter>(
             child: FaqProvider.page,
           ),
         ),
-        // GoRoute(
-        //   path: AppRouter.addIncident,
-        //   pageBuilder: (context, state) => slideTransitionPage(
-        //     key: state.pageKey,
-        //     child: const AddIncidentPage(),
-        //   ),
-        // ),
-        // GoRoute(
-        //   path: AppRouter.incidents,
-        //   pageBuilder: (context, state) => slideTransitionPage(
-        //     key: state.pageKey,
-        //     child: const ListingIncidentPage(),
-        //   ),
-        // ),
-        // GoRoute(
-        //   path: AppRouter.updateIncident,
-        //   pageBuilder: (context, state) => slideTransitionPage(
-        //     key: state.pageKey,
-        //     child: const UpdateIncidentPage(),
-        //   ),
-        // ),
-        // GoRoute(
-        //   path: AppRouter.updateIncidentTile,
-        //   pageBuilder: (context, state) {
-        //     final data = state.extra as Map<String, dynamic>;
-        //     final args = UpdateIncidentArgs.from(data);
-
-        //     return slideTransitionPage(
-        //       key: state.pageKey,
-        //       child: UpdateIncidentPageTile(args: args),
-        //     );
-        //   },
-        // ),
-        // GoRoute(
-        //   path: AppRouter.addIncidentSuccess,
-        //   pageBuilder: (context, state) => slideTransitionPage(
-        //     key: state.pageKey,
-        //     child: IncidentRegisteredSuccessfullyWidget(
-        //       vehicleType: 'carro',
-        //       location: 'Centro, São Paulo - SP',
-        //       incidentTime: DateTime.now(),
-        //     ),
-        //   ),
-        // ),
-        // GoRoute(
-        //   path: AppRouter.addIncidentError,
-        //   pageBuilder: (context, state) => slideTransitionPage(
-        //     key: state.pageKey,
-        //     child: IncidentErrorWidget(
-        //       onRetry: () {},
-        //     ),
-        //   ),
-        // ),
-        // GoRoute(
-        //   path: AppRouter.sendIncident,
-        //   pageBuilder: (context, state) => slideTransitionPage(
-        //     key: state.pageKey,
-        //     child: const SendingAlertScreen(
-        //       vehicleType: 'carro',
-        //       location: 'Centro, São Paulo - SP',
-        //     ),
-        //   ),
-        // ),
         GoRoute(
           path: AppRouter.addNickname,
           pageBuilder: (context, state) {
@@ -237,7 +206,16 @@ var goRouterProvider = Provider<GoRouter>(
           pageBuilder: (context, state) {
             return slideTransitionPage(
               key: state.pageKey,
-              child: SearchPage(),
+              child: const SearchPage(),
+            );
+          },
+        ),
+        GoRoute(
+          path: AppRouter.locationRequired,
+          pageBuilder: (context, state) {
+            return slideTransitionPage(
+              key: state.pageKey,
+              child: const LocationRequiredPage(),
             );
           },
         ),

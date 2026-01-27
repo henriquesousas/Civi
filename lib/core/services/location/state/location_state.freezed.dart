@@ -14,65 +14,24 @@ T _$identity<T>(T value) => value;
 
 /// @nodoc
 mixin _$LocationState {
-  bool get isLoading;
-
-  /// Create a copy of LocationState
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  @pragma('vm:prefer-inline')
-  $LocationStateCopyWith<LocationState> get copyWith =>
-      _$LocationStateCopyWithImpl<LocationState>(
-          this as LocationState, _$identity);
-
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType &&
-            other is LocationState &&
-            (identical(other.isLoading, isLoading) ||
-                other.isLoading == isLoading));
+        (other.runtimeType == runtimeType && other is LocationState);
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, isLoading);
+  int get hashCode => runtimeType.hashCode;
 
   @override
   String toString() {
-    return 'LocationState(isLoading: $isLoading)';
+    return 'LocationState()';
   }
 }
 
 /// @nodoc
-abstract mixin class $LocationStateCopyWith<$Res> {
-  factory $LocationStateCopyWith(
-          LocationState value, $Res Function(LocationState) _then) =
-      _$LocationStateCopyWithImpl;
-  @useResult
-  $Res call({bool isLoading});
-}
-
-/// @nodoc
-class _$LocationStateCopyWithImpl<$Res>
-    implements $LocationStateCopyWith<$Res> {
-  _$LocationStateCopyWithImpl(this._self, this._then);
-
-  final LocationState _self;
-  final $Res Function(LocationState) _then;
-
-  /// Create a copy of LocationState
-  /// with the given fields replaced by the non-null parameter values.
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? isLoading = null,
-  }) {
-    return _then(_self.copyWith(
-      isLoading: null == isLoading
-          ? _self.isLoading
-          : isLoading // ignore: cast_nullable_to_non_nullable
-              as bool,
-    ));
-  }
+class $LocationStateCopyWith<$Res> {
+  $LocationStateCopyWith(LocationState _, $Res Function(LocationState) __);
 }
 
 /// Adds pattern-matching-related methods to [LocationState].
@@ -90,14 +49,29 @@ extension LocationStatePatterns on LocationState {
   /// ```
 
   @optionalTypeArgs
-  TResult maybeMap<TResult extends Object?>(
-    TResult Function(_LocationState value)? $default, {
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_Loading value)? loading,
+    TResult Function(_Granted value)? granted,
+    TResult Function(_ServiceDisabled value)? serviceDisabled,
+    TResult Function(_Checking value)? checking,
+    TResult Function(_Denied value)? denied,
+    TResult Function(_DeniedPermanently value)? deniedPermanently,
     required TResult orElse(),
   }) {
     final _that = this;
     switch (_that) {
-      case _LocationState() when $default != null:
-        return $default(_that);
+      case _Loading() when loading != null:
+        return loading(_that);
+      case _Granted() when granted != null:
+        return granted(_that);
+      case _ServiceDisabled() when serviceDisabled != null:
+        return serviceDisabled(_that);
+      case _Checking() when checking != null:
+        return checking(_that);
+      case _Denied() when denied != null:
+        return denied(_that);
+      case _DeniedPermanently() when deniedPermanently != null:
+        return deniedPermanently(_that);
       case _:
         return orElse();
     }
@@ -117,13 +91,28 @@ extension LocationStatePatterns on LocationState {
   /// ```
 
   @optionalTypeArgs
-  TResult map<TResult extends Object?>(
-    TResult Function(_LocationState value) $default,
-  ) {
+  TResult map<TResult extends Object?>({
+    required TResult Function(_Loading value) loading,
+    required TResult Function(_Granted value) granted,
+    required TResult Function(_ServiceDisabled value) serviceDisabled,
+    required TResult Function(_Checking value) checking,
+    required TResult Function(_Denied value) denied,
+    required TResult Function(_DeniedPermanently value) deniedPermanently,
+  }) {
     final _that = this;
     switch (_that) {
-      case _LocationState():
-        return $default(_that);
+      case _Loading():
+        return loading(_that);
+      case _Granted():
+        return granted(_that);
+      case _ServiceDisabled():
+        return serviceDisabled(_that);
+      case _Checking():
+        return checking(_that);
+      case _Denied():
+        return denied(_that);
+      case _DeniedPermanently():
+        return deniedPermanently(_that);
       case _:
         throw StateError('Unexpected subclass');
     }
@@ -142,13 +131,28 @@ extension LocationStatePatterns on LocationState {
   /// ```
 
   @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>(
-    TResult? Function(_LocationState value)? $default,
-  ) {
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_Loading value)? loading,
+    TResult? Function(_Granted value)? granted,
+    TResult? Function(_ServiceDisabled value)? serviceDisabled,
+    TResult? Function(_Checking value)? checking,
+    TResult? Function(_Denied value)? denied,
+    TResult? Function(_DeniedPermanently value)? deniedPermanently,
+  }) {
     final _that = this;
     switch (_that) {
-      case _LocationState() when $default != null:
-        return $default(_that);
+      case _Loading() when loading != null:
+        return loading(_that);
+      case _Granted() when granted != null:
+        return granted(_that);
+      case _ServiceDisabled() when serviceDisabled != null:
+        return serviceDisabled(_that);
+      case _Checking() when checking != null:
+        return checking(_that);
+      case _Denied() when denied != null:
+        return denied(_that);
+      case _DeniedPermanently() when deniedPermanently != null:
+        return deniedPermanently(_that);
       case _:
         return null;
     }
@@ -167,14 +171,29 @@ extension LocationStatePatterns on LocationState {
   /// ```
 
   @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>(
-    TResult Function(bool isLoading)? $default, {
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? loading,
+    TResult Function()? granted,
+    TResult Function()? serviceDisabled,
+    TResult Function()? checking,
+    TResult Function(LocationStatus status, String message)? denied,
+    TResult Function(LocationStatus status, String message)? deniedPermanently,
     required TResult orElse(),
   }) {
     final _that = this;
     switch (_that) {
-      case _LocationState() when $default != null:
-        return $default(_that.isLoading);
+      case _Loading() when loading != null:
+        return loading();
+      case _Granted() when granted != null:
+        return granted();
+      case _ServiceDisabled() when serviceDisabled != null:
+        return serviceDisabled();
+      case _Checking() when checking != null:
+        return checking();
+      case _Denied() when denied != null:
+        return denied(_that.status, _that.message);
+      case _DeniedPermanently() when deniedPermanently != null:
+        return deniedPermanently(_that.status, _that.message);
       case _:
         return orElse();
     }
@@ -194,13 +213,29 @@ extension LocationStatePatterns on LocationState {
   /// ```
 
   @optionalTypeArgs
-  TResult when<TResult extends Object?>(
-    TResult Function(bool isLoading) $default,
-  ) {
+  TResult when<TResult extends Object?>({
+    required TResult Function() loading,
+    required TResult Function() granted,
+    required TResult Function() serviceDisabled,
+    required TResult Function() checking,
+    required TResult Function(LocationStatus status, String message) denied,
+    required TResult Function(LocationStatus status, String message)
+        deniedPermanently,
+  }) {
     final _that = this;
     switch (_that) {
-      case _LocationState():
-        return $default(_that.isLoading);
+      case _Loading():
+        return loading();
+      case _Granted():
+        return granted();
+      case _ServiceDisabled():
+        return serviceDisabled();
+      case _Checking():
+        return checking();
+      case _Denied():
+        return denied(_that.status, _that.message);
+      case _DeniedPermanently():
+        return deniedPermanently(_that.status, _that.message);
       case _:
         throw StateError('Unexpected subclass');
     }
@@ -219,13 +254,28 @@ extension LocationStatePatterns on LocationState {
   /// ```
 
   @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>(
-    TResult? Function(bool isLoading)? $default,
-  ) {
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? loading,
+    TResult? Function()? granted,
+    TResult? Function()? serviceDisabled,
+    TResult? Function()? checking,
+    TResult? Function(LocationStatus status, String message)? denied,
+    TResult? Function(LocationStatus status, String message)? deniedPermanently,
+  }) {
     final _that = this;
     switch (_that) {
-      case _LocationState() when $default != null:
-        return $default(_that.isLoading);
+      case _Loading() when loading != null:
+        return loading();
+      case _Granted() when granted != null:
+        return granted();
+      case _ServiceDisabled() when serviceDisabled != null:
+        return serviceDisabled();
+      case _Checking() when checking != null:
+        return checking();
+      case _Denied() when denied != null:
+        return denied(_that.status, _that.message);
+      case _DeniedPermanently() when deniedPermanently != null:
+        return deniedPermanently(_that.status, _that.message);
       case _:
         return null;
     }
@@ -234,70 +284,220 @@ extension LocationStatePatterns on LocationState {
 
 /// @nodoc
 
-class _LocationState implements LocationState {
-  const _LocationState({this.isLoading = false});
+class _Loading implements LocationState {
+  const _Loading();
 
   @override
-  @JsonKey()
-  final bool isLoading;
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType && other is _Loading);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  String toString() {
+    return 'LocationState.loading()';
+  }
+}
+
+/// @nodoc
+
+class _Granted implements LocationState {
+  const _Granted();
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType && other is _Granted);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  String toString() {
+    return 'LocationState.granted()';
+  }
+}
+
+/// @nodoc
+
+class _ServiceDisabled implements LocationState {
+  const _ServiceDisabled();
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType && other is _ServiceDisabled);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  String toString() {
+    return 'LocationState.serviceDisabled()';
+  }
+}
+
+/// @nodoc
+
+class _Checking implements LocationState {
+  const _Checking();
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType && other is _Checking);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  String toString() {
+    return 'LocationState.checking()';
+  }
+}
+
+/// @nodoc
+
+class _Denied implements LocationState {
+  const _Denied(this.status, this.message);
+
+  final LocationStatus status;
+  final String message;
 
   /// Create a copy of LocationState
   /// with the given fields replaced by the non-null parameter values.
-  @override
   @JsonKey(includeFromJson: false, includeToJson: false)
   @pragma('vm:prefer-inline')
-  _$LocationStateCopyWith<_LocationState> get copyWith =>
-      __$LocationStateCopyWithImpl<_LocationState>(this, _$identity);
+  _$DeniedCopyWith<_Denied> get copyWith =>
+      __$DeniedCopyWithImpl<_Denied>(this, _$identity);
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _LocationState &&
-            (identical(other.isLoading, isLoading) ||
-                other.isLoading == isLoading));
+            other is _Denied &&
+            (identical(other.status, status) || other.status == status) &&
+            (identical(other.message, message) || other.message == message));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, isLoading);
+  int get hashCode => Object.hash(runtimeType, status, message);
 
   @override
   String toString() {
-    return 'LocationState(isLoading: $isLoading)';
+    return 'LocationState.denied(status: $status, message: $message)';
   }
 }
 
 /// @nodoc
-abstract mixin class _$LocationStateCopyWith<$Res>
+abstract mixin class _$DeniedCopyWith<$Res>
     implements $LocationStateCopyWith<$Res> {
-  factory _$LocationStateCopyWith(
-          _LocationState value, $Res Function(_LocationState) _then) =
-      __$LocationStateCopyWithImpl;
-  @override
+  factory _$DeniedCopyWith(_Denied value, $Res Function(_Denied) _then) =
+      __$DeniedCopyWithImpl;
   @useResult
-  $Res call({bool isLoading});
+  $Res call({LocationStatus status, String message});
 }
 
 /// @nodoc
-class __$LocationStateCopyWithImpl<$Res>
-    implements _$LocationStateCopyWith<$Res> {
-  __$LocationStateCopyWithImpl(this._self, this._then);
+class __$DeniedCopyWithImpl<$Res> implements _$DeniedCopyWith<$Res> {
+  __$DeniedCopyWithImpl(this._self, this._then);
 
-  final _LocationState _self;
-  final $Res Function(_LocationState) _then;
+  final _Denied _self;
+  final $Res Function(_Denied) _then;
 
   /// Create a copy of LocationState
   /// with the given fields replaced by the non-null parameter values.
-  @override
   @pragma('vm:prefer-inline')
   $Res call({
-    Object? isLoading = null,
+    Object? status = null,
+    Object? message = null,
   }) {
-    return _then(_LocationState(
-      isLoading: null == isLoading
-          ? _self.isLoading
-          : isLoading // ignore: cast_nullable_to_non_nullable
-              as bool,
+    return _then(_Denied(
+      null == status
+          ? _self.status
+          : status // ignore: cast_nullable_to_non_nullable
+              as LocationStatus,
+      null == message
+          ? _self.message
+          : message // ignore: cast_nullable_to_non_nullable
+              as String,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _DeniedPermanently implements LocationState {
+  const _DeniedPermanently(this.status, this.message);
+
+  final LocationStatus status;
+  final String message;
+
+  /// Create a copy of LocationState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @pragma('vm:prefer-inline')
+  _$DeniedPermanentlyCopyWith<_DeniedPermanently> get copyWith =>
+      __$DeniedPermanentlyCopyWithImpl<_DeniedPermanently>(this, _$identity);
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _DeniedPermanently &&
+            (identical(other.status, status) || other.status == status) &&
+            (identical(other.message, message) || other.message == message));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType, status, message);
+
+  @override
+  String toString() {
+    return 'LocationState.deniedPermanently(status: $status, message: $message)';
+  }
+}
+
+/// @nodoc
+abstract mixin class _$DeniedPermanentlyCopyWith<$Res>
+    implements $LocationStateCopyWith<$Res> {
+  factory _$DeniedPermanentlyCopyWith(
+          _DeniedPermanently value, $Res Function(_DeniedPermanently) _then) =
+      __$DeniedPermanentlyCopyWithImpl;
+  @useResult
+  $Res call({LocationStatus status, String message});
+}
+
+/// @nodoc
+class __$DeniedPermanentlyCopyWithImpl<$Res>
+    implements _$DeniedPermanentlyCopyWith<$Res> {
+  __$DeniedPermanentlyCopyWithImpl(this._self, this._then);
+
+  final _DeniedPermanently _self;
+  final $Res Function(_DeniedPermanently) _then;
+
+  /// Create a copy of LocationState
+  /// with the given fields replaced by the non-null parameter values.
+  @pragma('vm:prefer-inline')
+  $Res call({
+    Object? status = null,
+    Object? message = null,
+  }) {
+    return _then(_DeniedPermanently(
+      null == status
+          ? _self.status
+          : status // ignore: cast_nullable_to_non_nullable
+              as LocationStatus,
+      null == message
+          ? _self.message
+          : message // ignore: cast_nullable_to_non_nullable
+              as String,
     ));
   }
 }

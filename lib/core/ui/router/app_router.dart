@@ -1,4 +1,5 @@
 class AppRouter {
+  //TODO: Mudar para home
   static const dashboard = "/dasboard";
   static const map = "/map";
   static const splash = "/splash";
@@ -17,4 +18,7 @@ class AppRouter {
   static const incidentDetail = "/incident-detail";
   static const addNickname = "/add-nickname";
   static const search = "/search";
+  //TODO: LocationPermissionRequiredPage
+  //TODO: locationPermission
+  static const locationRequired = "/location-required";
 }
