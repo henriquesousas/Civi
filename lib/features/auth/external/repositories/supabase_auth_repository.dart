@@ -1,6 +1,7 @@
 import 'package:deehelp/core/utils/unit.dart';
 import 'package:deehelp/core/utils/result.dart';
 import 'package:deehelp/features/auth/domain/entity/authenticated_user.dart';
+import 'package:deehelp/features/auth/domain/exceptions/unauthenticated_failure.dart';
 import 'package:deehelp/features/auth/domain/repositories/auth_repository.dart';
 import 'package:deehelp/features/auth/domain/exceptions/sign_out_failure.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
@@ -51,6 +52,30 @@ class SupabaseAuthRepository
     } catch (e) {
       return Result.failure(SignOutFailure(e.toString()));
     }
+  }
+
+  @override
+  Future<Result<AuthenticatedUser>> getCurrentUser() async {
+    final currentUser = _client.auth.currentUser;
+
+    if (currentUser == null) {
+      return Result.failure(const UnauthenticatedFailure());
+    }
+
+    final User user = currentUser;
+    final String dysplayName =
+        user.userMetadata?['full_name']?.toString() ?? '';
+    final String? photoUrl = user.userMetadata?['picture']?.toString();
+
+    final authenticatedUser = AuthenticatedUser(
+      id: user.id,
+      name: dysplayName,
+      email: user.email ?? '',
+      photoUrl: photoUrl,
+      authMethod: AuthMethod.google,
+    );
+
+    return Result.success(authenticatedUser);
   }
 
   @override

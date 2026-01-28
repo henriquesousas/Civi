@@ -1,16 +1,8 @@
 import 'dart:async';
 
 import 'package:deehelp/app_startup_provider.dart';
-import 'package:deehelp/core/providers/location_notifier_provider.dart';
-import 'package:deehelp/core/services/location/state/location_state.dart';
 import 'package:deehelp/core/ui/router/app_router.dart';
 import 'package:deehelp/core/ui/router/slide_transition_page.dart';
-import 'package:deehelp/core/ui/widgets/bottom_sheet/custom_modal_bottom_sheet.dart';
-import 'package:deehelp/app_bootstrap_provider.dart';
-import 'package:deehelp/features/auth/external/di/auth_repository_provider.dart';
-import 'package:deehelp/features/auth/external/di/auth_state_provider.dart';
-import 'package:deehelp/features/auth/external/repositories/supabase_auth_repository.dart';
-import 'package:deehelp/features/dashboard/presentation/widget/request_location_modal.dart';
 import 'package:deehelp/features/incident/incident_module.dart';
 import 'package:deehelp/features/profile/presentation/views/add_nickname/add_nickname_page.dart';
 import 'package:deehelp/features/dashboard/presentation/dashsboard_page.dart';
@@ -55,21 +47,11 @@ final _publicRoutes = [
 
 var goRouterProvider = Provider<GoRouter>(
   (ref) {
-    // final authState = ref.watch(authStateProvider);
-    // final authNotifier =
-    //     ref.watch(authRepositoryProvider) as AuthStateChangeNotifier;
-    // final bootstrap = ref.watch(appBootstrapProvider);
-    // final locationState = ref.watch(locationNotifierProvider);
-    // final bootstrap = ref.watch(appBootstrapProvider);
-
     final appStatus = ref.watch(appStartupProvider);
 
     return GoRouter(
       initialLocation: AppRouter.splash,
       debugLogDiagnostics: true,
-      // refreshListenable: GoRouterRefreshStream(
-      //   authNotifier.onAuthStateChanged(),
-      // ),
       refreshListenable: RouterRefreshNotifier(ref),
       redirect: (context, state) {
         final currentPath = state.matchedLocation;
@@ -86,28 +68,6 @@ var goRouterProvider = Provider<GoRouter>(
           case AppStatus.ready:
             return isPublicRoute ? AppRouter.dashboard : null;
         }
-        // return authState.when(
-        //   data: (session) {
-        //     final currentPath = state.matchedLocation;
-        //     final isSplash = currentPath == AppRouter.splash;
-        //     final isOnboarding = currentPath == AppRouter.onboarding;
-        //     // final isGpsRequiredScreen =
-        //     //     currentPath == AppRouter.locationRequired;
-        //     final isPublicRoute = _publicRoutes.contains(currentPath);
-
-        //     if (session == null) {
-        //       return isPublicRoute ? null : AppRouter.onboarding;
-        //     }
-
-        //     if (isSplash || isOnboarding) {
-        //       return AppRouter.dashboard;
-        //     }
-
-        //     return null;
-        //   },
-        //   error: (v, s) => null,
-        //   loading: () => null,
-        // );
       },
       routes: [
         ...IncidentModule.routers,

@@ -1,8 +1,11 @@
+import 'package:deehelp/core/ui/extensions/screen_size_extension.dart';
 import 'package:deehelp/core/ui/theme/app_colors.dart';
 import 'package:deehelp/core/ui/theme/app_text_styles.dart';
+import 'package:deehelp/core/ui/theme/dimens.dart';
 import 'package:deehelp/core/ui/widgets/icon/ui_icon.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class QuickActionItem extends StatelessWidget {
   final String title;
@@ -28,7 +31,10 @@ class QuickActionItem extends StatelessWidget {
           onTap();
         },
         child: Padding(
-          padding: const EdgeInsets.all(12),
+          padding: EdgeInsets.symmetric(
+            horizontal: Dimens.size10.w,
+            vertical: Dimens.size10.h,
+          ),
           child: Column(
             mainAxisSize: MainAxisSize.min,
             children: [

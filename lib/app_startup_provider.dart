@@ -1,7 +1,6 @@
-// import 'package:deehelp/location_provider.dart';
-// import 'package:flutter/material.dart';
-
+import 'package:deehelp/core/providers/current_location_provider.dart';
 import 'package:deehelp/core/services/location/state/location_state.dart';
+import 'package:deehelp/core/ui/extensions/result_extension.dart';
 import 'package:deehelp/features/auth/external/di/auth_repository_provider.dart';
 import 'package:deehelp/features/auth/external/repositories/supabase_auth_repository.dart';
 import 'package:deehelp/location_permission_notifier.dart';
@@ -27,25 +26,26 @@ class AppStartupNotifier extends StateNotifier<AppStatus> {
   }
 
   Future<void> _init() async {
-    await ref.read(locationPermissionProvider.notifier).check();
+    final start = DateTime.now();
 
+    // 1️⃣ Check localização
+    await ref.read(locationPermissionProvider.notifier).check();
     final locationState = ref.read(locationPermissionProvider);
 
-    // if (locationState is LocationServiceDisabled) {
-    //   state = AppStatus.gpsInactive;
-    //   return;
-    // }
+    // 2️⃣ Check autenticação
+    final authRepo = ref.read(authRepositoryProvider) as SupabaseAuthRepository;
+    final authResult = await authRepo.getCurrentUser();
+    final isAuthenticated = authResult.isSuccess;
 
-    // final isAuthenticated = ref.read(authStateProvider).valueOrNull ?? false;
-    // final authstate =
-    //     ref.watch(authRepositoryProvider) as AuthStateChangeNotifier;
-    // final isAuthenticated = authstate.onAuthStateChanged();
-    final isAuthenticated = false;
-
+    // 3️⃣ Se NÃO estiver autenticado → garantir 3s de splash
+    await ellapseTime(start);
     if (!isAuthenticated) {
       state = AppStatus.unauthenticated;
     } else if (!locationState.maybeWhen(
-      granted: () => true,
+      granted: (currentLocation) {
+        ref.watch(currentLocationProvider.notifier).state = currentLocation;
+        return true;
+      },
       orElse: () => false,
     )) {
       state = AppStatus.needLocation;
@@ -57,5 +57,13 @@ class AppStartupNotifier extends StateNotifier<AppStatus> {
   Future<void> refresh() async {
     state = AppStatus.loading;
     await _init();
+  }
+
+  Future<void> ellapseTime(DateTime start) async {
+    final elapsed = DateTime.now().difference(start);
+    const minSplashTime = Duration(seconds: 5);
+    if (elapsed < minSplashTime) {
+      await Future.delayed(minSplashTime - elapsed);
+    }
   }
 }

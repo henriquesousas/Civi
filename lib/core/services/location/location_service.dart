@@ -171,24 +171,24 @@ class LocationService {
   // Método melhorado para obter local atual com tratamento de erros
   Future<CurrentLocation?> getCurrentLocation() async {
     try {
-      final permission = await requestLocationPermission();
-      if (permission == LocationStatus.permissionDeniedForever ||
-          permission == LocationStatus.permissionDenied) {
-        throw LocationFailure(
-          status: permission,
-          message: getStatusMessage(permission),
-        );
-      }
+      // final permission = await requestLocationPermission();
+      // if (permission == LocationStatus.permissionDeniedForever ||
+      //     permission == LocationStatus.permissionDenied) {
+      //   throw LocationFailure(
+      //     status: permission,
+      //     message: getStatusMessage(permission),
+      //   );
+      // }
 
-      if (permission == LocationStatus.permissionGranted) {
-        LocationStatus status = await checkLocationStatus();
-        if (status == LocationStatus.serviceDisabled) {
-          throw LocationFailure(
-            status: status,
-            message: getStatusMessage(status),
-          );
-        }
-      }
+      // if (permission == LocationStatus.permissionGranted) {
+      //   LocationStatus status = await checkLocationStatus();
+      //   if (status == LocationStatus.serviceDisabled) {
+      //     throw LocationFailure(
+      //       status: status,
+      //       message: getStatusMessage(status),
+      //     );
+      //   }
+      // }
       // LocationStatus status = await checkLocationStatus();
       // if (status == LocationStatus.serviceDisabled) {
       //   throw LocationFailure(

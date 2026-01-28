@@ -102,7 +102,9 @@ class UICustomListTileCard extends StatelessWidget {
                     ? Text(
                         subtitle ?? "",
                         style: subtitleStyle ??
-                            context.appTextStyles.sectionSubTitle1,
+                            context.appTextStyles.sectionSubTitle1.copyWith(
+                              color: AppColors.textTertiary,
+                            ),
                       )
                     : null),
             trailing: trailing,

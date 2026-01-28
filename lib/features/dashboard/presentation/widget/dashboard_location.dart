@@ -38,24 +38,24 @@ class DashboardLocation extends ConsumerWidget {
         //   },
         // );
         // _showLocationOptionsModal(context, ref);
-        customModalBottomSheet(
-          isDismissible: true,
-          context,
-          child: PopScope(
-            canPop: true,
-            child: RequestLocationModal(
-              title: "Localização automática",
-              message:
-                  "O acesso a localização do seu aparelho facilita a visualização dos incidentes na sua região.",
-              buttonTitle: "Permitir localização automática",
-              press: () {
-                ref
-                    .watch(locationNotifierProvider.notifier)
-                    .getCurrentLocation();
-              },
-            ),
-          ),
-        );
+        // customModalBottomSheet(
+        //   isDismissible: true,
+        //   context,
+        //   child: PopScope(
+        //     canPop: true,
+        //     child: RequestLocationModal(
+        //       title: "Localização automática",
+        //       message:
+        //           "O acesso a localização do seu aparelho facilita a visualização dos incidentes na sua região.",
+        //       buttonTitle: "Permitir localização automática",
+        //       press: () {
+        //         ref
+        //             .watch(locationNotifierProvider.notifier)
+        //             .getCurrentLocation();
+        //       },
+        //     ),
+        //   ),
+        // );
       },
       child: Container(
         padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
@@ -83,11 +83,11 @@ class DashboardLocation extends ConsumerWidget {
                 color: AppColors.textColorHeader,
               ),
             ),
-            const Icon(
-              Icons.arrow_drop_down,
-              size: 14,
-              color: AppColors.textColorBody,
-            ),
+            // const Icon(
+            //   Icons.arrow_drop_down,
+            //   size: 14,
+            //   color: AppColors.textColorBody,
+            // ),
           ],
         ),
       ),

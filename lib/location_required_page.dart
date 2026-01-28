@@ -1,4 +1,5 @@
 import 'package:deehelp/app_startup_provider.dart';
+import 'package:deehelp/core/services/location/location_service.dart';
 import 'package:deehelp/core/services/location/state/location_state.dart';
 import 'package:deehelp/core/ui/theme/app_colors.dart';
 import 'package:deehelp/core/ui/theme/app_text_styles.dart';
@@ -12,15 +13,41 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:geolocator/geolocator.dart';
 
-class LocationRequiredPage extends ConsumerWidget {
+class LocationRequiredPage extends ConsumerStatefulWidget {
   const LocationRequiredPage({super.key});
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
-    // final locationState = ref.watch(locationNotifierProvider);
-    // final locationNotifier = ref.watch(locationNotifierProvider.notifier);
+  ConsumerState<LocationRequiredPage> createState() =>
+      _LocationRequiredPageState();
+}
+
+class _LocationRequiredPageState extends ConsumerState<LocationRequiredPage>
+    with WidgetsBindingObserver {
+  String _title = '';
+  String _message = '';
+
+  @override
+  void initState() {
+    super.initState();
+    WidgetsBinding.instance.addObserver(this);
+  }
+
+  @override
+  void dispose() {
+    WidgetsBinding.instance.removeObserver(this);
+    super.dispose();
+  }
+
+  @override
+  void didChangeAppLifecycleState(AppLifecycleState state) {
+    if (state == AppLifecycleState.resumed) {
+      ref.read(locationPermissionProvider.notifier).check();
+    }
+  }
+
+  @override
+  Widget build(BuildContext context) {
     final state = ref.watch(locationPermissionProvider);
-    // final notifier = ref.watch(locationPermissionProvider.notifier);
 
     ref.listen(
       locationPermissionProvider,
@@ -35,96 +62,89 @@ class LocationRequiredPage extends ConsumerWidget {
       hideAppBar: true,
       body: SafeArea(
         child: state.maybeWhen(
-          loading: () => _buildContent("asasa", context, () {}, loading: true),
-          serviceDisabled: () => _buildContent(
-            "GPS disable",
-            context,
-            () => Geolocator.openLocationSettings(),
+          loading: () => _buildContent(
+            icon: Icons.where_to_vote,
+            title: _title,
+            message: _message,
+            context: context,
+            press: () {},
+            loading: true,
           ),
-          denied: (status, message) => _buildContent(
-            "Permission denied",
-            context,
-            () => ref.read(locationPermissionProvider.notifier).request(),
-          ),
-          deniedPermanently: (status, message) => _buildContent(
-            "Permission pra sempre",
-            context,
-            () => ref.read(locationPermissionProvider.notifier).request(),
-          ),
+          serviceDisabled: () {
+            _title = "GPS desativado";
+            _message =
+                "Precisamos do GPS ligado para identificar sua localização e oferecer todos os recursos do aplicativo.";
+            return _buildContent(
+              icon: Icons.gps_off_rounded,
+              title: _title,
+              message: _message,
+              context: context,
+              textButton: "Ativar GPS",
+              press: () => Geolocator.openLocationSettings(),
+            );
+          },
+          denied: () {
+            _title = "Localização";
+            _message =
+                "Para continuar usando todas as funcionalidades do aplicativo, é necessário habilitar as permissões do dispositivo.";
+            return _buildContent(
+              icon: Icons.location_on_rounded,
+              title: _title,
+              message: _message,
+              context: context,
+              press: () =>
+                  ref.read(locationPermissionProvider.notifier).request(),
+            );
+          },
+          deniedPermanently: () {
+            _title = "Localização";
+            _message =
+                "Para continuar usando todas as funcionalidades do aplicativo, é necessário habilitar as permissões do dispositivo. Vá até as configurações e ative manualmente as permissões solicitadas.";
+            return _buildContent(
+              icon: Icons.location_on_rounded,
+              title: _title,
+              message: _message,
+              context: context,
+              showInfo: true,
+              textButton: "Abrir configuração",
+              press: () => LocationService().openNativePermissionSettings(),
+            );
+          },
           orElse: () => SizedBox.fromSize(),
         ),
-        // child: switch (state) {
-        //   LocationLoading() => _buildContent(
-        //       "Ative o GPS do dispositivo",
-        //       context,
-        //       () {
-        //         debugPrint("LocationServiceDisabled");
-        //         Geolocator.openLocationSettings();
-        //       },
-        //       loading: true,
-        //     ),
-        //   LocationServiceDisabled() => _buildContent(
-        //       "Ative o GPS do dispositivo",
-        //       context,
-        //       () {
-        //         debugPrint("LocationServiceDisabled");
-        //         Geolocator.openLocationSettings();
-        //       },
-        //     ),
-        //   LocationPermissionDenied() => _buildContent(
-        //         "Precisamos da sua localização para continuar", context, () {
-        //       debugPrint("LocationPermissionDenied");
-        //       ref.read(locationPermissionProvider.notifier).request();
-        //     }),
-        //   LocationPermissionPermanentlyDenied() => _buildContent(
-        //       "Permissão negada permanentemente",
-        //       context,
-        //       () {
-        //         debugPrint("LocationPermissionPermanentlyDenied");
-        //         ref.read(locationPermissionProvider.notifier).request();
-        //       },
-        //     ),
-        //   LocationGranted() => const SizedBox.shrink(),
-        //   // ignore: unreachable_switch_case
-        //   _ => const SizedBox.shrink(),
-        // },
       ),
     );
   }
 
-  Widget _buildContent(
-    String message,
-    BuildContext context,
-    VoidCallback press, {
+  Widget _buildContent({
+    required BuildContext context,
+    required String message,
+    required String title,
+    required IconData icon,
+    required VoidCallback press,
+    String textButton = "Continuar",
+    bool showInfo = false,
     bool loading = false,
   }) {
-    // final icon = status == LocationStatus.serviceDisabled
-    //     ? Icons.gps_off_rounded
-    //     : Icons.explore_rounded;
-
-    // final title = status == LocationStatus.serviceDisabled
-    //     ? "GPS desativado"
-    //     : "Localização";
-
     return Column(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
         const SizedBox(height: Dimens.size32),
         UIICon(
-          radius: Dimens.size90.w,
+          radius: Dimens.size120.w,
           isAlpha: true,
           bgColor: AppColors.primaryColor,
           icon: Icon(
-            Icons.explore_rounded,
-            size: Dimens.size125.w,
+            icon,
+            size: Dimens.size90.w,
             color: AppColors.primaryColor,
           ),
         ),
         const SizedBox(height: Dimens.size32),
-        const Text(
-          "Localizacao",
+        Text(
+          title,
           textAlign: TextAlign.center,
-          style: TextStyle(
+          style: const TextStyle(
             fontSize: 28,
             fontWeight: FontWeight.bold,
             color: Colors.black87,
@@ -134,27 +154,19 @@ class LocationRequiredPage extends ConsumerWidget {
         Text(
           message,
           textAlign: TextAlign.center,
-          style: context.appTextStyles.bodyTextStyle1,
+          style: context.appTextStyles.bodyTextStyle1.copyWith(
+            height: 1.5,
+          ),
         ),
-        // if (status == LocationStatus.permissionDeniedForever) ...[
-        //   const SizedBox(height: Dimens.size16),
-        //   _buildTextInfo(context),
-        // ],
+        if (showInfo) ...[
+          const SizedBox(height: Dimens.size16),
+          _buildTextInfo(context),
+        ],
         const Spacer(),
         UIElevatedButton(
-          // text: status == LocationStatus.permissionDeniedForever
-          //     ? "Abrir configurações"
-          //     : "Continuar",
-          text: "Localização",
+          text: textButton,
           isLoading: loading,
           press: press,
-          // press: () {
-          //   // if (status == LocationStatus.permissionDeniedForever) {
-          //   //   locationNotifier.openNativePermissionSettings();
-          //   // } else {
-          //   //   locationNotifier.getCurrentLocation();
-          //   // }
-          // },
         ),
       ],
     );
@@ -169,7 +181,7 @@ class LocationRequiredPage extends ConsumerWidget {
       padding: const EdgeInsets.all(10),
       decoration: BoxDecoration(
         color: AppColors.lightGreyColor30,
-        borderRadius: BorderRadius.circular(8),
+        borderRadius: BorderRadius.circular(10),
       ),
       child: Column(
         spacing: 10,
@@ -182,8 +194,7 @@ class LocationRequiredPage extends ConsumerWidget {
             ),
           ),
           Text(
-            "Para continuar usando todas as funcionalidades do aplicativo, é necessário habilitar as permissões do dispositivo. Vá até as configurações e ative manualmente as permissões solicitadas.",
-            // textAlign: TextAlign.center,
+            "1.Clique no botão abaixo para abrir a tela de configuração de permissãoes do app.\n\n2.Toque na opcão Durante o uso do app.",
             style: context.appTextStyles.sectionSubTitle1.copyWith(
               color: AppColors.darkGreyColor,
             ),

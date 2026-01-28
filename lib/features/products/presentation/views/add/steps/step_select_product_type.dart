@@ -44,28 +44,36 @@ class StepSelectProductType extends ConsumerWidget {
               delegate: SliverChildListDelegate(
                 [
                   const SizedBox(height: 10),
+                  Text(
+                    "O que você quer cadastrar ?",
+                    style: context.appTextStyles.sectionTitle.copyWith(
+                      fontWeight: FontWeight.bold,
+                      color: AppColors.textColorBody,
+                    ),
+                  ),
+
+                  const SizedBox(height: 10),
                   ProductTypeCard(
                     title: "Automóvel",
-                    description:
-                        "Registre roubo/furto de automóveis, vans e utilitários",
+                    description: "Carro, caminhão",
                     imageSrc: R.svg.car,
                     isSelected: state.productType == ProductType.car,
                     press: () => viewModel.selectProductType(ProductType.car),
                   ),
                   const SizedBox(height: 5),
+                  // ProductTypeCard(
+                  //   title: " Caminhões & Ônibus",
+                  //   description:
+                  //       "Registre roubo/furto de veículos pesados e transporte",
+                  //   imageSrc: R.svg.truck,
+                  //   isSelected: state.productType == ProductType.truck,
+                  //   press: () => viewModel.selectProductType(ProductType.truck),
+                  // ),
+                  // const SizedBox(height: 5),
                   ProductTypeCard(
-                    title: " Caminhões & Ônibus",
+                    title: "Moto",
                     description:
-                        "Registre roubo/furto de veículos pesados e transporte",
-                    imageSrc: R.svg.truck,
-                    isSelected: state.productType == ProductType.truck,
-                    press: () => viewModel.selectProductType(ProductType.truck),
-                  ),
-                  const SizedBox(height: 5),
-                  ProductTypeCard(
-                    title: "Motos",
-                    description:
-                        "Registre roubo/furto de motocicletas e motonetas",
+                        "Motocicleta convencional, Motocicleta elétrica,Biz, etc...)",
                     imageSrc: R.svg.motorcycle,
                     isSelected: state.productType == ProductType.motorcycle,
                     press: () =>
@@ -84,10 +92,10 @@ class StepSelectProductType extends ConsumerWidget {
 
   Widget _buildTextInfo(BuildContext context) {
     return Container(
-      margin: EdgeInsets.symmetric(
-        horizontal: Dimens.defaultPadding.w,
-        vertical: Dimens.defaultPadding.w,
-      ),
+      // margin: EdgeInsets.symmetric(
+      //   horizontal: Dimens.defaultPadding.w,
+      //   vertical: Dimens.defaultPadding.w,
+      // ),
       padding: const EdgeInsets.all(10),
       decoration: BoxDecoration(
         color: AppColors.lightGreyColor30,
@@ -100,12 +108,12 @@ class StepSelectProductType extends ConsumerWidget {
           Text(
             "O que é o pré cadastro",
             style: context.appTextStyles.sectionTitle3.copyWith(
-              fontWeight: FontWeight.bold,
+              fontWeight: FontWeight.w500,
             ),
           ),
           Text(
             "Pré-cadastre seu veículo para facilitar e acelerar o registro de ocorrências. Em caso de roubo ou furto, você poderá fazer a denúncia rapidamente, usando os dados já salvos, sem perder tempo preenchendo formulários extensos.",
-            textAlign: TextAlign.center,
+            textAlign: TextAlign.start,
             style: context.appTextStyles.sectionSubTitle1.copyWith(
               color: AppColors.darkGreyColor,
             ),

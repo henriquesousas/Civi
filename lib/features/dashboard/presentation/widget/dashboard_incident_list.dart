@@ -16,6 +16,7 @@ class DashboardIncidentList extends StatelessWidget {
     return Expanded(
       child: Container(
         // height: context.screenHeight * items.length * 0.08,
+        margin: const EdgeInsets.symmetric(horizontal: 5),
         height: context.screenHeight * 0.5,
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(20),

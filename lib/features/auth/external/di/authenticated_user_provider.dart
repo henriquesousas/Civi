@@ -2,6 +2,7 @@ import 'package:deehelp/features/auth/domain/entity/authenticated_user.dart';
 import 'package:deehelp/features/auth/external/di/auth_state_provider.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+//TODO verificar se precisa
 final authenticatedUserProvider = Provider<AuthenticatedUser?>((ref) {
   final session = ref.watch(authStateProvider).maybeWhen(
         data: (session) => session,

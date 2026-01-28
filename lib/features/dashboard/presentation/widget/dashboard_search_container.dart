@@ -20,7 +20,7 @@ class DashboardSearchContainer extends StatelessWidget {
       onTap: () => context.push(AppRouter.search),
       child: Container(
         width: context.screenWidth,
-        padding: EdgeInsets.all(Dimens.size22.w),
+        padding: EdgeInsets.all(Dimens.size10.w),
         decoration: BoxDecoration(
           color: AppColors.whiteColor,
           borderRadius: BorderRadius.circular(Dimens.defaultButtonRadius.w),
@@ -29,14 +29,17 @@ class DashboardSearchContainer extends StatelessWidget {
           ),
         ),
         child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          // mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
+            const SizedBox(width: 5),
             Text(
               'Faça uma pesquisa...',
-              style: context.appTextStyles.sectionBodyTextStyle.copyWith(
-                color: AppColors.textSecondary,
+              style: context.appTextStyles.bodyTextStyle1.copyWith(
+                color: AppColors.textTertiary,
+                fontWeight: FontWeight.normal,
               ),
             ),
+            const Spacer(),
             UIICon(
               padding: Dimens.size10.w,
               bgColor: AppColors.darkGreyColor10,

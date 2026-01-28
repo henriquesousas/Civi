@@ -23,4 +23,7 @@ class SvgAssets {
   String mic = 'assets/svg/map_mic.svg';
   String listInactive = 'assets/svg/statement_inactive.svg';
   String category = 'assets/svg/category.svg';
+  String info = 'assets/svg/info.svg';
+  String addProduct = 'assets/svg/add_product.svg';
+  String reportIncident = 'assets/svg/add_incident.svg';
 }

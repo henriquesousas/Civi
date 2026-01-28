@@ -35,13 +35,13 @@ class LocationNotifier extends StateNotifier<LocationState> {
 
     if (status != LocationStatus.permissionGranted) {
       final message = _locationService.getStatusMessage(status);
-      state = LocationState.denied(status, message);
+      state = LocationState.denied();
       // final event = LocationServiceEvent.error(status, message);
       // _emitEvent(event);
       return;
     }
 
-    state = const LocationState.granted();
+    state = const LocationState.granted(null);
     // Se GPS está OK, tenta obter localização
     // await _getCurrentLocation();
   }
@@ -58,14 +58,14 @@ class LocationNotifier extends StateNotifier<LocationState> {
       // state = const AsyncLoading();
       state = const LocationState.checking();
       final currentLocation = await _locationService.getCurrentLocation();
-      state = const LocationState.granted();
+      state = const LocationState.granted(null);
       // state = AsyncData(currentLocation);
       // _emitEvent(LocationServiceEvent.success(currentLocation));
       _notifyCurrentLocationProvider(currentLocation);
     } catch (error) {
       if (error is LocationFailure) {
         // state = AsyncError(error, StackTrace.current);
-        state = LocationState.denied(error.status, error.message);
+        state = LocationState.denied();
         // _emitEvent(LocationServiceEvent.error(error.status, error.message));
       }
     }

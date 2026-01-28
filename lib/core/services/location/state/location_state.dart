@@ -1,4 +1,4 @@
-import 'package:deehelp/core/services/location/location_service.dart';
+import 'package:deehelp/core/services/location/current_location.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 part 'location_state.freezed.dart';
@@ -13,11 +13,9 @@ class LocationState with _$LocationState {
 
   // const factory LocationState.initial() = _Initial;
   const factory LocationState.loading() = _Loading;
-  const factory LocationState.granted() = _Granted;
+  const factory LocationState.granted(CurrentLocation? location) = _Granted;
   const factory LocationState.serviceDisabled() = _ServiceDisabled;
   const factory LocationState.checking() = _Checking;
-  const factory LocationState.denied(LocationStatus status, String message) =
-      _Denied;
-  const factory LocationState.deniedPermanently(
-      LocationStatus status, String message) = _DeniedPermanently;
+  const factory LocationState.denied() = _Denied;
+  const factory LocationState.deniedPermanently() = _DeniedPermanently;
 }

@@ -93,13 +93,14 @@ class _ProductTypeCardState extends State<ProductTypeCard> {
                         maxLines: 2,
                         overflow: TextOverflow.ellipsis,
                         style: context.appTextStyles.sectionTitle.copyWith(
-                          fontWeight: FontWeight.w600,
+                          fontWeight: FontWeight.w500,
                           color: AppColors.textColorBody,
                         ),
                       ),
                       SizedBox(height: 4.h),
                       Text(
                         widget.description,
+                        maxLines: 2,
                         overflow: TextOverflow.ellipsis,
                         style: context.appTextStyles.caption1Style.copyWith(
                           color: AppColors.textSecondary,

@@ -17,9 +17,17 @@ class ProfileLogout extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return UICustomAppCard(
+      radius: 0,
       padding: Dimens.of(context).edgeInsetsScreenHorizontal,
       child: UICustomListTileCard(
-        title: "Sair da conta",
+        // title: "Sair da conta",
+        titleWidget: Text(
+          "Sair da conta",
+          style: context.appTextStyles.bodyTextStyle1.copyWith(
+            color: AppColors.errorColor,
+            fontWeight: FontWeight.w400,
+          ),
+        ),
         showBorder: false,
         titleStyle: context.appTextStyles.bodyTextStyle1.copyWith(
           color: AppColors.textColorBody,
@@ -30,12 +38,12 @@ class ProfileLogout extends StatelessWidget {
           width: Dimens.size22.w,
           height: Dimens.size22.h,
           boxFit: BoxFit.scaleDown,
-          color: AppColors.primaryColor,
+          color: AppColors.errorColor,
         ),
-        trailing: Icon(
+        trailing: const Icon(
           Icons.arrow_forward_ios_rounded,
           size: Dimens.defaultArrowForward,
-          color: AppColors.textColorHeader.withValues(alpha: 0.5),
+          color: AppColors.errorColor,
         ),
         press: () {
           customModalBottomSheet(

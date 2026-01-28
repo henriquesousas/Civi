@@ -8,4 +8,5 @@ abstract class AuthRepository {
     String accessToken,
   );
   Future<Result<Unit>> signOut();
+  Future<Result<AuthenticatedUser>> getCurrentUser();
 }

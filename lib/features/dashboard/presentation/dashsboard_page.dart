@@ -1,4 +1,5 @@
 import 'package:deehelp/core/base/base_page.dart';
+import 'package:deehelp/core/providers/current_location_provider.dart';
 import 'package:deehelp/core/providers/location_event_provider.dart';
 import 'package:deehelp/core/providers/location_notifier_provider.dart';
 import 'package:deehelp/core/services/location/current_location.dart';
@@ -33,154 +34,29 @@ class DashsboardPage extends BasePage {
   ConsumerState<DashsboardPage> createState() => _DashsboardPageState();
 }
 
-//with WidgetsBindingObserver
 class _DashsboardPageState extends BasePageState<DashsboardPage> {
-  // late final AppLifecycleListener _listener;
-  // bool _waitingForSettings = false;
-  // final ScrollController _scrollController = ScrollController();
+  @override
+  void initState() {
+    WidgetsBinding.instance.addPostFrameCallback(
+      (_) {
+        final currenLocation = ref.read(currentLocationProvider);
+        ref
+            .read(dashboardViewmodelProvider.notifier)
+            .getRecentIncidents(currenLocation);
+      },
+    );
 
-  // @override
-  // void initState() {
-  //   WidgetsBinding.instance.addPostFrameCallback(
-  //     (_) {
-  //       // _checkLocationOnEntry();
-  //       // ref.watch(locationNotifierProvider);
-  //       // if (currentState.isLoading) {
-  //       //   Loading.instance()
-  //       //       .show(context: context, text: "Obtendo localização...");
-  //       // }
-  //     },
-  //   );
-
-  //   super.initState();
-  // }
-
-  // void _setupErrorListener() {
-  //   // ref.listen<AsyncValue<CurrentLocation?>>(
-  //   //   locationNotifierProvider,
-  //   //   (previous, current) {
-  //   //     current.when(
-  //   //       error: (error, stackTrace) {
-  //   //         // Loading.instance().hide();
-  //   //         if (context.canPop()) {
-  //   //           context.pop();
-  //   //         }
-
-  //   //         if (error is LocationFailure) {
-  //   //           customModalBottomSheet(
-  //   //             context,
-  //   //             child: PopScope(
-  //   //               canPop: true,
-  //   //               child: () {
-  //   //                 switch ((error).status) {
-  //   //                   case LocationStatus.serviceDisabled:
-  //   //                     return RequestLocationModal(
-  //   //                       message: error.message,
-  //   //                       title: "GPS desligado",
-  //   //                       buttonTitle: "Tentar novamente",
-  //   //                       press: () async {
-  //   //                         ref
-  //   //                             .read(locationNotifierProvider.notifier)
-  //   //                             .getCurrentLocation();
-  //   //                       },
-  //   //                     );
-  //   //                   case LocationStatus.permissionDeniedForever ||
-  //   //                         LocationStatus.permissionDenied:
-  //   //                     return RequestLocationModal(
-  //   //                       message: error.message,
-  //   //                       title: "Ative a localização",
-  //   //                       buttonTitle: "Abrir configurações",
-  //   //                       press: () {
-  //   //                         // _waitingForSettings = true;
-  //   //                         ref
-  //   //                             .read(locationNotifierProvider.notifier)
-  //   //                             .openNativePermissionSettings();
-  //   //                       },
-  //   //                     );
-  //   //                   default:
-  //   //                     return const Text("Status desconhecido");
-  //   //                 }
-  //   //               }(),
-  //   //             ),
-  //   //           );
-  //   //         }
-  //   //       },
-  //   //       data: (data) {
-  //   //         if (context.canPop()) context.pop();
-  //   //         ref
-  //   //             .read(dashboardViewmodelProvider.notifier)
-  //   //             .getRecentIncidents(data);
-  //   //       },
-  //   //       loading: () => null,
-  //   //     );
-  //   //   },
-  //   // );
-  // }
-
-  // void _checkLocationOnEntry() async {
-  //   final locationState = ref.read(locationNotifierProvider);
-
-  //   locationState.when(
-  //     granted: () {
-  //       // Tudo OK, pode continuar
-  //     },
-  //     denied: (status, message) {
-  //       context.push(AppRouter.locationRequired);
-  //     },
-  //     initial: () {
-  //       // ref.read(locationNotifierProvider.notifier).checkLocationStatus();
-  //     },
-  //     loading: () {},
-  //     checking: () {
-  //       // Aguarda
-  //     },
-  //   );
-  // }
-
-  // @override
-  // void dispose() {
-  //   _listener.dispose();
-  //   // _scrollController.dispose();
-  //   super.dispose();
-  // }
+    super.initState();
+  }
 
   @override
   bool hideAppBar() => true;
 
   @override
-  void listener() {
-    // _setupErrorListener();
-
-    // ref.listen(
-    //   locationServiceEventProvider,
-    //   (previous, next) {
-    //     if (next == null) return;
-
-    //     next.when(
-    //       error: (status, message) {},
-    //       locationRequired: (status, message) =>
-    //           context.push(AppRouter.locationRequired),
-    //       success: (currentPlace) {},
-    //     );
-
-    //     // next.when(
-    //     //   initial: () {},
-    //     //   loading: () {},
-    //     //   checking: () => null,
-    //     //   granted: () {},
-    //     //   denied: (status, message) {
-    //     //     context.push(AppRouter.locationRequired);
-    //     //   },
-    //     // );
-    //   },
-    // );
-
-    super.listener();
-  }
+  EdgeInsetsGeometry? padding() => EdgeInsets.zero;
 
   @override
   Widget buildPage(BuildContext context) {
-    // ref.watch(locationNotifierProvider.notifier).checkLocationStatus();
     final state = ref.watch(dashboardViewmodelProvider);
 
     return Column(
@@ -189,24 +65,28 @@ class _DashsboardPageState extends BasePageState<DashsboardPage> {
         const Row(
           spacing: 5,
           children: [
+            SizedBox(width: 10),
             DashboardProfile(),
-            // DashboardLocation(),
+            DashboardLocation(),
           ],
         ),
         SizedBox(height: context.topPadding),
-        Column(
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            Text(
-              'RASTRO',
-              style: context.appTextStyles.sectionTitle.copyWith(
-                fontSize: Dimens.size26.sp,
-                fontWeight: FontWeight.bold,
+        Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 10),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              Text(
+                'RASTRO',
+                style: context.appTextStyles.sectionTitle.copyWith(
+                  fontSize: Dimens.size26.sp,
+                  fontWeight: FontWeight.bold,
+                ),
               ),
-            ),
-            SizedBox(height: Dimens.size20.h),
-            const DashboardSearchContainer()
-          ],
+              SizedBox(height: Dimens.size10.h),
+              const DashboardSearchContainer()
+            ],
+          ),
         ),
         SizedBox(height: Dimens.size15.h),
         state.maybeMap(
@@ -229,6 +109,7 @@ class _DashsboardPageState extends BasePageState<DashsboardPage> {
           visible: context.isPortrait,
           child: const DashbordQuickActionsCard(),
         ),
+        const SizedBox(height: 5),
       ],
     );
   }

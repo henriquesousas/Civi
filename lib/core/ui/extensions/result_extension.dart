@@ -40,23 +40,6 @@ extension ResultExtensions<T> on Result<T> {
   Object? get error => when(success: (_) => null, failure: (err) => err);
   bool get isSuccess => data != null;
   bool get isFailure => error != null;
-
-  /// Mapeia o valor de sucesso sem mudar o tipo Result
-  // Future<Result<U>> map<U>(
-  //   Future<U> Function(T value) mapper,
-  // ) async {
-  //   return when(
-  //     success: (value) async {
-  //       try {
-  //         final result = await mapper(value);
-  //         return Result.success(result);
-  //       } catch (e) {
-  //         return Result.failure(Failure(message: e.toString()));
-  //       }
-  //     },
-  //     failure: (failure) => Result.failure(failure),
-  //   );
-  // }
 }
 
 extension FutureResultExtensions<T> on Future<Result<T>> {
