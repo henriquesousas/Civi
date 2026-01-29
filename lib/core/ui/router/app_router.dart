@@ -21,4 +21,6 @@ class AppRouter {
   //TODO: LocationPermissionRequiredPage
   //TODO: locationPermission
   static const locationRequired = "/location-required";
+
+  static const publicEmergencyCall = "/public-emergency-call";
 }

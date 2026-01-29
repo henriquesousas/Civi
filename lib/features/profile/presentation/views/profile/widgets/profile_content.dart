@@ -1,6 +1,5 @@
 import 'package:deehelp/core/ui/theme/app_text_styles.dart';
 import 'package:deehelp/core/utils/url_launcher_utils.dart';
-import 'package:deehelp/features/auth/external/di/authenticated_user_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -28,8 +27,8 @@ class ProfileContent extends ConsumerWidget {
         child: Column(
           children: [
             UICustomListTileCard(
-              padding: const EdgeInsetsDirectional.symmetric(
-                vertical: Dimens.defaultPadding,
+              padding: EdgeInsetsDirectional.symmetric(
+                vertical: Dimens.size20.w,
               ),
               title: "Patrimônio",
               showBorder: true,
@@ -52,9 +51,8 @@ class ProfileContent extends ConsumerWidget {
               press: () => context.push(AppRouter.myProducts),
             ),
             UICustomListTileCard(
-              padding: const EdgeInsetsDirectional.symmetric(
-                vertical: Dimens.defaultPadding,
-              ),
+              padding:
+                  EdgeInsetsDirectional.symmetric(vertical: Dimens.size20.w),
               // title: "R.strings.lastOccurrences",
               title: "Minhas ocorrências",
               showBorder: true,
@@ -102,8 +100,8 @@ class ProfileContent extends ConsumerWidget {
             //   press: () {},
             // ),
             UICustomListTileCard(
-              padding: const EdgeInsetsDirectional.symmetric(
-                vertical: Dimens.defaultPadding,
+              padding: EdgeInsetsDirectional.symmetric(
+                vertical: Dimens.size20.w,
               ),
               title: "Pesquisar",
               showBorder: true,
@@ -123,11 +121,11 @@ class ProfileContent extends ConsumerWidget {
                 size: Dimens.defaultArrowForward,
                 color: AppColors.textColorHeader.withValues(alpha: 0.5),
               ),
-              press: () {},
+              press: () => context.push(AppRouter.search),
             ),
             UICustomListTileCard(
-              padding: const EdgeInsetsDirectional.symmetric(
-                vertical: Dimens.defaultPadding,
+              padding: EdgeInsetsDirectional.symmetric(
+                vertical: Dimens.size20.w,
               ),
               title: "Avaliar",
               showBorder: true,
@@ -153,8 +151,8 @@ class ProfileContent extends ConsumerWidget {
                   " 'com.massimobiolcati.irealb'"),
             ),
             UICustomListTileCard(
-              padding: const EdgeInsetsDirectional.symmetric(
-                vertical: Dimens.defaultPadding,
+              padding: EdgeInsetsDirectional.symmetric(
+                vertical: Dimens.size20.w,
               ),
               title: "Fale conosco",
               showBorder: true,
@@ -216,8 +214,8 @@ class ProfileContent extends ConsumerWidget {
             //   ),
             // ],
             UICustomListTileCard(
-              padding: const EdgeInsetsDirectional.symmetric(
-                vertical: Dimens.defaultPadding,
+              padding: EdgeInsetsDirectional.symmetric(
+                vertical: Dimens.size20.w,
               ),
               title: "Perguntas e respostas",
               showBorder: true,
@@ -240,8 +238,8 @@ class ProfileContent extends ConsumerWidget {
               press: () => context.push(AppRouter.faq),
             ),
             UICustomListTileCard(
-              padding: const EdgeInsetsDirectional.symmetric(
-                vertical: Dimens.defaultPadding,
+              padding: EdgeInsetsDirectional.symmetric(
+                vertical: Dimens.size20.w,
               ),
               title: "Versão",
               subtitle: "Confira se sua versão está atualizada",

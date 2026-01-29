@@ -5,6 +5,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 final dashboardViewmodelProvider = StateNotifierProvider.autoDispose<
     DashboardViewmodel, AsyncValue<List<IncidentOutput>>>((ref) {
-  final getIncidentUseCase = ref.watch(getIncidentUsecaseProvider);
+  final getIncidentUseCase =
+      ref.watch(getRecentIncidentsByLocationUseCaseProvider);
   return DashboardViewmodel(getIncidentUsecase: getIncidentUseCase);
 });

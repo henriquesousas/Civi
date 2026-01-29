@@ -89,7 +89,7 @@ class DashbordQuickActionsCard extends StatelessWidget {
                         BlendMode.srcIn,
                       ),
                     ),
-                    onTap: () {},
+                    onTap: () => context.push(AppRouter.publicEmergencyCall),
                   ),
                   // QuickActionItem(
                   //   title: "Ver\nmapa",

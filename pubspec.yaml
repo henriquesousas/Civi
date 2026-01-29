@@ -100,15 +100,22 @@ flutter:
         - asset: assets/fonts/grandis_extended/GrandisExtended-Black.ttf
           weight: 900
 
-    - family: AlbertSans
+    - family: MuseoModerno
       fonts:
-        - asset: assets/fonts/albert_sans/AlbertSans-Regular.ttf
-        - asset: assets/fonts/albert_sans/AlbertSans-Bold.ttf
-          weight: 700
-        - asset: assets/fonts/albert_sans/AlbertSans-Italic.ttf
-          style: italic
-        - asset: assets/fonts/albert_sans/AlbertSans-Light.ttf
-          weight: 300
+        - asset: assets/fonts/museomodern/MuseoModerno-Regular.ttf
+          weight: 400
+        - asset: assets/fonts/museomodern/MuseoModerno-ExtraBold.ttf
+          weight: 800
+
+    # - family: AlbertSans
+    #   fonts:
+    #     - asset: assets/fonts/albert_sans/AlbertSans-Regular.ttf
+    #     - asset: assets/fonts/albert_sans/AlbertSans-Bold.ttf
+    #       weight: 700
+    #     - asset: assets/fonts/albert_sans/AlbertSans-Italic.ttf
+    #       style: italic
+    #     - asset: assets/fonts/albert_sans/AlbertSans-Light.ttf
+    #       weight: 300
 
 # Comando para gerar o arquivo => flutter gen-l10n
 # dart run build_runner build --delete-conflicting-outputs

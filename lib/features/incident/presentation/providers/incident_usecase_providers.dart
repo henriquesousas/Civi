@@ -1,5 +1,6 @@
 import 'package:deehelp/features/incident/domain/usecase/add/add_incident_usecase.dart';
 import 'package:deehelp/features/incident/domain/usecase/delete/delete_incident_usecase.dart';
+import 'package:deehelp/features/incident/domain/usecase/listing/get_incidents_usecase.dart';
 import 'package:deehelp/features/incident/domain/usecase/listing/get_user_incidents_user_usecase.dart';
 import 'package:deehelp/features/incident/domain/usecase/listing/get_recent_incidents_by_location_usecase.dart';
 import 'package:deehelp/features/incident/domain/usecase/update/update_incident_usecase.dart';
@@ -28,8 +29,13 @@ final deleteIncidentUsecaseProvider = Provider<DeleteIncidentUsecase>((ref) {
   return DeleteIncidentUsecase(repository: repository);
 });
 
-final getIncidentUsecaseProvider =
+final getRecentIncidentsByLocationUseCaseProvider =
     Provider<GetRecentIncidentsByLocationUseCase>((ref) {
   final repository = ref.watch(incidentRepositoryProvider);
   return GetRecentIncidentsByLocationUseCase(repository: repository);
+});
+
+final getIncidentUsecaseProvider = Provider<GetIncidentsUseCase>((ref) {
+  final repository = ref.watch(incidentRepositoryProvider);
+  return GetIncidentsUseCase(repository: repository);
 });

@@ -2,7 +2,7 @@ import 'package:deehelp/features/search/deboounce_search_notifier.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 final debouncedSearchProvider =
-    StateNotifierProvider<DebouncedSearchNotifier, String>(
+    StateNotifierProvider.autoDispose<DebouncedSearchNotifier, String>(
   (ref) => DebouncedSearchNotifier(),
 );
 

@@ -27,7 +27,7 @@ class SearchItemList extends StatelessWidget {
             style: context.appTextStyles.bodyTextStyle2,
           ),
           subtitle: Text(
-            result.local?.city ?? '',
+            _getIncidentLocality(result) ?? '',
             style: context.appTextStyles.caption2Style.copyWith(
               color: AppColors.textColorBody,
             ),
@@ -39,5 +39,13 @@ class SearchItemList extends StatelessWidget {
         );
       },
     );
+  }
+
+  String? _getIncidentLocality(IncidentOutput item) {
+    if (item.local == null) return null;
+    if (item.local!.address != null && item.local!.address!.isNotEmpty) {
+      return 'Roubo aconteceu em ${item.local!.city}, ${item.local!.state}, próximo a ${item.local!.address}';
+    }
+    return 'Roubo aconteceu em ${item.local!.city}, ${item.local!.state}';
   }
 }

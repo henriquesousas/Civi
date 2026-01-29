@@ -1,20 +1,20 @@
 import 'package:deehelp/core/ui/extensions/result_extension.dart';
-import 'package:deehelp/features/incident/domain/entity/incident_local.dart';
 import 'package:deehelp/features/incident/domain/enum/incident_status.dart';
-import 'package:deehelp/features/incident/domain/enum/type_alert.dart';
 import 'package:deehelp/features/incident/domain/usecase/incident_output.dart';
-import 'package:deehelp/features/incident/domain/usecase/incident_product_output.dart';
+import 'package:deehelp/features/incident/domain/usecase/listing/get_incidents_usecase.dart';
 import 'package:deehelp/features/incident/domain/usecase/listing/incident_filter.dart';
 import 'package:deehelp/features/incident/domain/usecase/listing/get_recent_incidents_by_location_usecase.dart';
-import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 class SearchViewmodel extends StateNotifier<AsyncValue<List<IncidentOutput>>> {
-  final GetRecentIncidentsByLocationUseCase _getIncidentUsecase;
+  final GetRecentIncidentsByLocationUseCase _getRecentsIncidents;
+  final GetIncidentsUseCase _getIncidentsUseCase;
 
   SearchViewmodel({
-    required GetRecentIncidentsByLocationUseCase getIncidentUsecase,
-  })  : _getIncidentUsecase = getIncidentUsecase,
+    required GetRecentIncidentsByLocationUseCase getRecentsIncidents,
+    required GetIncidentsUseCase getIncidentsUseCase,
+  })  : _getRecentsIncidents = getRecentsIncidents,
+        _getIncidentsUseCase = getIncidentsUseCase,
         super(const AsyncData([]));
 
   Future<void> search(String query) async {
@@ -93,9 +93,9 @@ class SearchViewmodel extends StateNotifier<AsyncValue<List<IncidentOutput>>> {
       final filter = IncidentFilter(
         status: IncidentStatus.active,
         term: query,
-        limit: 5,
+        limit: 20,
       );
-      final result = await _getIncidentUsecase.execute(filter);
+      final result = await _getIncidentsUseCase.execute(filter);
       state = AsyncValue.data(result.data!);
     } catch (e, _) {
       state = AsyncValue.data([] as List<IncidentOutput>);

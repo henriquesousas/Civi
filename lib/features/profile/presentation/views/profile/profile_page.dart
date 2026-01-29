@@ -1,3 +1,4 @@
+import 'package:deehelp/core/ui/theme/dimens.dart';
 import 'package:deehelp/core/ui/widgets/card/ui_custom_scaffold.dart';
 import 'package:deehelp/features/profile/presentation/views/profile/widgets/profile_content.dart';
 import 'package:deehelp/features/profile/presentation/views/profile/widgets/profile_header.dart';
@@ -21,6 +22,7 @@ class ProfilePage extends ConsumerWidget {
         builder: (context, constraints) {
           return SingleChildScrollView(
             clipBehavior: Clip.none,
+            physics: const BouncingScrollPhysics(),
             child: ConstrainedBox(
               constraints: BoxConstraints(
                 minHeight: constraints.maxHeight,
@@ -34,26 +36,7 @@ class ProfilePage extends ConsumerWidget {
                     ProfileHeader(),
                     ProfileContent(),
                     ProfileLogout(),
-                    // Center(
-                    //   child: Container(
-                    //     padding: const EdgeInsets.all(10),
-                    //     decoration: BoxDecoration(
-                    //       borderRadius:
-                    //           const BorderRadius.all(Radius.circular(10)),
-                    //       color: AppColors.lightGreyColor30,
-                    //       border: BoxBorder.all(
-                    //         color: AppColors.lightGreyColor20,
-                    //         width: 1,
-                    //       ),
-                    //     ),
-                    //     child: Text(
-                    //       "Versão 1.0.0",
-                    //       style: context.appTextStyles.caption2Style.copyWith(
-                    //         color: AppColors.textColorBody,
-                    //       ),
-                    //     ),
-                    //   ),
-                    // ),
+                    SizedBox(height: Dimens.size60),
                   ],
                 ),
               ),

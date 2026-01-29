@@ -44,11 +44,14 @@ class CardSelectImage extends StatelessWidget {
               imageUrl: product!.images.first.path,
             )
           ],
-          Text(
-            product == null ? "Selecionar veículo" : product!.name,
-            style: context.appTextStyles.bodyTextStyle1,
+          Expanded(
+            child: Text(
+              product == null ? "Selecionar veículo" : product!.name,
+              maxLines: 2,
+              overflow: TextOverflow.ellipsis,
+              style: context.appTextStyles.bodyTextStyle1,
+            ),
           ),
-          const Spacer(),
           IconButton(
             onPressed: press,
             icon: const Icon(

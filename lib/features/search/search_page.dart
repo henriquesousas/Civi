@@ -1,7 +1,6 @@
 import 'package:deehelp/core/ui/theme/app_colors.dart';
 import 'package:deehelp/core/ui/widgets/card/ui_custom_scaffold.dart';
 import 'package:deehelp/features/search/presentation/providers/debounce_search_provider.dart';
-import 'package:deehelp/features/search/presentation/providers/is_loading_provider.dart';
 import 'package:deehelp/features/search/presentation/providers/search_viewmodel_provider.dart';
 import 'package:deehelp/features/search/presentation/widgets/search_info.dart';
 import 'package:deehelp/features/search/presentation/widgets/search_item_list.dart';

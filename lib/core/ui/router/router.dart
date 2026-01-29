@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:deehelp/app_startup_provider.dart';
 import 'package:deehelp/core/ui/router/app_router.dart';
 import 'package:deehelp/core/ui/router/slide_transition_page.dart';
+import 'package:deehelp/features/emergency-call/public_list_emergency_call_page.dart';
 import 'package:deehelp/features/incident/incident_module.dart';
 import 'package:deehelp/features/profile/presentation/views/add_nickname/add_nickname_page.dart';
 import 'package:deehelp/features/dashboard/presentation/dashsboard_page.dart';
@@ -176,6 +177,15 @@ var goRouterProvider = Provider<GoRouter>(
             return slideTransitionPage(
               key: state.pageKey,
               child: const LocationRequiredPage(),
+            );
+          },
+        ),
+        GoRoute(
+          path: AppRouter.publicEmergencyCall,
+          pageBuilder: (context, state) {
+            return slideTransitionPage(
+              key: state.pageKey,
+              child: const PublicListEmergencyCallPage(),
             );
           },
         ),

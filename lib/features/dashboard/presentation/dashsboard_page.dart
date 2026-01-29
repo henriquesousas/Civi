@@ -1,20 +1,9 @@
 import 'package:deehelp/core/base/base_page.dart';
 import 'package:deehelp/core/providers/current_location_provider.dart';
-import 'package:deehelp/core/providers/location_event_provider.dart';
-import 'package:deehelp/core/providers/location_notifier_provider.dart';
-import 'package:deehelp/core/services/location/current_location.dart';
-import 'package:deehelp/core/services/location/events/location_service_event.dart';
-import 'package:deehelp/core/services/location/location_failure.dart';
-import 'package:deehelp/core/services/location/location_service.dart';
-import 'package:deehelp/core/services/location/state/location_state.dart';
-import 'package:deehelp/core/ui/extensions/dialog_extension.dart';
 import 'package:deehelp/core/ui/extensions/screen_size_extension.dart';
-import 'package:deehelp/core/ui/router/app_router.dart';
 import 'package:deehelp/core/ui/theme/app_colors.dart';
 import 'package:deehelp/core/ui/theme/app_text_styles.dart';
 import 'package:deehelp/core/ui/theme/dimens.dart';
-import 'package:deehelp/core/ui/widgets/bottom_sheet/custom_modal_bottom_sheet.dart';
-import 'package:deehelp/core/ui/widgets/loader/loading.dart';
 import 'package:deehelp/features/dashboard/presentation/dashboard_viewmode_provider.dart';
 import 'package:deehelp/features/dashboard/presentation/widget/dashboad_incidents_warning.dart';
 import 'package:deehelp/features/dashboard/presentation/widget/dashboard_incident_list.dart';
@@ -72,15 +61,16 @@ class _DashsboardPageState extends BasePageState<DashsboardPage> {
         ),
         SizedBox(height: context.topPadding),
         Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 10),
+          padding: const EdgeInsets.symmetric(horizontal: 15),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               Text(
-                'RASTRO',
+                'TIZZO',
                 style: context.appTextStyles.sectionTitle.copyWith(
-                  fontSize: Dimens.size26.sp,
-                  fontWeight: FontWeight.bold,
+                  fontSize: Dimens.size32.sp,
+                  fontWeight: FontWeight.w400,
+                  fontFamily: "MuseoModerno",
                 ),
               ),
               SizedBox(height: Dimens.size10.h),

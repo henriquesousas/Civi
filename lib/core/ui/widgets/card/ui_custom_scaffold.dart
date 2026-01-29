@@ -66,7 +66,7 @@ class UICustomScaffold extends StatelessWidget {
                     child: Text(
                       "$pageTitle",
                       style: context.appTextStyles.appBarTitle.copyWith(
-                        fontWeight: FontWeight.w600,
+                        fontWeight: FontWeight.w500,
                       ),
                     ),
                   ),

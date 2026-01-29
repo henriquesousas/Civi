@@ -1,6 +1,8 @@
 import 'package:deehelp/core/ui/theme/app_colors.dart';
 import 'package:deehelp/core/ui/theme/app_text_styles.dart';
 import 'package:deehelp/core/ui/theme/dimens.dart';
+import 'package:deehelp/core/ui/widgets/button/ui_category_button.dart';
+import 'package:deehelp/core/utils/url_launcher_utils.dart';
 import 'package:flutter/material.dart';
 
 class ReportIncidentWarningIndicator extends StatelessWidget {
@@ -11,12 +13,11 @@ class ReportIncidentWarningIndicator extends StatelessWidget {
     return Container(
       padding: const EdgeInsets.all(12),
       decoration: BoxDecoration(
-        color: AppColors.successColor
-            .withValues(alpha: 0.2), // Colors.red.withValues(alpha: 0.2),
+        color: AppColors.successColor.withValues(alpha: 0.1),
         borderRadius: BorderRadius.circular(12),
-        border: Border.all(color: AppColors.successColor
-            //Colors.red.withValues(alpha: 0.3),
-            ),
+        border: Border.all(
+          color: AppColors.successColor.withValues(alpha: 0.4),
+        ),
       ),
       child: Row(
         children: [
@@ -50,20 +51,12 @@ class ReportIncidentWarningIndicator extends StatelessWidget {
               ],
             ),
           ),
-          Container(
-            padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
-            decoration: BoxDecoration(
-              color: AppColors.successColor,
-              borderRadius: BorderRadius.circular(20),
-            ),
-            child: Text(
-              "EMERGÊNCIA",
-              style: context.appTextStyles.caption1Style.copyWith(
-                fontWeight: FontWeight.w700,
-                color: Colors.white,
-                letterSpacing: 1.0,
-              ),
-            ),
+          UICategoryButton(
+            text: "EMERGÊNCIA",
+            color: AppColors.successColor,
+            press: () {
+              UrlLauncherUtils.makePhoneCall("190");
+            },
           ),
         ],
       ),

@@ -5,6 +5,12 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 final searchViewmodelProvider = StateNotifierProvider.autoDispose<
     SearchViewmodel, AsyncValue<List<IncidentOutput>>>((ref) {
-  final getIncidentUseCase = ref.watch(getIncidentUsecaseProvider);
-  return SearchViewmodel(getIncidentUsecase: getIncidentUseCase);
+  final getRecentIncidentsByLocationUseCase =
+      ref.watch(getRecentIncidentsByLocationUseCaseProvider);
+
+  final getIncidentUsecase = ref.watch(getIncidentUsecaseProvider);
+  return SearchViewmodel(
+    getRecentsIncidents: getRecentIncidentsByLocationUseCase,
+    getIncidentsUseCase: getIncidentUsecase,
+  );
 });
