@@ -15,7 +15,6 @@ class DashboardIncidentList extends StatelessWidget {
   Widget build(BuildContext context) {
     return Expanded(
       child: Container(
-        // height: context.screenHeight * items.length * 0.08,
         margin: const EdgeInsets.symmetric(horizontal: 5),
         height: context.screenHeight * 0.5,
         decoration: BoxDecoration(
@@ -82,6 +81,8 @@ class DashboardIncidentList extends StatelessWidget {
                     ),
                     subtitle: Text(
                       _getIncidentLocality(item) ?? '',
+                      maxLines: 2,
+                      overflow: TextOverflow.ellipsis,
                       style: context.appTextStyles.caption2Style.copyWith(
                         color: AppColors.textColorBody,
                       ),

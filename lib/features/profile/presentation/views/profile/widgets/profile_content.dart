@@ -74,31 +74,6 @@ class ProfileContent extends ConsumerWidget {
               ),
               press: () => context.push(AppRouter.incidents),
             ),
-            // UICustomListTileCard(
-            //   padding: const EdgeInsetsDirectional.symmetric(
-            //     vertical: Dimens.defaultPadding,
-            //   ),
-            //   // title: R.strings.favorites,
-            //   title: "Favoritos",
-            //   showBorder: true,
-            //   titleStyle: context.appTextStyles.bodyTextStyle1.copyWith(
-            //     color: AppColors.textColorBody,
-            //   ),
-            //   leading: UIMyAssetsImageWidget(
-            //     isSvg: true,
-            //     assetPath: R.svg.bookmark,
-            //     width: Dimens.size24.w,
-            //     height: Dimens.size24.h,
-            //     boxFit: BoxFit.scaleDown,
-            //     color: AppColors.primaryColor,
-            //   ),
-            //   trailing: Icon(
-            //     Icons.arrow_forward_ios_rounded,
-            //     size: Dimens.defaultArrowForward,
-            //     color: AppColors.textColorHeader.withValues(alpha: 0.5),
-            //   ),
-            //   press: () {},
-            // ),
             UICustomListTileCard(
               padding: EdgeInsetsDirectional.symmetric(
                 vertical: Dimens.size20.w,
@@ -178,41 +153,6 @@ class ProfileContent extends ConsumerWidget {
                 "Olá! 👋 Queremos a sua ajuda para melhorar o app DeeHelp. Diga-nos: Qual é a sua dúvida ou sugestão sobre o funcionamento ou segurança? Sua opinião é essencial!",
               ),
             ),
-            // if (session != null) ...[
-            //   UICustomListTileCard(
-            //     padding: const EdgeInsetsDirectional.symmetric(
-            //       vertical: Dimens.defaultPadding,
-            //     ),
-            //     title: "Meu apelido",
-            //     showBorder: true,
-            //     titleStyle: context.appTextStyles.bodyTextStyle1.copyWith(
-            //       color: AppColors.textColorBody,
-            //     ),
-            //     leading: UIMyAssetsImageWidget(
-            //       isSvg: true,
-            //       assetPath: R.svg.inactiveProfile,
-            //       width: Dimens.size24.w,
-            //       height: Dimens.size24.h,
-            //       boxFit: BoxFit.scaleDown,
-            //       color: AppColors.primaryColor,
-            //     ),
-            //     trailing: Container(
-            //       padding:
-            //           const EdgeInsets.symmetric(horizontal: 6, vertical: 4),
-            //       decoration: BoxDecoration(
-            //         color: AppColors.lightGreyColor20,
-            //         borderRadius: BorderRadius.circular(20.w),
-            //       ),
-            //       child: Text(
-            //         session.nickName ?? '',
-            //         style: context.appTextStyles.caption2Style.copyWith(
-            //           fontWeight: FontWeight.bold,
-            //         ),
-            //       ),
-            //     ),
-            //     press: () => context.push(AppRouter.faq),
-            //   ),
-            // ],
             UICustomListTileCard(
               padding: EdgeInsetsDirectional.symmetric(
                 vertical: Dimens.size20.w,
@@ -241,8 +181,33 @@ class ProfileContent extends ConsumerWidget {
               padding: EdgeInsetsDirectional.symmetric(
                 vertical: Dimens.size20.w,
               ),
+              title: "Nascemos agora",
+              showBorder: true,
+              titleStyle: context.appTextStyles.bodyTextStyle1.copyWith(
+                color: AppColors.textColorBody,
+              ),
+              leading: UIMyAssetsImageWidget(
+                isSvg: true,
+                assetPath: R.svg.info,
+                width: Dimens.size24.w,
+                height: Dimens.size24.h,
+                boxFit: BoxFit.scaleDown,
+                color: AppColors.primaryColor,
+              ),
+              trailing: Icon(
+                Icons.arrow_forward_ios_rounded,
+                size: Dimens.defaultArrowForward,
+                color: AppColors.textColorHeader.withValues(alpha: 0.5),
+              ),
+              press: () => context.push(AppRouter.welcome),
+            ),
+            UICustomListTileCard(
+              padding: EdgeInsetsDirectional.symmetric(
+                vertical: Dimens.size20.w,
+              ),
               title: "Versão",
-              subtitle: "Confira se sua versão está atualizada",
+              subtitle:
+                  "Em desenvolvimento, confira se sua versão está atualizada",
               showBorder: false,
               titleStyle: context.appTextStyles.bodyTextStyle1.copyWith(
                 color: AppColors.textColorBody,
@@ -255,8 +220,12 @@ class ProfileContent extends ConsumerWidget {
                 boxFit: BoxFit.scaleDown,
                 color: AppColors.primaryColor,
               ),
-              trailing: const Text("1.0.0"),
-              press: () => context.push(AppRouter.faq),
+              trailing: Text(
+                "1.0.0",
+                style: context.appTextStyles.bodyTextStyle1.copyWith(
+                  color: AppColors.textColorBody,
+                ),
+              ),
             ),
           ],
         ),

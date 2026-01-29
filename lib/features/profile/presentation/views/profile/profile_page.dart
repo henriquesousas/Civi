@@ -1,4 +1,3 @@
-import 'package:deehelp/core/ui/theme/dimens.dart';
 import 'package:deehelp/core/ui/widgets/card/ui_custom_scaffold.dart';
 import 'package:deehelp/features/profile/presentation/views/profile/widgets/profile_content.dart';
 import 'package:deehelp/features/profile/presentation/views/profile/widgets/profile_header.dart';
@@ -27,18 +26,16 @@ class ProfilePage extends ConsumerWidget {
               constraints: BoxConstraints(
                 minHeight: constraints.maxHeight,
               ),
-              child: const IntrinsicHeight(
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    SizedBox(height: 5),
-                    ProfileHeader(),
-                    ProfileContent(),
-                    ProfileLogout(),
-                    SizedBox(height: Dimens.size60),
-                  ],
-                ),
+              child: const Column(
+                mainAxisAlignment: MainAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  SizedBox(height: 5),
+                  ProfileHeader(),
+                  ProfileContent(),
+                  ProfileLogout(),
+                  // SizedBox(height: Dimens.size64),
+                ],
               ),
             ),
           );

@@ -21,6 +21,10 @@ class ProfileLogout extends StatelessWidget {
       padding: Dimens.of(context).edgeInsetsScreenHorizontal,
       child: UICustomListTileCard(
         // title: "Sair da conta",
+        padding: EdgeInsetsDirectional.symmetric(
+          vertical: Dimens.size20.w,
+        ),
+
         titleWidget: Text(
           "Sair da conta",
           style: context.appTextStyles.bodyTextStyle1.copyWith(

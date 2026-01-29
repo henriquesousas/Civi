@@ -1,11 +1,7 @@
 import 'package:deehelp/core/providers/current_location_provider.dart';
-import 'package:deehelp/core/providers/location_notifier_provider.dart';
-import 'package:deehelp/core/services/location/location_failure.dart';
 import 'package:deehelp/core/ui/theme/app_colors.dart';
 import 'package:deehelp/core/ui/theme/app_text_styles.dart';
 import 'package:deehelp/core/ui/theme/dimens.dart';
-import 'package:deehelp/core/ui/widgets/bottom_sheet/custom_modal_bottom_sheet.dart';
-import 'package:deehelp/features/dashboard/presentation/widget/request_location_modal.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -76,7 +72,7 @@ class DashboardLocation extends ConsumerWidget {
             ),
             Text(
               currentPlace != null
-                  ? '${currentPlace.city} ${currentPlace.state}'
+                  ? '${currentPlace.fullAddress}'
                   : "Localização não informada",
               style: context.appTextStyles.caption2Style.copyWith(
                 fontWeight: FontWeight.w500,

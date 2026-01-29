@@ -95,6 +95,7 @@ class _DashsboardPageState extends BasePageState<DashsboardPage> {
           ),
           orElse: () => const Expanded(child: DashboadIncidentsWarning()),
         ),
+        const SizedBox(height: 10),
         Visibility(
           visible: context.isPortrait,
           child: const DashbordQuickActionsCard(),

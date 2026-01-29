@@ -24,6 +24,7 @@ class SvgAssets {
   String listInactive = 'assets/svg/statement_inactive.svg';
   String category = 'assets/svg/category.svg';
   String info = 'assets/svg/info.svg';
+  String version = 'assets/svg/type.svg';
   String addProduct = 'assets/svg/add_product.svg';
   String reportIncident = 'assets/svg/add_incident.svg';
 }

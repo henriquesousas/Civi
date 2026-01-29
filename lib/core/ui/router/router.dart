@@ -19,6 +19,7 @@ import 'package:deehelp/features/profile/presentation/views/profile/profile_page
 import 'package:deehelp/features/search/search_page.dart';
 import 'package:deehelp/features/splash/splash_page.dart';
 import 'package:deehelp/features/test_page.dart';
+import 'package:deehelp/features/welcome/welcome_page.dart';
 import 'package:deehelp/location_required_page.dart';
 import 'package:deehelp/router_refresh_notifier.dart';
 import 'package:flutter/material.dart';
@@ -186,6 +187,15 @@ var goRouterProvider = Provider<GoRouter>(
             return slideTransitionPage(
               key: state.pageKey,
               child: const PublicListEmergencyCallPage(),
+            );
+          },
+        ),
+        GoRoute(
+          path: AppRouter.welcome,
+          pageBuilder: (context, state) {
+            return slideTransitionPage(
+              key: state.pageKey,
+              child: const WelcomeScreen(),
             );
           },
         ),
