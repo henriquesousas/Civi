@@ -58,6 +58,7 @@ var goRouterProvider = Provider<GoRouter>(
       redirect: (context, state) {
         final currentPath = state.matchedLocation;
         final isPublicRoute = _publicRoutes.contains(currentPath);
+        // return "/";
         switch (appStatus) {
           case AppStatus.loading:
             return AppRouter.splash;

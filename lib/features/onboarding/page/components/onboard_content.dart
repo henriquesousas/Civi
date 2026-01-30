@@ -34,7 +34,7 @@ class _OnboardContentState extends State<OnboardContent> {
                 fontWeight: FontWeight.bold,
               ),
             ),
-            const SizedBox(height: Dimens.size10),
+            SizedBox(height: Dimens.size10.h),
             Text(
               widget.page.description,
               textAlign: TextAlign.center,

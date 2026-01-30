@@ -1,5 +1,7 @@
+// import 'package:cloudflare_r2/cloudflare_r2.dart';
 import 'package:cloudflare_r2/cloudflare_r2.dart';
 import 'package:deehelp/core/ui/extensions/screen_size_extension.dart';
+import 'package:device_preview/device_preview.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -13,7 +15,6 @@ import 'core/env.dart';
 import 'core/resources.dart';
 import 'core/ui/router/router.dart';
 import 'core/ui/theme/app_theme.dart';
-import 'firebase_options.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -25,19 +26,27 @@ void main() async {
     anonKey: "sb_publishable_d4aHVgwM22a71tnZ7BZsIg_b9DPt9wD",
   );
 
-  await Firebase.initializeApp(
-    options: DefaultFirebaseOptions.currentPlatform,
-  );
+  // await Firebase.initializeApp(
+  //   options: DefaultFirebaseOptions.currentPlatform,
+  // );
 
   await CloudFlareR2.init(
     accountId: Env.r2AccountId,
     accessKeyId: Env.r2AccessKeyId,
     secretAccessKey: Env.r2SecretAccessKeyId,
   );
+
   SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(
     statusBarColor: Colors.transparent,
   ));
-  runApp(const ProviderScope(child: MainApp()));
+
+  runApp(
+    ProviderScope(
+        child: DevicePreview(
+      enabled: false,
+      builder: (context) => const MainApp(),
+    )),
+  );
 }
 
 class MainApp extends ConsumerWidget {
@@ -50,7 +59,8 @@ class MainApp extends ConsumerWidget {
         final router = ref.watch(goRouterProvider);
 
         return ScreenUtilInit(
-          designSize: context.designSize(),
+          // designSize: context.designSize(),
+          designSize: const Size(375, 812),
           minTextAdapt: true,
           splitScreenMode: true,
           useInheritedMediaQuery: true,

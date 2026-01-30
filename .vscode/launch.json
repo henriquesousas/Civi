@@ -1,0 +1,21 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "Moto G84",
+      "request": "launch",
+      "type": "dart",
+      "deviceId": "ZF524DPZ8N",
+      "flutterMode": "debug",
+      "program": "lib/main.dart"
+    },
+    {
+      "name": "Moto SM A037",
+      "request": "launch",
+      "type": "dart",
+      "deviceId": "R9QRB02BHEZ",
+      "flutterMode": "debug",
+      "program": "lib/main.dart"
+    }
+  ]
+}
