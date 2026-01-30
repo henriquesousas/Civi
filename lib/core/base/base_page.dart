@@ -21,13 +21,19 @@ abstract class BasePageState<T extends BasePage> extends ConsumerState<T> {
 
   bool hideAppBar() => false;
 
+  Widget? leading() => null;
+
+  List<Widget>? actionButton() => null;
+
   @override
   Widget build(BuildContext context) {
     listener();
     return UICustomScaffold(
       hideAppBar: hideAppBar(),
       padding: padding(),
+      leading: leading(),
       onBackButtonTap: onBackPress(),
+      actionButton: actionButton(),
       bottomNavigationBar: buildBottomNavigationBar(),
       pageTitle: pageTitle(),
       body: buildPage(context),

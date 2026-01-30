@@ -39,10 +39,28 @@ class _DashsboardPageState extends BasePageState<DashsboardPage> {
   }
 
   @override
-  bool hideAppBar() => true;
+  bool hideAppBar() => false;
 
   @override
   EdgeInsetsGeometry? padding() => EdgeInsets.zero;
+
+  @override
+  Widget? leading() {
+    return const Padding(
+      padding: EdgeInsets.only(left: 10),
+      child: DashboardProfile(),
+    );
+  }
+
+  @override
+  List<Widget>? actionButton() {
+    return [
+      const Padding(
+        padding: EdgeInsets.only(right: 10),
+        child: DashboardLocation(),
+      ),
+    ];
+  }
 
   @override
   Widget buildPage(BuildContext context) {
@@ -50,15 +68,15 @@ class _DashsboardPageState extends BasePageState<DashsboardPage> {
 
     return Column(
       children: [
-        SizedBox(height: context.topPadding),
-        const Row(
-          spacing: 5,
-          children: [
-            SizedBox(width: 10),
-            DashboardProfile(),
-            DashboardLocation(),
-          ],
-        ),
+        // SizedBox(height: context.topPadding),
+        // const Row(
+        //   spacing: 5,
+        //   children: [
+        //     SizedBox(width: 10),
+        //     // DashboardProfile(),
+        //     DashboardLocation(),
+        //   ],
+        // ),
         SizedBox(height: context.topPadding),
         Padding(
           padding: const EdgeInsets.symmetric(horizontal: 20),

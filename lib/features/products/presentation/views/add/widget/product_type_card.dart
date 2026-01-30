@@ -33,7 +33,7 @@ class _ProductTypeCardState extends State<ProductTypeCard> {
         borderRadius: BorderRadius.circular(Dimens.defaultRadius.r),
         color: widget.isSelected
             ? AppColors.primaryColor.withValues(alpha: 0.08)
-            : Theme.of(context).colorScheme.surface,
+            : AppColors.whiteColor,
         border: Border.all(
           color: widget.isSelected
               ? AppColors.primaryColor
@@ -68,7 +68,7 @@ class _ProductTypeCardState extends State<ProductTypeCard> {
                   decoration: BoxDecoration(
                     color: widget.isSelected
                         ? AppColors.primaryColor.withValues(alpha: 0.1)
-                        : Theme.of(context).colorScheme.surfaceContainerHighest,
+                        : Colors.transparent,
                     borderRadius: BorderRadius.circular(Dimens.size10.r),
                   ),
                   child: Center(
@@ -98,14 +98,14 @@ class _ProductTypeCardState extends State<ProductTypeCard> {
                         ),
                       ),
                       SizedBox(height: 4.h),
-                      Text(
-                        widget.description,
-                        maxLines: 2,
-                        overflow: TextOverflow.ellipsis,
-                        style: context.appTextStyles.caption1Style.copyWith(
-                          color: AppColors.textSecondary,
-                        ),
-                      )
+                      // Text(
+                      //   widget.description,
+                      //   maxLines: 2,
+                      //   overflow: TextOverflow.ellipsis,
+                      //   style: context.appTextStyles.caption1Style.copyWith(
+                      //     color: AppColors.textSecondary,
+                      //   ),
+                      // )
                     ],
                   ),
                 ),

@@ -18,10 +18,15 @@ class DashboardLocation extends ConsumerWidget {
       child: Container(
         padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
         decoration: BoxDecoration(
-          color: Theme.of(context).colorScheme.surface.withValues(alpha: 0.3),
+          // color: Theme.of(context).colorScheme.surface.withValues(alpha: 0.3),
+          color: Theme.of(context).colorScheme.secondaryContainer,
+          // color: AppColors.lightGreyColor30.withValues(alpha: 0.5),
           borderRadius: BorderRadius.circular(20),
           border: BoxBorder.all(
-            color: Theme.of(context).colorScheme.outlineVariant,
+            color: Theme.of(context)
+                .colorScheme
+                .surfaceDim
+                .withValues(alpha: 0.02),
           ),
         ),
         child: Row(

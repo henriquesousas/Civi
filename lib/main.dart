@@ -90,8 +90,8 @@ class MainApp extends ConsumerWidget {
               // theme: AppTheme.lightTheme(),
               // themeMode: ThemeMode.light,
               // darkTheme: AppTheme.dark(),
-              theme: AppTheme.dark(),
-              themeMode: ThemeMode.dark,
+              theme: AppTheme.lightTheme(),
+              themeMode: ThemeMode.light,
               // themeMode:
               //     themeState.isDarkMode ? ThemeMode.dark : ThemeMode.light,
               title: "DeeHelp",
