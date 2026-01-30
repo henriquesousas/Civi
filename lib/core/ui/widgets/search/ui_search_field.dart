@@ -20,7 +20,7 @@ class UISearchField extends StatelessWidget {
           ),
           border: OutlineInputBorder(
             borderRadius: BorderRadius.circular(8),
-            borderSide: BorderSide(color: Colors.grey.shade300),
+            // borderSide: BorderSide(color: Colors.grey.shade300),
           ),
           enabledBorder: OutlineInputBorder(
             borderRadius: BorderRadius.circular(90),
@@ -31,7 +31,8 @@ class UISearchField extends StatelessWidget {
             borderSide: BorderSide(color: Theme.of(context).primaryColor),
           ),
           filled: true,
-          fillColor: Colors.grey.shade50,
+          // fillColor: Colors.grey.shade50,
+          fillColor: Theme.of(context).colorScheme.surfaceContainer,
           contentPadding: const EdgeInsets.symmetric(
             vertical: 12,
             horizontal: 16,

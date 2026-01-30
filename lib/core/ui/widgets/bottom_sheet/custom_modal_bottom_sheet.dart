@@ -16,7 +16,7 @@ Future<dynamic> customModalBottomSheet(
     isScrollControlled: true,
     isDismissible: isDismissible,
     enableDrag: isDismissible,
-    backgroundColor: Theme.of(context).scaffoldBackgroundColor,
+    backgroundColor: Theme.of(context).colorScheme.surfaceContainer,
     shape: const RoundedRectangleBorder(
       borderRadius: BorderRadius.only(
         topLeft: Radius.circular(defaultBorderRadius * 2),

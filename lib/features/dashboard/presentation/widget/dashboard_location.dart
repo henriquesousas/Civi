@@ -11,53 +11,18 @@ class DashboardLocation extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    // ref.watch(dashboardViewmodelProvider);
     final currentPlace = ref.watch(currentLocationProvider);
 
     return GestureDetector(
-      onTap: () {
-        // final locationState = ref.read(locationNotifierProvider);
-
-        // locationState.when(
-        //   data: (location) {
-        //     // Se já tem localização, mostra modal para mudar?
-        //     _showLocationOptionsModal(context, ref);
-        //   },
-        //   error: (error, stackTrace) {
-        //     // Se tem erro, mostra modal de erro
-        //     if (error is LocationFailure) {
-        //       // _showErrorModal(context, error, ref);
-        //     }
-        //   },
-        //   loading: () {
-        //     // Se está carregando, não faz nada ou mostra loading
-        //   },
-        // );
-        // _showLocationOptionsModal(context, ref);
-        // customModalBottomSheet(
-        //   isDismissible: true,
-        //   context,
-        //   child: PopScope(
-        //     canPop: true,
-        //     child: RequestLocationModal(
-        //       title: "Localização automática",
-        //       message:
-        //           "O acesso a localização do seu aparelho facilita a visualização dos incidentes na sua região.",
-        //       buttonTitle: "Permitir localização automática",
-        //       press: () {
-        //         ref
-        //             .watch(locationNotifierProvider.notifier)
-        //             .getCurrentLocation();
-        //       },
-        //     ),
-        //   ),
-        // );
-      },
+      onTap: () {},
       child: Container(
         padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
         decoration: BoxDecoration(
-          color: AppColors.lightGreyColor30,
+          color: Theme.of(context).colorScheme.surface.withValues(alpha: 0.3),
           borderRadius: BorderRadius.circular(20),
+          border: BoxBorder.all(
+            color: Theme.of(context).colorScheme.outlineVariant,
+          ),
         ),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.center,
@@ -68,7 +33,7 @@ class DashboardLocation extends ConsumerWidget {
                   ? Icons.location_on_outlined
                   : Icons.location_off_outlined,
               size: Dimens.size16.w,
-              color: AppColors.textColorBody,
+              color: Theme.of(context).colorScheme.outline,
             ),
             Text(
               currentPlace != null
@@ -76,7 +41,7 @@ class DashboardLocation extends ConsumerWidget {
                   : "Localização não informada",
               style: context.appTextStyles.caption2Style.copyWith(
                 fontWeight: FontWeight.w500,
-                color: AppColors.textColorHeader,
+                color: Theme.of(context).colorScheme.surfaceDim,
               ),
             ),
             // const Icon(

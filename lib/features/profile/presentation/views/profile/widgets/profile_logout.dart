@@ -17,7 +17,7 @@ class ProfileLogout extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return UICustomAppCard(
-      radius: 0,
+      radius: 8,
       padding: Dimens.of(context).edgeInsetsScreenHorizontal,
       child: UICustomListTileCard(
         // title: "Sair da conta",

@@ -98,11 +98,12 @@ class _ProductListingPageState extends BasePageState<ProductListingPage> {
     return Column(
       spacing: 5,
       children: [
-        const Text(
-          "Por questões de segurança, todo bem cadastrado passa por uma validação interna antes de ser liberado no aplicativo.",
+        Text(
+          "Por questões de segurança, todo item cadastrado (como celulares, veículos, eletrônicos, etc.) passa por uma validação interna antes de ser liberado no aplicativo.",
           textAlign: TextAlign.center,
           style: TextStyle(
-            color: AppColors.textSecondary,
+            // color: AppColors.textSecondary,
+            color: Theme.of(context).colorScheme.surfaceDim,
             letterSpacing: 1.2,
           ),
         ),

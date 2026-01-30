@@ -31,7 +31,8 @@ class ProductListTileCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return UICustomAppCard(
       margin: margin ?? const EdgeInsets.symmetric(vertical: 5),
-      borderColor: AppColors.greyColor,
+      // borderColor: AppColors.greyColor,
+      borderColor: Theme.of(context).colorScheme.outline.withValues(alpha: 0.5),
       radius: 9,
       borderWidth: 1,
       padding: EdgeInsets.zero,
@@ -66,8 +67,8 @@ class ProductListTileCard extends StatelessWidget {
                       maxLines: 2,
                       overflow: TextOverflow.ellipsis,
                       style: context.appTextStyles.sectionTitle.copyWith(
-                        fontWeight: FontWeight.w600,
-                        color: AppColors.textColorBody,
+                        fontWeight: FontWeight.w500,
+                        color: Theme.of(context).colorScheme.onSurface,
                       ),
                     ),
                     Text(
@@ -75,7 +76,8 @@ class ProductListTileCard extends StatelessWidget {
                       maxLines: 2,
                       overflow: TextOverflow.ellipsis,
                       style: context.appTextStyles.caption1Style.copyWith(
-                        color: AppColors.textSecondary,
+                        // color: AppColors.textSecondary,
+                        color: Theme.of(context).colorScheme.surfaceDim,
                       ),
                     )
                   ],

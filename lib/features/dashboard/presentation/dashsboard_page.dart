@@ -61,16 +61,17 @@ class _DashsboardPageState extends BasePageState<DashsboardPage> {
         ),
         SizedBox(height: context.topPadding),
         Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 15),
+          padding: const EdgeInsets.symmetric(horizontal: 20),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               Text(
-                'TIZZO',
+                '[LABEL]',
                 style: context.appTextStyles.sectionTitle.copyWith(
                   fontSize: Dimens.size32.sp,
-                  fontWeight: FontWeight.w400,
-                  fontFamily: "MuseoModerno",
+                  fontWeight: FontWeight.w500,
+                  // fontFamily: "MuseoModerno",
+                  color: Theme.of(context).colorScheme.onSurface,
                 ),
               ),
               SizedBox(height: Dimens.size10.h),
@@ -120,7 +121,7 @@ class _DashsboardPageState extends BasePageState<DashsboardPage> {
                 spacing: 5,
                 children: [
                   Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 10),
+                    padding: EdgeInsets.symmetric(horizontal: Dimens.size15.w),
                     child: Text(
                       "Últimas ocorrências",
                       style: context.appTextStyles.caption1Style,

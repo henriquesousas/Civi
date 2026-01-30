@@ -1,8 +1,11 @@
 import 'package:deehelp/core/ui/theme/app_text_styles.dart';
+import 'package:deehelp/core/ui/theme/dimens.dart';
 import 'package:deehelp/core/ui/widgets/empty/ui_simple_empty_value.dart';
+import 'package:deehelp/core/ui/widgets/icon/ui_icon.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:go_router/go_router.dart';
 
-import '../../../../core/ui/theme/app_colors.dart';
 import '../../../../core/ui/widgets/search/ui_search_field.dart';
 
 class ModalSelectColor extends StatefulWidget {
@@ -67,15 +70,37 @@ class _ModalSelectColorState extends State<ModalSelectColor> {
   @override
   Widget build(BuildContext context) {
     return Column(
+      mainAxisAlignment: MainAxisAlignment.start,
+      crossAxisAlignment: CrossAxisAlignment.start,
       children: [
+        // Padding(
+        //   padding: const EdgeInsets.all(16),
+        //   child: Text(
+        //     "Selecione uma cor",
+        //     style: context.appTextStyles.sectionTitle.copyWith(
+        //       // color: AppColors.textSecondary,
+        //       color: Theme.of(context).colorScheme.surfaceDim,
+        //       fontWeight: FontWeight.w400,
+        //     ),
+        //   ),
+        // ),
         Padding(
-          padding: const EdgeInsets.all(16),
-          child: Text(
-            "Selecionar cor",
-            style: context.appTextStyles.bodyTextStyle1
-                .copyWith(color: AppColors.textSecondary),
+          padding: const EdgeInsets.symmetric(horizontal: 16),
+          child: Row(
+            children: [
+              UIICon(
+                press: () => context.pop(),
+                isAlpha: true,
+                bgColor: Theme.of(context).colorScheme.outline,
+                icon: Icon(
+                  Icons.close,
+                  color: Theme.of(context).colorScheme.onSurface,
+                ),
+              ),
+            ],
           ),
         ),
+        const SizedBox(height: 10),
         UISearchField(searchController: _searchController),
         Flexible(
           child: filteredValues.isEmpty
@@ -83,30 +108,33 @@ class _ModalSelectColorState extends State<ModalSelectColor> {
               : ListView.separated(
                   shrinkWrap: true,
                   physics: const ClampingScrollPhysics(),
-                  separatorBuilder: (context, index) => Divider(
+                  separatorBuilder: (context, index) => const Divider(
                     height: 1,
                     thickness: 1,
-                    color: Colors.grey.shade300,
+                    // color: Colors.grey.shade300,
                   ),
                   itemCount: filteredValues.length,
                   itemBuilder: (context, index) {
                     final color = filteredValues[index];
                     return ListTile(
-                        onTap: () {
-                          widget.onChange(color["name"].toString());
-                        },
-                        leading: Container(
-                          width: 30,
-                          height: 30,
-                          decoration: BoxDecoration(
-                            color: Color(int.parse(
-                                color["hex"]!.replaceFirst('#', '0xFF'))),
-                            borderRadius: BorderRadius.circular(8),
-                            border: Border.all(color: Colors.grey.shade300),
-                          ),
+                      onTap: () {
+                        widget.onChange(color["name"].toString());
+                      },
+                      leading: Container(
+                        width: Dimens.size32.w,
+                        height: Dimens.size32.h,
+                        decoration: BoxDecoration(
+                          color: Color(int.parse(
+                              color["hex"]!.replaceFirst('#', '0xFF'))),
+                          borderRadius: BorderRadius.circular(20),
+                          border: Border.all(color: Colors.grey.shade300),
                         ),
-                        title: Text(color["name"].toString(),
-                            style: context.appTextStyles.sectionSubTitle1));
+                      ),
+                      title: Text(
+                        color["name"].toString(),
+                        style: context.appTextStyles.sectionSubTitle1,
+                      ),
+                    );
                   },
                 ),
         ),

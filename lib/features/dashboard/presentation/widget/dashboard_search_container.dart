@@ -22,10 +22,10 @@ class DashboardSearchContainer extends StatelessWidget {
         width: context.screenWidth,
         padding: EdgeInsets.all(Dimens.size10.w),
         decoration: BoxDecoration(
-          color: AppColors.whiteColor,
+          color: Theme.of(context).colorScheme.surfaceContainer,
           borderRadius: BorderRadius.circular(Dimens.defaultButtonRadius.w),
           border: Border.all(
-            color: AppColors.lightGreyColor20,
+            color: Theme.of(context).colorScheme.outlineVariant,
           ),
         ),
         child: Row(

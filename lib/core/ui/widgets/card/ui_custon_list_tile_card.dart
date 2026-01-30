@@ -1,4 +1,3 @@
-import 'package:deehelp/core/ui/theme/app_colors.dart';
 import 'package:deehelp/core/ui/theme/app_text_styles.dart';
 import 'package:deehelp/core/ui/theme/dimens.dart';
 import 'package:flutter/material.dart';
@@ -68,9 +67,13 @@ class UICustomListTileCard extends StatelessWidget {
             color: backgroundColor,
             borderRadius: BorderRadius.circular(radius),
             border: showBorder == true
-                ? const Border(
+                ? Border(
                     bottom: BorderSide(
-                      color: AppColors.borderColor1,
+                      // color: AppColors.borderColor1,
+                      color: Theme.of(context)
+                          .colorScheme
+                          .outlineVariant
+                          .withValues(alpha: 0.6),
                       width: 1,
                     ),
                   )
@@ -93,8 +96,11 @@ class UICustomListTileCard extends StatelessWidget {
                 (title != null
                     ? Text(
                         title ?? "",
-                        style:
-                            titleStyle ?? context.appTextStyles.sectionTitle3,
+                        style: titleStyle ??
+                            context.appTextStyles.sectionTitle3.copyWith(
+                                // color: Theme.of(context).colorScheme.onSurface,
+                                // fontWeight: FontWeight.w400,
+                                ),
                       )
                     : null),
             subtitle: subtitleWidget ??
@@ -102,8 +108,8 @@ class UICustomListTileCard extends StatelessWidget {
                     ? Text(
                         subtitle ?? "",
                         style: subtitleStyle ??
-                            context.appTextStyles.sectionSubTitle1.copyWith(
-                              color: AppColors.textTertiary,
+                            context.appTextStyles.caption1Style.copyWith(
+                              color: Theme.of(context).colorScheme.surfaceDim,
                             ),
                       )
                     : null),

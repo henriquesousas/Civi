@@ -7,8 +7,8 @@ class UICustomAppCard extends StatelessWidget {
   final EdgeInsetsGeometry? margin;
   final double? width;
   final double? height;
-  final Color backgroundColor;
-  final Color borderColor;
+  final Color? backgroundColor;
+  final Color? borderColor;
   final double borderWidth;
   final double radius;
   final VoidCallback? onPressed;
@@ -21,8 +21,9 @@ class UICustomAppCard extends StatelessWidget {
     super.key,
     this.width,
     this.height,
-    this.backgroundColor = const Color(0XffFFFFFF),
-    this.borderColor = const Color(0xFFE2E8F0),
+    this.backgroundColor,
+    // this.borderColor = const Color(0xFFE2E8F0),
+    this.borderColor,
     this.borderWidth = 1,
     this.radius = Dimens.cardExtraRadius,
     this.onPressed,
@@ -44,10 +45,15 @@ class UICustomAppCard extends StatelessWidget {
         padding: padding ?? const EdgeInsets.all(16),
         margin: margin,
         decoration: BoxDecoration(
-          color: backgroundColor,
+          color:
+              backgroundColor ?? Theme.of(context).colorScheme.surfaceContainer,
           borderRadius: BorderRadius.circular(radius),
           border: showBorder
-              ? boxBorder ?? Border.all(color: borderColor, width: borderWidth)
+              ? boxBorder ??
+                  Border.all(
+                      color: borderColor ??
+                          Theme.of(context).colorScheme.outlineVariant,
+                      width: borderWidth)
               : null,
           boxShadow: showShadow
               ? [

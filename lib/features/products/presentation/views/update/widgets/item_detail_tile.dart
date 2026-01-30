@@ -35,21 +35,22 @@ class ItemDetailTile extends StatelessWidget {
           title: Text(
             title,
             style: context.appTextStyles.bodyTextStyle1.copyWith(
-              fontWeight: FontWeight.bold,
-              color: AppColors.textColorBody,
+              fontWeight: FontWeight.w500,
+              // color: AppColors.textColorBody,
             ),
           ),
           subtitle: subtitle != null
               ? Text(
                   subtitle!,
-                  style: context.appTextStyles.sectionBodyTextStyle.copyWith(
-                    color: AppColors.textSecondary.withValues(alpha: 0.7),
+                  style: context.appTextStyles.caption1Style.copyWith(
+                    // color: AppColors.textSecondary.withValues(alpha: 0.7),
+                    color: Theme.of(context).colorScheme.surfaceDim,
                   ),
                 )
               : null,
 
           leading: leading,
-          trailing: _getTrailing(),
+          trailing: _getTrailing(context),
           // trailing: trailing == null
           //     ? showIconEdit
           //         ? !showCam
@@ -69,12 +70,15 @@ class ItemDetailTile extends StatelessWidget {
           //     : trailing!,
         ),
         if (showDivider)
-          const Divider(color: AppColors.lightGreyColor30, height: 1),
+          const Divider(
+            // color: AppColors.lightGreyColor30,
+            height: 1,
+          ),
       ],
     );
   }
 
-  Widget? _getTrailing() {
+  Widget? _getTrailing(BuildContext context) {
     if (trailing != null) return trailing;
     if (!showIconEdit) return null;
     return showCam
@@ -83,12 +87,13 @@ class ItemDetailTile extends StatelessWidget {
             icon: Icon(Icons.camera_alt),
             bgColor: AppColors.primaryColor,
           )
-        : IconButton(
-            onPressed: press,
-            icon: const Icon(
+        : UIICon(
+            isAlpha: true,
+            icon: Icon(
               Icons.edit,
-              color: AppColors.greyColor,
+              color: Theme.of(context).primaryColor,
             ),
+            bgColor: AppColors.primaryColor,
           );
   }
 }

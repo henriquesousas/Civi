@@ -1,8 +1,10 @@
 import 'package:deehelp/core/ui/theme/app_colors.dart';
 import 'package:deehelp/core/ui/theme/app_text_styles.dart';
 import 'package:deehelp/core/ui/widgets/empty/ui_simple_empty_value.dart';
+import 'package:deehelp/core/ui/widgets/icon/ui_icon.dart';
 import 'package:deehelp/core/ui/widgets/search/ui_search_field.dart';
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 
 class ModalSelectBrand extends StatefulWidget {
   final String title;
@@ -56,14 +58,30 @@ class _ModalSelectBrandState extends State<ModalSelectBrand> {
   Widget build(BuildContext context) {
     return Column(
       children: [
+        // Padding(
+        //   padding: const EdgeInsets.all(16),
+        //   child: Text(
+        //     widget.title,
+        //     style: context.appTextStyles.bodyTextStyle1.copyWith(
+        //       color: AppColors.blackColor,
+        //       fontWeight: FontWeight.w500,
+        //     ),
+        //   ),
+        // ),
         Padding(
-          padding: const EdgeInsets.all(16),
-          child: Text(
-            widget.title,
-            style: context.appTextStyles.bodyTextStyle1.copyWith(
-              color: AppColors.blackColor,
-              fontWeight: FontWeight.w500,
-            ),
+          padding: const EdgeInsets.symmetric(horizontal: 16),
+          child: Row(
+            children: [
+              UIICon(
+                press: () => context.pop(),
+                isAlpha: true,
+                bgColor: Theme.of(context).colorScheme.outline,
+                icon: Icon(
+                  Icons.close,
+                  color: Theme.of(context).colorScheme.onSurface,
+                ),
+              ),
+            ],
           ),
         ),
         UISearchField(searchController: _searchController),
@@ -73,10 +91,10 @@ class _ModalSelectBrandState extends State<ModalSelectBrand> {
               : ListView.separated(
                   shrinkWrap: true,
                   physics: const ClampingScrollPhysics(),
-                  separatorBuilder: (context, index) => Divider(
+                  separatorBuilder: (context, index) => const Divider(
                     height: 1,
                     thickness: 1,
-                    color: Colors.grey.shade300,
+                    // color: Colors.grey.shade300,
                   ),
                   itemCount: filteredValues.length,
                   itemBuilder: (context, index) {
@@ -87,7 +105,9 @@ class _ModalSelectBrandState extends State<ModalSelectBrand> {
                       },
                       title: Text(
                         value,
-                        style: context.appTextStyles.sectionSubTitle1,
+                        style: context.appTextStyles.sectionTitle.copyWith(
+                          fontWeight: FontWeight.w400,
+                        ),
                       ),
                     );
                   },

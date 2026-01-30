@@ -5,6 +5,7 @@ import 'package:deehelp/core/ui/theme/app_text_styles.dart';
 import 'package:deehelp/core/ui/theme/dimens.dart';
 import 'package:deehelp/features/incident/domain/usecase/incident_output.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
 
 class DashboardIncidentList extends StatelessWidget {
@@ -15,7 +16,7 @@ class DashboardIncidentList extends StatelessWidget {
   Widget build(BuildContext context) {
     return Expanded(
       child: Container(
-        margin: const EdgeInsets.symmetric(horizontal: 5),
+        margin: EdgeInsets.symmetric(horizontal: Dimens.size10.w),
         height: context.screenHeight * 0.5,
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(20),
@@ -49,24 +50,26 @@ class DashboardIncidentList extends StatelessWidget {
 
             return Container(
               decoration: BoxDecoration(
-                color: AppColors.whiteColor,
+                // color: AppColors.whiteColor,
+                color: Theme.of(context).colorScheme.surfaceContainer,
                 borderRadius: borderRadius,
                 border: Border(
-                  top: const BorderSide(
-                    color: AppColors.lightGreyColor20,
+                  top: BorderSide(
+                    color: Theme.of(context).colorScheme.outlineVariant,
                     width: 1,
                   ),
-                  left: const BorderSide(
-                    color: AppColors.lightGreyColor20,
+                  left: BorderSide(
+                    color: Theme.of(context).colorScheme.outlineVariant,
                     width: 1,
                   ),
-                  right: const BorderSide(
-                    color: AppColors.lightGreyColor20,
+                  right: BorderSide(
+                    color: Theme.of(context).colorScheme.outlineVariant,
                     width: 1,
                   ),
                   bottom: index == items.length - 1
-                      ? const BorderSide(
-                          color: AppColors.lightGreyColor20, width: 1)
+                      ? BorderSide(
+                          color: Theme.of(context).colorScheme.outlineVariant,
+                          width: 1)
                       : BorderSide.none,
                 ),
               ),
@@ -77,6 +80,7 @@ class DashboardIncidentList extends StatelessWidget {
                       item.product.name,
                       style: context.appTextStyles.buttonTextStyle1.copyWith(
                         fontWeight: FontWeight.w400,
+                        color: Theme.of(context).colorScheme.onSurface,
                       ),
                     ),
                     subtitle: Text(
@@ -84,7 +88,8 @@ class DashboardIncidentList extends StatelessWidget {
                       maxLines: 2,
                       overflow: TextOverflow.ellipsis,
                       style: context.appTextStyles.caption2Style.copyWith(
-                        color: AppColors.textColorBody,
+                        // color: AppColors.textColorBody,
+                        color: Theme.of(context).colorScheme.surfaceDim,
                       ),
                     ),
                     trailing: const Icon(

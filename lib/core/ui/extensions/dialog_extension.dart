@@ -11,12 +11,13 @@ extension DialogExtension on BuildContext {
   Future<bool> showQuestionDialog(
     String title,
     String message, {
-    String textConfirmButton = "Sim",
-    String textCancelButton = "Não",
+    String textConfirmButton = "SIM",
+    String textCancelButton = "NÃO",
   }) async {
     final result = await showDialog<bool>(
       context: this,
       builder: (ctx) => AlertDialog(
+        backgroundColor: Theme.of(this).colorScheme.surfaceContainer,
         title: Text(
           title,
           style: appTextStyles.sectionTitle,

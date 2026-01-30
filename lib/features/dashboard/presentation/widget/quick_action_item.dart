@@ -47,7 +47,8 @@ class QuickActionItem extends StatelessWidget {
                 title,
                 textAlign: TextAlign.center,
                 style: context.appTextStyles.sectionTitle3.copyWith(
-                  color: AppColors.dark,
+                  // color: AppColors.dark,
+                  color: Theme.of(context).colorScheme.surfaceDim,
                   fontWeight: FontWeight.w400,
                 ),
               ),

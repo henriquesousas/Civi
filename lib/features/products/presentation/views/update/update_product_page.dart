@@ -91,7 +91,7 @@ class _UpdateProductPage extends BasePageState<UpdateProductPage> {
               press: () async {
                 if (state.currentProduct != null) {
                   final yes = await context.showQuestionDialog(
-                    "Apagar",
+                    "Confirmar",
                     "Tem certeza que deseja remover permanentemente o produto ${state.currentProduct?.name} da sua grade?",
                   );
 

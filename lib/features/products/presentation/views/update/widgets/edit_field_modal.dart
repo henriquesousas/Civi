@@ -96,19 +96,19 @@ class _EditFieldModalState extends ConsumerState<EditFieldModal> {
                 UIICon(
                   isAlpha: true,
                   icon: const Icon(Icons.close),
-                  bgColor: AppColors.darkGreyColor10,
+                  bgColor: Theme.of(context).colorScheme.outline,
                   press: () => context.pop(),
                 ),
               ],
             ),
             Text(
               widget.description,
-              style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                    color: AppColors.textSecondary,
-                  ),
+              // style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+              //       color: AppColors.textSecondary,
+              //     ),
             ),
             UITextFieldRounded(
-              fillColor: AppColors.background,
+              fillColor: Theme.of(context).colorScheme.secondaryContainer,
               textInputAction: TextInputAction.done,
               showLabelText: false,
               labelText: widget.hintText,
@@ -121,9 +121,9 @@ class _EditFieldModalState extends ConsumerState<EditFieldModal> {
             ),
             Text(
               widget.examples,
-              style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                    color: AppColors.textTertiary,
-                  ),
+              // style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+              //       color: AppColors.textTertiary,
+              //     ),
             ),
             SizedBox(height: Dimens.size24.h),
             Row(

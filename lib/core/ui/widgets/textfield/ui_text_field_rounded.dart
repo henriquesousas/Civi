@@ -103,7 +103,7 @@ class _UITextFieldRoundedState extends State<UITextFieldRounded> {
           //     ),
           style: widget.textStyle ??
               context.appTextStyles.sectionBodyTextStyle.copyWith(
-                color: AppColors.textColorBody,
+                // color: AppColors.textColorBody,
                 fontWeight: FontWeight.bold,
               ),
           decoration: InputDecoration(
@@ -121,8 +121,8 @@ class _UITextFieldRoundedState extends State<UITextFieldRounded> {
                 ),
             // labelText: widget.showLabelText ? widget.labelText : null,
             labelStyle: context.appTextStyles.sectionSubTitle1.copyWith(
-              color: AppColors.textColorBody,
-            ),
+                // color: AppColors.textColorBody,
+                ),
             hintText: widget.hintText,
             hintStyle: widget.hintStyle ??
                 context.appTextStyles.sectionBodyTextStyle.copyWith(

@@ -1,6 +1,7 @@
 // import 'package:cloudflare_r2/cloudflare_r2.dart';
 import 'package:cloudflare_r2/cloudflare_r2.dart';
 import 'package:deehelp/core/ui/extensions/screen_size_extension.dart';
+import 'package:deehelp/core/ui/theme/theme/theme.dart';
 import 'package:device_preview/device_preview.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
@@ -57,6 +58,10 @@ class MainApp extends ConsumerWidget {
     return OrientationBuilder(
       builder: (context, orientation) {
         final router = ref.watch(goRouterProvider);
+        // final themeData = ref.watch(themeDataProvider);
+        WidgetsBinding.instance.addPostFrameCallback((_) {
+          ref.read(themeProvider.notifier).loadSavedTheme();
+        });
 
         return ScreenUtilInit(
           // designSize: context.designSize(),
@@ -67,7 +72,6 @@ class MainApp extends ConsumerWidget {
           rebuildFactor: (old, data) => true,
           builder: (context, child) {
             return MaterialApp.router(
-              // localizationsDelegates: AppLocalizations.localizationsDelegates,
               localizationsDelegates: const [
                 GlobalMaterialLocalizations.delegate,
                 GlobalWidgetsLocalizations.delegate,
@@ -83,8 +87,13 @@ class MainApp extends ConsumerWidget {
               },
               locale: const Locale('pt', 'BR'),
               routerConfig: router,
-              theme: AppTheme.lightTheme(context),
-              themeMode: ThemeMode.light,
+              // theme: AppTheme.lightTheme(),
+              // themeMode: ThemeMode.light,
+              // darkTheme: AppTheme.dark(),
+              theme: AppTheme.dark(),
+              themeMode: ThemeMode.dark,
+              // themeMode:
+              //     themeState.isDarkMode ? ThemeMode.dark : ThemeMode.light,
               title: "DeeHelp",
               debugShowCheckedModeBanner: false,
             );

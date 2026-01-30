@@ -28,32 +28,38 @@ class UIAnnotatedRegionWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final systemUiOverlayStyle = useDarkTheme
-        ? SystemUiOverlayStyle.dark.copyWith(
-            statusBarColor: statusBarColor,
-            statusBarBrightness: statusBarBrightness ?? Brightness.light,
-            statusBarIconBrightness: statusBarIconBrightness ?? Brightness.dark,
-            systemNavigationBarColor: systemNavigationBarColor,
-            systemNavigationBarIconBrightness:
-                systemNavigationBarIconBrightness,
-            systemNavigationBarDividerColor: systemNavigationBarDividerColor,
-          )
-        : SystemUiOverlayStyle.light.copyWith(
-            statusBarColor: statusBarColor,
-            statusBarBrightness: statusBarBrightness ?? Brightness.light,
-            statusBarIconBrightness: statusBarIconBrightness ?? Brightness.dark,
-            systemNavigationBarColor: systemNavigationBarColor,
-            systemNavigationBarIconBrightness:
-                systemNavigationBarIconBrightness,
-            systemNavigationBarDividerColor: systemNavigationBarDividerColor,
-          );
+    // final systemUiOverlayStyle = useDarkTheme
+    //     ? SystemUiOverlayStyle.dark.copyWith(
+    //         statusBarColor: Colors.white,
+    //         statusBarBrightness: statusBarBrightness ?? Brightness.light,
+    //         statusBarIconBrightness: statusBarIconBrightness ?? Brightness.dark,
+    //         systemNavigationBarColor: systemNavigationBarColor,
+    //         systemNavigationBarIconBrightness:
+    //             systemNavigationBarIconBrightness,
+    //         systemNavigationBarDividerColor: systemNavigationBarDividerColor,
+    //       )
+    //     : SystemUiOverlayStyle.light.copyWith(
+    //         statusBarColor: Colors.transparent,
+    //         statusBarBrightness: statusBarBrightness ?? Brightness.light,
+    //         statusBarIconBrightness: statusBarIconBrightness ?? Brightness.dark,
+    //         systemNavigationBarColor: systemNavigationBarColor,
+    //         systemNavigationBarIconBrightness:
+    //             systemNavigationBarIconBrightness,
+    //         systemNavigationBarDividerColor: systemNavigationBarDividerColor,
+    //       );
 
     return Container(
       color: systemNavigationBarColor,
       child: Padding(
         padding: padding ?? EdgeInsets.zero,
         child: AnnotatedRegion<SystemUiOverlayStyle>(
-          value: systemUiOverlayStyle,
+          // value: systemUiOverlayStyle,
+          // value: SystemUiOverlayStyle.light.copyWith(
+          //   statusBarColor: Colors.black,
+          // ),
+          value: useDarkTheme
+              ? SystemUiOverlayStyle.light
+              : SystemUiOverlayStyle.dark,
           child: SafeArea(
             top: false,
             left: false,

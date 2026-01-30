@@ -44,36 +44,42 @@ class UICustomScaffold extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return UIAnnotatedRegionWidget(
-      statusBarColor: appBarBgColor ?? Colors.white,
+      // statusBarColor: appBarBgColor ?? Colors.white,
+      useDarkTheme: true,
       systemNavigationBarColor: appBarBgColor ?? Colors.white,
+      // statusBarColor: appBarBgColor ?? Colors.red,
+      // systemNavigationBarColor:
+      //     appBarBgColor ?? Theme.of(context).scaffoldBackgroundColor,
       child: Scaffold(
         bottomNavigationBar: bottomNavigationBar,
-        backgroundColor: bgColor ?? const Color(0xFFF8FAFC),
+        // backgroundColor: bgColor ?? const Color(0xFFF8FAFC),
+        backgroundColor: bgColor ?? Theme.of(context).scaffoldBackgroundColor,
         resizeToAvoidBottomInset: false,
         appBar: hideAppBar == true
             ? null
-            : PreferredSize(
-                preferredSize: const Size.fromHeight(60.0),
-                child: AppBar(
-                  surfaceTintColor: Colors.transparent,
-                  centerTitle: centerTitle,
-                  backgroundColor: appBarBgColor ?? Colors.white,
-                  leading: _getLeading(),
-                  titleSpacing: 0,
-                  title: Padding(
-                    padding: EdgeInsets.only(
-                        left: showBackButton ? 0 : Dimens.size10.w),
-                    child: Text(
-                      "$pageTitle",
-                      style: context.appTextStyles.appBarTitle.copyWith(
-                        fontWeight: FontWeight.w500,
-                      ),
+            : AppBar(
+                // surfaceTintColor: Colors.transparent,
+                // elevation: 12,
+                toolbarHeight: 60,
+                centerTitle: centerTitle,
+                // backgroundColor: appBarBgColor ?? Colors.white,
+                // backgroundColor: appBarBgColor ??
+                //     Theme.of(context).scaffoldBackgroundColor,
+                leading: _getLeading(),
+                titleSpacing: 0,
+                title: Padding(
+                  padding: EdgeInsets.only(
+                      left: showBackButton ? 0 : Dimens.size10.w),
+                  child: Text(
+                    "$pageTitle",
+                    style: context.appTextStyles.appBarTitle.copyWith(
+                      fontWeight: FontWeight.w500,
                     ),
                   ),
-                  actions: [
-                    if (actionButton != null) ...[...actionButton!],
-                  ],
                 ),
+                actions: [
+                  if (actionButton != null) ...[...actionButton!],
+                ],
               ),
         body: Padding(
           padding: padding ??

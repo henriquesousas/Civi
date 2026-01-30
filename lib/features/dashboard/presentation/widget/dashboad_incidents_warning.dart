@@ -12,14 +12,6 @@ class DashboadIncidentsWarning extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.center,
         spacing: 10,
         children: [
-          // const UIICon(
-          //   bgColor: AppColors.greyColor,
-          //   icon: Icon(
-          //     Icons.inventory,
-          //     color: AppColors.textColorBody,
-          //   ),
-          //   isAlpha: true,
-          // ),
           Text(
             textAlign: TextAlign.center,
             "Aqui aparecerá as ocorrências que foram \nregistradas nas últimas horas.",

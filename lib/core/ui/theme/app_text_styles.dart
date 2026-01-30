@@ -43,10 +43,10 @@ class AppTextStyles {
     // final color = _textTheme.titleMedium?.color ?? _kPrimaryTextColor;
     return _baseStyle.copyWith(
       fontSize: 15.sp,
-      fontWeight: FontWeight.w600,
+      // fontWeight: FontWeight.w600,
       // height: 20 / 15,
       // letterSpacing: -0.5,
-      color: AppColors.textColorHeader,
+      // color: AppColors.textColorHeader,
     );
   }
 
@@ -56,7 +56,7 @@ class AppTextStyles {
       fontWeight: FontWeight.w600,
       // height: 22 / 17,
       // letterSpacing: -0.408,
-      color: AppColors.textColorHeader,
+      // color: AppColors.textColorHeader,
     );
   }
 
@@ -73,7 +73,7 @@ class AppTextStyles {
       fontWeight: FontWeight.w400,
       // height: 20 / 15,
       letterSpacing: -0.24,
-      color: AppColors.textColorHeader,
+      // color: AppColors.textColorHeader,
     );
   }
 

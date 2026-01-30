@@ -16,7 +16,8 @@ class ProfileHeader extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     // final session = ref.watch(userSessionProvider);
-    final session = ref.watch(authenticatedUserProvider);
+    // final session = ref.watch(authenticatedUserProvider);
+    final session = null;
 
     return SizedBox(
       width: context.percentWidth(1),
@@ -62,12 +63,13 @@ class ProfileHeader extends ConsumerWidget {
             SizedBox(height: 5.h),
             Text(
               session.name,
-              style: context.appTextStyles.sectionTitle,
+              style: context.appTextStyles.sectionTitle
+                  .copyWith(color: Theme.of(context).colorScheme.onSurface),
             ),
             Text(
               session.email,
               style: context.appTextStyles.sectionBodyTextStyle.copyWith(
-                color: AppColors.textColorBody,
+                color: Theme.of(context).colorScheme.surfaceDim,
               ),
             ),
             SizedBox(height: Dimens.size10.h),

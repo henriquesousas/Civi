@@ -24,7 +24,8 @@ class DashbordQuickActionsCard extends StatelessWidget {
           Text(
             "Ações rápidas",
             style: context.appTextStyles.sectionTitle.copyWith(
-              color: AppColors.dark,
+              // color: AppColors.dark,
+              color: Theme.of(context).colorScheme.onSurface,
               fontWeight: FontWeight.w500,
             ),
           ),
@@ -74,7 +75,10 @@ class DashbordQuickActionsCard extends StatelessWidget {
                   ),
                   QuickActionItem(
                     title: "Chamada\nemergência",
-                    color: AppColors.lightGreyColor,
+                    color: Theme.of(context)
+                        .colorScheme
+                        .outlineVariant
+                        .withValues(alpha: 0.3),
                     // icon: const Icon(
                     //   Icons.local_police,
                     //   color: AppColors.darkGreyColor10,
@@ -84,8 +88,8 @@ class DashbordQuickActionsCard extends StatelessWidget {
                       width: Dimens.size30.w,
                       height: Dimens.size30.h,
                       fit: BoxFit.cover,
-                      colorFilter: const ColorFilter.mode(
-                        AppColors.textColorBody,
+                      colorFilter: ColorFilter.mode(
+                        Theme.of(context).colorScheme.outline,
                         BlendMode.srcIn,
                       ),
                     ),

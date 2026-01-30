@@ -4,25 +4,20 @@ import 'app_colors.dart';
 import 'constants.dart';
 
 const AppBarTheme appBarLightTheme = AppBarTheme(
+  surfaceTintColor: Colors.transparent,
+  // scrolledUnderElevation: 4.0,
+  elevation: 1.0,
+  shadowColor: Colors.white70,
   backgroundColor: Colors.white,
-  elevation: 0,
   iconTheme: IconThemeData(color: AppColors.blackColor),
-  titleTextStyle: TextStyle(
-    fontSize: 16,
-    fontWeight: FontWeight.w500,
-    color: AppColors.blackColor,
-  ),
 );
 
 const AppBarTheme appBarDarkTheme = AppBarTheme(
-  backgroundColor: AppColors.blackColor,
-  elevation: 0,
+  backgroundColor: Colors.black12,
+  scrolledUnderElevation: 8.0,
+  elevation: 8.0,
+  surfaceTintColor: Colors.transparent,
   iconTheme: IconThemeData(color: Colors.white),
-  titleTextStyle: TextStyle(
-    fontSize: 16,
-    fontWeight: FontWeight.w500,
-    color: Colors.white,
-  ),
 );
 
 ScrollbarThemeData scrollbarThemeData = ScrollbarThemeData(
