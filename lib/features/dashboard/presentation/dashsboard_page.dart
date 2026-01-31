@@ -66,11 +66,11 @@ class _DashsboardPageState extends BasePageState<DashsboardPage> {
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               Text(
-                'TIZZO',
+                '[LABEL]',
                 style: context.appTextStyles.sectionTitle.copyWith(
                   fontSize: Dimens.size32.sp,
                   fontWeight: FontWeight.w400,
-                  fontFamily: "MuseoModerno",
+                  // fontFamily: "MuseoModerno",
                 ),
               ),
               SizedBox(height: Dimens.size10.h),
