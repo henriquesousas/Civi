@@ -2,6 +2,7 @@ import 'package:deehelp/core/base/base_page.dart';
 import 'package:deehelp/core/ui/extensions/dialog_extension.dart';
 import 'package:deehelp/core/ui/extensions/string_extension.dart';
 import 'package:deehelp/core/ui/theme/app_colors.dart';
+import 'package:deehelp/core/ui/theme/app_text_styles.dart';
 import 'package:deehelp/core/ui/widgets/button/ui_elevated_button.dart';
 import 'package:deehelp/core/ui/widgets/textfield/ui_text_field_rounded.dart';
 import 'package:deehelp/features/incident/presentation/providers/update_incident_viewmodel_provider.dart';
@@ -110,9 +111,13 @@ class _UpdateIncidentPageTileState
       children: [
         Text(
           widget.args.description,
-          style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                color: AppColors.textSecondary,
-              ),
+          style: context.appTextStyles.sectionSubTitle1.copyWith(
+            color: Theme.of(context).colorScheme.surfaceDim,
+          ),
+
+          // style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+          //       color: AppColors.textSecondary,
+          //     ),
         ),
         UITextFieldRounded(
           textInputAction: TextInputAction.done,
@@ -124,6 +129,8 @@ class _UpdateIncidentPageTileState
           controller: _controller,
           onChanged: (value) => _onChangeValue(viewModel, value),
           error: state.updateError,
+          fillColor: Theme.of(context).colorScheme.secondaryContainer,
+          borderColor: Theme.of(context).colorScheme.outlineVariant,
         ),
         UIElevatedButton(
           text: "Confirmar",
@@ -134,14 +141,15 @@ class _UpdateIncidentPageTileState
         if (widget.args.showMyLocationButton) ...[
           UIElevatedButton(
             bgColor: AppColors.greyColor.withValues(alpha: 0.4),
-            textColor: AppColors.textColorHeader,
-            fontWeight: FontWeight.w500,
+            textColor: Theme.of(context).colorScheme.onSurface,
+            // fontWeight: FontWeight.w500,
             text: "Usar minha localização",
             isLoading: state.isGetCurrentLocattion,
             isEnabled: state.isFormValid,
-            icon: const Icon(
+            icon: Icon(
               Icons.gps_fixed,
-              color: AppColors.textColorBody,
+              // color: AppColors.textColorBody,
+              color: Theme.of(context).colorScheme.onSurface,
             ),
             press: () async {
               viewModel.getCurrentLocation(

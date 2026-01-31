@@ -23,7 +23,8 @@ class IncidentDate extends StatelessWidget {
           occurreAt.toDateWithFullMonth(),
           style: context.appTextStyles.caption1Style.copyWith(
             fontWeight: FontWeight.w500,
-            color: AppColors.textColorBody,
+            // color: AppColors.textColorBody,
+            color: Theme.of(context).colorScheme.surfaceDim,
           ),
         ),
       ],

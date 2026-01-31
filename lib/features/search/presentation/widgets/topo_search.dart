@@ -141,10 +141,12 @@ class _TopoSearchState extends ConsumerState<TopoSearch> {
         bottom: 10,
       ),
       decoration: BoxDecoration(
-        color: Colors.white,
+        // color: Colors.white,
+        color: Theme.of(context).colorScheme.surfaceContainer,
         border: Border(
           bottom: BorderSide(
-            color: Colors.grey[300]!,
+            // color: Colors.grey[300]!,
+            color: Theme.of(context).colorScheme.surfaceContainer,
             width: 1,
           ),
         ),
@@ -155,12 +157,14 @@ class _TopoSearchState extends ConsumerState<TopoSearch> {
             child: Padding(
               padding: const EdgeInsets.only(left: 10, right: 10),
               child: UITextFieldRounded(
+                fillColor: Theme.of(context).colorScheme.secondaryContainer,
+                borderColor: Theme.of(context).colorScheme.outlineVariant,
                 contentPadding: const EdgeInsetsDirectional.symmetric(
                   horizontal: 20,
                 ),
                 borderRadius: 90,
-                fillColor: Colors.grey[100],
-                borderColor: Colors.grey[300],
+                // fillColor: Colors.grey[100],
+                // borderColor: Colors.grey[300],
                 focusBorderColor: Colors.grey[300],
                 // borderType: InputBorderType.none,
                 showLabelText: false,
@@ -175,27 +179,7 @@ class _TopoSearchState extends ConsumerState<TopoSearch> {
                     Navigator.pop(context);
                   },
                 ),
-                // suffixIcon: ref.watch(searchViewmodelProvider).when(
-                //       data: (data) {
-                //         return searchQuery.isNotEmpty
-                //             ? IconButton(
-                //                 icon: const Icon(Icons.close,
-                //                     color: AppColors.textSecondary),
-                //                 onPressed: () {
 
-                //                 },
-                //               )
-                //             : null;
-                //       },
-                //       loading: () {
-                //         return const SizedBox(
-                //           height: 16,
-                //           width: 16,
-                //           child: CircularProgressIndicator(strokeWidth: 2),
-                //         );
-                //       },
-                //       error: (_, __) => null,
-                //     ),
                 suffixIcon: searchQuery.isEmpty
                     ? null
                     : IconButton(
@@ -209,7 +193,7 @@ class _TopoSearchState extends ConsumerState<TopoSearch> {
                   color: AppColors.textTertiary,
                 ),
                 textStyle: context.appTextStyles.appBarTitle.copyWith(
-                  color: AppColors.textColorBody,
+                  color: Theme.of(context).colorScheme.onSurface,
                   fontWeight: FontWeight.bold,
                 ),
                 onChanged: (value) => _onSearchChanged(value),

@@ -58,7 +58,7 @@ class MainApp extends ConsumerWidget {
     return OrientationBuilder(
       builder: (context, orientation) {
         final router = ref.watch(goRouterProvider);
-        // final themeData = ref.watch(themeDataProvider);
+        final themeData = ref.watch(themeDataProvider);
         WidgetsBinding.instance.addPostFrameCallback((_) {
           ref.read(themeProvider.notifier).loadSavedTheme();
         });
@@ -90,8 +90,8 @@ class MainApp extends ConsumerWidget {
               // theme: AppTheme.lightTheme(),
               // themeMode: ThemeMode.light,
               // darkTheme: AppTheme.dark(),
-              theme: AppTheme.lightTheme(),
-              themeMode: ThemeMode.light,
+              theme: themeData,
+              themeMode: ThemeMode.dark,
               // themeMode:
               //     themeState.isDarkMode ? ThemeMode.dark : ThemeMode.light,
               title: "DeeHelp",

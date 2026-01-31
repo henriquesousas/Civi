@@ -41,8 +41,8 @@ class IncidentListItem extends StatelessWidget {
       radius: 15,
       borderWidth: 1,
       margin: margin ?? EdgeInsets.symmetric(vertical: 5.h),
-      boxBorder: BoxBorder.all(color: AppColors.lightGreyColor20),
-      borderColor: AppColors.lightGreyColor,
+      // boxBorder: BoxBorder.all(color: AppColors.lightGreyColor20),
+      // borderColor: AppColors.lightGreyColor,
       padding: EdgeInsets.zero,
       showShadow: true,
       child: Material(

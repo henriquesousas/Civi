@@ -25,7 +25,8 @@ class IncidentLocation extends StatelessWidget {
             maxLines: 1,
             overflow: TextOverflow.ellipsis,
             style: context.appTextStyles.caption1Style.copyWith(
-              color: AppColors.textSecondary,
+              // color: AppColors.textSecondary,
+              color: Theme.of(context).colorScheme.surfaceDim,
             ),
           ),
         ),

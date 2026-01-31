@@ -153,6 +153,7 @@ class AppTheme {
 
       outlineVariant: Colors.grey.shade300,
       outline: Colors.grey.shade800,
+      primary: const Color(0xFF2B5BEE),
     );
 
     return ThemeData(
@@ -182,7 +183,8 @@ class AppTheme {
 
   static ThemeData dark() {
     final baseColorScheme = ColorScheme.light(
-      secondaryContainer: Color(0xFF1f222a),
+      secondaryContainer:
+          Colors.grey.withValues(alpha: 0.1), //Color(0xFF1f222a),
       surface: const Color(0xFF1f222a), // Fundo principal
       onSurface: Colors.white, // Texto principal
       surfaceDim: Colors.white70, //Texto secundario
@@ -193,8 +195,8 @@ class AppTheme {
       // outline → “borda principal”
       outline: Colors.grey.shade500,
       // outline: Colors.grey.shade500,
-      onPrimary: Colors.white,
-      onSecondary: Colors.white,
+      primary: const Color(0xFF2B5BEE),
+      onSecondary: const Color(0xFF2157F8),
 
       // primary: Color(0xFF0A84FF),
       // secondary: Color(0xFFFF9F0A),

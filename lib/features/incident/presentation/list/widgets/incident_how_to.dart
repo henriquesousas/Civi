@@ -13,8 +13,10 @@ class IncidentHowTo extends StatelessWidget {
         ? Container(
             padding: EdgeInsets.all(10.r),
             decoration: BoxDecoration(
-              color: AppColors.lightGreyColor.withValues(alpha: 0.3),
-              borderRadius: BorderRadius.circular(8.r),
+              // color: AppColors.lightGreyColor.withValues(alpha: 0.3),
+              color:
+                  Theme.of(context).colorScheme.outline.withValues(alpha: 0.06),
+              borderRadius: BorderRadius.circular(12.r),
             ),
             child: Row(
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -31,8 +33,8 @@ class IncidentHowTo extends StatelessWidget {
                     maxLines: 2,
                     overflow: TextOverflow.ellipsis,
                     style: context.appTextStyles.caption1Style.copyWith(
-                      color: AppColors.textColorBody,
-                    ),
+                        // color: AppColors.textColorBody,
+                        ),
                   ),
                 ),
               ],

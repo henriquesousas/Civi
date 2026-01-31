@@ -20,15 +20,17 @@ class LogoutModal extends ConsumerWidget {
             mainAxisSize: MainAxisSize.min,
             children: [
               Text(
-                "Sair da conta",
-                style: context.appTextStyles.sectionTitle,
+                "Desconectar",
+                style: context.appTextStyles.sectionTitle
+                    .copyWith(color: Theme.of(context).colorScheme.onSurface),
               ),
               const SizedBox(height: 20),
               Text(
                 textAlign: TextAlign.center,
                 "Tem certeza que deseja sair da sua conta? Você precisará fazer login novamente para acessar o aplicativo.",
-                style: context.appTextStyles.bodyTextStyle1.copyWith(
-                  color: AppColors.textColorBody,
+                style: context.appTextStyles.sectionSubTitle1.copyWith(
+                  color: Theme.of(context).colorScheme.onSurface,
+                  // color: AppColors.textColorBody,
                 ),
               ),
               const SizedBox(height: 20),
@@ -39,7 +41,7 @@ class LogoutModal extends ConsumerWidget {
                   Padding(
                     padding: const EdgeInsets.symmetric(vertical: 0),
                     child: UIElevatedButton(
-                      text: "Sim, quero sair",
+                      text: "Sair",
                       press: () {
                         ref.watch(authViewViewModelProvider.notifier).signOut();
                         context.pushReplacement(AppRouter.splash);

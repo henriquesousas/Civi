@@ -41,7 +41,7 @@ class _ProductListingPageState extends BasePageState<ProductListingPage> {
   }
 
   @override
-  String? pageTitle() => "Lista de bens";
+  String? pageTitle() => "Meus itens";
 
   @override
   VoidCallback? onBackPress() {

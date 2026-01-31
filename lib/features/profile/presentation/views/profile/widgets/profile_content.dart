@@ -6,6 +6,7 @@ import 'package:deehelp/core/ui/widgets/icon/ui_icon.dart';
 import 'package:deehelp/core/utils/url_launcher_utils.dart';
 import 'package:deehelp/features/auth/domain/entity/authenticated_user.dart';
 import 'package:deehelp/features/auth/external/di/authenticated_user_provider.dart';
+import 'package:deehelp/features/profile/presentation/views/profile/widgets/theme_switch.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -70,11 +71,10 @@ class ProfileContent extends ConsumerWidget {
                         width: 1,
                       ),
                     ),
-              press: () => context.push(AppRouter.myProducts),
             ),
             UICustomListTileCard(
               padding: EdgeInsetsDirectional.symmetric(vertical: verticalSize),
-              title: "Patrimônio",
+              title: "Meus itens",
               showBorder: true,
               // titleStyle: context.appTextStyles.bodyTextStyle1.copyWith(
               //   color: AppColors.textColorBody,
@@ -94,7 +94,7 @@ class ProfileContent extends ConsumerWidget {
             UICustomListTileCard(
               padding: EdgeInsetsDirectional.symmetric(vertical: verticalSize),
               // title: "R.strings.lastOccurrences",
-              title: "Minhas ocorrências",
+              title: "Ocorrências registradas por mim",
               showBorder: true,
               // titleStyle: context.appTextStyles.bodyTextStyle1.copyWith(
               //   color: AppColors.textColorBody,
@@ -113,7 +113,7 @@ class ProfileContent extends ConsumerWidget {
             ),
             UICustomListTileCard(
               padding: EdgeInsetsDirectional.symmetric(vertical: verticalSize),
-              title: "Pesquisar",
+              title: "Pesquisar ocorrência",
               showBorder: true,
               // titleStyle: context.appTextStyles.bodyTextStyle1.copyWith(
               //   color: AppColors.textColorBody,
@@ -196,6 +196,29 @@ class ProfileContent extends ConsumerWidget {
             ),
             UICustomListTileCard(
               padding: EdgeInsetsDirectional.symmetric(vertical: verticalSize),
+              title: "Tema escuro",
+              showBorder: true,
+              // titleStyle: context.appTextStyles.bodyTextStyle1.copyWith(
+              //   color: AppColors.textColorBody,
+              // ),
+              leading: UIMyAssetsImageWidget(
+                isSvg: true,
+                assetPath: R.svg.palleteColor,
+                width: Dimens.size26.w,
+                height: Dimens.size26.h,
+                boxFit: BoxFit.scaleDown,
+                color: AppColors.primaryColor,
+              ),
+              // trailing: Icon(
+              //   Icons.arrow_forward_ios_rounded,
+              //   size: Dimens.defaultArrowForward,
+              //   color: Theme.of(context).colorScheme.outline,
+              // ),
+              trailing: const ThemeSwitch(),
+              press: () => context.push(AppRouter.welcome),
+            ),
+            UICustomListTileCard(
+              padding: EdgeInsetsDirectional.symmetric(vertical: verticalSize),
               title: "Nascemos agora",
               showBorder: true,
               // titleStyle: context.appTextStyles.bodyTextStyle1.copyWith(
@@ -219,8 +242,8 @@ class ProfileContent extends ConsumerWidget {
             UICustomListTileCard(
               padding: EdgeInsetsDirectional.symmetric(vertical: verticalSize),
               title: "Versão",
-              subtitle:
-                  "Em desenvolvimento, confira se sua versão está atualizada",
+              // subtitle:
+              //     "Em desenvolvimento, confira se sua versão está atualizada",
               showBorder: false,
               // titleStyle: context.appTextStyles.bodyTextStyle1.copyWith(
               //   color: AppColors.textColorBody,

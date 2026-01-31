@@ -86,7 +86,7 @@ class _UpdateProductPage extends BasePageState<UpdateProductPage> {
               bgColor: Colors.transparent,
               borderColor: AppColors.errorColorDark,
               textColor: AppColors.errorColorDark,
-              text: "Apagar cadastro",
+              text: "Remover",
               isLoading: state.deletingProduct,
               press: () async {
                 if (state.currentProduct != null) {

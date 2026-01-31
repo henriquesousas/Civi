@@ -16,13 +16,14 @@ class ReportIncidentInfo extends StatelessWidget {
       ),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(8),
-        color: AppColors.lightGreyColor30,
+        color: Theme.of(context).colorScheme.secondaryContainer,
       ),
       child: Text(
         "Detalhes que você pode incluir:",
         style: context.appTextStyles.caption1Style.copyWith(
-          color: AppColors.darkGreyColor,
+          // color: AppColors.darkGreyColor,
           fontWeight: FontWeight.w600,
+          color: Theme.of(context).colorScheme.onSurface,
         ),
       ),
     );

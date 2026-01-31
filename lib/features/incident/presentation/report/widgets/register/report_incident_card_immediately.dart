@@ -19,7 +19,7 @@ class ReportIncidentCardImmediately extends ConsumerWidget {
       child: CardTypeIncident(
         press: () => viewModel.selectAlertType(TypeAlert.immediately),
         selected: state.type == TypeAlert.immediately,
-        title: "Quero enviar um alerta imediato",
+        title: "Imediato",
         subTitle:
             "Ideal para situações urgentes. Com poucos toques, você envia um alerta instantâneo informando o roubo do seu veículo à comunidade.",
         child: Visibility(
@@ -31,7 +31,8 @@ class ReportIncidentCardImmediately extends ConsumerWidget {
               Text(
                 "Você poderá adicionar mais detalhes depois.",
                 style: context.appTextStyles.bodyTextStyle1.copyWith(
-                  color: AppColors.textColorBody,
+                  // color: AppColors.textColorBody,
+                  color: Theme.of(context).colorScheme.surfaceDim,
                 ),
               ),
               UIHoldConfirmButton(

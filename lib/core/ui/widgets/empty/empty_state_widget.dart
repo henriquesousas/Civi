@@ -57,23 +57,30 @@ class EmptyStateWidget extends StatelessWidget {
             Text(
               title ?? "Nenhum registro encontrado",
               textAlign: TextAlign.center,
-              style: context.appTextStyles.sectionTitle,
+              style: context.appTextStyles.bodyTextStyle1.copyWith(
+                fontWeight: FontWeight.w500,
+                color: Theme.of(context).colorScheme.onSurface,
+              ),
             ),
+            const SizedBox(height: 16),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 20),
               child: Text(
                 subtitle ??
                     "Sua lista está vazia. Toque no botão abaixo para adicionar seu primeiro item.",
                 textAlign: TextAlign.center,
+                style: context.appTextStyles.sectionSubTitle1
+                    .copyWith(color: Theme.of(context).colorScheme.surfaceDim),
               ),
             ),
+            const SizedBox(height: 16),
             if (press != null)
               SizedBox(
                 width: context.percentWidth(0.6),
                 child: UIElevatedButton(
                   text: btnTitle ?? "Novo",
                   press: press ?? () {},
-                  icon: Icon(Icons.add, size: Dimens.size16.w),
+                  // icon: Icon(Icons.add, size: Dimens.size16.w),
                 ),
               )
           ],

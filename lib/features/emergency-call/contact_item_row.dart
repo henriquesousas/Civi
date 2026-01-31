@@ -23,7 +23,7 @@ class ContactItemRow extends StatelessWidget {
   Widget build(BuildContext context) {
     return UICustomAppCard(
       margin: const EdgeInsets.symmetric(vertical: 5),
-      borderColor: AppColors.greyColor,
+      borderColor: Theme.of(context).colorScheme.outline.withValues(alpha: 0.5),
       radius: 9,
       borderWidth: 1,
       padding: EdgeInsets.zero,
@@ -54,7 +54,8 @@ class ContactItemRow extends StatelessWidget {
                       overflow: TextOverflow.ellipsis,
                       style: context.appTextStyles.sectionTitle.copyWith(
                         fontWeight: FontWeight.w600,
-                        color: AppColors.textColorBody,
+                        color: Theme.of(context).colorScheme.onSurface,
+                        // color: AppColors.textColorBody,
                       ),
                     ),
                     Text(
@@ -62,7 +63,8 @@ class ContactItemRow extends StatelessWidget {
                       maxLines: 2,
                       overflow: TextOverflow.ellipsis,
                       style: context.appTextStyles.caption1Style.copyWith(
-                        color: AppColors.textSecondary,
+                        color: Theme.of(context).colorScheme.surfaceDim,
+                        // color: AppColors.textSecondary,
                       ),
                     )
                   ],

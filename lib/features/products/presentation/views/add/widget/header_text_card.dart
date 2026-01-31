@@ -18,8 +18,9 @@ class HeaderTextCard extends StatelessWidget {
           textAlign: TextAlign.start,
           text: header,
           textStyle: context.appTextStyles.sectionTitle.copyWith(
-            color: AppColors.textColorBody,
-            fontSize: 16.0,
+            // color: AppColors.textColorBody,
+            // fontSize: 16.0,
+            color: Theme.of(context).colorScheme.onSurface,
           ),
         ),
         const SizedBox(height: 3),
@@ -29,7 +30,8 @@ class HeaderTextCard extends StatelessWidget {
           textStyle: context.appTextStyles.sectionTitle.copyWith(
             fontWeight: FontWeight.normal,
             fontSize: 11,
-            color: AppColors.textColorBody,
+            // color: AppColors.textColorBody,
+            color: Theme.of(context).colorScheme.surfaceDim,
           ),
         ),
       ],

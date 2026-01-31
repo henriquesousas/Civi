@@ -42,6 +42,8 @@ class ReportIncidentSelectDate extends ConsumerWidget {
                   : "",
             ),
             error: state.errorOccurredAt,
+            fillColor: Theme.of(context).colorScheme.secondaryContainer,
+            borderColor: Theme.of(context).colorScheme.outlineVariant,
           ),
         ),
         Expanded(

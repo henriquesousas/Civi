@@ -21,8 +21,8 @@ class IncidentProtocol extends StatelessWidget {
           Text(
             "Protocolo: $protocolNumber",
             style: context.appTextStyles.caption1Style.copyWith(
-              color: AppColors.textSecondary,
-            ),
+                // color: AppColors.textSecondary,
+                ),
           ),
         ],
       ),

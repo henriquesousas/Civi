@@ -28,6 +28,8 @@ class SearchPage extends ConsumerWidget {
     );
 
     return UICustomScaffold(
+      bgColor: Theme.of(context).colorScheme.surface,
+      // bgColor: AppColors.accent1,
       padding: EdgeInsets.zero,
       hideAppBar: true,
       body: LayoutBuilder(
@@ -41,10 +43,11 @@ class SearchPage extends ConsumerWidget {
               Expanded(
                 child: Container(
                   decoration: BoxDecoration(
-                    color: AppColors.whiteColor,
+                    // color: AppColors.whiteColor,
+                    color: Theme.of(context).colorScheme.surfaceContainer,
                     borderRadius: BorderRadius.circular(10),
                     border: Border.all(
-                      color: AppColors.lightGreyColor30,
+                      color: Theme.of(context).colorScheme.surfaceContainer,
                       width: 1,
                     ),
                   ),

@@ -95,7 +95,10 @@ class _EditFieldModalState extends ConsumerState<EditFieldModal> {
                 ),
                 UIICon(
                   isAlpha: true,
-                  icon: const Icon(Icons.close),
+                  icon: Icon(
+                    Icons.close,
+                    color: Theme.of(context).colorScheme.onSurface,
+                  ),
                   bgColor: Theme.of(context).colorScheme.outline,
                   press: () => context.pop(),
                 ),

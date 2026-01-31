@@ -33,7 +33,7 @@ class _ProductTypeCardState extends State<ProductTypeCard> {
         borderRadius: BorderRadius.circular(Dimens.defaultRadius.r),
         color: widget.isSelected
             ? AppColors.primaryColor.withValues(alpha: 0.08)
-            : AppColors.whiteColor,
+            : Theme.of(context).colorScheme.surfaceContainer,
         border: Border.all(
           color: widget.isSelected
               ? AppColors.primaryColor
@@ -93,8 +93,9 @@ class _ProductTypeCardState extends State<ProductTypeCard> {
                         maxLines: 2,
                         overflow: TextOverflow.ellipsis,
                         style: context.appTextStyles.sectionTitle.copyWith(
-                          fontWeight: FontWeight.w500,
-                          color: AppColors.textColorBody,
+                          fontWeight: FontWeight.normal,
+                          // color: AppColors.textColorBody,
+                          color: Theme.of(context).colorScheme.onSurface,
                         ),
                       ),
                       SizedBox(height: 4.h),
@@ -122,7 +123,10 @@ class _ProductTypeCardState extends State<ProductTypeCard> {
                           child: Icon(
                             Icons.check,
                             size: Dimens.size16.r,
-                            color: Theme.of(context).colorScheme.onPrimary,
+                            color: Colors.white,
+                            // color: Theme.of(context)
+                            //     .colorScheme
+                            //     .secondaryContainer,
                           ),
                         )
                       : Container(

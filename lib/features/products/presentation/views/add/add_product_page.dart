@@ -70,7 +70,7 @@ class _AddProductPageState extends BasePageState<AddProductPage> {
   }
 
   @override
-  String? pageTitle() => "Novo bem";
+  String? pageTitle() => "Adicionar novo";
 
   @override
   EdgeInsetsGeometry? padding() => EdgeInsets.zero;

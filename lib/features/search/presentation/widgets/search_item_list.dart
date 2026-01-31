@@ -14,22 +14,29 @@ class SearchItemList extends StatelessWidget {
       itemBuilder: (context, index) {
         final result = results[index];
         return ListTile(
-          leading: const Icon(
-            Icons.search,
-            color: AppColors.textColorBody,
-          ),
-          trailing: const Icon(
+          leading: Icon(Icons.search,
+              color: Theme.of(context)
+                  .colorScheme
+                  .onSurface
+                  .withValues(alpha: 0.4)),
+          trailing: Icon(
             Icons.arrow_right_alt_outlined,
-            color: AppColors.textSecondary,
+            // color: AppColors.textSecondary,
+            color:
+                Theme.of(context).colorScheme.onSurface.withValues(alpha: 0.4),
           ),
           title: Text(
             result.product.name,
-            style: context.appTextStyles.bodyTextStyle2,
+            style: context.appTextStyles.buttonTextStyle1.copyWith(
+              fontWeight: FontWeight.w500,
+              color: Theme.of(context).colorScheme.onSurface,
+            ),
           ),
           subtitle: Text(
             _getIncidentLocality(result) ?? '',
             style: context.appTextStyles.caption2Style.copyWith(
-              color: AppColors.textColorBody,
+              // color: AppColors.textColorBody,
+              color: Theme.of(context).colorScheme.surfaceDim,
             ),
           ),
           onTap: () {

@@ -26,7 +26,7 @@ class ProfileLogout extends StatelessWidget {
         ),
 
         titleWidget: Text(
-          "Sair da conta",
+          "Sair",
           style: context.appTextStyles.bodyTextStyle1.copyWith(
             color: AppColors.errorColor,
             fontWeight: FontWeight.w400,

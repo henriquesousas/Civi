@@ -31,6 +31,8 @@ class StepAddObs extends ConsumerWidget {
             maxLength: 100,
             maxLine: 5,
             onChanged: (value) => viewModel.onObsChange(value),
+            fillColor: Theme.of(context).colorScheme.secondaryContainer,
+            borderColor: Theme.of(context).colorScheme.outlineVariant,
           ),
         ],
       ),

@@ -27,4 +27,5 @@ class SvgAssets {
   String version = 'assets/svg/type.svg';
   String addProduct = 'assets/svg/add_product.svg';
   String reportIncident = 'assets/svg/add_incident.svg';
+  String palleteColor = 'assets/svg/pallete.svg';
 }

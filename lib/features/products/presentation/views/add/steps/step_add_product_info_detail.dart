@@ -1,3 +1,4 @@
+import 'package:deehelp/core/ui/theme/app_colors.dart';
 import 'package:deehelp/core/ui/widgets/bottom_sheet/utils_modal.dart';
 import 'package:deehelp/core/ui/widgets/card/ui_custom_app_card.dart';
 import 'package:deehelp/core/ui/widgets/textfield/ui_text_field_rounded.dart';
@@ -100,6 +101,8 @@ class _StepAddProductInfoDetailState
             onChanged: (value) => viewModel.onModelChange(value),
             error: state.errorModel,
             controller: _brandController,
+            fillColor: Theme.of(context).colorScheme.secondaryContainer,
+            borderColor: Theme.of(context).colorScheme.outlineVariant,
           ),
           const SizedBox(height: 10),
           UITextFieldRounded(
@@ -112,6 +115,8 @@ class _StepAddProductInfoDetailState
             onChanged: (value) => viewModel.onLicencePlateChange(value),
             error: state.errorLicencePlate,
             controller: _licensePlateController,
+            fillColor: Theme.of(context).colorScheme.secondaryContainer,
+            borderColor: Theme.of(context).colorScheme.outlineVariant,
           ),
           const SizedBox(height: 10),
           UITextFieldRounded(
@@ -124,6 +129,8 @@ class _StepAddProductInfoDetailState
             onChanged: (value) => viewModel.onYearChange(value),
             error: state.errorYear,
             controller: _yearController,
+            fillColor: Theme.of(context).colorScheme.secondaryContainer,
+            borderColor: Theme.of(context).colorScheme.outlineVariant,
           ),
           const SizedBox(height: 10),
           UITextFieldRounded(
@@ -138,6 +145,8 @@ class _StepAddProductInfoDetailState
             controller: TextEditingController(
               text: state.brand,
             ),
+            fillColor: Theme.of(context).colorScheme.secondaryContainer,
+            borderColor: Theme.of(context).colorScheme.outlineVariant,
           ),
           const SizedBox(height: 10),
           UITextFieldRounded(
@@ -150,6 +159,8 @@ class _StepAddProductInfoDetailState
             keyboardType: TextInputType.text,
             onTap: () => _showModalSelectColor(),
             controller: TextEditingController(text: state.color),
+            fillColor: Theme.of(context).colorScheme.secondaryContainer,
+            borderColor: Theme.of(context).colorScheme.outlineVariant,
           ),
         ],
       ),

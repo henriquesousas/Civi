@@ -39,28 +39,10 @@ class _DashsboardPageState extends BasePageState<DashsboardPage> {
   }
 
   @override
-  bool hideAppBar() => false;
+  bool hideAppBar() => true;
 
   @override
   EdgeInsetsGeometry? padding() => EdgeInsets.zero;
-
-  @override
-  Widget? leading() {
-    return const Padding(
-      padding: EdgeInsets.only(left: 10),
-      child: DashboardProfile(),
-    );
-  }
-
-  @override
-  List<Widget>? actionButton() {
-    return [
-      const Padding(
-        padding: EdgeInsets.only(right: 10),
-        child: DashboardLocation(),
-      ),
-    ];
-  }
 
   @override
   Widget buildPage(BuildContext context) {
@@ -68,15 +50,15 @@ class _DashsboardPageState extends BasePageState<DashsboardPage> {
 
     return Column(
       children: [
-        // SizedBox(height: context.topPadding),
-        // const Row(
-        //   spacing: 5,
-        //   children: [
-        //     SizedBox(width: 10),
-        //     // DashboardProfile(),
-        //     DashboardLocation(),
-        //   ],
-        // ),
+        SizedBox(height: context.topPadding),
+        const Row(
+          spacing: 5,
+          children: [
+            SizedBox(width: 10),
+            DashboardProfile(),
+            DashboardLocation(),
+          ],
+        ),
         SizedBox(height: context.topPadding),
         Padding(
           padding: const EdgeInsets.symmetric(horizontal: 20),
@@ -84,14 +66,20 @@ class _DashsboardPageState extends BasePageState<DashsboardPage> {
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               Text(
-                '[LABEL]',
+                'NEIBOR',
                 style: context.appTextStyles.sectionTitle.copyWith(
-                  fontSize: Dimens.size32.sp,
-                  fontWeight: FontWeight.w500,
+                  fontSize: Dimens.size26.sp,
+                  fontWeight: FontWeight.w600,
                   // fontFamily: "MuseoModerno",
                   color: Theme.of(context).colorScheme.onSurface,
                 ),
               ),
+              // Image.asset(
+              //   "assets/images/neibor1.png",
+              //   width: 160,
+              //   height: 160,
+              //   fit: BoxFit.cover,
+              // ),
               SizedBox(height: Dimens.size10.h),
               const DashboardSearchContainer()
             ],

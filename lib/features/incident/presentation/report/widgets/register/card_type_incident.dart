@@ -24,8 +24,9 @@ class CardTypeIncident extends StatelessWidget {
   Widget build(BuildContext context) {
     return UICustomAppCard(
       onPressed: press,
-      borderColor:
-          selected ? AppColors.primaryColor : AppColors.lightGreyColor30,
+      borderColor: selected
+          ? Theme.of(context).colorScheme.primary
+          : Theme.of(context).colorScheme.outlineVariant,
       borderWidth: selected ? 2 : 1,
       child: Column(
         spacing: 10,
@@ -40,8 +41,7 @@ class CardTypeIncident extends StatelessWidget {
                 height: Dimens.size20.h,
                 decoration: BoxDecoration(
                   shape: BoxShape.circle,
-                  color:
-                      selected ? AppColors.primaryColor : AppColors.whiteColor,
+                  color: selected ? AppColors.primaryColor : Colors.white,
                   border: Border.all(
                     color:
                         selected ? AppColors.primaryColor : AppColors.greyColor,
@@ -55,16 +55,19 @@ class CardTypeIncident extends StatelessWidget {
               ),
               Text(
                 title,
-                style: context.appTextStyles.bodyTextStyle2.copyWith(
-                  fontWeight: FontWeight.bold,
-                  color: AppColors.darkGreyColor,
+                style: context.appTextStyles.sectionTitle.copyWith(
+                  // fontWeight: FontWeight.w600,
+                  // color: AppColors.darkGreyColor,
+                  color: Theme.of(context).colorScheme.onSurface,
                 ),
               ),
             ],
           ),
           Text(
             subTitle,
-            style: context.appTextStyles.bodyTextStyle1,
+            style: context.appTextStyles.sectionSubTitle1.copyWith(
+              color: Theme.of(context).colorScheme.surfaceDim,
+            ),
           ),
           const SizedBox(height: 10),
           child,

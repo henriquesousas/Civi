@@ -102,7 +102,7 @@ class AppTextStyles {
       fontSize: 16.sp,
       fontWeight: FontWeight.w400,
       // height: 21 / 16,
-      letterSpacing: -0.32,
+      // letterSpacing: -0.32,
     );
   }
 

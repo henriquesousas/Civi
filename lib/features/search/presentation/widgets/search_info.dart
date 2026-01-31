@@ -1,4 +1,3 @@
-import 'package:deehelp/core/ui/theme/app_colors.dart';
 import 'package:deehelp/core/ui/theme/app_text_styles.dart';
 import 'package:flutter/material.dart';
 
@@ -35,16 +34,19 @@ class SearchInfo extends StatelessWidget {
           // const SizedBox(height: 10),
           Text(
             title,
-            style: context.appTextStyles.bodyTextStyle1.copyWith(
-              color: AppColors.textColorBody,
-              fontWeight: FontWeight.w600,
+            style: context.appTextStyles.buttonTextStyle1.copyWith(
+              fontWeight: FontWeight.w400,
+              color: Theme.of(context).colorScheme.onSurface,
             ),
           ),
           Expanded(
             child: Text(
               error,
               textAlign: TextAlign.center,
-              // style: context.appTextStyles.caption2Style,
+              style: context.appTextStyles.caption2Style.copyWith(
+                // color: AppColors.textColorBody,
+                color: Theme.of(context).colorScheme.surfaceDim,
+              ),
             ),
           ),
         ],

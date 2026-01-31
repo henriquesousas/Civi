@@ -39,8 +39,9 @@ class FaqListItemWidget extends StatelessWidget {
               Expanded(
                 child: Text(
                   question,
-                  style: context.appTextStyles.sectionTitle.copyWith(
-                    color: AppColors.textColorHeader,
+                  style: context.appTextStyles.bodyTextStyle1.copyWith(
+                    // color: AppColors.textColorHeader,
+                    color: Theme.of(context).colorScheme.onSurface,
                     fontWeight: FontWeight.w500,
                   ),
                 ),
@@ -67,7 +68,7 @@ class FaqListItemWidget extends StatelessWidget {
                 Text(
                   answer,
                   style: context.appTextStyles.sectionSubTitle1.copyWith(
-                    color: AppColors.textColorBody,
+                    color: Theme.of(context).colorScheme.surfaceDim,
                   ),
                 ),
               ],

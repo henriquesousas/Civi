@@ -1,4 +1,3 @@
-import 'package:deehelp/core/ui/theme/app_colors.dart';
 import 'package:deehelp/core/ui/theme/app_text_styles.dart';
 import 'package:flutter/material.dart';
 
@@ -13,8 +12,9 @@ class IncidentTitle extends StatelessWidget {
       maxLines: 2,
       overflow: TextOverflow.ellipsis,
       style: context.appTextStyles.sectionTitle.copyWith(
-        fontWeight: FontWeight.w700,
-        color: AppColors.textColorBody,
+        // fontWeight: FontWeight.w700,
+        // color: AppColors.textColorBody,
+        color: Theme.of(context).colorScheme.onSurface,
       ),
     );
   }

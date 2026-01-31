@@ -25,7 +25,7 @@ class ReportIncidentCardDetailed extends ConsumerWidget {
       child: CardTypeIncident(
         press: () => viewModel.selectAlertType(TypeAlert.detailed),
         selected: state.type == TypeAlert.detailed,
-        title: "Alerta detalhado do incidente",
+        title: "Detalhado",
         subTitle:
             "Registre o roubo do seu veículo com informações completas, como características do veículo, local e horário do ocorrido, ajudando na identificação e no acompanhamento do caso.",
         child: ReportIncidentCardAnimated(
@@ -62,6 +62,8 @@ class ReportIncidentCardDetailed extends ConsumerWidget {
                       ? state.timeOccurredAt?.to24hFormat()
                       : "",
                 ),
+                fillColor: Theme.of(context).colorScheme.secondaryContainer,
+                borderColor: Theme.of(context).colorScheme.outlineVariant,
               ),
               UITextFieldRounded(
                 showLabelText: false,
@@ -70,6 +72,8 @@ class ReportIncidentCardDetailed extends ConsumerWidget {
                 controller: state.stateController,
                 onChanged: (value) => viewModel.onStateChange(value),
                 error: state.stateError,
+                fillColor: Theme.of(context).colorScheme.secondaryContainer,
+                borderColor: Theme.of(context).colorScheme.outlineVariant,
               ),
               UITextFieldRounded(
                 showLabelText: false,
@@ -78,6 +82,8 @@ class ReportIncidentCardDetailed extends ConsumerWidget {
                 controller: state.cityController,
                 onChanged: (value) => viewModel.onCityChange(value),
                 error: state.cityError,
+                fillColor: Theme.of(context).colorScheme.secondaryContainer,
+                borderColor: Theme.of(context).colorScheme.outlineVariant,
               ),
               UITextFieldRounded(
                 showLabelText: false,
@@ -85,6 +91,8 @@ class ReportIncidentCardDetailed extends ConsumerWidget {
                 hintText: "Rua,Avenida próximo (não precisa ser exato)",
                 onChanged: (v) => viewModel.onFullAddressChange(v),
                 error: state.errorFullAddress,
+                fillColor: Theme.of(context).colorScheme.secondaryContainer,
+                borderColor: Theme.of(context).colorScheme.outlineVariant,
               ),
               UITextFieldRounded(
                 showLabelText: false,
@@ -92,6 +100,8 @@ class ReportIncidentCardDetailed extends ConsumerWidget {
                 hintText: "Como acontenceu, conte mais detalhes...",
                 onChanged: (v) => viewModel.onHowToChange(v),
                 maxLine: 8,
+                fillColor: Theme.of(context).colorScheme.secondaryContainer,
+                borderColor: Theme.of(context).colorScheme.outlineVariant,
               ),
               UIElevatedButton(
                 text: "Salvar incidente",
