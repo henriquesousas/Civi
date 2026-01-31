@@ -18,7 +18,7 @@ class SplashContent extends StatelessWidget {
           Text(
             R.strings.appName,
             style: context.appTextStyles.bodyTextStyle1.copyWith(
-              fontFamily: "MuseoModerno",
+              // fontFamily: "MuseoModerno",
               fontWeight: FontWeight.bold,
               color: AppColors.whiteColor,
               fontSize: Dimens.size26.sp,

@@ -66,7 +66,7 @@ class _DashsboardPageState extends BasePageState<DashsboardPage> {
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               Text(
-                'NEIBOR',
+                '[LABEL]',
                 style: context.appTextStyles.sectionTitle.copyWith(
                   fontSize: Dimens.size26.sp,
                   fontWeight: FontWeight.w600,
