@@ -22,6 +22,17 @@ import 'package:deehelp/features/test_page.dart';
 import 'package:deehelp/features/welcome/welcome_page.dart';
 import 'package:deehelp/location_required_page.dart';
 import 'package:deehelp/router_refresh_notifier.dart';
+import 'package:deehelp/test_page10.dart';
+import 'package:deehelp/test_page1000.dart';
+import 'package:deehelp/test_page2.dart';
+import 'package:deehelp/test_page3.dart';
+import 'package:deehelp/test_page4.dart';
+import 'package:deehelp/test_page40.dart';
+import 'package:deehelp/test_page5.dart';
+import 'package:deehelp/test_page6.dart';
+import 'package:deehelp/test_page7.dart';
+import 'package:deehelp/test_page8.dart';
+import 'package:deehelp/test_page9.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
@@ -58,7 +69,7 @@ var goRouterProvider = Provider<GoRouter>(
       redirect: (context, state) {
         final currentPath = state.matchedLocation;
         final isPublicRoute = _publicRoutes.contains(currentPath);
-        // return "/";
+        return "/";
         switch (appStatus) {
           case AppStatus.loading:
             return AppRouter.splash;
@@ -78,7 +89,29 @@ var goRouterProvider = Provider<GoRouter>(
           path: '/',
           pageBuilder: (context, state) => slideTransitionPage(
             key: state.pageKey,
-            child: const TestPage(),
+            //Home
+            // child: const TestePage(),
+            // Tela de pesquisa de item
+            // child: const TestPage2(),
+            //Profile
+            // child: const TestPage3(),
+            // Lista de items
+            // child: const TestPage4(),
+            // Cadastro de item
+            // child: const TestPage40(),
+            // Detalhes do item
+            // child: TestPage5(),
+            // Item cadastrado sucesso
+            // child: TestPage6(),
+            //Detalhes da ocorrencia
+            // child: TestPage7(),
+            // Reportat incident
+            // child: TestPage8(),
+            // ReportIncidentSuccess
+            // child: const TestPage9(),
+            // Splash
+            // child: const TestPage10(),
+            child: const TestPage1000(),
           ),
         ),
         GoRoute(
