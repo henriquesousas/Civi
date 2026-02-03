@@ -35,6 +35,7 @@ import 'package:deehelp/test_page6.dart';
 import 'package:deehelp/test_page7.dart';
 import 'package:deehelp/test_page8.dart';
 import 'package:deehelp/test_page9.dart';
+import 'package:deehelp/test_page_dark.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
@@ -93,6 +94,7 @@ var goRouterProvider = Provider<GoRouter>(
             key: state.pageKey,
             //Home
             // child: const TestPage(),
+
             // Search
             // child: const TestPage2(),
             //Profile
@@ -100,7 +102,7 @@ var goRouterProvider = Provider<GoRouter>(
             // Lista de items
             // child: const TestPage4(),
             // Cadastro de item
-            child: const TestPage40(),
+            // child: const TestPage40(),
             // Detalhes do item
             // child: TestPage5(),
             // Item cadastrado sucesso
@@ -115,6 +117,8 @@ var goRouterProvider = Provider<GoRouter>(
             // child: const TestPage10(),
             // child: const TestPage11(),
             // child: const TestPage12FaqPage(),
+            //FAQ DARK
+            child: const TestPageDark(),
           ),
         ),
         GoRoute(
