@@ -27,19 +27,19 @@ class HomeSliverLayout extends StatelessWidget {
         // ===============================
         // Toolbar
         // ===============================
-        SliverAppBar(
-          pinned: true,
-          expandedHeight: 140,
-          elevation: 8,
-          flexibleSpace: FlexibleSpaceBar(
-            background: Padding(
-              padding: const EdgeInsets.fromLTRB(20, 72, 20, 16),
-              child: CollapsibleLocationBanner(
-                location: 'Você está em Osasco, São Paulo',
-              ),
-            ),
-          ),
-        ),
+        // SliverAppBar(
+        //   pinned: true,
+        //   expandedHeight: 140,
+        //   elevation: 8,
+        //   flexibleSpace: FlexibleSpaceBar(
+        //     background: Padding(
+        //       padding: const EdgeInsets.fromLTRB(20, 72, 20, 16),
+        //       child: CollapsibleLocationBanner(
+        //         location: 'Você está em Osasco, São Paulo',
+        //       ),
+        //     ),
+        //   ),
+        // ),
 
         // ===============================
         // Body Content

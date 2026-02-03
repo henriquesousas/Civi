@@ -24,6 +24,8 @@ import 'package:deehelp/location_required_page.dart';
 import 'package:deehelp/router_refresh_notifier.dart';
 import 'package:deehelp/test_page10.dart';
 import 'package:deehelp/test_page1000.dart';
+import 'package:deehelp/test_page11.dart';
+import 'package:deehelp/test_page12.dart';
 import 'package:deehelp/test_page2.dart';
 import 'package:deehelp/test_page3.dart';
 import 'package:deehelp/test_page4.dart';
@@ -90,15 +92,15 @@ var goRouterProvider = Provider<GoRouter>(
           pageBuilder: (context, state) => slideTransitionPage(
             key: state.pageKey,
             //Home
-            // child: const TestePage(),
-            // Tela de pesquisa de item
+            // child: const TestPage(),
+            // Search
             // child: const TestPage2(),
             //Profile
             // child: const TestPage3(),
             // Lista de items
             // child: const TestPage4(),
             // Cadastro de item
-            // child: const TestPage40(),
+            child: const TestPage40(),
             // Detalhes do item
             // child: TestPage5(),
             // Item cadastrado sucesso
@@ -111,7 +113,8 @@ var goRouterProvider = Provider<GoRouter>(
             // child: const TestPage9(),
             // Splash
             // child: const TestPage10(),
-            child: const TestPage1000(),
+            // child: const TestPage11(),
+            // child: const TestPage12FaqPage(),
           ),
         ),
         GoRoute(

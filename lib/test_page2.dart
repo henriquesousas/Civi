@@ -8,7 +8,9 @@ class TestPage2 extends StatefulWidget {
   State<TestPage2> createState() => _TestPage2State();
 }
 
-enum SearchMode { plate, imei }
+enum SearchMode { auto, plate, imei, incidentCode }
+
+enum _DetectedType { plate, imei, incidentCode, unknown }
 
 class _TestPage2State extends State<TestPage2> {
   static const _bg = Color(0xFFF5F7FD);
@@ -16,7 +18,7 @@ class _TestPage2State extends State<TestPage2> {
   static const _muted = Color(0xFF8A96C8);
   static const _primary = Color(0xFF2B5BEE);
 
-  SearchMode mode = SearchMode.plate;
+  SearchMode mode = SearchMode.auto;
   final TextEditingController queryCtrl = TextEditingController();
 
   bool loading = false;
@@ -25,52 +27,201 @@ class _TestPage2State extends State<TestPage2> {
   List<_IncidentResult> results = [];
 
   @override
+  void initState() {
+    super.initState();
+    queryCtrl.addListener(() => setState(() {}));
+  }
+
+  @override
   void dispose() {
     queryCtrl.dispose();
     super.dispose();
   }
 
-  String get _hint =>
-      mode == SearchMode.plate ? 'Ex: ABC1D23' : 'IMEI (15 dígitos)';
-  String get _label => mode == SearchMode.plate ? 'Placa' : 'IMEI';
-  IconData get _leadingIcon => mode == SearchMode.plate
-      ? Icons.confirmation_number_outlined
-      : Icons.dialpad_outlined;
+  String get _rawQuery => queryCtrl.text.trim();
 
+  _DetectedType get _detected => _detectType(_rawQuery);
+
+  SearchMode get _effectiveMode {
+    if (mode != SearchMode.auto) return mode;
+    switch (_detected) {
+      case _DetectedType.plate:
+        return SearchMode.plate;
+      case _DetectedType.imei:
+        return SearchMode.imei;
+      case _DetectedType.incidentCode:
+        return SearchMode.incidentCode;
+      case _DetectedType.unknown:
+        return SearchMode.auto;
+    }
+  }
+
+  String get _label {
+    switch (mode) {
+      case SearchMode.auto:
+        return 'Buscar';
+      case SearchMode.plate:
+        return 'Placa';
+      case SearchMode.imei:
+        return 'IMEI';
+      case SearchMode.incidentCode:
+        return 'Código da ocorrência';
+    }
+  }
+
+  String get _hint {
+    if (mode == SearchMode.auto) {
+      return 'Placa (ABC1D23), IMEI (15 dígitos) ou Código (#12345 / INC-123)';
+    }
+    switch (mode) {
+      case SearchMode.plate:
+        return 'Ex: ABC1D23';
+      case SearchMode.imei:
+        return 'IMEI (15 dígitos)';
+      case SearchMode.incidentCode:
+        return 'Ex: #12345 ou INC-12345';
+      default:
+        return '';
+    }
+  }
+
+  IconData get _leadingIcon {
+    switch (mode) {
+      case SearchMode.auto:
+        return Icons.manage_search_rounded;
+      case SearchMode.plate:
+        return Icons.confirmation_number_outlined;
+      case SearchMode.imei:
+        return Icons.dialpad_outlined;
+      case SearchMode.incidentCode:
+        return Icons.tag_rounded;
+    }
+  }
+
+  /// Formatters:
+  /// - AUTO: permissivo (permite colar qualquer um dos 3)
+  /// - PLACA: 7 chars + uppercase + alfanumérico
+  /// - IMEI: só dígitos, 15
+  /// - CÓDIGO: alfanumérico + # e -
   List<TextInputFormatter> get _formatters {
+    if (mode == SearchMode.auto) {
+      return [
+        LengthLimitingTextInputFormatter(24),
+        FilteringTextInputFormatter.allow(RegExp(r'[a-zA-Z0-9#-]')),
+        _UpperCaseTextFormatter(),
+      ];
+    }
+
     if (mode == SearchMode.plate) {
-      // Placa: 7 chars, uppercase
       return [
         LengthLimitingTextInputFormatter(7),
         FilteringTextInputFormatter.allow(RegExp(r'[a-zA-Z0-9]')),
         _UpperCaseTextFormatter(),
       ];
     }
-    // IMEI: só dígitos, 15
+
+    if (mode == SearchMode.imei) {
+      return [
+        FilteringTextInputFormatter.digitsOnly,
+        LengthLimitingTextInputFormatter(15),
+      ];
+    }
+
+    // incidentCode
     return [
-      FilteringTextInputFormatter.digitsOnly,
-      LengthLimitingTextInputFormatter(15),
+      LengthLimitingTextInputFormatter(24),
+      FilteringTextInputFormatter.allow(RegExp(r'[a-zA-Z0-9#-]')),
+      _UpperCaseTextFormatter(),
     ];
   }
 
-  Future<void> _search() async {
-    final q = queryCtrl.text.trim();
+  TextInputType get _keyboardType {
+    if (mode == SearchMode.imei) return TextInputType.number;
+    if (mode == SearchMode.auto && _effectiveMode == SearchMode.imei) {
+      return TextInputType.number;
+    }
+    return TextInputType.text;
+  }
 
-    if (mode == SearchMode.plate) {
-      if (q.length != 7) {
-        _toast('Informe uma placa válida (7 caracteres).');
-        return;
-      }
-    } else {
-      if (q.isNotEmpty && q.length != 15) {
-        _toast('IMEI deve ter 15 dígitos.');
-        return;
-      }
-      if (q.isEmpty) {
-        _toast('Informe o IMEI para buscar.');
-        return;
+  /// Normaliza o valor dependendo do tipo efetivo:
+  /// - IMEI: remove tudo que não for dígito
+  /// - PLACA: uppercase + remove chars inválidos
+  /// - CÓDIGO: uppercase + remove espaços + remove prefixos extras
+  String _normalizedQueryFor(SearchMode m, String q) {
+    final t = q.trim().toUpperCase();
+
+    if (m == SearchMode.imei) {
+      return t.replaceAll(RegExp(r'[^0-9]'), '');
+    }
+    if (m == SearchMode.plate) {
+      return t.replaceAll(RegExp(r'[^A-Z0-9]'), '');
+    }
+    if (m == SearchMode.incidentCode) {
+      // aceita "#123", "INC-123", "123"
+      return t.replaceAll(' ', '');
+    }
+    return t;
+  }
+
+  /// Validação que controla habilitação do botão (melhor UX).
+  bool get _canSearch {
+    final raw = _rawQuery;
+    if (raw.isEmpty) return false;
+
+    final eff = _effectiveMode;
+    final q = _normalizedQueryFor(eff, raw);
+
+    switch (eff) {
+      case SearchMode.plate:
+        return q.length == 7 && RegExp(r'^[A-Z0-9]{7}$').hasMatch(q);
+      case SearchMode.imei:
+        return q.length == 15 && RegExp(r'^\d{15}$').hasMatch(q);
+      case SearchMode.incidentCode:
+        // regras simples: mínimo 4, máximo 24, pode ter # e -
+        final cleaned = q.replaceAll(RegExp(r'[^A-Z0-9#-]'), '');
+        return cleaned.length >= 4 && cleaned.length <= 24;
+      case SearchMode.auto:
+        // Em auto, só habilita quando detecta algo válido
+        return _detected != _DetectedType.unknown;
+    }
+  }
+
+  String get _detectedLabel {
+    if (_rawQuery.isEmpty) return 'Digite para detectar';
+    if (mode != SearchMode.auto) {
+      // quando força modo, exibe o modo selecionado
+      switch (mode) {
+        case SearchMode.plate:
+          return 'Modo: Placa';
+        case SearchMode.imei:
+          return 'Modo: IMEI';
+        case SearchMode.incidentCode:
+          return 'Modo: Código';
+        case SearchMode.auto:
+          return '';
       }
     }
+
+    switch (_detected) {
+      case _DetectedType.plate:
+        return 'Detectado: Placa';
+      case _DetectedType.imei:
+        return 'Detectado: IMEI';
+      case _DetectedType.incidentCode:
+        return 'Detectado: Código';
+      case _DetectedType.unknown:
+        return 'Não foi possível detectar (use Auto ou escolha um tipo)';
+    }
+  }
+
+  Future<void> _search() async {
+    if (!_canSearch) {
+      _toast('Informe um valor válido para buscar.');
+      return;
+    }
+
+    final eff = _effectiveMode;
+    final q = _normalizedQueryFor(eff, _rawQuery);
 
     setState(() {
       loading = true;
@@ -78,25 +229,36 @@ class _TestPage2State extends State<TestPage2> {
     });
 
     try {
-      // TODO: chamar sua API/usecase: searchByPlate(q) ou searchByImei(q)
+      // TODO: chamar sua API/usecase conforme eff:
+      // - plate -> searchByPlate(q)
+      // - imei -> searchByImei(q)
+      // - incidentCode -> searchByIncidentCode(q)
       await Future.delayed(const Duration(milliseconds: 700));
 
       // Mock results
       setState(() {
         results = [
           _IncidentResult(
-            title: mode == SearchMode.plate
+            title: eff == SearchMode.plate
                 ? 'Roubo de veículo – Placa $q'
-                : 'Roubo de celular – IMEI $q',
+                : eff == SearchMode.imei
+                    ? 'Roubo de celular – IMEI $q'
+                    : 'Ocorrência – Código $q',
             subtitle: 'Registrado por usuário • Bairro Centro',
             dateLabel: 'há 3 dias',
             status: _IncidentStatus.open,
+            kind: eff == SearchMode.plate
+                ? _IncidentKind.vehicle
+                : eff == SearchMode.imei
+                    ? _IncidentKind.phone
+                    : _IncidentKind.incident,
           ),
           _IncidentResult(
             title: 'Furto – ocorrência relacionada',
             subtitle: 'Registrado por usuário • Bairro Jardim',
             dateLabel: 'há 12 dias',
             status: _IncidentStatus.recovered,
+            kind: _IncidentKind.incident,
           ),
         ];
       });
@@ -128,6 +290,7 @@ class _TestPage2State extends State<TestPage2> {
             dateLabel: i == 0 ? 'hoje' : 'há ${i * 3} dias',
             status:
                 i % 3 == 0 ? _IncidentStatus.open : _IncidentStatus.inReview,
+            kind: i.isEven ? _IncidentKind.vehicle : _IncidentKind.phone,
           ),
         );
       });
@@ -151,6 +314,8 @@ class _TestPage2State extends State<TestPage2> {
 
   @override
   Widget build(BuildContext context) {
+    final showClear = queryCtrl.text.isNotEmpty;
+
     return Scaffold(
       backgroundColor: _bg,
       appBar: AppBar(
@@ -171,8 +336,8 @@ class _TestPage2State extends State<TestPage2> {
           const _InfoHintCard(
             title: 'Como funciona',
             text:
-                'Digite a placa do veículo ou o IMEI do celular para localizar ocorrências relacionadas. '
-                'Ou consulte tudo que foi registrado nos últimos 30 dias.',
+                'Digite Placa, IMEI ou Código da ocorrência para localizar registros relacionados. '
+                'Se preferir, consulte tudo que foi registrado nos últimos 30 dias.',
           ),
           const SizedBox(height: 14),
           const _SectionTitle('Pesquisa'),
@@ -186,7 +351,6 @@ class _TestPage2State extends State<TestPage2> {
                     onChanged: (m) {
                       setState(() {
                         mode = m;
-                        queryCtrl.clear();
                         results = [];
                       });
                     },
@@ -208,9 +372,7 @@ class _TestPage2State extends State<TestPage2> {
                         child: TextField(
                           controller: queryCtrl,
                           inputFormatters: _formatters,
-                          keyboardType: mode == SearchMode.imei
-                              ? TextInputType.number
-                              : TextInputType.text,
+                          keyboardType: _keyboardType,
                           decoration: InputDecoration(
                             labelText: _label,
                             hintText: _hint,
@@ -228,7 +390,7 @@ class _TestPage2State extends State<TestPage2> {
                               horizontal: 14,
                               vertical: 12,
                             ),
-                            suffixIcon: queryCtrl.text.isEmpty
+                            suffixIcon: !showClear
                                 ? null
                                 : IconButton(
                                     onPressed: _clear,
@@ -236,18 +398,29 @@ class _TestPage2State extends State<TestPage2> {
                                     color: _muted,
                                   ),
                           ),
-                          onChanged: (_) => setState(() {}),
                           onSubmitted: (_) => _search(),
                         ),
                       ),
                     ],
                   ),
+                  const SizedBox(height: 10),
+
+                  // Linha “Detectado”
+                  _DetectionLine(
+                    text: _detectedLabel,
+                    isOk: mode != SearchMode.auto
+                        ? _canSearch
+                        : _detected != _DetectedType.unknown,
+                  ),
+
                   const SizedBox(height: 12),
+
+                  // Ação primária
                   Row(
                     children: [
                       Expanded(
                         child: ElevatedButton.icon(
-                          onPressed: loading ? null : _search,
+                          onPressed: (loading || !_canSearch) ? null : _search,
                           icon: loading
                               ? const SizedBox(
                                   width: 18,
@@ -274,26 +447,17 @@ class _TestPage2State extends State<TestPage2> {
                           ),
                         ),
                       ),
-                      const SizedBox(width: 12),
-                      Expanded(
-                        child: OutlinedButton.icon(
-                          onPressed: loading ? null : _fetchLast30Days,
-                          icon: const Icon(Icons.history_rounded),
-                          label: const Text(
-                            'Últimos 30 dias',
-                            style: TextStyle(fontWeight: FontWeight.w900),
-                          ),
-                          style: OutlinedButton.styleFrom(
-                            foregroundColor: _primary,
-                            side: BorderSide(color: _primary.withOpacity(0.35)),
-                            padding: const EdgeInsets.symmetric(vertical: 14),
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(18),
-                            ),
-                          ),
-                        ),
-                      ),
                     ],
+                  ),
+
+                  const SizedBox(height: 12),
+
+                  // Ação secundária em formato de card (mais elegante)
+                  _SecondaryActionCard(
+                    title: 'Ocorrências recentes',
+                    subtitle: 'Ver tudo que foi registrado nos últimos 30 dias',
+                    icon: Icons.history_rounded,
+                    onTap: loading ? null : _fetchLast30Days,
                   ),
                 ],
               ),
@@ -308,8 +472,7 @@ class _TestPage2State extends State<TestPage2> {
             const SizedBox(height: 8),
             _EmptyState(
               title: 'Nenhum resultado ainda',
-              subtitle:
-                  'Faça uma busca ou consulte as ocorrências dos últimos 30 dias.',
+              subtitle: 'Faça uma busca ou consulte as ocorrências recentes.',
               actionLabel: 'Ver últimos 30 dias',
               onAction: _fetchLast30Days,
             ),
@@ -326,6 +489,38 @@ class _TestPage2State extends State<TestPage2> {
         ],
       ),
     );
+  }
+
+  _DetectedType _detectType(String q) {
+    final raw = q.trim();
+    if (raw.isEmpty) return _DetectedType.unknown;
+
+    final up = raw.toUpperCase().replaceAll(' ', '');
+
+    // IMEI: 15 dígitos
+    final onlyDigits = up.replaceAll(RegExp(r'[^0-9]'), '');
+    if (onlyDigits.length == 15) return _DetectedType.imei;
+
+    // Placa: 7 alfanumérico (Mercosul/antiga) — heurística simples
+    final plateCandidate = up.replaceAll(RegExp(r'[^A-Z0-9]'), '');
+    if (plateCandidate.length == 7 &&
+        RegExp(r'^[A-Z0-9]{7}$').hasMatch(plateCandidate)) {
+      // Evita classificar "1234567" como placa; mas se quiser permitir, remova esta regra.
+      final hasLetter = RegExp(r'[A-Z]').hasMatch(plateCandidate);
+      if (hasLetter) return _DetectedType.plate;
+    }
+
+    // Código: aceita #, INC-, números curtos, etc.
+    final codeCandidate = up.replaceAll(RegExp(r'[^A-Z0-9#-]'), '');
+    final looksLikeCode = codeCandidate.length >= 4 &&
+        codeCandidate.length <= 24 &&
+        (codeCandidate.startsWith('#') ||
+            codeCandidate.contains('-') ||
+            RegExp(r'^[0-9]{4,12}$').hasMatch(codeCandidate) ||
+            RegExp(r'^[A-Z]{2,5}[0-9]{2,}$').hasMatch(codeCandidate));
+    if (looksLikeCode) return _DetectedType.incidentCode;
+
+    return _DetectedType.unknown;
   }
 }
 
@@ -355,6 +550,15 @@ class _ModeToggle extends StatelessWidget {
         children: [
           Expanded(
             child: _ToggleChip(
+              selected: value == SearchMode.auto,
+              label: 'Auto',
+              icon: Icons.manage_search_rounded,
+              onTap: () => onChanged(SearchMode.auto),
+            ),
+          ),
+          const SizedBox(width: 8),
+          Expanded(
+            child: _ToggleChip(
               selected: value == SearchMode.plate,
               label: 'Placa',
               icon: Icons.confirmation_number_outlined,
@@ -368,6 +572,15 @@ class _ModeToggle extends StatelessWidget {
               label: 'IMEI',
               icon: Icons.dialpad_outlined,
               onTap: () => onChanged(SearchMode.imei),
+            ),
+          ),
+          const SizedBox(width: 8),
+          Expanded(
+            child: _ToggleChip(
+              selected: value == SearchMode.incidentCode,
+              label: 'Código',
+              icon: Icons.tag_rounded,
+              onTap: () => onChanged(SearchMode.incidentCode),
             ),
           ),
         ],
@@ -399,7 +612,7 @@ class _ToggleChip extends StatelessWidget {
       borderRadius: BorderRadius.circular(14),
       onTap: onTap,
       child: Container(
-        padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 12),
+        padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 12),
         decoration: BoxDecoration(
           color: selected ? _primary.withOpacity(0.12) : Colors.white,
           borderRadius: BorderRadius.circular(14),
@@ -412,15 +625,124 @@ class _ToggleChip extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Icon(icon, size: 18, color: selected ? _primary : _muted),
-            const SizedBox(width: 8),
-            Text(
-              label,
-              style: TextStyle(
-                fontWeight: FontWeight.w900,
-                color: selected ? _primary : _ink,
+            const SizedBox(width: 6),
+            Flexible(
+              child: Text(
+                label,
+                overflow: TextOverflow.ellipsis,
+                style: TextStyle(
+                  fontWeight: FontWeight.w900,
+                  color: selected ? _primary : _ink,
+                ),
               ),
             ),
           ],
+        ),
+      ),
+    );
+  }
+}
+
+class _DetectionLine extends StatelessWidget {
+  final String text;
+  final bool isOk;
+
+  const _DetectionLine({required this.text, required this.isOk});
+
+  @override
+  Widget build(BuildContext context) {
+    final color = isOk ? const Color(0xFF43A047) : const Color(0xFF8A96C8);
+    final icon = isOk ? Icons.verified_outlined : Icons.info_outline;
+
+    return Row(
+      children: [
+        Icon(icon, size: 16, color: color),
+        const SizedBox(width: 6),
+        Expanded(
+          child: Text(
+            text,
+            style: TextStyle(
+              fontSize: 12.5,
+              color: color,
+              fontWeight: FontWeight.w700,
+            ),
+          ),
+        ),
+      ],
+    );
+  }
+}
+
+class _SecondaryActionCard extends StatelessWidget {
+  final String title;
+  final String subtitle;
+  final IconData icon;
+  final VoidCallback? onTap;
+
+  const _SecondaryActionCard({
+    required this.title,
+    required this.subtitle,
+    required this.icon,
+    required this.onTap,
+  });
+
+  static const _primary = Color(0xFF2B5BEE);
+  static const _ink = Color(0xFF1F2A44);
+  static const _muted = Color(0xFF8A96C8);
+
+  @override
+  Widget build(BuildContext context) {
+    return InkWell(
+      onTap: onTap,
+      borderRadius: BorderRadius.circular(18),
+      child: Ink(
+        decoration: BoxDecoration(
+          color: Colors.white,
+          borderRadius: BorderRadius.circular(18),
+          border: Border.all(color: const Color(0xFFE6EAF6)),
+        ),
+        child: Padding(
+          padding: const EdgeInsets.all(14),
+          child: Row(
+            children: [
+              Container(
+                width: 38,
+                height: 38,
+                decoration: BoxDecoration(
+                  color: _primary.withOpacity(0.10),
+                  borderRadius: BorderRadius.circular(14),
+                ),
+                child: Icon(icon, color: _primary, size: 20),
+              ),
+              const SizedBox(width: 12),
+              Expanded(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      title,
+                      style: const TextStyle(
+                        color: _ink,
+                        fontWeight: FontWeight.w900,
+                        fontSize: 13.5,
+                      ),
+                    ),
+                    const SizedBox(height: 3),
+                    Text(
+                      subtitle,
+                      style: const TextStyle(
+                        color: _muted,
+                        fontWeight: FontWeight.w600,
+                        height: 1.25,
+                        fontSize: 12.5,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              const Icon(Icons.chevron_right, color: _muted),
+            ],
+          ),
         ),
       ),
     );
@@ -463,7 +785,7 @@ class _IncidentCard extends StatelessWidget {
             child: Row(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                _StatusIcon(status: data.status),
+                _StatusIcon(status: data.status, kind: data.kind),
                 const SizedBox(width: 12),
                 Expanded(
                   child: Column(
@@ -524,7 +846,8 @@ class _IncidentCard extends StatelessWidget {
 
 class _StatusIcon extends StatelessWidget {
   final _IncidentStatus status;
-  const _StatusIcon({required this.status});
+  final _IncidentKind kind;
+  const _StatusIcon({required this.status, required this.kind});
 
   Color get _color {
     switch (status) {
@@ -538,13 +861,18 @@ class _StatusIcon extends StatelessWidget {
   }
 
   IconData get _icon {
-    switch (status) {
-      case _IncidentStatus.open:
-        return Icons.report_gmailerrorred_outlined;
-      case _IncidentStatus.inReview:
-        return Icons.hourglass_top_rounded;
-      case _IncidentStatus.recovered:
-        return Icons.verified_outlined;
+    // mistura status + tipo (dá sensação mais “informativa”)
+    if (status == _IncidentStatus.recovered) return Icons.verified_outlined;
+
+    switch (kind) {
+      case _IncidentKind.vehicle:
+        return Icons.directions_car_filled_outlined;
+      case _IncidentKind.phone:
+        return Icons.smartphone_outlined;
+      case _IncidentKind.incident:
+        return status == _IncidentStatus.inReview
+            ? Icons.hourglass_top_rounded
+            : Icons.report_gmailerrorred_outlined;
     }
   }
 
@@ -891,16 +1219,20 @@ class _UpperCaseTextFormatter extends TextInputFormatter {
 
 enum _IncidentStatus { open, inReview, recovered }
 
+enum _IncidentKind { vehicle, phone, incident }
+
 class _IncidentResult {
   final String title;
   final String subtitle;
   final String dateLabel;
   final _IncidentStatus status;
+  final _IncidentKind kind;
 
   const _IncidentResult({
     required this.title,
     required this.subtitle,
     required this.dateLabel,
     required this.status,
+    required this.kind,
   });
 }

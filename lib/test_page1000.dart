@@ -222,12 +222,22 @@ class _TestPage1000State extends State<TestPage1000>
                 //     'https://api.maptiler.com/maps/streets/{z}/{x}/{y}.png?key=kckSM42Sg4cVXpXD2WOu',
                 // userAgentPackageName: 'com.kotto.app',
                 //MAPBOX
-                // urlTemplate:
-                //     'https://api.mapbox.com/styles/v1/mapbox/streets-v11/tiles/{z}/{x}/{y}?access_token=pk.eyJ1IjoicHNvYXJlczI2MDEiLCJhIjoiY21pbnlkanJuMjBlNzNlcHc5NDBoeWJvdCJ9.-9sIXSToKx-OfzGflYEiYw',
-                // userAgentPackageName: 'com.kotto.app',
                 urlTemplate:
-                    'https://api.mapbox.com/styles/v1/mapbox/streets-v12/tiles/{z}/{x}/{y}@2x?access_token=pk.eyJ1IjoicHNvYXJlczI2MDEiLCJhIjoiY21pbnlkanJuMjBlNzNlcHc5NDBoeWJvdCJ9.-9sIXSToKx-OfzGflYEiYw',
+                    'https://api.mapbox.com/styles/v1/mapbox/streets-v11/tiles/{z}/{x}/{y}?access_token=pk.eyJ1IjoicHNvYXJlczI2MDEiLCJhIjoiY21pbnlkanJuMjBlNzNlcHc5NDBoeWJvdCJ9.-9sIXSToKx-OfzGflYEiYw',
+                // userAgentPackageName: 'com.kotto.app',
+                // urlTemplate:
+                //     'https://api.mapbox.com/styles/v1/mapbox/navigation-day-v1/tiles/512/{z}/{x}/{y}@2x?access_token=pk.eyJ1IjoicHNvYXJlczI2MDEiLCJhIjoiY21pbnlkanJuMjBlNzNlcHc5NDBoeWJvdCJ9.-9sIXSToKx-OfzGflYEiYw',
                 userAgentPackageName: 'com.kotto.app',
+                tileDimension: 512,
+                zoomOffset: -1,
+                maxZoom: 20,
+                minZoom: 3,
+                // retinaMode: true,
+
+                // tileDisplay: TileDisplay.fadeIn(),
+                // urlTemplate:
+                //     'https://api.mapbox.com/styles/v1/mapbox/streets-v12/tiles/{z}/{x}/{y}@2x?access_token=pk.eyJ1IjoicHNvYXJlczI2MDEiLCJhIjoiY21pbnlkanJuMjBlNzNlcHc5NDBoeWJvdCJ9.-9sIXSToKx-OfzGflYEiYw',
+                // userAgentPackageName: 'com.kotto.app',
                 // urlTemplate:
                 //     'https://api.mapbox.com/styles/v1/mapbox/streets-v12/tiles/{z}/{x}/{y}?access_token=pk.eyJ1IjoicHNvYXJlczI2MDEiLCJhIjoiY21pbnlkanJuMjBlNzNlcHc5NDBoeWJvdCJ9.-9sIXSToKx-OfzGflYEiYw',
                 // userAgentPackageName: 'com.kotto.app',

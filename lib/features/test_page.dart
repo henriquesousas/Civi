@@ -1,8 +1,45 @@
 import 'package:flutter/material.dart';
 
-// ===============================
-// Soft Gradient Card - Light Mode
-// ===============================
+/// ===============================
+/// UI TOKENS (Design System)
+/// ===============================
+class UIK {
+  // Colors
+  static const primary = Color(0xFF2B5BEE);
+  static const bg = Color(0xFFF7F9FC);
+  static const surface = Colors.white;
+  static const ink = Color(0xFF1F2A44);
+  static const muted = Color(0xFF6B7280); // cinza elegante
+  static const border = Color(0xFFE9EEF8);
+
+  // Radius
+  static const rCard = 18.0;
+  static const rChip = 14.0;
+  static const rButton = 18.0;
+
+  // Spacing
+  static const s12 = 12.0;
+  static const s16 = 16.0;
+  static const s20 = 20.0;
+  static const s24 = 24.0;
+
+  // Shadow
+  static const shadow = BoxShadow(
+    color: Color(0x12000000),
+    blurRadius: 18,
+    offset: Offset(0, 10),
+  );
+
+  static const shadowSoft = BoxShadow(
+    color: Color(0x0D000000),
+    blurRadius: 16,
+    offset: Offset(0, 8),
+  );
+}
+
+/// ===============================
+/// Soft Gradient Card - Light Mode
+/// ===============================
 class UISoftGradientCardLight extends StatelessWidget {
   final Widget child;
   final double borderRadius;
@@ -14,9 +51,9 @@ class UISoftGradientCardLight extends StatelessWidget {
   const UISoftGradientCardLight({
     super.key,
     required this.child,
-    this.borderRadius = 16,
-    this.padding = const EdgeInsets.all(20),
-    this.baseColor = const Color(0xFF2B5BEE),
+    this.borderRadius = UIK.rCard,
+    this.padding = const EdgeInsets.all(18),
+    this.baseColor = UIK.primary,
     this.width,
     this.height,
   });
@@ -24,16 +61,14 @@ class UISoftGradientCardLight extends StatelessWidget {
   Color _lighten(Color color, double amount) {
     final hsl = HSLColor.fromColor(color);
     return hsl
-        .withLightness(
-          (hsl.lightness + amount).clamp(0.0, 1.0),
-        )
+        .withLightness((hsl.lightness + amount).clamp(0.0, 1.0))
         .toColor();
   }
 
   @override
   Widget build(BuildContext context) {
-    final Color ultraLightBlue = _lighten(baseColor, 0.50);
-    final Color softLightBlue = _lighten(baseColor, 0.36);
+    final ultraLightBlue = _lighten(baseColor, 0.50);
+    final softLightBlue = _lighten(baseColor, 0.36);
 
     return Container(
       width: width,
@@ -43,648 +78,103 @@ class UISoftGradientCardLight extends StatelessWidget {
         gradient: LinearGradient(
           begin: Alignment.topLeft,
           end: Alignment.bottomRight,
-          colors: [
-            ultraLightBlue,
-            softLightBlue,
-          ],
+          colors: [ultraLightBlue, softLightBlue],
         ),
         borderRadius: BorderRadius.circular(borderRadius),
-        border: Border.all(
-          color: baseColor.withOpacity(0.06),
-          width: 1,
-        ),
-        boxShadow: const [
-          BoxShadow(
-            color: Color(0x0F000000),
-            blurRadius: 18,
-            offset: Offset(0, 10),
-          ),
-        ],
+        border: Border.all(color: baseColor.withOpacity(0.06), width: 1),
+        boxShadow: const [UIK.shadowSoft],
       ),
       child: child,
     );
   }
 }
 
-// ===============================
-// Home Screen - Light Mode
-// ===============================
-class TestePage extends StatelessWidget {
-  const TestePage({super.key});
+/// ===============================
+/// HOME (REFATORADA)
+/// ===============================
+class TestPage extends StatelessWidget {
+  const TestPage({super.key});
 
   @override
   Widget build(BuildContext context) {
-    final Color baseBlue = const Color(0xFF2B5BEE);
-
     return Scaffold(
-      appBar: HomeAppToolbar(
+      backgroundColor: UIK.bg,
+      appBar: const _HomeAppBar(
         userName: 'João Silva',
         profileImageUrl: 'https://i.pravatar.cc/150?img=3',
       ),
-      backgroundColor: const Color(0xFFF7F9FC),
-      bottomNavigationBar: BottomRegisterIncidentButton(
+      bottomNavigationBar: _BottomRegisterIncidentButton(
         onTap: () {},
       ),
       body: SafeArea(
-        child: SingleChildScrollView(
-          physics: BouncingScrollPhysics(),
-          padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 16),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              // ===============================
-              // Header - Profile
-              // ===============================
-              // Row(
-              //   children: [
-              //     const CircleAvatar(
-              //       radius: 22,
-              //       backgroundImage: NetworkImage(
-              //         'https://i.pravatar.cc/150?img=3',
-              //       ),
-              //     ),
-              //     const SizedBox(width: 12),
-              //     Column(
-              //       crossAxisAlignment: CrossAxisAlignment.start,
-              //       children: [
-              //         Text(
-              //           'Bom dia,',
-              //           style: Theme.of(context)
-              //               .textTheme
-              //               .bodySmall
-              //               ?.copyWith(color: Colors.grey[600]),
-              //         ),
-              //         Text(
-              //           'João Silva',
-              //           style: Theme.of(context).textTheme.titleMedium,
-              //         ),
-              //       ],
-              //     ),
-              //   ],
-              // ),
-
-              // const SizedBox(height: 24),
-
-              // ===============================
-              // Location Card
-              // ===============================
-              // CollapsibleLocationBanner(
-              //   location: 'Você está em Osasco, São Paulo',
-              // ),
-              LocationIndicatorCard(
-                location: 'Osasco, São Paulo',
-                onTap: () {}, // opcional
-              ),
-
-              // UISoftGradientCardLight(
-              //   padding: const EdgeInsets.all(16),
-              //   child: Row(
-              //     children: [
-              //       Icon(Icons.location_on_outlined, color: baseBlue),
-              //       const SizedBox(width: 8),
-              //       const Expanded(
-              //         child: Text('Você está em São Paulo, SP'),
-              //       ),
-              //     ],
-              //   ),
-              // ),
-
-              const SizedBox(height: 20),
-
-              // ===============================
-              // Search Field (CTA)
-              // ===============================
-              // GestureDetector(
-              //   onTap: () {
-              //     // Navigator.push(...);
-              //   },
-              //   child: Container(
-              //     padding:
-              //         const EdgeInsets.symmetric(horizontal: 16, vertical: 14),
-              //     decoration: BoxDecoration(
-              //       color: Colors.white,
-              //       borderRadius: BorderRadius.circular(14),
-              //       border: Border.all(color: Colors.grey.withOpacity(0.2)),
-              //     ),
-              //     child: Row(
-              //       children: [
-              //         Icon(Icons.search, color: Colors.grey[500]),
-              //         const SizedBox(width: 8),
-              //         Text(
-              //           'Buscar serviços, locais...',
-              //           style: TextStyle(color: Colors.grey[500]),
-              //         ),
-              //       ],
-              //     ),
-              //   ),
-              // ),
-              // SearchFakeField(
-              //   onTap: () {},
-              // ),
-              SearchFakeFieldV2(
-                onTap: () {},
-              ),
-              const SizedBox(height: 28),
-
-              // ===============================
-              // Grid Section
-              // ===============================
-              // HomeFeatureGrid(),
-              ImprovedHomeFeatureGrid(),
-              // const SizedBox(height: 24),
-              // ===============================
-              // Recents incidents
-              // ===============================
-              const SizedBox(height: 28),
-              // RecentIncidentsListV1(),
-              RecentIncidentsList(
-                items: [
-                  RecentIncidentItem(
-                    title: 'Roubo aconteceu em Osasco',
-                    location: 'Osasco, São Paulo',
-                    imageUrl: 'https://i.pravatar.cc/150?img=5',
-                    onTap: () {},
-                  ),
-                  RecentIncidentItem(
-                    title: 'Roubo aconteceu em Osasco',
-                    location: 'Osasco, São Paulo',
-                    imageUrl: 'https://i.pravatar.cc/150?img=5',
-                    onTap: () {},
-                  ),
-                  RecentIncidentItem(
-                    title: 'Roubo aconteceu em Osasco',
-                    location: 'Osasco, São Paulo',
-                    imageUrl: 'https://i.pravatar.cc/150?img=5',
-                    onTap: () {},
-                  ),
-                  RecentIncidentItem(
-                    title: 'Roubo aconteceu em Osasco',
-                    location: 'Osasco, São Paulo',
-                    imageUrl: 'https://i.pravatar.cc/150?img=5',
-                    onTap: () {},
-                  ),
-                  RecentIncidentItem(
-                    title: 'Roubo aconteceu em Osasco',
-                    location: 'Osasco, São Paulo',
-                    imageUrl: 'https://i.pravatar.cc/150?img=5',
-                    onTap: () {},
-                  ),
-                  // até 5 itens
-                ],
-                onSeeAll: () {},
-              ),
-              // ImprovedHomeFeatureGrid(),
-            ],
-          ),
-        ),
-      ),
-    );
-  }
-}
-
-class RecentIncidentsListV1 extends StatelessWidget {
-  final int itemCount;
-  final VoidCallback? onItemTap;
-
-  const RecentIncidentsListV1({
-    super.key,
-    this.itemCount = 5,
-    this.onItemTap,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Text(
-          'Ocorrências recentes',
-          style: Theme.of(context).textTheme.titleSmall,
-        ),
-        const SizedBox(height: 12),
-        ListView.separated(
-          shrinkWrap: true,
-          physics: const NeverScrollableScrollPhysics(),
-          itemCount: itemCount,
-          separatorBuilder: (_, __) => const SizedBox(height: 12),
-          itemBuilder: (context, index) {
-            return GestureDetector(
-              onTap: onItemTap,
-              child: Container(
-                padding: const EdgeInsets.all(14),
-                decoration: BoxDecoration(
-                  color: Colors.white,
-                  borderRadius: BorderRadius.circular(14),
-                  border: Border.all(
-                    color: Colors.grey.withOpacity(0.15),
-                  ),
-                ),
-                child: Row(
-                  children: [
-                    const CircleAvatar(
-                      radius: 20,
-                      backgroundImage: NetworkImage(
-                        'https://i.pravatar.cc/100?img=12',
-                      ),
-                    ),
-                    const SizedBox(width: 12),
-                    Expanded(
-                      child: Text(
-                        'Roubo aconteceu em Osasco, São Paulo',
-                        maxLines: 2,
-                        overflow: TextOverflow.ellipsis,
-                        style: Theme.of(context).textTheme.bodyMedium,
-                      ),
-                    ),
-                    const SizedBox(width: 8),
-                    const Icon(
-                      Icons.chevron_right,
-                      size: 20,
-                      color: Colors.grey,
-                    ),
-                  ],
-                ),
-              ),
-            );
-          },
-        ),
-      ],
-    );
-  }
-}
-
-class BottomRegisterIncidentButton extends StatelessWidget {
-  final VoidCallback onTap;
-  final Color baseColor;
-
-  const BottomRegisterIncidentButton({
-    super.key,
-    required this.onTap,
-    this.baseColor = const Color(0xFF2B5BEE),
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    return SafeArea(
-      top: false,
-      child: Padding(
-        padding: const EdgeInsets.fromLTRB(20, 12, 20, 16),
-        child: GestureDetector(
-          onTap: onTap,
-          child: Container(
-            height: 56,
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(18),
-              gradient: LinearGradient(
-                begin: Alignment.topLeft,
-                end: Alignment.bottomRight,
-                colors: [
-                  baseColor.withOpacity(0.95),
-                  baseColor.withOpacity(0.85),
-                ],
-              ),
-              boxShadow: const [
-                BoxShadow(
-                  color: Color(0x26000000),
-                  blurRadius: 20,
-                  offset: Offset(0, 10),
-                ),
-              ],
-            ),
-            child: Row(
-              children: [
-                const SizedBox(width: 20),
-                Expanded(
-                  child: Text(
-                    'Registrar novo incidente',
-                    style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                          color: Colors.white,
-                          fontWeight: FontWeight.w600,
-                        ),
-                  ),
-                ),
-                // Arrow container
-                Container(
-                  margin: const EdgeInsets.all(8),
-                  width: 40,
-                  height: 40,
-                  decoration: BoxDecoration(
-                    color: Colors.white.withOpacity(0.20),
-                    borderRadius: BorderRadius.circular(14),
-                  ),
-                  child: const Icon(
-                    Icons.arrow_forward_rounded,
-                    color: Colors.white,
-                    size: 22,
-                  ),
-                ),
-              ],
-            ),
-          ),
-        ),
-      ),
-    );
-  }
-}
-
-class HomeAppToolbar extends StatelessWidget implements PreferredSizeWidget {
-  final String userName;
-  final String profileImageUrl;
-
-  const HomeAppToolbar({
-    super.key,
-    required this.userName,
-    required this.profileImageUrl,
-  });
-
-  @override
-  Size get preferredSize => const Size.fromHeight(72);
-
-  @override
-  Widget build(BuildContext context) {
-    return AppBar(
-      elevation: 1,
-      backgroundColor: Colors.white,
-      surfaceTintColor: Colors.white,
-      automaticallyImplyLeading: false,
-      titleSpacing: 20,
-      title: Row(
-        children: [
-          CircleAvatar(
-            radius: 22,
-            backgroundImage: NetworkImage(profileImageUrl),
-          ),
-          const SizedBox(width: 12),
-          Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Text(
-                'Bom dia,',
-                style: Theme.of(context)
-                    .textTheme
-                    .bodySmall
-                    ?.copyWith(color: Colors.grey[600]),
-              ),
-              Text(
-                userName,
-                style: Theme.of(context)
-                    .textTheme
-                    .titleMedium
-                    ?.copyWith(fontWeight: FontWeight.w600),
-              ),
-            ],
-          ),
-        ],
-      ),
-    );
-  }
-}
-
-class LocationContextBanner extends StatelessWidget {
-  final String location;
-  final Color baseColor;
-
-  const LocationContextBanner({
-    super.key,
-    required this.location,
-    this.baseColor = const Color(0xFF2B5BEE),
-  });
-
-  Color _lighten(Color color, double amount) {
-    final hsl = HSLColor.fromColor(color);
-    return hsl
-        .withLightness(
-          (hsl.lightness + amount).clamp(0.0, 1.0),
-        )
-        .toColor();
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    final Color background = _lighten(baseColor, 0.55);
-
-    return Container(
-      padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 10),
-      decoration: BoxDecoration(
-        color: background,
-        borderRadius: BorderRadius.circular(12),
-      ),
-      child: Row(
-        children: [
-          Icon(
-            Icons.location_on_outlined,
-            size: 18,
-            color: baseColor,
-          ),
-          const SizedBox(width: 6),
-          Expanded(
-            child: Text(
-              location,
-              style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                    color: Colors.grey[800],
-                  ),
-            ),
-          ),
-        ],
-      ),
-    );
-  }
-}
-
-class CollapsibleLocationBanner extends StatefulWidget {
-  final String location;
-  final Color baseColor;
-  final bool initiallyExpanded;
-
-  const CollapsibleLocationBanner({
-    super.key,
-    required this.location,
-    this.baseColor = const Color(0xFF2B5BEE),
-    this.initiallyExpanded = true,
-  });
-
-  @override
-  State<CollapsibleLocationBanner> createState() =>
-      _CollapsibleLocationBannerState();
-}
-
-class _CollapsibleLocationBannerState extends State<CollapsibleLocationBanner>
-    with SingleTickerProviderStateMixin {
-  late bool _expanded;
-
-  @override
-  void initState() {
-    super.initState();
-    _expanded = widget.initiallyExpanded;
-  }
-
-  Color _lighten(Color color, double amount) {
-    final hsl = HSLColor.fromColor(color);
-    return hsl
-        .withLightness(
-          (hsl.lightness + amount).clamp(0.0, 1.0),
-        )
-        .toColor();
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    final Color background = _lighten(widget.baseColor, 0.55);
-
-    return AnimatedSize(
-      duration: const Duration(milliseconds: 250),
-      curve: Curves.easeInOut,
-      child: GestureDetector(
-        onTap: () {
-          setState(() => _expanded = !_expanded);
-        },
-        child: Container(
-          padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 10),
-          decoration: BoxDecoration(
-            color: background,
-            borderRadius: BorderRadius.circular(12),
-          ),
-          child: Row(
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              Icon(
-                Icons.location_on_outlined,
-                size: 18,
-                color: widget.baseColor,
-              ),
-              const SizedBox(width: 6),
-              Expanded(
-                child: AnimatedOpacity(
-                  duration: const Duration(milliseconds: 200),
-                  opacity: _expanded ? 1.0 : 0.0,
-                  child: _expanded
-                      ? Text(
-                          widget.location,
-                          style:
-                              Theme.of(context).textTheme.bodySmall?.copyWith(
-                                    color: Colors.grey[800],
-                                  ),
-                        )
-                      : const SizedBox.shrink(),
-                ),
-              ),
-              const SizedBox(width: 6),
-              Icon(
-                _expanded
-                    ? Icons.keyboard_arrow_up_rounded
-                    : Icons.keyboard_arrow_down_rounded,
-                size: 20,
-                color: Colors.grey[600],
-              ),
-            ],
-          ),
-        ),
-      ),
-    );
-  }
-}
-
-class HomeFeatureGrid extends StatelessWidget {
-  final Color baseColor;
-
-  const HomeFeatureGrid({
-    super.key,
-    this.baseColor = const Color(0xFF2B5BEE),
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    return Row(
-      children: [
-        // Left big card
-        Expanded(
-          child: UISoftGradientCardLight(
-            height: 180,
-            padding: const EdgeInsets.all(16),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Icon(Icons.map_outlined, size: 32, color: baseColor),
-                const Spacer(),
-                Text(
-                  'Mapa',
-                  style: Theme.of(context).textTheme.titleMedium,
-                ),
-              ],
-            ),
-          ),
-        ),
-
-        const SizedBox(width: 16),
-
-        // Right stacked cards
-        Expanded(
-          child: Column(
-            children: [
-              UISoftGradientCardLight(
-                height: 82,
-                padding: const EdgeInsets.all(14),
-                child: Row(
-                  children: [
-                    Icon(Icons.store_outlined, size: 26, color: baseColor),
-                    const SizedBox(width: 10),
-                    Text(
-                      'Lojas',
-                      style: Theme.of(context).textTheme.titleSmall,
-                    ),
-                  ],
-                ),
-              ),
-              const SizedBox(height: 16),
-              UISoftGradientCardLight(
-                height: 82,
-                padding: const EdgeInsets.all(14),
-                child: Row(
-                  children: [
-                    Icon(Icons.star_outline, size: 26, color: baseColor),
-                    const SizedBox(width: 10),
-                    Text(
-                      'Favoritos',
-                      style: Theme.of(context).textTheme.titleSmall,
-                    ),
-                  ],
-                ),
-              ),
-            ],
-          ),
-        ),
-      ],
-    );
-  }
-}
-
-class SearchFakeField extends StatelessWidget {
-  final VoidCallback onTap;
-
-  const SearchFakeField({
-    super.key,
-    required this.onTap,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    return GestureDetector(
-      onTap: onTap,
-      child: Container(
-        padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 14),
-        decoration: BoxDecoration(
-          color: Colors.white,
-          borderRadius: BorderRadius.circular(14),
-          border: Border.all(color: Colors.grey.withOpacity(0.2)),
-        ),
-        child: Row(
+        child: ListView(
+          padding: const EdgeInsets.fromLTRB(20, 16, 20, 18),
           children: [
-            Icon(Icons.search, color: Colors.grey[500]),
-            const SizedBox(width: 8),
-            Text(
-              'Buscar serviços, locais...',
-              style: TextStyle(color: Colors.grey[500]),
+            // Location (mais clean e compacto)
+            // _LocationCardCompact(
+            //   title: 'Localização atual',
+            //   primaryText: 'Osasco, São Paulo',
+            //   secondaryText: 'Travessa Francisco Alves da Silva',
+            //   onTap: () {},
+            // ),
+            _LocationBanner(
+              title: 'Localização atual',
+              primaryText: 'Osasco, São Paulo',
+              secondaryText: 'Travessa Francisco Alves da Silva',
+              onTap: () {},
+            ),
+            const SizedBox(height: UIK.s16),
+
+            // Search (mais input-like)
+            _SearchFieldFake(
+              hint: 'Buscar ocorrências, locais ou serviços',
+              onTap: () {},
+            ),
+            const SizedBox(height: UIK.s24),
+
+            // Quick Actions
+            _SectionHeader(
+              title: 'Ações rápidas',
+              actionText: null,
+              onAction: null,
+            ),
+            const SizedBox(height: UIK.s12),
+            // _QuickActionsGrid(
+            //   onMapTap: () {},
+            //   onMyRecordsTap: () {},
+            //   onFavoritesTap: () {},
+            // ),
+            const ImprovedHomeFeatureGrid(),
+            const SizedBox(height: UIK.s24),
+
+            // Recent incidents
+            _SectionHeader(
+              title: 'Incidentes recentes',
+              actionText: 'Ver todos',
+              onAction: () {},
+            ),
+            const SizedBox(height: UIK.s12),
+            _RecentIncidentsList(
+              items: [
+                RecentIncidentItem(
+                  title: 'Roubo de celular reportado',
+                  location: 'Centro • Osasco',
+                  imageUrl: 'https://i.pravatar.cc/150?img=5',
+                  onTap: () {},
+                ),
+                RecentIncidentItem(
+                  title: 'Furto de moto na região',
+                  location: 'Bela Vista • Osasco',
+                  imageUrl: 'https://i.pravatar.cc/150?img=12',
+                  onTap: () {},
+                ),
+                RecentIncidentItem(
+                  title: 'Roubo de veículo registrado',
+                  location: 'Vila Yara • Osasco',
+                  imageUrl: 'https://i.pravatar.cc/150?img=7',
+                  onTap: () {},
+                ),
+              ],
             ),
           ],
         ),
@@ -692,6 +182,477 @@ class SearchFakeField extends StatelessWidget {
     );
   }
 }
+
+/// ===============================
+/// APP BAR (mais elegante)
+/// ===============================
+class _HomeAppBar extends StatelessWidget implements PreferredSizeWidget {
+  final String userName;
+  final String profileImageUrl;
+
+  const _HomeAppBar({
+    required this.userName,
+    required this.profileImageUrl,
+  });
+
+  @override
+  Size get preferredSize => const Size.fromHeight(74);
+
+  @override
+  Widget build(BuildContext context) {
+    return AppBar(
+      elevation: 0,
+      scrolledUnderElevation: 0.6,
+      backgroundColor: UIK.surface,
+      surfaceTintColor: UIK.surface,
+      automaticallyImplyLeading: false,
+      titleSpacing: 20,
+      title: Row(
+        children: [
+          Container(
+            width: 46,
+            height: 46,
+            decoration: BoxDecoration(
+              shape: BoxShape.circle,
+              border: Border.all(color: UIK.border, width: 1),
+              image: DecorationImage(
+                image: NetworkImage(profileImageUrl),
+                fit: BoxFit.cover,
+              ),
+            ),
+          ),
+          const SizedBox(width: 12),
+          Expanded(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  'Bom dia,',
+                  style: Theme.of(context).textTheme.bodySmall?.copyWith(
+                        color: UIK.muted,
+                        fontWeight: FontWeight.w500,
+                      ),
+                ),
+                const SizedBox(height: 2),
+                Text(
+                  userName,
+                  style: Theme.of(context).textTheme.titleMedium?.copyWith(
+                        color: UIK.ink,
+                        fontWeight: FontWeight.w700,
+                      ),
+                ),
+              ],
+            ),
+          ),
+          _IconAction(
+            icon: Icons.notifications_none_rounded,
+            onTap: () {},
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+class _IconAction extends StatelessWidget {
+  final IconData icon;
+  final VoidCallback onTap;
+
+  const _IconAction({required this.icon, required this.onTap});
+
+  @override
+  Widget build(BuildContext context) {
+    return InkWell(
+      onTap: onTap,
+      borderRadius: BorderRadius.circular(UIK.rChip),
+      child: Container(
+        width: 42,
+        height: 42,
+        decoration: BoxDecoration(
+          color: UIK.primary.withOpacity(0.06),
+          borderRadius: BorderRadius.circular(UIK.rChip),
+          border: Border.all(color: UIK.primary.withOpacity(0.10)),
+        ),
+        child: Icon(icon, color: UIK.primary, size: 22),
+      ),
+    );
+  }
+}
+
+/// ===============================
+/// SECTION HEADER
+/// ===============================
+class _SectionHeader extends StatelessWidget {
+  final String title;
+  final String? actionText;
+  final VoidCallback? onAction;
+
+  const _SectionHeader({
+    required this.title,
+    required this.actionText,
+    required this.onAction,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      children: [
+        Expanded(
+          child: Text(
+            title,
+            style: Theme.of(context).textTheme.titleMedium?.copyWith(
+                  fontWeight: FontWeight.w700,
+                  color: UIK.ink,
+                ),
+          ),
+        ),
+        if (actionText != null && onAction != null)
+          TextButton(
+            onPressed: onAction,
+            style: TextButton.styleFrom(
+              foregroundColor: UIK.primary,
+              padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 8),
+            ),
+            child: Text(
+              actionText!,
+              style: const TextStyle(fontWeight: FontWeight.w700),
+            ),
+          ),
+      ],
+    );
+  }
+}
+
+/// ===============================
+/// LOCATION (compact + pro)
+/// ===============================
+class _LocationCardCompact extends StatelessWidget {
+  final String title;
+  final String primaryText;
+  final String? secondaryText;
+  final VoidCallback? onTap;
+
+  const _LocationCardCompact({
+    required this.title,
+    required this.primaryText,
+    this.secondaryText,
+    this.onTap,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return _SurfaceCard(
+      onTap: onTap,
+      padding: const EdgeInsets.all(14),
+      child: Row(
+        children: [
+          _BadgeIcon(icon: Icons.my_location_outlined),
+          const SizedBox(width: 12),
+          Expanded(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  title,
+                  style: Theme.of(context).textTheme.labelSmall?.copyWith(
+                        color: UIK.muted,
+                        fontWeight: FontWeight.w600,
+                      ),
+                ),
+                const SizedBox(height: 4),
+                Text(
+                  primaryText,
+                  maxLines: 1,
+                  overflow: TextOverflow.ellipsis,
+                  style: Theme.of(context).textTheme.bodyLarge?.copyWith(
+                        color: UIK.ink,
+                        fontWeight: FontWeight.w700,
+                      ),
+                ),
+                if (secondaryText != null) ...[
+                  const SizedBox(height: 3),
+                  Text(
+                    secondaryText!,
+                    maxLines: 1,
+                    overflow: TextOverflow.ellipsis,
+                    style: Theme.of(context).textTheme.bodySmall?.copyWith(
+                          color: UIK.muted,
+                          fontWeight: FontWeight.w600,
+                        ),
+                  ),
+                ],
+              ],
+            ),
+          ),
+          if (onTap != null)
+            const Icon(Icons.chevron_right_rounded, color: UIK.muted),
+        ],
+      ),
+    );
+  }
+}
+
+class _BadgeIcon extends StatelessWidget {
+  final IconData icon;
+  const _BadgeIcon({required this.icon});
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      width: 42,
+      height: 42,
+      decoration: BoxDecoration(
+        color: UIK.primary.withOpacity(0.08),
+        borderRadius: BorderRadius.circular(14),
+        border: Border.all(color: UIK.primary.withOpacity(0.10)),
+      ),
+      child: Icon(icon, color: UIK.primary, size: 20),
+    );
+  }
+}
+
+/// ===============================
+/// SEARCH (fake, mas com cara de input real)
+/// ===============================
+class _SearchFieldFake extends StatelessWidget {
+  final VoidCallback onTap;
+  final String hint;
+
+  const _SearchFieldFake({
+    required this.onTap,
+    required this.hint,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return _SurfaceCard(
+      onTap: onTap,
+      padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 14),
+      child: Row(
+        children: [
+          Container(
+            width: 42,
+            height: 42,
+            decoration: BoxDecoration(
+              color: UIK.ink.withOpacity(0.05),
+              borderRadius: BorderRadius.circular(14),
+            ),
+            child: const Icon(Icons.search_rounded, color: UIK.ink, size: 20),
+          ),
+          const SizedBox(width: 12),
+          Expanded(
+            child: Text(
+              hint,
+              style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                    color: UIK.muted,
+                    fontWeight: FontWeight.w600,
+                  ),
+            ),
+          ),
+          Container(
+            padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 8),
+            decoration: BoxDecoration(
+              color: UIK.primary.withOpacity(0.08),
+              borderRadius: BorderRadius.circular(14),
+              border: Border.all(color: UIK.primary.withOpacity(0.10)),
+            ),
+            child: const Icon(Icons.tune_rounded, color: UIK.primary, size: 18),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+/// ===============================
+/// QUICK ACTIONS GRID (bem consistente)
+/// ===============================
+// class _QuickActionsGrid extends StatelessWidget {
+//   final VoidCallback? onMapTap;
+//   final VoidCallback? onMyRecordsTap;
+//   final VoidCallback? onFavoritesTap;
+
+//   const _QuickActionsGrid({
+//     this.onMapTap,
+//     this.onMyRecordsTap,
+//     this.onFavoritesTap,
+//   });
+
+//   @override
+//   Widget build(BuildContext context) {
+//     return Row(
+//       children: [
+//         // Left (highlight)
+//         Expanded(
+//           child: GestureDetector(
+//             onTap: onMapTap,
+//             child: UISoftGradientCardLight(
+//               height: 190,
+//               padding: const EdgeInsets.all(18),
+//               baseColor: UIK.primary,
+//               child: Column(
+//                 crossAxisAlignment: CrossAxisAlignment.start,
+//                 children: [
+//                   _Pill(
+//                     icon: Icons.map_outlined,
+//                     text: 'Mapa',
+//                     bg: UIK.primary.withOpacity(0.12),
+//                     fg: UIK.primary,
+//                   ),
+//                   const Spacer(),
+//                   Text(
+//                     'Mapa de ocorrências',
+//                     style: Theme.of(context).textTheme.titleMedium?.copyWith(
+//                           color: UIK.ink,
+//                           fontWeight: FontWeight.w800,
+//                         ),
+//                   ),
+//                   const SizedBox(height: 6),
+//                   Text(
+//                     'Veja incidentes próximos a você',
+//                     style: Theme.of(context).textTheme.bodySmall?.copyWith(
+//                           color: UIK.muted,
+//                           fontWeight: FontWeight.w600,
+//                         ),
+//                   ),
+//                 ],
+//               ),
+//             ),
+//           ),
+//         ),
+//         const SizedBox(width: 16),
+
+//         // Right stack
+//         Expanded(
+//           child: Column(
+//             children: [
+//               _SurfaceCard(
+//                 onTap: onMyRecordsTap,
+//                 padding: const EdgeInsets.all(16),
+//                 child: _MiniActionRow(
+//                   icon: Icons.report_outlined,
+//                   title: 'Meus registros',
+//                   subtitle: 'Itens e ocorrências',
+//                 ),
+//               ),
+//               const SizedBox(height: 16),
+//               _SurfaceCard(
+//                 onTap: onFavoritesTap,
+//                 padding: const EdgeInsets.all(16),
+//                 child: _MiniActionRow(
+//                   icon: Icons.star_outline_rounded,
+//                   title: 'Favoritos',
+//                   subtitle: 'Locais e alertas',
+//                 ),
+//               ),
+//             ],
+//           ),
+//         ),
+//       ],
+//     );
+//   }
+// }
+
+// class _QuickActionsGrid extends StatelessWidget {
+//   final VoidCallback? onMapTap;
+//   final VoidCallback? onMyRecordsTap;
+//   final VoidCallback? onFavoritesTap;
+
+//   const _QuickActionsGrid({
+//     this.onMapTap,
+//     this.onMyRecordsTap,
+//     this.onFavoritesTap,
+//   });
+
+//   @override
+//   Widget build(BuildContext context) {
+//     const double gap = 16;
+//     const double tileH = 88; // altura de cada card da direita
+//     const double totalH = (tileH * 2) + gap;
+
+//     return SizedBox(
+//       height: totalH, // ✅ define a altura do bloco inteiro (resolve o sumiço)
+//       child: Row(
+//         children: [
+//           // LEFT - MAP
+//           Expanded(
+//             child: GestureDetector(
+//               onTap: onMapTap,
+//               child: UISoftGradientCardLight(
+//                 height: totalH, // ✅ iguala exatamente com os dois da direita
+//                 padding: const EdgeInsets.all(18),
+//                 baseColor: UIK.primary,
+//                 child: Column(
+//                   crossAxisAlignment: CrossAxisAlignment.start,
+//                   children: [
+//                     _Pill(
+//                       icon: Icons.map_outlined,
+//                       text: 'Mapa',
+//                       bg: UIK.primary.withOpacity(0.12),
+//                       fg: UIK.primary,
+//                     ),
+//                     const Spacer(),
+//                     Text(
+//                       'Mapa de ocorrências',
+//                       style: Theme.of(context).textTheme.titleMedium?.copyWith(
+//                             fontWeight: FontWeight.w800,
+//                             color: UIK.ink,
+//                           ),
+//                     ),
+//                     const SizedBox(height: 6),
+//                     Text(
+//                       'Veja incidentes próximos a você',
+//                       style: Theme.of(context).textTheme.bodySmall?.copyWith(
+//                             color: UIK.muted,
+//                             fontWeight: FontWeight.w600,
+//                           ),
+//                     ),
+//                   ],
+//                 ),
+//               ),
+//             ),
+//           ),
+
+//           const SizedBox(width: gap),
+
+//           // RIGHT - STACK
+//           Expanded(
+//             child: Column(
+//               children: [
+//                 SizedBox(
+//                   height: tileH,
+//                   child: _SurfaceCard(
+//                     onTap: onMyRecordsTap,
+//                     padding: const EdgeInsets.all(16),
+//                     child: _MiniActionRow(
+//                       icon: Icons.report_outlined,
+//                       title: 'Meus registros',
+//                       subtitle: 'Itens e ocorrências',
+//                     ),
+//                   ),
+//                 ),
+//                 const SizedBox(height: gap),
+//                 SizedBox(
+//                   height: tileH,
+//                   child: _SurfaceCard(
+//                     onTap: onFavoritesTap,
+//                     padding: const EdgeInsets.all(16),
+//                     child: _MiniActionRow(
+//                       icon: Icons.star_outline_rounded,
+//                       title: 'Favoritos',
+//                       subtitle: 'Locais e alertas',
+//                     ),
+//                   ),
+//                 ),
+//               ],
+//             ),
+//           ),
+//         ],
+//       ),
+//     );
+//   }
+// }
 
 class ImprovedHomeFeatureGrid extends StatelessWidget {
   final Color baseColor;
@@ -844,135 +805,175 @@ class _IconBadge extends StatelessWidget {
   }
 }
 
-class RecentIncidentsList extends StatelessWidget {
-  final List<RecentIncidentItem> items;
-  final VoidCallback? onSeeAll;
+class _MiniActionRow extends StatelessWidget {
+  final IconData icon;
+  final String title;
+  final String subtitle;
 
-  const RecentIncidentsList({
-    super.key,
-    required this.items,
-    this.onSeeAll,
+  const _MiniActionRow({
+    required this.icon,
+    required this.title,
+    required this.subtitle,
   });
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
+    return Row(
       children: [
-        // ===============================
-        // Header
-        // ===============================
-        Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            Text(
-              'Incidentes recentes',
-              style: Theme.of(context)
-                  .textTheme
-                  .titleMedium
-                  ?.copyWith(fontWeight: FontWeight.w600),
-            ),
-            if (onSeeAll != null)
-              TextButton(
-                onPressed: onSeeAll,
-                child: const Text('Ver todos'),
+        _BadgeIcon(icon: icon),
+        const SizedBox(width: 12),
+        Expanded(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                title,
+                style: Theme.of(context).textTheme.bodyLarge?.copyWith(
+                      color: UIK.ink,
+                      fontWeight: FontWeight.w800,
+                    ),
               ),
-          ],
+              const SizedBox(height: 4),
+              Text(
+                subtitle,
+                style: Theme.of(context).textTheme.bodySmall?.copyWith(
+                      color: UIK.muted,
+                      fontWeight: FontWeight.w600,
+                    ),
+              ),
+            ],
+          ),
         ),
+        const Icon(Icons.chevron_right_rounded, color: UIK.muted),
+      ],
+    );
+  }
+}
 
-        const SizedBox(height: 12),
+class _Pill extends StatelessWidget {
+  final IconData icon;
+  final String text;
+  final Color bg;
+  final Color fg;
 
-        // ===============================
-        // List
-        // ===============================
-        ListView.separated(
-          shrinkWrap: true,
-          physics: const NeverScrollableScrollPhysics(),
-          itemCount: items.length.clamp(0, 5),
-          separatorBuilder: (_, __) => const SizedBox(height: 12),
-          itemBuilder: (context, index) {
-            final item = items[index];
+  const _Pill({
+    required this.icon,
+    required this.text,
+    required this.bg,
+    required this.fg,
+  });
 
-            return GestureDetector(
-              onTap: item.onTap,
-              child: Container(
-                padding: const EdgeInsets.all(14),
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 8),
+      decoration: BoxDecoration(
+        color: bg,
+        borderRadius: BorderRadius.circular(14),
+        border: Border.all(color: fg.withOpacity(0.10)),
+      ),
+      child: Row(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          Icon(icon, size: 18, color: fg),
+          const SizedBox(width: 8),
+          Text(
+            text,
+            style: TextStyle(
+              color: fg,
+              fontWeight: FontWeight.w800,
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+/// ===============================
+/// RECENT LIST (mais leve e elegante)
+/// ===============================
+class _RecentIncidentsList extends StatelessWidget {
+  final List<RecentIncidentItem> items;
+
+  const _RecentIncidentsList({required this.items});
+
+  @override
+  Widget build(BuildContext context) {
+    final capped = items.length.clamp(0, 5);
+
+    return ListView.separated(
+      shrinkWrap: true,
+      physics: const NeverScrollableScrollPhysics(),
+      itemCount: capped,
+      separatorBuilder: (_, __) => const SizedBox(height: 12),
+      itemBuilder: (context, index) {
+        final item = items[index];
+
+        return _SurfaceCard(
+          onTap: item.onTap,
+          padding: const EdgeInsets.all(14),
+          child: Row(
+            children: [
+              // Avatar
+              Container(
+                width: 42,
+                height: 42,
                 decoration: BoxDecoration(
-                  color: Colors.white,
-                  borderRadius: BorderRadius.circular(14),
-                  border: Border.all(color: Colors.grey.withOpacity(0.15)),
+                  shape: BoxShape.circle,
+                  border: Border.all(color: UIK.border, width: 1),
+                  image: DecorationImage(
+                    image: NetworkImage(item.imageUrl),
+                    fit: BoxFit.cover,
+                  ),
                 ),
-                child: Row(
+              ),
+              const SizedBox(width: 12),
+
+              // Texts
+              Expanded(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    // ===============================
-                    // Avatar / Image
-                    // ===============================
-                    Container(
-                      width: 44,
-                      height: 44,
-                      decoration: BoxDecoration(
-                        shape: BoxShape.circle,
-                        image: DecorationImage(
-                          image: NetworkImage(item.imageUrl),
-                          fit: BoxFit.cover,
-                        ),
-                      ),
+                    Text(
+                      item.title,
+                      maxLines: 1,
+                      overflow: TextOverflow.ellipsis,
+                      style: Theme.of(context).textTheme.bodyLarge?.copyWith(
+                            color: UIK.ink,
+                            fontWeight: FontWeight.w700,
+                          ),
                     ),
-
-                    const SizedBox(width: 12),
-
-                    // ===============================
-                    // Texts
-                    // ===============================
-                    Expanded(
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(
-                            item.title,
-                            maxLines: 2,
+                    const SizedBox(height: 6),
+                    Row(
+                      children: [
+                        const Icon(Icons.location_on_outlined,
+                            size: 14, color: UIK.muted),
+                        const SizedBox(width: 4),
+                        Expanded(
+                          child: Text(
+                            item.location,
+                            maxLines: 1,
                             overflow: TextOverflow.ellipsis,
-                            style: Theme.of(context)
-                                .textTheme
-                                .bodyMedium
-                                ?.copyWith(fontWeight: FontWeight.w500),
+                            style:
+                                Theme.of(context).textTheme.bodySmall?.copyWith(
+                                      color: UIK.muted,
+                                      fontWeight: FontWeight.w600,
+                                    ),
                           ),
-                          const SizedBox(height: 4),
-                          Row(
-                            children: [
-                              Icon(Icons.location_on_outlined,
-                                  size: 14, color: Colors.grey[500]),
-                              const SizedBox(width: 4),
-                              Expanded(
-                                child: Text(
-                                  item.location,
-                                  maxLines: 1,
-                                  overflow: TextOverflow.ellipsis,
-                                  style: Theme.of(context)
-                                      .textTheme
-                                      .bodySmall
-                                      ?.copyWith(color: Colors.grey[600]),
-                                ),
-                              ),
-                            ],
-                          ),
-                        ],
-                      ),
+                        ),
+                      ],
                     ),
-
-                    const SizedBox(width: 8),
-
-                    // ===============================
-                    // Chevron
-                    // ===============================
-                    const Icon(Icons.chevron_right_rounded, color: Colors.grey),
                   ],
                 ),
               ),
-            );
-          },
-        ),
-      ],
+
+              const SizedBox(width: 8),
+              const Icon(Icons.chevron_right_rounded, color: UIK.muted),
+            ],
+          ),
+        );
+      },
     );
   }
 }
@@ -991,162 +992,203 @@ class RecentIncidentItem {
   });
 }
 
-class SearchFakeFieldV2 extends StatelessWidget {
-  final VoidCallback onTap;
-  final String hint;
+/// ===============================
+/// SURFACE CARD (base para tudo)
+/// ===============================
+class _SurfaceCard extends StatelessWidget {
+  final Widget child;
+  final EdgeInsetsGeometry padding;
+  final VoidCallback? onTap;
 
-  const SearchFakeFieldV2({
-    super.key,
-    required this.onTap,
-    this.hint = 'Buscar incidentes, locais ou serviços',
+  const _SurfaceCard({
+    required this.child,
+    required this.padding,
+    this.onTap,
   });
 
   @override
   Widget build(BuildContext context) {
-    final theme = Theme.of(context);
+    final card = Container(
+      padding: padding,
+      decoration: BoxDecoration(
+        color: UIK.surface,
+        borderRadius: BorderRadius.circular(UIK.rCard),
+        // borderRadius: BorderRadius.circular(90),
+        border: Border.all(color: UIK.border, width: 1),
+        boxShadow: const [UIK.shadowSoft],
+      ),
+      child: child,
+    );
 
-    return GestureDetector(
+    if (onTap == null) return card;
+
+    return InkWell(
       onTap: onTap,
-      child: Container(
-        padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 14),
-        decoration: BoxDecoration(
-          color: Colors.white,
-          borderRadius: BorderRadius.circular(16),
-          border: Border.all(color: Colors.grey.withOpacity(0.18)),
-        ),
-        child: Row(
-          children: [
-            // Icon badge
-            Container(
-              padding: const EdgeInsets.all(8),
-              decoration: BoxDecoration(
-                color: theme.primaryColor.withOpacity(0.08),
-                borderRadius: BorderRadius.circular(10),
-              ),
-              child: Icon(
-                Icons.search,
-                size: 20,
-                color: theme.primaryColor,
-              ),
-            ),
+      borderRadius: BorderRadius.circular(UIK.rCard),
+      child: card,
+    );
+  }
+}
 
-            const SizedBox(width: 12),
+/// ===============================
+/// CTA FIXO (mantive, só deixei mais alinhado)
+/// ===============================
+class _BottomRegisterIncidentButton extends StatelessWidget {
+  final VoidCallback onTap;
+  final Color baseColor;
 
-            // Hint text
-            Expanded(
-              child: Text(
-                hint,
-                style: theme.textTheme.bodyMedium?.copyWith(
-                  color: Colors.grey[600],
+  const _BottomRegisterIncidentButton({
+    required this.onTap,
+    this.baseColor = UIK.primary,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return SafeArea(
+      top: false,
+      child: Padding(
+        padding: const EdgeInsets.fromLTRB(20, 12, 20, 16),
+        child: GestureDetector(
+          onTap: onTap,
+          child: Container(
+            height: 56,
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(UIK.rButton),
+              gradient: LinearGradient(
+                begin: Alignment.topLeft,
+                end: Alignment.bottomRight,
+                colors: [
+                  baseColor.withOpacity(0.95),
+                  baseColor.withOpacity(0.85),
+                ],
+              ),
+              boxShadow: const [
+                BoxShadow(
+                  color: Color(0x22000000),
+                  blurRadius: 18,
+                  offset: Offset(0, 10),
                 ),
-              ),
+              ],
             ),
-
-            // CTA hint
-            Text(
-              'Buscar',
-              style: theme.textTheme.bodySmall?.copyWith(
-                color: theme.primaryColor,
-                fontWeight: FontWeight.w500,
-              ),
+            child: Row(
+              children: [
+                const SizedBox(width: 18),
+                Expanded(
+                  child: Text(
+                    'Registrar novo incidente',
+                    style: Theme.of(context).textTheme.titleMedium?.copyWith(
+                          color: Colors.white,
+                          fontWeight: FontWeight.w800,
+                        ),
+                  ),
+                ),
+                Container(
+                  margin: const EdgeInsets.all(8),
+                  width: 40,
+                  height: 40,
+                  decoration: BoxDecoration(
+                    color: Colors.white.withOpacity(0.18),
+                    borderRadius: BorderRadius.circular(14),
+                    border: Border.all(color: Colors.white.withOpacity(0.14)),
+                  ),
+                  child: const Icon(
+                    Icons.arrow_forward_rounded,
+                    color: Colors.white,
+                    size: 22,
+                  ),
+                ),
+              ],
             ),
-          ],
+          ),
         ),
       ),
     );
   }
 }
 
-class LocationIndicatorCard extends StatelessWidget {
-  final String location;
+class _LocationBanner extends StatelessWidget {
+  final String title;
+  final String primaryText;
+  final String? secondaryText;
   final VoidCallback? onTap;
-  final Color baseColor;
 
-  const LocationIndicatorCard({
-    super.key,
-    required this.location,
+  const _LocationBanner({
+    required this.title,
+    required this.primaryText,
+    this.secondaryText,
     this.onTap,
-    this.baseColor = const Color(0xFF2B5BEE),
   });
 
   @override
   Widget build(BuildContext context) {
-    final theme = Theme.of(context);
-
-    return GestureDetector(
-      onTap: onTap,
-      child: Container(
-        padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
-        decoration: BoxDecoration(
-          color: baseColor.withOpacity(0.06),
-          borderRadius: BorderRadius.circular(14),
-          border: Border.all(
-            color: baseColor.withOpacity(0.15),
-          ),
-        ),
-        child: Row(
-          children: [
-            // Icon badge
-            Container(
-              padding: const EdgeInsets.all(8),
-              decoration: BoxDecoration(
-                color: baseColor.withOpacity(0.12),
-                borderRadius: BorderRadius.circular(10),
-              ),
-              child: Icon(
-                Icons.my_location_outlined,
-                size: 18,
-                color: baseColor,
-              ),
+    final content = Container(
+      padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 14),
+      decoration: BoxDecoration(
+        color: UIK.primary.withOpacity(0.06), // ✅ não branco
+        borderRadius: BorderRadius.circular(UIK.rCard),
+        border: Border.all(color: UIK.primary.withOpacity(0.14)),
+      ),
+      child: Row(
+        children: [
+          Container(
+            width: 42,
+            height: 42,
+            decoration: BoxDecoration(
+              color: UIK.primary.withOpacity(0.12),
+              borderRadius: BorderRadius.circular(14),
             ),
-
-            const SizedBox(width: 12),
-
-            // Texts
-            Expanded(
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    'Localização atual',
-                    style: theme.textTheme.labelSmall?.copyWith(
-                      color: Colors.grey[600],
-                      fontWeight: FontWeight.w500,
-                    ),
-                  ),
+            child: const Icon(Icons.my_location_outlined,
+                color: UIK.primary, size: 20),
+          ),
+          const SizedBox(width: 12),
+          Expanded(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  title,
+                  style: Theme.of(context).textTheme.labelSmall?.copyWith(
+                        color: UIK.muted,
+                        fontWeight: FontWeight.w600,
+                      ),
+                ),
+                const SizedBox(height: 4),
+                Text(
+                  primaryText,
+                  maxLines: 1,
+                  overflow: TextOverflow.ellipsis,
+                  style: Theme.of(context).textTheme.bodyLarge?.copyWith(
+                        color: UIK.ink,
+                        fontWeight: FontWeight.w800,
+                      ),
+                ),
+                if (secondaryText != null) ...[
                   const SizedBox(height: 2),
                   Text(
-                    'Travessa Francisco Alves da Silva',
+                    secondaryText!,
                     maxLines: 1,
                     overflow: TextOverflow.ellipsis,
-                    style: theme.textTheme.bodyMedium?.copyWith(
-                      fontWeight: FontWeight.w600,
-                      color: Colors.grey[800],
-                    ),
-                  ),
-                  const SizedBox(height: 2),
-                  Text(
-                    location,
-                    maxLines: 1,
-                    overflow: TextOverflow.ellipsis,
-                    style: theme.textTheme.bodyMedium?.copyWith(
-                      fontWeight: FontWeight.w600,
-                      color: Colors.grey[800],
-                    ),
+                    style: Theme.of(context).textTheme.bodySmall?.copyWith(
+                          color: UIK.muted,
+                          fontWeight: FontWeight.w600,
+                        ),
                   ),
                 ],
-              ),
+              ],
             ),
-
-            // Optional action indicator
-            if (onTap != null)
-              const Icon(
-                Icons.chevron_right_rounded,
-                color: Colors.grey,
-              ),
-          ],
-        ),
+          ),
+          if (onTap != null)
+            const Icon(Icons.chevron_right_rounded, color: UIK.muted),
+        ],
       ),
+    );
+
+    if (onTap == null) return content;
+
+    return InkWell(
+      onTap: onTap,
+      borderRadius: BorderRadius.circular(UIK.rCard),
+      child: content,
     );
   }
 }
