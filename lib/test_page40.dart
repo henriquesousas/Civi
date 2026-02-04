@@ -1,5 +1,7 @@
 import 'dart:io';
 
+import 'package:app_core/app_core.dart';
+import 'package:deehelp/core/ui/theme/app_colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:image_picker/image_picker.dart';
@@ -267,10 +269,23 @@ class _TestPage40State extends State<TestPage40> {
               onSelect: (t) => setState(() => type = t),
             ),
             const SizedBox(height: 14),
-            const _InfoHintCard(
-              title: 'Dica',
-              text:
-                  'Depois de criar o item, você poderá adicionar fotos para verificação e identificação.',
+            // const _InfoHintCard(
+            //   title: 'Dica',
+            //   text:
+            //       'Depois de criar o item, você poderá adicionar fotos para verificação e identificação.',
+            // ),
+            const CardHint(
+              // backgroundColor: AppColors.whiteColor,
+              // iconBackgroundColor: AppColors.blackColor,
+              title: "Dicas",
+              message:
+                  "Depois de criar o item, você poderá adicionar fotos para verificação e identificação.",
+              icon: Icon(
+                Icons.info_outline,
+                color: _primary,
+                // color: Color(0XFFFFFFFF),
+                size: IconSizes.md,
+              ),
             ),
           ],
           if (step == 1) ...[
@@ -739,28 +754,30 @@ class _WizardHeader extends StatelessWidget {
         padding: const EdgeInsets.all(16),
         child: Row(
           children: [
-            Container(
-              width: 46,
-              height: 46,
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(16),
-                gradient: const LinearGradient(
-                  colors: [Color(0xFF2B5BEE), Color(0xFF5F85FF)],
-                  begin: Alignment.topLeft,
-                  end: Alignment.bottomRight,
-                ),
-              ),
-              child: Center(
-                child: Text(
-                  '${step + 1}',
-                  style: const TextStyle(
-                    color: Colors.white,
-                    fontWeight: FontWeight.w900,
-                    fontSize: 18,
-                  ),
-                ),
-              ),
-            ),
+            //StepCard
+            // Container(
+            //   width: 46,
+            //   height: 46,
+            //   decoration: BoxDecoration(
+            //     borderRadius: BorderRadius.circular(16),
+            //     gradient: const LinearGradient(
+            //       colors: [Color(0xFF2B5BEE), Color(0xFF5F85FF)],
+            //       begin: Alignment.topLeft,
+            //       end: Alignment.bottomRight,
+            //     ),
+            //   ),
+            //   child: Center(
+            //     child: Text(
+            //       '${step + 1}',
+            //       style: const TextStyle(
+            //         color: Colors.white,
+            //         fontWeight: FontWeight.w900,
+            //         fontSize: 18,
+            //       ),
+            //     ),
+            //   ),
+            // ),
+            CardCounter(counter: (step + 1)),
             const SizedBox(width: 14),
             Expanded(
               child: Column(

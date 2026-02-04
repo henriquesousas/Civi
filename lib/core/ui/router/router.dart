@@ -1,5 +1,8 @@
 import 'dart:async';
 
+import 'package:app_core/app_core.dart';
+import 'package:app_feature/app_feature.dart';
+
 import 'package:deehelp/app_startup_provider.dart';
 import 'package:deehelp/core/ui/router/app_router.dart';
 import 'package:deehelp/core/ui/router/slide_transition_page.dart';
@@ -17,7 +20,7 @@ import 'package:deehelp/features/products/presentation/views/listing/product_lis
 import 'package:deehelp/features/products/presentation/views/update/update_product_page.dart';
 import 'package:deehelp/features/profile/presentation/views/profile/profile_page.dart';
 import 'package:deehelp/features/search/search_page.dart';
-import 'package:deehelp/features/splash/splash_page.dart';
+// import 'package:deehelp/features/splash/splash_page.dart';
 import 'package:deehelp/features/test_page.dart';
 import 'package:deehelp/features/welcome/welcome_page.dart';
 import 'package:deehelp/location_required_page.dart';
@@ -91,35 +94,38 @@ var goRouterProvider = Provider<GoRouter>(
         GoRoute(
           path: '/',
           pageBuilder: (context, state) => slideTransitionPage(
-            key: state.pageKey,
-            //Home
-            // child: const TestPage(),
+              key: state.pageKey,
 
-            // Search
-            // child: const TestPage2(),
-            //Profile
-            // child: const TestPage3(),
-            // Lista de items
-            // child: const TestPage4(),
-            // Cadastro de item
-            // child: const TestPage40(),
-            // Detalhes do item
-            // child: TestPage5(),
-            // Item cadastrado sucesso
-            // child: TestPage6(),
-            //Detalhes da ocorrencia
-            // child: TestPage7(),
-            // Reportat incident
-            // child: TestPage8(),
-            // ReportIncidentSuccess
-            // child: const TestPage9(),
-            // Splash
-            // child: const TestPage10(),
-            // child: const TestPage11(),
-            // child: const TestPage12FaqPage(),
-            //FAQ DARK
-            child: const TestPageDark(),
-          ),
+              //Home
+              // child: const TestPage(),
+              child: SplashPage()
+              // Search
+              // child: const TestPage2(),
+              //Profile
+              // child: const TestPage3(),
+              // Lista de items
+              // child: const TestPage4(),
+              // Cadastro de item
+              // child: const TestPage40(),
+              // Detalhes do item
+              // child: TestPage5(),
+              // Item cadastrado sucesso
+              // child: TestPage6(),
+              //Detalhes da ocorrencia
+              // child: TestPage7(),
+              // Reportat incident
+              // child: TestPage8(),
+              // ReportIncidentSuccess
+              // child: const TestPage9(),
+              // Splash
+              // child: const TestPage10(),
+
+              // child: const TestPage11(),
+              // child: const TestPage12FaqPage(),
+              //FAQ DARK
+              // child: const TestPageDark(),
+              // child: MyTest(),
+              ),
         ),
         GoRoute(
           path: AppRouter.onboarding,
@@ -166,10 +172,10 @@ var goRouterProvider = Provider<GoRouter>(
             child: const AddProductSuccessPage(),
           ),
         ),
-        GoRoute(
-          path: AppRouter.splash,
-          builder: (context, state) => const SplashPage(),
-        ),
+        // GoRoute(
+        //   path: AppRouter.splash,
+        //   builder: (context, state) => const SplashPage(),
+        // ),
         GoRoute(
           path: AppRouter.map,
           builder: (context, state) => const MapPage(),

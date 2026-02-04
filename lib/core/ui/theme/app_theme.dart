@@ -1,3 +1,4 @@
+import 'package:app_core/app_core.dart';
 import 'package:deehelp/core/ui/theme/app_colors.dart';
 import 'package:deehelp/core/ui/theme/text_button_theme.dart';
 import 'package:flutter/material.dart';
@@ -144,16 +145,28 @@ import 'theme_data.dart';
 
 class AppTheme {
   static ThemeData lightTheme() {
-    final baseColorScheme = ColorScheme.light(
-      secondaryContainer: Colors.grey.shade200,
-      surface: Colors.grey.shade500, // Fundo principal
-      onSurface: AppColors.textColorHeader, // Texto principal
-      surfaceDim: AppColors.textColorBody, //Texto secundario
-      surfaceContainer: Colors.white,
+    final baseColorScheme = const ColorScheme.light(
+      // onSurface: Colors.red, // Texto pri
+      // surfaceDim: Colors.red, //Texto/Icone propositalmente apagado
+      // secondary: Colors.red,
+      // onError: Color(0xFFEA5B5B),
 
-      outlineVariant: Colors.grey.shade300,
-      outline: Colors.grey.shade800,
-      primary: const Color(0xFF2B5BEE),
+      // secondaryContainer: Colors.grey.shade200,
+      // surface: Colors.grey.shade500, // Fundo principal
+      //Texto
+      onSurface: Color(0xFF1F2A44), //Texto primario
+      secondary: Color(0xFF6B7AAE), //Texto secundario
+      surfaceDim: AppColors.textColorBody, //Texto/Icone propositalmente apagado
+      onError: Color(0xFFEA5B5B),
+
+      // surfaceContainer: Colors.white,
+      // surfaceVariant: Color(0xFF6B7AAE),
+
+      // outlineVariant: Colors.grey.shade300,
+      // outline: Colors.grey.shade800,
+
+      primary: Color(0xFF2B5BEE),
+      onPrimary: Color(0xFFFFFFFF),
     );
 
     return ThemeData(
@@ -166,9 +179,10 @@ class AppTheme {
       primarySwatch: AppColors.primaryMaterialColor,
       primaryColor: AppColors.primaryColor,
       iconTheme: const IconThemeData(color: AppColors.blackColor),
-      textTheme: const TextTheme(
-        bodyMedium: TextStyle(color: AppColors.blackColor40),
-      ),
+      // textTheme: AppTypography.textTheme.apply(
+      //   displayColor: baseColorScheme.onSurface,
+      //   bodyColor: baseColorScheme.secondary,
+      // ),
       elevatedButtonTheme: elevatedButtonThemeData,
       textButtonTheme: textButtonThemeData,
       outlinedButtonTheme: outlinedButtonTheme(),
@@ -226,4 +240,15 @@ class AppTheme {
       dataTableTheme: dataTableLightThemeData,
     );
   }
+
+  // ThemeData buildTheme(ColorScheme scheme) {
+  //   return ThemeData(
+  //     useMaterial3: true,
+  //     colorScheme: scheme,
+  //     textTheme: AppTypography.textTheme.apply(
+  //       bodyColor: scheme.onSurface,
+  //       displayColor: scheme.onSurface,
+  //     ),
+  //   );
+  // }
 }

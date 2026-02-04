@@ -12,6 +12,10 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
+  app_core:
+    path: packages/core
+  app_feature:
+    path: packages/feature
   flutter_localizations:
     sdk: flutter
   intl: 0.20.2

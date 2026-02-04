@@ -1,0 +1,13 @@
+name: app_core
+description: Core shared code
+version: 1.0.0
+
+publish_to: none
+
+environment:
+  sdk: ">=3.0.0 <4.0.0"
+
+dependencies:
+  flutter:
+    sdk: flutter
+  flutter_screenutil: ^5.9.3

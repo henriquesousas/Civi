@@ -15,7 +15,6 @@ import 'package:supabase_flutter/supabase_flutter.dart';
 import 'core/env.dart';
 import 'core/resources.dart';
 import 'core/ui/router/router.dart';
-import 'core/ui/theme/app_theme.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -50,18 +49,32 @@ void main() async {
   );
 }
 
-class MainApp extends ConsumerWidget {
+class MainApp extends ConsumerStatefulWidget {
   const MainApp({super.key});
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
+  ConsumerState<MainApp> createState() => _MainAppState();
+}
+
+class _MainAppState extends ConsumerState<MainApp> {
+  @override
+  void initState() {
+    super.initState();
+    // Future.microtask(() => ref.read(themeProvider.notifier).loadSavedTheme());
+    // WidgetsBinding.instance.addPostFrameCallback((_) {
+    //   ref.read(themeProvider.notifier).loadSavedTheme();
+    // });
+  }
+
+  @override
+  Widget build(BuildContext context) {
     return OrientationBuilder(
       builder: (context, orientation) {
-        final router = ref.watch(goRouterProvider);
-        final themeData = ref.watch(themeDataProvider);
-        WidgetsBinding.instance.addPostFrameCallback((_) {
-          ref.read(themeProvider.notifier).loadSavedTheme();
-        });
+        // final router = ref.watch(goRouterProvider);
+        // final themeData = ref.watch(themeDataProvider);
+        // WidgetsBinding.instance.addPostFrameCallback((_) {
+        //   ref.read(themeProvider.notifier).loadSavedTheme();
+        // });
 
         return ScreenUtilInit(
           // designSize: context.designSize(),
@@ -71,6 +84,11 @@ class MainApp extends ConsumerWidget {
           useInheritedMediaQuery: true,
           rebuildFactor: (old, data) => true,
           builder: (context, child) {
+            final router = ref.watch(goRouterProvider);
+            final themeData = ref.watch(themeDataProvider);
+            // WidgetsBinding.instance.addPostFrameCallback((_) {
+            //   ref.read(themeProvider.notifier).loadSavedTheme();
+            // });
             return MaterialApp.router(
               localizationsDelegates: const [
                 GlobalMaterialLocalizations.delegate,
@@ -94,7 +112,7 @@ class MainApp extends ConsumerWidget {
               themeMode: ThemeMode.dark,
               // themeMode:
               //     themeState.isDarkMode ? ThemeMode.dark : ThemeMode.light,
-              title: "DeeHelp",
+              title: "Kotto",
               debugShowCheckedModeBanner: false,
             );
           },
