@@ -6,7 +6,7 @@ class AppColors {
   static const Color primaryColor = Color(0xFF2B5BEE);
   static const Color primaryColorDark = Color(0xFF2157F8);
   static const Color primaryColorVariant = Color(0xFF5F85FF);
-  static const Color white = Color(0xFFFFFFFF);
+  // static const Color white = Color(0xFFFFFFFF);
   // static const MaterialColor primaryMaterialColor =
   //     MaterialColor(0xFF9581FF, <int, Color>{
   //   50: Color(0xFFEFECFF),

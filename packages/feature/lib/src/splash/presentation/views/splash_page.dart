@@ -1,6 +1,6 @@
 import 'package:app_core/app_core.dart';
-import 'package:app_feature/src/splash/widgets/logo.dart';
-import 'package:app_feature/src/splash/widgets/splash_progress_indicator.dart';
+import 'package:app_feature/src/splash/presentation/views/widgets/logo.dart';
+import 'package:app_feature/src/splash/presentation/views/widgets/splash_progress_indicator.dart';
 import 'package:flutter/material.dart';
 
 class SplashPage extends StatefulWidget {

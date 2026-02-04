@@ -274,7 +274,7 @@ class _TestPage40State extends State<TestPage40> {
             //   text:
             //       'Depois de criar o item, você poderá adicionar fotos para verificação e identificação.',
             // ),
-            const CardHint(
+            CardHint(
               // backgroundColor: AppColors.whiteColor,
               // iconBackgroundColor: AppColors.blackColor,
               title: "Dicas",

@@ -1,10 +1,14 @@
-import 'package:deehelp/core/providers/current_location_provider.dart';
-import 'package:deehelp/core/services/location/state/location_state.dart';
+import 'package:app_core/app_core.dart';
 import 'package:deehelp/core/ui/extensions/result_extension.dart';
 import 'package:deehelp/features/auth/external/di/auth_repository_provider.dart';
 import 'package:deehelp/features/auth/external/repositories/supabase_auth_repository.dart';
-import 'package:deehelp/location_permission_notifier.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+
+// final locationAccessNotifierProvider =
+//     StateNotifierProvider<LocationAccessNotifier, LocationAccessState>(
+//   (ref) => LocationAccessNotifier(),
+// );
 
 enum AppStatus {
   loading,
@@ -21,49 +25,69 @@ final appStartupProvider = StateNotifierProvider<AppStartupNotifier, AppStatus>(
 class AppStartupNotifier extends StateNotifier<AppStatus> {
   final Ref ref;
 
-  AppStartupNotifier(this.ref) : super(AppStatus.loading) {
-    _init();
-  }
+  AppStartupNotifier(this.ref) : super(AppStatus.loading);
 
-  Future<void> _init() async {
-    final start = DateTime.now();
+  Future<void> initCheck() async {
+    final isAuthenticated = await _checkAuthentication();
 
-    // 1️⃣ Check localização
-    await ref.read(locationPermissionProvider.notifier).check();
-    final locationState = ref.read(locationPermissionProvider);
-
-    // 2️⃣ Check autenticação
-    final authRepo = ref.read(authRepositoryProvider) as SupabaseAuthRepository;
-    final authResult = await authRepo.getCurrentUser();
-    final isAuthenticated = authResult.isSuccess;
-
-    // 3️⃣ Se NÃO estiver autenticado → garantir 3s de splash
-    await ellapseTime(start);
     if (!isAuthenticated) {
       state = AppStatus.unauthenticated;
-    } else if (!locationState.maybeWhen(
-      granted: (currentLocation) {
-        ref.watch(currentLocationProvider.notifier).state = currentLocation;
-        return true;
-      },
-      orElse: () => false,
-    )) {
-      state = AppStatus.needLocation;
-    } else {
-      state = AppStatus.ready;
+      return;
     }
+
+    _checkLocalization();
   }
 
   Future<void> refresh() async {
     state = AppStatus.loading;
-    await _init();
+    await initCheck();
   }
 
-  Future<void> ellapseTime(DateTime start) async {
+  Future<void> _ellapseTime(DateTime start) async {
     final elapsed = DateTime.now().difference(start);
     const minSplashTime = Duration(seconds: 5);
     if (elapsed < minSplashTime) {
       await Future.delayed(minSplashTime - elapsed);
     }
+  }
+
+  Future<bool> _checkAuthentication() async {
+    final start = DateTime.now();
+    final authRepo = ref.read(authRepositoryProvider) as SupabaseAuthRepository;
+    final authResult = await authRepo.getCurrentUser();
+    final isAuthenticated = authResult.isSuccess;
+
+    await _ellapseTime(start);
+
+    if (!isAuthenticated) {
+      state = AppStatus.unauthenticated;
+      return false;
+    }
+
+    return true;
+  }
+
+  void _checkLocalization() async {
+    await ref.read(locationAccessNotifierProvider.notifier).check();
+    final locationRequestState = ref.read(locationAccessNotifierProvider);
+
+    final granted = locationRequestState.maybeWhen(
+      granted: (currentLocation) {
+        ref.watch(currentLocationProvider.notifier).state = currentLocation;
+        return true;
+      },
+      orElse: () => false,
+    );
+
+    if (!granted) {
+      state =
+          locationRequestState == const LocationAccessState.serviceDisabled()
+              ? AppStatus.gpsInactive
+              : AppStatus.needLocation;
+
+      return;
+    }
+
+    state = AppStatus.ready;
   }
 }

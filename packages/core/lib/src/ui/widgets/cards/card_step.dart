@@ -1,4 +1,4 @@
-import 'package:app_core/src/theme/colors.dart';
+import 'package:app_core/src/theme/app_colors.dart';
 import 'package:app_core/src/theme/size/badge_size.dart.dart';
 import 'package:app_core/src/theme/size/radius_size.dart';
 import 'package:app_core/src/ui/styles/app_text_style.dart';
@@ -14,7 +14,7 @@ class CardCounter extends StatelessWidget {
       width: BadgeSizes.lg,
       height: BadgeSizes.lg,
       decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(RadiusSize.mdLg),
+        borderRadius: BorderRadius.circular(RadiusSize.md),
         gradient: const LinearGradient(
           colors: [
             AppColors.primaryColor,
@@ -28,7 +28,7 @@ class CardCounter extends StatelessWidget {
         child: Text(
           '$counter',
           style: context.appText.section.copyWith(
-            color: AppColors.white,
+            color: Colors.white,
             fontWeight: FontWeight.w900,
           ),
         ),

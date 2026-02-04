@@ -13,3 +13,5 @@ dependencies:
   app_core:
     path: ../core
   flutter_screenutil: ^5.9.3
+  go_router: ^14.6.2
+  geolocator: ^10.1.0

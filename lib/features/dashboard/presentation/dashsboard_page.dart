@@ -1,5 +1,5 @@
 import 'package:deehelp/core/base/base_page.dart';
-import 'package:deehelp/core/providers/current_location_provider.dart';
+import 'package:deehelp/core/providers/old_current_location_provider.dart';
 import 'package:deehelp/core/ui/extensions/screen_size_extension.dart';
 import 'package:deehelp/core/ui/theme/app_colors.dart';
 import 'package:deehelp/core/ui/theme/app_text_styles.dart';
@@ -28,7 +28,7 @@ class _DashsboardPageState extends BasePageState<DashsboardPage> {
   void initState() {
     WidgetsBinding.instance.addPostFrameCallback(
       (_) {
-        final currenLocation = ref.read(currentLocationProvider);
+        final currenLocation = ref.read(oldCurrentLocationProvider);
         ref
             .read(dashboardViewmodelProvider.notifier)
             .getRecentIncidents(currenLocation);

@@ -17,6 +17,7 @@ class AppTextStyles {
       .copyWith(fontWeight: FontWeight.w900, fontSize: AppTextSizes.headersm);
   TextStyle get headermd => headersm.copyWith(fontSize: AppTextSizes.headermd);
   TextStyle get headerlg => headersm.copyWith(fontSize: AppTextSizes.headerlg);
+  TextStyle get headerxg => headersm.copyWith(fontSize: AppTextSizes.headerxg);
 
   // Body
   TextStyle get body => _textTheme.bodyMedium!;
@@ -34,4 +35,7 @@ class AppTextStyles {
       _textTheme.headlineSmall!.copyWith(fontWeight: FontWeight.w800
           // fontSize: AppTextSizes.section,
           );
+
+  // Button
+  TextStyle get button => headersm.copyWith(fontSize: AppTextSizes.button);
 }

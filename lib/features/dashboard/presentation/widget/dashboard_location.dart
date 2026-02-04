@@ -1,4 +1,4 @@
-import 'package:deehelp/core/providers/current_location_provider.dart';
+import 'package:deehelp/core/providers/old_current_location_provider.dart';
 import 'package:deehelp/core/ui/theme/app_colors.dart';
 import 'package:deehelp/core/ui/theme/app_text_styles.dart';
 import 'package:deehelp/core/ui/theme/dimens.dart';
@@ -11,7 +11,7 @@ class DashboardLocation extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final currentPlace = ref.watch(currentLocationProvider);
+    final currentPlace = ref.watch(oldCurrentLocationProvider);
 
     return GestureDetector(
       onTap: () {},

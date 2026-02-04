@@ -1,4 +1,4 @@
-import 'package:deehelp/core/providers/current_location_provider.dart';
+import 'package:deehelp/core/providers/old_current_location_provider.dart';
 import 'package:deehelp/core/providers/location_event_provider.dart';
 import 'package:deehelp/core/services/location/current_location.dart';
 import 'package:deehelp/core/services/location/events/location_service_event.dart';
@@ -80,6 +80,6 @@ class LocationNotifier extends StateNotifier<LocationState> {
   }
 
   void _notifyCurrentLocationProvider(CurrentLocation? currentLocation) {
-    _ref.read(currentLocationProvider.notifier).state = currentLocation;
+    _ref.read(oldCurrentLocationProvider.notifier).state = currentLocation;
   }
 }

@@ -1,6 +1,5 @@
 import 'dart:async';
 
-import 'package:app_core/app_core.dart';
 import 'package:app_feature/app_feature.dart';
 
 import 'package:deehelp/app_startup_provider.dart';
@@ -21,24 +20,9 @@ import 'package:deehelp/features/products/presentation/views/update/update_produ
 import 'package:deehelp/features/profile/presentation/views/profile/profile_page.dart';
 import 'package:deehelp/features/search/search_page.dart';
 // import 'package:deehelp/features/splash/splash_page.dart';
-import 'package:deehelp/features/test_page.dart';
 import 'package:deehelp/features/welcome/welcome_page.dart';
-import 'package:deehelp/location_required_page.dart';
 import 'package:deehelp/router_refresh_notifier.dart';
-import 'package:deehelp/test_page10.dart';
-import 'package:deehelp/test_page1000.dart';
-import 'package:deehelp/test_page11.dart';
-import 'package:deehelp/test_page12.dart';
-import 'package:deehelp/test_page2.dart';
-import 'package:deehelp/test_page3.dart';
-import 'package:deehelp/test_page4.dart';
-import 'package:deehelp/test_page40.dart';
-import 'package:deehelp/test_page5.dart';
-import 'package:deehelp/test_page6.dart';
-import 'package:deehelp/test_page7.dart';
-import 'package:deehelp/test_page8.dart';
-import 'package:deehelp/test_page9.dart';
-import 'package:deehelp/test_page_dark.dart';
+import 'package:deehelp/test_page13.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
@@ -59,38 +43,43 @@ class GoRouterRefreshStream extends ChangeNotifier {
 }
 
 final _publicRoutes = [
-  AppRouter.splash,
+  // AppRouter.splash,
+  SplashRouter.path,
+  GPSRouter.gpsDisabled,
+  GPSRouter.localizationDenied,
   AppRouter.onboarding,
-  AppRouter.locationRequired,
 ];
 
 var goRouterProvider = Provider<GoRouter>(
   (ref) {
-    final appStatus = ref.watch(appStartupProvider);
+    Future.microtask(() => ref.read(appStartupProvider.notifier).initCheck());
 
     return GoRouter(
-      initialLocation: AppRouter.splash,
+      initialLocation: SplashRouter.path,
       debugLogDiagnostics: true,
       refreshListenable: RouterRefreshNotifier(ref),
       redirect: (context, state) {
+        final appStatus = ref.read(appStartupProvider);
         final currentPath = state.matchedLocation;
         final isPublicRoute = _publicRoutes.contains(currentPath);
-        return "/";
+        // return "/";
         switch (appStatus) {
           case AppStatus.loading:
-            return AppRouter.splash;
+            return SplashRouter.path;
           case AppStatus.unauthenticated:
             return AppRouter.onboarding;
           case AppStatus.needLocation:
-            return AppRouter.locationRequired;
+            return GPSRouter.localizationDenied;
           case AppStatus.gpsInactive:
-            return AppRouter.locationRequired;
+            return GPSRouter.gpsDisabled;
           case AppStatus.ready:
             return isPublicRoute ? AppRouter.dashboard : null;
         }
       },
       routes: [
-        ...IncidentModule.routers,
+        ...SplashRouter.routers,
+        ...GPSRouter.routers,
+        // ...IncidentModule.routers,
         GoRoute(
           path: '/',
           pageBuilder: (context, state) => slideTransitionPage(
@@ -98,7 +87,7 @@ var goRouterProvider = Provider<GoRouter>(
 
               //Home
               // child: const TestPage(),
-              child: SplashPage()
+              child: TestPage13()
               // Search
               // child: const TestPage2(),
               //Profile
@@ -219,15 +208,15 @@ var goRouterProvider = Provider<GoRouter>(
             );
           },
         ),
-        GoRoute(
-          path: AppRouter.locationRequired,
-          pageBuilder: (context, state) {
-            return slideTransitionPage(
-              key: state.pageKey,
-              child: const LocationRequiredPage(),
-            );
-          },
-        ),
+        // GoRoute(
+        //   path: AppRouter.locationRequired,
+        //   pageBuilder: (context, state) {
+        //     return slideTransitionPage(
+        //       key: state.pageKey,
+        //       child: const LocationRequiredPage(),
+        //     );
+        //   },
+        // ),
         GoRoute(
           path: AppRouter.publicEmergencyCall,
           pageBuilder: (context, state) {
