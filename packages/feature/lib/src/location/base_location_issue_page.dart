@@ -1,12 +1,12 @@
 import 'package:app_core/app_core.dart';
 import 'package:flutter/material.dart';
 
-class LocalizationIssuePage extends StatelessWidget {
+class BaseLocationIssuePage extends StatelessWidget {
   final String title;
   final String message;
   final String buttonName;
   final VoidCallback action;
-  const LocalizationIssuePage({
+  const BaseLocationIssuePage({
     super.key,
     required this.title,
     required this.message,

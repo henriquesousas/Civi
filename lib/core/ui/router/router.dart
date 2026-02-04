@@ -45,8 +45,8 @@ class GoRouterRefreshStream extends ChangeNotifier {
 final _publicRoutes = [
   // AppRouter.splash,
   SplashRouter.path,
-  GPSRouter.gpsDisabled,
-  GPSRouter.localizationDenied,
+  LocationRouter.gpsDisabled,
+  LocationRouter.locationDenied,
   AppRouter.onboarding,
 ];
 
@@ -69,16 +69,16 @@ var goRouterProvider = Provider<GoRouter>(
           case AppStatus.unauthenticated:
             return AppRouter.onboarding;
           case AppStatus.needLocation:
-            return GPSRouter.localizationDenied;
+            return LocationRouter.locationDenied;
           case AppStatus.gpsInactive:
-            return GPSRouter.gpsDisabled;
+            return LocationRouter.gpsDisabled;
           case AppStatus.ready:
             return isPublicRoute ? AppRouter.dashboard : null;
         }
       },
       routes: [
         ...SplashRouter.routers,
-        ...GPSRouter.routers,
+        ...LocationRouter.routers,
         // ...IncidentModule.routers,
         GoRoute(
           path: '/',

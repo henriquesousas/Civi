@@ -1,4 +1,4 @@
-import 'package:app_feature/src/gps/localization_issue_page.dart';
+import 'package:app_feature/src/location/base_location_issue_page.dart';
 import 'package:flutter/material.dart';
 import 'package:geolocator/geolocator.dart';
 
@@ -7,7 +7,7 @@ class GpsDisabledPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return LocalizationIssuePage(
+    return BaseLocationIssuePage(
       title: "Ative o GPS",
       message:
           "Para funcionar corretamente, o Kotto precisa acessar sua localização.",
