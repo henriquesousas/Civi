@@ -1,17 +1,50 @@
+import 'package:app_core/app_core.dart';
 import 'package:app_feature/src/location/base_location_issue_page.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-class LocationRequiredPage extends StatelessWidget {
+class LocationRequiredPage extends ConsumerStatefulWidget {
   const LocationRequiredPage({super.key});
 
   @override
+  ConsumerState<LocationRequiredPage> createState() =>
+      _LocationRequiredPageState();
+}
+
+class _LocationRequiredPageState extends ConsumerState<LocationRequiredPage>
+    with WidgetsBindingObserver {
+  bool _isDeniedPermanently = false;
+
+  @override
   Widget build(BuildContext context) {
+    final state = ref.watch(locationAccessNotifierProvider);
+    state.maybeMap(
+      deniedPermanently: (value) {
+        _isDeniedPermanently = true;
+        return _isDeniedPermanently;
+      },
+      denied: (value) {
+        _isDeniedPermanently = false;
+        return _isDeniedPermanently;
+      },
+      orElse: () => false,
+    );
+
     return BaseLocationIssuePage(
       title: "Permita o acesso à localização",
       message: "O Kotto precisa da sua permissão para acessar a localização.",
-      buttonName: "Permitir localização",
+      buttonName: !_isDeniedPermanently
+          ? "Permitir localização"
+          : "Abrir configurações",
+      showDeniedInfo: _isDeniedPermanently,
       action: () {
-        debugPrint("Action");
+        if (!_isDeniedPermanently) {
+          ref.read(locationAccessNotifierProvider.notifier).request();
+        } else {
+          ref
+              .read(locationAccessNotifierProvider.notifier)
+              .openNativePermissionSettings();
+        }
       },
     );
   }

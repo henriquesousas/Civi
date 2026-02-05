@@ -1,5 +1,5 @@
 import 'package:app_feature/src/location/gps_disabled_page.dart';
-import 'package:app_feature/src/location/location_access_required_page.dart';
+import 'package:app_feature/src/location/location_required_page.dart';
 import 'package:go_router/go_router.dart';
 
 class LocationRouter {

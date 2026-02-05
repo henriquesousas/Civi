@@ -17,3 +17,6 @@ export 'src/extension/app_extension.dart';
 
 //Services
 export 'src/services/permissions/permission_export.dart';
+
+//Provider
+export 'src/page_redirect_provider.dart';

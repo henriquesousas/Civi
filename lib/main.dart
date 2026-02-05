@@ -82,7 +82,7 @@ class _MainAppState extends ConsumerState<MainApp> {
           minTextAdapt: true,
           splitScreenMode: true,
           useInheritedMediaQuery: true,
-          rebuildFactor: (old, data) => true,
+          // rebuildFactor: (old, data) => true,
           builder: (context, child) {
             final router = ref.watch(goRouterProvider);
             final themeData = ref.watch(themeDataProvider);

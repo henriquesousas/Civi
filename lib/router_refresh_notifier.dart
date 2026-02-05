@@ -8,5 +8,13 @@ class RouterRefreshNotifier extends ChangeNotifier {
       appStartupProvider,
       (_, __) => notifyListeners(),
     );
+    // ref.listen<LocationAccessState>(
+    //   locationAccessNotifierProvider,
+    //   (oldState, currentState) {
+    //     if (currentState == const LocationAccessState.checking()) return;
+    //     if (currentState == const LocationAccessState.loading()) return;
+    //     notifyListeners();
+    //   },
+    // );
   }
 }

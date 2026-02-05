@@ -1,12 +1,12 @@
 import 'dart:async';
 
+import 'package:app_core/app_core.dart';
 import 'package:app_feature/app_feature.dart';
 
 import 'package:deehelp/app_startup_provider.dart';
 import 'package:deehelp/core/ui/router/app_router.dart';
 import 'package:deehelp/core/ui/router/slide_transition_page.dart';
 import 'package:deehelp/features/emergency-call/public_list_emergency_call_page.dart';
-import 'package:deehelp/features/incident/incident_module.dart';
 import 'package:deehelp/features/profile/presentation/views/add_nickname/add_nickname_page.dart';
 import 'package:deehelp/features/dashboard/presentation/dashsboard_page.dart';
 import 'package:deehelp/features/faq/faq_provider.dart';
@@ -43,7 +43,6 @@ class GoRouterRefreshStream extends ChangeNotifier {
 }
 
 final _publicRoutes = [
-  // AppRouter.splash,
   SplashRouter.path,
   LocationRouter.gpsDisabled,
   LocationRouter.locationDenied,
@@ -62,16 +61,19 @@ var goRouterProvider = Provider<GoRouter>(
         final appStatus = ref.read(appStartupProvider);
         final currentPath = state.matchedLocation;
         final isPublicRoute = _publicRoutes.contains(currentPath);
-        // return "/";
         switch (appStatus) {
           case AppStatus.loading:
             return SplashRouter.path;
+
           case AppStatus.unauthenticated:
             return AppRouter.onboarding;
+
           case AppStatus.needLocation:
             return LocationRouter.locationDenied;
+
           case AppStatus.gpsInactive:
             return LocationRouter.gpsDisabled;
+
           case AppStatus.ready:
             return isPublicRoute ? AppRouter.dashboard : null;
         }
