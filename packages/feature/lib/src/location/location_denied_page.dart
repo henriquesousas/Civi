@@ -3,15 +3,15 @@ import 'package:app_feature/src/location/base_location_issue_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-class LocationRequiredPage extends ConsumerStatefulWidget {
-  const LocationRequiredPage({super.key});
+class LocationDeniedPage extends ConsumerStatefulWidget {
+  const LocationDeniedPage({super.key});
 
   @override
-  ConsumerState<LocationRequiredPage> createState() =>
+  ConsumerState<LocationDeniedPage> createState() =>
       _LocationRequiredPageState();
 }
 
-class _LocationRequiredPageState extends ConsumerState<LocationRequiredPage>
+class _LocationRequiredPageState extends ConsumerState<LocationDeniedPage>
     with WidgetsBindingObserver {
   bool _isDeniedPermanently = false;
 

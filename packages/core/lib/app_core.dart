@@ -16,7 +16,4 @@ export 'src/ui/styles/app_styles.dart';
 export 'src/extension/app_extension.dart';
 
 //Services
-export 'src/services/permissions/permission_export.dart';
-
-//Provider
-export 'src/page_redirect_provider.dart';
+export 'src/services/permissions/location/location_export.dart';

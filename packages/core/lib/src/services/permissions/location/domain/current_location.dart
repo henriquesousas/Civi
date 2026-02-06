@@ -3,17 +3,18 @@ import 'package:geocoding/geocoding.dart';
 import 'package:geolocator/geolocator.dart';
 
 class CurrentLocation {
-  final double? latitue;
-  final double? longitude;
+  final double latitude;
+  final double longitude;
   final String? state;
   final String? city;
-  final String? adress;
-  CurrentLocation._({
+  final String? address;
+
+  const CurrentLocation._({
+    required this.latitude,
+    required this.longitude,
     required this.state,
     required this.city,
-    required this.adress,
-    required this.latitue,
-    required this.longitude,
+    required this.address,
   });
 
   static CurrentLocation? from(
@@ -21,32 +22,44 @@ class CurrentLocation {
     Position position,
   ) {
     if (placemarks.isEmpty) return null;
+
     final state = CollectionUtils.firstOrNull<Placemark, String>(
-      placemarks.toList(),
+      placemarks,
       (e) => e.administrativeArea,
       condiction: (s) => s.isNotEmpty,
     );
 
     final city = CollectionUtils.firstOrNull<Placemark, String>(
-      placemarks.toList(),
-      (e) => e.subAdministrativeArea,
+      placemarks,
+      (e) => e.locality,
       condiction: (s) => s.isNotEmpty,
     );
 
-    final fullAddress = CollectionUtils.firstOrNull<Placemark, String>(
-      placemarks.toList(),
+    final street = CollectionUtils.firstOrNull<Placemark, String>(
+      placemarks,
       (e) => e.thoroughfare,
       condiction: (s) => s.isNotEmpty,
     );
 
+    final number = CollectionUtils.firstOrNull<Placemark, String>(
+      placemarks,
+      (e) => e.subThoroughfare,
+      condiction: (s) => s.isNotEmpty,
+    );
+
+    final address = [
+      if (street != null) street,
+      if (number != null) number,
+    ].join(', ').trim();
+
     if (state == null && city == null) return null;
 
     return CurrentLocation._(
-      latitue: position.latitude,
+      latitude: position.latitude,
       longitude: position.longitude,
       state: state,
       city: city,
-      adress: fullAddress,
+      address: address.isEmpty ? null : address,
     );
   }
 }

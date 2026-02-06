@@ -52,10 +52,6 @@ class _BaseLocationIssuePageState extends ConsumerState<BaseLocationIssuePage>
       checking: (value) => true,
       orElse: () => false,
     );
-    // final isDeniedPermanently = state.maybeMap(
-    //   deniedPermanently: (value) => true,
-    //   orElse: () => false,
-    // );
 
     return Scaffold(
       backgroundColor: context.secondaryContainer,

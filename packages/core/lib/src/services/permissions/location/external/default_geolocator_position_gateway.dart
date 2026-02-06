@@ -1,11 +1,11 @@
-import 'package:app_core/src/services/permissions/location/current_location.dart';
-import 'package:geolocator/geolocator.dart';
+import 'package:app_core/src/services/permissions/location/domain/current_location.dart';
+import 'package:app_core/src/services/permissions/location/domain/services/geolocator_position_gateway.dart';
 import 'package:geocoding/geocoding.dart';
+import 'package:geolocator/geolocator.dart';
 
-class GetCurrentPosition {
-  const GetCurrentPosition();
-
-  Future<CurrentLocation?> getCurrent({
+class DefaultGeolocatorPositionGateway implements GeolocatorPositionGateway {
+  @override
+  Future<CurrentLocation?> getPosition({
     String localeIdentifier = 'pt_BR',
   }) async {
     try {

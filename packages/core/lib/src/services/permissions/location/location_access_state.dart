@@ -1,4 +1,4 @@
-import 'package:app_core/src/services/permissions/location/current_location.dart';
+import 'package:app_core/src/services/permissions/location/domain/current_location.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 part 'location_access_state.freezed.dart';
