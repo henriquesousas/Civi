@@ -1,2 +1,2 @@
-export 'src/splash/app_splash.dart';
+export 'src/splash/splash_exports.dart';
 export 'src/location/location_exports.dart';

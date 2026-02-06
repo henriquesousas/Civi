@@ -1,5 +1,5 @@
 import 'package:app_core/app_core.dart';
-import 'package:app_feature/src/location/base_location_issue_page.dart';
+import 'package:app_feature/src/location/presentation/widgets/base_location_issue_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
