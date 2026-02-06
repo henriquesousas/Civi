@@ -99,7 +99,7 @@ class _BaseLocationIssuePageState extends ConsumerState<BaseLocationIssuePage>
                     'da sua região. O Kotto não rastreia você em segundo plano.',
                 icon: Icon(
                   Icons.lock_outline,
-                  size: IconSizes.sm,
+                  size: IconSizes.xs,
                   color: context.secondaryColor,
                   // color: _muted,
                 ),
@@ -114,7 +114,7 @@ class _BaseLocationIssuePageState extends ConsumerState<BaseLocationIssuePage>
                   textColor: Colors.white,
                   icon: Icon(
                     Icons.lock_outline,
-                    size: IconSizes.sm,
+                    size: IconSizes.xs,
                     color: Colors.white,
                   ),
                 ),

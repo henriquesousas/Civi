@@ -6,12 +6,14 @@ class HighlightIcon extends StatelessWidget {
   final Color? bgColor;
   final double? containerSize;
   final double? radius;
+  final Border? border;
   const HighlightIcon({
     super.key,
     required this.icon,
     this.bgColor,
     this.containerSize,
     this.radius,
+    this.border,
   });
 
   @override
@@ -22,6 +24,7 @@ class HighlightIcon extends StatelessWidget {
       decoration: BoxDecoration(
         color: bgColor ?? context.primaryColorOpacity(0.1),
         borderRadius: BorderRadius.circular(radius ?? RadiusSize.md),
+        border: border,
       ),
       child: icon,
       // child: Icon(

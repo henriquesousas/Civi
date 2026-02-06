@@ -27,7 +27,7 @@ class CardCounter extends StatelessWidget {
       child: Center(
         child: Text(
           '$counter',
-          style: context.appText.section.copyWith(
+          style: context.appText.caption.copyWith(
             color: Colors.white,
             fontWeight: FontWeight.w900,
           ),

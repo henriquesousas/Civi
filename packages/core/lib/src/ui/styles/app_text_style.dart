@@ -1,3 +1,4 @@
+import 'package:app_core/src/extension/size_extension.dart';
 import 'package:app_core/src/theme/size/app_text_size.dart';
 import 'package:flutter/material.dart';
 
@@ -22,20 +23,33 @@ class AppTextStyles {
   // Body
   TextStyle get body => _textTheme.bodyMedium!;
   TextStyle get bodySmall => _textTheme.bodySmall!.copyWith(
-        fontSize: AppTextSizes.bodySmall,
+        fontSize: _context.safeSp(AppTextSizes.bodySmall),
         fontWeight: FontWeight.w500,
         color: _colorScheme.secondary,
       );
 
-  TextStyle get title =>
-      _textTheme.titleLarge!.copyWith(fontWeight: FontWeight.w800);
-  TextStyle get subtitle => _textTheme.bodyMedium!
-      .copyWith(fontWeight: FontWeight.w600, fontSize: AppTextSizes.body);
-  TextStyle get section =>
-      _textTheme.headlineSmall!.copyWith(fontWeight: FontWeight.w800
-          // fontSize: AppTextSizes.section,
-          );
+  TextStyle get title => _textTheme.titleLarge!.copyWith(
+        fontWeight: FontWeight.w800,
+        fontSize: _context.safeSp(AppTextSizes.headerlg),
+      );
+
+  TextStyle get titleMedium => _textTheme.titleMedium!.copyWith(
+        fontWeight: FontWeight.w700,
+        fontSize: _context.safeSp(AppTextSizes.headermd),
+      );
+
+  // TextStyle get subtitle => _textTheme.bodyMedium!.copyWith(
+  //       fontWeight: FontWeight.w600,
+  //       fontSize: AppTextSizes.body,
+  //     );
+
+  TextStyle get caption => _textTheme.headlineSmall!.copyWith(
+        fontWeight: FontWeight.w500,
+        fontSize: AppTextSizes.caption,
+      );
 
   // Button
-  TextStyle get button => headersm.copyWith(fontSize: AppTextSizes.button);
+  TextStyle get button => headersm.copyWith(
+        fontSize: _context.safeSp(AppTextSizes.button),
+      );
 }

@@ -3,6 +3,8 @@ export 'src/ui/widgets/cards/card_exports.dart';
 export 'src/ui/widgets/bubble/app_bubble.dart';
 export 'src/ui/widgets/icon/icon_export.dart';
 export 'src/ui/widgets/buttons/buttons_export.dart';
+export 'src/ui/widgets/appbar/default_app_bar.dart';
+export 'src/ui/widgets/image/custom_network_image.dart';
 
 //Theme
 export 'src/theme/theme.dart';

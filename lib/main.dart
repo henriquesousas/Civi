@@ -82,8 +82,11 @@ class _MainAppState extends ConsumerState<MainApp> {
           minTextAdapt: true,
           splitScreenMode: true,
           useInheritedMediaQuery: true,
-          // rebuildFactor: (old, data) => true,
+          rebuildFactor: (old, data) => true,
           builder: (context, child) {
+            // final mq = MediaQuery.of(context);
+            // final isLandscape = mq.orientation == Orientation.landscape;
+
             final router = ref.watch(goRouterProvider);
             final themeData = ref.watch(themeDataProvider);
             // WidgetsBinding.instance.addPostFrameCallback((_) {

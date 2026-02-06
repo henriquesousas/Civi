@@ -284,7 +284,7 @@ class _TestPage40State extends State<TestPage40> {
                 Icons.info_outline,
                 color: _primary,
                 // color: Color(0XFFFFFFFF),
-                size: IconSizes.md,
+                size: IconSizes.lg,
               ),
             ),
           ],

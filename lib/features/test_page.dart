@@ -147,7 +147,7 @@ class TestPage extends StatelessWidget {
             const ImprovedHomeFeatureGrid(),
             const SizedBox(height: UIK.s24),
 
-            // Recent incidents
+            // Recent incidents QA
             _SectionHeader(
               title: 'Incidentes recentes',
               actionText: 'Ver todos',

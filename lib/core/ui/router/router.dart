@@ -19,6 +19,7 @@ import 'package:deehelp/features/products/presentation/views/listing/product_lis
 import 'package:deehelp/features/products/presentation/views/update/update_product_page.dart';
 import 'package:deehelp/features/profile/presentation/views/profile/profile_page.dart';
 import 'package:deehelp/features/search/search_page.dart';
+import 'package:deehelp/features/test_page.dart';
 // import 'package:deehelp/features/splash/splash_page.dart';
 import 'package:deehelp/features/welcome/welcome_page.dart';
 import 'package:deehelp/router_refresh_notifier.dart';
@@ -61,6 +62,7 @@ var goRouterProvider = Provider<GoRouter>(
         final appStatus = ref.read(appStartupProvider);
         final currentPath = state.matchedLocation;
         final isPublicRoute = _publicRoutes.contains(currentPath);
+        // return '/';
         switch (appStatus) {
           case AppStatus.loading:
             return SplashRouter.path;
@@ -75,48 +77,49 @@ var goRouterProvider = Provider<GoRouter>(
             return LocationRouter.gpsDisabled;
 
           case AppStatus.ready:
-            return isPublicRoute ? AppRouter.dashboard : null;
+            return isPublicRoute ? HomeRouter.path : null;
         }
       },
       routes: [
         ...SplashRouter.routers,
         ...LocationRouter.routers,
+        ...HomeRouter.routers,
         // ...IncidentModule.routers,
         GoRoute(
           path: '/',
           pageBuilder: (context, state) => slideTransitionPage(
-              key: state.pageKey,
+            key: state.pageKey,
 
-              //Home
-              // child: const TestPage(),
-              child: TestPage13()
-              // Search
-              // child: const TestPage2(),
-              //Profile
-              // child: const TestPage3(),
-              // Lista de items
-              // child: const TestPage4(),
-              // Cadastro de item
-              // child: const TestPage40(),
-              // Detalhes do item
-              // child: TestPage5(),
-              // Item cadastrado sucesso
-              // child: TestPage6(),
-              //Detalhes da ocorrencia
-              // child: TestPage7(),
-              // Reportat incident
-              // child: TestPage8(),
-              // ReportIncidentSuccess
-              // child: const TestPage9(),
-              // Splash
-              // child: const TestPage10(),
+            //Home
+            child: const TestPage(),
+            // child: TestPage13()
+            // Search
+            // child: const TestPage2(),
+            //Profile
+            // child: const TestPage3(),
+            // Lista de items
+            // child: const TestPage4(),
+            // Cadastro de item
+            // child: const TestPage40(),
+            // Detalhes do item
+            // child: TestPage5(),
+            // Item cadastrado sucesso
+            // child: TestPage6(),
+            //Detalhes da ocorrencia
+            // child: TestPage7(),
+            // Reportat incident
+            // child: TestPage8(),
+            // ReportIncidentSuccess
+            // child: const TestPage9(),
+            // Splash
+            // child: const TestPage10(),
 
-              // child: const TestPage11(),
-              // child: const TestPage12FaqPage(),
-              //FAQ DARK
-              // child: const TestPageDark(),
-              // child: MyTest(),
-              ),
+            // child: const TestPage11(),
+            // child: const TestPage12FaqPage(),
+            //FAQ DARK
+            // child: const TestPageDark(),
+            // child: MyTest(),
+          ),
         ),
         GoRoute(
           path: AppRouter.onboarding,
