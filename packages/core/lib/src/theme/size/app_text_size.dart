@@ -11,12 +11,12 @@ abstract class AppTextSizes {
   static double get headerxg => 28;
 
   // Body
-  static double get body => 14;
   static double get bodySmall => 12;
-  // static double get bodySmall => 13.sp;
+  static double get bodymd => 13;
+  static double get body => 14;
 
   // Labels / Info
-  static double get label => 12;
+  static double get label => 13;
   static double get caption => 11;
 
   static double get button => 13;

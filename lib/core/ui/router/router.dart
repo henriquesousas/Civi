@@ -24,6 +24,7 @@ import 'package:deehelp/features/test_page.dart';
 import 'package:deehelp/features/welcome/welcome_page.dart';
 import 'package:deehelp/router_refresh_notifier.dart';
 import 'package:deehelp/test_page13.dart';
+import 'package:deehelp/test_page3.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
@@ -84,6 +85,7 @@ var goRouterProvider = Provider<GoRouter>(
         ...SplashRouter.routers,
         ...LocationRouter.routers,
         ...HomeRouter.routers,
+        ...ProfileRouter.routers,
         // ...IncidentModule.routers,
         GoRoute(
           path: '/',
@@ -91,12 +93,12 @@ var goRouterProvider = Provider<GoRouter>(
             key: state.pageKey,
 
             //Home
-            child: const TestPage(),
+            // child: const TestPage(),
             // child: TestPage13()
             // Search
             // child: const TestPage2(),
             //Profile
-            // child: const TestPage3(),
+            child: const TestPage3(),
             // Lista de items
             // child: const TestPage4(),
             // Cadastro de item
@@ -181,13 +183,13 @@ var goRouterProvider = Provider<GoRouter>(
             child: const DashsboardPage(),
           ),
         ),
-        GoRoute(
-          path: AppRouter.profile,
-          pageBuilder: (context, state) => slideTransitionPage(
-            key: state.pageKey,
-            child: const ProfilePage(),
-          ),
-        ),
+        // GoRoute(
+        //   path: AppRouter.profile,
+        //   pageBuilder: (context, state) => slideTransitionPage(
+        //     key: state.pageKey,
+        //     child: const ProfilePage(),
+        //   ),
+        // ),
         GoRoute(
           path: AppRouter.faq,
           pageBuilder: (context, state) => slideTransitionPage(

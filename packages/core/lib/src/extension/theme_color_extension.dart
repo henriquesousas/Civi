@@ -9,6 +9,8 @@ extension ThemeColorExtension on BuildContext {
   Color get secondaryColor => Theme.of(this).colorScheme.secondary;
   Color get surfaceColor => Theme.of(this).colorScheme.surface;
   Color get outlineVariantColor => Theme.of(this).colorScheme.outlineVariant;
+  //Cor de texto principal
+  Color get onSurface => Theme.of(this).colorScheme.onSurface;
   Color get shadowColor =>
       Theme.of(this).colorScheme.shadow.withValues(alpha: 0.1);
 }

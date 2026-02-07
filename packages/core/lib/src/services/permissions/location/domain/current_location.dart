@@ -31,7 +31,7 @@ class CurrentLocation {
 
     final city = CollectionUtils.firstOrNull<Placemark, String>(
       placemarks,
-      (e) => e.locality,
+      (e) => e.subAdministrativeArea ?? e.locality ?? '',
       condiction: (s) => s.isNotEmpty,
     );
 

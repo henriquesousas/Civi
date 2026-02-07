@@ -21,7 +21,14 @@ class AppTextStyles {
   TextStyle get headerxg => headersm.copyWith(fontSize: AppTextSizes.headerxg);
 
   // Body
-  TextStyle get body => _textTheme.bodyMedium!;
+  TextStyle get body => _textTheme.bodyMedium!.copyWith(
+        fontSize: _context.safeSp(AppTextSizes.body),
+      );
+
+  TextStyle get bodymd => _textTheme.bodyMedium!.copyWith(
+        fontSize: _context.safeSp(AppTextSizes.bodymd),
+      );
+
   TextStyle get bodySmall => _textTheme.bodySmall!.copyWith(
         fontSize: _context.safeSp(AppTextSizes.bodySmall),
         fontWeight: FontWeight.w500,
@@ -42,6 +49,11 @@ class AppTextStyles {
   //       fontWeight: FontWeight.w600,
   //       fontSize: AppTextSizes.body,
   //     );
+
+  TextStyle get label => _textTheme.headlineSmall!.copyWith(
+        fontWeight: FontWeight.w500,
+        fontSize: AppTextSizes.label,
+      );
 
   TextStyle get caption => _textTheme.headlineSmall!.copyWith(
         fontWeight: FontWeight.w500,

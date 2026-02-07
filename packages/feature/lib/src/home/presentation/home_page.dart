@@ -1,20 +1,29 @@
 import 'package:app_core/app_core.dart';
+import 'package:app_feature/src/home/presentation/widgets/home_app_bar.dart';
 import 'package:app_feature/src/home/presentation/widgets/home_register_incident_button.dart';
 import 'package:app_feature/src/home/presentation/widgets/recent_incident_list.dart';
 import 'package:app_feature/src/home/presentation/widgets/section_quick_actions.dart';
 import 'package:app_feature/src/home/presentation/widgets/home_search_field.dart';
 import 'package:app_feature/src/home/presentation/widgets/location_banner.dart';
+import 'package:app_feature/src/profile/profile_exports.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:go_router/go_router.dart';
 
-class HomePage extends StatelessWidget {
+class HomePage extends ConsumerWidget {
   const HomePage({super.key});
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    final currentLocationState = ref.watch(currentLocationProvider);
+    //  final session = ref.watch(authenticatedUserProvider);
+
     return Scaffold(
-      appBar: const DefaultAppBar(
-        userName: "João Silva",
-        profileImageUrl: "https://i.pravatar.cc/150?img=3",
+      appBar: HomeAppBar(
+        userName: "Paulo Silva",
+        profileImageUrl:
+            "https://www.adobe.com/br/express/feature/image/remove-background/png/media_142f9cf5285c2cdcda8375c1041d273a3f0383e5f.png?width=30000&format=png&optimize=medium&quality=80",
+        press: () => context.push(ProfileRouter.path),
       ),
       bottomNavigationBar: HomeRegisterIncidentButton(
         onTap: () {},
@@ -23,10 +32,10 @@ class HomePage extends StatelessWidget {
         child: ListView(
           padding: const EdgeInsets.all(LayoutSpacingSize.page),
           children: [
-            const LocationBanner(
+            LocationBanner(
               title: "Localização atual",
-              primaryText: "Osasco, São Paulo",
-              secondaryText: "Travessa Francisco Alves da Silva",
+              primaryText: currentLocationState?.city ?? '',
+              secondaryText: currentLocationState?.address ?? '',
             ),
             const SizedBox(height: SpacingSize.xl),
             HomeSearchField(
