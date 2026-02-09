@@ -4,16 +4,18 @@ import 'package:flutter/material.dart';
 class ButtonOutline extends StatelessWidget {
   final VoidCallback press;
   final String text;
-  final Icon? icon;
+  final Widget? icon;
   final Color? bgColor;
   final Color? textColor;
+  final BorderSide? side;
   const ButtonOutline(
       {super.key,
       required this.press,
       required this.text,
       this.icon,
       this.bgColor,
-      this.textColor});
+      this.textColor,
+      this.side});
 
   @override
   Widget build(BuildContext context) {
@@ -22,7 +24,6 @@ class ButtonOutline extends StatelessWidget {
       height: ButtonSize.sm,
       child: OutlinedButton.icon(
         onPressed: press,
-        // icon: const Icon(Icons.share_outlined),
         icon: icon,
         label: Text(
           text,
@@ -33,9 +34,10 @@ class ButtonOutline extends StatelessWidget {
         style: OutlinedButton.styleFrom(
           foregroundColor: context.primaryColor(),
           backgroundColor: bgColor,
-          side: BorderSide(
-            color: context.primaryColor().withValues(alpha: 0.32),
-          ),
+          side: side ??
+              BorderSide(
+                color: context.primaryColor().withValues(alpha: 0.32),
+              ),
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(RadiusSize.md),
           ),

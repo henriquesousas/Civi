@@ -8,8 +8,8 @@ class Logo extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      width: ImageSize.xxxl,
-      height: ImageSize.xxxl,
+      width: ImageSize.xl,
+      height: ImageSize.xl,
       decoration: BoxDecoration(
         color: Colors.white.withValues(alpha: 0.14),
         borderRadius: BorderRadius.circular(RadiusSize.xl),

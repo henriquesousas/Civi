@@ -67,6 +67,7 @@ var goRouterProvider = Provider<GoRouter>(
         final currentPath = state.matchedLocation;
         final isPublicRoute = _publicRoutes.contains(currentPath);
         // return '/';
+        return AuthRouter.path;
         switch (appStatus) {
           case AppStatus.loading:
             return SplashRouter.path;
@@ -91,6 +92,7 @@ var goRouterProvider = Provider<GoRouter>(
         ...ProfileRouter.routers,
         ...AboutRouter.routers,
         ...FaqPageRouter.routers,
+        ...AuthRouter.routers,
         // ...IncidentModule.routers,
         GoRoute(
           path: '/',
@@ -99,7 +101,7 @@ var goRouterProvider = Provider<GoRouter>(
 
             //Home
             // child: const TestPage(),
-            // child: TestPage13()
+            // child: TestPage13(),
             // Search
             // child: const TestPage2(),
             //Profile
@@ -123,11 +125,11 @@ var goRouterProvider = Provider<GoRouter>(
 
             // OK child: const TestPage11(),
             //FAQ DARK
-            child: const TestPage12FaqPage(),
-            // child: TestPageLogin(
-            //   onGoogleTap: () {},
-            //   onGuestTap: () {},
-            // ),
+            // child: const TestPage12FaqPage(),
+            child: TestPageLogin(
+              onGoogleTap: () {},
+              onGuestTap: () {},
+            ),
             // child: const TestPageDark(),
             // child: MyTest(),
           ),

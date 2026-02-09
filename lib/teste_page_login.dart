@@ -170,18 +170,9 @@ class _LogoBlock extends StatelessWidget {
         //   ),
         // ),
         Lottie.asset(
-          'assets/lottie/owl.json',
+          'assets/lottie/owl2.json',
           width: 240,
           height: 240,
-          // delegates: LottieDelegates(
-          //   values: [
-          //     // Aplica a cor em TUDO (fills e strokes) — ótimo se você quer “tudo azul”
-          //     ValueDelegate.colorFilter(
-          //       const ['**'],
-          //       value: ColorFilter.mode(Color(0xFF2B5BEE), BlendMode.srcIn),
-          //     ),
-          //   ],
-          // ),
         ),
         const SizedBox(height: 18),
         const Text(
