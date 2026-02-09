@@ -38,7 +38,7 @@ class _SplashPageState extends State<SplashPage> {
                     Text(
                       'Sua segurança começa no seu bairro',
                       textAlign: TextAlign.center,
-                      style: context.appText.body.copyWith(
+                      style: context.appText.bodySmall.copyWith(
                         color: Colors.white.withValues(alpha: 0.92),
                         height: 1.35,
                         fontWeight: FontWeight.w600,

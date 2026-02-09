@@ -15,12 +15,14 @@ class ProfileImageWithUploadButtonWidget extends StatefulWidget {
   final double? width;
   final double? height;
   final Function(File)? onChanged;
+  final bool showBorder;
 
   const ProfileImageWithUploadButtonWidget({
     super.key,
     required this.imageAlt,
     this.imageUrl,
     this.showUploadIcon = false,
+    this.showBorder = false,
     this.onTap,
     this.onChanged,
     this.radius,
@@ -44,7 +46,9 @@ class _ProfileImageWithUploadButtonWidgetState
             padding: const EdgeInsets.all(1),
             decoration: BoxDecoration(
               border: Border.all(
-                color: context.primaryColor(),
+                color: widget.showBorder
+                    ? context.primaryColor()
+                    : Colors.transparent,
                 width: 2,
               ),
               borderRadius: BorderRadius.circular(RadiusSize.xl),

@@ -35,7 +35,7 @@ class ProfileTile extends StatelessWidget {
                     children: [
                       Text(
                         item.title,
-                        style: context.appText.bodymd.copyWith(
+                        style: context.appText.label.copyWith(
                           fontWeight: FontWeight.w600,
                         ),
                       ),
@@ -65,7 +65,7 @@ class ProfileTile extends StatelessWidget {
                     const SizedBox(height: SpacingSize.xs),
                     Text(
                       item.subtitle!,
-                      style: context.appText.label.copyWith(
+                      style: context.appText.caption.copyWith(
                         fontWeight: FontWeight.w400,
                         color: context.secondaryColor,
                       ),

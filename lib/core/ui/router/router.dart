@@ -24,8 +24,10 @@ import 'package:deehelp/features/test_page.dart';
 import 'package:deehelp/features/welcome/welcome_page.dart';
 import 'package:deehelp/router_refresh_notifier.dart';
 import 'package:deehelp/test_page11.dart';
+import 'package:deehelp/test_page12.dart';
 import 'package:deehelp/test_page13.dart';
 import 'package:deehelp/test_page3.dart';
+import 'package:deehelp/teste_page_login.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
@@ -88,6 +90,7 @@ var goRouterProvider = Provider<GoRouter>(
         ...HomeRouter.routers,
         ...ProfileRouter.routers,
         ...AboutRouter.routers,
+        ...FaqPageRouter.routers,
         // ...IncidentModule.routers,
         GoRoute(
           path: '/',
@@ -118,9 +121,13 @@ var goRouterProvider = Provider<GoRouter>(
             // Splash
             // child: const TestPage10(),
 
-            child: const TestPage11(),
-            // child: const TestPage12FaqPage(),
+            // OK child: const TestPage11(),
             //FAQ DARK
+            child: const TestPage12FaqPage(),
+            // child: TestPageLogin(
+            //   onGoogleTap: () {},
+            //   onGuestTap: () {},
+            // ),
             // child: const TestPageDark(),
             // child: MyTest(),
           ),

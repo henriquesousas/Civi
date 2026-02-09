@@ -9,7 +9,7 @@ ElevatedButtonThemeData elevatedButtonThemeData = ElevatedButtonThemeData(
     foregroundColor: Colors.white,
     minimumSize: const Size(double.infinity, 32),
     shape: const RoundedRectangleBorder(
-      borderRadius: BorderRadius.all(Radius.circular(RadiusSize.lg)),
+      borderRadius: BorderRadius.all(Radius.circular(RadiusSize.md)),
     ),
   ).copyWith(
     textStyle: WidgetStatePropertyAll(

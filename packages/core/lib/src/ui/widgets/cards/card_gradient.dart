@@ -41,14 +41,14 @@ class CardGradient extends StatelessWidget {
                   const Spacer(),
                   Text(
                     'Mapa de ocorrências',
-                    style: context.appText.headersm.copyWith(
+                    style: context.appText.headermd.copyWith(
                       fontWeight: FontWeight.w600,
                     ),
                   ),
                   const SizedBox(height: SpacingSize.xs),
                   Text(
                     'Veja incidentes próximos a você',
-                    style: context.appText.body.copyWith(
+                    style: context.appText.caption.copyWith(
                       color: AppColors.grey,
                     ),
                   ),
@@ -81,7 +81,7 @@ class CardGradient extends StatelessWidget {
                       Expanded(
                         child: Text(
                           'Minhas ocorrências',
-                          style: context.appText.body.copyWith(
+                          style: context.appText.bodymd.copyWith(
                             fontWeight: FontWeight.w500,
                           ),
                         ),
@@ -111,7 +111,7 @@ class CardGradient extends StatelessWidget {
                       Expanded(
                         child: Text(
                           'Meus itens',
-                          style: context.appText.body.copyWith(
+                          style: context.appText.bodymd.copyWith(
                             fontWeight: FontWeight.w500,
                           ),
                         ),

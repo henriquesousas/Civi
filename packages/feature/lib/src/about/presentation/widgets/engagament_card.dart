@@ -14,6 +14,7 @@ class EngagementCard extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
+          const SizedBox(height: SpacingSize.sm),
           Text(
             'O Kotto melhora com o uso da comunidade.',
             style: context.appText.bodySmall.copyWith(
@@ -33,6 +34,7 @@ class EngagementCard extends StatelessWidget {
           ),
           const SizedBox(height: SpacingSize.md),
           ButtonOutline(
+            icon: const Icon(Icons.share_outlined),
             text: 'Compartilhar o Kotto',
             press: () {},
           )

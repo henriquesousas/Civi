@@ -23,7 +23,7 @@ class SplashProgressIndicator extends StatelessWidget {
           const SizedBox(height: SpacingSize.lg),
           Text(
             "Aguarde...",
-            style: context.appText.body.copyWith(
+            style: context.appText.caption.copyWith(
               color: Colors.white.withValues(alpha: 0.7),
               fontWeight: FontWeight.w500,
             ),

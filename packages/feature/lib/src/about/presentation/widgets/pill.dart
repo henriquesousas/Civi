@@ -18,7 +18,7 @@ class Pill extends StatelessWidget {
       ),
       decoration: BoxDecoration(
         color: bg,
-        borderRadius: BorderRadius.circular(99),
+        borderRadius: BorderRadius.circular(RadiusSize.lg),
       ),
       child: Text(
         label,
@@ -26,6 +26,7 @@ class Pill extends StatelessWidget {
           color: fg,
           fontWeight: FontWeight.w900,
           letterSpacing: 0.3,
+          fontSize: context.safeSp(10),
         ),
       ),
     );

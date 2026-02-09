@@ -6,7 +6,7 @@ class AppColors {
   static const Color primaryColorVariant = Color(0xFF5F85FF);
 
   static const Color grey = Color(0xFF6B7280);
-  static const Color white100 = Color(0xFFFFF3E0);
+  static const Color greyLight = Color(0xFFF5F7FD);
   static const Color orange = Color(0xFFFB8C00);
 
   static const shadow = BoxShadow(

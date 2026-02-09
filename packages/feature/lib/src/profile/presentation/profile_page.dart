@@ -1,5 +1,5 @@
 import 'package:app_core/app_core.dart';
-import 'package:app_feature/src/about/about_exports.dart';
+import 'package:app_feature/app_feature.dart';
 import 'package:app_feature/src/profile/presentation/profile_item.dart';
 import 'package:app_feature/src/profile/presentation/widgets/account_card.dart';
 import 'package:app_feature/src/profile/presentation/widgets/profile_options.dart';
@@ -55,6 +55,7 @@ class ProfilePage extends StatelessWidget {
               ProfileItem(
                 icon: Icons.help_outline,
                 title: 'Perguntas frequentes',
+                press: () => context.push(FaqPageRouter.path),
               ),
               ProfileItem(
                 icon: Icons.info_outline_rounded,

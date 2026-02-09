@@ -1,7 +1,6 @@
 import 'package:deehelp/core/ui/theme/app_colors.dart';
 import 'package:deehelp/core/utils/url_launcher_utils.dart';
 import 'package:deehelp/features/welcome/minimal_new_app_card.dart';
-import 'package:deehelp/features/welcome/new_app_announced_card.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';

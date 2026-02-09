@@ -1,3 +1,4 @@
+import 'package:app_core/app_core.dart';
 import 'package:app_core/src/theme/size/button_size.dart';
 import 'package:app_core/src/theme/size/ciruclar_progress_indicator_size.dart';
 import 'package:app_core/src/ui/styles/app_styles.dart';
@@ -19,8 +20,21 @@ class ButtonPrimary extends StatelessWidget {
   Widget build(BuildContext context) {
     return SizedBox(
       width: double.infinity,
-      height: ButtonSize.md,
+      height: ButtonSize.sm,
       child: ElevatedButton(
+        style: ElevatedButton.styleFrom(
+          backgroundColor: AppColors.primaryColor,
+          foregroundColor: Colors.white,
+          minimumSize: const Size(double.infinity, 32),
+          shape: const RoundedRectangleBorder(
+            borderRadius: BorderRadius.all(Radius.circular(RadiusSize.md)),
+          ),
+        ).copyWith(
+          textStyle: WidgetStatePropertyAll(
+            TextStyle(
+                fontWeight: FontWeight.w500, fontSize: AppTextSizes.button),
+          ),
+        ),
         onPressed: () {
           if (!loading) {
             press();
