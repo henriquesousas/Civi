@@ -23,6 +23,7 @@ import 'package:deehelp/features/test_page.dart';
 // import 'package:deehelp/features/splash/splash_page.dart';
 import 'package:deehelp/features/welcome/welcome_page.dart';
 import 'package:deehelp/router_refresh_notifier.dart';
+import 'package:deehelp/test_page11.dart';
 import 'package:deehelp/test_page13.dart';
 import 'package:deehelp/test_page3.dart';
 import 'package:flutter/material.dart';
@@ -86,6 +87,7 @@ var goRouterProvider = Provider<GoRouter>(
         ...LocationRouter.routers,
         ...HomeRouter.routers,
         ...ProfileRouter.routers,
+        ...AboutRouter.routers,
         // ...IncidentModule.routers,
         GoRoute(
           path: '/',
@@ -98,7 +100,7 @@ var goRouterProvider = Provider<GoRouter>(
             // Search
             // child: const TestPage2(),
             //Profile
-            child: const TestPage3(),
+            // child: const TestPage3(),
             // Lista de items
             // child: const TestPage4(),
             // Cadastro de item
@@ -116,7 +118,7 @@ var goRouterProvider = Provider<GoRouter>(
             // Splash
             // child: const TestPage10(),
 
-            // child: const TestPage11(),
+            child: const TestPage11(),
             // child: const TestPage12FaqPage(),
             //FAQ DARK
             // child: const TestPageDark(),

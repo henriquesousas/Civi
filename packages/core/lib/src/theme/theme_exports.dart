@@ -8,6 +8,7 @@ export 'size/radius_size.dart';
 export 'size/spacing_size.dart';
 export 'size/progress_indicator_size.dart';
 export 'size/button_size.dart';
+export 'size/image_size.dart';
 
 // theme
 export 'app_colors.dart';

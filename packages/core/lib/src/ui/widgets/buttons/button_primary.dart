@@ -4,11 +4,11 @@ import 'package:app_core/src/ui/styles/app_styles.dart';
 import 'package:flutter/material.dart';
 
 //TODO: Refatorar para ter loading, desabilitado
-class PrimaryButton extends StatelessWidget {
+class ButtonPrimary extends StatelessWidget {
   final String text;
   final VoidCallback press;
   final bool loading;
-  const PrimaryButton({
+  const ButtonPrimary({
     super.key,
     required this.press,
     required this.text,

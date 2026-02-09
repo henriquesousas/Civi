@@ -1,4 +1,6 @@
+import 'package:app_core/app_core.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class Logo extends StatelessWidget {
   const Logo({super.key});
@@ -6,23 +8,23 @@ class Logo extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      width: 120,
-      height: 120,
+      width: ImageSize.xxxl,
+      height: ImageSize.xxxl,
       decoration: BoxDecoration(
         color: Colors.white.withValues(alpha: 0.14),
-        borderRadius: BorderRadius.circular(32),
-        border: Border.all(color: Colors.white.withOpacity(0.18)),
+        borderRadius: BorderRadius.circular(RadiusSize.xl),
+        border: Border.all(color: Colors.white.withValues(alpha: 0.18)),
       ),
       child: Center(
         child: Image.asset(
           'assets/logo.png',
-          width: 72,
-          height: 72,
+          width: 72.w,
+          height: 72.h,
           fit: BoxFit.contain,
-          errorBuilder: (_, __, ___) => const Icon(
+          errorBuilder: (_, __, ___) => Icon(
             Icons.shield_outlined,
             color: Colors.white,
-            size: 46,
+            size: IconSizes.xxxl,
           ),
         ),
       ),

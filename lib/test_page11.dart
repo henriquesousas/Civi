@@ -1,3 +1,4 @@
+import 'package:app_core/app_core.dart';
 import 'package:flutter/material.dart';
 
 class TestPage11 extends StatelessWidget {
@@ -122,14 +123,14 @@ class _Header extends StatelessWidget {
       children: [
         // fake logo mark
         Container(
-          width: 42,
-          height: 42,
+          width: ImageSize.md,
+          height: ImageSize.md,
           decoration: BoxDecoration(
             color: _primary,
             borderRadius: BorderRadius.circular(14),
             boxShadow: [
               BoxShadow(
-                color: _primary.withOpacity(0.25),
+                color: context.primaryColorOpacity(0.25),
                 blurRadius: 18,
                 offset: const Offset(0, 10),
               ),
@@ -137,7 +138,7 @@ class _Header extends StatelessWidget {
           ),
           child: const Icon(Icons.visibility_outlined, color: Colors.white),
         ),
-        const SizedBox(width: 10),
+        const SizedBox(width: RadiusSize.sm),
         const Expanded(
           child: Text(
             'Kotto',

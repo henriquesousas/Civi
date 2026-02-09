@@ -1,2 +1,3 @@
-export 'primary_button.dart';
-export 'inline_button.dart';
+export 'button_primary.dart';
+export 'button_inline.dart';
+export 'button_outline.dart';

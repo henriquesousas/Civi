@@ -52,12 +52,12 @@ class AppTextStyles {
 
   TextStyle get label => _textTheme.headlineSmall!.copyWith(
         fontWeight: FontWeight.w500,
-        fontSize: AppTextSizes.label,
+        fontSize: _context.safeSp(AppTextSizes.label),
       );
 
   TextStyle get caption => _textTheme.headlineSmall!.copyWith(
         fontWeight: FontWeight.w500,
-        fontSize: AppTextSizes.caption,
+        fontSize: _context.safeSp(AppTextSizes.caption),
       );
 
   // Button

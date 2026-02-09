@@ -120,7 +120,7 @@ class _BaseLocationIssuePageState extends ConsumerState<BaseLocationIssuePage>
                 ),
               ),
               const SizedBox(height: SpacingSize.xxl),
-              PrimaryButton(
+              ButtonPrimary(
                 press: widget.action,
                 text: widget.buttonName,
                 loading: loading,

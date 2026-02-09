@@ -1,4 +1,5 @@
 import 'package:app_core/app_core.dart';
+import 'package:app_feature/src/about/about_exports.dart';
 import 'package:app_feature/src/profile/presentation/profile_item.dart';
 import 'package:app_feature/src/profile/presentation/widgets/account_card.dart';
 import 'package:app_feature/src/profile/presentation/widgets/profile_options.dart';
@@ -20,9 +21,9 @@ class ProfilePage extends StatelessWidget {
         padding:
             const EdgeInsets.symmetric(vertical: LayoutSpacingSize.listItem),
         children: [
-          TitleSection(title: 'Conta'),
-          AccountCard(),
-          SizedBox(height: SpacingSize.lg),
+          const TitleSection(title: 'Conta'),
+          const AccountCard(),
+          const SizedBox(height: SpacingSize.lg),
           ProfileOptions(
             items: [
               ProfileItem(
@@ -42,8 +43,8 @@ class ProfilePage extends StatelessWidget {
             //   debugPrint('Pressed item index: $key');
             // },
           ),
-          SizedBox(height: SpacingSize.lg),
-          TitleSection(title: 'Explorar'),
+          const SizedBox(height: SpacingSize.lg),
+          const TitleSection(title: 'Explorar'),
           ProfileOptions(
             items: [
               ProfileItem(
@@ -59,12 +60,13 @@ class ProfilePage extends StatelessWidget {
                 icon: Icons.info_outline_rounded,
                 title: 'Quem somos',
                 subtitle: 'Conheça mais sobre o app',
+                press: () => context.push(AboutRouter.path),
               ),
             ],
           ),
-          SizedBox(height: SpacingSize.lg),
-          TitleSection(title: 'Preferências'),
-          ProfileOptions(
+          const SizedBox(height: SpacingSize.lg),
+          const TitleSection(title: 'Preferências'),
+          const ProfileOptions(
             items: [
               ProfileItem(
                 icon: Icons.dark_mode_outlined,
@@ -79,8 +81,8 @@ class ProfilePage extends StatelessWidget {
               ),
             ],
           ),
-          SizedBox(height: SpacingSize.lg),
-          TitleSection(title: 'Sistema'),
+          const SizedBox(height: SpacingSize.lg),
+          const TitleSection(title: 'Sistema'),
           ProfileOptions(
             items: [
               ProfileItem(
@@ -124,7 +126,7 @@ class ProfilePage extends StatelessWidget {
               ),
             ],
           ),
-          SizedBox(height: SpacingSize.lg),
+          const SizedBox(height: SpacingSize.lg),
         ],
       ),
     );
