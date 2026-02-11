@@ -1,7 +1,6 @@
-export 'src/home/home_exports.dart';
-export 'src/splash/splash_exports.dart';
-export 'src/location/location_exports.dart';
-export 'src/profile/profile_exports.dart';
-export 'src/about/about_exports.dart';
-export 'src/faq/faq_exports.dart';
-export 'src/auth/auth_exports.dart';
+// export 'src/home/home_exports.dart';
+// export '../../../lib/feature/splash/splash_exports.dart';
+// export '../../../lib/feature/profile/profile_exports.dart';
+// export '../../../lib/feature/about/about_exports.dart';
+// export '../../../lib/feature/faq/faq_exports.dart';
+// export '../../../lib/feature/auth/auth_exports.dart';

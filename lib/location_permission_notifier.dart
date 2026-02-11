@@ -1,5 +1,5 @@
-import 'package:deehelp/core/services/location/current_location.dart';
-import 'package:deehelp/core/services/location/state/location_state.dart';
+import 'package:deehelp/old_core/services/location/current_location.dart';
+import 'package:deehelp/old_core/services/location/state/location_state.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:geocoding/geocoding.dart';
 import 'package:geolocator/geolocator.dart';

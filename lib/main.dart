@@ -1,7 +1,7 @@
 // import 'package:cloudflare_r2/cloudflare_r2.dart';
 import 'package:cloudflare_r2/cloudflare_r2.dart';
-import 'package:deehelp/core/ui/extensions/screen_size_extension.dart';
-import 'package:deehelp/core/ui/theme/theme/theme.dart';
+import 'package:deehelp/old_core/ui/extensions/screen_size_extension.dart';
+import 'package:deehelp/old_core/ui/theme/theme/theme.dart';
 import 'package:device_preview/device_preview.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
@@ -12,9 +12,9 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:intl/date_symbol_data_local.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
-import 'core/env.dart';
-import 'core/resources.dart';
-import 'core/ui/router/router.dart';
+import 'old_core/env.dart';
+import 'old_core/resources.dart';
+import 'old_core/ui/router/router.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();

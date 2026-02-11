@@ -1,7 +1,9 @@
 import 'dart:io';
 
 import 'package:app_core/app_core.dart';
-import 'package:deehelp/core/ui/theme/app_colors.dart';
+import 'package:deehelp/core/theme/export_theme.dart';
+import 'package:deehelp/core/ui/widgets/cards/card_exports.dart';
+import 'package:deehelp/old_core/ui/theme/app_colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:image_picker/image_picker.dart';

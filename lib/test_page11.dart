@@ -1,4 +1,7 @@
 import 'package:app_core/app_core.dart';
+import 'package:deehelp/core/extension/exports_extension.dart';
+import 'package:deehelp/core/theme/export_theme.dart';
+import 'package:deehelp/core/theme/size/radius_size.dart';
 import 'package:flutter/material.dart';
 
 class TestPage11 extends StatelessWidget {
@@ -123,14 +126,14 @@ class _Header extends StatelessWidget {
       children: [
         // fake logo mark
         Container(
-          width: ImageSize.md,
-          height: ImageSize.md,
+          width: ImageSize.sm,
+          height: ImageSize.sm,
           decoration: BoxDecoration(
             color: _primary,
             borderRadius: BorderRadius.circular(14),
             boxShadow: [
               BoxShadow(
-                color: context.primaryColorOpacity(0.25),
+                color: context.primaryColor.withValues(alpha: 0.25),
                 blurRadius: 18,
                 offset: const Offset(0, 10),
               ),
