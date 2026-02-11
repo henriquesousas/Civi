@@ -59,7 +59,7 @@ class LocationBanner extends StatelessWidget {
                   primaryText,
                   maxLines: 1,
                   overflow: TextOverflow.ellipsis,
-                  style: context.appText.headersm.copyWith(
+                  style: context.appText.headermd.copyWith(
                     fontWeight: FontWeight.w800,
                   ),
                 ),

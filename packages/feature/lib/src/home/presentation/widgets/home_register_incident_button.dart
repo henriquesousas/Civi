@@ -39,11 +39,11 @@ class HomeRegisterIncidentButton extends StatelessWidget {
             ),
             child: Row(
               children: [
-                const SizedBox(width: SpacingSize.lg),
+                const SizedBox(width: SpacingSize.xl),
                 Expanded(
                   child: Text(
-                    'Registrar novo incidente',
-                    style: context.appText.titleMedium.copyWith(
+                    'Registrar incidente',
+                    style: context.appText.body.copyWith(
                       color: Colors.white,
                       fontWeight: FontWeight.w800,
                     ),

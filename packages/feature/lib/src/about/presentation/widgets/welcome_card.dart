@@ -38,7 +38,7 @@ class WelcomeCard extends StatelessWidget {
             ),
             const SizedBox(height: SpacingSize.md),
             Text(
-              'Bem-vindo ao Kotto 👋',
+              'Bem-vindo ao Tizzo 👋',
               style: context.appText.headerlg,
             ),
             const SizedBox(height: SpacingSize.sm),

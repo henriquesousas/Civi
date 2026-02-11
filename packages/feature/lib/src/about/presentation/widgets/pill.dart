@@ -18,7 +18,7 @@ class Pill extends StatelessWidget {
       ),
       decoration: BoxDecoration(
         color: bg,
-        borderRadius: BorderRadius.circular(RadiusSize.lg),
+        borderRadius: BorderRadius.circular(RadiusSize.sm),
       ),
       child: Text(
         label,

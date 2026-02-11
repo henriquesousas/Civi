@@ -39,7 +39,7 @@ class HomeSearchField extends StatelessWidget {
             bgColor: context.primaryColorOpacity(0.08),
             border: Border.all(color: context.primaryColorOpacity(0.10)),
             icon: Icon(
-              Icons.tune_rounded,
+              Icons.arrow_circle_right_outlined,
               color: context.primaryColor(),
               size: IconSizes.sm,
             ),
@@ -85,7 +85,7 @@ class SurfaceCard extends StatelessWidget {
           ),
       decoration: BoxDecoration(
         color: context.surfaceColor,
-        borderRadius: BorderRadius.circular(RadiusSize.lg),
+        borderRadius: BorderRadius.circular(RadiusSize.xxl),
         border: Border.all(color: context.outlineVariantColor, width: 1),
         boxShadow: const [shadowSoft],
       ),

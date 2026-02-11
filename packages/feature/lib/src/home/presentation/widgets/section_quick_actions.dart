@@ -18,12 +18,12 @@ class SectionQuickActions extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.start,
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text(
-          "Ações rápidas",
-          style: context.appText.body.copyWith(
-            fontWeight: FontWeight.w700,
-          ),
-        ),
+        // Text(
+        //   "Ações rápidas",
+        //   style: context.appText.body.copyWith(
+        //     fontWeight: FontWeight.w700,
+        //   ),
+        // ),
         const CardGradient()
       ],
     );

@@ -28,6 +28,7 @@ import 'package:deehelp/test_page12.dart';
 import 'package:deehelp/test_page13.dart';
 import 'package:deehelp/test_page3.dart';
 import 'package:deehelp/teste_page_login.dart';
+import 'package:deehelp/teste_sos_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
@@ -66,8 +67,8 @@ var goRouterProvider = Provider<GoRouter>(
         final appStatus = ref.read(appStartupProvider);
         final currentPath = state.matchedLocation;
         final isPublicRoute = _publicRoutes.contains(currentPath);
-        // return '/';
-        return AuthRouter.path;
+        return '/';
+        // return AuthRouter.path;
         switch (appStatus) {
           case AppStatus.loading:
             return SplashRouter.path;
@@ -100,7 +101,8 @@ var goRouterProvider = Provider<GoRouter>(
             key: state.pageKey,
 
             //Home
-            // child: const TestPage(),
+            child: const TestPage(),
+            // child: const TesteSOSPage(),
             // child: TestPage13(),
             // Search
             // child: const TestPage2(),
@@ -123,13 +125,13 @@ var goRouterProvider = Provider<GoRouter>(
             // Splash
             // child: const TestPage10(),
 
-            // OK child: const TestPage11(),
+            // child: const TestPage11(),
             //FAQ DARK
             // child: const TestPage12FaqPage(),
-            child: TestPageLogin(
-              onGoogleTap: () {},
-              onGuestTap: () {},
-            ),
+            // child: TestPageLogin(
+            //   onGoogleTap: () {},
+            //   onGuestTap: () {},
+            // ),
             // child: const TestPageDark(),
             // child: MyTest(),
           ),

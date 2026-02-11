@@ -1,4 +1,5 @@
 import 'package:app_core/app_core.dart';
+import 'package:app_feature/src/home/presentation/widgets/home_avatar_badge.dart';
 import 'package:flutter/material.dart';
 
 class HomeAppBar extends StatelessWidget implements PreferredSizeWidget {
@@ -28,10 +29,14 @@ class HomeAppBar extends StatelessWidget implements PreferredSizeWidget {
       titleSpacing: 20,
       title: Row(
         children: [
-          ProfileImageWithUploadButtonWidget(
-            imageUrl: profileImageUrl,
-            imageAlt: "Fake name",
-            onTap: press,
+          // ProfileImageWithUploadButtonWidget(
+          //   imageUrl: profileImageUrl,
+          //   imageAlt: "Fake name",
+          //   onTap: press,
+          // ),
+          HomeAvatarBadge(
+            initials: "PS",
+            onTap: () {},
           ),
           const SizedBox(width: SpacingSize.md),
           Expanded(
@@ -39,7 +44,7 @@ class HomeAppBar extends StatelessWidget implements PreferredSizeWidget {
               mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text('Bom dia,', style: context.appText.body),
+                Text('Olá,', style: context.appText.caption),
                 const SizedBox(height: 2),
                 Text(
                   userName,

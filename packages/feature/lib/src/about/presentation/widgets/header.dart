@@ -1,5 +1,6 @@
 import 'package:app_core/app_core.dart';
 import 'package:flutter/material.dart';
+import 'package:lottie/lottie.dart';
 
 class Header extends StatelessWidget {
   final VoidCallback onSkip;
@@ -9,7 +10,6 @@ class Header extends StatelessWidget {
   Widget build(BuildContext context) {
     return Row(
       children: [
-        //TODO:Mudar logo
         Container(
           width: ImageSize.md,
           height: ImageSize.md,
@@ -26,10 +26,15 @@ class Header extends StatelessWidget {
           ),
           child: const Icon(Icons.shield_outlined, color: Colors.white),
         ),
+        // Lottie.asset(
+        //   'assets/lottie/owl_open_mouth.json',
+        //   width: 60,
+        //   height: 60,
+        // ),
         const SizedBox(width: SpacingSize.md),
         Expanded(
           child: Text(
-            'Kotto',
+            'TIZZO',
             style: context.appText.headerlg.copyWith(
               fontWeight: FontWeight.w900,
               color: Colors.white,
