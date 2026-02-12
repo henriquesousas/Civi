@@ -6,24 +6,34 @@ import 'package:flutter/services.dart';
 class TextFieldPrimary extends StatelessWidget {
   final TextEditingController controller;
   final String hint;
-  final String labelText;
   final List<TextInputFormatter>? inputFormatters;
+  final String? labelText;
   final Widget? suffixIcon;
+  final int? maxLength;
+  final int? maxLines;
+  final TextInputType? textInputType;
+
   const TextFieldPrimary(
       {super.key,
       required this.controller,
       required this.hint,
-      required this.labelText,
+      this.labelText,
       this.inputFormatters,
-      this.suffixIcon});
+      this.suffixIcon,
+      this.maxLength,
+      this.maxLines,
+      this.textInputType});
 
   @override
   Widget build(BuildContext context) {
     return TextField(
       controller: controller,
-      keyboardType: TextInputType.number,
+      keyboardType: textInputType ?? TextInputType.text,
+      maxLength: maxLength,
+      maxLines: maxLines,
       inputFormatters: inputFormatters,
       decoration: InputDecoration(
+          counterStyle: TextStyle(color: context.secondaryColor),
           labelText: labelText,
           labelStyle: TextStyle(
             color: context.secondaryColor,

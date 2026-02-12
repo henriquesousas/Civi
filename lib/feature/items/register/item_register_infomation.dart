@@ -1,5 +1,10 @@
+import 'package:deehelp/core/extension/color_extension.dart';
+import 'package:deehelp/core/theme/export_theme.dart';
 import 'package:deehelp/core/theme/size/layout_spacing_size.dart';
 import 'package:deehelp/core/theme/size/spacing_size.dart';
+import 'package:deehelp/core/ui/styles/app_text_style.dart';
+import 'package:deehelp/core/ui/widgets/cards/card_exports.dart';
+import 'package:deehelp/core/ui/widgets/cards/card_hint.dart';
 import 'package:deehelp/feature/items/item_type.dart';
 import 'package:deehelp/feature/items/register/item_data.dart';
 import 'package:deehelp/feature/items/register/widgets/card_page.dart';
@@ -7,6 +12,7 @@ import 'package:deehelp/feature/items/register/widgets/brand-picker/brand_picker
 import 'package:deehelp/feature/items/register/widgets/color-picker/color_option.dart';
 import 'package:deehelp/feature/items/register/widgets/color-picker/color_picker_field.dart';
 import 'package:deehelp/feature/items/register/widgets/imei/ime_card.dart';
+import 'package:deehelp/feature/items/register/widgets/observation_card_field.dart';
 import 'package:deehelp/feature/items/register/widgets/section_title.dart';
 import 'package:deehelp/feature/items/register/widgets/simple_text_field.dart';
 import 'package:deehelp/feature/items/register/widgets/wizard_step.dart';
@@ -170,6 +176,29 @@ class _ItemRegisterInfomationState extends State<ItemRegisterInfomation> {
         ],
         const SizedBox(height: SpacingSize.xl),
         const SectionTitle('Observação'),
+        ObservationCardField(controller: notesCtrl),
+        const SizedBox(height: SpacingSize.xl),
+        CardHint(
+          backgroundColor: AppColors.green.withValues(alpha: 0.12),
+          iconBackgroundColor: AppColors.green.withValues(alpha: 0.12),
+          textStyle: context.appText.bodySmall.copyWith(
+            height: 1.35,
+            color: context.onSurface,
+            fontWeight: FontWeight.w400,
+          ),
+          border: Border.all(
+            color: AppColors.green.withValues(alpha: 0.01),
+            width: 1,
+          ),
+          icon: Icon(
+            Icons.verified_user_outlined,
+            color: AppColors.green,
+            size: IconSizes.sm,
+          ),
+          title: "Verificação",
+          message:
+              'Após o cadastro, seu item pode ficar como “Pendente” até ser verificado e liberado pela nossa equipe.',
+        ),
       ],
     );
   }

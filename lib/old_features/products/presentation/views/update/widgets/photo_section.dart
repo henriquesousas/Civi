@@ -5,7 +5,7 @@ import 'package:deehelp/old_core/ui/extensions/result_extension.dart';
 import 'package:deehelp/old_core/ui/widgets/card/ui_custom_app_card.dart';
 import 'package:deehelp/old_core/providers/image_picker_provider.dart';
 import 'package:deehelp/old_features/products/presentation/providers/product_viewmodel_provider.dart';
-import 'package:deehelp/old_features/products/presentation/views/add/widget/grid_add_photo.dart';
+import 'package:deehelp/core/ui/widgets/grid/grid_add_photo.dart';
 import 'package:deehelp/old_features/products/presentation/views/update/widgets/item_detail_tile.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';

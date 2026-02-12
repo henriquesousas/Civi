@@ -1,5 +1,6 @@
 import 'package:deehelp/core/ui/widgets/appbar/default_app_bar.dart';
 import 'package:deehelp/feature/items/register/item_register_infomation.dart';
+import 'package:deehelp/feature/items/register/item_register_photo.dart';
 import 'package:deehelp/feature/items/register/item_register_type.dart';
 import 'package:deehelp/feature/items/register/widgets/wizard_bottom_bar.dart';
 import 'package:flutter/material.dart';
@@ -18,12 +19,10 @@ class _ItemRegisterPageViewState extends State<ItemRegisterPageView> {
   @override
   void initState() {
     super.initState();
-    _pageController.addListener(_pageChangeListener);
   }
 
   @override
   void dispose() {
-    _pageController.removeListener(_pageChangeListener);
     _pageController.dispose();
     super.dispose();
   }
@@ -48,15 +47,6 @@ class _ItemRegisterPageViewState extends State<ItemRegisterPageView> {
         curve: Curves.easeIn,
       );
     });
-  }
-
-  void _pageChangeListener() {
-    // int newPage = _pageController.page?.round() ?? 0;
-    // if (newPage != _currentPage) {
-    //   setState(() {
-    //     _currentPage = newPage;
-    //   });
-    // }
   }
 
   @override
@@ -86,6 +76,7 @@ class _ItemRegisterPageViewState extends State<ItemRegisterPageView> {
         children: [
           ItemRegisterType(press: () => _nextPage()),
           ItemRegisterInfomation(press: () => _nextPage()),
+          ItemRegisterPhoto(),
         ],
       ),
     );

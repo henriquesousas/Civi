@@ -10,6 +10,8 @@ class CardHint extends StatelessWidget {
   final Color? backgroundColor;
   final Color? iconBackgroundColor;
   final double? iconContainerSize;
+  final Border? border;
+  final TextStyle? textStyle;
 
   const CardHint({
     super.key,
@@ -19,6 +21,8 @@ class CardHint extends StatelessWidget {
     this.backgroundColor,
     this.iconBackgroundColor,
     this.iconContainerSize,
+    this.border,
+    this.textStyle,
   });
 
   @override
@@ -28,7 +32,8 @@ class CardHint extends StatelessWidget {
       decoration: BoxDecoration(
         color: backgroundColor ?? context.primaryColor.withValues(alpha: 0.08),
         borderRadius: BorderRadius.circular(RadiusSize.lg),
-        border: Border.all(color: context.primaryColor.withValues(alpha: 0.20)),
+        border: border ??
+            Border.all(color: context.primaryColor.withValues(alpha: 0.20)),
       ),
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -41,8 +46,13 @@ class CardHint extends StatelessWidget {
                 color: iconBackgroundColor ??
                     context.primaryColor.withValues(alpha: 0.14),
                 borderRadius: BorderRadius.circular(14),
-                border: Border.all(
-                    color: context.primaryColor.withValues(alpha: 0.18)),
+                border: backgroundColor != null
+                    ? Border.all(
+                        color: backgroundColor!.withValues(alpha: 0.18),
+                      )
+                    : Border.all(
+                        color: context.primaryColor.withValues(alpha: 0.18),
+                      ),
               ),
               child: icon,
             ),
@@ -58,10 +68,11 @@ class CardHint extends StatelessWidget {
                 const SizedBox(height: SpacingSize.xs),
                 Text(
                   message,
-                  style: context.appText.bodySmall.copyWith(
-                    height: 1.35,
-                    fontWeight: FontWeight.w600,
-                  ),
+                  style: textStyle ??
+                      context.appText.bodySmall.copyWith(
+                        height: 1.35,
+                        fontWeight: FontWeight.w600,
+                      ),
                 ),
               ],
             ),

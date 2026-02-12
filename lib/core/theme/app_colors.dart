@@ -8,6 +8,7 @@ class AppColors {
   static const Color grey = Color(0xFF6B7280);
   static const Color greyLight = Color(0xFFF5F7FD);
   static const Color orange = Color(0xFFFB8C00);
+  static const Color green = Color(0xFF009561);
 
   static const shadow = BoxShadow(
     color: Color(0x12000000),

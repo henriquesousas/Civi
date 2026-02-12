@@ -1,3 +1,4 @@
+import 'package:deehelp/core/ui/styles/export_style.dart';
 import 'package:deehelp/old_core/ui/theme/app_colors.dart';
 import 'package:deehelp/old_core/ui/theme/app_text_styles.dart';
 import 'package:deehelp/old_core/ui/theme/dimens.dart';
