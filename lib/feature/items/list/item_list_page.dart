@@ -104,7 +104,7 @@ class ItemListPage extends StatelessWidget {
               padding: const EdgeInsets.only(bottom: 12),
               child: RowItemCard(
                 item: it,
-                onTap: () {},
+                onTap: () => context.push(ItemsRouter.detail),
               ),
             ),
           ),

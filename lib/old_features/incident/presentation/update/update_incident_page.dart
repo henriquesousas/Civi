@@ -14,7 +14,7 @@ import 'package:deehelp/old_features/incident/presentation/providers/update_inci
 import 'package:deehelp/old_features/incident/presentation/update/incident_field.dart';
 import 'package:deehelp/old_features/incident/presentation/update/state/update_incident_state.dart';
 import 'package:deehelp/old_features/incident/presentation/update/update_incident_args.dart';
-import 'package:deehelp/core/ui/widgets/grid/grid_add_photo.dart';
+import 'package:deehelp/core/ui/widgets/image/grid_add_image.dart';
 import 'package:deehelp/old_features/products/presentation/views/listing/widgets/status_badge_widget.dart';
 import 'package:deehelp/old_features/products/presentation/views/update/widgets/item_detail_tile.dart';
 import 'package:flutter/material.dart';
@@ -273,7 +273,7 @@ class _UpdateIncidentPageState extends ConsumerState<UpdateIncidentPage> {
                   ),
                   Padding(
                     padding: const EdgeInsets.all(8.0),
-                    child: GridAddPhoto(
+                    child: GridAddImage(
                       maxPhotos: state.updatedValue?.product.images.length ?? 0,
                       photos: state.updatedValue?.product.images ?? [],
                     ),

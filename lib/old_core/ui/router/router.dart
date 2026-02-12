@@ -37,6 +37,7 @@ import 'package:deehelp/test_page13.dart';
 import 'package:deehelp/test_page3.dart';
 import 'package:deehelp/test_page4.dart';
 import 'package:deehelp/test_page40.dart';
+import 'package:deehelp/test_page5.dart';
 import 'package:deehelp/teste_page_login.dart';
 import 'package:deehelp/teste_sos_page.dart';
 import 'package:flutter/material.dart';
@@ -122,9 +123,9 @@ var goRouterProvider = Provider<GoRouter>(
             // Lista de items
             // child: const TestPage4(),
             // Cadastro de item
-            child: const TestPage40(),
+            // child: const TestPage40(),
             // Detalhes do item
-            // child: TestPage5(),
+            child: TestPage5(),
             // Item cadastrado sucesso
             // child: TestPage6(),
             //Detalhes da ocorrencia

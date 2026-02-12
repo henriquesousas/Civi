@@ -76,7 +76,7 @@ class _ItemRegisterPageViewState extends State<ItemRegisterPageView> {
         children: [
           ItemRegisterType(press: () => _nextPage()),
           ItemRegisterInfomation(press: () => _nextPage()),
-          ItemRegisterPhoto(),
+          const ItemRegisterPhoto(),
         ],
       ),
     );

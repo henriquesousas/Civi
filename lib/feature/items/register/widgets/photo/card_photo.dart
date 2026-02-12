@@ -10,7 +10,7 @@ import 'package:deehelp/old_core/ui/extensions/dialog_extension.dart';
 import 'package:deehelp/old_core/ui/extensions/result_extension.dart';
 import 'package:deehelp/old_core/zoom_image_viewer.dart';
 import 'package:deehelp/old_features/products/domain/entities/image_media.dart';
-import 'package:deehelp/core/ui/widgets/grid/grid_add_photo.dart';
+import 'package:deehelp/core/ui/widgets/image/grid_add_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -105,7 +105,7 @@ class _CardPhotoState extends ConsumerState<CardPhoto> {
               ),
             ),
             const SizedBox(height: SpacingSize.md),
-            GridAddPhoto(
+            GridAddImage(
               photos: photos,
               maxPhotos: 3,
               onAdd: () => pickFromGalley(imagePicker),

@@ -6,7 +6,7 @@ import 'package:deehelp/old_core/ui/extensions/result_extension.dart';
 import 'package:deehelp/old_core/providers/image_picker_provider.dart';
 import 'package:deehelp/old_features/products/presentation/providers/product_viewmodel_provider.dart';
 import 'package:deehelp/old_features/products/presentation/views/add/widget/header_text_card.dart';
-import 'package:deehelp/core/ui/widgets/grid/grid_add_photo.dart';
+import 'package:deehelp/core/ui/widgets/image/grid_add_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -32,7 +32,7 @@ class _StepAddPhotoState extends ConsumerState<StepAddPhoto> {
                 "Adicione fotos do seu veículo para facilitar a identificação e tornar seu registro mais completo.",
           ),
           const SizedBox(height: 10),
-          GridAddPhoto(
+          GridAddImage(
             maxPhotos: 2,
             photos: state.imageMedia,
             onAdd: () async {

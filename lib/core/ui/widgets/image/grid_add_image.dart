@@ -1,4 +1,3 @@
-import 'package:deehelp/core/ui/styles/export_style.dart';
 import 'package:deehelp/old_core/ui/theme/app_colors.dart';
 import 'package:deehelp/old_core/ui/theme/app_text_styles.dart';
 import 'package:deehelp/old_core/ui/theme/dimens.dart';
@@ -8,7 +7,7 @@ import 'package:deehelp/old_features/products/domain/entities/image_media.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-class GridAddPhoto extends StatelessWidget {
+class GridAddImage extends StatelessWidget {
   final List<ImageMedia> photos;
   final VoidCallback? onAdd;
   final Function(int)? onRemove;
@@ -18,7 +17,7 @@ class GridAddPhoto extends StatelessWidget {
   final int maxPhotos;
   final bool isLoading;
 
-  const GridAddPhoto({
+  const GridAddImage({
     Key? key,
     required this.photos,
     this.onAdd,
