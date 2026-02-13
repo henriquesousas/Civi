@@ -18,8 +18,8 @@ class AppColors {
   );
 
   static const shadowSoft = BoxShadow(
-    color: Color(0x0D000000),
-    blurRadius: 16,
-    offset: Offset(0, 8),
+    color: Color(0x12000000),
+    blurRadius: 18,
+    offset: Offset(0, 10),
   );
 }

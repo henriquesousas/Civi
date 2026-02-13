@@ -4,6 +4,7 @@ import 'package:deehelp/feature/about/about_exports.dart';
 import 'package:deehelp/feature/faq/export_faq.dart';
 import 'package:deehelp/feature/incidents/incident_router.dart';
 import 'package:deehelp/feature/items/items_router.dart';
+import 'package:deehelp/feature/sos/sos_router.dart';
 import 'profile_item.dart';
 import 'widgets/account_card.dart';
 import 'widgets/profile_options.dart';
@@ -43,9 +44,6 @@ class ProfilePage extends StatelessWidget {
                 press: () => context.push(IncidentRouter.list),
               ),
             ],
-            // press: (key) {
-            //   debugPrint('Pressed item index: $key');
-            // },
           ),
           const SizedBox(height: SpacingSize.lg),
           const TitleSection(title: 'Explorar'),
@@ -55,6 +53,12 @@ class ProfilePage extends StatelessWidget {
                 icon: Icons.search_rounded,
                 title: 'Consultar incidentes',
                 subtitle: 'Pesquise ocorrências registradas',
+              ),
+              ProfileItem(
+                icon: Icons.sos,
+                title: 'Emergência',
+                subtitle: 'Telefones de emergência',
+                press: () => context.push(SOSRouter.path),
               ),
               ProfileItem(
                 icon: Icons.help_outline,

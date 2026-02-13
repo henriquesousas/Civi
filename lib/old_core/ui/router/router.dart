@@ -12,6 +12,7 @@ import 'package:deehelp/feature/incidents/incident_router.dart';
 import 'package:deehelp/feature/items/items_router.dart';
 import 'package:deehelp/feature/location/export_location.dart';
 import 'package:deehelp/feature/profile/export_profile.dart';
+import 'package:deehelp/feature/sos/sos_router.dart';
 import 'package:deehelp/feature/splash/splash_router.dart';
 import 'package:deehelp/old_core/ui/router/app_router.dart';
 import 'package:deehelp/old_core/ui/router/slide_transition_page.dart';
@@ -116,6 +117,7 @@ var goRouterProvider = Provider<GoRouter>(
         ...AuthRouter.routers,
         ...ItemsRouter.routers,
         ...IncidentRouter.routers,
+        ...SOSRouter.routers,
         // ...IncidentModule.routers,
         GoRoute(
           path: '/',
@@ -123,7 +125,7 @@ var goRouterProvider = Provider<GoRouter>(
             key: state.pageKey,
 
             //Home
-            // child: const TestPage(),
+            child: const TestPage(),
             //SOS
             // child: const TesteSOSPage(),
             //GPS
@@ -144,7 +146,7 @@ var goRouterProvider = Provider<GoRouter>(
             //Detalhes da ocorrencia
             // child: TestPage7(),
             // Reportat incident
-            child: TestOcorrencia(),
+            // child: TestOcorrencia(),
             // child: TestPage8(),
             // ReportIncidentSuccess
             // child: const TestPage9(),
