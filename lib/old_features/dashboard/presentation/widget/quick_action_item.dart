@@ -1,4 +1,3 @@
-import 'package:deehelp/old_core/ui/extensions/screen_size_extension.dart';
 import 'package:deehelp/old_core/ui/theme/app_colors.dart';
 import 'package:deehelp/old_core/ui/theme/app_text_styles.dart';
 import 'package:deehelp/old_core/ui/theme/dimens.dart';
@@ -23,7 +22,7 @@ class QuickActionItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Material(
-      color: Colors.transparent,
+      color: AppColors.greyColor.withValues(alpha: 0.3),
       child: InkWell(
         borderRadius: BorderRadius.circular(16),
         onTap: () {

@@ -1,8 +1,15 @@
 import 'dart:async';
 
+import 'package:deehelp/feature/home/widgets/home_avatar_badge.dart';
 import 'package:deehelp/old_core/ui/theme/app_colors.dart';
+import 'package:deehelp/old_core/ui/theme/dimens.dart';
+import 'package:deehelp/old_features/dashboard/presentation/widget/quick_action_item.dart';
+import 'package:deehelp/test_quick_acion_card_test.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_svg/svg.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class TestPage extends StatefulWidget {
   const TestPage({super.key});
@@ -28,6 +35,15 @@ class _TestPageState extends State<TestPage> {
   void initState() {
     super.initState();
     _scrollController = ScrollController()..addListener(_onScroll);
+
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      WelcomeOnce.showIfFirstTime(
+        context: context,
+        onGoToMyItems: () {
+          // context.push('/my-items');
+        },
+      );
+    });
   }
 
   @override
@@ -63,144 +79,223 @@ class _TestPageState extends State<TestPage> {
         controller: _scrollController,
         physics: const BouncingScrollPhysics(),
         slivers: [
-          SliverAppBar(
-            expandedHeight: 220,
-            toolbarHeight: kToolbarHeight,
-            collapsedHeight: kToolbarHeight,
+          // SliverAppBar(
+          //   expandedHeight: 220,
+          //   toolbarHeight: kToolbarHeight,
+          //   collapsedHeight: kToolbarHeight,
 
-            backgroundColor: AppColors.primaryColor,
-            // pinned: true,
-            // floating: true,
+          //   backgroundColor: AppColors.primaryColor,
+          //   // pinned: true,
+          //   // floating: true,
+          //   flexibleSpace: FlexibleSpaceBar(
+          //     background: Padding(
+          //       padding: EdgeInsets.symmetric(horizontal: 16, vertical: 10),
+          //       child: Container(
+          //         decoration: BoxDecoration(
+          //           gradient: LinearGradient(
+          //             begin: Alignment.topCenter,
+          //             end: Alignment.bottomCenter,
+          //             colors: [
+          //               AppColors.primaryColor,
+          //               AppColors.primaryColor.withValues(alpha: 0.92),
+          //               AppColors.primaryColor.withValues(alpha: 0.82),
+          //             ],
+          //           ),
+          //         ),
+          //         child: Column(
+          //           spacing: 20,
+          //           mainAxisAlignment: MainAxisAlignment.end,
+          //           children: [
+          //             Row(
+          //               spacing: 10,
+          //               mainAxisAlignment: MainAxisAlignment.start,
+          //               children: [
+          //                 _Avatar(
+          //                   size: 44,
+          //                   imageUrl: null,
+          //                   fallbackIcon: Icons.person_rounded,
+          //                 ),
+          //                 Expanded(
+          //                   child: Column(
+          //                     crossAxisAlignment: CrossAxisAlignment.start,
+          //                     children: [
+          //                       Text(
+          //                         'Olá,',
+          //                         style: TextStyle(
+          //                           color: Colors.white.withValues(
+          //                             alpha: 0.90,
+          //                           ),
+          //                           fontSize: 14,
+          //                         ),
+          //                       ),
+          //                       Text(
+          //                         'Paulo',
+          //                         maxLines: 1,
+          //                         overflow: TextOverflow.ellipsis,
+          //                         style: const TextStyle(
+          //                           color: Colors.white,
+          //                           fontSize: 18,
+          //                           fontWeight: FontWeight.w700,
+          //                         ),
+          //                       ),
+          //                     ],
+          //                   ),
+          //                 ),
+          //                 // _HeaderIconButton(
+          //                 //   onPressed: () {},
+          //                 //   icon: Icons.notifications_none_rounded,
+          //                 // ),
+          //                 // const SizedBox(width: 8),
+          //                 // _HeaderIconButton(
+          //                 //   onPressed: () {},
+          //                 //   icon: Icons.help_outline_rounded,
+          //                 // ),
+          //               ],
+          //             ),
+          //             Column(
+          //               children: [
+          //                 _BlueInfoCard(
+          //                   child: Column(
+          //                     crossAxisAlignment: CrossAxisAlignment.start,
+          //                     children: [
+          //                       _UserAddressHeader(
+          //                         cityState: 'São Paulo, SP',
+          //                         streetLine: 'Av. Paulista, 1000 • Bela Vista',
+          //                         riskLabel: 'Risco: Médio',
+          //                       ),
+          //                       // const SizedBox(height: 20),
+          //                       // _LocationSearchField(
+          //                       //   hint: 'Buscar bairro, cidade ou CEP',
+          //                       //   onUseGps: () {},
+          //                       //   onTap: () {},
+          //                       // ),
+          //                     ],
+          //                   ),
+          //                 ),
+          //               ],
+          //             ),
+          //           ],
+          //         ),
+          //       ),
+          //     ),
+          //   ),
+          // ),
+
+          //Action
+          SliverAppBar(
+            expandedHeight: 260.h,
+            toolbarHeight: 260.h,
+            pinned: true,
+            backgroundColor: Colors.white,
+            surfaceTintColor: Colors.white,
+            elevation: 0,
             flexibleSpace: FlexibleSpaceBar(
-              background: Padding(
-                padding: EdgeInsets.symmetric(horizontal: 16, vertical: 10),
-                child: Container(
-                  decoration: BoxDecoration(
-                    gradient: LinearGradient(
-                      begin: Alignment.topCenter,
-                      end: Alignment.bottomCenter,
-                      colors: [
-                        AppColors.primaryColor,
-                        AppColors.primaryColor.withValues(alpha: 0.92),
-                        AppColors.primaryColor.withValues(alpha: 0.82),
-                      ],
-                    ),
-                  ),
+              background: SafeArea(
+                bottom: false,
+                child: Padding(
+                  padding: const EdgeInsets.fromLTRB(20, 12, 20, 16),
                   child: Column(
-                    spacing: 20,
-                    mainAxisAlignment: MainAxisAlignment.end,
+                    crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
+                      const SizedBox(height: 6),
+
+                      /// 📍 LOCALIZAÇÃO
                       Row(
-                        spacing: 10,
-                        mainAxisAlignment: MainAxisAlignment.start,
                         children: [
-                          _Avatar(
-                            size: 44,
-                            imageUrl: null,
-                            fallbackIcon: Icons.person_rounded,
+                          const Icon(
+                            Icons.location_on_rounded,
+                            size: 16,
+                            color: Color(0xFF6B7280),
                           ),
+                          const SizedBox(width: 6),
+                          const Expanded(
+                            child: Text(
+                              'São Paulo, SP • Av. Paulista, 1000',
+                              maxLines: 1,
+                              overflow: TextOverflow.ellipsis,
+                              style: TextStyle(
+                                fontSize: 12.5,
+                                fontWeight: FontWeight.w600,
+                                color: Color(0xFF6B7280),
+                              ),
+                            ),
+                          ),
+                          const SizedBox(width: 10),
+                          _ProfileButton(
+                            onTap: () {
+                              // context.push('/profile');
+                            },
+                            // imageUrl: profileUrl, // se tiver foto
+                          ),
+                        ],
+                      ),
+
+                      const SizedBox(height: 12),
+
+                      // TÍTULO
+                      const Text(
+                        'Ações rápidas',
+                        style: TextStyle(
+                          fontSize: 18,
+                          fontWeight: FontWeight.w900,
+                          color: Colors.black,
+                        ),
+                      ),
+
+                      const SizedBox(height: 14),
+
+                      // MENU HORIZONTAL (alinhado e consistente)
+                      Row(
+                        children: [
                           Expanded(
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Text(
-                                  'Olá,',
-                                  style: TextStyle(
-                                    color: Colors.white.withValues(
-                                      alpha: 0.90,
-                                    ),
-                                    fontSize: 14,
-                                  ),
-                                ),
-                                Text(
-                                  'Paulo',
-                                  maxLines: 1,
-                                  overflow: TextOverflow.ellipsis,
-                                  style: const TextStyle(
-                                    color: Colors.white,
-                                    fontSize: 18,
-                                    fontWeight: FontWeight.w700,
-                                  ),
-                                ),
-                              ],
+                            child: _buildQuickAction2(
+                              icon: Icons.inventory_2_outlined,
+                              label: 'Meus itens',
+                              onTap: () {},
                             ),
                           ),
-                          // _HeaderIconButton(
-                          //   onPressed: () {},
-                          //   icon: Icons.notifications_none_rounded,
-                          // ),
-                          // const SizedBox(width: 8),
-                          // _HeaderIconButton(
-                          //   onPressed: () {},
-                          //   icon: Icons.help_outline_rounded,
-                          // ),
-                        ],
-                      ),
-                      Column(
-                        children: [
-                          _BlueInfoCard(
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                _UserAddressHeader(
-                                  cityState: 'São Paulo, SP',
-                                  streetLine: 'Av. Paulista, 1000 • Bela Vista',
-                                  riskLabel: 'Risco: Médio',
-                                ),
-                                const SizedBox(height: 20),
-                                _LocationSearchField(
-                                  hint: 'Buscar bairro, cidade ou CEP',
-                                  onUseGps: () {},
-                                  onTap: () {},
-                                ),
-                              ],
+                          const SizedBox(width: 12),
+                          Expanded(
+                            child: _buildQuickAction2(
+                              icon: Icons.campaign_outlined,
+                              label: 'Ocorrências',
+                              onTap: () {},
+                            ),
+                          ),
+                          const SizedBox(width: 12),
+                          Expanded(
+                            child: _buildQuickAction2(
+                              icon: Icons.sos,
+                              isDanger: true,
+                              label: 'SOS',
+                              onTap: () {},
                             ),
                           ),
                         ],
                       ),
+
+                      const SizedBox(height: 16),
+
+                      // SEARCH FAKE
+                      FakeSearchBar(
+                        hint: 'Buscar bairro, cidade ou ocorrência',
+                        onTap: () {
+                          // context.push('/search');
+                        },
+                      ),
+
+                      const Spacer(),
+
+                      // respiro final pra não “grudar”
+                      const SizedBox(height: 6),
                     ],
                   ),
                 ),
               ),
             ),
           ),
-          SliverAppBar(
-            backgroundColor: AppColors.white,
-            expandedHeight: 120,
-            toolbarHeight: 180,
-            pinned: true,
-            flexibleSpace: FlexibleSpaceBar(
-              background: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 20),
-                    child: Text(
-                      "Ações rapida",
-                      style: TextStyle(
-                        fontSize: 18,
-                        fontWeight: FontWeight.bold,
-                        color: Colors.black,
-                      ),
-                    ),
-                  ),
-                  SizedBox(height: 30),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceAround,
-                    children: [
-                      _buildQuickAction(icon: Icons.send, label: 'Meus itens'),
-                      _buildQuickAction(
-                          icon: Icons.receipt, label: 'Ocorrências'),
-                      _buildQuickAction(icon: Icons.add, label: 'SOS'),
-                      _buildQuickAction(icon: Icons.add, label: 'SOS'),
-                    ],
-                  ),
-                ],
-              ),
-            ),
-          ),
-          // Corpo
+
+          // Recents
           SliverToBoxAdapter(
             child: Padding(
               padding: const EdgeInsets.fromLTRB(16, 16, 16, 10),
@@ -259,7 +354,6 @@ class _TestPageState extends State<TestPage> {
               ),
             ),
           ),
-
           SliverToBoxAdapter(
             child: Padding(
               padding: const EdgeInsets.fromLTRB(16, 4, 16, 22),
@@ -331,9 +425,9 @@ class _TestPageState extends State<TestPage> {
           onPressed: () {},
           backgroundColor: AppColors.primaryColor,
           foregroundColor: Colors.white,
-          icon: const Icon(Icons.campaign),
+          icon: const Icon(Icons.record_voice_over_rounded),
           label: const Text(
-            'Reportar ocorrência',
+            'Registrar ocorrencia de roubo',
             style: TextStyle(
               fontWeight: FontWeight.bold,
             ),
@@ -466,6 +560,73 @@ class _TestPageState extends State<TestPage> {
   //     ),
   //   );
   // }
+
+  Widget _buildQuickAction2({
+    required IconData icon,
+    required String label,
+    required VoidCallback onTap,
+    bool isDanger = false,
+  }) {
+    final accent = isDanger ? const Color(0xFFDC2626) : AppColors.primaryColor;
+    final radius = BorderRadius.circular(16);
+
+    return Expanded(
+      child: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 6),
+        child: Material(
+          color: Colors.white,
+          borderRadius: radius,
+          clipBehavior: Clip.antiAlias,
+          child: InkWell(
+            onTap: onTap,
+            borderRadius: radius,
+            splashColor: accent.withValues(alpha: 0.18),
+            highlightColor: accent.withValues(alpha: 0.08),
+            child: Ink(
+              decoration: BoxDecoration(
+                borderRadius: radius,
+                border: Border.all(color: const Color(0xFFE7ECF5)),
+                boxShadow: const [
+                  BoxShadow(
+                    color: Color(0x08000000),
+                    blurRadius: 14,
+                    offset: Offset(0, 8),
+                  ),
+                ],
+              ),
+              padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 12),
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  Container(
+                    width: 44,
+                    height: 44,
+                    decoration: BoxDecoration(
+                      color: accent.withValues(alpha: 0.10),
+                      borderRadius: BorderRadius.circular(14),
+                    ),
+                    child: Icon(icon, color: accent, size: 22),
+                  ),
+                  const SizedBox(height: 10),
+                  Text(
+                    label,
+                    maxLines: 1,
+                    overflow: TextOverflow.ellipsis,
+                    textAlign: TextAlign.center,
+                    style: const TextStyle(
+                      fontSize: 12.5,
+                      fontWeight: FontWeight.w800,
+                      color: Color(0xFF121826),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ),
+        ),
+      ),
+    );
+  }
 
   Widget _buildQuickAction({
     required IconData icon,
@@ -1106,6 +1267,493 @@ class _SlideFab extends StatelessWidget {
           scale: visible ? 1.0 : 0.99,
           child: child,
         ),
+      ),
+    );
+  }
+}
+
+class FakeSearchBar extends StatelessWidget {
+  final String hint;
+  final VoidCallback onTap;
+
+  const FakeSearchBar({
+    super.key,
+    required this.hint,
+    required this.onTap,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    final radius = BorderRadius.circular(16);
+
+    return Material(
+      color: Colors.white,
+      borderRadius: radius,
+      clipBehavior: Clip.antiAlias,
+      child: InkWell(
+        onTap: onTap,
+        borderRadius: radius,
+        splashColor: AppColors.primaryColor.withValues(alpha: 0.12),
+        highlightColor: AppColors.primaryColor.withValues(alpha: 0.05),
+        child: Ink(
+          height: 50,
+          decoration: BoxDecoration(
+            color: AppColors.greyColor.withValues(alpha: 0.15),
+            borderRadius: radius,
+            border: Border.all(
+              color: const Color(0xFFE7ECF5),
+            ),
+            boxShadow: const [
+              BoxShadow(
+                color: Color(0x08000000),
+                blurRadius: 10,
+                offset: Offset(0, 8),
+              ),
+            ],
+          ),
+          padding: const EdgeInsets.symmetric(horizontal: 14),
+          child: Row(
+            children: [
+              Icon(
+                Icons.search_rounded,
+                color: Colors.grey.shade600,
+                size: 22,
+              ),
+              const SizedBox(width: 10),
+              Expanded(
+                child: Text(
+                  hint,
+                  style: TextStyle(
+                    color: Colors.grey.shade500,
+                    fontSize: 14,
+                    fontWeight: FontWeight.w500,
+                  ),
+                ),
+              ),
+              Icon(
+                Icons.chevron_right_rounded,
+                color: Colors.grey.shade400,
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+class RecentIncident {
+  final String title;
+  final String location;
+  final String time;
+  final String? imageUrl; // 👈 foto real do item
+
+  const RecentIncident({
+    required this.title,
+    required this.location,
+    required this.time,
+    this.imageUrl,
+  });
+}
+
+class RecentIncidentsCard extends StatelessWidget {
+  final List<RecentIncident> items;
+  final VoidCallback onSeeAll;
+  final ValueChanged<RecentIncident> onTapItem;
+
+  const RecentIncidentsCard({
+    super.key,
+    required this.items,
+    required this.onSeeAll,
+    required this.onTapItem,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    final radius = BorderRadius.circular(20);
+
+    return Material(
+      color: Colors.white,
+      borderRadius: radius,
+      clipBehavior: Clip.antiAlias,
+      child: Ink(
+        decoration: BoxDecoration(
+          borderRadius: radius,
+          border: Border.all(color: const Color(0xFFE7ECF5)),
+          boxShadow: const [
+            BoxShadow(
+              color: Color(0x0A000000),
+              blurRadius: 18,
+              offset: Offset(0, 10),
+            ),
+          ],
+        ),
+        child: Column(
+          children: [
+            // Header do card
+            Padding(
+              padding: const EdgeInsets.fromLTRB(16, 14, 12, 10),
+              child: Row(
+                children: [
+                  const Expanded(
+                    child: Text(
+                      'Ocorrências recentes',
+                      style: TextStyle(
+                        fontSize: 16,
+                        fontWeight: FontWeight.w900,
+                        color: Color(0xFF121826),
+                      ),
+                    ),
+                  ),
+                  TextButton(
+                    onPressed: onSeeAll,
+                    child: const Text(
+                      'Ver tudo',
+                      style: TextStyle(fontWeight: FontWeight.w800),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+
+            const Divider(height: 1, thickness: 1, color: Color(0xFFEFF2F7)),
+
+            // Lista dentro do card (com divider fino entre itens)
+            ListView.separated(
+              shrinkWrap: true,
+              physics: const NeverScrollableScrollPhysics(),
+              itemCount: items.length,
+              separatorBuilder: (_, __) => const Divider(
+                  height: 1, thickness: 1, color: Color(0xFFEFF2F7)),
+              itemBuilder: (context, index) {
+                final item = items[index];
+                return _RecentIncidentRow(
+                  item: item,
+                  onTap: () => onTapItem(item),
+                );
+              },
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+class _RecentIncidentRow extends StatelessWidget {
+  final RecentIncident item;
+  final VoidCallback onTap;
+
+  const _RecentIncidentRow({
+    required this.item,
+    required this.onTap,
+  });
+
+  bool get _hasImage =>
+      item.imageUrl != null && item.imageUrl!.trim().isNotEmpty;
+
+  @override
+  Widget build(BuildContext context) {
+    final radius = BorderRadius.circular(14);
+
+    return Material(
+      color: Colors.transparent,
+      child: InkWell(
+        onTap: onTap,
+        child: Padding(
+          padding: const EdgeInsets.fromLTRB(16, 12, 12, 12),
+          child: Row(
+            children: [
+              // Thumbnail da imagem real
+              ClipRRect(
+                borderRadius: radius,
+                child: Container(
+                  width: 54,
+                  height: 54,
+                  color: const Color(0xFFF2F4F7),
+                  child: _hasImage
+                      ? Image.network(
+                          item.imageUrl!,
+                          fit: BoxFit.cover,
+                        )
+                      : const Icon(
+                          Icons.image_not_supported_outlined,
+                          color: Color(0xFF98A2B3),
+                        ),
+                ),
+              ),
+
+              const SizedBox(width: 12),
+
+              // Textos
+              Expanded(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      item.title,
+                      maxLines: 1,
+                      overflow: TextOverflow.ellipsis,
+                      style: const TextStyle(
+                        fontSize: 14,
+                        fontWeight: FontWeight.w900,
+                        color: Color(0xFF121826),
+                      ),
+                    ),
+                    const SizedBox(height: 6),
+                    Row(
+                      children: [
+                        const Icon(Icons.place_rounded,
+                            size: 16, color: Color(0xFF6B7280)),
+                        const SizedBox(width: 6),
+                        Expanded(
+                          child: Text(
+                            item.location,
+                            maxLines: 1,
+                            overflow: TextOverflow.ellipsis,
+                            style: const TextStyle(
+                              fontSize: 12.5,
+                              fontWeight: FontWeight.w600,
+                              color: Color(0xFF6B7280),
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                    const SizedBox(height: 4),
+                    Row(
+                      children: [
+                        const Icon(Icons.schedule_rounded,
+                            size: 16, color: Color(0xFF6B7280)),
+                        const SizedBox(width: 6),
+                        Text(
+                          item.time,
+                          style: const TextStyle(
+                            fontSize: 12.5,
+                            fontWeight: FontWeight.w600,
+                            color: Color(0xFF6B7280),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ],
+                ),
+              ),
+
+              const SizedBox(width: 8),
+              const Icon(Icons.chevron_right_rounded, color: Color(0xFF98A2B3)),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+class _ProfileButton extends StatelessWidget {
+  final VoidCallback onTap;
+  final String? imageUrl;
+
+  const _ProfileButton({
+    required this.onTap,
+    this.imageUrl,
+  });
+
+  bool get _hasImage => imageUrl != null && imageUrl!.trim().isNotEmpty;
+
+  @override
+  Widget build(BuildContext context) {
+    const bg = Color(0xFFF2F4F7);
+    const border = Color(0xFFE7ECF5);
+
+    return Material(
+      color: bg,
+      shape: const CircleBorder(),
+      child: InkWell(
+        customBorder: const CircleBorder(),
+        onTap: onTap,
+        child: Ink(
+          width: 36,
+          height: 36,
+          decoration: const BoxDecoration(
+            shape: BoxShape.circle,
+            border: Border.fromBorderSide(BorderSide(color: border)),
+          ),
+          child: ClipOval(
+            child: _hasImage
+                ? Image.network(imageUrl!, fit: BoxFit.cover)
+                : const Icon(
+                    Icons.person_rounded,
+                    size: 20,
+                    color: Color(0xFF667085),
+                  ),
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+class WelcomeDialog extends StatelessWidget {
+  final VoidCallback onPrimary;
+  final VoidCallback? onSecondary;
+
+  const WelcomeDialog({
+    super.key,
+    required this.onPrimary,
+    this.onSecondary,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Dialog(
+      insetPadding: const EdgeInsets.symmetric(horizontal: 18),
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(22)),
+      child: Padding(
+        padding: const EdgeInsets.fromLTRB(18, 18, 18, 14),
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            // “explodir” = vibe de destaque (ícone + badge)
+            Container(
+              width: 64,
+              height: 64,
+              decoration: BoxDecoration(
+                color: AppColors.primaryColor.withValues(alpha: 0.10),
+                borderRadius: BorderRadius.circular(18),
+              ),
+              child: Icon(
+                Icons.auto_awesome_rounded,
+                color: AppColors.primaryColor,
+                size: 30,
+              ),
+            ),
+
+            const SizedBox(height: 14),
+
+            const Text(
+              'Bem-vindo!',
+              textAlign: TextAlign.center,
+              style: TextStyle(
+                fontSize: 18,
+                fontWeight: FontWeight.w900,
+                color: Color(0xFF121826),
+              ),
+            ),
+
+            const SizedBox(height: 8),
+
+            Text(
+              'Antes de qualquer coisa, cadastre seus itens (IMEI, placa, nota ou fotos). '
+              'Isso agiliza o registro em caso de roubo e aumenta as chances de recuperação.',
+              textAlign: TextAlign.center,
+              style: TextStyle(
+                fontSize: 13.5,
+                height: 1.35,
+                color: Colors.grey.shade700,
+                fontWeight: FontWeight.w600,
+              ),
+            ),
+
+            const SizedBox(height: 12),
+
+            Container(
+              width: double.infinity,
+              padding: const EdgeInsets.all(12),
+              decoration: BoxDecoration(
+                color: const Color(0xFFF8FAFC),
+                borderRadius: BorderRadius.circular(16),
+                border: Border.all(color: const Color(0xFFE7ECF5)),
+              ),
+              child: Row(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Icon(
+                    Icons.groups_rounded,
+                    color: Colors.grey.shade700,
+                    size: 18,
+                  ),
+                  const SizedBox(width: 10),
+                  Expanded(
+                    child: Text(
+                      'O intuito do app é ajudar: quando você registra uma ocorrência, '
+                      'você também alerta a comunidade ao redor.',
+                      style: TextStyle(
+                        fontSize: 12.8,
+                        height: 1.35,
+                        color: Colors.grey.shade700,
+                        fontWeight: FontWeight.w600,
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+
+            const SizedBox(height: 14),
+
+            Row(
+              children: [
+                Expanded(
+                  child: TextButton(
+                    onPressed: onSecondary ?? () => Navigator.pop(context),
+                    child: const Text(
+                      'Agora não',
+                      style: TextStyle(fontWeight: FontWeight.w800),
+                    ),
+                  ),
+                ),
+                const SizedBox(width: 10),
+                Expanded(
+                  child: FilledButton.icon(
+                    onPressed: onPrimary,
+                    icon: const Icon(Icons.inventory_2_rounded),
+                    label: const Text(
+                      'Cadastrar itens',
+                      style: TextStyle(fontWeight: FontWeight.w900),
+                    ),
+                    style: FilledButton.styleFrom(
+                      backgroundColor: AppColors.primaryColor,
+                      padding: const EdgeInsets.symmetric(vertical: 12),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(14),
+                      ),
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+class WelcomeOnce {
+  static const _key = 'welcome_dialog_shown';
+
+  static Future<void> showIfFirstTime({
+    required BuildContext context,
+    required VoidCallback onGoToMyItems,
+  }) async {
+    final prefs = await SharedPreferences.getInstance();
+    final shown = prefs.getBool(_key) ?? false;
+    if (shown) return;
+
+    // marca como exibido antes de mostrar (evita repetir se fechar rápido)
+    await prefs.setBool(_key, true);
+
+    if (!context.mounted) return;
+
+    showDialog(
+      context: context,
+      barrierDismissible: true,
+      builder: (_) => WelcomeDialog(
+        onPrimary: () {
+          Navigator.pop(context);
+          onGoToMyItems();
+        },
       ),
     );
   }

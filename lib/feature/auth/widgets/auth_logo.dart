@@ -34,8 +34,8 @@ class LogoBlock extends StatelessWidget {
         // ),
         Lottie.asset(
           'assets/lottie/owl2.json',
-          width: ImageSize.xxxl,
-          height: ImageSize.xxxl,
+          width: ImageSize.xxl,
+          height: ImageSize.xxl,
         ),
         const Text(
           'Que bom ver você por aqui!',
@@ -59,28 +59,6 @@ class LogoBlock extends StatelessWidget {
             height: 1.4,
           ),
         ),
-        // const SizedBox(height: 18),
-        // const Text(
-        //   'Bem-vindo ao Kotto',
-        //   textAlign: TextAlign.center,
-        //   style: TextStyle(
-        //     color: _inkOnBlue,
-        //     fontSize: 22,
-        //     fontWeight: FontWeight.w900,
-        //   ),
-        // ),
-        // const SizedBox(height: 10),
-        // Text(
-        //   'Entre para salvar seus itens, registrar ocorrências\n'
-        //   'e receber alertas na sua região.',
-        //   textAlign: TextAlign.center,
-        //   style: TextStyle(
-        //     color: _inkOnBlue.withOpacity(0.86),
-        //     fontSize: 14,
-        //     height: 1.35,
-        //     fontWeight: FontWeight.w600,
-        //   ),
-        // ),
       ],
     );
   }

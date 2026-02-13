@@ -2,6 +2,7 @@ import 'package:deehelp/core/extension/exports_extension.dart';
 import 'package:deehelp/core/theme/export_theme.dart';
 import 'package:deehelp/core/ui/styles/export_style.dart';
 import 'package:deehelp/core/ui/widgets/buttons/buttons_export.dart';
+import 'package:go_router/go_router.dart';
 import 'widgets/auth_action_card.dart';
 import 'widgets/auth_logo.dart';
 import 'widgets/bubble_background.dart';
@@ -40,7 +41,7 @@ class AuthPage extends StatelessWidget {
                             ),
                             const SizedBox(height: SpacingSize.md),
                             ButtonOutline(
-                              press: () {},
+                              press: () => context.pop(),
                               bgColor: const Color(0xFFF5F7FD),
                               side: const BorderSide(color: Color(0xFFE6EAF6)),
                               textColor: context.onSurface,

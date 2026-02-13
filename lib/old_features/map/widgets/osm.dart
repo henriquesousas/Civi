@@ -54,6 +54,7 @@ class _OsmState extends State<Osm> {
       children: [
         TileLayer(
           urlTemplate: 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
+          userAgentPackageName: 'br.com.atomos.deehelp',
           subdomains: const ['a', 'b', 'c'],
         ),
         CircleLayer(

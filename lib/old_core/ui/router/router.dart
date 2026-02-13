@@ -88,7 +88,7 @@ var goRouterProvider = Provider<GoRouter>(
         final appStatus = ref.read(appStartupProvider);
         final currentPath = state.matchedLocation;
         final isPublicRoute = _publicRoutes.contains(currentPath);
-        // return '/';
+        return '/';
         // return AuthRouter.path;
         switch (appStatus) {
           case AppStatus.loading:
@@ -161,6 +161,7 @@ var goRouterProvider = Provider<GoRouter>(
             //   onGuestTap: () {},
             // ),
             // child: const TestPageDark(),
+            // child: const MapPage(),
           ),
         ),
         GoRoute(
@@ -208,10 +209,6 @@ var goRouterProvider = Provider<GoRouter>(
             child: const AddProductSuccessPage(),
           ),
         ),
-        // GoRoute(
-        //   path: AppRouter.splash,
-        //   builder: (context, state) => const SplashPage(),
-        // ),
         GoRoute(
           path: AppRouter.map,
           builder: (context, state) => const MapPage(),
@@ -223,13 +220,6 @@ var goRouterProvider = Provider<GoRouter>(
             child: const DashsboardPage(),
           ),
         ),
-        // GoRoute(
-        //   path: AppRouter.profile,
-        //   pageBuilder: (context, state) => slideTransitionPage(
-        //     key: state.pageKey,
-        //     child: const ProfilePage(),
-        //   ),
-        // ),
         GoRoute(
           path: AppRouter.faq,
           pageBuilder: (context, state) => slideTransitionPage(

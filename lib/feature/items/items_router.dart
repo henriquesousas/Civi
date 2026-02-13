@@ -2,6 +2,7 @@ import 'package:deehelp/feature/items/detail/item_detail_page.dart';
 import 'package:deehelp/feature/items/list/item_list_page.dart';
 import 'package:deehelp/feature/items/register/item_register_page_view.dart';
 import 'package:deehelp/feature/items/success/item_register_success_page.dart';
+import 'package:deehelp/old_core/ui/router/slide_transition_page.dart';
 import 'package:go_router/go_router.dart';
 
 class ItemsRouter {
@@ -14,19 +15,31 @@ class ItemsRouter {
   static List<RouteBase> get routers => [
         GoRoute(
           path: list,
-          builder: (_, __) => const ItemListPage(),
+          pageBuilder: (context, state) => slideTransitionPage(
+            key: state.pageKey,
+            child: const ItemListPage(),
+          ),
         ),
         GoRoute(
           path: register,
-          builder: (_, __) => const ItemRegisterPageView(),
+          pageBuilder: (context, state) => slideTransitionPage(
+            key: state.pageKey,
+            child: const ItemRegisterPageView(),
+          ),
         ),
         GoRoute(
           path: detail,
-          builder: (_, __) => const ItemDetailPage(),
+          pageBuilder: (context, state) => slideTransitionPage(
+            key: state.pageKey,
+            child: const ItemDetailPage(),
+          ),
         ),
         GoRoute(
           path: success,
-          builder: (_, __) => const ItemRegisterSuccessPage(),
+          pageBuilder: (context, state) => slideTransitionPage(
+            key: state.pageKey,
+            child: const ItemRegisterSuccessPage(),
+          ),
         ),
       ];
 }

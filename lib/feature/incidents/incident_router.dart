@@ -1,4 +1,5 @@
 import 'package:deehelp/feature/incidents/list/incident_list_page.dart';
+import 'package:deehelp/old_core/ui/router/slide_transition_page.dart';
 import 'package:go_router/go_router.dart';
 
 class IncidentRouter {
@@ -11,7 +12,10 @@ class IncidentRouter {
   static List<RouteBase> get routers => [
         GoRoute(
           path: list,
-          builder: (_, __) => const IncidentListPage(),
+          pageBuilder: (context, state) => slideTransitionPage(
+            key: state.pageKey,
+            child: const IncidentListPage(),
+          ),
         ),
         // GoRoute(
         //   path: register,
