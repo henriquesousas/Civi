@@ -11,14 +11,14 @@ class ItemRegisterPhoto extends StatelessWidget {
   Widget build(BuildContext context) {
     return ListView(
       padding: const EdgeInsets.fromLTRB(16, 16, 16, 110),
-      children: [
-        const WizardHeader(
+      children: const [
+        WizardHeader(
           step: 3,
           title: "Fotos",
           subtitle: 'Envio fotos depois do cadastro concluído',
         ),
-        const SizedBox(height: SpacingSize.xl),
-        const SectionTitle('Fotos do item'),
+        SizedBox(height: SpacingSize.xl),
+        SectionTitle('Fotos do item'),
         CardPhoto()
       ],
     );

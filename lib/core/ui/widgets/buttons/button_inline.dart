@@ -12,6 +12,9 @@ class ButtonInline extends StatelessWidget {
       onPressed: press,
       child: Text(
         text,
+        style: const TextStyle(fontWeight: FontWeight.w900).copyWith(
+          color: Colors.white,
+        ),
       ),
     );
   }

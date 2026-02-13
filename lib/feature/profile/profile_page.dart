@@ -2,6 +2,7 @@ import 'package:deehelp/core/theme/export_theme.dart';
 import 'package:deehelp/core/ui/widgets/appbar/default_app_bar.dart';
 import 'package:deehelp/feature/about/about_exports.dart';
 import 'package:deehelp/feature/faq/export_faq.dart';
+import 'package:deehelp/feature/incidents/incident_router.dart';
 import 'package:deehelp/feature/items/items_router.dart';
 import 'profile_item.dart';
 import 'widgets/account_card.dart';
@@ -30,16 +31,16 @@ class ProfilePage extends StatelessWidget {
           ProfileOptions(
             items: [
               ProfileItem(
-                icon: Icons.report_outlined,
-                title: 'Minhas ocorrências',
-                subtitle: 'Histórico de registros feitos por você',
-                press: () => debugPrint('Minhas ocorrências'),
-              ),
-              ProfileItem(
                 icon: Icons.inventory_2_outlined,
                 title: 'Meus itens',
                 subtitle: 'Itens vinculados ao seu perfil',
                 press: () => context.push(ItemsRouter.list),
+              ),
+              ProfileItem(
+                icon: Icons.report_outlined,
+                title: 'Minhas ocorrências',
+                subtitle: 'Histórico de registros feitos por você',
+                press: () => context.push(IncidentRouter.list),
               ),
             ],
             // press: (key) {

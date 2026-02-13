@@ -4,7 +4,6 @@ import 'package:deehelp/core/ui/widgets/badge/export_badge.dart';
 import 'package:deehelp/core/ui/widgets/image/export_image.dart';
 import 'package:deehelp/feature/items/detail/widgets/danger_zone.dart';
 import 'package:deehelp/feature/items/detail/widgets/editable_field_tile.dart';
-import 'package:deehelp/feature/items/detail/widgets/editable_multline_field_tile.dart';
 import 'package:deehelp/feature/items/detail/widgets/header_card.dart';
 import 'package:deehelp/feature/items/detail/widgets/photos_gallery_card.dart';
 import 'package:deehelp/feature/items/register/widgets/card_page.dart';

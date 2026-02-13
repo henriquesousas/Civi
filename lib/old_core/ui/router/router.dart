@@ -8,6 +8,7 @@ import 'package:deehelp/feature/about/about_router.dart';
 import 'package:deehelp/feature/auth/export_auth.dart';
 import 'package:deehelp/feature/faq/export_faq.dart';
 import 'package:deehelp/feature/home/export_home.dart';
+import 'package:deehelp/feature/incidents/incident_router.dart';
 import 'package:deehelp/feature/items/items_router.dart';
 import 'package:deehelp/feature/location/export_location.dart';
 import 'package:deehelp/feature/profile/export_profile.dart';
@@ -31,13 +32,21 @@ import 'package:deehelp/old_features/test_page.dart';
 // import 'package:deehelp/features/splash/splash_page.dart';
 import 'package:deehelp/old_features/welcome/welcome_page.dart';
 import 'package:deehelp/router_refresh_notifier.dart';
+import 'package:deehelp/test_ocorrences.dart';
+import 'package:deehelp/test_page10.dart';
 import 'package:deehelp/test_page11.dart';
 import 'package:deehelp/test_page12.dart';
 import 'package:deehelp/test_page13.dart';
+import 'package:deehelp/test_page2.dart';
 import 'package:deehelp/test_page3.dart';
 import 'package:deehelp/test_page4.dart';
 import 'package:deehelp/test_page40.dart';
 import 'package:deehelp/test_page5.dart';
+import 'package:deehelp/test_page6.dart';
+import 'package:deehelp/test_page7.dart';
+import 'package:deehelp/test_page8.dart';
+import 'package:deehelp/test_page9.dart';
+import 'package:deehelp/test_page_dark.dart';
 import 'package:deehelp/teste_page_login.dart';
 import 'package:deehelp/teste_sos_page.dart';
 import 'package:flutter/material.dart';
@@ -106,6 +115,7 @@ var goRouterProvider = Provider<GoRouter>(
         ...FaqPageRouter.routers,
         ...AuthRouter.routers,
         ...ItemsRouter.routers,
+        ...IncidentRouter.routers,
         // ...IncidentModule.routers,
         GoRoute(
           path: '/',
@@ -114,7 +124,9 @@ var goRouterProvider = Provider<GoRouter>(
 
             //Home
             // child: const TestPage(),
+            //SOS
             // child: const TesteSOSPage(),
+            //GPS
             // child: TestPage13(),
             // Search
             // child: const TestPage2(),
@@ -125,18 +137,20 @@ var goRouterProvider = Provider<GoRouter>(
             // Cadastro de item
             // child: const TestPage40(),
             // Detalhes do item
-            child: TestPage5(),
+            // child: TestPage5(),
             // Item cadastrado sucesso
             // child: TestPage6(),
+            // child: AddProductSuccessPage()
             //Detalhes da ocorrencia
             // child: TestPage7(),
             // Reportat incident
+            child: TestOcorrencia(),
             // child: TestPage8(),
             // ReportIncidentSuccess
             // child: const TestPage9(),
             // Splash
             // child: const TestPage10(),
-
+            // Welcome
             // child: const TestPage11(),
             //FAQ DARK
             // child: const TestPage12FaqPage(),
@@ -145,7 +159,6 @@ var goRouterProvider = Provider<GoRouter>(
             //   onGuestTap: () {},
             // ),
             // child: const TestPageDark(),
-            // child: MyTest(),
           ),
         ),
         GoRoute(

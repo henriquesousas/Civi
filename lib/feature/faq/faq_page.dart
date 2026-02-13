@@ -2,7 +2,7 @@ import 'package:deehelp/core/extension/exports_extension.dart';
 import 'package:deehelp/core/theme/export_theme.dart';
 import 'package:deehelp/core/ui/styles/export_style.dart';
 import 'package:deehelp/core/ui/widgets/appbar/default_app_bar.dart';
-import 'empty_state.dart';
+import 'package:deehelp/core/ui/widgets/empty/empty_state.dart';
 import 'faq_item.dart';
 import 'faq_section.dart';
 import 'widgets/faq_card.dart';
@@ -88,8 +88,10 @@ class _FaqPageState extends State<FaqPage> {
           const SizedBox(height: SpacingSize.md),
           if (filtered.isEmpty) ...[
             EmptyState(
-              query: searchCtrl.text.trim(),
-              onClear: () {
+              subtitle:
+                  'Não encontramos resultados para "${searchCtrl.text.trim()}". Tente outras palavras.',
+              actionTitle: "Limpar pesquisa",
+              press: () {
                 searchCtrl.clear();
                 setState(() {});
               },

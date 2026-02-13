@@ -90,7 +90,7 @@ class ItemListPage extends StatelessWidget {
       ),
       appBar: DefaultAppBar(
         title: "Meus itens",
-        press: () {},
+        press: () => context.pop(),
       ),
       body: ListView(
         padding: const EdgeInsets.fromLTRB(16, 16, 16, 24),

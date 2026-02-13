@@ -1,11 +1,9 @@
-import 'package:app_core/app_core.dart';
 import 'package:deehelp/core/services/permissions/location/providers/location_providers.dart';
 import 'package:deehelp/core/theme/export_theme.dart';
 import 'package:deehelp/feature/profile/export_profile.dart';
 import 'widgets/home_app_bar.dart';
 import 'widgets/home_register_incident_button.dart';
 import 'widgets/recent_incident_card.dart';
-import 'widgets/section_quick_actions.dart';
 import 'widgets/home_search_field.dart';
 import 'widgets/location_banner.dart';
 import 'package:flutter/material.dart';

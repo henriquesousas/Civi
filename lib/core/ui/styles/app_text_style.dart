@@ -21,7 +21,7 @@ class AppTextStyles {
 
   TextStyle get headerlg => headersm.copyWith(fontSize: AppTextSizes.headerlg);
 
-  TextStyle get headerxg => headersm.copyWith(fontSize: AppTextSizes.headerxg);
+  TextStyle get headerxl => headersm.copyWith(fontSize: AppTextSizes.headerxg);
 
   // Body
   TextStyle get body => _textTheme.bodyMedium!.copyWith(

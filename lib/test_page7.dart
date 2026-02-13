@@ -25,7 +25,7 @@ class _TestPage7State extends State<TestPage7> {
   final bool isOwner = true; // ✅ troque para true para ver Danger Zone
 
   final String incidentId = 'INC-20391';
-  final ItemType itemType = ItemType.phone; // car | moto | phone
+  final ItemType itemType = ItemType.car; // car | moto | phone
 
   final String itemName = 'iPhone 13';
   final String brand = 'Apple';

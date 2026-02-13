@@ -1,9 +1,11 @@
 import 'package:deehelp/core/ui/widgets/appbar/default_app_bar.dart';
+import 'package:deehelp/feature/items/items_router.dart';
 import 'package:deehelp/feature/items/register/item_register_infomation.dart';
 import 'package:deehelp/feature/items/register/item_register_photo.dart';
 import 'package:deehelp/feature/items/register/item_register_type.dart';
 import 'package:deehelp/feature/items/register/widgets/wizard_bottom_bar.dart';
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 
 class ItemRegisterPageView extends StatefulWidget {
   const ItemRegisterPageView({super.key});
@@ -28,6 +30,12 @@ class _ItemRegisterPageViewState extends State<ItemRegisterPageView> {
   }
 
   void _nextPage({int? goToPage}) {
+    debugPrint("$_currentPage");
+    if (_currentPage == 2) {
+      context.pushReplacement(ItemsRouter.success);
+      return;
+    }
+
     final page = goToPage ?? ++_currentPage;
     setState(() {
       _pageController.animateToPage(
@@ -64,9 +72,8 @@ class _ItemRegisterPageViewState extends State<ItemRegisterPageView> {
         title: "Cadastrar",
         // leading: const Icon(Icons.close),
         press: () {
-          if (_currentPage > 0) {
-            _previousPage();
-          }
+          if (_currentPage == 0) context.pop();
+          if (_currentPage > 0) _previousPage();
         },
       ),
       body: PageView(

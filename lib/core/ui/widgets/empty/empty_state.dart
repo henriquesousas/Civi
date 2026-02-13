@@ -5,10 +5,18 @@ import 'package:deehelp/core/ui/widgets/icon/export_icon.dart';
 import 'package:flutter/material.dart';
 
 class EmptyState extends StatelessWidget {
-  final String query;
-  final VoidCallback onClear;
+  final String subtitle;
+  final String actionTitle;
+  final VoidCallback press;
+  final String? title;
 
-  const EmptyState({super.key, required this.query, required this.onClear});
+  const EmptyState({
+    super.key,
+    required this.subtitle,
+    required this.actionTitle,
+    required this.press,
+    this.title,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -38,14 +46,14 @@ class EmptyState extends StatelessWidget {
           ),
           const SizedBox(height: SpacingSize.md),
           Text(
-            'Nada encontrado',
+            title ?? 'Nada encontrado',
             style: context.appText.body.copyWith(
               fontWeight: FontWeight.w900,
             ),
           ),
           const SizedBox(height: SpacingSize.sm),
           Text(
-            'Não encontramos resultados para "$query". Tente outras palavras.',
+            subtitle,
             textAlign: TextAlign.center,
             style: context.appText.bodySmall.copyWith(
               height: 1.35,
@@ -55,10 +63,10 @@ class EmptyState extends StatelessWidget {
           ),
           const SizedBox(height: SpacingSize.md),
           TextButton(
-            onPressed: onClear,
-            child: const Text(
-              'Limpar pesquisa',
-              style: TextStyle(fontWeight: FontWeight.w900),
+            onPressed: press,
+            child: Text(
+              actionTitle,
+              style: const TextStyle(fontWeight: FontWeight.w900),
             ),
           ),
         ],

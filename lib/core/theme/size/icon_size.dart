@@ -1,6 +1,7 @@
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 abstract class IconSizes {
+  static double xxs = 11.w;
   static double xs = 14.w;
   static double sm = 16.w;
   static double md = 18.w;
