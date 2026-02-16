@@ -3,7 +3,7 @@ import 'package:deehelp/old_core/ui/theme/app_colors.dart';
 import 'package:deehelp/old_core/ui/widgets/button/ui_elevated_icon_button.dart';
 import 'package:deehelp/old_core/ui/widgets/empty/empty_state_widget.dart';
 import 'package:deehelp/old_core/ui/widgets/shimmer_animation.dart';
-import 'package:deehelp/old_features/auth/external/di/authenticated_user_provider.dart';
+import 'package:deehelp/module/external/di/authenticated_user_provider.dart';
 import 'package:deehelp/old_features/products/domain/entities/product.dart';
 import 'package:deehelp/old_features/products/presentation/views/listing/widgets/product_list_card_tile.dart';
 import 'package:deehelp/old_core/base/base_page.dart';

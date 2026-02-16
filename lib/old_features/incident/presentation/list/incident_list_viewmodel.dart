@@ -1,7 +1,7 @@
 import 'dart:async';
 
 import 'package:deehelp/old_core/ui/extensions/result_extension.dart';
-import 'package:deehelp/old_features/auth/external/di/authenticated_user_provider.dart';
+import 'package:deehelp/module/external/di/authenticated_user_provider.dart';
 import 'package:deehelp/old_features/incident/domain/usecase/incident_output.dart';
 import 'package:deehelp/old_features/incident/presentation/providers/incident_usecase_providers.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';

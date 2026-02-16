@@ -1,5 +1,5 @@
 // lib/core/extensions/result_extensions.dart
-import 'package:deehelp/old_core/errors/failure.dart';
+import 'package:deehelp/core/errors/failure.dart';
 import 'package:deehelp/old_core/utils/result.dart';
 
 extension ResultExtensions<T> on Result<T> {

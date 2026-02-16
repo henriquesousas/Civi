@@ -1,0 +1,9 @@
+import 'package:deehelp/module/external/di/auth_repository_provider.dart';
+import 'package:deehelp/module/external/repositories/supabase_auth_repository.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:supabase_flutter/supabase_flutter.dart';
+
+final authStateProvider = StreamProvider<Session?>((ref) {
+  final repo = ref.watch(authRepositoryProvider) as AuthStateChangeNotifier;
+  return repo.onAuthStateChanged();
+});

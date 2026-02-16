@@ -1,10 +1,18 @@
 import 'package:deehelp/core/theme/export_theme.dart';
 import 'package:deehelp/core/ui/styles/export_style.dart';
 import 'package:deehelp/core/ui/widgets/image/export_image.dart';
+import 'package:deehelp/feature/home/widgets/home_avatar_badge.dart';
 import 'package:flutter/material.dart';
 
 class AccountCard extends StatelessWidget {
-  const AccountCard({super.key});
+  final String name;
+  final String email;
+  final String? imageUrl;
+  const AccountCard(
+      {super.key,
+      required this.name,
+      required this.email,
+      required this.imageUrl});
 
   @override
   Widget build(BuildContext context) {
@@ -24,23 +32,29 @@ class AccountCard extends StatelessWidget {
       ),
       child: Row(
         children: [
-          const ProfileImageWithUploadButtonWidget(
-            imageAlt: "Joao silva",
-          ),
+          if (imageUrl != null) ...[
+            ProfileImageWithUploadButtonWidget(
+              imageUrl: imageUrl,
+              imageAlt: name,
+            ),
+          ] else ...[
+            HomeAvatarBadge(initials: "PS", onTap: () {})
+          ],
+
           const SizedBox(width: SpacingSize.lg),
           Expanded(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  'João da Silva',
+                  name,
                   style: context.appText.headermd.copyWith(
                     fontWeight: FontWeight.w600,
                   ),
                 ),
                 const SizedBox(height: SpacingSize.xxs),
                 Text(
-                  'joao@email.com',
+                  email,
                   style: context.appText.bodySmall.copyWith(
                     fontWeight: FontWeight.w400,
                   ),

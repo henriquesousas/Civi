@@ -1,7 +1,7 @@
 import 'package:deehelp/old_core/ui/extensions/string_extension.dart';
 import 'package:deehelp/old_core/handlers/handle_command.dart';
 import 'package:deehelp/old_core/services/location/current_location.dart';
-import 'package:deehelp/old_features/auth/domain/entity/authenticated_user.dart';
+import 'package:deehelp/module/auth/domain/entity/authenticated_user.dart';
 import 'package:deehelp/old_features/incident/domain/entity/incident_local.dart';
 import 'package:deehelp/old_features/incident/domain/enum/incident_status.dart';
 import 'package:deehelp/old_features/incident/domain/enum/type_alert.dart';

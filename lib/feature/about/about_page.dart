@@ -2,7 +2,7 @@ import 'package:deehelp/core/extension/exports_extension.dart';
 import 'package:deehelp/core/theme/export_theme.dart';
 import 'package:deehelp/core/ui/styles/export_style.dart';
 import 'package:deehelp/core/ui/widgets/buttons/buttons_export.dart';
-import 'package:deehelp/feature/auth/auth_router.dart';
+import 'package:deehelp/feature/auth/presentation/auth_router.dart';
 import 'widgets/blue_header_bubles.dart';
 import 'widgets/engagament_card.dart';
 import 'widgets/header.dart';

@@ -1,4 +1,4 @@
-import 'package:deehelp/old_core/errors/failure.dart';
+import 'package:deehelp/core/errors/failure.dart';
 
 class ImagePickerFailure extends Failure {
   const ImagePickerFailure(

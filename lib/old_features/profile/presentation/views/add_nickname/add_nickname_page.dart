@@ -1,4 +1,4 @@
-import 'package:deehelp/old_features/auth/external/di/authenticated_user_provider.dart';
+import 'package:deehelp/module/external/di/authenticated_user_provider.dart';
 import 'package:deehelp/old_features/profile/external/di/profile_viewmodel_provider.dart';
 import 'package:deehelp/old_core/ui/router/app_router.dart';
 import 'package:deehelp/old_core/ui/theme/app_colors.dart';

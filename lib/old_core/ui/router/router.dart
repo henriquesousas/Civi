@@ -5,7 +5,7 @@ import 'package:app_feature/app_feature.dart';
 
 import 'package:deehelp/app_startup_provider.dart';
 import 'package:deehelp/feature/about/about_router.dart';
-import 'package:deehelp/feature/auth/export_auth.dart';
+import 'package:deehelp/feature/auth/presentation/export_auth.dart';
 import 'package:deehelp/feature/faq/export_faq.dart';
 import 'package:deehelp/feature/home/export_home.dart';
 import 'package:deehelp/feature/incidents/incident_router.dart';
@@ -71,9 +71,10 @@ class GoRouterRefreshStream extends ChangeNotifier {
 
 final _publicRoutes = [
   SplashRouter.path,
+  HomeRouter.path,
+  AppRouter.onboarding,
   LocationRouter.gpsDisabled,
   LocationRouter.locationDenied,
-  AppRouter.onboarding,
 ];
 
 var goRouterProvider = Provider<GoRouter>(
@@ -88,14 +89,14 @@ var goRouterProvider = Provider<GoRouter>(
         final appStatus = ref.read(appStartupProvider);
         final currentPath = state.matchedLocation;
         final isPublicRoute = _publicRoutes.contains(currentPath);
-        return '/';
+        // return '/';
         // return AuthRouter.path;
         switch (appStatus) {
           case AppStatus.loading:
             return SplashRouter.path;
 
           case AppStatus.unauthenticated:
-            return AppRouter.onboarding;
+            return isPublicRoute ? HomeRouter.path : null;
 
           case AppStatus.needLocation:
             return LocationRouter.locationDenied;

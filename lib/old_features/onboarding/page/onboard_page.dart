@@ -1,18 +1,15 @@
 import 'dart:async';
 
 import 'package:deehelp/app_startup_provider.dart';
-import 'package:deehelp/old_core/ui/router/app_router.dart';
-import 'package:deehelp/old_features/auth/domain/entity/authenticated_user.dart';
-import 'package:deehelp/old_features/auth/external/di/auth_view_model_provider.dart';
+import 'package:deehelp/module/external/di/auth_view_model_provider.dart';
 import 'package:deehelp/old_core/ui/extensions/dialog_extension.dart';
-import 'package:deehelp/old_features/auth/presentation/auth/state/auth_state.dart';
+import 'package:deehelp/feature/auth/viemodel/auth_state.dart';
 import 'package:deehelp/old_features/onboarding/page/components/onboard_content.dart';
 import 'package:deehelp/old_features/onboarding/page/onboard_item.dart';
 import 'package:deehelp/old_features/onboarding/page/onboard_view.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:go_router/go_router.dart';
 
 class OnboardPage extends ConsumerStatefulWidget {
   const OnboardPage({super.key});

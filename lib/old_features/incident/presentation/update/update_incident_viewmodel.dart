@@ -1,4 +1,4 @@
-import 'package:deehelp/old_core/errors/failure.dart';
+import 'package:deehelp/core/errors/failure.dart';
 import 'package:deehelp/old_core/ui/extensions/string_extension.dart';
 import 'package:deehelp/old_core/handlers/handle_command.dart';
 import 'package:deehelp/old_core/handlers/handler_error.dart';

@@ -1,6 +1,6 @@
-import 'package:deehelp/old_core/errors/failure.dart';
+import 'package:deehelp/core/errors/failure.dart';
 
-import '../../old_features/auth/domain/exceptions/auth_failure.dart';
+import '../../module/auth/domain/exceptions/auth_failure.dart';
 
 /// S estado que esta sendo gerenciado
 S handleError<S>(

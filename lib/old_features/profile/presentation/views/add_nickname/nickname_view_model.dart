@@ -1,6 +1,6 @@
 import 'package:deehelp/old_core/handlers/handler_error.dart';
-import 'package:deehelp/old_features/auth/domain/entity/authenticated_user.dart';
-import 'package:deehelp/old_features/auth/domain/utils/nickname_utils.dart';
+import 'package:deehelp/module/auth/domain/entity/authenticated_user.dart';
+import 'package:deehelp/module/auth/domain/utils/nickname_utils.dart';
 import 'package:deehelp/old_features/profile/domain/usecase/add-nickname/add_nick_name_usecase.dart';
 import 'package:deehelp/old_features/profile/presentation/views/add_nickname/state/nickname_state.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
