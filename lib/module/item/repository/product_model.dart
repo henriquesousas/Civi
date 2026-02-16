@@ -1,10 +1,8 @@
 import 'package:deehelp/core/ui/widgets/badge/status_style.dart';
 import 'package:deehelp/module/item/domain/entities/product_id.dart';
 import 'package:deehelp/module/item/repository/image_media_model.dart';
-import 'package:deehelp/old_core/ui/extensions/date_extension.dart';
 
 import '../domain/entities/product.dart';
-import '../../../old_features/products/product_status.dart';
 
 class ProductModel {
   static Map<String, dynamic> toMap(Product product) {
