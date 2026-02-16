@@ -3,8 +3,8 @@ import 'package:deehelp/old_core/ui/extensions/dialog_extension.dart';
 import 'package:deehelp/old_core/ui/theme/app_colors.dart';
 import 'package:deehelp/old_core/ui/theme/dimens.dart';
 import 'package:deehelp/old_core/ui/widgets/button/ui_elevated_button.dart';
-import 'package:deehelp/old_features/products/domain/entities/product.dart';
-import 'package:deehelp/old_features/products/presentation/providers/product_viewmodel_provider.dart';
+import 'package:deehelp/module/item/domain/entities/product.dart';
+import 'package:deehelp/module/item/di/item_viewmodel_provider.dart';
 import 'package:deehelp/old_features/products/presentation/views/update/state/product_update_state.dart';
 import 'package:deehelp/old_features/products/presentation/views/update/widgets/product_form.dart';
 import 'package:flutter/material.dart';
@@ -56,7 +56,7 @@ class _UpdateProductPage extends BasePageState<UpdateProductPage> {
             currentState.successMessage ?? "Operação realizada com sucesso!",
           );
           ref
-              .watch(productListingViewmodelProvider.notifier)
+              .watch(itemListViewmodelProvider.notifier)
               .refresh(currentState.currentProduct!);
         }
       },

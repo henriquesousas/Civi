@@ -3,7 +3,7 @@ import 'package:deehelp/old_core/ui/theme/dimens.dart';
 import 'package:deehelp/old_core/ui/widgets/button/ui_elevated_button.dart';
 import 'package:deehelp/old_core/ui/widgets/icon/ui_icon.dart';
 import 'package:deehelp/old_core/ui/widgets/textfield/ui_text_field_rounded.dart';
-import 'package:deehelp/old_features/products/presentation/providers/product_viewmodel_provider.dart';
+import 'package:deehelp/module/item/di/item_viewmodel_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';

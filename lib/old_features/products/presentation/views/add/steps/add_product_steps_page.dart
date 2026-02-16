@@ -4,7 +4,7 @@ import 'package:deehelp/old_core/ui/theme/app_text_styles.dart';
 import 'package:deehelp/old_core/ui/widgets/button/ui_elevated_button.dart';
 import 'package:deehelp/old_features/products/presentation/views/add/add_product_viewmodel.dart';
 import 'package:deehelp/old_features/products/presentation/views/add/state/add_product_state.dart';
-import 'package:deehelp/old_features/products/presentation/providers/product_viewmodel_provider.dart';
+import 'package:deehelp/module/item/di/item_viewmodel_provider.dart';
 import 'package:deehelp/old_features/products/presentation/views/add/steps/step_add_obs.dart';
 import 'package:deehelp/old_features/products/presentation/views/add/steps/step_add_photo.dart';
 import 'package:flutter/material.dart';
@@ -85,12 +85,12 @@ class _AddProductStepPageState extends ConsumerState<AddProductStepPage> {
 
   @override
   Widget build(BuildContext context) {
-    final state = ref.watch(addProductViewModelProvider);
-    final viewModel = ref.watch(addProductViewModelProvider.notifier);
+    final state = ref.watch(addItemViewModelProvider);
+    final viewModel = ref.watch(addItemViewModelProvider.notifier);
     _buildSteps(state.currentStep);
 
     ref.listen<AddProductState>(
-      addProductViewModelProvider,
+      addItemViewModelProvider,
       (previous, currentState) {
         if (currentState.isSuccess) {
           context.pushReplacement(AppRouter.addProductSuccess);

@@ -1,6 +1,6 @@
 import 'package:deehelp/old_core/services/location/current_location.dart';
 import 'package:deehelp/old_features/incident/domain/enum/type_alert.dart';
-import 'package:deehelp/old_features/products/domain/entities/product.dart';
+import 'package:deehelp/module/item/domain/entities/product.dart';
 import 'package:flutter/material.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 

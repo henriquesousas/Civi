@@ -21,6 +21,8 @@ class EmptyState extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
+      width: context.screenWidth,
+      height: context.percentHeight(0.3),
       padding: const EdgeInsets.all(18),
       decoration: BoxDecoration(
         color: Colors.white,

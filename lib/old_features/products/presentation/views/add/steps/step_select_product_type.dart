@@ -4,7 +4,7 @@ import 'package:deehelp/old_core/ui/theme/app_text_styles.dart';
 import 'package:deehelp/old_core/ui/theme/dimens.dart';
 import 'package:deehelp/old_core/ui/widgets/button/ui_elevated_button.dart';
 import 'package:deehelp/old_core/ui/widgets/card/ui_custom_scaffold.dart';
-import 'package:deehelp/old_features/products/presentation/providers/product_viewmodel_provider.dart';
+import 'package:deehelp/module/item/di/item_viewmodel_provider.dart';
 import 'package:deehelp/old_features/products/presentation/views/add/state/add_product_state.dart';
 import 'package:deehelp/old_features/products/presentation/views/add/widget/product_type_card.dart';
 import 'package:flutter/material.dart';
@@ -20,8 +20,8 @@ class StepSelectProductType extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final state = ref.watch(addProductViewModelProvider);
-    final viewModel = ref.read(addProductViewModelProvider.notifier);
+    final state = ref.watch(addItemViewModelProvider);
+    final viewModel = ref.read(addItemViewModelProvider.notifier);
 
     return UICustomScaffold(
       hideAppBar: true,

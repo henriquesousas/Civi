@@ -10,7 +10,7 @@ import 'package:deehelp/old_features/incident/presentation/report/widgets/regist
 import 'package:deehelp/old_features/incident/presentation/report/widgets/error/incident_error_overlay.dart';
 import 'package:deehelp/old_features/incident/presentation/report/widgets/register/report_incident_warning_indicator.dart';
 import 'package:deehelp/old_features/incident/presentation/report/widgets/register/report_incident_loading_progress_overlay.dart';
-import 'package:deehelp/old_features/products/domain/entities/product.dart';
+import 'package:deehelp/module/item/domain/entities/product.dart';
 import 'package:deehelp/old_features/products/presentation/views/listing/product_listing_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';

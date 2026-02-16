@@ -5,7 +5,7 @@ import 'package:deehelp/old_core/ui/theme/dimens.dart';
 import 'package:deehelp/old_core/ui/widgets/avatar/profile_image_with_upload_button_widget.dart';
 import 'package:deehelp/old_core/ui/widgets/button/ui_elevated_button.dart';
 import 'package:deehelp/old_core/ui/widgets/icon/ui_icon.dart';
-import 'package:deehelp/module/external/di/authenticated_user_provider.dart';
+import 'package:deehelp/module/auth/external/di/authenticated_user_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';

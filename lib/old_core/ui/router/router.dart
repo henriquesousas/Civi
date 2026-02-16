@@ -22,7 +22,7 @@ import 'package:deehelp/old_features/dashboard/presentation/dashsboard_page.dart
 import 'package:deehelp/old_features/faq/faq_provider.dart';
 import 'package:deehelp/old_features/map/presentation/map_page.dart';
 import 'package:deehelp/old_features/onboarding/page/onboard_page.dart';
-import 'package:deehelp/old_features/products/domain/entities/product.dart';
+import 'package:deehelp/module/item/domain/entities/product.dart';
 import 'package:deehelp/old_features/products/presentation/views/add/add_product_page.dart';
 import 'package:deehelp/old_features/products/presentation/views/add/steps/add_product_success_page.dart';
 import 'package:deehelp/old_features/products/presentation/views/listing/product_listing_page.dart';

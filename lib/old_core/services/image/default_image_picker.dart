@@ -2,7 +2,7 @@ import 'package:deehelp/old_core/services/image/image_picker_failure.dart';
 import 'package:deehelp/old_core/utils/image_utils.dart';
 import 'package:deehelp/old_core/services/image/image_compress.dart';
 import 'package:deehelp/old_core/utils/result.dart';
-import 'package:deehelp/old_features/products/domain/entities/image_media.dart';
+import 'package:deehelp/module/item/domain/entities/image_media.dart';
 import 'package:image_picker/image_picker.dart';
 
 class DefaultImagePicker {

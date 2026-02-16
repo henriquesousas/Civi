@@ -1,7 +1,7 @@
 import 'package:deehelp/old_core/ui/theme/app_text_styles.dart';
 import 'package:deehelp/old_core/ui/theme/dimens.dart';
 import 'package:deehelp/old_core/ui/widgets/card/ui_custom_app_card.dart';
-import 'package:deehelp/old_features/products/domain/entities/product.dart';
+import 'package:deehelp/module/item/domain/entities/product.dart';
 import 'package:deehelp/old_features/products/presentation/views/listing/widgets/status_badge_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -88,11 +88,11 @@ class ProductListTileCard extends StatelessWidget {
                   height: Dimens.size40.h,
                   color: AppColors.lightGreyColor20,
                 ),
-                StatusBadgeWidget(
-                  label: product.status.label,
-                  color: product.status.color,
-                  iconData: product.status.icon,
-                ),
+                // StatusBadgeWidget(
+                //   label: product.status.label,
+                //   color: product.status.color,
+                //   iconData: product.status.icon,
+                // ),
               ],
             ),
           ),

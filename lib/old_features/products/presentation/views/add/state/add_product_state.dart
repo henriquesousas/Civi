@@ -1,4 +1,4 @@
-import 'package:deehelp/old_features/products/domain/entities/image_media.dart';
+import 'package:deehelp/module/item/domain/entities/image_media.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 part 'add_product_state.freezed.dart';

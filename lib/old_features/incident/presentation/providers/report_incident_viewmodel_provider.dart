@@ -1,4 +1,4 @@
-import 'package:deehelp/module/external/di/authenticated_user_provider.dart';
+import 'package:deehelp/module/auth/external/di/authenticated_user_provider.dart';
 import 'package:deehelp/old_features/incident/presentation/providers/incident_usecase_providers.dart';
 import 'package:deehelp/old_features/incident/presentation/report/report_incident_viewmodel.dart';
 import 'package:deehelp/old_features/incident/presentation/report/state/add_incident_state.dart';

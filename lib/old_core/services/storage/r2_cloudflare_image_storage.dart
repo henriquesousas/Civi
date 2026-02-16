@@ -1,6 +1,6 @@
 import 'package:cloudflare_r2/cloudflare_r2.dart';
 import 'package:deehelp/old_core/services/storage/image_storage.dart';
-import 'package:deehelp/old_features/products/domain/entities/image_media.dart';
+import 'package:deehelp/module/item/domain/entities/image_media.dart';
 import 'package:flutter/material.dart';
 import 'package:logging/logging.dart';
 

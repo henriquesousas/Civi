@@ -1,0 +1,45 @@
+import 'package:deehelp/old_features/products/presentation/views/add/add_product_viewmodel.dart';
+import 'package:deehelp/old_features/products/presentation/views/add/state/add_product_state.dart';
+import 'package:deehelp/feature/items/list/item_list_viewmodel.dart';
+import 'package:deehelp/module/item/di/product_usecase_provider.dart';
+import 'package:deehelp/feature/items/list/item_list_state.dart';
+import 'package:deehelp/old_features/products/presentation/views/update/state/product_update_state.dart';
+import 'package:deehelp/old_features/products/presentation/views/update/update_product_viewmodel.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+
+final itemListViewmodelProvider =
+    StateNotifierProvider.autoDispose<ItemListViewModel, ListProductState>(
+  (ref) {
+    final usecase = ref.watch(getProductsByUserUsecaseProvider);
+    ref.onDispose(() {
+      debugPrint('productListingViewmodelProvider disposed');
+    });
+    return ItemListViewModel(getProductsByUserUsecase: usecase);
+  },
+);
+
+final addItemViewModelProvider =
+    StateNotifierProvider.autoDispose<AddProductViewmodel, AddProductState>(
+  (ref) {
+    final usecase = ref.watch(addProductUsecaseProvider);
+    return AddProductViewmodel(
+      addProductUseCase: usecase,
+    );
+  },
+);
+
+final updateProductViewModelProvider = StateNotifierProvider.autoDispose<
+    UpdateProductViewmodel, ProductUpdateState>(
+  (ref) {
+    final updateProductUsecase = ref.watch(updateProductUsecaseProvider);
+    final deleteImageUseCase = ref.watch(deleteImageUsecaseProvider);
+    final addImageUseCase = ref.watch(addImageUsecaseProvider);
+    final deleteProductUseCase = ref.watch(deleteProductUsecaseProvider);
+    return UpdateProductViewmodel(
+        updateProductUseCase: updateProductUsecase,
+        deleteImageUsecase: deleteImageUseCase,
+        addImageUsecase: addImageUseCase,
+        deleteProductUsecase: deleteProductUseCase);
+  },
+);

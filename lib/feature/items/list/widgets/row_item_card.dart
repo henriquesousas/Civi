@@ -4,12 +4,12 @@ import 'package:deehelp/core/ui/styles/app_text_style.dart';
 import 'package:deehelp/core/ui/widgets/badge/export_badge.dart';
 import 'package:deehelp/core/ui/widgets/icon/highlight_icon.dart';
 import 'package:deehelp/core/ui/widgets/image/export_image.dart';
-import 'package:deehelp/feature/items/list/item_list_page.dart';
+import 'package:deehelp/module/item/domain/entities/product.dart';
+import 'package:deehelp/old_core/ui/extensions/date_extension.dart';
 import 'package:flutter/material.dart';
-import 'package:intl/intl.dart';
 
 class RowItemCard extends StatelessWidget {
-  final UserItem item;
+  final Product item;
   final VoidCallback onTap;
 
   const RowItemCard({
@@ -21,7 +21,6 @@ class RowItemCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final statusStyle = StatusStyle.from(item.status);
-    final dateText = DateFormat('dd/MM/yyyy').format(item.createdAt);
 
     return Material(
       color: Colors.transparent,
@@ -50,7 +49,7 @@ class RowItemCard extends StatelessWidget {
                   width: ImageSize.md,
                   height: ImageSize.md,
                   radius: RadiusSize.lg,
-                  imageUrl: item.photo,
+                  imageUrl: item.images.isNotEmpty ? item.images[0].value : '',
                 ),
                 const SizedBox(width: 12),
                 Expanded(
@@ -100,7 +99,7 @@ class RowItemCard extends StatelessWidget {
                                 ),
                                 const SizedBox(height: 2),
                                 Text(
-                                  dateText,
+                                  item.createdAt!.toDayMonthYearFormat(),
                                   style: context.appText.bodySmall.copyWith(
                                     fontWeight: FontWeight.w700,
                                     color: context.onSurface,

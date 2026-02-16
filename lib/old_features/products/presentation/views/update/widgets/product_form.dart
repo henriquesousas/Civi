@@ -1,5 +1,5 @@
 import 'package:deehelp/old_core/ui/widgets/bottom_sheet/custom_modal_bottom_sheet.dart';
-import 'package:deehelp/old_features/products/presentation/providers/product_viewmodel_provider.dart';
+import 'package:deehelp/module/item/di/item_viewmodel_provider.dart';
 import 'package:deehelp/old_features/products/presentation/views/update/product_update_manager.dart';
 import 'package:deehelp/old_features/products/presentation/views/update/state/product_update_state.dart';
 import 'package:deehelp/old_features/products/presentation/views/update/widgets/brand_section.dart';

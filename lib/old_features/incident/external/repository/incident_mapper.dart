@@ -4,7 +4,7 @@ import 'package:deehelp/old_features/incident/domain/enum/incident_status.dart';
 import 'package:deehelp/old_features/incident/domain/enum/type_alert.dart';
 import 'package:deehelp/old_features/incident/domain/usecase/incident_output.dart';
 import 'package:deehelp/old_features/incident/domain/usecase/incident_product_output.dart';
-import 'package:deehelp/old_features/products/external/repository/image_media_model.dart';
+import 'package:deehelp/module/item/repository/image_media_model.dart';
 import 'package:flutter/material.dart';
 
 class IncidentMapper {

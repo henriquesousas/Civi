@@ -1,7 +1,7 @@
 import 'package:deehelp/old_core/ui/widgets/bottom_sheet/custom_modal_bottom_sheet.dart';
 import 'package:deehelp/old_core/ui/widgets/card/ui_custom_app_card.dart';
-import 'package:deehelp/old_features/products/external/repository/data.dart';
-import 'package:deehelp/old_features/products/presentation/providers/product_viewmodel_provider.dart';
+import 'package:deehelp/module/item/repository/data.dart';
+import 'package:deehelp/module/item/di/item_viewmodel_provider.dart';
 import 'package:deehelp/old_features/products/presentation/views/update/product_update_manager.dart';
 import 'package:deehelp/old_features/products/presentation/views/update/widgets/item_detail_tile.dart';
 import 'package:deehelp/old_features/products/presentation/widgets/modal_select_brand.dart';

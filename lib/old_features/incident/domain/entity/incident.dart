@@ -1,7 +1,7 @@
 import 'package:deehelp/old_features/incident/domain/entity/incident_local.dart';
 import 'package:deehelp/old_features/incident/domain/enum/incident_status.dart';
 import 'package:deehelp/old_features/incident/domain/enum/type_alert.dart';
-import 'package:deehelp/old_features/products/domain/entities/product.dart';
+import 'package:deehelp/module/item/domain/entities/product.dart';
 import 'package:flutter/material.dart';
 
 //TODO: Nao passar todo o Product apenas o Id dele

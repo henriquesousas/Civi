@@ -3,7 +3,7 @@ import 'package:deehelp/old_core/ui/theme/app_text_styles.dart';
 import 'package:deehelp/old_core/ui/theme/dimens.dart';
 import 'package:deehelp/old_core/ui/widgets/image/ui_my_assets_image_widget.dart';
 import 'package:deehelp/old_core/ui/widgets/image/ui_my_network_image_widget.dart';
-import 'package:deehelp/old_features/products/domain/entities/image_media.dart';
+import 'package:deehelp/module/item/domain/entities/image_media.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 

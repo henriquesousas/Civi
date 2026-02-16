@@ -1,4 +1,4 @@
-import 'package:deehelp/old_features/products/domain/entities/product.dart';
+import 'package:deehelp/module/item/domain/entities/product.dart';
 
 enum ProductField {
   model,

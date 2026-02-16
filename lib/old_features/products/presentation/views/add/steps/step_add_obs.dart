@@ -1,4 +1,4 @@
-import 'package:deehelp/old_features/products/presentation/providers/product_viewmodel_provider.dart';
+import 'package:deehelp/module/item/di/item_viewmodel_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -11,7 +11,7 @@ class StepAddObs extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final viewModel = ref.watch(addProductViewModelProvider.notifier);
+    final viewModel = ref.watch(addItemViewModelProvider.notifier);
     return UICustomAppCard(
       child: Column(
         children: [

@@ -1,9 +1,9 @@
 import 'package:dartz/dartz.dart';
 import 'package:deehelp/old_core/handlers/handler_error.dart';
 import 'package:deehelp/old_core/handlers/handle_command.dart';
-import 'package:deehelp/old_features/products/domain/entities/image_media.dart';
-import 'package:deehelp/old_features/products/domain/usecases/add/add_product_usecase.dart';
-import 'package:deehelp/old_features/products/domain/usecases/add/dtos/add_product_dto.dart';
+import 'package:deehelp/module/item/domain/entities/image_media.dart';
+import 'package:deehelp/module/item/domain/usecases/add/add_product_usecase.dart';
+import 'package:deehelp/module/item/domain/usecases/add/dtos/add_product_dto.dart';
 import 'package:deehelp/old_features/products/presentation/views/add/state/add_product_state.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 

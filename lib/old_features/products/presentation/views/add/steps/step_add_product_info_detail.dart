@@ -2,10 +2,10 @@ import 'package:deehelp/old_core/ui/theme/app_colors.dart';
 import 'package:deehelp/old_core/ui/widgets/bottom_sheet/utils_modal.dart';
 import 'package:deehelp/old_core/ui/widgets/card/ui_custom_app_card.dart';
 import 'package:deehelp/old_core/ui/widgets/textfield/ui_text_field_rounded.dart';
-import 'package:deehelp/old_features/products/external/repository/data.dart';
+import 'package:deehelp/module/item/repository/data.dart';
 import 'package:deehelp/old_features/products/presentation/widgets/modal_select_brand.dart';
 import 'package:deehelp/old_features/products/presentation/widgets/modal_select_color.dart';
-import 'package:deehelp/old_features/products/presentation/providers/product_viewmodel_provider.dart';
+import 'package:deehelp/module/item/di/item_viewmodel_provider.dart';
 import 'package:deehelp/old_features/products/presentation/views/add/widget/header_text_card.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -43,7 +43,7 @@ class _StepAddProductInfoDetailState
         onChange: (brand) => onComplete(brand),
       ),
       onComplete: (result) =>
-          ref.watch(addProductViewModelProvider.notifier).onBrandChange(result),
+          ref.watch(addItemViewModelProvider.notifier).onBrandChange(result),
     );
   }
 
@@ -54,14 +54,14 @@ class _StepAddProductInfoDetailState
         onChange: (color) => onComplete(color),
       ),
       onComplete: (result) =>
-          ref.watch(addProductViewModelProvider.notifier).onColorChange(result),
+          ref.watch(addItemViewModelProvider.notifier).onColorChange(result),
     );
   }
 
   void _bindController() {
     WidgetsBinding.instance.addPostFrameCallback(
       (_) {
-        final state = ref.read(addProductViewModelProvider);
+        final state = ref.read(addItemViewModelProvider);
         _licensePlateController.text = state.licencePlate ?? '';
         _brandController.text = state.brand ?? '';
         _yearController.text = state.year != null ? state.year.toString() : "";
@@ -79,8 +79,8 @@ class _StepAddProductInfoDetailState
 
   @override
   Widget build(BuildContext context) {
-    final state = ref.watch(addProductViewModelProvider);
-    final viewModel = ref.watch(addProductViewModelProvider.notifier);
+    final state = ref.watch(addItemViewModelProvider);
+    final viewModel = ref.watch(addItemViewModelProvider.notifier);
 
     return UICustomAppCard(
       child: Column(

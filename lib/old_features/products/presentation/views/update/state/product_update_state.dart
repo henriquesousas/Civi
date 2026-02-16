@@ -1,4 +1,4 @@
-import 'package:deehelp/old_features/products/domain/entities/product.dart';
+import 'package:deehelp/module/item/domain/entities/product.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 part 'product_update_state.freezed.dart';

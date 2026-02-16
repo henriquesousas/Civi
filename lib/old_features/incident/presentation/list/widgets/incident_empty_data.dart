@@ -8,12 +8,13 @@ class IncidentEmptyData extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return EmptyStateWidget(
-      title: "Ótimo! Nenhum incidente para gerenciar no momento.",
-      subtitle:
-          "Para registrar um incidente, basta tocar no botão 'Registrar incidente' abaixo",
-      btnTitle: "Registrar incidente",
-      press: () => context.push(AppRouter.reportIncident),
-    );
+    return SizedBox.shrink();
+    // return EmptyStateWidget(
+    //   title: "Ótimo! Nenhum incidente para gerenciar no momento.",
+    //   subtitle:
+    //       "Para registrar um incidente, basta tocar no botão 'Registrar incidente' abaixo",
+    //   btnTitle: "Registrar incidente",
+    //   press: () => context.push(AppRouter.reportIncident),
+    // );
   }
 }

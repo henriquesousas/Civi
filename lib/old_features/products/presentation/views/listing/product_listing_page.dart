@@ -3,13 +3,13 @@ import 'package:deehelp/old_core/ui/theme/app_colors.dart';
 import 'package:deehelp/old_core/ui/widgets/button/ui_elevated_icon_button.dart';
 import 'package:deehelp/old_core/ui/widgets/empty/empty_state_widget.dart';
 import 'package:deehelp/old_core/ui/widgets/shimmer_animation.dart';
-import 'package:deehelp/module/external/di/authenticated_user_provider.dart';
-import 'package:deehelp/old_features/products/domain/entities/product.dart';
+import 'package:deehelp/module/auth/external/di/authenticated_user_provider.dart';
+import 'package:deehelp/module/item/domain/entities/product.dart';
 import 'package:deehelp/old_features/products/presentation/views/listing/widgets/product_list_card_tile.dart';
 import 'package:deehelp/old_core/base/base_page.dart';
-import 'package:deehelp/old_features/products/presentation/views/listing/product_listing_shimmer.dart';
-import 'package:deehelp/old_features/products/presentation/providers/product_viewmodel_provider.dart';
-import 'package:deehelp/old_features/products/presentation/views/listing/state/list_product_state.dart';
+import 'package:deehelp/feature/items/list/row_item_card_skeleton.dart';
+import 'package:deehelp/module/item/di/item_viewmodel_provider.dart';
+import 'package:deehelp/feature/items/list/item_list_state.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
@@ -35,7 +35,7 @@ class _ProductListingPageState extends BasePageState<ProductListingPage> {
     WidgetsBinding.instance.addPostFrameCallback((_) {
       final userId = ref.watch(authenticatedUserProvider)?.id;
       if (userId != null) {
-        ref.read(productListingViewmodelProvider.notifier).getProducts(userId);
+        ref.read(itemListViewmodelProvider.notifier).getProducts(userId);
       }
     });
   }
@@ -52,7 +52,7 @@ class _ProductListingPageState extends BasePageState<ProductListingPage> {
 
   @override
   Widget? buildBottomNavigationBar() {
-    return ref.watch(productListingViewmodelProvider).maybeWhen(
+    return ref.watch(itemListViewmodelProvider).maybeWhen(
           success: (items, selectedFilter) => SafeArea(
             child: Padding(
               padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 20),
@@ -81,16 +81,21 @@ class _ProductListingPageState extends BasePageState<ProductListingPage> {
 
   @override
   Widget buildPage(BuildContext context) {
-    final state = ref.watch(productListingViewmodelProvider);
+    final state = ref.watch(itemListViewmodelProvider);
 
     return state.maybeMap(
       success: (value) => _buildView(value.items),
-      loading: (_) => ShimmerAnimation(
-        enabled: true,
-        child: _buildView(productListShimmer),
+      // loading: (_) => ShimmerAnimation(
+      //   enabled: true,
+      //   child: _buildView(productListShimmer),
+      // ),
+      orElse: () => EmptyStateWidget(
+        buttonText: "",
+        highlightIcon: Icon(Icons.import_contacts),
+        title: "",
+        subtitle: "",
+        onRegisterItem: () {},
       ),
-      orElse: () =>
-          EmptyStateWidget(press: () => context.push(AppRouter.addProduct)),
     );
   }
 
