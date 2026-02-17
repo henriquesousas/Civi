@@ -6,7 +6,7 @@ import 'package:flutter/material.dart';
 //TODO: Refatorar para ter loading, desabilitado
 class ButtonPrimary extends StatelessWidget {
   final String text;
-  final VoidCallback press;
+  final VoidCallback? press;
   final bool loading;
   const ButtonPrimary({
     super.key,
@@ -34,11 +34,18 @@ class ButtonPrimary extends StatelessWidget {
                 fontWeight: FontWeight.w500, fontSize: AppTextSizes.button),
           ),
         ),
-        onPressed: () {
-          if (!loading) {
-            press();
-          }
-        },
+        // onPressed: () {
+        //   if (!loading) {
+        //     press();
+        //   }
+        // },
+        onPressed: press != null
+            ? () {
+                if (!loading) {
+                  press!();
+                }
+              }
+            : null,
         child: !loading ? _title(context) : _cirucularProgressIndicator(),
       ),
     );

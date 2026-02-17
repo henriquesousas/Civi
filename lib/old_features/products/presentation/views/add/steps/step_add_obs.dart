@@ -11,7 +11,7 @@ class StepAddObs extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final viewModel = ref.watch(addItemViewModelProvider.notifier);
+    final viewModel = ref.watch(registerItemViewModelProvider.notifier);
     return UICustomAppCard(
       child: Column(
         children: [

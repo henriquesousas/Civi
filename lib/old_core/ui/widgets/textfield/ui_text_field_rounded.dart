@@ -26,7 +26,6 @@ class UITextFieldRounded extends StatefulWidget {
   final TextStyle? textStyle;
   final TextStyle? hintStyle;
   final VoidCallback? onTap;
-  final Function(String)? onChanged;
   final ValueChanged<String>? onFieldSubmitted;
   final EdgeInsetsGeometry? contentPadding;
   final bool readOnly;
@@ -34,6 +33,7 @@ class UITextFieldRounded extends StatefulWidget {
   final bool showLabelText;
   final int maxLine;
   final String? instructions;
+  final Function(String)? onChanged;
   final String? error;
   final Color? borderColor;
   final double borderRadius;

@@ -7,6 +7,7 @@ abstract class ProductRepository {
   Future<void> save(Product product);
   Future<void> update(Product product);
   Future<void> delete(ProductId id);
+  Future<Product?> getByCode(String code);
   Future<List<Product>> getAll(String userId);
   //TODO: Colocar em um repositorio separado
   Future<void> saveImage(ProductId productId, ImageMedia image);

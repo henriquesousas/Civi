@@ -1,4 +1,4 @@
-import 'package:deehelp/feature/items/register/widgets/color-picker/color_option.dart';
+import 'package:deehelp/feature/items/register/presentation/widgets/color-picker/color_option.dart';
 import 'package:flutter/material.dart';
 
 class ColorDot extends StatelessWidget {

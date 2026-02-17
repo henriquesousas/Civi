@@ -60,7 +60,7 @@ class ButtonOutline extends StatelessWidget {
     return Text(
       text,
       style: context.appText.button.copyWith(
-        color: textColor ?? Colors.white,
+        color: textColor ?? context.primaryColor,
       ),
     );
   }

@@ -1,14 +1,14 @@
 import 'package:deehelp/core/theme/export_theme.dart';
 import 'package:deehelp/core/ui/styles/app_text_style.dart';
 import 'package:deehelp/core/ui/widgets/textfield/text_field_primary.dart';
-import 'package:deehelp/feature/items/register/widgets/card_page.dart';
-import 'package:deehelp/feature/items/register/widgets/item_highticon.dart';
+import 'package:deehelp/feature/items/register/presentation/widgets/card_page.dart';
+import 'package:deehelp/feature/items/register/presentation/widgets/item_highticon.dart';
 import 'package:flutter/material.dart';
 
 class ObservationCardField extends StatelessWidget {
-  final TextEditingController controller;
+  final Function(String)? onChanged;
 
-  const ObservationCardField({super.key, required this.controller});
+  const ObservationCardField({super.key, this.onChanged});
 
   @override
   Widget build(BuildContext context) {
@@ -35,10 +35,10 @@ class ObservationCardField extends StatelessWidget {
             ),
             const SizedBox(width: SpacingSize.md),
             TextFieldPrimary(
-              controller: controller,
               hint: 'Digite detalhes que ajudem a identificar o item…',
               maxLength: 300,
               maxLines: 7,
+              onChanged: onChanged,
             ),
           ],
         ),

@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
 class TextFieldPrimary extends StatelessWidget {
-  final TextEditingController controller;
+  final TextEditingController? controller;
   final String hint;
   final List<TextInputFormatter>? inputFormatters;
   final String? labelText;
@@ -13,16 +13,21 @@ class TextFieldPrimary extends StatelessWidget {
   final int? maxLines;
   final TextInputType? textInputType;
 
+  final Function(String)? onChanged;
+  final String? error;
+
   const TextFieldPrimary(
       {super.key,
-      required this.controller,
       required this.hint,
+      this.controller,
       this.labelText,
       this.inputFormatters,
       this.suffixIcon,
       this.maxLength,
       this.maxLines,
-      this.textInputType});
+      this.textInputType,
+      this.onChanged,
+      this.error});
 
   @override
   Widget build(BuildContext context) {
@@ -32,7 +37,13 @@ class TextFieldPrimary extends StatelessWidget {
       maxLength: maxLength,
       maxLines: maxLines,
       inputFormatters: inputFormatters,
+      onChanged: (text) {
+        if (onChanged != null) {
+          onChanged!(text);
+        }
+      },
       decoration: InputDecoration(
+          errorText: error,
           counterStyle: TextStyle(color: context.secondaryColor),
           labelText: labelText,
           labelStyle: TextStyle(
@@ -47,6 +58,7 @@ class TextFieldPrimary extends StatelessWidget {
             borderSide: BorderSide.none,
           ),
           suffixIcon: suffixIcon
+
           // suffixIcon: controller.text.isEmpty
           //     ? null
           //     : IconButton(

@@ -42,8 +42,9 @@ class _StepAddProductInfoDetailState
         values: kBrands,
         onChange: (brand) => onComplete(brand),
       ),
-      onComplete: (result) =>
-          ref.watch(addItemViewModelProvider.notifier).onBrandChange(result),
+      onComplete: (result) => ref
+          .watch(registerItemViewModelProvider.notifier)
+          .onBrandChange(result),
     );
   }
 
@@ -53,15 +54,16 @@ class _StepAddProductInfoDetailState
       builder: (onComplete) => ModalSelectColor(
         onChange: (color) => onComplete(color),
       ),
-      onComplete: (result) =>
-          ref.watch(addItemViewModelProvider.notifier).onColorChange(result),
+      onComplete: (result) => ref
+          .watch(registerItemViewModelProvider.notifier)
+          .onColorChange(result),
     );
   }
 
   void _bindController() {
     WidgetsBinding.instance.addPostFrameCallback(
       (_) {
-        final state = ref.read(addItemViewModelProvider);
+        final state = ref.read(registerItemViewModelProvider);
         _licensePlateController.text = state.licencePlate ?? '';
         _brandController.text = state.brand ?? '';
         _yearController.text = state.year != null ? state.year.toString() : "";
@@ -79,8 +81,8 @@ class _StepAddProductInfoDetailState
 
   @override
   Widget build(BuildContext context) {
-    final state = ref.watch(addItemViewModelProvider);
-    final viewModel = ref.watch(addItemViewModelProvider.notifier);
+    final state = ref.watch(registerItemViewModelProvider);
+    final viewModel = ref.watch(registerItemViewModelProvider.notifier);
 
     return UICustomAppCard(
       child: Column(

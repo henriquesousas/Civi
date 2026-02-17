@@ -2,8 +2,8 @@ import 'package:deehelp/old_core/ui/router/app_router.dart';
 import 'package:deehelp/old_core/ui/theme/app_colors.dart';
 import 'package:deehelp/old_core/ui/theme/app_text_styles.dart';
 import 'package:deehelp/old_core/ui/widgets/button/ui_elevated_button.dart';
-import 'package:deehelp/old_features/products/presentation/views/add/add_product_viewmodel.dart';
-import 'package:deehelp/old_features/products/presentation/views/add/state/add_product_state.dart';
+import 'package:deehelp/feature/items/register/viewmodel/register_item_viewmodel.dart';
+import 'package:deehelp/feature/items/register/viewmodel/add_product_state.dart';
 import 'package:deehelp/module/item/di/item_viewmodel_provider.dart';
 import 'package:deehelp/old_features/products/presentation/views/add/steps/step_add_obs.dart';
 import 'package:deehelp/old_features/products/presentation/views/add/steps/step_add_photo.dart';
@@ -55,15 +55,15 @@ class _AddProductStepPageState extends ConsumerState<AddProductStepPage> {
     ];
   }
 
-  void _nextStep(int currentStep, AddProductViewmodel viewModel) {
+  void _nextStep(int currentStep, RegisterItemViewmodel viewModel) {
     viewModel.nextStep(currentStep);
   }
 
-  void _save(AddProductViewmodel viewModel) {
+  void _save(RegisterItemViewmodel viewModel) {
     viewModel.save("a5c33b3e-7c0e-4ea9-99ae-2c87d3f2da46");
   }
 
-  void _previousStep(int currentStep, AddProductViewmodel viewModel) {
+  void _previousStep(int currentStep, RegisterItemViewmodel viewModel) {
     viewModel.previous(currentStep);
   }
 
@@ -85,12 +85,12 @@ class _AddProductStepPageState extends ConsumerState<AddProductStepPage> {
 
   @override
   Widget build(BuildContext context) {
-    final state = ref.watch(addItemViewModelProvider);
-    final viewModel = ref.watch(addItemViewModelProvider.notifier);
+    final state = ref.watch(registerItemViewModelProvider);
+    final viewModel = ref.watch(registerItemViewModelProvider.notifier);
     _buildSteps(state.currentStep);
 
     ref.listen<AddProductState>(
-      addItemViewModelProvider,
+      registerItemViewModelProvider,
       (previous, currentState) {
         if (currentState.isSuccess) {
           context.pushReplacement(AppRouter.addProductSuccess);

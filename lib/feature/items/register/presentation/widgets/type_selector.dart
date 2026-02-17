@@ -1,6 +1,6 @@
 import 'package:deehelp/core/theme/export_theme.dart';
 import 'package:deehelp/feature/items/item_type.dart';
-import 'package:deehelp/feature/items/register/widgets/type_card.dart';
+import 'package:deehelp/feature/items/register/presentation/widgets/type_card.dart';
 import 'package:flutter/material.dart';
 
 class TypeSelector extends StatelessWidget {

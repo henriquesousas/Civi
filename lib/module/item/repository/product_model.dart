@@ -14,7 +14,7 @@ class ProductModel {
       'brand': product.brand,
       'obs': product.obs,
       'year': product.year,
-      'status': product.status.toString(),
+      'status': product.status.name,
       'type': product.type,
       'user_id': product.userId,
       'created_at': product.createdAt?.toUtc().toIso8601String(),

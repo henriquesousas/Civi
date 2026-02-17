@@ -1,26 +1,28 @@
 import 'package:deehelp/core/extension/exports_extension.dart';
 import 'package:deehelp/core/theme/export_theme.dart';
 import 'package:deehelp/core/ui/styles/app_text_style.dart';
-import 'package:deehelp/feature/items/register/widgets/item_highticon.dart';
-import 'package:deehelp/feature/items/register/widgets/brand-picker/brand_bottom_sheet.dart';
+import 'package:deehelp/feature/items/register/presentation/widgets/item_highticon.dart';
+import 'package:deehelp/feature/items/register/presentation/widgets/brand-picker/brand_bottom_sheet.dart';
 import 'package:flutter/material.dart';
 
 class BrandPickerField extends StatelessWidget {
-  final TextEditingController controller;
+  // final TextEditingController controller;
+  final String value;
   final List<String> options;
   final ValueChanged<String> onSelected;
 
   const BrandPickerField({
     super.key,
-    required this.controller,
     required this.options,
     required this.onSelected,
+    required this.value,
   });
 
   @override
   Widget build(BuildContext context) {
-    final value =
-        controller.text.isEmpty ? 'Selecionar marca' : controller.text;
+    // final value =
+    //     controller.text.isEmpty ? 'Selecionar marca' : controller.text;
+    final muted = value == 'Selecionar marca';
 
     return InkWell(
       onTap: () async {
@@ -29,7 +31,7 @@ class BrandPickerField extends StatelessWidget {
           backgroundColor: Colors.transparent,
           isScrollControlled: true,
           builder: (_) => BrandBottomSheet(
-            current: controller.text,
+            current: value,
             options: (options.toSet().toList()..sort()),
           ),
         );
@@ -55,9 +57,8 @@ class BrandPickerField extends StatelessWidget {
                       value,
                       style: context.appText.bodySmall.copyWith(
                         fontWeight: FontWeight.w800,
-                        color: controller.text.isEmpty
-                            ? context.secondaryColor
-                            : context.onSurface,
+                        color:
+                            muted ? context.secondaryColor : context.onSurface,
                       ),
                     ),
                   ),

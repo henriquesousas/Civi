@@ -32,7 +32,7 @@ class WizardBottomBar extends StatelessWidget {
       child: SafeArea(
         top: false,
         child: ButtonPrimary(
-          press: press ?? () {},
+          press: press,
           loading: loading,
           text: nextLabel,
         ),

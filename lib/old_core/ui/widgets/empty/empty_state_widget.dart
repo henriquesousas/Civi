@@ -53,6 +53,7 @@ class EmptyStateWidget extends StatelessWidget {
             const SizedBox(height: SpacingSize.xl),
             ButtonOutline(
               bgColor: context.primaryColor,
+              textColor: Colors.white,
               press: onRegisterItem,
               text: buttonText,
             ),

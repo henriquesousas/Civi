@@ -1,4 +1,6 @@
-import 'package:dartz/dartz.dart';
+import 'package:deehelp/core/utils/enum_utils.dart';
+import 'package:deehelp/feature/items/item_type.dart';
+import 'package:deehelp/module/item/domain/exceptions/item_notfound_exception.dart';
 import 'package:deehelp/old_core/base/use_case.dart';
 import 'package:deehelp/old_core/services/storage/image_storage.dart';
 import 'package:deehelp/old_core/utils/result.dart';
@@ -7,6 +9,7 @@ import 'package:deehelp/module/item/domain/entities/image_media.dart';
 import 'package:deehelp/module/item/domain/entities/product.dart';
 import 'package:deehelp/module/item/domain/product_repository.dart';
 import 'package:deehelp/module/item/domain/usecases/add/dtos/add_product_dto.dart';
+import 'package:deehelp/old_core/utils/unit.dart';
 import 'package:logging/logging.dart';
 
 class AddProductUseCase extends UseCase<AddProductDto, Unit> {
@@ -23,6 +26,12 @@ class AddProductUseCase extends UseCase<AddProductDto, Unit> {
   @override
   Future<Result<Unit>> execute(AddProductDto dto) async {
     _logger.info("Iniciando AddProductUseCase para salvar o produto...");
+
+    final item = await _repository.getByCode(dto.code);
+    if (item != null) {
+      final type = EnumUtils.fromString(ItemType.values, dto.type);
+      return Result.failure(ItemNotFoundException.from(type, dto.code));
+    }
 
     try {
       final newImagesMedia = await Future.wait(
@@ -43,7 +52,7 @@ class AddProductUseCase extends UseCase<AddProductDto, Unit> {
       product.changeImage(newImagesMedia);
       await _repository.save(product);
       _logger.info("Produto cadastrado com sucesso");
-      return Result.success(unit);
+      return Result.success(const Unit());
     } catch (e) {
       await Future.wait(
         dto.images.map(

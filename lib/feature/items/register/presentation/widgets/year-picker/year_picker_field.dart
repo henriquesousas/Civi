@@ -1,6 +1,6 @@
 import 'package:deehelp/core/extension/exports_extension.dart';
 import 'package:deehelp/core/theme/export_theme.dart';
-import 'package:deehelp/feature/items/register/widgets/item_highticon.dart';
+import 'package:deehelp/feature/items/register/presentation/widgets/item_highticon.dart';
 import 'package:flutter/material.dart';
 
 class YearPickerField extends StatelessWidget {
@@ -48,6 +48,11 @@ class YearPickerField extends StatelessWidget {
                         color:
                             muted ? context.secondaryColor : context.onSurface,
                       ),
+                      // style: TextStyle(
+                      //   fontWeight: FontWeight.w800,
+                      //   color:
+                      //       muted ? context.onSurface : context.secondaryColor,
+                      // ),
                     ),
                   ),
                   const Icon(Icons.expand_more, color: Color(0xFF8A96C8)),

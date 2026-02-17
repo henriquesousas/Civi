@@ -1,25 +1,34 @@
-import 'package:dartz/dartz.dart';
+import 'package:deehelp/feature/items/item_type.dart';
+import 'package:deehelp/module/item/domain/usecases/add/item_validate_usecase.dart';
 import 'package:deehelp/old_core/handlers/handler_error.dart';
 import 'package:deehelp/old_core/handlers/handle_command.dart';
 import 'package:deehelp/module/item/domain/entities/image_media.dart';
 import 'package:deehelp/module/item/domain/usecases/add/add_product_usecase.dart';
 import 'package:deehelp/module/item/domain/usecases/add/dtos/add_product_dto.dart';
-import 'package:deehelp/old_features/products/presentation/views/add/state/add_product_state.dart';
+import 'package:deehelp/feature/items/register/viewmodel/add_product_state.dart';
+import 'package:deehelp/old_core/utils/unit.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-class AddProductViewmodel extends StateNotifier<AddProductState> {
+class RegisterItemViewmodel extends StateNotifier<AddProductState> {
   final AddProductUseCase _addProductUseCase;
-  AddProductViewmodel({
+  final ItemValidaUseCase _itemValidateUseCase;
+  RegisterItemViewmodel({
     required AddProductUseCase addProductUseCase,
+    required ItemValidaUseCase itemValidateUseCase,
   })  : _addProductUseCase = addProductUseCase,
+        _itemValidateUseCase = itemValidateUseCase,
         super(AddProductState.initial());
+
+  void reset() {
+    state = state.copyWith(isValidateApi: false);
+  }
 
   void save(String userId) async {
     final dto = AddProductDto(
       userId: userId,
       name: state.model!,
       year: state.year!,
-      type: state.productType.name,
+      type: state.type.name,
       images: state.imageMedia,
       code: state.licencePlate!,
       color: state.color!,
@@ -30,8 +39,11 @@ class AddProductViewmodel extends StateNotifier<AddProductState> {
     await HandleCommand.execute<Unit, AddProductState>(
       updateState: (newState) => state = newState,
       command: () => _addProductUseCase.execute(dto),
-      onLoading: () => state.copyWith(isLoading: true),
-      onSuccess: (result) => state.copyWith(isSuccess: true, isLoading: false),
+      onLoading: () =>
+          state.copyWith(isLoading: true, errorMessage: null, isSuccess: false),
+      onSuccess: (result) {
+        return state.copyWith(isSuccess: true, isLoading: false);
+      },
       onError: (error) {
         return handleError<AddProductState>(
           error,
@@ -43,9 +55,40 @@ class AddProductViewmodel extends StateNotifier<AddProductState> {
     );
   }
 
-  void selectProductType(ProductType productType) async {
+  void validate() async {
+    if (state.licencePlate == null) return;
+    final dto = GetItemDto(code: state.licencePlate!, type: state.type);
+
+    await HandleCommand.execute<Unit, AddProductState>(
+      updateState: (newState) => state = newState,
+      command: () => _itemValidateUseCase.execute(dto),
+      onLoading: () => state.copyWith(
+        isLoading: true,
+        errorMessage: null,
+        isSuccess: false,
+        isValidateApi: false,
+      ),
+      onSuccess: (result) {
+        return state.copyWith(
+          isSuccess: false,
+          isLoading: false,
+          isValidateApi: true,
+        );
+      },
+      onError: (error) {
+        return handleError<AddProductState>(
+          error,
+          (message, _) {
+            return state.copyWith(errorMessage: message, isLoading: false);
+          },
+        );
+      },
+    );
+  }
+
+  void selectProductType(ItemType type) async {
     state = state.copyWith(
-      productType: productType,
+      type: type,
       hasProductTypeSelected: true,
     );
   }
@@ -65,6 +108,17 @@ class AddProductViewmodel extends StateNotifier<AddProductState> {
     state = state.copyWith(
       licencePlate: value,
       errorLicencePlate: isError,
+    );
+
+    _checkStepProductInfoDetailsIsValid();
+  }
+
+  void onImeiChange(String value) {
+    final isError = value.length < 15 ? "IMEI inválido" : null;
+    state = state.copyWith(
+      licencePlate: value,
+      errorLicencePlate: isError,
+      year: DateTime.now().year,
     );
 
     _checkStepProductInfoDetailsIsValid();

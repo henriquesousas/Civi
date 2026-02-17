@@ -1,7 +1,7 @@
 import 'package:deehelp/core/theme/export_theme.dart';
 import 'package:deehelp/core/ui/styles/export_style.dart';
-import 'package:deehelp/feature/items/register/widgets/color-picker/color_dot.dart';
-import 'package:deehelp/feature/items/register/widgets/color-picker/color_option.dart';
+import 'package:deehelp/feature/items/register/presentation/widgets/color-picker/color_dot.dart';
+import 'package:deehelp/feature/items/register/presentation/widgets/color-picker/color_option.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 

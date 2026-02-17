@@ -1,3 +1,4 @@
+import 'package:deehelp/feature/items/item_type.dart';
 import 'package:deehelp/module/item/domain/entities/image_media.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
@@ -17,7 +18,7 @@ enum ProductType {
 abstract class AddProductState with _$AddProductState {
   const factory AddProductState({
     @Default(0) int currentStep,
-    @Default(ProductType.none) ProductType productType,
+    @Default(ItemType.none) ItemType type,
     @Default(false) bool hasProductTypeSelected,
     // Step 1
     String? model,
@@ -36,10 +37,11 @@ abstract class AddProductState with _$AddProductState {
     @Default(false) bool stepAddPhotoValid,
     @Default(false) bool isLoading,
     @Default(false) bool isSuccess,
+    @Default(false) bool isValidateApi,
     String? errorMessage,
   }) = _AddProductState;
 
   factory AddProductState.initial() => const AddProductState(
-        productType: ProductType.none,
+        type: ItemType.none,
       );
 }

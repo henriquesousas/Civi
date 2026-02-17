@@ -1,3 +1,4 @@
+import 'package:deehelp/module/item/domain/usecases/add/item_validate_usecase.dart';
 import 'package:deehelp/old_core/providers/image_storage_provider.dart';
 import 'package:deehelp/module/item/domain/usecases/add/add_image_usecase.dart';
 import 'package:deehelp/module/item/domain/usecases/add/add_product_usecase.dart';
@@ -12,6 +13,12 @@ final getProductsByUserUsecaseProvider =
     Provider.autoDispose<GetProductsByUserUsecase>((ref) {
   final repository = ref.watch(productRepositoryProvider);
   return GetProductsByUserUsecase(repository: repository);
+});
+
+final getItemByCodeUsecaseProvider =
+    Provider.autoDispose<ItemValidaUseCase>((ref) {
+  final repository = ref.watch(productRepositoryProvider);
+  return ItemValidaUseCase(repository: repository);
 });
 
 final updateProductUsecaseProvider =

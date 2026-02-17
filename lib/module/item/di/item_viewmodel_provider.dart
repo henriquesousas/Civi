@@ -1,5 +1,5 @@
-import 'package:deehelp/old_features/products/presentation/views/add/add_product_viewmodel.dart';
-import 'package:deehelp/old_features/products/presentation/views/add/state/add_product_state.dart';
+import 'package:deehelp/feature/items/register/viewmodel/register_item_viewmodel.dart';
+import 'package:deehelp/feature/items/register/viewmodel/add_product_state.dart';
 import 'package:deehelp/feature/items/list/item_list_viewmodel.dart';
 import 'package:deehelp/module/item/di/product_usecase_provider.dart';
 import 'package:deehelp/feature/items/list/item_list_state.dart';
@@ -19,13 +19,13 @@ final itemListViewmodelProvider =
   },
 );
 
-final addItemViewModelProvider =
-    StateNotifierProvider.autoDispose<AddProductViewmodel, AddProductState>(
+final registerItemViewModelProvider =
+    StateNotifierProvider.autoDispose<RegisterItemViewmodel, AddProductState>(
   (ref) {
     final usecase = ref.watch(addProductUsecaseProvider);
-    return AddProductViewmodel(
-      addProductUseCase: usecase,
-    );
+    final itemValidateUseCase = ref.watch(getItemByCodeUsecaseProvider);
+    return RegisterItemViewmodel(
+        addProductUseCase: usecase, itemValidateUseCase: itemValidateUseCase);
   },
 );
 

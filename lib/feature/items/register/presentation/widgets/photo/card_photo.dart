@@ -3,7 +3,9 @@ import 'package:deehelp/core/theme/export_theme.dart';
 import 'package:deehelp/core/ui/styles/app_text_style.dart';
 import 'package:deehelp/core/ui/widgets/badge/badge_text.dart';
 import 'package:deehelp/core/ui/widgets/icon/export_icon.dart';
-import 'package:deehelp/feature/items/register/widgets/card_page.dart';
+import 'package:deehelp/feature/items/register/presentation/widgets/card_page.dart';
+import 'package:deehelp/feature/items/register/viewmodel/register_item_viewmodel.dart';
+import 'package:deehelp/module/item/di/item_viewmodel_provider.dart';
 import 'package:deehelp/old_core/providers/image_picker_provider.dart';
 import 'package:deehelp/old_core/services/image/default_image_picker.dart';
 import 'package:deehelp/old_core/ui/extensions/dialog_extension.dart';
@@ -15,7 +17,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 class CardPhoto extends ConsumerStatefulWidget {
-  const CardPhoto({super.key});
+  final int allowedPhotos;
+  const CardPhoto({
+    super.key,
+    required this.allowedPhotos,
+  });
 
   @override
   ConsumerState<CardPhoto> createState() => _CardPhotoState();
@@ -24,7 +30,10 @@ class CardPhoto extends ConsumerStatefulWidget {
 class _CardPhotoState extends ConsumerState<CardPhoto> {
   List<ImageMedia> photos = [];
 
-  Future<void> pickFromGalley(DefaultImagePicker picker) async {
+  Future<void> pickFromGalley(
+    DefaultImagePicker picker,
+    RegisterItemViewmodel viewModel,
+  ) async {
     try {
       final imageMedia = await picker.pickImageFromGallery();
       if (imageMedia.isFailure) {
@@ -34,7 +43,8 @@ class _CardPhotoState extends ConsumerState<CardPhoto> {
           type: DialogType.error,
         );
       }
-      setState(() => photos.add(imageMedia.data!));
+      // setState(() => photos.add(imageMedia.data!));
+      viewModel.addPhoto(imageMedia.data!);
     } catch (ex) {
       if (!mounted) return;
       context.showSnackBar(
@@ -44,12 +54,8 @@ class _CardPhotoState extends ConsumerState<CardPhoto> {
     }
   }
 
-  Future<void> removePhoto(int index) async {
-    final newImages = List<ImageMedia>.from(photos);
-    if (index >= 0 && index < newImages.length) {
-      photos.removeAt(index);
-      setState(() {});
-    }
+  Future<void> removePhoto(int index, RegisterItemViewmodel viewModel) async {
+    viewModel.removePhoto(index);
   }
 
   Future<void> openPhotoViewer(int index) async {
@@ -69,6 +75,8 @@ class _CardPhotoState extends ConsumerState<CardPhoto> {
   @override
   Widget build(BuildContext context) {
     final imagePicker = ref.watch(imagePickerProvider);
+    final state = ref.watch(registerItemViewModelProvider);
+    final viewModel = ref.watch(registerItemViewModelProvider.notifier);
     return PageCard(
       child: Padding(
         padding: const EdgeInsets.all(LayoutSpacingSize.card),
@@ -93,7 +101,7 @@ class _CardPhotoState extends ConsumerState<CardPhoto> {
                     ),
                   ),
                 ),
-                const BadgeText(text: "3"),
+                BadgeText(text: state.imageMedia.length.toString()),
               ],
             ),
             const SizedBox(height: SpacingSize.md),
@@ -106,11 +114,10 @@ class _CardPhotoState extends ConsumerState<CardPhoto> {
             ),
             const SizedBox(height: SpacingSize.md),
             GridAddImage(
-              photos: photos,
-              maxPhotos: 3,
-              onAdd: () => pickFromGalley(imagePicker),
-              onRemove: (position) => removePhoto(position),
-              press: (position) => openPhotoViewer(position),
+              photos: state.imageMedia,
+              maxPhotos: widget.allowedPhotos,
+              onAdd: () => pickFromGalley(imagePicker, viewModel),
+              onRemove: (index) => removePhoto(index, viewModel),
             ),
             const SizedBox(height: SpacingSize.lg),
             Text(

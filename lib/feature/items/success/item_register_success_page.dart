@@ -3,11 +3,11 @@ import 'package:deehelp/core/ui/styles/app_text_style.dart';
 import 'package:deehelp/core/ui/widgets/bubble/bubble_export.dart';
 import 'package:deehelp/core/ui/widgets/buttons/buttons_export.dart';
 import 'package:deehelp/core/ui/widgets/icon/highlight_icon.dart';
-import 'package:deehelp/feature/items/success/card_id.dart';
 import 'package:deehelp/feature/items/success/card_next_step.dart';
 import 'package:deehelp/old_core/ui/animation/transform_scale_opacity_animator.dart';
 import 'package:deehelp/old_core/utils/url_launcher_utils.dart';
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:lottie/lottie.dart';
 
 class ItemRegisterSuccessPage extends StatelessWidget {
@@ -24,12 +24,10 @@ class ItemRegisterSuccessPage extends StatelessWidget {
     this.onClose,
   });
 
-  static const bgBlue = Color(0xFF2157F8);
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: bgBlue,
+      backgroundColor: AppColors.primaryColor,
       body: SafeArea(
         child: DecorativeBubblesBackground(
           child: Stack(
@@ -42,16 +40,19 @@ class ItemRegisterSuccessPage extends StatelessWidget {
                   children: [
                     Align(
                       alignment: Alignment.topLeft,
-                      child: HighlightIcon(
-                        containerSize: IconSizes.xxl,
-                        radius: RadiusSize.md,
-                        border: Border.all(
-                            color: Colors.white.withValues(alpha: 0.18)),
-                        bgColor: AppColors.primaryColorVariant
-                            .withValues(alpha: 0.7),
-                        icon: const Icon(
-                          Icons.close,
-                          color: Colors.white,
+                      child: GestureDetector(
+                        onTap: () => context.pop(),
+                        child: HighlightIcon(
+                          containerSize: IconSizes.xxl,
+                          radius: RadiusSize.md,
+                          border: Border.all(
+                              color: Colors.white.withValues(alpha: 0.18)),
+                          bgColor: AppColors.primaryColorVariant
+                              .withValues(alpha: 0.7),
+                          icon: const Icon(
+                            Icons.close,
+                            color: Colors.white,
+                          ),
                         ),
                       ),
                     ),
@@ -59,8 +60,8 @@ class ItemRegisterSuccessPage extends StatelessWidget {
                       duration: const Duration(milliseconds: 1500),
                       child: Lottie.asset(
                         "assets/lottie/loader_success.json",
-                        width: 180,
-                        height: 180,
+                        width: ImageSize.xxl,
+                        height: ImageSize.xxl,
                         repeat: false,
                       ),
                     ),
@@ -83,18 +84,14 @@ class ItemRegisterSuccessPage extends StatelessWidget {
                       ),
                     ),
                     const SizedBox(height: RadiusSize.md),
-                    const CardId(itemId: "123456"),
+                    // const CardId(itemId: "123456"),
                     const CardNextStep(),
                     const Spacer(),
                     ButtonOutline(
                       bgColor: Colors.white,
                       icon: const Icon(Icons.share_outlined),
                       press: () {
-                        UrlLauncherUtils.shareIncident(
-                          context,
-                          "123",
-                          DateTime.now(),
-                        );
+                        UrlLauncherUtils.shareApp(context);
                       },
                       text: 'Compartilhar o app',
                     ),

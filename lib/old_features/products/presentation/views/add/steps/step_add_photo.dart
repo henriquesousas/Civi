@@ -21,8 +21,8 @@ class _StepAddPhotoState extends ConsumerState<StepAddPhoto> {
   @override
   Widget build(BuildContext context) {
     final imagePicker = ref.watch(imagePickerProvider);
-    final state = ref.watch(addItemViewModelProvider);
-    final viewModel = ref.watch(addItemViewModelProvider.notifier);
+    final state = ref.watch(registerItemViewModelProvider);
+    final viewModel = ref.watch(registerItemViewModelProvider.notifier);
     return UICustomAppCard(
       child: Column(
         children: [

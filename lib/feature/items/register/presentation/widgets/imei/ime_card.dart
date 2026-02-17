@@ -6,7 +6,7 @@ import 'package:deehelp/core/ui/widgets/buttons/button_outline.dart';
 import 'package:deehelp/core/ui/widgets/cards/card_exports.dart';
 import 'package:deehelp/core/ui/widgets/icon/export_icon.dart';
 import 'package:deehelp/core/ui/widgets/textfield/text_field_primary.dart';
-import 'package:deehelp/feature/items/register/widgets/card_page.dart';
+import 'package:deehelp/feature/items/register/presentation/widgets/card_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
@@ -15,13 +15,17 @@ class ImeiCard extends StatelessWidget {
   final VoidCallback onScan;
   final VoidCallback onPaste;
   final VoidCallback onClear;
+  final Function(String)? onChanged;
+  final String? error;
 
   const ImeiCard({
     super.key,
-    required this.controller,
     required this.onScan,
     required this.onPaste,
     required this.onClear,
+    this.onChanged,
+    this.error,
+    required this.controller,
   });
 
   @override
@@ -36,7 +40,7 @@ class ImeiCard extends StatelessWidget {
               children: [
                 HighlightIcon(
                   icon: Icon(
-                    Icons.qr_code_scanner_outlined,
+                    Icons.phone,
                     color: context.primaryColor,
                     size: IconSizes.md,
                   ),
@@ -58,17 +62,20 @@ class ImeiCard extends StatelessWidget {
               controller: controller,
               hint: 'Digite ou leia automaticamente',
               labelText: 'IMEI (15 dígitos)',
+              textInputType: TextInputType.number,
+              onChanged: onChanged,
               inputFormatters: [
                 FilteringTextInputFormatter.digitsOnly,
                 LengthLimitingTextInputFormatter(15),
               ],
-              suffixIcon: controller.text.isEmpty
-                  ? null
-                  : IconButton(
-                      onPressed: onClear,
-                      icon: const Icon(Icons.close),
-                      color: const Color(0xFF8A96C8),
-                    ),
+              error: error,
+              // suffixIcon: controller.text.isEmpty
+              //     ? null
+              //     : IconButton(
+              //         onPressed: onClear,
+              //         icon: const Icon(Icons.close),
+              //         color: const Color(0xFF8A96C8),
+              //       ),
             ),
             const SizedBox(height: SpacingSize.md),
             Row(

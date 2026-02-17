@@ -102,6 +102,24 @@ Baixe agora: https://play.google.com/store/apps/details?id=com.seu.app
     );
   }
 
+  static Future<void> shareApp(BuildContext context) async {
+    final message = '''
+
+🚨 **TIZZO App** 🚨
+
+Estou usando o aplicativo Tizzo para registrar e acompanhar ocorrências na minha região.
+
+O app ajuda a fortalecer a segurança da comunidade de forma colaborativa.
+
+📲 Baixe e participe:
+https://play.google.com/store/apps/details?id=com.seu.app
+''';
+    await Share.share(
+      message,
+      subject: 'Conheça o app Tizzo',
+    );
+  }
+
   static Future<void> makePhoneCall(String number) async {
     final Uri dialerUri = Uri(scheme: 'tel', path: number);
 

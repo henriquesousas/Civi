@@ -1,56 +1,44 @@
 import 'package:deehelp/core/extension/color_extension.dart';
 import 'package:deehelp/core/theme/export_theme.dart';
-import 'package:deehelp/core/theme/size/layout_spacing_size.dart';
-import 'package:deehelp/core/theme/size/spacing_size.dart';
 import 'package:deehelp/core/ui/styles/app_text_style.dart';
 import 'package:deehelp/core/ui/widgets/cards/card_exports.dart';
 import 'package:deehelp/core/ui/widgets/cards/card_hint.dart';
 import 'package:deehelp/feature/items/item_type.dart';
 import 'package:deehelp/feature/items/register/item_data.dart';
-import 'package:deehelp/feature/items/register/widgets/card_page.dart';
-import 'package:deehelp/feature/items/register/widgets/brand-picker/brand_picker_field.dart';
-import 'package:deehelp/feature/items/register/widgets/color-picker/color_option.dart';
-import 'package:deehelp/feature/items/register/widgets/color-picker/color_picker_field.dart';
-import 'package:deehelp/feature/items/register/widgets/imei/ime_card.dart';
-import 'package:deehelp/feature/items/register/widgets/observation_card_field.dart';
-import 'package:deehelp/feature/items/register/widgets/section_title.dart';
-import 'package:deehelp/feature/items/register/widgets/simple_text_field.dart';
-import 'package:deehelp/feature/items/register/widgets/wizard_step.dart';
-import 'package:deehelp/feature/items/register/widgets/year-picker/year_picker_field.dart';
-import 'package:deehelp/feature/items/register/widgets/year-picker/year_bottom_sheet.dart';
+import 'package:deehelp/feature/items/register/presentation/widgets/card_page.dart';
+import 'package:deehelp/feature/items/register/presentation/widgets/brand-picker/brand_picker_field.dart';
+import 'package:deehelp/feature/items/register/presentation/widgets/color-picker/color_option.dart';
+import 'package:deehelp/feature/items/register/presentation/widgets/color-picker/color_picker_field.dart';
+import 'package:deehelp/feature/items/register/presentation/widgets/imei/ime_card.dart';
+import 'package:deehelp/feature/items/register/presentation/widgets/observation_card_field.dart';
+import 'package:deehelp/feature/items/register/presentation/widgets/section_title.dart';
+import 'package:deehelp/feature/items/register/presentation/widgets/simple_text_field.dart';
+import 'package:deehelp/feature/items/register/presentation/widgets/wizard_step.dart';
+import 'package:deehelp/feature/items/register/presentation/widgets/year-picker/year_picker_field.dart';
+import 'package:deehelp/feature/items/register/presentation/widgets/year-picker/year_bottom_sheet.dart';
+import 'package:deehelp/feature/items/register/viewmodel/register_item_viewmodel.dart';
+import 'package:deehelp/module/item/di/item_viewmodel_provider.dart';
 import 'package:deehelp/old_core/utils/url_launcher_utils.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-class ItemRegisterInfomation extends StatefulWidget {
-  final VoidCallback press;
-  const ItemRegisterInfomation({super.key, required this.press});
+class ItemRegisterInfomation extends ConsumerStatefulWidget {
+  const ItemRegisterInfomation({super.key});
 
   @override
-  State<ItemRegisterInfomation> createState() => _ItemRegisterInfomationState();
+  ConsumerState<ItemRegisterInfomation> createState() =>
+      _ItemRegisterInfomationState();
 }
 
-class _ItemRegisterInfomationState extends State<ItemRegisterInfomation> {
-  final ItemType type = ItemType.phone;
-
-  bool get isVehicle => type == ItemType.car || type == ItemType.moto;
-
-  final nameCtrl = TextEditingController();
-  final brandCtrl = TextEditingController();
-  final colorCtrl = TextEditingController();
+class _ItemRegisterInfomationState
+    extends ConsumerState<ItemRegisterInfomation> {
   final yearCtrl = TextEditingController();
-  final plateCtrl = TextEditingController();
-  final notesCtrl = TextEditingController();
   final imeiCtrl = TextEditingController();
 
   @override
   void dispose() {
-    nameCtrl.dispose();
-    brandCtrl.dispose();
-    colorCtrl.dispose();
     yearCtrl.dispose();
-    plateCtrl.dispose();
-    notesCtrl.dispose();
     imeiCtrl.dispose();
     super.dispose();
   }
@@ -70,7 +58,7 @@ class _ItemRegisterInfomationState extends State<ItemRegisterInfomation> {
     );
   }
 
-  Future<void> pasteImeiFromClipboard() async {
+  Future<void> pasteImeiFromClipboard(RegisterItemViewmodel viewModel) async {
     final data = await Clipboard.getData('text/plain');
     final raw = (data?.text ?? '').trim();
     final digits = raw.replaceAll(RegExp(r'[^0-9]'), '');
@@ -79,6 +67,8 @@ class _ItemRegisterInfomationState extends State<ItemRegisterInfomation> {
       return;
     }
 
+    final digit = digits.length > 15 ? digits.substring(0, 15) : digits;
+    viewModel.onImeiChange(digit);
     imeiCtrl.text = digits.length > 15 ? digits.substring(0, 15) : digits;
   }
 
@@ -88,6 +78,9 @@ class _ItemRegisterInfomationState extends State<ItemRegisterInfomation> {
 
   @override
   Widget build(BuildContext context) {
+    final state = ref.watch(registerItemViewModelProvider);
+    final viewModel = ref.watch(registerItemViewModelProvider.notifier);
+
     return ListView(
       padding: const EdgeInsets.fromLTRB(16, 16, 16, 110),
       children: [
@@ -105,23 +98,22 @@ class _ItemRegisterInfomationState extends State<ItemRegisterInfomation> {
               children: [
                 SimpleTextField(
                   icon: Icons.badge_outlined,
-                  label: type == ItemType.phone ? 'Modelo/Nome' : 'Nome',
-                  hint: type == ItemType.phone
+                  label: state.type == ItemType.phone ? 'Modelo/Nome' : 'Nome',
+                  hint: state.type == ItemType.phone
                       ? 'Ex: iPhone 13'
                       : 'Ex: CG Titan 150',
-                  controller: TextEditingController(),
+                  error: state.errorModel,
+                  onChanged: (value) => viewModel.onModelChange(value),
                 ),
                 const SizedBox(height: SpacingSize.md),
                 BrandPickerField(
-                  controller: brandCtrl,
-                  options: getItemTypes(type),
-                  onSelected: (v) {
-                    setState(() => brandCtrl.text = v);
-                  },
+                  value: state.brand ?? "Selecionar marca",
+                  options: getItemTypes(state.type),
+                  onSelected: (brand) => viewModel.onBrandChange(brand),
                 ),
                 const SizedBox(height: SpacingSize.md),
                 ColorPickerField(
-                  controller: colorCtrl,
+                  value: state.color ?? "Selecionar cor",
                   options: const [
                     ColorOption('Preto', Color(0xFF1F2A44)),
                     ColorOption('Branco', Color(0xFFFFFFFF),
@@ -136,47 +128,57 @@ class _ItemRegisterInfomationState extends State<ItemRegisterInfomation> {
                     ColorOption('Marrom', Color(0xFF6D4C41)),
                     ColorOption('Roxo', Color(0xFF8E24AA)),
                   ],
-                  onSelected: (opt) =>
-                      setState(() => colorCtrl.text = opt.name),
+                  onSelected: (opt) {
+                    viewModel.onColorChange(opt.name);
+                  },
                 ),
-                if (isVehicle) ...[
+                if (state.type != ItemType.phone) ...[
                   const SizedBox(height: SpacingSize.md),
                   YearPickerField(
                     label: 'Ano',
-                    value: yearCtrl.text.isEmpty ? 'Selecionar' : yearCtrl.text,
+                    value: state.year == null
+                        ? 'Selecionar ano'
+                        : state.year.toString(),
                     icon: Icons.calendar_month_outlined,
                     onTap: () async {
                       final year = await _pickYear(context, yearCtrl.text);
-                      if (year != null) setState(() => yearCtrl.text = '$year');
+                      if (year != null) {
+                        viewModel.onYearChange('$year');
+                      }
                     },
                   ),
                   const SizedBox(height: SpacingSize.md),
                   SimpleTextField(
                     label: 'Placa',
                     hint: 'Ex: ABC1D23',
-                    controller: plateCtrl,
                     icon: Icons.confirmation_number_outlined,
                     maxLen: 7,
                     toUpperCase: true,
+                    error: state.errorLicencePlate,
+                    onChanged: (value) => viewModel.onLicencePlateChange(value),
                   ),
                 ],
               ],
             ),
           ),
         ),
-        if (type == ItemType.phone) ...[
+        if (state.type == ItemType.phone) ...[
           const SizedBox(height: SpacingSize.xl),
           const SectionTitle('IMEI'),
           ImeiCard(
             controller: imeiCtrl,
+            error: state.errorLicencePlate,
+            onChanged: (value) => viewModel.onImeiChange(value),
             onScan: () => UrlLauncherUtils.makePhoneCall(''),
-            onPaste: () => pasteImeiFromClipboard(),
+            onPaste: () => pasteImeiFromClipboard(viewModel),
             onClear: () => setState(() => imeiCtrl.clear()),
           ),
         ],
         const SizedBox(height: SpacingSize.xl),
         const SectionTitle('Observação'),
-        ObservationCardField(controller: notesCtrl),
+        ObservationCardField(
+          onChanged: (v) => viewModel.onObsChange(v),
+        ),
         const SizedBox(height: SpacingSize.xl),
         CardHint(
           backgroundColor: AppColors.green.withValues(alpha: 0.12),

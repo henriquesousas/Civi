@@ -1,3 +1,4 @@
+import 'package:deehelp/feature/items/item_type.dart';
 import 'package:deehelp/old_core/resources.dart';
 import 'package:deehelp/old_core/ui/theme/app_colors.dart';
 import 'package:deehelp/old_core/ui/theme/app_text_styles.dart';
@@ -5,7 +6,7 @@ import 'package:deehelp/old_core/ui/theme/dimens.dart';
 import 'package:deehelp/old_core/ui/widgets/button/ui_elevated_button.dart';
 import 'package:deehelp/old_core/ui/widgets/card/ui_custom_scaffold.dart';
 import 'package:deehelp/module/item/di/item_viewmodel_provider.dart';
-import 'package:deehelp/old_features/products/presentation/views/add/state/add_product_state.dart';
+import 'package:deehelp/feature/items/register/viewmodel/add_product_state.dart';
 import 'package:deehelp/old_features/products/presentation/views/add/widget/product_type_card.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -20,8 +21,8 @@ class StepSelectProductType extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final state = ref.watch(addItemViewModelProvider);
-    final viewModel = ref.read(addItemViewModelProvider.notifier);
+    final state = ref.watch(registerItemViewModelProvider);
+    final viewModel = ref.read(registerItemViewModelProvider.notifier);
 
     return UICustomScaffold(
       hideAppBar: true,
@@ -57,8 +58,8 @@ class StepSelectProductType extends ConsumerWidget {
                     title: "Automóvel",
                     description: "Carro, caminhão",
                     imageSrc: R.svg.car,
-                    isSelected: state.productType == ProductType.car,
-                    press: () => viewModel.selectProductType(ProductType.car),
+                    isSelected: state.type == ItemType.car,
+                    press: () => viewModel.selectProductType(ItemType.car),
                   ),
                   const SizedBox(height: 5),
                   ProductTypeCard(
@@ -66,9 +67,8 @@ class StepSelectProductType extends ConsumerWidget {
                     description:
                         "Motocicleta convencional, Motocicleta elétrica,Biz, etc...)",
                     imageSrc: R.svg.motorcycle,
-                    isSelected: state.productType == ProductType.motorcycle,
-                    press: () =>
-                        viewModel.selectProductType(ProductType.motorcycle),
+                    isSelected: state.type == ItemType.moto,
+                    press: () => viewModel.selectProductType(ItemType.moto),
                   ),
                   SizedBox(height: Dimens.size20.w),
                   _buildTextInfo(context),

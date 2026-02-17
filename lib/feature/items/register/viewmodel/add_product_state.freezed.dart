@@ -15,7 +15,7 @@ T _$identity<T>(T value) => value;
 /// @nodoc
 mixin _$AddProductState {
   int get currentStep;
-  ProductType get productType;
+  ItemType get type;
   bool get hasProductTypeSelected; // Step 1
   String? get model;
   String? get errorModel;
@@ -31,6 +31,7 @@ mixin _$AddProductState {
   bool get stepAddPhotoValid;
   bool get isLoading;
   bool get isSuccess;
+  bool get isValidateApi;
   String? get errorMessage;
 
   /// Create a copy of AddProductState
@@ -48,8 +49,7 @@ mixin _$AddProductState {
             other is AddProductState &&
             (identical(other.currentStep, currentStep) ||
                 other.currentStep == currentStep) &&
-            (identical(other.productType, productType) ||
-                other.productType == productType) &&
+            (identical(other.type, type) || other.type == type) &&
             (identical(other.hasProductTypeSelected, hasProductTypeSelected) ||
                 other.hasProductTypeSelected == hasProductTypeSelected) &&
             (identical(other.model, model) || other.model == model) &&
@@ -77,35 +77,39 @@ mixin _$AddProductState {
                 other.isLoading == isLoading) &&
             (identical(other.isSuccess, isSuccess) ||
                 other.isSuccess == isSuccess) &&
+            (identical(other.isValidateApi, isValidateApi) ||
+                other.isValidateApi == isValidateApi) &&
             (identical(other.errorMessage, errorMessage) ||
                 other.errorMessage == errorMessage));
   }
 
   @override
-  int get hashCode => Object.hash(
-      runtimeType,
-      currentStep,
-      productType,
-      hasProductTypeSelected,
-      model,
-      errorModel,
-      licencePlate,
-      errorLicencePlate,
-      year,
-      errorYear,
-      brand,
-      color,
-      stepAddProductInfoDetailValid,
-      obs,
-      const DeepCollectionEquality().hash(imageMedia),
-      stepAddPhotoValid,
-      isLoading,
-      isSuccess,
-      errorMessage);
+  int get hashCode => Object.hashAll([
+        runtimeType,
+        currentStep,
+        type,
+        hasProductTypeSelected,
+        model,
+        errorModel,
+        licencePlate,
+        errorLicencePlate,
+        year,
+        errorYear,
+        brand,
+        color,
+        stepAddProductInfoDetailValid,
+        obs,
+        const DeepCollectionEquality().hash(imageMedia),
+        stepAddPhotoValid,
+        isLoading,
+        isSuccess,
+        isValidateApi,
+        errorMessage
+      ]);
 
   @override
   String toString() {
-    return 'AddProductState(currentStep: $currentStep, productType: $productType, hasProductTypeSelected: $hasProductTypeSelected, model: $model, errorModel: $errorModel, licencePlate: $licencePlate, errorLicencePlate: $errorLicencePlate, year: $year, errorYear: $errorYear, brand: $brand, color: $color, stepAddProductInfoDetailValid: $stepAddProductInfoDetailValid, obs: $obs, imageMedia: $imageMedia, stepAddPhotoValid: $stepAddPhotoValid, isLoading: $isLoading, isSuccess: $isSuccess, errorMessage: $errorMessage)';
+    return 'AddProductState(currentStep: $currentStep, type: $type, hasProductTypeSelected: $hasProductTypeSelected, model: $model, errorModel: $errorModel, licencePlate: $licencePlate, errorLicencePlate: $errorLicencePlate, year: $year, errorYear: $errorYear, brand: $brand, color: $color, stepAddProductInfoDetailValid: $stepAddProductInfoDetailValid, obs: $obs, imageMedia: $imageMedia, stepAddPhotoValid: $stepAddPhotoValid, isLoading: $isLoading, isSuccess: $isSuccess, isValidateApi: $isValidateApi, errorMessage: $errorMessage)';
   }
 }
 
@@ -117,7 +121,7 @@ abstract mixin class $AddProductStateCopyWith<$Res> {
   @useResult
   $Res call(
       {int currentStep,
-      ProductType productType,
+      ItemType type,
       bool hasProductTypeSelected,
       String? model,
       String? errorModel,
@@ -133,6 +137,7 @@ abstract mixin class $AddProductStateCopyWith<$Res> {
       bool stepAddPhotoValid,
       bool isLoading,
       bool isSuccess,
+      bool isValidateApi,
       String? errorMessage});
 }
 
@@ -150,7 +155,7 @@ class _$AddProductStateCopyWithImpl<$Res>
   @override
   $Res call({
     Object? currentStep = null,
-    Object? productType = null,
+    Object? type = null,
     Object? hasProductTypeSelected = null,
     Object? model = freezed,
     Object? errorModel = freezed,
@@ -166,6 +171,7 @@ class _$AddProductStateCopyWithImpl<$Res>
     Object? stepAddPhotoValid = null,
     Object? isLoading = null,
     Object? isSuccess = null,
+    Object? isValidateApi = null,
     Object? errorMessage = freezed,
   }) {
     return _then(_self.copyWith(
@@ -173,10 +179,10 @@ class _$AddProductStateCopyWithImpl<$Res>
           ? _self.currentStep
           : currentStep // ignore: cast_nullable_to_non_nullable
               as int,
-      productType: null == productType
-          ? _self.productType
-          : productType // ignore: cast_nullable_to_non_nullable
-              as ProductType,
+      type: null == type
+          ? _self.type
+          : type // ignore: cast_nullable_to_non_nullable
+              as ItemType,
       hasProductTypeSelected: null == hasProductTypeSelected
           ? _self.hasProductTypeSelected
           : hasProductTypeSelected // ignore: cast_nullable_to_non_nullable
@@ -236,6 +242,10 @@ class _$AddProductStateCopyWithImpl<$Res>
       isSuccess: null == isSuccess
           ? _self.isSuccess
           : isSuccess // ignore: cast_nullable_to_non_nullable
+              as bool,
+      isValidateApi: null == isValidateApi
+          ? _self.isValidateApi
+          : isValidateApi // ignore: cast_nullable_to_non_nullable
               as bool,
       errorMessage: freezed == errorMessage
           ? _self.errorMessage
@@ -340,7 +350,7 @@ extension AddProductStatePatterns on AddProductState {
   TResult maybeWhen<TResult extends Object?>(
     TResult Function(
             int currentStep,
-            ProductType productType,
+            ItemType type,
             bool hasProductTypeSelected,
             String? model,
             String? errorModel,
@@ -356,6 +366,7 @@ extension AddProductStatePatterns on AddProductState {
             bool stepAddPhotoValid,
             bool isLoading,
             bool isSuccess,
+            bool isValidateApi,
             String? errorMessage)?
         $default, {
     required TResult orElse(),
@@ -365,7 +376,7 @@ extension AddProductStatePatterns on AddProductState {
       case _AddProductState() when $default != null:
         return $default(
             _that.currentStep,
-            _that.productType,
+            _that.type,
             _that.hasProductTypeSelected,
             _that.model,
             _that.errorModel,
@@ -381,6 +392,7 @@ extension AddProductStatePatterns on AddProductState {
             _that.stepAddPhotoValid,
             _that.isLoading,
             _that.isSuccess,
+            _that.isValidateApi,
             _that.errorMessage);
       case _:
         return orElse();
@@ -404,7 +416,7 @@ extension AddProductStatePatterns on AddProductState {
   TResult when<TResult extends Object?>(
     TResult Function(
             int currentStep,
-            ProductType productType,
+            ItemType type,
             bool hasProductTypeSelected,
             String? model,
             String? errorModel,
@@ -420,6 +432,7 @@ extension AddProductStatePatterns on AddProductState {
             bool stepAddPhotoValid,
             bool isLoading,
             bool isSuccess,
+            bool isValidateApi,
             String? errorMessage)
         $default,
   ) {
@@ -428,7 +441,7 @@ extension AddProductStatePatterns on AddProductState {
       case _AddProductState():
         return $default(
             _that.currentStep,
-            _that.productType,
+            _that.type,
             _that.hasProductTypeSelected,
             _that.model,
             _that.errorModel,
@@ -444,6 +457,7 @@ extension AddProductStatePatterns on AddProductState {
             _that.stepAddPhotoValid,
             _that.isLoading,
             _that.isSuccess,
+            _that.isValidateApi,
             _that.errorMessage);
       case _:
         throw StateError('Unexpected subclass');
@@ -466,7 +480,7 @@ extension AddProductStatePatterns on AddProductState {
   TResult? whenOrNull<TResult extends Object?>(
     TResult? Function(
             int currentStep,
-            ProductType productType,
+            ItemType type,
             bool hasProductTypeSelected,
             String? model,
             String? errorModel,
@@ -482,6 +496,7 @@ extension AddProductStatePatterns on AddProductState {
             bool stepAddPhotoValid,
             bool isLoading,
             bool isSuccess,
+            bool isValidateApi,
             String? errorMessage)?
         $default,
   ) {
@@ -490,7 +505,7 @@ extension AddProductStatePatterns on AddProductState {
       case _AddProductState() when $default != null:
         return $default(
             _that.currentStep,
-            _that.productType,
+            _that.type,
             _that.hasProductTypeSelected,
             _that.model,
             _that.errorModel,
@@ -506,6 +521,7 @@ extension AddProductStatePatterns on AddProductState {
             _that.stepAddPhotoValid,
             _that.isLoading,
             _that.isSuccess,
+            _that.isValidateApi,
             _that.errorMessage);
       case _:
         return null;
@@ -518,7 +534,7 @@ extension AddProductStatePatterns on AddProductState {
 class _AddProductState implements AddProductState {
   const _AddProductState(
       {this.currentStep = 0,
-      this.productType = ProductType.none,
+      this.type = ItemType.none,
       this.hasProductTypeSelected = false,
       this.model,
       this.errorModel,
@@ -534,6 +550,7 @@ class _AddProductState implements AddProductState {
       this.stepAddPhotoValid = false,
       this.isLoading = false,
       this.isSuccess = false,
+      this.isValidateApi = false,
       this.errorMessage})
       : _imageMedia = imageMedia;
 
@@ -542,7 +559,7 @@ class _AddProductState implements AddProductState {
   final int currentStep;
   @override
   @JsonKey()
-  final ProductType productType;
+  final ItemType type;
   @override
   @JsonKey()
   final bool hasProductTypeSelected;
@@ -589,6 +606,9 @@ class _AddProductState implements AddProductState {
   @JsonKey()
   final bool isSuccess;
   @override
+  @JsonKey()
+  final bool isValidateApi;
+  @override
   final String? errorMessage;
 
   /// Create a copy of AddProductState
@@ -606,8 +626,7 @@ class _AddProductState implements AddProductState {
             other is _AddProductState &&
             (identical(other.currentStep, currentStep) ||
                 other.currentStep == currentStep) &&
-            (identical(other.productType, productType) ||
-                other.productType == productType) &&
+            (identical(other.type, type) || other.type == type) &&
             (identical(other.hasProductTypeSelected, hasProductTypeSelected) ||
                 other.hasProductTypeSelected == hasProductTypeSelected) &&
             (identical(other.model, model) || other.model == model) &&
@@ -635,35 +654,39 @@ class _AddProductState implements AddProductState {
                 other.isLoading == isLoading) &&
             (identical(other.isSuccess, isSuccess) ||
                 other.isSuccess == isSuccess) &&
+            (identical(other.isValidateApi, isValidateApi) ||
+                other.isValidateApi == isValidateApi) &&
             (identical(other.errorMessage, errorMessage) ||
                 other.errorMessage == errorMessage));
   }
 
   @override
-  int get hashCode => Object.hash(
-      runtimeType,
-      currentStep,
-      productType,
-      hasProductTypeSelected,
-      model,
-      errorModel,
-      licencePlate,
-      errorLicencePlate,
-      year,
-      errorYear,
-      brand,
-      color,
-      stepAddProductInfoDetailValid,
-      obs,
-      const DeepCollectionEquality().hash(_imageMedia),
-      stepAddPhotoValid,
-      isLoading,
-      isSuccess,
-      errorMessage);
+  int get hashCode => Object.hashAll([
+        runtimeType,
+        currentStep,
+        type,
+        hasProductTypeSelected,
+        model,
+        errorModel,
+        licencePlate,
+        errorLicencePlate,
+        year,
+        errorYear,
+        brand,
+        color,
+        stepAddProductInfoDetailValid,
+        obs,
+        const DeepCollectionEquality().hash(_imageMedia),
+        stepAddPhotoValid,
+        isLoading,
+        isSuccess,
+        isValidateApi,
+        errorMessage
+      ]);
 
   @override
   String toString() {
-    return 'AddProductState(currentStep: $currentStep, productType: $productType, hasProductTypeSelected: $hasProductTypeSelected, model: $model, errorModel: $errorModel, licencePlate: $licencePlate, errorLicencePlate: $errorLicencePlate, year: $year, errorYear: $errorYear, brand: $brand, color: $color, stepAddProductInfoDetailValid: $stepAddProductInfoDetailValid, obs: $obs, imageMedia: $imageMedia, stepAddPhotoValid: $stepAddPhotoValid, isLoading: $isLoading, isSuccess: $isSuccess, errorMessage: $errorMessage)';
+    return 'AddProductState(currentStep: $currentStep, type: $type, hasProductTypeSelected: $hasProductTypeSelected, model: $model, errorModel: $errorModel, licencePlate: $licencePlate, errorLicencePlate: $errorLicencePlate, year: $year, errorYear: $errorYear, brand: $brand, color: $color, stepAddProductInfoDetailValid: $stepAddProductInfoDetailValid, obs: $obs, imageMedia: $imageMedia, stepAddPhotoValid: $stepAddPhotoValid, isLoading: $isLoading, isSuccess: $isSuccess, isValidateApi: $isValidateApi, errorMessage: $errorMessage)';
   }
 }
 
@@ -677,7 +700,7 @@ abstract mixin class _$AddProductStateCopyWith<$Res>
   @useResult
   $Res call(
       {int currentStep,
-      ProductType productType,
+      ItemType type,
       bool hasProductTypeSelected,
       String? model,
       String? errorModel,
@@ -693,6 +716,7 @@ abstract mixin class _$AddProductStateCopyWith<$Res>
       bool stepAddPhotoValid,
       bool isLoading,
       bool isSuccess,
+      bool isValidateApi,
       String? errorMessage});
 }
 
@@ -710,7 +734,7 @@ class __$AddProductStateCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   $Res call({
     Object? currentStep = null,
-    Object? productType = null,
+    Object? type = null,
     Object? hasProductTypeSelected = null,
     Object? model = freezed,
     Object? errorModel = freezed,
@@ -726,6 +750,7 @@ class __$AddProductStateCopyWithImpl<$Res>
     Object? stepAddPhotoValid = null,
     Object? isLoading = null,
     Object? isSuccess = null,
+    Object? isValidateApi = null,
     Object? errorMessage = freezed,
   }) {
     return _then(_AddProductState(
@@ -733,10 +758,10 @@ class __$AddProductStateCopyWithImpl<$Res>
           ? _self.currentStep
           : currentStep // ignore: cast_nullable_to_non_nullable
               as int,
-      productType: null == productType
-          ? _self.productType
-          : productType // ignore: cast_nullable_to_non_nullable
-              as ProductType,
+      type: null == type
+          ? _self.type
+          : type // ignore: cast_nullable_to_non_nullable
+              as ItemType,
       hasProductTypeSelected: null == hasProductTypeSelected
           ? _self.hasProductTypeSelected
           : hasProductTypeSelected // ignore: cast_nullable_to_non_nullable
@@ -796,6 +821,10 @@ class __$AddProductStateCopyWithImpl<$Res>
       isSuccess: null == isSuccess
           ? _self.isSuccess
           : isSuccess // ignore: cast_nullable_to_non_nullable
+              as bool,
+      isValidateApi: null == isValidateApi
+          ? _self.isValidateApi
+          : isValidateApi // ignore: cast_nullable_to_non_nullable
               as bool,
       errorMessage: freezed == errorMessage
           ? _self.errorMessage

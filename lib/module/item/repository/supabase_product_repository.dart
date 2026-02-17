@@ -6,6 +6,7 @@ import 'package:deehelp/module/item/domain/exceptions/delete_product_failure.dar
 import 'package:deehelp/module/item/domain/product_repository.dart';
 import 'package:deehelp/module/item/repository/image_media_model.dart';
 import 'package:deehelp/module/item/repository/product_model.dart';
+import 'package:flutter/material.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
 class SupabaseProductRepository implements ProductRepository {
@@ -42,6 +43,21 @@ class SupabaseProductRepository implements ProductRepository {
     return data.isNotEmpty
         ? data.map((el) => ProductModel.fromMap(el)).toList()
         : [];
+  }
+
+  @override
+  Future<Product?> getByCode(String code) async {
+    try {
+      final data = await _supabaseClient
+          .from(product)
+          .select("*,product_images (*)")
+          .eq("code", code)
+          .single();
+
+      return ProductModel.fromMap(data);
+    } catch (e) {
+      return null;
+    }
   }
 
   @override
