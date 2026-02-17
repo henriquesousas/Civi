@@ -6,7 +6,6 @@ import 'package:deehelp/module/item/domain/exceptions/delete_product_failure.dar
 import 'package:deehelp/module/item/domain/product_repository.dart';
 import 'package:deehelp/module/item/repository/image_media_model.dart';
 import 'package:deehelp/module/item/repository/product_model.dart';
-import 'package:flutter/material.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
 class SupabaseProductRepository implements ProductRepository {
