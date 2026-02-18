@@ -12,8 +12,8 @@ class Header extends StatelessWidget {
     return Row(
       children: [
         Container(
-          width: ImageSize.sm,
-          height: ImageSize.sm,
+          width: ImageSize.xs,
+          height: ImageSize.xs,
           decoration: BoxDecoration(
             color: context.primaryColor,
             borderRadius: BorderRadius.circular(RadiusSize.md),

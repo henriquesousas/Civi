@@ -61,8 +61,8 @@ class _ProfileImageWithUploadButtonWidgetState
               ),
               child: widget.imageUrl == null
                   ? RandomColorAvatar(
-                      width: ImageSize.sm,
-                      height: ImageSize.sm,
+                      width: ImageSize.xs,
+                      height: ImageSize.xs,
                       name: widget.imageAlt,
                     )
                   : Skeleton.replace(

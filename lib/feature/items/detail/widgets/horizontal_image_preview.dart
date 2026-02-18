@@ -1,9 +1,11 @@
 import 'package:deehelp/core/extension/exports_extension.dart';
 import 'package:deehelp/core/theme/export_theme.dart';
+import 'package:deehelp/core/ui/widgets/image/custom_network_image.dart';
+import 'package:deehelp/module/item/domain/entities/image_media.dart';
 import 'package:flutter/material.dart';
 
 class HorizontalImagePreview extends StatelessWidget {
-  final List<ImageProvider> photos;
+  final List<ImageMedia> photos;
   final Function(int) press;
   final int selectedIndex;
   const HorizontalImagePreview(
@@ -40,13 +42,19 @@ class HorizontalImagePreview extends StatelessWidget {
                   width: selected ? 1.6 : 1,
                 ),
               ),
-              child: ClipRRect(
-                borderRadius: BorderRadius.circular(RadiusSize.md),
-                child: AspectRatio(
-                  aspectRatio: 1,
-                  child: Image(image: photos[i], fit: BoxFit.cover),
-                ),
+              child: CustomNetworkImage(
+                width: ImageSize.sm,
+                radius: RadiusSize.md,
+                imageUrl: photos[i].value,
+                boxFit: BoxFit.cover,
               ),
+              // child: ClipRRect(
+              //   borderRadius: BorderRadius.circular(RadiusSize.md),
+              //   child: AspectRatio(
+              //     aspectRatio: 1,
+              //     child: Image(image: photos[i].value, fit: BoxFit.cover),
+              //   ),
+              // ),
             ),
           );
         },

@@ -1,6 +1,5 @@
 import 'package:deehelp/core/theme/export_theme.dart';
 import 'package:deehelp/core/ui/widgets/appbar/default_app_bar.dart';
-import 'package:deehelp/core/ui/widgets/badge/export_badge.dart';
 import 'package:deehelp/core/ui/widgets/image/export_image.dart';
 import 'package:deehelp/feature/items/detail/widgets/danger_zone.dart';
 import 'package:deehelp/feature/items/detail/widgets/editable_field_tile.dart';
@@ -9,11 +8,14 @@ import 'package:deehelp/feature/items/detail/widgets/photos_gallery_card.dart';
 import 'package:deehelp/feature/items/register/presentation/widgets/card_page.dart';
 import 'package:deehelp/feature/items/register/presentation/widgets/section_title.dart';
 import 'package:deehelp/feature/items/soft_divider.dart';
+import 'package:deehelp/module/item/domain/entities/image_media.dart';
+import 'package:deehelp/module/item/domain/entities/product.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
 class ItemDetailPage extends StatefulWidget {
-  const ItemDetailPage({super.key});
+  final Product item;
+  const ItemDetailPage({super.key, required this.item});
 
   @override
   State<ItemDetailPage> createState() => _ItemDetailPageState();
@@ -23,28 +25,9 @@ class _ItemDetailPageState extends State<ItemDetailPage> {
   int selectedPhoto = 0;
   final _pageCtrl = PageController();
 
-  String name = 'CG Titan 150';
-  String brand = 'Honda';
-  String color = 'Vermelha';
-  String year = '2020';
-  String plate = 'ABC1D23';
-  String notes =
-      'Placa final 7. Adesivo no paralama traseiro. Pequeno risco no tanque.';
-
-  ItemStatus status = ItemStatus.active;
-
-  final List<ImageProvider> photos = const [
-    NetworkImage(
-        'https://images.usadosbr.com/manipulatedImages/media/gallery/08/7e/24/citroen-c3-1-5-tendance-2014-ribeirao-preto-sp-e6b4cb57-w4--0-image-760x570-crop.webp'),
-    NetworkImage(
-        'https://s3-sa-east-1.amazonaws.com/revresources/araujo-automoveis/imagens_veiculos/640_480_folhacar_citroen-c3-tendance-1-5-8v-flex-13-14-b76032-38.jpg'),
-    NetworkImage(
-        'https://images.usadosbr.com/manipulatedImages/media/gallery/c6/94/8e/citroen-c3-1-5-tendance-2015-sao-paulo-sp-51331c5a-rB--1-image-760x570-crop.webp'),
-  ];
-
   Future<void> _openPhotoViewer(
     BuildContext context,
-    List<ImageProvider> photos,
+    List<ImageMedia> photos,
     int initialIndex,
   ) async {
     await showDialog(
@@ -68,7 +51,7 @@ class _ItemDetailPageState extends State<ItemDetailPage> {
         padding: const EdgeInsets.fromLTRB(16, 16, 16, 24),
         children: [
           PhotosGalleryCard(
-            photos: photos,
+            photos: widget.item.images,
             selectedIndex: selectedPhoto,
             onIndexChanged: (i) {
               if (!mounted) return;
@@ -80,13 +63,13 @@ class _ItemDetailPageState extends State<ItemDetailPage> {
               });
             },
             controller: _pageCtrl,
-            onOpenZoom: (i) => _openPhotoViewer(context, photos, i),
+            onOpenZoom: (i) => _openPhotoViewer(context, widget.item.images, i),
           ),
           const SizedBox(height: SpacingSize.lg),
           HeaderCard(
-            title: name,
+            title: widget.item.name,
             subtitle: 'Toque nos campos para editar',
-            status: status,
+            status: widget.item.status,
           ),
           const SizedBox(height: SpacingSize.lg),
           const SectionTitle('Informações do item'),
@@ -96,7 +79,7 @@ class _ItemDetailPageState extends State<ItemDetailPage> {
                 EditableFieldTile(
                   icon: Icons.badge_outlined,
                   label: 'Nome',
-                  value: name,
+                  value: widget.item.name,
                   onEdit: () {},
                   // onEdit: () => _editText(
                   //   context,
@@ -111,7 +94,7 @@ class _ItemDetailPageState extends State<ItemDetailPage> {
                 EditableFieldTile(
                   icon: Icons.branding_watermark_outlined,
                   label: 'Marca',
-                  value: brand, onEdit: () {},
+                  value: widget.item.brand, onEdit: () {},
                   // onEdit: () => _editText(
                   //   context,
                   //   title: 'Editar marca',
@@ -125,7 +108,7 @@ class _ItemDetailPageState extends State<ItemDetailPage> {
                 EditableFieldTile(
                   icon: Icons.color_lens_outlined,
                   label: 'Cor',
-                  value: color,
+                  value: widget.item.color,
                   onEdit: () {},
                   // onEdit: () => _editText(
                   //   context,
@@ -140,7 +123,7 @@ class _ItemDetailPageState extends State<ItemDetailPage> {
                 EditableFieldTile(
                   icon: Icons.calendar_month_outlined,
                   label: 'Ano',
-                  value: year, onEdit: () {},
+                  value: "${widget.item.year}", onEdit: () {},
                   // onEdit: () => _editText(
                   //   context,
                   //   title: 'Editar ano',
@@ -159,7 +142,7 @@ class _ItemDetailPageState extends State<ItemDetailPage> {
                 EditableFieldTile(
                   icon: Icons.confirmation_number_outlined,
                   label: 'Placa',
-                  value: plate,
+                  value: widget.item.code,
                   onEdit: () {},
                   // onEdit: () => _editText(
                   //   context,
@@ -180,7 +163,7 @@ class _ItemDetailPageState extends State<ItemDetailPage> {
             child: EditableFieldTile(
               icon: Icons.notes_outlined,
               label: 'Descrição (até 300 caracteres)',
-              value: notes,
+              value: widget.item.obs ?? '',
               minHeight: 150,
               maxLines: 10,
               onEdit: () {}, // 👈 mostra mais conteúdo antes do "..."

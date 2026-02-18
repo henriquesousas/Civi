@@ -27,7 +27,12 @@ class ItemListView extends StatelessWidget {
             padding: const EdgeInsets.only(bottom: 12),
             child: RowItemCard(
               item: it,
-              onTap: () => context.push(ItemsRouter.detail),
+              onTap: () async {
+                await context.push<Map<String, dynamic>?>(
+                  ItemsRouter.detail,
+                  extra: it,
+                );
+              },
             ),
           ),
         ),

@@ -1,8 +1,10 @@
 import 'package:deehelp/core/theme/export_theme.dart';
+import 'package:deehelp/core/ui/widgets/image/custom_network_image.dart';
+import 'package:deehelp/module/item/domain/entities/image_media.dart';
 import 'package:flutter/material.dart';
 
 class ImageViewDialog extends StatefulWidget {
-  final List<ImageProvider> photos;
+  final List<ImageMedia> photos;
   final int initialIndex;
 
   const ImageViewDialog({
@@ -46,8 +48,9 @@ class _ImageViewDialogState extends State<ImageViewDialog> {
               return InteractiveViewer(
                 minScale: 1.0,
                 maxScale: 4.0,
-                child: Center(
-                  child: Image(image: widget.photos[i], fit: BoxFit.contain),
+                child: CustomNetworkImage(
+                  imageUrl: widget.photos[i].value,
+                  boxFit: BoxFit.contain,
                 ),
               );
             },

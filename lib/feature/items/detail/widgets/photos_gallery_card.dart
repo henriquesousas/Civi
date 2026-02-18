@@ -1,13 +1,15 @@
 import 'package:deehelp/core/theme/export_theme.dart';
 import 'package:deehelp/core/ui/styles/app_text_style.dart';
 import 'package:deehelp/core/ui/widgets/badge/badge_text.dart';
+import 'package:deehelp/core/ui/widgets/image/custom_network_image.dart';
 import 'package:deehelp/feature/items/detail/widgets/card_text_zoom.dart';
 import 'package:deehelp/feature/items/detail/widgets/empty_photos.dart';
 import 'package:deehelp/feature/items/detail/widgets/horizontal_image_preview.dart';
+import 'package:deehelp/module/item/domain/entities/image_media.dart';
 import 'package:flutter/material.dart';
 
 class PhotosGalleryCard extends StatelessWidget {
-  final List<ImageProvider> photos;
+  final List<ImageMedia> photos;
   final int selectedIndex;
   final ValueChanged<int> onIndexChanged;
   final PageController controller;
@@ -72,14 +74,15 @@ class PhotosGalleryCard extends StatelessWidget {
                             itemBuilder: (_, i) {
                               return GestureDetector(
                                 onTap: () => onOpenZoom(i),
-                                // child: CustomNetworkImage(imageUrl: photos[i]),
-                                child: Container(
-                                  color: const Color(0xFFF5F7FD),
-                                  child: Image(
-                                    image: photos[i],
-                                    fit: BoxFit.cover,
-                                  ),
-                                ),
+                                child: CustomNetworkImage(
+                                    imageUrl: photos[i].value),
+                                // child: Container(
+                                //   color: const Color(0xFFF5F7FD),
+                                //   child: Image(
+                                //     image: photos[i],
+                                //     fit: BoxFit.cover,
+                                //   ),
+                                // ),
                               );
                             },
                           ),

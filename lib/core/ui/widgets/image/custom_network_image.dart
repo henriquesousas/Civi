@@ -42,8 +42,8 @@ class CustomNetworkImage extends StatelessWidget {
         imageUrl: imageUrl,
         color: color,
         imageBuilder: (context, imageProvider) => Container(
-          height: height ?? ImageSize.sm,
-          width: width ?? ImageSize.sm,
+          height: height ?? ImageSize.xs,
+          width: width ?? ImageSize.xs,
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(radius ?? RadiusSize.xs),
             image: DecorationImage(
@@ -63,8 +63,8 @@ class CustomNetworkImage extends StatelessWidget {
 
   Widget _buildPlaceholderWidget() {
     return Container(
-      height: height ?? ImageSize.sm,
-      width: width ?? ImageSize.sm,
+      height: height ?? ImageSize.xs,
+      width: width ?? ImageSize.xs,
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(RadiusSize.xs),
         color: AppColors.grey.withValues(alpha: 0.2),

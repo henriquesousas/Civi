@@ -126,8 +126,8 @@ class _Header extends StatelessWidget {
       children: [
         // fake logo mark
         Container(
-          width: ImageSize.sm,
-          height: ImageSize.sm,
+          width: ImageSize.xs,
+          height: ImageSize.xs,
           decoration: BoxDecoration(
             color: _primary,
             borderRadius: BorderRadius.circular(14),
