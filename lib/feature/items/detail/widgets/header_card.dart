@@ -1,4 +1,3 @@
-import 'package:deehelp/core/extension/color_extension.dart';
 import 'package:deehelp/core/theme/export_theme.dart';
 import 'package:deehelp/core/ui/styles/export_style.dart';
 import 'package:deehelp/core/ui/widgets/badge/export_badge.dart';
@@ -19,7 +18,7 @@ class HeaderCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final style = StatusStyle.from(status);
+    // final style = StatusStyle.from(status);
 
     return Container(
       padding: const EdgeInsets.all(LayoutSpacingSize.container),
@@ -59,36 +58,7 @@ class HeaderCard extends StatelessWidget {
                       ),
                     ),
                     const SizedBox(width: RadiusSize.md),
-                    InkWell(
-                      onTap: () {},
-                      borderRadius: BorderRadius.circular(RadiusSize.xxxl),
-                      child: Container(
-                        padding: const EdgeInsets.symmetric(
-                          horizontal: SpacingSize.xs,
-                          vertical: SpacingSize.xs,
-                        ),
-                        decoration: BoxDecoration(
-                          color: style.bg,
-                          borderRadius: BorderRadius.circular(RadiusSize.xxxl),
-                          border: Border.all(color: style.border),
-                        ),
-                        child: Row(
-                          mainAxisSize: MainAxisSize.min,
-                          children: [
-                            Icon(style.icon,
-                                size: IconSizes.sm, color: style.fg),
-                            const SizedBox(width: RadiusSize.xs),
-                            Text(
-                              style.label,
-                              style: context.appText.caption.copyWith(
-                                fontWeight: FontWeight.w800,
-                                color: context.primaryColor,
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-                    ),
+                    StatusBadge(style: StatusStyle.from(status)),
                   ],
                 ),
                 Text(

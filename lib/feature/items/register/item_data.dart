@@ -35,6 +35,7 @@ final motorcycleData = [
   'Suzuki',
   'Triumph',
   'Yamaha',
+  'Honda',
 ];
 
 final phoneData = [
@@ -47,7 +48,7 @@ final phoneData = [
   'LG',
 ];
 
-List<String> getItemTypes(ItemType type) {
+List<String> getData(ItemType type) {
   if (type == ItemType.car) return vehicleData;
   if (type == ItemType.moto) return motorcycleData;
   return phoneData;

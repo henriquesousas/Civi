@@ -9,8 +9,8 @@ import 'package:deehelp/module/item/domain/usecases/delete/delete_image_usecase.
 import 'package:deehelp/module/item/domain/usecases/delete/delete_product_usecase.dart';
 import 'package:deehelp/module/item/domain/usecases/delete/dtos/delete_image_dto.dart';
 import 'package:deehelp/module/item/domain/usecases/update/update_product_usecase.dart';
-import 'package:deehelp/old_features/products/presentation/views/update/product_update_manager.dart';
-import 'package:deehelp/old_features/products/presentation/views/update/state/product_update_state.dart';
+import 'package:deehelp/feature/items/detail/viewmodel/item_update_manager.dart';
+import 'package:deehelp/feature/items/detail/viewmodel/product_update_state.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 class UpdateProductViewmodel extends StateNotifier<ProductUpdateState> {
@@ -167,14 +167,14 @@ class UpdateProductViewmodel extends StateNotifier<ProductUpdateState> {
   }
 
   void onValueChange(
-    ProductField field,
+    ItemField field,
     String value, {
     bool executeUpdate = false,
   }) {
-    final _updateManager = ProductUpdateManager();
+    final updateManager = ItemUpdateManager();
     if (state.currentProduct == null) return;
 
-    final error = _updateManager.validateField(field, value);
+    final error = updateManager.validateField(field, value);
 
     state = state.copyWith(
       updateValue: value,
@@ -183,7 +183,7 @@ class UpdateProductViewmodel extends StateNotifier<ProductUpdateState> {
     );
 
     if (error == null) {
-      _product = _updateManager.updateField(
+      _product = updateManager.updateField(
         product: state.currentProduct!,
         field: field,
         value: value,

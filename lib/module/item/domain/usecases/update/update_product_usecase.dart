@@ -1,3 +1,4 @@
+import 'package:deehelp/core/errors/failure.dart';
 import 'package:deehelp/old_core/base/use_case.dart';
 import 'package:deehelp/old_core/utils/result.dart';
 import 'package:deehelp/old_core/utils/unit.dart';
@@ -12,6 +13,15 @@ class UpdateProductUseCase extends UseCase<Product, Unit> {
 
   @override
   Future<Result<Unit>> execute(Product product) async {
+    // final productResult = await _repository.getByCode(product.code);
+    // if (productResult != null) {
+    //   return Result.failure(
+    //     ItemAlreadyExistException.from(
+    //       EnumUtils.fromString(ItemType.values, product.type),
+    //       product.code,
+    //     ),
+    //   );
+    // }
     await _repository.update(product);
     return Result.success(const Unit());
   }

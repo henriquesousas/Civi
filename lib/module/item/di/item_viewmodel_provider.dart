@@ -3,7 +3,7 @@ import 'package:deehelp/feature/items/register/viewmodel/add_product_state.dart'
 import 'package:deehelp/feature/items/list/item_list_viewmodel.dart';
 import 'package:deehelp/module/item/di/product_usecase_provider.dart';
 import 'package:deehelp/feature/items/list/item_list_state.dart';
-import 'package:deehelp/old_features/products/presentation/views/update/state/product_update_state.dart';
+import 'package:deehelp/feature/items/detail/viewmodel/product_update_state.dart';
 import 'package:deehelp/old_features/products/presentation/views/update/update_product_viewmodel.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';

@@ -108,7 +108,7 @@ class _ItemRegisterInfomationState
                 const SizedBox(height: SpacingSize.md),
                 BrandPickerField(
                   value: state.brand ?? "Selecionar marca",
-                  options: getItemTypes(state.type),
+                  options: getData(state.type),
                   onSelected: (brand) => viewModel.onBrandChange(brand),
                 ),
                 const SizedBox(height: SpacingSize.md),

@@ -1,7 +1,7 @@
 import 'package:deehelp/old_core/ui/widgets/bottom_sheet/custom_modal_bottom_sheet.dart';
 import 'package:deehelp/module/item/di/item_viewmodel_provider.dart';
-import 'package:deehelp/old_features/products/presentation/views/update/product_update_manager.dart';
-import 'package:deehelp/old_features/products/presentation/views/update/state/product_update_state.dart';
+import 'package:deehelp/feature/items/detail/viewmodel/item_update_manager.dart';
+import 'package:deehelp/feature/items/detail/viewmodel/product_update_state.dart';
 import 'package:deehelp/old_features/products/presentation/views/update/widgets/brand_section.dart';
 import 'package:deehelp/old_features/products/presentation/views/update/widgets/detail_section.dart';
 import 'package:deehelp/old_features/products/presentation/views/update/widgets/edit_field_modal.dart';
@@ -34,7 +34,7 @@ class ProductForm extends ConsumerWidget {
               description: description,
               examples: examples,
               onChange: (value) =>
-                  viewModel.onValueChange(ProductField.model, value),
+                  viewModel.onValueChange(ItemField.model, value),
               onModalClose: () => viewModel.restart(),
             ),
           ),
@@ -47,7 +47,7 @@ class ProductForm extends ConsumerWidget {
               examples: examples,
               isObs: true,
               onChange: (value) =>
-                  viewModel.onValueChange(ProductField.obs, value),
+                  viewModel.onValueChange(ItemField.obs, value),
               initialValue: state.currentProduct!.obs,
               onModalClose: () => viewModel.restart(),
             ),

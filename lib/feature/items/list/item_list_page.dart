@@ -2,6 +2,7 @@ import 'package:deehelp/core/extension/color_extension.dart';
 import 'package:deehelp/core/theme/export_theme.dart';
 import 'package:deehelp/core/ui/widgets/appbar/default_app_bar.dart';
 import 'package:deehelp/core/ui/widgets/buttons/buttons_export.dart';
+import 'package:deehelp/feature/items/detail/provider/selected_item_provider.dart';
 import 'package:deehelp/feature/items/items_router.dart';
 import 'package:deehelp/feature/items/list/item_list_state.dart';
 import 'package:deehelp/feature/items/list/widgets/item_list_shimmer.dart';
@@ -40,7 +41,19 @@ class _ItemListPageState extends ConsumerState<ItemListPage> {
         press: () => context.pop(),
       ),
       body: state.maybeMap(
-        success: (value) => ItemListView(items: value.items),
+        success: (value) => ItemListView(
+          items: value.items,
+          press: (item) async {
+            ref.watch(selectedItemProvider.notifier).state = item;
+            await context.push<Map<String, dynamic>?>(
+              ItemsRouter.detail,
+              extra: item,
+            );
+
+            final current = ref.watch(selectedItemProvider.notifier).state;
+            ref.watch(itemListViewmodelProvider.notifier).refresh(current!);
+          },
+        ),
         loading: (_) => const ItemListShimmer(),
         orElse: () => Padding(
           padding: const EdgeInsets.all(8.0),

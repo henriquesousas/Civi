@@ -1,3 +1,5 @@
+import 'package:deehelp/feature/items/detail/edit_args.dart';
+import 'package:deehelp/feature/items/detail/item_edit_field_page.dart';
 import 'package:deehelp/feature/items/detail/item_detail_page.dart';
 import 'package:deehelp/feature/items/list/item_list_page.dart';
 import 'package:deehelp/feature/items/register/presentation/item_register_page_view.dart';
@@ -10,6 +12,7 @@ class ItemsRouter {
   static const String list = '/list';
   static const String register = '/register';
   static const String detail = '/detail';
+  static const String detailField = '/detail-field';
   static const String success = '/success';
   ItemsRouter._();
 
@@ -31,10 +34,21 @@ class ItemsRouter {
         GoRoute(
           path: detail,
           pageBuilder: (context, state) {
-            final Product? product = state.extra as Product?;
             return slideTransitionPage(
               key: state.pageKey,
-              child: ItemDetailPage(item: product!),
+              child: const ItemDetailPage(),
+            );
+          },
+        ),
+        GoRoute(
+          path: detailField,
+          pageBuilder: (context, state) {
+            final EditFieldArgs args = state.extra as EditFieldArgs;
+            return slideTransitionPage(
+              key: state.pageKey,
+              child: ItemEditFieldPage(
+                args: args,
+              ),
             );
           },
         ),

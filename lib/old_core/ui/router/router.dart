@@ -43,6 +43,7 @@ import 'package:deehelp/test_page3.dart';
 import 'package:deehelp/test_page4.dart';
 import 'package:deehelp/test_page40.dart';
 import 'package:deehelp/test_page5.dart';
+import 'package:deehelp/test_page5_1.dart';
 import 'package:deehelp/test_page6.dart';
 import 'package:deehelp/test_page7.dart';
 import 'package:deehelp/test_page8.dart';
@@ -126,7 +127,7 @@ var goRouterProvider = Provider<GoRouter>(
             key: state.pageKey,
 
             //Home
-            child: const TestPage(),
+            // child: const TestPage(),
             //SOS
             // child: const TesteSOSPage(),
             //GPS
@@ -141,6 +142,16 @@ var goRouterProvider = Provider<GoRouter>(
             // child: const TestPage40(),
             // Detalhes do item
             // child: TestPage5(),
+            // child: TestPage5(),
+            child: TestPage5_1(
+              args: EditFieldArgs(
+                title: "Marca",
+                label: "marca",
+                hint: "marca",
+                initialValue: "Motorola",
+                maxLen: 10,
+              ),
+            ),
             // Item cadastrado sucesso
             // child: TestPage6(),
             // child: AddProductSuccessPage()

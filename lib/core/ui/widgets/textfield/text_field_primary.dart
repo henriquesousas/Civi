@@ -43,6 +43,7 @@ class TextFieldPrimary extends StatelessWidget {
         }
       },
       decoration: InputDecoration(
+          counterText: '',
           errorText: error,
           counterStyle: TextStyle(color: context.secondaryColor),
           labelText: labelText,

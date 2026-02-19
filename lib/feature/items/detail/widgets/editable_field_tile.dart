@@ -9,18 +9,20 @@ class EditableFieldTile extends StatelessWidget {
   final IconData icon;
   final String label;
   final String value;
-  final VoidCallback onEdit;
+  final VoidCallback? onEdit;
   final double? minHeight;
   final int? maxLines;
+  final bool isLoading;
 
   const EditableFieldTile({
     super.key,
     required this.icon,
     required this.label,
     required this.value,
-    required this.onEdit,
+    this.onEdit,
     this.minHeight,
     this.maxLines,
+    this.isLoading = false,
   });
 
   @override
@@ -37,7 +39,8 @@ class EditableFieldTile extends StatelessWidget {
             vertical: SpacingSize.md,
           ),
           child: Row(
-            crossAxisAlignment: CrossAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            mainAxisAlignment: MainAxisAlignment.center,
             children: [
               ItemHighticon(iconData: icon),
               const SizedBox(width: SpacingSize.md),
@@ -60,6 +63,9 @@ class EditableFieldTile extends StatelessWidget {
                       overflow: TextOverflow.ellipsis,
                       style: context.appText.bodymd.copyWith(
                         fontWeight: FontWeight.w700,
+                        color: onEdit != null
+                            ? context.onSurface
+                            : context.onSurface.withValues(alpha: 0.5),
                         height: 1.35,
                       ),
                     ),
@@ -67,13 +73,25 @@ class EditableFieldTile extends StatelessWidget {
                 ),
               ),
               const SizedBox(width: SpacingSize.xs),
-              HighlightIcon(
-                icon: Icon(
-                  Icons.edit_outlined,
-                  color: context.primaryColor,
-                  size: IconSizes.sm,
-                ),
-              ),
+              if (onEdit != null) ...[
+                if (isLoading)
+                  const Padding(
+                    padding: EdgeInsets.symmetric(horizontal: SpacingSize.md),
+                    child: SizedBox(
+                      width: SpacingSize.lg,
+                      height: SpacingSize.lg,
+                      child: CircularProgressIndicator(),
+                    ),
+                  ),
+                if (!isLoading)
+                  HighlightIcon(
+                    icon: Icon(
+                      Icons.edit_outlined,
+                      color: context.primaryColor,
+                      size: IconSizes.sm,
+                    ),
+                  ),
+              ],
             ],
           ),
         ),
