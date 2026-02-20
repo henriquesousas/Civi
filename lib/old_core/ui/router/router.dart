@@ -49,7 +49,11 @@ import 'package:deehelp/test_page7.dart';
 import 'package:deehelp/test_page8.dart';
 import 'package:deehelp/test_page9.dart';
 import 'package:deehelp/test_page_dark.dart';
+import 'package:deehelp/teste_home.dart';
+import 'package:deehelp/teste_incident_loading.dart';
+import 'package:deehelp/teste_page_contato.dart';
 import 'package:deehelp/teste_page_login.dart';
+import 'package:deehelp/teste_sheel_page.dart';
 import 'package:deehelp/teste_sos_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -90,7 +94,7 @@ var goRouterProvider = Provider<GoRouter>(
         final appStatus = ref.read(appStartupProvider);
         final currentPath = state.matchedLocation;
         final isPublicRoute = _publicRoutes.contains(currentPath);
-        // return '/';
+        return '/';
         // return AuthRouter.path;
         switch (appStatus) {
           case AppStatus.loading:
@@ -143,15 +147,15 @@ var goRouterProvider = Provider<GoRouter>(
             // Detalhes do item
             // child: TestPage5(),
             // child: TestPage5(),
-            child: TestPage5_1(
-              args: EditFieldArgs(
-                title: "Marca",
-                label: "marca",
-                hint: "marca",
-                initialValue: "Motorola",
-                maxLen: 10,
-              ),
-            ),
+            // child: TestPage5_1(
+            //   args: EditFieldArgs(
+            //     title: "Marca",
+            //     label: "marca",
+            //     hint: "marca",
+            //     initialValue: "Motorola",
+            //     maxLen: 10,
+            //   ),
+            // ),
             // Item cadastrado sucesso
             // child: TestPage6(),
             // child: AddProductSuccessPage()
@@ -174,6 +178,10 @@ var goRouterProvider = Provider<GoRouter>(
             // ),
             // child: const TestPageDark(),
             // child: const MapPage(),
+            // child: TestePageContato(),
+            // child: TesteHome(),
+            // child: TesteShellPage(),
+            child: TesteIncidentLoading(),
           ),
         ),
         GoRoute(
