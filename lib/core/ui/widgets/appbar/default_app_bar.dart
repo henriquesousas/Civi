@@ -7,6 +7,7 @@ class DefaultAppBar extends StatelessWidget implements PreferredSizeWidget {
   final Widget? leading;
   final VoidCallback press;
   final bool showBackButton;
+  final List<Widget>? actions;
 
   const DefaultAppBar({
     super.key,
@@ -14,6 +15,7 @@ class DefaultAppBar extends StatelessWidget implements PreferredSizeWidget {
     required this.press,
     this.leading,
     this.showBackButton = true,
+    this.actions,
   });
 
   @override
@@ -35,6 +37,7 @@ class DefaultAppBar extends StatelessWidget implements PreferredSizeWidget {
         title,
         style: context.appText.headerlg,
       ),
+      actions: actions,
     );
   }
 

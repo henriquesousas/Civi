@@ -1,8 +1,8 @@
+import 'package:deehelp/feature/items/detail/provider/selected_item_provider.dart';
 import 'package:deehelp/old_core/handlers/handle_command.dart';
 import 'package:deehelp/old_core/handlers/handler_error.dart';
 import 'package:deehelp/old_core/utils/unit.dart';
 import 'package:deehelp/module/item/domain/entities/image_media.dart';
-import 'package:deehelp/module/item/domain/entities/product.dart';
 import 'package:deehelp/module/item/domain/usecases/add/dtos/add_image_dto.dart';
 import 'package:deehelp/module/item/domain/usecases/add/add_image_usecase.dart';
 import 'package:deehelp/module/item/domain/usecases/delete/delete_image_usecase.dart';
@@ -18,18 +18,26 @@ class ItemUpdateViewmodel extends StateNotifier<ProductUpdateState> {
   final DeleteImageUsecase _deleteImageUsecase;
   final AddImageUsecase _addImageUsecase;
   final DeleteProductUsecase _deleteProductUsecase;
-  // Product? _product;
+  final Ref ref;
+  final String productId;
+
   ItemUpdateViewmodel({
     required UpdateProductUseCase updateProductUseCase,
     required DeleteImageUsecase deleteImageUsecase,
     required AddImageUsecase addImageUsecase,
     required DeleteProductUsecase deleteProductUsecase,
-    required Product product,
+    required this.productId,
+    required this.ref,
   })  : _updateProductUseCase = updateProductUseCase,
         _deleteImageUsecase = deleteImageUsecase,
         _addImageUsecase = addImageUsecase,
         _deleteProductUsecase = deleteProductUsecase,
-        super(ProductUpdateState.setup(product));
+        super(ProductUpdateState.initial()) {
+    final selected = ref.read(selectedItemProvider);
+    if (selected != null && selected.id.value == productId) {
+      state = state.copyWith(currentProduct: selected);
+    }
+  }
 
   void restart() {
     state = state.copyWith(
@@ -48,7 +56,7 @@ class ItemUpdateViewmodel extends StateNotifier<ProductUpdateState> {
     );
   }
 
-  void updatreProduct() async {
+  void updatreProduct({ItemField? field}) async {
     if (!state.hasChangeSomeField) return;
     if (state.currentProduct == null) return;
 
@@ -56,11 +64,20 @@ class ItemUpdateViewmodel extends StateNotifier<ProductUpdateState> {
       updateState: (newState) => state = newState,
       command: () => _updateProductUseCase.execute(state.currentProduct!),
       onLoading: () => state.copyWith(
-          isLoading: true, errorMessage: null, errorValidation: null),
+        isLoading: true,
+        errorMessage: null,
+        errorValidation: null,
+        yearUpdateLoad: field == ItemField.year,
+        brandUpdateLoad: field == ItemField.brand,
+        colorUpdateLoad: field == ItemField.color,
+      ),
       onSuccess: (_) {
         return state.copyWith(
           isLoading: false,
           isSuccess: true,
+          yearUpdateLoad: false,
+          brandUpdateLoad: false,
+          colorUpdateLoad: false,
           currentProduct: state.currentProduct!,
           successMessage: "Produto alterado com sucesso",
         );
@@ -72,6 +89,9 @@ class ItemUpdateViewmodel extends StateNotifier<ProductUpdateState> {
             return state.copyWith(
               errorMessage: message,
               isLoading: false,
+              yearUpdateLoad: false,
+              brandUpdateLoad: false,
+              colorUpdateLoad: false,
             );
           },
         );
@@ -92,7 +112,7 @@ class ItemUpdateViewmodel extends StateNotifier<ProductUpdateState> {
       onSuccess: (_) {
         return state.copyWith(
           deletingProduct: false,
-          isSuccess: true,
+          deleteSuccess: true,
           currentProduct: state.currentProduct!,
           successMessage: "Produto removido com sucesso",
         );
@@ -112,28 +132,47 @@ class ItemUpdateViewmodel extends StateNotifier<ProductUpdateState> {
   }
 
   void deletePhoto(int index) async {
-    if (state.currentProduct == null) return;
+    final product = state.currentProduct;
+    if (product == null) return;
+
+    if (index < 0 || index >= product.images.length) return;
+
     final dto = DeleteImageDto(
-      productId: state.currentProduct!.id,
-      image: state.currentProduct!.images[index],
+      productId: product.id,
+      image: product.images[index],
     );
+
     await HandleCommand.execute<Unit, ProductUpdateState>(
       updateState: (newState) => state = newState,
       command: () => _deleteImageUsecase.execute(dto),
       onLoading: () => state.copyWith(
         errorMessage: null,
+        errorUploadOrDeleteImage: null,
+        deleteImageSuccess: false,
+        isLoading: true,
+        currentProduct: state.currentProduct,
+        removeImageIndex: index,
       ),
       onSuccess: (_) {
-        state.currentProduct!.removeImage(index);
+        final current = state.currentProduct ?? product;
+        final updated = current.removeImage(index);
         return state.copyWith(
-          currentProduct: state.currentProduct!,
+          currentProduct: updated,
+          deleteImageSuccess: true,
+          isLoading: false,
+          removeImageIndex: -1,
         );
       },
       onError: (error) {
         return handleError<ProductUpdateState>(
           error,
           (message, extra) {
-            return state.copyWith(errorMessage: message);
+            return state.copyWith(
+              errorUploadOrDeleteImage: message,
+              deleteImageSuccess: false,
+              isLoading: false,
+              removeImageIndex: -1,
+            );
           },
         );
       },
@@ -145,7 +184,11 @@ class ItemUpdateViewmodel extends StateNotifier<ProductUpdateState> {
     await HandleCommand.execute<List<ImageMedia>, ProductUpdateState>(
       updateState: (newState) => state = newState,
       command: () => _addImageUsecase.execute(dto),
-      onLoading: () => state.copyWith(addingPhoto: true, errorMessage: null),
+      onLoading: () => state.copyWith(
+        addingPhoto: true,
+        errorMessage: null,
+        errorUploadOrDeleteImage: null,
+      ),
       onSuccess: (currentImages) {
         state.currentProduct!.images = currentImages;
         return state.copyWith(
@@ -159,6 +202,7 @@ class ItemUpdateViewmodel extends StateNotifier<ProductUpdateState> {
           (message, extra) {
             return state.copyWith(
               errorMessage: message,
+              errorUploadOrDeleteImage: message,
               addingPhoto: false,
             );
           },
@@ -204,12 +248,7 @@ class ItemUpdateViewmodel extends StateNotifier<ProductUpdateState> {
     }
 
     if (executeUpdate) {
-      updatreProduct();
+      updatreProduct(field: field);
     }
   }
-
-  // void modalConfirm() {
-  //   if (state.currentProduct == null) return;
-  //   state = state.copyWith(currentProduct: _product);
-  // }
 }

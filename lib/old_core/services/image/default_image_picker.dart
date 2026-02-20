@@ -3,6 +3,7 @@ import 'package:deehelp/old_core/utils/image_utils.dart';
 import 'package:deehelp/old_core/services/image/image_compress.dart';
 import 'package:deehelp/old_core/utils/result.dart';
 import 'package:deehelp/module/item/domain/entities/image_media.dart';
+import 'package:flutter/foundation.dart';
 import 'package:image_picker/image_picker.dart';
 
 class DefaultImagePicker {
@@ -15,13 +16,18 @@ class DefaultImagePicker {
   Future<Result<ImageMedia>> pickImageFromGallery() async {
     try {
       final XFile? file = await _picker.pickImage(source: ImageSource.gallery);
-      if (file == null) return Result.failure(const ImagePickerFailure());
+      // if (file == null) return Result.failure(const ImagePickerFailure());
+      if (file == null) {
+        return Result.failure(const ImagePickerFailure(canceled: true));
+      }
 
       String? mimeType = ImageUtils.getMimetype(file);
 
       if (mimeType == null) {
         return Result.failure(
-          const ImagePickerFailure(message: "Arquivo não suportado"),
+          const ImagePickerFailure(
+            message: "Arquivo não suportado",
+          ),
         );
       }
 
@@ -40,6 +46,7 @@ class DefaultImagePicker {
       );
       return Result.success(imageMeda);
     } catch (e) {
+      debugPrint("Error DefaultImagePicker ${e.toString()}");
       return Result.failure(const ImagePickerFailure());
     }
   }

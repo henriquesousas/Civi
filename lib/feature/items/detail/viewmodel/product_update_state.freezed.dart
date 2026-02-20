@@ -15,14 +15,21 @@ T _$identity<T>(T value) => value;
 /// @nodoc
 mixin _$ProductUpdateState {
   bool get isLoading;
+  bool get yearUpdateLoad;
+  bool get brandUpdateLoad;
+  bool get colorUpdateLoad;
   bool get addingPhoto;
   bool get deletingProduct;
   bool get isSuccess;
+  bool get deleteSuccess;
+  bool get deleteImageSuccess;
+  int get removeImageIndex;
   Product? get currentProduct;
   String? get updateValue;
   String? get errorValidation;
   String? get errorMessage;
   String? get successMessage;
+  String? get errorUploadOrDeleteImage;
   dynamic get hasChangeSomeField;
 
   /// Create a copy of ProductUpdateState
@@ -40,12 +47,24 @@ mixin _$ProductUpdateState {
             other is ProductUpdateState &&
             (identical(other.isLoading, isLoading) ||
                 other.isLoading == isLoading) &&
+            (identical(other.yearUpdateLoad, yearUpdateLoad) ||
+                other.yearUpdateLoad == yearUpdateLoad) &&
+            (identical(other.brandUpdateLoad, brandUpdateLoad) ||
+                other.brandUpdateLoad == brandUpdateLoad) &&
+            (identical(other.colorUpdateLoad, colorUpdateLoad) ||
+                other.colorUpdateLoad == colorUpdateLoad) &&
             (identical(other.addingPhoto, addingPhoto) ||
                 other.addingPhoto == addingPhoto) &&
             (identical(other.deletingProduct, deletingProduct) ||
                 other.deletingProduct == deletingProduct) &&
             (identical(other.isSuccess, isSuccess) ||
                 other.isSuccess == isSuccess) &&
+            (identical(other.deleteSuccess, deleteSuccess) ||
+                other.deleteSuccess == deleteSuccess) &&
+            (identical(other.deleteImageSuccess, deleteImageSuccess) ||
+                other.deleteImageSuccess == deleteImageSuccess) &&
+            (identical(other.removeImageIndex, removeImageIndex) ||
+                other.removeImageIndex == removeImageIndex) &&
             (identical(other.currentProduct, currentProduct) ||
                 other.currentProduct == currentProduct) &&
             (identical(other.updateValue, updateValue) ||
@@ -56,6 +75,9 @@ mixin _$ProductUpdateState {
                 other.errorMessage == errorMessage) &&
             (identical(other.successMessage, successMessage) ||
                 other.successMessage == successMessage) &&
+            (identical(
+                    other.errorUploadOrDeleteImage, errorUploadOrDeleteImage) ||
+                other.errorUploadOrDeleteImage == errorUploadOrDeleteImage) &&
             const DeepCollectionEquality()
                 .equals(other.hasChangeSomeField, hasChangeSomeField));
   }
@@ -64,19 +86,26 @@ mixin _$ProductUpdateState {
   int get hashCode => Object.hash(
       runtimeType,
       isLoading,
+      yearUpdateLoad,
+      brandUpdateLoad,
+      colorUpdateLoad,
       addingPhoto,
       deletingProduct,
       isSuccess,
+      deleteSuccess,
+      deleteImageSuccess,
+      removeImageIndex,
       currentProduct,
       updateValue,
       errorValidation,
       errorMessage,
       successMessage,
+      errorUploadOrDeleteImage,
       const DeepCollectionEquality().hash(hasChangeSomeField));
 
   @override
   String toString() {
-    return 'ProductUpdateState(isLoading: $isLoading, addingPhoto: $addingPhoto, deletingProduct: $deletingProduct, isSuccess: $isSuccess, currentProduct: $currentProduct, updateValue: $updateValue, errorValidation: $errorValidation, errorMessage: $errorMessage, successMessage: $successMessage, hasChangeSomeField: $hasChangeSomeField)';
+    return 'ProductUpdateState(isLoading: $isLoading, yearUpdateLoad: $yearUpdateLoad, brandUpdateLoad: $brandUpdateLoad, colorUpdateLoad: $colorUpdateLoad, addingPhoto: $addingPhoto, deletingProduct: $deletingProduct, isSuccess: $isSuccess, deleteSuccess: $deleteSuccess, deleteImageSuccess: $deleteImageSuccess, removeImageIndex: $removeImageIndex, currentProduct: $currentProduct, updateValue: $updateValue, errorValidation: $errorValidation, errorMessage: $errorMessage, successMessage: $successMessage, errorUploadOrDeleteImage: $errorUploadOrDeleteImage, hasChangeSomeField: $hasChangeSomeField)';
   }
 }
 
@@ -88,14 +117,21 @@ abstract mixin class $ProductUpdateStateCopyWith<$Res> {
   @useResult
   $Res call(
       {bool isLoading,
+      bool yearUpdateLoad,
+      bool brandUpdateLoad,
+      bool colorUpdateLoad,
       bool addingPhoto,
       bool deletingProduct,
       bool isSuccess,
+      bool deleteSuccess,
+      bool deleteImageSuccess,
+      int removeImageIndex,
       Product? currentProduct,
       String? updateValue,
       String? errorValidation,
       String? errorMessage,
       String? successMessage,
+      String? errorUploadOrDeleteImage,
       dynamic hasChangeSomeField});
 }
 
@@ -113,20 +149,39 @@ class _$ProductUpdateStateCopyWithImpl<$Res>
   @override
   $Res call({
     Object? isLoading = null,
+    Object? yearUpdateLoad = null,
+    Object? brandUpdateLoad = null,
+    Object? colorUpdateLoad = null,
     Object? addingPhoto = null,
     Object? deletingProduct = null,
     Object? isSuccess = null,
+    Object? deleteSuccess = null,
+    Object? deleteImageSuccess = null,
+    Object? removeImageIndex = null,
     Object? currentProduct = freezed,
     Object? updateValue = freezed,
     Object? errorValidation = freezed,
     Object? errorMessage = freezed,
     Object? successMessage = freezed,
+    Object? errorUploadOrDeleteImage = freezed,
     Object? hasChangeSomeField = freezed,
   }) {
     return _then(_self.copyWith(
       isLoading: null == isLoading
           ? _self.isLoading
           : isLoading // ignore: cast_nullable_to_non_nullable
+              as bool,
+      yearUpdateLoad: null == yearUpdateLoad
+          ? _self.yearUpdateLoad
+          : yearUpdateLoad // ignore: cast_nullable_to_non_nullable
+              as bool,
+      brandUpdateLoad: null == brandUpdateLoad
+          ? _self.brandUpdateLoad
+          : brandUpdateLoad // ignore: cast_nullable_to_non_nullable
+              as bool,
+      colorUpdateLoad: null == colorUpdateLoad
+          ? _self.colorUpdateLoad
+          : colorUpdateLoad // ignore: cast_nullable_to_non_nullable
               as bool,
       addingPhoto: null == addingPhoto
           ? _self.addingPhoto
@@ -140,6 +195,18 @@ class _$ProductUpdateStateCopyWithImpl<$Res>
           ? _self.isSuccess
           : isSuccess // ignore: cast_nullable_to_non_nullable
               as bool,
+      deleteSuccess: null == deleteSuccess
+          ? _self.deleteSuccess
+          : deleteSuccess // ignore: cast_nullable_to_non_nullable
+              as bool,
+      deleteImageSuccess: null == deleteImageSuccess
+          ? _self.deleteImageSuccess
+          : deleteImageSuccess // ignore: cast_nullable_to_non_nullable
+              as bool,
+      removeImageIndex: null == removeImageIndex
+          ? _self.removeImageIndex
+          : removeImageIndex // ignore: cast_nullable_to_non_nullable
+              as int,
       currentProduct: freezed == currentProduct
           ? _self.currentProduct
           : currentProduct // ignore: cast_nullable_to_non_nullable
@@ -159,6 +226,10 @@ class _$ProductUpdateStateCopyWithImpl<$Res>
       successMessage: freezed == successMessage
           ? _self.successMessage
           : successMessage // ignore: cast_nullable_to_non_nullable
+              as String?,
+      errorUploadOrDeleteImage: freezed == errorUploadOrDeleteImage
+          ? _self.errorUploadOrDeleteImage
+          : errorUploadOrDeleteImage // ignore: cast_nullable_to_non_nullable
               as String?,
       hasChangeSomeField: freezed == hasChangeSomeField
           ? _self.hasChangeSomeField
@@ -263,14 +334,21 @@ extension ProductUpdateStatePatterns on ProductUpdateState {
   TResult maybeWhen<TResult extends Object?>(
     TResult Function(
             bool isLoading,
+            bool yearUpdateLoad,
+            bool brandUpdateLoad,
+            bool colorUpdateLoad,
             bool addingPhoto,
             bool deletingProduct,
             bool isSuccess,
+            bool deleteSuccess,
+            bool deleteImageSuccess,
+            int removeImageIndex,
             Product? currentProduct,
             String? updateValue,
             String? errorValidation,
             String? errorMessage,
             String? successMessage,
+            String? errorUploadOrDeleteImage,
             dynamic hasChangeSomeField)?
         $default, {
     required TResult orElse(),
@@ -280,14 +358,21 @@ extension ProductUpdateStatePatterns on ProductUpdateState {
       case _ProductUpdateState() when $default != null:
         return $default(
             _that.isLoading,
+            _that.yearUpdateLoad,
+            _that.brandUpdateLoad,
+            _that.colorUpdateLoad,
             _that.addingPhoto,
             _that.deletingProduct,
             _that.isSuccess,
+            _that.deleteSuccess,
+            _that.deleteImageSuccess,
+            _that.removeImageIndex,
             _that.currentProduct,
             _that.updateValue,
             _that.errorValidation,
             _that.errorMessage,
             _that.successMessage,
+            _that.errorUploadOrDeleteImage,
             _that.hasChangeSomeField);
       case _:
         return orElse();
@@ -311,14 +396,21 @@ extension ProductUpdateStatePatterns on ProductUpdateState {
   TResult when<TResult extends Object?>(
     TResult Function(
             bool isLoading,
+            bool yearUpdateLoad,
+            bool brandUpdateLoad,
+            bool colorUpdateLoad,
             bool addingPhoto,
             bool deletingProduct,
             bool isSuccess,
+            bool deleteSuccess,
+            bool deleteImageSuccess,
+            int removeImageIndex,
             Product? currentProduct,
             String? updateValue,
             String? errorValidation,
             String? errorMessage,
             String? successMessage,
+            String? errorUploadOrDeleteImage,
             dynamic hasChangeSomeField)
         $default,
   ) {
@@ -327,14 +419,21 @@ extension ProductUpdateStatePatterns on ProductUpdateState {
       case _ProductUpdateState():
         return $default(
             _that.isLoading,
+            _that.yearUpdateLoad,
+            _that.brandUpdateLoad,
+            _that.colorUpdateLoad,
             _that.addingPhoto,
             _that.deletingProduct,
             _that.isSuccess,
+            _that.deleteSuccess,
+            _that.deleteImageSuccess,
+            _that.removeImageIndex,
             _that.currentProduct,
             _that.updateValue,
             _that.errorValidation,
             _that.errorMessage,
             _that.successMessage,
+            _that.errorUploadOrDeleteImage,
             _that.hasChangeSomeField);
       case _:
         throw StateError('Unexpected subclass');
@@ -357,14 +456,21 @@ extension ProductUpdateStatePatterns on ProductUpdateState {
   TResult? whenOrNull<TResult extends Object?>(
     TResult? Function(
             bool isLoading,
+            bool yearUpdateLoad,
+            bool brandUpdateLoad,
+            bool colorUpdateLoad,
             bool addingPhoto,
             bool deletingProduct,
             bool isSuccess,
+            bool deleteSuccess,
+            bool deleteImageSuccess,
+            int removeImageIndex,
             Product? currentProduct,
             String? updateValue,
             String? errorValidation,
             String? errorMessage,
             String? successMessage,
+            String? errorUploadOrDeleteImage,
             dynamic hasChangeSomeField)?
         $default,
   ) {
@@ -373,14 +479,21 @@ extension ProductUpdateStatePatterns on ProductUpdateState {
       case _ProductUpdateState() when $default != null:
         return $default(
             _that.isLoading,
+            _that.yearUpdateLoad,
+            _that.brandUpdateLoad,
+            _that.colorUpdateLoad,
             _that.addingPhoto,
             _that.deletingProduct,
             _that.isSuccess,
+            _that.deleteSuccess,
+            _that.deleteImageSuccess,
+            _that.removeImageIndex,
             _that.currentProduct,
             _that.updateValue,
             _that.errorValidation,
             _that.errorMessage,
             _that.successMessage,
+            _that.errorUploadOrDeleteImage,
             _that.hasChangeSomeField);
       case _:
         return null;
@@ -393,19 +506,35 @@ extension ProductUpdateStatePatterns on ProductUpdateState {
 class _ProductUpdateState implements ProductUpdateState {
   const _ProductUpdateState(
       {this.isLoading = false,
+      this.yearUpdateLoad = false,
+      this.brandUpdateLoad = false,
+      this.colorUpdateLoad = false,
       this.addingPhoto = false,
       this.deletingProduct = false,
       this.isSuccess = false,
+      this.deleteSuccess = false,
+      this.deleteImageSuccess = false,
+      this.removeImageIndex = -1,
       this.currentProduct,
       this.updateValue,
       this.errorValidation,
       this.errorMessage,
       this.successMessage,
+      this.errorUploadOrDeleteImage,
       this.hasChangeSomeField = false});
 
   @override
   @JsonKey()
   final bool isLoading;
+  @override
+  @JsonKey()
+  final bool yearUpdateLoad;
+  @override
+  @JsonKey()
+  final bool brandUpdateLoad;
+  @override
+  @JsonKey()
+  final bool colorUpdateLoad;
   @override
   @JsonKey()
   final bool addingPhoto;
@@ -416,6 +545,15 @@ class _ProductUpdateState implements ProductUpdateState {
   @JsonKey()
   final bool isSuccess;
   @override
+  @JsonKey()
+  final bool deleteSuccess;
+  @override
+  @JsonKey()
+  final bool deleteImageSuccess;
+  @override
+  @JsonKey()
+  final int removeImageIndex;
+  @override
   final Product? currentProduct;
   @override
   final String? updateValue;
@@ -425,6 +563,8 @@ class _ProductUpdateState implements ProductUpdateState {
   final String? errorMessage;
   @override
   final String? successMessage;
+  @override
+  final String? errorUploadOrDeleteImage;
   @override
   @JsonKey()
   final dynamic hasChangeSomeField;
@@ -444,12 +584,24 @@ class _ProductUpdateState implements ProductUpdateState {
             other is _ProductUpdateState &&
             (identical(other.isLoading, isLoading) ||
                 other.isLoading == isLoading) &&
+            (identical(other.yearUpdateLoad, yearUpdateLoad) ||
+                other.yearUpdateLoad == yearUpdateLoad) &&
+            (identical(other.brandUpdateLoad, brandUpdateLoad) ||
+                other.brandUpdateLoad == brandUpdateLoad) &&
+            (identical(other.colorUpdateLoad, colorUpdateLoad) ||
+                other.colorUpdateLoad == colorUpdateLoad) &&
             (identical(other.addingPhoto, addingPhoto) ||
                 other.addingPhoto == addingPhoto) &&
             (identical(other.deletingProduct, deletingProduct) ||
                 other.deletingProduct == deletingProduct) &&
             (identical(other.isSuccess, isSuccess) ||
                 other.isSuccess == isSuccess) &&
+            (identical(other.deleteSuccess, deleteSuccess) ||
+                other.deleteSuccess == deleteSuccess) &&
+            (identical(other.deleteImageSuccess, deleteImageSuccess) ||
+                other.deleteImageSuccess == deleteImageSuccess) &&
+            (identical(other.removeImageIndex, removeImageIndex) ||
+                other.removeImageIndex == removeImageIndex) &&
             (identical(other.currentProduct, currentProduct) ||
                 other.currentProduct == currentProduct) &&
             (identical(other.updateValue, updateValue) ||
@@ -460,6 +612,9 @@ class _ProductUpdateState implements ProductUpdateState {
                 other.errorMessage == errorMessage) &&
             (identical(other.successMessage, successMessage) ||
                 other.successMessage == successMessage) &&
+            (identical(
+                    other.errorUploadOrDeleteImage, errorUploadOrDeleteImage) ||
+                other.errorUploadOrDeleteImage == errorUploadOrDeleteImage) &&
             const DeepCollectionEquality()
                 .equals(other.hasChangeSomeField, hasChangeSomeField));
   }
@@ -468,19 +623,26 @@ class _ProductUpdateState implements ProductUpdateState {
   int get hashCode => Object.hash(
       runtimeType,
       isLoading,
+      yearUpdateLoad,
+      brandUpdateLoad,
+      colorUpdateLoad,
       addingPhoto,
       deletingProduct,
       isSuccess,
+      deleteSuccess,
+      deleteImageSuccess,
+      removeImageIndex,
       currentProduct,
       updateValue,
       errorValidation,
       errorMessage,
       successMessage,
+      errorUploadOrDeleteImage,
       const DeepCollectionEquality().hash(hasChangeSomeField));
 
   @override
   String toString() {
-    return 'ProductUpdateState(isLoading: $isLoading, addingPhoto: $addingPhoto, deletingProduct: $deletingProduct, isSuccess: $isSuccess, currentProduct: $currentProduct, updateValue: $updateValue, errorValidation: $errorValidation, errorMessage: $errorMessage, successMessage: $successMessage, hasChangeSomeField: $hasChangeSomeField)';
+    return 'ProductUpdateState(isLoading: $isLoading, yearUpdateLoad: $yearUpdateLoad, brandUpdateLoad: $brandUpdateLoad, colorUpdateLoad: $colorUpdateLoad, addingPhoto: $addingPhoto, deletingProduct: $deletingProduct, isSuccess: $isSuccess, deleteSuccess: $deleteSuccess, deleteImageSuccess: $deleteImageSuccess, removeImageIndex: $removeImageIndex, currentProduct: $currentProduct, updateValue: $updateValue, errorValidation: $errorValidation, errorMessage: $errorMessage, successMessage: $successMessage, errorUploadOrDeleteImage: $errorUploadOrDeleteImage, hasChangeSomeField: $hasChangeSomeField)';
   }
 }
 
@@ -494,14 +656,21 @@ abstract mixin class _$ProductUpdateStateCopyWith<$Res>
   @useResult
   $Res call(
       {bool isLoading,
+      bool yearUpdateLoad,
+      bool brandUpdateLoad,
+      bool colorUpdateLoad,
       bool addingPhoto,
       bool deletingProduct,
       bool isSuccess,
+      bool deleteSuccess,
+      bool deleteImageSuccess,
+      int removeImageIndex,
       Product? currentProduct,
       String? updateValue,
       String? errorValidation,
       String? errorMessage,
       String? successMessage,
+      String? errorUploadOrDeleteImage,
       dynamic hasChangeSomeField});
 }
 
@@ -519,20 +688,39 @@ class __$ProductUpdateStateCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   $Res call({
     Object? isLoading = null,
+    Object? yearUpdateLoad = null,
+    Object? brandUpdateLoad = null,
+    Object? colorUpdateLoad = null,
     Object? addingPhoto = null,
     Object? deletingProduct = null,
     Object? isSuccess = null,
+    Object? deleteSuccess = null,
+    Object? deleteImageSuccess = null,
+    Object? removeImageIndex = null,
     Object? currentProduct = freezed,
     Object? updateValue = freezed,
     Object? errorValidation = freezed,
     Object? errorMessage = freezed,
     Object? successMessage = freezed,
+    Object? errorUploadOrDeleteImage = freezed,
     Object? hasChangeSomeField = freezed,
   }) {
     return _then(_ProductUpdateState(
       isLoading: null == isLoading
           ? _self.isLoading
           : isLoading // ignore: cast_nullable_to_non_nullable
+              as bool,
+      yearUpdateLoad: null == yearUpdateLoad
+          ? _self.yearUpdateLoad
+          : yearUpdateLoad // ignore: cast_nullable_to_non_nullable
+              as bool,
+      brandUpdateLoad: null == brandUpdateLoad
+          ? _self.brandUpdateLoad
+          : brandUpdateLoad // ignore: cast_nullable_to_non_nullable
+              as bool,
+      colorUpdateLoad: null == colorUpdateLoad
+          ? _self.colorUpdateLoad
+          : colorUpdateLoad // ignore: cast_nullable_to_non_nullable
               as bool,
       addingPhoto: null == addingPhoto
           ? _self.addingPhoto
@@ -546,6 +734,18 @@ class __$ProductUpdateStateCopyWithImpl<$Res>
           ? _self.isSuccess
           : isSuccess // ignore: cast_nullable_to_non_nullable
               as bool,
+      deleteSuccess: null == deleteSuccess
+          ? _self.deleteSuccess
+          : deleteSuccess // ignore: cast_nullable_to_non_nullable
+              as bool,
+      deleteImageSuccess: null == deleteImageSuccess
+          ? _self.deleteImageSuccess
+          : deleteImageSuccess // ignore: cast_nullable_to_non_nullable
+              as bool,
+      removeImageIndex: null == removeImageIndex
+          ? _self.removeImageIndex
+          : removeImageIndex // ignore: cast_nullable_to_non_nullable
+              as int,
       currentProduct: freezed == currentProduct
           ? _self.currentProduct
           : currentProduct // ignore: cast_nullable_to_non_nullable
@@ -565,6 +765,10 @@ class __$ProductUpdateStateCopyWithImpl<$Res>
       successMessage: freezed == successMessage
           ? _self.successMessage
           : successMessage // ignore: cast_nullable_to_non_nullable
+              as String?,
+      errorUploadOrDeleteImage: freezed == errorUploadOrDeleteImage
+          ? _self.errorUploadOrDeleteImage
+          : errorUploadOrDeleteImage // ignore: cast_nullable_to_non_nullable
               as String?,
       hasChangeSomeField: freezed == hasChangeSomeField
           ? _self.hasChangeSomeField

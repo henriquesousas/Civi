@@ -8,6 +8,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 class ItemListViewModel extends StateNotifier<ListProductState> {
   final GetProductsByUserUsecase _getProductsByUserUsecase;
+  List<Product> _cacheProducts = [];
   ItemListViewModel(
       {required GetProductsByUserUsecase getProductsByUserUsecase})
       : _getProductsByUserUsecase = getProductsByUserUsecase,
@@ -19,8 +20,9 @@ class ItemListViewModel extends StateNotifier<ListProductState> {
       command: () async => await _getProductsByUserUsecase.execute(userId),
       onLoading: () => const ListProductState.loading(),
       onSuccess: (products) {
+        _cacheProducts = products;
         return products.isNotEmpty
-            ? ListProductState.success(products, "All")
+            ? ListProductState.success(_cacheProducts, "All")
             : const ListProductState.empty();
       },
       onError: (error) {
@@ -46,5 +48,15 @@ class ItemListViewModel extends StateNotifier<ListProductState> {
       },
       orElse: () => null,
     );
+  }
+
+  void removeAt(Product product) {
+    final index = _cacheProducts.indexWhere((inc) => inc.id == product.id);
+    if (index != -1) {
+      _cacheProducts.removeAt(index);
+      state = _cacheProducts.isNotEmpty
+          ? ListProductState.success(_cacheProducts, "All")
+          : const ListProductState.empty();
+    }
   }
 }

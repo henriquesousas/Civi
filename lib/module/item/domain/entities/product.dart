@@ -111,6 +111,7 @@ class Product extends Entity<ProductId> {
   Product changeType(final String value) => copyWith(type: value);
   Product changeName(final String value) => copyWith(name: value);
   Product changeCode(final String value) => copyWith(code: value);
+  Product changeYear(final String value) => copyWith(year: int.parse(value));
   Product removeImage(int index) {
     final newImages = List<ImageMedia>.from(images);
     if (index >= 0 && index < newImages.length) {

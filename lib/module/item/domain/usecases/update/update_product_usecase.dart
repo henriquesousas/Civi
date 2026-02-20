@@ -1,4 +1,3 @@
-import 'package:deehelp/core/errors/failure.dart';
 import 'package:deehelp/old_core/base/use_case.dart';
 import 'package:deehelp/old_core/utils/result.dart';
 import 'package:deehelp/old_core/utils/unit.dart';

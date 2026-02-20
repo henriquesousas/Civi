@@ -45,13 +45,25 @@ class _ItemListPageState extends ConsumerState<ItemListPage> {
           items: value.items,
           press: (item) async {
             ref.watch(selectedItemProvider.notifier).state = item;
-            await context.push<Map<String, dynamic>?>(
+            final result = await context.push<Map<String, dynamic>?>(
               ItemsRouter.detail,
               extra: item,
             );
 
             final current = ref.watch(selectedItemProvider.notifier).state;
-            ref.watch(itemListViewmodelProvider.notifier).refresh(current!);
+            if (result != null) {
+              final operation = result['args']['operation'] as String;
+              // final status = result['args']['status'] as bool;
+              /*Refatorar para nao usar o valores fixos pois podem mudar
+              este operation esta vindo da tela de detalhes*/
+              if (operation == 'delete') {
+                ref
+                    .watch(itemListViewmodelProvider.notifier)
+                    .removeAt(current!);
+              }
+            } else {
+              ref.watch(itemListViewmodelProvider.notifier).refresh(current!);
+            }
           },
         ),
         loading: (_) => const ItemListShimmer(),
@@ -92,7 +104,9 @@ class _ItemListPageState extends ConsumerState<ItemListPage> {
           child: SafeArea(
             top: false,
             child: ButtonOutline(
-              press: () => context.push(ItemsRouter.register),
+              press: () {
+                context.push(ItemsRouter.register);
+              },
               bgColor: context.primaryColor,
               textColor: Colors.white,
               icon: const Icon(

@@ -50,6 +50,11 @@ class RowItemCard extends StatelessWidget {
                   height: ImageSize.md,
                   radius: RadiusSize.lg,
                   imageUrl: item.images.isNotEmpty ? item.images[0].value : '',
+                  customErrorWidget: Icon(
+                    Icons.phone_android,
+                    size: IconSizes.xl,
+                    color: context.onSurface.withValues(alpha: 0.5),
+                  ),
                 ),
                 const SizedBox(width: 12),
                 Expanded(

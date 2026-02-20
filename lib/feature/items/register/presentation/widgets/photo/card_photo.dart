@@ -8,6 +8,7 @@ import 'package:deehelp/feature/items/register/viewmodel/register_item_viewmodel
 import 'package:deehelp/module/item/di/item_viewmodel_provider.dart';
 import 'package:deehelp/old_core/providers/image_picker_provider.dart';
 import 'package:deehelp/old_core/services/image/default_image_picker.dart';
+import 'package:deehelp/old_core/services/image/image_picker_failure.dart';
 import 'package:deehelp/old_core/ui/extensions/dialog_extension.dart';
 import 'package:deehelp/old_core/ui/extensions/result_extension.dart';
 import 'package:deehelp/old_core/zoom_image_viewer.dart';
@@ -38,10 +39,15 @@ class _CardPhotoState extends ConsumerState<CardPhoto> {
       final imageMedia = await picker.pickImageFromGallery();
       if (imageMedia.isFailure) {
         if (!mounted) return;
+        final imagePickerError = (imageMedia.error as ImagePickerFailure);
+
+        if (imagePickerError.canceled) return;
+
         context.showSnackBar(
-          imageMedia.error.toString(),
+          imagePickerError.message,
           type: DialogType.error,
         );
+        return;
       }
       // setState(() => photos.add(imageMedia.data!));
       viewModel.addPhoto(imageMedia.data!);
@@ -103,14 +109,6 @@ class _CardPhotoState extends ConsumerState<CardPhoto> {
                 ),
                 BadgeText(text: state.imageMedia.length.toString()),
               ],
-            ),
-            const SizedBox(height: SpacingSize.md),
-            Text(
-              'Item criado com ID: ${'INC101023'}',
-              style: context.appText.caption.copyWith(
-                fontWeight: FontWeight.w600,
-                color: context.secondaryColor,
-              ),
             ),
             const SizedBox(height: SpacingSize.md),
             GridAddImage(

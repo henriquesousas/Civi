@@ -55,8 +55,9 @@ class PhotosGalleryCard extends StatelessWidget {
                     ),
                   ),
                 ),
-                if (hasPhotos)
+                if (hasPhotos) ...[
                   BadgeText(text: '${selectedIndex + 1}/${photos.length}'),
+                ],
               ],
             ),
             const SizedBox(height: SpacingSize.md),
@@ -110,6 +111,7 @@ class PhotosGalleryCard extends StatelessWidget {
                   onIndexChanged(i);
                 },
               ),
+              // TextButton(onPressed: () {}, child: const Text("Atualizar fotos"))
             ],
           ],
         ),

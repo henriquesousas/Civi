@@ -11,7 +11,7 @@ class ItemAlreadyExistException extends Failure {
     String code,
   ) {
     final message = type != ItemType.phone
-        ? "${type.label} com a placa $code já cadastrado!!!"
+        ? "Placa já cadastrada!!!"
         : "Celular já cadastrado!!!";
 
     return ItemAlreadyExistException._(message);

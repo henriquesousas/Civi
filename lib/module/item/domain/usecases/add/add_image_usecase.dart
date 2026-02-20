@@ -1,3 +1,4 @@
+import 'package:deehelp/core/errors/failure.dart';
 import 'package:deehelp/old_core/base/use_case.dart';
 import 'package:deehelp/old_core/services/storage/image_storage.dart';
 import 'package:deehelp/old_core/utils/result.dart';
@@ -20,6 +21,7 @@ class AddImageUsecase extends UseCase<AddImageDto, List<ImageMedia>> {
   Future<Result<List<ImageMedia>>> execute(AddImageDto dto) async {
     try {
       final newUrl = await _imageStorage.upload(dto.image);
+
       final newImageMedia = ImageMedia.fromWeb(
         url: newUrl,
         size: dto.image.size,

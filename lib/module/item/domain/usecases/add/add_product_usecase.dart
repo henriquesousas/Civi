@@ -10,6 +10,7 @@ import 'package:deehelp/module/item/domain/entities/product.dart';
 import 'package:deehelp/module/item/domain/product_repository.dart';
 import 'package:deehelp/module/item/domain/usecases/add/dtos/add_product_dto.dart';
 import 'package:deehelp/old_core/utils/unit.dart';
+import 'package:flutter/material.dart';
 import 'package:logging/logging.dart';
 
 class AddProductUseCase extends UseCase<AddProductDto, Unit> {
@@ -38,6 +39,7 @@ class AddProductUseCase extends UseCase<AddProductDto, Unit> {
         dto.images.map(
           (currentImageMedia) async {
             final newUrl = await _imageStorage.upload(currentImageMedia);
+            _logger.info('Imagem upload com sucesso $newUrl');
             return ImageMedia.fromWeb(
               url: newUrl,
               size: currentImageMedia.size,

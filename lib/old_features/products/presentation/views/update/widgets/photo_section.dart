@@ -41,7 +41,6 @@ class _PhotoSectionState extends ConsumerState<PhotoSection> {
           Padding(
             padding: const EdgeInsets.all(8.0),
             child: GridAddImage(
-              isLoading: state.addingPhoto,
               photos: state.currentProduct!.images,
               onAdd: () async {
                 final imageMedia = await imagePicker.pickImageFromGallery();

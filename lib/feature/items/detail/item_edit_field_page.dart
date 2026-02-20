@@ -52,7 +52,7 @@ class _ItemEditFieldPageState extends ConsumerState<ItemEditFieldPage> {
     final a = widget.args;
 
     _currentProduct = ref.watch(selectedItemProvider.notifier).state;
-    final provider = itemUpdateViewmodelProvider(_currentProduct!);
+    final provider = itemUpdateViewmodelProvider(_currentProduct!.id.value);
 
     final state = ref.watch(provider);
     final viewModel = ref.watch(provider.notifier);
@@ -131,7 +131,7 @@ class _ItemEditFieldPageState extends ConsumerState<ItemEditFieldPage> {
   }
 
   void listener(Product item) {
-    final provider = itemUpdateViewmodelProvider(item);
+    final provider = itemUpdateViewmodelProvider(item.id.value);
     ref.listen<ProductUpdateState>(
       provider,
       (oldState, currentState) {
@@ -151,7 +151,7 @@ class _ItemEditFieldPageState extends ConsumerState<ItemEditFieldPage> {
   }
 
   void _pop() {
-    final provider = itemUpdateViewmodelProvider(_currentProduct!);
+    final provider = itemUpdateViewmodelProvider(_currentProduct!.id.value);
     ref.read(provider.notifier).clearErrorMessage();
     context.pop();
   }

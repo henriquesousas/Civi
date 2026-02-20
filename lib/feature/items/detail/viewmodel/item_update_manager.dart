@@ -59,6 +59,11 @@ class ItemUpdateManager {
       (product, value) => product.changeCode(value),
     );
 
+    registerUpdater(
+      ItemField.year,
+      (product, value) => product.changeYear(value),
+    );
+
     // Registrar validators
     registerValidator(
       ItemField.model,
@@ -72,6 +77,13 @@ class ItemUpdateManager {
       ItemField.obs,
       (value) => value.length <= 500 ? null : 'Máximo 500 caracteres',
     );
+
+    registerValidator(ItemField.year, (value) {
+      final year = int.tryParse(value) ?? 0;
+      final isValid = year >= 1900 && year <= DateTime.now().year + 1;
+      return isValid ? null : "Ano inválido";
+    });
+
     registerValidator(
       ItemField.code,
       _validateLicensePlate,
