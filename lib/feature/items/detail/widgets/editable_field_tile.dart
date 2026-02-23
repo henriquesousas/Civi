@@ -13,6 +13,7 @@ class EditableFieldTile extends StatelessWidget {
   final double? minHeight;
   final int? maxLines;
   final bool isLoading;
+  final Color? textColor;
 
   const EditableFieldTile({
     super.key,
@@ -23,6 +24,7 @@ class EditableFieldTile extends StatelessWidget {
     this.minHeight,
     this.maxLines,
     this.isLoading = false,
+    this.textColor,
   });
 
   @override
@@ -65,7 +67,8 @@ class EditableFieldTile extends StatelessWidget {
                         fontWeight: FontWeight.w700,
                         color: onEdit != null
                             ? context.onSurface
-                            : context.onSurface.withValues(alpha: 0.5),
+                            : textColor ??
+                                context.onSurface.withValues(alpha: 0.5),
                         height: 1.35,
                       ),
                     ),

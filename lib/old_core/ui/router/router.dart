@@ -160,7 +160,7 @@ var goRouterProvider = Provider<GoRouter>(
             // child: TestPage6(),
             // child: AddProductSuccessPage()
             //Detalhes da ocorrencia
-            // child: TestPage7(),
+            child: TestPage7(),
             // Reportat incident
             // child: TestOcorrencia(),
             // child: TestPage8(),
@@ -181,7 +181,7 @@ var goRouterProvider = Provider<GoRouter>(
             // child: TestePageContato(),
             // child: TesteHome(),
             // child: TesteShellPage(),
-            child: TesteIncidentLoading(),
+            // child: TesteIncidentLoading(),
           ),
         ),
         GoRoute(

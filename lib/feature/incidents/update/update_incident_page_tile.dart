@@ -1,10 +1,10 @@
+import 'package:deehelp/core/extension/exports_extension.dart';
+import 'package:deehelp/core/ui/widgets/buttons/buttons_export.dart';
+import 'package:deehelp/core/ui/widgets/textfield/text_field_card.dart';
+import 'package:deehelp/feature/items/detail/widgets/edit/edit_info_card.dart';
 import 'package:deehelp/old_core/base/base_page.dart';
 import 'package:deehelp/old_core/ui/extensions/dialog_extension.dart';
 import 'package:deehelp/old_core/ui/extensions/string_extension.dart';
-import 'package:deehelp/old_core/ui/theme/app_colors.dart';
-import 'package:deehelp/old_core/ui/theme/app_text_styles.dart';
-import 'package:deehelp/old_core/ui/widgets/button/ui_elevated_button.dart';
-import 'package:deehelp/old_core/ui/widgets/textfield/ui_text_field_rounded.dart';
 import 'package:deehelp/feature/incidents/providers/update_incident_viewmodel_provider.dart';
 import 'package:deehelp/feature/incidents/update/incident_field.dart';
 import 'package:deehelp/feature/incidents/update/state/update_incident_state.dart';
@@ -109,53 +109,38 @@ class _UpdateIncidentPageTileState
       mainAxisAlignment: MainAxisAlignment.start,
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text(
-          widget.args.description,
-          style: context.appTextStyles.sectionSubTitle1.copyWith(
-            color: Theme.of(context).colorScheme.surfaceDim,
-          ),
-
-          // style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-          //       color: AppColors.textSecondary,
-          //     ),
+        EditInfoCard(
+          title: widget.args.toolbarTitle,
+          helper: widget.args.description,
         ),
-        UITextFieldRounded(
-          textInputAction: TextInputAction.done,
-          showLabelText: false,
-          labelText: widget.args.hint,
-          hintText: widget.args.hint,
-          maxLength: widget.args.maxLength,
-          maxLine: widget.args.maxLine,
+        TextFieldCard(
           controller: _controller,
-          onChanged: (value) => _onChangeValue(viewModel, value),
+          hint: widget.args.hint,
           error: state.updateError,
-          fillColor: Theme.of(context).colorScheme.secondaryContainer,
-          borderColor: Theme.of(context).colorScheme.outlineVariant,
+          // formatters: widget.args.inputFormatters,
+          maxLength: widget.args.maxLength,
+          maxLines: widget.args.maxLine,
+          onChanged: (value) => _onChangeValue(viewModel, value),
         ),
-        UIElevatedButton(
-          text: "Confirmar",
-          isLoading: state.isLoading,
-          isEnabled: state.isFormValid,
+        ButtonPrimary(
           press: () => viewModel.update(),
+          loading: state.isLoading,
+          text: "Confirmar",
         ),
         if (widget.args.showMyLocationButton) ...[
-          UIElevatedButton(
-            bgColor: AppColors.greyColor.withValues(alpha: 0.4),
-            textColor: Theme.of(context).colorScheme.onSurface,
-            // fontWeight: FontWeight.w500,
-            text: "Usar minha localização",
-            isLoading: state.isGetCurrentLocattion,
-            isEnabled: state.isFormValid,
-            icon: Icon(
-              Icons.gps_fixed,
-              // color: AppColors.textColorBody,
-              color: Theme.of(context).colorScheme.onSurface,
-            ),
+          ButtonOutline(
+            loading: state.isGetCurrentLocattion,
+            isPrimary: true,
             press: () async {
               viewModel.getCurrentLocation(
                   widget.args.value, widget.args.field);
             },
-          )
+            icon: Icon(
+              Icons.gps_fixed,
+              color: context.primaryColor,
+            ),
+            text: "Usar minha localização",
+          ),
         ],
       ],
     );

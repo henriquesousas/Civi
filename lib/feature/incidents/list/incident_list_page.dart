@@ -6,7 +6,6 @@ import 'package:deehelp/feature/items/list/widgets/item_list_shimmer.dart';
 import 'package:deehelp/module/incident/domain/usecase/incident_output.dart';
 import 'package:deehelp/feature/incidents/list/widgets/inciden_list.dart';
 import 'package:deehelp/feature/incidents/list/widgets/incident_empty_data.dart';
-import 'package:deehelp/feature/incidents/list/widgets/incident_list_shimmer.dart';
 import 'package:deehelp/feature/incidents/providers/incident_list_viewmodel_provider.dart';
 import 'package:deehelp/feature/incidents/providers/incident_selected_provider.dart';
 import 'package:flutter/material.dart';

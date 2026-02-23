@@ -1,6 +1,5 @@
+import 'package:deehelp/core/theme/export_theme.dart';
 import 'package:deehelp/core/ui/styles/export_style.dart';
-import 'package:deehelp/old_core/ui/theme/app_colors.dart';
-import 'package:deehelp/old_core/ui/theme/app_text_styles.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -16,17 +15,20 @@ class IncidentCode extends StatelessWidget {
         vertical: 2.h,
       ),
       decoration: BoxDecoration(
-        color: AppColors.primaryColor.withValues(alpha: 0.1),
+        color: AppColors.grey.withValues(alpha: 0.1),
         borderRadius: BorderRadius.circular(8.r),
         border: Border.all(
-          color: AppColors.primaryColor.withValues(alpha: 0.3),
+          color: AppColors.grey.withValues(alpha: 0.3),
         ),
       ),
       child: Text(
+        // code.length > 5 ? code.substring(0, 5) : code,
         code,
-        style: context.appText.bodymd.copyWith(
+        maxLines: 1,
+        overflow: TextOverflow.ellipsis,
+        style: context.appText.caption.copyWith(
           fontWeight: FontWeight.w600,
-          color: AppColors.primaryColor,
+          color: AppColors.grey,
         ),
       ),
     );

@@ -152,29 +152,29 @@ class ProfileContent extends ConsumerWidget {
                   " 'com.massimobiolcati.irealb'",
                   " 'com.massimobiolcati.irealb'"),
             ),
-            UICustomListTileCard(
-              padding: EdgeInsetsDirectional.symmetric(vertical: verticalSize),
-              title: "Fale conosco",
-              showBorder: true,
-              // titleStyle: context.appTextStyles.bodyTextStyle1.copyWith(
-              //   color: AppColors.textColorBody,
-              // ),
-              leading: UIMyAssetsImageWidget(
-                isSvg: true,
-                assetPath: R.svg.help,
-                width: Dimens.size24.w,
-                height: Dimens.size24.h,
-                boxFit: BoxFit.scaleDown,
-                color: AppColors.primaryColor,
-              ),
-              trailing: Icon(Icons.arrow_forward_ios_rounded,
-                  size: Dimens.defaultArrowForward, color: trailingColor),
-              press: () => UrlLauncherUtils.launchWhatsAppSupport(
-                context,
-                "+5511972732245",
-                "Olá! 👋 Queremos a sua ajuda para melhorar o app DeeHelp. Diga-nos: Qual é a sua dúvida ou sugestão sobre o funcionamento ou segurança? Sua opinião é essencial!",
-              ),
-            ),
+            // UICustomListTileCard(
+            //   padding: EdgeInsetsDirectional.symmetric(vertical: verticalSize),
+            //   title: "Fale conosco",
+            //   showBorder: true,
+            //   // titleStyle: context.appTextStyles.bodyTextStyle1.copyWith(
+            //   //   color: AppColors.textColorBody,
+            //   // ),
+            //   leading: UIMyAssetsImageWidget(
+            //     isSvg: true,
+            //     assetPath: R.svg.help,
+            //     width: Dimens.size24.w,
+            //     height: Dimens.size24.h,
+            //     boxFit: BoxFit.scaleDown,
+            //     color: AppColors.primaryColor,
+            //   ),
+            //   trailing: Icon(Icons.arrow_forward_ios_rounded,
+            //       size: Dimens.defaultArrowForward, color: trailingColor),
+            //   press: () => UrlLauncherUtils.launchWhatsAppSupport(
+            //     context,
+            //     "+5511972732245",
+            //     "Olá! 👋 Queremos a sua ajuda para melhorar o app DeeHelp. Diga-nos: Qual é a sua dúvida ou sugestão sobre o funcionamento ou segurança? Sua opinião é essencial!",
+            //   ),
+            // ),
             UICustomListTileCard(
               padding: EdgeInsetsDirectional.symmetric(vertical: verticalSize),
               title: "Perguntas e respostas",

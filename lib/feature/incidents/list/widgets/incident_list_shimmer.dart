@@ -1,4 +1,5 @@
 import 'package:deehelp/core/ui/widgets/badge/export_badge.dart';
+import 'package:deehelp/feature/items/item_type.dart';
 import 'package:deehelp/old_core/ui/widgets/shimmer_animation.dart';
 import 'package:deehelp/module/incident/domain/entity/incident_local.dart';
 import 'package:deehelp/module/incident/domain/enum/type_alert.dart';
@@ -16,6 +17,9 @@ final _fakeIncident = IncidentOutput(
     name: "any name",
     code: "any",
     images: List.empty(),
+    color: '',
+    brand: '',
+    type: "car",
   ),
   status: ItemStatus.active,
   type: TypeAlert.detailed,

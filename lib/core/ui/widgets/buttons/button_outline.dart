@@ -12,6 +12,7 @@ class ButtonOutline extends StatelessWidget {
   final BorderSide? side;
   final double? height;
   final bool? loading;
+  final bool isPrimary;
   const ButtonOutline({
     super.key,
     required this.press,
@@ -22,6 +23,7 @@ class ButtonOutline extends StatelessWidget {
     this.side,
     this.height,
     this.loading = false,
+    this.isPrimary = false,
   });
 
   @override
@@ -39,7 +41,7 @@ class ButtonOutline extends StatelessWidget {
         //   ),
         // ),
         label: loading!
-            ? _cirucularProgressIndicator()
+            ? _cirucularProgressIndicator(context, isPrimary)
             : _title(context, textColor),
         style: OutlinedButton.styleFrom(
           foregroundColor: context.primaryColor,
@@ -49,7 +51,7 @@ class ButtonOutline extends StatelessWidget {
                 color: context.primaryColor.withValues(alpha: 0.32),
               ),
           shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(RadiusSize.md),
+            borderRadius: BorderRadius.circular(RadiusSize.xl),
           ),
         ),
       ),
@@ -65,12 +67,12 @@ class ButtonOutline extends StatelessWidget {
     );
   }
 
-  Widget _cirucularProgressIndicator() {
+  Widget _cirucularProgressIndicator(BuildContext context, bool isPrimary) {
     return SizedBox(
       height: CiruclarProgressIndicatorSize.sm,
       width: CiruclarProgressIndicatorSize.sm,
-      child: const CircularProgressIndicator(
-        color: Colors.white,
+      child: CircularProgressIndicator(
+        color: isPrimary ? context.primaryColor : Colors.white,
       ),
     );
   }

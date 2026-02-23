@@ -48,7 +48,8 @@ class SupabaseIncidentRepository extends IncidentRepository {
   }) async {
     final data = await _supabaseClient
         .from(_table)
-        .select("*,product (id,name,code, product_images (*))")
+        .select(
+            "*,product (id,name,code,color, brand, type, obs, product_images (*))")
         .eq(
           "user_id",
           userId,

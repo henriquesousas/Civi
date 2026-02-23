@@ -450,11 +450,11 @@ class WelcomeScreen extends StatelessWidget {
                             borderRadius: BorderRadius.circular(16),
                             onTap: () {
                               // _showFeedbackOptions(context);
-                              UrlLauncherUtils.launchWhatsAppSupport(
-                                context,
-                                "5511972732245",
-                                "Teste",
-                              );
+                              // UrlLauncherUtils.launchWhatsAppSupport(
+                              //   context,
+                              //   "5511972732245",
+                              //   "Teste",
+                              // );
                             },
                             child: Center(
                               child: Row(

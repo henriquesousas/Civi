@@ -3,11 +3,13 @@ import 'package:flutter/material.dart';
 
 class PageCard extends StatelessWidget {
   final Widget child;
-  const PageCard({super.key, required this.child});
+  final EdgeInsets? padding;
+  const PageCard({super.key, required this.child, this.padding});
 
   @override
   Widget build(BuildContext context) {
     return Container(
+      padding: padding ?? EdgeInsets.zero,
       decoration: BoxDecoration(
         color: Colors.white,
         borderRadius: BorderRadius.circular(RadiusSize.xl),

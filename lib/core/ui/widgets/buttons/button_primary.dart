@@ -26,7 +26,7 @@ class ButtonPrimary extends StatelessWidget {
           foregroundColor: Colors.white,
           minimumSize: const Size(double.infinity, 32),
           shape: const RoundedRectangleBorder(
-            borderRadius: BorderRadius.all(Radius.circular(RadiusSize.md)),
+            borderRadius: BorderRadius.all(Radius.circular(RadiusSize.xl)),
           ),
         ).copyWith(
           textStyle: WidgetStatePropertyAll(

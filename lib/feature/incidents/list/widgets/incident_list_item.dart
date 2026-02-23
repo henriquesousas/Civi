@@ -1,11 +1,6 @@
 import 'package:deehelp/core/extension/exports_extension.dart';
 import 'package:deehelp/core/theme/export_theme.dart';
 import 'package:deehelp/core/ui/widgets/badge/export_badge.dart';
-import 'package:deehelp/core/ui/widgets/badge/status_badge.dart';
-import 'package:deehelp/old_core/ui/theme/app_colors.dart';
-import 'package:deehelp/old_core/ui/theme/dimens.dart';
-import 'package:deehelp/old_core/ui/widgets/card/ui_custom_app_card.dart';
-import 'package:deehelp/module/incident/domain/enum/incident_status.dart';
 import 'package:deehelp/module/incident/domain/usecase/incident_output.dart';
 import 'package:deehelp/feature/incidents/list/widgets/incident_code.dart';
 import 'package:deehelp/feature/incidents/list/widgets/incident_date.dart';
@@ -14,10 +9,8 @@ import 'package:deehelp/feature/incidents/list/widgets/incident_location.dart';
 import 'package:deehelp/feature/incidents/list/widgets/incident_protocol.dart';
 import 'package:deehelp/feature/incidents/list/widgets/incident_how_to.dart';
 import 'package:deehelp/feature/incidents/list/widgets/incident_title.dart';
-import 'package:deehelp/old_features/products/presentation/views/listing/widgets/status_badge_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class IncidentListItem extends StatelessWidget {
   final IncidentOutput incident;
@@ -78,26 +71,30 @@ class IncidentListItem extends StatelessWidget {
                     IncidentImage(images: incident.product.images),
                     Expanded(
                       child: Column(
-                        spacing: 5,
+                        spacing: 7,
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           IncidentTitle(title: incident.product.name),
                           IncidentLocation(local: incident.local),
-                          IncidentDate(occurreAt: incident.occurredAt)
+                          IncidentDate(occurreAt: incident.occurredAt),
+                          IncidentCode(code: incident.product.code),
                         ],
                       ),
                     ),
                   ],
                 ),
                 if (!isLoading) ...[
-                  SizedBox(height: Dimens.size10.h),
+                  const SizedBox(height: SpacingSize.lg),
                   IncidentHowTo(howTo: incident.howTo),
-                  SizedBox(height: Dimens.size10.h),
+                  const SizedBox(height: SpacingSize.md),
                   Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     spacing: 5,
                     children: [
-                      IncidentProtocol(protocolNumber: incident.alertId),
-                      IncidentCode(code: incident.product.code),
+                      IncidentProtocol(
+                        protocolNumber: incident.alertId,
+                      ),
+                      // IncidentCode(code: incident.product.code),
                       StatusBadge(style: StatusStyle.from(incident.status))
                     ],
                   ),

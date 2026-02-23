@@ -1,3 +1,4 @@
+import 'package:deehelp/app_name.dart';
 import 'package:deehelp/old_core/ui/extensions/date_extension.dart';
 import 'package:flutter/material.dart';
 import 'package:share_plus/share_plus.dart';
@@ -9,15 +10,44 @@ class UrlLauncherUtils {
   factory UrlLauncherUtils() => _instance;
   UrlLauncherUtils._internal();
 
-  static Future<void> launchWhatsAppSupport(
-    BuildContext context,
-    String phoneNumber,
-    String message,
-  ) async {
+  static Future<void> launchWhatsAppSupport({
+    required BuildContext context,
+  }) async {
     final messenger = ScaffoldMessenger.of(context);
-    // final phoneNumber = "+5511972732245";
-    // final message =
-    //     "Olá! 👋 Queremos a sua ajuda para melhorar o app DeeHelp. Diga-nos: Qual é a sua dúvida ou sugestão sobre o funcionamento ou segurança? Sua opinião é essencial!";
+    String? phoneNumber = "+5511972732245";
+
+    final message =
+        "Olá! 👋 Queremos a sua ajuda para melhorar o app ${AppName.appName}. Diga-nos: Qual é a sua dúvida ou é uma sugestão sobre o funcionamento ou segurança? Sua opinião é essencial!";
+
+    try {
+      final link = WhatsAppUnilink(
+        phoneNumber: phoneNumber,
+        text: message,
+      );
+
+      await launchUrl(link.asUri());
+    } catch (e) {
+      final url = 'https://wa.me/$phoneNumber?text=${Uri.encodeFull(message)}';
+      if (await canLaunchUrl(Uri.parse(url))) {
+        await launchUrl(Uri.parse(url));
+      } else {
+        messenger.showSnackBar(
+          const SnackBar(content: Text("Não foi possível abrir o WhatsApp.")),
+        );
+      }
+    }
+  }
+
+  static Future<void> launchWhatsIncidentDenunc({
+    required BuildContext context,
+    required String alertId,
+  }) async {
+    final messenger = ScaffoldMessenger.of(context);
+    String? phoneNumber = "+5511972732245";
+    final message =
+        """Olá! 👋  Vi a ocorrência no aplicativo ${AppName.appName} que tem o código  $alertId e acredito ter visto algo que pode estar relacionado. Gostaria de compartilhar as informações com você.
+        """;
+
     try {
       final link = WhatsAppUnilink(
         phoneNumber: phoneNumber,
@@ -78,7 +108,7 @@ class UrlLauncherUtils {
     final message = '''
 🚨 **ALERTA DE SEGURANÇA** 🚨
 
-Acabei de registrar um incidente de roubo no aplicativo [LABEL].
+Acabei de registrar um incidente de roubo no aplicativo ${AppName.appName}.
 
 🔢 **ID do Caso:** $incidentId
 📅 **Registrado em:** ${date.toDateWithFullMonth()}
@@ -88,7 +118,7 @@ Acabei de registrar um incidente de roubo no aplicativo [LABEL].
 • Aumentar a segurança coletiva
 • Contribuir com dados confiáveis para a comunidade
 
-📱 **Compartilhado via [LABEL]**
+📱 **Compartilhado via ${AppName.appName}**
 Este app ajuda a manter a comunidade mais segura.
 Baixe agora: https://play.google.com/store/apps/details?id=com.seu.app
 
