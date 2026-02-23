@@ -1,3 +1,4 @@
+import 'package:deehelp/core/theme/export_theme.dart';
 import 'package:flutter/material.dart';
 
 enum ItemStatus { active, pending, canceled }
@@ -22,25 +23,25 @@ class StatusStyle {
       case ItemStatus.active:
         return StatusStyle(
           label: 'Ativo',
-          bg: const Color(0xFF2B5BEE).withOpacity(0.12),
-          fg: const Color(0xFF2B5BEE),
-          border: const Color(0xFF2B5BEE).withOpacity(0.35),
+          bg: AppColors.green.withValues(alpha: 0.12),
+          fg: AppColors.green,
+          border: AppColors.green.withValues(alpha: 0.35),
           icon: Icons.check_circle_outline,
         );
       case ItemStatus.pending:
         return StatusStyle(
           label: 'Pendente',
-          bg: const Color(0xFFFFB020).withOpacity(0.14),
+          bg: const Color(0xFFFFB020).withValues(alpha: 0.14),
           fg: const Color(0xFFB06A00),
-          border: const Color(0xFFFFB020).withOpacity(0.35),
+          border: const Color(0xFFFFB020).withValues(alpha: 0.35),
           icon: Icons.schedule,
         );
       case ItemStatus.canceled:
         return StatusStyle(
           label: 'Cancelado',
-          bg: Colors.redAccent.withOpacity(0.12),
+          bg: Colors.redAccent.withValues(alpha: 0.12),
           fg: Colors.redAccent,
-          border: Colors.redAccent.withOpacity(0.30),
+          border: Colors.redAccent.withValues(alpha: 0.30),
           icon: Icons.block,
         );
     }

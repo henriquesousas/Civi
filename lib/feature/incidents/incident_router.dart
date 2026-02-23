@@ -1,4 +1,5 @@
 import 'package:deehelp/feature/incidents/list/incident_list_page.dart';
+import 'package:deehelp/feature/incidents/update/update_incident_page.dart';
 import 'package:deehelp/old_core/ui/router/slide_transition_page.dart';
 import 'package:go_router/go_router.dart';
 
@@ -17,17 +18,23 @@ class IncidentRouter {
             child: const IncidentListPage(),
           ),
         ),
-        // GoRoute(
-        //   path: register,
-        //   builder: (_, __) => const ItemRegisterPageView(),
-        // ),
+        GoRoute(
+          path: detail,
+          pageBuilder: (context, state) => slideTransitionPage(
+            key: state.pageKey,
+            child: const UpdateIncidentPage(),
+          ),
+        ),
         // GoRoute(
         //   path: detail,
-        //   builder: (_, __) => const ItemDetailPage(),
-        // ),
-        // GoRoute(
-        //   path: success,
-        //   builder: (_, __) => const ItemRegisterSuccessPage(),
+        //   pageBuilder: (context, state) {
+        //     final extra = state.extra as Map<String, dynamic>;
+        //     final incident = extra['args'] as IncidentOutput;
+        //     return slideTransitionPage(
+        //       key: state.pageKey,
+        //       child: IncidentDetailPage(incident: incident),
+        //     );
+        //   },
         // ),
       ];
 }

@@ -11,7 +11,7 @@ import 'package:deehelp/old_features/dashboard/presentation/widget/dashboard_loc
 import 'package:deehelp/old_features/dashboard/presentation/widget/dashboard_profile.dart';
 import 'package:deehelp/old_features/dashboard/presentation/widget/dashboard_search_container.dart';
 import 'package:deehelp/old_features/dashboard/presentation/widget/dashbord_quick_actions_card.dart';
-import 'package:deehelp/old_features/incident/domain/usecase/incident_output.dart';
+import 'package:deehelp/module/incident/domain/usecase/incident_output.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';

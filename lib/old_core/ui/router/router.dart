@@ -94,7 +94,7 @@ var goRouterProvider = Provider<GoRouter>(
         final appStatus = ref.read(appStartupProvider);
         final currentPath = state.matchedLocation;
         final isPublicRoute = _publicRoutes.contains(currentPath);
-        return '/';
+        // return '/';
         // return AuthRouter.path;
         switch (appStatus) {
           case AppStatus.loading:

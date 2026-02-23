@@ -1,6 +1,6 @@
 import 'package:deehelp/old_core/ui/theme/app_colors.dart';
 import 'package:deehelp/old_core/ui/theme/app_text_styles.dart';
-import 'package:deehelp/old_features/incident/domain/usecase/incident_output.dart';
+import 'package:deehelp/module/incident/domain/usecase/incident_output.dart';
 import 'package:flutter/material.dart';
 
 class SearchItemList extends StatelessWidget {

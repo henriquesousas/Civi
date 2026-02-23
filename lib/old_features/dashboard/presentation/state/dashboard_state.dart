@@ -1,4 +1,4 @@
-import 'package:deehelp/old_features/incident/domain/usecase/incident_output.dart';
+import 'package:deehelp/module/incident/domain/usecase/incident_output.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 part 'dashboard_state.freezed.dart';

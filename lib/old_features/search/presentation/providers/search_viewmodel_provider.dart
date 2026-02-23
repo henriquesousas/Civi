@@ -1,5 +1,5 @@
-import 'package:deehelp/old_features/incident/domain/usecase/incident_output.dart';
-import 'package:deehelp/old_features/incident/presentation/providers/incident_usecase_providers.dart';
+import 'package:deehelp/module/incident/domain/usecase/incident_output.dart';
+import 'package:deehelp/feature/incidents/providers/incident_usecase_providers.dart';
 import 'package:deehelp/old_features/search/presentation/search_viewmodel.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 

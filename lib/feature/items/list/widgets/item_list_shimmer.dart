@@ -3,6 +3,8 @@ import 'package:deehelp/feature/items/list/row_item_card_skeleton.dart';
 import 'package:deehelp/old_core/ui/widgets/shimmer_animation.dart';
 import 'package:flutter/material.dart';
 
+//Ta sendo usado por ItemListPage e IncideListPage
+
 class ItemListShimmer extends StatelessWidget {
   const ItemListShimmer({super.key});
 

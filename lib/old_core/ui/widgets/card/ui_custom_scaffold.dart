@@ -1,5 +1,5 @@
+import 'package:deehelp/core/ui/widgets/appbar/default_app_bar.dart';
 import 'package:deehelp/old_core/ui/theme/dimens.dart';
-import 'package:deehelp/old_core/ui/theme/app_text_styles.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -57,30 +57,35 @@ class UICustomScaffold extends StatelessWidget {
         resizeToAvoidBottomInset: false,
         appBar: hideAppBar == true
             ? null
-            : AppBar(
-                // surfaceTintColor: Colors.transparent,
-                // elevation: 12,
-                toolbarHeight: 60,
-                centerTitle: centerTitle,
-                // backgroundColor: appBarBgColor ?? Colors.white,
-                // backgroundColor: appBarBgColor ??
-                //     Theme.of(context).scaffoldBackgroundColor,
+            : DefaultAppBar(
+                title: "$pageTitle",
+                press: () => onBackButtonTap,
                 leading: _getLeading(),
-                titleSpacing: 0,
-                title: Padding(
-                  padding: EdgeInsets.only(
-                      left: showBackButton ? 0 : Dimens.size10.w),
-                  child: Text(
-                    "$pageTitle",
-                    style: context.appTextStyles.appBarTitle.copyWith(
-                      fontWeight: FontWeight.w500,
-                    ),
-                  ),
-                ),
-                actions: [
-                  if (actionButton != null) ...[...actionButton!],
-                ],
               ),
+        // : AppBar(
+        //     // surfaceTintColor: Colors.transparent,
+        //     // elevation: 12,
+        //     toolbarHeight: 60,
+        //     centerTitle: centerTitle,
+        //     // backgroundColor: appBarBgColor ?? Colors.white,
+        //     // backgroundColor: appBarBgColor ??
+        //     //     Theme.of(context).scaffoldBackgroundColor,
+        //     leading: _getLeading(),
+        //     titleSpacing: 0,
+        //     title: Padding(
+        //       padding: EdgeInsets.only(
+        //           left: showBackButton ? 0 : Dimens.size10.w),
+        //       child: Text(
+        //         "$pageTitle",
+        //         style: context.appTextStyles.appBarTitle.copyWith(
+        //           fontWeight: FontWeight.w500,
+        //         ),
+        //       ),
+        //     ),
+        //     actions: [
+        //       if (actionButton != null) ...[...actionButton!],
+        //     ],
+        //   ),
         body: Padding(
           padding: padding ??
               EdgeInsetsDirectional.symmetric(

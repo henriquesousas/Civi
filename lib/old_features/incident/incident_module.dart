@@ -1,13 +1,13 @@
 import 'package:deehelp/old_core/ui/router/app_router.dart';
 import 'package:deehelp/old_core/ui/router/slide_transition_page.dart';
-import 'package:deehelp/old_features/incident/domain/usecase/incident_output.dart';
-import 'package:deehelp/old_features/incident/presentation/incident_detail_page.dart';
-import 'package:deehelp/old_features/incident/presentation/report/report_incident_page.dart';
-import 'package:deehelp/old_features/incident/presentation/list/incident_list_page.dart';
-import 'package:deehelp/old_features/incident/presentation/report/report_incident_successfully_page.dart';
-import 'package:deehelp/old_features/incident/presentation/update/update_incident_args.dart';
-import 'package:deehelp/old_features/incident/presentation/update/update_incident_page.dart';
-import 'package:deehelp/old_features/incident/presentation/update/update_incident_page_tile.dart';
+import 'package:deehelp/module/incident/domain/usecase/incident_output.dart';
+import 'package:deehelp/feature/incidents/update/incident_detail_page.dart';
+import 'package:deehelp/feature/incidents/report/report_incident_page.dart';
+import 'package:deehelp/feature/incidents/list/incident_list_page.dart';
+import 'package:deehelp/feature/incidents/report/report_incident_successfully_page.dart';
+import 'package:deehelp/feature/incidents/update/update_incident_args.dart';
+import 'package:deehelp/feature/incidents/update/update_incident_page.dart';
+import 'package:deehelp/feature/incidents/update/update_incident_page_tile.dart';
 import 'package:go_router/go_router.dart';
 
 class IncidentModule {

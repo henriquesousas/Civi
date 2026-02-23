@@ -7,7 +7,7 @@ import 'package:deehelp/old_core/ui/animation/transform_scale_opacity_animator.d
 import 'package:deehelp/old_core/ui/theme/app_colors.dart';
 import 'package:deehelp/old_core/ui/theme/app_text_styles.dart';
 import 'package:deehelp/old_core/ui/theme/dimens.dart';
-import 'package:deehelp/old_features/incident/presentation/providers/report_incident_viewmodel_provider.dart';
+import 'package:deehelp/feature/incidents/providers/report_incident_viewmodel_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
