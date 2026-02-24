@@ -21,7 +21,7 @@ class DashboardViewmodel
       : _getIncidentUsecase = getIncidentUsecase,
         super(const AsyncValue.loading());
 
-  Future<void> getRecentIncidents(CurrentLocation? location) async {
+  Future<void> getRecentIncidents(OldCurrentLocation? location) async {
     if (_hasCache && _isCacheValid()) {
       state = AsyncValue.data(_cache);
       return;
@@ -54,7 +54,7 @@ class DashboardViewmodel
     }
   }
 
-  Future<void> refreshData(CurrentLocation? location) async {
+  Future<void> refreshData(OldCurrentLocation? location) async {
     _hasCache = false;
     await getRecentIncidents(location);
   }

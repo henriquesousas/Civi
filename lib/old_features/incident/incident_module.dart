@@ -47,13 +47,13 @@ class IncidentModule {
             );
           },
         ),
-        GoRoute(
-          path: AppRouter.reportIncidentSuccess,
-          pageBuilder: (context, state) => slideTransitionPage(
-            key: state.pageKey,
-            child: const ReportIncidentSuccessfullyPage(),
-          ),
-        ),
+        // GoRoute(
+        //   path: AppRouter.reportIncidentSuccess,
+        //   pageBuilder: (context, state) => slideTransitionPage(
+        //     key: state.pageKey,
+        //     child: const ReportIncidentSuccessfullyPage(),
+        //   ),
+        // ),
         GoRoute(
           path: AppRouter.incidentDetail,
           pageBuilder: (context, state) {

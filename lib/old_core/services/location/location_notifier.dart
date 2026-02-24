@@ -79,7 +79,7 @@ class LocationNotifier extends StateNotifier<LocationState> {
     _ref.read(locationServiceEventProvider.notifier).state = event;
   }
 
-  void _notifyCurrentLocationProvider(CurrentLocation? currentLocation) {
+  void _notifyCurrentLocationProvider(OldCurrentLocation? currentLocation) {
     _ref.read(oldCurrentLocationProvider.notifier).state = currentLocation;
   }
 }

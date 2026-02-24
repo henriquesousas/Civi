@@ -3,6 +3,7 @@ import 'package:deehelp/core/ui/styles/app_text_style.dart';
 import 'package:deehelp/core/ui/widgets/bubble/bubble_export.dart';
 import 'package:deehelp/core/ui/widgets/buttons/buttons_export.dart';
 import 'package:deehelp/core/ui/widgets/icon/highlight_icon.dart';
+import 'package:deehelp/feature/incidents/report/widgets/speech_bubble.dart';
 import 'package:deehelp/feature/items/success/card_next_step.dart';
 import 'package:deehelp/old_core/ui/animation/transform_scale_opacity_animator.dart';
 import 'package:deehelp/old_core/utils/url_launcher_utils.dart';
@@ -56,49 +57,53 @@ class ItemRegisterSuccessPage extends StatelessWidget {
                         ),
                       ),
                     ),
-                    TransformScaleOpacityAnimator(
-                      duration: const Duration(milliseconds: 1500),
-                      child: Lottie.asset(
-                        "assets/lottie/loader_success.json",
-                        width: ImageSize.xxl,
-                        height: ImageSize.xxl,
-                        repeat: false,
+                    Expanded(
+                      child: ListView(
+                        children: [
+                          const OwlSadSpeechBubble(
+                            file: 'assets/lottie/owl_happy.json',
+                            message:
+                                "Perfeito! 🦉✨\nSeu item foi cadastrado com sucesso.\nAgora ele está protegido e monitorado.",
+                          ),
+                          Text(
+                            'Cadastro recebido!',
+                            textAlign: TextAlign.center,
+                            style: context.appText.headerxl.copyWith(
+                              color: Colors.white,
+                              fontWeight: FontWeight.w900,
+                              height: 1.1,
+                            ),
+                          ),
+                          const SizedBox(height: SpacingSize.md),
+                          Text(
+                            'Recebemos seu cadastro e ele passará por validações da nossa equipe antes de ficar visível no app.',
+                            textAlign: TextAlign.center,
+                            style: context.appText.bodySmall.copyWith(
+                              height: 1.35,
+                              color: Colors.white,
+                              fontWeight: FontWeight.w500,
+                            ),
+                          ),
+                          const SizedBox(height: SpacingSize.xxl),
+                          const CardNextStep(),
+                          const SizedBox(height: SpacingSize.md),
+                          const Spacer(),
+                          ButtonOutline(
+                            bgColor: Colors.white,
+                            icon: const Icon(Icons.share_outlined),
+                            press: () {
+                              UrlLauncherUtils.shareApp(context);
+                            },
+                            text: 'Compartilhar o app',
+                          ),
+                          const SizedBox(height: SpacingSize.md),
+                          ButtonInline(
+                            text: "Fechar",
+                            press: () => Navigator.pop(context),
+                            // onPressed: () {},
+                          ),
+                        ],
                       ),
-                    ),
-                    Text(
-                      'Cadastro recebido!',
-                      textAlign: TextAlign.center,
-                      style: context.appText.headerxl.copyWith(
-                        color: Colors.white,
-                        fontWeight: FontWeight.w900,
-                        height: 1.1,
-                      ),
-                    ),
-                    Text(
-                      'Recebemos seu cadastro e ele passará por validações da nossa equipe antes de ficar visível no app.',
-                      textAlign: TextAlign.center,
-                      style: context.appText.bodySmall.copyWith(
-                        height: 1.35,
-                        color: Colors.white,
-                        fontWeight: FontWeight.w500,
-                      ),
-                    ),
-                    const SizedBox(height: RadiusSize.md),
-                    // const CardId(itemId: "123456"),
-                    const CardNextStep(),
-                    const Spacer(),
-                    ButtonOutline(
-                      bgColor: Colors.white,
-                      icon: const Icon(Icons.share_outlined),
-                      press: () {
-                        UrlLauncherUtils.shareApp(context);
-                      },
-                      text: 'Compartilhar o app',
-                    ),
-                    ButtonInline(
-                      text: "Fechar",
-                      press: () => Navigator.pop(context),
-                      // onPressed: () {},
                     ),
                   ],
                 ),

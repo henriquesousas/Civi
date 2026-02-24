@@ -153,7 +153,7 @@ extension LocationServiceEventPatterns on LocationServiceEvent {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(LocationStatus status, String message)? error,
     TResult Function(LocationStatus status, String message)? locationRequired,
-    TResult Function(CurrentLocation? currentPlace)? success,
+    TResult Function(OldCurrentLocation? currentPlace)? success,
     required TResult orElse(),
   }) {
     final _that = this;
@@ -188,7 +188,7 @@ extension LocationServiceEventPatterns on LocationServiceEvent {
     required TResult Function(LocationStatus status, String message) error,
     required TResult Function(LocationStatus status, String message)
         locationRequired,
-    required TResult Function(CurrentLocation? currentPlace) success,
+    required TResult Function(OldCurrentLocation? currentPlace) success,
   }) {
     final _that = this;
     switch (_that) {
@@ -219,7 +219,7 @@ extension LocationServiceEventPatterns on LocationServiceEvent {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(LocationStatus status, String message)? error,
     TResult? Function(LocationStatus status, String message)? locationRequired,
-    TResult? Function(CurrentLocation? currentPlace)? success,
+    TResult? Function(OldCurrentLocation? currentPlace)? success,
   }) {
     final _that = this;
     switch (_that) {
@@ -388,7 +388,7 @@ class __$LocationServiceEventLocationRequiredCopyWithImpl<$Res>
 class _LocationServiceEventSuccess implements LocationServiceEvent {
   const _LocationServiceEventSuccess(this.currentPlace);
 
-  final CurrentLocation? currentPlace;
+  final OldCurrentLocation? currentPlace;
 
   /// Create a copy of LocationServiceEvent
   /// with the given fields replaced by the non-null parameter values.
@@ -424,7 +424,7 @@ abstract mixin class _$LocationServiceEventSuccessCopyWith<$Res>
           $Res Function(_LocationServiceEventSuccess) _then) =
       __$LocationServiceEventSuccessCopyWithImpl;
   @useResult
-  $Res call({CurrentLocation? currentPlace});
+  $Res call({OldCurrentLocation? currentPlace});
 }
 
 /// @nodoc
@@ -445,7 +445,7 @@ class __$LocationServiceEventSuccessCopyWithImpl<$Res>
       freezed == currentPlace
           ? _self.currentPlace
           : currentPlace // ignore: cast_nullable_to_non_nullable
-              as CurrentLocation?,
+              as OldCurrentLocation?,
     ));
   }
 }

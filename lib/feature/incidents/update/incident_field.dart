@@ -8,7 +8,7 @@ enum IncidentField {
 }
 
 extension IncidentFieldExtension on IncidentField {
-  String? getPlaceValueFrom(CurrentLocation? place) {
+  String? getPlaceValueFrom(OldCurrentLocation? place) {
     if (place == null) return null;
     switch (this) {
       case IncidentField.city:

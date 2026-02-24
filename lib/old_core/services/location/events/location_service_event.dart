@@ -15,6 +15,6 @@ class LocationServiceEvent with _$LocationServiceEvent {
     LocationStatus status,
     String message,
   ) = _LocationServiceEventLocationRequired;
-  const factory LocationServiceEvent.success(CurrentLocation? currentPlace) =
+  const factory LocationServiceEvent.success(OldCurrentLocation? currentPlace) =
       _LocationServiceEventSuccess;
 }

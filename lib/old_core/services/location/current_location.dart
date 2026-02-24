@@ -2,13 +2,13 @@ import 'package:deehelp/old_core/utils/collection_utils.dart';
 import 'package:geocoding/geocoding.dart';
 import 'package:geolocator/geolocator.dart';
 
-class CurrentLocation {
+class OldCurrentLocation {
   final double? latitue;
   final double? longitude;
   final String? state;
   final String? city;
   final String? fullAddress;
-  CurrentLocation({
+  OldCurrentLocation({
     required this.state,
     required this.city,
     required this.fullAddress,
@@ -16,7 +16,8 @@ class CurrentLocation {
     required this.longitude,
   });
 
-  static CurrentLocation? from(List<Placemark> placemarks, Position position) {
+  static OldCurrentLocation? from(
+      List<Placemark> placemarks, Position position) {
     if (placemarks.isEmpty) return null;
     final state = CollectionUtils.firstOrNull<Placemark, String>(
       placemarks.toList(),
@@ -38,7 +39,7 @@ class CurrentLocation {
 
     if (state == null && city == null) return null;
 
-    return CurrentLocation(
+    return OldCurrentLocation(
       latitue: position.latitude,
       longitude: position.longitude,
       state: state,

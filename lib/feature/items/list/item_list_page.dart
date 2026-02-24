@@ -5,6 +5,7 @@ import 'package:deehelp/core/ui/widgets/buttons/buttons_export.dart';
 import 'package:deehelp/feature/items/detail/provider/selected_item_provider.dart';
 import 'package:deehelp/feature/items/items_router.dart';
 import 'package:deehelp/feature/items/list/item_list_state.dart';
+import 'package:deehelp/feature/items/list/item_listing_args.dart';
 import 'package:deehelp/feature/items/list/widgets/item_list_shimmer.dart';
 import 'package:deehelp/feature/items/list/widgets/item_list_view.dart';
 import 'package:deehelp/module/auth/external/di/authenticated_user_provider.dart';
@@ -15,7 +16,11 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
 class ItemListPage extends ConsumerStatefulWidget {
-  const ItemListPage({super.key});
+  final ItemListingArgs? args;
+  const ItemListPage({
+    super.key,
+    this.args,
+  });
 
   @override
   ConsumerState<ItemListPage> createState() => _ItemListPageState();
@@ -44,6 +49,11 @@ class _ItemListPageState extends ConsumerState<ItemListPage> {
         success: (value) => ItemListView(
           items: value.items,
           press: (item) async {
+            if (widget.args != null && widget.args!.isAddingIncident) {
+              context.pop(item);
+              return;
+            }
+
             ref.watch(selectedItemProvider.notifier).state = item;
             final result = await context.push<Map<String, dynamic>?>(
               ItemsRouter.detail,

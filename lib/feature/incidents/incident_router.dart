@@ -1,4 +1,7 @@
 import 'package:deehelp/feature/incidents/list/incident_list_page.dart';
+import 'package:deehelp/feature/incidents/report/report_incident_page.dart';
+import 'package:deehelp/feature/incidents/report/report_incident_successfully_page.dart';
+import 'package:deehelp/feature/incidents/report/widgets/success/regiter_incident_success_args.dart';
 import 'package:deehelp/feature/incidents/update/update_incident_args.dart';
 import 'package:deehelp/feature/incidents/update/update_incident_page.dart';
 import 'package:deehelp/feature/incidents/update/update_incident_page_tile.dart';
@@ -14,6 +17,13 @@ class IncidentRouter {
   IncidentRouter._();
 
   static List<RouteBase> get routers => [
+        GoRoute(
+          path: register,
+          pageBuilder: (context, state) => slideTransitionPage(
+            key: state.pageKey,
+            child: const ReportIncidentPage(),
+          ),
+        ),
         GoRoute(
           path: list,
           pageBuilder: (context, state) => slideTransitionPage(
@@ -40,16 +50,17 @@ class IncidentRouter {
             );
           },
         ),
-        // GoRoute(
-        //   path: update,
-        //   pageBuilder: (context, state) {
-        //     final extra = state.extra as Map<String, dynamic>;
-        //     final incident = extra['args'] as IncidentOutput;
-        //     return slideTransitionPage(
-        //       key: state.pageKey,
-        //       child: IncidentDetailPage(incident: incident),
-        //     );
-        //   },
-        // ),
+        GoRoute(
+          path: success,
+          pageBuilder: (context, state) {
+            final args = state.extra as RegiterIncidentSuccessArgs;
+            return slideTransitionPage(
+              key: state.pageKey,
+              child: ReportIncidentSuccessfullyPage(
+                args: args,
+              ),
+            );
+          },
+        ),
       ];
 }

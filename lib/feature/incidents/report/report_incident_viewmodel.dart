@@ -1,6 +1,10 @@
+import 'package:deehelp/core/services/permissions/location/domain/current_location.dart';
+import 'package:deehelp/core/services/permissions/location/providers/location_providers.dart';
+import 'package:deehelp/core/utils/enum_utils.dart';
+import 'package:deehelp/feature/incidents/report/widgets/success/regiter_incident_success_args.dart';
+import 'package:deehelp/feature/items/item_type.dart';
 import 'package:deehelp/old_core/ui/extensions/string_extension.dart';
 import 'package:deehelp/old_core/handlers/handle_command.dart';
-import 'package:deehelp/old_core/services/location/current_location.dart';
 import 'package:deehelp/module/auth/domain/entity/authenticated_user.dart';
 import 'package:deehelp/module/incident/domain/entity/incident_local.dart';
 import 'package:deehelp/module/incident/domain/enum/incident_status.dart';
@@ -27,7 +31,12 @@ class ReportIncidentViewmodel extends StateNotifier<AddIncidentState> {
   })  : _addIncidentUsecase = addIncidentImmediatelyUsecase,
         _ref = ref,
         _authenticatedUser = authenticatedUser,
-        super(AddIncidentState.initial());
+        super(AddIncidentState.initial()) {
+    final location = ref.read(currentLocationProvider.notifier).state;
+    if (location != null) {
+      addCurrentPlace(location);
+    }
+  }
 
   void clear() => state = state.copyWith(errorMessage: null);
 
@@ -38,12 +47,13 @@ class ReportIncidentViewmodel extends StateNotifier<AddIncidentState> {
   void selectAlertType(TypeAlert type) => state = state.copyWith(type: type);
 
   void addCurrentPlace(CurrentLocation? place) {
+    debugPrint("MY ADDREESS = ${place?.address}");
     if (place == null) return;
     state.stateController?.text = place.state ?? '';
     state.cityController?.text = place.city ?? '';
     state = state.copyWith(
-      stateController: state.stateController,
-      cityController: state.cityController,
+      currentPlace: place,
+      fullAddress: place.address,
     );
   }
 
@@ -57,7 +67,7 @@ class ReportIncidentViewmodel extends StateNotifier<AddIncidentState> {
       occurredAt: DateTime.now(),
       occurredAtTime: TimeOfDay.now(),
       local: IncidentLocal(
-        address: null,
+        address: state.fullAddress,
         city: state.cityController?.text,
         state: state.stateController?.text,
       ),
@@ -65,11 +75,11 @@ class ReportIncidentViewmodel extends StateNotifier<AddIncidentState> {
     _save(dto);
   }
 
-  void saveImmediatelly() {
-    // state = state.copyWith(isLoading: true, type: TypeAlert.immediately);
-    _ref.read(reportIncidentEventProvider.notifier).state =
-        const ReportIncidentEvent.loadProgress();
-  }
+  // void saveImmediatelly() {
+  //   // state = state.copyWith(isLoading: true, type: TypeAlert.immediately);
+  // _ref.read(reportIncidentEventProvider.notifier).state =
+  //     const ReportIncidentEvent.loadProgress();
+  // }
 
   void saveDetailed() async {
     state = state.copyWith(isLoading: true, type: TypeAlert.detailed);
@@ -167,6 +177,8 @@ class ReportIncidentViewmodel extends StateNotifier<AddIncidentState> {
   }
 
   void _save(AddIncidentDto dto) async {
+    _ref.read(reportIncidentEventProvider.notifier).state =
+        const ReportIncidentEvent.loadProgress();
     _logger.info("Iniciando chamada de salvar incidente...");
     await HandleCommand.execute<String, AddIncidentState>(
       updateState: (newState) => state = newState,
@@ -176,8 +188,16 @@ class ReportIncidentViewmodel extends StateNotifier<AddIncidentState> {
       },
       onSuccess: (alertId) {
         _logger.info("Incident salvo com sucesso");
+        final args = RegiterIncidentSuccessArgs(
+          alertId: alertId,
+          item: dto.product,
+          itemType: EnumUtils.fromString(ItemType.values, dto.product.type),
+          local: dto.local,
+          createdAt: dto.occurredAt,
+          typeAlert: dto.type,
+        );
         _ref.read(reportIncidentEventProvider.notifier).state =
-            const ReportIncidentEvent.successfully();
+            ReportIncidentEvent.successfully(args);
         return state;
       },
       onError: (error) {

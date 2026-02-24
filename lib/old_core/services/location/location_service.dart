@@ -169,7 +169,7 @@ class LocationService {
   }
 
   // Método melhorado para obter local atual com tratamento de erros
-  Future<CurrentLocation?> getCurrentLocation() async {
+  Future<OldCurrentLocation?> getCurrentLocation() async {
     try {
       // final permission = await requestLocationPermission();
       // if (permission == LocationStatus.permissionDeniedForever ||
@@ -208,7 +208,7 @@ class LocationService {
         localeIdentifier: "pt_BR",
       );
 
-      return CurrentLocation.from(placemarks, position);
+      return OldCurrentLocation.from(placemarks, position);
     } catch (e) {
       rethrow;
     }

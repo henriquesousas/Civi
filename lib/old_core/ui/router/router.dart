@@ -51,6 +51,8 @@ import 'package:deehelp/test_page9.dart';
 import 'package:deehelp/test_page_dark.dart';
 import 'package:deehelp/teste_home.dart';
 import 'package:deehelp/teste_incident_loading.dart';
+import 'package:deehelp/teste_nickname_page.dart';
+import 'package:deehelp/teste_nickname_required_page.dart';
 import 'package:deehelp/teste_page_contato.dart';
 import 'package:deehelp/teste_page_login.dart';
 import 'package:deehelp/teste_sheel_page.dart';
@@ -160,12 +162,12 @@ var goRouterProvider = Provider<GoRouter>(
             // child: TestPage6(),
             // child: AddProductSuccessPage()
             //Detalhes da ocorrencia
-            child: TestPage7(),
+            // child: TestPage7(),
             // Reportat incident
             // child: TestOcorrencia(),
             // child: TestPage8(),
             // ReportIncidentSuccess
-            // child: const TestPage9(),
+            child: const TestPage9(),
             // Splash
             // child: const TestPage10(),
             // Welcome
@@ -182,6 +184,8 @@ var goRouterProvider = Provider<GoRouter>(
             // child: TesteHome(),
             // child: TesteShellPage(),
             // child: TesteIncidentLoading(),
+            // child: TesteNicknamePage(),
+            // child: TesteNicknameRequiredPage(),
           ),
         ),
         GoRoute(

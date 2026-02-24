@@ -1,3 +1,4 @@
+import 'package:deehelp/core/ui/styles/export_style.dart';
 import 'package:deehelp/old_core/ui/theme/app_colors.dart';
 import 'package:deehelp/old_core/ui/theme/app_text_styles.dart';
 import 'package:flutter/material.dart';
@@ -214,9 +215,10 @@ class _UIHoldConfirmButtonState extends State<UIHoldConfirmButton>
                         ), // Key to switch back to progress text
                         textAlign: TextAlign.center,
                         style: widget.textStyle ??
-                            context.appTextStyles.bodyTextStyle1.copyWith(
+                            context.appText.button.copyWith(
+                              fontWeight: FontWeight.w600,
                               color: (progressController.value * 100) > 40
-                                  ? AppColors.whiteColor
+                                  ? Colors.white
                                   : widget.textColor ?? const Color(0xFF475569),
                             ),
                       ),

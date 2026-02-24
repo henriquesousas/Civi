@@ -173,7 +173,7 @@ extension LocationStatePatterns on LocationState {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? loading,
-    TResult Function(CurrentLocation? location)? granted,
+    TResult Function(OldCurrentLocation? location)? granted,
     TResult Function()? serviceDisabled,
     TResult Function()? checking,
     TResult Function()? denied,
@@ -215,7 +215,7 @@ extension LocationStatePatterns on LocationState {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() loading,
-    required TResult Function(CurrentLocation? location) granted,
+    required TResult Function(OldCurrentLocation? location) granted,
     required TResult Function() serviceDisabled,
     required TResult Function() checking,
     required TResult Function() denied,
@@ -255,7 +255,7 @@ extension LocationStatePatterns on LocationState {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? loading,
-    TResult? Function(CurrentLocation? location)? granted,
+    TResult? Function(OldCurrentLocation? location)? granted,
     TResult? Function()? serviceDisabled,
     TResult? Function()? checking,
     TResult? Function()? denied,
@@ -306,7 +306,7 @@ class _Loading implements LocationState {
 class _Granted implements LocationState {
   const _Granted(this.location);
 
-  final CurrentLocation? location;
+  final OldCurrentLocation? location;
 
   /// Create a copy of LocationState
   /// with the given fields replaced by the non-null parameter values.
@@ -339,7 +339,7 @@ abstract mixin class _$GrantedCopyWith<$Res>
   factory _$GrantedCopyWith(_Granted value, $Res Function(_Granted) _then) =
       __$GrantedCopyWithImpl;
   @useResult
-  $Res call({CurrentLocation? location});
+  $Res call({OldCurrentLocation? location});
 }
 
 /// @nodoc
@@ -359,7 +359,7 @@ class __$GrantedCopyWithImpl<$Res> implements _$GrantedCopyWith<$Res> {
       freezed == location
           ? _self.location
           : location // ignore: cast_nullable_to_non_nullable
-              as CurrentLocation?,
+              as OldCurrentLocation?,
     ));
   }
 }

@@ -13,7 +13,7 @@ class LocationState with _$LocationState {
 
   // const factory LocationState.initial() = _Initial;
   const factory LocationState.loading() = _Loading;
-  const factory LocationState.granted(CurrentLocation? location) = _Granted;
+  const factory LocationState.granted(OldCurrentLocation? location) = _Granted;
   const factory LocationState.serviceDisabled() = _ServiceDisabled;
   const factory LocationState.checking() = _Checking;
   const factory LocationState.denied() = _Denied;

@@ -144,7 +144,7 @@ extension ReportIncidentEventPatterns on ReportIncidentEvent {
 
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? successfully,
+    TResult Function(RegiterIncidentSuccessArgs args)? successfully,
     TResult Function(String error)? error,
     TResult Function()? loadProgress,
     required TResult orElse(),
@@ -152,7 +152,7 @@ extension ReportIncidentEventPatterns on ReportIncidentEvent {
     final _that = this;
     switch (_that) {
       case ReportSuccessfully() when successfully != null:
-        return successfully();
+        return successfully(_that.args);
       case ReportError() when error != null:
         return error(_that.error);
       case ReportLoadProgress() when loadProgress != null:
@@ -177,14 +177,14 @@ extension ReportIncidentEventPatterns on ReportIncidentEvent {
 
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function() successfully,
+    required TResult Function(RegiterIncidentSuccessArgs args) successfully,
     required TResult Function(String error) error,
     required TResult Function() loadProgress,
   }) {
     final _that = this;
     switch (_that) {
       case ReportSuccessfully():
-        return successfully();
+        return successfully(_that.args);
       case ReportError():
         return error(_that.error);
       case ReportLoadProgress():
@@ -206,14 +206,14 @@ extension ReportIncidentEventPatterns on ReportIncidentEvent {
 
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? successfully,
+    TResult? Function(RegiterIncidentSuccessArgs args)? successfully,
     TResult? Function(String error)? error,
     TResult? Function()? loadProgress,
   }) {
     final _that = this;
     switch (_that) {
       case ReportSuccessfully() when successfully != null:
-        return successfully();
+        return successfully(_that.args);
       case ReportError() when error != null:
         return error(_that.error);
       case ReportLoadProgress() when loadProgress != null:
@@ -227,20 +227,64 @@ extension ReportIncidentEventPatterns on ReportIncidentEvent {
 /// @nodoc
 
 class ReportSuccessfully implements ReportIncidentEvent {
-  const ReportSuccessfully();
+  const ReportSuccessfully(this.args);
+
+  final RegiterIncidentSuccessArgs args;
+
+  /// Create a copy of ReportIncidentEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @pragma('vm:prefer-inline')
+  $ReportSuccessfullyCopyWith<ReportSuccessfully> get copyWith =>
+      _$ReportSuccessfullyCopyWithImpl<ReportSuccessfully>(this, _$identity);
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is ReportSuccessfully);
+        (other.runtimeType == runtimeType &&
+            other is ReportSuccessfully &&
+            (identical(other.args, args) || other.args == args));
   }
 
   @override
-  int get hashCode => runtimeType.hashCode;
+  int get hashCode => Object.hash(runtimeType, args);
 
   @override
   String toString() {
-    return 'ReportIncidentEvent.successfully()';
+    return 'ReportIncidentEvent.successfully(args: $args)';
+  }
+}
+
+/// @nodoc
+abstract mixin class $ReportSuccessfullyCopyWith<$Res>
+    implements $ReportIncidentEventCopyWith<$Res> {
+  factory $ReportSuccessfullyCopyWith(
+          ReportSuccessfully value, $Res Function(ReportSuccessfully) _then) =
+      _$ReportSuccessfullyCopyWithImpl;
+  @useResult
+  $Res call({RegiterIncidentSuccessArgs args});
+}
+
+/// @nodoc
+class _$ReportSuccessfullyCopyWithImpl<$Res>
+    implements $ReportSuccessfullyCopyWith<$Res> {
+  _$ReportSuccessfullyCopyWithImpl(this._self, this._then);
+
+  final ReportSuccessfully _self;
+  final $Res Function(ReportSuccessfully) _then;
+
+  /// Create a copy of ReportIncidentEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @pragma('vm:prefer-inline')
+  $Res call({
+    Object? args = null,
+  }) {
+    return _then(ReportSuccessfully(
+      null == args
+          ? _self.args
+          : args // ignore: cast_nullable_to_non_nullable
+              as RegiterIncidentSuccessArgs,
+    ));
   }
 }
 
