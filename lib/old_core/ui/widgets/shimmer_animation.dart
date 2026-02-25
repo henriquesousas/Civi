@@ -18,7 +18,7 @@ class ShimmerAnimation extends StatelessWidget {
       enableSwitchAnimation: true,
       ignoreContainers: false,
       ignorePointers: false,
-      justifyMultiLineText: false,
+      justifyMultiLineText: true,
       containersColor: Theme.of(context).colorScheme.outlineVariant,
       effect: ShimmerEffect(
         baseColor: Theme.of(context).colorScheme.outline.withValues(alpha: 0.3),

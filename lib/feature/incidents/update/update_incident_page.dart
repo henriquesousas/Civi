@@ -92,6 +92,19 @@ class _UpdateIncidentPageState extends ConsumerState<UpdateIncidentPage> {
     return Scaffold(
       appBar: DefaultAppBar(
         title: "Detalhes do roubo",
+        showBackButton: true,
+        actions: [
+          IconButton(
+            onPressed: () {},
+            icon: Icon(
+              Icons.verified_rounded,
+              color: state.updatedValue!.visibilty
+                  ? AppColors.success
+                  : AppColors.grey,
+              size: IconSizes.sm,
+            ),
+          )
+        ],
         press: () => context.pop(),
       ),
       body: ListView(
@@ -106,7 +119,7 @@ class _UpdateIncidentPageState extends ConsumerState<UpdateIncidentPage> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      state.updatedValue!.product.name,
+                      '${state.updatedValue!.product.name} roubado(a)',
                       style: context.appText.headerlg,
                     ),
                     const SizedBox(height: SpacingSize.sm),

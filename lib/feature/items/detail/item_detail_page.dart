@@ -112,6 +112,7 @@ class _ItemDetailPageState extends ConsumerState<ItemDetailPage> {
     return Scaffold(
       appBar: DefaultAppBar(
         title: "Detalhes do item",
+        showBackButton: true,
         press: () => context.pop(),
         actions: item.type != ItemType.phone.name
             ? [
@@ -362,8 +363,9 @@ class _ItemDetailPageState extends ConsumerState<ItemDetailPage> {
       barrierDismissible: false,
       barrierColor: Colors.black.withValues(alpha: 0.15), // leve escurecido
       builder: (_) {
-        return WillPopScope(
-          onWillPop: () async => false, // bloqueia botão voltar
+        return PopScope(
+          // onWillPop: () async => false, // bloqueia botão voltar
+          canPop: false,
           child: Stack(
             children: [
               // Blur no fundo

@@ -33,8 +33,8 @@ class MyItemsPage extends StatelessWidget {
 }
 
 // ✅ 4ª aba: Profile
-class ProfilePage extends StatelessWidget {
-  const ProfilePage({super.key});
+class OldProfilePage extends StatelessWidget {
+  const OldProfilePage({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -70,20 +70,17 @@ class _TesteShellPageState extends State<TesteShellPage> {
     TesteHome(), // 1
     SearchPage2(), // 2
     MyItemsPage(), // 3
-    ProfilePage(), // 4
+    OldProfilePage(), // 4
   ];
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: _bg,
-
-      // ✅ preserva estado das telas
       body: IndexedStack(
         index: index,
         children: _pages,
       ),
-
       bottomNavigationBar: _PremiumBottomNav(
         currentIndex: index,
         onChanged: (i) => setState(() => index = i),

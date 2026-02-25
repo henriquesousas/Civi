@@ -46,7 +46,11 @@ class _ItemPhotoUpdateState extends ConsumerState<ItemPhotoUpdate> {
     );
 
     return Scaffold(
-      appBar: DefaultAppBar(title: "Alterar fotos", press: () => context.pop()),
+      appBar: DefaultAppBar(
+        title: "Alterar fotos",
+        press: () => context.pop(),
+        showBackButton: true,
+      ),
       body: ListView(
         padding: const EdgeInsets.all(LayoutSpacingSize.card),
         children: [

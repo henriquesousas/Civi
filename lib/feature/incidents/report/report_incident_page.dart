@@ -3,40 +3,29 @@ import 'dart:ui';
 
 import 'package:deehelp/core/extension/color_extension.dart';
 import 'package:deehelp/core/extension/exports_extension.dart';
-import 'package:deehelp/core/services/permissions/location/export_location.dart';
 import 'package:deehelp/core/theme/export_theme.dart';
 import 'package:deehelp/core/ui/styles/export_style.dart';
 import 'package:deehelp/core/ui/widgets/appbar/default_app_bar.dart';
-import 'package:deehelp/core/ui/widgets/buttons/button_hold.dart';
 import 'package:deehelp/core/ui/widgets/cards/card_exports.dart';
 import 'package:deehelp/core/ui/widgets/icon/export_icon.dart';
 import 'package:deehelp/core/utils/enum_utils.dart';
-import 'package:deehelp/feature/about/widgets/info_card.dart';
 import 'package:deehelp/feature/incidents/incident_router.dart';
 import 'package:deehelp/feature/incidents/report/report_incident_viewmodel.dart';
 import 'package:deehelp/feature/incidents/report/widgets/register/expandable_card.dart';
 import 'package:deehelp/feature/incidents/report/widgets/register/item_card.dart';
-import 'package:deehelp/feature/incidents/report/widgets/success/regiter_incident_success_args.dart';
 import 'package:deehelp/feature/items/item_type.dart';
 import 'package:deehelp/feature/items/items_router.dart';
 import 'package:deehelp/feature/items/register/presentation/widgets/card_page.dart';
 import 'package:deehelp/feature/items/register/presentation/widgets/section_title.dart';
+import 'package:deehelp/feature/profile/item_list_router_args.dart';
 import 'package:deehelp/module/incident/domain/enum/type_alert.dart';
-import 'package:deehelp/old_core/ui/router/app_router.dart';
-import 'package:deehelp/old_core/services/location/location_service.dart';
 import 'package:deehelp/old_core/ui/widgets/button/ui_hold_confirm_button.dart';
-import 'package:deehelp/old_core/ui/widgets/card/ui_custom_scaffold.dart';
 import 'package:deehelp/feature/incidents/providers/report_incident_event_provider.dart';
 import 'package:deehelp/feature/incidents/providers/report_incident_viewmodel_provider.dart';
 import 'package:deehelp/feature/incidents/report/events/report_incident_event.dart';
-import 'package:deehelp/feature/incidents/report/widgets/register/report_incident_card_detailed.dart';
-import 'package:deehelp/feature/incidents/report/widgets/register/report_incident_card_immediately.dart';
-import 'package:deehelp/feature/incidents/report/widgets/register/card_select_image.dart';
 import 'package:deehelp/feature/incidents/report/widgets/error/incident_error_overlay.dart';
-import 'package:deehelp/feature/incidents/report/widgets/register/report_incident_loading_progress_overlay.dart';
 import 'package:deehelp/module/item/domain/entities/product.dart';
 import 'package:deehelp/feature/items/list/item_listing_args.dart';
-import 'package:deehelp/old_features/products/presentation/views/listing/product_listing_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
@@ -120,7 +109,7 @@ class _AddIncidentPageState extends ConsumerState<ReportIncidentPage>
   Future<void> _pickItem(ReportIncidentViewmodel viewModel) async {
     final product = await context.push<Product?>(
       ItemsRouter.list,
-      extra: ItemListingArgs(isAddingIncident: true),
+      extra: ItemListRouteArgs(args: ItemListingArgs(isAddingIncident: true)),
     );
     if (product != null) {
       viewModel.selectProduct(product);
@@ -140,6 +129,7 @@ class _AddIncidentPageState extends ConsumerState<ReportIncidentPage>
     return Scaffold(
       appBar: DefaultAppBar(
         title: 'Reportar incidente',
+        showBackButton: true,
         press: () => context.pop(),
       ),
       body: ListView(

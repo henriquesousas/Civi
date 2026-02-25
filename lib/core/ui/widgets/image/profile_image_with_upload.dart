@@ -50,8 +50,8 @@ class _ProfileImageWithUploadButtonWidgetState
               border: Border.all(
                 color: widget.showBorder
                     ? context.primaryColor
-                    : Colors.transparent,
-                width: 2,
+                    : context.primaryColor,
+                width: 1,
               ),
               borderRadius: BorderRadius.circular(RadiusSize.xxl),
             ),

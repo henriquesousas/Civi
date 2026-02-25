@@ -32,14 +32,19 @@ class AccountCard extends StatelessWidget {
       ),
       child: Row(
         children: [
-          if (imageUrl != null) ...[
-            ProfileImageWithUploadButtonWidget(
-              imageUrl: imageUrl,
-              imageAlt: name,
-            ),
-          ] else ...[
-            HomeAvatarBadge(initials: "PS", onTap: () {})
-          ],
+          // if (imageUrl != null) ...[
+          //   ProfileImageWithUploadButtonWidget(
+          //     imageUrl: imageUrl,
+          //     imageAlt: name,
+          //   ),
+          // ] else ...[
+          //   // HomeAvatarBadge(initials: "PS", onTap: () {})
+          // ],
+
+          ProfileImageWithUploadButtonWidget(
+            imageUrl: imageUrl,
+            imageAlt: name,
+          ),
 
           const SizedBox(width: SpacingSize.lg),
           Expanded(

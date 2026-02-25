@@ -142,6 +142,7 @@ class _ItemRegisterPageViewState extends ConsumerState<ItemRegisterPageView> {
       ),
       appBar: DefaultAppBar(
         title: "Cadastrar",
+        showBackButton: true,
         // leading: const Icon(Icons.close),
         press: () {
           if (_currentPage == 0) context.pop();

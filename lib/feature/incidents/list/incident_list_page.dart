@@ -41,6 +41,7 @@ class _ListingIncidentPageState extends ConsumerState<IncidentListPage> {
     return Scaffold(
       appBar: DefaultAppBar(
         title: "Minhas ocorrências",
+        showBackButton: true,
         press: () => context.pop(),
       ),
       bottomNavigationBar: _bottomBar(),

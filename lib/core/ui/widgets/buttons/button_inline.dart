@@ -2,9 +2,11 @@ import 'package:flutter/material.dart';
 
 class ButtonInline extends StatelessWidget {
   final String text;
+  final Color? textColor;
   final VoidCallback press;
 
-  const ButtonInline({super.key, required this.press, required this.text});
+  const ButtonInline(
+      {super.key, required this.press, required this.text, this.textColor});
 
   @override
   Widget build(BuildContext context) {
@@ -13,7 +15,7 @@ class ButtonInline extends StatelessWidget {
       child: Text(
         text,
         style: const TextStyle(fontWeight: FontWeight.w900).copyWith(
-          color: Colors.white,
+          color: textColor ?? Colors.white,
         ),
       ),
     );

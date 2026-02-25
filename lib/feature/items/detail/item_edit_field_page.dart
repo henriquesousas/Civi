@@ -62,6 +62,7 @@ class _ItemEditFieldPageState extends ConsumerState<ItemEditFieldPage> {
     return Scaffold(
       appBar: DefaultAppBar(
         title: a.title,
+        showBackButton: true,
         press: () => _pop(),
       ),
       body: ListView(

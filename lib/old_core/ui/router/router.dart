@@ -12,6 +12,7 @@ import 'package:deehelp/feature/incidents/incident_router.dart';
 import 'package:deehelp/feature/items/items_router.dart';
 import 'package:deehelp/feature/location/export_location.dart';
 import 'package:deehelp/feature/profile/export_profile.dart';
+import 'package:deehelp/feature/shell/app_sheel_router.dart';
 import 'package:deehelp/feature/sos/sos_router.dart';
 import 'package:deehelp/feature/splash/splash_router.dart';
 import 'package:deehelp/old_core/ui/router/app_router.dart';
@@ -103,7 +104,7 @@ var goRouterProvider = Provider<GoRouter>(
             return SplashRouter.path;
 
           case AppStatus.unauthenticated:
-            return isPublicRoute ? HomeRouter.path : null;
+            return isPublicRoute ? AppSheelRouter.path : null;
 
           case AppStatus.needLocation:
             return LocationRouter.locationDenied;
@@ -112,10 +113,11 @@ var goRouterProvider = Provider<GoRouter>(
             return LocationRouter.gpsDisabled;
 
           case AppStatus.ready:
-            return isPublicRoute ? HomeRouter.path : null;
+            return isPublicRoute ? AppSheelRouter.path : null;
         }
       },
       routes: [
+        ...AppSheelRouter.routers,
         ...SplashRouter.routers,
         ...LocationRouter.routers,
         ...HomeRouter.routers,
@@ -167,7 +169,7 @@ var goRouterProvider = Provider<GoRouter>(
             // child: TestOcorrencia(),
             // child: TestPage8(),
             // ReportIncidentSuccess
-            child: const TestPage9(),
+            // child: const TestPage9(),
             // Splash
             // child: const TestPage10(),
             // Welcome
@@ -181,7 +183,7 @@ var goRouterProvider = Provider<GoRouter>(
             // child: const TestPageDark(),
             // child: const MapPage(),
             // child: TestePageContato(),
-            // child: TesteHome(),
+            child: TesteHome(),
             // child: TesteShellPage(),
             // child: TesteIncidentLoading(),
             // child: TesteNicknamePage(),
@@ -237,13 +239,13 @@ var goRouterProvider = Provider<GoRouter>(
           path: AppRouter.map,
           builder: (context, state) => const MapPage(),
         ),
-        GoRoute(
-          path: AppRouter.dashboard,
-          pageBuilder: (context, state) => slideTransitionPage(
-            key: state.pageKey,
-            child: const DashsboardPage(),
-          ),
-        ),
+        // GoRoute(
+        //   path: AppRouter.dashboard,
+        //   pageBuilder: (context, state) => slideTransitionPage(
+        //     key: state.pageKey,
+        //     child: const DashsboardPage(),
+        //   ),
+        // ),
         GoRoute(
           path: AppRouter.faq,
           pageBuilder: (context, state) => slideTransitionPage(

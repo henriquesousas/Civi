@@ -14,7 +14,7 @@ class DefaultAppBar extends StatelessWidget implements PreferredSizeWidget {
     required this.title,
     required this.press,
     this.leading,
-    this.showBackButton = true,
+    this.showBackButton = false,
     this.actions,
   });
 

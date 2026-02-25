@@ -12,6 +12,8 @@ class AppColors {
   static const Color green = Color(0xFF009561);
   static const Color danger = Color(0xFFE53935);
 
+  static const Color success = Color(0xFF16A34A);
+
   static const shadow = BoxShadow(
     color: Color(0x12000000),
     blurRadius: 18,

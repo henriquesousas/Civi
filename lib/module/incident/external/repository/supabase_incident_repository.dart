@@ -35,7 +35,7 @@ class SupabaseIncidentRepository extends IncidentRepository {
       "state": dto.state,
       "approximate_address": dto.address,
       'status': dto.status.name,
-      'visibility': dto.visibility,
+      // 'visibility': dto.visibility,
     };
     await _supabaseClient.from(_table).update(updateData).eq("id", incidentId);
     return Result.success(const Unit());
@@ -67,8 +67,9 @@ class SupabaseIncidentRepository extends IncidentRepository {
     final term = _normalizeSearchTerm(filter.term);
     var query = _supabaseClient
         .from(_table)
-        .select("*,product!inner (id,name,code, product_images (*))")
-        .eq('visibility', true)
+        .select(
+            "*,product!inner (id,name,code,color, brand, type, obs, product_images (*))")
+        // .eq('visibility', true)
         .eq('status', filter.status.value);
 
     if (_looksLikeAlertId(term)) {
@@ -102,8 +103,9 @@ class SupabaseIncidentRepository extends IncidentRepository {
 
     var query = _supabaseClient
         .from(_table)
-        .select("*,product!inner (id,name,code, product_images (*))")
-        .eq('visibility', true)
+        .select(
+            "*,product!inner (id,name,code,color, brand, type, obs, product_images (*))")
+        // .eq('visibility', true)
         .eq('status', IncidentStatus.active.value);
 
     if (!term.isNullOrEmpty()) {
@@ -144,22 +146,3 @@ class SupabaseIncidentRepository extends IncidentRepository {
     return conditions;
   }
 }
-
-
-  // bool _looksLikeProductCode(String term) {
-  //   final cleanTerm = term.replaceAll(RegExp(r'[\s\-_]'), '').toUpperCase();
-
-  //   // Padrões comuns de códigos:
-  //   // 1. Letras + números (ex: ABC123, DND0171)
-  //   // 2. Padrão específico como "ABC-1234"
-  //   // 3. Contém números e pelo menos uma letra
-  //   //INC202123 nao é uma placa
-
-  //   final letterNumberPattern = RegExp(r'^[A-Z]+\d+$|^\d+[A-Z]+$');
-  //   final containsNumbers = RegExp(r'\d').hasMatch(cleanTerm);
-  //   final containsLetters = RegExp(r'[A-Z]').hasMatch(cleanTerm);
-
-  //   return letterNumberPattern.hasMatch(cleanTerm) ||
-  //       (containsNumbers && containsLetters && cleanTerm.length <= 20);
-  // }
-

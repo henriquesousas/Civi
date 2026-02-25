@@ -8,7 +8,6 @@ import 'package:deehelp/feature/items/list/item_list_state.dart';
 import 'package:deehelp/feature/items/list/item_listing_args.dart';
 import 'package:deehelp/feature/items/list/widgets/item_list_shimmer.dart';
 import 'package:deehelp/feature/items/list/widgets/item_list_view.dart';
-import 'package:deehelp/module/auth/external/di/authenticated_user_provider.dart';
 import 'package:deehelp/module/item/di/item_viewmodel_provider.dart';
 import 'package:deehelp/old_core/ui/widgets/empty/empty_state_widget.dart';
 import 'package:flutter/material.dart';
@@ -17,9 +16,11 @@ import 'package:go_router/go_router.dart';
 
 class ItemListPage extends ConsumerStatefulWidget {
   final ItemListingArgs? args;
+  final bool? showBackButton;
   const ItemListPage({
     super.key,
     this.args,
+    this.showBackButton = false,
   });
 
   @override
@@ -27,14 +28,14 @@ class ItemListPage extends ConsumerStatefulWidget {
 }
 
 class _ItemListPageState extends ConsumerState<ItemListPage> {
-  @override
-  void initState() {
-    super.initState();
-    WidgetsBinding.instance.addPostFrameCallback((_) {
-      final userId = ref.watch(authenticatedUserProvider)?.id;
-      ref.read(itemListViewmodelProvider.notifier).getProducts(userId!);
-    });
-  }
+  // @override
+  // void initState() {
+  //   super.initState();
+  //   WidgetsBinding.instance.addPostFrameCallback((_) {
+  //     final userId = ref.read(authenticatedUserProvider)?.id;
+  //     ref.read(itemListViewmodelProvider.notifier).getProducts(userId!);
+  //   });
+  // }
 
   @override
   Widget build(BuildContext context) {
@@ -43,6 +44,7 @@ class _ItemListPageState extends ConsumerState<ItemListPage> {
       bottomNavigationBar: _bottomBar(state),
       appBar: DefaultAppBar(
         title: "Meus itens",
+        showBackButton: widget.showBackButton ?? false,
         press: () => context.pop(),
       ),
       body: state.maybeMap(

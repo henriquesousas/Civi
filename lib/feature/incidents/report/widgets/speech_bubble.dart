@@ -7,11 +7,17 @@ import 'package:lottie/lottie.dart';
 class OwlSadSpeechBubble extends StatelessWidget {
   final String? file;
   final String message;
+  final bool primary;
+  final double? width;
+  final double? height;
 
   const OwlSadSpeechBubble({
     super.key,
     required this.message,
     this.file,
+    this.primary = false,
+    this.width,
+    this.height,
   });
 
   @override
@@ -22,8 +28,8 @@ class OwlSadSpeechBubble extends StatelessWidget {
         /// 🦉 CORUJA
         Lottie.asset(
           file ?? 'assets/lottie/owl_stopped.json',
-          width: ImageSize.xxl,
-          height: ImageSize.xxl,
+          width: width ?? ImageSize.xxl,
+          height: height ?? ImageSize.xxl,
           repeat: true,
         ),
 
@@ -31,6 +37,7 @@ class OwlSadSpeechBubble extends StatelessWidget {
         Flexible(
           child: _SpeechBubble(
             message: message,
+            primary: primary,
           ),
         ),
       ],
@@ -40,12 +47,14 @@ class OwlSadSpeechBubble extends StatelessWidget {
 
 class _SpeechBubble extends StatelessWidget {
   final String message;
+  final bool primary;
 
-  const _SpeechBubble({required this.message});
+  const _SpeechBubble({required this.message, required this.primary});
 
   @override
   Widget build(BuildContext context) {
-    const bubbleColor = Color(0xFFF4F7FF);
+    // const bubbleColor = Color(0xFFF4F7FF);
+    var bubbleColor = primary ? context.primaryColor : const Color(0xFFF4F7FF);
 
     return Stack(
       clipBehavior: Clip.none,
@@ -76,7 +85,8 @@ class _SpeechBubble extends StatelessWidget {
             style: context.appText.caption.copyWith(
               height: 1.5,
               fontWeight: FontWeight.w500,
-              color: context.onSurface,
+              // color: context.onSurface,
+              color: primary ? Colors.white : context.onSurface,
             ),
           ),
         ),
@@ -110,7 +120,7 @@ class _BubbleTailPainter extends CustomPainter {
     path.lineTo(size.width, size.height);
     path.close();
 
-    canvas.drawShadow(path, Colors.black.withValues(alpha: 0.12), 6, true);
+    // canvas.drawShadow(path, Colos.black.withValues(alpha: 0.12), 6, true);
     canvas.drawPath(path, paint);
   }
 

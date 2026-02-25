@@ -1,6 +1,6 @@
 import 'dart:async';
 
-import 'package:deehelp/old_core/services/location/current_location.dart';
+import 'package:deehelp/core/services/permissions/location/domain/current_location.dart';
 import 'package:deehelp/old_core/ui/extensions/result_extension.dart';
 import 'package:deehelp/module/incident/domain/enum/incident_status.dart';
 import 'package:deehelp/module/incident/domain/usecase/incident_output.dart';
@@ -8,20 +8,19 @@ import 'package:deehelp/module/incident/domain/usecase/listing/incident_filter.d
 import 'package:deehelp/module/incident/domain/usecase/listing/get_recent_incidents_by_location_usecase.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-class DashboardViewmodel
-    extends StateNotifier<AsyncValue<List<IncidentOutput>>> {
+class HomeViewmodel extends StateNotifier<AsyncValue<List<IncidentOutput>>> {
   List<IncidentOutput> _cache = [];
   bool _hasCache = false;
   DateTime? _cacheTimestamp;
   static const Duration _cacheValidityDuration = Duration(minutes: 5);
   final GetRecentIncidentsByLocationUseCase _getIncidentUsecase;
 
-  DashboardViewmodel(
+  HomeViewmodel(
       {required GetRecentIncidentsByLocationUseCase getIncidentUsecase})
       : _getIncidentUsecase = getIncidentUsecase,
         super(const AsyncValue.loading());
 
-  Future<void> getRecentIncidents(OldCurrentLocation? location) async {
+  Future<void> getRecentIncidents(CurrentLocation? location) async {
     if (_hasCache && _isCacheValid()) {
       state = AsyncValue.data(_cache);
       return;
@@ -32,7 +31,7 @@ class DashboardViewmodel
       final filter = IncidentFilter(
         status: IncidentStatus.active,
         term: location?.city ?? '',
-        limit: 5,
+        limit: 10,
       );
 
       final result = await _getIncidentUsecase.execute(filter);
@@ -54,7 +53,7 @@ class DashboardViewmodel
     }
   }
 
-  Future<void> refreshData(OldCurrentLocation? location) async {
+  Future<void> refreshData(CurrentLocation? location) async {
     _hasCache = false;
     await getRecentIncidents(location);
   }

@@ -3,9 +3,9 @@ import 'package:deehelp/feature/items/detail/item_edit_field_page.dart';
 import 'package:deehelp/feature/items/detail/item_detail_page.dart';
 import 'package:deehelp/feature/items/detail/item_photo_update.dart';
 import 'package:deehelp/feature/items/list/item_list_page.dart';
-import 'package:deehelp/feature/items/list/item_listing_args.dart';
 import 'package:deehelp/feature/items/register/presentation/item_register_page_view.dart';
 import 'package:deehelp/feature/items/success/item_register_success_page.dart';
+import 'package:deehelp/feature/profile/item_list_router_args.dart';
 import 'package:deehelp/old_core/ui/router/slide_transition_page.dart';
 import 'package:go_router/go_router.dart';
 
@@ -22,11 +22,13 @@ class ItemsRouter {
         GoRoute(
           path: list,
           pageBuilder: (context, state) {
-            final args = state.extra as ItemListingArgs?;
+            final routerArgs = state.extra as ItemListRouteArgs?;
+
             return slideTransitionPage(
               key: state.pageKey,
               child: ItemListPage(
-                args: args,
+                args: routerArgs?.args,
+                showBackButton: routerArgs?.showBackButton ?? false,
               ),
             );
           },

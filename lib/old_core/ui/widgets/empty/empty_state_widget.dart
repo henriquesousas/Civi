@@ -2,6 +2,7 @@ import 'package:deehelp/core/extension/color_extension.dart';
 import 'package:deehelp/core/theme/export_theme.dart';
 import 'package:deehelp/core/ui/styles/export_style.dart';
 import 'package:deehelp/core/ui/widgets/buttons/button_outline.dart';
+import 'package:deehelp/core/ui/widgets/buttons/buttons_export.dart';
 import 'package:deehelp/core/ui/widgets/icon/highlight_icon.dart';
 import 'package:flutter/material.dart';
 
@@ -38,9 +39,7 @@ class EmptyStateWidget extends StatelessWidget {
             Text(
               title,
               textAlign: TextAlign.center,
-              style: context.appText.bodymd.copyWith(
-                fontWeight: FontWeight.w800,
-              ),
+              style: context.appText.headermd,
             ),
             const SizedBox(height: SpacingSize.md),
             Text(
@@ -48,6 +47,7 @@ class EmptyStateWidget extends StatelessWidget {
               textAlign: TextAlign.center,
               style: context.appText.bodySmall.copyWith(
                 color: context.secondaryColor,
+                fontWeight: FontWeight.w600,
               ),
             ),
             const SizedBox(height: SpacingSize.xl),

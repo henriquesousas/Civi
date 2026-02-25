@@ -19,6 +19,7 @@ class SOSPage extends StatelessWidget {
       backgroundColor: UIK.bg,
       appBar: DefaultAppBar(
         title: "SOS",
+        showBackButton: true,
         press: () => context.pop(),
       ),
       body: SafeArea(

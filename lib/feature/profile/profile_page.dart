@@ -5,6 +5,7 @@ import 'package:deehelp/feature/about/about_exports.dart';
 import 'package:deehelp/feature/faq/export_faq.dart';
 import 'package:deehelp/feature/incidents/incident_router.dart';
 import 'package:deehelp/feature/items/items_router.dart';
+import 'package:deehelp/feature/profile/item_list_router_args.dart';
 import 'package:deehelp/feature/profile/widgets/logout_dialog.dart';
 import 'package:deehelp/feature/profile/widgets/not_authenticated_card.dart';
 import 'package:deehelp/feature/sos/sos_router.dart';
@@ -45,7 +46,7 @@ class ProfilePage extends ConsumerWidget {
           ] else ...[
             const NotAuthenticatedCard()
           ],
-          const SizedBox(height: SpacingSize.lg),
+          // const SizedBox(height: SpacingSize.lg),
           ProfileOptions(
             items: [
               ProfileItem(
@@ -53,7 +54,13 @@ class ProfilePage extends ConsumerWidget {
                 title: 'Meus itens',
                 subtitle: 'Itens vinculados ao seu perfil',
                 press: () => context.push(
-                  NavigationUtils.path(ItemsRouter.list, session),
+                  NavigationUtils.path(
+                    ItemsRouter.list,
+                    session,
+                  ),
+                  extra: const ItemListRouteArgs(
+                    showBackButton: true,
+                  ),
                 ),
               ),
               ProfileItem(
