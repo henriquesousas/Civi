@@ -50,6 +50,7 @@ class _FaqPageState extends State<FaqPage> {
       appBar: DefaultAppBar(
         press: () => context.pop(),
         title: 'Perguntas frequentes',
+        showBackButton: true,
       ),
       body: ListView(
         padding: const EdgeInsets.fromLTRB(16, 16, 16, 24),

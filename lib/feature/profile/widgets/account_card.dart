@@ -54,8 +54,8 @@ class AccountCard extends StatelessWidget {
                 Text(
                   name,
                   style: context.appText.headermd.copyWith(
-                    fontWeight: FontWeight.w600,
-                  ),
+                      // fontWeight: FontWeight.w600,
+                      ),
                 ),
                 const SizedBox(height: SpacingSize.xxs),
                 Text(

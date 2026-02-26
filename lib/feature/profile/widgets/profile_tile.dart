@@ -39,8 +39,8 @@ class ProfileTile extends StatelessWidget {
                     children: [
                       Text(
                         item.title,
-                        style: context.appText.label.copyWith(
-                          fontWeight: FontWeight.w600,
+                        style: context.appText.headersm.copyWith(
+                          fontWeight: FontWeight.w800,
                         ),
                       ),
                       if (item.badge != null) ...[
