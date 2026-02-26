@@ -1,7 +1,6 @@
 import 'package:deehelp/core/theme/export_theme.dart';
 import 'package:deehelp/core/ui/styles/export_style.dart';
 import 'package:deehelp/core/ui/widgets/image/export_image.dart';
-import 'package:deehelp/feature/home/widgets/home_avatar_badge.dart';
 import 'package:flutter/material.dart';
 
 class AccountCard extends StatelessWidget {
@@ -53,9 +52,7 @@ class AccountCard extends StatelessWidget {
               children: [
                 Text(
                   name,
-                  style: context.appText.headermd.copyWith(
-                      // fontWeight: FontWeight.w600,
-                      ),
+                  style: context.appText.headermd,
                 ),
                 const SizedBox(height: SpacingSize.xxs),
                 Text(

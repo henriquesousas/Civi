@@ -1,5 +1,6 @@
 // import 'package:cloudflare_r2/cloudflare_r2.dart';
 import 'package:cloudflare_r2/cloudflare_r2.dart';
+import 'package:deehelp/app_name.dart';
 import 'package:deehelp/old_core/ui/extensions/screen_size_extension.dart';
 import 'package:deehelp/old_core/ui/theme/theme/theme.dart';
 import 'package:device_preview/device_preview.dart';
@@ -115,7 +116,7 @@ class _MainAppState extends ConsumerState<MainApp> {
               themeMode: ThemeMode.dark,
               // themeMode:
               //     themeState.isDarkMode ? ThemeMode.dark : ThemeMode.light,
-              title: "Kotto",
+              title: AppName.appName,
               debugShowCheckedModeBanner: false,
             );
           },

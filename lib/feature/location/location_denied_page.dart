@@ -1,3 +1,4 @@
+import 'package:deehelp/app_name.dart';
 import 'package:deehelp/core/services/permissions/location/export_location.dart';
 import 'widgets/base_location_issue_page.dart';
 import 'package:flutter/material.dart';
@@ -32,7 +33,8 @@ class _LocationRequiredPageState extends ConsumerState<LocationDeniedPage>
 
     return BaseLocationIssuePage(
       title: "Permita o acesso à localização",
-      message: "O Kotto precisa da sua permissão para acessar a localização.",
+      message:
+          "O ${AppName.appName} precisa da sua permissão para acessar a localização.",
       buttonName: !_isDeniedPermanently
           ? "Permitir localização"
           : "Abrir configurações",

@@ -49,7 +49,9 @@ class _UpdateIncidentPageState extends ConsumerState<UpdateIncidentPage> {
     final state = ref.watch(updateIncidentViewmodelProvider);
 
     final isVehicle = state.updatedValue!.product.type != ItemType.phone.name;
-    bool isOwner = state.updatedValue!.userId == authenticatedUser!.id;
+    bool isOwner = authenticatedUser == null
+        ? false
+        : state.updatedValue!.userId == authenticatedUser.id;
 
     ref.listen<UpdateIncidentState>(
       updateIncidentViewmodelProvider,

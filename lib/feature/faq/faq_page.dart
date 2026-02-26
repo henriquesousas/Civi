@@ -1,3 +1,4 @@
+import 'package:deehelp/app_name.dart';
 import 'package:deehelp/core/extension/exports_extension.dart';
 import 'package:deehelp/core/theme/export_theme.dart';
 import 'package:deehelp/core/ui/styles/export_style.dart';
@@ -195,23 +196,23 @@ class _FaqPageState extends State<FaqPage> {
           ),
         ],
       ),
-      const FaqSection(
+      FaqSection(
         title: 'Ocorrências',
-        accentColor: Color(0xFFE53935),
+        accentColor: const Color(0xFFE53935),
         items: [
-          FaqItem(
+          const FaqItem(
             question: 'Qual a diferença entre “Imediato” e “Detalhado”?',
             answer:
                 'Imediato: para quando acabou de acontecer — registra rapidamente e você pode completar detalhes depois.\n\n'
                 'Detalhado: você informa data/hora, cidade, bairro, endereço aproximado e como aconteceu.',
           ),
-          FaqItem(
+          const FaqItem(
             question: 'Quem pode cancelar ou marcar como recuperado?',
             answer:
                 'Apenas o usuário que registrou a ocorrência pode cancelar ou marcar como recuperado. '
                 'Essas ações ficam na “Danger Zone” para evitar alterações indevidas.',
           ),
-          FaqItem(
+          const FaqItem(
             question: 'Como compartilhar uma ocorrência?',
             answer:
                 'Na tela de detalhes da ocorrência, você pode compartilhar (ex.: WhatsApp) com o resumo do caso. '
@@ -220,7 +221,7 @@ class _FaqPageState extends State<FaqPage> {
           FaqItem(
             question: 'Devo fazer boletim de ocorrência?',
             answer:
-                'Sim. Recomendamos fazer o BO o mais rápido possível. O Kotto ajuda com informação e organização, '
+                'Sim. Recomendamos fazer o BO o mais rápido possível. O ${AppName.appName} ajuda com informação e organização, '
                 'mas não substitui o registro oficial.',
           ),
         ],

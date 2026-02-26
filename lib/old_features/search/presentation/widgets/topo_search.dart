@@ -4,7 +4,7 @@ import 'package:deehelp/old_core/ui/theme/app_text_styles.dart';
 import 'package:deehelp/old_core/ui/widgets/textfield/ui_text_field_rounded.dart';
 import 'package:deehelp/old_features/search/presentation/providers/debounce_search_provider.dart';
 import 'package:deehelp/old_features/search/presentation/providers/search_query_provider.dart';
-import 'package:deehelp/old_features/search/presentation/providers/search_viewmodel_provider.dart';
+import 'package:deehelp/feature/search/search_viewmodel_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 

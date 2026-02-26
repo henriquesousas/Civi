@@ -1,3 +1,4 @@
+import 'package:deehelp/feature/search/widgets/mode_toogle.dart';
 import 'package:deehelp/old_core/ui/extensions/string_extension.dart';
 import 'package:deehelp/old_core/utils/result.dart';
 import 'package:deehelp/old_core/utils/unit.dart';
@@ -63,16 +64,18 @@ class SupabaseIncidentRepository extends IncidentRepository {
 
   @override
   Future<Result<List<IncidentOutput>>> getIncidents(
-      IncidentFilter filter) async {
+    IncidentFilter filter,
+  ) async {
     final term = _normalizeSearchTerm(filter.term);
+    // final term = "423434343432432"; //_normalizeSearchTerm(filter.term);
+
     var query = _supabaseClient
         .from(_table)
         .select(
             "*,product!inner (id,name,code,color, brand, type, obs, product_images (*))")
-        // .eq('visibility', true)
         .eq('status', filter.status.value);
 
-    if (_looksLikeAlertId(term)) {
+    if (filter.mode == SearchMode.incidentCode) {
       query = query.filter("alert_id", 'ilike', '%$term%');
     } else {
       query = query.or(
@@ -104,8 +107,8 @@ class SupabaseIncidentRepository extends IncidentRepository {
     var query = _supabaseClient
         .from(_table)
         .select(
-            "*,product!inner (id,name,code,color, brand, type, obs, product_images (*))")
-        // .eq('visibility', true)
+          "*,product!inner (id,name,code,color, brand, type, obs, product_images (*))",
+        )
         .eq('status', IncidentStatus.active.value);
 
     if (!term.isNullOrEmpty()) {

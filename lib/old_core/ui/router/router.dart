@@ -1,8 +1,5 @@
 import 'dart:async';
 
-import 'package:app_core/app_core.dart';
-import 'package:app_feature/app_feature.dart';
-
 import 'package:deehelp/app_startup_provider.dart';
 import 'package:deehelp/feature/about/about_router.dart';
 import 'package:deehelp/feature/auth/presentation/export_auth.dart';
@@ -12,6 +9,7 @@ import 'package:deehelp/feature/incidents/incident_router.dart';
 import 'package:deehelp/feature/items/items_router.dart';
 import 'package:deehelp/feature/location/export_location.dart';
 import 'package:deehelp/feature/profile/export_profile.dart';
+import 'package:deehelp/feature/search/search_router.dart';
 import 'package:deehelp/feature/shell/app_sheel_router.dart';
 import 'package:deehelp/feature/sos/sos_router.dart';
 import 'package:deehelp/feature/splash/splash_router.dart';
@@ -19,7 +17,6 @@ import 'package:deehelp/old_core/ui/router/app_router.dart';
 import 'package:deehelp/old_core/ui/router/slide_transition_page.dart';
 import 'package:deehelp/old_features/emergency-call/public_list_emergency_call_page.dart';
 import 'package:deehelp/old_features/profile/presentation/views/add_nickname/add_nickname_page.dart';
-import 'package:deehelp/old_features/dashboard/presentation/dashsboard_page.dart';
 import 'package:deehelp/old_features/faq/faq_provider.dart';
 import 'package:deehelp/old_features/map/presentation/map_page.dart';
 import 'package:deehelp/old_features/onboarding/page/onboard_page.dart';
@@ -28,36 +25,11 @@ import 'package:deehelp/old_features/products/presentation/views/add/add_product
 import 'package:deehelp/old_features/products/presentation/views/add/steps/add_product_success_page.dart';
 import 'package:deehelp/old_features/products/presentation/views/listing/product_listing_page.dart';
 import 'package:deehelp/old_features/products/presentation/views/update/update_product_page.dart';
-import 'package:deehelp/old_features/profile/presentation/views/profile/profile_page.dart';
 import 'package:deehelp/old_features/search/search_page.dart';
-import 'package:deehelp/old_features/test_page.dart';
 // import 'package:deehelp/features/splash/splash_page.dart';
 import 'package:deehelp/old_features/welcome/welcome_page.dart';
 import 'package:deehelp/router_refresh_notifier.dart';
-import 'package:deehelp/test_ocorrences.dart';
-import 'package:deehelp/test_page10.dart';
-import 'package:deehelp/test_page11.dart';
-import 'package:deehelp/test_page12.dart';
-import 'package:deehelp/test_page13.dart';
 import 'package:deehelp/test_page2.dart';
-import 'package:deehelp/test_page3.dart';
-import 'package:deehelp/test_page4.dart';
-import 'package:deehelp/test_page40.dart';
-import 'package:deehelp/test_page5.dart';
-import 'package:deehelp/test_page5_1.dart';
-import 'package:deehelp/test_page6.dart';
-import 'package:deehelp/test_page7.dart';
-import 'package:deehelp/test_page8.dart';
-import 'package:deehelp/test_page9.dart';
-import 'package:deehelp/test_page_dark.dart';
-import 'package:deehelp/teste_home.dart';
-import 'package:deehelp/teste_incident_loading.dart';
-import 'package:deehelp/teste_nickname_page.dart';
-import 'package:deehelp/teste_nickname_required_page.dart';
-import 'package:deehelp/teste_page_contato.dart';
-import 'package:deehelp/teste_page_login.dart';
-import 'package:deehelp/teste_sheel_page.dart';
-import 'package:deehelp/teste_sos_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
@@ -99,6 +71,7 @@ var goRouterProvider = Provider<GoRouter>(
         final isPublicRoute = _publicRoutes.contains(currentPath);
         // return '/';
         // return AuthRouter.path;
+        // return SplashRouter.path;
         switch (appStatus) {
           case AppStatus.loading:
             return SplashRouter.path;
@@ -128,6 +101,7 @@ var goRouterProvider = Provider<GoRouter>(
         ...ItemsRouter.routers,
         ...IncidentRouter.routers,
         ...SOSRouter.routers,
+        ...SearchRouter.routers,
         // ...IncidentModule.routers,
         GoRoute(
           path: '/',
@@ -141,7 +115,7 @@ var goRouterProvider = Provider<GoRouter>(
             //GPS
             // child: TestPage13(),
             // Search
-            // child: const TestPage2(),
+            child: const TestPage2(),
             //Profile
             // child: const TestPage3(),
             // Lista de items
@@ -183,7 +157,7 @@ var goRouterProvider = Provider<GoRouter>(
             // child: const TestPageDark(),
             // child: const MapPage(),
             // child: TestePageContato(),
-            child: TesteHome(),
+            // child: TesteHome(),
             // child: TesteShellPage(),
             // child: TesteIncidentLoading(),
             // child: TesteNicknamePage(),
@@ -262,15 +236,15 @@ var goRouterProvider = Provider<GoRouter>(
             );
           },
         ),
-        GoRoute(
-          path: AppRouter.search,
-          pageBuilder: (context, state) {
-            return slideTransitionPage(
-              key: state.pageKey,
-              child: const SearchPage(),
-            );
-          },
-        ),
+        // GoRoute(
+        //   path: AppRouter.search,
+        //   pageBuilder: (context, state) {
+        //     return slideTransitionPage(
+        //       key: state.pageKey,
+        //       child: const SearchPage(),
+        //     );
+        //   },
+        // ),
         // GoRoute(
         //   path: AppRouter.locationRequired,
         //   pageBuilder: (context, state) {

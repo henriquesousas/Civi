@@ -3,6 +3,7 @@ import 'package:deehelp/core/theme/export_theme.dart';
 import 'package:deehelp/core/ui/styles/export_style.dart';
 import 'package:deehelp/feature/profile/profile_item.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
 
 import '../../../core/ui/widgets/icon/export_icon.dart';
 
@@ -10,7 +11,11 @@ class ProfileTile extends StatelessWidget {
   final ProfileItem item;
   final VoidCallback? press;
 
-  const ProfileTile({super.key, required this.item, this.press});
+  const ProfileTile({
+    super.key,
+    required this.item,
+    this.press,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -28,7 +33,13 @@ class ProfileTile extends StatelessWidget {
           children: [
             HighlightIcon(
               bgColor: baseColor.withValues(alpha: 0.08),
-              icon: Icon(item.icon, color: baseColor, size: IconSizes.sm),
+              icon: !item.isInstragram
+                  ? Icon(item.icon, color: baseColor, size: IconSizes.md)
+                  : SvgPicture.asset(
+                      "assets/svg/instagram.svg",
+                      width: IconSizes.md,
+                      height: IconSizes.md,
+                    ),
             ),
             const SizedBox(width: SpacingSize.lg),
             Expanded(
@@ -39,8 +50,9 @@ class ProfileTile extends StatelessWidget {
                     children: [
                       Text(
                         item.title,
-                        style: context.appText.headersm.copyWith(
+                        style: context.appText.bodymd.copyWith(
                           fontWeight: FontWeight.w800,
+                          color: context.onSurface,
                         ),
                       ),
                       if (item.badge != null) ...[

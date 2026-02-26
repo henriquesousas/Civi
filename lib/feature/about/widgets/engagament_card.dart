@@ -1,3 +1,4 @@
+import 'package:deehelp/app_name.dart';
 import 'package:deehelp/core/extension/exports_extension.dart';
 import 'package:deehelp/core/theme/export_theme.dart';
 import 'package:deehelp/core/ui/styles/export_style.dart';
@@ -19,7 +20,7 @@ class EngagementCard extends StatelessWidget {
         children: [
           const SizedBox(height: SpacingSize.sm),
           Text(
-            'O Kotto melhora com o uso da comunidade.',
+            'O ${AppName.appName} melhora com o uso da comunidade.',
             style: context.appText.bodySmall.copyWith(
               height: 1.35,
               color: context.onSurface,
@@ -38,7 +39,7 @@ class EngagementCard extends StatelessWidget {
           const SizedBox(height: SpacingSize.md),
           ButtonOutline(
             icon: const Icon(Icons.share_outlined),
-            text: 'Compartilhar o Kotto',
+            text: 'Compartilhar o ${AppName.appName}',
             press: () {},
           )
         ],

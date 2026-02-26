@@ -1,3 +1,4 @@
+import 'package:deehelp/app_name.dart';
 import 'package:deehelp/core/extension/exports_extension.dart';
 import 'package:deehelp/core/theme/export_theme.dart';
 import 'package:deehelp/core/ui/styles/export_style.dart';
@@ -40,10 +41,10 @@ class AboutPage extends StatelessWidget {
                       const WelcomeCard(),
                       const SizedBox(height: SpacingSize.md),
                       InfoCard(
-                        title: 'Por que criamos o Kotto?',
+                        title: 'Por que criamos o ${AppName.appName}?',
                         icon: Icons.shield_outlined,
                         child: Text(
-                          'Criamos o Kotto para ajudar pessoas a entenderem melhor o nível de risco '
+                          'Criamos o ${AppName.appName} para ajudar pessoas a entenderem melhor o nível de risco '
                           'na região onde vivem e a reagirem mais rápido quando algo acontece.\n\n'
                           'A informação vem da comunidade: quanto mais gente usando, mais útil e preciso fica.',
                           style: context.appText.bodySmall.copyWith(

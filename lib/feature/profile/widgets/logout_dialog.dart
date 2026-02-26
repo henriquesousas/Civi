@@ -1,3 +1,4 @@
+import 'package:deehelp/app_name.dart';
 import 'package:deehelp/core/extension/exports_extension.dart';
 import 'package:deehelp/core/theme/app_colors.dart';
 import 'package:deehelp/core/theme/export_theme.dart';
@@ -40,7 +41,7 @@ class LogoutDialog extends StatelessWidget {
             ),
             const SizedBox(height: SpacingSize.md),
             Text(
-              'Tem certeza que deseja sair do Kotto?\n'
+              'Tem certeza que deseja sair do ${AppName.appName}?\n'
               'Você poderá entrar novamente quando quiser.',
               textAlign: TextAlign.center,
               style: context.appText.bodymd.copyWith(

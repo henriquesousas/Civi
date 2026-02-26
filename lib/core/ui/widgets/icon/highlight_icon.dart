@@ -3,7 +3,7 @@ import 'package:deehelp/core/theme/export_theme.dart';
 import 'package:flutter/material.dart';
 
 class HighlightIcon extends StatelessWidget {
-  final Icon icon;
+  final Widget icon;
   final Color? bgColor;
   final double? containerSize;
   final double? radius;
@@ -27,7 +27,9 @@ class HighlightIcon extends StatelessWidget {
         borderRadius: BorderRadius.circular(radius ?? RadiusSize.md),
         border: border,
       ),
-      child: icon,
+      child: Center(
+        child: icon,
+      ),
       // child: Icon(
       //   Icons.location_off_rounded,
       //   size: IconSizes.xxl,

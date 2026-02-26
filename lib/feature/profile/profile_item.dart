@@ -9,6 +9,7 @@ class ProfileItem {
   final bool isDestructive;
   final bool hideChevron;
   final VoidCallback? press;
+  final bool isInstragram;
 
   const ProfileItem({
     required this.icon,
@@ -18,6 +19,7 @@ class ProfileItem {
     this.badge,
     this.isDestructive = false,
     this.hideChevron = false,
+    this.isInstragram = false,
     this.press,
   });
 }

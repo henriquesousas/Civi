@@ -1,5 +1,5 @@
 import 'package:deehelp/old_features/search/presentation/providers/debounce_search_provider.dart';
-import 'package:deehelp/old_features/search/presentation/providers/search_viewmodel_provider.dart';
+import 'package:deehelp/feature/search/search_viewmodel_provider.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 final isLoadingProvider = Provider.autoDispose<bool>((ref) {

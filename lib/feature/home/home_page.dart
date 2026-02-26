@@ -2,6 +2,7 @@ import 'package:deehelp/core/extension/color_extension.dart';
 import 'package:deehelp/core/services/permissions/location/providers/location_providers.dart';
 import 'package:deehelp/core/theme/export_theme.dart';
 import 'package:deehelp/core/ui/widgets/badge/export_badge.dart';
+import 'package:deehelp/core/utils/navigation_utils.dart';
 import 'package:deehelp/feature/home/widgets/card_header.dart';
 import 'package:deehelp/feature/home/widgets/empty_incident_state.dart';
 import 'package:deehelp/feature/home/widgets/incident_loading.dart';
@@ -15,14 +16,13 @@ import 'package:deehelp/feature/incidents/providers/incident_selected_provider.d
 import 'package:deehelp/feature/items/items_router.dart';
 import 'package:deehelp/feature/items/register/presentation/widgets/card_page.dart';
 import 'package:deehelp/feature/profile/export_profile.dart';
+import 'package:deehelp/feature/search/search_router.dart';
 import 'package:deehelp/feature/sos/sos_router.dart';
-import 'package:deehelp/module/auth/external/di/authenticated_user_provider.dart';
 import 'package:deehelp/module/incident/domain/enum/type_alert.dart';
 import 'package:deehelp/module/incident/domain/usecase/incident_output.dart';
 import 'package:deehelp/module/incident/domain/usecase/incident_product_output.dart';
 import 'package:deehelp/feature/home/home_viewmodel_provider.dart';
 import 'package:deehelp/module/item/domain/entities/image_media.dart';
-import 'package:deehelp/old_core/ui/widgets/shimmer_animation.dart';
 import 'widgets/home_app_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -61,14 +61,13 @@ class HomePage extends ConsumerStatefulWidget {
 }
 
 class _HomePageState extends ConsumerState<HomePage> {
-  String? _location;
-
+  String? _region;
   @override
   void initState() {
     WidgetsBinding.instance.addPostFrameCallback(
       (_) {
         final currenLocation = ref.watch(currentLocationProvider);
-        _location = '${currenLocation?.city} • ${currenLocation?.state}';
+        _region = '${currenLocation?.city} • ${currenLocation?.state}';
         ref
             .read(homeViewmodelProvider.notifier)
             .getRecentIncidents(currenLocation);
@@ -84,6 +83,7 @@ class _HomePageState extends ConsumerState<HomePage> {
 
     return Scaffold(
       appBar: HomeAppBar(
+        region: _region,
         press: () => context.push(ProfileRouter.path),
       ),
       body: SafeArea(
@@ -111,8 +111,12 @@ class _HomePageState extends ConsumerState<HomePage> {
                                 title: 'Ocorrência',
                                 subtitle: 'Registrar',
                                 accent: AppColors.danger,
-                                onTap: () =>
-                                    context.push(IncidentRouter.register),
+                                onTap: () {
+                                  //  context.push(IncidentRouter.register)
+                                  final path = NavigationUtils.safeNavigation(
+                                      IncidentRouter.register, ref);
+                                  context.push(path);
+                                },
                               ),
                             ),
                             const SizedBox(width: 12),
@@ -122,7 +126,7 @@ class _HomePageState extends ConsumerState<HomePage> {
                                 title: 'Pesquisar',
                                 subtitle: 'Placa / IMEI',
                                 accent: context.primaryColor,
-                                onTap: () => {},
+                                onTap: () => context.push(SearchRouter.search),
                               ),
                             ),
                           ],
@@ -136,7 +140,13 @@ class _HomePageState extends ConsumerState<HomePage> {
                                 title: 'Item',
                                 subtitle: 'Registrar novo',
                                 accent: AppColors.success,
-                                onTap: () => context.push(ItemsRouter.register),
+                                onTap: () {
+                                  final path = NavigationUtils.safeNavigation(
+                                    ItemsRouter.register,
+                                    ref,
+                                  );
+                                  context.push(path);
+                                },
                               ),
                             ),
                             const SizedBox(width: 12),

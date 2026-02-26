@@ -22,13 +22,15 @@ class AppStartupNotifier extends StateNotifier<AppStatus> {
   }
 
   Future<void> initCheck() async {
+    AppStatus? currentStatus;
     final authenticated = await _checkAuthenticationWithMinSplash();
     if (!authenticated) {
-      state = AppStatus.unauthenticated;
-      return;
+      // state = AppStatus.unauthenticated;
+      currentStatus = AppStatus.unauthenticated;
+      // return;
     }
 
-    await _checkLocalization();
+    await _checkLocalization(currentStatus);
   }
 
   Future<void> refresh() async {
@@ -47,7 +49,7 @@ class AppStartupNotifier extends StateNotifier<AppStatus> {
   }
 
   Future<void> _ensureMinSplash(DateTime start) async {
-    const minTime = Duration(seconds: 5);
+    const minTime = Duration(seconds: 1);
     final elapsed = DateTime.now().difference(start);
 
     if (elapsed < minTime) {
@@ -76,7 +78,7 @@ class AppStartupNotifier extends StateNotifier<AppStatus> {
     );
   }
 
-  Future<void> _checkLocalization() async {
+  Future<void> _checkLocalization(AppStatus? currentStatus) async {
     final notifier = ref.read(locationAccessNotifierProvider.notifier);
 
     await notifier.check();
@@ -88,7 +90,11 @@ class AppStartupNotifier extends StateNotifier<AppStatus> {
       checking: () {},
       granted: (location) {
         _setCurrentLocation(location);
-        state = AppStatus.ready;
+        if (currentStatus != null) {
+          state = currentStatus;
+        } else {
+          state = AppStatus.ready;
+        }
       },
       denied: () => state = AppStatus.needLocation,
       deniedPermanently: () => state = AppStatus.needLocation,

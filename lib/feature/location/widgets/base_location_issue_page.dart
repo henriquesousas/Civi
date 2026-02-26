@@ -1,3 +1,4 @@
+import 'package:deehelp/app_name.dart';
 import 'package:deehelp/core/extension/exports_extension.dart';
 import 'package:deehelp/core/services/permissions/location/export_location.dart';
 import 'package:deehelp/core/theme/export_theme.dart';
@@ -102,7 +103,7 @@ class _BaseLocationIssuePageState extends ConsumerState<BaseLocationIssuePage>
               CardHintInfo(
                 message:
                     'Sua localização é usada apenas para exibir informações '
-                    'da sua região. O Kotto não rastreia você em segundo plano.',
+                    'da sua região. O ${AppName.appName} não rastreia você em segundo plano.',
                 icon: Icon(
                   Icons.lock_outline,
                   size: IconSizes.xs,
