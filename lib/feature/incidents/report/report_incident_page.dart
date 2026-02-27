@@ -88,16 +88,17 @@ class _AddIncidentPageState extends ConsumerState<ReportIncidentPage>
           if (context.canPop()) {
             context.pop();
           }
-          showGeneralDialog(
-            context: context,
-            barrierDismissible: false,
-            barrierColor: Colors.transparent,
-            pageBuilder: (_, __, ___) => IncidentErrorOverlay(onRetry: () {
-              if (context.canPop()) {
-                context.pop();
-              }
-            }),
-          );
+          // showGeneralDialog(
+          //   context: context,
+          //   barrierDismissible: false,
+          //   barrierColor: Colors.transparent,
+          //   pageBuilder: (_, __, ___) => IncidentErrorOverlay(onRetry: () {
+          //     if (context.canPop()) {
+          //       context.pop();
+          //     }
+          //   }),
+          // );
+          _showReportErrorSheet();
         }, loadProgress: () {
           // showGeneralDialog(
           //   context: context,
@@ -201,7 +202,6 @@ class _AddIncidentPageState extends ConsumerState<ReportIncidentPage>
             child: InkWell(
               borderRadius: BorderRadius.circular(RadiusSize.xl),
               onTap: () => _pickItem(viewModel),
-              // onTap: () => showDialogOverlay(context),
               child: Padding(
                 padding: const EdgeInsets.all(LayoutSpacingSize.container),
                 child: Row(
@@ -368,51 +368,24 @@ class _AddIncidentPageState extends ConsumerState<ReportIncidentPage>
         ],
       ),
     );
+  }
 
-    // return UICustomScaffold(
-    //   pageTitle: "Registrar incidente",
-    //   onBackButtonTap: () {
-    //     ref.invalidate(reportIncidentViewmodelProvider);
-    //     context.pop();
-    //   },
-    //   body: LayoutBuilder(
-    //     builder: (context, constraints) {
-    //       return SingleChildScrollView(
-    //         physics: const BouncingScrollPhysics(),
-    //         padding: EdgeInsets.only(
-    //           bottom: MediaQuery.of(context).viewInsets.bottom,
-    //         ),
-    //         child: ConstrainedBox(
-    //           constraints: BoxConstraints(
-    //             minHeight: constraints.maxHeight,
-    //           ),
-    //           child: IntrinsicHeight(
-    //             child: Column(
-    //               crossAxisAlignment: CrossAxisAlignment.start,
-    //               spacing: 10,
-    //               children: [
-    //                 CardSelectImage(
-    //                   product: state.product,
-    //                   press: () async {
-    //   final product = await context.push<Product?>(
-    //     ItemsRouter.list,
-    //     extra: ItemListingArgs(isAddingIncident: true),
-    //   );
-    //   if (product != null) {
-    //     viewModel.selectProduct(product);
-    //   }
-    // },
-    //                 ),
-    //                 const ReportIncidentCardImmediately(),
-    //                 const ReportIncidentCardDetailed(),
-    //               ],
-    //             ),
-    //           ),
-    //         ),
-    //       );
-    //     },
-    //   ),
-    // );
+  void _showReportErrorSheet({String? supportId, String? details}) {
+    showModalBottomSheet(
+      context: context,
+      isScrollControlled: true,
+      backgroundColor: Colors.transparent,
+      builder: (_) => IncidentReportErrorSheet(
+        supportId: supportId,
+        technicalDetails: details,
+        onClose: () => Navigator.pop(context),
+        onRetry: () {
+          Navigator.pop(context);
+          // chame seu submit novamente aqui
+          // ex: viewModel.submit(...)
+        },
+      ),
+    );
   }
 
   void showDialogOverlay(BuildContext context, {String? message}) {
@@ -505,6 +478,312 @@ class _AddIncidentPageState extends ConsumerState<ReportIncidentPage>
           ),
         );
       },
+    );
+  }
+}
+
+class IncidentReportErrorSheet extends StatelessWidget {
+  final String title;
+  final String message;
+
+  /// Ex.: "ERRO-REQ-9021" ou "INC-2026-000123"
+  final String? supportId;
+
+  /// Se quiser mostrar detalhes técnicos (opcional).
+  final String? technicalDetails;
+
+  final VoidCallback? onRetry;
+  final VoidCallback? onClose;
+
+  const IncidentReportErrorSheet({
+    super.key,
+    this.title = 'Não foi possível enviar o incidente',
+    this.message =
+        'Ocorreu um erro ao tentar registrar sua ocorrência. Verifique sua conexão e tente novamente.',
+    this.supportId,
+    this.technicalDetails,
+    this.onRetry,
+    this.onClose,
+  });
+
+  static const _ink = Color(0xFF1F2A44);
+  static const _muted = Color(0xFF8A96C8);
+  static const _primary = Color(0xFF2B5BEE);
+  static const _danger = Color(0xFFE53935);
+  static const _bg = Color(0xFFF5F7FD);
+
+  @override
+  Widget build(BuildContext context) {
+    return SafeArea(
+      top: false,
+      child: Container(
+        decoration: const BoxDecoration(
+          color: Colors.white,
+          borderRadius: BorderRadius.vertical(top: Radius.circular(26)),
+        ),
+        child: Padding(
+          padding: const EdgeInsets.fromLTRB(16, 10, 16, 18),
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              // Handle
+              Container(
+                width: 44,
+                height: 5,
+                decoration: BoxDecoration(
+                  color: const Color(0xFFE6EAF6),
+                  borderRadius: BorderRadius.circular(99),
+                ),
+              ),
+              const SizedBox(height: 12),
+
+              // Header
+              Row(
+                children: [
+                  _IconBadge(
+                    icon: Icons.error_outline_rounded,
+                    bg: _danger.withOpacity(0.10),
+                    fg: _danger,
+                  ),
+                  const SizedBox(width: 12),
+                  Expanded(
+                    child: Text(
+                      title,
+                      style: const TextStyle(
+                        fontSize: 16,
+                        fontWeight: FontWeight.w900,
+                        color: _ink,
+                      ),
+                    ),
+                  ),
+                  IconButton(
+                    onPressed: onClose ?? () => Navigator.pop(context),
+                    icon: const Icon(Icons.close_rounded, color: _muted),
+                    tooltip: 'Fechar',
+                  )
+                ],
+              ),
+              const SizedBox(height: 8),
+
+              // Message
+              Align(
+                alignment: Alignment.centerLeft,
+                child: Text(
+                  message,
+                  style: const TextStyle(
+                    color: _muted,
+                    fontWeight: FontWeight.w600,
+                    fontSize: 12.8,
+                    height: 1.3,
+                  ),
+                ),
+              ),
+
+              const SizedBox(height: 14),
+
+              // Tips box
+              Container(
+                padding: const EdgeInsets.all(14),
+                decoration: BoxDecoration(
+                  color: _bg,
+                  borderRadius: BorderRadius.circular(18),
+                  border: Border.all(color: const Color(0xFFE6EAF6)),
+                ),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: const [
+                    _TipRow(
+                      icon: Icons.wifi_rounded,
+                      text: 'Verifique sua conexão com a internet (Wi-Fi/4G).',
+                    ),
+                    SizedBox(height: 10),
+                    _TipRow(
+                      icon: Icons.refresh_rounded,
+                      text: 'Tente novamente em alguns segundos.',
+                    ),
+                    SizedBox(height: 10),
+                    _TipRow(
+                      icon: Icons.edit_note_rounded,
+                      text:
+                          'Se for “Imediato”, você pode registrar agora e completar os detalhes depois.',
+                    ),
+                  ],
+                ),
+              ),
+
+              if (supportId != null || technicalDetails != null) ...[
+                const SizedBox(height: 12),
+                _SupportBox(
+                  supportId: supportId,
+                  technicalDetails: technicalDetails,
+                ),
+              ],
+
+              const SizedBox(height: 14),
+              ButtonPrimary(press: () => context.pop(), text: "Fechar"),
+
+              // Actions
+              // Row(
+              //   children: [
+              //     Expanded(
+              //       child: OutlinedButton(
+              //         onPressed: onClose ?? () => Navigator.pop(context),
+              //         style: OutlinedButton.styleFrom(
+              //           foregroundColor: _ink,
+              //           side: BorderSide(color: _primary.withOpacity(0.22)),
+              //           shape: RoundedRectangleBorder(
+              //             borderRadius: BorderRadius.circular(18),
+              //           ),
+              //           padding: const EdgeInsets.symmetric(vertical: 14),
+              //         ),
+              //         child: const Text(
+              //           'Fechar',
+              //           style: TextStyle(fontWeight: FontWeight.w900),
+              //         ),
+              //       ),
+              //     ),
+              //     const SizedBox(width: 12),
+              //     Expanded(
+              //       child: ElevatedButton(
+              //         onPressed: onRetry,
+              //         style: ElevatedButton.styleFrom(
+              //           backgroundColor: _primary,
+              //           foregroundColor: Colors.white,
+              //           elevation: 0,
+              //           shape: RoundedRectangleBorder(
+              //             borderRadius: BorderRadius.circular(18),
+              //           ),
+              //           padding: const EdgeInsets.symmetric(vertical: 14),
+              //         ),
+              //         child: const Text(
+              //           'Tentar novamente',
+              //           style: TextStyle(fontWeight: FontWeight.w900),
+              //         ),
+              //       ),
+              //     ),
+              //   ],
+              // ),
+
+              // const SizedBox(height: 6),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+class _IconBadge extends StatelessWidget {
+  final IconData icon;
+  final Color bg;
+  final Color fg;
+
+  const _IconBadge({
+    required this.icon,
+    required this.bg,
+    required this.fg,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      width: 44,
+      height: 44,
+      decoration: BoxDecoration(
+        color: bg,
+        borderRadius: BorderRadius.circular(16),
+        border: Border.all(color: fg.withOpacity(0.18)),
+      ),
+      child: Icon(icon, color: fg),
+    );
+  }
+}
+
+class _TipRow extends StatelessWidget {
+  final IconData icon;
+  final String text;
+
+  const _TipRow({required this.icon, required this.text});
+
+  static const _muted = Color(0xFF6B7AAE);
+
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Icon(icon, size: 18, color: _muted),
+        const SizedBox(width: 10),
+        Expanded(
+          child: Text(
+            text,
+            style: const TextStyle(
+              fontSize: 12.7,
+              color: _muted,
+              fontWeight: FontWeight.w600,
+              height: 1.25,
+            ),
+          ),
+        ),
+      ],
+    );
+  }
+}
+
+class _SupportBox extends StatelessWidget {
+  final String? supportId;
+  final String? technicalDetails;
+
+  const _SupportBox({this.supportId, this.technicalDetails});
+
+  static const _ink = Color(0xFF1F2A44);
+  static const _muted = Color(0xFF8A96C8);
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      width: double.infinity,
+      padding: const EdgeInsets.all(14),
+      decoration: BoxDecoration(
+        color: Colors.white,
+        borderRadius: BorderRadius.circular(18),
+        border: Border.all(color: const Color(0xFFE6EAF6)),
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          const Text(
+            'Ajuda ao suporte',
+            style: TextStyle(
+              fontSize: 12,
+              fontWeight: FontWeight.w900,
+              color: _ink,
+            ),
+          ),
+          const SizedBox(height: 8),
+          if (supportId != null)
+            Text(
+              'ID: $supportId',
+              style: const TextStyle(
+                fontSize: 12.5,
+                fontWeight: FontWeight.w700,
+                color: _muted,
+              ),
+            ),
+          if (technicalDetails != null) ...[
+            const SizedBox(height: 6),
+            Text(
+              technicalDetails!,
+              style: const TextStyle(
+                fontSize: 12.0,
+                fontWeight: FontWeight.w600,
+                color: _muted,
+                height: 1.25,
+              ),
+            ),
+          ],
+        ],
+      ),
     );
   }
 }

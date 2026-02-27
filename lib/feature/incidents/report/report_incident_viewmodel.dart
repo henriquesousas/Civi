@@ -202,6 +202,7 @@ class ReportIncidentViewmodel extends StateNotifier<AddIncidentState> {
       },
       onError: (error) {
         _logger.info("Erro ao salvar incident ${error.toString()}");
+        state = state.copyWith(isLoading: false);
         _ref.read(reportIncidentEventProvider.notifier).state =
             ReportIncidentEvent.error(error.toString());
         return state;
