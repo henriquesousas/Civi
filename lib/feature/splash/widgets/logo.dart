@@ -8,12 +8,14 @@ class Logo extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      width: context.isLandscape
-          ? context.percentWidth(0.2)
-          : context.percentWidth(0.6),
-      height: context.isLandscape
-          ? context.percentHeight(0.4)
-          : context.percentHeight(0.16),
+      // width: context.isLandscape
+      //     ? context.percentWidth(0.1)
+      //     : context.percentWidth(0.6),
+      // height: context.isLandscape
+      //     ? context.percentHeight(0.2)
+      //     : context.percentHeight(0.16),
+      width: context.percentWidth(0.4),
+      height: context.percentWidth(0.4),
       padding: const EdgeInsets.symmetric(
         horizontal: 2,
         vertical: 2,
@@ -26,7 +28,7 @@ class Logo extends StatelessWidget {
       child: ClipRRect(
         borderRadius: BorderRadius.circular(100),
         child: Image.asset(
-          'assets/images/logo2.png',
+          'assets/images/logo3.png',
           // width: context.percentWidth(0.1),
           // height: context.percentWidth(0.13),
           fit: BoxFit.cover,

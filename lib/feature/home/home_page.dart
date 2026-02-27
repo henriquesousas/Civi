@@ -78,9 +78,21 @@ class _HomePageState extends ConsumerState<HomePage> {
     super.initState();
   }
 
+  bool isToday(DateTime date) {
+    final now = DateTime.now();
+    return date.year == now.year &&
+        date.month == now.month &&
+        date.day == now.day;
+  }
+
   @override
   Widget build(BuildContext context) {
     final state = ref.watch(homeViewmodelProvider);
+
+    // final incidents = state.asData?.value ?? [];
+
+    // final hasTodayIncident =
+    //     incidents.any((incident) => isToday(incident.occurredAt));
 
     return Scaffold(
       appBar: HomeAppBar(
@@ -91,6 +103,20 @@ class _HomePageState extends ConsumerState<HomePage> {
         child: ListView(
           padding: const EdgeInsets.all(LayoutSpacingSize.page),
           children: [
+            // Visibility(
+            //   visible: hasTodayIncident,
+            //   child: RegionAlertCard(
+            //     tag: "Roubo de celular",
+            //     meta: "Últimas 24h • 1,8 km",
+            //     onTap: () {
+            //       // abrir mapa/ocorrências próximas
+            //     },
+            //     onSeeDetails: () {
+            //       // navegar para detalhes / listagem filtrada
+            //     },
+            //   ),
+            // ),
+            const SizedBox(height: 14),
             PageCard(
               child: Column(
                 children: [
@@ -235,3 +261,242 @@ class _HomePageState extends ConsumerState<HomePage> {
     );
   }
 }
+
+// class RegionAlertCard extends StatelessWidget {
+//   final String title;
+//   final String subtitle;
+//   final String? meta;
+//   final String? tag;
+//   final VoidCallback? onTap;
+//   final VoidCallback? onSeeDetails;
+
+//   const RegionAlertCard({
+//     super.key,
+//     this.title = 'Atenção na sua região',
+//     this.subtitle =
+//         'Registramos um roubo recentemente próximo de você. Fique atento(a) e redobre os cuidados.',
+//     this.meta,
+//     this.tag,
+//     this.onTap,
+//     this.onSeeDetails,
+//   });
+
+//   static const _ink = Color(0xFF1F2A44);
+//   static const _muted = Color(0xFF6B7AAE);
+//   static const _primary = Color(0xFF2B5BEE);
+//   static const _danger = Color(0xFFE53935);
+
+//   @override
+//   Widget build(BuildContext context) {
+//     return InkWell(
+//       borderRadius: BorderRadius.circular(22),
+//       onTap: onTap,
+//       child: Ink(
+//         decoration: BoxDecoration(
+//           color: const Color(0xFFFFF4F4), // 🔴 fundo leve
+//           borderRadius: BorderRadius.circular(22),
+//           border: Border.all(
+//             color: _danger.withOpacity(0.25),
+//           ),
+//           boxShadow: const [
+//             BoxShadow(
+//               color: Color(0x12000000),
+//               blurRadius: 18,
+//               offset: Offset(0, 10),
+//             ),
+//           ],
+//         ),
+//         child: Padding(
+//           padding: const EdgeInsets.all(16),
+//           child: Row(
+//             crossAxisAlignment: CrossAxisAlignment.start,
+//             children: [
+//               _AlertIcon(),
+//               const SizedBox(width: 14),
+//               Expanded(
+//                 child: Column(
+//                   crossAxisAlignment: CrossAxisAlignment.start,
+//                   children: [
+//                     Row(
+//                       children: [
+//                         Expanded(
+//                           child: Text(
+//                             title,
+//                             style: const TextStyle(
+//                               fontSize: 15,
+//                               fontWeight: FontWeight.w900,
+//                               color: _ink,
+//                             ),
+//                           ),
+//                         ),
+//                         if (tag != null) _TagPill(text: tag!),
+//                       ],
+//                     ),
+//                     const SizedBox(height: 6),
+//                     Text(
+//                       subtitle,
+//                       style: const TextStyle(
+//                         fontSize: 13,
+//                         fontWeight: FontWeight.w600,
+//                         color: _muted,
+//                         height: 1.3,
+//                       ),
+//                     ),
+//                     const SizedBox(height: 12),
+//                     Row(
+//                       children: [
+//                         if (meta != null)
+//                           Row(
+//                             children: [
+//                               const Icon(Icons.near_me_outlined,
+//                                   size: 16, color: _muted),
+//                               const SizedBox(width: 6),
+//                               Text(
+//                                 meta!,
+//                                 style: const TextStyle(
+//                                   fontSize: 12.5,
+//                                   fontWeight: FontWeight.w700,
+//                                   color: _muted,
+//                                 ),
+//                               ),
+//                             ],
+//                           ),
+//                         const Spacer(),
+//                         TextButton(
+//                           onPressed: onSeeDetails,
+//                           style: TextButton.styleFrom(
+//                             foregroundColor: _primary,
+//                             padding: const EdgeInsets.symmetric(
+//                                 horizontal: 12, vertical: 8),
+//                             shape: RoundedRectangleBorder(
+//                               borderRadius: BorderRadius.circular(14),
+//                             ),
+//                           ),
+//                           child: const Text(
+//                             'Ver detalhes',
+//                             style: TextStyle(fontWeight: FontWeight.w900),
+//                           ),
+//                         ),
+//                       ],
+//                     )
+//                   ],
+//                 ),
+//               ),
+//             ],
+//           ),
+//         ),
+//       ),
+//     );
+//   }
+// }
+
+// class _AlertIcon extends StatelessWidget {
+//   static const _danger = Color(0xFFE53935);
+
+//   @override
+//   Widget build(BuildContext context) {
+//     return Container(
+//       width: 46,
+//       height: 46,
+//       decoration: BoxDecoration(
+//         color: _danger.withOpacity(0.12),
+//         borderRadius: BorderRadius.circular(16),
+//         border: Border.all(color: _danger.withOpacity(0.25)),
+//       ),
+//       child: const Icon(
+//         Icons.warning_amber_rounded,
+//         color: _danger,
+//         size: 24,
+//       ),
+//     );
+//   }
+// }
+
+// class _TagPill extends StatelessWidget {
+//   final String text;
+//   const _TagPill({required this.text});
+
+//   static const _danger = Color(0xFFE53935);
+
+//   @override
+//   Widget build(BuildContext context) {
+//     return Container(
+//       margin: const EdgeInsets.only(left: 8),
+//       padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
+//       decoration: BoxDecoration(
+//         color: _danger,
+//         borderRadius: BorderRadius.circular(99),
+//       ),
+//       child: Text(
+//         text,
+//         style: const TextStyle(
+//           color: Colors.white,
+//           fontSize: 11,
+//           fontWeight: FontWeight.w900,
+//         ),
+//       ),
+//     );
+//   }
+// }
+
+// class _MetaRow extends StatelessWidget {
+//   final IconData icon;
+//   final String text;
+
+//   const _MetaRow({required this.icon, required this.text});
+
+//   static const _muted = Color(0xFF6B7AAE);
+
+//   @override
+//   Widget build(BuildContext context) {
+//     return Row(
+//       children: [
+//         Icon(icon, size: 16, color: _muted),
+//         const SizedBox(width: 6),
+//         Text(
+//           text,
+//           style: const TextStyle(
+//             fontSize: 12.2,
+//             fontWeight: FontWeight.w700,
+//             color: _muted,
+//           ),
+//         ),
+//       ],
+//     );
+//   }
+// }
+
+// class _Pill extends StatelessWidget {
+//   final String text;
+//   final Color bg;
+//   final Color fg;
+//   final Color border;
+
+//   const _Pill({
+//     required this.text,
+//     required this.bg,
+//     required this.fg,
+//     required this.border,
+//   });
+
+//   @override
+//   Widget build(BuildContext context) {
+//     return Container(
+//       padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
+//       decoration: BoxDecoration(
+//         color: bg,
+//         borderRadius: BorderRadius.circular(99),
+//         border: Border.all(color: border),
+//       ),
+//       child: Text(
+//         text,
+//         style: TextStyle(
+//           color: fg,
+//           fontSize: 11,
+//           fontWeight: FontWeight.w900,
+//           letterSpacing: 0.2,
+//         ),
+//       ),
+//     );
+//   }
+// }

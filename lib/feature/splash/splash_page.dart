@@ -42,11 +42,11 @@ class _SplashPageState extends State<SplashPage> {
                           mainAxisSize: MainAxisSize.min,
                           children: [
                             const Logo(),
-                            const SizedBox(height: 32),
+                            // const SizedBox(height: 32),
                             Text(
                               AppName.appName,
                               textAlign: TextAlign.center,
-                              style: context.appText.headerlg.copyWith(
+                              style: context.appText.headerxl.copyWith(
                                 color: Colors.white,
                               ),
                             ),
