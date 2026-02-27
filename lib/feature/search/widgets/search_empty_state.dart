@@ -50,9 +50,9 @@ class SearchEmptyState extends StatelessWidget {
             ),
             const SizedBox(height: SpacingSize.md),
             ButtonOutline(
-              press: () {},
               icon: const Icon(Icons.history_rounded),
               text: actionLabel,
+              press: onAction,
             )
           ],
         ),

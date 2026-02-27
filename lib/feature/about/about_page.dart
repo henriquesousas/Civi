@@ -4,6 +4,9 @@ import 'package:deehelp/core/theme/export_theme.dart';
 import 'package:deehelp/core/ui/styles/export_style.dart';
 import 'package:deehelp/core/ui/widgets/buttons/buttons_export.dart';
 import 'package:deehelp/feature/auth/presentation/auth_router.dart';
+import 'package:deehelp/module/auth/external/di/authenticated_user_provider.dart';
+import 'package:deehelp/old_core/utils/url_launcher_utils.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'widgets/blue_header_bubles.dart';
 import 'widgets/engagament_card.dart';
 import 'widgets/header.dart';
@@ -13,11 +16,11 @@ import 'widgets/welcome_card.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
-class AboutPage extends StatelessWidget {
+class AboutPage extends ConsumerWidget {
   const AboutPage({super.key});
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     return Scaffold(
       body: Stack(
         children: [
@@ -57,17 +60,22 @@ class AboutPage extends StatelessWidget {
                       const HowItWorksCard(),
                       const SizedBox(height: SpacingSize.md),
                       EngagementCard(
-                        onShare: () {},
+                        onShare: () => UrlLauncherUtils.shareApp(context),
                       ),
                       const SizedBox(height: SpacingSize.md)
                     ],
                   ),
                 ),
-                Padding(
-                  padding: const EdgeInsets.all(SpacingSize.md),
-                  child: ButtonPrimary(
-                    press: () => context.push(AuthRouter.path),
-                    text: 'Entrar com minha conta',
+                Visibility(
+                  visible: ref.watch(authenticatedUserProvider) == null
+                      ? true
+                      : false,
+                  child: Padding(
+                    padding: const EdgeInsets.all(SpacingSize.md),
+                    child: ButtonPrimary(
+                      press: () => context.push(AuthRouter.path),
+                      text: 'Entrar com minha conta',
+                    ),
                   ),
                 ),
               ],

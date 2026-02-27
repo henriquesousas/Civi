@@ -9,6 +9,7 @@ import 'package:deehelp/module/incident/domain/usecase/incident_output.dart';
 import 'package:deehelp/module/incident/domain/usecase/listing/incident_filter.dart';
 import 'package:deehelp/module/incident/domain/usecase/update/update_incident_dto.dart';
 import 'package:deehelp/module/incident/external/repository/incident_mapper.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
 class SupabaseIncidentRepository extends IncidentRepository {
@@ -22,9 +23,7 @@ class SupabaseIncidentRepository extends IncidentRepository {
   @override
   Future<Result<Unit>> save(Incident incident) async {
     final map = IncidentMapper.toMap(incident);
-    await _supabaseClient.from(_table).insert(
-          map,
-        );
+    await _supabaseClient.from(_table).insert(map);
     return Result.success(const Unit());
   }
 
@@ -67,7 +66,7 @@ class SupabaseIncidentRepository extends IncidentRepository {
     IncidentFilter filter,
   ) async {
     final term = _normalizeSearchTerm(filter.term);
-    // final term = "423434343432432"; //_normalizeSearchTerm(filter.term);
+    debugPrint("Termo filtrado $term");
 
     var query = _supabaseClient
         .from(_table)
@@ -78,13 +77,17 @@ class SupabaseIncidentRepository extends IncidentRepository {
     if (filter.mode == SearchMode.incidentCode) {
       query = query.filter("alert_id", 'ilike', '%$term%');
     } else {
-      query = query.or(
-        'name.ilike.%$term%,code.ilike.%$term%',
-        referencedTable: 'product',
-      );
+      if (filter.term != '*') {
+        debugPrint("Entrou no query ilike $term");
+        query = query.or(
+          'name.ilike.%$term%,code.ilike.%$term%',
+          referencedTable: 'product',
+        );
+      }
     }
 
-    final data = await query.limit(filter.limit);
+    final data =
+        await query.limit(filter.limit).order('created_at', ascending: false);
 
     final incidents = IncidentMapper.toList(data);
 
@@ -115,7 +118,7 @@ class SupabaseIncidentRepository extends IncidentRepository {
       query = query.or("city.ilike.%$term%,$termWordsCondition%");
     }
 
-    final data = await query.limit(limit);
+    final data = await query.limit(limit).order('created_at', ascending: false);
 
     final incidents = IncidentMapper.toList(data);
 
@@ -128,12 +131,12 @@ class SupabaseIncidentRepository extends IncidentRepository {
     return Result.success(const Unit());
   }
 
-  bool _looksLikeAlertId(String term) {
-    final cleanTerm = term.replaceAll(RegExp(r'[\s\-_]'), '').toUpperCase();
-    final containsNumbers = RegExp(r'\d').hasMatch(cleanTerm);
+  // bool _looksLikeAlertId(String term) {
+  //   final cleanTerm = term.replaceAll(RegExp(r'[\s\-_]'), '').toUpperCase();
+  //   final containsNumbers = RegExp(r'\d').hasMatch(cleanTerm);
 
-    return (containsNumbers && cleanTerm.length <= 6);
-  }
+  //   return (containsNumbers && cleanTerm.length <= 6);
+  // }
 
   String _normalizeSearchTerm(String term) {
     final newTerm = term.trim().toLowerCase();

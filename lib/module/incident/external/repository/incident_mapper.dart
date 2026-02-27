@@ -57,7 +57,7 @@ class IncidentMapper {
       howTo: map['how_to'],
       visibilty: map['visibility'],
       local: IncidentLocal(
-        address: map['approximate_address'] ?? '',
+        address: map['approximate_address'],
         city: map['city'] ?? '',
         state: map['state'] ?? '',
       ),

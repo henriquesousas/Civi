@@ -28,6 +28,7 @@ import 'package:deehelp/feature/incidents/providers/incident_list_viewmodel_prov
 import 'package:deehelp/feature/incidents/providers/incident_selected_provider.dart';
 import 'package:deehelp/feature/incidents/providers/update_incident_viewmodel_provider.dart';
 import 'package:deehelp/feature/incidents/update/state/update_incident_state.dart';
+import 'package:deehelp/old_core/ui/extensions/string_extension.dart';
 import 'package:deehelp/old_core/utils/url_launcher_utils.dart';
 import 'package:deehelp/old_core/zoom_image_viewer.dart';
 import 'package:flutter/material.dart';
@@ -121,7 +122,7 @@ class _UpdateIncidentPageState extends ConsumerState<UpdateIncidentPage> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      '${state.updatedValue!.product.name} roubado(a)',
+                      '${state.updatedValue!.product.name} roubado',
                       style: context.appText.headerlg,
                     ),
                     const SizedBox(height: SpacingSize.sm),
@@ -490,9 +491,14 @@ class _UpdateIncidentPageState extends ConsumerState<UpdateIncidentPage> {
   }
 
   String _getLocal(UpdateIncidentState state) {
+    debugPrint(state.updatedValue?.local?.address);
     if (state.updatedValue == null) return 'Não informado';
     if (state.updatedValue!.local == null) return 'Não informado';
-    return "${state.updatedValue!.local!.city!} • ${state.updatedValue!.local?.state!}";
+    bool hasAddress = state.updatedValue!.local?.address != null;
+
+    final address = hasAddress ? "${state.updatedValue!.local?.address} •" : '';
+
+    return "$address${state.updatedValue!.local!.city!} • ${state.updatedValue!.local?.state!}";
   }
 
   String _dataLabel(UpdateIncidentState state) {

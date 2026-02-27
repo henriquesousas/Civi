@@ -30,6 +30,8 @@ import 'package:deehelp/old_features/search/search_page.dart';
 import 'package:deehelp/old_features/welcome/welcome_page.dart';
 import 'package:deehelp/router_refresh_notifier.dart';
 import 'package:deehelp/test_page2.dart';
+import 'package:deehelp/test_page8.dart';
+import 'package:deehelp/test_page9.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
@@ -72,6 +74,7 @@ var goRouterProvider = Provider<GoRouter>(
         // return '/';
         // return AuthRouter.path;
         // return SplashRouter.path;
+        // return ItemsRouter.success;
         switch (appStatus) {
           case AppStatus.loading:
             return SplashRouter.path;
@@ -115,7 +118,7 @@ var goRouterProvider = Provider<GoRouter>(
             //GPS
             // child: TestPage13(),
             // Search
-            child: const TestPage2(),
+            // child: const TestPage2(),
             //Profile
             // child: const TestPage3(),
             // Lista de items
@@ -141,7 +144,7 @@ var goRouterProvider = Provider<GoRouter>(
             // child: TestPage7(),
             // Reportat incident
             // child: TestOcorrencia(),
-            // child: TestPage8(),
+            child: TestPage8(),
             // ReportIncidentSuccess
             // child: const TestPage9(),
             // Splash

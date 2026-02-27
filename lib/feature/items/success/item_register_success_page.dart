@@ -60,10 +60,16 @@ class ItemRegisterSuccessPage extends StatelessWidget {
                     Expanded(
                       child: ListView(
                         children: [
-                          const OwlSadSpeechBubble(
-                            file: 'assets/lottie/owl_happy.json',
-                            message:
-                                "Perfeito! 🦉✨\nSeu item foi cadastrado com sucesso.\nAgora ele está protegido e monitorado.",
+                          // const OwlSadSpeechBubble(
+                          //   file: 'assets/lottie/owl_happy.json',
+                          //   message:
+                          //       "Perfeito! 🦉✨\nSeu item foi cadastrado com sucesso.\nAgora ele está protegido e monitorado.",
+                          // ),
+                          Lottie.asset(
+                            "assets/lottie/loader_success.json",
+                            width: 200,
+                            height: 200,
+                            repeat: false,
                           ),
                           Text(
                             'Cadastro recebido!',

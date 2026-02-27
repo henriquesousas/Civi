@@ -1,5 +1,9 @@
 class ItemListingArgs {
   final bool isAddingIncident;
+  final bool fetchData;
 
-  ItemListingArgs({required this.isAddingIncident});
+  ItemListingArgs({
+    required this.isAddingIncident,
+    this.fetchData = false,
+  });
 }

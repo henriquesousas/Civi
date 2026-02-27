@@ -17,7 +17,7 @@ class UrlLauncherUtils {
     String? phoneNumber = "+5511972732245";
 
     final message =
-        "Olá! 👋 Queremos a sua ajuda para melhorar o app ${AppName.appName}. Diga-nos: Qual é a sua dúvida ou é uma sugestão sobre o funcionamento ou segurança? Sua opinião é essencial!";
+        "Olá! 👋 Queremos a sua ajuda para melhorar o app ${AppName.appName}. Diga-nos: Qual é a sua dúvida? ou é uma sugestão sobre o funcionamento do app? Sua opinião é essencial!";
 
     try {
       final link = WhatsAppUnilink(
@@ -68,7 +68,10 @@ class UrlLauncherUtils {
   }
 
   static Future<bool> launchAppStorePage(
-      BuildContext context, String androidAppId, String iOSAppId) async {
+    BuildContext context,
+    String androidAppId,
+    String iOSAppId,
+  ) async {
     final messenger = ScaffoldMessenger.of(context);
     String url;
 

@@ -16,6 +16,7 @@ import 'package:deehelp/feature/incidents/providers/incident_selected_provider.d
 import 'package:deehelp/feature/items/items_router.dart';
 import 'package:deehelp/feature/items/register/presentation/widgets/card_page.dart';
 import 'package:deehelp/feature/profile/export_profile.dart';
+import 'package:deehelp/feature/search/search_args.dart';
 import 'package:deehelp/feature/search/search_router.dart';
 import 'package:deehelp/feature/sos/sos_router.dart';
 import 'package:deehelp/module/incident/domain/enum/type_alert.dart';
@@ -126,7 +127,10 @@ class _HomePageState extends ConsumerState<HomePage> {
                                 title: 'Pesquisar',
                                 subtitle: 'Placa / IMEI',
                                 accent: context.primaryColor,
-                                onTap: () => context.push(SearchRouter.search),
+                                onTap: () => context.push(
+                                  SearchRouter.search,
+                                  extra: SearchArgs(showBackButton: true),
+                                ),
                               ),
                             ),
                           ],

@@ -8,9 +8,12 @@ import 'package:deehelp/feature/items/items_router.dart';
 import 'package:deehelp/feature/profile/item_list_router_args.dart';
 import 'package:deehelp/feature/profile/widgets/logout_dialog.dart';
 import 'package:deehelp/feature/profile/widgets/not_authenticated_card.dart';
+import 'package:deehelp/feature/search/search_args.dart';
+import 'package:deehelp/feature/search/search_router.dart';
 import 'package:deehelp/feature/sos/sos_router.dart';
 import 'package:deehelp/module/auth/external/di/auth_view_model_provider.dart';
 import 'package:deehelp/module/auth/external/di/authenticated_user_provider.dart';
+import 'package:deehelp/old_core/utils/url_launcher_utils.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'profile_item.dart';
 import 'widgets/account_card.dart';
@@ -76,10 +79,14 @@ class ProfilePage extends ConsumerWidget {
           const TitleSection(title: 'Explorar'),
           ProfileOptions(
             items: [
-              const ProfileItem(
+              ProfileItem(
                 icon: Icons.search_rounded,
-                title: 'Consultar incidentes',
+                title: 'Consultar',
                 subtitle: 'Pesquise ocorrências registradas',
+                press: () => context.push(
+                  SearchRouter.search,
+                  extra: SearchArgs(showBackButton: true),
+                ),
               ),
               ProfileItem(
                 icon: Icons.sos,
@@ -102,7 +109,7 @@ class ProfilePage extends ConsumerWidget {
           ),
           const SizedBox(height: SpacingSize.lg),
           const TitleSection(title: 'Preferências'),
-          const ProfileOptions(
+          ProfileOptions(
             items: [
               // ProfileItem(
               //   icon: Icons.dark_mode_outlined,
@@ -114,6 +121,8 @@ class ProfilePage extends ConsumerWidget {
                 title: 'Avaliar o app',
                 subtitle: 'Ajude-nos a melhorar',
                 badge: 'Novo',
+                press: () => UrlLauncherUtils.launchAppStorePage(
+                    context, "com.radardoroubo.br.radar_do_roubo", "br.com"),
               ),
             ],
           ),
@@ -144,10 +153,12 @@ class ProfilePage extends ConsumerWidget {
                 subtitle: '1.0.0',
                 hideChevron: true,
               ),
-              const ProfileItem(
+              ProfileItem(
                 icon: Icons.support_agent_rounded,
                 title: 'Fale conosco',
                 subtitle: 'Tire dúvidas ou envie sugestões',
+                press: () =>
+                    UrlLauncherUtils.launchWhatsAppSupport(context: context),
               ),
               if (session != null) ...[
                 ProfileItem(
@@ -175,12 +186,4 @@ class ProfilePage extends ConsumerWidget {
       ),
     );
   }
-
-  // Future<bool?> showLogoutDialog(BuildContext context) {
-  //   return showDialog<bool>(
-  //     context: context,
-  //     barrierDismissible: false,
-  //     builder: (_) => const _LogoutDialog(),
-  //   );
-  // }
 }

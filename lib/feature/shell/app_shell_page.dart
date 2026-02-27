@@ -43,7 +43,7 @@ class _AppShellPageState extends ConsumerState<AppShellPage> {
           if (i == 2) {
             final userId = ref.read(authenticatedUserProvider)?.id;
             if (userId == null) {
-              ref.read(itemListViewmodelProvider.notifier).zero();
+              ref.read(itemListViewmodelProvider.notifier).clear();
               _itemsLoadedOnce = false;
               return;
             }

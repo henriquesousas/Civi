@@ -40,7 +40,7 @@ class EngagementCard extends StatelessWidget {
           ButtonOutline(
             icon: const Icon(Icons.share_outlined),
             text: 'Compartilhar o ${AppName.appName}',
-            press: () {},
+            press: onShare,
           )
         ],
       ),

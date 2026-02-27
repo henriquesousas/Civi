@@ -1,8 +1,10 @@
 import 'package:deehelp/core/extension/color_extension.dart';
 import 'package:deehelp/core/theme/export_theme.dart';
 import 'package:deehelp/core/ui/styles/export_style.dart';
+import 'package:deehelp/core/ui/widgets/icon/highlight_icon.dart';
 import 'package:deehelp/feature/incidents/report/widgets/speech_bubble.dart';
 import 'package:flutter/material.dart';
+import 'package:lottie/lottie.dart';
 
 class EmptyIncidentsState extends StatelessWidget {
   const EmptyIncidentsState({super.key});
@@ -27,27 +29,27 @@ class EmptyIncidentsState extends StatelessWidget {
       child: Column(
         mainAxisSize: MainAxisSize.min,
         children: [
-          // HighlightIcon(
-          //   containerSize: IconContainerSizes.xl,
-          //   radius: RadiusSize.xl,
-          //   icon: Icon(
-          //     Icons.radar_rounded,
-          //     size: IconSizes.xxl,
-          //     color: context.primaryColor,
-          //   ),
-          // ),
-          OwlSadSpeechBubble(
-            width: ImageSize.xl,
-            height: ImageSize.xl,
-            message:
-                'Tudo calmo por aqui!👌\nSe algo acontecer, eu te aviso, estou de olho 👀.',
-            // file: 'assets/lottie/owl2.json',
-            primary: false,
+          HighlightIcon(
+            containerSize: IconContainerSizes.xl,
+            radius: RadiusSize.xl,
+            icon: Icon(
+              Icons.radar_rounded,
+              size: IconSizes.xxl,
+              color: context.primaryColor,
+            ),
           ),
+          // OwlSadSpeechBubble(
+          //   width: ImageSize.xl,
+          //   height: ImageSize.xl,
+          //   message:
+          //       'Tudo calmo por aqui!👌\nSe algo acontecer, eu te aviso, estou de olho 👀.',
+          //   // file: 'assets/lottie/owl2.json',
+          //   primary: false,
+          // ),
           // Lottie.asset(
           //   'assets/lottie/owl_stopped.json',
-          //   width: ImageSize.xxl,
-          //   height: ImageSize.xxl,
+          //   width: ImageSize.xl,
+          //   height: ImageSize.xl,
           //   repeat: true,
           // ),
           const SizedBox(height: SpacingSize.md),

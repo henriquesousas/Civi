@@ -3,22 +3,32 @@ import 'dart:ui';
 
 import 'package:deehelp/core/extension/color_extension.dart';
 import 'package:deehelp/core/extension/exports_extension.dart';
+import 'package:deehelp/core/services/permissions/location/providers/location_providers.dart';
 import 'package:deehelp/core/theme/export_theme.dart';
 import 'package:deehelp/core/ui/styles/export_style.dart';
 import 'package:deehelp/core/ui/widgets/appbar/default_app_bar.dart';
+import 'package:deehelp/core/ui/widgets/buttons/buttons_export.dart';
 import 'package:deehelp/core/ui/widgets/cards/card_exports.dart';
 import 'package:deehelp/core/ui/widgets/icon/export_icon.dart';
+import 'package:deehelp/core/ui/widgets/textfield/text_field_card.dart';
+import 'package:deehelp/core/ui/widgets/textfield/text_field_primary.dart';
 import 'package:deehelp/core/utils/enum_utils.dart';
+import 'package:deehelp/feature/home/widgets/thini_divider.dart';
 import 'package:deehelp/feature/incidents/incident_router.dart';
 import 'package:deehelp/feature/incidents/report/report_incident_viewmodel.dart';
 import 'package:deehelp/feature/incidents/report/widgets/register/expandable_card.dart';
+import 'package:deehelp/feature/incidents/report/widgets/register/field_tile.dart';
 import 'package:deehelp/feature/incidents/report/widgets/register/item_card.dart';
+import 'package:deehelp/feature/incidents/report/widgets/register/text_field_long_text.dart';
+import 'package:deehelp/feature/incidents/report/widgets/register/text_input.file.dart';
 import 'package:deehelp/feature/items/item_type.dart';
 import 'package:deehelp/feature/items/items_router.dart';
 import 'package:deehelp/feature/items/register/presentation/widgets/card_page.dart';
 import 'package:deehelp/feature/items/register/presentation/widgets/section_title.dart';
 import 'package:deehelp/feature/profile/item_list_router_args.dart';
 import 'package:deehelp/module/incident/domain/enum/type_alert.dart';
+import 'package:deehelp/old_core/ui/extensions/date_extension.dart';
+import 'package:deehelp/old_core/ui/extensions/time_extension.dart';
 import 'package:deehelp/old_core/ui/widgets/button/ui_hold_confirm_button.dart';
 import 'package:deehelp/feature/incidents/providers/report_incident_event_provider.dart';
 import 'package:deehelp/feature/incidents/providers/report_incident_viewmodel_provider.dart';
@@ -42,24 +52,31 @@ class _AddIncidentPageState extends ConsumerState<ReportIncidentPage>
   double holdProgress = 0.0;
   Timer? holdTimer;
   bool immediateDone = false;
+  // DateTime? selectedDate;
+  // TimeOfDay? selectedTime;
+  final cityCtrl = TextEditingController();
+  final districtCtrl = TextEditingController();
+  final howCtrl = TextEditingController();
+  final addressCtrl = TextEditingController();
 
   @override
   void initState() {
     super.initState();
+    // final currentLocation = ref.read(currentLocationProvider.notifier).state;
 
-    // LocationService().getCurrentLocation().then(
-    //   (place) {
-    //     if (!mounted) return null;
-    //     if (place == null) return null;
+    // ref
+    //     .read(reportIncidentViewmodelProvider.notifier)
+    //     .addCurrentPlace(currentLocation);
+  }
 
-    //     final currentLocation =
-    //         ref.watch(currentLocationProvider.notifier).state;
-
-    //     // ref
-    //     //     .read(reportIncidentViewmodelProvider.notifier)
-    //     //     .addCurrentPlace(place);
-    //   },
-    // );
+  @override
+  void dispose() {
+    cityCtrl.dispose();
+    districtCtrl.dispose();
+    howCtrl.dispose();
+    holdTimer?.cancel();
+    addressCtrl.dispose();
+    super.dispose();
   }
 
   void listener() {
@@ -109,11 +126,45 @@ class _AddIncidentPageState extends ConsumerState<ReportIncidentPage>
   Future<void> _pickItem(ReportIncidentViewmodel viewModel) async {
     final product = await context.push<Product?>(
       ItemsRouter.list,
-      extra: ItemListRouteArgs(args: ItemListingArgs(isAddingIncident: true)),
+      extra: ItemListRouteArgs(
+        args: ItemListingArgs(
+          isAddingIncident: true,
+          fetchData: true,
+        ),
+        showBackButton: true,
+      ),
     );
     if (product != null) {
       viewModel.selectProduct(product);
     }
+  }
+
+  Future<void> _pickDate(
+      ReportIncidentViewmodel viewModel, DateTime? initialDate) async {
+    final now = DateTime.now();
+    final result = await showDatePicker(
+      context: context,
+      initialDate: initialDate ?? now,
+      firstDate: DateTime(now.year - 2),
+      lastDate: DateTime(now.year + 1),
+      helpText: 'Selecionar data',
+    );
+    if (result == null) return;
+    // setState(() => selectedDate = result);
+    viewModel.onOccurredAtChange(result);
+  }
+
+  Future<void> _pickTime(
+      ReportIncidentViewmodel viewModel, TimeOfDay? initialTime) async {
+    final result = await showTimePicker(
+      context: context,
+      initialTime: initialTime ?? TimeOfDay.now(),
+      helpText: 'Selecionar horário',
+    );
+    if (result == null) return;
+    // setState(() => selectedTime = result);
+    debugPrint("Hora do ocorrido ${result}");
+    viewModel.onTimeOccurredAtChange(result);
   }
 
   @override
@@ -226,6 +277,89 @@ class _AddIncidentPageState extends ConsumerState<ReportIncidentPage>
                       onApiCall: () async {},
                       onProgressChange: (v) {},
                     ),
+                  ],
+                ),
+              ),
+            ),
+            const SizedBox(height: SpacingSize.md),
+            ExpandableCard(
+              selected: state.type == TypeAlert.detailed,
+              title: "Detalhado",
+              subtitle:
+                  'Inclui data, horário e contexto. Recomendado para um registro completo.',
+              badge: "COMPLETO",
+              icon: Icons.assignment_outlined,
+              onTap: () => viewModel.selectAlertType(TypeAlert.detailed),
+              child: Padding(
+                padding: const EdgeInsets.fromLTRB(16, 0, 16, 16),
+                child: Column(
+                  children: [
+                    const SizedBox(height: SpacingSize.md),
+                    FieldTile(
+                      icon: Icons.calendar_month_outlined,
+                      label: 'Data',
+                      value: state.occurredAt == null
+                          ? 'Selecionar'
+                          : state.occurredAt!.toDayMonthYearFormat(),
+                      onTap: () => _pickDate(viewModel, state.occurredAt),
+                    ),
+                    const ThinDivider(),
+                    FieldTile(
+                      icon: Icons.schedule_outlined,
+                      label: 'Horário',
+                      value: state.timeOccurredAt == null
+                          ? 'Selecionar'
+                          : state.timeOccurredAt!.to24hFormat(),
+                      onTap: () => _pickTime(viewModel, state.timeOccurredAt),
+                    ),
+                    const ThinDivider(),
+                    TextInputTile(
+                      icon: Icons.location_city_outlined,
+                      label: 'Cidade',
+                      // controller: cityCtrl,
+                      controller: state.cityController!,
+                      onChanged: (value) => viewModel.onCityChange(value),
+                      error: state.cityError,
+                      hint: 'Ex.: Centro',
+                      textInputAction: TextInputAction.next,
+                    ),
+                    const ThinDivider(),
+                    TextInputTile(
+                      icon: Icons.place_outlined,
+                      label: 'Estado',
+                      // controller: districtCtrl,
+                      controller: state.stateController!,
+                      onChanged: (value) => viewModel.onStateChange(value),
+                      error: state.stateError,
+                      hint: 'Ex.: São Paulo',
+                      textInputAction: TextInputAction.next,
+                    ),
+                    const SizedBox(height: SpacingSize.md),
+                    const ThinDivider(),
+                    TextInputTile(
+                      icon: Icons.signpost_outlined,
+                      label: 'Endereço aproximado',
+                      controller: addressCtrl,
+                      hint: 'Ex.: Próx. à Av. Paulista, 1200',
+                      textInputAction: TextInputAction.next,
+                      onChanged: (v) => viewModel.onFullAddressChange(v),
+                      error: state.errorFullAddress,
+                    ),
+                    TextFieldLongText(
+                      title: 'Como aconteceu',
+                      subtitle: 'Descreva em até 300 caracteres.',
+                      controller: howCtrl,
+                      onChanged: (v) => viewModel.onHowToChange(v),
+                      maxLen: 300,
+                    ),
+                    const SizedBox(height: SpacingSize.lg),
+                    ButtonPrimary(
+                      loading: state.isLoading,
+                      press: state.isFormValid
+                          ? () => viewModel.saveDetailed()
+                          : null,
+                      text: "Salvar",
+                    )
                   ],
                 ),
               ),

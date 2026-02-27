@@ -3,6 +3,7 @@ import 'package:deehelp/core/ui/widgets/appbar/default_app_bar.dart';
 import 'package:deehelp/core/ui/widgets/buttons/buttons_export.dart';
 import 'package:deehelp/feature/incidents/incident_router.dart';
 import 'package:deehelp/feature/items/list/widgets/item_list_shimmer.dart';
+import 'package:deehelp/feature/search/widgets/load_skeleton.dart';
 import 'package:deehelp/module/incident/domain/usecase/incident_output.dart';
 import 'package:deehelp/feature/incidents/list/widgets/inciden_list.dart';
 import 'package:deehelp/feature/incidents/list/widgets/incident_empty_data.dart';
@@ -47,7 +48,8 @@ class _ListingIncidentPageState extends ConsumerState<IncidentListPage> {
       bottomNavigationBar: _bottomBar(),
       body: state.when(
         data: (incidents) => IncidenList(items: incidents),
-        loading: () => const ItemListShimmer(),
+        // loading: () => const ItemListShimmer(),
+        loading: () => const LoadingResultsSkeleton(size: 10),
         error: (error, stackTrace) => const IncidentEmptyData(),
       ),
     );

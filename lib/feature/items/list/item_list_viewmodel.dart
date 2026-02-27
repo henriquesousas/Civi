@@ -14,11 +14,12 @@ class ItemListViewModel extends StateNotifier<ListProductState> {
       : _getProductsByUserUsecase = getProductsByUserUsecase,
         super(const ListProductState.initial());
 
-  void zero() {
+  void clear() {
     state = const ListProductState.empty();
   }
 
   void getProducts(String userId) {
+    if (_cacheProducts.isNotEmpty) return;
     HandleCommand.execute<List<Product>, ListProductState>(
       updateState: (newState) => state = newState,
       command: () async => await _getProductsByUserUsecase.execute(userId),

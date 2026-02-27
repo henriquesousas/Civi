@@ -8,9 +8,12 @@ import 'package:deehelp/core/ui/widgets/icon/export_icon.dart';
 import 'package:deehelp/core/ui/widgets/textfield/upper_case_text_formatter.dart';
 import 'package:deehelp/feature/home/widgets/incident_row_item.dart';
 import 'package:deehelp/feature/home/widgets/thini_divider.dart';
+import 'package:deehelp/feature/incidents/incident_router.dart';
+import 'package:deehelp/feature/incidents/providers/incident_selected_provider.dart';
 import 'package:deehelp/feature/items/item_type.dart';
 import 'package:deehelp/feature/items/register/presentation/widgets/card_page.dart';
 import 'package:deehelp/feature/items/register/presentation/widgets/section_title.dart';
+import 'package:deehelp/feature/search/search_args.dart';
 import 'package:deehelp/feature/search/search_viewmodel.dart';
 import 'package:deehelp/feature/search/search_viewmodel_provider.dart';
 import 'package:deehelp/feature/search/widgets/detection_line.dart';
@@ -20,6 +23,7 @@ import 'package:deehelp/feature/search/widgets/search_empty_state.dart';
 import 'package:deehelp/module/incident/domain/enum/type_alert.dart';
 import 'package:deehelp/module/incident/domain/usecase/incident_output.dart';
 import 'package:deehelp/module/incident/domain/usecase/incident_product_output.dart';
+import 'package:deehelp/old_core/ui/extensions/dialog_extension.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -27,83 +31,9 @@ import 'package:go_router/go_router.dart';
 
 enum DetectedType { plate, imei, incidentCode, unknown }
 
-final results = [
-  IncidentOutput(
-    id: "112",
-    userId: "123",
-    alertId: "100202",
-    type: TypeAlert.immediately,
-    product: IncidentProductOutput(
-        productId: "123",
-        name: "Produto 1",
-        code: "DND0171",
-        images: [],
-        color: "Vermelho",
-        brand: "Max",
-        type: ItemType.car.name),
-    status: ItemStatus.active,
-    createdAt: DateTime.now(),
-    occurredAt: DateTime.now(),
-    occurredAtTime: TimeOfDay.now(),
-  ),
-  IncidentOutput(
-    id: "112",
-    userId: "123",
-    alertId: "100202",
-    type: TypeAlert.immediately,
-    product: IncidentProductOutput(
-        productId: "123",
-        name: "Produto 1",
-        code: "DND0171",
-        images: [],
-        color: "Vermelho",
-        brand: "Max",
-        type: ItemType.car.name),
-    status: ItemStatus.active,
-    createdAt: DateTime.now(),
-    occurredAt: DateTime.now(),
-    occurredAtTime: TimeOfDay.now(),
-  ),
-  IncidentOutput(
-    id: "112",
-    userId: "123",
-    alertId: "100202",
-    type: TypeAlert.immediately,
-    product: IncidentProductOutput(
-        productId: "123",
-        name: "Produto 1",
-        code: "DND0171",
-        images: [],
-        color: "Vermelho",
-        brand: "Max",
-        type: ItemType.car.name),
-    status: ItemStatus.active,
-    createdAt: DateTime.now(),
-    occurredAt: DateTime.now(),
-    occurredAtTime: TimeOfDay.now(),
-  ),
-  IncidentOutput(
-    id: "112",
-    userId: "123",
-    alertId: "100202",
-    type: TypeAlert.immediately,
-    product: IncidentProductOutput(
-        productId: "123",
-        name: "Produto 1",
-        code: "DND0171",
-        images: [],
-        color: "Vermelho",
-        brand: "Max",
-        type: ItemType.car.name),
-    status: ItemStatus.active,
-    createdAt: DateTime.now(),
-    occurredAt: DateTime.now(),
-    occurredAtTime: TimeOfDay.now(),
-  )
-];
-
 class SearchPage extends ConsumerStatefulWidget {
-  const SearchPage({super.key});
+  final SearchArgs? args;
+  const SearchPage({super.key, this.args});
 
   @override
   ConsumerState<SearchPage> createState() => _SearchPageState();
@@ -233,7 +163,6 @@ class _SearchPageState extends ConsumerState<SearchPage> {
   String get _detectedLabel {
     if (_rawQuery.isEmpty) return 'Digite para detectar';
     if (mode != SearchMode.auto) {
-      // quando força modo, exibe o modo selecionado
       switch (mode) {
         case SearchMode.plate:
           return 'Modo: Placa';
@@ -302,9 +231,17 @@ class _SearchPageState extends ConsumerState<SearchPage> {
 
   Future<void> _search(SearchViewmodel viewModel) async {
     debugPrint("$mode");
+    debugPrint("Tipo detectado = $_detected");
+    FocusScope.of(context).unfocus();
     if (!_canSearch) {
       // _toast('Informe um valor válido para buscar.');
+      _clear();
       debugPrint("Informe um valor válido para buscar.");
+      // context.showSnackBar("Informe um valor válido para buscar.",
+      context.showTopNotice(
+        "Informe um valor válido para buscar.",
+        type: DialogType.normal,
+      );
       return;
     }
 
@@ -313,7 +250,11 @@ class _SearchPageState extends ConsumerState<SearchPage> {
 
     // final viewModel = ref.read(searchViewmodelProvider.notifier);
 
-    viewModel.search(query, mode);
+    final searchMode =
+        _detected == DetectedType.incidentCode ? SearchMode.incidentCode : mode;
+    debugPrint("Searchmode enviado $searchMode");
+    debugPrint("Searchmode enviado $searchMode");
+    viewModel.search(query, searchMode);
   }
 
   @override
@@ -324,7 +265,8 @@ class _SearchPageState extends ConsumerState<SearchPage> {
     final showClear = queryCtrl.text.isNotEmpty;
     return Scaffold(
       appBar: DefaultAppBar(
-        showBackButton: true,
+        showBackButton:
+            widget.args == null ? false : widget.args!.showBackButton,
         title: "Consultar incidentes",
         press: () => context.pop(),
       ),
@@ -355,6 +297,7 @@ class _SearchPageState extends ConsumerState<SearchPage> {
                       FocusScope.of(context).unfocus();
                       setState(
                         () {
+                          debugPrint("Trocou para o modo $mode");
                           mode = m;
                           // results = [];
                         },
@@ -435,7 +378,7 @@ class _SearchPageState extends ConsumerState<SearchPage> {
                   subtitle:
                       'Faça uma busca ou consulte as ocorrências recentes.',
                   actionLabel: 'Ver últimos 30 dias',
-                  onAction: () {},
+                  onAction: () => viewModel.getlast(),
                 );
               }
               return PageCard(
@@ -444,7 +387,11 @@ class _SearchPageState extends ConsumerState<SearchPage> {
                     ...data.map(
                       (r) => IncidentRowItem(
                         incident: r,
-                        onTap: () {},
+                        onTap: () {
+                          ref.watch(incidentSelectedProvider.notifier).state =
+                              r;
+                          context.push(IncidentRouter.detail);
+                        },
                       ),
                     ),
                     const ThinDivider(),
@@ -457,7 +404,7 @@ class _SearchPageState extends ConsumerState<SearchPage> {
                 title: 'Nenhum resultado ainda',
                 subtitle: 'Faça uma busca ou consulte as ocorrências recentes.',
                 actionLabel: 'Ver últimos 30 dias',
-                onAction: () {},
+                onAction: () => viewModel.getlast(),
               );
             },
             loading: () {
@@ -467,33 +414,6 @@ class _SearchPageState extends ConsumerState<SearchPage> {
               );
             },
           ),
-
-          //Loading
-          // const SizedBox(height: SpacingSize.sm),
-          // const LoadingResultsSkeleton(
-          //   size: 5,
-          // ),
-          //Empty
-          // const SizedBox(height: SpacingSize.sm),
-          // SearchEmptyState(
-          //   title: 'Nenhum resultado ainda',
-          //   subtitle: 'Faça uma busca ou consulte as ocorrências recentes.',
-          //   actionLabel: 'Ver últimos 30 dias',
-          //   onAction: () {},
-          // ),
-          // PageCard(
-          //   child: Column(
-          //     children: [
-          //       ...results.map(
-          //         (r) => IncidentRowItem(
-          //           incident: r,
-          //           onTap: () {},
-          //         ),
-          //       ),
-          //       const ThinDivider(),
-          //     ],
-          //   ),
-          // ),
         ],
       ),
     );

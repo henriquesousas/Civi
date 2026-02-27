@@ -30,7 +30,7 @@ class ExpandableCard extends StatelessWidget {
         ? context.primaryColor.withValues(alpha: 0.32)
         : const Color(0xFFE6EAF6);
     final bg =
-        selected ? context.primaryColor.withValues(alpha: 0.06) : Colors.white;
+        selected ? context.primaryColor.withValues(alpha: 0.01) : Colors.white;
 
     return InkWell(
       borderRadius: BorderRadius.circular(RadiusSize.xl),
@@ -80,7 +80,7 @@ class ExpandableCard extends StatelessWidget {
                               ),
                               child: Text(
                                 badge,
-                                style: context.appText.bodySmall.copyWith(
+                                style: context.appText.caption.copyWith(
                                   color: Colors.white,
                                   fontWeight: FontWeight.w900,
                                   letterSpacing: 0.4,
