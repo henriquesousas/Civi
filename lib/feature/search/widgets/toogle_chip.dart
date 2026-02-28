@@ -44,7 +44,7 @@ class ToggleChip extends StatelessWidget {
               size: IconSizes.sm,
               color: selected ? context.primaryColor : context.secondaryColor,
             ),
-            const SizedBox(width: 6),
+            const SizedBox(width: 1),
             Flexible(
               child: Text(
                 label,

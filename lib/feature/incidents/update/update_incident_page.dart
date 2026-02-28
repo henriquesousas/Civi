@@ -28,7 +28,6 @@ import 'package:deehelp/feature/incidents/providers/incident_list_viewmodel_prov
 import 'package:deehelp/feature/incidents/providers/incident_selected_provider.dart';
 import 'package:deehelp/feature/incidents/providers/update_incident_viewmodel_provider.dart';
 import 'package:deehelp/feature/incidents/update/state/update_incident_state.dart';
-import 'package:deehelp/old_core/ui/extensions/string_extension.dart';
 import 'package:deehelp/old_core/utils/url_launcher_utils.dart';
 import 'package:deehelp/old_core/zoom_image_viewer.dart';
 import 'package:flutter/material.dart';
@@ -233,7 +232,7 @@ class _UpdateIncidentPageState extends ConsumerState<UpdateIncidentPage> {
                         border: Border.all(color: const Color(0xFFE6EAF6)),
                       ),
                       child: Text(
-                        "123456789111245",
+                        state.updatedValue!.product.code,
                         style: context.appText.headermd,
                       ),
                     ),

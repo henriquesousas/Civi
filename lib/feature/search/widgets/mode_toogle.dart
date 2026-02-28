@@ -32,7 +32,7 @@ class ModeToggle extends StatelessWidget {
               onTap: () => onChanged(SearchMode.auto),
             ),
           ),
-          const SizedBox(width: 8),
+          const SizedBox(width: 4),
           Expanded(
             child: ToggleChip(
               selected: value == SearchMode.plate,
@@ -41,7 +41,7 @@ class ModeToggle extends StatelessWidget {
               onTap: () => onChanged(SearchMode.plate),
             ),
           ),
-          const SizedBox(width: 8),
+          const SizedBox(width: 4),
           Expanded(
             child: ToggleChip(
               selected: value == SearchMode.imei,
@@ -50,7 +50,7 @@ class ModeToggle extends StatelessWidget {
               onTap: () => onChanged(SearchMode.imei),
             ),
           ),
-          const SizedBox(width: 8),
+          const SizedBox(width: 4),
           Expanded(
             child: ToggleChip(
               selected: value == SearchMode.incidentCode,

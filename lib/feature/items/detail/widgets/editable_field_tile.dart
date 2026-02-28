@@ -64,7 +64,7 @@ class EditableFieldTile extends StatelessWidget {
                       maxLines: 8,
                       overflow: TextOverflow.ellipsis,
                       style: context.appText.bodymd.copyWith(
-                        fontWeight: FontWeight.w700,
+                        fontWeight: FontWeight.w600,
                         color: onEdit != null
                             ? context.onSurface
                             : textColor ??

@@ -4,6 +4,8 @@ import 'package:deehelp/core/ui/styles/app_text_style.dart';
 import 'package:deehelp/core/ui/widgets/badge/export_badge.dart';
 import 'package:deehelp/core/ui/widgets/icon/highlight_icon.dart';
 import 'package:deehelp/core/ui/widgets/image/export_image.dart';
+import 'package:deehelp/feature/items/item_type.dart';
+import 'package:deehelp/feature/items/list/widgets/phone_placeholder.dart';
 import 'package:deehelp/module/item/domain/entities/product.dart';
 import 'package:deehelp/old_core/ui/extensions/date_extension.dart';
 import 'package:flutter/material.dart';
@@ -45,17 +47,33 @@ class RowItemCard extends StatelessWidget {
             child: Row(
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                CustomNetworkImage(
-                  width: ImageSize.md,
-                  height: ImageSize.md,
-                  radius: RadiusSize.lg,
-                  imageUrl: item.images.isNotEmpty ? item.images[0].value : '',
-                  customErrorWidget: Icon(
-                    Icons.phone_android,
-                    size: IconSizes.xl,
-                    color: context.onSurface.withValues(alpha: 0.5),
+                if (item.type != ItemType.phone.name) ...[
+                  CustomNetworkImage(
+                    width: ImageSize.md,
+                    height: ImageSize.md,
+                    radius: RadiusSize.lg,
+                    imageUrl:
+                        item.images.isNotEmpty ? item.images[0].value : '',
+                    customErrorWidget: Icon(
+                      Icons.phone_android,
+                      size: IconSizes.xl,
+                      color: context.onSurface.withValues(alpha: 0.5),
+                    ),
                   ),
-                ),
+                ],
+                if (item.type == ItemType.phone.name) ...[
+                  // HighlightIcon(
+                  //   containerSize: ImageSize.md,
+                  //   icon: Icon(
+                  //     Icons.phone_android,
+                  //     color: context.onSurface.withValues(alpha: 0.6),
+                  //     size: 50,
+                  //   ),
+                  // ),
+                  PhonePlaceholder(
+                    size: ImageSize.md,
+                  )
+                ],
                 const SizedBox(width: 12),
                 Expanded(
                   child: Column(
