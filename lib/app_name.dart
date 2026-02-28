@@ -1,3 +1,3 @@
 class AppName {
-  static String appName = "TIZZO";
+  static String appName = "KOTTO";
 }

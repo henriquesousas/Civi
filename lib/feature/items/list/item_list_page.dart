@@ -40,7 +40,11 @@ class _ItemListPageState extends ConsumerState<ItemListPage> {
         ref.read(itemListViewmodelProvider.notifier).clear();
         return;
       }
-      ref.read(itemListViewmodelProvider.notifier).getProducts(userId);
+
+      ref.read(itemListViewmodelProvider.notifier).getProducts(
+            userId,
+            fetchData: widget.args?.fetchData ?? false,
+          );
     });
   }
 

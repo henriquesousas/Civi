@@ -1,5 +1,6 @@
 import 'dart:ui';
 
+import 'package:deehelp/core/extension/color_extension.dart';
 import 'package:deehelp/core/theme/export_theme.dart';
 import 'package:deehelp/core/ui/styles/export_style.dart';
 import 'package:deehelp/core/ui/widgets/appbar/default_app_bar.dart';
@@ -69,8 +70,16 @@ class _ItemDetailPageState extends ConsumerState<ItemDetailPage> {
 
         if (currentState.errorMessage != null &&
             currentState.errorMessage != oldState?.errorMessage) {
-          context.showSnackBar(currentState.errorMessage!,
+          final navigator = Navigator.of(context, rootNavigator: true);
+          // 1️⃣ Fecha o dialog (loading)
+          if (navigator.canPop()) {
+            navigator.pop();
+          }
+          context.showTopNotice(
+              "Não foi possível realizar esta operação o erro foi por que provavelmente o item a ser excluido deve ter um incidente relacionado a ele",
               type: DialogType.error);
+          // context.showSnackBar(currentState.errorMessage!,
+          //     type: DialogType.error);
         }
 
         if (currentState.deleteSuccess) {
@@ -337,6 +346,16 @@ class _ItemDetailPageState extends ConsumerState<ItemDetailPage> {
               );
             },
           ),
+          const SizedBox(height: 10),
+          Center(
+              child: Text(
+            "Caso exista um incidente relacionado ao ${item.name} a exclusão não poderá ser executada.",
+            textAlign: TextAlign.center,
+            style: context.appText.caption.copyWith(
+              color: context.secondaryColor,
+              fontWeight: FontWeight.w400,
+            ),
+          )),
         ],
       ),
     );

@@ -1,7 +1,9 @@
+import 'package:deehelp/app_name.dart';
+import 'package:deehelp/core/extension/exports_extension.dart';
 import 'package:deehelp/core/theme/export_theme.dart';
 import 'package:deehelp/core/ui/styles/export_style.dart';
 import 'package:flutter/material.dart';
-import 'package:lottie/lottie.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class Header extends StatelessWidget {
   final VoidCallback onSkip;
@@ -11,32 +13,44 @@ class Header extends StatelessWidget {
   Widget build(BuildContext context) {
     return Row(
       children: [
-        // Container(
-        //   width: ImageSize.xs,
-        //   height: ImageSize.xs,
-        //   decoration: BoxDecoration(
-        //     color: context.primaryColor,
-        //     borderRadius: BorderRadius.circular(RadiusSize.md),
-        //     boxShadow: [
-        //       BoxShadow(
-        //         color: context.primaryColor.withValues(alpha: 0.25),
-        //         blurRadius: 18,
-        //         offset: const Offset(0, 10),
-        //       ),
-        //     ],
-        //   ),
-        //   child: const Icon(Icons.shield_outlined, color: Colors.white),
-        // ),
-        Lottie.asset(
-          'assets/lottie/owl2.json',
-          width: ImageSize.sm,
-          height: ImageSize.sm,
-          repeat: true,
+        Container(
+          width: 52.w,
+          height: 52.w,
+          decoration: BoxDecoration(
+            color: context.primaryColor,
+            borderRadius: BorderRadius.circular(RadiusSize.md),
+            boxShadow: [
+              BoxShadow(
+                color: context.primaryColor.withValues(alpha: 0.25),
+                blurRadius: 18,
+                offset: const Offset(0, 10),
+              ),
+            ],
+          ),
+          // child: const Icon(Icons.shield_outlined, color: Colors.white),
+          child: Image.asset(
+            'assets/images/logo5.png',
+            // width: 90,
+            // height: 80,
+            fit: BoxFit.cover,
+          ),
         ),
+        // Lottie.asset(
+        //   'assets/lottie/owl2.json',
+        //   width: ImageSize.sm,
+        //   height: ImageSize.sm,
+        //   repeat: true,
+        // ),
+        // Image.asset(
+        //   'assets/images/logo5.png',
+        //   width: 90,
+        //   height: 80,
+        //   fit: BoxFit.cover,
+        // ),
         const SizedBox(width: SpacingSize.md),
         Expanded(
           child: Text(
-            'TIZZO',
+            AppName.appName,
             style: context.appText.headerlg.copyWith(
               fontWeight: FontWeight.w900,
               color: Colors.white,

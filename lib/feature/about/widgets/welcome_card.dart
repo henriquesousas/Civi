@@ -1,3 +1,4 @@
+import 'package:deehelp/app_name.dart';
 import 'package:deehelp/core/extension/exports_extension.dart';
 import 'package:deehelp/core/theme/export_theme.dart';
 import 'package:deehelp/core/ui/styles/export_style.dart';
@@ -40,7 +41,7 @@ class WelcomeCard extends StatelessWidget {
             ),
             const SizedBox(height: SpacingSize.md),
             Text(
-              'Bem-vindo ao Tizzo 👋',
+              'Bem-vindo ao ${AppName.appName} 👋',
               style: context.appText.headerlg,
             ),
             const SizedBox(height: SpacingSize.sm),

@@ -25,13 +25,9 @@ import 'package:deehelp/old_features/products/presentation/views/add/add_product
 import 'package:deehelp/old_features/products/presentation/views/add/steps/add_product_success_page.dart';
 import 'package:deehelp/old_features/products/presentation/views/listing/product_listing_page.dart';
 import 'package:deehelp/old_features/products/presentation/views/update/update_product_page.dart';
-import 'package:deehelp/old_features/search/search_page.dart';
-// import 'package:deehelp/features/splash/splash_page.dart';
 import 'package:deehelp/old_features/welcome/welcome_page.dart';
 import 'package:deehelp/router_refresh_notifier.dart';
-import 'package:deehelp/test_page2.dart';
 import 'package:deehelp/test_page8.dart';
-import 'package:deehelp/test_page9.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';

@@ -222,7 +222,6 @@ class _AddIncidentPageState extends ConsumerState<ReportIncidentPage>
                         children: [
                           Text(
                             hasItem ? selectedItem!.name : 'Escolher item',
-                            // "Escolher item",
                             style: context.appText.headermd,
                           ),
                           const SizedBox(height: SpacingSize.xs),
