@@ -15,27 +15,31 @@ class Logo extends StatelessWidget {
       // height: context.isLandscape
       //     ? context.percentHeight(0.2)
       //     : context.percentHeight(0.16),
-      // width: context.percentWidth(0.5),
-      // height: context.percentWidth(0.5),
+      // width: 100.w,
+      // height: 100.h,
+      // width: 200,
+      // height: 200,
       padding: const EdgeInsets.symmetric(
         horizontal: 2,
         vertical: 2,
       ),
       // decoration: BoxDecoration(
       //   color: Colors.white.withValues(alpha: 0.14),
-      //   borderRadius: BorderRadius.circular(RadiusSize.xl),
+      //   borderRadius: BorderRadius.circular(100),
       //   border: Border.all(color: Colors.white.withValues(alpha: 0.18)),
       // ),
       child: ClipRRect(
         borderRadius: BorderRadius.circular(20),
         child: Image.asset(
-          'assets/images/logo5.png',
-          width: context.isLandscape
-              ? context.percentWidth(0.2)
-              : context.percentWidth(0.5),
-          height: context.isLandscape
-              ? context.percentHeight(0.2)
-              : context.percentHeight(0.1),
+          'assets/images/logo_kotto.png',
+          // width: context.isLandscape
+          //     ? context.percentWidth(0.2)
+          //     : context.percentWidth(0.5),
+          // height: context.isLandscape
+          //     ? context.percentHeight(0.2)
+          //     : context.percentHeight(0.1),
+          width: 120.w,
+          height: 120.h,
           fit: BoxFit.cover,
           errorBuilder: (_, __, ___) => Icon(
             Icons.shield_outlined,

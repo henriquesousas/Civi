@@ -43,19 +43,20 @@ class _SplashPageState extends State<SplashPage> {
                           children: [
                             const Logo(),
                             // const SizedBox(height: 32),
-                            Text(
-                              AppName.appName,
-                              textAlign: TextAlign.center,
-                              style: context.appText.headerxl.copyWith(
-                                color: Colors.white,
-                              ),
-                            ),
-                            const SizedBox(height: 12),
+                            // Text(
+                            //   AppName.appName,
+                            //   textAlign: TextAlign.center,
+                            //   style: context.appText.headerxl.copyWith(
+                            //     color: Colors.white,
+                            //   ),
+                            // ),
+                            // const SizedBox(height: 12),
                             Text(
                               'Sua segurança começa no seu bairro',
                               textAlign: TextAlign.center,
-                              style: context.appText.bodySmall.copyWith(
-                                color: Colors.white.withOpacity(0.92),
+                              style: context.appText.bodymd.copyWith(
+                                fontWeight: FontWeight.w700,
+                                color: Colors.white.withValues(alpha: 0.92),
                               ),
                             ),
                             if (isLandscape) ...[
