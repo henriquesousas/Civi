@@ -15,7 +15,6 @@ import 'package:deehelp/feature/sos/sos_router.dart';
 import 'package:deehelp/feature/splash/splash_router.dart';
 import 'package:deehelp/old_core/ui/router/app_router.dart';
 import 'package:deehelp/old_core/ui/router/slide_transition_page.dart';
-import 'package:deehelp/old_features/emergency-call/public_list_emergency_call_page.dart';
 import 'package:deehelp/old_features/profile/presentation/views/add_nickname/add_nickname_page.dart';
 import 'package:deehelp/old_features/faq/faq_provider.dart';
 import 'package:deehelp/old_features/map/presentation/map_page.dart';
@@ -27,7 +26,7 @@ import 'package:deehelp/old_features/products/presentation/views/listing/product
 import 'package:deehelp/old_features/products/presentation/views/update/update_product_page.dart';
 import 'package:deehelp/old_features/welcome/welcome_page.dart';
 import 'package:deehelp/router_refresh_notifier.dart';
-import 'package:deehelp/teste_page_loading.dart';
+import 'package:deehelp/teste_home2.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
@@ -141,7 +140,7 @@ var goRouterProvider = Provider<GoRouter>(
             // Reportat incident
             // child: TestOcorrencia(),
             // child: TestPage8(),
-            child: TestePageLoading(),
+            // child: TestePageLoading(),
             // ReportIncidentSuccess
             // child: const TestPage9(),
             // Splash
@@ -158,6 +157,7 @@ var goRouterProvider = Provider<GoRouter>(
             // child: const MapPage(),
             // child: TestePageContato(),
             // child: TesteHome(),
+            child: const TesteHome2(),
             // child: TesteShellPage(),
             // child: TesteIncidentLoading(),
             // child: TesteNicknamePage(),
@@ -254,15 +254,7 @@ var goRouterProvider = Provider<GoRouter>(
         //     );
         //   },
         // ),
-        GoRoute(
-          path: AppRouter.publicEmergencyCall,
-          pageBuilder: (context, state) {
-            return slideTransitionPage(
-              key: state.pageKey,
-              child: const PublicListEmergencyCallPage(),
-            );
-          },
-        ),
+
         GoRoute(
           path: AppRouter.welcome,
           pageBuilder: (context, state) {

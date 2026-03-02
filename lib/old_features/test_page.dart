@@ -1,14 +1,9 @@
 import 'dart:async';
 
-import 'package:deehelp/feature/home/widgets/home_avatar_badge.dart';
 import 'package:deehelp/old_core/ui/theme/app_colors.dart';
-import 'package:deehelp/old_core/ui/theme/dimens.dart';
-import 'package:deehelp/old_features/dashboard/presentation/widget/quick_action_item.dart';
-import 'package:deehelp/test_quick_acion_card_test.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:flutter_svg/svg.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class TestPage extends StatefulWidget {

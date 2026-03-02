@@ -18,6 +18,45 @@ class _TestPage2State extends State<TestPage2> {
   static const _muted = Color(0xFF8A96C8);
   static const _primary = Color(0xFF2B5BEE);
 
+  LocationFilter location = const LocationFilter.nearMe();
+
+// Mock: lista de UFs e cidades (trocar por API)
+  static const List<String> _ufs = [
+    "AC",
+    "AL",
+    "AP",
+    "AM",
+    "BA",
+    "CE",
+    "DF",
+    "ES",
+    "GO",
+    "MA",
+    "MT",
+    "MS",
+    "MG",
+    "PA",
+    "PB",
+    "PR",
+    "PE",
+    "PI",
+    "RJ",
+    "RN",
+    "RS",
+    "RO",
+    "RR",
+    "SC",
+    "SP",
+    "SE",
+    "TO",
+  ];
+
+  final Map<String, List<String>> _citiesByUf = {
+    "SP": ["Osasco", "São Paulo", "Barueri", "Guarulhos"],
+    "RJ": ["Rio de Janeiro", "Niterói", "Duque de Caxias"],
+    "MG": ["Belo Horizonte", "Contagem", "Betim"],
+  };
+
   SearchMode mode = SearchMode.auto;
   final TextEditingController queryCtrl = TextEditingController();
 
@@ -305,6 +344,26 @@ class _TestPage2State extends State<TestPage2> {
     ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(msg)));
   }
 
+  Future<void> _openLocationFilter() async {
+    final updated = await showModalBottomSheet<LocationFilter>(
+      context: context,
+      isScrollControlled: true,
+      backgroundColor: Colors.transparent,
+      builder: (_) => _LocationFilterSheet(
+        initial: location,
+        ufs: _ufs,
+        citiesByUf: _citiesByUf,
+      ),
+    );
+
+    if (updated != null) {
+      setState(() {
+        location = updated;
+        results = [];
+      });
+    }
+  }
+
   void _clear() {
     setState(() {
       queryCtrl.clear();
@@ -413,6 +472,21 @@ class _TestPage2State extends State<TestPage2> {
                         : _detected != _DetectedType.unknown,
                   ),
 
+                  const SizedBox(height: 12),
+
+                  const SizedBox(height: 10),
+                  _LocationFilterBar(
+                    label: location.label,
+                    onTap: loading ? null : _openLocationFilter,
+                    onClear: (!location.nearMe)
+                        ? () {
+                            setState(() {
+                              location = const LocationFilter.nearMe();
+                              results = [];
+                            });
+                          }
+                        : null,
+                  ),
                   const SizedBox(height: 12),
 
                   // Ação primária
@@ -1235,4 +1309,423 @@ class _IncidentResult {
     required this.status,
     required this.kind,
   });
+}
+
+class LocationFilter {
+  final String? uf; // ex: "SP"
+  final String? city; // ex: "Osasco"
+  final bool nearMe; // true => usa localização do usuário
+
+  const LocationFilter({
+    this.uf,
+    this.city,
+    required this.nearMe,
+  });
+
+  const LocationFilter.nearMe()
+      : uf = null,
+        city = null,
+        nearMe = true;
+
+  LocationFilter copyWith({String? uf, String? city, bool? nearMe}) {
+    return LocationFilter(
+      uf: uf ?? this.uf,
+      city: city ?? this.city,
+      nearMe: nearMe ?? this.nearMe,
+    );
+  }
+
+  String get label {
+    if (nearMe) return "Perto de mim";
+    if ((city ?? "").isNotEmpty && (uf ?? "").isNotEmpty) return "$city • $uf";
+    if ((uf ?? "").isNotEmpty) return "Estado: $uf";
+    return "Definir local";
+  }
+}
+
+class _LocationFilterBar extends StatelessWidget {
+  final String label;
+  final VoidCallback? onTap;
+  final VoidCallback? onClear;
+
+  const _LocationFilterBar({
+    required this.label,
+    required this.onTap,
+    this.onClear,
+  });
+
+  static const _primary = Color(0xFF2B5BEE);
+  static const _ink = Color(0xFF1F2A44);
+  static const _muted = Color(0xFF8A96C8);
+
+  @override
+  Widget build(BuildContext context) {
+    return InkWell(
+      onTap: onTap,
+      borderRadius: BorderRadius.circular(18),
+      child: Ink(
+        decoration: BoxDecoration(
+          color: const Color(0xFFF5F7FD),
+          borderRadius: BorderRadius.circular(18),
+          border: Border.all(color: const Color(0xFFE6EAF6)),
+        ),
+        child: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 10),
+          child: Row(
+            children: [
+              Container(
+                width: 34,
+                height: 34,
+                decoration: BoxDecoration(
+                  color: _primary.withOpacity(0.10),
+                  borderRadius: BorderRadius.circular(14),
+                ),
+                child:
+                    const Icon(Icons.place_outlined, color: _primary, size: 18),
+              ),
+              const SizedBox(width: 10),
+              Expanded(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    const Text(
+                      "Local da consulta",
+                      style: TextStyle(
+                        color: _muted,
+                        fontWeight: FontWeight.w800,
+                        fontSize: 12,
+                      ),
+                    ),
+                    const SizedBox(height: 2),
+                    Text(
+                      label,
+                      style: const TextStyle(
+                        color: _ink,
+                        fontWeight: FontWeight.w900,
+                        fontSize: 13.5,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              if (onClear != null) ...[
+                IconButton(
+                  onPressed: onClear,
+                  icon: const Icon(Icons.close_rounded, size: 18),
+                  color: _muted,
+                  tooltip: "Limpar filtro",
+                ),
+              ],
+              const Icon(Icons.tune_rounded, color: _muted),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+class _LocationFilterSheet extends StatefulWidget {
+  final LocationFilter initial;
+  final List<String> ufs;
+  final Map<String, List<String>> citiesByUf;
+
+  const _LocationFilterSheet({
+    required this.initial,
+    required this.ufs,
+    required this.citiesByUf,
+  });
+
+  @override
+  State<_LocationFilterSheet> createState() => _LocationFilterSheetState();
+}
+
+class _LocationFilterSheetState extends State<_LocationFilterSheet> {
+  static const _bg = Color(0xFFF5F7FD);
+  static const _ink = Color(0xFF1F2A44);
+  static const _muted = Color(0xFF8A96C8);
+  static const _primary = Color(0xFF2B5BEE);
+
+  late bool nearMe;
+  String? uf;
+  String? city;
+
+  @override
+  void initState() {
+    super.initState();
+    nearMe = widget.initial.nearMe;
+    uf = widget.initial.uf;
+    city = widget.initial.city;
+  }
+
+  List<String> get _cities {
+    if ((uf ?? "").isEmpty) return const [];
+    return widget.citiesByUf[uf] ?? const [];
+  }
+
+  bool get _canApply {
+    if (nearMe) return true;
+    // Se não é perto de mim, pelo menos UF
+    if ((uf ?? "").isEmpty) return false;
+    // Cidade é opcional (mas recomendado)
+    return true;
+  }
+
+  void _apply() {
+    if (!_canApply) return;
+
+    final result = nearMe
+        ? const LocationFilter.nearMe()
+        : LocationFilter(uf: uf, city: city, nearMe: false);
+
+    Navigator.of(context).pop(result);
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    final bottomInset = MediaQuery.of(context).viewInsets.bottom;
+
+    return Container(
+      padding: EdgeInsets.fromLTRB(16, 10, 16, 16 + bottomInset),
+      decoration: const BoxDecoration(
+        color: Colors.transparent,
+      ),
+      child: Container(
+        decoration: BoxDecoration(
+          color: Colors.white,
+          borderRadius: BorderRadius.circular(26),
+          boxShadow: const [
+            BoxShadow(
+              color: Color(0x22000000),
+              blurRadius: 24,
+              offset: Offset(0, 10),
+            ),
+          ],
+        ),
+        child: Padding(
+          padding: const EdgeInsets.fromLTRB(16, 12, 16, 16),
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              Container(
+                width: 42,
+                height: 4,
+                decoration: BoxDecoration(
+                  color: const Color(0xFFE6EAF6),
+                  borderRadius: BorderRadius.circular(99),
+                ),
+              ),
+              const SizedBox(height: 14),
+              Row(
+                children: const [
+                  Icon(Icons.tune_rounded, color: _primary),
+                  SizedBox(width: 8),
+                  Expanded(
+                    child: Text(
+                      "Filtrar por local",
+                      style: TextStyle(
+                        color: _ink,
+                        fontWeight: FontWeight.w900,
+                        fontSize: 16,
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+              const SizedBox(height: 10),
+              Container(
+                padding: const EdgeInsets.all(12),
+                decoration: BoxDecoration(
+                  color: _primary.withOpacity(0.07),
+                  borderRadius: BorderRadius.circular(18),
+                  border: Border.all(color: _primary.withOpacity(0.18)),
+                ),
+                child: const Text(
+                  "Escolha se a consulta deve usar sua localização atual (perto de mim) ou uma cidade/estado específico.",
+                  style: TextStyle(
+                    color: _muted,
+                    fontWeight: FontWeight.w600,
+                    height: 1.25,
+                  ),
+                ),
+              ),
+              const SizedBox(height: 12),
+
+              // Toggle: Perto de mim
+              SwitchListTile.adaptive(
+                contentPadding: EdgeInsets.zero,
+                value: nearMe,
+                onChanged: (v) {
+                  setState(() {
+                    nearMe = v;
+                    if (nearMe) {
+                      uf = null;
+                      city = null;
+                    }
+                  });
+                },
+                title: const Text(
+                  "Perto de mim",
+                  style: TextStyle(color: _ink, fontWeight: FontWeight.w900),
+                ),
+                subtitle: const Text(
+                  "Usa sua localização para encontrar ocorrências na sua região.",
+                  style: TextStyle(color: _muted, fontWeight: FontWeight.w600),
+                ),
+              ),
+
+              const SizedBox(height: 8),
+
+              // UF + Cidade
+              AnimatedOpacity(
+                opacity: nearMe ? 0.45 : 1,
+                duration: const Duration(milliseconds: 180),
+                child: IgnorePointer(
+                  ignoring: nearMe,
+                  child: Column(
+                    children: [
+                      _DropdownCard<String>(
+                        label: "Estado (UF)",
+                        value: uf,
+                        items: widget.ufs,
+                        hint: "Selecione a UF",
+                        onChanged: (v) {
+                          setState(() {
+                            uf = v;
+                            city = null;
+                          });
+                        },
+                      ),
+                      const SizedBox(height: 10),
+                      _DropdownCard<String>(
+                        label: "Cidade (opcional)",
+                        value: city,
+                        items: _cities,
+                        hint: (uf == null)
+                            ? "Selecione a UF antes"
+                            : "Selecione a cidade",
+                        onChanged: (v) => setState(() => city = v),
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+
+              const SizedBox(height: 14),
+
+              Row(
+                children: [
+                  Expanded(
+                    child: OutlinedButton(
+                      onPressed: () => Navigator.of(context).pop(),
+                      style: OutlinedButton.styleFrom(
+                        foregroundColor: _primary,
+                        side: BorderSide(color: _primary.withOpacity(0.35)),
+                        padding: const EdgeInsets.symmetric(vertical: 14),
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(18),
+                        ),
+                      ),
+                      child: const Text(
+                        "Cancelar",
+                        style: TextStyle(fontWeight: FontWeight.w900),
+                      ),
+                    ),
+                  ),
+                  const SizedBox(width: 12),
+                  Expanded(
+                    child: ElevatedButton(
+                      onPressed: _canApply ? _apply : null,
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor: _primary,
+                        foregroundColor: Colors.white,
+                        elevation: 0,
+                        padding: const EdgeInsets.symmetric(vertical: 14),
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(18),
+                        ),
+                      ),
+                      child: const Text(
+                        "Aplicar",
+                        style: TextStyle(fontWeight: FontWeight.w900),
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+class _DropdownCard<T> extends StatelessWidget {
+  final String label;
+  final T? value;
+  final List<T> items;
+  final String hint;
+  final ValueChanged<T?> onChanged;
+
+  const _DropdownCard({
+    required this.label,
+    required this.value,
+    required this.items,
+    required this.hint,
+    required this.onChanged,
+  });
+
+  static const _bg = Color(0xFFF5F7FD);
+  static const _ink = Color(0xFF1F2A44);
+  static const _muted = Color(0xFF8A96C8);
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      padding: const EdgeInsets.fromLTRB(12, 10, 12, 10),
+      decoration: BoxDecoration(
+        color: _bg,
+        borderRadius: BorderRadius.circular(18),
+        border: Border.all(color: const Color(0xFFE6EAF6)),
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(
+            label,
+            style: const TextStyle(
+              color: _muted,
+              fontWeight: FontWeight.w800,
+              fontSize: 12,
+            ),
+          ),
+          DropdownButtonHideUnderline(
+            child: DropdownButton<T>(
+              value: value,
+              isExpanded: true,
+              hint: Text(
+                hint,
+                style:
+                    const TextStyle(color: _muted, fontWeight: FontWeight.w600),
+              ),
+              items: items
+                  .map((e) => DropdownMenuItem<T>(
+                        value: e,
+                        child: Text(
+                          "$e",
+                          style: const TextStyle(
+                            color: _ink,
+                            fontWeight: FontWeight.w800,
+                          ),
+                        ),
+                      ))
+                  .toList(),
+              onChanged: onChanged,
+            ),
+          ),
+        ],
+      ),
+    );
+  }
 }
