@@ -1,5 +1,4 @@
-import 'package:deehelp/old_core/ui/extensions/screen_size_extension.dart';
-import 'package:deehelp/old_core/ui/animation/transform_scale_opacity_animator.dart';
+import 'package:deehelp/core/extension/size_extension.dart';
 import 'package:deehelp/old_core/ui/theme/app_colors.dart';
 import 'package:deehelp/old_core/ui/theme/app_text_styles.dart';
 import 'package:deehelp/old_core/ui/theme/dimens.dart';
@@ -91,14 +90,11 @@ class _LoadingProgressPageState
           children: [
             Expanded(
               child: Center(
-                child: TransformScaleOpacityAnimator(
-                  duration: const Duration(milliseconds: 1500),
-                  child: Lottie.asset(
-                    "assets/lottie/ripple.json",
-                    width: context.percentWidth(0.6),
-                    height: context.percentHeight(0.6),
-                    repeat: true,
-                  ),
+                child: Lottie.asset(
+                  "assets/lottie/ripple.json",
+                  width: context.percentWidth(0.6),
+                  height: context.percentHeight(0.6),
+                  repeat: true,
                 ),
               ),
             ),

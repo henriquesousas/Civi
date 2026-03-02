@@ -1,8 +1,8 @@
 import 'package:deehelp/core/notification/domain_notification.dart';
-import 'package:deehelp/old_core/validation/validator.dart';
+import 'package:deehelp/core/validation/validator.dart';
 import 'package:deehelp/module/auth/domain/entity/user.dart';
 
-import '../../../old_core/validation/validation_handler.dart';
+import '../../../core/validation/validation_handler.dart';
 
 class UserValidator extends Validator {
   final User user;

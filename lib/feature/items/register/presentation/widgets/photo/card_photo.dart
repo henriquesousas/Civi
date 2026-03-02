@@ -3,15 +3,15 @@ import 'package:deehelp/core/theme/export_theme.dart';
 import 'package:deehelp/core/ui/styles/app_text_style.dart';
 import 'package:deehelp/core/ui/widgets/badge/badge_text.dart';
 import 'package:deehelp/core/ui/widgets/icon/export_icon.dart';
+import 'package:deehelp/core/ui/widgets/image/image_view_dialog.dart';
 import 'package:deehelp/feature/items/register/presentation/widgets/card_page.dart';
 import 'package:deehelp/feature/items/register/viewmodel/register_item_viewmodel.dart';
 import 'package:deehelp/module/item/di/item_viewmodel_provider.dart';
 import 'package:deehelp/core/providers/image_picker_provider.dart';
 import 'package:deehelp/core/services/image/default_image_picker.dart';
 import 'package:deehelp/core/services/image/image_picker_failure.dart';
-import 'package:deehelp/old_core/ui/extensions/dialog_extension.dart';
-import 'package:deehelp/old_core/ui/extensions/result_extension.dart';
-import 'package:deehelp/old_core/zoom_image_viewer.dart';
+import 'package:deehelp/core/extension/dialog_extension.dart';
+import 'package:deehelp/core/extension/result_extension.dart';
 import 'package:deehelp/module/item/domain/entities/image_media.dart';
 import 'package:deehelp/core/ui/widgets/image/grid_add_image.dart';
 import 'package:flutter/material.dart';
@@ -65,17 +65,25 @@ class _CardPhotoState extends ConsumerState<CardPhoto> {
   }
 
   Future<void> openPhotoViewer(int index) async {
-    final urls = photos.map((e) => e.value).toList();
-    showDialog(
+    await showDialog(
       context: context,
-      barrierColor: Colors.black87,
-      builder: (context) {
-        return ImageZoomViewer(
-          imageUrls: urls,
-          initialIndex: index,
-        );
-      },
+      barrierColor: Colors.black.withValues(alpha: 0.92),
+      builder: (_) => ImageViewDialog(
+        photos: photos,
+        initialIndex: index,
+      ),
     );
+    // final urls = photos.map((e) => e.value).toList();
+    // showDialog(
+    //   context: context,
+    //   barrierColor: Colors.black87,
+    //   builder: (context) {
+    //     return ImageZoomViewer(
+    //       imageUrls: urls,
+    //       initialIndex: index,
+    //     );
+    //   },
+    // );
   }
 
   @override

@@ -4,7 +4,7 @@ import 'package:deehelp/core/errors/network_failure.dart';
 import 'package:deehelp/core/errors/unknow_failure.dart';
 import 'package:deehelp/core/services/network/network_info.dart';
 import 'package:deehelp/module/auth/domain/exceptions/auth_failure.dart';
-import 'package:deehelp/old_core/utils/result.dart';
+import 'package:deehelp/core/utils/result.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
 Future<Result<T>> safeSupabaseCall<T>({

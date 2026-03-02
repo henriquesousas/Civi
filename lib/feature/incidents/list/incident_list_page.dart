@@ -2,7 +2,6 @@ import 'package:deehelp/core/extension/exports_extension.dart';
 import 'package:deehelp/core/ui/widgets/appbar/default_app_bar.dart';
 import 'package:deehelp/core/ui/widgets/buttons/buttons_export.dart';
 import 'package:deehelp/feature/incidents/incident_router.dart';
-import 'package:deehelp/feature/items/list/widgets/item_list_shimmer.dart';
 import 'package:deehelp/feature/search/widgets/load_skeleton.dart';
 import 'package:deehelp/module/incident/domain/usecase/incident_output.dart';
 import 'package:deehelp/feature/incidents/list/widgets/inciden_list.dart';

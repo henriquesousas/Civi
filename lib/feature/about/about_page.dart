@@ -5,7 +5,7 @@ import 'package:deehelp/core/ui/styles/export_style.dart';
 import 'package:deehelp/core/ui/widgets/buttons/buttons_export.dart';
 import 'package:deehelp/feature/auth/presentation/auth_router.dart';
 import 'package:deehelp/module/auth/external/di/authenticated_user_provider.dart';
-import 'package:deehelp/old_core/utils/url_launcher_utils.dart';
+import 'package:deehelp/core/utils/url_launcher_utils.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'widgets/blue_header_bubles.dart';
 import 'widgets/engagament_card.dart';

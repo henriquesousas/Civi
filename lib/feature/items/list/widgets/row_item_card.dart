@@ -7,7 +7,7 @@ import 'package:deehelp/core/ui/widgets/image/export_image.dart';
 import 'package:deehelp/feature/items/item_type.dart';
 import 'package:deehelp/feature/items/list/widgets/phone_placeholder.dart';
 import 'package:deehelp/module/item/domain/entities/product.dart';
-import 'package:deehelp/old_core/ui/extensions/date_extension.dart';
+import 'package:deehelp/core/extension/date_extension.dart';
 import 'package:flutter/material.dart';
 
 class RowItemCard extends StatelessWidget {

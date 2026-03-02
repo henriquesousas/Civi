@@ -4,7 +4,7 @@ import 'package:deehelp/core/ui/widgets/badge/export_badge.dart';
 import 'package:deehelp/core/base/entity.dart';
 import 'package:deehelp/module/item/domain/entities/product_id.dart';
 
-import '../../../../old_core/validation/validation_handler.dart';
+import '../../../../core/validation/validation_handler.dart';
 import '../usecases/add/dtos/add_product_dto.dart';
 import 'image_media.dart';
 

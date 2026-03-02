@@ -11,7 +11,7 @@ import 'package:deehelp/feature/items/detail/provider/selected_item_provider.dar
 import 'package:deehelp/feature/items/detail/viewmodel/product_update_state.dart';
 import 'package:deehelp/feature/items/detail/widgets/edit/edit_info_card.dart';
 import 'package:deehelp/module/item/domain/entities/product.dart';
-import 'package:deehelp/old_core/ui/extensions/dialog_extension.dart';
+import 'package:deehelp/core/extension/dialog_extension.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';

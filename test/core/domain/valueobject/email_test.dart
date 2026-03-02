@@ -1,4 +1,4 @@
-import 'package:deehelp/old_core/valueobject/email.dart';
+import 'package:deehelp/core/valueobject/email.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 void main() {

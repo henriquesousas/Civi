@@ -7,6 +7,7 @@ import 'package:deehelp/core/ui/widgets/badge/export_badge.dart';
 import 'package:deehelp/core/ui/widgets/buttons/button_edit.dart';
 import 'package:deehelp/core/ui/widgets/buttons/button_outline.dart';
 import 'package:deehelp/core/ui/widgets/icon/export_icon.dart';
+import 'package:deehelp/core/ui/widgets/image/image_view_dialog.dart';
 import 'package:deehelp/core/utils/enum_utils.dart';
 import 'package:deehelp/feature/incidents/incident_router.dart';
 import 'package:deehelp/feature/incidents/update/incident_field.dart';
@@ -22,14 +23,13 @@ import 'package:deehelp/feature/items/register/presentation/widgets/section_titl
 import 'package:deehelp/feature/items/soft_divider.dart';
 import 'package:deehelp/module/auth/external/di/authenticated_user_provider.dart';
 import 'package:deehelp/module/item/domain/entities/image_media.dart';
-import 'package:deehelp/old_core/ui/extensions/date_extension.dart';
-import 'package:deehelp/old_core/ui/extensions/dialog_extension.dart';
+import 'package:deehelp/core/extension/date_extension.dart';
+import 'package:deehelp/core/extension/dialog_extension.dart';
 import 'package:deehelp/feature/incidents/providers/incident_list_viewmodel_provider.dart';
 import 'package:deehelp/feature/incidents/providers/incident_selected_provider.dart';
 import 'package:deehelp/feature/incidents/providers/update_incident_viewmodel_provider.dart';
 import 'package:deehelp/feature/incidents/update/state/update_incident_state.dart';
-import 'package:deehelp/old_core/utils/url_launcher_utils.dart';
-import 'package:deehelp/old_core/zoom_image_viewer.dart';
+import 'package:deehelp/core/utils/url_launcher_utils.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -457,16 +457,13 @@ class _UpdateIncidentPageState extends ConsumerState<UpdateIncidentPage> {
   }
 
   Future<void> openPhotoViewer(int index, List<ImageMedia> photos) async {
-    final urls = photos.map((e) => e.value).toList();
-    showDialog(
+    await showDialog(
       context: context,
-      barrierColor: Colors.black87,
-      builder: (context) {
-        return ImageZoomViewer(
-          imageUrls: urls,
-          initialIndex: index,
-        );
-      },
+      barrierColor: Colors.black.withValues(alpha: 0.92),
+      builder: (_) => ImageViewDialog(
+        photos: photos,
+        initialIndex: index,
+      ),
     );
   }
 

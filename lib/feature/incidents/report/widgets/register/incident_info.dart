@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 
-import '../../../../../old_core/resources.dart';
+import '../../../../../core/resources.dart';
 import '../../../../../old_core/ui/theme/app_colors.dart';
 import '../../../../../old_core/ui/theme/dimens.dart';
 import '../../../../../old_core/ui/widgets/image/ui_my_network_image_widget.dart';

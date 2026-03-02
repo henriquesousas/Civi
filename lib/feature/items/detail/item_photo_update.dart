@@ -11,8 +11,8 @@ import 'package:deehelp/feature/items/detail/viewmodel/product_update_state.dart
 import 'package:deehelp/feature/items/register/presentation/widgets/card_page.dart';
 import 'package:deehelp/feature/items/register/presentation/widgets/section_title.dart';
 import 'package:deehelp/core/providers/image_picker_provider.dart';
-import 'package:deehelp/old_core/ui/extensions/dialog_extension.dart';
-import 'package:deehelp/old_core/ui/extensions/result_extension.dart';
+import 'package:deehelp/core/extension/dialog_extension.dart';
+import 'package:deehelp/core/extension/result_extension.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';

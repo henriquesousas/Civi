@@ -1,9 +1,8 @@
 import 'dart:async';
 
+import 'package:deehelp/core/extension/size_extension.dart';
 import 'package:deehelp/core/theme/size/radius_size.dart';
 import 'package:deehelp/core/ui/styles/app_text_style.dart';
-import 'package:deehelp/old_core/ui/extensions/screen_size_extension.dart';
-import 'package:deehelp/old_core/ui/animation/transform_scale_opacity_animator.dart';
 import 'package:deehelp/old_core/ui/theme/app_colors.dart';
 import 'package:deehelp/old_core/ui/theme/app_text_styles.dart';
 import 'package:deehelp/old_core/ui/theme/dimens.dart';
@@ -164,14 +163,11 @@ class _LoadingProgressPageState extends ConsumerState<TesteIncidentLoading> {
                         ),
                         child: Column(
                           children: [
-                            TransformScaleOpacityAnimator(
-                              duration: const Duration(milliseconds: 1200),
-                              child: Lottie.asset(
-                                "assets/lottie/ripple.json",
-                                width: context.percentWidth(0.52),
-                                height: context.percentWidth(0.52),
-                                repeat: true,
-                              ),
+                            Lottie.asset(
+                              "assets/lottie/ripple.json",
+                              width: context.percentWidth(0.52),
+                              height: context.percentWidth(0.52),
+                              repeat: true,
                             ),
                             const SizedBox(height: 8),
 

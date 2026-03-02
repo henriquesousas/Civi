@@ -1,6 +1,6 @@
 import 'package:deehelp/feature/search/search_args.dart';
 import 'package:deehelp/feature/search/search_page.dart';
-import 'package:deehelp/old_core/ui/router/slide_transition_page.dart';
+import 'package:deehelp/core/router/slide_transition_page.dart';
 import 'package:go_router/go_router.dart';
 
 class SearchRouter {

@@ -1,7 +1,7 @@
 import 'package:deehelp/core/services/http/safe_supabase_call.dart';
 import 'package:deehelp/core/services/network/network_info.dart';
-import 'package:deehelp/old_core/utils/unit.dart';
-import 'package:deehelp/old_core/utils/result.dart';
+import 'package:deehelp/core/utils/unit.dart';
+import 'package:deehelp/core/utils/result.dart';
 import 'package:deehelp/module/auth/domain/entity/authenticated_user.dart';
 import 'package:deehelp/module/auth/domain/exceptions/unauthenticated_failure.dart';
 import 'package:deehelp/module/auth/domain/repositories/auth_repository.dart';

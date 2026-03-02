@@ -1,6 +1,6 @@
-import 'package:deehelp/old_core/ui/extensions/dialog_extension.dart';
+import 'package:deehelp/core/extension/dialog_extension.dart';
 import 'package:deehelp/old_core/ui/theme/dimens.dart';
-import 'package:deehelp/old_core/utils/url_launcher_utils.dart';
+import 'package:deehelp/core/utils/url_launcher_utils.dart';
 import 'package:deehelp/feature/incidents/providers/report_incident_viewmodel_provider.dart';
 import 'package:deehelp/feature/incidents/report/widgets/success/registered_incident_quick_action_item.dart';
 import 'package:flutter/material.dart';

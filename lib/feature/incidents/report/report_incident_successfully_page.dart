@@ -16,7 +16,7 @@ import 'package:deehelp/feature/items/item_type.dart';
 import 'package:deehelp/feature/items/success/bullet.dart';
 import 'package:deehelp/module/incident/domain/entity/incident_local.dart';
 import 'package:deehelp/module/incident/domain/enum/type_alert.dart';
-import 'package:deehelp/old_core/utils/url_launcher_utils.dart';
+import 'package:deehelp/core/utils/url_launcher_utils.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 

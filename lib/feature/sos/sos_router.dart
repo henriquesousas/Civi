@@ -1,5 +1,5 @@
 import 'package:deehelp/feature/sos/sos_page.dart';
-import 'package:deehelp/old_core/ui/router/slide_transition_page.dart';
+import 'package:deehelp/core/router/slide_transition_page.dart';
 import 'package:go_router/go_router.dart';
 
 class SOSRouter {

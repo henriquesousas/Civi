@@ -1,6 +1,6 @@
 import 'package:deehelp/core/base/use_case.dart';
-import 'package:deehelp/old_core/utils/result.dart';
-import 'package:deehelp/old_core/utils/unit.dart';
+import 'package:deehelp/core/utils/result.dart';
+import 'package:deehelp/core/utils/unit.dart';
 import 'package:deehelp/module/item/domain/entities/product.dart';
 import 'package:deehelp/module/item/domain/product_repository.dart';
 

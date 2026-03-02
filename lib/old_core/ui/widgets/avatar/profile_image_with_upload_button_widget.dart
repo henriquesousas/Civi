@@ -8,7 +8,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:skeletonizer/skeletonizer.dart';
 
-import '../../../resources.dart';
+import '../../../../core/resources.dart';
 
 class ProfileImageWithUploadButtonWidget extends StatefulWidget {
   final String imageUrl;

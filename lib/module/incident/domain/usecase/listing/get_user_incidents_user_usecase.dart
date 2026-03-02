@@ -1,5 +1,5 @@
 import 'package:deehelp/core/base/use_case.dart';
-import 'package:deehelp/old_core/utils/result.dart';
+import 'package:deehelp/core/utils/result.dart';
 import 'package:deehelp/module/incident/domain/incident_repository.dart';
 import 'package:deehelp/module/incident/domain/usecase/incident_output.dart';
 

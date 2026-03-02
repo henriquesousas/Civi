@@ -23,7 +23,7 @@ import 'package:deehelp/feature/search/widgets/search_empty_state.dart';
 import 'package:deehelp/module/incident/domain/enum/type_alert.dart';
 import 'package:deehelp/module/incident/domain/usecase/incident_output.dart';
 import 'package:deehelp/module/incident/domain/usecase/incident_product_output.dart';
-import 'package:deehelp/old_core/ui/extensions/dialog_extension.dart';
+import 'package:deehelp/core/extension/dialog_extension.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';

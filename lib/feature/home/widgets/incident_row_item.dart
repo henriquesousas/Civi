@@ -4,7 +4,7 @@ import 'package:deehelp/core/ui/widgets/icon/export_icon.dart';
 import 'package:deehelp/core/ui/widgets/image/custom_network_image.dart';
 import 'package:deehelp/feature/items/item_type.dart';
 import 'package:deehelp/module/incident/domain/usecase/incident_output.dart';
-import 'package:deehelp/old_core/ui/extensions/date_extension.dart';
+import 'package:deehelp/core/extension/date_extension.dart';
 import 'package:flutter/material.dart';
 
 class IncidentRowItem extends StatelessWidget {

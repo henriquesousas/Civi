@@ -1,5 +1,5 @@
 import 'package:deehelp/core/services/permissions/location/export_location.dart';
-import 'package:deehelp/old_core/ui/extensions/result_extension.dart';
+import 'package:deehelp/core/extension/result_extension.dart';
 import 'package:deehelp/module/auth/external/di/auth_repository_provider.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 

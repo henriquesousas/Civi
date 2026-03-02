@@ -1,22 +1,18 @@
-import 'package:deehelp/old_core/ui/extensions/screen_size_extension.dart';
-import 'package:deehelp/old_core/ui/router/app_router.dart';
+import 'package:deehelp/core/extension/size_extension.dart';
+import 'package:deehelp/core/router/app_router.dart';
 import 'package:deehelp/old_core/ui/theme/app_colors.dart';
 import 'package:deehelp/old_core/ui/theme/app_text_styles.dart';
 import 'package:deehelp/old_core/ui/widgets/avatar/profile_image_with_upload_button_widget.dart';
-import 'package:deehelp/old_core/ui/widgets/button/ui_category_button.dart';
 import 'package:deehelp/old_core/ui/widgets/button/ui_elevated_button.dart';
 import 'package:deehelp/old_core/ui/widgets/card/ui_custom_app_card.dart';
 import 'package:deehelp/old_core/ui/widgets/divider/ui_divider.dart';
 import 'package:deehelp/old_core/ui/widgets/image/ui_my_network_image_widget.dart';
 import 'package:deehelp/module/incident/domain/entity/incident.dart';
-import 'package:deehelp/feature/map/presentation/data.dart';
 import 'package:deehelp/feature/map/presentation/widget/incident_modal.dart';
 import 'package:deehelp/feature/map/widgets/map_bottom_content.dart';
 import 'package:deehelp/feature/map/widgets/map_custom_sliding_up.dart';
 import 'package:deehelp/feature/map/widgets/map_floating_button.dart';
-import 'package:deehelp/feature/map/widgets/map_top_menu_button.dart';
 import 'package:deehelp/feature/map/widgets/osm.dart';
-import 'package:deehelp/feature/map/widgets/sliding_occurrences_panel.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_map/flutter_map.dart';
@@ -408,13 +404,13 @@ class _MapPageState extends State<MapPage> with TickerProviderStateMixin {
         child: SearchBar(
           keyboardType: TextInputType.text,
           trailing: [
-            IconButton(
-              onPressed: () => context.push(AppRouter.profile),
-              icon: const Icon(
-                Icons.filter_list,
-                color: AppColors.darkGreyColor,
-              ),
-            ),
+            // IconButton(
+            //   onPressed: () => context.push(AppRouter.profile),
+            //   icon: const Icon(
+            //     Icons.filter_list,
+            //     color: AppColors.darkGreyColor,
+            //   ),
+            // ),
           ],
           controller: TextEditingController(),
           focusNode: AlwaysDisabledFocusNode(),
@@ -433,8 +429,8 @@ class _MapPageState extends State<MapPage> with TickerProviderStateMixin {
             imageAlt: 'Profile',
             showUploadIcon: false,
             onTap: () {
-              debugPrint("Clicou");
-              context.push(AppRouter.profile);
+              // debugPrint("Clicou");
+              // context.push(AppRouter.profile);
             },
           ),
         ),
@@ -501,11 +497,11 @@ class _MapPageState extends State<MapPage> with TickerProviderStateMixin {
   }
 
   void _navigateToMyItems() {
-    context.push(AppRouter.myProducts);
+    // context.push(AppRouter.myProducts);
   }
 
   void _handleSinalizePress() {
-    context.push(AppRouter.reportIncident);
+    // context.push(AppRouter.reportIncident);
   }
 }
 

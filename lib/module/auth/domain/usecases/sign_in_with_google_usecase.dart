@@ -1,6 +1,6 @@
 import 'package:deehelp/core/base/use_case.dart';
-import 'package:deehelp/old_core/utils/result.dart';
-import 'package:deehelp/old_core/ui/extensions/result_extension.dart';
+import 'package:deehelp/core/utils/result.dart';
+import 'package:deehelp/core/extension/result_extension.dart';
 import 'package:deehelp/module/auth/domain/entity/authenticated_user.dart';
 import 'package:deehelp/module/auth/domain/exceptions/auth_failure.dart';
 import 'package:deehelp/module/auth/domain/repositories/auth_repository.dart';

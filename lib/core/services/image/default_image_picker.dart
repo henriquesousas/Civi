@@ -1,7 +1,7 @@
 import 'package:deehelp/core/services/image/image_picker_failure.dart';
-import 'package:deehelp/old_core/utils/image_utils.dart';
+import 'package:deehelp/core/utils/image_utils.dart';
 import 'package:deehelp/core/services/image/image_compress.dart';
-import 'package:deehelp/old_core/utils/result.dart';
+import 'package:deehelp/core/utils/result.dart';
 import 'package:deehelp/module/item/domain/entities/image_media.dart';
 import 'package:flutter/foundation.dart';
 import 'package:image_picker/image_picker.dart';

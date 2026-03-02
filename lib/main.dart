@@ -1,10 +1,8 @@
 // import 'package:cloudflare_r2/cloudflare_r2.dart';
 import 'package:cloudflare_r2/cloudflare_r2.dart';
 import 'package:deehelp/app_name.dart';
-import 'package:deehelp/old_core/ui/extensions/screen_size_extension.dart';
 import 'package:deehelp/old_core/ui/theme/theme/theme.dart';
 import 'package:device_preview/device_preview.dart';
-import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
@@ -13,9 +11,9 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:intl/date_symbol_data_local.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
-import 'old_core/env.dart';
-import 'old_core/resources.dart';
-import 'old_core/ui/router/router.dart';
+import 'core/env.dart';
+import 'core/resources.dart';
+import 'core/router/router.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -26,10 +24,6 @@ void main() async {
     url: "https://qyqwuyrigoqubqpnayde.supabase.co",
     anonKey: "sb_publishable_d4aHVgwM22a71tnZ7BZsIg_b9DPt9wD",
   );
-
-  // await Firebase.initializeApp(
-  //   options: DefaultFirebaseOptions.currentPlatform,
-  // );
 
   await CloudFlareR2.init(
     accountId: Env.r2AccountId,

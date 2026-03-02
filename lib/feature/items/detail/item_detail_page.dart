@@ -27,7 +27,7 @@ import 'package:deehelp/feature/items/register/presentation/widgets/year-picker/
 import 'package:deehelp/feature/items/soft_divider.dart';
 import 'package:deehelp/module/item/domain/entities/image_media.dart';
 import 'package:deehelp/module/item/domain/entities/product.dart';
-import 'package:deehelp/old_core/ui/extensions/dialog_extension.dart';
+import 'package:deehelp/core/extension/dialog_extension.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';

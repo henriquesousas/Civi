@@ -1,10 +1,10 @@
-import 'package:deehelp/old_core/ui/extensions/date_extension.dart';
+import 'package:deehelp/core/extension/date_extension.dart';
 import 'package:deehelp/old_core/ui/theme/app_text_styles.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 
-import '../../../../../old_core/resources.dart';
+import '../../../../../core/resources.dart';
 import '../../../../../old_core/ui/theme/app_colors.dart';
 import '../../../../../old_core/ui/theme/dimens.dart';
 

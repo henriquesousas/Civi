@@ -1,4 +1,4 @@
-import 'package:deehelp/old_core/utils/result.dart';
+import 'package:deehelp/core/utils/result.dart';
 
 abstract class UseCase<IN, OUT> {
   Future<Result<OUT>> execute(IN data);

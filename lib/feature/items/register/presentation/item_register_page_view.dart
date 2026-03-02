@@ -8,7 +8,7 @@ import 'package:deehelp/feature/items/register/presentation/widgets/wizard_botto
 import 'package:deehelp/feature/items/register/viewmodel/add_product_state.dart';
 import 'package:deehelp/module/auth/external/di/authenticated_user_provider.dart';
 import 'package:deehelp/module/item/di/item_viewmodel_provider.dart';
-import 'package:deehelp/old_core/ui/extensions/dialog_extension.dart';
+import 'package:deehelp/core/extension/dialog_extension.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';

@@ -1,4 +1,4 @@
-import 'package:deehelp/old_core/validation/validation_handler.dart';
+import 'package:deehelp/core/validation/validation_handler.dart';
 
 import 'notification_message.dart';
 

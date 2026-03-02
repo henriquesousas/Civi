@@ -1,11 +1,11 @@
-import 'package:deehelp/old_core/ui/extensions/date_extension.dart';
-import 'package:deehelp/old_core/ui/extensions/string_extension.dart';
+import 'package:deehelp/core/ui/widgets/image/image_view_dialog.dart';
+import 'package:deehelp/core/extension/date_extension.dart';
+import 'package:deehelp/core/extension/string_extension.dart';
 import 'package:deehelp/old_core/ui/theme/app_colors.dart';
 import 'package:deehelp/old_core/ui/theme/app_text_styles.dart';
 import 'package:deehelp/old_core/ui/widgets/card/ui_card_tile.dart';
 import 'package:deehelp/old_core/ui/widgets/card/ui_custom_app_card.dart';
 import 'package:deehelp/old_core/ui/widgets/card/ui_custom_scaffold.dart';
-import 'package:deehelp/old_core/zoom_image_viewer.dart';
 import 'package:deehelp/module/incident/domain/usecase/incident_output.dart';
 import 'package:deehelp/feature/incidents/report/widgets/register/plate_number_widget.dart';
 import 'package:deehelp/core/ui/widgets/image/grid_add_image.dart';
@@ -164,16 +164,20 @@ class _UpdateIncidentPageState extends ConsumerState<IncidentDetailPage> {
                             showDialog(
                               context: context,
                               barrierColor: Colors.black87,
-                              builder: (context) {
-                                return ImageZoomViewer(
-                                  imageUrls: widget.incident.product.images
-                                      .map(
-                                        (e) => e.value,
-                                      )
-                                      .toList(),
-                                  initialIndex: index,
-                                );
-                              },
+                              builder: (_) => ImageViewDialog(
+                                photos: widget.incident.product.images,
+                                initialIndex: index,
+                              ),
+                              // builder: (context) {
+                              //   // return ImageZoomViewer(
+                              //   //   imageUrls: widget.incident.product.images
+                              //   //       .map(
+                              //   //         (e) => e.value,
+                              //   //       )
+                              //   //       .toList(),
+                              //   //   initialIndex: index,
+                              //   // );
+                              // },
                             );
                           },
                         ),

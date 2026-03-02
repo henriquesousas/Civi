@@ -1,5 +1,5 @@
-import 'package:deehelp/old_core/utils/result.dart';
-import 'package:deehelp/old_core/utils/unit.dart';
+import 'package:deehelp/core/utils/result.dart';
+import 'package:deehelp/core/utils/unit.dart';
 import 'package:deehelp/module/auth/domain/entity/authenticated_user.dart';
 
 abstract class AuthRepository {

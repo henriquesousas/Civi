@@ -3,7 +3,7 @@ import 'package:deehelp/core/theme/export_theme.dart';
 import 'package:deehelp/feature/auth/presentation/widgets/auth_view.dart';
 import 'package:deehelp/feature/auth/viemodel/auth_state.dart';
 import 'package:deehelp/module/auth/external/di/auth_view_model_provider.dart';
-import 'package:deehelp/old_core/ui/extensions/dialog_extension.dart';
+import 'package:deehelp/core/extension/dialog_extension.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'widgets/auth_logo.dart';

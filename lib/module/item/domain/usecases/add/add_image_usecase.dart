@@ -1,7 +1,7 @@
 import 'package:deehelp/core/errors/failure.dart';
 import 'package:deehelp/core/base/use_case.dart';
 import 'package:deehelp/core/services/storage/image_storage.dart';
-import 'package:deehelp/old_core/utils/result.dart';
+import 'package:deehelp/core/utils/result.dart';
 import 'package:deehelp/module/item/domain/entities/image_media.dart';
 import 'package:deehelp/module/item/domain/exceptions/upload_image_failure.dart';
 import 'package:deehelp/module/item/domain/product_repository.dart';

@@ -1,6 +1,6 @@
 import 'package:equatable/equatable.dart';
 
-import '../../core/notification/domain_notification.dart';
+import '../notification/domain_notification.dart';
 
 abstract class ValueObject<T> extends Equatable {
   final T value;

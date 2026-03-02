@@ -4,7 +4,7 @@ import 'package:deehelp/feature/sos/widgets/row_sos_contact.dart';
 import 'package:deehelp/feature/sos/widgets/section_header.dart';
 import 'package:deehelp/feature/sos/widgets/sos_contact.dart';
 import 'package:deehelp/feature/sos/widgets/sos_header.dart';
-import 'package:deehelp/old_core/utils/url_launcher_utils.dart';
+import 'package:deehelp/core/utils/url_launcher_utils.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 

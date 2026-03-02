@@ -1,24 +1,21 @@
-import 'dart:math' as math;
-import 'package:deehelp/old_core/ui/extensions/screen_size_extension.dart';
 import 'package:deehelp/old_core/ui/theme/app_colors.dart';
-import 'package:deehelp/old_core/ui/theme/app_text_styles.dart';
 import 'package:flutter/material.dart';
 
 extension ContextExtension on BuildContext {
-  double calculateTextWidth(String text, double percent) {
-    final maxWidth = percentWidth(percent);
+  // double calculateTextWidth(String text, double percent) {
+  //   final maxWidth = percentWidth(percent);
 
-    final textPainter = TextPainter(
-      text: TextSpan(
-        text: text,
-        style: appTextStyles.caption1Style,
-      ),
-      maxLines: 2,
-      textDirection: TextDirection.ltr,
-    )..layout(maxWidth: maxWidth);
+  //   final textPainter = TextPainter(
+  //     text: TextSpan(
+  //       text: text,
+  //       style: appTextStyles.caption1Style,
+  //     ),
+  //     maxLines: 2,
+  //     textDirection: TextDirection.ltr,
+  //   )..layout(maxWidth: maxWidth);
 
-    return math.min(textPainter.size.width, maxWidth);
-  }
+  //   return math.min(textPainter.size.width, maxWidth);
+  // }
 
   Future<DateTime?> pickDate({DateTime? initialDate}) async {
     return await showDatePicker(

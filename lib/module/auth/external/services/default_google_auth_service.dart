@@ -2,8 +2,8 @@ import 'package:deehelp/module/auth/domain/exceptions/auth_failure.dart';
 import 'package:deehelp/module/auth/domain/services/operation_status.dart';
 import 'package:deehelp/module/auth/domain/services/google_credentials.dart';
 import 'package:deehelp/module/auth/domain/services/google_auth_service.dart';
-import 'package:deehelp/old_core/resources.dart';
-import 'package:deehelp/old_core/utils/result.dart';
+import 'package:deehelp/core/resources.dart';
+import 'package:deehelp/core/utils/result.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 
 class DefaultGoogleAuthService implements GoogleAuthService {

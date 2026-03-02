@@ -2,7 +2,7 @@ import 'package:deehelp/old_core/ui/theme/app_colors.dart';
 import 'package:deehelp/old_core/ui/theme/app_text_styles.dart';
 import 'package:deehelp/old_core/ui/theme/dimens.dart';
 import 'package:deehelp/old_core/ui/widgets/button/ui_category_button.dart';
-import 'package:deehelp/old_core/utils/url_launcher_utils.dart';
+import 'package:deehelp/core/utils/url_launcher_utils.dart';
 import 'package:flutter/material.dart';
 
 class ReportIncidentWarningIndicator extends StatelessWidget {

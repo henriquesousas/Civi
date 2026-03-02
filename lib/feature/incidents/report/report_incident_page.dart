@@ -27,8 +27,8 @@ import 'package:deehelp/feature/items/register/presentation/widgets/card_page.da
 import 'package:deehelp/feature/items/register/presentation/widgets/section_title.dart';
 import 'package:deehelp/feature/profile/item_list_router_args.dart';
 import 'package:deehelp/module/incident/domain/enum/type_alert.dart';
-import 'package:deehelp/old_core/ui/extensions/date_extension.dart';
-import 'package:deehelp/old_core/ui/extensions/time_extension.dart';
+import 'package:deehelp/core/extension/date_extension.dart';
+import 'package:deehelp/core/extension/time_extension.dart';
 import 'package:deehelp/old_core/ui/widgets/button/ui_hold_confirm_button.dart';
 import 'package:deehelp/feature/incidents/providers/report_incident_event_provider.dart';
 import 'package:deehelp/feature/incidents/providers/report_incident_viewmodel_provider.dart';

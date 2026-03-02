@@ -6,7 +6,7 @@ import 'package:deehelp/module/item/domain/entities/image_media.dart';
 import 'package:deehelp/module/item/domain/usecases/add/add_product_usecase.dart';
 import 'package:deehelp/module/item/domain/usecases/add/dtos/add_product_dto.dart';
 import 'package:deehelp/feature/items/register/viewmodel/add_product_state.dart';
-import 'package:deehelp/old_core/utils/unit.dart';
+import 'package:deehelp/core/utils/unit.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 class RegisterItemViewmodel extends StateNotifier<AddProductState> {
