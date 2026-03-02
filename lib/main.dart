@@ -1,7 +1,7 @@
 // import 'package:cloudflare_r2/cloudflare_r2.dart';
 import 'package:cloudflare_r2/cloudflare_r2.dart';
 import 'package:deehelp/app_name.dart';
-import 'package:deehelp/old_core/ui/theme/theme/theme.dart';
+import 'package:deehelp/core/theme/theme_provider.dart';
 import 'package:device_preview/device_preview.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';

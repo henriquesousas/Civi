@@ -1,4 +1,4 @@
-import 'package:deehelp/old_core/ui/widgets/card/ui_custom_scaffold.dart';
+import 'package:deehelp/core/ui/widgets/cards/ui_custom_scaffold.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 

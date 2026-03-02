@@ -1,6 +1,5 @@
+import 'package:deehelp/core/theme/export_theme.dart';
 import 'package:deehelp/core/ui/styles/export_style.dart';
-import 'package:deehelp/old_core/ui/theme/app_colors.dart';
-import 'package:deehelp/old_core/ui/theme/app_text_styles.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -24,19 +23,14 @@ class IncidentHowTo extends StatelessWidget {
               children: [
                 Icon(
                   Icons.report_outlined,
-                  size: 16.sp,
-                  color: AppColors.textSecondary,
+                  size: IconSizes.xxs,
                 ),
                 SizedBox(width: 8.w),
                 Expanded(
-                  child: Text(
-                    howTo ?? "Não informado como aconteceu...",
-                    maxLines: 2,
-                    overflow: TextOverflow.ellipsis,
-                    style: context.appText.caption.copyWith(
-                      color: AppColors.textColorBody,
-                    ),
-                  ),
+                  child: Text(howTo ?? "Não informado como aconteceu...",
+                      maxLines: 2,
+                      overflow: TextOverflow.ellipsis,
+                      style: context.appText.caption),
                 ),
               ],
             ),

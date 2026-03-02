@@ -1,6 +1,8 @@
-import 'package:deehelp/old_core/ui/theme/app_colors.dart';
+import 'package:deehelp/core/extension/color_extension.dart';
+import 'package:deehelp/core/theme/export_theme.dart';
+import 'package:deehelp/core/theme/size/radius_size.dart';
+import 'package:deehelp/core/ui/widgets/image/custom_network_image.dart';
 import 'package:deehelp/old_core/ui/theme/dimens.dart';
-import 'package:deehelp/old_core/ui/widgets/image/ui_my_network_image_widget.dart';
 import 'package:deehelp/module/item/domain/entities/image_media.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -13,18 +15,18 @@ class IncidentImage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(8.r),
+        borderRadius: BorderRadius.circular(RadiusSize.lg.w),
         border: Border.all(
-          color: AppColors.lightGreyColor,
+          color: context.outlineVariantColor,
           width: 1,
         ),
       ),
       child: ClipRRect(
-        borderRadius: BorderRadius.circular(7.r),
-        child: UIMyNetworkImageWidget(
+        borderRadius: BorderRadius.circular(RadiusSize.lg.w),
+        child: CustomNetworkImage(
           imageUrl: images.isNotEmpty ? images.first.value : '',
-          width: Dimens.size70.w,
-          height: Dimens.size70.w,
+          width: ImageSize.md,
+          height: ImageSize.md,
         ),
       ),
     );

@@ -1,11 +1,10 @@
-import 'package:deehelp/old_core/ui/theme/app_colors.dart';
-import 'package:deehelp/old_core/ui/theme/app_text_styles.dart';
-import 'package:deehelp/old_core/ui/theme/dimens.dart';
-import 'package:deehelp/old_core/ui/widgets/image/ui_my_assets_image_widget.dart';
-import 'package:deehelp/old_core/ui/widgets/image/ui_my_network_image_widget.dart';
+import 'package:deehelp/core/extension/exports_extension.dart';
+import 'package:deehelp/core/theme/export_theme.dart';
+import 'package:deehelp/core/ui/styles/app_text_style.dart';
+import 'package:deehelp/core/ui/widgets/image/custom_network_image.dart';
+import 'package:deehelp/core/ui/widgets/image/ui_my_assets_image_widget.dart';
 import 'package:deehelp/module/item/domain/entities/image_media.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class GridAddImage extends StatelessWidget {
   final List<ImageMedia> photos;
@@ -91,7 +90,7 @@ class GridAddImage extends StatelessWidget {
                 border: Border.all(color: Colors.grey[300]!),
               ),
               child: image.source == MediaSource.api
-                  ? UIMyNetworkImageWidget(
+                  ? CustomNetworkImage(
                       radius: 8.0,
                       imageUrl: image.value,
                       width: width,
@@ -118,13 +117,13 @@ class GridAddImage extends StatelessWidget {
               onTap: () => onRemove!(index),
               child: Container(
                 padding: const EdgeInsets.all(4),
-                decoration: const BoxDecoration(
-                  color: AppColors.darkGreyColor,
+                decoration: BoxDecoration(
+                  color: context.onSurface.withValues(alpha: 0.8),
                   shape: BoxShape.circle,
                 ),
                 child: Icon(
                   Icons.close,
-                  size: Dimens.size16.w,
+                  size: IconSizes.sm,
                   color: Colors.white,
                 ),
               ),
@@ -141,11 +140,11 @@ class GridAddImage extends StatelessWidget {
               ),
               child: Center(
                 child: SizedBox(
-                  width: Dimens.size18.w,
-                  height: Dimens.size18.h,
+                  width: IconSizes.sm,
+                  height: IconSizes.sm,
                   child: CircularProgressIndicator(
                     strokeWidth: 2.6,
-                    color: AppColors.primaryColor.withValues(alpha: 1),
+                    color: context.primaryColor.withValues(alpha: 1),
                   ),
                 ),
               ),
@@ -174,11 +173,11 @@ class GridAddImage extends StatelessWidget {
           child: isAddLoading
               ? Center(
                   child: SizedBox(
-                    width: Dimens.size16.w,
-                    height: Dimens.size16.h,
+                    width: IconSizes.sm,
+                    height: IconSizes.sm,
                     child: CircularProgressIndicator(
                       strokeWidth: 2.6,
-                      color: AppColors.primaryColor.withValues(alpha: 1),
+                      color: context.primaryColor.withValues(alpha: 1),
                     ),
                   ),
                 )
@@ -188,18 +187,18 @@ class GridAddImage extends StatelessWidget {
                     Icon(
                       Icons.camera_alt,
                       color: Theme.of(context).primaryColor,
-                      size: Dimens.size22.w,
+                      size: IconSizes.sm,
                     ),
                     const SizedBox(height: 4),
                     Text(
                       'Adicionar',
-                      style: context.appTextStyles.bodyTextStyle1.copyWith(
+                      style: context.appText.headersm.copyWith(
                         color: Theme.of(context).primaryColor,
                       ),
                     ),
                     Text(
                       '${photos.length}/$maxPhotos',
-                      style: context.appTextStyles.caption2Style.copyWith(
+                      style: context.appText.caption.copyWith(
                         color: Theme.of(context).primaryColor,
                       ),
                     ),

@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:deehelp/core/theme/app_colors.dart';
 import 'package:deehelp/old_core/ui/theme/app_colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
@@ -1293,7 +1294,7 @@ class FakeSearchBar extends StatelessWidget {
         child: Ink(
           height: 50,
           decoration: BoxDecoration(
-            color: AppColors.greyColor.withValues(alpha: 0.15),
+            color: Colors.grey.withValues(alpha: 0.15),
             borderRadius: radius,
             border: Border.all(
               color: const Color(0xFFE7ECF5),

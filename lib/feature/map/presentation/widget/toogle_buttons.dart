@@ -1,5 +1,5 @@
+import 'package:deehelp/core/extension/exports_extension.dart';
 import 'package:flutter/material.dart';
-import '../../../../old_core/ui/theme/app_colors.dart';
 
 class ToogleButtons extends StatefulWidget {
   const ToogleButtons({super.key});
@@ -16,9 +16,9 @@ class _ToogleButtonsState extends State<ToogleButtons> {
     return ToggleButtons(
       isSelected: _isSelected,
       borderRadius: BorderRadius.circular(8),
-      selectedColor: AppColors.whiteColor,
-      selectedBorderColor: AppColors.primaryColorDark,
-      fillColor: AppColors.primaryColorDark,
+      selectedColor: Colors.white,
+      selectedBorderColor: context.primaryColorDark,
+      fillColor: context.primaryColorDark,
       onPressed: (int index) {
         setState(() {
           for (int i = 0; i < _isSelected.length; i++) {

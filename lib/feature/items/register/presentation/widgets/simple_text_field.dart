@@ -1,7 +1,7 @@
 import 'package:deehelp/core/extension/exports_extension.dart';
 import 'package:deehelp/core/theme/export_theme.dart';
+import 'package:deehelp/core/ui/widgets/textfield/upper_case_text_formatter.dart';
 import 'package:deehelp/feature/items/register/presentation/widgets/item_highticon.dart';
-import 'package:deehelp/old_core/ui/widgets/textfield/upper_case_text_formatter.dart';
 import 'package:flutter/material.dart';
 
 class SimpleTextField extends StatelessWidget {

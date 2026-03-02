@@ -1,3 +1,5 @@
+import 'package:deehelp/core/extension/exports_extension.dart';
+import 'package:deehelp/core/theme/export_theme.dart';
 import 'package:deehelp/core/ui/styles/export_style.dart';
 import 'package:deehelp/core/extension/date_extension.dart';
 import 'package:deehelp/old_core/ui/theme/app_colors.dart';
@@ -17,8 +19,8 @@ class IncidentDate extends StatelessWidget {
       children: [
         Icon(
           Icons.calendar_today_outlined,
-          size: Dimens.size12.sp,
-          color: AppColors.textSecondary,
+          size: IconSizes.xxs,
+          color: context.onSurface,
         ),
         Text(
           occurreAt.toDateWithFullMonth(),

@@ -1,9 +1,7 @@
 import 'package:deehelp/core/ui/widgets/appbar/default_app_bar.dart';
-import 'package:deehelp/old_core/ui/theme/dimens.dart';
+import 'package:deehelp/core/ui_annotated_region_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-
-import '../ui_annotated_region_widget.dart';
 
 class UICustomScaffold extends StatelessWidget {
   final String? pageTitle;
@@ -89,8 +87,8 @@ class UICustomScaffold extends StatelessWidget {
         body: Padding(
           padding: padding ??
               EdgeInsetsDirectional.symmetric(
-                horizontal: Dimens.defaultScafoldPadding.w,
-                vertical: Dimens.defaultScafoldPadding.h,
+                horizontal: 14.w,
+                vertical: 14.h,
               ),
           child: body,
         ),

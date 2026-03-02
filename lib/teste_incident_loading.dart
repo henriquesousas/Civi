@@ -137,7 +137,7 @@ class _LoadingProgressPageState extends ConsumerState<TesteIncidentLoading> {
               child: ConstrainedBox(
                 constraints: BoxConstraints(maxWidth: maxContent),
                 child: Padding(
-                  padding: const EdgeInsets.all(Dimens.size20),
+                  padding: const EdgeInsets.all(20),
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
@@ -150,9 +150,9 @@ class _LoadingProgressPageState extends ConsumerState<TesteIncidentLoading> {
                           borderRadius:
                               BorderRadius.circular(RadiusSize.xl + 2),
                           border: Border.all(
-                            color: AppColors.lightGreyColor30
-                                .withValues(alpha: 0.45),
-                          ),
+                              // color: AppColors.lightGreyColor30
+                              //     .withValues(alpha: 0.45),
+                              ),
                           boxShadow: const [
                             BoxShadow(
                               color: Color(0x14000000),
@@ -182,13 +182,13 @@ class _LoadingProgressPageState extends ConsumerState<TesteIncidentLoading> {
                                 textAlign: TextAlign.center,
                                 maxLines: 2,
                                 overflow: TextOverflow.ellipsis,
-                                style:
-                                    context.appTextStyles.sectionTitle.copyWith(
-                                  fontSize: 18.sp.clamp(16, 22),
-                                  fontWeight: FontWeight.w800,
-                                  color: AppColors.textColorBody,
-                                  height: 1.15,
-                                ),
+                                // style:
+                                //     context.appTextStyles.sectionTitle.copyWith(
+                                //   fontSize: 18.sp.clamp(16, 22),
+                                //   fontWeight: FontWeight.w800,
+                                //   color: AppColors.textColorBody,
+                                //   height: 1.15,
+                                // ),
                               ),
                             ),
 
@@ -201,8 +201,8 @@ class _LoadingProgressPageState extends ConsumerState<TesteIncidentLoading> {
                               style: context.appText.bodySmall.copyWith(
                                 fontSize: 12.5.sp.clamp(12, 14),
                                 fontWeight: FontWeight.w600,
-                                color: AppColors.textColorBody
-                                    .withValues(alpha: 0.55),
+                                // color: AppColors.textColorBody
+                                //     .withValues(alpha: 0.55),
                               ),
                             ),
 
@@ -216,9 +216,9 @@ class _LoadingProgressPageState extends ConsumerState<TesteIncidentLoading> {
                                 value: _progress,
                                 minHeight: 10,
                                 backgroundColor: const Color(0xFFEFF3FF),
-                                valueColor: const AlwaysStoppedAnimation<Color>(
-                                  AppColors.primaryColor,
-                                ),
+                                // valueColor: const AlwaysStoppedAnimation<Color>(
+                                //   AppColors.primaryColor,
+                                // ),
                               ),
                             ),
 
@@ -229,8 +229,8 @@ class _LoadingProgressPageState extends ConsumerState<TesteIncidentLoading> {
                               "${(_progress * 100).round()}%",
                               style: context.appText.bodySmall.copyWith(
                                 fontWeight: FontWeight.w800,
-                                color: AppColors.textColorBody
-                                    .withValues(alpha: 0.45),
+                                // color: AppColors.textColorBody
+                                //     .withValues(alpha: 0.45),
                               ),
                             ),
                           ],
@@ -249,9 +249,9 @@ class _LoadingProgressPageState extends ConsumerState<TesteIncidentLoading> {
                           color: Colors.white.withOpacity(0.75),
                           borderRadius: BorderRadius.circular(RadiusSize.xl),
                           border: Border.all(
-                            color: AppColors.lightGreyColor30
-                                .withValues(alpha: 0.35),
-                          ),
+                              // color: AppColors.lightGreyColor30
+                              //     .withValues(alpha: 0.35),
+                              ),
                         ),
                         child: Row(
                           mainAxisSize: MainAxisSize.min,
@@ -259,16 +259,16 @@ class _LoadingProgressPageState extends ConsumerState<TesteIncidentLoading> {
                             Icon(
                               Icons.shield_outlined,
                               size: 18,
-                              color: AppColors.textColorBody
-                                  .withValues(alpha: 0.55),
+                              // color: AppColors.textColorBody
+                              // .withValues(alpha: 0.55),
                             ),
                             const SizedBox(width: 8),
                             Text(
                               "Avisando a comunidade com segurança",
                               style: context.appText.bodySmall.copyWith(
                                 fontWeight: FontWeight.w700,
-                                color: AppColors.textColorBody
-                                    .withValues(alpha: 0.55),
+                                // color: AppColors.textColorBody
+                                //     .withValues(alpha: 0.55),
                               ),
                             ),
                           ],

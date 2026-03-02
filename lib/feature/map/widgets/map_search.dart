@@ -15,7 +15,7 @@ class MapSearch extends StatelessWidget {
           padding: const EdgeInsets.symmetric(horizontal: 16),
           child: Container(
             decoration: BoxDecoration(
-              color: AppColors.lightGreyColor,
+              // color: AppColors.lightGreyColor,
               borderRadius: BorderRadius.circular(24),
               border: Border.all(
                 color: Colors.grey.shade300,
@@ -35,10 +35,10 @@ class MapSearch extends StatelessWidget {
                 SvgPicture.asset(
                   R.svg.search,
                   width: 24,
-                  colorFilter: const ColorFilter.mode(
-                    AppColors.greyColor,
-                    BlendMode.srcIn,
-                  ),
+                  // colorFilter: const ColorFilter.mode(
+                  //   // AppColors.greyColor,
+                  //   // BlendMode.srcIn,
+                  // ),
                 ),
                 const SizedBox(width: 8),
                 const Padding(

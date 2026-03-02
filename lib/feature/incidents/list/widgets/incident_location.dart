@@ -1,9 +1,7 @@
+import 'package:deehelp/core/theme/export_theme.dart';
 import 'package:deehelp/core/ui/styles/export_style.dart';
-import 'package:deehelp/old_core/ui/theme/app_colors.dart';
-import 'package:deehelp/old_core/ui/theme/dimens.dart';
 import 'package:deehelp/module/incident/domain/entity/incident_local.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class IncidentLocation extends StatelessWidget {
   final IncidentLocal? local;
@@ -16,8 +14,7 @@ class IncidentLocation extends StatelessWidget {
       children: [
         Icon(
           Icons.location_on_outlined,
-          size: Dimens.size12.sp,
-          color: AppColors.textSecondary,
+          size: IconSizes.xxs,
         ),
         Expanded(
           child: Text(

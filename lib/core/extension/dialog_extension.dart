@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:deehelp/core/extension/exports_extension.dart';
+import 'package:deehelp/core/theme/app_colors.dart';
 import 'package:deehelp/old_core/ui/theme/app_colors.dart';
 import 'package:deehelp/old_core/ui/theme/app_text_styles.dart';
 import 'package:flutter/material.dart';
@@ -20,30 +21,30 @@ extension DialogExtension on BuildContext {
         backgroundColor: Theme.of(this).colorScheme.surfaceContainer,
         title: Text(
           title,
-          style: appTextStyles.sectionTitle,
+          // style: appTextStyles.sectionTitle,
         ),
         content: Text(
           message,
-          style: appTextStyles.bodyTextStyle1.copyWith(
-            color: AppColors.textTertiary,
-          ),
+          // style: appTextStyles.bodyTextStyle1.copyWith(
+          //   color: AppColors.textTertiary,
+          // ),
         ),
         actions: [
           TextButton(
             child: Text(
               textCancelButton,
-              style: appTextStyles.buttonTextStyle1.copyWith(
-                color: AppColors.primaryColor,
-              ),
+              // style: appTextStyles.buttonTextStyle1.copyWith(
+              //   color: AppColors.primaryColor,
+              // ),
             ),
             onPressed: () => Navigator.of(ctx).pop(false),
           ),
           TextButton(
             child: Text(
               textConfirmButton,
-              style: appTextStyles.buttonTextStyle1.copyWith(
-                color: AppColors.primaryColor,
-              ),
+              // style: appTextStyles.buttonTextStyle1.copyWith(
+              //   color: AppColors.primaryColor,
+              // ),
             ),
             onPressed: () => Navigator.of(ctx).pop(true),
           ),
@@ -71,21 +72,21 @@ extension DialogExtension on BuildContext {
   }
 
   void showSnackBar(String message, {DialogType type = DialogType.success}) {
-    Color bgColor = AppColors.successColor;
+    Color bgColor = AppColors.green;
 
     if (type == DialogType.normal) {
       bgColor = onSurface;
     } else if (type == DialogType.error) {
-      bgColor = AppColors.errorColor;
+      bgColor = AppColors.danger;
     }
 
     ScaffoldMessenger.of(this).showSnackBar(
       SnackBar(
         content: Text(
           message,
-          style: appTextStyles.sectionTitle3.copyWith(
-            color: AppColors.whiteColor,
-          ),
+          // style: appTextStyles.sectionTitle3.copyWith(
+          //   color: AppColors.whiteColor,
+          // ),
         ),
         backgroundColor: bgColor,
         behavior: SnackBarBehavior.floating,

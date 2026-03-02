@@ -21,8 +21,8 @@ class MapFloatButton extends StatelessWidget {
     required this.child,
     this.top = 0,
     this.left = 0,
-    this.backgroundColor = AppColors.whiteColor,
-    this.foregroundColor = AppColors.primaryColor,
+    this.backgroundColor = Colors.white,
+    this.foregroundColor = Colors.blue,
   });
 
   @override

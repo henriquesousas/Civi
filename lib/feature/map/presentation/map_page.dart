@@ -1,15 +1,9 @@
 import 'package:deehelp/core/extension/size_extension.dart';
-import 'package:deehelp/core/router/app_router.dart';
+import 'package:deehelp/core/ui/widgets/image/custom_network_image.dart';
 import 'package:deehelp/old_core/ui/theme/app_colors.dart';
-import 'package:deehelp/old_core/ui/theme/app_text_styles.dart';
-import 'package:deehelp/old_core/ui/widgets/avatar/profile_image_with_upload_button_widget.dart';
-import 'package:deehelp/old_core/ui/widgets/button/ui_elevated_button.dart';
-import 'package:deehelp/old_core/ui/widgets/card/ui_custom_app_card.dart';
-import 'package:deehelp/old_core/ui/widgets/divider/ui_divider.dart';
-import 'package:deehelp/old_core/ui/widgets/image/ui_my_network_image_widget.dart';
+import 'package:deehelp/core/ui/widgets/avatar/profile_image_with_upload_button_widget.dart';
+import 'package:deehelp/feature/map/presentation/ui_custom_app_card.dart';
 import 'package:deehelp/module/incident/domain/entity/incident.dart';
-import 'package:deehelp/feature/map/presentation/widget/incident_modal.dart';
-import 'package:deehelp/feature/map/widgets/map_bottom_content.dart';
 import 'package:deehelp/feature/map/widgets/map_custom_sliding_up.dart';
 import 'package:deehelp/feature/map/widgets/map_floating_button.dart';
 import 'package:deehelp/feature/map/widgets/osm.dart';
@@ -18,7 +12,6 @@ import 'package:flutter/services.dart';
 import 'package:flutter_map/flutter_map.dart';
 import 'package:flutter_map_animations/flutter_map_animations.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:go_router/go_router.dart';
 import 'package:latlong2/latlong.dart';
 import 'package:sliding_up_panel/sliding_up_panel.dart';
 
@@ -125,18 +118,18 @@ class _MapPageState extends State<MapPage> with TickerProviderStateMixin {
   }
 
   void _showIncidentModal(Incident incident) {
-    showModalBottomSheet(
-      context: context,
-      isScrollControlled: true,
-      useSafeArea: true,
-      shape: const RoundedRectangleBorder(
-        borderRadius: BorderRadius.vertical(top: Radius.circular(12)),
-      ),
-      builder: (context) => Container(
-        color: const Color(0xFFF8FAFC),
-        child: const IncidentModal(),
-      ),
-    );
+    // showModalBottomSheet(
+    //   context: context,
+    //   isScrollControlled: true,
+    //   useSafeArea: true,
+    //   shape: const RoundedRectangleBorder(
+    //     borderRadius: BorderRadius.vertical(top: Radius.circular(12)),
+    //   ),
+    //   builder: (context) => Container(
+    //     color: const Color(0xFFF8FAFC),
+    //     child: const IncidentModal(),
+    //   ),
+    // );
   }
 
   Widget _buildOccurrencesPanel(BuildContext context) {
@@ -170,15 +163,15 @@ class _MapPageState extends State<MapPage> with TickerProviderStateMixin {
         mainAxisAlignment: MainAxisAlignment.start,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Center(child: UIDivider()),
+          // Center(child: UIDivider()),
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 5),
             child: Text(
               "Osasco, São Paulo",
-              style: context.appTextStyles.sectionTitle3.copyWith(
-                fontWeight: FontWeight.w500,
-                fontSize: 20.sp,
-              ),
+              // style: context.appTextStyles.sectionTitle3.copyWith(
+              //   fontWeight: FontWeight.w500,
+              //   fontSize: 20.sp,
+              // ),
             ),
           ),
           Row(
@@ -186,28 +179,28 @@ class _MapPageState extends State<MapPage> with TickerProviderStateMixin {
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             spacing: 5,
             children: [
-              Expanded(
-                child: UIElevatedButton(
-                  bgColor: AppColors.whiteColor,
-                  borderColor: AppColors.primaryColor,
-                  textColor: AppColors.primaryColor,
-                  icon: const Icon(
-                    Icons.add,
-                    color: AppColors.primaryColor,
-                  ),
-                  text: "Novo patrimônio",
-                  // radius: 8,
-                  press: () {},
-                ),
-              ),
-              Expanded(
-                child: UIElevatedButton(
-                  icon: Icon(Icons.campaign_outlined),
-                  text: "Emitir alerta",
-                  // radius: 8,
-                  press: () {},
-                ),
-              ),
+              // Expanded(
+              //   child: UIElevatedButton(
+              //     bgColor: AppColors.whiteColor,
+              //     borderColor: AppColors.primaryColor,
+              //     textColor: AppColors.primaryColor,
+              //     icon: const Icon(
+              //       Icons.add,
+              //       color: AppColors.primaryColor,
+              //     ),
+              //     text: "Novo patrimônio",
+              //     // radius: 8,
+              //     press: () {},
+              //   ),
+              // ),
+              // Expanded(
+              //   child: UIElevatedButton(
+              //     icon: Icon(Icons.campaign_outlined),
+              //     text: "Emitir alerta",
+              //     // radius: 8,
+              //     press: () {},
+              //   ),
+              // ),
             ],
           )
           // Row(
@@ -258,7 +251,7 @@ class _MapPageState extends State<MapPage> with TickerProviderStateMixin {
 
   Widget _buildCardProduct(String url) {
     return UICustomAppCard(
-      borderColor: AppColors.lightGreyColor20,
+      // borderColor: Colors.lightGreyColor20,
       showShadow: true,
       child: SizedBox(
         width: context.percentWidth(0.7),
@@ -267,7 +260,7 @@ class _MapPageState extends State<MapPage> with TickerProviderStateMixin {
             Row(
               spacing: 5,
               children: [
-                UIMyNetworkImageWidget(
+                CustomNetworkImage(
                   imageUrl: url,
                 ),
                 Expanded(
@@ -279,14 +272,14 @@ class _MapPageState extends State<MapPage> with TickerProviderStateMixin {
                         "Renault Sandero 2.0",
                         maxLines: 2,
                         overflow: TextOverflow.ellipsis,
-                        style: context.appTextStyles.sectionTitle.copyWith(
-                          fontWeight: FontWeight.bold,
-                          color: AppColors.darkGreyColor,
-                        ),
+                        // style: context.appTextStyles.sectionTitle.copyWith(
+                        //   fontWeight: FontWeight.bold,
+                        //   color: AppColors.darkGreyColor,
+                        // ),
                       ),
                       Text(
                         "DND-0000",
-                        style: context.appTextStyles.caption2Style,
+                        // style: context.appTextStyles.caption2Style,
                       ),
                     ],
                   ),
@@ -294,11 +287,11 @@ class _MapPageState extends State<MapPage> with TickerProviderStateMixin {
               ],
             ),
             const SizedBox(height: 12), // Espaço antes da linha
-            const Divider(
-              color: AppColors.lightGreyColor30,
-              height: 1,
-              thickness: 1,
-            ),
+            // const Divider(
+            //   color: AppColors.lightGreyColor30,
+            //   height: 1,
+            //   thickness: 1,
+            // ),
             Row(
               children: [
                 Expanded(
@@ -307,13 +300,13 @@ class _MapPageState extends State<MapPage> with TickerProviderStateMixin {
                     child: Text(
                       "lorem ipsun dads sd ahdj jsahd asdh jdhsa djsahjdh asjkdh jakdh",
                       maxLines: 2,
-                      style: context.appTextStyles.bodyTextStyle1,
+                      // style: context.appTextStyles.bodyTextStyle1,
                     ),
                   ),
                 ),
                 const Icon(
                   Icons.arrow_circle_right_outlined,
-                  color: AppColors.darkGreyColor10,
+                  // color: AppColors.darkGreyColor10,
                 ),
                 // UICategoryButton(
                 //   verticalPadding: 8,
@@ -333,12 +326,12 @@ class _MapPageState extends State<MapPage> with TickerProviderStateMixin {
     return AnimatedPositioned(
       duration: const Duration(milliseconds: 400),
       curve: Curves.easeInOut,
-      bottom: _showOverlay ? context.percentHeight(0.15) : -Dimens.size200.h,
+      bottom: _showOverlay ? context.percentHeight(0.15) : -200.h,
       // bottom: context.percentHeight(0.15),
-      left: Dimens.defaultPadding.w,
-      right: Dimens.defaultPadding.w,
+      left: 12,
+      right: 12,
       child: SizedBox(
-        height: Dimens.size200.h,
+        height: 200,
         child: ListView.separated(
           physics: const BouncingScrollPhysics(),
           clipBehavior: Clip.none,
@@ -415,11 +408,11 @@ class _MapPageState extends State<MapPage> with TickerProviderStateMixin {
           controller: TextEditingController(),
           focusNode: AlwaysDisabledFocusNode(),
           hintText: "Pesquisar ...",
-          hintStyle: WidgetStateProperty.all(
-            context.appTextStyles.buttonTextStyle1.copyWith(
-              color: AppColors.greyColor,
-            ),
-          ),
+          // hintStyle: WidgetStateProperty.all(
+          //   context.appTextStyles.buttonTextStyle1.copyWith(
+          //     color: AppColors.greyColor,
+          //   ),
+          // ),
           leading: ProfileImageWithUploadButtonWidget(
             radius: 90,
             width: 40,
@@ -459,16 +452,16 @@ class _MapPageState extends State<MapPage> with TickerProviderStateMixin {
       bottom: _showOverlay
           ? context.percentHeight(0.38.h)
           : context.percentHeight(0.16.h),
-      right: Dimens.size16.w,
+      right: 16,
       curve: Curves.easeInOut,
       child: MapFloatButton(
         bottom: _showOverlay
             ? context.percentHeight(0.38.h)
             : context.percentHeight(0.20.h),
         offset: _getLocationButtonOffset(),
-        right: Dimens.size16.w,
-        backgroundColor: AppColors.primaryColor,
-        foregroundColor: AppColors.whiteColor,
+        right: 16,
+        // backgroundColor: AppColors.primaryColor,
+        // foregroundColor: AppColors.whiteColor,
         press: _moveToInitialLocation,
         child: Icon(Icons.explore, size: 18.w),
       ),
@@ -489,12 +482,12 @@ class _MapPageState extends State<MapPage> with TickerProviderStateMixin {
     );
   }
 
-  Widget _buildBottomContent() {
-    return MapBottomContent(
-      onNewBemPress: _navigateToMyItems,
-      onSinalizePress: _handleSinalizePress,
-    );
-  }
+  // Widget _buildBottomContent() {
+  //   return MapBottomContent(
+  //     onNewBemPress: _navigateToMyItems,
+  //     onSinalizePress: _handleSinalizePress,
+  //   );
+  // }
 
   void _navigateToMyItems() {
     // context.push(AppRouter.myProducts);

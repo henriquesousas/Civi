@@ -11,7 +11,7 @@ import 'package:deehelp/feature/items/list/widgets/item_list_view.dart';
 import 'package:deehelp/feature/search/widgets/load_skeleton.dart';
 import 'package:deehelp/module/auth/external/di/authenticated_user_provider.dart';
 import 'package:deehelp/module/item/di/item_viewmodel_provider.dart';
-import 'package:deehelp/old_core/ui/widgets/empty/empty_state_widget.dart';
+import 'package:deehelp/core/ui/widgets/empty/empty_state_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';

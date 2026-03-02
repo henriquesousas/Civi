@@ -22,7 +22,7 @@ class ShimmerAnimation extends StatelessWidget {
       containersColor: Theme.of(context).colorScheme.outlineVariant,
       effect: ShimmerEffect(
         baseColor: Theme.of(context).colorScheme.outline.withValues(alpha: 0.3),
-        highlightColor: AppColors.darkGreyColor10, //Color(0XFFF2F2F2),
+        highlightColor: const Color(0xFF6B7280),
         duration: const Duration(
           milliseconds: 2000,
         ),

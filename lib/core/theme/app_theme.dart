@@ -1,12 +1,10 @@
 // import 'package:app_core/app_core.dart';
-import 'package:deehelp/old_core/ui/theme/app_colors.dart';
-import 'package:deehelp/old_core/ui/theme/text_button_theme.dart';
+import 'package:deehelp/core/theme/app_colors.dart';
+import 'package:deehelp/core/theme/text_button_theme.dart';
 import 'package:flutter/material.dart';
 
 import 'button_theme.dart';
-import 'checkbox_theme.dart';
 import 'input_decoration_theme.dart';
-import 'theme_data.dart';
 
 class AppTheme {
   static ThemeData lightTheme() {
@@ -20,7 +18,7 @@ class AppTheme {
       // texto secundario
       secondary: Color(0xFF6B7AAE),
       // texto/icone/ propositalmente apagado
-      surfaceDim: AppColors.textColorBody,
+      surfaceDim: Color(0xFF475569),
       // texto error
       onError: Color(0xFFEA5B5B),
       // overlay de cor aplicado conforme a elevação
@@ -46,14 +44,14 @@ class AppTheme {
 
     return ThemeData(
       useMaterial3: true,
-      appBarTheme: appBarLightTheme,
+      // appBarTheme: appBarLightTheme,
       scaffoldBackgroundColor: const Color(0xFFF8FAFC),
       brightness: Brightness.light,
       fontFamily: "Plus Jakarta",
       colorScheme: baseColorScheme,
-      primarySwatch: AppColors.primaryMaterialColor,
+      // primarySwatch: AppColors.primaryMaterialColor,
       primaryColor: AppColors.primaryColor,
-      iconTheme: const IconThemeData(color: AppColors.blackColor),
+      // iconTheme: const IconThemeData(color: AppColors.blackColor),
       // textTheme: AppTypography.textTheme.apply(
       //   displayColor: baseColorScheme.onSurface,
       //   bodyColor: baseColorScheme.secondary,
@@ -62,11 +60,11 @@ class AppTheme {
       textButtonTheme: textButtonThemeData,
       outlinedButtonTheme: outlinedButtonTheme(),
       inputDecorationTheme: lightInputDecorationTheme,
-      checkboxTheme: checkboxThemeData.copyWith(
-        side: const BorderSide(color: AppColors.blackColor40),
-      ),
-      scrollbarTheme: scrollbarThemeData,
-      dataTableTheme: dataTableLightThemeData,
+      // checkboxTheme: checkboxThemeData.copyWith(
+      //   side: const BorderSide(color: AppColors.blackColor40),
+      // ),
+      // scrollbarTheme: scrollbarThemeData,
+      // dataTableTheme: dataTableLightThemeData,
     );
   }
 
@@ -97,33 +95,22 @@ class AppTheme {
       brightness: Brightness.light,
       fontFamily: "Plus Jakarta",
       colorScheme: baseColorScheme,
-      primarySwatch: AppColors.primaryMaterialColor,
+      // primarySwatch: AppColors.primaryMaterialColor,
       primaryColor: AppColors.primaryColor,
-      iconTheme: const IconThemeData(color: AppColors.blackColor),
-      textTheme: const TextTheme(
-        bodyMedium: TextStyle(color: AppColors.blackColor40),
-      ),
+      // iconTheme: const IconThemeData(color: AppColors.blackColor),
+      // textTheme: const TextTheme(
+      //   bodyMedium: TextStyle(color: AppColors.blackColor40),
+      // ),
       elevatedButtonTheme: elevatedButtonThemeData,
       textButtonTheme: textButtonThemeData,
       outlinedButtonTheme: outlinedButtonTheme(),
       inputDecorationTheme: lightInputDecorationTheme,
-      checkboxTheme: checkboxThemeData.copyWith(
-        side: const BorderSide(color: AppColors.blackColor40),
-      ),
-      appBarTheme: appBarDarkTheme,
-      scrollbarTheme: scrollbarThemeData,
-      dataTableTheme: dataTableLightThemeData,
+      // checkboxTheme: checkboxThemeData.copyWith(
+      //   side: const BorderSide(color: AppColors.blackColor40),
+      // ),
+      // appBarTheme: appBarDarkTheme,
+      // scrollbarTheme: scrollbarThemeData,
+      // dataTableTheme: dataTableLightThemeData,
     );
   }
-
-  // ThemeData buildTheme(ColorScheme scheme) {
-  //   return ThemeData(
-  //     useMaterial3: true,
-  //     colorScheme: scheme,
-  //     textTheme: AppTypography.textTheme.apply(
-  //       bodyColor: scheme.onSurface,
-  //       displayColor: scheme.onSurface,
-  //     ),
-  //   );
-  // }
 }

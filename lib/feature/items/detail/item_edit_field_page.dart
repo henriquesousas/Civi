@@ -110,7 +110,7 @@ class _ItemEditFieldPageState extends ConsumerState<ItemEditFieldPage> {
                 child: ButtonOutline(
                   press: () => _pop(),
                   text: "Cancelar",
-                  textColor: context.onSurface,
+                  textColor: context.primaryColor,
                 ),
               ),
               const SizedBox(width: SpacingSize.md),

@@ -1,14 +1,5 @@
-import 'package:deehelp/old_core/ui/theme/dimens.dart';
-import 'package:deehelp/old_core/ui/widgets/icon/ui_icon.dart';
-import 'package:deehelp/old_core/ui/theme/app_text_styles.dart';
-import 'package:deehelp/old_core/ui/widgets/divider/ui_divider.dart';
-import 'package:deehelp/old_core/ui/widgets/textfield/ui_text_field_rounded.dart';
 import 'package:deehelp/module/incident/domain/entity/incident.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:flutter_svg/flutter_svg.dart';
-
-import '../../../core/resources.dart';
 import '../../../old_core/ui/theme/app_colors.dart';
 
 class SlidingOccurrencesPanel extends StatelessWidget {
@@ -26,11 +17,11 @@ class SlidingOccurrencesPanel extends StatelessWidget {
     final textOpacity = (1 - (panelPosition / 0.8)).clamp(0.0, 1.0);
     final textFieldOpacity = ((panelPosition - 0.7) / 0.1).clamp(0.0, 1.0);
     final showTextField = panelPosition >= 0.8;
-    final iconColor = AppColors.textColorBody.withValues(alpha: 0.6);
+    final iconColor = Colors.black.withValues(alpha: 0.6);
 
     return Column(
       children: [
-        const UIDivider(),
+        // const UIDivider(),
         // if (!showTextField) ...[
         //   Opacity(
         //     opacity: textOpacity,
@@ -126,27 +117,27 @@ class SlidingOccurrencesPanel extends StatelessWidget {
               return ListTile(
                 title: Text(
                   "${incident.product.name}, placa ${incident.product.code} roubado.",
-                  style: context.appTextStyles.bodyTextStyle1.copyWith(
-                    fontWeight: FontWeight.w500,
-                  ),
+                  // style: context.appTextStyles.bodyTextStyle1.copyWith(
+                  //   fontWeight: FontWeight.w500,
+                  // ),
                 ),
                 subtitle: Text(
                   incident.local != null
                       ? "${incident.local?.address},${incident.local?.city}, ${incident.local?.address}"
                       : '',
-                  style: context.appTextStyles.bodyTextStyle2.copyWith(),
+                  // style: context.appTextStyles.bodyTextStyle2.copyWith(),
                 ),
                 leading: Container(
                   padding: const EdgeInsets.all(6),
                   child: const Icon(
                     Icons.campaign,
                     // size: 18,
-                    color: AppColors.blackColor60,
+                    // color: AppColors.blackColor60,
                   ),
                 ),
                 trailing: Text(
                   "12KM",
-                  style: context.appTextStyles.caption1Style,
+                  // style: context.appTextStyles.caption1Style,
                 ),
               );
             },

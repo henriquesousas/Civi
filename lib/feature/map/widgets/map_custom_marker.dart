@@ -1,5 +1,3 @@
-import 'package:deehelp/old_core/ui/theme/app_colors.dart';
-import 'package:deehelp/old_core/ui/theme/dimens.dart';
 import 'package:flutter/material.dart';
 
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -16,9 +14,9 @@ class MapCustomMarker extends StatelessWidget {
     super.key,
     required this.label,
     this.icon = Icons.motorcycle,
-    this.iconColor = AppColors.primaryColor,
-    this.borderColor = AppColors.primaryColor,
-    this.backgroundColor = AppColors.whiteColor,
+    this.iconColor = Colors.blue,
+    this.borderColor = Colors.blue,
+    this.backgroundColor = Colors.white,
     this.arrowSize = 0.8,
   });
 
@@ -27,7 +25,7 @@ class MapCustomMarker extends StatelessWidget {
     return Center(
       child: CustomPaint(
         painter: MarkerPainterV2(
-          borderColor: AppColors.darkGreyColor10.withValues(alpha: 0.6),
+          borderColor: Colors.black.withValues(alpha: 0.6),
           fillColor: backgroundColor,
           arrowSize: arrowSize,
         ),
@@ -50,12 +48,12 @@ class MapCustomMarker extends StatelessWidget {
               width: 25,
               height: 25,
               decoration: BoxDecoration(
-                color: AppColors.primaryColor,
+                color: Colors.blue,
                 borderRadius: BorderRadiusDirectional.circular(10),
               ),
               child: Icon(
                 icon,
-                color: AppColors.whiteColor,
+                color: Colors.white,
                 size: 14.sp,
               ),
             ),

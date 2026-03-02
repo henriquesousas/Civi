@@ -1,21 +1,19 @@
 import 'dart:io';
 
-import 'package:deehelp/old_core/ui/widgets/image/ui_my_assets_image_widget.dart';
-import 'package:deehelp/old_core/ui/widgets/image/ui_my_network_image_widget.dart';
-import 'package:deehelp/old_core/ui/theme/app_colors.dart';
+import 'package:deehelp/core/extension/color_extension.dart';
+import 'package:deehelp/core/theme/export_theme.dart';
+import 'package:deehelp/core/ui/widgets/image/custom_network_image.dart';
 import 'package:deehelp/old_core/ui/theme/dimens.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:skeletonizer/skeletonizer.dart';
-
-import '../../../../core/resources.dart';
 
 class ProfileImageWithUploadButtonWidget extends StatefulWidget {
   final String imageUrl;
   final String imageAlt;
   final bool showUploadIcon;
   final VoidCallback? onTap;
-  final double radius;
+  final double? radius;
   final double width;
   final double height;
   final Function(File)? onChanged;
@@ -26,7 +24,7 @@ class ProfileImageWithUploadButtonWidget extends StatefulWidget {
     this.showUploadIcon = true,
     this.onTap,
     this.onChanged,
-    this.radius = Dimens.defaultRadius,
+    this.radius,
     this.width = 80,
     this.height = 80,
     required this.imageAlt,
@@ -47,10 +45,11 @@ class _ProfileImageWithUploadButtonWidgetState
           Container(
             decoration: BoxDecoration(
               border: Border.all(
-                color: AppColors.primaryColor.withValues(alpha: 0.15),
+                color: context.primaryColor.withValues(alpha: 0.15),
                 width: 2.w,
               ),
-              borderRadius: BorderRadius.circular(widget.radius),
+              borderRadius:
+                  BorderRadius.circular(widget.radius ?? RadiusSize.md),
             ),
             child: Container(
               decoration: BoxDecoration(
@@ -58,21 +57,20 @@ class _ProfileImageWithUploadButtonWidgetState
                 //   color: AppColors.primaryColor,
                 //   width: 2,
                 // ),
-                borderRadius: BorderRadius.circular(widget.radius),
+                borderRadius:
+                    BorderRadius.circular(widget.radius ?? RadiusSize.md),
               ),
               child: Container(
                 decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(
-                    Dimens.defaultRadius,
-                  ),
+                  borderRadius: BorderRadius.circular(RadiusSize.md),
                 ),
                 child: widget.imageUrl.isNotEmpty
                     ? Skeleton.replace(
                         replace: true,
                         replacement: const Bone.circle(size: 80),
-                        child: UIMyNetworkImageWidget(
+                        child: CustomNetworkImage(
                           imageUrl: widget.imageUrl,
-                          isProfile: true,
+                          // isProfile: true,
                           imageAlt: widget.imageAlt,
                           radius: widget.radius,
                           width: widget.width,
@@ -80,13 +78,13 @@ class _ProfileImageWithUploadButtonWidgetState
                           boxFit: BoxFit.cover,
                         ),
                       )
-                    : UIMyAssetsImageWidget(
-                        assetPath: widget.imageUrl,
-                        isFile: true,
+                    : CustomNetworkImage(
+                        // assetPath: widget.imageUrl,
+                        // isFile: true,
                         radius: widget.radius,
                         boxFit: BoxFit.cover,
                         width: widget.width,
-                        height: widget.height,
+                        height: widget.height, imageUrl: widget.imageUrl,
                       ),
               ),
             ),
@@ -99,22 +97,22 @@ class _ProfileImageWithUploadButtonWidgetState
                 decoration: BoxDecoration(
                   color: const Color(0XFFFFFFFF),
                   borderRadius: BorderRadius.circular(20),
-                  boxShadow: const [
+                  boxShadow: [
                     BoxShadow(
-                      color: AppColors.primaryColor,
+                      color: context.primaryColor,
                       blurRadius: 100,
-                      offset: Offset(-3, -8),
+                      offset: const Offset(-3, -8),
                     ),
                   ],
                 ),
                 width: widget.width / 2,
                 height: widget.height / 2,
                 padding: const EdgeInsetsDirectional.all(5),
-                child: UIMyAssetsImageWidget(
-                  color: AppColors.primaryColor,
-                  isSvg: true,
-                  assetPath: R.svg.upload,
-                ),
+                // child: UIMyAssetsImageWidget(
+                //   color: AppColors.primaryColor,
+                //   isSvg: true,
+                //   assetPath: R.svg.upload,
+                // ),
               ),
             ),
         ],

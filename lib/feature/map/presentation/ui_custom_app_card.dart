@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../../theme/dimens.dart';
+import '../../../old_core/ui/theme/dimens.dart';
 
 class UICustomAppCard extends StatelessWidget {
   final EdgeInsetsGeometry? padding;
@@ -25,7 +25,7 @@ class UICustomAppCard extends StatelessWidget {
     // this.borderColor = const Color(0xFFE2E8F0),
     this.borderColor,
     this.borderWidth = 1,
-    this.radius = Dimens.cardExtraRadius,
+    this.radius = 20,
     this.onPressed,
     required this.child,
     this.padding,

@@ -1,4 +1,5 @@
 import 'package:deehelp/core/extension/color_extension.dart';
+import 'package:deehelp/core/services/image/image_picker_failure.dart';
 import 'package:deehelp/core/theme/export_theme.dart';
 import 'package:deehelp/core/ui/styles/app_text_style.dart';
 import 'package:deehelp/core/ui/widgets/appbar/default_app_bar.dart';
@@ -97,9 +98,14 @@ class _ItemPhotoUpdateState extends ConsumerState<ItemPhotoUpdate> {
                       try {
                         final imageMedia =
                             await imagePicker.pickImageFromGallery();
+
                         if (imageMedia.isFailure) {
                           if (!context.mounted) return;
-                          context.showSnackBar(
+                          final imagePickerError =
+                              (imageMedia.error as ImagePickerFailure);
+
+                          if (imagePickerError.canceled) return;
+                          context.showTopNotice(
                             imageMedia.error.toString(),
                             type: DialogType.error,
                           );
