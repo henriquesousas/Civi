@@ -9,7 +9,7 @@ import 'package:deehelp/old_core/zoom_image_viewer.dart';
 import 'package:deehelp/module/incident/domain/usecase/incident_output.dart';
 import 'package:deehelp/feature/incidents/report/widgets/register/plate_number_widget.dart';
 import 'package:deehelp/core/ui/widgets/image/grid_add_image.dart';
-import 'package:deehelp/old_features/products/presentation/views/update/widgets/item_detail_tile.dart';
+import 'package:deehelp/feature/items/detail/widgets/item_detail_tile.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';

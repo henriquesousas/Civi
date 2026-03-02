@@ -2,7 +2,7 @@ import 'package:deehelp/old_core/ui/theme/app_text_styles.dart';
 import 'package:deehelp/old_core/ui/widgets/icon/ui_icon.dart';
 import 'package:flutter/material.dart';
 
-import '../../../../../../old_core/ui/theme/app_colors.dart';
+import '../../../../old_core/ui/theme/app_colors.dart';
 
 class ItemDetailTile extends StatelessWidget {
   final String title;

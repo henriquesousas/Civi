@@ -17,12 +17,6 @@ import 'package:deehelp/old_core/ui/router/app_router.dart';
 import 'package:deehelp/old_core/ui/router/slide_transition_page.dart';
 import 'package:deehelp/old_features/profile/presentation/views/add_nickname/add_nickname_page.dart';
 import 'package:deehelp/old_features/map/presentation/map_page.dart';
-import 'package:deehelp/old_features/onboarding/page/onboard_page.dart';
-import 'package:deehelp/module/item/domain/entities/product.dart';
-import 'package:deehelp/old_features/products/presentation/views/add/add_product_page.dart';
-import 'package:deehelp/old_features/products/presentation/views/add/steps/add_product_success_page.dart';
-import 'package:deehelp/old_features/products/presentation/views/listing/product_listing_page.dart';
-import 'package:deehelp/old_features/products/presentation/views/update/update_product_page.dart';
 import 'package:deehelp/old_features/welcome/welcome_page.dart';
 import 'package:deehelp/router_refresh_notifier.dart';
 import 'package:deehelp/teste_home2.dart';
@@ -163,62 +157,11 @@ var goRouterProvider = Provider<GoRouter>(
             // child: TesteNicknameRequiredPage(),
           ),
         ),
-        GoRoute(
-          path: AppRouter.onboarding,
-          pageBuilder: (context, state) {
-            return slideTransitionPage(
-                key: state.pageKey, child: const OnboardPage());
-          },
-        ),
-        GoRoute(
-          path: AppRouter.myProducts,
-          pageBuilder: (context, state) {
-            final extra = state.extra as Map<String, dynamic>?;
-            final isAddIncident =
-                extra?[ProductListingPage.isAddIncidentKey] as bool? ?? false;
-            return slideTransitionPage(
-              key: state.pageKey,
-              child: ProductListingPage(
-                isAddIncident: isAddIncident,
-              ),
-            );
-          },
-        ),
-        GoRoute(
-          path: AppRouter.addProduct,
-          pageBuilder: (context, state) => slideTransitionPage(
-            key: state.pageKey,
-            child: const AddProductPage(),
-          ),
-        ),
-        GoRoute(
-          path: AppRouter.editProduct,
-          pageBuilder: (context, state) {
-            final Product? product = state.extra as Product?;
-            return slideTransitionPage(
-              key: state.pageKey,
-              child: UpdateProductPage(product: product!),
-            );
-          },
-        ),
-        GoRoute(
-          path: AppRouter.addProductSuccess,
-          pageBuilder: (context, state) => slideTransitionPage(
-            key: state.pageKey,
-            child: const AddProductSuccessPage(),
-          ),
-        ),
+
         GoRoute(
           path: AppRouter.map,
           builder: (context, state) => const MapPage(),
         ),
-        // GoRoute(
-        //   path: AppRouter.dashboard,
-        //   pageBuilder: (context, state) => slideTransitionPage(
-        //     key: state.pageKey,
-        //     child: const DashsboardPage(),
-        //   ),
-        // ),
 
         GoRoute(
           path: AppRouter.addNickname,
