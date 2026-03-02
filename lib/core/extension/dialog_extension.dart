@@ -124,7 +124,6 @@ class TopNotice {
         bg = const Color(0xFF111827); // gray-900
         icon = Icons.info_outline_rounded;
         break;
-      case DialogType.success:
       default:
         bg = const Color(0xFF16A34A); // green-600
         icon = Icons.check_circle_outline_rounded;

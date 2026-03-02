@@ -13,11 +13,7 @@ import 'package:deehelp/feature/search/search_router.dart';
 import 'package:deehelp/feature/shell/app_sheel_router.dart';
 import 'package:deehelp/feature/sos/sos_router.dart';
 import 'package:deehelp/feature/splash/splash_router.dart';
-import 'package:deehelp/core/router/app_router.dart';
-import 'package:deehelp/core/router/slide_transition_page.dart';
-import 'package:deehelp/feature/map/presentation/map_page.dart';
 import 'package:deehelp/core/router/router_refresh_notifier.dart';
-import 'package:deehelp/teste_home2.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
@@ -57,9 +53,6 @@ var goRouterProvider = Provider<GoRouter>(
         final currentPath = state.matchedLocation;
         final isPublicRoute = _publicRoutes.contains(currentPath);
         // return '/';
-        // return AuthRouter.path;
-        // return SplashRouter.path;
-        // return ItemsRouter.success;
         switch (appStatus) {
           case AppStatus.loading:
             return SplashRouter.path;
@@ -90,74 +83,12 @@ var goRouterProvider = Provider<GoRouter>(
         ...IncidentRouter.routers,
         ...SOSRouter.routers,
         ...SearchRouter.routers,
-        // ...IncidentModule.routers,
-        GoRoute(
-          path: '/',
-          pageBuilder: (context, state) => slideTransitionPage(
-            key: state.pageKey,
-
-            //Home
-            // child: const TestPage(),
-            //SOS
-            // child: const TesteSOSPage(),
-            //GPS
-            // child: TestPage13(),
-            // Search
-            // child: const TestPage2(),
-            //Profile
-            // child: const TestPage3(),
-            // Lista de items
-            // child: const TestPage4(),
-            // Cadastro de item
-            // child: const TestPage40(),
-            // Detalhes do item
-            // child: TestPage5(),
-            // child: TestPage5(),
-            // child: TestPage5_1(
-            //   args: EditFieldArgs(
-            //     title: "Marca",
-            //     label: "marca",
-            //     hint: "marca",
-            //     initialValue: "Motorola",
-            //     maxLen: 10,
-            //   ),
-            // ),
-            // Item cadastrado sucesso
-            // child: TestPage6(),
-            // child: AddProductSuccessPage()
-            //Detalhes da ocorrencia
-            // child: TestPage7(),
-            // Reportat incident
-            // child: TestOcorrencia(),
-            // child: TestPage8(),
-            // child: TestePageLoading(),
-            // ReportIncidentSuccess
-            // child: const TestPage9(),
-            // Splash
-            // child: const TestPage10(),
-            // Welcome
-            // child: const TestPage11(),
-            //FAQ DARK
-            // child: const TestPage12FaqPage(),
-            // child: TestPageLogin(
-            //   onGoogleTap: () {},
-            //   onGuestTap: () {},
-            // ),
-            // child: const TestPageDark(),
-            // child: const MapPage(),
-            // child: TestePageContato(),
-            // child: TesteHome(),
-            child: const TesteHome2(),
-            // child: TesteShellPage(),
-            // child: TesteIncidentLoading(),
-            // child: TesteNicknamePage(),
-            // child: TesteNicknameRequiredPage(),
-          ),
-        ),
-
         // GoRoute(
-        //   path: AppRouter.map,
-        //   builder: (context, state) => const MapPage(),
+        //   path: '/',
+        //   pageBuilder: (context, state) => slideTransitionPage(
+        //     key: state.pageKey,
+        //     // child: const TesteHome2(),
+        //   ),
         // ),
       ],
     );
