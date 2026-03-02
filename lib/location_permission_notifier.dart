@@ -1,5 +1,5 @@
-import 'package:deehelp/core/services/location/current_location.dart';
-import 'package:deehelp/core/services/location/state/location_state.dart';
+import 'package:deehelp/old_core/services/location/current_location.dart';
+import 'package:deehelp/old_core/services/location/state/location_state.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:geocoding/geocoding.dart';
 import 'package:geolocator/geolocator.dart';
@@ -46,7 +46,7 @@ class LocationPermissionNotifier extends StateNotifier<LocationState> {
     }
   }
 
-  Future<CurrentLocation?> _getCurrentPlace() async {
+  Future<OldCurrentLocation?> _getCurrentPlace() async {
     try {
       final position = await Geolocator.getCurrentPosition(
         desiredAccuracy: LocationAccuracy.high,
@@ -61,7 +61,7 @@ class LocationPermissionNotifier extends StateNotifier<LocationState> {
         localeIdentifier: "pt_BR",
       );
 
-      return CurrentLocation.from(placemarks, position);
+      return OldCurrentLocation.from(placemarks, position);
     } catch (e) {
       return null;
     }

@@ -16,6 +16,14 @@
       "deviceId": "R9QRB02BHEZ",
       "flutterMode": "debug",
       "program": "lib/main.dart"
+    },
+    {
+      "name": "Daniel S9",
+      "request": "launch",
+      "type": "dart",
+      "deviceId": "23a1b38d11057ece",
+      "flutterMode": "debug",
+      "program": "lib/main.dart"
     }
   ]
 }

@@ -1,0 +1,13 @@
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+
+abstract class IconSizes {
+  static double xxs = 11.w;
+  static double xs = 14.w;
+  static double sm = 16.w;
+  static double md = 18.w;
+  static double lg = 24.w;
+  static double xl = 32.w;
+  static double xxl = 42.w;
+  static double xxxl = 46.w;
+  // static const double xg = 96;
+}

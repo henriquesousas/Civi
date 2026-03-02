@@ -1,6 +1,8 @@
 // import 'package:cloudflare_r2/cloudflare_r2.dart';
 import 'package:cloudflare_r2/cloudflare_r2.dart';
-import 'package:deehelp/core/ui/extensions/screen_size_extension.dart';
+import 'package:deehelp/app_name.dart';
+import 'package:deehelp/old_core/ui/extensions/screen_size_extension.dart';
+import 'package:deehelp/old_core/ui/theme/theme/theme.dart';
 import 'package:device_preview/device_preview.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
@@ -11,10 +13,9 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:intl/date_symbol_data_local.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
-import 'core/env.dart';
-import 'core/resources.dart';
-import 'core/ui/router/router.dart';
-import 'core/ui/theme/app_theme.dart';
+import 'old_core/env.dart';
+import 'old_core/resources.dart';
+import 'old_core/ui/router/router.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -49,14 +50,32 @@ void main() async {
   );
 }
 
-class MainApp extends ConsumerWidget {
+class MainApp extends ConsumerStatefulWidget {
   const MainApp({super.key});
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
+  ConsumerState<MainApp> createState() => _MainAppState();
+}
+
+class _MainAppState extends ConsumerState<MainApp> {
+  @override
+  void initState() {
+    super.initState();
+    // Future.microtask(() => ref.read(themeProvider.notifier).loadSavedTheme());
+    // WidgetsBinding.instance.addPostFrameCallback((_) {
+    //   ref.read(themeProvider.notifier).loadSavedTheme();
+    // });
+  }
+
+  @override
+  Widget build(BuildContext context) {
     return OrientationBuilder(
       builder: (context, orientation) {
-        final router = ref.watch(goRouterProvider);
+        // final router = ref.watch(goRouterProvider);
+        // final themeData = ref.watch(themeDataProvider);
+        // WidgetsBinding.instance.addPostFrameCallback((_) {
+        //   ref.read(themeProvider.notifier).loadSavedTheme();
+        // });
 
         return ScreenUtilInit(
           // designSize: context.designSize(),
@@ -66,8 +85,15 @@ class MainApp extends ConsumerWidget {
           useInheritedMediaQuery: true,
           rebuildFactor: (old, data) => true,
           builder: (context, child) {
+            // final mq = MediaQuery.of(context);
+            // final isLandscape = mq.orientation == Orientation.landscape;
+
+            final router = ref.watch(goRouterProvider);
+            final themeData = ref.watch(themeDataProvider);
+            // WidgetsBinding.instance.addPostFrameCallback((_) {
+            //   ref.read(themeProvider.notifier).loadSavedTheme();
+            // });
             return MaterialApp.router(
-              // localizationsDelegates: AppLocalizations.localizationsDelegates,
               localizationsDelegates: const [
                 GlobalMaterialLocalizations.delegate,
                 GlobalWidgetsLocalizations.delegate,
@@ -83,9 +109,14 @@ class MainApp extends ConsumerWidget {
               },
               locale: const Locale('pt', 'BR'),
               routerConfig: router,
-              theme: AppTheme.lightTheme(context),
-              themeMode: ThemeMode.light,
-              title: "DeeHelp",
+              // theme: AppTheme.lightTheme(),
+              // themeMode: ThemeMode.light,
+              // darkTheme: AppTheme.dark(),
+              theme: themeData,
+              themeMode: ThemeMode.dark,
+              // themeMode:
+              //     themeState.isDarkMode ? ThemeMode.dark : ThemeMode.light,
+              title: AppName.appName,
               debugShowCheckedModeBanner: false,
             );
           },

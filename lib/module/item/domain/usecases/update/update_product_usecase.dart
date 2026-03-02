@@ -1,0 +1,27 @@
+import 'package:deehelp/old_core/base/use_case.dart';
+import 'package:deehelp/old_core/utils/result.dart';
+import 'package:deehelp/old_core/utils/unit.dart';
+import 'package:deehelp/module/item/domain/entities/product.dart';
+import 'package:deehelp/module/item/domain/product_repository.dart';
+
+class UpdateProductUseCase extends UseCase<Product, Unit> {
+  final ProductRepository _repository;
+
+  UpdateProductUseCase({required ProductRepository repository})
+      : _repository = repository;
+
+  @override
+  Future<Result<Unit>> execute(Product product) async {
+    // final productResult = await _repository.getByCode(product.code);
+    // if (productResult != null) {
+    //   return Result.failure(
+    //     ItemAlreadyExistException.from(
+    //       EnumUtils.fromString(ItemType.values, product.type),
+    //       product.code,
+    //     ),
+    //   );
+    // }
+    await _repository.update(product);
+    return Result.success(const Unit());
+  }
+}

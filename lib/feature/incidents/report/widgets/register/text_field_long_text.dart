@@ -1,0 +1,75 @@
+import 'package:deehelp/core/extension/exports_extension.dart';
+import 'package:deehelp/core/ui/styles/app_text_style.dart';
+import 'package:flutter/material.dart';
+
+class TextFieldLongText extends StatelessWidget {
+  final String title;
+  final String subtitle;
+  final TextEditingController controller;
+  final int maxLen;
+  final Function(String)? onChanged;
+
+  const TextFieldLongText({
+    super.key,
+    required this.title,
+    required this.subtitle,
+    required this.controller,
+    required this.maxLen,
+    this.onChanged,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      padding: const EdgeInsets.all(14),
+      decoration: BoxDecoration(
+        color: const Color(0xFFF5F7FD),
+        borderRadius: BorderRadius.circular(18),
+        border: Border.all(color: const Color(0xFFE6EAF6)),
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(
+            title.toUpperCase(),
+            style: context.appText.caption.copyWith(
+              fontWeight: FontWeight.w800,
+              color: context.secondaryColor,
+            ),
+          ),
+          const SizedBox(height: 6),
+          Text(
+            subtitle,
+            style: context.appText.caption.copyWith(
+              fontWeight: FontWeight.w600,
+              color: context.secondaryColor,
+            ),
+          ),
+          const SizedBox(height: 10),
+          TextField(
+            controller: controller,
+            maxLength: maxLen,
+            maxLines: 5,
+            onChanged: (text) {
+              if (onChanged != null) {
+                onChanged!(text);
+              }
+            },
+            decoration: InputDecoration(
+              hintText: 'Digite aqui…',
+              hintStyle: TextStyle(color: context.secondaryColor),
+              filled: true,
+              fillColor: Colors.white,
+              border: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(16),
+                borderSide: BorderSide.none,
+              ),
+              contentPadding:
+                  const EdgeInsets.symmetric(horizontal: 12, vertical: 12),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+}

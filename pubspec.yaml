@@ -12,6 +12,10 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
+  app_core:
+    path: packages/core
+  app_feature:
+    path: packages/feature
   flutter_localizations:
     sdk: flutter
   intl: 0.20.2
@@ -37,6 +41,7 @@ dependencies:
   logging: ^1.3.0
   freezed_annotation: ^3.1.0
   skeletonizer: ^2.1.1
+  shimmer: ^3.0.0
   sliding_up_panel: ^2.0.0+1
   shared_preferences: ^2.5.4
   flutter_riverpod: ^2.6.1
@@ -46,7 +51,8 @@ dependencies:
   share_plus: ^7.2.0
   permission_handler: ^12.0.1
   device_preview: ^1.3.1
-
+  mobile_scanner: ^5.2.3
+  connectivity_plus: ^7.0.0
   # Rever se precisa
   animations: ^2.0.11
   flutter_map_animations: ^0.9.0
@@ -89,17 +95,17 @@ flutter:
         - asset: assets/fonts/plus_jakarta/PlusJakartaDisplay-Bold.otf
           weight: 700
 
-    - family: Grandis Extended
-      fonts:
-        - asset: assets/fonts/grandis_extended/GrandisExtended-Regular.ttf
-        - asset: assets/fonts/grandis_extended/GrandisExtended-Thin.ttf
-          weight: 300
-        - asset: assets/fonts/grandis_extended/GrandisExtended-Medium.ttf
-          weight: 500
-        - asset: assets/fonts/grandis_extended/GrandisExtended-Bold.ttf
-          weight: 700
-        - asset: assets/fonts/grandis_extended/GrandisExtended-Black.ttf
-          weight: 900
+    # - family: Grandis Extended
+    #   fonts:
+    #     - asset: assets/fonts/grandis_extended/GrandisExtended-Regular.ttf
+    #     - asset: assets/fonts/grandis_extended/GrandisExtended-Thin.ttf
+    #       weight: 300
+    #     - asset: assets/fonts/grandis_extended/GrandisExtended-Medium.ttf
+    #       weight: 500
+    #     - asset: assets/fonts/grandis_extended/GrandisExtended-Bold.ttf
+    #       weight: 700
+    #     - asset: assets/fonts/grandis_extended/GrandisExtended-Black.ttf
+    #       weight: 900
 
     - family: MuseoModerno
       fonts:
