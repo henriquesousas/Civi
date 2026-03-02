@@ -1,6 +1,5 @@
 import 'package:deehelp/core/extension/size_extension.dart';
 import 'package:deehelp/core/ui/widgets/image/custom_network_image.dart';
-import 'package:deehelp/old_core/ui/theme/app_colors.dart';
 import 'package:deehelp/core/ui/widgets/avatar/profile_image_with_upload_button_widget.dart';
 import 'package:deehelp/feature/map/presentation/ui_custom_app_card.dart';
 import 'package:deehelp/module/incident/domain/entity/incident.dart';
@@ -14,8 +13,6 @@ import 'package:flutter_map_animations/flutter_map_animations.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:latlong2/latlong.dart';
 import 'package:sliding_up_panel/sliding_up_panel.dart';
-
-import '../../../old_core/ui/theme/dimens.dart';
 
 class MapPage extends StatefulWidget {
   const MapPage({super.key});

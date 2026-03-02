@@ -1,6 +1,5 @@
 import 'package:deehelp/module/incident/domain/entity/incident.dart';
 import 'package:flutter/material.dart';
-import '../../../old_core/ui/theme/app_colors.dart';
 
 class SlidingOccurrencesPanel extends StatelessWidget {
   final List<Incident> occurrences;

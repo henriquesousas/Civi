@@ -2,8 +2,6 @@ import 'dart:async';
 
 import 'package:deehelp/core/extension/exports_extension.dart';
 import 'package:deehelp/core/theme/app_colors.dart';
-import 'package:deehelp/old_core/ui/theme/app_colors.dart';
-import 'package:deehelp/old_core/ui/theme/app_text_styles.dart';
 import 'package:flutter/material.dart';
 
 enum DialogType { success, error, normal }

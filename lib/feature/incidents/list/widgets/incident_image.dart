@@ -1,8 +1,6 @@
 import 'package:deehelp/core/extension/color_extension.dart';
 import 'package:deehelp/core/theme/export_theme.dart';
-import 'package:deehelp/core/theme/size/radius_size.dart';
 import 'package:deehelp/core/ui/widgets/image/custom_network_image.dart';
-import 'package:deehelp/old_core/ui/theme/dimens.dart';
 import 'package:deehelp/module/item/domain/entities/image_media.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';

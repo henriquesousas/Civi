@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 
-import '../../../old_core/ui/theme/dimens.dart';
-
 class UICustomAppCard extends StatelessWidget {
   final EdgeInsetsGeometry? padding;
   final EdgeInsetsGeometry? margin;
