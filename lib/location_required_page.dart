@@ -1,7 +1,6 @@
 import 'package:deehelp/app_startup_provider.dart';
 import 'package:deehelp/core/services/permissions/location/location_access_state.dart';
 import 'package:deehelp/core/services/permissions/location/location_service.dart';
-import 'package:deehelp/old_core/services/location/state/location_state.dart';
 import 'package:deehelp/old_core/ui/theme/app_colors.dart';
 import 'package:deehelp/old_core/ui/theme/app_text_styles.dart';
 import 'package:deehelp/old_core/ui/theme/dimens.dart';

@@ -1,5 +1,4 @@
 import 'package:deehelp/core/services/permissions/location/export_location.dart';
-import 'package:deehelp/old_core/services/location/location_failure.dart';
 import 'package:geocoding/geocoding.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:permission_handler/permission_handler.dart';
@@ -73,11 +72,13 @@ class LocationService {
 
     switch (status) {
       case LocationStatus.serviceDisabled:
-        throw const LocationFailure(
-          status: LocationStatus.serviceDisabled,
-          message:
-              'Serviço de localização desativado. Ative nas configurações do dispositivo.',
-        );
+        // throw const LocationFailure(
+        //   status: LocationStatus.serviceDisabled,
+        //   message:
+        //       'Serviço de localização desativado. Ative nas configurações do dispositivo.',
+        // );
+        throw Exception(
+            'Serviço de localização desativado. Ative nas configurações do dispositivo.');
       case LocationStatus.permissionDenied:
         // Solicita permissão novamente
         LocationStatus newStatus = await requestLocationPermission();
