@@ -1,4 +1,4 @@
-import 'package:deehelp/old_core/notification/domain_notification.dart';
+import 'package:deehelp/core/notification/domain_notification.dart';
 import 'package:deehelp/old_core/validation/validator.dart';
 import 'package:deehelp/module/auth/domain/entity/user.dart';
 

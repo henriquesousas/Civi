@@ -1,5 +1,5 @@
-import 'package:deehelp/old_core/base/use_case.dart';
-import 'package:deehelp/old_core/services/storage/image_storage.dart';
+import 'package:deehelp/core/base/use_case.dart';
+import 'package:deehelp/core/services/storage/image_storage.dart';
 import 'package:deehelp/old_core/utils/result.dart';
 import 'package:deehelp/old_core/utils/unit.dart';
 import 'package:deehelp/module/item/domain/entities/product.dart';

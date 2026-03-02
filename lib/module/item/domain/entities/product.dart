@@ -1,7 +1,7 @@
 // ignore_for_file: must_be_immutable
 
 import 'package:deehelp/core/ui/widgets/badge/export_badge.dart';
-import 'package:deehelp/old_core/base/entity.dart';
+import 'package:deehelp/core/base/entity.dart';
 import 'package:deehelp/module/item/domain/entities/product_id.dart';
 
 import '../../../../old_core/validation/validation_handler.dart';

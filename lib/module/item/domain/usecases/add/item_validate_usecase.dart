@@ -1,7 +1,7 @@
 import 'package:deehelp/core/utils/enum_utils.dart';
 import 'package:deehelp/feature/items/item_type.dart';
 import 'package:deehelp/module/item/domain/exceptions/item_already_exist_exception.dart';
-import 'package:deehelp/old_core/base/use_case.dart';
+import 'package:deehelp/core/base/use_case.dart';
 import 'package:deehelp/old_core/utils/result.dart';
 import 'package:deehelp/module/item/domain/product_repository.dart';
 import 'package:deehelp/old_core/utils/unit.dart';

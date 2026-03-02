@@ -2,8 +2,8 @@ import 'dart:ui';
 
 import 'package:deehelp/old_core/ui/assets/lottie_assets.dart';
 import 'package:deehelp/old_core/ui/assets/svg_assets.dart';
-import 'package:deehelp/old_core/localization/pt_br.dart';
-import 'package:deehelp/old_core/localization/translation.dart';
+import 'package:deehelp/core/localization/pt_br.dart';
+import 'package:deehelp/core/localization/translation.dart';
 
 class R {
   static late Translation _strings;

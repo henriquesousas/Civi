@@ -1,5 +1,5 @@
-import 'package:deehelp/old_core/handlers/handler_error.dart';
-import 'package:deehelp/old_core/handlers/handle_command.dart';
+import 'package:deehelp/core/handlers/handler_error.dart';
+import 'package:deehelp/core/handlers/handle_command.dart';
 import 'package:deehelp/module/item/domain/entities/product.dart';
 import 'package:deehelp/module/item/domain/usecases/listing/get_products_by_user_usecase.dart';
 import 'package:deehelp/feature/items/list/item_list_state.dart';

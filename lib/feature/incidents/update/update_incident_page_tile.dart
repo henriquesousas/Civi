@@ -2,7 +2,7 @@ import 'package:deehelp/core/extension/exports_extension.dart';
 import 'package:deehelp/core/ui/widgets/buttons/buttons_export.dart';
 import 'package:deehelp/core/ui/widgets/textfield/text_field_card.dart';
 import 'package:deehelp/feature/items/detail/widgets/edit/edit_info_card.dart';
-import 'package:deehelp/old_core/base/base_page.dart';
+import 'package:deehelp/core/base/base_page.dart';
 import 'package:deehelp/old_core/ui/extensions/dialog_extension.dart';
 import 'package:deehelp/old_core/ui/extensions/string_extension.dart';
 import 'package:deehelp/feature/incidents/providers/update_incident_viewmodel_provider.dart';

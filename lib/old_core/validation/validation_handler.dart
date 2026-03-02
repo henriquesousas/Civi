@@ -1,5 +1,5 @@
-import '../notification/domain_notification.dart';
-import '../notification/notification_message.dart';
+import '../../core/notification/domain_notification.dart';
+import '../../core/notification/notification_message.dart';
 
 abstract class ValidationHandler {
   ValidationHandler append(String property, String message);

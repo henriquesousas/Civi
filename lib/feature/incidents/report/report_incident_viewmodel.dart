@@ -4,7 +4,7 @@ import 'package:deehelp/core/utils/enum_utils.dart';
 import 'package:deehelp/feature/incidents/report/widgets/success/regiter_incident_success_args.dart';
 import 'package:deehelp/feature/items/item_type.dart';
 import 'package:deehelp/old_core/ui/extensions/string_extension.dart';
-import 'package:deehelp/old_core/handlers/handle_command.dart';
+import 'package:deehelp/core/handlers/handle_command.dart';
 import 'package:deehelp/module/auth/domain/entity/authenticated_user.dart';
 import 'package:deehelp/module/incident/domain/entity/incident_local.dart';
 import 'package:deehelp/module/incident/domain/enum/incident_status.dart';

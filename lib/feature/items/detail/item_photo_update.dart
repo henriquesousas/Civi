@@ -10,7 +10,7 @@ import 'package:deehelp/feature/items/detail/provider/selected_item_provider.dar
 import 'package:deehelp/feature/items/detail/viewmodel/product_update_state.dart';
 import 'package:deehelp/feature/items/register/presentation/widgets/card_page.dart';
 import 'package:deehelp/feature/items/register/presentation/widgets/section_title.dart';
-import 'package:deehelp/old_core/providers/image_picker_provider.dart';
+import 'package:deehelp/core/providers/image_picker_provider.dart';
 import 'package:deehelp/old_core/ui/extensions/dialog_extension.dart';
 import 'package:deehelp/old_core/ui/extensions/result_extension.dart';
 import 'package:flutter/material.dart';

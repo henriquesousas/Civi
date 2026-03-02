@@ -1,4 +1,4 @@
-import 'package:deehelp/old_core/services/location/current_location.dart';
+import 'package:deehelp/core/services/permissions/location/export_location.dart';
 
 enum IncidentField {
   howto,
@@ -8,7 +8,7 @@ enum IncidentField {
 }
 
 extension IncidentFieldExtension on IncidentField {
-  String? getPlaceValueFrom(OldCurrentLocation? place) {
+  String? getPlaceValueFrom(CurrentLocation? place) {
     if (place == null) return null;
     switch (this) {
       case IncidentField.city:
@@ -16,7 +16,7 @@ extension IncidentFieldExtension on IncidentField {
       case IncidentField.state:
         return place.state;
       case IncidentField.address:
-        return place.fullAddress;
+        return place.address;
       default:
         {
           return null;

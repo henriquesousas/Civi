@@ -1,8 +1,8 @@
 import 'package:deehelp/core/errors/failure.dart';
+import 'package:deehelp/core/services/permissions/location/location_service.dart';
 import 'package:deehelp/old_core/ui/extensions/string_extension.dart';
-import 'package:deehelp/old_core/handlers/handle_command.dart';
-import 'package:deehelp/old_core/handlers/handler_error.dart';
-import 'package:deehelp/old_core/services/location/location_service.dart';
+import 'package:deehelp/core/handlers/handle_command.dart';
+import 'package:deehelp/core/handlers/handler_error.dart';
 import 'package:deehelp/old_core/utils/unit.dart';
 import 'package:deehelp/module/incident/domain/entity/incident_local.dart';
 import 'package:deehelp/module/incident/domain/usecase/delete/delete_incident_usecase.dart';

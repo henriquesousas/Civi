@@ -1,22 +1,21 @@
-import 'package:deehelp/old_core/services/location/current_location.dart';
-import 'package:deehelp/old_core/services/location/state/location_state.dart';
+import 'package:deehelp/core/services/permissions/location/export_location.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:geocoding/geocoding.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:permission_handler/permission_handler.dart';
 
 final locationPermissionProvider =
-    StateNotifierProvider<LocationPermissionNotifier, LocationState>(
+    StateNotifierProvider<LocationPermissionNotifier, LocationAccessState>(
   (ref) => LocationPermissionNotifier(),
 );
 
-class LocationPermissionNotifier extends StateNotifier<LocationState> {
-  LocationPermissionNotifier() : super(const LocationState.loading());
+class LocationPermissionNotifier extends StateNotifier<LocationAccessState> {
+  LocationPermissionNotifier() : super(const LocationAccessState.loading());
 
   Future<void> check() async {
     bool serviceEnabled = await Geolocator.isLocationServiceEnabled();
     if (!serviceEnabled) {
-      state = const LocationState.serviceDisabled();
+      state = const LocationAccessState.serviceDisabled();
       return;
     }
 
@@ -24,29 +23,29 @@ class LocationPermissionNotifier extends StateNotifier<LocationState> {
 
     if (status.isGranted) {
       final currentLocation = await _getCurrentPlace();
-      state = LocationState.granted(currentLocation);
+      state = LocationAccessState.granted(currentLocation);
     } else if (status.isPermanentlyDenied) {
-      state = const LocationState.deniedPermanently();
+      state = const LocationAccessState.deniedPermanently();
     } else {
-      state = const LocationState.denied();
+      state = const LocationAccessState.denied();
     }
   }
 
   Future<void> request() async {
-    state = const LocationState.loading();
+    state = const LocationAccessState.loading();
 
     final status = await Permission.location.request();
     if (status.isGranted) {
       final currentLocation = await _getCurrentPlace();
-      state = LocationState.granted(currentLocation);
+      state = LocationAccessState.granted(currentLocation);
     } else if (status.isPermanentlyDenied) {
-      state = const LocationState.deniedPermanently();
+      state = const LocationAccessState.deniedPermanently();
     } else {
-      state = const LocationState.denied();
+      state = const LocationAccessState.denied();
     }
   }
 
-  Future<OldCurrentLocation?> _getCurrentPlace() async {
+  Future<CurrentLocation?> _getCurrentPlace() async {
     try {
       final position = await Geolocator.getCurrentPosition(
         desiredAccuracy: LocationAccuracy.high,
@@ -61,7 +60,7 @@ class LocationPermissionNotifier extends StateNotifier<LocationState> {
         localeIdentifier: "pt_BR",
       );
 
-      return OldCurrentLocation.from(placemarks, position);
+      return CurrentLocation.from(placemarks, position);
     } catch (e) {
       return null;
     }

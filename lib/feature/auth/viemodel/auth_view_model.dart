@@ -1,5 +1,5 @@
-import 'package:deehelp/old_core/handlers/handle_command.dart';
-import 'package:deehelp/old_core/handlers/handler_error.dart';
+import 'package:deehelp/core/handlers/handle_command.dart';
+import 'package:deehelp/core/handlers/handler_error.dart';
 import 'package:deehelp/module/auth/domain/entity/authenticated_user.dart';
 import 'package:deehelp/module/auth/domain/services/operation_status.dart';
 import 'package:deehelp/module/auth/domain/usecases/sign_in_with_google_usecase.dart';

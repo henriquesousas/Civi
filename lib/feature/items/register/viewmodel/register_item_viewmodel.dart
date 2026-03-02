@@ -1,7 +1,7 @@
 import 'package:deehelp/feature/items/item_type.dart';
 import 'package:deehelp/module/item/domain/usecases/add/item_validate_usecase.dart';
-import 'package:deehelp/old_core/handlers/handler_error.dart';
-import 'package:deehelp/old_core/handlers/handle_command.dart';
+import 'package:deehelp/core/handlers/handler_error.dart';
+import 'package:deehelp/core/handlers/handle_command.dart';
 import 'package:deehelp/module/item/domain/entities/image_media.dart';
 import 'package:deehelp/module/item/domain/usecases/add/add_product_usecase.dart';
 import 'package:deehelp/module/item/domain/usecases/add/dtos/add_product_dto.dart';

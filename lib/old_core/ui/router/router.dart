@@ -15,9 +15,7 @@ import 'package:deehelp/feature/sos/sos_router.dart';
 import 'package:deehelp/feature/splash/splash_router.dart';
 import 'package:deehelp/old_core/ui/router/app_router.dart';
 import 'package:deehelp/old_core/ui/router/slide_transition_page.dart';
-import 'package:deehelp/old_features/profile/presentation/views/add_nickname/add_nickname_page.dart';
-import 'package:deehelp/old_features/map/presentation/map_page.dart';
-import 'package:deehelp/old_features/welcome/welcome_page.dart';
+import 'package:deehelp/feature/map/presentation/map_page.dart';
 import 'package:deehelp/router_refresh_notifier.dart';
 import 'package:deehelp/teste_home2.dart';
 import 'package:flutter/material.dart';
@@ -161,44 +159,6 @@ var goRouterProvider = Provider<GoRouter>(
         GoRoute(
           path: AppRouter.map,
           builder: (context, state) => const MapPage(),
-        ),
-
-        GoRoute(
-          path: AppRouter.addNickname,
-          pageBuilder: (context, state) {
-            return slideTransitionPage(
-              key: state.pageKey,
-              child: AddNicknamePage(),
-            );
-          },
-        ),
-        // GoRoute(
-        //   path: AppRouter.search,
-        //   pageBuilder: (context, state) {
-        //     return slideTransitionPage(
-        //       key: state.pageKey,
-        //       child: const SearchPage(),
-        //     );
-        //   },
-        // ),
-        // GoRoute(
-        //   path: AppRouter.locationRequired,
-        //   pageBuilder: (context, state) {
-        //     return slideTransitionPage(
-        //       key: state.pageKey,
-        //       child: const LocationRequiredPage(),
-        //     );
-        //   },
-        // ),
-
-        GoRoute(
-          path: AppRouter.welcome,
-          pageBuilder: (context, state) {
-            return slideTransitionPage(
-              key: state.pageKey,
-              child: const WelcomeScreen(),
-            );
-          },
         ),
       ],
     );

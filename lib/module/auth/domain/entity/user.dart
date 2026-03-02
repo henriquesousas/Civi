@@ -1,4 +1,4 @@
-import 'package:deehelp/old_core/base/entity.dart';
+import 'package:deehelp/core/base/entity.dart';
 import 'package:deehelp/old_core/validation/validation_handler.dart';
 import 'package:deehelp/old_core/valueobject/email.dart';
 import 'package:deehelp/old_core/valueobject/image_url.dart';
