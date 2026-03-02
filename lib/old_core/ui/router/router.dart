@@ -27,7 +27,7 @@ import 'package:deehelp/old_features/products/presentation/views/listing/product
 import 'package:deehelp/old_features/products/presentation/views/update/update_product_page.dart';
 import 'package:deehelp/old_features/welcome/welcome_page.dart';
 import 'package:deehelp/router_refresh_notifier.dart';
-import 'package:deehelp/test_page8.dart';
+import 'package:deehelp/teste_page_loading.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
@@ -140,7 +140,8 @@ var goRouterProvider = Provider<GoRouter>(
             // child: TestPage7(),
             // Reportat incident
             // child: TestOcorrencia(),
-            child: TestPage8(),
+            // child: TestPage8(),
+            child: TestePageLoading(),
             // ReportIncidentSuccess
             // child: const TestPage9(),
             // Splash
