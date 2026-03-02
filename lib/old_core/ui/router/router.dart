@@ -16,7 +16,6 @@ import 'package:deehelp/feature/splash/splash_router.dart';
 import 'package:deehelp/old_core/ui/router/app_router.dart';
 import 'package:deehelp/old_core/ui/router/slide_transition_page.dart';
 import 'package:deehelp/old_features/profile/presentation/views/add_nickname/add_nickname_page.dart';
-import 'package:deehelp/old_features/faq/faq_provider.dart';
 import 'package:deehelp/old_features/map/presentation/map_page.dart';
 import 'package:deehelp/old_features/onboarding/page/onboard_page.dart';
 import 'package:deehelp/module/item/domain/entities/product.dart';
@@ -220,13 +219,7 @@ var goRouterProvider = Provider<GoRouter>(
         //     child: const DashsboardPage(),
         //   ),
         // ),
-        GoRoute(
-          path: AppRouter.faq,
-          pageBuilder: (context, state) => slideTransitionPage(
-            key: state.pageKey,
-            child: FaqProvider.page,
-          ),
-        ),
+
         GoRoute(
           path: AppRouter.addNickname,
           pageBuilder: (context, state) {
