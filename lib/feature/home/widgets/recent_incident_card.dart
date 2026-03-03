@@ -176,83 +176,83 @@ class _VehicleThumb extends StatelessWidget {
   }
 }
 
-class _Pill extends StatelessWidget {
-  final String label;
-  final Color bg;
-  final Color fg;
+// class _Pill extends StatelessWidget {
+//   final String label;
+//   final Color bg;
+//   final Color fg;
 
-  const _Pill({required this.label, required this.bg, required this.fg});
+//   const _Pill({required this.label, required this.bg, required this.fg});
 
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 6),
-      decoration: BoxDecoration(
-        color: bg,
-        borderRadius: BorderRadius.circular(999),
-      ),
-      child: Text(
-        label,
-        style: TextStyle(
-          color: fg,
-          fontSize: 12,
-          fontWeight: FontWeight.w800,
-        ),
-      ),
-    );
-  }
-}
+//   @override
+//   Widget build(BuildContext context) {
+//     return Container(
+//       padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 6),
+//       decoration: BoxDecoration(
+//         color: bg,
+//         borderRadius: BorderRadius.circular(999),
+//       ),
+//       child: Text(
+//         label,
+//         style: TextStyle(
+//           color: fg,
+//           fontSize: 12,
+//           fontWeight: FontWeight.w800,
+//         ),
+//       ),
+//     );
+//   }
+// }
 
-class _ItemThumb extends StatelessWidget {
-  final String? imageUrl;
-  final bool showPhonePlaceholder;
-  final IconData fallbackIcon;
+// class _ItemThumb extends StatelessWidget {
+//   final String? imageUrl;
+//   final bool showPhonePlaceholder;
+//   final IconData fallbackIcon;
 
-  const _ItemThumb({
-    required this.imageUrl,
-    required this.showPhonePlaceholder,
-    required this.fallbackIcon,
-  });
+//   const _ItemThumb({
+//     required this.imageUrl,
+//     required this.showPhonePlaceholder,
+//     required this.fallbackIcon,
+//   });
 
-  bool get _hasImage => (imageUrl != null) && imageUrl!.trim().isNotEmpty;
+//   bool get _hasImage => (imageUrl != null) && imageUrl!.trim().isNotEmpty;
 
-  @override
-  Widget build(BuildContext context) {
-    final radius = BorderRadius.circular(16);
+//   @override
+//   Widget build(BuildContext context) {
+//     final radius = BorderRadius.circular(16);
 
-    return ClipRRect(
-      borderRadius: radius,
-      child: Container(
-        width: 64,
-        height: 64,
-        decoration: BoxDecoration(
-          color: const Color(0xFFF2F4F8),
-          borderRadius: radius,
-          border: Border.all(color: Color(0xFFE9EEF8)),
-        ),
-        child: _hasImage
-            ? Image.network(
-                imageUrl!,
-                fit: BoxFit.cover,
-                errorBuilder: (_, __, ___) =>
-                    _ThumbFallback(icon: fallbackIcon),
-              )
-            : showPhonePlaceholder
-                ? const _ThumbFallback(icon: Icons.smartphone_rounded)
-                : _ThumbFallback(icon: fallbackIcon),
-      ),
-    );
-  }
-}
+//     return ClipRRect(
+//       borderRadius: radius,
+//       child: Container(
+//         width: 64,
+//         height: 64,
+//         decoration: BoxDecoration(
+//           color: const Color(0xFFF2F4F8),
+//           borderRadius: radius,
+//           border: Border.all(color: Color(0xFFE9EEF8)),
+//         ),
+//         child: _hasImage
+//             ? Image.network(
+//                 imageUrl!,
+//                 fit: BoxFit.cover,
+//                 errorBuilder: (_, __, ___) =>
+//                     _ThumbFallback(icon: fallbackIcon),
+//               )
+//             : showPhonePlaceholder
+//                 ? const _ThumbFallback(icon: Icons.smartphone_rounded)
+//                 : _ThumbFallback(icon: fallbackIcon),
+//       ),
+//     );
+//   }
+// }
 
-class _ThumbFallback extends StatelessWidget {
-  final IconData icon;
-  const _ThumbFallback({required this.icon});
+// class _ThumbFallback extends StatelessWidget {
+//   final IconData icon;
+//   const _ThumbFallback({required this.icon});
 
-  @override
-  Widget build(BuildContext context) {
-    return Center(
-      child: Icon(icon, color: const Color(0xFF9AA3B2), size: 30),
-    );
-  }
-}
+//   @override
+//   Widget build(BuildContext context) {
+//     return Center(
+//       child: Icon(icon, color: const Color(0xFF9AA3B2), size: 30),
+//     );
+//   }
+// }
