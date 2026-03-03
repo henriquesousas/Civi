@@ -33,7 +33,7 @@ class ObservationCardField extends StatelessWidget {
                 ),
               ],
             ),
-            const SizedBox(width: SpacingSize.md),
+            const SizedBox(height: SpacingSize.lg),
             TextFieldPrimary(
               hint: 'Digite detalhes que ajudem a identificar o item…',
               maxLength: 300,

@@ -10,7 +10,6 @@ import 'package:deehelp/module/item/domain/entities/product.dart';
 import 'package:deehelp/module/item/domain/product_repository.dart';
 import 'package:deehelp/module/item/domain/usecases/add/dtos/add_product_dto.dart';
 import 'package:deehelp/core/utils/unit.dart';
-import 'package:flutter/material.dart';
 import 'package:logging/logging.dart';
 
 class AddProductUseCase extends UseCase<AddProductDto, Unit> {

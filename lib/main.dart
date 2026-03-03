@@ -1,8 +1,6 @@
-// import 'package:cloudflare_r2/cloudflare_r2.dart';
 import 'package:cloudflare_r2/cloudflare_r2.dart';
 import 'package:deehelp/app_name.dart';
 import 'package:deehelp/core/theme/theme_provider.dart';
-import 'package:device_preview/device_preview.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
@@ -36,11 +34,7 @@ void main() async {
   ));
 
   runApp(
-    ProviderScope(
-        child: DevicePreview(
-      enabled: false,
-      builder: (context) => const MainApp(),
-    )),
+    const ProviderScope(child: MainApp()),
   );
 }
 

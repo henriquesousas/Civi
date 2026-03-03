@@ -1,7 +1,6 @@
 import 'package:deehelp/core/extension/color_extension.dart';
 import 'package:deehelp/core/services/permissions/location/providers/location_providers.dart';
 import 'package:deehelp/core/theme/export_theme.dart';
-import 'package:deehelp/core/ui/widgets/badge/export_badge.dart';
 import 'package:deehelp/core/utils/navigation_utils.dart';
 import 'package:deehelp/feature/home/widgets/card_header.dart';
 import 'package:deehelp/feature/home/widgets/empty_incident_state.dart';
@@ -11,7 +10,6 @@ import 'package:deehelp/feature/home/widgets/pill.dart';
 import 'package:deehelp/feature/home/widgets/quick_action_tile.dart';
 import 'package:deehelp/feature/home/widgets/thini_divider.dart';
 import 'package:deehelp/feature/incidents/incident_router.dart';
-import 'package:deehelp/feature/incidents/list/widgets/fake_incident_list_model.dart';
 import 'package:deehelp/feature/incidents/providers/incident_selected_provider.dart';
 import 'package:deehelp/feature/items/items_router.dart';
 import 'package:deehelp/feature/items/register/presentation/widgets/card_page.dart';
@@ -19,40 +17,13 @@ import 'package:deehelp/feature/profile/export_profile.dart';
 import 'package:deehelp/feature/search/search_args.dart';
 import 'package:deehelp/feature/search/search_router.dart';
 import 'package:deehelp/feature/sos/sos_router.dart';
-import 'package:deehelp/module/incident/domain/enum/type_alert.dart';
 import 'package:deehelp/module/incident/domain/usecase/incident_output.dart';
-import 'package:deehelp/module/incident/domain/usecase/incident_product_output.dart';
 import 'package:deehelp/feature/home/home_viewmodel_provider.dart';
-import 'package:deehelp/module/item/domain/entities/image_media.dart';
+import 'package:lottie/lottie.dart';
 import 'widgets/home_app_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
-
-final recentIncidents = [
-  IncidentOutput(
-    id: '123',
-    userId: '123',
-    alertId: "101020",
-    type: TypeAlert.immediately,
-    product: IncidentProductOutput(
-      productId: "123",
-      name: "any",
-      code: "0000000",
-      images: [
-        ImageMedia.fromWeb(
-            url: "sasasa", size: 1024, mimeType: "", imageName: "sassa")
-      ],
-      color: "Vermelho",
-      brand: "Marca",
-      type: ItemType.car.name,
-    ),
-    status: ItemStatus.active,
-    createdAt: DateTime.now(),
-    occurredAt: DateTime.now(),
-    occurredAtTime: TimeOfDay.now(),
-  ),
-];
 
 class HomePage extends ConsumerStatefulWidget {
   const HomePage({super.key});
@@ -116,6 +87,7 @@ class _HomePageState extends ConsumerState<HomePage> {
             //     },
             //   ),
             // ),
+            // Lottie.asset("assets/lottie/warning.json"),
             const SizedBox(height: 14),
             PageCard(
               child: Column(
