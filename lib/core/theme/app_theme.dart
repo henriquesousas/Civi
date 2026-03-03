@@ -49,7 +49,7 @@ class AppTheme {
       brightness: Brightness.light,
       fontFamily: "Plus Jakarta",
       colorScheme: baseColorScheme,
-      // primarySwatch: AppColors.primaryMaterialColor,
+      primarySwatch: AppColors.primaryMaterialColor,
       primaryColor: AppColors.primaryColor,
       // iconTheme: const IconThemeData(color: AppColors.blackColor),
       // textTheme: AppTypography.textTheme.apply(
@@ -95,7 +95,7 @@ class AppTheme {
       brightness: Brightness.light,
       fontFamily: "Plus Jakarta",
       colorScheme: baseColorScheme,
-      // primarySwatch: AppColors.primaryMaterialColor,
+      primarySwatch: AppColors.primaryMaterialColor,
       primaryColor: AppColors.primaryColor,
       // iconTheme: const IconThemeData(color: AppColors.blackColor),
       // textTheme: const TextTheme(
