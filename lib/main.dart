@@ -1,5 +1,6 @@
 import 'package:cloudflare_r2/cloudflare_r2.dart';
 import 'package:deehelp/app_name.dart';
+import 'package:deehelp/core/env.dart';
 import 'package:deehelp/core/theme/theme_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -15,6 +16,8 @@ import 'core/router/router.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
+  await Env.init();
+
   await initializeDateFormatting('pt_BR', null);
 
   await Supabase.initialize(
@@ -23,10 +26,9 @@ void main() async {
   );
 
   await CloudFlareR2.init(
-    accountId: "2f0c45d371a6f728da6a889027b991f5",
-    accessKeyId: "290d6a3180cc5b6fa78937b557bda224",
-    secretAccessKey:
-        "6fd0a3d0bbaa58909b0a8739d70dda002d709dc19ef9a237ac1473a29eba0312",
+    accountId: Env.r2AccountId,
+    accessKeyId: Env.r2AccessKeyId,
+    secretAccessKey: Env.r2SecretAccessKeyId,
   );
 
   SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(

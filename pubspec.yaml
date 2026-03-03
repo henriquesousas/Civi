@@ -85,6 +85,7 @@ flutter:
     - assets/images/
     - assets/svg/
     - assets/lottie/
+    - assets/env/env_dev.json
 
   fonts:
     - family: Plus Jakarta

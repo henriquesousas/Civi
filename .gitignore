@@ -50,12 +50,18 @@ app.*.map.json
 !.env/env.example.json
 
 # Arquivos específicos para ignorar
-.env/env.local.json
-.env/env.prod.json
-.env/env.dev.json
-.env/env.staging.json
+# .env/env.local.json
+# .env/env.prod.json
+# .env/env.dev.json
+# .env/env.staging.json
 
 # Qualquer arquivo com dados sensíveis
 .env/*.local.*
 .env/*.prod.*
 .env/*.dev.
+
+assets/env_local.json
+assets/env_prod.json
+assets/env_dev.json
+assets/env_staging.json
+
