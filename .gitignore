@@ -60,8 +60,8 @@ app.*.map.json
 .env/*.prod.*
 .env/*.dev.
 
-assets/env_local.json
-assets/env_prod.json
-assets/env_dev.json
-assets/env_staging.json
+assets/env/env_dev.json
+# assets/env_local.json
+# assets/env_prod.json
+# assets/env_staging.json
 
