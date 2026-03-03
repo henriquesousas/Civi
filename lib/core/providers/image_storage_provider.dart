@@ -1,4 +1,4 @@
-import 'package:deehelp/core/env.dart';
+import 'package:deehelp/core/env_config.dart';
 import 'package:deehelp/core/services/storage/image_storage.dart';
 import 'package:deehelp/core/services/storage/r2_cloudflare_image_storage.dart';
 import 'package:deehelp/module/auth/external/di/authenticated_user_provider.dart';
@@ -13,6 +13,6 @@ final imageStorageServiceProvider = Provider<ImageStorage>((ref) {
   return R2CloudFlareImageStorage(
     bucketName: "deehelp",
     baseFolder: "products/${authenticatedUser.id}",
-    cdnUrl: Env.r2BaseUrl,
+    cdnUrl: EnvConfig.r2BaseUrl,
   );
 });

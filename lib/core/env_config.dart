@@ -3,9 +3,9 @@ import 'dart:convert';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/services.dart';
 
-class Env {
+class EnvConfig {
   static final _assetPath = 'assets/env/env_dev.json';
-  Env._();
+  EnvConfig._();
 
   static Map<String, String> _runtime = {};
 
