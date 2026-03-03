@@ -1,0 +1,1 @@
+flutter run --debug --dart-define-from-file=.env/env_dev.json

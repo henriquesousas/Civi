@@ -49,10 +49,6 @@ class _MainAppState extends ConsumerState<MainApp> {
   @override
   void initState() {
     super.initState();
-    // Future.microtask(() => ref.read(themeProvider.notifier).loadSavedTheme());
-    // WidgetsBinding.instance.addPostFrameCallback((_) {
-    //   ref.read(themeProvider.notifier).loadSavedTheme();
-    // });
   }
 
   @override
