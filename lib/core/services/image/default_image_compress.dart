@@ -17,8 +17,7 @@ class DefaultImageCompress implements ImageCompress {
     try {
       final compressedFile = await FlutterImageCompress.compressAndGetFile(
         file.path,
-        // "${file.path}_compressed${ImageUtils.getExtension(file)}",
-        outputName,
+        "${file.path}_compressed_$outputName",
         minWidth: minWidth,
         minHeight: minHeight,
         quality: quality,

@@ -9,7 +9,6 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:intl/date_symbol_data_local.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
-import 'core/env.dart';
 import 'core/resources.dart';
 import 'core/router/router.dart';
 
@@ -19,14 +18,15 @@ void main() async {
   await initializeDateFormatting('pt_BR', null);
 
   await Supabase.initialize(
-    url: "https://qyqwuyrigoqubqpnayde.supabase.co",
-    anonKey: "sb_publishable_d4aHVgwM22a71tnZ7BZsIg_b9DPt9wD",
+    url: "https://zgwniakmowojymmmljbw.supabase.co",
+    anonKey: "sb_publishable_N5D6VJ2Qm832Onz-NvFGfA_bO1NohOE",
   );
 
   await CloudFlareR2.init(
-    accountId: Env.r2AccountId,
-    accessKeyId: Env.r2AccessKeyId,
-    secretAccessKey: Env.r2SecretAccessKeyId,
+    accountId: "2f0c45d371a6f728da6a889027b991f5",
+    accessKeyId: "290d6a3180cc5b6fa78937b557bda224",
+    secretAccessKey:
+        "6fd0a3d0bbaa58909b0a8739d70dda002d709dc19ef9a237ac1473a29eba0312",
   );
 
   SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(

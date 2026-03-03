@@ -1,5 +1,4 @@
 import 'package:deehelp/core/services/image/image_picker_failure.dart';
-import 'package:deehelp/core/utils/image_utils.dart';
 import 'package:deehelp/core/services/image/image_compress.dart';
 import 'package:deehelp/core/utils/result.dart';
 import 'package:deehelp/module/item/domain/entities/image_media.dart';
@@ -16,22 +15,14 @@ class DefaultImagePicker {
   Future<Result<ImageMedia>> pickImageFromGallery() async {
     try {
       final XFile? file = await _picker.pickImage(source: ImageSource.gallery);
-      // if (file == null) return Result.failure(const ImagePickerFailure());
       if (file == null) {
         return Result.failure(const ImagePickerFailure(canceled: true));
       }
 
-      String? mimeType = ImageUtils.getMimetype(file);
+      String? mimeType = "image/jpeg"; //ImageUtils.getMimetype(file);
 
-      if (mimeType == null) {
-        return Result.failure(
-          const ImagePickerFailure(
-            message: "Arquivo não suportado",
-          ),
-        );
-      }
-
-      final ext = ImageUtils.getExtension(file);
+      // final ext = ImageUtils.getExtension(file);
+      final ext = ".jpeg";
       final imageOutputName =
           "${DateTime.now().millisecondsSinceEpoch.toString()}$ext";
 
