@@ -1,5 +1,4 @@
 import 'package:deehelp/feature/incidents/report/widgets/success/regiter_incident_success_args.dart';
-import 'package:deehelp/module/item/domain/entities/product.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 part 'report_incident_event.freezed.dart';

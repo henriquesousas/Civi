@@ -502,7 +502,7 @@ class IncidentReportErrorSheet extends StatelessWidget {
 
   static const _ink = Color(0xFF1F2A44);
   static const _muted = Color(0xFF8A96C8);
-  static const _primary = Color(0xFF2B5BEE);
+  // static const _primary = Color(0xFF2B5BEE);
   static const _danger = Color(0xFFE53935);
   static const _bg = Color(0xFFF5F7FD);
 

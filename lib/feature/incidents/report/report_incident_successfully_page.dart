@@ -338,90 +338,90 @@ class ReportIncidentSuccessfullyPage extends StatelessWidget {
   }
 }
 
-class _SpeechBubble extends StatelessWidget {
-  final String message;
+// class _SpeechBubble extends StatelessWidget {
+//   final String message;
 
-  const _SpeechBubble({required this.message});
+//   const _SpeechBubble({required this.message});
 
-  @override
-  Widget build(BuildContext context) {
-    const borderColor = Colors.white;
-    const textColor = Colors.white;
+//   @override
+//   Widget build(BuildContext context) {
+//     const borderColor = Colors.white;
+//     const textColor = Colors.white;
 
-    return Stack(
-      clipBehavior: Clip.none,
-      children: [
-        /// Caixa principal
-        Container(
-          padding: const EdgeInsets.symmetric(
-            horizontal: 18,
-            vertical: 16,
-          ),
-          decoration: BoxDecoration(
-            color: Colors.transparent,
-            borderRadius: BorderRadius.circular(20),
-            border: Border.all(
-              color: borderColor.withOpacity(0.9),
-              width: 1.6,
-            ),
-            boxShadow: [
-              BoxShadow(
-                color: Colors.black.withOpacity(0.15),
-                blurRadius: 20,
-                offset: const Offset(0, 10),
-              ),
-            ],
-          ),
-          child: Text(
-            message,
-            style: const TextStyle(
-              fontSize: 14,
-              height: 1.5,
-              fontWeight: FontWeight.w500,
-              color: textColor,
-            ),
-          ),
-        ),
+//     return Stack(
+//       clipBehavior: Clip.none,
+//       children: [
+//         /// Caixa principal
+//         Container(
+//           padding: const EdgeInsets.symmetric(
+//             horizontal: 18,
+//             vertical: 16,
+//           ),
+//           decoration: BoxDecoration(
+//             color: Colors.transparent,
+//             borderRadius: BorderRadius.circular(20),
+//             border: Border.all(
+//               color: borderColor.withOpacity(0.9),
+//               width: 1.6,
+//             ),
+//             boxShadow: [
+//               BoxShadow(
+//                 color: Colors.black.withOpacity(0.15),
+//                 blurRadius: 20,
+//                 offset: const Offset(0, 10),
+//               ),
+//             ],
+//           ),
+//           child: Text(
+//             message,
+//             style: const TextStyle(
+//               fontSize: 14,
+//               height: 1.5,
+//               fontWeight: FontWeight.w500,
+//               color: textColor,
+//             ),
+//           ),
+//         ),
 
-        /// Rabinho transparente com borda
-        Positioned(
-          left: -10,
-          top: 26,
-          child: CustomPaint(
-            size: const Size(18, 18),
-            painter: _BubbleTailPainter(borderColor),
-          ),
-        ),
-      ],
-    );
-  }
-}
+//         /// Rabinho transparente com borda
+//         Positioned(
+//           left: -10,
+//           top: 26,
+//           child: CustomPaint(
+//             size: const Size(18, 18),
+//             painter: _BubbleTailPainter(borderColor),
+//           ),
+//         ),
+//       ],
+//     );
+//   }
+// }
 
-class _BubbleTailPainter extends CustomPainter {
-  final Color borderColor;
+// class _BubbleTailPainter extends CustomPainter {
+//   final Color borderColor;
 
-  _BubbleTailPainter(this.borderColor);
+//   _BubbleTailPainter(this.borderColor);
 
-  @override
-  void paint(Canvas canvas, Size size) {
-    final path = Path();
-    path.moveTo(size.width, 0);
-    path.lineTo(0, size.height / 2);
-    path.lineTo(size.width, size.height);
-    path.close();
+//   @override
+//   void paint(Canvas canvas, Size size) {
+//     final path = Path();
+//     path.moveTo(size.width, 0);
+//     path.lineTo(0, size.height / 2);
+//     path.lineTo(size.width, size.height);
+//     path.close();
 
-    // Sombra suave
-    canvas.drawShadow(path, Colors.black.withOpacity(0.15), 6, true);
+//     // Sombra suave
+//     canvas.drawShadow(path, Colors.black.withOpacity(0.15), 6, true);
 
-    // Apenas borda
-    final paint = Paint()
-      ..color = borderColor.withOpacity(0.9)
-      ..style = PaintingStyle.stroke
-      ..strokeWidth = 1.6;
+//     // Apenas borda
+//     final paint = Paint()
+//       ..color = borderColor.withOpacity(0.9)
+//       ..style = PaintingStyle.stroke
+//       ..strokeWidth = 1.6;
 
-    canvas.drawPath(path, paint);
-  }
+//     canvas.drawPath(path, paint);
+//   }
 
-  @override
-  bool shouldRepaint(CustomPainter oldDelegate) => false;
-}
+//   @override
+//   bool shouldRepaint(CustomPainter oldDelegate) => false;
+// }

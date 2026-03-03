@@ -19,7 +19,6 @@ import 'package:deehelp/feature/search/search_router.dart';
 import 'package:deehelp/feature/sos/sos_router.dart';
 import 'package:deehelp/module/incident/domain/usecase/incident_output.dart';
 import 'package:deehelp/feature/home/home_viewmodel_provider.dart';
-import 'package:lottie/lottie.dart';
 import 'widgets/home_app_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
