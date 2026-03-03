@@ -4,13 +4,12 @@ import 'package:deehelp/core/env.dart';
 import 'package:deehelp/core/theme/theme_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_localizations/flutter_localizations.dart';
+// import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:intl/date_symbol_data_local.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
-import 'core/resources.dart';
 import 'core/router/router.dart';
 
 void main() async {
@@ -80,19 +79,19 @@ class _MainAppState extends ConsumerState<MainApp> {
             //   ref.read(themeProvider.notifier).loadSavedTheme();
             // });
             return MaterialApp.router(
-              localizationsDelegates: const [
-                GlobalMaterialLocalizations.delegate,
-                GlobalWidgetsLocalizations.delegate,
-                GlobalCupertinoLocalizations.delegate,
-              ],
-              supportedLocales: const [
-                Locale('en', 'US'),
-                Locale('pt', 'BR'),
-              ],
-              localeResolutionCallback: (locale, supportedLocales) {
-                R.load(locale ?? const Locale('pt', 'BR'));
-                return locale;
-              },
+              // localizationsDelegates: const [
+              //   GlobalMaterialLocalizations.delegate,
+              //   GlobalWidgetsLocalizations.delegate,
+              //   GlobalCupertinoLocalizations.delegate,
+              // ],
+              // supportedLocales: const [
+              //   Locale('en', 'US'),
+              //   Locale('pt', 'BR'),
+              // ],
+              // localeResolutionCallback: (locale, supportedLocales) {
+              //   R.load(locale ?? const Locale('pt', 'BR'));
+              //   return locale;
+              // },
               locale: const Locale('pt', 'BR'),
               routerConfig: router,
               // theme: AppTheme.lightTheme(),

@@ -12,19 +12,13 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-  app_core:
-    path: packages/core
-  app_feature:
-    path: packages/feature
-  flutter_localizations:
-    sdk: flutter
+  # flutter_localizations:
+  #   sdk: flutter
   intl: 0.20.2
   uuid: ^4.0.0
   flutter_screenutil: ^5.9.3
   flutter_svg: ^2.0.16
   go_router: ^14.6.2
-  dio: ^5.7.0
-  pretty_dio_logger: ^1.4.0
   flutter_map: ^8.1.1
   latlong2: ^0.9.1
   google_sign_in: ^7.2.0
@@ -40,34 +34,38 @@ dependencies:
   cloudflare_r2: ^0.0.14
   logging: ^1.3.0
   freezed_annotation: ^3.1.0
-  skeletonizer: ^2.1.1
   shimmer: ^3.0.0
-  sliding_up_panel: ^2.0.0+1
-  shared_preferences: ^2.5.4
   flutter_riverpod: ^2.6.1
   supabase_flutter: ^2.12.0
   supabase: ^2.10.2
   flutter_image_compress: ^2.4.0
   share_plus: ^7.2.0
   permission_handler: ^12.0.1
-  device_preview: ^1.3.1
-  mobile_scanner: ^5.2.3
-  connectivity_plus: ^7.0.0
-  # Rever se precisa
-  animations: ^2.0.11
-  flutter_map_animations: ^0.9.0
+  skeletonizer: ^2.1.1
+  connectivity_plus:
+    ^7.0.0
+    # Preparar para remover (essa lib remove caracteres especiais)
+  diacritic: ^0.1.6
+  # Usado no mapa para animacao
+  # flutter_map_animations: ^0.9.0
 
   # Para remover
-  dartz: ^0.10.1
-  provider: ^6.1.2
-  flutter_bloc: ^8.1.6
-  firebase_core: ^4.2.0
-  firebase_auth: ^6.1.1
-  cloud_firestore: ^6.0.3
-  firebase_storage: ^13.0.4
-  dotted_border: ^3.1.0
+  # dio: ^5.7.0
+  # pretty_dio_logger: ^1.4.0
+  # device_preview: ^1.3.1
+  # mobile_scanner: ^5.2.3
+  # animations: ^2.0.11
+  # shared_preferences: ^2.5.4
+  # sliding_up_panel: ^2.0.0+1
+  # dartz: ^0.10.1
+  # provider: ^6.1.2
+  # flutter_bloc: ^8.1.6
+  # firebase_core: ^4.2.0
+  # firebase_auth: ^6.1.1
+  # cloud_firestore: ^6.0.3
+  # firebase_storage: ^13.0.4
+  # dotted_border: ^3.1.0
   flutter_switch: ^0.3.2
-  diacritic: ^0.1.6
 
 dev_dependencies:
   flutter_test:
@@ -128,9 +126,9 @@ flutter:
 # Comando para gerar o arquivo => flutter gen-l10n
 # dart run build_runner build --delete-conflicting-outputs
 
-l10n:
-  arb-dir: lib/l10n
-  template-arb-file: app_en.arb
-  output-localization-file: app_localizations.dart
-  supported-locales: [en, pt]
-  output-dir: lib/l10n
+# l10n:
+#   arb-dir: lib/l10n
+#   template-arb-file: app_en.arb
+#   output-localization-file: app_localizations.dart
+#   supported-locales: [en, pt]
+#   output-dir: lib/l10n

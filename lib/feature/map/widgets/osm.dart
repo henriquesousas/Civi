@@ -2,7 +2,7 @@ import 'package:deehelp/module/incident/domain/entity/incident.dart';
 import 'package:deehelp/feature/map/widgets/map_custom_marker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_map/flutter_map.dart';
-import 'package:flutter_map_animations/flutter_map_animations.dart';
+// import 'package:flutter_map_animations/flutter_map_animations.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:latlong2/latlong.dart';
 
@@ -13,7 +13,7 @@ class Osm extends StatefulWidget {
   final double initialZoom;
   final Function(Incident) press;
   final VoidCallback onMapEventMove;
-  final AnimatedMapController animatedMapController;
+  // final AnimatedMapController animatedMapController;
   const Osm({
     super.key,
     required this.controller,
@@ -21,7 +21,7 @@ class Osm extends StatefulWidget {
     required this.item,
     required this.press,
     required this.onMapEventMove,
-    required this.animatedMapController,
+    // required this.animatedMapController,
     this.initialZoom = 13.0,
   });
 
@@ -41,7 +41,7 @@ class _OsmState extends State<Osm> {
   @override
   Widget build(BuildContext context) {
     return FlutterMap(
-      mapController: widget.animatedMapController.mapController,
+      // mapController: widget.animatedMapController.mapController,
       options: MapOptions(
         initialCenter: widget.initial,
         initialZoom: widget.initialZoom,
