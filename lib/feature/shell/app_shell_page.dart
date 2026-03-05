@@ -1,4 +1,4 @@
-import 'package:deehelp/feature/home/export_home.dart';
+import 'package:deehelp/feature/home/v2/home_page.dart';
 import 'package:deehelp/feature/items/list/item_list_page.dart';
 import 'package:deehelp/feature/profile/profile_page.dart';
 import 'package:deehelp/feature/search/search_page.dart';
@@ -20,7 +20,7 @@ class _AppShellPageState extends ConsumerState<AppShellPage> {
   bool _itemsLoadedOnce = false;
   int index = 0;
   late final List<Widget> _pages = const [
-    HomePage(), // 1
+    HomePage(), //  1
     SearchPage(), // 2
     ItemListPage(), // 3
     ProfilePage(), // 4
