@@ -4,10 +4,11 @@ import 'package:deehelp/core/env_config.dart';
 import 'package:deehelp/core/theme/theme_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-// import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:intl/date_symbol_data_local.dart';
+import 'package:mapbox_maps_flutter/mapbox_maps_flutter.dart'
+    show MapboxOptions;
 import 'package:supabase_flutter/supabase_flutter.dart';
 
 import 'core/router/router.dart';
@@ -18,6 +19,9 @@ void main() async {
   await EnvConfig.init();
 
   await initializeDateFormatting('pt_BR', null);
+
+  MapboxOptions.setAccessToken(
+      "pk.eyJ1IjoicHNvYXJlczI2MDEiLCJhIjoiY21pbnlkanJuMjBlNzNlcHc5NDBoeWJvdCJ9.-9sIXSToKx-OfzGflYEiYw");
 
   await Supabase.initialize(
     url: "https://zgwniakmowojymmmljbw.supabase.co",

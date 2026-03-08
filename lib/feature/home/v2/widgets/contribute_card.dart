@@ -1,3 +1,5 @@
+import 'package:deehelp/core/extension/exports_extension.dart';
+import 'package:deehelp/core/theme/app_colors.dart';
 import 'package:deehelp/feature/items/register/presentation/widgets/card_page.dart';
 import 'package:flutter/material.dart';
 
@@ -17,13 +19,14 @@ class ContributePrimaryCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return PageCard(
+      bgColor: AppColors.grey.withValues(alpha: 0.01),
       child: Padding(
         padding: const EdgeInsets.fromLTRB(16, 16, 16, 16),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             const Text(
-              "Contribua com a segurança da região",
+              "Ajude a comunidade",
               style: TextStyle(
                 color: _ink,
                 fontWeight: FontWeight.w900,

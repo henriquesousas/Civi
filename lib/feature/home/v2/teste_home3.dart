@@ -1,1083 +1,932 @@
+// home_screen.dart (refatorada: mais profissional e menos poluída)
+
+import 'dart:math';
+import 'package:deehelp/core/extension/color_extension.dart';
 import 'package:flutter/material.dart';
 
-/* ====================== MODELS ====================== */
-
-enum RiskLevel { low, moderate, high, critical }
-
-// class RegionStatus {
-//   final String localityLabel;
-//   final String updateLabel;
-//   final String periodLabel;
-
-//   final RiskLevel level;
-//   final int score; // 0..100
-
-//   // Top 3 (principais ocorrências)
-//   final List<RiskDriver> drivers;
-
-//   // Ocorrência mais recente (para topo flutuante)
-//   final RecentEvidence? evidence;
-
-//   // NOVO: panorama coletivo do dia
-//   final TodaySnapshot today;
-
-//   // NOVO: movimento da comunidade
-//   final CommunityPulse pulse;
-
-//   const RegionStatus({
-//     required this.localityLabel,
-//     required this.updateLabel,
-//     required this.periodLabel,
-//     required this.level,
-//     required this.score,
-//     required this.drivers,
-//     required this.evidence,
-//     required this.today,
-//     required this.pulse,
-//   });
-// }
-
-class RiskDriver {
-  final String label; // "Roubo de celular"
-  final String value; // "18"
-  final bool positiveUp; // usado só para cor do indicador
-  final IconData icon;
-
-  const RiskDriver({
-    required this.label,
-    required this.value,
-    required this.positiveUp,
-    required this.icon,
-  });
-}
-
-enum EvidenceKind { robbery, theft, recovered }
-
-class RecentEvidence {
-  final EvidenceKind kind;
-  final String title;
-  final String subtitle; // "Há 12 min • Centro"
-  final bool verified;
-
-  // NOVO (coletivo/preventivo)
-  final double distanceKm; // 1.8
-  final int confirmations; // 4 confirmações da comunidade
-
-  const RecentEvidence({
-    required this.kind,
-    required this.title,
-    required this.subtitle,
-    required this.verified,
-    required this.distanceKm,
-    required this.confirmations,
-  });
-}
-
-class TodaySnapshot {
-  final int total24h;
-  final int confirmed;
-  final int analyzing;
-
-  const TodaySnapshot({
-    required this.total24h,
-    required this.confirmed,
-    required this.analyzing,
-  });
-}
-
-class CommunityPulse {
-  final int watchersToday;
-  final int contributorsToday;
-
-  const CommunityPulse({
-    required this.watchersToday,
-    required this.contributorsToday,
-  });
-}
-
-/* ====================== HOME ====================== */
-
-class TesteHome3 extends StatefulWidget {
-  const TesteHome3({super.key});
+class TesteHome5 extends StatefulWidget {
+  const TesteHome5({super.key});
 
   @override
-  State<TesteHome3> createState() => _TesteHome3State();
+  State<TesteHome5> createState() => _TesteHome5State();
 }
 
-class _TesteHome3State extends State<TesteHome3> {
-  // ===== Visual tokens (clean/premium)
-  static const _bg = Color(0xFFF5F7FD);
-  static const _surface = Colors.white;
-  static const _ink = Color(0xFF1F2A44);
-  static const _muted = Color(0xFF8A96C8);
-  static const _border = Color(0xFFE6EAF6);
-  static const _primary = Color(0xFF2B5BEE);
+class _TesteHome5State extends State<TesteHome5> {
+  // ====== Design tokens (consistência) ======
+  static const _bg = Color(0xFFF3F5F8);
+  static const _ink = Color(0xFF1F2A37);
+  static const _muted = Color(0xFF6B7280);
+  static const _primary = Color(0xFF667EEA);
+  static const _card = Colors.white;
 
-  String currentLocation = "Osasco • SP";
-  String lastUpdate = "Atualizado há 5 min";
+  static const _r12 = 12.0;
+  static const _r16 = 16.0;
+  static const _r20 = 20.0;
 
-  String currentCity = "Osasco • SP";
-  String selectedNeighborhood = "Todos"; // chip s
+  static const _padScreen = EdgeInsets.all(16);
+  static const _padCard = EdgeInsets.all(16);
 
-  // late RegionStatus status = RegionStatus(
-  //   localityLabel: currentLocation,
-  //   updateLabel: lastUpdate,
-  //   periodLabel: "Últimas 24h",
-  //   level: RiskLevel.low,
-  //   score: 72,
-  //   drivers: const [
-  //     RiskDriver(
-  //       label: "Roubo de celular",
-  //       value: "18",
-  //       positiveUp: true,
-  //       icon: Icons.smartphone_rounded,
-  //     ),
-  //     RiskDriver(
-  //       label: "Roubo de veículo",
-  //       value: "9",
-  //       positiveUp: true,
-  //       icon: Icons.directions_car_rounded,
-  //     ),
-  //     RiskDriver(
-  //       label: "Furto de moto",
-  //       value: "6",
-  //       positiveUp: false,
-  //       icon: Icons.two_wheeler_rounded,
-  //     ),
-  //   ],
-  //   evidence: const RecentEvidence(
-  //     kind: EvidenceKind.robbery,
-  //     title: "Roubo registrado agora",
-  //     subtitle: "Há 12 min • Centro",
-  //     verified: true,
-  //     distanceKm: 1.8,
-  //     confirmations: 4,
-  //   ),
-  //   today: const TodaySnapshot(
-  //     total24h: 8,
-  //     confirmed: 3,
-  //     analyzing: 2,
-  //   ),
-  //   pulse: const CommunityPulse(
-  //     watchersToday: 23,
-  //     contributorsToday: 7,
-  //   ),
-  // );
-  late RegionStatusV2 status = RegionStatusV2(
-    localityLabel: currentCity,
-    updateLabel: lastUpdate,
-    periodLabel: "Últimas 24h",
-    level: RiskLevel.low,
-    score: 72,
-    drivers: const [
-      RiskDriver(
-        label: "Roubo de celular",
-        value: "18",
-        positiveUp: true,
-        icon: Icons.smartphone_rounded,
-      ),
-      RiskDriver(
-        label: "Roubo de veículo",
-        value: "9",
-        positiveUp: true,
-        icon: Icons.directions_car_rounded,
-      ),
-      RiskDriver(
-        label: "Furto de moto",
-        value: "6",
-        positiveUp: false,
-        icon: Icons.two_wheeler_rounded,
-      ),
-    ],
-    evidence: const RecentEvidence(
-      kind: EvidenceKind.robbery,
-      title: "Roubo registrado agora",
-      subtitle: "Há 12 min • Centro",
-      verified: true,
-      distanceKm: 1.8,
-      confirmations: 4,
-    ),
-    today: const TodaySnapshot(total24h: 8, confirmed: 3, analyzing: 2),
-    pulse: const CommunityPulse(watchersToday: 23, contributorsToday: 7),
-    osasco: OsascoFocus(
-      cityLabel: "Osasco • SP",
-      selectedNeighborhood: "Todos",
-      neighborhoods: const [
-        "Todos",
-        "Centro",
-        "Km 18",
-        "Quitaúna",
-        "Rochdale",
-        "Bela Vista",
-        "Pres. Altino",
-      ],
-      hotspots: const [
-        OsascoHotspot(
-          neighborhood: "Centro",
-          note: "Eixo estação / comércio",
-          count24h: 12,
-          change7dPct: 18,
-        ),
-        OsascoHotspot(
-          neighborhood: "Km 18",
-          note: "Pico: 18h–22h",
-          count24h: 9,
-          change7dPct: 11,
-        ),
-        OsascoHotspot(
-          neighborhood: "Rochdale",
-          note: "Atenção em vias isoladas",
-          count24h: 6,
-          change7dPct: 7,
-        ),
-      ],
-    ),
-  );
+  final List<String> _alertMessages = const [
+    "⚠️ Atenção: o risco na sua região está elevado. Redobre o cuidado ao sair.",
+    "🔔 Com risco alto, mantenha objetos de valor fora de vista.",
+    "💡 Compartilhe sua rota com familiares hoje.",
+    "🛡️ Evite vias desertas e prefira locais iluminados.",
+    "📱 Deixe contatos de emergência acessíveis.",
+    "👥 Avise vizinhos sobre movimentações suspeitas.",
+  ];
 
-  Color _riskColor(RiskLevel level) => switch (level) {
-        RiskLevel.low => const Color(0xFF059669),
-        RiskLevel.moderate => const Color(0xFFD97706),
-        RiskLevel.high => const Color(0xFFDC2626),
-        RiskLevel.critical => const Color(0xFFB91C1C),
-      };
+  late final String _randomMessage;
 
-  String _riskLabel(RiskLevel level) => switch (level) {
-        RiskLevel.low => "Baixo",
-        RiskLevel.moderate => "Moderado",
-        RiskLevel.high => "Alto",
-        RiskLevel.critical => "Crítico",
-      };
-
-  String _headlineByLevel(RiskLevel level) => switch (level) {
-        RiskLevel.low =>
-          "Cenário estável. Mantenham atenção em horários de pico.",
-        RiskLevel.moderate =>
-          "Oscilações pontuais. Reforcem cuidados em pontos de maior fluxo.",
-        RiskLevel.high =>
-          "Registros acima do normal. Atenção redobrada em deslocamentos.",
-        RiskLevel.critical =>
-          "Situação crítica. Evitem rotas isoladas e priorizem locais movimentados.",
-      };
-
-  void _toast(String msg) =>
-      ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(msg)));
-
-  void _openHowItWorks() => _toast("Abrir: Como calculamos");
-  void _openLocationPicker() => _toast("Abrir: trocar local");
-  void _openPanicSheet(BuildContext context) => _toast("Abrir: SOS rápido");
+  @override
+  void initState() {
+    super.initState();
+    _randomMessage = _alertMessages[Random().nextInt(_alertMessages.length)];
+  }
 
   @override
   Widget build(BuildContext context) {
-    final hasEvidence = status.evidence != null;
-
-    // card flutuante (altura + topo)
-    const floatingH = 92.0;
-    const floatingTop = 12.0;
-
     return Scaffold(
       backgroundColor: _bg,
-      appBar: AppBar(
-        elevation: 1,
-        backgroundColor: _surface,
-        surfaceTintColor: _surface,
-        titleSpacing: 16,
-        title: const Text(
-          "Osasco • Status",
-          style: TextStyle(
-            color: _ink,
-            fontWeight: FontWeight.w900,
-            fontSize: 16,
-          ),
-        ),
-        actions: [
-          IconButton(
-            tooltip: "Trocar local",
-            onPressed: _openLocationPicker,
-            icon: const Icon(Icons.place_outlined, color: _ink),
-          ),
-          IconButton(
-            tooltip: "Como calculamos",
-            onPressed: _openHowItWorks,
-            icon: const Icon(Icons.info_outline, color: _ink),
-          ),
-          const SizedBox(width: 6),
-        ],
-      ),
-      floatingActionButtonLocation: FloatingActionButtonLocation.endFloat,
-      // floatingActionButton: FloatingActionButton.extended(
-      //   onPressed: () => _openPanicSheet(context),
-      //   icon: const Icon(Icons.sos_rounded),
-      //   label: const Text("SOS", style: TextStyle(fontWeight: FontWeight.w900)),
-      //   backgroundColor: const Color(0xFFEF4444),
-      //   foregroundColor: Colors.white,
-      //   elevation: 0,
-      // ),
-      body: Stack(
-        children: [
-          ListView(
-            padding: EdgeInsets.fromLTRB(
-              16,
-              16 + (hasEvidence ? (floatingH + floatingTop + 10) : 0),
-              16,
-              24,
+      body: SafeArea(
+        child: CustomScrollView(
+          slivers: [
+            _TopBar(
+              title: "Bem-vindo de volta,",
+              subtitle: "Cidadão",
+              badgeCount: 3,
+              onNotifications: () {},
             ),
+            SliverPadding(
+              padding: _padScreen,
+              sliver: SliverList(
+                delegate: SliverChildListDelegate([
+                  // ====== Destaque do dia (menos chamativo, mais premium) ======
+                  _HighlightIncidentCard(
+                    title: "Nova ocorrência",
+                    description:
+                        "Roubo de veículo registrado no Centro • 10:30",
+                    remaining: "23h restantes",
+                    onTap: () {},
+                  ),
+
+                  const SizedBox(height: 12),
+
+                  // ====== Score / risco ======
+                  _CityRiskCard(
+                    score: 72,
+                    label: "Alto risco",
+                    trendA: _MiniTrend(
+                        label: "Roubos", value: "↑ 15%", tone: _Tone.danger),
+                    trendB: _MiniTrend(
+                        label: "Furtos", value: "↑ 8%", tone: _Tone.warning),
+                    trendC: _MiniTrend(
+                        label: "Vandalismo",
+                        value: "↓ 3%",
+                        tone: _Tone.success),
+                  ),
+
+                  const SizedBox(height: 12),
+
+                  // ====== Dica do dia ======
+                  _InfoBanner(
+                    icon: Icons.security,
+                    title: "Recomendação",
+                    message: _randomMessage,
+                    tone: _Tone.warning,
+                  ),
+
+                  const SizedBox(height: 12),
+
+                  // ====== Panorama ======
+                  _PanoramaCard(
+                    headline: "Panorama de hoje",
+                    chip: "Últimas 24h",
+                    items: const [
+                      _Metric(
+                          label: "Ocorrências",
+                          value: "12",
+                          icon: Icons.warning_amber_rounded,
+                          tone: _Tone.danger,
+                          foot: "↑ 2"),
+                      _Metric(
+                          label: "Alertas",
+                          value: "8",
+                          icon: Icons.notifications_active,
+                          tone: _Tone.warning,
+                          foot: "3 novos"),
+                      _Metric(
+                          label: "Patrulhas",
+                          value: "15",
+                          icon: Icons.local_police,
+                          tone: _Tone.primary,
+                          foot: "Ativas"),
+                      _Metric(
+                          label: "Resolvidos",
+                          value: "5",
+                          icon: Icons.check_circle,
+                          tone: _Tone.success,
+                          foot: "80%"),
+                    ],
+                    insight: "Volume de ocorrências 15% maior que ontem",
+                  ),
+
+                  const SizedBox(height: 16),
+
+                  // ====== Ocorrências 24h ======
+                  // _SectionHeader(
+                  //   title: "Ocorrências ativas",
+                  //   subtitle: "Expiram em 24h",
+                  //   icon: Icons.timer,
+                  //   onAction: () {
+                  //     // ver todas (opcional)
+                  //   },
+                  //   actionLabel: "Ver",
+                  // ),
+
+                  // const SizedBox(height: 10),
+
+                  // _OccurrenceTile(
+                  //   title: "Veículo suspeito",
+                  //   location: "Centro, Rua Principal",
+                  //   time: "Há 2h • 22h restantes",
+                  //   tone: _Tone.warning,
+                  //   icon: Icons.directions_car,
+                  //   onTap: () {},
+                  // ),
+                  // _OccurrenceTile(
+                  //   title: "Barulho suspeito",
+                  //   location: "Jardim América",
+                  //   time: "Há 5h • 19h restantes",
+                  //   tone: _Tone.primary,
+                  //   icon: Icons.home,
+                  //   onTap: () {},
+                  // ),
+                  // _OccurrenceTile(
+                  //   title: "Iluminação pública",
+                  //   location: "Parque Central",
+                  //   time: "Há 8h • 16h restantes",
+                  //   tone: _Tone.neutral,
+                  //   icon: Icons.lightbulb,
+                  //   onTap: () {},
+                  // ),
+
+                  // const SizedBox(height: 16),
+
+                  // ====== Comunidade (menos “painelzão”, mais compacto) ======
+                  // _CommunityCard(
+                  //   contributions: "157",
+                  //   views: "1.2k",
+                  //   active: "89",
+                  //   activities: const [
+                  //     _ActivityLine(
+                  //         icon: Icons.person_outline,
+                  //         text: "Alguém reportou veículo suspeito",
+                  //         time: "10 min"),
+                  //     _ActivityLine(
+                  //         icon: Icons.route,
+                  //         text: "2 pessoas compartilharam rotas",
+                  //         time: "25 min"),
+                  //     _ActivityLine(
+                  //         icon: Icons.lightbulb_outline,
+                  //         text: "Alguém sugeriu melhoria",
+                  //         time: "1h"),
+                  //   ],
+                  //   onContribute: () {},
+                  // ),
+                  CommunityTipsAndActionsCard(
+                    tips: const [
+                      CommunityTip(
+                        icon: Icons.traffic,
+                        title: "Trânsito parado? atenção redobrada",
+                        subtitle:
+                            "Em retornos e sob viadutos, evite ficar exposto e observe ao redor.",
+                      ),
+                      CommunityTip(
+                        icon: Icons.smartphone,
+                        title: "Celular fora de vista",
+                        subtitle:
+                            "Preferir bolso interno/bolsa fechada em pontos de ônibus e semáforos.",
+                      ),
+                      CommunityTip(
+                        icon: Icons.lightbulb,
+                        title: "Prefira rotas iluminadas",
+                        subtitle:
+                            "Evite ruas desertas; se possível, caminhe acompanhado.",
+                      ),
+                    ],
+                    onSendTip: () {
+                      // abrir modal/tela “Enviar dica”
+                      // showModalBottomSheet<ReportEntry>(
+                      //   context: context,
+                      //   isScrollControlled: false,
+                      //   backgroundColor: Colors.transparent,
+                      //   builder: (ctx) {
+                      //     return const TesteReportyEntryBottomSheet();
+                      //   },
+                      // );
+                    },
+                    onShareRoute: () {
+                      // abrir share sheet / deep link / etc.
+                    },
+                  ),
+
+                  const SizedBox(height: 16),
+
+                  // ====== Ações rápidas ======
+                  _SectionHeader(
+                    title: "Ações rápidas",
+                    subtitle: "Atalhos",
+                    icon: Icons.flash_on,
+                  ),
+                  const SizedBox(height: 10),
+
+                  _QuickActionsGrid(
+                    onReport: () {},
+                    onRiskAreas: () {},
+                    onNeighbors: () {},
+                    onEmergency: () {},
+                  ),
+
+                  const SizedBox(height: 16),
+
+                  // ====== Atualizações ======
+                  _SectionHeader(
+                    title: "Últimas atualizações",
+                    subtitle: "Hoje",
+                    icon: Icons.newspaper,
+                    actionLabel: "Ver todas",
+                    onAction: () {},
+                  ),
+                  const SizedBox(height: 10),
+
+                  const _UpdateTile(
+                    title: "Patrulhamento reforçado na região sul",
+                    time: "Há 2 horas",
+                    icon: Icons.policy,
+                  ),
+                  const _UpdateTile(
+                    title: "Câmeras de segurança instaladas",
+                    time: "Há 5 horas",
+                    icon: Icons.videocam,
+                  ),
+                  const _UpdateTile(
+                    title: "Reunião comunitária hoje às 19h",
+                    time: "Há 8 horas",
+                    icon: Icons.event,
+                  ),
+
+                  const SizedBox(height: 24),
+                ]),
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+// =======================================================
+// Components
+// =======================================================
+
+class _TopBar extends StatelessWidget {
+  final String title;
+  final String subtitle;
+  final int badgeCount;
+  final VoidCallback onNotifications;
+
+  const _TopBar({
+    required this.title,
+    required this.subtitle,
+    required this.badgeCount,
+    required this.onNotifications,
+  });
+
+  static const _ink = Color(0xFF1F2A37);
+  static const _muted = Color(0xFF6B7280);
+
+  @override
+  Widget build(BuildContext context) {
+    return SliverAppBar(
+      floating: true,
+      backgroundColor: Colors.transparent,
+      elevation: 0,
+      titleSpacing: 16,
+      title: Row(
+        children: [
+          _IconPill(icon: Icons.location_city),
+          const SizedBox(width: 10),
+          Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              // LocationCard(
-              //   location: currentLocation,
-              //   updateLabel: lastUpdate,
-              //   onChange: _openLocationPicker,
-              // ),
-              LocationCardOld(
-                location: "$currentCity • $selectedNeighborhood",
-                updateLabel: lastUpdate,
-                onChange: () => _toast("Abrir: selecionar bairro"),
+              Text(
+                title,
+                style: const TextStyle(
+                    fontSize: 12, color: _muted, fontWeight: FontWeight.w500),
               ),
-              const SizedBox(height: 14),
-              NeighborhoodChips(
-                items: status.osasco.neighborhoods,
-                selected: selectedNeighborhood,
-                onSelect: (b) => setState(() => selectedNeighborhood = b),
-              ),
-              const SizedBox(height: 14),
-
-              // 1) Índice coletivo (clean)
-              RegionSummaryHeroCollective(
-                locality: status.localityLabel,
-                periodLabel: status.periodLabel,
-                level: status.level,
-                score: status.score, // 72
-                headline: _headlineByLevel(status.level),
-                onPrimaryAction: () => _toast("Abrir mapa / rotas seguras"),
-              ),
-
-              const SizedBox(height: 12),
-
-              // 2) Panorama de hoje (coletivo)
-              TodayPanoramaCard(
-                title: "Panorama de hoje",
-                subtitle: "Resumo coletivo nas últimas 24h",
-                total24h: status.today.total24h,
-                confirmed: status.today.confirmed,
-                analyzing: status.today.analyzing,
-              ),
-
-              const SizedBox(height: 12),
-              OsascoHotspotsCard(
-                items: status.osasco.hotspots,
-                onSeeAll: () => _toast("Abrir: mapa de bairros (Osasco)"),
-              ),
-
-              const SizedBox(height: 12),
-
-              // 3) Principais ocorrências (top 3 horizontal)
-              DriversTopHorizontalCard(
-                title: "O que mais aconteceu em Osasco",
-                subtitle: "Top 3 do período",
-                drivers: status.drivers,
-                onTapDriver: (d) => _toast("Abrir lista filtrada: ${d.label}"),
-              ),
-
-              const SizedBox(height: 12),
-
-              // 4) Movimento da comunidade
-              //Atividade da comunidade
-              CommunityMovementCard(
-                title: "Movimento da comunidade",
-                subtitle: "Acompanhamento e contribuições de hoje",
-                watchersToday: status.pulse.watchersToday,
-                contributorsToday: status.pulse.contributorsToday,
-                onSeeMore: () => _toast("Abrir detalhes da comunidade"),
-              ),
-
-              const SizedBox(height: 12),
-
-              // 5) CTA principal (coletivo)
-              ContributePrimaryCard(
-                onContribute: () => _toast("Abrir: contribuir com alerta"),
+              Text(
+                subtitle,
+                style: const TextStyle(
+                    fontSize: 16, color: _ink, fontWeight: FontWeight.w700),
               ),
             ],
           ),
+        ],
+      ),
+      actions: [
+        Padding(
+          padding: const EdgeInsets.only(right: 12),
+          child: _NotificationButton(count: badgeCount, onTap: onNotifications),
+        ),
+      ],
+    );
+  }
+}
 
-          // Ocorrência recente flutuante no topo
-          if (hasEvidence)
-            Positioned(
-              left: 16,
-              right: 16,
-              top: floatingTop,
-              child: RecentIncidentFloatingCard(
-                evidence: status.evidence!,
-                onTap: () => _toast("Abrir incidente mais recente"),
+class _IconPill extends StatelessWidget {
+  final IconData icon;
+  const _IconPill({required this.icon});
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      padding: const EdgeInsets.all(8),
+      decoration: BoxDecoration(
+        color: Colors.white,
+        borderRadius: BorderRadius.circular(12),
+        boxShadow: [
+          BoxShadow(
+              color: Colors.black.withOpacity(0.05),
+              blurRadius: 10,
+              offset: const Offset(0, 2)),
+        ],
+      ),
+      child: Icon(icon, size: 22, color: const Color(0xFF1F2A37)),
+    );
+  }
+}
+
+class _NotificationButton extends StatelessWidget {
+  final int count;
+  final VoidCallback onTap;
+
+  const _NotificationButton({required this.count, required this.onTap});
+
+  @override
+  Widget build(BuildContext context) {
+    return Stack(
+      clipBehavior: Clip.none,
+      children: [
+        Container(
+          decoration: BoxDecoration(
+            color: Colors.white,
+            shape: BoxShape.circle,
+            boxShadow: [
+              BoxShadow(
+                  color: Colors.black.withOpacity(0.05),
+                  blurRadius: 10,
+                  offset: const Offset(0, 2))
+            ],
+          ),
+          child: IconButton(
+            icon: const Icon(Icons.notifications_outlined),
+            onPressed: onTap,
+            color: const Color(0xFF1F2A37),
+          ),
+        ),
+        if (count > 0)
+          Positioned(
+            right: 8,
+            top: 8,
+            child: Container(
+              padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
+              decoration: BoxDecoration(
+                  color: Colors.red, borderRadius: BorderRadius.circular(999)),
+              child: Text(
+                "$count",
+                style: const TextStyle(
+                    color: Colors.white,
+                    fontSize: 10,
+                    fontWeight: FontWeight.w800),
               ),
             ),
+          ),
+      ],
+    );
+  }
+}
+
+class _SurfaceCard extends StatelessWidget {
+  final Widget child;
+  final EdgeInsets padding;
+  final VoidCallback? onTap;
+
+  const _SurfaceCard({
+    required this.child,
+    this.padding = const EdgeInsets.all(16),
+    this.onTap,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    final content = Padding(padding: padding, child: child);
+
+    return Container(
+      decoration: BoxDecoration(
+        color: Colors.white,
+        borderRadius: BorderRadius.circular(20),
+        boxShadow: [
+          BoxShadow(
+              color: Colors.black.withOpacity(0.06),
+              blurRadius: 18,
+              offset: const Offset(0, 8)),
+          BoxShadow(
+              color: Colors.black.withOpacity(0.04),
+              blurRadius: 6,
+              offset: const Offset(0, 2)),
+        ],
+      ),
+      child: Material(
+        color: Colors.transparent,
+        borderRadius: BorderRadius.circular(20),
+        child: onTap == null
+            ? ClipRRect(borderRadius: BorderRadius.circular(20), child: content)
+            : InkWell(
+                borderRadius: BorderRadius.circular(20),
+                onTap: onTap,
+                child: ClipRRect(
+                    borderRadius: BorderRadius.circular(20), child: content),
+              ),
+      ),
+    );
+  }
+}
+
+class _HighlightIncidentCard extends StatelessWidget {
+  final String title;
+  final String description;
+  final String remaining;
+  final VoidCallback onTap;
+
+  const _HighlightIncidentCard({
+    required this.title,
+    required this.description,
+    required this.remaining,
+    required this.onTap,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return _SurfaceCard(
+      onTap: onTap,
+      padding: const EdgeInsets.all(16),
+      child: Row(
+        children: [
+          Container(
+            padding: const EdgeInsets.all(12),
+            decoration: BoxDecoration(
+              color: const Color(0xFF667EEA).withOpacity(0.12),
+              borderRadius: BorderRadius.circular(16),
+            ),
+            child: const Icon(Icons.warning_amber_rounded,
+                color: Color(0xFF667EEA), size: 26),
+          ),
+          const SizedBox(width: 12),
+          Expanded(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Row(
+                  children: [
+                    Text(
+                      title.toUpperCase(),
+                      style: TextStyle(
+                        fontSize: 11,
+                        fontWeight: FontWeight.w700,
+                        letterSpacing: 0.6,
+                        color: Colors.grey[700],
+                      ),
+                    ),
+                    const SizedBox(width: 8),
+                    const Icon(Icons.timer, size: 14, color: Color(0xFF6B7280)),
+                    const SizedBox(width: 4),
+                    Text(
+                      remaining,
+                      style: const TextStyle(
+                          fontSize: 11, color: Color(0xFF6B7280)),
+                    ),
+                  ],
+                ),
+                const SizedBox(height: 6),
+                Text(
+                  description,
+                  style: const TextStyle(
+                    fontSize: 14,
+                    fontWeight: FontWeight.w700,
+                    color: Color(0xFF1F2A37),
+                    height: 1.2,
+                  ),
+                ),
+              ],
+            ),
+          ),
+          const SizedBox(width: 8),
+          Container(
+            padding: const EdgeInsets.all(8),
+            decoration: BoxDecoration(
+              color: Colors.black.withOpacity(0.04),
+              shape: BoxShape.circle,
+            ),
+            child: const Icon(Icons.arrow_forward,
+                size: 18, color: Color(0xFF1F2A37)),
+          ),
         ],
       ),
     );
   }
 }
 
-/* ====================== COMPONENTS ====================== */
+class _CityRiskCard extends StatelessWidget {
+  final int score;
+  final String label;
+  final _MiniTrend trendA;
+  final _MiniTrend trendB;
+  final _MiniTrend trendC;
 
-class LocationCardOld extends StatelessWidget {
-  final String location;
-  final String updateLabel;
-  final VoidCallback onChange;
-
-  const LocationCardOld({
-    super.key,
-    required this.location,
-    required this.updateLabel,
-    required this.onChange,
+  const _CityRiskCard({
+    required this.score,
+    required this.label,
+    required this.trendA,
+    required this.trendB,
+    required this.trendC,
   });
-
-  static const _surface = Colors.white;
-  static const _ink = Color(0xFF1F2A44);
-  static const _muted = Color(0xFF8A96C8);
-  static const _primary = Color(0xFF2B5BEE);
-  static const _border = Color(0xFFE6EAF6);
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      decoration: BoxDecoration(
-        color: _surface,
-        borderRadius: BorderRadius.circular(24),
-        border: Border.all(color: _border),
-        boxShadow: const [
-          BoxShadow(
-            color: Color(0x122B5BEE),
-            blurRadius: 18,
-            offset: Offset(0, 10),
+    final clamped = (score / 100).clamp(0.0, 1.0);
+    final tone = score >= 70
+        ? _Tone.warning
+        : (score >= 40 ? _Tone.primary : _Tone.success);
+
+    return _SurfaceCard(
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Row(
+            children: [
+              const Text(
+                "Score da cidade",
+                style: TextStyle(
+                    fontSize: 16,
+                    fontWeight: FontWeight.w800,
+                    color: Color(0xFF1F2A37)),
+              ),
+              const Spacer(),
+              _Chip(
+                text: label,
+                tone: tone,
+              ),
+            ],
+          ),
+          const SizedBox(height: 14),
+          Center(
+            child: SizedBox(
+              height: 180,
+              width: 180,
+              child: Stack(
+                alignment: Alignment.center,
+                children: [
+                  SizedBox(
+                    height: 180,
+                    width: 180,
+                    child: CircularProgressIndicator(
+                      value: clamped,
+                      strokeWidth: 16, // mais "forte"
+                      backgroundColor: Colors.grey[200],
+                      valueColor:
+                          AlwaysStoppedAnimation<Color>(_toneColor(tone)),
+                      strokeCap: StrokeCap.round, // deixa mais premium
+                    ),
+                  ),
+                  Column(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      FittedBox(
+                        fit: BoxFit.scaleDown,
+                        child: Text(
+                          "$score",
+                          style: const TextStyle(
+                            fontSize: 46, // menor que antes
+                            fontWeight: FontWeight.w900,
+                            color: Color(0xFF1F2A37),
+                            height: 1,
+                          ),
+                        ),
+                      ),
+                      const SizedBox(height: 2),
+                      Text(
+                        "de 100",
+                        style: TextStyle(
+                          fontSize: 13,
+                          color: Colors.grey[600],
+                          fontWeight: FontWeight.w600,
+                        ),
+                      ),
+                    ],
+                  ),
+                ],
+              ),
+            ),
+          ),
+          // Center(
+          //   child: SizedBox(
+          //     height: 140,
+          //     width: 140,
+          //     child: Stack(
+          //       alignment: Alignment.center,
+          //       children: [
+          //         CircularProgressIndicator(
+          //           value: clamped,
+          //           strokeWidth: 12,
+          //           backgroundColor: Colors.grey[200],
+          //           valueColor: AlwaysStoppedAnimation<Color>(_toneColor(tone)),
+          //         ),
+          //         Column(
+          //           mainAxisSize: MainAxisSize.min,
+          //           children: [
+          //             Text(
+          //               "$score",
+          //               style: const TextStyle(
+          //                   fontSize: 40,
+          //                   fontWeight: FontWeight.w900,
+          //                   color: Color(0xFF1F2A37)),
+          //             ),
+          //             Text("de 100",
+          //                 style:
+          //                     TextStyle(fontSize: 13, color: Colors.grey[600])),
+          //           ],
+          //         ),
+          //       ],
+          //     ),
+          //   ),
+          // ),
+          const SizedBox(height: 14),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceAround,
+            children: [
+              _TrendPill(trendA),
+              _TrendPill(trendB),
+              _TrendPill(trendC),
+            ],
           ),
         ],
       ),
-      child: Padding(
+    );
+  }
+}
+
+class _InfoBanner extends StatelessWidget {
+  final IconData icon;
+  final String title;
+  final String message;
+  final _Tone tone;
+
+  const _InfoBanner({
+    required this.icon,
+    required this.title,
+    required this.message,
+    required this.tone,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    final c = _toneColor(tone);
+    return _SurfaceCard(
+      child: Row(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Container(
+            padding: const EdgeInsets.all(10),
+            decoration: BoxDecoration(
+              color: c.withOpacity(0.12),
+              borderRadius: BorderRadius.circular(14),
+            ),
+            child: Icon(icon, color: c, size: 22),
+          ),
+          const SizedBox(width: 12),
+          Expanded(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(title,
+                    style: const TextStyle(
+                        fontSize: 13,
+                        fontWeight: FontWeight.w800,
+                        color: Color(0xFF1F2A37))),
+                const SizedBox(height: 4),
+                Text(
+                  message,
+                  style: const TextStyle(
+                      fontSize: 13, color: Color(0xFF374151), height: 1.35),
+                ),
+              ],
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+class _PanoramaCard extends StatelessWidget {
+  final String headline;
+  final String chip;
+  final List<_Metric> items;
+  final String insight;
+
+  const _PanoramaCard({
+    required this.headline,
+    required this.chip,
+    required this.items,
+    required this.insight,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return _SurfaceCard(
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Row(
+            children: [
+              const _MiniIcon(icon: Icons.timeline),
+              const SizedBox(width: 8),
+              Text(headline,
+                  style: const TextStyle(
+                      fontSize: 15,
+                      fontWeight: FontWeight.w800,
+                      color: Color(0xFF1F2A37))),
+              const Spacer(),
+              _NeutralChip(text: chip),
+            ],
+          ),
+          const SizedBox(height: 12),
+          // 2x2 grid “limpo”
+          Row(
+            children: [
+              Expanded(child: _MetricCard(items[0])),
+              const SizedBox(width: 10),
+              Expanded(child: _MetricCard(items[1])),
+            ],
+          ),
+          const SizedBox(height: 10),
+          Row(
+            children: [
+              Expanded(child: _MetricCard(items[2])),
+              const SizedBox(width: 10),
+              Expanded(child: _MetricCard(items[3])),
+            ],
+          ),
+          const SizedBox(height: 12),
+          Container(
+            padding: const EdgeInsets.all(12),
+            decoration: BoxDecoration(
+                color: Colors.black.withOpacity(0.03),
+                borderRadius: BorderRadius.circular(14)),
+            child: Row(
+              children: [
+                Icon(Icons.trending_up, size: 18, color: Colors.orange[700]),
+                const SizedBox(width: 8),
+                Expanded(
+                  child: Text(
+                    insight,
+                    style: TextStyle(fontSize: 12, color: Colors.grey[700]),
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+class _SectionHeader extends StatelessWidget {
+  final String title;
+  final String subtitle;
+  final IconData icon;
+  final String? actionLabel;
+  final VoidCallback? onAction;
+
+  const _SectionHeader({
+    required this.title,
+    required this.subtitle,
+    required this.icon,
+    this.actionLabel,
+    this.onAction,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      children: [
+        _MiniIcon(icon: icon),
+        const SizedBox(width: 8),
+        Text(
+          title,
+          style: const TextStyle(
+              fontSize: 16,
+              fontWeight: FontWeight.w900,
+              color: Color(0xFF1F2A37)),
+        ),
+        const SizedBox(width: 8),
+        _NeutralChip(text: subtitle),
+        const Spacer(),
+        if (actionLabel != null)
+          TextButton(
+            onPressed: onAction,
+            child: Text(actionLabel!,
+                style: const TextStyle(fontWeight: FontWeight.w700)),
+          ),
+      ],
+    );
+  }
+}
+
+class _OccurrenceTile extends StatelessWidget {
+  final String title;
+  final String location;
+  final String time;
+  final _Tone tone;
+  final IconData icon;
+  final VoidCallback onTap;
+
+  const _OccurrenceTile({
+    required this.title,
+    required this.location,
+    required this.time,
+    required this.tone,
+    required this.icon,
+    required this.onTap,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    final c = _toneColor(tone);
+
+    return Padding(
+      padding: const EdgeInsets.only(bottom: 10),
+      child: _SurfaceCard(
+        onTap: onTap,
         padding: const EdgeInsets.all(14),
         child: Row(
           children: [
             Container(
-              width: 44,
-              height: 44,
+              padding: const EdgeInsets.all(10),
               decoration: BoxDecoration(
-                color: _primary.withOpacity(0.10),
-                borderRadius: BorderRadius.circular(16),
-              ),
-              child: const Icon(Icons.my_location_rounded, color: _primary),
+                  color: c.withOpacity(0.12),
+                  borderRadius: BorderRadius.circular(14)),
+              child: Icon(icon, color: c, size: 20),
             ),
             const SizedBox(width: 12),
             Expanded(
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  const Text(
-                    "Osasco agora",
-                    style: TextStyle(
-                      color: _muted,
-                      fontWeight: FontWeight.w800,
-                      fontSize: 12,
-                    ),
-                  ),
+                  Text(title,
+                      style: const TextStyle(
+                          fontSize: 14,
+                          fontWeight: FontWeight.w800,
+                          color: Color(0xFF1F2A37))),
                   const SizedBox(height: 4),
-                  Text(
-                    location,
-                    style: const TextStyle(
-                      color: _ink,
-                      fontWeight: FontWeight.w900,
-                      fontSize: 15,
-                    ),
-                  ),
-                  const SizedBox(height: 3),
-                  Text(
-                    updateLabel,
-                    style: const TextStyle(
-                      color: _muted,
-                      fontWeight: FontWeight.w600,
-                      fontSize: 12.2,
-                    ),
+                  Row(
+                    children: [
+                      Icon(Icons.location_on,
+                          size: 12, color: Colors.grey[600]),
+                      const SizedBox(width: 4),
+                      Expanded(
+                        child: Text(
+                          location,
+                          style:
+                              TextStyle(fontSize: 12, color: Colors.grey[600]),
+                          overflow: TextOverflow.ellipsis,
+                        ),
+                      ),
+                    ],
                   ),
                 ],
               ),
             ),
-            SizedBox(
-              width: 108,
-              height: 44,
-              child: OutlinedButton.icon(
-                onPressed: onChange,
-                icon: const Icon(Icons.swap_horiz_rounded, size: 18),
-                label: const Text(
-                  "Bairros",
-                  style: TextStyle(fontWeight: FontWeight.w900),
-                ),
-                style: OutlinedButton.styleFrom(
-                  foregroundColor: _ink,
-                  side: const BorderSide(color: _border),
-                  padding:
-                      const EdgeInsets.symmetric(horizontal: 12, vertical: 12),
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(18),
-                  ),
-                ),
-              ),
-            ),
-          ],
-        ),
-      ),
-    );
-  }
-}
-
-class NeighborhoodChips extends StatelessWidget {
-  final List<String> items;
-  final String selected;
-  final ValueChanged<String> onSelect;
-
-  const NeighborhoodChips({
-    super.key,
-    required this.items,
-    required this.selected,
-    required this.onSelect,
-  });
-
-  static const _ink = Color(0xFF1F2A44);
-  static const _muted = Color(0xFF8A96C8);
-  static const _border = Color(0xFFE6EAF6);
-  static const _primary = Color(0xFF2B5BEE);
-
-  @override
-  Widget build(BuildContext context) {
-    return SizedBox(
-      height: 44,
-      child: ListView.separated(
-        scrollDirection: Axis.horizontal,
-        itemCount: items.length,
-        separatorBuilder: (_, __) => const SizedBox(width: 10),
-        itemBuilder: (_, i) {
-          final it = items[i];
-          final isOn = it == selected;
-
-          return InkWell(
-            onTap: () => onSelect(it),
-            borderRadius: BorderRadius.circular(999),
-            child: Container(
-              padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 10),
-              decoration: BoxDecoration(
-                color: isOn ? _primary.withOpacity(0.10) : Colors.white,
-                borderRadius: BorderRadius.circular(999),
-                border: Border.all(
-                    color: isOn ? _primary.withOpacity(0.25) : _border),
-              ),
-              child: Text(
-                it,
-                style: TextStyle(
-                  color: isOn ? _primary : _ink,
-                  fontWeight: FontWeight.w900,
-                  fontSize: 13.2,
-                ),
-              ),
-            ),
-          );
-        },
-      ),
-    );
-  }
-}
-
-class RegionSummaryHeroCollective extends StatelessWidget {
-  final String locality;
-  final String periodLabel;
-  final RiskLevel level;
-  final int score; // 0..100
-  final String headline;
-  final VoidCallback onPrimaryAction;
-
-  const RegionSummaryHeroCollective({
-    super.key,
-    required this.locality,
-    required this.periodLabel,
-    required this.level,
-    required this.score,
-    required this.headline,
-    required this.onPrimaryAction,
-  });
-
-  static const _ink = Color(0xFF1F2A44);
-  static const _muted = Color(0xFF8A96C8);
-  static const _border = Color(0xFFE6EAF6);
-  static const _primary = Color(0xFF2B5BEE);
-
-  Color _levelColor() => switch (level) {
-        RiskLevel.low => const Color(0xFF059669),
-        RiskLevel.moderate => const Color(0xFFD97706),
-        RiskLevel.high => const Color(0xFFDC2626),
-        RiskLevel.critical => const Color(0xFFB91C1C),
-      };
-
-  String _levelLabel() => switch (level) {
-        RiskLevel.low => "Baixo",
-        RiskLevel.moderate => "Moderado",
-        RiskLevel.high => "Alto",
-        RiskLevel.critical => "Crítico",
-      };
-
-  String _primaryLabel() => switch (level) {
-        RiskLevel.critical => "Ver rotas seguras",
-        RiskLevel.high => "Ver rotas seguras",
-        _ => "Ver mapa",
-      };
-
-  IconData _primaryIcon() => switch (level) {
-        RiskLevel.critical => Icons.route_rounded,
-        RiskLevel.high => Icons.route_rounded,
-        _ => Icons.map_outlined,
-      };
-
-  @override
-  Widget build(BuildContext context) {
-    final c = _levelColor();
-    final s = score.clamp(0, 100);
-    final progress = s / 100.0;
-
-    return Container(
-      decoration: BoxDecoration(
-        color: Colors.white,
-        borderRadius: BorderRadius.circular(24),
-        border: Border.all(color: _border),
-        boxShadow: const [
-          BoxShadow(
-            color: Color(0x122B5BEE),
-            blurRadius: 18,
-            offset: Offset(0, 10),
-          ),
-        ],
-      ),
-      child: Padding(
-        padding: const EdgeInsets.fromLTRB(16, 14, 16, 16),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            // topo (coletivo)
-            Row(
+            const SizedBox(width: 10),
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.end,
               children: [
-                Expanded(
-                  child: Text(
-                    "$locality • $periodLabel",
-                    maxLines: 1,
-                    overflow: TextOverflow.ellipsis,
-                    style: const TextStyle(
-                      color: _muted,
-                      fontWeight: FontWeight.w800,
-                      fontSize: 13.2,
-                    ),
-                  ),
-                ),
-                _Pill(text: _levelLabel(), color: c),
-              ],
-            ),
-            const SizedBox(height: 12),
-
-            Row(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                // bloco índice (72/100)
-                Container(
-                  width: 140,
-                  padding: const EdgeInsets.fromLTRB(14, 14, 14, 12),
-                  decoration: BoxDecoration(
-                    color: Colors.white,
-                    borderRadius: BorderRadius.circular(20),
-                    border: Border.all(color: _border),
-                  ),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      const Text(
-                        "Índice coletivo",
-                        style: TextStyle(
-                          color: _muted,
-                          fontWeight: FontWeight.w900,
-                          fontSize: 12.5,
-                        ),
-                      ),
-                      const SizedBox(height: 10),
-                      RichText(
-                        text: TextSpan(
-                          children: [
-                            TextSpan(
-                              text: "$s",
-                              style: const TextStyle(
-                                color: _ink,
-                                fontWeight: FontWeight.w900,
-                                fontSize: 44,
-                                height: 1,
-                                letterSpacing: -0.6,
-                              ),
-                            ),
-                            const TextSpan(
-                              text: "/100",
-                              style: TextStyle(
-                                color: _muted,
-                                fontWeight: FontWeight.w900,
-                                fontSize: 14,
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-                      const SizedBox(height: 12),
-                      ClipRRect(
-                        borderRadius: BorderRadius.circular(999),
-                        child: Container(
-                          height: 10,
-                          color: const Color(0xFFF5F7FD),
-                          child: Align(
-                            alignment: Alignment.centerLeft,
-                            child: FractionallySizedBox(
-                              widthFactor: progress,
-                              child: Container(color: c),
-                            ),
-                          ),
-                        ),
-                      ),
-                      const SizedBox(height: 10),
-                      Text(
-                        "Nível: ${_levelLabel()}",
-                        style: const TextStyle(
-                          color: _muted,
-                          fontWeight: FontWeight.w800,
-                          fontSize: 12.8,
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-
-                const SizedBox(width: 12),
-
-                // headline (sem tendências/sem “baseado em registros”)
-                Expanded(
-                  child: Container(
-                    padding: const EdgeInsets.fromLTRB(14, 14, 14, 14),
-                    decoration: BoxDecoration(
-                      color: const Color(0xFFF8FAFF),
-                      borderRadius: BorderRadius.circular(20),
-                      border: Border.all(color: _border),
-                    ),
-                    child: Row(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Container(
-                          width: 4,
-                          height: 56,
-                          decoration: BoxDecoration(
-                            color: c,
-                            borderRadius: BorderRadius.circular(999),
-                          ),
-                        ),
-                        const SizedBox(width: 10),
-                        Expanded(
-                          child: Text(
-                            headline,
-                            style: const TextStyle(
-                              color: _ink,
-                              fontWeight: FontWeight.w900,
-                              fontSize: 16,
-                              height: 1.2,
-                            ),
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                ),
-              ],
-            ),
-
-            const SizedBox(height: 14),
-
-            SizedBox(
-              width: double.infinity,
-              child: ElevatedButton.icon(
-                onPressed: onPrimaryAction,
-                icon: Icon(_primaryIcon()),
-                label: Text(
-                  _primaryLabel(),
-                  style: const TextStyle(
-                    fontWeight: FontWeight.w900,
-                    fontSize: 15,
-                  ),
-                ),
-                style: ElevatedButton.styleFrom(
-                  backgroundColor: _primary,
-                  foregroundColor: Colors.white,
-                  elevation: 0,
-                  padding: const EdgeInsets.symmetric(vertical: 14),
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(18),
-                  ),
-                ),
-              ),
-            ),
-          ],
-        ),
-      ),
-    );
-  }
-}
-
-class TodayPanoramaCard extends StatelessWidget {
-  final String title;
-  final String subtitle;
-  final int total24h;
-  final int confirmed;
-  final int analyzing;
-
-  const TodayPanoramaCard({
-    super.key,
-    required this.title,
-    required this.subtitle,
-    required this.total24h,
-    required this.confirmed,
-    required this.analyzing,
-  });
-
-  static const _ink = Color(0xFF1F2A44);
-  static const _muted = Color(0xFF8A96C8);
-  static const _border = Color(0xFFE6EAF6);
-
-  @override
-  Widget build(BuildContext context) {
-    return _BaseCard(
-      child: Padding(
-        padding: const EdgeInsets.fromLTRB(16, 16, 16, 16),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Text(
-              title,
-              style: const TextStyle(
-                color: _ink,
-                fontWeight: FontWeight.w900,
-                fontSize: 16.5,
-              ),
-            ),
-            const SizedBox(height: 6),
-            Text(
-              subtitle,
-              style: const TextStyle(
-                color: _muted,
-                fontWeight: FontWeight.w700,
-                fontSize: 13.2,
-              ),
-            ),
-            const SizedBox(height: 14),
-            Row(
-              children: [
-                Expanded(
-                  child: _KpiTile(
-                    label: "Registros",
-                    value: "$total24h",
-                    icon: Icons.receipt_long_rounded,
-                  ),
-                ),
-                const SizedBox(width: 10),
-                Expanded(
-                  child: _KpiTile(
-                    label: "Confirmados",
-                    value: "$confirmed",
-                    icon: Icons.verified_rounded,
-                    valueColor: const Color(0xFF059669),
-                  ),
-                ),
-                const SizedBox(width: 10),
-                Expanded(
-                  child: _KpiTile(
-                    label: "Em análise",
-                    value: "$analyzing",
-                    icon: Icons.hourglass_top_rounded,
-                    valueColor: const Color(0xFF64748B),
-                  ),
-                ),
-              ],
-            ),
-            const SizedBox(height: 6),
-            Container(
-              margin: const EdgeInsets.only(top: 10),
-              padding: const EdgeInsets.all(12),
-              decoration: BoxDecoration(
-                color: const Color(0xFFF8FAFF),
-                borderRadius: BorderRadius.circular(18),
-                border: Border.all(color: _border),
-              ),
-              child: const Text(
-                "Acompanhe e contribua para fortalecer o monitoramento coletivo da região.",
-                style: TextStyle(
-                  color: _muted,
-                  fontWeight: FontWeight.w700,
-                  height: 1.25,
-                ),
-              ),
-            ),
-          ],
-        ),
-      ),
-    );
-  }
-}
-
-class DriversTopHorizontalCard extends StatelessWidget {
-  final String title;
-  final String subtitle;
-  final List<RiskDriver> drivers;
-  final ValueChanged<RiskDriver>? onTapDriver;
-
-  const DriversTopHorizontalCard({
-    super.key,
-    required this.title,
-    required this.subtitle,
-    required this.drivers,
-    this.onTapDriver,
-  });
-
-  static const _ink = Color(0xFF1F2A44);
-  static const _muted = Color(0xFF8A96C8);
-
-  @override
-  Widget build(BuildContext context) {
-    final top3 = drivers.take(3).toList();
-
-    return _BaseCard(
-      child: Padding(
-        padding: const EdgeInsets.fromLTRB(16, 16, 16, 18),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Text(
-              title,
-              style: const TextStyle(
-                color: _ink,
-                fontWeight: FontWeight.w900,
-                fontSize: 16.5,
-              ),
-            ),
-            const SizedBox(height: 6),
-            Text(
-              subtitle,
-              style: const TextStyle(
-                color: _muted,
-                fontWeight: FontWeight.w700,
-                fontSize: 13.2,
-              ),
-            ),
-            const SizedBox(height: 14),
-            Row(
-              children: top3
-                  .map(
-                    (d) => Expanded(
-                      child: Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 4),
-                        child: _DriverMiniCard(
-                          driver: d,
-                          onTap: onTapDriver == null
-                              ? null
-                              : () => onTapDriver!(d),
-                        ),
-                      ),
-                    ),
-                  )
-                  .toList(),
-            ),
-          ],
-        ),
-      ),
-    );
-  }
-}
-
-class _DriverMiniCard extends StatelessWidget {
-  final RiskDriver driver;
-  final VoidCallback? onTap;
-
-  const _DriverMiniCard({
-    required this.driver,
-    this.onTap,
-  });
-
-  static const _ink = Color(0xFF1F2A44);
-  static const _muted = Color(0xFF8A96C8);
-  static const _border = Color(0xFFE6EAF6);
-
-  Color get _valueColor =>
-      driver.positiveUp ? const Color(0xFFDC2626) : const Color(0xFF059669);
-
-  @override
-  Widget build(BuildContext context) {
-    final vc = _valueColor;
-
-    return InkWell(
-      onTap: onTap,
-      borderRadius: BorderRadius.circular(18),
-      child: Container(
-        padding: const EdgeInsets.fromLTRB(12, 14, 12, 14),
-        decoration: BoxDecoration(
-          color: Colors.white,
-          borderRadius: BorderRadius.circular(18),
-          border: Border.all(color: _border),
-        ),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            // ícone
-            Container(
-              width: 36,
-              height: 36,
-              decoration: BoxDecoration(
-                color: vc.withOpacity(0.08),
-                borderRadius: BorderRadius.circular(12),
-              ),
-              child: Icon(driver.icon, color: vc, size: 18),
-            ),
-            const SizedBox(height: 12),
-
-            // label
-            Text(
-              driver.label,
-              maxLines: 2,
-              overflow: TextOverflow.ellipsis,
-              style: const TextStyle(
-                color: _ink,
-                fontWeight: FontWeight.w800,
-                fontSize: 13.5,
-                height: 1.2,
-              ),
-            ),
-            const SizedBox(height: 10),
-
-            // valor (ex: "18")
-            Row(
-              children: [
-                Container(
-                  width: 8,
-                  height: 8,
-                  decoration: BoxDecoration(color: vc, shape: BoxShape.circle),
-                ),
-                const SizedBox(width: 8),
-                Text(
-                  driver.value,
-                  style: TextStyle(
-                    color: vc,
-                    fontWeight: FontWeight.w900,
-                    fontSize: 16,
-                    height: 1,
-                  ),
-                ),
-                const SizedBox(width: 6),
-                const Text(
-                  "registros",
-                  style: TextStyle(
-                    color: _muted,
-                    fontWeight: FontWeight.w800,
-                    fontSize: 12.5,
-                  ),
-                ),
+                _Chip(text: "Expira", tone: tone, compact: true),
+                const SizedBox(height: 6),
+                Text(time,
+                    style: TextStyle(fontSize: 11, color: Colors.grey[500])),
               ],
             ),
           ],
@@ -1087,166 +936,100 @@ class _DriverMiniCard extends StatelessWidget {
   }
 }
 
-class CommunityMovementCard extends StatelessWidget {
-  final String title;
-  final String subtitle;
-  final int watchersToday;
-  final int contributorsToday;
-  final VoidCallback onSeeMore;
-
-  const CommunityMovementCard({
-    super.key,
-    required this.title,
-    required this.subtitle,
-    required this.watchersToday,
-    required this.contributorsToday,
-    required this.onSeeMore,
-  });
-
-  static const _ink = Color(0xFF1F2A44);
-  static const _muted = Color(0xFF8A96C8);
-  static const _primary = Color(0xFF2B5BEE);
-
-  @override
-  Widget build(BuildContext context) {
-    return _BaseCard(
-      child: Padding(
-        padding: const EdgeInsets.fromLTRB(16, 16, 16, 12),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Text(
-              title,
-              style: const TextStyle(
-                color: _ink,
-                fontWeight: FontWeight.w900,
-                fontSize: 16.5,
-              ),
-            ),
-            const SizedBox(height: 6),
-            Text(
-              subtitle,
-              style: const TextStyle(
-                color: _muted,
-                fontWeight: FontWeight.w700,
-                fontSize: 13.2,
-              ),
-            ),
-            const SizedBox(height: 14),
-            Row(
-              children: [
-                Expanded(
-                  child: _KpiTile(
-                    label: "Acompanhando",
-                    value: "$watchersToday",
-                    icon: Icons.visibility_rounded,
-                    valueColor: _primary,
-                  ),
-                ),
-                const SizedBox(width: 10),
-                Expanded(
-                  child: _KpiTile(
-                    label: "Contribuíram",
-                    value: "$contributorsToday",
-                    icon: Icons.volunteer_activism_rounded,
-                    valueColor: const Color(0xFF059669),
-                  ),
-                ),
-              ],
-            ),
-            const SizedBox(height: 8),
-            Align(
-              alignment: Alignment.centerLeft,
-              child: TextButton(
-                onPressed: onSeeMore,
-                child: const Text(
-                  "Ver detalhes",
-                  style: TextStyle(fontWeight: FontWeight.w900),
-                ),
-              ),
-            ),
-          ],
-        ),
-      ),
-    );
-  }
-}
-
-class ContributePrimaryCard extends StatelessWidget {
+class _CommunityCard extends StatelessWidget {
+  final String contributions;
+  final String views;
+  final String active;
+  final List<_ActivityLine> activities;
   final VoidCallback onContribute;
 
-  const ContributePrimaryCard({
-    super.key,
+  const _CommunityCard({
+    required this.contributions,
+    required this.views,
+    required this.active,
+    required this.activities,
     required this.onContribute,
   });
 
-  static const _ink = Color(0xFF1F2A44);
-  static const _muted = Color(0xFF8A96C8);
-  static const _primary = Color(0xFF2B5BEE);
-  static const _border = Color(0xFFE6EAF6);
-
   @override
   Widget build(BuildContext context) {
-    return _BaseCard(
+    // troquei o gradient forte por um “tinted surface” mais elegante
+    return Container(
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(20),
+        color: const Color(0xFF43A047).withOpacity(0.10),
+        border: Border.all(color: const Color(0xFF43A047).withOpacity(0.18)),
+      ),
       child: Padding(
-        padding: const EdgeInsets.fromLTRB(16, 16, 16, 16),
+        padding: const EdgeInsets.all(16),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            const Text(
-              "Contribua com a segurança da região",
-              style: TextStyle(
-                color: _ink,
-                fontWeight: FontWeight.w900,
-                fontSize: 16.5,
+            Row(
+              children: const [
+                _MiniIcon(icon: Icons.people, tone: _Tone.success),
+                SizedBox(width: 8),
+                Text(
+                  "Movimentos da comunidade",
+                  style: TextStyle(
+                      fontSize: 15,
+                      fontWeight: FontWeight.w900,
+                      color: Color(0xFF1F2A37)),
+                ),
+              ],
+            ),
+            const SizedBox(height: 12),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
+              children: [
+                _Stat(label: "Contribuições", value: contributions),
+                _Stat(label: "Visualizações", value: views),
+                _Stat(label: "Ativos", value: active),
+              ],
+            ),
+            const SizedBox(height: 12),
+            Container(
+              padding: const EdgeInsets.all(12),
+              decoration: BoxDecoration(
+                  color: Colors.white, borderRadius: BorderRadius.circular(16)),
+              child: Column(
+                children: [
+                  for (int i = 0; i < activities.length; i++) ...[
+                    _ActivityRow(activities[i]),
+                    if (i != activities.length - 1) const Divider(height: 16),
+                  ],
+                ],
               ),
             ),
-            const SizedBox(height: 6),
-            const Text(
-              "Registre um alerta para ajudar outras pessoas a se prevenirem.",
-              style: TextStyle(
-                color: _muted,
-                fontWeight: FontWeight.w700,
-                fontSize: 13.2,
-                height: 1.2,
-              ),
+            const SizedBox(height: 12),
+            Row(
+              children: const [
+                Icon(Icons.privacy_tip, size: 16, color: Color(0xFF43A047)),
+                SizedBox(width: 8),
+                Text(
+                  "Informações anônimas",
+                  style: TextStyle(
+                      fontSize: 12,
+                      fontWeight: FontWeight.w700,
+                      color: Color(0xFF43A047)),
+                ),
+              ],
             ),
-            const SizedBox(height: 14),
+            const SizedBox(height: 12),
             SizedBox(
               width: double.infinity,
               child: ElevatedButton.icon(
                 onPressed: onContribute,
-                icon: const Icon(Icons.add_alert_rounded),
-                label: const Text(
-                  "Contribuir com alerta",
-                  style: TextStyle(fontWeight: FontWeight.w900, fontSize: 15),
-                ),
+                icon: const Icon(Icons.add),
+                label: const Text("Contribuir agora"),
                 style: ElevatedButton.styleFrom(
-                  backgroundColor: _primary,
+                  backgroundColor: const Color(0xFF43A047),
                   foregroundColor: Colors.white,
                   elevation: 0,
-                  padding: const EdgeInsets.symmetric(vertical: 14),
                   shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(18),
-                  ),
-                ),
-              ),
-            ),
-            const SizedBox(height: 10),
-            Container(
-              width: double.infinity,
-              padding: const EdgeInsets.all(12),
-              decoration: BoxDecoration(
-                color: const Color(0xFFF8FAFF),
-                borderRadius: BorderRadius.circular(18),
-                border: Border.all(color: _border),
-              ),
-              child: const Text(
-                "Quanto mais contribuições e confirmações, mais forte fica o monitoramento coletivo.",
-                style: TextStyle(
-                  color: _muted,
-                  fontWeight: FontWeight.w700,
-                  height: 1.25,
+                      borderRadius: BorderRadius.circular(14)),
+                  padding: const EdgeInsets.symmetric(vertical: 12),
+                  textStyle: const TextStyle(fontWeight: FontWeight.w800),
                 ),
               ),
             ),
@@ -1257,459 +1040,675 @@ class ContributePrimaryCard extends StatelessWidget {
   }
 }
 
-/* ====================== FLOATING INCIDENT ====================== */
+class _QuickActionsGrid extends StatelessWidget {
+  final VoidCallback onReport;
+  final VoidCallback onRiskAreas;
+  final VoidCallback onNeighbors;
+  final VoidCallback onEmergency;
 
-class RecentIncidentFloatingCard extends StatelessWidget {
-  final RecentEvidence evidence;
-  final VoidCallback onTap;
-
-  const RecentIncidentFloatingCard({
-    super.key,
-    required this.evidence,
-    required this.onTap,
+  const _QuickActionsGrid({
+    required this.onReport,
+    required this.onRiskAreas,
+    required this.onNeighbors,
+    required this.onEmergency,
   });
-
-  static const _surface = Colors.white;
-  static const _ink = Color(0xFF1F2A44);
-  static const _muted = Color(0xFF8A96C8);
-  static const _border = Color(0xFFE6EAF6);
-
-  Color get _accent => switch (evidence.kind) {
-        EvidenceKind.robbery => const Color(0xFFDC2626),
-        EvidenceKind.theft => const Color(0xFFD97706),
-        EvidenceKind.recovered => const Color(0xFF059669),
-      };
-
-  IconData get _icon => switch (evidence.kind) {
-        EvidenceKind.robbery => Icons.report_gmailerrorred_rounded,
-        EvidenceKind.theft => Icons.warning_amber_rounded,
-        EvidenceKind.recovered => Icons.verified_rounded,
-      };
-
-  String get _distanceText {
-    final km = evidence.distanceKm;
-    if (km < 1) {
-      final m = (km * 1000).round();
-      return "$m m";
-    }
-    return "${km.toStringAsFixed(1).replaceAll('.', ',')} km";
-  }
 
   @override
   Widget build(BuildContext context) {
-    final a = _accent;
+    return Row(
+      children: [
+        Expanded(
+            child: _QuickAction(
+                icon: Icons.add_alert,
+                label: "Reportar",
+                onTap: onReport,
+                tone: _Tone.primary)),
+        const SizedBox(width: 10),
+        Expanded(
+            child: _QuickAction(
+                icon: Icons.location_on,
+                label: "Áreas",
+                onTap: onRiskAreas,
+                tone: _Tone.neutral)),
+        const SizedBox(width: 10),
+        Expanded(
+            child: _QuickAction(
+                icon: Icons.group,
+                label: "Vizinhos",
+                onTap: onNeighbors,
+                tone: _Tone.neutral)),
+        const SizedBox(width: 10),
+        Expanded(
+            child: _QuickAction(
+                icon: Icons.emergency,
+                label: "Emergência",
+                onTap: onEmergency,
+                tone: _Tone.danger)),
+      ],
+    );
+  }
+}
 
-    return Material(
-      color: Colors.transparent,
-      child: InkWell(
-        onTap: onTap,
-        borderRadius: BorderRadius.circular(18),
-        child: Ink(
-          decoration: BoxDecoration(
-            color: _surface,
-            borderRadius: BorderRadius.circular(18),
-            border: Border.all(color: _border),
-            boxShadow: const [
-              BoxShadow(
-                color: Color(0x122B5BEE),
-                blurRadius: 18,
-                offset: Offset(0, 10),
-              ),
-            ],
+class _QuickAction extends StatelessWidget {
+  final IconData icon;
+  final String label;
+  final VoidCallback onTap;
+  final _Tone tone;
+
+  const _QuickAction({
+    required this.icon,
+    required this.label,
+    required this.onTap,
+    required this.tone,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    final c = _toneColor(tone);
+    final bg = c.withOpacity(tone == _Tone.danger ? 0.12 : 0.10);
+
+    return _SurfaceCard(
+      onTap: onTap,
+      padding: const EdgeInsets.symmetric(vertical: 14, horizontal: 10),
+      child: Column(
+        children: [
+          Container(
+            padding: const EdgeInsets.all(10),
+            decoration: BoxDecoration(
+                color: bg, borderRadius: BorderRadius.circular(14)),
+            child: Icon(icon, color: c, size: 22),
           ),
-          child: Padding(
-            padding: const EdgeInsets.fromLTRB(12, 12, 12, 12),
-            child: Row(
-              children: [
-                // barra
-                Container(
-                  width: 4,
-                  height: 46,
-                  decoration: BoxDecoration(
-                    color: a,
-                    borderRadius: BorderRadius.circular(999),
-                  ),
-                ),
-                const SizedBox(width: 12),
+          const SizedBox(height: 8),
+          Text(
+            label,
+            style: TextStyle(
+                fontSize: 11,
+                fontWeight: FontWeight.w800,
+                color: tone == _Tone.danger ? c : const Color(0xFF1F2A37)),
+            textAlign: TextAlign.center,
+          ),
+        ],
+      ),
+    );
+  }
+}
 
-                // ícone
-                Container(
-                  width: 40,
-                  height: 40,
-                  decoration: BoxDecoration(
-                    color: a.withOpacity(0.10),
-                    borderRadius: BorderRadius.circular(14),
-                  ),
-                  child: Icon(_icon, color: a, size: 20),
-                ),
-                const SizedBox(width: 12),
+class _UpdateTile extends StatelessWidget {
+  final String title;
+  final String time;
+  final IconData icon;
 
-                // texto
-                Expanded(
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Row(
-                        children: [
-                          Expanded(
-                            child: Text(
-                              evidence.title,
-                              maxLines: 1,
-                              overflow: TextOverflow.ellipsis,
-                              style: const TextStyle(
-                                color: _ink,
-                                fontWeight: FontWeight.w900,
-                                fontSize: 14.5,
-                                height: 1.1,
-                              ),
-                            ),
-                          ),
-                          if (evidence.verified) ...[
-                            const SizedBox(width: 8),
-                            const Icon(Icons.verified_rounded,
-                                size: 16, color: Color(0xFF059669)),
-                          ],
-                        ],
-                      ),
-                      const SizedBox(height: 6),
-                      Text(
-                        "${evidence.subtitle} • $_distanceText • ${evidence.confirmations} confirmações",
-                        maxLines: 1,
-                        overflow: TextOverflow.ellipsis,
-                        style: const TextStyle(
-                          color: _muted,
-                          fontWeight: FontWeight.w800,
-                          fontSize: 13.0,
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-                const SizedBox(width: 8),
-                Icon(Icons.chevron_right_rounded,
-                    color: a.withOpacity(0.9), size: 28),
-              ],
+  const _UpdateTile(
+      {required this.title, required this.time, required this.icon});
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.only(bottom: 10),
+      child: _SurfaceCard(
+        padding: const EdgeInsets.all(14),
+        child: Row(
+          children: [
+            Container(
+              padding: const EdgeInsets.all(10),
+              decoration: BoxDecoration(
+                  color: const Color(0xFF667EEA).withOpacity(0.10),
+                  borderRadius: BorderRadius.circular(14)),
+              child: Icon(icon, color: const Color(0xFF667EEA), size: 20),
             ),
-          ),
+            const SizedBox(width: 12),
+            Expanded(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(title,
+                      style: const TextStyle(
+                          fontSize: 13,
+                          fontWeight: FontWeight.w800,
+                          color: Color(0xFF1F2A37))),
+                  const SizedBox(height: 4),
+                  Text(time,
+                      style: TextStyle(fontSize: 12, color: Colors.grey[600])),
+                ],
+              ),
+            ),
+          ],
         ),
       ),
     );
   }
 }
 
-/* ====================== UI HELPERS ====================== */
+// =======================================================
+// Small UI pieces
+// =======================================================
 
-class _BaseCard extends StatelessWidget {
-  final Widget child;
-  const _BaseCard({required this.child});
+enum _Tone { primary, warning, danger, success, neutral }
 
-  static const _border = Color(0xFFE6EAF6);
+Color _toneColor(_Tone tone) {
+  switch (tone) {
+    case _Tone.primary:
+      return const Color(0xFF667EEA);
+    case _Tone.warning:
+      return const Color(0xFFF59E0B);
+    case _Tone.danger:
+      return const Color(0xFFEF4444);
+    case _Tone.success:
+      return const Color(0xFF22C55E);
+    case _Tone.neutral:
+      return const Color(0xFF8B5CF6);
+  }
+}
+
+class _MiniIcon extends StatelessWidget {
+  final IconData icon;
+  final _Tone tone;
+
+  const _MiniIcon({required this.icon, this.tone = _Tone.primary});
 
   @override
   Widget build(BuildContext context) {
+    final c = _toneColor(tone);
     return Container(
+      padding: const EdgeInsets.all(6),
       decoration: BoxDecoration(
-        color: Colors.white,
-        borderRadius: BorderRadius.circular(24),
-        border: Border.all(color: _border),
-        boxShadow: const [
-          BoxShadow(
-            color: Color(0x122B5BEE),
-            blurRadius: 18,
-            offset: Offset(0, 10),
-          ),
-        ],
-      ),
-      child: child,
+          color: c.withOpacity(0.10), borderRadius: BorderRadius.circular(10)),
+      child: Icon(icon, size: 16, color: c),
     );
   }
 }
 
-class _Pill extends StatelessWidget {
+class _NeutralChip extends StatelessWidget {
   final String text;
-  final Color color;
-
-  const _Pill({required this.text, required this.color});
+  const _NeutralChip({required this.text});
 
   @override
   Widget build(BuildContext context) {
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 6),
       decoration: BoxDecoration(
-        color: color.withOpacity(0.10),
-        borderRadius: BorderRadius.circular(999),
-        border: Border.all(color: color.withOpacity(0.18)),
-      ),
+          color: Colors.black.withOpacity(0.04),
+          borderRadius: BorderRadius.circular(999)),
+      child: Text(text,
+          style: TextStyle(
+              fontSize: 11,
+              color: Colors.grey[700],
+              fontWeight: FontWeight.w600)),
+    );
+  }
+}
+
+class _Chip extends StatelessWidget {
+  final String text;
+  final _Tone tone;
+  final bool compact;
+
+  const _Chip({required this.text, required this.tone, this.compact = false});
+
+  @override
+  Widget build(BuildContext context) {
+    final c = _toneColor(tone);
+    return Container(
+      padding: EdgeInsets.symmetric(
+          horizontal: compact ? 8 : 10, vertical: compact ? 5 : 6),
+      decoration: BoxDecoration(
+          color: c.withOpacity(0.12), borderRadius: BorderRadius.circular(999)),
       child: Text(
         text,
         style: TextStyle(
-          fontWeight: FontWeight.w900,
-          color: color,
-          fontSize: 12,
-        ),
+            fontSize: compact ? 10 : 11, color: c, fontWeight: FontWeight.w800),
       ),
     );
   }
 }
 
-class _KpiTile extends StatelessWidget {
+class _MiniTrend {
   final String label;
   final String value;
-  final IconData icon;
-  final Color? valueColor;
+  final _Tone tone;
+  const _MiniTrend(
+      {required this.label, required this.value, required this.tone});
+}
 
-  const _KpiTile({
-    required this.label,
-    required this.value,
-    required this.icon,
-    this.valueColor,
-  });
-
-  static const _ink = Color(0xFF1F2A44);
-  static const _muted = Color(0xFF8A96C8);
-  static const _border = Color(0xFFE6EAF6);
+class _TrendPill extends StatelessWidget {
+  final _MiniTrend t;
+  const _TrendPill(this.t);
 
   @override
   Widget build(BuildContext context) {
-    final vc = valueColor ?? _ink;
+    final c = _toneColor(t.tone);
+    return Column(
+      children: [
+        Container(
+            width: 8,
+            height: 8,
+            decoration: BoxDecoration(color: c, shape: BoxShape.circle)),
+        const SizedBox(height: 6),
+        Text(t.label,
+            style: const TextStyle(
+                fontSize: 11,
+                color: Color(0xFF6B7280),
+                fontWeight: FontWeight.w600)),
+        const SizedBox(height: 2),
+        Text(t.value,
+            style:
+                TextStyle(fontSize: 12, fontWeight: FontWeight.w900, color: c)),
+      ],
+    );
+  }
+}
 
+class _Metric {
+  final String label;
+  final String value;
+  final IconData icon;
+  final _Tone tone;
+  final String foot;
+
+  const _Metric({
+    required this.label,
+    required this.value,
+    required this.icon,
+    required this.tone,
+    required this.foot,
+  });
+}
+
+class _MetricCard extends StatelessWidget {
+  final _Metric m;
+  const _MetricCard(this.m);
+
+  @override
+  Widget build(BuildContext context) {
+    final c = _toneColor(m.tone);
     return Container(
-      padding: const EdgeInsets.fromLTRB(12, 12, 12, 12),
+      padding: const EdgeInsets.all(12),
       decoration: BoxDecoration(
-        color: const Color(0xFFF8FAFF),
-        borderRadius: BorderRadius.circular(18),
-        border: Border.all(color: _border),
+        color: c.withOpacity(0.06),
+        borderRadius: BorderRadius.circular(16),
+        border: Border.all(color: c.withOpacity(0.10)),
       ),
-      child: Row(
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Container(
-            width: 34,
-            height: 34,
-            decoration: BoxDecoration(
-              color: vc.withOpacity(0.10),
-              borderRadius: BorderRadius.circular(12),
-            ),
-            child: Icon(icon, color: vc, size: 18),
-          ),
-          const SizedBox(width: 10),
-          Expanded(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  label,
-                  maxLines: 1,
-                  overflow: TextOverflow.ellipsis,
-                  style: const TextStyle(
-                    color: _muted,
-                    fontWeight: FontWeight.w800,
-                    fontSize: 12.2,
-                  ),
-                ),
-                const SizedBox(height: 6),
-                Text(
-                  value,
+          Row(
+            children: [
+              Icon(m.icon, size: 14, color: c),
+              const SizedBox(width: 6),
+              Expanded(
+                child: Text(
+                  m.label,
                   style: TextStyle(
-                    color: vc,
-                    fontWeight: FontWeight.w900,
-                    fontSize: 16,
-                    height: 1,
-                  ),
+                      fontSize: 11,
+                      color: Colors.grey[700],
+                      fontWeight: FontWeight.w600),
+                  overflow: TextOverflow.ellipsis,
                 ),
-              ],
-            ),
+              ),
+            ],
           ),
+          const SizedBox(height: 8),
+          Text(m.value,
+              style: TextStyle(
+                  fontSize: 18, fontWeight: FontWeight.w900, color: c)),
+          const SizedBox(height: 2),
+          Text(m.foot,
+              style: TextStyle(
+                  fontSize: 10,
+                  fontWeight: FontWeight.w700,
+                  color: c.withOpacity(0.85))),
         ],
       ),
     );
   }
 }
 
-class OsascoHotspot {
-  final String neighborhood; // "Centro"
-  final String note; // "Pico: 18h–22h" / "Eixo Autonomistas"
-  final int count24h; // 12
-  final double? change7dPct; // +18.0 (opcional)
+class _Stat extends StatelessWidget {
+  final String label;
+  final String value;
 
-  const OsascoHotspot({
-    required this.neighborhood,
-    required this.note,
-    required this.count24h,
-    this.change7dPct,
-  });
-}
-
-class OsascoFocus {
-  final String cityLabel; // "Osasco • SP"
-  final String selectedNeighborhood; // "Centro" | "Todos"
-  final List<String> neighborhoods; // lista de chips
-  final List<OsascoHotspot> hotspots; // card "Bairros em atenção"
-
-  const OsascoFocus({
-    required this.cityLabel,
-    required this.selectedNeighborhood,
-    required this.neighborhoods,
-    required this.hotspots,
-  });
-}
-
-class RegionStatusV2 {
-  final String localityLabel;
-  final String updateLabel;
-  final String periodLabel;
-
-  final RiskLevel level;
-  final int score;
-
-  final List<RiskDriver> drivers;
-  final RecentEvidence? evidence;
-
-  final TodaySnapshot today;
-  final CommunityPulse pulse;
-
-  // NOVO: foco Osasco
-  final OsascoFocus osasco;
-
-  const RegionStatusV2({
-    required this.localityLabel,
-    required this.updateLabel,
-    required this.periodLabel,
-    required this.level,
-    required this.score,
-    required this.drivers,
-    required this.evidence,
-    required this.today,
-    required this.pulse,
-    required this.osasco,
-  });
-}
-
-class OsascoHotspotsCard extends StatelessWidget {
-  final List<OsascoHotspot> items;
-  final VoidCallback? onSeeAll;
-
-  const OsascoHotspotsCard({
-    super.key,
-    required this.items,
-    this.onSeeAll,
-  });
-
-  static const _ink = Color(0xFF1F2A44);
-  static const _muted = Color(0xFF8A96C8);
-  static const _primary = Color(0xFF2B5BEE);
-  static const _border = Color(0xFFE6EAF6);
+  const _Stat({required this.label, required this.value});
 
   @override
   Widget build(BuildContext context) {
-    final top = items.take(4).toList();
+    return Column(
+      children: [
+        Text(value,
+            style: const TextStyle(
+                fontSize: 18,
+                fontWeight: FontWeight.w900,
+                color: Color(0xFF1F2A37))),
+        const SizedBox(height: 2),
+        Text(label,
+            style: TextStyle(
+                fontSize: 10,
+                color: Colors.grey[700],
+                fontWeight: FontWeight.w600)),
+      ],
+    );
+  }
+}
 
-    return _BaseCard(
+class _ActivityLine {
+  final IconData icon;
+  final String text;
+  final String time;
+
+  const _ActivityLine(
+      {required this.icon, required this.text, required this.time});
+}
+
+class _ActivityRow extends StatelessWidget {
+  final _ActivityLine a;
+  const _ActivityRow(this.a);
+
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      children: [
+        Container(
+          padding: const EdgeInsets.all(8),
+          decoration: BoxDecoration(
+              color: Colors.black.withOpacity(0.05), shape: BoxShape.circle),
+          child: Icon(a.icon, size: 16, color: const Color(0xFF1F2A37)),
+        ),
+        const SizedBox(width: 10),
+        Expanded(
+          child: Text(a.text,
+              style: const TextStyle(
+                  fontSize: 13,
+                  fontWeight: FontWeight.w700,
+                  color: Color(0xFF1F2A37))),
+        ),
+        Text(a.time, style: TextStyle(fontSize: 11, color: Colors.grey[600])),
+      ],
+    );
+  }
+}
+
+class CommunityTipsAndActionsCard extends StatelessWidget {
+  final List<CommunityTip> tips;
+  final VoidCallback onSendTip;
+  final VoidCallback onShareRoute;
+
+  const CommunityTipsAndActionsCard({
+    super.key,
+    required this.tips,
+    required this.onSendTip,
+    required this.onShareRoute,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    const ink = Color(0xFF1F2A37);
+    const muted = Color(0xFF6B7280);
+    const success = Color(0xFF22C55E);
+
+    return Container(
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(20),
+        // color: success.withOpacity(0.09),
+        color: context.primaryColor.withOpacity(0.09),
+        border: Border.all(color: context.primaryColor.withOpacity(0.18)),
+      ),
       child: Padding(
-        padding: const EdgeInsets.fromLTRB(16, 16, 16, 12),
+        padding: const EdgeInsets.all(16),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
+            // Header
             Row(
               children: [
-                const Expanded(
-                  child: Text(
-                    "Bairros em atenção",
-                    style: TextStyle(
-                      color: _ink,
-                      fontWeight: FontWeight.w900,
-                      fontSize: 16.5,
-                    ),
-                  ),
-                ),
-                if (onSeeAll != null)
-                  TextButton(
-                    onPressed: onSeeAll,
-                    child: const Text("Ver tudo",
-                        style: TextStyle(fontWeight: FontWeight.w900)),
-                  ),
-              ],
-            ),
-            const SizedBox(height: 6),
-            const Text(
-              "Mais citados nas últimas 24h em Osasco",
-              style: TextStyle(
-                color: _muted,
-                fontWeight: FontWeight.w700,
-                fontSize: 13.2,
-              ),
-            ),
-            const SizedBox(height: 14),
-            ...top.map((h) => Container(
-                  margin: const EdgeInsets.only(bottom: 10),
-                  padding: const EdgeInsets.all(12),
+                Container(
+                  padding: const EdgeInsets.all(8),
                   decoration: BoxDecoration(
-                    color: const Color(0xFFF8FAFF),
-                    borderRadius: BorderRadius.circular(18),
-                    border: Border.all(color: _border),
+                    color: Colors.white,
+                    borderRadius: BorderRadius.circular(12),
+                    boxShadow: [
+                      BoxShadow(
+                        color: Colors.black.withOpacity(0.05),
+                        blurRadius: 10,
+                        offset: const Offset(0, 2),
+                      ),
+                    ],
                   ),
-                  child: Row(
+                  child:
+                      Icon(Icons.people, size: 18, color: context.primaryColor),
+                ),
+                const SizedBox(width: 10),
+                const Expanded(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Container(
-                        width: 36,
-                        height: 36,
-                        decoration: BoxDecoration(
-                          color: _primary.withOpacity(0.10),
-                          borderRadius: BorderRadius.circular(12),
-                        ),
-                        child: const Icon(Icons.location_city_rounded,
-                            color: _primary, size: 18),
-                      ),
-                      const SizedBox(width: 10),
-                      Expanded(
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text(
-                              h.neighborhood,
-                              style: const TextStyle(
-                                color: _ink,
-                                fontWeight: FontWeight.w900,
-                                fontSize: 14.5,
-                                height: 1.1,
-                              ),
-                            ),
-                            const SizedBox(height: 4),
-                            Text(
-                              h.note,
-                              maxLines: 1,
-                              overflow: TextOverflow.ellipsis,
-                              style: const TextStyle(
-                                color: _muted,
-                                fontWeight: FontWeight.w800,
-                                fontSize: 12.8,
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-                      const SizedBox(width: 10),
                       Text(
-                        "${h.count24h}",
-                        style: const TextStyle(
-                          color: _ink,
+                        "Dicas & ações",
+                        style: TextStyle(
+                          fontSize: 15,
                           fontWeight: FontWeight.w900,
-                          fontSize: 16,
+                          color: ink,
                         ),
                       ),
-                      const SizedBox(width: 6),
-                      const Text(
-                        "24h",
+                      SizedBox(height: 2),
+                      Text(
+                        "Sugestões rápidas para reduzir risco hoje",
                         style: TextStyle(
-                          color: _muted,
-                          fontWeight: FontWeight.w800,
-                          fontSize: 12.5,
+                          fontSize: 12,
+                          color: muted,
+                          fontWeight: FontWeight.w600,
                         ),
                       ),
                     ],
                   ),
-                )),
+                ),
+                _Pill(
+                  text: "Anônimo",
+                  icon: Icons.privacy_tip,
+                  tone: _PillTone.success,
+                ),
+              ],
+            ),
+
+            const SizedBox(height: 12),
+
+            // Tips list
+            Container(
+              padding: const EdgeInsets.all(12),
+              decoration: BoxDecoration(
+                color: Colors.white,
+                borderRadius: BorderRadius.circular(16),
+                boxShadow: [
+                  BoxShadow(
+                    color: Colors.black.withOpacity(0.04),
+                    blurRadius: 12,
+                    offset: const Offset(0, 4),
+                  ),
+                ],
+              ),
+              child: Column(
+                children: [
+                  for (int i = 0; i < tips.length; i++) ...[
+                    _TipRow(tip: tips[i]),
+                    if (i != tips.length - 1)
+                      const Padding(
+                        padding: EdgeInsets.symmetric(vertical: 10),
+                        child: Divider(height: 1),
+                      ),
+                  ],
+                ],
+              ),
+            ),
+
+            const SizedBox(height: 12),
+
+            // Actions
+            Row(
+              children: [
+                Expanded(
+                  child: OutlinedButton.icon(
+                    onPressed: onSendTip,
+                    icon: const Icon(Icons.edit, size: 18),
+                    label: const Text("Enviar dica"),
+                    style: OutlinedButton.styleFrom(
+                      foregroundColor: ink,
+                      side: BorderSide(
+                          color: context.primaryColor.withOpacity(0.35)),
+                      padding: const EdgeInsets.symmetric(vertical: 12),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(14),
+                      ),
+                      textStyle: const TextStyle(fontWeight: FontWeight.w800),
+                      backgroundColor: Colors.white.withOpacity(0.6),
+                    ),
+                  ),
+                ),
+                const SizedBox(width: 10),
+                Expanded(
+                  child: ElevatedButton.icon(
+                    onPressed: onShareRoute,
+                    icon: const Icon(Icons.route, size: 18),
+                    label: const Text("Compartilhar rota"),
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: context.primaryColor,
+                      foregroundColor: Colors.white,
+                      elevation: 0,
+                      padding: const EdgeInsets.symmetric(vertical: 12),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(14),
+                      ),
+                      textStyle: const TextStyle(fontWeight: FontWeight.w900),
+                    ),
+                  ),
+                ),
+              ],
+            ),
+
+            const SizedBox(height: 8),
+
+            // Footnote
+            Text(
+              "Dica: registre ocorrências em 10s para alertar vizinhos próximos.",
+              style: TextStyle(
+                fontSize: 11,
+                color: muted.withOpacity(0.95),
+                fontWeight: FontWeight.w600,
+              ),
+            ),
           ],
         ),
+      ),
+    );
+  }
+}
+
+class CommunityTip {
+  final IconData icon;
+  final String title;
+  final String subtitle;
+
+  const CommunityTip({
+    required this.icon,
+    required this.title,
+    required this.subtitle,
+  });
+}
+
+class _TipRow extends StatelessWidget {
+  final CommunityTip tip;
+  const _TipRow({required this.tip});
+
+  @override
+  Widget build(BuildContext context) {
+    const ink = Color(0xFF1F2A37);
+    const muted = Color(0xFF6B7280);
+
+    return Row(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Container(
+          padding: const EdgeInsets.all(8),
+          decoration: BoxDecoration(
+            color: context.primaryColor.withOpacity(0.12),
+            borderRadius: BorderRadius.circular(12),
+          ),
+          child: Icon(
+            tip.icon,
+            size: 18,
+            color: context.primaryColor,
+          ),
+        ),
+        const SizedBox(width: 10),
+        Expanded(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                tip.title,
+                style: const TextStyle(
+                  fontSize: 13,
+                  fontWeight: FontWeight.w900,
+                  color: ink,
+                  height: 1.15,
+                ),
+              ),
+              const SizedBox(height: 4),
+              Text(
+                tip.subtitle,
+                style: const TextStyle(
+                  fontSize: 12,
+                  color: muted,
+                  fontWeight: FontWeight.w600,
+                  height: 1.2,
+                ),
+              ),
+            ],
+          ),
+        ),
+      ],
+    );
+  }
+}
+
+enum _PillTone { success, neutral }
+
+class _Pill extends StatelessWidget {
+  final String text;
+  final IconData icon;
+  final _PillTone tone;
+
+  const _Pill({
+    required this.text,
+    required this.icon,
+    required this.tone,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    final color = switch (tone) {
+      // _PillTone.success => const Color(0xFF22C55E),
+      _PillTone.success => context.primaryColor,
+      _PillTone.neutral => const Color(0xFF6B7280),
+    };
+
+    return Container(
+      padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 6),
+      decoration: BoxDecoration(
+        color: color.withOpacity(0.12),
+        borderRadius: BorderRadius.circular(999),
+      ),
+      child: Row(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          Icon(icon, size: 14, color: color),
+          const SizedBox(width: 6),
+          Text(
+            text,
+            style: TextStyle(
+              fontSize: 11,
+              fontWeight: FontWeight.w900,
+              color: color,
+            ),
+          ),
+        ],
       ),
     );
   }

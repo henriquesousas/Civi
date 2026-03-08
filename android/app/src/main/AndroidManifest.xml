@@ -5,6 +5,7 @@
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
     <uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission android:name="android.permission.VIBRATE"/>
 
     <application
         android:label="Kotto"
@@ -37,6 +38,10 @@
         <meta-data
             android:name="flutterEmbedding"
             android:value="2" />
+
+        <meta-data
+            android:name="com.mapbox.maps.token"
+            android:value="pk.eyJ1IjoicHNvYXJlczI2MDEiLCJhIjoiY21pbnlkanJuMjBlNzNlcHc5NDBoeWJvdCJ9.-9sIXSToKx-OfzGflYEiYw"/>
 
         <!-- <uses-feature
                 android:name="android.hardware.camera"

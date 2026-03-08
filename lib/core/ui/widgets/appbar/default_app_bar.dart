@@ -24,9 +24,15 @@ class DefaultAppBar extends StatelessWidget implements PreferredSizeWidget {
   @override
   Widget build(BuildContext context) {
     return AppBar(
-      elevation: 1,
-      // toolbarHeight: 74,
-      scrolledUnderElevation: 0.6,
+      // elevation: 10,
+      bottom: PreferredSize(
+        preferredSize: const Size.fromHeight(1),
+        child: Container(
+          height: 1,
+          color: const Color(0xFFE6EAF6),
+        ),
+      ),
+      // scrolledUnderElevation: 0.6,
       backgroundColor: context.surfaceColor,
       surfaceTintColor: context.surfaceColor,
       automaticallyImplyLeading: false,
