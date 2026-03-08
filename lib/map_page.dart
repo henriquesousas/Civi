@@ -348,7 +348,13 @@ class _MapPageState extends State<MapPage> {
     _markers.clear();
 
     for (final incident in incidents) {
-      final pinImage = await createPinWithContainer(incident.image);
+      // final pinImage = await createPinWithContainer(incident.image);
+      final pinImage = await createPinWithIcon(
+        borderColor: AppColors.primaryColor,
+        icon: Icons.motorcycle,
+        backgroundColor: AppColors.primaryColor,
+        iconColor: Colors.white,
+      );
 
       final marker = await _pointManager!.create(
         PointAnnotationOptions(
@@ -559,6 +565,77 @@ class _MapPageState extends State<MapPage> {
     );
 
     textPainter.paint(canvas, offset);
+
+    final picture = recorder.endRecording();
+    final img = await picture.toImage(size.toInt(), size.toInt());
+    final byteData = await img.toByteData(format: ui.ImageByteFormat.png);
+
+    return byteData!.buffer.asUint8List();
+  }
+
+  Future<Uint8List> createPinWithIcon({
+    required IconData icon,
+    required Color borderColor,
+    Color backgroundColor = Colors.white,
+    Color iconColor = Colors.black,
+  }) async {
+    const double size = 60;
+    const double strokeWidth = 4;
+    const double radius = 90;
+    const double iconSize = 34;
+
+    final recorder = ui.PictureRecorder();
+    final canvas = Canvas(recorder);
+
+    final fillPaint = Paint()..color = backgroundColor;
+
+    final borderPaint = Paint()
+      ..color = borderColor
+      ..style = PaintingStyle.stroke
+      ..strokeWidth = strokeWidth
+      ..isAntiAlias = true;
+
+    final fillRRect = RRect.fromRectAndRadius(
+      const Rect.fromLTWH(0, 0, size, size),
+      const Radius.circular(radius),
+    );
+
+    final double borderInset = strokeWidth / 2;
+
+    final borderRRect = RRect.fromRectAndRadius(
+      Rect.fromLTWH(
+        borderInset,
+        borderInset,
+        size - strokeWidth,
+        size - strokeWidth,
+      ),
+      Radius.circular(radius - borderInset),
+    );
+
+    canvas.drawRRect(fillRRect, fillPaint);
+    canvas.drawRRect(borderRRect, borderPaint);
+
+    final textPainter = TextPainter(
+      textDirection: TextDirection.ltr,
+      text: TextSpan(
+        text: String.fromCharCode(icon.codePoint),
+        style: TextStyle(
+          fontSize: iconSize,
+          fontFamily: icon.fontFamily,
+          package: icon.fontPackage,
+          color: iconColor,
+        ),
+      ),
+    );
+
+    textPainter.layout();
+
+    final iconOffset = Offset(
+      (size - textPainter.width) / 2,
+      (size - textPainter.height) / 2,
+    );
+
+    textPainter.paint(canvas, iconOffset);
 
     final picture = recorder.endRecording();
     final img = await picture.toImage(size.toInt(), size.toInt());
