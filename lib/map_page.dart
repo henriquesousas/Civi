@@ -747,8 +747,9 @@ class _MapPageState extends State<MapPage> {
     required BuildContext context,
     required String label,
     required IconData icon,
+    bool isSelected = true,
   }) async {
-    const double width = 128;
+    final double width = 128;
     const double height = 48;
     const double pointerHeight = 10;
 
@@ -777,24 +778,6 @@ class _MapPageState extends State<MapPage> {
 
       /// até inicio da seta
       ..lineTo(centerX + 14, height)
-
-      /// seta arredondada
-      // ..cubicTo(
-      //   centerX + 6,
-      //   height,
-      //   centerX + 4,
-      //   height + 6,
-      //   centerX,
-      //   height + pointerHeight,
-      // )
-      // ..cubicTo(
-      //   centerX - 4,
-      //   height + 6,
-      //   centerX - 6,
-      //   height,
-      //   centerX - 12,
-      //   height,
-      // )
       ..cubicTo(
         centerX + 6,
         height,
@@ -890,24 +873,25 @@ class _MapPageState extends State<MapPage> {
       ),
     );
 
-    /// texto
-    final textPainter = TextPainter(
-      textDirection: TextDirection.ltr,
-      text: TextSpan(
-        text: label,
-        style: context.appText.caption.copyWith(
-          color: context.onSurface,
+    if (isSelected) {
+      final textPainter = TextPainter(
+        textDirection: TextDirection.ltr,
+        text: TextSpan(
+          text: label,
+          style: context.appText.caption.copyWith(
+            color: context.onSurface,
+          ),
         ),
-      ),
-    )..layout(maxWidth: width - 60);
+      )..layout(maxWidth: width - 60);
 
-    textPainter.paint(
-      canvas,
-      Offset(
-        56,
-        (height - textPainter.height) / 2,
-      ),
-    );
+      textPainter.paint(
+        canvas,
+        Offset(
+          56,
+          (height - textPainter.height) / 2,
+        ),
+      );
+    }
 
     final picture = recorder.endRecording();
     final image = await picture.toImage(
