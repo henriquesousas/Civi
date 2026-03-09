@@ -8,7 +8,10 @@ import 'package:deehelp/core/ui/styles/app_text_style.dart';
 import 'package:deehelp/mons_house.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:geolocator/geolocator.dart'
+    show Geolocator, LocationPermission, LocationAccuracy;
 import 'package:mapbox_maps_flutter/mapbox_maps_flutter.dart';
+import 'package:permission_handler/permission_handler.dart';
 
 class FakeIncident {
   final Point point;
@@ -139,6 +142,8 @@ class MapPage extends StatefulWidget {
 class _MapPageState extends State<MapPage> {
   bool _showIncidentCards = false;
   List<PointAnnotation> _markers = [];
+  bool _locationEnabled = false;
+  bool _isFollowingUser = false;
 
   PointAnnotation? _activeMarker;
   CameraState? _previousCameraState;
@@ -157,6 +162,7 @@ class _MapPageState extends State<MapPage> {
     return Scaffold(
       body: Stack(
         children: [
+          // Mapa
           MapWidget(
             key: const ValueKey('mapWidget'),
             styleUri: MapboxStyles.MAPBOX_STREETS,
@@ -165,6 +171,41 @@ class _MapPageState extends State<MapPage> {
               zoom: 13.8,
             ),
             onMapCreated: _onMapCreated,
+          ),
+
+          SafeArea(
+            bottom: false,
+            child: Padding(
+              padding: const EdgeInsets.fromLTRB(16, 10, 16, 0),
+              child: MapTopFakeSearchBar(
+                // hintText: 'Buscar incidentes ou locais',
+                hintText: 'O que aconteceu por aqui?',
+                avatarUrl:
+                    "https://img.freepik.com/fotos-gratis/jovem-bonito-vestindo-camiseta-casual-sobre-o-rosto-feliz-de-fundo-azul-sorrindo-com-os-bracos-cruzados-olhando-para-a-camera-pessoa-positiva_839833-12963.jpg?semt=ais_hybrid&w=740&q=80",
+                notificationCount: 3,
+                onTap: () {},
+                onAvatarTap: () {},
+                onNotificationTap: () {},
+              ),
+            ),
+          ),
+
+          // Botao GPS
+          AnimatedPositioned(
+            duration: const Duration(milliseconds: 300),
+            curve: Curves.easeOut,
+            right: 16,
+            bottom: _showIncidentCards ? 260 : 190,
+            child: FloatingActionButton(
+              mini: false,
+              backgroundColor: AppColors.primaryColor,
+              elevation: 8,
+              onPressed: () => _goToMyLocation(),
+              child: const Icon(
+                Icons.my_location_rounded,
+                color: Colors.white,
+              ),
+            ),
           ),
 
           _clseButton(),
@@ -176,6 +217,27 @@ class _MapPageState extends State<MapPage> {
             right: 16,
             bottom: _showIncidentCards ? context.topPadding + 10 : -200,
             child: _horizontalIncidentCard(),
+          ),
+
+          // Botao reportar incidente
+          Positioned(
+            bottom: 190,
+            right: 0,
+            left: 0,
+            child: Align(
+              alignment: Alignment.center,
+              child: AnimatedSlide(
+                duration: const Duration(milliseconds: 300),
+                offset: _showIncidentCards ? const Offset(0, 1) : Offset.zero,
+                child: AnimatedOpacity(
+                  duration: const Duration(milliseconds: 250),
+                  opacity: _showIncidentCards ? 0 : 1,
+                  child: ReportIncidentMiniButton2(
+                    onTap: () {},
+                  ),
+                ),
+              ),
+            ),
           ),
 
           // Moms'House
@@ -194,8 +256,8 @@ class _MapPageState extends State<MapPage> {
                   right: 16,
                   bottom: 92,
                   child: LocationSummaryCard(
-                    title: "Mom's House",
-                    alertsText: "4 alerts past 24 hr",
+                    title: "Osasco - SP",
+                    alertsText: "4 alertas últimas 24 hr",
                   ),
                 ),
               ),
@@ -307,6 +369,20 @@ class _MapPageState extends State<MapPage> {
   Future<void> _onMapCreated(MapboxMap mapboxMap) async {
     _mapboxMap = mapboxMap;
 
+    final status = await Permission.locationWhenInUse.request();
+
+    if (status.isGranted) {
+      await _mapboxMap!.location.updateSettings(
+        LocationComponentSettings(
+          enabled: true,
+          pulsingEnabled: true,
+          showAccuracyRing: true,
+          puckBearingEnabled: true,
+          puckBearing: PuckBearing.HEADING,
+        ),
+      );
+    }
+
     _pointManager =
         await _mapboxMap!.annotations.createPointAnnotationManager();
 
@@ -363,9 +439,10 @@ class _MapPageState extends State<MapPage> {
       //   isSelected: true,
       // );
 
-      final pinImage = await createPinWithIconV3(
+      final pinImage = await createPinWithIconV4(
         icon: incident.image,
         label: 'DND0171',
+        isSelected: true,
         context: context,
       );
 
@@ -901,5 +978,822 @@ class _MapPageState extends State<MapPage> {
 
     final bytes = await image.toByteData(format: ui.ImageByteFormat.png);
     return bytes!.buffer.asUint8List();
+  }
+
+  Future<Uint8List> createPinWithIconV4({
+    required BuildContext context,
+    required String label,
+    required IconData icon,
+    bool isSelected = true,
+  }) async {
+    const double height = 48;
+    const double pointerHeight = 10;
+
+    const double borderRadius = 24;
+    const double borderWidth = 1.4;
+
+    const double iconCircleSize = 40;
+    const double iconSize = 22;
+    const double iconLeft = 8;
+
+    const double textLeft = 56;
+    const double textRightPadding = 16;
+
+    /// mede texto
+    final textPainter = TextPainter(
+      textDirection: TextDirection.ltr,
+      text: TextSpan(
+        text: label,
+        style: context.appText.caption.copyWith(
+          color: context.onSurface,
+        ),
+      ),
+    )..layout();
+
+    /// largura dinâmica
+    double width;
+
+    if (isSelected) {
+      width = textLeft + textPainter.width + textRightPadding;
+    } else {
+      width = iconCircleSize + 16;
+    }
+
+    final recorder = ui.PictureRecorder();
+    final canvas = Canvas(recorder);
+
+    final double centerX = width / 2;
+
+    final path = Path()
+      ..moveTo(borderRadius, 0)
+
+      /// topo
+      ..lineTo(width - borderRadius, 0)
+      ..quadraticBezierTo(width, 0, width, borderRadius)
+
+      /// lado direito
+      ..lineTo(width, height - borderRadius)
+      ..quadraticBezierTo(width, height, width - borderRadius, height)
+
+      /// seta
+      ..lineTo(centerX + 14, height)
+      ..cubicTo(
+        centerX + 6,
+        height,
+        centerX + 4,
+        height + 6,
+        centerX + 2,
+        height + pointerHeight - 1,
+      )
+      ..quadraticBezierTo(
+        centerX,
+        height + pointerHeight + 1.5,
+        centerX - 2,
+        height + pointerHeight - 1,
+      )
+      ..cubicTo(
+        centerX - 4,
+        height + 6,
+        centerX - 6,
+        height,
+        centerX - 12,
+        height,
+      )
+
+      /// lado esquerdo
+      ..lineTo(borderRadius, height)
+      ..quadraticBezierTo(0, height, 0, height - borderRadius)
+      ..lineTo(0, borderRadius)
+      ..quadraticBezierTo(0, 0, borderRadius, 0)
+      ..close();
+
+    /// shadow
+    canvas.save();
+    canvas.translate(0, 2);
+    canvas.drawPath(
+      path,
+      Paint()
+        ..color = const Color(0x22000000)
+        ..maskFilter = const ui.MaskFilter.blur(ui.BlurStyle.normal, 6),
+    );
+    canvas.restore();
+
+    /// fundo
+    canvas.drawPath(path, Paint()..color = Colors.white);
+
+    /// borda
+    canvas.drawPath(
+      path,
+      Paint()
+        ..color = AppColors.grey.withValues(alpha: 0.3)
+        ..style = PaintingStyle.stroke
+        ..strokeWidth = borderWidth
+        ..isAntiAlias = true,
+    );
+
+    /// círculo do ícone
+    final double iconTop = (height - iconCircleSize) / 2;
+
+    canvas.drawCircle(
+      Offset(
+        iconLeft + iconCircleSize / 2,
+        iconTop + iconCircleSize / 2,
+      ),
+      iconCircleSize / 2,
+      Paint()..color = const Color(0xFFE53935),
+    );
+
+    /// ícone
+    final iconPainter = TextPainter(
+      textDirection: TextDirection.ltr,
+      text: TextSpan(
+        text: String.fromCharCode(icon.codePoint),
+        style: TextStyle(
+          fontSize: iconSize,
+          fontFamily: icon.fontFamily,
+          package: icon.fontPackage,
+          color: Colors.white,
+        ),
+      ),
+    )..layout();
+
+    iconPainter.paint(
+      canvas,
+      Offset(
+        iconLeft + (iconCircleSize - iconPainter.width) / 2,
+        iconTop + (iconCircleSize - iconPainter.height) / 2,
+      ),
+    );
+
+    /// label
+    if (isSelected) {
+      textPainter.paint(
+        canvas,
+        Offset(
+          textLeft,
+          (height - textPainter.height) / 2,
+        ),
+      );
+    }
+
+    final picture = recorder.endRecording();
+    final image = await picture.toImage(
+      width.toInt(),
+      (height + pointerHeight + 6).toInt(),
+    );
+
+    final bytes = await image.toByteData(format: ui.ImageByteFormat.png);
+    return bytes!.buffer.asUint8List();
+  }
+
+  Future<void> _enableUserLocation() async {
+    final permission = await Permission.locationWhenInUse.request();
+
+    if (!permission.isGranted) return;
+
+    final serviceEnabled = await Geolocator.isLocationServiceEnabled();
+    if (!serviceEnabled) return;
+
+    await _mapboxMap?.location.updateSettings(
+      LocationComponentSettings(
+        enabled: true,
+        pulsingEnabled: true,
+        showAccuracyRing: true,
+        puckBearingEnabled: true,
+        puckBearing: PuckBearing.HEADING,
+      ),
+    );
+
+    setState(() {
+      _locationEnabled = true;
+    });
+  }
+
+  Future<void> _goToMyLocation() async {
+    if (!_locationEnabled) {
+      await _enableUserLocation();
+    }
+
+    final permission = await Geolocator.checkPermission();
+    if (permission == LocationPermission.denied ||
+        permission == LocationPermission.deniedForever) {
+      return;
+    }
+
+    final position = await Geolocator.getCurrentPosition(
+      desiredAccuracy: LocationAccuracy.high,
+    );
+
+    await _mapboxMap?.flyTo(
+      CameraOptions(
+        center: Point(
+          coordinates: Position(position.longitude, position.latitude),
+        ),
+        zoom: 16.5,
+        pitch: 0,
+      ),
+      MapAnimationOptions(
+        duration: 1200,
+      ),
+    );
+
+    setState(() {
+      _isFollowingUser = true;
+    });
+  }
+}
+
+class PremiumFakeSearchBar extends StatelessWidget {
+  final String hintText;
+  final String? avatarUrl;
+  final VoidCallback onTap;
+  final int notificationCount;
+
+  const PremiumFakeSearchBar({
+    super.key,
+    required this.onTap,
+    this.hintText = "Buscar alertas ou locais...",
+    this.avatarUrl,
+    this.notificationCount = 0,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Material(
+      elevation: 8, // <- ELEVATION
+      shadowColor: Colors.black.withValues(alpha: 0.25),
+      borderRadius: BorderRadius.circular(22),
+      color: Colors.white,
+      child: InkWell(
+        borderRadius: BorderRadius.circular(22),
+        onTap: onTap,
+        child: Container(
+          height: 56,
+          padding: const EdgeInsets.symmetric(horizontal: 10),
+          child: Row(
+            children: [
+              /// NOTIFICATION
+              Stack(
+                clipBehavior: Clip.none,
+                children: [
+                  Container(
+                    width: 38,
+                    height: 38,
+                    decoration: BoxDecoration(
+                      color: const Color(0xFFF4F6FA),
+                      borderRadius: BorderRadius.circular(14),
+                    ),
+                    child: const Icon(
+                      Icons.notifications_none_rounded,
+                      size: 20,
+                    ),
+                  ),
+                  if (notificationCount > 0)
+                    Positioned(
+                      right: -2,
+                      top: -2,
+                      child: Container(
+                        padding: const EdgeInsets.all(4),
+                        decoration: const BoxDecoration(
+                          color: Colors.red,
+                          shape: BoxShape.circle,
+                        ),
+                        child: Text(
+                          "$notificationCount",
+                          style: const TextStyle(
+                            color: Colors.white,
+                            fontSize: 9,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                      ),
+                    ),
+                ],
+              ),
+
+              const SizedBox(width: 12),
+
+              /// TEXT
+              Expanded(
+                child: Text(
+                  hintText,
+                  style: const TextStyle(
+                    color: Color(0xFF98A2B3),
+                    fontSize: 15,
+                    fontWeight: FontWeight.w500,
+                  ),
+                ),
+              ),
+
+              /// AVATAR
+              Container(
+                width: 38,
+                height: 38,
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(14),
+                  image: avatarUrl != null
+                      ? DecorationImage(
+                          image: NetworkImage(avatarUrl!),
+                          fit: BoxFit.cover,
+                        )
+                      : null,
+                  color: avatarUrl == null ? const Color(0xFF2B5BEE) : null,
+                ),
+                child: avatarUrl == null
+                    ? const Icon(
+                        Icons.person,
+                        color: Colors.white,
+                        size: 20,
+                      )
+                    : null,
+              ),
+
+              const SizedBox(width: 4),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+class MapTopFakeSearchBar extends StatelessWidget {
+  final String hintText;
+  final String? avatarUrl;
+  final VoidCallback onTap;
+  final VoidCallback? onAvatarTap;
+  final VoidCallback? onNotificationTap;
+  final int notificationCount;
+
+  const MapTopFakeSearchBar({
+    super.key,
+    required this.onTap,
+    this.onAvatarTap,
+    this.onNotificationTap,
+    this.hintText = 'Buscar aqui',
+    this.avatarUrl,
+    this.notificationCount = 0,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      height: 54,
+      padding: const EdgeInsets.symmetric(horizontal: 10),
+      decoration: BoxDecoration(
+        color: Colors.white,
+        borderRadius: BorderRadius.circular(28),
+        border: Border.all(
+          color: const Color(0xFFEAECEF),
+          width: 0.8,
+        ),
+        boxShadow: [
+          BoxShadow(
+            color: Colors.black.withValues(alpha: 0.18),
+            blurRadius: 16,
+            spreadRadius: -2,
+            offset: const Offset(0, 8),
+          )
+        ],
+      ),
+      child: Row(
+        children: [
+          _AvatarAction(
+            avatarUrl: avatarUrl,
+            onTap: onAvatarTap ?? onTap,
+          ),
+          const SizedBox(width: 10),
+          const Icon(
+            Icons.search_rounded,
+            size: 22,
+            color: Color(0xFF5F6368),
+          ),
+          const SizedBox(width: 10),
+          Expanded(
+            child: Text(
+              hintText,
+              style: const TextStyle(
+                fontSize: 16,
+                color: Color(0xFF5F6368),
+              ),
+            ),
+          ),
+          _NotificationAction(
+            count: notificationCount,
+            onTap: onNotificationTap ?? onTap,
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+class _AvatarAction extends StatelessWidget {
+  final String? avatarUrl;
+  final VoidCallback onTap;
+
+  const _AvatarAction({
+    required this.avatarUrl,
+    required this.onTap,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    final hasImage = avatarUrl != null && avatarUrl!.trim().isNotEmpty;
+
+    return InkWell(
+      onTap: onTap,
+      borderRadius: BorderRadius.circular(20),
+      child: Container(
+        width: 40,
+        height: 40,
+        decoration: BoxDecoration(
+          shape: BoxShape.circle,
+          color: hasImage ? null : const Color(0xFFE8F0FE),
+          image: hasImage
+              ? DecorationImage(
+                  image: NetworkImage(avatarUrl!),
+                  fit: BoxFit.cover,
+                )
+              : null,
+        ),
+        child: hasImage
+            ? null
+            : const Icon(
+                Icons.person_rounded,
+                color: Color(0xFF1A73E8),
+                size: 22,
+              ),
+      ),
+    );
+  }
+}
+
+class _NotificationAction extends StatelessWidget {
+  final int count;
+  final VoidCallback onTap;
+
+  const _NotificationAction({
+    required this.count,
+    required this.onTap,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return InkWell(
+      onTap: onTap,
+      borderRadius: BorderRadius.circular(20),
+      child: SizedBox(
+        width: 40,
+        height: 40,
+        child: Stack(
+          clipBehavior: Clip.none,
+          alignment: Alignment.center,
+          children: [
+            const Icon(
+              Icons.notifications_none_rounded,
+              size: 24,
+              color: Color(0xFF5F6368),
+            ),
+            if (count > 0)
+              Positioned(
+                right: 4,
+                top: 6,
+                child: Container(
+                  constraints: const BoxConstraints(
+                    minWidth: 16,
+                    minHeight: 16,
+                  ),
+                  padding: const EdgeInsets.symmetric(horizontal: 4),
+                  decoration: BoxDecoration(
+                    color: const Color(0xFFD93025),
+                    borderRadius: BorderRadius.circular(10),
+                    border: Border.all(
+                      color: Colors.white,
+                      width: 1.4,
+                    ),
+                  ),
+                  alignment: Alignment.center,
+                  child: Text(
+                    count > 9 ? '9+' : '$count',
+                    style: const TextStyle(
+                      color: Colors.white,
+                      fontSize: 9,
+                      fontWeight: FontWeight.w700,
+                      height: 1,
+                    ),
+                  ),
+                ),
+              ),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+class FloatingMapSearchBar extends StatelessWidget {
+  final String hintText;
+  final String? avatarUrl;
+  final int notificationCount;
+  final VoidCallback onTap;
+  final VoidCallback? onAvatarTap;
+  final VoidCallback? onNotificationTap;
+
+  const FloatingMapSearchBar({
+    super.key,
+    required this.onTap,
+    this.onAvatarTap,
+    this.onNotificationTap,
+    this.hintText = 'Buscar no mapa',
+    this.avatarUrl,
+    this.notificationCount = 0,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return ClipRRect(
+      borderRadius: BorderRadius.circular(28),
+      child: BackdropFilter(
+        filter: ui.ImageFilter.blur(sigmaX: 6, sigmaY: 6),
+        child: Container(
+          height: 56,
+          decoration: BoxDecoration(
+            color: Colors.white.withValues(alpha: 0.94),
+            borderRadius: BorderRadius.circular(28),
+            border: Border.all(
+              color: const Color(0xFFE8EAED),
+              width: 0.9,
+            ),
+            boxShadow: [
+              BoxShadow(
+                color: Colors.black.withValues(alpha: 0.16),
+                blurRadius: 18,
+                spreadRadius: -3,
+                offset: const Offset(0, 10),
+              ),
+              BoxShadow(
+                color: Colors.black.withValues(alpha: 0.06),
+                blurRadius: 6,
+                spreadRadius: 0,
+                offset: const Offset(0, 2),
+              ),
+            ],
+          ),
+          child: Material(
+            color: Colors.transparent,
+            child: InkWell(
+              borderRadius: BorderRadius.circular(28),
+              onTap: onTap,
+              child: Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 8),
+                child: Row(
+                  children: [
+                    _MapAvatar(
+                      avatarUrl: avatarUrl,
+                      onTap: onAvatarTap ?? onTap,
+                    ),
+                    const SizedBox(width: 10),
+                    const Icon(
+                      Icons.search_rounded,
+                      size: 21,
+                      color: Color(0xFF5F6368),
+                    ),
+                    const SizedBox(width: 10),
+                    Expanded(
+                      child: Text(
+                        hintText,
+                        maxLines: 1,
+                        overflow: TextOverflow.ellipsis,
+                        style: const TextStyle(
+                          fontSize: 15.5,
+                          fontWeight: FontWeight.w400,
+                          color: Color(0xFF5F6368),
+                          letterSpacing: 0.1,
+                        ),
+                      ),
+                    ),
+                    const SizedBox(width: 6),
+                    _MapNotificationButton(
+                      count: notificationCount,
+                      onTap: onNotificationTap ?? onTap,
+                    ),
+                  ],
+                ),
+              ),
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+class _MapAvatar extends StatelessWidget {
+  final String? avatarUrl;
+  final VoidCallback onTap;
+
+  const _MapAvatar({
+    required this.avatarUrl,
+    required this.onTap,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    final hasImage = avatarUrl != null && avatarUrl!.trim().isNotEmpty;
+
+    return InkWell(
+      onTap: onTap,
+      borderRadius: BorderRadius.circular(999),
+      child: Container(
+        width: 40,
+        height: 40,
+        decoration: BoxDecoration(
+          shape: BoxShape.circle,
+          color: hasImage ? null : const Color(0xFFE8F0FE),
+          image: hasImage
+              ? DecorationImage(
+                  image: NetworkImage(avatarUrl!),
+                  fit: BoxFit.cover,
+                )
+              : null,
+          boxShadow: [
+            BoxShadow(
+              color: Colors.black.withValues(alpha: 0.08),
+              blurRadius: 4,
+              offset: const Offset(0, 1),
+            ),
+          ],
+        ),
+        child: hasImage
+            ? null
+            : const Icon(
+                Icons.person_rounded,
+                size: 20,
+                color: Color(0xFF1A73E8),
+              ),
+      ),
+    );
+  }
+}
+
+class _MapNotificationButton extends StatelessWidget {
+  final int count;
+  final VoidCallback onTap;
+
+  const _MapNotificationButton({
+    required this.count,
+    required this.onTap,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return InkWell(
+      onTap: onTap,
+      borderRadius: BorderRadius.circular(999),
+      child: SizedBox(
+        width: 40,
+        height: 40,
+        child: Stack(
+          clipBehavior: Clip.none,
+          alignment: Alignment.center,
+          children: [
+            const Icon(
+              Icons.notifications_none_rounded,
+              size: 23,
+              color: Color(0xFF5F6368),
+            ),
+            if (count > 0)
+              Positioned(
+                right: 3,
+                top: 5,
+                child: Container(
+                  constraints: const BoxConstraints(
+                    minWidth: 16,
+                    minHeight: 16,
+                  ),
+                  padding: const EdgeInsets.symmetric(horizontal: 4),
+                  decoration: BoxDecoration(
+                    color: const Color(0xFFD93025),
+                    borderRadius: BorderRadius.circular(99),
+                    border: Border.all(
+                      color: Colors.white,
+                      width: 1.5,
+                    ),
+                    boxShadow: [
+                      BoxShadow(
+                        color: Colors.black.withValues(alpha: 0.10),
+                        blurRadius: 4,
+                        offset: const Offset(0, 1),
+                      ),
+                    ],
+                  ),
+                  alignment: Alignment.center,
+                  child: Text(
+                    count > 9 ? '9+' : '$count',
+                    style: const TextStyle(
+                      fontSize: 9,
+                      fontWeight: FontWeight.w700,
+                      color: Colors.white,
+                      height: 1,
+                    ),
+                  ),
+                ),
+              ),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+class ReportIncidentMiniButton extends StatelessWidget {
+  final VoidCallback onTap;
+
+  const ReportIncidentMiniButton({
+    super.key,
+    required this.onTap,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Material(
+      elevation: 8,
+      shadowColor: Colors.black.withValues(alpha: 0.25),
+      borderRadius: BorderRadius.circular(22),
+      color: const Color(0xFFEF4444),
+      child: InkWell(
+        borderRadius: BorderRadius.circular(22),
+        onTap: onTap,
+        child: const Padding(
+          padding: EdgeInsets.symmetric(horizontal: 14, vertical: 10),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              Icon(
+                Icons.report_problem_rounded,
+                color: Colors.white,
+                size: 20,
+              ),
+              SizedBox(width: 6),
+              Text(
+                "Reportar",
+                style: TextStyle(
+                  color: Colors.white,
+                  fontWeight: FontWeight.w600,
+                  fontSize: 14,
+                ),
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+class ReportIncidentMiniButton2 extends StatelessWidget {
+  final VoidCallback onTap;
+
+  const ReportIncidentMiniButton2({
+    super.key,
+    required this.onTap,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Material(
+      elevation: 8,
+      shadowColor: Colors.black.withValues(alpha: 0.25),
+      borderRadius: BorderRadius.circular(22),
+      color: const Color(0xFFEF4444),
+      child: InkWell(
+        borderRadius: BorderRadius.circular(22),
+        onTap: onTap,
+        child: const Padding(
+          padding: EdgeInsets.symmetric(horizontal: 16, vertical: 10),
+          child: Row(
+            mainAxisSize: MainAxisSize.min, // 👈 tamanho baseado no conteúdo
+            children: [
+              Icon(
+                Icons.campaign_rounded,
+                color: Colors.white,
+                size: 20,
+              ),
+              SizedBox(width: 6),
+              Text(
+                "Alertar",
+                style: TextStyle(
+                  color: Colors.white,
+                  fontWeight: FontWeight.w600,
+                  fontSize: 14,
+                ),
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
   }
 }

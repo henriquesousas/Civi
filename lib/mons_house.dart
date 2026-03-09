@@ -125,7 +125,7 @@ class LocationSummaryCard extends StatelessWidget {
                 ),
               ),
               child: const Text(
-                'Edit Location',
+                'Ver incidentes',
                 style: TextStyle(
                   color: Color(0xFF374151),
                   fontSize: 12,
