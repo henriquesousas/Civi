@@ -132,14 +132,14 @@ class FakeIncident {
   }
 }
 
-class MapPage extends StatefulWidget {
-  const MapPage({super.key});
+class MapPageTeste extends StatefulWidget {
+  const MapPageTeste({super.key});
 
   @override
-  State<MapPage> createState() => _MapPageState();
+  State<MapPageTeste> createState() => _MapPageTesteState();
 }
 
-class _MapPageState extends State<MapPage> {
+class _MapPageTesteState extends State<MapPageTeste> {
   bool _showIncidentCards = false;
   List<PointAnnotation> _markers = [];
   bool _locationEnabled = false;
@@ -173,6 +173,7 @@ class _MapPageState extends State<MapPage> {
             onMapCreated: _onMapCreated,
           ),
 
+          //Search
           SafeArea(
             bottom: false,
             child: Padding(

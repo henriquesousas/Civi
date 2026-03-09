@@ -1,8 +1,10 @@
 // import 'package:deehelp/feature/home/v2/home_page.dart';
-import 'package:deehelp/feature/home/home_page4.dart';
+
+import 'package:deehelp/feature/home/v2/home_page.dart';
 import 'package:deehelp/feature/home/v2/teste_home.dart';
 import 'package:deehelp/feature/home/v2/widgets/waze_alert.dart';
 import 'package:deehelp/feature/items/list/item_list_page.dart';
+import 'package:deehelp/feature/mapa/mapa_page.dart';
 import 'package:deehelp/feature/profile/profile_page.dart';
 import 'package:deehelp/feature/search/search_page.dart';
 import 'package:deehelp/feature/shell/bottom_nav.dart';
@@ -24,8 +26,9 @@ class _AppShellPageState extends ConsumerState<AppShellPage> {
   int index = 0;
   late final List<Widget> _pages = const [
     // HomePage(), //  1
-    EventsScreen(),
+    // EventsScreen(),
     // AlertDetailsScreen(),
+    MapaPage(),
     SearchPage(), // 2
     ItemListPage(), // 3
     ProfilePage(), // 4

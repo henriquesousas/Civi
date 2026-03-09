@@ -16,7 +16,7 @@ import 'package:deehelp/feature/shell/app_sheel_router.dart';
 import 'package:deehelp/feature/sos/sos_router.dart';
 import 'package:deehelp/feature/splash/splash_router.dart';
 import 'package:deehelp/core/router/router_refresh_notifier.dart';
-import 'package:deehelp/map_page.dart';
+import 'package:deehelp/map_page_teste.dart';
 import 'package:deehelp/map_page2.dart';
 import 'package:deehelp/map_toolbar.dart';
 import 'package:deehelp/mons_house.dart';
@@ -58,7 +58,7 @@ var goRouterProvider = Provider<GoRouter>(
         final appStatus = ref.read(appStartupProvider);
         final currentPath = state.matchedLocation;
         final isPublicRoute = _publicRoutes.contains(currentPath);
-        return '/';
+        // return '/';
         switch (appStatus) {
           case AppStatus.loading:
             return SplashRouter.path;
@@ -97,7 +97,7 @@ var goRouterProvider = Provider<GoRouter>(
             // child: const MapPage2(),
             // child: const MounsHouse(),
             // child: const CardBottom(),
-            child: const MapPage(),
+            child: const MapPageTeste(),
             // child: const MapToolbar(),
           ),
         ),

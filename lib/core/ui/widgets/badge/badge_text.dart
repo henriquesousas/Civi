@@ -5,7 +5,8 @@ import 'package:flutter/material.dart';
 
 class BadgeText extends StatelessWidget {
   final String text;
-  const BadgeText({super.key, required this.text});
+  final Color? bgColor;
+  const BadgeText({super.key, required this.text, this.bgColor});
 
   @override
   Widget build(BuildContext context) {
@@ -15,7 +16,7 @@ class BadgeText extends StatelessWidget {
         vertical: SpacingSize.sm,
       ),
       decoration: BoxDecoration(
-        color: context.primaryColor.withValues(alpha: 0.10),
+        color: bgColor ?? context.primaryColor.withValues(alpha: 0.10),
         borderRadius: BorderRadius.circular(99),
       ),
       child: Text(

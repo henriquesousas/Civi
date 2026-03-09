@@ -1,0 +1,1 @@
+enum ReportedBy { community, platform }

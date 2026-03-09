@@ -1,6 +1,7 @@
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 abstract class ImageSize {
+  static double xxs = 30.w;
   static double xs = 42.w;
   static double sm = 60.w;
   static double md = 92.w;
