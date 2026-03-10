@@ -16,6 +16,8 @@ class ProfileImageWithUploadButtonWidget extends StatefulWidget {
   final double width;
   final double height;
   final Function(File)? onChanged;
+  final BoxBorder? border;
+  final bool showBoxShadow;
 
   const ProfileImageWithUploadButtonWidget({
     super.key,
@@ -26,6 +28,8 @@ class ProfileImageWithUploadButtonWidget extends StatefulWidget {
     this.radius,
     this.width = 80,
     this.height = 80,
+    this.showBoxShadow = false,
+    this.border,
     required this.imageAlt,
   });
   @override
@@ -47,8 +51,18 @@ class _ProfileImageWithUploadButtonWidgetState
                 color: context.primaryColor.withValues(alpha: 0.15),
                 width: 2.w,
               ),
-              borderRadius:
-                  BorderRadius.circular(widget.radius ?? RadiusSize.md),
+              borderRadius: BorderRadius.circular(
+                widget.radius ?? RadiusSize.md,
+              ),
+              boxShadow: widget.showBoxShadow
+                  ? [
+                      BoxShadow(
+                        color: Colors.black.withValues(alpha: 0.08),
+                        blurRadius: 12,
+                        offset: const Offset(0, 6),
+                      )
+                    ]
+                  : null,
             ),
             child: Container(
               decoration: BoxDecoration(
@@ -56,6 +70,7 @@ class _ProfileImageWithUploadButtonWidgetState
                 //   color: AppColors.primaryColor,
                 //   width: 2,
                 // ),
+                border: widget.border,
                 borderRadius:
                     BorderRadius.circular(widget.radius ?? RadiusSize.md),
               ),

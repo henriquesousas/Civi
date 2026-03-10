@@ -40,7 +40,7 @@ class SearchViewmodel extends StateNotifier<AsyncValue<List<IncidentOutput>>> {
 
   Future<void> getlast() async {
     debugPrint('getlast');
-    state = const AsyncValue.loading();
+    // state = const AsyncValue.loading();
 
     try {
       final filter = IncidentFilter(

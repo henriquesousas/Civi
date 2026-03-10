@@ -266,6 +266,7 @@ class _SearchPageState extends ConsumerState<SearchPage> {
         press: () => context.pop(),
       ),
       body: ListView(
+        physics: const BouncingScrollPhysics(),
         padding: const EdgeInsets.fromLTRB(16, 16, 16, 24),
         children: [
           CardHint(

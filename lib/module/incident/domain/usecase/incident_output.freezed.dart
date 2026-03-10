@@ -20,8 +20,11 @@ mixin _$IncidentOutput {
   TypeAlert get type;
   IncidentProductOutput get product;
   ItemStatus get status;
+  Kind get kind;
+  ReportType get reportType;
   DateTime get createdAt;
   DateTime get occurredAt;
+  DateTime? get expiresAt;
   TimeOfDay get occurredAtTime;
   IncidentLocal? get local;
   String? get howTo;
@@ -46,10 +49,15 @@ mixin _$IncidentOutput {
             (identical(other.type, type) || other.type == type) &&
             (identical(other.product, product) || other.product == product) &&
             (identical(other.status, status) || other.status == status) &&
+            (identical(other.kind, kind) || other.kind == kind) &&
+            (identical(other.reportType, reportType) ||
+                other.reportType == reportType) &&
             (identical(other.createdAt, createdAt) ||
                 other.createdAt == createdAt) &&
             (identical(other.occurredAt, occurredAt) ||
                 other.occurredAt == occurredAt) &&
+            (identical(other.expiresAt, expiresAt) ||
+                other.expiresAt == expiresAt) &&
             (identical(other.occurredAtTime, occurredAtTime) ||
                 other.occurredAtTime == occurredAtTime) &&
             (identical(other.local, local) || other.local == local) &&
@@ -67,8 +75,11 @@ mixin _$IncidentOutput {
       type,
       product,
       status,
+      kind,
+      reportType,
       createdAt,
       occurredAt,
+      expiresAt,
       occurredAtTime,
       local,
       howTo,
@@ -76,7 +87,7 @@ mixin _$IncidentOutput {
 
   @override
   String toString() {
-    return 'IncidentOutput(id: $id, userId: $userId, alertId: $alertId, type: $type, product: $product, status: $status, createdAt: $createdAt, occurredAt: $occurredAt, occurredAtTime: $occurredAtTime, local: $local, howTo: $howTo, visibilty: $visibilty)';
+    return 'IncidentOutput(id: $id, userId: $userId, alertId: $alertId, type: $type, product: $product, status: $status, kind: $kind, reportType: $reportType, createdAt: $createdAt, occurredAt: $occurredAt, expiresAt: $expiresAt, occurredAtTime: $occurredAtTime, local: $local, howTo: $howTo, visibilty: $visibilty)';
   }
 }
 
@@ -93,8 +104,11 @@ abstract mixin class $IncidentOutputCopyWith<$Res> {
       TypeAlert type,
       IncidentProductOutput product,
       ItemStatus status,
+      Kind kind,
+      ReportType reportType,
       DateTime createdAt,
       DateTime occurredAt,
+      DateTime? expiresAt,
       TimeOfDay occurredAtTime,
       IncidentLocal? local,
       String? howTo,
@@ -120,8 +134,11 @@ class _$IncidentOutputCopyWithImpl<$Res>
     Object? type = null,
     Object? product = null,
     Object? status = null,
+    Object? kind = null,
+    Object? reportType = null,
     Object? createdAt = null,
     Object? occurredAt = null,
+    Object? expiresAt = freezed,
     Object? occurredAtTime = null,
     Object? local = freezed,
     Object? howTo = freezed,
@@ -152,6 +169,14 @@ class _$IncidentOutputCopyWithImpl<$Res>
           ? _self.status
           : status // ignore: cast_nullable_to_non_nullable
               as ItemStatus,
+      kind: null == kind
+          ? _self.kind
+          : kind // ignore: cast_nullable_to_non_nullable
+              as Kind,
+      reportType: null == reportType
+          ? _self.reportType
+          : reportType // ignore: cast_nullable_to_non_nullable
+              as ReportType,
       createdAt: null == createdAt
           ? _self.createdAt
           : createdAt // ignore: cast_nullable_to_non_nullable
@@ -160,6 +185,10 @@ class _$IncidentOutputCopyWithImpl<$Res>
           ? _self.occurredAt
           : occurredAt // ignore: cast_nullable_to_non_nullable
               as DateTime,
+      expiresAt: freezed == expiresAt
+          ? _self.expiresAt
+          : expiresAt // ignore: cast_nullable_to_non_nullable
+              as DateTime?,
       occurredAtTime: null == occurredAtTime
           ? _self.occurredAtTime
           : occurredAtTime // ignore: cast_nullable_to_non_nullable
@@ -280,8 +309,11 @@ extension IncidentOutputPatterns on IncidentOutput {
             TypeAlert type,
             IncidentProductOutput product,
             ItemStatus status,
+            Kind kind,
+            ReportType reportType,
             DateTime createdAt,
             DateTime occurredAt,
+            DateTime? expiresAt,
             TimeOfDay occurredAtTime,
             IncidentLocal? local,
             String? howTo,
@@ -299,8 +331,11 @@ extension IncidentOutputPatterns on IncidentOutput {
             _that.type,
             _that.product,
             _that.status,
+            _that.kind,
+            _that.reportType,
             _that.createdAt,
             _that.occurredAt,
+            _that.expiresAt,
             _that.occurredAtTime,
             _that.local,
             _that.howTo,
@@ -332,8 +367,11 @@ extension IncidentOutputPatterns on IncidentOutput {
             TypeAlert type,
             IncidentProductOutput product,
             ItemStatus status,
+            Kind kind,
+            ReportType reportType,
             DateTime createdAt,
             DateTime occurredAt,
+            DateTime? expiresAt,
             TimeOfDay occurredAtTime,
             IncidentLocal? local,
             String? howTo,
@@ -350,8 +388,11 @@ extension IncidentOutputPatterns on IncidentOutput {
             _that.type,
             _that.product,
             _that.status,
+            _that.kind,
+            _that.reportType,
             _that.createdAt,
             _that.occurredAt,
+            _that.expiresAt,
             _that.occurredAtTime,
             _that.local,
             _that.howTo,
@@ -382,8 +423,11 @@ extension IncidentOutputPatterns on IncidentOutput {
             TypeAlert type,
             IncidentProductOutput product,
             ItemStatus status,
+            Kind kind,
+            ReportType reportType,
             DateTime createdAt,
             DateTime occurredAt,
+            DateTime? expiresAt,
             TimeOfDay occurredAtTime,
             IncidentLocal? local,
             String? howTo,
@@ -400,8 +444,11 @@ extension IncidentOutputPatterns on IncidentOutput {
             _that.type,
             _that.product,
             _that.status,
+            _that.kind,
+            _that.reportType,
             _that.createdAt,
             _that.occurredAt,
+            _that.expiresAt,
             _that.occurredAtTime,
             _that.local,
             _that.howTo,
@@ -422,8 +469,11 @@ class _IncidentOutput implements IncidentOutput {
       required this.type,
       required this.product,
       required this.status,
+      required this.kind,
+      required this.reportType,
       required this.createdAt,
       required this.occurredAt,
+      required this.expiresAt,
       required this.occurredAtTime,
       this.local,
       this.howTo,
@@ -442,9 +492,15 @@ class _IncidentOutput implements IncidentOutput {
   @override
   final ItemStatus status;
   @override
+  final Kind kind;
+  @override
+  final ReportType reportType;
+  @override
   final DateTime createdAt;
   @override
   final DateTime occurredAt;
+  @override
+  final DateTime? expiresAt;
   @override
   final TimeOfDay occurredAtTime;
   @override
@@ -474,10 +530,15 @@ class _IncidentOutput implements IncidentOutput {
             (identical(other.type, type) || other.type == type) &&
             (identical(other.product, product) || other.product == product) &&
             (identical(other.status, status) || other.status == status) &&
+            (identical(other.kind, kind) || other.kind == kind) &&
+            (identical(other.reportType, reportType) ||
+                other.reportType == reportType) &&
             (identical(other.createdAt, createdAt) ||
                 other.createdAt == createdAt) &&
             (identical(other.occurredAt, occurredAt) ||
                 other.occurredAt == occurredAt) &&
+            (identical(other.expiresAt, expiresAt) ||
+                other.expiresAt == expiresAt) &&
             (identical(other.occurredAtTime, occurredAtTime) ||
                 other.occurredAtTime == occurredAtTime) &&
             (identical(other.local, local) || other.local == local) &&
@@ -495,8 +556,11 @@ class _IncidentOutput implements IncidentOutput {
       type,
       product,
       status,
+      kind,
+      reportType,
       createdAt,
       occurredAt,
+      expiresAt,
       occurredAtTime,
       local,
       howTo,
@@ -504,7 +568,7 @@ class _IncidentOutput implements IncidentOutput {
 
   @override
   String toString() {
-    return 'IncidentOutput(id: $id, userId: $userId, alertId: $alertId, type: $type, product: $product, status: $status, createdAt: $createdAt, occurredAt: $occurredAt, occurredAtTime: $occurredAtTime, local: $local, howTo: $howTo, visibilty: $visibilty)';
+    return 'IncidentOutput(id: $id, userId: $userId, alertId: $alertId, type: $type, product: $product, status: $status, kind: $kind, reportType: $reportType, createdAt: $createdAt, occurredAt: $occurredAt, expiresAt: $expiresAt, occurredAtTime: $occurredAtTime, local: $local, howTo: $howTo, visibilty: $visibilty)';
   }
 }
 
@@ -523,8 +587,11 @@ abstract mixin class _$IncidentOutputCopyWith<$Res>
       TypeAlert type,
       IncidentProductOutput product,
       ItemStatus status,
+      Kind kind,
+      ReportType reportType,
       DateTime createdAt,
       DateTime occurredAt,
+      DateTime? expiresAt,
       TimeOfDay occurredAtTime,
       IncidentLocal? local,
       String? howTo,
@@ -550,8 +617,11 @@ class __$IncidentOutputCopyWithImpl<$Res>
     Object? type = null,
     Object? product = null,
     Object? status = null,
+    Object? kind = null,
+    Object? reportType = null,
     Object? createdAt = null,
     Object? occurredAt = null,
+    Object? expiresAt = freezed,
     Object? occurredAtTime = null,
     Object? local = freezed,
     Object? howTo = freezed,
@@ -582,6 +652,14 @@ class __$IncidentOutputCopyWithImpl<$Res>
           ? _self.status
           : status // ignore: cast_nullable_to_non_nullable
               as ItemStatus,
+      kind: null == kind
+          ? _self.kind
+          : kind // ignore: cast_nullable_to_non_nullable
+              as Kind,
+      reportType: null == reportType
+          ? _self.reportType
+          : reportType // ignore: cast_nullable_to_non_nullable
+              as ReportType,
       createdAt: null == createdAt
           ? _self.createdAt
           : createdAt // ignore: cast_nullable_to_non_nullable
@@ -590,6 +668,10 @@ class __$IncidentOutputCopyWithImpl<$Res>
           ? _self.occurredAt
           : occurredAt // ignore: cast_nullable_to_non_nullable
               as DateTime,
+      expiresAt: freezed == expiresAt
+          ? _self.expiresAt
+          : expiresAt // ignore: cast_nullable_to_non_nullable
+              as DateTime?,
       occurredAtTime: null == occurredAtTime
           ? _self.occurredAtTime
           : occurredAtTime // ignore: cast_nullable_to_non_nullable

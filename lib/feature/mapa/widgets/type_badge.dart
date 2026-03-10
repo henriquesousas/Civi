@@ -1,3 +1,4 @@
+import 'package:deehelp/core/ui/styles/app_text_style.dart';
 import 'package:flutter/material.dart';
 
 class TypeBadge extends StatelessWidget {
@@ -22,11 +23,16 @@ class TypeBadge extends StatelessWidget {
       ),
       child: Text(
         label,
-        style: TextStyle(
-          fontSize: 11.4,
+        style: context.appText.caption.copyWith(
           fontWeight: FontWeight.w700,
           color: textColor,
         ),
+
+        // style: TextStyle(
+        //   fontSize: 11.4,
+        //   fontWeight: FontWeight.w700,
+        //   color: textColor,
+        // ),
       ),
     );
   }

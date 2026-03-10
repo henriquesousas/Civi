@@ -50,15 +50,15 @@ class ModeToggle extends StatelessWidget {
               onTap: () => onChanged(SearchMode.imei),
             ),
           ),
-          const SizedBox(width: 4),
-          Expanded(
-            child: ToggleChip(
-              selected: value == SearchMode.incidentCode,
-              label: 'Código',
-              icon: Icons.tag_rounded,
-              onTap: () => onChanged(SearchMode.incidentCode),
-            ),
-          ),
+          // const SizedBox(width: 4),
+          // Expanded(
+          //   child: ToggleChip(
+          //     selected: value == SearchMode.incidentCode,
+          //     label: 'Código',
+          //     icon: Icons.tag_rounded,
+          //     onTap: () => onChanged(SearchMode.incidentCode),
+          //   ),
+          // ),
         ],
       ),
     );

@@ -1,3 +1,4 @@
+import 'dart:math';
 import 'dart:typed_data';
 import 'dart:ui' as ui;
 
@@ -5,10 +6,14 @@ import 'package:deehelp/core/extension/exports_extension.dart';
 import 'package:deehelp/core/services/permissions/location/export_location.dart';
 import 'package:deehelp/core/theme/app_colors.dart';
 import 'package:deehelp/core/ui/styles/export_style.dart';
+import 'package:deehelp/core/ui/widgets/icon/export_icon.dart';
 import 'package:deehelp/feature/mapa/reported_by.dart';
 import 'package:deehelp/feature/mapa/widgets/horizontal_incident_card.dart';
 import 'package:deehelp/feature/mapa/widgets/map_location_summary_card.dart';
 import 'package:deehelp/feature/mapa/widgets/map_search.dart';
+import 'package:deehelp/feature/mapa/widgets/mapa_avatar.dart';
+import 'package:deehelp/feature/mapa/widgets/mapa_side_action.dart';
+import 'package:deehelp/feature/mapa/widgets/search_card_with_region.dart';
 import 'package:deehelp/module/auth/external/di/authenticated_user_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -24,7 +29,36 @@ class FakeIncident {
   FakeIncident(
       {required this.point, required this.image, required this.pinBorder});
 
-  static List<FakeIncident> items() {
+  static List<FakeIncident> generateFakeIncidents() {
+    final random = Random();
+
+    const double minLat = -23.70;
+    const double maxLat = -23.45;
+
+    const double minLng = -46.80;
+    const double maxLng = -46.40;
+
+    final icons = [
+      Icons.directions_car_filled_rounded,
+      Icons.smartphone_rounded,
+      Icons.two_wheeler_rounded,
+    ];
+
+    return List.generate(100, (index) {
+      final lat = minLat + random.nextDouble() * (maxLat - minLat);
+      final lng = minLng + random.nextDouble() * (maxLng - minLng);
+
+      return FakeIncident(
+        point: Point(
+          coordinates: Position(lng, lat),
+        ),
+        image: icons[random.nextInt(icons.length)],
+        pinBorder: AppColors.primaryColor,
+      );
+    });
+  }
+
+  static List<FakeIncident> itemss() {
     return [
       FakeIncident(
         point: Point(coordinates: Position(-46.7905, -23.5338)),
@@ -135,6 +169,12 @@ class FakeIncident {
   }
 }
 
+enum GPSHeight {
+  normal,
+  min,
+  hight,
+}
+
 class MapaPage extends ConsumerStatefulWidget {
   const MapaPage({super.key});
 
@@ -145,6 +185,12 @@ class MapaPage extends ConsumerStatefulWidget {
 class _MapaPageState extends ConsumerState<MapaPage> {
   final _initialZoom = 13.8;
   bool _showIncidentCards = false;
+  bool _isCardOpened = false;
+  GPSHeight _gpsHeight = GPSHeight.normal;
+
+  // double gpsNormalHeight = 100.h;
+  // final double gpsCardIncidentHeight = 240.h;
+
   // bool _locationEnabled = false;
   CameraState? _previousCameraState;
   final List<PointAnnotation> _markers = [];
@@ -157,10 +203,22 @@ class _MapaPageState extends ConsumerState<MapaPage> {
     coordinates: Position(-46.7917, -23.5329),
   );
 
+  double get _getGpsHeight {
+    switch (_gpsHeight) {
+      case GPSHeight.normal:
+        return 120.h;
+      case GPSHeight.min:
+        return 180.h;
+      default:
+        return 220.h;
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     final state = ref.watch(authenticatedUserProvider);
     final currenLocation = ref.watch(currentLocationProvider);
+    final fakeIncidents = FakeIncident.generateFakeIncidents();
 
     return Scaffold(
       body: Stack(
@@ -173,16 +231,50 @@ class _MapaPageState extends ConsumerState<MapaPage> {
               center: _myLocation,
               zoom: _initialZoom,
             ),
-            onMapCreated: _onMapCreated,
+            textureView: true,
+            onMapCreated: (mapboxMap) =>
+                _onMapCreated(mapboxMap, fakeIncidents),
+            // onMapCreated: _onMapCreated(),
           ),
           //Search
+          // SafeArea(
+          //   bottom: false,
+          //   child: Padding(
+          //     padding: const EdgeInsets.fromLTRB(16, 10, 16, 0),
+          //     child: Row(
+          //       mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          //       children: [
+          //         Flexible(
+          //           flex: 1,
+          //           child: MapaAvatar(
+          //             photoUrl: state?.photoUrl,
+          //           ),
+          //         ),
+          //         // const SizedBox(width: 12),
+          //         const Flexible(flex: 4, child: SearchCardWithRegion()),
+          //         // const SizedBox(width: 12),
+          //         // Aqui deve ter 3  icones um abaixo do outro no caso aqui no topo
+          //         Flexible(
+          //           flex: 1,
+          //           child: MapSideActionButton(
+          //             assetPath: "assets/images/settingsv2.png",
+          //             // icon: Icons.settings_outlined,
+          //             onTap: () {},
+          //           ),
+          //         ),
+
+          //       ],
+          //     ),
+          //   ),
+          // ),
+
           SafeArea(
             bottom: false,
             child: Padding(
-              padding: const EdgeInsets.fromLTRB(16, 10, 16, 0),
+              padding: const EdgeInsets.fromLTRB(20, 10, 20, 0),
               child: MapSearch(
                 // hintText: 'Buscar incidentes ou locais',
-                hintText: "👋 Digite uma placa ou IMEI de celular",
+                hintText: "👋 Consultar placa ou IMEI de celular",
                 avatarUrl: state?.photoUrl,
                 userName: state?.name ?? '',
                 notificationCount: 3,
@@ -197,16 +289,27 @@ class _MapaPageState extends ConsumerState<MapaPage> {
             duration: const Duration(milliseconds: 300),
             curve: Curves.easeOut,
             right: 16,
-            bottom: _showIncidentCards ? 260.h : 100.h,
-            child: FloatingActionButton(
-              mini: false,
-              backgroundColor: context.primaryColor,
-              elevation: 8,
-              onPressed: () => _goToMyLocation(currenLocation),
-              child: const Icon(
-                Icons.my_location_rounded,
-                color: Colors.white,
-              ),
+            // bottom: _showIncidentCards ? 240.h : 100.h,
+            bottom: _getGpsHeight,
+            child: Column(
+              spacing: 10,
+              children: [
+                // MapSideActionButton(
+                //   assetPath: "assets/images/settingsv2.png",
+                //   // icon: Icons.settings_outlined,
+                //   onTap: () {},
+                // ),
+                FloatingActionButton(
+                  mini: false,
+                  backgroundColor: context.primaryColor,
+                  elevation: 8,
+                  onPressed: () => _goToMyLocation(currenLocation),
+                  child: const Icon(
+                    Icons.my_location_rounded,
+                    color: Colors.white,
+                  ),
+                ),
+              ],
             ),
           ),
           //Close incidents
@@ -216,24 +319,50 @@ class _MapaPageState extends ConsumerState<MapaPage> {
             duration: const Duration(milliseconds: 350),
             left: 16,
             right: 16,
-            bottom: _showIncidentCards ? context.topPadding : -300,
-            child: _horizontalIncidentCard(),
+            bottom: _showIncidentCards ? 1 : -300,
+            child: _horizontalIncidentCard(fakeIncidents),
           ),
           // Location
           Positioned(
-            left: 16,
-            right: 16,
-            bottom: -10,
+            left: 10,
+            right: 10,
+            bottom: context.bottomPadding + 5,
             child: AnimatedSlide(
               duration: const Duration(milliseconds: 300),
               offset: _showIncidentCards ? const Offset(0, 1) : Offset.zero,
               child: AnimatedOpacity(
                 duration: const Duration(milliseconds: 250),
                 opacity: _showIncidentCards ? 0 : 1,
-                child: const Positioned(
-                  child: MapLocationSummaryCard(
-                    title: "Osasco - SP",
-                    alertsText: "4 alertas últimas 24 hrs",
+                child: Positioned(
+                  // child: MapLocationSummaryCard(
+                  //   title: "Osasco - SP",
+                  //   // alertsText: "4 alertas últimas 24 hrs",
+                  //   alertsText:
+                  //       "Travessa Francisco Alves da Silva, 2 Baronesa Osasco",
+                  // ),
+                  child: ExpandableIncidentCard(
+                    startOpened: _showIncidentCards,
+                    title: 'Osasco - SP',
+                    subtitle:
+                        'Trabessa Francisco Alves da Silva,2, Baronesa, Osasco',
+                    onViewIncidents: () {
+                      debugPrint('Ver incidentes');
+                    },
+                    onRegisterIncident: () {
+                      debugPrint('Registrar incidente');
+                    },
+                    onExpand: (opened) {
+                      _isCardOpened = opened;
+                      if (opened) {
+                        setState(() {
+                          _gpsHeight = GPSHeight.min;
+                        });
+                      } else {
+                        setState(() {
+                          _gpsHeight = GPSHeight.normal;
+                        });
+                      }
+                    },
                   ),
                 ),
               ),
@@ -246,7 +375,7 @@ class _MapaPageState extends ConsumerState<MapaPage> {
 
   Widget _clseButton() {
     return Positioned(
-      bottom: _showIncidentCards ? 260.h : 100.h,
+      bottom: _showIncidentCards ? 240.h : 100.h,
       left: 30,
       child: AnimatedOpacity(
         duration: const Duration(milliseconds: 250),
@@ -270,6 +399,11 @@ class _MapaPageState extends ConsumerState<MapaPage> {
               onPressed: () async {
                 setState(() {
                   _showIncidentCards = false;
+                  if (!_isCardOpened) {
+                    _gpsHeight = GPSHeight.normal;
+                  } else {
+                    _gpsHeight = GPSHeight.min;
+                  }
                 });
 
                 if (_previousCameraState != null) {
@@ -291,14 +425,14 @@ class _MapaPageState extends ConsumerState<MapaPage> {
     );
   }
 
-  Widget _horizontalIncidentCard() {
-    final height = context.percentHeight(0.10).clamp(205.0, 245.0);
+  Widget _horizontalIncidentCard(List<FakeIncident> incidents) {
+    final height = context.percentHeight(0.15).clamp(205.0, 245.0);
     return SizedBox(
       height: height,
       child: PageView.builder(
         clipBehavior: Clip.none,
         controller: _incidentPageController,
-        itemCount: FakeIncident.items().length,
+        itemCount: incidents.length,
         onPageChanged: (index) {
           _onIncidentCardChanged(index);
         },
@@ -327,7 +461,8 @@ class _MapaPageState extends ConsumerState<MapaPage> {
     );
   }
 
-  Future<void> _onMapCreated(MapboxMap mapboxMap) async {
+  Future<void> _onMapCreated(
+      MapboxMap mapboxMap, List<FakeIncident> incidents) async {
     _mapboxMap = mapboxMap;
 
     final status = await Permission.locationWhenInUse.request();
@@ -344,19 +479,30 @@ class _MapaPageState extends ConsumerState<MapaPage> {
       );
     }
 
+    await mapboxMap.compass.updateSettings(
+      CompassSettings(
+        enabled: false,
+      ),
+    );
+
     _pointManager =
         await _mapboxMap!.annotations.createPointAnnotationManager();
 
     _showScallableZoom(false);
-    _onMarkeClick();
+    _onMarkeClick(incidents);
 
-    final incidents = FakeIncident.items();
+    // final incidents = FakeIncident.items();
     _markers.clear();
     for (final incident in incidents) {
+      // final pinImage = await createPinWithText(
+      //   icon: incident.image,
+      //   label: 'DND0171',
+      //   isSelected: false,
+      // );
       final pinImage = await createPinWithIconV4(
         icon: incident.image,
-        label: 'DND0171',
-        isSelected: true,
+        badgeText: 'DND0171',
+        isSelected: false,
       );
 
       final marker = await _pointManager!.create(
@@ -382,10 +528,10 @@ class _MapaPageState extends ConsumerState<MapaPage> {
     );
   }
 
-  Future<Uint8List> createPinWithIconV4({
+  Future<Uint8List> createPinWithText({
     required String label,
     required IconData icon,
-    bool isSelected = true,
+    bool isSelected = false,
   }) async {
     final double height = context.percentHeight(0.055);
     // final double height = 35.h;
@@ -549,14 +695,247 @@ class _MapaPageState extends ConsumerState<MapaPage> {
     return bytes!.buffer.asUint8List();
   }
 
-  Future<void> _onMarkeClick() async {
+  Future<Uint8List> createPinWithIconV4({
+    required IconData icon,
+    required String badgeText,
+    bool isSelected = false,
+  }) async {
+    final double height = context.percentHeight(0.055);
+    const double pointerHeight = 10;
+
+    const double borderRadius = 22;
+    const double borderWidth = 1.4;
+
+    final double iconCircleSize = context.percentHeight(0.045);
+    final double iconSize = 21.w;
+
+    const double horizontalPadding = 8;
+    final double width = iconCircleSize + (horizontalPadding * 2);
+
+    /// badge
+    final badgePainter = TextPainter(
+      textDirection: TextDirection.ltr,
+      maxLines: 1,
+      text: TextSpan(
+        text: badgeText.toUpperCase(),
+        style: TextStyle(
+          fontSize: 11.sp,
+          fontWeight: FontWeight.w700,
+          color: const Color(0xFFE53935),
+          // color: Colors.black,
+          letterSpacing: 0.3,
+        ),
+      ),
+    )..layout();
+
+    const double badgeHorizontalPadding = 10;
+    const double badgeHeight = 20;
+    final double badgeWidth = badgePainter.width + (badgeHorizontalPadding * 2);
+
+    const double badgeTopSpacing = 2;
+    const double gapBetweenBadgeAndCard = 6;
+
+    final double totalHeight = badgeTopSpacing +
+        badgeHeight +
+        gapBetweenBadgeAndCard +
+        height +
+        pointerHeight +
+        6;
+
+    final recorder = ui.PictureRecorder();
+    final canvas = Canvas(recorder);
+
+    final double cardTop =
+        badgeTopSpacing + badgeHeight + gapBetweenBadgeAndCard;
+    final double centerX = width / 2;
+
+    /// path do card branco com seta
+    final path = Path()
+      ..moveTo(borderRadius, cardTop)
+
+      /// topo
+      ..lineTo(width - borderRadius, cardTop)
+      ..quadraticBezierTo(width, cardTop, width, cardTop + borderRadius)
+
+      /// lado direito
+      ..lineTo(width, cardTop + height - borderRadius)
+      ..quadraticBezierTo(
+        width,
+        cardTop + height,
+        width - borderRadius,
+        cardTop + height,
+      )
+
+      /// seta inferior
+      ..lineTo(centerX + 14, cardTop + height)
+      ..cubicTo(
+        centerX + 6,
+        cardTop + height,
+        centerX + 4,
+        cardTop + height + 6,
+        centerX + 2,
+        cardTop + height + pointerHeight - 1,
+      )
+      ..quadraticBezierTo(
+        centerX,
+        cardTop + height + pointerHeight + 1.5,
+        centerX - 2,
+        cardTop + height + pointerHeight - 1,
+      )
+      ..cubicTo(
+        centerX - 4,
+        cardTop + height + 6,
+        centerX - 6,
+        cardTop + height,
+        centerX - 12,
+        cardTop + height,
+      )
+
+      /// lado esquerdo
+      ..lineTo(borderRadius, cardTop + height)
+      ..quadraticBezierTo(
+          0, cardTop + height, 0, cardTop + height - borderRadius)
+      ..lineTo(0, cardTop + borderRadius)
+      ..quadraticBezierTo(0, cardTop, borderRadius, cardTop)
+      ..close();
+
+    /// sombra do card
+    canvas.save();
+    canvas.translate(0, 2);
+    canvas.drawPath(
+      path,
+      Paint()
+        ..color = const Color(0x22000000)
+        ..maskFilter = const ui.MaskFilter.blur(ui.BlurStyle.normal, 6),
+    );
+    canvas.restore();
+
+    /// fundo do card
+    canvas.drawPath(path, Paint()..color = Colors.white);
+
+    /// borda do card
+    canvas.drawPath(
+      path,
+      Paint()
+        ..color = AppColors.grey.withValues(alpha: 0.28)
+        ..style = PaintingStyle.stroke
+        ..strokeWidth = borderWidth
+        ..isAntiAlias = true,
+    );
+
+    /// badge flutuante acima
+    final double badgeLeft = (width - badgeWidth) / 2;
+    final Rect badgeRect = Rect.fromLTWH(
+      badgeLeft,
+      badgeTopSpacing,
+      badgeWidth,
+      badgeHeight,
+    );
+
+    final badgeRRect = RRect.fromRectAndRadius(
+      badgeRect,
+      const Radius.circular(999),
+    );
+
+    /// sombra badge
+    canvas.save();
+    canvas.translate(0, 1.5);
+    canvas.drawRRect(
+      badgeRRect,
+      Paint()
+        ..color = const Color(0x16000000)
+        ..maskFilter = const ui.MaskFilter.blur(ui.BlurStyle.normal, 4),
+    );
+    canvas.restore();
+
+    /// fundo badge
+    canvas.drawRRect(
+      badgeRRect,
+      Paint()..color = const Color(0xFFFFEBEE),
+      // Paint()..color = Colors.black87,
+    );
+
+    /// borda badge
+    canvas.drawRRect(
+      badgeRRect,
+      Paint()
+        // ..color = const Color(0xFFE53935).withValues(alpha: 0.22)
+        ..color = Colors.black.withValues(alpha: 0.22)
+        ..style = PaintingStyle.stroke
+        ..strokeWidth = 1,
+    );
+
+    badgePainter.paint(
+      canvas,
+      Offset(
+        badgeLeft + badgeHorizontalPadding,
+        badgeTopSpacing + (badgeHeight - badgePainter.height) / 2,
+      ),
+    );
+
+    /// círculo do ícone dentro do card
+    final double iconTop = cardTop + (height - iconCircleSize) / 2;
+    final double iconLeft = (width - iconCircleSize) / 2;
+
+    canvas.drawCircle(
+      Offset(
+        iconLeft + iconCircleSize / 2,
+        iconTop + iconCircleSize / 2,
+      ),
+      iconCircleSize / 2,
+      Paint()..color = const Color(0xFFE53935),
+    );
+
+    /// ícone
+    final iconPainter = TextPainter(
+      textDirection: TextDirection.ltr,
+      text: TextSpan(
+        text: String.fromCharCode(icon.codePoint),
+        style: TextStyle(
+          fontSize: iconSize,
+          fontFamily: icon.fontFamily,
+          package: icon.fontPackage,
+          color: Colors.white,
+        ),
+      ),
+    )..layout();
+
+    iconPainter.paint(
+      canvas,
+      Offset(
+        iconLeft + (iconCircleSize - iconPainter.width) / 2,
+        iconTop + (iconCircleSize - iconPainter.height) / 2,
+      ),
+    );
+
+    /// destaque quando selecionado
+    if (isSelected) {
+      canvas.drawPath(
+        path,
+        Paint()
+          ..color = const Color(0xFFE53935).withValues(alpha: 0.06)
+          ..style = PaintingStyle.fill,
+      );
+    }
+
+    final picture = recorder.endRecording();
+    final image = await picture.toImage(
+      width.toInt(),
+      totalHeight.toInt(),
+    );
+
+    final bytes = await image.toByteData(format: ui.ImageByteFormat.png);
+    return bytes!.buffer.asUint8List();
+  }
+
+  Future<void> _onMarkeClick(List<FakeIncident> incidents) async {
     _pointManager?.tapEvents(
       onTap: (pointAnnotation) async {
         _highlightMarker(pointAnnotation);
         _previousCameraState = await _mapboxMap?.getCameraState();
         final coords = pointAnnotation.geometry.coordinates;
 
-        final index = FakeIncident.items().indexWhere(
+        final index = incidents.indexWhere(
           (p) => p.point.coordinates == coords,
         );
 
@@ -571,6 +950,7 @@ class _MapaPageState extends ConsumerState<MapaPage> {
         _zoomToMarker(coords);
         setState(() {
           _showIncidentCards = true;
+          _gpsHeight = GPSHeight.hight;
         });
       },
     );

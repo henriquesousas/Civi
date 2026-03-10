@@ -1,6 +1,8 @@
+import 'package:deehelp/core/extension/size_extension.dart';
+import 'package:deehelp/core/theme/export_theme.dart';
 import 'package:deehelp/core/ui/styles/app_text_style.dart';
+import 'package:deehelp/core/ui/widgets/buttons/buttons_export.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class MapLocationSummaryCard extends StatelessWidget {
   final String title;
@@ -17,7 +19,9 @@ class MapLocationSummaryCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 80.h,
+      height: context.isLandscape
+          ? context.percentHeight(0.3)
+          : context.percentHeight(0.1),
       padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 12),
       decoration: BoxDecoration(
         color: Colors.white,
@@ -69,27 +73,179 @@ class MapLocationSummaryCard extends StatelessWidget {
             ),
           ),
           const SizedBox(width: 10),
-          GestureDetector(
-            onTap: onEditTap,
-            child: Container(
-              padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
-              decoration: BoxDecoration(
-                color: const Color(0xFFF3F4F6),
-                borderRadius: BorderRadius.circular(12),
-                border: Border.all(
-                  color: const Color(0xFFE5E7EB),
-                ),
-              ),
-              child: Text(
-                'Ver incidentes',
-                style: context.appText.caption.copyWith(
-                  color: const Color(0xFF374151),
-                  fontWeight: FontWeight.w600,
-                ),
+          // GestureDetector(
+          //   onTap: onEditTap,
+          //   child: Container(
+          //     padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+          //     decoration: BoxDecoration(
+          //       color: const Color(0xFFF3F4F6),
+          //       borderRadius: BorderRadius.circular(12),
+          //       border: Border.all(
+          //         color: const Color(0xFFE5E7EB),
+          //       ),
+          //     ),
+          //     child: Text(
+          //       'Ver incidentes',
+          //       style: context.appText.caption.copyWith(
+          //         color: const Color(0xFF374151),
+          //         fontWeight: FontWeight.w600,
+          //       ),
+          //     ),
+          //   ),
+          // ),
+        ],
+      ),
+    );
+  }
+}
+
+class ExpandableIncidentCard extends StatefulWidget {
+  final String title;
+  final String subtitle;
+  final VoidCallback? onViewIncidents;
+  final VoidCallback? onRegisterIncident;
+  final VoidCallback? onCardTap;
+  final Function(bool) onExpand;
+  final bool startOpened;
+
+  const ExpandableIncidentCard({
+    super.key,
+    required this.title,
+    required this.subtitle,
+    this.onViewIncidents,
+    this.onRegisterIncident,
+    this.onCardTap,
+    this.startOpened = false,
+    required this.onExpand,
+  });
+
+  @override
+  State<ExpandableIncidentCard> createState() => _ExpandableIncidentCardState();
+}
+
+class _ExpandableIncidentCardState extends State<ExpandableIncidentCard>
+    with TickerProviderStateMixin {
+  bool _isExpanded = false;
+
+  @override
+  void initState() {
+    _isExpanded = widget.startOpened;
+    super.initState();
+  }
+
+  void _toggleCard() {
+    setState(() {
+      _isExpanded = !_isExpanded;
+    });
+
+    // widget.onCardTap?.call();
+    widget.onExpand.call(_isExpanded);
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    const radius = 20.0;
+
+    return Material(
+      color: Colors.transparent,
+      borderRadius: BorderRadius.circular(radius),
+      child: Ink(
+        decoration: BoxDecoration(
+          color: Colors.white,
+          borderRadius: BorderRadius.circular(radius),
+          border: Border.all(
+            color: Colors.black.withValues(alpha: 0.05),
+          ),
+          // boxShadow: [
+          //   BoxShadow(
+          //     color: Colors.black.withValues(alpha: 0.08),
+          //     blurRadius: 18,
+          //     offset: const Offset(0, 6),
+          //   ),
+          // ],
+        ),
+        child: InkWell(
+          onTap: _toggleCard,
+          // borderRadius: BorderRadius.circular(radius),
+          // splashColor: Colors.black.withValues(alpha: 0.05),
+          // highlightColor: Colors.black.withValues(alpha: 0.02),
+          child: Padding(
+            padding: const EdgeInsets.all(16),
+            child: AnimatedSize(
+              duration: const Duration(milliseconds: 260),
+              curve: Curves.easeInOut,
+              alignment: Alignment.topCenter,
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Row(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      // const Text(
+                      //   '🔥',
+                      //   style: TextStyle(fontSize: 22),
+                      // ),
+                      const Text(
+                        '🏠',
+                        style: TextStyle(fontSize: 22),
+                      ),
+                      const SizedBox(width: 8),
+                      Expanded(
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              "Osasco - SP",
+                              overflow: TextOverflow.ellipsis,
+                              maxLines: 1,
+                              style: context.appText.headerlg,
+                            ),
+                            const SizedBox(height: 4),
+                            Text(
+                              widget.subtitle,
+                              style: context.appText.caption.copyWith(
+                                fontWeight: FontWeight.w500,
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                      const SizedBox(width: 8),
+                      AnimatedRotation(
+                        turns: _isExpanded ? 0.5 : 0.0,
+                        duration: const Duration(milliseconds: 260),
+                        child: Icon(
+                          Icons.keyboard_arrow_up,
+                          size: IconSizes.md,
+                          color: Colors.black.withValues(alpha: 0.75),
+                        ),
+                      ),
+                    ],
+                  ),
+                  if (_isExpanded) ...[
+                    const SizedBox(height: 14),
+                    Row(
+                      children: [
+                        Expanded(
+                          child: ButtonOutline(
+                              press: () {}, text: "Ver incidentes"),
+                        ),
+                        const SizedBox(width: 10),
+                        Expanded(
+                          child: ButtonPrimary(
+                            press: () {},
+                            text: "Novo Alerta",
+                          ),
+                        )
+                      ],
+                    ),
+                  ],
+                ],
               ),
             ),
           ),
-        ],
+        ),
       ),
     );
   }

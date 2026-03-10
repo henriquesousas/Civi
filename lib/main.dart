@@ -20,9 +20,6 @@ void main() async {
 
   await initializeDateFormatting('pt_BR', null);
 
-  MapboxOptions.setAccessToken(
-      "pk.eyJ1IjoicHNvYXJlczI2MDEiLCJhIjoiY21pbnlkanJuMjBlNzNlcHc5NDBoeWJvdCJ9.-9sIXSToKx-OfzGflYEiYw");
-
   await Supabase.initialize(
     url: "https://zgwniakmowojymmmljbw.supabase.co",
     anonKey: "sb_publishable_N5D6VJ2Qm832Onz-NvFGfA_bO1NohOE",
@@ -33,6 +30,9 @@ void main() async {
     accessKeyId: EnvConfig.r2AccessKeyId,
     secretAccessKey: EnvConfig.r2SecretAccessKeyId,
   );
+
+  MapboxOptions.setAccessToken(
+      "pk.eyJ1IjoicHNvYXJlczI2MDEiLCJhIjoiY21pbnlkanJuMjBlNzNlcHc5NDBoeWJvdCJ9.-9sIXSToKx-OfzGflYEiYw");
 
   SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(
     statusBarColor: Colors.transparent,

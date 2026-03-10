@@ -14,7 +14,7 @@ import 'package:supabase_flutter/supabase_flutter.dart';
 
 class SupabaseIncidentRepository extends IncidentRepository {
   // static final _logger = Logger("SupabaseIncidentRepository");
-  static final _table = "incidents";
+  static final _table = "report";
   final SupabaseClient _supabaseClient;
 
   SupabaseIncidentRepository({required SupabaseClient supabaseClient})
@@ -71,7 +71,7 @@ class SupabaseIncidentRepository extends IncidentRepository {
     var query = _supabaseClient
         .from(_table)
         .select(
-            "*,product!inner (id,name,code,color, brand, type, obs, product_images (*))")
+            "*,product!inner (id,name,code,color, brand, type, obs, product_images (*)),  regions(*)")
         .eq('status', filter.status.value);
 
     if (filter.mode == SearchMode.incidentCode) {
@@ -130,13 +130,6 @@ class SupabaseIncidentRepository extends IncidentRepository {
     await _supabaseClient.from(_table).delete().eq('id', incidentId);
     return Result.success(const Unit());
   }
-
-  // bool _looksLikeAlertId(String term) {
-  //   final cleanTerm = term.replaceAll(RegExp(r'[\s\-_]'), '').toUpperCase();
-  //   final containsNumbers = RegExp(r'\d').hasMatch(cleanTerm);
-
-  //   return (containsNumbers && cleanTerm.length <= 6);
-  // }
 
   String _normalizeSearchTerm(String term) {
     final newTerm = term.trim().toLowerCase();

@@ -4,6 +4,8 @@ import 'package:deehelp/module/incident/domain/entity/incident_local.dart';
 import 'package:deehelp/module/incident/domain/enum/type_alert.dart';
 import 'package:deehelp/module/incident/domain/usecase/incident_output.dart';
 import 'package:deehelp/module/incident/domain/usecase/incident_product_output.dart';
+import 'package:deehelp/module/incident/domain/usecase/kind.dart';
+import 'package:deehelp/module/incident/domain/usecase/report_type.dart';
 import 'package:deehelp/module/item/repository/image_media_model.dart';
 import 'package:flutter/material.dart';
 
@@ -53,9 +55,10 @@ class IncidentMapper {
     return IncidentOutput(
       id: map['id'],
       userId: map['user_id'],
-      type: TypeAlert.values.firstWhere((e) => e.name == map['type']),
+      // type: TypeAlert.values.firstWhere((e) => e.name == map['type']),
+      type: TypeAlert.detailed,
       howTo: map['how_to'],
-      visibilty: map['visibility'],
+      visibilty: map['verified'],
       local: IncidentLocal(
         address: map['approximate_address'],
         city: map['city'] ?? '',
@@ -63,6 +66,9 @@ class IncidentMapper {
       ),
       // status: IncidentStatus.values.firstWhere((e) => e.name == map['status']),
       status: ItemStatus.values.firstWhere((e) => e.name == map['status']),
+      kind: Kind.values.firstWhere((e) => e.name == map['kind']),
+      reportType:
+          ReportType.values.firstWhere((e) => e.name == map['report_type']),
       alertId: map['alert_id'],
       product: IncidentProductOutput(
         productId: map['product']['id'],
@@ -76,7 +82,9 @@ class IncidentMapper {
       ),
       createdAt: DateTime.parse(map['created_at']),
       occurredAt: DateTime.parse(map['occurred_at']),
-      occurredAtTime: _parseTimeFromString(map['occurred_hour']),
+      occurredAtTime: _parseTimeFromString(map['hour']),
+      expiresAt:
+          map['expires_at'] != null ? DateTime.parse(map['expires_at']) : null,
     );
   }
 
