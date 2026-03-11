@@ -1,6 +1,7 @@
 import 'package:deehelp/module/incident/domain/entity/incident_local.dart';
 import 'package:deehelp/module/incident/domain/enum/incident_status.dart';
-import 'package:deehelp/module/incident/domain/enum/type_alert.dart';
+import 'package:deehelp/module/incident/domain/usecase/kind.dart';
+import 'package:deehelp/module/incident/domain/usecase/report_type.dart';
 import 'package:deehelp/module/item/domain/entities/product.dart';
 import 'package:flutter/material.dart';
 
@@ -8,14 +9,17 @@ import 'package:flutter/material.dart';
 class Incident {
   final String id;
   final String? alertId;
+  final String? regionId;
   final IncidentStatus status;
-  final TypeAlert type;
   final Product product;
   final String userId;
   final String? howTo;
   final IncidentLocal? local;
+  final Kind kind;
+  final ReportType reportType;
   bool visibility;
   DateTime createdAt;
+  DateTime? expiresAt;
   DateTime occurredAt;
   TimeOfDay occurredAtTime;
 
@@ -23,12 +27,15 @@ class Incident {
     required this.id,
     required this.alertId,
     required this.status,
-    required this.type,
     required this.product,
     required this.userId,
+    required this.kind,
+    required this.reportType,
     this.visibility = true,
     this.howTo,
     this.local,
+    this.expiresAt,
+    this.regionId,
     DateTime? createdAt,
     DateTime? occurredAt,
     TimeOfDay? occurredAtTime,

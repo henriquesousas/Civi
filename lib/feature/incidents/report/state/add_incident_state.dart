@@ -1,3 +1,5 @@
+import 'dart:ffi';
+
 import 'package:deehelp/core/services/permissions/location/domain/current_location.dart';
 import 'package:deehelp/module/incident/domain/enum/type_alert.dart';
 import 'package:deehelp/module/item/domain/entities/product.dart';
@@ -14,6 +16,8 @@ abstract class AddIncidentState with _$AddIncidentState {
     String? fullAddress,
     String? errorFullAddress,
     String? howTo,
+    Double? latitude,
+    Double? longitude,
     DateTime? occurredAt,
     String? errorOccurredAt,
     TimeOfDay? timeOccurredAt,

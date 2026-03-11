@@ -6,6 +6,7 @@ import 'package:deehelp/module/incident/domain/usecase/incident_output.dart';
 import 'package:deehelp/module/incident/domain/usecase/incident_product_output.dart';
 import 'package:deehelp/module/incident/domain/usecase/kind.dart';
 import 'package:deehelp/module/incident/domain/usecase/report_type.dart';
+import 'package:deehelp/module/incident/external/repository/region_mapper.dart';
 import 'package:deehelp/module/item/repository/image_media_model.dart';
 import 'package:flutter/material.dart';
 
@@ -36,14 +37,20 @@ class IncidentMapper {
       'alert_id': incident.alertId,
       'product_id': incident.product.id.value,
       'user_id': incident.userId,
-      'type': incident.type.name,
       'how_to': incident.howTo,
       'city': incident.local?.city,
       'state': incident.local?.state,
-      'approximate_address': incident.local?.address,
+      'address': incident.local?.address,
       'occurred_at': incident.occurredAt.toUtc().toIso8601String(),
-      'occurred_hour': _timeOfDayToPostgresTime(incident.occurredAtTime),
+      'hour': _timeOfDayToPostgresTime(incident.occurredAtTime),
       'status': incident.status.name,
+      'report_type': incident.reportType.name,
+      'kind': incident.kind.name,
+      'region_id': incident.regionId,
+      'point': incident.local?.longitude != null
+          ? 'POINT(${incident.local!.longitude} ${incident.local!.latitue})'
+          : null,
+      'expires_at': incident.expiresAt?.toUtc().toIso8601String(),
       'created_at': incident.createdAt.toUtc().toIso8601String(),
     };
   }
@@ -63,8 +70,11 @@ class IncidentMapper {
         address: map['approximate_address'],
         city: map['city'] ?? '',
         state: map['state'] ?? '',
+        latitue: map['latitude'],
+        longitude: map['longitude'],
       ),
       // status: IncidentStatus.values.firstWhere((e) => e.name == map['status']),
+      region: RegionMapper.fromMap(map['regions']),
       status: ItemStatus.values.firstWhere((e) => e.name == map['status']),
       kind: Kind.values.firstWhere((e) => e.name == map['kind']),
       reportType:

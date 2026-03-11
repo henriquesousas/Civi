@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'dart:ui';
 
+import 'package:deehelp/core/extension/dialog_extension.dart';
 import 'package:deehelp/core/extension/exports_extension.dart';
 import 'package:deehelp/core/theme/export_theme.dart';
 import 'package:deehelp/core/ui/styles/export_style.dart';
@@ -79,29 +80,16 @@ class _AddIncidentPageState extends ConsumerState<ReportIncidentPage>
       reportIncidentEventProvider,
       (previous, event) {
         if (event == null) return;
-        event.when(error: (error) {
+        event.when(error: (error, isKnowError) {
           if (context.canPop()) {
             context.pop();
           }
-          // showGeneralDialog(
-          //   context: context,
-          //   barrierDismissible: false,
-          //   barrierColor: Colors.transparent,
-          //   pageBuilder: (_, __, ___) => IncidentErrorOverlay(onRetry: () {
-          //     if (context.canPop()) {
-          //       context.pop();
-          //     }
-          //   }),
-          // );
-          _showReportErrorSheet();
+          if (!isKnowError) {
+            context.showTopNotice(error, type: DialogType.error);
+          } else {
+            _showReportErrorSheet();
+          }
         }, loadProgress: () {
-          // showGeneralDialog(
-          //   context: context,
-          //   barrierDismissible: false,
-          //   barrierColor: Colors.transparent,
-          //   pageBuilder: (_, __, ___) =>
-          //       const ReportIncidentLoadingProgressOverlay(),
-          // );
           showDialogOverlay(context);
         }, successfully: (args) {
           Future.delayed(const Duration(seconds: 3), () {
@@ -159,7 +147,7 @@ class _AddIncidentPageState extends ConsumerState<ReportIncidentPage>
     );
     if (result == null) return;
     // setState(() => selectedTime = result);
-    debugPrint("Hora do ocorrido ${result}");
+    debugPrint("Hora do ocorrido $result");
     viewModel.onTimeOccurredAtChange(result);
   }
 
@@ -172,6 +160,8 @@ class _AddIncidentPageState extends ConsumerState<ReportIncidentPage>
     final hasItem = state.product != null;
 
     listener();
+
+    debugPrint("Item selecionado para reportar => ${selectedItem?.type}");
 
     return Scaffold(
       appBar: DefaultAppBar(

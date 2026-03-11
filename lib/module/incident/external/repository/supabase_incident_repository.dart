@@ -9,12 +9,14 @@ import 'package:deehelp/module/incident/domain/usecase/incident_output.dart';
 import 'package:deehelp/module/incident/domain/usecase/listing/incident_filter.dart';
 import 'package:deehelp/module/incident/domain/usecase/update/update_incident_dto.dart';
 import 'package:deehelp/module/incident/external/repository/incident_mapper.dart';
+import 'package:deehelp/module/incident/external/repository/region_dto.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
 class SupabaseIncidentRepository extends IncidentRepository {
   // static final _logger = Logger("SupabaseIncidentRepository");
-  static final _table = "report";
+  // static final _table = "report";
+  static final _table = "report_with_coords";
   final SupabaseClient _supabaseClient;
 
   SupabaseIncidentRepository({required SupabaseClient supabaseClient})
@@ -49,7 +51,7 @@ class SupabaseIncidentRepository extends IncidentRepository {
     final data = await _supabaseClient
         .from(_table)
         .select(
-            "*,product (id,name,code,color, brand, type, obs, product_images (*))")
+            "*,product!inner (id,name,code,color, brand, type, obs, product_images (*)),  regions(*)")
         .eq(
           "user_id",
           userId,
@@ -69,7 +71,7 @@ class SupabaseIncidentRepository extends IncidentRepository {
     debugPrint("Termo filtrado $term");
 
     var query = _supabaseClient
-        .from(_table)
+        .from('report_with_coords')
         .select(
             "*,product!inner (id,name,code,color, brand, type, obs, product_images (*)),  regions(*)")
         .eq('status', filter.status.value);
@@ -110,8 +112,7 @@ class SupabaseIncidentRepository extends IncidentRepository {
     var query = _supabaseClient
         .from(_table)
         .select(
-          "*,product!inner (id,name,code,color, brand, type, obs, product_images (*))",
-        )
+            "*,product!inner (id,name,code,color, brand, type, obs, product_images (*)),  regions(*)")
         .eq('status', IncidentStatus.active.value);
 
     if (!term.isNullOrEmpty()) {
@@ -129,6 +130,37 @@ class SupabaseIncidentRepository extends IncidentRepository {
   Future<Result<Unit>> delete(String incidentId) async {
     await _supabaseClient.from(_table).delete().eq('id', incidentId);
     return Result.success(const Unit());
+  }
+
+  @override
+  Future<String?> getRegion(RegionDto dto) async {
+    try {
+      var query = await _supabaseClient
+          .from('regions')
+          .select('*')
+          .or('name.ilike.%${dto.city}%,region_key.ilike.%${dto.city}%')
+          .single();
+
+      return query['id'];
+    } catch (ex) {
+      return null;
+    }
+  }
+
+  @override
+  Future<IncidentOutput?> getIncidentByProductId(String productId) async {
+    try {
+      var query = await _supabaseClient
+          .from(_table)
+          .select(
+              "*,product!inner (id,name,code,color, brand, type, obs, product_images (*)),  regions(*)")
+          .eq("product_id", productId)
+          .single();
+
+      return IncidentMapper.fromMap(query);
+    } catch (e) {
+      return null;
+    }
   }
 
   String _normalizeSearchTerm(String term) {

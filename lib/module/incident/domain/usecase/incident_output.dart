@@ -1,6 +1,7 @@
 import 'package:deehelp/core/ui/widgets/badge/export_badge.dart';
 import 'package:deehelp/module/incident/domain/entity/incident_local.dart';
 import 'package:deehelp/module/incident/domain/enum/type_alert.dart';
+import 'package:deehelp/module/incident/domain/region.dart';
 import 'package:deehelp/module/incident/domain/usecase/incident_product_output.dart';
 import 'package:deehelp/module/incident/domain/usecase/kind.dart';
 import 'package:deehelp/module/incident/domain/usecase/report_type.dart';
@@ -24,6 +25,7 @@ abstract class IncidentOutput with _$IncidentOutput {
     required DateTime occurredAt,
     required DateTime? expiresAt,
     required TimeOfDay occurredAtTime,
+    required Region? region,
     IncidentLocal? local,
     String? howTo,
     @Default(true) bool visibilty,

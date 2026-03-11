@@ -1,9 +1,1 @@
-enum Kind {
-  car,
-  moto,
-  phone,
-  flooding,
-  streetClosed,
-  dragnet,
-  suspiciousActivity
-}
+enum Kind { rouberry, flooding, streetClosed, dragnet, suspiciousActivity }

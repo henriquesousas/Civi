@@ -19,6 +19,8 @@ mixin _$AddIncidentState {
   String? get fullAddress;
   String? get errorFullAddress;
   String? get howTo;
+  Double? get latitude;
+  Double? get longitude;
   DateTime? get occurredAt;
   String? get errorOccurredAt;
   TimeOfDay? get timeOccurredAt;
@@ -56,6 +58,10 @@ mixin _$AddIncidentState {
             (identical(other.errorFullAddress, errorFullAddress) ||
                 other.errorFullAddress == errorFullAddress) &&
             (identical(other.howTo, howTo) || other.howTo == howTo) &&
+            (identical(other.latitude, latitude) ||
+                other.latitude == latitude) &&
+            (identical(other.longitude, longitude) ||
+                other.longitude == longitude) &&
             (identical(other.occurredAt, occurredAt) ||
                 other.occurredAt == occurredAt) &&
             (identical(other.errorOccurredAt, errorOccurredAt) ||
@@ -94,6 +100,8 @@ mixin _$AddIncidentState {
         fullAddress,
         errorFullAddress,
         howTo,
+        latitude,
+        longitude,
         occurredAt,
         errorOccurredAt,
         timeOccurredAt,
@@ -113,7 +121,7 @@ mixin _$AddIncidentState {
 
   @override
   String toString() {
-    return 'AddIncidentState(currentPlace: $currentPlace, product: $product, fullAddress: $fullAddress, errorFullAddress: $errorFullAddress, howTo: $howTo, occurredAt: $occurredAt, errorOccurredAt: $errorOccurredAt, timeOccurredAt: $timeOccurredAt, errorTimeOccurredAt: $errorTimeOccurredAt, errorMessage: $errorMessage, registeredsuccessfully: $registeredsuccessfully, stateController: $stateController, stateError: $stateError, cityController: $cityController, cityError: $cityError, type: $type, isFormValid: $isFormValid, isLoading: $isLoading, isProgressDone: $isProgressDone, alertId: $alertId)';
+    return 'AddIncidentState(currentPlace: $currentPlace, product: $product, fullAddress: $fullAddress, errorFullAddress: $errorFullAddress, howTo: $howTo, latitude: $latitude, longitude: $longitude, occurredAt: $occurredAt, errorOccurredAt: $errorOccurredAt, timeOccurredAt: $timeOccurredAt, errorTimeOccurredAt: $errorTimeOccurredAt, errorMessage: $errorMessage, registeredsuccessfully: $registeredsuccessfully, stateController: $stateController, stateError: $stateError, cityController: $cityController, cityError: $cityError, type: $type, isFormValid: $isFormValid, isLoading: $isLoading, isProgressDone: $isProgressDone, alertId: $alertId)';
   }
 }
 
@@ -129,6 +137,8 @@ abstract mixin class $AddIncidentStateCopyWith<$Res> {
       String? fullAddress,
       String? errorFullAddress,
       String? howTo,
+      Double? latitude,
+      Double? longitude,
       DateTime? occurredAt,
       String? errorOccurredAt,
       TimeOfDay? timeOccurredAt,
@@ -164,6 +174,8 @@ class _$AddIncidentStateCopyWithImpl<$Res>
     Object? fullAddress = freezed,
     Object? errorFullAddress = freezed,
     Object? howTo = freezed,
+    Object? latitude = freezed,
+    Object? longitude = freezed,
     Object? occurredAt = freezed,
     Object? errorOccurredAt = freezed,
     Object? timeOccurredAt = freezed,
@@ -201,6 +213,14 @@ class _$AddIncidentStateCopyWithImpl<$Res>
           ? _self.howTo
           : howTo // ignore: cast_nullable_to_non_nullable
               as String?,
+      latitude: freezed == latitude
+          ? _self.latitude
+          : latitude // ignore: cast_nullable_to_non_nullable
+              as Double?,
+      longitude: freezed == longitude
+          ? _self.longitude
+          : longitude // ignore: cast_nullable_to_non_nullable
+              as Double?,
       occurredAt: freezed == occurredAt
           ? _self.occurredAt
           : occurredAt // ignore: cast_nullable_to_non_nullable
@@ -364,6 +384,8 @@ extension AddIncidentStatePatterns on AddIncidentState {
             String? fullAddress,
             String? errorFullAddress,
             String? howTo,
+            Double? latitude,
+            Double? longitude,
             DateTime? occurredAt,
             String? errorOccurredAt,
             TimeOfDay? timeOccurredAt,
@@ -391,6 +413,8 @@ extension AddIncidentStatePatterns on AddIncidentState {
             _that.fullAddress,
             _that.errorFullAddress,
             _that.howTo,
+            _that.latitude,
+            _that.longitude,
             _that.occurredAt,
             _that.errorOccurredAt,
             _that.timeOccurredAt,
@@ -432,6 +456,8 @@ extension AddIncidentStatePatterns on AddIncidentState {
             String? fullAddress,
             String? errorFullAddress,
             String? howTo,
+            Double? latitude,
+            Double? longitude,
             DateTime? occurredAt,
             String? errorOccurredAt,
             TimeOfDay? timeOccurredAt,
@@ -458,6 +484,8 @@ extension AddIncidentStatePatterns on AddIncidentState {
             _that.fullAddress,
             _that.errorFullAddress,
             _that.howTo,
+            _that.latitude,
+            _that.longitude,
             _that.occurredAt,
             _that.errorOccurredAt,
             _that.timeOccurredAt,
@@ -498,6 +526,8 @@ extension AddIncidentStatePatterns on AddIncidentState {
             String? fullAddress,
             String? errorFullAddress,
             String? howTo,
+            Double? latitude,
+            Double? longitude,
             DateTime? occurredAt,
             String? errorOccurredAt,
             TimeOfDay? timeOccurredAt,
@@ -524,6 +554,8 @@ extension AddIncidentStatePatterns on AddIncidentState {
             _that.fullAddress,
             _that.errorFullAddress,
             _that.howTo,
+            _that.latitude,
+            _that.longitude,
             _that.occurredAt,
             _that.errorOccurredAt,
             _that.timeOccurredAt,
@@ -554,6 +586,8 @@ class _AddIncidentState implements AddIncidentState {
       this.fullAddress,
       this.errorFullAddress,
       this.howTo,
+      this.latitude,
+      this.longitude,
       this.occurredAt,
       this.errorOccurredAt,
       this.timeOccurredAt,
@@ -580,6 +614,10 @@ class _AddIncidentState implements AddIncidentState {
   final String? errorFullAddress;
   @override
   final String? howTo;
+  @override
+  final Double? latitude;
+  @override
+  final Double? longitude;
   @override
   final DateTime? occurredAt;
   @override
@@ -637,6 +675,10 @@ class _AddIncidentState implements AddIncidentState {
             (identical(other.errorFullAddress, errorFullAddress) ||
                 other.errorFullAddress == errorFullAddress) &&
             (identical(other.howTo, howTo) || other.howTo == howTo) &&
+            (identical(other.latitude, latitude) ||
+                other.latitude == latitude) &&
+            (identical(other.longitude, longitude) ||
+                other.longitude == longitude) &&
             (identical(other.occurredAt, occurredAt) ||
                 other.occurredAt == occurredAt) &&
             (identical(other.errorOccurredAt, errorOccurredAt) ||
@@ -675,6 +717,8 @@ class _AddIncidentState implements AddIncidentState {
         fullAddress,
         errorFullAddress,
         howTo,
+        latitude,
+        longitude,
         occurredAt,
         errorOccurredAt,
         timeOccurredAt,
@@ -694,7 +738,7 @@ class _AddIncidentState implements AddIncidentState {
 
   @override
   String toString() {
-    return 'AddIncidentState(currentPlace: $currentPlace, product: $product, fullAddress: $fullAddress, errorFullAddress: $errorFullAddress, howTo: $howTo, occurredAt: $occurredAt, errorOccurredAt: $errorOccurredAt, timeOccurredAt: $timeOccurredAt, errorTimeOccurredAt: $errorTimeOccurredAt, errorMessage: $errorMessage, registeredsuccessfully: $registeredsuccessfully, stateController: $stateController, stateError: $stateError, cityController: $cityController, cityError: $cityError, type: $type, isFormValid: $isFormValid, isLoading: $isLoading, isProgressDone: $isProgressDone, alertId: $alertId)';
+    return 'AddIncidentState(currentPlace: $currentPlace, product: $product, fullAddress: $fullAddress, errorFullAddress: $errorFullAddress, howTo: $howTo, latitude: $latitude, longitude: $longitude, occurredAt: $occurredAt, errorOccurredAt: $errorOccurredAt, timeOccurredAt: $timeOccurredAt, errorTimeOccurredAt: $errorTimeOccurredAt, errorMessage: $errorMessage, registeredsuccessfully: $registeredsuccessfully, stateController: $stateController, stateError: $stateError, cityController: $cityController, cityError: $cityError, type: $type, isFormValid: $isFormValid, isLoading: $isLoading, isProgressDone: $isProgressDone, alertId: $alertId)';
   }
 }
 
@@ -712,6 +756,8 @@ abstract mixin class _$AddIncidentStateCopyWith<$Res>
       String? fullAddress,
       String? errorFullAddress,
       String? howTo,
+      Double? latitude,
+      Double? longitude,
       DateTime? occurredAt,
       String? errorOccurredAt,
       TimeOfDay? timeOccurredAt,
@@ -747,6 +793,8 @@ class __$AddIncidentStateCopyWithImpl<$Res>
     Object? fullAddress = freezed,
     Object? errorFullAddress = freezed,
     Object? howTo = freezed,
+    Object? latitude = freezed,
+    Object? longitude = freezed,
     Object? occurredAt = freezed,
     Object? errorOccurredAt = freezed,
     Object? timeOccurredAt = freezed,
@@ -784,6 +832,14 @@ class __$AddIncidentStateCopyWithImpl<$Res>
           ? _self.howTo
           : howTo // ignore: cast_nullable_to_non_nullable
               as String?,
+      latitude: freezed == latitude
+          ? _self.latitude
+          : latitude // ignore: cast_nullable_to_non_nullable
+              as Double?,
+      longitude: freezed == longitude
+          ? _self.longitude
+          : longitude // ignore: cast_nullable_to_non_nullable
+              as Double?,
       occurredAt: freezed == occurredAt
           ? _self.occurredAt
           : occurredAt // ignore: cast_nullable_to_non_nullable

@@ -1,3 +1,4 @@
+import 'package:deehelp/core/handlers/handler_error.dart';
 import 'package:deehelp/core/services/permissions/location/domain/current_location.dart';
 import 'package:deehelp/core/services/permissions/location/providers/location_providers.dart';
 import 'package:deehelp/core/utils/enum_utils.dart';
@@ -9,11 +10,14 @@ import 'package:deehelp/module/auth/domain/entity/authenticated_user.dart';
 import 'package:deehelp/module/incident/domain/entity/incident_local.dart';
 import 'package:deehelp/module/incident/domain/enum/incident_status.dart';
 import 'package:deehelp/module/incident/domain/enum/type_alert.dart';
+import 'package:deehelp/module/incident/domain/product_already_exist_exception.dart';
 import 'package:deehelp/module/incident/domain/usecase/add/add_incident_dto.dart';
 import 'package:deehelp/module/incident/domain/usecase/add/add_incident_usecase.dart';
 import 'package:deehelp/feature/incidents/providers/report_incident_event_provider.dart';
 import 'package:deehelp/feature/incidents/report/events/report_incident_event.dart';
 import 'package:deehelp/feature/incidents/report/state/add_incident_state.dart';
+import 'package:deehelp/module/incident/domain/usecase/kind.dart';
+import 'package:deehelp/module/incident/domain/usecase/report_type.dart';
 import 'package:deehelp/module/item/domain/entities/product.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -48,6 +52,8 @@ class ReportIncidentViewmodel extends StateNotifier<AddIncidentState> {
 
   void addCurrentPlace(CurrentLocation? place) {
     debugPrint("MY ADDREESS = ${place?.address}");
+    debugPrint("Point = ${place?.latitude}");
+    debugPrint("Point = ${place?.longitude}");
     if (place == null) return;
     state.stateController?.text = place.state ?? '';
     state.cityController?.text = place.city ?? '';
@@ -63,14 +69,17 @@ class ReportIncidentViewmodel extends StateNotifier<AddIncidentState> {
       product: state.product!,
       userId: _authenticatedUser.id,
       status: IncidentStatus.active,
-      type: TypeAlert.immediately,
+      // type: TypeAlert.immediately,
       occurredAt: DateTime.now(),
       occurredAtTime: TimeOfDay.now(),
       local: IncidentLocal(
-        address: state.fullAddress,
-        city: state.cityController?.text,
-        state: state.stateController?.text,
-      ),
+          address: state.fullAddress,
+          city: state.cityController?.text,
+          state: state.stateController?.text,
+          longitude: state.currentPlace?.longitude,
+          latitue: state.currentPlace?.latitude),
+      reportType: ReportType.alertIncident,
+      kind: Kind.rouberry,
     );
     _save(dto);
   }
@@ -87,7 +96,7 @@ class ReportIncidentViewmodel extends StateNotifier<AddIncidentState> {
       product: state.product!,
       userId: _authenticatedUser.id,
       status: IncidentStatus.pending,
-      type: TypeAlert.detailed,
+      // type: TypeAlert.detailed,
       howTo: state.howTo,
       local: IncidentLocal(
         address: state.fullAddress!,
@@ -96,6 +105,7 @@ class ReportIncidentViewmodel extends StateNotifier<AddIncidentState> {
       ),
       occurredAt: state.occurredAt!,
       occurredAtTime: state.timeOccurredAt!,
+      reportType: ReportType.alertIncident, kind: Kind.rouberry,
     );
     _logger.info("Iniciando chamada de salvar incidente...");
     _save(dto);
@@ -194,18 +204,33 @@ class ReportIncidentViewmodel extends StateNotifier<AddIncidentState> {
           itemType: EnumUtils.fromString(ItemType.values, dto.product.type),
           local: dto.local,
           createdAt: dto.occurredAt,
-          typeAlert: dto.type,
         );
         _ref.read(reportIncidentEventProvider.notifier).state =
             ReportIncidentEvent.successfully(args);
         return state;
       },
       onError: (error) {
-        _logger.info("Erro ao salvar incident ${error.toString()}");
-        state = state.copyWith(isLoading: false);
-        _ref.read(reportIncidentEventProvider.notifier).state =
-            ReportIncidentEvent.error(error.toString());
-        return state;
+        if (error is ProductAlreadyExistException) {
+          state = state.copyWith(isLoading: false);
+          _ref.read(reportIncidentEventProvider.notifier).state =
+              ReportIncidentEvent.error(error.message.toString(), false);
+          return state;
+        }
+        return handleError<AddIncidentState>(
+          error,
+          (message, extra) {
+            state = state.copyWith(isLoading: false);
+            _ref.read(reportIncidentEventProvider.notifier).state =
+                ReportIncidentEvent.error(error.toString(), true);
+            return state;
+          },
+        );
+
+        // _logger.info("Erro ao salvar incident ${error.toString()}");
+        // state = state.copyWith(isLoading: false);
+        // _ref.read(reportIncidentEventProvider.notifier).state =
+        //     ReportIncidentEvent.error(error.toString());
+        // return state;
       },
     );
   }

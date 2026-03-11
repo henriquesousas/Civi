@@ -15,7 +15,6 @@ import 'package:deehelp/feature/incidents/report/widgets/success/regiter_inciden
 import 'package:deehelp/feature/items/item_type.dart';
 import 'package:deehelp/feature/items/success/bullet.dart';
 import 'package:deehelp/module/incident/domain/entity/incident_local.dart';
-import 'package:deehelp/module/incident/domain/enum/type_alert.dart';
 import 'package:deehelp/core/utils/url_launcher_utils.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
@@ -133,13 +132,13 @@ class ReportIncidentSuccessfullyPage extends StatelessWidget {
                                         icon: Icons.fingerprint_outlined,
                                         text: args.alertId,
                                       ),
-                                      MiniPill(
-                                        icon: Icons.flash_on_outlined,
-                                        text: args.typeAlert ==
-                                                TypeAlert.immediately
-                                            ? 'Imediato'
-                                            : 'Detalhado',
-                                      ),
+                                      // MiniPill(
+                                      //   icon: Icons.flash_on_outlined,
+                                      //   text: args.typeAlert ==
+                                      //           TypeAlert.immediately
+                                      //       ? 'Imediato'
+                                      //       : 'Detalhado',
+                                      // ),
                                       MiniPill(
                                         icon: args.itemType.icon,
                                         text: args.itemType != ItemType.phone

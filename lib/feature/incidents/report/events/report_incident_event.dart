@@ -7,6 +7,7 @@ part 'report_incident_event.freezed.dart';
 sealed class ReportIncidentEvent with _$ReportIncidentEvent {
   const factory ReportIncidentEvent.successfully(
       RegiterIncidentSuccessArgs args) = ReportSuccessfully;
-  const factory ReportIncidentEvent.error(String error) = ReportError;
+  const factory ReportIncidentEvent.error(String error, bool isKnowError) =
+      ReportError;
   const factory ReportIncidentEvent.loadProgress() = ReportLoadProgress;
 }

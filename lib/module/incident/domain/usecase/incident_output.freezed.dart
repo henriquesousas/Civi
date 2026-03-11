@@ -26,6 +26,7 @@ mixin _$IncidentOutput {
   DateTime get occurredAt;
   DateTime? get expiresAt;
   TimeOfDay get occurredAtTime;
+  Region? get region;
   IncidentLocal? get local;
   String? get howTo;
   bool get visibilty;
@@ -60,6 +61,7 @@ mixin _$IncidentOutput {
                 other.expiresAt == expiresAt) &&
             (identical(other.occurredAtTime, occurredAtTime) ||
                 other.occurredAtTime == occurredAtTime) &&
+            (identical(other.region, region) || other.region == region) &&
             (identical(other.local, local) || other.local == local) &&
             (identical(other.howTo, howTo) || other.howTo == howTo) &&
             (identical(other.visibilty, visibilty) ||
@@ -81,13 +83,14 @@ mixin _$IncidentOutput {
       occurredAt,
       expiresAt,
       occurredAtTime,
+      region,
       local,
       howTo,
       visibilty);
 
   @override
   String toString() {
-    return 'IncidentOutput(id: $id, userId: $userId, alertId: $alertId, type: $type, product: $product, status: $status, kind: $kind, reportType: $reportType, createdAt: $createdAt, occurredAt: $occurredAt, expiresAt: $expiresAt, occurredAtTime: $occurredAtTime, local: $local, howTo: $howTo, visibilty: $visibilty)';
+    return 'IncidentOutput(id: $id, userId: $userId, alertId: $alertId, type: $type, product: $product, status: $status, kind: $kind, reportType: $reportType, createdAt: $createdAt, occurredAt: $occurredAt, expiresAt: $expiresAt, occurredAtTime: $occurredAtTime, region: $region, local: $local, howTo: $howTo, visibilty: $visibilty)';
   }
 }
 
@@ -110,6 +113,7 @@ abstract mixin class $IncidentOutputCopyWith<$Res> {
       DateTime occurredAt,
       DateTime? expiresAt,
       TimeOfDay occurredAtTime,
+      Region? region,
       IncidentLocal? local,
       String? howTo,
       bool visibilty});
@@ -140,6 +144,7 @@ class _$IncidentOutputCopyWithImpl<$Res>
     Object? occurredAt = null,
     Object? expiresAt = freezed,
     Object? occurredAtTime = null,
+    Object? region = freezed,
     Object? local = freezed,
     Object? howTo = freezed,
     Object? visibilty = null,
@@ -193,6 +198,10 @@ class _$IncidentOutputCopyWithImpl<$Res>
           ? _self.occurredAtTime
           : occurredAtTime // ignore: cast_nullable_to_non_nullable
               as TimeOfDay,
+      region: freezed == region
+          ? _self.region
+          : region // ignore: cast_nullable_to_non_nullable
+              as Region?,
       local: freezed == local
           ? _self.local
           : local // ignore: cast_nullable_to_non_nullable
@@ -315,6 +324,7 @@ extension IncidentOutputPatterns on IncidentOutput {
             DateTime occurredAt,
             DateTime? expiresAt,
             TimeOfDay occurredAtTime,
+            Region? region,
             IncidentLocal? local,
             String? howTo,
             bool visibilty)?
@@ -337,6 +347,7 @@ extension IncidentOutputPatterns on IncidentOutput {
             _that.occurredAt,
             _that.expiresAt,
             _that.occurredAtTime,
+            _that.region,
             _that.local,
             _that.howTo,
             _that.visibilty);
@@ -373,6 +384,7 @@ extension IncidentOutputPatterns on IncidentOutput {
             DateTime occurredAt,
             DateTime? expiresAt,
             TimeOfDay occurredAtTime,
+            Region? region,
             IncidentLocal? local,
             String? howTo,
             bool visibilty)
@@ -394,6 +406,7 @@ extension IncidentOutputPatterns on IncidentOutput {
             _that.occurredAt,
             _that.expiresAt,
             _that.occurredAtTime,
+            _that.region,
             _that.local,
             _that.howTo,
             _that.visibilty);
@@ -429,6 +442,7 @@ extension IncidentOutputPatterns on IncidentOutput {
             DateTime occurredAt,
             DateTime? expiresAt,
             TimeOfDay occurredAtTime,
+            Region? region,
             IncidentLocal? local,
             String? howTo,
             bool visibilty)?
@@ -450,6 +464,7 @@ extension IncidentOutputPatterns on IncidentOutput {
             _that.occurredAt,
             _that.expiresAt,
             _that.occurredAtTime,
+            _that.region,
             _that.local,
             _that.howTo,
             _that.visibilty);
@@ -475,6 +490,7 @@ class _IncidentOutput implements IncidentOutput {
       required this.occurredAt,
       required this.expiresAt,
       required this.occurredAtTime,
+      required this.region,
       this.local,
       this.howTo,
       this.visibilty = true});
@@ -503,6 +519,8 @@ class _IncidentOutput implements IncidentOutput {
   final DateTime? expiresAt;
   @override
   final TimeOfDay occurredAtTime;
+  @override
+  final Region? region;
   @override
   final IncidentLocal? local;
   @override
@@ -541,6 +559,7 @@ class _IncidentOutput implements IncidentOutput {
                 other.expiresAt == expiresAt) &&
             (identical(other.occurredAtTime, occurredAtTime) ||
                 other.occurredAtTime == occurredAtTime) &&
+            (identical(other.region, region) || other.region == region) &&
             (identical(other.local, local) || other.local == local) &&
             (identical(other.howTo, howTo) || other.howTo == howTo) &&
             (identical(other.visibilty, visibilty) ||
@@ -562,13 +581,14 @@ class _IncidentOutput implements IncidentOutput {
       occurredAt,
       expiresAt,
       occurredAtTime,
+      region,
       local,
       howTo,
       visibilty);
 
   @override
   String toString() {
-    return 'IncidentOutput(id: $id, userId: $userId, alertId: $alertId, type: $type, product: $product, status: $status, kind: $kind, reportType: $reportType, createdAt: $createdAt, occurredAt: $occurredAt, expiresAt: $expiresAt, occurredAtTime: $occurredAtTime, local: $local, howTo: $howTo, visibilty: $visibilty)';
+    return 'IncidentOutput(id: $id, userId: $userId, alertId: $alertId, type: $type, product: $product, status: $status, kind: $kind, reportType: $reportType, createdAt: $createdAt, occurredAt: $occurredAt, expiresAt: $expiresAt, occurredAtTime: $occurredAtTime, region: $region, local: $local, howTo: $howTo, visibilty: $visibilty)';
   }
 }
 
@@ -593,6 +613,7 @@ abstract mixin class _$IncidentOutputCopyWith<$Res>
       DateTime occurredAt,
       DateTime? expiresAt,
       TimeOfDay occurredAtTime,
+      Region? region,
       IncidentLocal? local,
       String? howTo,
       bool visibilty});
@@ -623,6 +644,7 @@ class __$IncidentOutputCopyWithImpl<$Res>
     Object? occurredAt = null,
     Object? expiresAt = freezed,
     Object? occurredAtTime = null,
+    Object? region = freezed,
     Object? local = freezed,
     Object? howTo = freezed,
     Object? visibilty = null,
@@ -676,6 +698,10 @@ class __$IncidentOutputCopyWithImpl<$Res>
           ? _self.occurredAtTime
           : occurredAtTime // ignore: cast_nullable_to_non_nullable
               as TimeOfDay,
+      region: freezed == region
+          ? _self.region
+          : region // ignore: cast_nullable_to_non_nullable
+              as Region?,
       local: freezed == local
           ? _self.local
           : local // ignore: cast_nullable_to_non_nullable

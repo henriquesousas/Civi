@@ -5,7 +5,9 @@ import 'package:deehelp/core/utils/id_utils.dart';
 import 'package:deehelp/core/utils/result.dart';
 import 'package:deehelp/module/incident/domain/entity/incident.dart';
 import 'package:deehelp/module/incident/domain/incident_repository.dart';
+import 'package:deehelp/module/incident/domain/product_already_exist_exception.dart';
 import 'package:deehelp/module/incident/domain/usecase/add/add_incident_dto.dart';
+import 'package:deehelp/module/incident/external/repository/region_dto.dart';
 
 class AddIncidentUsecase extends UseCase<AddIncidentDto, String> {
   final IncidentRepository _repository;
@@ -15,19 +17,39 @@ class AddIncidentUsecase extends UseCase<AddIncidentDto, String> {
 
   @override
   Future<Result<String>> execute(AddIncidentDto dto) async {
+    //Verificar se tem o region
+    String? regionId;
+    if (dto.local?.city != null) {
+      regionId = await _repository.getRegion(RegionDto(
+        city: dto.local!.city!,
+        state: dto.local!.state!,
+      ));
+    }
+
+    //Verificar se o produto ja foi feito incidente com ele
+    final product =
+        await _repository.getIncidentByProductId(dto.product.id.value);
+
+    if (product != null) {
+      return Result.failure(const ProductAlreadyExistException());
+    }
+
     final incident = Incident(
       id: IdUtils.generate(),
+      regionId: regionId,
       alertId: _generateIncidentId(),
       product: dto.product,
       userId: dto.userId,
-      type: dto.type,
       status: dto.status,
       occurredAt: dto.occurredAt,
       occurredAtTime: dto.occurredAtTime,
       howTo: dto.howTo,
       local: dto.local,
       createdAt: DateTime.now(),
+      kind: dto.kind,
+      reportType: dto.reportType,
     );
+
     await _repository.save(incident);
     return Result.success(incident.alertId!);
   }
