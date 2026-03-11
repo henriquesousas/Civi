@@ -1,5 +1,6 @@
 // import 'package:deehelp/feature/home/v2/home_page.dart';
 
+import 'package:deehelp/core/ui/styles/export_style.dart';
 import 'package:deehelp/feature/home/v2/home_page.dart';
 import 'package:deehelp/feature/home/v2/teste_home.dart';
 import 'package:deehelp/feature/home/v2/widgets/waze_alert.dart';
@@ -42,7 +43,9 @@ class _AppShellPageState extends ConsumerState<AppShellPage> {
             index: index,
             children: _pages,
           ),
-          bottomNavigationBar: BottomNav(
+          //BottomNav
+          //HomeBottomSheetNav
+          bottomNavigationBar: HomeBottomSheetNav(
             currentIndex: index,
             onChanged: (i) {
               setState(
@@ -105,4 +108,123 @@ class _AppShellPageState extends ConsumerState<AppShellPage> {
       ],
     );
   }
+}
+
+class HomeBottomSheetNav extends StatelessWidget {
+  final int currentIndex;
+  final ValueChanged<int>? onChanged;
+
+  const HomeBottomSheetNav({
+    super.key,
+    required this.currentIndex,
+    this.onChanged,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    const items = [
+      _BottomNavItemData(
+        icon: Icons.public,
+        activeIcon: Icons.public_outlined,
+        label: 'Map',
+      ),
+      _BottomNavItemData(
+        icon: Icons.search,
+        activeIcon: Icons.search,
+        label: 'Buscar',
+      ),
+      _BottomNavItemData(
+        icon: Icons.inventory_2_outlined,
+        activeIcon: Icons.inventory_2_rounded,
+        label: 'Items',
+      ),
+      _BottomNavItemData(
+        icon: Icons.person_outline_rounded,
+        activeIcon: Icons.person,
+        label: 'Perfil',
+      ),
+    ];
+
+    return Container(
+      padding: EdgeInsets.only(
+        left: 10,
+        right: 10,
+        top: 10,
+        bottom: MediaQuery.of(context).padding.bottom + 10,
+      ),
+      decoration: const BoxDecoration(
+        color: Colors.white,
+        borderRadius: BorderRadius.vertical(
+          top: Radius.circular(28),
+        ),
+        boxShadow: [
+          BoxShadow(
+            color: Color(0x14000000),
+            blurRadius: 18,
+            offset: Offset(0, -4),
+          ),
+        ],
+      ),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceAround,
+        children: List.generate(items.length, (index) {
+          final item = items[index];
+          final selected = currentIndex == index;
+
+          return Expanded(
+            child: InkWell(
+              onTap: () => onChanged?.call(index),
+              borderRadius: BorderRadius.circular(16),
+              child: Padding(
+                padding: const EdgeInsets.symmetric(vertical: 6),
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    Icon(
+                      selected ? item.activeIcon : item.icon,
+                      color: selected
+                          ? const Color(0xFF2563EB)
+                          : const Color(0xFF9CA3AF),
+                      size: 22,
+                    ),
+                    const SizedBox(height: 4),
+                    Text(
+                      item.label,
+                      style: context.appText.caption.copyWith(
+                        color: selected
+                            ? const Color(0xFF2563EB)
+                            : const Color(0xFF9CA3AF),
+                        fontWeight:
+                            selected ? FontWeight.w600 : FontWeight.w400,
+                      ),
+                      // style: TextStyle(
+                      //   color: selected
+                      //       ? const Color(0xFF2563EB)
+                      //       : const Color(0xFF9CA3AF),
+                      //   fontSize: 11,
+                      //   fontWeight:
+                      //       selected ? FontWeight.w600 : FontWeight.w400,
+                      // ),
+                    ),
+                  ],
+                ),
+              ),
+            ),
+          );
+        }),
+      ),
+    );
+  }
+}
+
+class _BottomNavItemData {
+  final IconData icon;
+  final IconData activeIcon;
+  final String label;
+
+  const _BottomNavItemData({
+    required this.icon,
+    required this.activeIcon,
+    required this.label,
+  });
 }

@@ -11,10 +11,10 @@ class IncidentEmptyData extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return EmptyStateWidget(
-      title: "Ótimo! Nenhum incidente para gerenciar no momento.",
+      title: "Nenhuma ocorrência encontrada",
       subtitle:
-          "Para registrar um incidente, basta tocar no botão 'Registrar incidente' abaixo",
-      buttonText: "Registrar incidente",
+          "Quando você registrar ou acompanhar uma ocorrência, ela aparecerá aqui.",
+      buttonText: "Criar alerta",
       onRegisterItem: () => context.push(IncidentRouter.register),
       highlightIcon: Icon(
         Icons.search,

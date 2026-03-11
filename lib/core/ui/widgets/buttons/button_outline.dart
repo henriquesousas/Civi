@@ -30,7 +30,7 @@ class ButtonOutline extends StatelessWidget {
   Widget build(BuildContext context) {
     return SizedBox(
       width: double.infinity,
-      height: height ?? ButtonSize.sm,
+      height: height ?? ButtonSize.xs,
       child: OutlinedButton.icon(
         onPressed: press,
         icon: loading! ? null : icon,

@@ -35,7 +35,8 @@ class BottomNav extends StatelessWidget {
           type: BottomNavigationBarType.fixed,
           backgroundColor: context.surfaceColor,
           selectedItemColor: context.primaryColor,
-          unselectedItemColor: context.secondaryColor,
+          // unselectedItemColor: context.secondaryColor,
+          unselectedItemColor: const Color(0xFF6B7280),
           elevation: 0,
           selectedLabelStyle: TextStyle(
             fontWeight: FontWeight.w800,

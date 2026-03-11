@@ -20,6 +20,7 @@ import 'package:deehelp/map_page_teste.dart';
 import 'package:deehelp/map_page2.dart';
 import 'package:deehelp/map_toolbar.dart';
 import 'package:deehelp/mons_house.dart';
+import 'package:deehelp/teste_profile.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
@@ -59,6 +60,7 @@ var goRouterProvider = Provider<GoRouter>(
         final currentPath = state.matchedLocation;
         final isPublicRoute = _publicRoutes.contains(currentPath);
         // return '/';
+        // return SplashRouter.path;
         switch (appStatus) {
           case AppStatus.loading:
             return SplashRouter.path;
@@ -97,7 +99,7 @@ var goRouterProvider = Provider<GoRouter>(
             // child: const MapPage2(),
             // child: const MounsHouse(),
             // child: const CardBottom(),
-            child: const MapPageTeste(),
+            child: const TestePage3(),
             // child: const MapToolbar(),
           ),
         ),

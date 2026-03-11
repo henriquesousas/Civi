@@ -19,7 +19,7 @@ class ButtonPrimary extends StatelessWidget {
   Widget build(BuildContext context) {
     return SizedBox(
       width: double.infinity,
-      height: ButtonSize.sm,
+      height: ButtonSize.xs,
       child: ElevatedButton(
         style: ElevatedButton.styleFrom(
           backgroundColor: context.primaryColor,

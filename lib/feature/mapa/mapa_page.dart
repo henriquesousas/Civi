@@ -6,16 +6,12 @@ import 'package:deehelp/core/extension/exports_extension.dart';
 import 'package:deehelp/core/services/permissions/location/export_location.dart';
 import 'package:deehelp/core/theme/app_colors.dart';
 import 'package:deehelp/core/ui/styles/export_style.dart';
-import 'package:deehelp/core/ui/widgets/icon/export_icon.dart';
 import 'package:deehelp/feature/mapa/reported_by.dart';
 import 'package:deehelp/feature/mapa/widgets/horizontal_incident_card.dart';
-import 'package:deehelp/feature/mapa/widgets/map_location_summary_card.dart';
-import 'package:deehelp/feature/mapa/widgets/map_search.dart';
-import 'package:deehelp/feature/mapa/widgets/mapa_avatar.dart';
-import 'package:deehelp/feature/mapa/widgets/mapa_side_action.dart';
-import 'package:deehelp/feature/mapa/widgets/search_card_with_region.dart';
+import 'package:deehelp/feature/mapa/widgets/map_bottom_sheet.dart';
 import 'package:deehelp/module/auth/external/di/authenticated_user_provider.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:mapbox_maps_flutter/mapbox_maps_flutter.dart';
@@ -24,10 +20,14 @@ import 'package:permission_handler/permission_handler.dart';
 class FakeIncident {
   final Point point;
   final IconData image;
+  final String imageAssets;
   final Color pinBorder;
 
   FakeIncident(
-      {required this.point, required this.image, required this.pinBorder});
+      {required this.point,
+      required this.image,
+      required this.pinBorder,
+      required this.imageAssets});
 
   static List<FakeIncident> generateFakeIncidents() {
     final random = Random();
@@ -44,6 +44,12 @@ class FakeIncident {
       Icons.two_wheeler_rounded,
     ];
 
+    final imageAssets = [
+      "assets/images/motorcycle_pin_v9.png",
+      "assets/images/car_rouberry_v4.png",
+      "assets/images/phone_pin_v2.png",
+    ];
+
     return List.generate(100, (index) {
       final lat = minLat + random.nextDouble() * (maxLat - minLat);
       final lng = minLng + random.nextDouble() * (maxLng - minLng);
@@ -53,120 +59,121 @@ class FakeIncident {
           coordinates: Position(lng, lat),
         ),
         image: icons[random.nextInt(icons.length)],
+        imageAssets: imageAssets[random.nextInt(imageAssets.length)],
         pinBorder: AppColors.primaryColor,
       );
     });
   }
 
-  static List<FakeIncident> itemss() {
-    return [
-      FakeIncident(
-        point: Point(coordinates: Position(-46.7905, -23.5338)),
-        image: Icons.directions_car_filled_rounded,
-        pinBorder: AppColors.primaryColor,
-      ),
-      FakeIncident(
-        point: Point(coordinates: Position(-46.7889, -23.5315)),
-        image: Icons.smartphone_rounded,
-        pinBorder: AppColors.primaryColor,
-      ),
-      FakeIncident(
-        point: Point(coordinates: Position(-46.7952, -23.5347)),
-        image: Icons.two_wheeler_rounded,
-        pinBorder: AppColors.primaryColor,
-      ),
-      FakeIncident(
-        point: Point(coordinates: Position(-46.7978, -23.5299)),
-        image: Icons.flood_rounded,
-        pinBorder: AppColors.primaryColor,
-      ),
-      FakeIncident(
-        point: Point(coordinates: Position(-46.7854, -23.5361)),
-        image: Icons.visibility_rounded,
-        pinBorder: AppColors.primaryColor,
-      ),
-      FakeIncident(
-        point: Point(coordinates: Position(-46.7822, -23.5304)),
-        image: Icons.flood_rounded,
-        pinBorder: AppColors.primaryColor,
-      ),
-      FakeIncident(
-        point: Point(coordinates: Position(-46.8001, -23.5321)),
-        image: Icons.directions_car_filled_rounded,
-        pinBorder: AppColors.primaryColor,
-      ),
-      FakeIncident(
-        point: Point(coordinates: Position(-46.8035, -23.5374)),
-        image: Icons.directions_car_filled_rounded,
-        pinBorder: AppColors.primaryColor,
-      ),
-      FakeIncident(
-        point: Point(coordinates: Position(-46.8035, -23.5374)),
-        image: Icons.motorcycle,
-        pinBorder: AppColors.primaryColor,
-      ),
-      FakeIncident(
-        point: Point(coordinates: Position(-46.7768, -23.5289)),
-        image: Icons.directions_car_filled_rounded,
-        pinBorder: AppColors.primaryColor,
-      ),
-      FakeIncident(
-        point: Point(coordinates: Position(-46.7741, -23.5340)),
-        image: Icons.motorcycle_rounded,
-        pinBorder: AppColors.primaryColor,
-      ),
-      FakeIncident(
-        point: Point(coordinates: Position(-46.7867, -23.5257)),
-        image: Icons.motorcycle_rounded,
-        pinBorder: AppColors.primaryColor,
-      ),
-      FakeIncident(
-        point: Point(coordinates: Position(-46.7928, -23.5402)),
-        image: Icons.directions_car_filled_rounded,
-        pinBorder: AppColors.primaryColor,
-      ),
-      FakeIncident(
-        point: Point(coordinates: Position(-46.8057, -23.5295)),
-        image: Icons.motorcycle_rounded,
-        pinBorder: AppColors.primaryColor,
-      ),
-      FakeIncident(
-        point: Point(coordinates: Position(-46.8092, -23.5333)),
-        image: Icons.phone_android_rounded,
-        pinBorder: AppColors.primaryColor,
-      ),
-      FakeIncident(
-        point: Point(coordinates: Position(-46.7819, -23.5411)),
-        image: Icons.directions_car_filled_rounded,
-        pinBorder: AppColors.primaryColor,
-      ),
-      FakeIncident(
-        point: Point(coordinates: Position(-46.7727, -23.5378)),
-        image: Icons.directions_car_filled_rounded,
-        pinBorder: AppColors.primaryColor,
-      ),
-      FakeIncident(
-        point: Point(coordinates: Position(-46.7994, -23.5252)),
-        image: Icons.directions_car_filled_rounded,
-        pinBorder: AppColors.primaryColor,
-      ),
-      FakeIncident(
-        point: Point(coordinates: Position(-46.8070, -23.5415)),
-        image: Icons.directions_car_filled_rounded,
-        pinBorder: AppColors.primaryColor,
-      ),
-      FakeIncident(
-        point: Point(coordinates: Position(-46.7840, -23.5440)),
-        image: Icons.directions_car_filled_rounded,
-        pinBorder: AppColors.primaryColor,
-      ),
-      FakeIncident(
-        point: Point(coordinates: Position(-46.7708, -23.5309)),
-        image: Icons.directions_car_filled_rounded,
-        pinBorder: AppColors.primaryColor,
-      ),
-    ];
-  }
+  // static List<FakeIncident> itemss() {
+  //   return [
+  //     FakeIncident(
+  //       point: Point(coordinates: Position(-46.7905, -23.5338)),
+  //       image: Icons.directions_car_filled_rounded,
+  //       pinBorder: AppColors.primaryColor,
+  //     ),
+  //     FakeIncident(
+  //       point: Point(coordinates: Position(-46.7889, -23.5315)),
+  //       image: Icons.smartphone_rounded,
+  //       pinBorder: AppColors.primaryColor,
+  //     ),
+  //     FakeIncident(
+  //       point: Point(coordinates: Position(-46.7952, -23.5347)),
+  //       image: Icons.two_wheeler_rounded,
+  //       pinBorder: AppColors.primaryColor,
+  //     ),
+  //     FakeIncident(
+  //       point: Point(coordinates: Position(-46.7978, -23.5299)),
+  //       image: Icons.flood_rounded,
+  //       pinBorder: AppColors.primaryColor,
+  //     ),
+  //     FakeIncident(
+  //       point: Point(coordinates: Position(-46.7854, -23.5361)),
+  //       image: Icons.visibility_rounded,
+  //       pinBorder: AppColors.primaryColor,
+  //     ),
+  //     FakeIncident(
+  //       point: Point(coordinates: Position(-46.7822, -23.5304)),
+  //       image: Icons.flood_rounded,
+  //       pinBorder: AppColors.primaryColor,
+  //     ),
+  //     FakeIncident(
+  //       point: Point(coordinates: Position(-46.8001, -23.5321)),
+  //       image: Icons.directions_car_filled_rounded,
+  //       pinBorder: AppColors.primaryColor,
+  //     ),
+  //     FakeIncident(
+  //       point: Point(coordinates: Position(-46.8035, -23.5374)),
+  //       image: Icons.directions_car_filled_rounded,
+  //       pinBorder: AppColors.primaryColor,
+  //     ),
+  //     FakeIncident(
+  //       point: Point(coordinates: Position(-46.8035, -23.5374)),
+  //       image: Icons.motorcycle,
+  //       pinBorder: AppColors.primaryColor,
+  //     ),
+  //     FakeIncident(
+  //       point: Point(coordinates: Position(-46.7768, -23.5289)),
+  //       image: Icons.directions_car_filled_rounded,
+  //       pinBorder: AppColors.primaryColor,
+  //     ),
+  //     FakeIncident(
+  //       point: Point(coordinates: Position(-46.7741, -23.5340)),
+  //       image: Icons.motorcycle_rounded,
+  //       pinBorder: AppColors.primaryColor,
+  //     ),
+  //     FakeIncident(
+  //       point: Point(coordinates: Position(-46.7867, -23.5257)),
+  //       image: Icons.motorcycle_rounded,
+  //       pinBorder: AppColors.primaryColor,
+  //     ),
+  //     FakeIncident(
+  //       point: Point(coordinates: Position(-46.7928, -23.5402)),
+  //       image: Icons.directions_car_filled_rounded,
+  //       pinBorder: AppColors.primaryColor,
+  //     ),
+  //     FakeIncident(
+  //       point: Point(coordinates: Position(-46.8057, -23.5295)),
+  //       image: Icons.motorcycle_rounded,
+  //       pinBorder: AppColors.primaryColor,
+  //     ),
+  //     FakeIncident(
+  //       point: Point(coordinates: Position(-46.8092, -23.5333)),
+  //       image: Icons.phone_android_rounded,
+  //       pinBorder: AppColors.primaryColor,
+  //     ),
+  //     FakeIncident(
+  //       point: Point(coordinates: Position(-46.7819, -23.5411)),
+  //       image: Icons.directions_car_filled_rounded,
+  //       pinBorder: AppColors.primaryColor,
+  //     ),
+  //     FakeIncident(
+  //       point: Point(coordinates: Position(-46.7727, -23.5378)),
+  //       image: Icons.directions_car_filled_rounded,
+  //       pinBorder: AppColors.primaryColor,
+  //     ),
+  //     FakeIncident(
+  //       point: Point(coordinates: Position(-46.7994, -23.5252)),
+  //       image: Icons.directions_car_filled_rounded,
+  //       pinBorder: AppColors.primaryColor,
+  //     ),
+  //     FakeIncident(
+  //       point: Point(coordinates: Position(-46.8070, -23.5415)),
+  //       image: Icons.directions_car_filled_rounded,
+  //       pinBorder: AppColors.primaryColor,
+  //     ),
+  //     FakeIncident(
+  //       point: Point(coordinates: Position(-46.7840, -23.5440)),
+  //       image: Icons.directions_car_filled_rounded,
+  //       pinBorder: AppColors.primaryColor,
+  //     ),
+  //     FakeIncident(
+  //       point: Point(coordinates: Position(-46.7708, -23.5309)),
+  //       image: Icons.directions_car_filled_rounded,
+  //       pinBorder: AppColors.primaryColor,
+  //     ),
+  //   ];
+  // }
 }
 
 enum GPSHeight {
@@ -183,7 +190,8 @@ class MapaPage extends ConsumerStatefulWidget {
 }
 
 class _MapaPageState extends ConsumerState<MapaPage> {
-  final _initialZoom = 13.8;
+  // final _initialZoom = 13.8;
+  final _initialZoom = 16.0;
   bool _showIncidentCards = false;
   bool _isCardOpened = false;
   GPSHeight _gpsHeight = GPSHeight.normal;
@@ -206,9 +214,9 @@ class _MapaPageState extends ConsumerState<MapaPage> {
   double get _getGpsHeight {
     switch (_gpsHeight) {
       case GPSHeight.normal:
-        return 120.h;
+        return 100.h;
       case GPSHeight.min:
-        return 180.h;
+        return 270.h;
       default:
         return 220.h;
     }
@@ -226,11 +234,14 @@ class _MapaPageState extends ConsumerState<MapaPage> {
           //Mapa
           MapWidget(
             key: const ValueKey('mapWidget'),
-            styleUri: MapboxStyles.MAPBOX_STREETS,
+            styleUri: MapboxStyles.STANDARD,
             cameraOptions: CameraOptions(
               center: _myLocation,
               zoom: _initialZoom,
+              pitch: 65,
+              bearing: -30,
             ),
+
             textureView: true,
             onMapCreated: (mapboxMap) =>
                 _onMapCreated(mapboxMap, fakeIncidents),
@@ -268,22 +279,30 @@ class _MapaPageState extends ConsumerState<MapaPage> {
           //   ),
           // ),
 
-          SafeArea(
-            bottom: false,
-            child: Padding(
-              padding: const EdgeInsets.fromLTRB(20, 10, 20, 0),
-              child: MapSearch(
-                // hintText: 'Buscar incidentes ou locais',
-                hintText: "👋 Consultar placa ou IMEI de celular",
-                avatarUrl: state?.photoUrl,
-                userName: state?.name ?? '',
-                notificationCount: 3,
-                onTap: () {},
-                onAvatarTap: () {},
-                onNotificationTap: () {},
-              ),
-            ),
-          ),
+          //Search
+          // SafeArea(
+          //   bottom: false,
+          //   child: Padding(
+          //     padding: const EdgeInsets.fromLTRB(20, 10, 20, 0),
+          //     child: MapSearch(
+          //       // hintText: 'Buscar incidentes ou locais',
+          //       hintText: "👋 Consultar placa ou IMEI de celular",
+          //       avatarUrl: state?.photoUrl,
+          //       userName: state?.name ?? '',
+          //       notificationCount: 3,
+          //       onTap: () {},
+          //       onAvatarTap: () {},
+          //       onNotificationTap: () {},
+          //     ),
+          //   ),
+          // ),
+
+          // MapTopToolbar(
+          //   avatarUrl: state?.photoUrl,
+          //   // onProfileTap: () {},
+          //   onNotificationTap: () {},
+          //   onSettingsTap: () {},
+          // ),
           //GPS
           AnimatedPositioned(
             duration: const Duration(milliseconds: 300),
@@ -324,9 +343,10 @@ class _MapaPageState extends ConsumerState<MapaPage> {
           ),
           // Location
           Positioned(
-            left: 10,
-            right: 10,
-            bottom: context.bottomPadding + 5,
+            left: 0,
+            right: 0,
+            bottom: 0,
+            // bottom: context.bottomPadding + 5,
             child: AnimatedSlide(
               duration: const Duration(milliseconds: 300),
               offset: _showIncidentCards ? const Offset(0, 1) : Offset.zero,
@@ -334,24 +354,9 @@ class _MapaPageState extends ConsumerState<MapaPage> {
                 duration: const Duration(milliseconds: 250),
                 opacity: _showIncidentCards ? 0 : 1,
                 child: Positioned(
-                  // child: MapLocationSummaryCard(
-                  //   title: "Osasco - SP",
-                  //   // alertsText: "4 alertas últimas 24 hrs",
-                  //   alertsText:
-                  //       "Travessa Francisco Alves da Silva, 2 Baronesa Osasco",
-                  // ),
-                  child: ExpandableIncidentCard(
-                    startOpened: _showIncidentCards,
-                    title: 'Osasco - SP',
-                    subtitle:
-                        'Trabessa Francisco Alves da Silva,2, Baronesa, Osasco',
-                    onViewIncidents: () {
-                      debugPrint('Ver incidentes');
-                    },
-                    onRegisterIncident: () {
-                      debugPrint('Registrar incidente');
-                    },
-                    onExpand: (opened) {
+                  child: MapLayersBottomSheet(
+                    initiallyExpanded: _showIncidentCards,
+                    onTapHeader: (opened) {
                       _isCardOpened = opened;
                       if (opened) {
                         setState(() {
@@ -364,6 +369,37 @@ class _MapaPageState extends ConsumerState<MapaPage> {
                       }
                     },
                   ),
+                  // child: ExpandableIncidentCard(
+                  //   startOpened: _showIncidentCards,
+                  //   title: 'Osasco - SP',
+                  //   subtitle:
+                  //       'Trabessa Francisco Alves da Silva,2, Baronesa, Osasco',
+                  //   onViewIncidents: () {
+                  //     debugPrint('Ver incidentes');
+                  //   },
+                  //   onRegisterIncident: () {
+                  //     debugPrint('Registrar incidente');
+                  //     showModalBottomSheet(
+                  //       context: context,
+                  //       backgroundColor: Colors.transparent,
+                  //       barrierColor: Colors.black54,
+                  //       isScrollControlled: true,
+                  //       builder: (_) => const MapLayersBottomSheet(),
+                  //     );
+                  //   },
+                  //   onExpand: (opened) {
+                  //     _isCardOpened = opened;
+                  //     if (opened) {
+                  //       setState(() {
+                  //         _gpsHeight = GPSHeight.min;
+                  //       });
+                  //     } else {
+                  //       setState(() {
+                  //         _gpsHeight = GPSHeight.normal;
+                  //       });
+                  //     }
+                  //   },
+                  // ),
                 ),
               ),
             ),
@@ -462,7 +498,9 @@ class _MapaPageState extends ConsumerState<MapaPage> {
   }
 
   Future<void> _onMapCreated(
-      MapboxMap mapboxMap, List<FakeIncident> incidents) async {
+    MapboxMap mapboxMap,
+    List<FakeIncident> incidents,
+  ) async {
     _mapboxMap = mapboxMap;
 
     final status = await Permission.locationWhenInUse.request();
@@ -479,10 +517,53 @@ class _MapaPageState extends ConsumerState<MapaPage> {
       );
     }
 
-    await mapboxMap.compass.updateSettings(
-      CompassSettings(
-        enabled: false,
+    await _mapboxMap?.gestures.updateSettings(
+      GesturesSettings(
+        pitchEnabled: true,
       ),
+    );
+
+    await _mapboxMap?.location.updateSettings(
+      LocationComponentSettings(
+        enabled: true,
+        pulsingEnabled: true,
+      ),
+    );
+
+    //botao de rotacao
+    if (mounted) {
+      await _mapboxMap!.compass.updateSettings(
+        CompassSettings(
+          enabled: true,
+          marginTop: context.topPadding,
+          marginRight: 16,
+        ),
+      );
+    }
+
+    await _mapboxMap!.style.setStyleImportConfigProperty(
+      'basemap',
+      'lightPreset',
+      'day',
+    );
+
+    // opcionais, para deixar o mapa mais limpo
+    await _mapboxMap!.style.setStyleImportConfigProperty(
+      'basemap',
+      'showPointOfInterestLabels',
+      false,
+    );
+
+    await _mapboxMap!.style.setStyleImportConfigProperty(
+      'basemap',
+      'showTransitLabels',
+      true,
+    );
+
+    await _mapboxMap!.style.setStyleImportConfigProperty(
+      'basemap',
+      'showPedestrianRoads',
+      true,
     );
 
     _pointManager =
@@ -499,17 +580,21 @@ class _MapaPageState extends ConsumerState<MapaPage> {
       //   label: 'DND0171',
       //   isSelected: false,
       // );
-      final pinImage = await createPinWithIconV4(
-        icon: incident.image,
-        badgeText: 'DND0171',
-        isSelected: false,
-      );
+      // final pinImage = await createPinWithIconV4(
+      //   icon: incident.image,
+      //   badgeText: 'DND0171',
+      //   isSelected: false,
+      // );
+
+      //car_rouberry_v4
+
+      final pinImage = await createPinWithAsset(incident.imageAssets);
 
       final marker = await _pointManager!.create(
         PointAnnotationOptions(
           geometry: incident.point,
           image: pinImage,
-          iconSize: 1.5,
+          iconSize: 1.2,
           iconAnchor: IconAnchor.BOTTOM,
         ),
       );
@@ -928,6 +1013,69 @@ class _MapaPageState extends ConsumerState<MapaPage> {
     return bytes!.buffer.asUint8List();
   }
 
+  Future<Uint8List> createPinWithAsset(String assetPath) async {
+    debugPrint(assetPath);
+    const double size = 70;
+    const double strokeWidth = 4;
+    const double radius = 90;
+
+    final recorder = ui.PictureRecorder();
+    final canvas = Canvas(recorder);
+
+    // final fillPaint = Paint()..color = Colors.white;
+    final fillPaint = Paint()..color = Colors.black;
+
+    final borderPaint = Paint()
+      // ..color = const Color(0xFF2B5BEE)
+      ..color = AppColors.danger //fire
+      // ..color = Colors.white //fire
+      // ..color = AppColors.primaryColor //flooding
+      // ..color = AppColors.primaryColor //car
+      ..style = PaintingStyle.stroke
+      ..strokeWidth = strokeWidth
+      ..isAntiAlias = true;
+
+    final fillRRect = RRect.fromRectAndRadius(
+      const Rect.fromLTWH(0, 0, size, size),
+      const Radius.circular(radius),
+    );
+
+    double borderInset = strokeWidth / 2;
+
+    final borderRRect = RRect.fromRectAndRadius(
+      Rect.fromLTWH(
+        borderInset,
+        borderInset,
+        size - strokeWidth,
+        size - strokeWidth,
+      ),
+      Radius.circular(radius - borderInset),
+    );
+
+    canvas.drawRRect(fillRRect, fillPaint);
+    canvas.drawRRect(borderRRect, borderPaint);
+
+    final ByteData data = await rootBundle.load(assetPath);
+    final Uint8List bytes = data.buffer.asUint8List();
+
+    final codec = await ui.instantiateImageCodec(bytes, targetWidth: 56);
+    final frame = await codec.getNextFrame();
+    final image = frame.image;
+
+    final offset = Offset(
+      (size - image.width) / 2,
+      (size - image.height) / 2,
+    );
+
+    canvas.drawImage(image, offset, Paint());
+
+    final picture = recorder.endRecording();
+    final img = await picture.toImage(size.toInt(), size.toInt());
+    final byteData = await img.toByteData(format: ui.ImageByteFormat.png);
+
+    return byteData!.buffer.asUint8List();
+  }
+
   Future<void> _onMarkeClick(List<FakeIncident> incidents) async {
     _pointManager?.tapEvents(
       onTap: (pointAnnotation) async {
@@ -1000,8 +1148,8 @@ class _MapaPageState extends ConsumerState<MapaPage> {
         center: Point(
           coordinates: Position(location.longitude, location.latitude),
         ),
-        zoom: 16.5,
-        pitch: 0,
+        zoom: _initialZoom,
+        // pitch: 0,
       ),
       MapAnimationOptions(
         duration: 1200,

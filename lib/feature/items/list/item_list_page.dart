@@ -104,9 +104,9 @@ class _ItemListPageState extends ConsumerState<ItemListPage> {
               size: IconSizes.xl,
               color: context.primaryColor,
             ),
-            title: 'Nenhum item cadastrado',
+            title: 'Você ainda não cadastrou nenhum item',
             subtitle:
-                'Cadastre seu carro, moto ou celular para protegê-los e ajudar a comunidade em caso de roubo.',
+                'Cadastre seu carro, moto ou celular para acompanhar ocorrências e receber alertas relacionados.',
             buttonText: "Cadastrar item",
             onRegisterItem: () {
               final router =
