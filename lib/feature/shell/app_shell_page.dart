@@ -1,5 +1,7 @@
 // import 'package:deehelp/feature/home/v2/home_page.dart';
 
+import 'package:deehelp/core/extension/exports_extension.dart';
+import 'package:deehelp/core/theme/export_theme.dart';
 import 'package:deehelp/core/ui/styles/export_style.dart';
 import 'package:deehelp/feature/home/v2/home_page.dart';
 import 'package:deehelp/feature/home/v2/teste_home.dart';
@@ -126,7 +128,7 @@ class HomeBottomSheetNav extends StatelessWidget {
       _BottomNavItemData(
         icon: Icons.public,
         activeIcon: Icons.public_outlined,
-        label: 'Map',
+        label: 'Mapa',
       ),
       _BottomNavItemData(
         icon: Icons.search,
@@ -152,12 +154,13 @@ class HomeBottomSheetNav extends StatelessWidget {
         top: 10,
         bottom: MediaQuery.of(context).padding.bottom + 10,
       ),
-      decoration: const BoxDecoration(
-        color: Colors.white,
-        borderRadius: BorderRadius.vertical(
+      decoration: BoxDecoration(
+        // color: Colors.white,
+        color: context.surfaceColor,
+        borderRadius: const BorderRadius.vertical(
           top: Radius.circular(28),
         ),
-        boxShadow: [
+        boxShadow: const [
           BoxShadow(
             color: Color(0x14000000),
             blurRadius: 18,
@@ -184,27 +187,21 @@ class HomeBottomSheetNav extends StatelessWidget {
                       selected ? item.activeIcon : item.icon,
                       color: selected
                           ? const Color(0xFF2563EB)
-                          : const Color(0xFF9CA3AF),
-                      size: 22,
+                          // : const Color(0xFF9CA3AF),
+                          : context.onSurface.withValues(alpha: 0.8),
+                      size: IconSizes.md,
                     ),
                     const SizedBox(height: 4),
                     Text(
                       item.label,
-                      style: context.appText.caption.copyWith(
+                      style: context.appText.label.copyWith(
                         color: selected
                             ? const Color(0xFF2563EB)
-                            : const Color(0xFF9CA3AF),
+                            : context.onSurface.withValues(alpha: 0.8),
+                        // : const Color(0xFF9CA3AF),
                         fontWeight:
                             selected ? FontWeight.w600 : FontWeight.w400,
                       ),
-                      // style: TextStyle(
-                      //   color: selected
-                      //       ? const Color(0xFF2563EB)
-                      //       : const Color(0xFF9CA3AF),
-                      //   fontSize: 11,
-                      //   fontWeight:
-                      //       selected ? FontWeight.w600 : FontWeight.w400,
-                      // ),
                     ),
                   ],
                 ),

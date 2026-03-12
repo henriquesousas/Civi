@@ -26,14 +26,20 @@ class ToggleChip extends StatelessWidget {
         padding: const EdgeInsets.symmetric(
             horizontal: SpacingSize.md, vertical: SpacingSize.md),
         decoration: BoxDecoration(
+          // color: selected
+          //     ? context.primaryColor.withValues(alpha: 0.12)
+          //     : Colors.white,
           color: selected
               ? context.primaryColor.withValues(alpha: 0.12)
-              : Colors.white,
+              : context.surfaceColor,
           borderRadius: BorderRadius.circular(14),
           border: Border.all(
+            // color: selected
+            //     ? context.primaryColor.withValues(alpha: 0.30)
+            //     : const Color(0xFFE6EAF6),
             color: selected
                 ? context.primaryColor.withValues(alpha: 0.30)
-                : const Color(0xFFE6EAF6),
+                : context.outlineVariantColor,
           ),
         ),
         child: Row(
@@ -49,8 +55,9 @@ class ToggleChip extends StatelessWidget {
               child: Text(
                 label,
                 overflow: TextOverflow.ellipsis,
-                style: context.appText.caption.copyWith(
-                  fontWeight: FontWeight.w900,
+                style: context.appText.label.copyWith(
+                  fontWeight: FontWeight.w700,
+                  // color: selected ? context.primaryColor : context.onSurface,
                   color: selected ? context.primaryColor : context.onSurface,
                 ),
               ),

@@ -30,7 +30,7 @@ class CardHint extends StatelessWidget {
     return Container(
       padding: const EdgeInsets.all(LayoutSpacingSize.card),
       decoration: BoxDecoration(
-        color: backgroundColor ?? context.primaryColor.withValues(alpha: 0.08),
+        color: backgroundColor ?? context.primaryColor.withValues(alpha: 0.09),
         borderRadius: BorderRadius.circular(RadiusSize.lg),
         border: border ??
             Border.all(color: context.primaryColor.withValues(alpha: 0.20)),
@@ -63,7 +63,7 @@ class CardHint extends StatelessWidget {
               children: [
                 Text(
                   title,
-                  style: context.appText.headersm,
+                  style: context.appText.headermd,
                 ),
                 const SizedBox(height: SpacingSize.xs),
                 Text(

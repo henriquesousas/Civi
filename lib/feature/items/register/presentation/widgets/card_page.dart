@@ -1,4 +1,4 @@
-import 'package:deehelp/core/theme/app_colors.dart';
+import 'package:deehelp/core/extension/exports_extension.dart';
 import 'package:deehelp/core/theme/size/radius_size.dart';
 import 'package:flutter/material.dart';
 
@@ -20,9 +20,12 @@ class PageCard extends StatelessWidget {
     return Container(
       padding: padding ?? EdgeInsets.zero,
       decoration: BoxDecoration(
-        color: bgColor ?? Colors.white,
+        // color: bgColor ?? Colors.white,
+        color: bgColor ?? context.surfaceColor,
         borderRadius: BorderRadius.circular(RadiusSize.xl),
-        border: BoxBorder.all(color: AppColors.grey.withValues(alpha: 0.3)),
+        // border: BoxBorder.all(color: AppColors.grey.withValues(alpha: 0.3)),
+        border: BoxBorder.all(
+            color: context.outlineVariantColor.withValues(alpha: 0.5)),
         boxShadow: isFloating
             ? const [
                 BoxShadow(

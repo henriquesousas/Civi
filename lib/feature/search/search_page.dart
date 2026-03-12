@@ -325,7 +325,8 @@ class _SearchPageState extends ConsumerState<SearchPage> {
                               fontWeight: FontWeight.w800,
                             ),
                             filled: true,
-                            fillColor: context.secondaryContainer,
+                            fillColor: context.outlineVariantColor
+                                .withValues(alpha: 0.5),
                             border: OutlineInputBorder(
                               borderRadius: BorderRadius.circular(18),
                               borderSide: BorderSide.none,

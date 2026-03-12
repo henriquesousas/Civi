@@ -4,34 +4,6 @@ import 'package:deehelp/core/ui/styles/export_style.dart';
 import 'package:deehelp/core/ui/widgets/icon/export_icon.dart';
 import 'package:flutter/material.dart';
 
-/// ===============================
-class UIK {
-  static const primary = Color(0xFF2B5BEE);
-  static const bg = Color(0xFFF7F9FC);
-  static const surface = Colors.white;
-  static const ink = Color(0xFF1F2A44);
-  static const muted = Color(0xFF6B7280);
-  static const border = Color(0xFFE9EEF8);
-
-  static const danger = Color(0xFFE53935);
-
-  static const rCard = 20.0;
-  static const rButton = 18.0;
-
-  static const s12 = 12.0;
-  static const s16 = 16.0;
-  static const s20 = 20.0;
-  static const s24 = 24.0;
-
-  static const shadowSoft = BoxShadow(
-    color: Color(0x12000000),
-    blurRadius: 18,
-    offset: Offset(0, 10),
-  );
-}
-
-/// ========
-///
 class SosHeaderCard extends StatelessWidget {
   final String title;
   final String subtitle;
@@ -58,7 +30,7 @@ class SosHeaderCard extends StatelessWidget {
           ),
         ],
       ),
-      padding: const EdgeInsets.all(UIK.s16),
+      padding: const EdgeInsets.all(16),
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [

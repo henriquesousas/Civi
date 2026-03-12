@@ -16,7 +16,7 @@ class SOSPage extends StatelessWidget {
     final contacts = SosContact.defaultEmergencyContacts();
 
     return Scaffold(
-      backgroundColor: UIK.bg,
+      // backgroundColor: context.secondaryContainer,
       appBar: DefaultAppBar(
         title: "SOS",
         showBackButton: true,
@@ -24,8 +24,7 @@ class SOSPage extends StatelessWidget {
       ),
       body: SafeArea(
         child: ListView(
-          padding:
-              const EdgeInsets.fromLTRB(UIK.s16, UIK.s16, UIK.s16, UIK.s24),
+          padding: const EdgeInsets.fromLTRB(16, 16, 16, 24),
           children: [
             SosHeaderCard(
               title: 'Contatos de emergência',
@@ -38,14 +37,14 @@ class SOSPage extends StatelessWidget {
             const SizedBox(height: SpacingSize.lg),
             ...contacts.map(
               (c) => Padding(
-                padding: const EdgeInsets.only(bottom: UIK.s12),
+                padding: const EdgeInsets.only(bottom: 12),
                 child: RowSOSContact(
                   contact: c,
                   onCall: () => UrlLauncherUtils.makePhoneCall(c.phone),
                 ),
               ),
             ),
-            const SizedBox(height: UIK.s20),
+            const SizedBox(height: 20),
             // _OtherContactsHint(),
           ],
         ),

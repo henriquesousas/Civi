@@ -26,16 +26,13 @@ class DefaultAppBar extends StatelessWidget implements PreferredSizeWidget {
   Widget build(BuildContext context) {
     return AppBar(
       // elevation: 10,
-      systemOverlayStyle: const SystemUiOverlayStyle(
-        statusBarColor: Colors.transparent,
-        statusBarIconBrightness: Brightness.light,
-      ),
+
       bottom: PreferredSize(
         preferredSize: const Size.fromHeight(1),
         child: Container(
           height: 1,
           // color: const Color(0xFFE6EAF6),
-          color: context.outline,
+          color: context.outlineVariantColor.withValues(alpha: 0.5),
         ),
       ),
       // scrolledUnderElevation: 0.6,
