@@ -1,3 +1,4 @@
+import 'package:deehelp/core/extension/exports_extension.dart';
 import 'package:deehelp/core/theme/export_theme.dart';
 import 'package:deehelp/core/ui/styles/export_style.dart';
 import 'package:deehelp/feature/items/register/presentation/widgets/color-picker/color_dot.dart';
@@ -18,10 +19,10 @@ class ColorBottomSheet extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      decoration: const BoxDecoration(
-        color: Colors.white,
+      decoration: BoxDecoration(
+        color: context.surfaceColor,
         borderRadius:
-            BorderRadius.vertical(top: Radius.circular(RadiusSize.md)),
+            const BorderRadius.vertical(top: Radius.circular(RadiusSize.md)),
       ),
       child: Padding(
         padding: const EdgeInsets.fromLTRB(16, 14, 16, 18),
@@ -78,12 +79,12 @@ class ColorBottomSheet extends StatelessWidget {
                       decoration: BoxDecoration(
                         color: selected
                             ? opt.color.withValues(alpha: 0.10)
-                            : const Color(0xFFF5F7FD),
+                            : context.surfaceColor,
                         borderRadius: BorderRadius.circular(18),
                         border: Border.all(
                           color: selected
                               ? opt.color.withValues(alpha: 0.35)
-                              : const Color(0xFFE6EAF6),
+                              : context.outlineVariantColor,
                         ),
                       ),
                       child: Row(
@@ -102,9 +103,10 @@ class ColorBottomSheet extends StatelessWidget {
                             Icon(Icons.check,
                                 color: opt.color, size: IconSizes.md)
                           else
-                            const Icon(
+                            Icon(
                               Icons.chevron_right,
-                              color: Color(0xFF8A96C8),
+                              color: context.outlineVariantColor
+                                  .withValues(alpha: 1),
                             ),
                         ],
                       ),

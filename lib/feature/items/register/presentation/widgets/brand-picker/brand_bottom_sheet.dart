@@ -45,10 +45,10 @@ class _BrandBottomSheetState extends State<BrandBottomSheet> {
       child: SizedBox(
         height: MediaQuery.of(context).size.height * 0.85,
         child: Container(
-          decoration: const BoxDecoration(
-            color: Colors.white,
-            borderRadius:
-                BorderRadius.vertical(top: Radius.circular(RadiusSize.md)),
+          decoration: BoxDecoration(
+            color: context.surfaceColor,
+            borderRadius: const BorderRadius.vertical(
+                top: Radius.circular(RadiusSize.md)),
           ),
           child: Column(
             mainAxisSize: MainAxisSize.max,
@@ -136,7 +136,7 @@ class _BrandBottomSheetState extends State<BrandBottomSheet> {
                           decoration: BoxDecoration(
                             color: selected
                                 ? context.primaryColor.withValues(alpha: 0.10)
-                                : const Color(0xFFF5F7FD),
+                                : context.surfaceColor,
                             borderRadius: BorderRadius.circular(18),
                           ),
                           child: Row(

@@ -23,7 +23,7 @@ class TextFieldLongText extends StatelessWidget {
     return Container(
       padding: const EdgeInsets.all(14),
       decoration: BoxDecoration(
-        color: const Color(0xFFF5F7FD),
+        color: context.surface,
         borderRadius: BorderRadius.circular(18),
         border: Border.all(color: const Color(0xFFE6EAF6)),
       ),
@@ -59,7 +59,7 @@ class TextFieldLongText extends StatelessWidget {
               hintText: 'Digite aqui…',
               hintStyle: TextStyle(color: context.secondaryColor),
               filled: true,
-              fillColor: Colors.white,
+              fillColor: context.outlineVariantColor,
               border: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(16),
                 borderSide: BorderSide.none,

@@ -1,7 +1,9 @@
 import 'package:deehelp/core/extension/color_extension.dart';
 import 'package:deehelp/core/theme/export_theme.dart';
 import 'package:deehelp/core/ui/styles/app_text_style.dart';
+import 'package:deehelp/feature/items/items_router.dart';
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 
 class HeaderSummary extends StatelessWidget {
   final int total;
@@ -13,7 +15,7 @@ class HeaderSummary extends StatelessWidget {
     return Container(
       padding: const EdgeInsets.all(LayoutSpacingSize.card),
       decoration: BoxDecoration(
-        color: Colors.white,
+        color: context.surfaceColor,
         borderRadius: BorderRadius.circular(RadiusSize.xl),
         boxShadow: const [
           BoxShadow(
@@ -25,21 +27,26 @@ class HeaderSummary extends StatelessWidget {
       ),
       child: Row(
         children: [
-          Container(
-            width: IconSizes.xxl,
-            height: IconSizes.xxl,
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(RadiusSize.md),
-              gradient: const LinearGradient(
-                colors: [
-                  Color(0xFF2B5BEE),
-                  Color(0xFF5F85FF),
-                ],
-                begin: Alignment.topLeft,
-                end: Alignment.bottomRight,
+          GestureDetector(
+            onTap: () => context.push(ItemsRouter.register),
+            child: Container(
+              width: IconSizes.xxl,
+              height: IconSizes.xxl,
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(999),
+                gradient: LinearGradient(
+                  colors: [
+                    // Color(0xFF2B5BEE),
+                    // Color(0xFF5F85FF),
+                    context.primaryColor,
+                    context.primaryColorDark,
+                  ],
+                  begin: Alignment.topLeft,
+                  end: Alignment.bottomRight,
+                ),
               ),
+              child: Icon(Icons.add, color: context.surfaceColor),
             ),
-            child: const Icon(Icons.inventory_2_outlined, color: Colors.white),
           ),
           const SizedBox(width: SpacingSize.md),
           Expanded(

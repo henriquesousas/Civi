@@ -23,7 +23,10 @@ class HorizontalImagePreview extends StatelessWidget {
       child: ListView.separated(
         scrollDirection: Axis.horizontal,
         itemCount: photos.length,
-        separatorBuilder: (_, __) => const SizedBox(height: SpacingSize.md),
+        separatorBuilder: (_, __) => const SizedBox(
+          height: SpacingSize.md,
+          width: 4,
+        ),
         itemBuilder: (_, i) {
           final selected = i == selectedIndex;
           return GestureDetector(
@@ -34,7 +37,7 @@ class HorizontalImagePreview extends StatelessWidget {
               decoration: BoxDecoration(
                 color: selected
                     ? context.primaryColor.withValues(alpha: 0.18)
-                    : const Color(0xFFF5F7FD),
+                    : context.surfaceColor,
                 borderRadius: BorderRadius.circular(14),
                 border: Border.all(
                   color:

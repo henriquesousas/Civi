@@ -27,10 +27,11 @@ class ExpandableCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final border = selected
-        ? context.primaryColor.withValues(alpha: 0.32)
-        : const Color(0xFFE6EAF6);
-    final bg =
-        selected ? context.primaryColor.withValues(alpha: 0.01) : Colors.white;
+        ? context.primaryColor.withValues(alpha: 0.2)
+        : context.outlineVariantColor;
+    final bg = selected
+        ? context.primaryColor.withValues(alpha: 0.01)
+        : context.surface;
 
     return InkWell(
       borderRadius: BorderRadius.circular(RadiusSize.xl),
@@ -81,7 +82,7 @@ class ExpandableCard extends StatelessWidget {
                               child: Text(
                                 badge,
                                 style: context.appText.caption.copyWith(
-                                  color: Colors.white,
+                                  color: context.surface,
                                   fontWeight: FontWeight.w900,
                                   letterSpacing: 0.4,
                                 ),
@@ -111,7 +112,7 @@ class ExpandableCard extends StatelessWidget {
               ),
             ),
             if (selected) ...[
-              const Divider(height: 1, color: Color(0xFFE6EAF6)),
+              Divider(height: 1, color: context.surface),
               child,
             ],
           ],

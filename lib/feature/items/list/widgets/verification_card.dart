@@ -12,7 +12,7 @@ class VerificationInfoCard extends StatelessWidget {
     return Container(
       padding: const EdgeInsets.all(LayoutSpacingSize.card),
       decoration: BoxDecoration(
-        color: Colors.white,
+        color: context.surfaceColor,
         borderRadius: BorderRadius.circular(RadiusSize.xxl),
         boxShadow: const [
           BoxShadow(

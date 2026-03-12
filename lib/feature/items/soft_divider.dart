@@ -1,3 +1,4 @@
+import 'package:deehelp/core/extension/exports_extension.dart';
 import 'package:flutter/material.dart';
 
 class SoftDivider extends StatelessWidget {
@@ -5,10 +6,10 @@ class SoftDivider extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Divider(
+    return Divider(
       height: 1,
       indent: 70,
-      color: Color(0xFFE6EAF6),
+      color: context.outlineVariantColor.withValues(alpha: 0.3),
     );
   }
 }

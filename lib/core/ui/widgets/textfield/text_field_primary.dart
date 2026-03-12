@@ -53,7 +53,8 @@ class TextFieldPrimary extends StatelessWidget {
           ),
           hintText: hint,
           filled: true,
-          fillColor: const Color(0xFFF5F7FD),
+          // fillColor: const Color(0xFFF5F7FD),
+          fillColor: context.secondaryContainer,
           border: OutlineInputBorder(
             borderRadius: BorderRadius.circular(RadiusSize.md),
             borderSide: BorderSide.none,

@@ -102,7 +102,8 @@ class _MainAppState extends ConsumerState<MainApp> {
               // themeMode: ThemeMode.light,
               // darkTheme: AppTheme.dark(),
               // theme: themeData,
-              theme: AppTheme.dark(),
+              theme: AppTheme.lightTheme(),
+              darkTheme: AppTheme.dark(),
               themeMode: ThemeMode.dark,
               // themeMode:
               //     themeState.isDarkMode ? ThemeMode.dark : ThemeMode.light,

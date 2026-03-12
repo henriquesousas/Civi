@@ -9,6 +9,7 @@ import 'package:deehelp/core/ui/styles/export_style.dart';
 import 'package:deehelp/feature/mapa/reported_by.dart';
 import 'package:deehelp/feature/mapa/widgets/horizontal_incident_card.dart';
 import 'package:deehelp/feature/mapa/widgets/map_bottom_sheet.dart';
+import 'package:deehelp/map_page_teste.dart';
 import 'package:deehelp/module/auth/external/di/authenticated_user_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -195,6 +196,7 @@ class _MapaPageState extends ConsumerState<MapaPage> {
   bool _showIncidentCards = false;
   bool _isCardOpened = false;
   GPSHeight _gpsHeight = GPSHeight.normal;
+  ScrollController controller = ScrollController();
 
   // double gpsNormalHeight = 100.h;
   // final double gpsCardIncidentHeight = 240.h;
@@ -234,7 +236,7 @@ class _MapaPageState extends ConsumerState<MapaPage> {
           //Mapa
           MapWidget(
             key: const ValueKey('mapWidget'),
-            styleUri: MapboxStyles.STANDARD,
+            styleUri: MapboxStyles.DARK,
             cameraOptions: CameraOptions(
               center: _myLocation,
               zoom: _initialZoom,
@@ -320,11 +322,14 @@ class _MapaPageState extends ConsumerState<MapaPage> {
                 // ),
                 FloatingActionButton(
                   mini: false,
-                  backgroundColor: context.primaryColor,
+
+                  // backgroundColor: context.primaryColor,
+                  backgroundColor:
+                      context.secondaryColor.withValues(alpha: 0.2),
                   elevation: 8,
                   onPressed: () => _goToMyLocation(currenLocation),
                   child: const Icon(
-                    Icons.my_location_rounded,
+                    Icons.navigation,
                     color: Colors.white,
                   ),
                 ),
@@ -353,22 +358,23 @@ class _MapaPageState extends ConsumerState<MapaPage> {
               child: AnimatedOpacity(
                 duration: const Duration(milliseconds: 250),
                 opacity: _showIncidentCards ? 0 : 1,
-                child: Positioned(
-                  child: MapLayersBottomSheet(
-                    initiallyExpanded: _showIncidentCards,
-                    onTapHeader: (opened) {
-                      _isCardOpened = opened;
-                      if (opened) {
-                        setState(() {
-                          _gpsHeight = GPSHeight.min;
-                        });
-                      } else {
-                        setState(() {
-                          _gpsHeight = GPSHeight.normal;
-                        });
-                      }
-                    },
-                  ),
+                child: const Positioned(
+                  // child: MapLayersBottomSheet(
+                  //   initiallyExpanded: _showIncidentCards,
+                  //   onTapHeader: (opened) {
+                  //     _isCardOpened = opened;
+                  //     if (opened) {
+                  //       setState(() {
+                  //         _gpsHeight = GPSHeight.min;
+                  //       });
+                  //     } else {
+                  //       setState(() {
+                  //         _gpsHeight = GPSHeight.normal;
+                  //       });
+                  //     }
+                  //   },
+                  // ),
+                  child: MapLayersBottomSheet2(),
                   // child: ExpandableIncidentCard(
                   //   startOpened: _showIncidentCards,
                   //   title: 'Osasco - SP',

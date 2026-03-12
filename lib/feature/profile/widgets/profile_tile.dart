@@ -73,7 +73,7 @@ class ProfileTile extends StatelessWidget {
                           child: Text(
                             item.badge!,
                             style: context.appText.caption.copyWith(
-                              color: Colors.white,
+                              color: Theme.of(context).colorScheme.surface,
                               fontWeight: FontWeight.w600,
                             ),
                           ),

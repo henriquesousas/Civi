@@ -31,9 +31,9 @@ class StatusStyle {
       case ItemStatus.pending:
         return StatusStyle(
           label: 'Pendente',
-          bg: const Color(0xFFFFB020).withValues(alpha: 0.14),
-          fg: const Color(0xFFB06A00),
-          border: const Color(0xFFFFB020).withValues(alpha: 0.35),
+          bg: AppColors.orange.withValues(alpha: 0.14),
+          fg: AppColors.orange,
+          border: AppColors.orange.withValues(alpha: 0.35),
           icon: Icons.schedule,
         );
       case ItemStatus.canceled:

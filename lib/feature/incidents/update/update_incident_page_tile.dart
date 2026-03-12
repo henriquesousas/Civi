@@ -137,7 +137,8 @@ class _UpdateIncidentPageTileState
             },
             icon: Icon(
               Icons.gps_fixed,
-              color: context.primaryColor,
+              // color: context.primaryColor,
+              color: context.onSurfaceVariant,
             ),
             text: "Usar minha localização",
           ),

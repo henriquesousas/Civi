@@ -61,9 +61,10 @@ class _ListingIncidentPageState extends ConsumerState<IncidentListPage> {
           return state.hasValue && state.value!.isNotEmpty
               ? Container(
                   padding: const EdgeInsets.fromLTRB(16, 12, 16, 16),
-                  decoration: const BoxDecoration(
-                    color: Colors.white,
-                    boxShadow: [
+                  decoration: BoxDecoration(
+                    // color: Colors.white,
+                    color: context.surfaceColor,
+                    boxShadow: const [
                       BoxShadow(
                         color: Color(0x142B5BEE),
                         blurRadius: 16,
@@ -74,14 +75,15 @@ class _ListingIncidentPageState extends ConsumerState<IncidentListPage> {
                   child: SafeArea(
                     top: false,
                     child: ButtonOutline(
+                      borderColor: context.primaryContainer,
                       press: () {
                         context.push(IncidentRouter.register);
                       },
                       bgColor: context.primaryColor,
-                      textColor: Colors.white,
-                      icon: const Icon(
+                      textColor: context.surface,
+                      icon: Icon(
                         Icons.add_circle_outline,
-                        color: Colors.white,
+                        color: context.surface,
                       ),
                       text: "Registrar roubo",
                     ),

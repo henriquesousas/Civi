@@ -58,7 +58,7 @@ class TextInputTile extends StatelessWidget {
                     errorText: error,
                     hintStyle: TextStyle(color: context.secondaryColor),
                     filled: true,
-                    fillColor: const Color(0xFFF5F7FD),
+                    fillColor: context.surface,
                     border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(16),
                       borderSide: BorderSide.none,

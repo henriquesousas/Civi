@@ -37,7 +37,7 @@ class _ItemRegisterTypeState extends ConsumerState<ItemRegisterType> {
           selected: state.type,
           onSelect: (value) => viewModel.selectProductType(value),
         ),
-        const SizedBox(height: SpacingSize.lg),
+        const SizedBox(height: SpacingSize.xxl),
         CardHint(
           title: "Dicas",
           message:

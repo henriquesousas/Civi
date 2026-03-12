@@ -1,3 +1,4 @@
+import 'package:deehelp/core/extension/exports_extension.dart';
 import 'package:deehelp/core/theme/export_theme.dart';
 import 'package:deehelp/core/ui/styles/export_style.dart';
 import 'package:deehelp/core/ui/widgets/badge/export_badge.dart';
@@ -23,7 +24,7 @@ class HeaderCard extends StatelessWidget {
     return Container(
       padding: const EdgeInsets.all(LayoutSpacingSize.container),
       decoration: BoxDecoration(
-        color: Colors.white,
+        color: context.surfaceColor,
         borderRadius: BorderRadius.circular(RadiusSize.md),
         boxShadow: const [
           BoxShadow(

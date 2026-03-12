@@ -17,7 +17,9 @@ import 'package:deehelp/feature/items/success/bullet.dart';
 import 'package:deehelp/module/incident/domain/entity/incident_local.dart';
 import 'package:deehelp/core/utils/url_launcher_utils.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
+import 'package:lottie/lottie.dart';
 
 class ReportIncidentSuccessfullyPage extends StatelessWidget {
   final RegiterIncidentSuccessArgs args;
@@ -29,60 +31,70 @@ class ReportIncidentSuccessfullyPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: context.primaryColor,
+      // backgroundColor: context.primaryColor,
+      backgroundColor: Theme.of(context).brightness == Brightness.dark
+          ? Colors.black
+          : AppColors.primaryColor,
       body: SafeArea(
         child: DecorativeBubblesBackground(
           child: Stack(
             children: [
               Padding(
-                padding: const EdgeInsets.fromLTRB(16, 12, 16, 18),
+                padding: const EdgeInsets.fromLTRB(8, 12, 8, 18),
                 child: Column(
                   children: [
-                    Row(
-                      children: [
-                        GestureDetector(
-                          onTap: () => context.pop(),
-                          child: HighlightIcon(
-                            containerSize: IconSizes.xxl,
-                            radius: RadiusSize.md,
-                            border: Border.all(
-                                color: Colors.white.withValues(alpha: 0.18)),
-                            bgColor: AppColors.primaryColorVariant
-                                .withValues(alpha: 0.7),
-                            icon: const Icon(
-                              Icons.close,
-                              color: Colors.white,
-                            ),
-                          ),
-                        ),
-                        const Spacer(),
-                        GestureDetector(
-                          onTap: () => UrlLauncherUtils.shareIncident(
-                              context, args.alertId, args.createdAt),
-                          child: HighlightIcon(
-                            containerSize: IconSizes.xxl,
-                            radius: RadiusSize.md,
-                            border: Border.all(
-                                color: Colors.white.withValues(alpha: 0.18)),
-                            bgColor: AppColors.primaryColorVariant
-                                .withValues(alpha: 0.7),
-                            icon: const Icon(
-                              Icons.share_outlined,
-                              color: Colors.white,
-                            ),
-                          ),
-                        ),
-                      ],
-                    ),
-                    const SizedBox(height: SpacingSize.lg),
+                    // Row(
+                    //   children: [
+                    //     GestureDetector(
+                    //       onTap: () => context.pop(),
+                    //       child: HighlightIcon(
+                    //         containerSize: IconSizes.xxl,
+                    //         radius: RadiusSize.md,
+                    //         border: Border.all(
+                    //             color: Colors.white.withValues(alpha: 0.18)),
+                    //         bgColor: AppColors.primaryColorVariant
+                    //             .withValues(alpha: 0.7),
+                    //         icon: const Icon(
+                    //           Icons.close,
+                    //           color: Colors.white,
+                    //         ),
+                    //       ),
+                    //     ),
+                    //     const Spacer(),
+                    //     GestureDetector(
+                    //       onTap: () => UrlLauncherUtils.shareIncident(
+                    //           context, args.alertId, args.createdAt),
+                    //       child: HighlightIcon(
+                    //         containerSize: IconSizes.xxl,
+                    //         radius: RadiusSize.md,
+                    //         border: Border.all(
+                    //             color: Colors.white.withValues(alpha: 0.18)),
+                    //         bgColor: AppColors.primaryColorVariant
+                    //             .withValues(alpha: 0.7),
+                    //         icon: const Icon(
+                    //           Icons.share_outlined,
+                    //           color: Colors.white,
+                    //         ),
+                    //       ),
+                    //     ),
+                    //   ],
+                    // ),
+                    // const SizedBox(height: SpacingSize.lg),
                     Expanded(
                       child: ListView(
+                        physics: const BouncingScrollPhysics(),
                         children: [
-                          const OwlSadSpeechBubble(
-                            message:
-                                "Estou triste com essa situação... 😔\nMas vamos agir rápido para resolver.",
+                          // const OwlSadSpeechBubble(
+                          //   message:
+                          //       "Estou triste com essa situação... 😔\nMas vamos agir rápido para resolver.",
+                          // ),
+                          // const SizedBox(height: SpacingSize.lg),
+                          Lottie.asset(
+                            "assets/lottie/loader_success.json",
+                            width: 180.w,
+                            height: 180.h,
+                            repeat: false,
                           ),
-                          const SizedBox(height: SpacingSize.lg),
                           Text(
                             'Incidente reportado!',
                             textAlign: TextAlign.center,
@@ -310,7 +322,8 @@ class ReportIncidentSuccessfullyPage extends StatelessWidget {
                           // Primary CTA
                           ButtonOutline(
                             press: () => context.pop(),
-                            bgColor: Colors.white,
+                            bgColor: context.primaryColor,
+                            textColor: context.surface,
                             text: "Concluir",
                           ),
 

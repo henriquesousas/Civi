@@ -13,7 +13,7 @@ class ButtonEdit extends StatelessWidget {
       onTap: onTap,
       borderRadius: BorderRadius.circular(99),
       child: Container(
-        padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 8),
+        padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
         decoration: BoxDecoration(
           color: const Color(0xFFF5F7FD),
           borderRadius: BorderRadius.circular(99),
@@ -24,14 +24,14 @@ class ButtonEdit extends StatelessWidget {
             Icon(
               Icons.edit_outlined,
               size: IconSizes.xs,
-              color: const Color(0xFF8A96C8),
+              color: context.surface,
             ),
             const SizedBox(width: 2),
             Text(
               'Editar',
               style: context.appText.caption.copyWith(
                 fontWeight: FontWeight.w900,
-                color: context.secondaryColor,
+                color: context.surface,
               ),
             ),
           ],

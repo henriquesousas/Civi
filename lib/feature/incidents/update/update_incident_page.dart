@@ -93,7 +93,7 @@ class _UpdateIncidentPageState extends ConsumerState<UpdateIncidentPage> {
 
     return Scaffold(
       appBar: DefaultAppBar(
-        title: "Detalhes do roubo",
+        title: "Ocorrência",
         showBackButton: true,
         actions: [
           IconButton(
@@ -121,12 +121,13 @@ class _UpdateIncidentPageState extends ConsumerState<UpdateIncidentPage> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      '${state.updatedValue!.product.name} roubado',
+                      // '${state.updatedValue!.product.name} reportado como roubado',
+                      state.updatedValue!.product.name,
                       style: context.appText.headerlg,
                     ),
                     const SizedBox(height: SpacingSize.sm),
                     Text(
-                      '${_getLocal(state)} • ${_dataLabel(state)}',
+                      'Roubado nas proximidades de ${_getLocal(state)} • ${_dataLabel(state)}',
                       style: context.appText.bodySmall.copyWith(
                         fontWeight: FontWeight.w600,
                       ),
@@ -149,8 +150,11 @@ class _UpdateIncidentPageState extends ConsumerState<UpdateIncidentPage> {
                   children: [
                     Row(
                       children: [
-                        const HighlightIcon(
-                          icon: Icon(Icons.photo_library_outlined),
+                        HighlightIcon(
+                          icon: Icon(
+                            Icons.photo_library_outlined,
+                            color: context.onSurface,
+                          ),
                         ),
                         const SizedBox(width: SpacingSize.md),
                         Expanded(
@@ -346,7 +350,11 @@ class _UpdateIncidentPageState extends ConsumerState<UpdateIncidentPage> {
               children: [
                 Row(
                   children: [
-                    const HighlightIcon(icon: Icon(Icons.description_outlined)),
+                    HighlightIcon(
+                        icon: Icon(
+                      Icons.description_outlined,
+                      color: context.onSurface,
+                    )),
                     const SizedBox(width: 12),
                     Expanded(
                       child: Text(
@@ -396,6 +404,7 @@ class _UpdateIncidentPageState extends ConsumerState<UpdateIncidentPage> {
           const SizedBox(height: SpacingSize.lg),
           const SectionTitle('Ações'),
           PageCard(
+            padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 5),
             child: Column(
               children: [
                 ActionTile(
@@ -415,23 +424,27 @@ class _UpdateIncidentPageState extends ConsumerState<UpdateIncidentPage> {
                           context: context,
                         ),
                         text: "WhatsApp",
-                        icon: const Icon(Icons.chat_bubble_outline),
+                        icon: Icon(
+                          Icons.chat_bubble_outline,
+                          color: context.onSurfaceVariant,
+                        ),
                       ),
                     ),
                     const SizedBox(width: SpacingSize.md),
                     Expanded(
                       child: ButtonOutline(
                         bgColor: context.primaryColor,
-                        textColor: Colors.white,
+                        borderColor: context.primaryColor,
+                        textColor: context.surface,
                         press: () => UrlLauncherUtils.shareIncident(
                           context,
                           state.updatedValue!.alertId,
                           state.updatedValue!.createdAt,
                         ),
                         text: "Compartilhar",
-                        icon: const Icon(
+                        icon: Icon(
                           Icons.share,
-                          color: Colors.white,
+                          color: context.surface,
                         ),
                       ),
                     ),

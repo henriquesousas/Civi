@@ -9,7 +9,9 @@ class AboutCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       decoration: BoxDecoration(
+        // color: context.surfaceColor,
         color: context.surfaceColor,
+        // color: context.surfaceColor.withValues(alpha: 0.5),
         borderRadius: BorderRadius.circular(24),
         boxShadow: const [
           BoxShadow(

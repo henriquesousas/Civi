@@ -43,7 +43,8 @@ class SimpleTextField extends StatelessWidget {
                   fontWeight: FontWeight.w800,
                 ),
                 filled: true,
-                fillColor: const Color(0xFFF5F7FD),
+                // fillColor: const Color(0xFFF5F7FD),
+                fillColor: context.outlineVariantColor.withValues(alpha: 0.3),
                 border: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(RadiusSize.md),
                   borderSide: BorderSide.none,

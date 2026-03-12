@@ -1,4 +1,5 @@
 import 'package:deehelp/app_name.dart';
+import 'package:deehelp/core/extension/color_extension.dart';
 import 'package:deehelp/core/theme/export_theme.dart';
 import 'package:deehelp/core/ui/styles/export_style.dart';
 import 'package:flutter/material.dart';
@@ -36,8 +37,10 @@ class Header extends StatelessWidget {
         // ),
 
         IconButton(
-            onPressed: () => context.pop(),
-            icon: const Icon(Icons.arrow_back, color: Colors.white)),
+          onPressed: () => context.pop(),
+          icon:
+              Icon(Icons.arrow_back_ios_new_rounded, color: context.onSurface),
+        ),
 
         const SizedBox(width: SpacingSize.md),
         Expanded(
@@ -45,7 +48,7 @@ class Header extends StatelessWidget {
             AppName.appName,
             style: context.appText.headerlg.copyWith(
               fontWeight: FontWeight.w900,
-              color: Colors.white,
+              color: context.onSurface,
               letterSpacing: 0.2,
             ),
           ),

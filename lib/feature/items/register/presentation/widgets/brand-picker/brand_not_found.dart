@@ -11,9 +11,12 @@ class BrandNotFound extends StatelessWidget {
     return Container(
       padding: const EdgeInsets.all(LayoutSpacingSize.container),
       decoration: BoxDecoration(
-        color: const Color(0xFFF5F7FD),
+        // color: const Color(0xFFF5F7FD),
+        // color: context.outline,
         borderRadius: BorderRadius.circular(RadiusSize.md),
-        border: Border.all(color: const Color(0xFFE6EAF6)),
+        border: Border.all(
+          color: context.outlineVariantColor,
+        ),
       ),
       child: Text(
         'Nenhuma marca encontrada.',

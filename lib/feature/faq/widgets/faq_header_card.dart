@@ -10,7 +10,7 @@ class FaqHeaderCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       decoration: BoxDecoration(
-        color: context.primaryColor,
+        color: context.surface,
         borderRadius: BorderRadius.circular(RadiusSize.lg),
         boxShadow: const [
           BoxShadow(

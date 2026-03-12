@@ -18,8 +18,8 @@ class DecorativeBubblesBackground extends StatelessWidget {
     this.bubbleColor = Colors.white,
     this.topBubbleSize = 260,
     this.bottomBubbleSize = 320,
-    this.topBubbleOpacity = 0.10,
-    this.bottomBubbleOpacity = 0.08,
+    this.topBubbleOpacity = 0.05,
+    this.bottomBubbleOpacity = 0.05,
   });
 
   @override

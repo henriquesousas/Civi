@@ -11,6 +11,7 @@ extension ColorExtension on BuildContext {
   Color get outlineVariantColor => Theme.of(this).colorScheme.outlineVariant;
   Color get outline => Theme.of(this).colorScheme.outline;
   Color get onSurface => Theme.of(this).colorScheme.onSurface;
+  Color get surface => Theme.of(this).colorScheme.surface;
   Color get onSurfaceVariant => Theme.of(this).colorScheme.onSurfaceVariant;
   Color get shadowColor =>
       Theme.of(this).colorScheme.shadow.withValues(alpha: 0.1);

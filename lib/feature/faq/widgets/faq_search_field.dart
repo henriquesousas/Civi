@@ -35,12 +35,8 @@ class FaqSearhField extends StatelessWidget {
               style: context.appText.bodySmall.copyWith(
                 fontWeight: FontWeight.w600,
               ),
-              // style: const TextStyle(
-              //   fontWeight: FontWeight.w800,
-              //   // color: _ink,
-              //   // fontSize: 13.5,
-              // ),
               decoration: InputDecoration(
+                fillColor: context.outlineVariantColor,
                 border: InputBorder.none,
                 contentPadding:
                     const EdgeInsets.symmetric(vertical: SpacingSize.lg),

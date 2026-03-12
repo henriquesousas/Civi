@@ -3,7 +3,6 @@ import 'package:deehelp/core/theme/export_theme.dart';
 import 'package:deehelp/core/ui/styles/export_style.dart';
 import 'package:flutter/material.dart';
 
-//TODO: Refatorar para ter loading, desabilitado
 class ButtonPrimary extends StatelessWidget {
   final String text;
   final VoidCallback? press;
@@ -50,7 +49,8 @@ class ButtonPrimary extends StatelessWidget {
                 }
               }
             : null,
-        child: !loading ? _title(context) : _cirucularProgressIndicator(),
+        child:
+            !loading ? _title(context) : _cirucularProgressIndicator(context),
       ),
     );
   }
@@ -59,17 +59,17 @@ class ButtonPrimary extends StatelessWidget {
     return Text(
       text,
       style: context.appText.button.copyWith(
-        color: Colors.white,
+        color: context.surfaceColor,
       ),
     );
   }
 
-  Widget _cirucularProgressIndicator() {
+  Widget _cirucularProgressIndicator(BuildContext context) {
     return SizedBox(
-      height: CiruclarProgressIndicatorSize.sm,
-      width: CiruclarProgressIndicatorSize.sm,
-      child: const CircularProgressIndicator(
-        color: Colors.white,
+      height: CiruclarProgressIndicatorSize.xs,
+      width: CiruclarProgressIndicatorSize.xs,
+      child: CircularProgressIndicator(
+        color: context.surfaceColor,
       ),
     );
   }

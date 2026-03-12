@@ -55,7 +55,7 @@ var goRouterProvider = Provider<GoRouter>(
         final currentPath = state.matchedLocation;
         final isPublicRoute = _publicRoutes.contains(currentPath);
         // return '/';
-        // return SplashRouter.path;
+        // return ItemsRouter.success;
         switch (appStatus) {
           case AppStatus.loading:
             return SplashRouter.path;

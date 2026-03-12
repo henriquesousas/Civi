@@ -28,7 +28,8 @@ class DangerCard extends StatelessWidget {
       borderRadius: BorderRadius.circular(24),
       child: Ink(
         decoration: BoxDecoration(
-          color: Colors.white,
+          // color: Colors.white,
+          color: context.surfaceColor,
           borderRadius: BorderRadius.circular(24),
           boxShadow: const [
             BoxShadow(
@@ -74,7 +75,7 @@ class DangerCard extends StatelessWidget {
                   ],
                 ),
               ),
-              const Icon(Icons.chevron_right, color: Color(0xFF8A96C8)),
+              Icon(Icons.chevron_right, color: context.surfaceDim),
             ],
           ),
         ),

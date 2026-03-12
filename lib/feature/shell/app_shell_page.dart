@@ -10,7 +10,6 @@ import 'package:deehelp/feature/items/list/item_list_page.dart';
 import 'package:deehelp/feature/mapa/mapa_page.dart';
 import 'package:deehelp/feature/profile/profile_page.dart';
 import 'package:deehelp/feature/search/search_page.dart';
-import 'package:deehelp/feature/shell/bottom_nav.dart';
 import 'package:deehelp/module/auth/external/di/authenticated_user_provider.dart';
 import 'package:deehelp/module/item/di/item_viewmodel_provider.dart';
 import 'package:flutter/material.dart';
@@ -156,7 +155,8 @@ class HomeBottomSheetNav extends StatelessWidget {
       ),
       decoration: BoxDecoration(
         // color: Colors.white,
-        color: context.surfaceColor,
+        // color: context.surfaceColor,
+        color: Theme.of(context).scaffoldBackgroundColor,
         borderRadius: const BorderRadius.vertical(
           top: Radius.circular(28),
         ),
@@ -186,21 +186,20 @@ class HomeBottomSheetNav extends StatelessWidget {
                     Icon(
                       selected ? item.activeIcon : item.icon,
                       color: selected
-                          ? const Color(0xFF2563EB)
+                          ? context.onSurfaceVariant
                           // : const Color(0xFF9CA3AF),
                           : context.onSurface.withValues(alpha: 0.8),
-                      size: IconSizes.md,
+                      size: IconSizes.lg,
                     ),
                     const SizedBox(height: 4),
                     Text(
                       item.label,
                       style: context.appText.label.copyWith(
                         color: selected
-                            ? const Color(0xFF2563EB)
+                            ? context.onSurfaceVariant
                             : context.onSurface.withValues(alpha: 0.8),
                         // : const Color(0xFF9CA3AF),
-                        fontWeight:
-                            selected ? FontWeight.w600 : FontWeight.w400,
+                        fontWeight: FontWeight.normal,
                       ),
                     ),
                   ],

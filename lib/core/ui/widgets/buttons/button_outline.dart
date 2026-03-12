@@ -61,8 +61,8 @@ class ButtonOutline extends StatelessWidget {
     return Text(
       text,
       style: context.appText.label.copyWith(
-        fontWeight: FontWeight.w800,
-        color: textColor ?? context.onSurfaceVariant,
+        fontWeight: FontWeight.w800, color: textColor ?? context.primaryColor,
+        // color: textColor ?? context.onSurfaceVariant,
       ),
     );
   }

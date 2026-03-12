@@ -52,7 +52,7 @@ class _ItemListPageState extends ConsumerState<ItemListPage> {
   Widget build(BuildContext context) {
     final state = ref.watch(itemListViewmodelProvider);
     return Scaffold(
-      bottomNavigationBar: _bottomBar(state),
+      // bottomNavigationBar: _bottomBar(state),
       appBar: DefaultAppBar(
         title: "Meus itens",
         showBackButton: widget.showBackButton ?? false,
@@ -89,12 +89,15 @@ class _ItemListPageState extends ConsumerState<ItemListPage> {
             }
           },
         ),
+        // success: (_) => const Padding(
+        //   padding: EdgeInsets.symmetric(horizontal: 12, vertical: 12),
+        //   child: LoadingResultsSkeleton(
+        //     size: 10,
+        //   ),
+        // ),
         // loading: (_) => const ItemListShimmer(),
-        loading: (_) => const Padding(
-          padding: EdgeInsets.symmetric(horizontal: 12, vertical: 12),
-          child: LoadingResultsSkeleton(
-            size: 10,
-          ),
+        loading: (_) => const LoadingResultsSkeleton(
+          size: 10,
         ),
         orElse: () => Padding(
           padding: const EdgeInsets.all(8.0),
@@ -119,39 +122,40 @@ class _ItemListPageState extends ConsumerState<ItemListPage> {
     );
   }
 
-  Widget? _bottomBar(ListProductState state) {
-    return state.maybeMap(
-      success: (value) {
-        return Container(
-          padding: const EdgeInsets.fromLTRB(16, 12, 16, 16),
-          decoration: const BoxDecoration(
-            color: Colors.white,
-            boxShadow: [
-              BoxShadow(
-                color: Color(0x142B5BEE),
-                blurRadius: 16,
-                offset: Offset(0, -6),
-              ),
-            ],
-          ),
-          child: SafeArea(
-            top: false,
-            child: ButtonOutline(
-              press: () {
-                context.push(ItemsRouter.register);
-              },
-              bgColor: context.primaryColor,
-              textColor: Colors.white,
-              icon: const Icon(
-                Icons.add_circle_outline,
-                color: Colors.white,
-              ),
-              text: "Cadastrar novo item",
-            ),
-          ),
-        );
-      },
-      orElse: () => null,
-    );
-  }
+  // Widget? _bottomBar(ListProductState state) {
+  //   return state.maybeMap(
+  //     success: (value) {
+  //       return Container(
+  //         padding: const EdgeInsets.fromLTRB(16, 12, 16, 16),
+  //         decoration: const BoxDecoration(
+  //           // color: context.surfaceColor,
+  //           boxShadow: [
+  //             BoxShadow(
+  //               color: Color(0x142B5BEE),
+  //               blurRadius: 16,
+  //               offset: Offset(0, -6),
+  //             ),
+  //           ],
+  //         ),
+  //         child: SafeArea(
+  //           top: false,
+  //           child: ButtonOutline(
+  //             press: () {
+  //               context.push(ItemsRouter.register);
+  //             },
+  //             borderColor: context.primaryColor,
+  //             bgColor: context.primaryColor,
+  //             // textColor: Colors.white,
+  //             icon: Icon(
+  //               Icons.add_circle_outline,
+  //               color: context.surfaceColor,
+  //             ),
+  //             text: "Cadastrar novo item",
+  //           ),
+  //         ),
+  //       );
+  //     },
+  //     orElse: () => null,
+  //   );
+  // }
 }

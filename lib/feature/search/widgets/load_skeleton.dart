@@ -1,3 +1,4 @@
+import 'package:deehelp/core/extension/exports_extension.dart';
 import 'package:deehelp/core/theme/export_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -14,10 +15,11 @@ class LoadingResultsSkeleton extends StatelessWidget {
         children: List.generate(
           size,
           (i) => Container(
-            margin: const EdgeInsets.only(bottom: 12),
-            height: 96,
+            margin: const EdgeInsets.only(top: 10),
+            height: 96.h,
             decoration: BoxDecoration(
-              color: Colors.white,
+              // color: Colors.white,
+              color: context.surfaceColor,
               borderRadius: BorderRadius.circular(RadiusSize.xl),
               boxShadow: const [
                 BoxShadow(
@@ -35,9 +37,14 @@ class LoadingResultsSkeleton extends StatelessWidget {
                     width: 44.w,
                     height: 44.h,
                     decoration: BoxDecoration(
-                      color: const Color(0xFFF5F7FD),
+                      // color: const Color(0xFFF5F7FD),
+                      color: context.surfaceColor,
                       borderRadius: BorderRadius.circular(16),
-                      border: Border.all(color: const Color(0xFFE6EAF6)),
+                      border: Border.all(
+                        // color: const Color(0xFFE6EAF6),
+                        color:
+                            context.outlineVariantColor.withValues(alpha: 0.6),
+                      ),
                     ),
                   ),
                   const SizedBox(width: RadiusSize.md),
@@ -49,7 +56,9 @@ class LoadingResultsSkeleton extends StatelessWidget {
                           height: 14.h,
                           width: double.infinity,
                           decoration: BoxDecoration(
-                            color: const Color(0xFFF5F7FD),
+                            // color: const Color(0xFFF5F7FD),
+                            color: context.outlineVariantColor
+                                .withValues(alpha: 0.3),
                             borderRadius: BorderRadius.circular(10),
                           ),
                         ),
@@ -58,7 +67,8 @@ class LoadingResultsSkeleton extends StatelessWidget {
                           height: 12.h,
                           width: 220.w,
                           decoration: BoxDecoration(
-                            color: const Color(0xFFF5F7FD),
+                            color: context.outlineVariantColor
+                                .withValues(alpha: 0.3),
                             borderRadius: BorderRadius.circular(10),
                           ),
                         ),
@@ -67,7 +77,8 @@ class LoadingResultsSkeleton extends StatelessWidget {
                           height: 12.h,
                           width: 120.w,
                           decoration: BoxDecoration(
-                            color: const Color(0xFFF5F7FD),
+                            color: context.outlineVariantColor
+                                .withValues(alpha: 0.3),
                             borderRadius: BorderRadius.circular(10),
                           ),
                         ),

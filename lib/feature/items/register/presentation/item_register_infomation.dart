@@ -115,7 +115,7 @@ class _ItemRegisterInfomationState
                 ColorPickerField(
                   value: state.color ?? "Selecionar cor",
                   options: const [
-                    ColorOption('Preto', Color(0xFF1F2A44)),
+                    ColorOption('Preto', Color(0xFF000000)),
                     ColorOption('Branco', Color(0xFFFFFFFF),
                         border: Color(0xFFE6EAF6)),
                     ColorOption('Cinza', Color(0xFF9AA4B2)),
@@ -179,28 +179,28 @@ class _ItemRegisterInfomationState
         ObservationCardField(
           onChanged: (v) => viewModel.onObsChange(v),
         ),
-        const SizedBox(height: SpacingSize.xl),
-        CardHint(
-          backgroundColor: AppColors.green.withValues(alpha: 0.12),
-          iconBackgroundColor: AppColors.green.withValues(alpha: 0.12),
-          textStyle: context.appText.bodySmall.copyWith(
-            height: 1.35,
-            color: context.onSurface,
-            fontWeight: FontWeight.w400,
-          ),
-          border: Border.all(
-            color: AppColors.green.withValues(alpha: 0.01),
-            width: 1,
-          ),
-          icon: Icon(
-            Icons.verified_user_outlined,
-            color: AppColors.green,
-            size: IconSizes.sm,
-          ),
-          title: "Verificação",
-          message:
-              'Após o cadastro, seu item pode ficar como “Pendente” até ser verificado e liberado pela nossa equipe.',
-        ),
+        // const SizedBox(height: SpacingSize.xl),
+        // CardHint(
+        //   backgroundColor: AppColors.green.withValues(alpha: 0.09),
+        //   iconBackgroundColor: AppColors.green.withValues(alpha: 0.12),
+        //   textStyle: context.appText.bodySmall.copyWith(
+        //     height: 1.35,
+        //     color: context.primaryColor,
+        //     fontWeight: FontWeight.w400,
+        //   ),
+        //   border: Border.all(
+        //     color: AppColors.green,
+        //     width: 1,
+        //   ),
+        //   icon: Icon(
+        //     Icons.verified_user_outlined,
+        //     color: AppColors.green,
+        //     size: IconSizes.sm,
+        //   ),
+        //   title: "Verificação",
+        //   message:
+        //       'Após o cadastro, seu item pode ficar como “Pendente” até ser verificado e liberado pela nossa equipe.',
+        // ),
       ],
     );
   }

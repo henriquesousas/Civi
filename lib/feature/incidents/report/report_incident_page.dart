@@ -135,6 +135,15 @@ class _AddIncidentPageState extends ConsumerState<ReportIncidentPage>
     );
     if (result == null) return;
     // setState(() => selectedDate = result);
+
+    final error = result.isAfter(now) ? "A data  não pode ser no futuro" : null;
+    if (error != null && mounted) {
+      if (mounted) {
+        context.showTopNotice(error, type: DialogType.error);
+      }
+      return;
+    }
+
     viewModel.onOccurredAtChange(result);
   }
 

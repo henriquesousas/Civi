@@ -22,9 +22,12 @@ class TypeCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final border = selected ? context.primaryColor : const Color(0xFFE6EAF6);
-    final bg =
-        selected ? context.primaryColor.withValues(alpha: 0.08) : Colors.white;
+    // final border = selected ? context.primaryColor : const Color(0xFFE6EAF6);
+    final border =
+        selected ? context.primaryColor : context.outlineVariantColor;
+    final bg = selected
+        ? context.primaryColor.withValues(alpha: 0.08)
+        : context.surfaceColor;
 
     return InkWell(
       onTap: onTap,
@@ -34,7 +37,7 @@ class TypeCard extends StatelessWidget {
         decoration: BoxDecoration(
           color: bg,
           borderRadius: BorderRadius.circular(RadiusSize.xl),
-          border: Border.all(color: border),
+          border: Border.all(color: border, width: selected ? 2 : 1),
           boxShadow: const [
             BoxShadow(
               color: Color(0x142B5BEE),
@@ -48,7 +51,8 @@ class TypeCard extends StatelessWidget {
             HighlightIcon(
               bgColor: selected
                   ? context.primaryColor.withValues(alpha: 0.16)
-                  : const Color(0xFFF5F7FD),
+                  : context.outline,
+              // : const Color(0xFFF5F7FD),
               icon: Icon(
                 icon,
                 color: selected ? context.primaryColor : context.onSurface,

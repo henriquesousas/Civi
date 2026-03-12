@@ -9,7 +9,7 @@ import 'input_decoration_theme.dart';
 class AppTheme {
   static ThemeData lightTheme() {
     final baseColorScheme = ColorScheme.light(
-      primaryContainer: Color(0xFF2B5BEE),
+      primaryContainer: const Color(0xFF2B5BEE),
       // Bg principal
       surface: Colors.white,
       secondaryContainer: Colors.white,
@@ -48,6 +48,7 @@ class AppTheme {
       useMaterial3: true,
       // appBarTheme: appBarLightTheme,
       scaffoldBackgroundColor: const Color(0xFFF8FAFC),
+      // scaffoldBackgroundColor: const Color(0xFFF8FAFC),
       brightness: Brightness.light,
       fontFamily: "Plus Jakarta",
       colorScheme: baseColorScheme,
@@ -62,6 +63,10 @@ class AppTheme {
       textButtonTheme: textButtonThemeData,
       outlinedButtonTheme: outlinedButtonTheme(),
       inputDecorationTheme: lightInputDecorationTheme,
+      appBarTheme: const AppBarTheme(
+        backgroundColor: Colors.white,
+        foregroundColor: Colors.black, // cor do texto e ícones
+      ),
       // checkboxTheme: checkboxThemeData.copyWith(
       //   side: const BorderSide(color: AppColors.blackColor40),
       // ),
@@ -71,7 +76,7 @@ class AppTheme {
   }
 
   static ThemeData dark() {
-    final baseColorScheme = ColorScheme.light(
+    final baseColorScheme = ColorScheme.dark(
       primaryContainer: const Color(0xFF1f222a),
       surface: const Color(0xFF1f222a), // Fundo principal
       secondaryContainer:
@@ -89,9 +94,11 @@ class AppTheme {
       onSurfaceVariant: Colors.white,
 
       // outline: Colors.grey.shade500,
-      primary: const Color(0xFF2B5BEE),
-      onSecondary: const Color(0xFF2157F8),
+      // primary: const Color(0xFF2B5BEE),
+      primary: Colors.white,
+      onPrimary: Colors.white,
       secondary: Colors.white70,
+      onSecondary: const Color(0xFF2157F8),
 
       // primary: Color(0xFF0A84FF),
       // secondary: Color(0xFFFF9F0A),
@@ -100,19 +107,20 @@ class AppTheme {
     return ThemeData(
       useMaterial3: true,
       scaffoldBackgroundColor: Colors.black87,
-      brightness: Brightness.light,
+      brightness: Brightness.dark,
       fontFamily: "Plus Jakarta",
       colorScheme: baseColorScheme,
       primarySwatch: AppColors.primaryMaterialColor,
-      primaryColor: AppColors.primaryColor,
-      // iconTheme: const IconThemeData(color: AppColors.blackColor),
-      // textTheme: const TextTheme(
-      //   bodyMedium: TextStyle(color: AppColors.blackColor40),
-      // ),
+      primaryColor: Colors.white,
+      primaryColorDark: Colors.white,
       elevatedButtonTheme: elevatedButtonThemeData,
       textButtonTheme: textButtonThemeData,
       outlinedButtonTheme: outlinedButtonTheme(),
       inputDecorationTheme: lightInputDecorationTheme,
+      appBarTheme: const AppBarTheme(
+        backgroundColor: Colors.black,
+        foregroundColor: Colors.white, // cor do texto e ícones
+      ),
       // checkboxTheme: checkboxThemeData.copyWith(
       //   side: const BorderSide(color: AppColors.blackColor40),
       // ),

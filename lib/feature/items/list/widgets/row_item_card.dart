@@ -28,12 +28,12 @@ class RowItemCard extends StatelessWidget {
       color: Colors.transparent,
       child: InkWell(
         onTap: onTap,
-        borderRadius: BorderRadius.circular(24),
+        borderRadius: BorderRadius.circular(12),
         splashColor: context.primaryColor.withValues(alpha: 0.06),
         child: Ink(
           decoration: BoxDecoration(
-            color: Colors.white,
-            borderRadius: BorderRadius.circular(24),
+            color: context.surfaceColor,
+            borderRadius: BorderRadius.circular(12),
             boxShadow: const [
               BoxShadow(
                 color: Color(0x142B5BEE),
@@ -125,7 +125,7 @@ class RowItemCard extends StatelessWidget {
                                   item.createdAt!.toDayMonthYearFormat(),
                                   style: context.appText.bodySmall.copyWith(
                                     fontWeight: FontWeight.w700,
-                                    color: context.onSurface,
+                                    color: context.secondaryColor,
                                   ),
                                 ),
                               ],

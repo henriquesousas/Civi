@@ -16,9 +16,9 @@ class YearBottomSheet extends StatelessWidget {
     final max = now + 1;
 
     return Container(
-      decoration: const BoxDecoration(
-        color: Colors.white,
-        borderRadius: BorderRadius.vertical(top: Radius.circular(26)),
+      decoration: BoxDecoration(
+        color: context.surfaceColor,
+        borderRadius: const BorderRadius.vertical(top: Radius.circular(26)),
       ),
       child: Padding(
         padding: const EdgeInsets.fromLTRB(16, 14, 16, 18),
@@ -41,11 +41,20 @@ class YearBottomSheet extends StatelessWidget {
             const SizedBox(height: SpacingSize.md),
             SizedBox(
               height: context.percentHeight(0.3),
-              child: YearPicker(
-                firstDate: DateTime(min),
-                lastDate: DateTime(max),
-                selectedDate: DateTime(selectedYear),
-                onChanged: (d) => Navigator.pop(context, d.year),
+              child: Theme(
+                data: Theme.of(context).copyWith(
+                  colorScheme: Theme.of(context).colorScheme.copyWith(
+                        primary: Colors.black, // cor do ano selecionado
+                        onPrimary: Colors
+                            .white, // cor do texto dentro do círculo selecionado
+                      ),
+                ),
+                child: YearPicker(
+                  firstDate: DateTime(min),
+                  lastDate: DateTime(max),
+                  selectedDate: DateTime(selectedYear),
+                  onChanged: (d) => Navigator.pop(context, d.year),
+                ),
               ),
             ),
           ],

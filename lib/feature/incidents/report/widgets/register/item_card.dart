@@ -16,10 +16,10 @@ class ItemCard extends StatelessWidget {
     if (!isPhone) {
       return ClipRRect(
         borderRadius: BorderRadius.circular(14),
-        child: Container(
+        child: SizedBox(
           width: ImageSize.xs,
           height: ImageSize.xs,
-          color: const Color(0xFFF5F7FD),
+          // color: const Color(0xFFF5F7FD),
           child: Image.network(
             imageUrl,
             fit: BoxFit.cover,

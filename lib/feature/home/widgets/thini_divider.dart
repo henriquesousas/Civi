@@ -1,4 +1,4 @@
-import 'package:deehelp/core/theme/export_theme.dart';
+import 'package:deehelp/core/extension/exports_extension.dart';
 import 'package:flutter/material.dart';
 
 class ThinDivider extends StatelessWidget {
@@ -10,7 +10,7 @@ class ThinDivider extends StatelessWidget {
     return Divider(
       height: 1,
       thickness: 1,
-      color: AppColors.greyLight,
+      color: context.outline,
       indent: indent,
     );
   }

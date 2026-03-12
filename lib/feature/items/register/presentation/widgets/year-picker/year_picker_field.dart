@@ -35,7 +35,8 @@ class YearPickerField extends StatelessWidget {
                 vertical: LayoutSpacingSize.container,
               ),
               decoration: BoxDecoration(
-                color: const Color(0xFFF5F7FD),
+                // color: const Color(0xFFF5F7FD),
+                color: context.onSurfaceVariant.withValues(alpha: 0.03),
                 borderRadius: BorderRadius.circular(RadiusSize.md),
               ),
               child: Row(
@@ -55,7 +56,10 @@ class YearPickerField extends StatelessWidget {
                       // ),
                     ),
                   ),
-                  const Icon(Icons.expand_more, color: Color(0xFF8A96C8)),
+                  Icon(
+                    Icons.expand_more,
+                    color: context.onSurfaceVariant.withValues(alpha: 0.2),
+                  ),
                 ],
               ),
             ),

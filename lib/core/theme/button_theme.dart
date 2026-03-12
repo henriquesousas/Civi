@@ -4,8 +4,7 @@ import 'package:flutter/material.dart';
 ElevatedButtonThemeData elevatedButtonThemeData = ElevatedButtonThemeData(
   style: ElevatedButton.styleFrom(
     // padding: const EdgeInsets.all(Dimens.defaultPadding),
-    backgroundColor: AppColors.primaryColor,
-    foregroundColor: Colors.white,
+    // backgroundColor: AppColors.primaryColor,
     minimumSize: const Size(double.infinity, 32),
     shape: const RoundedRectangleBorder(
       borderRadius: BorderRadius.all(Radius.circular(RadiusSize.md)),

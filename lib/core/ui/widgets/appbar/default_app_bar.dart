@@ -32,11 +32,12 @@ class DefaultAppBar extends StatelessWidget implements PreferredSizeWidget {
         child: Container(
           height: 1,
           // color: const Color(0xFFE6EAF6),
-          color: context.outlineVariantColor.withValues(alpha: 0.5),
+          color: context.outlineVariantColor.withValues(alpha: 0.3),
         ),
       ),
       // scrolledUnderElevation: 0.6,
-      backgroundColor: context.surfaceColor,
+      // backgroundColor: context.surfaceColor,
+      // backgroundColor: Theme.of(context).scaffoldBackgroundColor,
       surfaceTintColor: context.surfaceColor,
       automaticallyImplyLeading: false,
       titleSpacing: 20,
@@ -57,7 +58,7 @@ class DefaultAppBar extends StatelessWidget implements PreferredSizeWidget {
         ? IconButton(
             onPressed: press,
             icon: const Icon(
-              Icons.arrow_back,
+              Icons.arrow_back_ios_new_rounded,
             ),
           )
         : null;

@@ -47,10 +47,11 @@ class IncidentListItem extends StatelessWidget {
         splashColor: context.primaryColor.withValues(alpha: 0.06),
         highlightColor: context.primaryColor.withValues(alpha: 0.05),
         child: Container(
-          decoration: const BoxDecoration(
-            color: Colors.white,
-            borderRadius: BorderRadius.all(Radius.circular(RadiusSize.lg)),
-            boxShadow: [
+          decoration: BoxDecoration(
+            color: context.surfaceColor,
+            borderRadius:
+                const BorderRadius.all(Radius.circular(RadiusSize.lg)),
+            boxShadow: const [
               BoxShadow(
                 color: Color(0x142B5BEE),
                 blurRadius: 16,

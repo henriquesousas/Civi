@@ -2,19 +2,15 @@ import 'package:deehelp/app_name.dart';
 import 'package:deehelp/core/extension/exports_extension.dart';
 import 'package:deehelp/core/theme/export_theme.dart';
 import 'package:deehelp/core/ui/styles/export_style.dart';
-import 'package:deehelp/core/ui/widgets/buttons/buttons_export.dart';
-import 'package:deehelp/feature/auth/presentation/auth_router.dart';
-import 'package:deehelp/module/auth/external/di/authenticated_user_provider.dart';
+import 'package:deehelp/core/ui/widgets/appbar/default_app_bar.dart';
 import 'package:deehelp/core/utils/url_launcher_utils.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'widgets/blue_header_bubles.dart';
+import 'package:go_router/go_router.dart';
 import 'widgets/engagament_card.dart';
-import 'widgets/header.dart';
 import 'widgets/how_its_work_card.dart';
 import 'widgets/info_card.dart';
 import 'widgets/welcome_card.dart';
 import 'package:flutter/material.dart';
-import 'package:go_router/go_router.dart';
 
 class AboutPage extends ConsumerWidget {
   const AboutPage({super.key});
@@ -22,21 +18,27 @@ class AboutPage extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     return Scaffold(
+      // backgroundColor: Color(0XFFf8fafc),
+      appBar: DefaultAppBar(
+        title: AppName.appName,
+        press: () => context.pop(),
+        showBackButton: true,
+      ),
       body: Stack(
         children: [
-          const BlueHeaderBubbles(),
+          // const BlueHeaderBubbles(),
           SafeArea(
             child: Column(
               children: [
                 const SizedBox(height: SpacingSize.lg),
-                Padding(
-                  padding:
-                      const EdgeInsets.symmetric(horizontal: SpacingSize.lg),
-                  child: Header(
-                    onSkip: () => context.pop(),
-                  ),
-                ),
-                const SizedBox(height: SpacingSize.md),
+                // Padding(
+                //   padding:
+                //       const EdgeInsets.symmetric(horizontal: SpacingSize.lg),
+                //   child: Header(
+                //     onSkip: () => context.pop(),
+                //   ),
+                // ),
+                // const SizedBox(height: SpacingSize.md),
                 Expanded(
                   child: ListView(
                     physics: const BouncingScrollPhysics(),
@@ -67,18 +69,18 @@ class AboutPage extends ConsumerWidget {
                     ],
                   ),
                 ),
-                Visibility(
-                  visible: ref.watch(authenticatedUserProvider) == null
-                      ? true
-                      : false,
-                  child: Padding(
-                    padding: const EdgeInsets.all(SpacingSize.md),
-                    child: ButtonPrimary(
-                      press: () => context.push(AuthRouter.path),
-                      text: 'Entrar com minha conta',
-                    ),
-                  ),
-                ),
+                // Visibility(
+                //   visible: ref.watch(authenticatedUserProvider) == null
+                //       ? true
+                //       : false,
+                //   child: Padding(
+                //     padding: const EdgeInsets.all(SpacingSize.md),
+                //     child: ButtonPrimary(
+                //       press: () => context.push(AuthRouter.path),
+                //       text: 'Entrar com minha conta',
+                //     ),
+                //   ),
+                // ),
               ],
             ),
           ),

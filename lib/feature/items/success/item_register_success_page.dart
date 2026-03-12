@@ -1,3 +1,5 @@
+import 'package:deehelp/core/extension/color_extension.dart';
+import 'package:deehelp/core/extension/size_extension.dart';
 import 'package:deehelp/core/theme/export_theme.dart';
 import 'package:deehelp/core/ui/styles/app_text_style.dart';
 import 'package:deehelp/core/ui/widgets/bubble/bubble_export.dart';
@@ -6,6 +8,7 @@ import 'package:deehelp/core/ui/widgets/icon/highlight_icon.dart';
 import 'package:deehelp/feature/items/success/card_next_step.dart';
 import 'package:deehelp/core/utils/url_launcher_utils.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
 import 'package:lottie/lottie.dart';
 
@@ -26,7 +29,10 @@ class ItemRegisterSuccessPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: AppColors.primaryColor,
+      // backgroundColor: context.primaryColor,
+      backgroundColor: Theme.of(context).brightness == Brightness.dark
+          ? Colors.black
+          : AppColors.primaryColor,
       body: SafeArea(
         child: DecorativeBubblesBackground(
           child: Stack(
@@ -37,24 +43,24 @@ class ItemRegisterSuccessPage extends StatelessWidget {
                   spacing: 10,
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
-                    Align(
-                      alignment: Alignment.topLeft,
-                      child: GestureDetector(
-                        onTap: () => context.pop(),
-                        child: HighlightIcon(
-                          containerSize: IconSizes.xxl,
-                          radius: RadiusSize.md,
-                          border: Border.all(
-                              color: Colors.white.withValues(alpha: 0.18)),
-                          bgColor: AppColors.primaryColorVariant
-                              .withValues(alpha: 0.7),
-                          icon: const Icon(
-                            Icons.close,
-                            color: Colors.white,
-                          ),
-                        ),
-                      ),
-                    ),
+                    // Align(
+                    //   alignment: Alignment.topLeft,
+                    //   child: GestureDetector(
+                    //     onTap: () => context.pop(),
+                    //     child: HighlightIcon(
+                    //       containerSize: IconSizes.xxl,
+                    //       radius: RadiusSize.md,
+                    //       border: Border.all(
+                    //         color: Colors.white.withValues(alpha: 0.18),
+                    //       ),
+                    //       bgColor: context.primaryColor,
+                    //       icon: const Icon(
+                    //         Icons.close,
+                    //         color: Colors.black,
+                    //       ),
+                    //     ),
+                    //   ),
+                    // ),
                     Expanded(
                       child: ListView(
                         children: [
@@ -65,8 +71,8 @@ class ItemRegisterSuccessPage extends StatelessWidget {
                           // ),
                           Lottie.asset(
                             "assets/lottie/loader_success.json",
-                            width: 200,
-                            height: 200,
+                            width: 180.w,
+                            height: 180.h,
                             repeat: false,
                           ),
                           Text(
@@ -94,7 +100,12 @@ class ItemRegisterSuccessPage extends StatelessWidget {
                           const Spacer(),
                           ButtonOutline(
                             bgColor: Colors.white,
-                            icon: const Icon(Icons.share_outlined),
+                            borderColor: context.primaryColor,
+                            textColor: Colors.black,
+                            icon: const Icon(
+                              Icons.share_outlined,
+                              color: Colors.black,
+                            ),
                             press: () {
                               UrlLauncherUtils.shareApp(context);
                             },
@@ -102,6 +113,10 @@ class ItemRegisterSuccessPage extends StatelessWidget {
                           ),
                           const SizedBox(height: SpacingSize.md),
                           ButtonInline(
+                            textColor:
+                                Theme.of(context).brightness == Brightness.dark
+                                    ? context.onSurface
+                                    : Colors.white,
                             text: "Fechar",
                             press: () => Navigator.pop(context),
                             // onPressed: () {},

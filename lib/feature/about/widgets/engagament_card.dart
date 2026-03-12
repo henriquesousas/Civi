@@ -23,6 +23,7 @@ class EngagementCard extends StatelessWidget {
             'O ${AppName.appName} melhora com o uso da comunidade.',
             style: context.appText.bodySmall.copyWith(
               height: 1.35,
+              // color: context.onSurface,
               color: context.onSurface,
               fontWeight: FontWeight.w900,
             ),
@@ -36,9 +37,13 @@ class EngagementCard extends StatelessWidget {
               height: 1.35,
             ),
           ),
-          const SizedBox(height: SpacingSize.md),
+          const SizedBox(height: SpacingSize.lg),
           ButtonOutline(
-            icon: const Icon(Icons.share_outlined),
+            bgColor: context.primaryColor,
+            // textColor:
+            //     context.isLight ? AppColors.primaryColor : context.primaryColor,
+            textColor: context.surface,
+            icon: Icon(Icons.share_outlined, color: context.surface),
             text: 'Compartilhar o ${AppName.appName}',
             press: onShare,
           )
