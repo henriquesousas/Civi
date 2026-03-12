@@ -1,6 +1,7 @@
 import 'package:cloudflare_r2/cloudflare_r2.dart';
 import 'package:deehelp/app_name.dart';
 import 'package:deehelp/core/env_config.dart';
+import 'package:deehelp/core/theme/app_theme.dart';
 import 'package:deehelp/core/theme/theme_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -98,10 +99,10 @@ class _MainAppState extends ConsumerState<MainApp> {
               // },
               locale: const Locale('pt', 'BR'),
               routerConfig: router,
-              // theme: AppTheme.lightTheme(),
               // themeMode: ThemeMode.light,
               // darkTheme: AppTheme.dark(),
-              theme: themeData,
+              // theme: themeData,
+              theme: AppTheme.dark(),
               themeMode: ThemeMode.dark,
               // themeMode:
               //     themeState.isDarkMode ? ThemeMode.dark : ThemeMode.light,

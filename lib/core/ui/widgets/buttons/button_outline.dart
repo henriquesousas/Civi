@@ -13,6 +13,7 @@ class ButtonOutline extends StatelessWidget {
   final double? height;
   final bool? loading;
   final bool isPrimary;
+  final double? width;
   const ButtonOutline({
     super.key,
     required this.press,
@@ -22,6 +23,7 @@ class ButtonOutline extends StatelessWidget {
     this.textColor,
     this.side,
     this.height,
+    this.width,
     this.loading = false,
     this.isPrimary = false,
   });
@@ -29,7 +31,7 @@ class ButtonOutline extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      width: double.infinity,
+      width: width ?? double.infinity,
       height: height ?? ButtonSize.xs,
       child: OutlinedButton.icon(
         onPressed: press,
@@ -61,7 +63,8 @@ class ButtonOutline extends StatelessWidget {
   Text _title(BuildContext context, Color? textColor) {
     return Text(
       text,
-      style: context.appText.button.copyWith(
+      style: context.appText.label.copyWith(
+        fontWeight: FontWeight.w800,
         color: textColor ?? context.primaryColor,
       ),
     );

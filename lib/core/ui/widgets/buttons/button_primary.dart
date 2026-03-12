@@ -8,17 +8,19 @@ class ButtonPrimary extends StatelessWidget {
   final String text;
   final VoidCallback? press;
   final bool loading;
+  final double? width;
   const ButtonPrimary({
     super.key,
     required this.press,
     required this.text,
+    this.width,
     this.loading = false,
   });
 
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      width: double.infinity,
+      width: width ?? double.infinity,
       height: ButtonSize.xs,
       child: ElevatedButton(
         style: ElevatedButton.styleFrom(
@@ -31,7 +33,9 @@ class ButtonPrimary extends StatelessWidget {
         ).copyWith(
           textStyle: WidgetStatePropertyAll(
             TextStyle(
-                fontWeight: FontWeight.w500, fontSize: AppTextSizes.button),
+              fontWeight: FontWeight.w500,
+              fontSize: AppTextSizes.button,
+            ),
           ),
         ),
         // onPressed: () {

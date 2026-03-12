@@ -2,6 +2,8 @@ import 'package:deehelp/core/extension/color_extension.dart';
 import 'package:deehelp/core/theme/export_theme.dart';
 import 'package:flutter/material.dart';
 
+enum ButtonProfileSize { low, medium }
+
 class ButtonProfile extends StatelessWidget {
   final VoidCallback onTap;
 
@@ -18,8 +20,10 @@ class ButtonProfile extends StatelessWidget {
         customBorder: const CircleBorder(),
         onTap: onTap,
         child: Ink(
-          width: IconSizes.xxl,
-          height: IconSizes.xxl,
+          // width: IconSizes.xxl,
+          // height: IconSizes.xxl,
+          width: ImageSize.sm,
+          height: ImageSize.sm,
           decoration: BoxDecoration(
             shape: BoxShape.circle,
             border: Border.fromBorderSide(BorderSide(
@@ -29,6 +33,7 @@ class ButtonProfile extends StatelessWidget {
           child: ClipOval(
             child: Icon(
               Icons.person_rounded,
+              // size: IconSizes.lg,
               size: IconSizes.lg,
               color: const Color(0xFF667085),
             ),

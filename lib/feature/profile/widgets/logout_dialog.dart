@@ -1,8 +1,6 @@
 import 'package:deehelp/app_name.dart';
 import 'package:deehelp/core/extension/exports_extension.dart';
-import 'package:deehelp/core/theme/app_colors.dart';
 import 'package:deehelp/core/theme/export_theme.dart';
-import 'package:deehelp/core/theme/size/icon_size.dart';
 import 'package:deehelp/core/ui/styles/app_text_style.dart';
 import 'package:deehelp/core/ui/widgets/buttons/buttons_export.dart';
 import 'package:deehelp/core/ui/widgets/icon/export_icon.dart';
@@ -16,7 +14,7 @@ class LogoutDialog extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Dialog(
-      backgroundColor: Colors.white,
+      backgroundColor: context.surfaceColor,
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(24),
       ),
@@ -44,8 +42,9 @@ class LogoutDialog extends StatelessWidget {
               'Tem certeza que deseja sair do ${AppName.appName}?\n'
               'Você poderá entrar novamente quando quiser.',
               textAlign: TextAlign.center,
-              style: context.appText.bodymd.copyWith(
+              style: context.appText.label.copyWith(
                 color: context.secondaryColor,
+                fontWeight: FontWeight.normal,
               ),
             ),
             const SizedBox(height: SpacingSize.xl),

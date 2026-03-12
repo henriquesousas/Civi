@@ -1,3 +1,5 @@
+import 'package:deehelp/core/extension/exports_extension.dart';
+import 'package:deehelp/core/ui/styles/app_text_style.dart';
 import 'package:flutter/material.dart';
 
 class ButtonInline extends StatelessWidget {
@@ -14,8 +16,11 @@ class ButtonInline extends StatelessWidget {
       onPressed: press,
       child: Text(
         text,
-        style: const TextStyle(fontWeight: FontWeight.w900).copyWith(
-          color: textColor ?? Colors.white,
+        // style: const TextStyle(fontWeight: FontWeight.w900).copyWith(
+        //   color: textColor ?? Colors.white,
+        // ),
+        style: context.appText.button.copyWith(
+          color: textColor ?? context.onSurface,
         ),
       ),
     );

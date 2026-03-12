@@ -6,6 +6,7 @@ extension ColorExtension on BuildContext {
   Color get secondaryContainer => Theme.of(this).colorScheme.secondaryContainer;
   Color get secondaryColor => Theme.of(this).colorScheme.secondary;
   Color get surfaceColor => Theme.of(this).colorScheme.surface;
+  Color get surfaceDim => Theme.of(this).colorScheme.surfaceDim;
   Color get outlineVariantColor => Theme.of(this).colorScheme.outlineVariant;
   Color get outline => Theme.of(this).colorScheme.outline;
   Color get onSurface => Theme.of(this).colorScheme.onSurface;

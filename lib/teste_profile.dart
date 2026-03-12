@@ -1,294 +1,624 @@
 import 'package:flutter/material.dart';
 
-class TestePage3 extends StatelessWidget {
-  const TestePage3({super.key});
+class TestPageDark extends StatefulWidget {
+  const TestPageDark({super.key});
+
+  @override
+  State<TestPageDark> createState() => _TestPageDarkState();
+}
+
+class _TestPageDarkState extends State<TestPageDark> {
+  // Dark palette (Kotto)
+  static const _bg = Color(0xFF0B1220);
+  static const _surface = Color(0xFF111B2E);
+  static const _surface2 = Color(0xFF0F1728);
+
+  static const _ink = Color(0xFFEAF0FF);
+  static const _muted = Color(0xFF9AA8D1);
+
+  static const _primary = Color(0xFF2157F8);
+  static const _divider = Color(0xFF1C2A46);
+  static const _outline = Color(0xFF1B2742);
+
+  final TextEditingController searchCtrl = TextEditingController();
+  late final List<_FaqSection> sections = _buildSections();
+
+  @override
+  void dispose() {
+    searchCtrl.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
-    const bg = Color(0xFFF3F6FB);
-    const textPrimary = Color(0xFF111827);
-    const textSecondary = Color(0xFF6B7280);
-    const blue = Color(0xFF2563EB);
-    const border = Color(0xFFE5EAF3);
+    final q = searchCtrl.text.trim().toLowerCase();
+
+    final filtered = sections
+        .map((s) {
+          final items = s.items.where((i) {
+            final t = '${i.question} ${i.answer}'.toLowerCase();
+            return q.isEmpty || t.contains(q);
+          }).toList();
+          return s.copyWith(items: items);
+        })
+        .where((s) => s.items.isNotEmpty)
+        .toList();
 
     return Scaffold(
-      backgroundColor: bg,
-      body: SafeArea(
-        child: CustomScrollView(
-          slivers: [
-            SliverToBoxAdapter(
-              child: Padding(
-                padding: const EdgeInsets.fromLTRB(20, 16, 20, 32),
+      backgroundColor: _bg,
+      appBar: AppBar(
+        elevation: 0,
+        backgroundColor: _surface2,
+        title: const Text(
+          'Perguntas frequentes',
+          style: TextStyle(
+            color: _ink,
+            fontWeight: FontWeight.w800,
+          ),
+        ),
+        iconTheme: const IconThemeData(color: _ink),
+      ),
+      body: ListView(
+        padding: const EdgeInsets.fromLTRB(16, 16, 16, 24),
+        children: [
+          _HeaderCardDark(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                const Text(
+                  'Como podemos ajudar?',
+                  style: TextStyle(
+                    fontSize: 20,
+                    fontWeight: FontWeight.w900,
+                    color: Colors.white,
+                  ),
+                ),
+                const SizedBox(height: 8),
+                const Text(
+                  'Pesquise e encontre respostas rápidas sobre cadastro de itens, '
+                  'ocorrências, mapa, filtros e privacidade.',
+                  style: TextStyle(
+                    fontSize: 14,
+                    height: 1.4,
+                    fontWeight: FontWeight.w600,
+                    color: Color.fromRGBO(255, 255, 255, 0.85),
+                  ),
+                ),
+                const SizedBox(height: 16),
+                _SearchFieldDark(
+                  controller: searchCtrl,
+                  hint: 'Pesquisar nas perguntas…',
+                  onChanged: (_) => setState(() {}),
+                  onClear: () {
+                    searchCtrl.clear();
+                    setState(() {});
+                  },
+                ),
+              ],
+            ),
+          ),
+          const SizedBox(height: 16),
+          if (filtered.isEmpty) ...[
+            _EmptyStateDark(
+              query: searchCtrl.text.trim(),
+              onClear: () {
+                searchCtrl.clear();
+                setState(() {});
+              },
+            ),
+          ] else ...[
+            for (final s in filtered) ...[
+              _SectionTitleDark(s.title),
+              _FaqCardDark(
                 child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: const [
-                    _TopBar(),
-                    SizedBox(height: 24),
-                    _PremiumAccountHeader(),
-                    SizedBox(height: 16),
-                    _TrustCard(),
-                    SizedBox(height: 28),
-                    _SectionLabel('Conta'),
-                    SizedBox(height: 12),
-                    _SettingsCard(
-                      items: [
-                        ProfileItem(
-                          icon: Icons.person_outline_rounded,
-                          title: 'Dados pessoais',
-                          subtitle: 'Nome, e-mail e informações da conta',
+                  children: [
+                    for (int i = 0; i < s.items.length; i++) ...[
+                      _FaqTileDark(
+                        item: s.items[i],
+                        accentColor: s.accentColor,
+                      ),
+                      if (i != s.items.length - 1)
+                        const Divider(
+                          height: 1,
+                          indent: 18,
+                          endIndent: 18,
+                          color: _divider,
                         ),
-                        ProfileItem(
-                          icon: Icons.report_outlined,
-                          title: 'Minhas ocorrências',
-                          subtitle: 'Acompanhe seus registros e atualizações',
-                        ),
-                        ProfileItem(
-                          icon: Icons.inventory_2_outlined,
-                          title: 'Meus itens',
-                          subtitle: 'Itens vinculados ao seu perfil',
-                        ),
-                      ],
-                    ),
-                    SizedBox(height: 24),
-                    _SectionLabel('Recursos'),
-                    SizedBox(height: 12),
-                    _SettingsCard(
-                      items: [
-                        ProfileItem(
-                          icon: Icons.search_rounded,
-                          title: 'Consultar incidentes',
-                          subtitle: 'Pesquise ocorrências registradas',
-                        ),
-                        ProfileItem(
-                          icon: Icons.notifications_none_rounded,
-                          title: 'Notificações',
-                          subtitle: 'Gerencie alertas e avisos do app',
-                        ),
-                        ProfileItem(
-                          icon: Icons.help_outline_rounded,
-                          title: 'Central de ajuda',
-                          subtitle: 'Dúvidas frequentes e suporte',
-                        ),
-                      ],
-                    ),
-                    SizedBox(height: 24),
-                    _SectionLabel('Preferências'),
-                    SizedBox(height: 12),
-                    _SettingsCard(
-                      items: [
-                        ProfileItem(
-                          icon: Icons.dark_mode_outlined,
-                          title: 'Modo escuro',
-                          subtitle: 'Ajuste a aparência do aplicativo',
-                          trailing: _PremiumSwitch(value: false),
-                        ),
-                        ProfileItem(
-                          icon: Icons.star_outline_rounded,
-                          title: 'Avaliar aplicativo',
-                          subtitle: 'Sua opinião ajuda a evoluir o produto',
-                          badge: 'Novo',
-                        ),
-                      ],
-                    ),
-                    SizedBox(height: 24),
-                    _SectionLabel('Sistema'),
-                    SizedBox(height: 12),
-                    _SettingsCard(
-                      items: [
-                        ProfileItem(
-                          icon: Icons.info_outline_rounded,
-                          title: 'Versão do app',
-                          subtitle: '1.0.0',
-                          hideChevron: true,
-                        ),
-                        ProfileItem(
-                          icon: Icons.logout_rounded,
-                          title: 'Sair da conta',
-                          subtitle: 'Encerrar sessão neste dispositivo',
-                          isDestructive: true,
-                        ),
-                      ],
-                    ),
+                    ],
                   ],
                 ),
               ),
-            ),
-          ],
-        ),
-      ),
-    );
-  }
-}
-
-class _TopBar extends StatelessWidget {
-  const _TopBar();
-
-  @override
-  Widget build(BuildContext context) {
-    return Row(
-      children: [
-        _CircleAction(
-          icon: Icons.arrow_back_ios_new_rounded,
-          onTap: () {},
-        ),
-        const Spacer(),
-        const Text(
-          'Perfil',
-          style: TextStyle(
-            fontSize: 22,
-            fontWeight: FontWeight.w700,
-            color: Color(0xFF111827),
-          ),
-        ),
-        const Spacer(),
-        _CircleAction(
-          icon: Icons.settings_outlined,
-          onTap: () {},
-        ),
-      ],
-    );
-  }
-}
-
-class _CircleAction extends StatelessWidget {
-  final IconData icon;
-  final VoidCallback onTap;
-
-  const _CircleAction({
-    required this.icon,
-    required this.onTap,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    return Material(
-      color: Colors.white,
-      borderRadius: BorderRadius.circular(16),
-      child: InkWell(
-        borderRadius: BorderRadius.circular(16),
-        onTap: onTap,
-        child: Container(
-          width: 44,
-          height: 44,
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(16),
-            border: Border.all(
-              color: const Color(0xFFE8EDF5),
-            ),
-            boxShadow: const [
-              BoxShadow(
-                color: Color(0x0A0F172A),
-                blurRadius: 18,
-                offset: Offset(0, 8),
-              ),
+              const SizedBox(height: 16),
             ],
+          ],
+          const SizedBox(height: 8),
+          _SupportCardDark(
+            onContact: () {
+              ScaffoldMessenger.of(context).showSnackBar(
+                const SnackBar(content: Text('Abrir suporte (fake)')),
+              );
+            },
+            onSuggest: () {
+              ScaffoldMessenger.of(context).showSnackBar(
+                const SnackBar(content: Text('Enviar sugestão (fake)')),
+              );
+            },
           ),
-          child: Icon(
-            icon,
-            size: 18,
-            color: const Color(0xFF111827),
-          ),
-        ),
+        ],
       ),
     );
   }
+
+  List<_FaqSection> _buildSections() {
+    return [
+      _FaqSection(
+        title: 'Conta & acesso',
+        accentColor: _primary,
+        items: const [
+          _FaqItem(
+            question: 'Preciso fazer login para usar o app?',
+            answer:
+                'Não. Você pode continuar sem login. Porém, para salvar itens no seu perfil, '
+                'editar ocorrências e acompanhar histórico, o login é necessário.',
+          ),
+          _FaqItem(
+            question: 'Por que o login é apenas com Google?',
+            answer:
+                'Nesta fase inicial (beta), usamos o Google para simplificar e aumentar a segurança do acesso. '
+                'No futuro, podemos adicionar outras formas de login.',
+          ),
+          _FaqItem(
+            question: 'Esqueci meu acesso. O que faço?',
+            answer:
+                'Como o login é com Google, basta entrar novamente com a mesma conta Google usada anteriormente.',
+          ),
+        ],
+      ),
+      _FaqSection(
+        title: 'Meus itens',
+        accentColor: const Color(0xFF43A047),
+        items: const [
+          _FaqItem(
+            question: 'Quais itens posso cadastrar?',
+            answer:
+                'Você pode cadastrar veículos (carro/moto) e celular. O objetivo é facilitar '
+                'a identificação em caso de roubo/furto.',
+          ),
+          _FaqItem(
+            question: 'Por que meu item fica “Pendente” após cadastrar?',
+            answer:
+                'Todo item cadastrado passa por uma verificação antes de aparecer no app. '
+                'Isso ajuda a reduzir fraudes e melhorar a qualidade das informações.',
+          ),
+          _FaqItem(
+            question: 'Posso adicionar mais de uma foto?',
+            answer:
+                'Sim. Você pode adicionar 1 ou mais fotos. Fotos nítidas aumentam a chance de identificação.',
+          ),
+          _FaqItem(
+            question: 'Como funciona IMEI no cadastro de celular?',
+            answer:
+                'Você pode digitar o IMEI ou ler automaticamente usando a câmera (scanner). '
+                'O IMEI é um identificador importante para comunicar às operadoras e autoridades.',
+          ),
+        ],
+      ),
+      _FaqSection(
+        title: 'Ocorrências',
+        accentColor: const Color(0xFFE53935),
+        items: const [
+          _FaqItem(
+            question: 'Qual a diferença entre “Imediato” e “Detalhado”?',
+            answer:
+                'Imediato: para quando acabou de acontecer — registra rapidamente e você pode completar detalhes depois.\n\n'
+                'Detalhado: você informa data/hora, cidade, bairro, endereço aproximado e como aconteceu.',
+          ),
+          _FaqItem(
+            question: 'Quem pode cancelar ou marcar como recuperado?',
+            answer:
+                'Apenas o usuário que registrou a ocorrência pode cancelar ou marcar como recuperado. '
+                'Essas ações ficam na “Danger Zone” para evitar alterações indevidas.',
+          ),
+          _FaqItem(
+            question: 'Como compartilhar uma ocorrência?',
+            answer:
+                'Na tela de detalhes da ocorrência, você pode compartilhar (ex.: WhatsApp) com o resumo do caso. '
+                'Isso ajuda a avisar pessoas próximas e ampliar a rede de atenção.',
+          ),
+          _FaqItem(
+            question: 'Devo fazer boletim de ocorrência?',
+            answer:
+                'Sim. Recomendamos fazer o BO o mais rápido possível. O Kotto ajuda com informação e organização, '
+                'mas não substitui o registro oficial.',
+          ),
+        ],
+      ),
+      _FaqSection(
+        title: 'Mapa & filtros',
+        accentColor: const Color(0xFFFB8C00),
+        items: const [
+          _FaqItem(
+            question: 'O que significa “Raio local personalizado”?',
+            answer:
+                'Você define uma distância (ex.: 1 km, 2 km) e o mapa mostra apenas ocorrências dentro dessa área.',
+          ),
+          _FaqItem(
+            question: 'O que é “Filtrar por região visível”?',
+            answer:
+                'Mostra ocorrências com base na área que está visível no mapa. '
+                'Ao dar zoom e arrastar, você altera a região de busca.',
+          ),
+          _FaqItem(
+            question: 'Por que alguns pins mostram placa e outros um ícone?',
+            answer:
+                'Para veículos, o pin mostra a placa. Para celular, exibimos um ícone por privacidade e clareza visual.',
+          ),
+        ],
+      ),
+      _FaqSection(
+        title: 'Privacidade & segurança',
+        accentColor: const Color(0xFF5F85FF),
+        items: const [
+          _FaqItem(
+            question: 'Meus dados ficam públicos?',
+            answer:
+                'Exibimos apenas informações necessárias para alertas e identificação. '
+                'Dados sensíveis podem ser ocultados/limitados dependendo do tipo de item.',
+          ),
+          _FaqItem(
+            question: 'Posso usar o app sem informar dados pessoais?',
+            answer:
+                'Sim. No modo sem login, você navega e consulta. Para cadastrar itens e registrar ocorrências, '
+                'pode ser necessário fornecer informações mínimas.',
+          ),
+        ],
+      ),
+      _FaqSection(
+        title: 'Suporte & sugestões',
+        accentColor: const Color(0xFF2B5BEE),
+        items: const [
+          _FaqItem(
+            question: 'O app ainda está em desenvolvimento. Como posso ajudar?',
+            answer: 'Use o app, compartilhe com a comunidade e envie feedback. '
+                'Quanto mais pessoas usando, mais útil e preciso ele se torna.',
+          ),
+          _FaqItem(
+            question: 'Encontrei um erro. O que faço?',
+            answer:
+                'Envie uma descrição do problema e, se possível, prints. Isso acelera a correção.',
+          ),
+        ],
+      ),
+    ];
+  }
 }
 
-class _PremiumAccountHeader extends StatelessWidget {
-  const _PremiumAccountHeader();
+/* ------------------------------ Dark Widgets ------------------------------ */
+
+class _HeaderCardDark extends StatelessWidget {
+  final Widget child;
+  const _HeaderCardDark({required this.child});
+
+  static const _primary = Color(0xFF2157F8);
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: const EdgeInsets.all(22),
       decoration: BoxDecoration(
-        color: const Color(0xFF0F172A),
-        borderRadius: BorderRadius.circular(32),
+        color: _primary,
+        borderRadius: BorderRadius.circular(26),
+        boxShadow: [
+          BoxShadow(
+            color: _primary.withOpacity(0.22),
+            blurRadius: 22,
+            offset: const Offset(0, 12),
+          ),
+        ],
+      ),
+      child: Padding(
+        padding: const EdgeInsets.fromLTRB(16, 16, 16, 16),
+        child: child,
+      ),
+    );
+  }
+}
+
+class _SearchFieldDark extends StatelessWidget {
+  final TextEditingController controller;
+  final String hint;
+  final ValueChanged<String> onChanged;
+  final VoidCallback onClear;
+
+  const _SearchFieldDark({
+    required this.controller,
+    required this.hint,
+    required this.onChanged,
+    required this.onClear,
+  });
+
+  static const _primary = Color(0xFF2157F8);
+  static const _ink = Color(0xFFEAF0FF);
+  static const _muted = Color(0xFF9AA8D1);
+
+  @override
+  Widget build(BuildContext context) {
+    return Focus(
+      child: Builder(
+        builder: (context) {
+          final hasFocus = Focus.of(context).hasFocus;
+
+          return AnimatedContainer(
+            duration: const Duration(milliseconds: 180),
+            height: 52,
+            decoration: BoxDecoration(
+              color: const Color(0xFF0F1728), // dark "input"
+              borderRadius: BorderRadius.circular(18),
+              border: Border.all(
+                color: hasFocus
+                    ? Colors.white.withOpacity(0.50)
+                    : Colors.white.withOpacity(0.18),
+                width: 1.2,
+              ),
+            ),
+            child: TextField(
+              controller: controller,
+              onChanged: onChanged,
+              style: const TextStyle(
+                fontWeight: FontWeight.w800,
+                color: _ink,
+                fontSize: 13.5,
+              ),
+              decoration: InputDecoration(
+                border: InputBorder.none,
+                contentPadding: const EdgeInsets.symmetric(vertical: 14),
+                prefixIcon: const Icon(Icons.search, color: _muted),
+                hintText: hint,
+                hintStyle: const TextStyle(
+                  color: Color.fromRGBO(255, 255, 255, 0.70),
+                  fontWeight: FontWeight.w600,
+                ),
+                suffixIcon: ValueListenableBuilder<TextEditingValue>(
+                  valueListenable: controller,
+                  builder: (_, value, __) {
+                    if (value.text.isEmpty) return const SizedBox.shrink();
+                    return IconButton(
+                      onPressed: onClear,
+                      icon: const Icon(Icons.close,
+                          size: 18, color: Colors.white70),
+                      splashRadius: 18,
+                      tooltip: 'Limpar',
+                    );
+                  },
+                ),
+              ),
+            ),
+          );
+        },
+      ),
+    );
+  }
+}
+
+class _SectionTitleDark extends StatelessWidget {
+  final String text;
+  const _SectionTitleDark(this.text);
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.fromLTRB(8, 2, 8, 10),
+      child: Text(
+        text.toUpperCase(),
+        style: const TextStyle(
+          fontSize: 12,
+          fontWeight: FontWeight.w700,
+          color: Color(0xFF9AA8D1),
+          letterSpacing: 1.2,
+        ),
+      ),
+    );
+  }
+}
+
+class _FaqCardDark extends StatelessWidget {
+  final Widget child;
+  const _FaqCardDark({required this.child});
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      decoration: BoxDecoration(
+        color: const Color(0xFF111B2E),
+        borderRadius: BorderRadius.circular(24),
+        border: Border.all(color: const Color(0xFF1B2742)),
         boxShadow: const [
           BoxShadow(
-            color: Color(0x220F172A),
-            blurRadius: 30,
-            offset: Offset(0, 16),
+            color: Color(0x33000000),
+            blurRadius: 18,
+            offset: Offset(0, 10),
+          ),
+        ],
+      ),
+      child: child,
+    );
+  }
+}
+
+class _FaqTileDark extends StatefulWidget {
+  final _FaqItem item;
+  final Color accentColor;
+
+  const _FaqTileDark({required this.item, required this.accentColor});
+
+  @override
+  State<_FaqTileDark> createState() => _FaqTileDarkState();
+}
+
+class _FaqTileDarkState extends State<_FaqTileDark> {
+  bool expanded = false;
+
+  @override
+  Widget build(BuildContext context) {
+    return Theme(
+      data: Theme.of(context).copyWith(dividerColor: Colors.transparent),
+      child: ExpansionTile(
+        onExpansionChanged: (v) => setState(() => expanded = v),
+        tilePadding: const EdgeInsets.symmetric(horizontal: 16, vertical: 10),
+        childrenPadding: const EdgeInsets.fromLTRB(16, 0, 16, 14),
+        leading: _LeadingIconDark(
+          color: widget.accentColor,
+          expanded: expanded,
+        ),
+        title: Text(
+          widget.item.question,
+          style: const TextStyle(
+            fontSize: 13.8,
+            fontWeight: FontWeight.w900,
+            color: Color(0xFFEAF0FF),
+            height: 1.2,
+          ),
+        ),
+        trailing: Icon(
+          expanded ? Icons.remove : Icons.add,
+          color: const Color(0xFF9AA8D1),
+        ),
+        children: [
+          Text(
+            widget.item.answer,
+            style: const TextStyle(
+              fontSize: 13.2,
+              height: 1.35,
+              fontWeight: FontWeight.w600,
+              color: Color(0xFF9AA8D1),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+class _LeadingIconDark extends StatelessWidget {
+  final Color color;
+  final bool expanded;
+
+  const _LeadingIconDark({required this.color, required this.expanded});
+
+  @override
+  Widget build(BuildContext context) {
+    return AnimatedContainer(
+      duration: const Duration(milliseconds: 180),
+      width: 40,
+      height: 40,
+      decoration: BoxDecoration(
+        color: expanded ? color.withOpacity(0.18) : const Color(0xFF0F1728),
+        borderRadius: BorderRadius.circular(12),
+        border: Border.all(
+          color: expanded ? color.withOpacity(0.35) : const Color(0xFF1B2742),
+        ),
+      ),
+      child: Icon(
+        expanded ? Icons.question_answer_outlined : Icons.help_outline,
+        color: expanded ? color : const Color(0xFFEAF0FF),
+        size: 20,
+      ),
+    );
+  }
+}
+
+class _SupportCardDark extends StatelessWidget {
+  final VoidCallback onContact;
+  final VoidCallback onSuggest;
+
+  const _SupportCardDark({
+    required this.onContact,
+    required this.onSuggest,
+  });
+
+  static const _primary = Color(0xFF2157F8);
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      padding: const EdgeInsets.all(16),
+      decoration: BoxDecoration(
+        color: const Color(0xFF111B2E),
+        borderRadius: BorderRadius.circular(24),
+        border: Border.all(color: const Color(0xFF1B2742)),
+        boxShadow: const [
+          BoxShadow(
+            color: Color(0x33000000),
+            blurRadius: 18,
+            offset: Offset(0, 10),
           ),
         ],
       ),
       child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Row(
+          const Row(
             children: [
-              Container(
-                width: 74,
-                height: 74,
-                decoration: BoxDecoration(
-                  shape: BoxShape.circle,
-                  gradient: const LinearGradient(
-                    colors: [
-                      Color(0xFF3B82F6),
-                      Color(0xFF60A5FA),
-                    ],
-                    begin: Alignment.topLeft,
-                    end: Alignment.bottomRight,
-                  ),
-                  border: Border.all(
-                    color: Colors.white.withOpacity(0.18),
-                    width: 2,
-                  ),
-                ),
-                child: const Center(
-                  child: Text(
-                    'JD',
-                    style: TextStyle(
-                      color: Colors.white,
-                      fontSize: 24,
-                      fontWeight: FontWeight.w800,
-                    ),
-                  ),
-                ),
-              ),
-              const SizedBox(width: 16),
-              const Expanded(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      'João da Silva',
-                      style: TextStyle(
-                        color: Colors.white,
-                        fontSize: 19,
-                        fontWeight: FontWeight.w700,
-                      ),
-                    ),
-                    SizedBox(height: 5),
-                    Text(
-                      'joao@email.com',
-                      style: TextStyle(
-                        color: Color(0xFFB6C2D9),
-                        fontSize: 13.5,
-                        fontWeight: FontWeight.w500,
-                      ),
-                    ),
-                    SizedBox(height: 10),
-                    _StatusPill(),
-                  ],
+              Icon(Icons.support_agent, color: _primary),
+              SizedBox(width: 10),
+              Text(
+                'Ainda com dúvidas?',
+                style: TextStyle(
+                  fontSize: 14.5,
+                  fontWeight: FontWeight.w900,
+                  color: Color(0xFFEAF0FF),
                 ),
               ),
             ],
           ),
-          const SizedBox(height: 18),
+          const SizedBox(height: 8),
+          const Text(
+            'Envie uma mensagem para o suporte ou compartilhe uma sugestão para melhorar o app.',
+            style: TextStyle(
+              fontSize: 13,
+              height: 1.35,
+              fontWeight: FontWeight.w600,
+              color: Color(0xFF9AA8D1),
+            ),
+          ),
+          const SizedBox(height: 12),
           Row(
             children: [
               Expanded(
-                child: _ActionButton(
-                  icon: Icons.edit_outlined,
-                  label: 'Editar perfil',
-                  isPrimary: true,
+                child: OutlinedButton.icon(
+                  onPressed: onSuggest,
+                  icon: const Icon(Icons.lightbulb_outline, size: 18),
+                  label: const Text(
+                    'Sugestão',
+                    style: TextStyle(fontWeight: FontWeight.w900),
+                  ),
+                  style: OutlinedButton.styleFrom(
+                    foregroundColor: _primary,
+                    side: BorderSide(color: _primary.withOpacity(0.35)),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(18),
+                    ),
+                    padding: const EdgeInsets.symmetric(vertical: 14),
+                  ),
                 ),
               ),
               const SizedBox(width: 12),
               Expanded(
-                child: _ActionButton(
-                  icon: Icons.shield_outlined,
-                  label: 'Privacidade',
+                child: ElevatedButton.icon(
+                  onPressed: onContact,
+                  icon: const Icon(Icons.chat_outlined, size: 18),
+                  label: const Text(
+                    'Suporte',
+                    style: TextStyle(fontWeight: FontWeight.w900),
+                  ),
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: _primary,
+                    foregroundColor: Colors.white,
+                    elevation: 0,
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(18),
+                    ),
+                    padding: const EdgeInsets.symmetric(vertical: 14),
+                  ),
                 ),
               ),
             ],
@@ -299,428 +629,103 @@ class _PremiumAccountHeader extends StatelessWidget {
   }
 }
 
-class _StatusPill extends StatelessWidget {
-  const _StatusPill();
+class _EmptyStateDark extends StatelessWidget {
+  final String query;
+  final VoidCallback onClear;
 
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 6),
-      decoration: BoxDecoration(
-        color: const Color(0xFF152341),
-        borderRadius: BorderRadius.circular(999),
-        border: Border.all(
-          color: Colors.white.withOpacity(0.08),
-        ),
-      ),
-      child: const Row(
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          Icon(
-            Icons.verified_rounded,
-            size: 14,
-            color: Color(0xFF60A5FA),
-          ),
-          SizedBox(width: 6),
-          Text(
-            'Conta verificada',
-            style: TextStyle(
-              color: Color(0xFFD9E4F8),
-              fontSize: 12,
-              fontWeight: FontWeight.w600,
-            ),
-          ),
-        ],
-      ),
-    );
-  }
-}
-
-class _ActionButton extends StatelessWidget {
-  final IconData icon;
-  final String label;
-  final bool isPrimary;
-
-  const _ActionButton({
-    required this.icon,
-    required this.label,
-    this.isPrimary = false,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    final bgColor = isPrimary ? Colors.white : Colors.white.withOpacity(0.06);
-    final borderColor =
-        isPrimary ? Colors.white : Colors.white.withOpacity(0.08);
-    final textColor = isPrimary ? const Color(0xFF0F172A) : Colors.white;
-
-    return Container(
-      height: 50,
-      decoration: BoxDecoration(
-        color: bgColor,
-        borderRadius: BorderRadius.circular(18),
-        border: Border.all(color: borderColor),
-      ),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Icon(icon, size: 18, color: textColor),
-          const SizedBox(width: 8),
-          Text(
-            label,
-            style: TextStyle(
-              color: textColor,
-              fontWeight: FontWeight.w600,
-              fontSize: 14,
-            ),
-          ),
-        ],
-      ),
-    );
-  }
-}
-
-class _TrustCard extends StatelessWidget {
-  const _TrustCard();
+  const _EmptyStateDark({required this.query, required this.onClear});
 
   @override
   Widget build(BuildContext context) {
     return Container(
       padding: const EdgeInsets.all(18),
       decoration: BoxDecoration(
-        color: Colors.white,
-        borderRadius: BorderRadius.circular(26),
-        border: Border.all(
-          color: const Color(0xFFE7ECF5),
-        ),
+        color: const Color(0xFF111B2E),
+        borderRadius: BorderRadius.circular(24),
+        border: Border.all(color: const Color(0xFF1B2742)),
         boxShadow: const [
           BoxShadow(
-            color: Color(0x0A0F172A),
+            color: Color(0x33000000),
             blurRadius: 18,
-            offset: Offset(0, 8),
-          ),
-        ],
-      ),
-      child: const Row(
-        children: [
-          _MiniMetric(
-            value: '12',
-            label: 'Ocorrências',
-            icon: Icons.report_outlined,
-          ),
-          _DividerVertical(),
-          _MiniMetric(
-            value: '04',
-            label: 'Itens',
-            icon: Icons.inventory_2_outlined,
-          ),
-          _DividerVertical(),
-          _MiniMetric(
-            value: '98%',
-            label: 'Confiabilidade',
-            icon: Icons.shield_outlined,
-          ),
-        ],
-      ),
-    );
-  }
-}
-
-class _MiniMetric extends StatelessWidget {
-  final String value;
-  final String label;
-  final IconData icon;
-
-  const _MiniMetric({
-    required this.value,
-    required this.label,
-    required this.icon,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    return Expanded(
-      child: Column(
-        children: [
-          Container(
-            width: 38,
-            height: 38,
-            decoration: BoxDecoration(
-              color: const Color(0xFFEEF4FF),
-              borderRadius: BorderRadius.circular(12),
-            ),
-            child: Icon(
-              icon,
-              size: 19,
-              color: const Color(0xFF2563EB),
-            ),
-          ),
-          const SizedBox(height: 10),
-          Text(
-            value,
-            style: const TextStyle(
-              fontSize: 18,
-              fontWeight: FontWeight.w800,
-              color: Color(0xFF111827),
-            ),
-          ),
-          const SizedBox(height: 4),
-          Text(
-            label,
-            textAlign: TextAlign.center,
-            style: const TextStyle(
-              fontSize: 12,
-              color: Color(0xFF6B7280),
-              fontWeight: FontWeight.w500,
-            ),
-          ),
-        ],
-      ),
-    );
-  }
-}
-
-class _DividerVertical extends StatelessWidget {
-  const _DividerVertical();
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      width: 1,
-      height: 62,
-      color: const Color(0xFFE8EDF5),
-    );
-  }
-}
-
-class _SectionLabel extends StatelessWidget {
-  final String text;
-
-  const _SectionLabel(this.text);
-
-  @override
-  Widget build(BuildContext context) {
-    return Text(
-      text,
-      style: const TextStyle(
-        fontSize: 13,
-        fontWeight: FontWeight.w700,
-        color: Color(0xFF94A3B8),
-        letterSpacing: 0.4,
-      ),
-    );
-  }
-}
-
-class ProfileItem {
-  final IconData icon;
-  final String title;
-  final String? subtitle;
-  final Widget? trailing;
-  final String? badge;
-  final bool isDestructive;
-  final bool hideChevron;
-
-  const ProfileItem({
-    required this.icon,
-    required this.title,
-    this.subtitle,
-    this.trailing,
-    this.badge,
-    this.isDestructive = false,
-    this.hideChevron = false,
-  });
-}
-
-class _SettingsCard extends StatelessWidget {
-  final List<ProfileItem> items;
-
-  const _SettingsCard({required this.items});
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      decoration: BoxDecoration(
-        color: Colors.white,
-        borderRadius: BorderRadius.circular(28),
-        border: Border.all(color: const Color(0xFFE7ECF5)),
-        boxShadow: const [
-          BoxShadow(
-            color: Color(0x0A0F172A),
-            blurRadius: 22,
             offset: Offset(0, 10),
           ),
         ],
       ),
       child: Column(
-        children: items.asMap().entries.map((entry) {
-          final item = entry.value;
-          final isLast = entry.key == items.length - 1;
-
-          return Column(
-            children: [
-              _PremiumTile(item: item),
-              if (!isLast)
-                const Padding(
-                  padding: EdgeInsets.only(left: 72),
-                  child: Divider(
-                    height: 1,
-                    thickness: 1,
-                    color: Color(0xFFF0F3F8),
-                  ),
-                ),
-            ],
-          );
-        }).toList(),
-      ),
-    );
-  }
-}
-
-class _PremiumTile extends StatelessWidget {
-  final ProfileItem item;
-
-  const _PremiumTile({required this.item});
-
-  @override
-  Widget build(BuildContext context) {
-    final titleColor =
-        item.isDestructive ? const Color(0xFFDC2626) : const Color(0xFF111827);
-
-    final iconColor =
-        item.isDestructive ? const Color(0xFFDC2626) : const Color(0xFF2563EB);
-
-    final iconBg =
-        item.isDestructive ? const Color(0xFFFEECEC) : const Color(0xFFEEF4FF);
-
-    return InkWell(
-      borderRadius: BorderRadius.circular(28),
-      onTap: () {},
-      child: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
-        child: Row(
-          children: [
-            Container(
-              width: 44,
-              height: 44,
-              decoration: BoxDecoration(
-                color: iconBg,
-                borderRadius: BorderRadius.circular(14),
-              ),
-              child: Icon(
-                item.icon,
-                size: 21,
-                color: iconColor,
-              ),
+        children: [
+          Container(
+            width: 56,
+            height: 56,
+            decoration: BoxDecoration(
+              color: const Color(0xFF0F1728),
+              borderRadius: BorderRadius.circular(18),
+              border: Border.all(color: const Color(0xFF1B2742)),
             ),
-            const SizedBox(width: 14),
-            Expanded(
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Row(
-                    children: [
-                      Flexible(
-                        child: Text(
-                          item.title,
-                          style: TextStyle(
-                            fontSize: 15.5,
-                            fontWeight: FontWeight.w700,
-                            color: titleColor,
-                          ),
-                        ),
-                      ),
-                      if (item.badge != null) ...[
-                        const SizedBox(width: 8),
-                        Container(
-                          padding: const EdgeInsets.symmetric(
-                            horizontal: 8,
-                            vertical: 4,
-                          ),
-                          decoration: BoxDecoration(
-                            color: const Color(0xFF2563EB),
-                            borderRadius: BorderRadius.circular(999),
-                          ),
-                          child: Text(
-                            item.badge!,
-                            style: const TextStyle(
-                              color: Colors.white,
-                              fontSize: 10,
-                              fontWeight: FontWeight.w700,
-                            ),
-                          ),
-                        ),
-                      ],
-                    ],
-                  ),
-                  if (item.subtitle != null) ...[
-                    const SizedBox(height: 4),
-                    Text(
-                      item.subtitle!,
-                      style: const TextStyle(
-                        fontSize: 13,
-                        height: 1.35,
-                        color: Color(0xFF6B7280),
-                      ),
-                    ),
-                  ],
-                ],
-              ),
-            ),
-            const SizedBox(width: 8),
-            item.trailing ??
-                (item.hideChevron
-                    ? const SizedBox.shrink()
-                    : Container(
-                        width: 32,
-                        height: 32,
-                        decoration: BoxDecoration(
-                          color: const Color(0xFFF8FAFC),
-                          borderRadius: BorderRadius.circular(10),
-                        ),
-                        child: const Icon(
-                          Icons.chevron_right_rounded,
-                          color: Color(0xFF94A3B8),
-                          size: 20,
-                        ),
-                      )),
-          ],
-        ),
-      ),
-    );
-  }
-}
-
-class _PremiumSwitch extends StatelessWidget {
-  final bool value;
-
-  const _PremiumSwitch({required this.value});
-
-  @override
-  Widget build(BuildContext context) {
-    return IgnorePointer(
-      child: AnimatedContainer(
-        duration: const Duration(milliseconds: 220),
-        width: 52,
-        height: 30,
-        padding: const EdgeInsets.all(4),
-        decoration: BoxDecoration(
-          color: value ? const Color(0xFF2563EB) : const Color(0xFFE5EAF3),
-          borderRadius: BorderRadius.circular(999),
-        ),
-        child: AnimatedAlign(
-          duration: const Duration(milliseconds: 220),
-          alignment: value ? Alignment.centerRight : Alignment.centerLeft,
-          child: Container(
-            width: 22,
-            height: 22,
-            decoration: const BoxDecoration(
-              color: Colors.white,
-              shape: BoxShape.circle,
+            child:
+                const Icon(Icons.search_off_outlined, color: Color(0xFF9AA8D1)),
+          ),
+          const SizedBox(height: 12),
+          const Text(
+            'Nada encontrado',
+            style: TextStyle(
+              fontSize: 14.5,
+              fontWeight: FontWeight.w900,
+              color: Color(0xFFEAF0FF),
             ),
           ),
-        ),
+          const SizedBox(height: 6),
+          Text(
+            'Não encontramos resultados para "$query". Tente outras palavras.',
+            textAlign: TextAlign.center,
+            style: const TextStyle(
+              fontSize: 13,
+              height: 1.35,
+              fontWeight: FontWeight.w600,
+              color: Color(0xFF9AA8D1),
+            ),
+          ),
+          const SizedBox(height: 12),
+          TextButton(
+            onPressed: onClear,
+            child: const Text(
+              'Limpar pesquisa',
+              style: TextStyle(fontWeight: FontWeight.w900),
+            ),
+          ),
+        ],
       ),
     );
   }
+}
+
+/* ------------------------------ Models ------------------------------ */
+
+class _FaqSection {
+  final String title;
+  final Color accentColor;
+  final List<_FaqItem> items;
+
+  const _FaqSection({
+    required this.title,
+    required this.accentColor,
+    required this.items,
+  });
+
+  _FaqSection copyWith({List<_FaqItem>? items}) {
+    return _FaqSection(
+      title: title,
+      accentColor: accentColor,
+      items: items ?? this.items,
+    );
+  }
+}
+
+class _FaqItem {
+  final String question;
+  final String answer;
+
+  const _FaqItem({
+    required this.question,
+    required this.answer,
+  });
 }

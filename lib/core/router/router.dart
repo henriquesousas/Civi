@@ -1,7 +1,6 @@
 import 'dart:async';
 
 import 'package:deehelp/app_startup_provider.dart';
-import 'package:deehelp/card_bottom.dart';
 import 'package:deehelp/core/router/slide_transition_page.dart';
 import 'package:deehelp/feature/about/about_router.dart';
 import 'package:deehelp/feature/auth/presentation/export_auth.dart';
@@ -16,10 +15,6 @@ import 'package:deehelp/feature/shell/app_sheel_router.dart';
 import 'package:deehelp/feature/sos/sos_router.dart';
 import 'package:deehelp/feature/splash/splash_router.dart';
 import 'package:deehelp/core/router/router_refresh_notifier.dart';
-import 'package:deehelp/map_page_teste.dart';
-import 'package:deehelp/map_page2.dart';
-import 'package:deehelp/map_toolbar.dart';
-import 'package:deehelp/mons_house.dart';
 import 'package:deehelp/teste_profile.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -99,7 +94,7 @@ var goRouterProvider = Provider<GoRouter>(
             // child: const MapPage2(),
             // child: const MounsHouse(),
             // child: const CardBottom(),
-            child: const TestePage3(),
+            child: const TestPageDark(),
             // child: const MapToolbar(),
           ),
         ),

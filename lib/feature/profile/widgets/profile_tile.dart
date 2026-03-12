@@ -39,6 +39,10 @@ class ProfileTile extends StatelessWidget {
                       "assets/svg/instagram.svg",
                       width: IconSizes.md,
                       height: IconSizes.md,
+                      colorFilter: ColorFilter.mode(
+                        baseColor,
+                        BlendMode.srcIn,
+                      ),
                     ),
             ),
             const SizedBox(width: SpacingSize.lg),
@@ -50,7 +54,7 @@ class ProfileTile extends StatelessWidget {
                     children: [
                       Text(
                         item.title,
-                        style: context.appText.bodymd.copyWith(
+                        style: context.appText.headermd.copyWith(
                           fontWeight: FontWeight.w800,
                           color: context.onSurface,
                         ),
@@ -93,9 +97,9 @@ class ProfileTile extends StatelessWidget {
             item.trailing ??
                 (item.hideChevron
                     ? const SizedBox.shrink()
-                    : const Icon(
+                    : Icon(
                         Icons.chevron_right,
-                        color: Color(0xFF8A96C8),
+                        color: context.surfaceDim,
                       )),
           ],
         ),

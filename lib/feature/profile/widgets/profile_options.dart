@@ -1,3 +1,4 @@
+import 'package:deehelp/core/extension/color_extension.dart';
 import 'package:deehelp/core/theme/export_theme.dart';
 import '../profile_item.dart';
 import 'profile_tile.dart';
@@ -13,7 +14,7 @@ class ProfileOptions extends StatelessWidget {
     return Container(
       margin: const EdgeInsets.symmetric(horizontal: LayoutSpacingSize.page),
       decoration: BoxDecoration(
-        color: Colors.white,
+        color: context.secondaryContainer,
         borderRadius: BorderRadius.circular(RadiusSize.lg),
         boxShadow: const [
           BoxShadow(
@@ -35,10 +36,10 @@ class ProfileOptions extends StatelessWidget {
                     press: () => entry.value.press?.call(),
                   ),
                   if (entry.key != items.length - 1)
-                    const Divider(
+                    Divider(
                       height: 1,
                       indent: 72,
-                      color: Color(0xFFE6EAF6),
+                      color: context.outline,
                     ),
                 ],
               ),

@@ -8,27 +8,29 @@ import 'input_decoration_theme.dart';
 
 class AppTheme {
   static ThemeData lightTheme() {
-    final baseColorScheme = const ColorScheme.light(
+    final baseColorScheme = ColorScheme.light(
       // Bg principal
       surface: Colors.white,
-      secondaryContainer: Color(0xFFF5F7FD),
+      secondaryContainer: Colors.white,
       //Texto
       // texto principal
-      onSurface: Color(0xFF1F2A44),
+      onSurface: const Color(0xFF1F2A44),
       // texto secundario
-      secondary: Color(0xFF6B7AAE),
+      secondary: const Color(0xFF6B7AAE),
       // texto/icone/ propositalmente apagado
-      surfaceDim: Color(0xFF475569),
+      surfaceDim: const Color(0xFF475569),
       // texto error
-      onError: Color(0xFFEA5B5B),
+      onError: const Color(0xFFEA5B5B),
       // overlay de cor aplicado conforme a elevação
-      surfaceTint: Color.fromARGB(0, 12, 15, 0),
+      surfaceTint: const Color.fromARGB(0, 12, 15, 0),
       // bordas mais forte
-      outline: Color(0xFF475569),
+      // outline: Color(0xFF475569),
+      // outline → “borda principal”
+      outline: Colors.grey.shade100,
       // bordas mais fraca
-      outlineVariant: Color(0xFFE6EAF6),
+      outlineVariant: const Color(0xFFE6EAF6),
       // shadow
-      shadow: Color(0x14000000),
+      shadow: const Color(0x14000000),
       // usado pra modais (pode ser o mesmo)
       scrim: Colors.black,
 
@@ -70,20 +72,24 @@ class AppTheme {
 
   static ThemeData dark() {
     final baseColorScheme = ColorScheme.light(
+      surface: const Color(0xFF1f222a), // Fundo principal
       secondaryContainer:
           Colors.grey.withValues(alpha: 0.1), //Color(0xFF1f222a),
-      surface: const Color(0xFF1f222a), // Fundo principal
+
       onSurface: Colors.white, // Texto principal
-      surfaceDim: Colors.white70, //Texto secundario
+      // texto/icone/ propositalmente apagado
+      surfaceDim: Colors.grey.shade700,
       //Fundo para componentes (cards, listas) em diferentes níveis de elevação.
       surfaceContainer: const Color(0xFF1f222a),
       // outlineVariant versão mais suave, usada em bordas
       outlineVariant: Colors.grey.shade800,
       // outline → “borda principal”
-      outline: Colors.grey.shade500,
+      outline: Colors.grey.shade900,
+
       // outline: Colors.grey.shade500,
       primary: const Color(0xFF2B5BEE),
       onSecondary: const Color(0xFF2157F8),
+      secondary: Colors.white70,
 
       // primary: Color(0xFF0A84FF),
       // secondary: Color(0xFFFF9F0A),
