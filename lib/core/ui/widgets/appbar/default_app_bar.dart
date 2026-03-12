@@ -34,7 +34,8 @@ class DefaultAppBar extends StatelessWidget implements PreferredSizeWidget {
         preferredSize: const Size.fromHeight(1),
         child: Container(
           height: 1,
-          color: const Color(0xFFE6EAF6),
+          // color: const Color(0xFFE6EAF6),
+          color: context.outline,
         ),
       ),
       // scrolledUnderElevation: 0.6,
@@ -42,7 +43,8 @@ class DefaultAppBar extends StatelessWidget implements PreferredSizeWidget {
       surfaceTintColor: context.surfaceColor,
       automaticallyImplyLeading: false,
       titleSpacing: 20,
-      iconTheme: const IconThemeData(color: Color(0xFF1F2A44)),
+      // iconTheme: const IconThemeData(color: Color(0xFF1F2A44)),
+      iconTheme: IconThemeData(color: context.onSurface),
       leading: _getLeading(),
       title: Text(
         title,

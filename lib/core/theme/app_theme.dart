@@ -35,14 +35,13 @@ class AppTheme {
       // usado pra modais (pode ser o mesmo)
       scrim: Colors.black,
 
-      // surfaceContainer: Colors.white,
-      // surfaceVariant: Color(0xFF6B7AAE),
-
+      surfaceContainer: Colors.white,
+      onSurfaceVariant: const Color(0xFF2B5BEE),
       // outlineVariant: Colors.grey.shade300,
       // outline: Colors.grey.shade800,
 
-      primary: Color(0xFF2B5BEE),
-      onPrimary: Color(0xFFFFFFFF),
+      primary: const Color(0xFF2B5BEE),
+      onPrimary: const Color(0xFFFFFFFF),
     );
 
     return ThemeData(
@@ -87,6 +86,7 @@ class AppTheme {
       outlineVariant: Colors.grey.shade800,
       // outline → “borda principal”
       outline: Colors.grey.shade900,
+      onSurfaceVariant: Colors.white,
 
       // outline: Colors.grey.shade500,
       primary: const Color(0xFF2B5BEE),

@@ -19,7 +19,7 @@ class FaqSupportCard extends StatelessWidget {
     return Container(
       padding: const EdgeInsets.all(16),
       decoration: BoxDecoration(
-        color: Colors.white,
+        color: context.secondaryContainer,
         borderRadius: BorderRadius.circular(RadiusSize.lg),
         border: Border.all(color: context.outlineVariantColor),
         boxShadow: const [
@@ -60,7 +60,11 @@ class FaqSupportCard extends StatelessWidget {
                 child: ButtonOutline(
                   press: () {},
                   text: "Sugestão",
-                  icon: Icon(Icons.lightbulb_outline, size: IconSizes.md),
+                  icon: Icon(
+                    Icons.lightbulb_outline,
+                    size: IconSizes.md,
+                    color: context.onSurfaceVariant,
+                  ),
                 ),
               ),
               const SizedBox(width: 12),
@@ -69,6 +73,7 @@ class FaqSupportCard extends StatelessWidget {
                   press: () {},
                   text: "Suporte",
                   bgColor: context.primaryColor,
+                  borderColor: context.primaryColor,
                   textColor: Colors.white,
                   icon: Icon(
                     Icons.chat_outlined,

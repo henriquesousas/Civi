@@ -25,9 +25,9 @@ class EmptyState extends StatelessWidget {
       height: context.percentHeight(0.3),
       padding: const EdgeInsets.all(18),
       decoration: BoxDecoration(
-        color: Colors.white,
+        color: context.secondaryContainer,
         borderRadius: BorderRadius.circular(RadiusSize.lg),
-        border: Border.all(color: AppColors.greyLight),
+        border: Border.all(color: context.outline),
         boxShadow: const [
           BoxShadow(
             color: Color(0x142B5BEE),
@@ -40,7 +40,8 @@ class EmptyState extends StatelessWidget {
         children: [
           HighlightIcon(
             containerSize: IconSizes.xxxl,
-            bgColor: AppColors.greyLight,
+            // bgColor: AppColors.greyLight,
+            bgColor: context.surfaceColor,
             icon: Icon(
               Icons.search_off_outlined,
               color: context.secondaryColor,

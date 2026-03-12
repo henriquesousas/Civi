@@ -8,6 +8,7 @@ class ButtonOutline extends StatelessWidget {
   final String text;
   final Widget? icon;
   final Color? bgColor;
+  final Color? borderColor;
   final Color? textColor;
   final BorderSide? side;
   final double? height;
@@ -24,6 +25,7 @@ class ButtonOutline extends StatelessWidget {
     this.side,
     this.height,
     this.width,
+    this.borderColor,
     this.loading = false,
     this.isPrimary = false,
   });
@@ -36,12 +38,6 @@ class ButtonOutline extends StatelessWidget {
       child: OutlinedButton.icon(
         onPressed: press,
         icon: loading! ? null : icon,
-        // label:   Text(
-        //   text,
-        //   style: const TextStyle(fontWeight: FontWeight.w900).copyWith(
-        //     color: textColor ?? context.primaryColor,
-        //   ),
-        // ),
         label: loading!
             ? _cirucularProgressIndicator(context, isPrimary)
             : _title(context, textColor),
@@ -50,7 +46,8 @@ class ButtonOutline extends StatelessWidget {
           backgroundColor: bgColor,
           side: side ??
               BorderSide(
-                color: context.primaryColor.withValues(alpha: 0.32),
+                // color: context.onSurface,
+                color: borderColor ?? context.onSurfaceVariant,
               ),
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(RadiusSize.xl),
@@ -65,7 +62,7 @@ class ButtonOutline extends StatelessWidget {
       text,
       style: context.appText.label.copyWith(
         fontWeight: FontWeight.w800,
-        color: textColor ?? context.primaryColor,
+        color: textColor ?? context.onSurfaceVariant,
       ),
     );
   }

@@ -54,6 +54,7 @@ class _FaqPageState extends State<FaqPage> {
         showBackButton: true,
       ),
       body: ListView(
+        physics: const BouncingScrollPhysics(),
         padding: const EdgeInsets.fromLTRB(16, 16, 16, 24),
         children: [
           FaqHeaderCard(
@@ -111,11 +112,11 @@ class _FaqPageState extends State<FaqPage> {
                         accentColor: s.accentColor,
                       ),
                       if (i != s.items.length - 1)
-                        const Divider(
+                        Divider(
                           height: 1,
                           indent: 18,
                           endIndent: 18,
-                          color: Color(0xFFE6EAF6),
+                          color: context.outline,
                         ),
                     ],
                   ],

@@ -1,3 +1,4 @@
+import 'package:deehelp/core/extension/color_extension.dart';
 import 'package:deehelp/core/theme/export_theme.dart';
 import 'package:flutter/material.dart';
 
@@ -9,7 +10,7 @@ class FaqCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       decoration: BoxDecoration(
-        color: Colors.white,
+        color: context.secondaryContainer,
         borderRadius: BorderRadius.circular(RadiusSize.xxl),
         boxShadow: const [
           BoxShadow(
