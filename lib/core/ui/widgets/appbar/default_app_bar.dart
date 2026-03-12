@@ -1,6 +1,7 @@
 import 'package:deehelp/core/extension/exports_extension.dart';
 import 'package:deehelp/core/ui/styles/export_style.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 class DefaultAppBar extends StatelessWidget implements PreferredSizeWidget {
   final String title;
@@ -25,6 +26,10 @@ class DefaultAppBar extends StatelessWidget implements PreferredSizeWidget {
   Widget build(BuildContext context) {
     return AppBar(
       // elevation: 10,
+      systemOverlayStyle: const SystemUiOverlayStyle(
+        statusBarColor: Colors.transparent,
+        statusBarIconBrightness: Brightness.light,
+      ),
       bottom: PreferredSize(
         preferredSize: const Size.fromHeight(1),
         child: Container(

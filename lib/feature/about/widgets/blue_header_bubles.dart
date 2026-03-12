@@ -1,10 +1,13 @@
+import 'package:deehelp/core/extension/color_extension.dart';
+import 'package:deehelp/core/extension/exports_extension.dart';
+
 import 'bubble.dart';
 import 'package:flutter/material.dart';
 
 class BlueHeaderBubbles extends StatelessWidget {
   const BlueHeaderBubbles({super.key});
 
-  static const _primary = Color(0xFF2157F8);
+  // static const _primary = Color(0xFF2157F8);
 
   @override
   Widget build(BuildContext context) {
@@ -13,25 +16,26 @@ class BlueHeaderBubbles extends StatelessWidget {
         children: [
           Container(
             height: 210,
-            decoration: const BoxDecoration(
-              color: _primary,
-              borderRadius: BorderRadius.vertical(bottom: Radius.circular(34)),
+            decoration: BoxDecoration(
+              color: context.primaryContainer,
+              borderRadius:
+                  const BorderRadius.vertical(bottom: Radius.circular(34)),
             ),
           ),
           const Positioned(
             top: -40,
             right: -50,
-            child: Bubble(size: 160, opacity: 0.12),
+            child: Bubble(size: 160, opacity: 0.05),
           ),
           const Positioned(
             top: 60,
             left: -40,
-            child: Bubble(size: 120, opacity: 0.10),
+            child: Bubble(size: 120, opacity: 0.05),
           ),
           const Positioned(
             top: 120,
             right: 40,
-            child: Bubble(size: 80, opacity: 0.10),
+            child: Bubble(size: 80, opacity: 0.05),
           ),
         ],
       ),

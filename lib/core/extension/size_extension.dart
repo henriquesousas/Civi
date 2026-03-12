@@ -12,6 +12,7 @@ extension ScreenSizeExtension on BuildContext {
   bool get isPortrait => orientation == Orientation.portrait;
   bool get isLandscape => orientation == Orientation.landscape;
   bool get hasSafeArea => topPadding > 0 || bottomPadding > 0;
+  bool get isLight => Theme.of(this).brightness == Brightness.dark;
 
   double percentWidth(double percent) => screenWidth * percent;
   double percentHeight(double percent) => screenHeight * percent;

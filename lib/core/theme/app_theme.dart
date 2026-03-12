@@ -9,6 +9,7 @@ import 'input_decoration_theme.dart';
 class AppTheme {
   static ThemeData lightTheme() {
     final baseColorScheme = ColorScheme.light(
+      primaryContainer: Color(0xFF2B5BEE),
       // Bg principal
       surface: Colors.white,
       secondaryContainer: Colors.white,
@@ -72,6 +73,7 @@ class AppTheme {
 
   static ThemeData dark() {
     final baseColorScheme = ColorScheme.light(
+      primaryContainer: const Color(0xFF1f222a),
       surface: const Color(0xFF1f222a), // Fundo principal
       secondaryContainer:
           Colors.grey.withValues(alpha: 0.1), //Color(0xFF1f222a),

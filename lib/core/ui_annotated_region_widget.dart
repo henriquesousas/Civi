@@ -60,6 +60,7 @@ class UIAnnotatedRegionWidget extends StatelessWidget {
           value: useDarkTheme
               ? SystemUiOverlayStyle.light
               : SystemUiOverlayStyle.dark,
+
           child: SafeArea(
             top: false,
             left: false,

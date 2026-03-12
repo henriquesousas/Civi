@@ -1,3 +1,4 @@
+import 'package:deehelp/core/extension/exports_extension.dart';
 import 'package:flutter/material.dart';
 
 class AboutCard extends StatelessWidget {
@@ -8,7 +9,7 @@ class AboutCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       decoration: BoxDecoration(
-        color: Colors.white,
+        color: context.surfaceColor,
         borderRadius: BorderRadius.circular(24),
         boxShadow: const [
           BoxShadow(

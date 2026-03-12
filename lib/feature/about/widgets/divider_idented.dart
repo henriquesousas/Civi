@@ -1,3 +1,4 @@
+import 'package:deehelp/core/extension/color_extension.dart';
 import 'package:flutter/material.dart';
 
 class DividerIndented extends StatelessWidget {
@@ -5,10 +6,10 @@ class DividerIndented extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Divider(
+    return Divider(
       height: 1,
       indent: 52,
-      color: Color(0xFFE6EAF6),
+      color: context.outline,
     );
   }
 }

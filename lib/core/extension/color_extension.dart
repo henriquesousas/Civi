@@ -4,6 +4,7 @@ extension ColorExtension on BuildContext {
   Color get primaryColor => Theme.of(this).primaryColor;
   Color get primaryColorDark => Theme.of(this).primaryColorDark;
   Color get secondaryContainer => Theme.of(this).colorScheme.secondaryContainer;
+  Color get primaryContainer => Theme.of(this).colorScheme.primaryContainer;
   Color get secondaryColor => Theme.of(this).colorScheme.secondary;
   Color get surfaceColor => Theme.of(this).colorScheme.surface;
   Color get surfaceDim => Theme.of(this).colorScheme.surfaceDim;

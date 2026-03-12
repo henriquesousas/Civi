@@ -39,6 +39,7 @@ class AboutPage extends ConsumerWidget {
                 const SizedBox(height: SpacingSize.md),
                 Expanded(
                   child: ListView(
+                    physics: const BouncingScrollPhysics(),
                     padding: const EdgeInsets.fromLTRB(16, 0, 16, 18),
                     children: [
                       const WelcomeCard(),
@@ -52,7 +53,7 @@ class AboutPage extends ConsumerWidget {
                           'A informação vem da comunidade: quanto mais gente usando, mais útil e preciso fica.',
                           style: context.appText.bodySmall.copyWith(
                             height: 1.35,
-                            color: context.onSurface,
+                            color: context.secondaryColor,
                           ),
                         ),
                       ),
