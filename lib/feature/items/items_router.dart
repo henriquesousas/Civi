@@ -66,7 +66,7 @@ class ItemsRouter {
             final EditFieldArgs args = state.extra as EditFieldArgs;
             return slideTransitionPage(
               key: state.pageKey,
-              child: ItemEditFieldPage(
+              child: ItemEditFieldPageV2(
                 args: args,
               ),
             );

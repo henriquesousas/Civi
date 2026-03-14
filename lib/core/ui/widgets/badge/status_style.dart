@@ -1,7 +1,7 @@
 import 'package:deehelp/core/theme/export_theme.dart';
 import 'package:flutter/material.dart';
 
-enum ItemStatus { active, pending, canceled }
+enum ItemStatus { active, pending, canceled, rouberry }
 
 class StatusStyle {
   final String label;
@@ -39,6 +39,15 @@ class StatusStyle {
       case ItemStatus.canceled:
         return StatusStyle(
           label: 'Cancelado',
+          bg: Colors.redAccent.withValues(alpha: 0.12),
+          fg: Colors.redAccent,
+          border: Colors.redAccent.withValues(alpha: 0.30),
+          icon: Icons.block,
+        );
+
+      case ItemStatus.rouberry:
+        return StatusStyle(
+          label: 'Roubado',
           bg: Colors.redAccent.withValues(alpha: 0.12),
           fg: Colors.redAccent,
           border: Colors.redAccent.withValues(alpha: 0.30),

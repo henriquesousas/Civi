@@ -15,6 +15,7 @@ import 'package:deehelp/feature/shell/app_sheel_router.dart';
 import 'package:deehelp/feature/sos/sos_router.dart';
 import 'package:deehelp/feature/splash/splash_router.dart';
 import 'package:deehelp/core/router/router_refresh_notifier.dart';
+import 'package:deehelp/teste_page4.dart';
 import 'package:deehelp/teste_profile.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -89,14 +90,35 @@ var goRouterProvider = Provider<GoRouter>(
         GoRoute(
           path: '/',
           pageBuilder: (context, state) => slideTransitionPage(
-            key: state.pageKey,
-            // child: const MapPage(),
-            // child: const MapPage2(),
-            // child: const MounsHouse(),
-            // child: const CardBottom(),
-            child: const TestPageDark(),
-            // child: const MapToolbar(),
-          ),
+              key: state.pageKey,
+              // child: const MapPage(),
+              // child: const MapPage2(),
+              // child: const MounsHouse(),
+              // child: const CardBottom(),
+              child: TestPage5Dark()
+              // child: ItemDetailsPage(
+              //   item: ItemDetailsModel(
+              //     name: 'Citroen C3 Tendance',
+              //     status: ItemStatus.active,
+              //     createdAtLabel: 'Cadastrado em 12/03/2026',
+              //     identifierLabel: 'Placa',
+              //     identifierValue: 'FGH-2A11',
+              //     color: 'Branco',
+              //     extraLabel1: 'Ano',
+              //     extraValue1: '2018',
+              //     lastLocation: 'Osasco • SP',
+              //     lastUpdateLabel: 'Atualizado há 2 horas',
+              //     notes: 'Veículo cadastrado para monitoramento preventivo.',
+              //     imageUrls: [
+              //       'https://pub-0366da0e0a6d49998a77e988d464e762.r2.dev/products/374d51f7-b49a-4360-b5f7-3a8e5c4d995b/1773265765129.jpeg',
+              //       'https://pub-0366da0e0a6d49998a77e988d464e762.r2.dev/products/374d51f7-b49a-4360-b5f7-3a8e5c4d995b/1773343050076.jpeg',
+              //       'https://pub-0366da0e0a6d49998a77e988d464e762.r2.dev/products/374d51f7-b49a-4360-b5f7-3a8e5c4d995b/1773265791164.jpeg',
+              //     ],
+              //     onDelete: () {},
+              //     onEditIdentifier: () {},
+              //   ),
+              // ),
+              ),
         ),
       ],
     );

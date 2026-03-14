@@ -3,6 +3,9 @@ import 'package:deehelp/core/theme/export_theme.dart';
 import 'package:deehelp/core/ui/styles/export_style.dart';
 import 'package:deehelp/core/ui/widgets/badge/export_badge.dart';
 import 'package:deehelp/core/ui/widgets/icon/highlight_icon_gradient.dart';
+import 'package:deehelp/core/utils/enum_utils.dart';
+import 'package:deehelp/module/auth/domain/status.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class HeaderCard extends StatelessWidget {
@@ -23,23 +26,28 @@ class HeaderCard extends StatelessWidget {
 
     return Container(
       padding: const EdgeInsets.all(LayoutSpacingSize.container),
+      // decoration: BoxDecoration(
+      //   color: context.surfaceColor,
+      //   borderRadius: BorderRadius.circular(RadiusSize.md),
+      //   boxShadow: const [
+      //     BoxShadow(
+      //       color: Color(0x142B5BEE),
+      //       blurRadius: 16,
+      //       offset: Offset(0, 8),
+      //     ),
+      //   ],
+      // ),
       decoration: BoxDecoration(
-        color: context.surfaceColor,
-        borderRadius: BorderRadius.circular(RadiusSize.md),
-        boxShadow: const [
-          BoxShadow(
-            color: Color(0x142B5BEE),
-            blurRadius: 16,
-            offset: Offset(0, 8),
-          ),
-        ],
+        color: const Color(0xFF101012),
+        borderRadius: BorderRadius.circular(24),
+        border: Border.all(color: const Color(0xFF1D1D21)),
       ),
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           const HighlightIconGradient(
             icon: Icon(
-              Icons.inventory_2_outlined,
+              CupertinoIcons.cube_box,
               color: Colors.white,
             ),
           ),
@@ -55,16 +63,26 @@ class HeaderCard extends StatelessWidget {
                         title,
                         maxLines: 1,
                         overflow: TextOverflow.ellipsis,
-                        style: context.appText.headermd,
+                        style: const TextStyle(
+                          fontSize: 17,
+                          fontWeight: FontWeight.w800,
+                          color: Colors.white,
+                        ),
                       ),
                     ),
                     const SizedBox(width: RadiusSize.md),
-                    StatusBadge(style: StatusStyle.from(status)),
+                    // StatusBadge(style: StatusStyle.from(status)),
+                    StatusBadgeV2(
+                        status: EnumUtils.fromString(
+                            ItemStatus.values, status.name)),
                   ],
                 ),
                 Text(
                   subtitle,
-                  style: context.appText.bodySmall,
+                  style: TextStyle(
+                    fontSize: context.safeSp(11),
+                    color: const Color(0xFF8D8D93),
+                  ),
                 ),
               ],
             ),

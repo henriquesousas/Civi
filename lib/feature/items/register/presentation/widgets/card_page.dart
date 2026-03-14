@@ -1,5 +1,3 @@
-import 'package:deehelp/core/extension/exports_extension.dart';
-import 'package:deehelp/core/theme/size/radius_size.dart';
 import 'package:flutter/material.dart';
 
 class PageCard extends StatelessWidget {
@@ -19,29 +17,34 @@ class PageCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       padding: padding ?? EdgeInsets.zero,
+      // decoration: BoxDecoration(
+      //   // color: bgColor ?? Colors.white,
+      //   color: bgColor ?? context.surfaceColor,
+      //   borderRadius: BorderRadius.circular(RadiusSize.xl),
+      //   // border: BoxBorder.all(color: AppColors.grey.withValues(alpha: 0.3)),
+      //   border: BoxBorder.all(
+      //       color: context.outlineVariantColor.withValues(alpha: 0.5)),
+      //   boxShadow: isFloating
+      //       ? const [
+      //           BoxShadow(
+      //             color: Color(0x1F2B5BEE),
+      //             blurRadius: 28,
+      //             spreadRadius: 1,
+      //             offset: Offset(0, 14),
+      //           ),
+      //         ]
+      //       : const [
+      //           BoxShadow(
+      //             color: Color(0x142B5BEE),
+      //             blurRadius: 16,
+      //             offset: Offset(0, 8),
+      //           ),
+      //         ],
+      // ),
       decoration: BoxDecoration(
-        // color: bgColor ?? Colors.white,
-        color: bgColor ?? context.surfaceColor,
-        borderRadius: BorderRadius.circular(RadiusSize.xl),
-        // border: BoxBorder.all(color: AppColors.grey.withValues(alpha: 0.3)),
-        border: BoxBorder.all(
-            color: context.outlineVariantColor.withValues(alpha: 0.5)),
-        boxShadow: isFloating
-            ? const [
-                BoxShadow(
-                  color: Color(0x1F2B5BEE),
-                  blurRadius: 28,
-                  spreadRadius: 1,
-                  offset: Offset(0, 14),
-                ),
-              ]
-            : const [
-                BoxShadow(
-                  color: Color(0x142B5BEE),
-                  blurRadius: 16,
-                  offset: Offset(0, 8),
-                ),
-              ],
+        color: const Color(0xFF101012),
+        borderRadius: BorderRadius.circular(24),
+        border: Border.all(color: const Color(0xFF1D1D21)),
       ),
       child: child,
     );

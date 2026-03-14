@@ -1,396 +1,424 @@
+import 'package:deehelp/core/extension/size_extension.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-class TestPageDark extends StatefulWidget {
-  const TestPageDark({super.key});
+class ItemDetailsPage extends StatefulWidget {
+  final ItemDetailsModel item;
+
+  const ItemDetailsPage({
+    super.key,
+    required this.item,
+  });
 
   @override
-  State<TestPageDark> createState() => _TestPageDarkState();
+  State<ItemDetailsPage> createState() => _ItemDetailsPageState();
 }
 
-class _TestPageDarkState extends State<TestPageDark> {
-  // Dark palette (Kotto)
-  static const _bg = Color(0xFF0B1220);
-  static const _surface = Color(0xFF111B2E);
-  static const _surface2 = Color(0xFF0F1728);
+class _ItemDetailsPageState extends State<ItemDetailsPage> {
+  late final PageController _pageController;
+  int _currentImage = 0;
 
-  static const _ink = Color(0xFFEAF0FF);
-  static const _muted = Color(0xFF9AA8D1);
-
-  static const _primary = Color(0xFF2157F8);
-  static const _divider = Color(0xFF1C2A46);
-  static const _outline = Color(0xFF1B2742);
-
-  final TextEditingController searchCtrl = TextEditingController();
-  late final List<_FaqSection> sections = _buildSections();
+  @override
+  void initState() {
+    super.initState();
+    _pageController = PageController();
+  }
 
   @override
   void dispose() {
-    searchCtrl.dispose();
+    _pageController.dispose();
     super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
-    final q = searchCtrl.text.trim().toLowerCase();
-
-    final filtered = sections
-        .map((s) {
-          final items = s.items.where((i) {
-            final t = '${i.question} ${i.answer}'.toLowerCase();
-            return q.isEmpty || t.contains(q);
-          }).toList();
-          return s.copyWith(items: items);
-        })
-        .where((s) => s.items.isNotEmpty)
-        .toList();
+    final item = widget.item;
+    final topPadding = MediaQuery.of(context).padding.top;
 
     return Scaffold(
-      backgroundColor: _bg,
-      appBar: AppBar(
-        elevation: 0,
-        backgroundColor: _surface2,
-        title: const Text(
-          'Perguntas frequentes',
-          style: TextStyle(
-            color: _ink,
-            fontWeight: FontWeight.w800,
-          ),
-        ),
-        iconTheme: const IconThemeData(color: _ink),
-      ),
-      body: ListView(
-        padding: const EdgeInsets.fromLTRB(16, 16, 16, 24),
-        children: [
-          _HeaderCardDark(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                const Text(
-                  'Como podemos ajudar?',
-                  style: TextStyle(
-                    fontSize: 20,
-                    fontWeight: FontWeight.w900,
-                    color: Colors.white,
+      backgroundColor: Colors.black,
+      body: CustomScrollView(
+        physics: const BouncingScrollPhysics(),
+        slivers: [
+          SliverToBoxAdapter(
+            child: SizedBox(
+              height: 390,
+              child: Stack(
+                children: [
+                  Positioned.fill(
+                    child: _DetailsImagesCarousel(
+                      imageUrls: item.imageUrls,
+                      pageController: _pageController,
+                      onPageChanged: (index) {
+                        setState(() {
+                          _currentImage = index;
+                        });
+                      },
+                    ),
                   ),
-                ),
-                const SizedBox(height: 8),
-                const Text(
-                  'Pesquise e encontre respostas rápidas sobre cadastro de itens, '
-                  'ocorrências, mapa, filtros e privacidade.',
-                  style: TextStyle(
-                    fontSize: 14,
-                    height: 1.4,
-                    fontWeight: FontWeight.w600,
-                    color: Color.fromRGBO(255, 255, 255, 0.85),
-                  ),
-                ),
-                const SizedBox(height: 16),
-                _SearchFieldDark(
-                  controller: searchCtrl,
-                  hint: 'Pesquisar nas perguntas…',
-                  onChanged: (_) => setState(() {}),
-                  onClear: () {
-                    searchCtrl.clear();
-                    setState(() {});
-                  },
-                ),
-              ],
-            ),
-          ),
-          const SizedBox(height: 16),
-          if (filtered.isEmpty) ...[
-            _EmptyStateDark(
-              query: searchCtrl.text.trim(),
-              onClear: () {
-                searchCtrl.clear();
-                setState(() {});
-              },
-            ),
-          ] else ...[
-            for (final s in filtered) ...[
-              _SectionTitleDark(s.title),
-              _FaqCardDark(
-                child: Column(
-                  children: [
-                    for (int i = 0; i < s.items.length; i++) ...[
-                      _FaqTileDark(
-                        item: s.items[i],
-                        accentColor: s.accentColor,
-                      ),
-                      if (i != s.items.length - 1)
-                        const Divider(
-                          height: 1,
-                          indent: 18,
-                          endIndent: 18,
-                          color: _divider,
+                  Positioned.fill(
+                    child: IgnorePointer(
+                      child: DecoratedBox(
+                        decoration: BoxDecoration(
+                          gradient: LinearGradient(
+                            begin: Alignment.topCenter,
+                            end: Alignment.bottomCenter,
+                            colors: [
+                              Colors.black.withValues(alpha: 0.10),
+                              Colors.black.withValues(alpha: 0.18),
+                              Colors.black.withValues(alpha: 0.45),
+                              Colors.black.withValues(alpha: 0.78),
+                              Colors.black,
+                            ],
+                            stops: const [0.0, 0.18, 0.45, 0.78, 1.0],
+                          ),
                         ),
+                      ),
+                    ),
+                  ),
+                  Positioned(
+                    top: topPadding + 12,
+                    left: 12,
+                    child: _TopCircleButton(
+                      icon: CupertinoIcons.back,
+                      onTap: () => Navigator.of(context).pop(),
+                    ),
+                  ),
+                  if (item.imageUrls.length > 1)
+                    Positioned(
+                      bottom: 24,
+                      left: 0,
+                      right: 0,
+                      child: _ImagePagerDots(
+                        count: item.imageUrls.length,
+                        currentIndex: _currentImage,
+                      ),
+                    ),
+                  Positioned(
+                    bottom: 70,
+                    right: 16,
+                    child: Container(
+                      padding: const EdgeInsets.symmetric(
+                        horizontal: 10,
+                        vertical: 6,
+                      ),
+                      decoration: BoxDecoration(
+                        color: Colors.black.withValues(alpha: 0.55),
+                        borderRadius: BorderRadius.circular(20),
+                      ),
+                      child: Row(
+                        children: [
+                          Icon(
+                            CupertinoIcons.zoom_in,
+                            size: 14.sp,
+                            color: Colors.white,
+                          ),
+                          const SizedBox(width: 6),
+                          Text(
+                            'Ampliar',
+                            style: TextStyle(
+                              color: Colors.white,
+                              fontSize: context.safeSp(11),
+                              fontWeight: FontWeight.w600,
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ),
+          SliverToBoxAdapter(
+            child: Transform.translate(
+              offset: const Offset(0, -24),
+              child: Container(
+                decoration: const BoxDecoration(
+                  color: Color(0xFF050505),
+                  borderRadius: BorderRadius.vertical(
+                    top: Radius.circular(32),
+                  ),
+                ),
+                child: Padding(
+                  padding: const EdgeInsets.fromLTRB(24, 18, 24, 120),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Center(
+                        child: Container(
+                          width: 54,
+                          height: 5,
+                          decoration: BoxDecoration(
+                            color: Colors.white24,
+                            borderRadius: BorderRadius.circular(100),
+                          ),
+                        ),
+                      ),
+                      const SizedBox(height: 24),
+                      Text(
+                        item.name,
+                        style: const TextStyle(
+                          color: Colors.white,
+                          fontSize: 30,
+                          fontWeight: FontWeight.w700,
+                          letterSpacing: -0.9,
+                          height: 1.0,
+                        ),
+                      ),
+                      const SizedBox(height: 14),
+                      Row(
+                        children: [
+                          StatusBadge2(status: item.status),
+                          const SizedBox(width: 12),
+                          Expanded(
+                            child: Text(
+                              item.createdAtLabel,
+                              maxLines: 1,
+                              overflow: TextOverflow.ellipsis,
+                              style: const TextStyle(
+                                color: Color(0xFF8D8D93),
+                                fontSize: 14,
+                                fontWeight: FontWeight.w500,
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                      const SizedBox(height: 28),
+                      _DetailsSectionCard(
+                        title: 'Resumo',
+                        child: Column(
+                          children: [
+                            EditableInfoRow(
+                              label: item.identifierLabel,
+                              value: item.identifierValue,
+                              onEdit: item.onEditIdentifier,
+                            ),
+                            InfoRow(
+                              label: 'Cor',
+                              value: item.color,
+                            ),
+                            InfoRow(
+                              label: item.extraLabel1,
+                              value: item.extraValue1,
+                            ),
+                            InfoRow(
+                              label: 'Cadastro',
+                              value: item.createdAtLabel,
+                              isLast: true,
+                            ),
+                          ],
+                        ),
+                      ),
+                      const SizedBox(height: 18),
+                      _DetailsSectionCard(
+                        title: 'Última localização',
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Row(
+                              children: [
+                                const Icon(
+                                  CupertinoIcons.location_solid,
+                                  color: Color(0xFF8F98FF),
+                                  size: 18,
+                                ),
+                                const SizedBox(width: 8),
+                                Expanded(
+                                  child: Text(
+                                    item.lastLocation,
+                                    style: const TextStyle(
+                                      color: Colors.white,
+                                      fontSize: 15,
+                                      fontWeight: FontWeight.w600,
+                                      height: 1.3,
+                                    ),
+                                  ),
+                                ),
+                              ],
+                            ),
+                            if (item.lastUpdateLabel != null &&
+                                item.lastUpdateLabel!.isNotEmpty) ...[
+                              const SizedBox(height: 10),
+                              Text(
+                                item.lastUpdateLabel!,
+                                style: const TextStyle(
+                                  color: Color(0xFF8D8D93),
+                                  fontSize: 13,
+                                  fontWeight: FontWeight.w500,
+                                ),
+                              ),
+                            ],
+                          ],
+                        ),
+                      ),
+                      const SizedBox(height: 18),
+                      _DetailsSectionCard(
+                        title: 'Observações',
+                        child: Text(
+                          item.notes?.trim().isNotEmpty == true
+                              ? item.notes!
+                              : 'Nenhuma observação cadastrada para este item.',
+                          style: const TextStyle(
+                            color: Color(0xFFE7E7EA),
+                            fontSize: 15,
+                            fontWeight: FontWeight.w400,
+                            height: 1.5,
+                          ),
+                        ),
+                      ),
+                      const SizedBox(height: 28),
+                      const Text(
+                        'Danger Zone',
+                        style: TextStyle(
+                          color: Color(0xFFFF7373),
+                          fontSize: 18,
+                          fontWeight: FontWeight.w700,
+                          letterSpacing: -0.3,
+                        ),
+                      ),
+                      const SizedBox(height: 12),
+                      _DangerZoneCard(
+                        title: 'Excluir item',
+                        subtitle:
+                            'Essa ação remove este item do seu cadastro e não poderá ser desfeita.',
+                        onDelete: item.onDelete,
+                      ),
                     ],
-                  ],
+                  ),
                 ),
               ),
-              const SizedBox(height: 16),
-            ],
-          ],
-          const SizedBox(height: 8),
-          _SupportCardDark(
-            onContact: () {
-              ScaffoldMessenger.of(context).showSnackBar(
-                const SnackBar(content: Text('Abrir suporte (fake)')),
-              );
-            },
-            onSuggest: () {
-              ScaffoldMessenger.of(context).showSnackBar(
-                const SnackBar(content: Text('Enviar sugestão (fake)')),
-              );
-            },
+            ),
           ),
         ],
       ),
     );
   }
-
-  List<_FaqSection> _buildSections() {
-    return [
-      _FaqSection(
-        title: 'Conta & acesso',
-        accentColor: _primary,
-        items: const [
-          _FaqItem(
-            question: 'Preciso fazer login para usar o app?',
-            answer:
-                'Não. Você pode continuar sem login. Porém, para salvar itens no seu perfil, '
-                'editar ocorrências e acompanhar histórico, o login é necessário.',
-          ),
-          _FaqItem(
-            question: 'Por que o login é apenas com Google?',
-            answer:
-                'Nesta fase inicial (beta), usamos o Google para simplificar e aumentar a segurança do acesso. '
-                'No futuro, podemos adicionar outras formas de login.',
-          ),
-          _FaqItem(
-            question: 'Esqueci meu acesso. O que faço?',
-            answer:
-                'Como o login é com Google, basta entrar novamente com a mesma conta Google usada anteriormente.',
-          ),
-        ],
-      ),
-      _FaqSection(
-        title: 'Meus itens',
-        accentColor: const Color(0xFF43A047),
-        items: const [
-          _FaqItem(
-            question: 'Quais itens posso cadastrar?',
-            answer:
-                'Você pode cadastrar veículos (carro/moto) e celular. O objetivo é facilitar '
-                'a identificação em caso de roubo/furto.',
-          ),
-          _FaqItem(
-            question: 'Por que meu item fica “Pendente” após cadastrar?',
-            answer:
-                'Todo item cadastrado passa por uma verificação antes de aparecer no app. '
-                'Isso ajuda a reduzir fraudes e melhorar a qualidade das informações.',
-          ),
-          _FaqItem(
-            question: 'Posso adicionar mais de uma foto?',
-            answer:
-                'Sim. Você pode adicionar 1 ou mais fotos. Fotos nítidas aumentam a chance de identificação.',
-          ),
-          _FaqItem(
-            question: 'Como funciona IMEI no cadastro de celular?',
-            answer:
-                'Você pode digitar o IMEI ou ler automaticamente usando a câmera (scanner). '
-                'O IMEI é um identificador importante para comunicar às operadoras e autoridades.',
-          ),
-        ],
-      ),
-      _FaqSection(
-        title: 'Ocorrências',
-        accentColor: const Color(0xFFE53935),
-        items: const [
-          _FaqItem(
-            question: 'Qual a diferença entre “Imediato” e “Detalhado”?',
-            answer:
-                'Imediato: para quando acabou de acontecer — registra rapidamente e você pode completar detalhes depois.\n\n'
-                'Detalhado: você informa data/hora, cidade, bairro, endereço aproximado e como aconteceu.',
-          ),
-          _FaqItem(
-            question: 'Quem pode cancelar ou marcar como recuperado?',
-            answer:
-                'Apenas o usuário que registrou a ocorrência pode cancelar ou marcar como recuperado. '
-                'Essas ações ficam na “Danger Zone” para evitar alterações indevidas.',
-          ),
-          _FaqItem(
-            question: 'Como compartilhar uma ocorrência?',
-            answer:
-                'Na tela de detalhes da ocorrência, você pode compartilhar (ex.: WhatsApp) com o resumo do caso. '
-                'Isso ajuda a avisar pessoas próximas e ampliar a rede de atenção.',
-          ),
-          _FaqItem(
-            question: 'Devo fazer boletim de ocorrência?',
-            answer:
-                'Sim. Recomendamos fazer o BO o mais rápido possível. O Kotto ajuda com informação e organização, '
-                'mas não substitui o registro oficial.',
-          ),
-        ],
-      ),
-      _FaqSection(
-        title: 'Mapa & filtros',
-        accentColor: const Color(0xFFFB8C00),
-        items: const [
-          _FaqItem(
-            question: 'O que significa “Raio local personalizado”?',
-            answer:
-                'Você define uma distância (ex.: 1 km, 2 km) e o mapa mostra apenas ocorrências dentro dessa área.',
-          ),
-          _FaqItem(
-            question: 'O que é “Filtrar por região visível”?',
-            answer:
-                'Mostra ocorrências com base na área que está visível no mapa. '
-                'Ao dar zoom e arrastar, você altera a região de busca.',
-          ),
-          _FaqItem(
-            question: 'Por que alguns pins mostram placa e outros um ícone?',
-            answer:
-                'Para veículos, o pin mostra a placa. Para celular, exibimos um ícone por privacidade e clareza visual.',
-          ),
-        ],
-      ),
-      _FaqSection(
-        title: 'Privacidade & segurança',
-        accentColor: const Color(0xFF5F85FF),
-        items: const [
-          _FaqItem(
-            question: 'Meus dados ficam públicos?',
-            answer:
-                'Exibimos apenas informações necessárias para alertas e identificação. '
-                'Dados sensíveis podem ser ocultados/limitados dependendo do tipo de item.',
-          ),
-          _FaqItem(
-            question: 'Posso usar o app sem informar dados pessoais?',
-            answer:
-                'Sim. No modo sem login, você navega e consulta. Para cadastrar itens e registrar ocorrências, '
-                'pode ser necessário fornecer informações mínimas.',
-          ),
-        ],
-      ),
-      _FaqSection(
-        title: 'Suporte & sugestões',
-        accentColor: const Color(0xFF2B5BEE),
-        items: const [
-          _FaqItem(
-            question: 'O app ainda está em desenvolvimento. Como posso ajudar?',
-            answer: 'Use o app, compartilhe com a comunidade e envie feedback. '
-                'Quanto mais pessoas usando, mais útil e preciso ele se torna.',
-          ),
-          _FaqItem(
-            question: 'Encontrei um erro. O que faço?',
-            answer:
-                'Envie uma descrição do problema e, se possível, prints. Isso acelera a correção.',
-          ),
-        ],
-      ),
-    ];
-  }
 }
 
-/* ------------------------------ Dark Widgets ------------------------------ */
+class _DetailsImagesCarousel extends StatelessWidget {
+  final List<String> imageUrls;
+  final PageController pageController;
+  final ValueChanged<int> onPageChanged;
 
-class _HeaderCardDark extends StatelessWidget {
-  final Widget child;
-  const _HeaderCardDark({required this.child});
-
-  static const _primary = Color(0xFF2157F8);
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      decoration: BoxDecoration(
-        color: _primary,
-        borderRadius: BorderRadius.circular(26),
-        boxShadow: [
-          BoxShadow(
-            color: _primary.withOpacity(0.22),
-            blurRadius: 22,
-            offset: const Offset(0, 12),
-          ),
-        ],
-      ),
-      child: Padding(
-        padding: const EdgeInsets.fromLTRB(16, 16, 16, 16),
-        child: child,
-      ),
-    );
-  }
-}
-
-class _SearchFieldDark extends StatelessWidget {
-  final TextEditingController controller;
-  final String hint;
-  final ValueChanged<String> onChanged;
-  final VoidCallback onClear;
-
-  const _SearchFieldDark({
-    required this.controller,
-    required this.hint,
-    required this.onChanged,
-    required this.onClear,
+  const _DetailsImagesCarousel({
+    required this.imageUrls,
+    required this.pageController,
+    required this.onPageChanged,
   });
 
-  static const _primary = Color(0xFF2157F8);
-  static const _ink = Color(0xFFEAF0FF);
-  static const _muted = Color(0xFF9AA8D1);
+  @override
+  Widget build(BuildContext context) {
+    if (imageUrls.isEmpty) {
+      return Container(
+        color: const Color(0xFF111214),
+        child: const Center(
+          child: Icon(
+            CupertinoIcons.photo,
+            color: Colors.white38,
+            size: 46,
+          ),
+        ),
+      );
+    }
+
+    return PageView.builder(
+      controller: pageController,
+      physics: const BouncingScrollPhysics(),
+      itemCount: imageUrls.length,
+      onPageChanged: onPageChanged,
+      itemBuilder: (context, index) {
+        final imageUrl = imageUrls[index];
+
+        return _DetailsImageItem(
+          imageUrl: imageUrl,
+        );
+      },
+    );
+  }
+}
+
+class _DetailsImageItem extends StatelessWidget {
+  final String imageUrl;
+
+  const _DetailsImageItem({
+    required this.imageUrl,
+  });
 
   @override
   Widget build(BuildContext context) {
-    return Focus(
-      child: Builder(
-        builder: (context) {
-          final hasFocus = Focus.of(context).hasFocus;
+    if (imageUrl.trim().isEmpty) {
+      return Container(
+        color: const Color(0xFF111214),
+        child: const Center(
+          child: Icon(
+            CupertinoIcons.photo,
+            color: Colors.white38,
+            size: 46,
+          ),
+        ),
+      );
+    }
 
-          return AnimatedContainer(
-            duration: const Duration(milliseconds: 180),
-            height: 52,
-            decoration: BoxDecoration(
-              color: const Color(0xFF0F1728), // dark "input"
-              borderRadius: BorderRadius.circular(18),
-              border: Border.all(
-                color: hasFocus
-                    ? Colors.white.withOpacity(0.50)
-                    : Colors.white.withOpacity(0.18),
-                width: 1.2,
-              ),
+    return Image.network(
+      imageUrl,
+      fit: BoxFit.cover,
+      loadingBuilder: (context, child, progress) {
+        if (progress == null) return child;
+
+        return Container(
+          color: const Color(0xFF111214),
+          child: const Center(
+            child: CircularProgressIndicator.adaptive(
+              valueColor: AlwaysStoppedAnimation(Color(0xFF8F98FF)),
             ),
-            child: TextField(
-              controller: controller,
-              onChanged: onChanged,
-              style: const TextStyle(
-                fontWeight: FontWeight.w800,
-                color: _ink,
-                fontSize: 13.5,
-              ),
-              decoration: InputDecoration(
-                border: InputBorder.none,
-                contentPadding: const EdgeInsets.symmetric(vertical: 14),
-                prefixIcon: const Icon(Icons.search, color: _muted),
-                hintText: hint,
-                hintStyle: const TextStyle(
-                  color: Color.fromRGBO(255, 255, 255, 0.70),
-                  fontWeight: FontWeight.w600,
-                ),
-                suffixIcon: ValueListenableBuilder<TextEditingValue>(
-                  valueListenable: controller,
-                  builder: (_, value, __) {
-                    if (value.text.isEmpty) return const SizedBox.shrink();
-                    return IconButton(
-                      onPressed: onClear,
-                      icon: const Icon(Icons.close,
-                          size: 18, color: Colors.white70),
-                      splashRadius: 18,
-                      tooltip: 'Limpar',
-                    );
-                  },
-                ),
-              ),
+          ),
+        );
+      },
+      errorBuilder: (_, __, ___) {
+        return Container(
+          color: const Color(0xFF111214),
+          child: const Center(
+            child: Icon(
+              CupertinoIcons.photo,
+              color: Colors.white38,
+              size: 46,
+            ),
+          ),
+        );
+      },
+    );
+  }
+}
+
+class _ImagePagerDots extends StatelessWidget {
+  final int count;
+  final int currentIndex;
+
+  const _ImagePagerDots({
+    required this.count,
+    required this.currentIndex,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: List.generate(
+        count,
+        (index) {
+          final selected = index == currentIndex;
+          return AnimatedContainer(
+            duration: const Duration(milliseconds: 220),
+            curve: Curves.easeOut,
+            margin: const EdgeInsets.symmetric(horizontal: 4),
+            width: selected ? 18 : 7,
+            height: 7,
+            decoration: BoxDecoration(
+              color: selected ? Colors.white : Colors.white38,
+              borderRadius: BorderRadius.circular(999),
             ),
           );
         },
@@ -399,229 +427,199 @@ class _SearchFieldDark extends StatelessWidget {
   }
 }
 
-class _SectionTitleDark extends StatelessWidget {
-  final String text;
-  const _SectionTitleDark(this.text);
+class _TopCircleButton extends StatelessWidget {
+  final IconData icon;
+  final VoidCallback onTap;
 
-  @override
-  Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.fromLTRB(8, 2, 8, 10),
-      child: Text(
-        text.toUpperCase(),
-        style: const TextStyle(
-          fontSize: 12,
-          fontWeight: FontWeight.w700,
-          color: Color(0xFF9AA8D1),
-          letterSpacing: 1.2,
-        ),
-      ),
-    );
-  }
-}
-
-class _FaqCardDark extends StatelessWidget {
-  final Widget child;
-  const _FaqCardDark({required this.child});
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      decoration: BoxDecoration(
-        color: const Color(0xFF111B2E),
-        borderRadius: BorderRadius.circular(24),
-        border: Border.all(color: const Color(0xFF1B2742)),
-        boxShadow: const [
-          BoxShadow(
-            color: Color(0x33000000),
-            blurRadius: 18,
-            offset: Offset(0, 10),
-          ),
-        ],
-      ),
-      child: child,
-    );
-  }
-}
-
-class _FaqTileDark extends StatefulWidget {
-  final _FaqItem item;
-  final Color accentColor;
-
-  const _FaqTileDark({required this.item, required this.accentColor});
-
-  @override
-  State<_FaqTileDark> createState() => _FaqTileDarkState();
-}
-
-class _FaqTileDarkState extends State<_FaqTileDark> {
-  bool expanded = false;
-
-  @override
-  Widget build(BuildContext context) {
-    return Theme(
-      data: Theme.of(context).copyWith(dividerColor: Colors.transparent),
-      child: ExpansionTile(
-        onExpansionChanged: (v) => setState(() => expanded = v),
-        tilePadding: const EdgeInsets.symmetric(horizontal: 16, vertical: 10),
-        childrenPadding: const EdgeInsets.fromLTRB(16, 0, 16, 14),
-        leading: _LeadingIconDark(
-          color: widget.accentColor,
-          expanded: expanded,
-        ),
-        title: Text(
-          widget.item.question,
-          style: const TextStyle(
-            fontSize: 13.8,
-            fontWeight: FontWeight.w900,
-            color: Color(0xFFEAF0FF),
-            height: 1.2,
-          ),
-        ),
-        trailing: Icon(
-          expanded ? Icons.remove : Icons.add,
-          color: const Color(0xFF9AA8D1),
-        ),
-        children: [
-          Text(
-            widget.item.answer,
-            style: const TextStyle(
-              fontSize: 13.2,
-              height: 1.35,
-              fontWeight: FontWeight.w600,
-              color: Color(0xFF9AA8D1),
-            ),
-          ),
-        ],
-      ),
-    );
-  }
-}
-
-class _LeadingIconDark extends StatelessWidget {
-  final Color color;
-  final bool expanded;
-
-  const _LeadingIconDark({required this.color, required this.expanded});
-
-  @override
-  Widget build(BuildContext context) {
-    return AnimatedContainer(
-      duration: const Duration(milliseconds: 180),
-      width: 40,
-      height: 40,
-      decoration: BoxDecoration(
-        color: expanded ? color.withOpacity(0.18) : const Color(0xFF0F1728),
-        borderRadius: BorderRadius.circular(12),
-        border: Border.all(
-          color: expanded ? color.withOpacity(0.35) : const Color(0xFF1B2742),
-        ),
-      ),
-      child: Icon(
-        expanded ? Icons.question_answer_outlined : Icons.help_outline,
-        color: expanded ? color : const Color(0xFFEAF0FF),
-        size: 20,
-      ),
-    );
-  }
-}
-
-class _SupportCardDark extends StatelessWidget {
-  final VoidCallback onContact;
-  final VoidCallback onSuggest;
-
-  const _SupportCardDark({
-    required this.onContact,
-    required this.onSuggest,
+  const _TopCircleButton({
+    required this.icon,
+    required this.onTap,
   });
 
-  static const _primary = Color(0xFF2157F8);
+  @override
+  Widget build(BuildContext context) {
+    return Material(
+      color: Colors.black.withValues(alpha: 0.34),
+      shape: const CircleBorder(),
+      child: InkWell(
+        onTap: onTap,
+        customBorder: const CircleBorder(),
+        child: const SizedBox(
+          width: 42,
+          height: 42,
+          child: Icon(
+            CupertinoIcons.back,
+            color: Colors.white,
+            size: 20,
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+class _DetailsSectionCard extends StatelessWidget {
+  final String title;
+  final Widget child;
+
+  const _DetailsSectionCard({
+    required this.title,
+    required this.child,
+  });
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: const EdgeInsets.all(16),
+      width: double.infinity,
+      padding: const EdgeInsets.fromLTRB(18, 18, 18, 18),
       decoration: BoxDecoration(
-        color: const Color(0xFF111B2E),
-        borderRadius: BorderRadius.circular(24),
-        border: Border.all(color: const Color(0xFF1B2742)),
-        boxShadow: const [
-          BoxShadow(
-            color: Color(0x33000000),
-            blurRadius: 18,
-            offset: Offset(0, 10),
-          ),
-        ],
+        color: const Color(0xFF101012),
+        borderRadius: BorderRadius.circular(22),
+        border: Border.all(
+          color: const Color(0xFF1D1D21),
+        ),
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          const Row(
-            children: [
-              Icon(Icons.support_agent, color: _primary),
-              SizedBox(width: 10),
-              Text(
-                'Ainda com dúvidas?',
-                style: TextStyle(
-                  fontSize: 14.5,
-                  fontWeight: FontWeight.w900,
-                  color: Color(0xFFEAF0FF),
-                ),
-              ),
-            ],
-          ),
-          const SizedBox(height: 8),
-          const Text(
-            'Envie uma mensagem para o suporte ou compartilhe uma sugestão para melhorar o app.',
-            style: TextStyle(
+          Text(
+            title,
+            style: const TextStyle(
+              color: Color(0xFF9A9AA0),
               fontSize: 13,
-              height: 1.35,
-              fontWeight: FontWeight.w600,
-              color: Color(0xFF9AA8D1),
+              fontWeight: FontWeight.w700,
+              letterSpacing: 0.2,
             ),
           ),
-          const SizedBox(height: 12),
+          const SizedBox(height: 14),
+          child,
+        ],
+      ),
+    );
+  }
+}
+
+class InfoRow extends StatelessWidget {
+  final String label;
+  final String value;
+  final bool isLast;
+
+  const InfoRow({
+    super.key,
+    required this.label,
+    required this.value,
+    this.isLast = false,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: EdgeInsets.only(bottom: isLast ? 0 : 14),
+      child: Column(
+        children: [
           Row(
+            crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               Expanded(
-                child: OutlinedButton.icon(
-                  onPressed: onSuggest,
-                  icon: const Icon(Icons.lightbulb_outline, size: 18),
-                  label: const Text(
-                    'Sugestão',
-                    style: TextStyle(fontWeight: FontWeight.w900),
-                  ),
-                  style: OutlinedButton.styleFrom(
-                    foregroundColor: _primary,
-                    side: BorderSide(color: _primary.withOpacity(0.35)),
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(18),
-                    ),
-                    padding: const EdgeInsets.symmetric(vertical: 14),
+                child: Text(
+                  label,
+                  style: const TextStyle(
+                    color: Color(0xFF8D8D93),
+                    fontSize: 14,
+                    fontWeight: FontWeight.w500,
                   ),
                 ),
               ),
-              const SizedBox(width: 12),
-              Expanded(
-                child: ElevatedButton.icon(
-                  onPressed: onContact,
-                  icon: const Icon(Icons.chat_outlined, size: 18),
-                  label: const Text(
-                    'Suporte',
-                    style: TextStyle(fontWeight: FontWeight.w900),
-                  ),
-                  style: ElevatedButton.styleFrom(
-                    backgroundColor: _primary,
-                    foregroundColor: Colors.white,
-                    elevation: 0,
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(18),
-                    ),
-                    padding: const EdgeInsets.symmetric(vertical: 14),
+              const SizedBox(width: 16),
+              Flexible(
+                child: Text(
+                  value,
+                  textAlign: TextAlign.right,
+                  style: const TextStyle(
+                    color: Colors.white,
+                    fontSize: 14,
+                    fontWeight: FontWeight.w600,
+                    height: 1.3,
                   ),
                 ),
               ),
             ],
+          ),
+          if (!isLast) ...[
+            const SizedBox(height: 14),
+            const Divider(
+              color: Color(0xFF1C1C1E),
+              height: 1,
+            ),
+          ],
+        ],
+      ),
+    );
+  }
+}
+
+class EditableInfoRow extends StatelessWidget {
+  final String label;
+  final String value;
+  final VoidCallback? onEdit;
+
+  const EditableInfoRow({
+    super.key,
+    required this.label,
+    required this.value,
+    this.onEdit,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.only(bottom: 14),
+      child: Column(
+        children: [
+          Row(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              Expanded(
+                child: Text(
+                  label,
+                  style: const TextStyle(
+                    color: Color(0xFF8D8D93),
+                    fontSize: 14,
+                    fontWeight: FontWeight.w500,
+                  ),
+                ),
+              ),
+              const SizedBox(width: 16),
+              Flexible(
+                child: Row(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    Flexible(
+                      child: Text(
+                        value,
+                        textAlign: TextAlign.right,
+                        overflow: TextOverflow.ellipsis,
+                        style: const TextStyle(
+                          color: Colors.white,
+                          fontSize: 14,
+                          fontWeight: FontWeight.w600,
+                        ),
+                      ),
+                    ),
+                    const SizedBox(width: 8),
+                    _InlineCircleIconButton(
+                      icon: CupertinoIcons.pencil,
+                      onTap: onEdit,
+                    ),
+                  ],
+                ),
+              ),
+            ],
+          ),
+          const SizedBox(height: 14),
+          const Divider(
+            color: Color(0xFF1C1C1E),
+            height: 1,
           ),
         ],
       ),
@@ -629,67 +627,114 @@ class _SupportCardDark extends StatelessWidget {
   }
 }
 
-class _EmptyStateDark extends StatelessWidget {
-  final String query;
-  final VoidCallback onClear;
+class _InlineCircleIconButton extends StatelessWidget {
+  final IconData icon;
+  final VoidCallback? onTap;
 
-  const _EmptyStateDark({required this.query, required this.onClear});
+  const _InlineCircleIconButton({
+    required this.icon,
+    this.onTap,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Material(
+      color: const Color(0xFF1A1A1F),
+      shape: const CircleBorder(),
+      child: InkWell(
+        onTap: onTap,
+        customBorder: const CircleBorder(),
+        child: SizedBox(
+          width: 28,
+          height: 28,
+          child: Icon(
+            icon,
+            color: Colors.white,
+            size: 14,
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+class _DangerZoneCard extends StatelessWidget {
+  final String title;
+  final String subtitle;
+  final VoidCallback? onDelete;
+
+  const _DangerZoneCard({
+    required this.title,
+    required this.subtitle,
+    this.onDelete,
+  });
 
   @override
   Widget build(BuildContext context) {
     return Container(
+      width: double.infinity,
       padding: const EdgeInsets.all(18),
       decoration: BoxDecoration(
-        color: const Color(0xFF111B2E),
-        borderRadius: BorderRadius.circular(24),
-        border: Border.all(color: const Color(0xFF1B2742)),
-        boxShadow: const [
-          BoxShadow(
-            color: Color(0x33000000),
-            blurRadius: 18,
-            offset: Offset(0, 10),
-          ),
-        ],
+        color: const Color(0xFF151010),
+        borderRadius: BorderRadius.circular(22),
+        border: Border.all(
+          color: const Color(0xFF3A1E22),
+        ),
       ),
-      child: Column(
+      child: Row(
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Container(
-            width: 56,
-            height: 56,
+            width: 42,
+            height: 42,
             decoration: BoxDecoration(
-              color: const Color(0xFF0F1728),
-              borderRadius: BorderRadius.circular(18),
-              border: Border.all(color: const Color(0xFF1B2742)),
+              color: const Color(0xFFEF4444).withValues(alpha: 0.12),
+              shape: BoxShape.circle,
             ),
-            child:
-                const Icon(Icons.search_off_outlined, color: Color(0xFF9AA8D1)),
-          ),
-          const SizedBox(height: 12),
-          const Text(
-            'Nada encontrado',
-            style: TextStyle(
-              fontSize: 14.5,
-              fontWeight: FontWeight.w900,
-              color: Color(0xFFEAF0FF),
+            child: const Icon(
+              CupertinoIcons.trash,
+              color: Color(0xFFEF4444),
+              size: 19,
             ),
           ),
-          const SizedBox(height: 6),
-          Text(
-            'Não encontramos resultados para "$query". Tente outras palavras.',
-            textAlign: TextAlign.center,
-            style: const TextStyle(
-              fontSize: 13,
-              height: 1.35,
-              fontWeight: FontWeight.w600,
-              color: Color(0xFF9AA8D1),
+          const SizedBox(width: 14),
+          Expanded(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  title,
+                  style: const TextStyle(
+                    color: Color(0xFFFF7B7B),
+                    fontSize: 15,
+                    fontWeight: FontWeight.w700,
+                  ),
+                ),
+                const SizedBox(height: 6),
+                Text(
+                  subtitle,
+                  style: const TextStyle(
+                    color: Color(0xFFB8A7A7),
+                    fontSize: 13,
+                    fontWeight: FontWeight.w500,
+                    height: 1.45,
+                  ),
+                ),
+              ],
             ),
           ),
-          const SizedBox(height: 12),
+          const SizedBox(width: 12),
           TextButton(
-            onPressed: onClear,
+            onPressed: onDelete,
+            style: TextButton.styleFrom(
+              foregroundColor: const Color(0xFFEF4444),
+              padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 8),
+            ),
             child: const Text(
-              'Limpar pesquisa',
-              style: TextStyle(fontWeight: FontWeight.w900),
+              'Excluir',
+              style: TextStyle(
+                fontWeight: FontWeight.w700,
+              ),
             ),
           ),
         ],
@@ -698,34 +743,102 @@ class _EmptyStateDark extends StatelessWidget {
   }
 }
 
-/* ------------------------------ Models ------------------------------ */
+class ItemDetailsModel {
+  final String name;
+  final ItemStatus status;
+  final String createdAtLabel;
+  final String identifierLabel;
+  final String identifierValue;
+  final String color;
+  final String extraLabel1;
+  final String extraValue1;
+  final String lastLocation;
+  final String? lastUpdateLabel;
+  final String? notes;
+  final List<String> imageUrls;
+  final VoidCallback? onDelete;
+  final VoidCallback? onEditIdentifier;
 
-class _FaqSection {
-  final String title;
-  final Color accentColor;
-  final List<_FaqItem> items;
-
-  const _FaqSection({
-    required this.title,
-    required this.accentColor,
-    required this.items,
+  const ItemDetailsModel({
+    required this.name,
+    required this.status,
+    required this.createdAtLabel,
+    required this.identifierLabel,
+    required this.identifierValue,
+    required this.color,
+    required this.extraLabel1,
+    required this.extraValue1,
+    required this.lastLocation,
+    required this.imageUrls,
+    this.lastUpdateLabel,
+    this.notes,
+    this.onDelete,
+    this.onEditIdentifier,
   });
-
-  _FaqSection copyWith({List<_FaqItem>? items}) {
-    return _FaqSection(
-      title: title,
-      accentColor: accentColor,
-      items: items ?? this.items,
-    );
-  }
 }
 
-class _FaqItem {
-  final String question;
-  final String answer;
+class ItemStatusColors {
+  static const active = Color(0xFF22C55E);
+  static const stolen = Color(0xFFEF4444);
+  static const pending = Color(0xFFF59E0B);
+  static const canceled = Color(0xFF6B7280);
+}
 
-  const _FaqItem({
-    required this.question,
-    required this.answer,
+enum ItemStatus {
+  active,
+  stolen,
+  pending,
+  canceled,
+}
+
+class StatusBadge2 extends StatelessWidget {
+  final ItemStatus status;
+
+  const StatusBadge2({
+    super.key,
+    required this.status,
   });
+
+  @override
+  Widget build(BuildContext context) {
+    String text;
+    Color color;
+
+    switch (status) {
+      case ItemStatus.active:
+        text = 'ATIVO';
+        color = ItemStatusColors.active;
+        break;
+      case ItemStatus.stolen:
+        text = 'ROUBADO';
+        color = ItemStatusColors.stolen;
+        break;
+      case ItemStatus.pending:
+        text = 'PENDENTE';
+        color = ItemStatusColors.pending;
+        break;
+      case ItemStatus.canceled:
+        text = 'CANCELADO';
+        color = ItemStatusColors.canceled;
+        break;
+    }
+
+    return Container(
+      padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(100),
+        border: Border.all(color: color, width: 1.3),
+        color: color.withValues(alpha: 0.08),
+      ),
+      child: Text(
+        text,
+        style: TextStyle(
+          color: color,
+          fontWeight: FontWeight.w700,
+          fontSize: 12,
+          letterSpacing: 0.3,
+        ),
+      ),
+    );
+  }
 }

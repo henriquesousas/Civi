@@ -3,8 +3,6 @@
 import 'package:deehelp/core/extension/exports_extension.dart';
 import 'package:deehelp/core/theme/export_theme.dart';
 import 'package:deehelp/core/ui/styles/export_style.dart';
-import 'package:deehelp/feature/home/v2/home_page.dart';
-import 'package:deehelp/feature/home/v2/teste_home.dart';
 import 'package:deehelp/feature/home/v2/widgets/waze_alert.dart';
 import 'package:deehelp/feature/items/list/item_list_page.dart';
 import 'package:deehelp/feature/mapa/mapa_page.dart';
@@ -12,6 +10,7 @@ import 'package:deehelp/feature/profile/profile_page.dart';
 import 'package:deehelp/feature/search/search_page.dart';
 import 'package:deehelp/module/auth/external/di/authenticated_user_provider.dart';
 import 'package:deehelp/module/item/di/item_viewmodel_provider.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -44,9 +43,7 @@ class _AppShellPageState extends ConsumerState<AppShellPage> {
             index: index,
             children: _pages,
           ),
-          //BottomNav
-          //HomeBottomSheetNav
-          bottomNavigationBar: HomeBottomSheetNav(
+          bottomNavigationBar: _BottomNavBar(
             currentIndex: index,
             onChanged: (i) {
               setState(
@@ -111,116 +108,249 @@ class _AppShellPageState extends ConsumerState<AppShellPage> {
   }
 }
 
-class HomeBottomSheetNav extends StatelessWidget {
+class _BottomNavBar extends StatelessWidget {
   final int currentIndex;
   final ValueChanged<int>? onChanged;
-
-  const HomeBottomSheetNav({
-    super.key,
+  const _BottomNavBar({
     required this.currentIndex,
-    this.onChanged,
+    required this.onChanged,
   });
 
   @override
   Widget build(BuildContext context) {
-    const items = [
-      _BottomNavItemData(
-        icon: Icons.public,
-        activeIcon: Icons.public_outlined,
+    final items = const [
+      _NavItem(
+        icon: CupertinoIcons.map,
+        activeIcon: CupertinoIcons.map_fill,
         label: 'Mapa',
+        selected: false,
       ),
-      _BottomNavItemData(
-        icon: Icons.search,
-        activeIcon: Icons.search,
-        label: 'Buscar',
+      _NavItem(
+        icon: CupertinoIcons.search,
+        activeIcon: CupertinoIcons.search,
+        label: 'Home',
+        selected: true,
       ),
-      _BottomNavItemData(
-        icon: Icons.inventory_2_outlined,
-        activeIcon: Icons.inventory_2_rounded,
-        label: 'Items',
+      _NavItem(
+        icon: CupertinoIcons.cube,
+        activeIcon: CupertinoIcons.cube_box_fill,
+        label: 'Meus itens',
+        selected: false,
       ),
-      _BottomNavItemData(
-        icon: Icons.person_outline_rounded,
-        activeIcon: Icons.person,
+      _NavItem(
+        icon: CupertinoIcons.person,
+        activeIcon: CupertinoIcons.person_fill,
         label: 'Perfil',
+        selected: false,
       ),
     ];
-
     return Container(
-      padding: EdgeInsets.only(
-        left: 10,
-        right: 10,
-        top: 10,
-        bottom: MediaQuery.of(context).padding.bottom + 10,
-      ),
-      decoration: BoxDecoration(
-        // color: Colors.white,
-        // color: context.surfaceColor,
-        color: Theme.of(context).scaffoldBackgroundColor,
-        borderRadius: const BorderRadius.vertical(
-          top: Radius.circular(28),
+      height: 86,
+      decoration: const BoxDecoration(
+        color: Color(0xFF040404),
+        border: Border(
+          top: BorderSide(color: Color(0xFF1C1C1E), width: 1),
         ),
-        boxShadow: const [
-          BoxShadow(
-            color: Color(0x14000000),
-            blurRadius: 18,
-            offset: Offset(0, -4),
-          ),
-        ],
       ),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceAround,
-        children: List.generate(items.length, (index) {
-          final item = items[index];
-          final selected = currentIndex == index;
+        children: List.generate(
+          items.length,
+          (index) {
+            final item = items[index];
+            final selected = currentIndex == index;
 
-          return Expanded(
-            child: InkWell(
-              onTap: () => onChanged?.call(index),
-              borderRadius: BorderRadius.circular(16),
-              child: Padding(
-                padding: const EdgeInsets.symmetric(vertical: 6),
-                child: Column(
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    Icon(
-                      selected ? item.activeIcon : item.icon,
-                      color: selected
-                          ? context.onSurfaceVariant
-                          // : const Color(0xFF9CA3AF),
-                          : context.onSurface.withValues(alpha: 0.8),
-                      size: IconSizes.lg,
-                    ),
-                    const SizedBox(height: 4),
-                    Text(
-                      item.label,
-                      style: context.appText.label.copyWith(
+            return Expanded(
+              child: InkWell(
+                onTap: () => onChanged?.call(index),
+                borderRadius: BorderRadius.circular(16),
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(vertical: 6),
+                  child: Column(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      Icon(
+                        selected ? item.activeIcon : item.icon,
                         color: selected
                             ? context.onSurfaceVariant
+                            // : const Color(0xFF9CA3AF),
                             : context.onSurface.withValues(alpha: 0.8),
-                        // : const Color(0xFF9CA3AF),
-                        fontWeight: FontWeight.normal,
+                        size: IconSizes.lg,
                       ),
-                    ),
-                  ],
+                      const SizedBox(height: 4),
+                      Text(
+                        item.label,
+                        style: context.appText.label.copyWith(
+                          color: selected
+                              ? context.onSurfaceVariant
+                              : context.onSurface.withValues(alpha: 0.8),
+                          // : const Color(0xFF9CA3AF),
+                          fontWeight: FontWeight.normal,
+                        ),
+                      ),
+                    ],
+                  ),
                 ),
               ),
-            ),
-          );
-        }),
+            );
+          },
+        ),
       ),
     );
   }
 }
 
-class _BottomNavItemData {
+class _NavItem extends StatelessWidget {
   final IconData icon;
   final IconData activeIcon;
   final String label;
+  final bool selected;
 
-  const _BottomNavItemData({
+  const _NavItem({
     required this.icon,
     required this.activeIcon,
     required this.label,
+    required this.selected,
   });
+
+  @override
+  Widget build(BuildContext context) {
+    final color = selected ? Colors.white : const Color(0xFFA1A1A8);
+
+    return SizedBox(
+      width: 70,
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Icon(icon, color: color, size: 28),
+          const SizedBox(height: 6),
+          Text(
+            label,
+            style: TextStyle(
+              color: color,
+              fontSize: context.safeSp(13),
+              fontWeight: selected ? FontWeight.w700 : FontWeight.w500,
+            ),
+          ),
+        ],
+      ),
+    );
+  }
 }
+
+// class HomeBottomSheetNav extends StatelessWidget {
+//   final int currentIndex;
+//   final ValueChanged<int>? onChanged;
+
+//   const HomeBottomSheetNav({
+//     super.key,
+//     required this.currentIndex,
+//     this.onChanged,
+//   });
+
+//   @override
+//   Widget build(BuildContext context) {
+//     const items = [
+//       _BottomNavItemData(
+//         icon: Icons.public,
+//         activeIcon: Icons.public_outlined,
+//         label: 'Mapa',
+//       ),
+//       _BottomNavItemData(
+//         icon: Icons.search,
+//         activeIcon: Icons.search,
+//         label: 'Buscar',
+//       ),
+//       _BottomNavItemData(
+//         icon: Icons.inventory_2_outlined,
+//         activeIcon: Icons.inventory_2_rounded,
+//         label: 'Items',
+//       ),
+//       _BottomNavItemData(
+//         icon: Icons.person_outline_rounded,
+//         activeIcon: Icons.person,
+//         label: 'Perfil',
+//       ),
+//     ];
+
+//     return Container(
+//       padding: EdgeInsets.only(
+//         left: 10,
+//         right: 10,
+//         top: 10,
+//         bottom: MediaQuery.of(context).padding.bottom + 10,
+//       ),
+//       decoration: BoxDecoration(
+//         // color: Colors.white,
+//         // color: context.surfaceColor,
+//         color: Theme.of(context).scaffoldBackgroundColor,
+//         borderRadius: const BorderRadius.vertical(
+//           top: Radius.circular(28),
+//         ),
+//         boxShadow: const [
+//           BoxShadow(
+//             color: Color(0x14000000),
+//             blurRadius: 18,
+//             offset: Offset(0, -4),
+//           ),
+//         ],
+//       ),
+//       child: Row(
+//         mainAxisAlignment: MainAxisAlignment.spaceAround,
+//         children: List.generate(
+//           items.length,
+//           (index) {
+//             final item = items[index];
+//             final selected = currentIndex == index;
+
+//             return Expanded(
+//               child: InkWell(
+//                 onTap: () => onChanged?.call(index),
+//                 borderRadius: BorderRadius.circular(16),
+//                 child: Padding(
+//                   padding: const EdgeInsets.symmetric(vertical: 6),
+//                   child: Column(
+//                     mainAxisSize: MainAxisSize.min,
+//                     children: [
+//                       Icon(
+//                         selected ? item.activeIcon : item.icon,
+//                         color: selected
+//                             ? context.onSurfaceVariant
+//                             // : const Color(0xFF9CA3AF),
+//                             : context.onSurface.withValues(alpha: 0.8),
+//                         size: IconSizes.lg,
+//                       ),
+//                       const SizedBox(height: 4),
+//                       Text(
+//                         item.label,
+//                         style: context.appText.label.copyWith(
+//                           color: selected
+//                               ? context.onSurfaceVariant
+//                               : context.onSurface.withValues(alpha: 0.8),
+//                           // : const Color(0xFF9CA3AF),
+//                           fontWeight: FontWeight.normal,
+//                         ),
+//                       ),
+//                     ],
+//                   ),
+//                 ),
+//               ),
+//             );
+//           },
+//         ),
+//       ),
+//     );
+//   }
+// }
+
+// class _BottomNavItemData {
+//   final IconData icon;
+//   final IconData activeIcon;
+//   final String label;
+
+//   const _BottomNavItemData({
+//     required this.icon,
+//     required this.activeIcon,
+//     required this.label,
+//   });
+// }

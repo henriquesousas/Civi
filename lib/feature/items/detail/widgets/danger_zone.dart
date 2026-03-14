@@ -1,6 +1,5 @@
-import 'package:deehelp/core/extension/exports_extension.dart';
 import 'package:deehelp/core/theme/export_theme.dart';
-import 'package:deehelp/core/ui/styles/app_text_style.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class DangerZone extends StatelessWidget {
@@ -13,15 +12,9 @@ class DangerZone extends StatelessWidget {
     return Container(
       padding: const EdgeInsets.all(LayoutSpacingSize.card),
       decoration: BoxDecoration(
-        color: context.surfaceColor,
-        borderRadius: BorderRadius.circular(RadiusSize.xl),
-        boxShadow: const [
-          BoxShadow(
-            color: Color(0x142B5BEE),
-            blurRadius: 16,
-            offset: Offset(0, 8),
-          ),
-        ],
+        color: const Color(0xFF151010),
+        borderRadius: BorderRadius.circular(24),
+        border: Border.all(color: const Color(0xFF3A1E22)),
       ),
       child: InkWell(
         borderRadius: BorderRadius.circular(RadiusSize.md),
@@ -33,18 +26,24 @@ class DangerZone extends StatelessWidget {
           ),
           child: Row(
             children: [
-              const Icon(Icons.delete_outline, color: Colors.redAccent),
-              const SizedBox(width: SpacingSize.md),
-              Expanded(
+              // const Icon(Icons.delete_outline, color: Colors.redAccent),
+              const Icon(CupertinoIcons.trash, color: Color(0xFFEF4444)),
+              const SizedBox(width: 10),
+              const Expanded(
                 child: Text(
                   'Remover item',
-                  style: context.appText.body.copyWith(
+                  style: TextStyle(
+                    fontSize: 15,
                     fontWeight: FontWeight.w800,
-                    color: Colors.redAccent,
+                    color: Color(0xFFEF4444),
                   ),
                 ),
               ),
-              const Icon(Icons.chevron_right, color: Color(0xFF8A96C8)),
+              Icon(
+                CupertinoIcons.chevron_right,
+                color: const Color(0xFF8D8D93),
+                size: IconSizes.xs,
+              ),
             ],
           ),
         ),

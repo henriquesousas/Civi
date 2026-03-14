@@ -121,3 +121,263 @@ class ColorBottomSheet extends StatelessWidget {
     );
   }
 }
+
+//V2
+
+class ColorBottomSheetV2 extends StatelessWidget {
+  final String current;
+  final List<ColorOption> options;
+
+  const ColorBottomSheetV2({
+    super.key,
+    required this.current,
+    required this.options,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return DecoratedBox(
+      decoration: BoxDecoration(
+        color: const Color(0xFF0F1013),
+        borderRadius: const BorderRadius.vertical(
+          top: Radius.circular(28),
+        ),
+        border: Border.all(
+          color: Colors.white.withValues(alpha: 0.06),
+        ),
+        boxShadow: [
+          BoxShadow(
+            color: Colors.black.withValues(alpha: 0.30),
+            blurRadius: 28,
+            offset: const Offset(0, -6),
+          ),
+        ],
+      ),
+      child: SafeArea(
+        top: false,
+        child: Padding(
+          padding: const EdgeInsets.fromLTRB(16, 10, 16, 20),
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              Container(
+                width: 42,
+                height: 5,
+                decoration: BoxDecoration(
+                  color: Colors.white.withValues(alpha: 0.16),
+                  borderRadius: BorderRadius.circular(999),
+                ),
+              ),
+              const SizedBox(height: 18),
+              Row(
+                children: [
+                  Expanded(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          'Selecionar cor',
+                          style: TextStyle(
+                            fontSize: context.safeSp(16),
+                            fontWeight: FontWeight.w700,
+                            color: Colors.white,
+                          ),
+                        ),
+                        const SizedBox(height: 4),
+                        Text(
+                          'Escolha a cor que melhor representa o item',
+                          style: TextStyle(
+                            fontSize: context.safeSp(12),
+                            fontWeight: FontWeight.w500,
+                            color: Colors.white.withValues(alpha: 0.58),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                  _CloseButton(
+                    onTap: () => Navigator.pop(context),
+                  ),
+                ],
+              ),
+              const SizedBox(height: 16),
+              Align(
+                alignment: Alignment.centerLeft,
+                child: Text(
+                  '${options.length} cor${options.length > 1 ? 'es' : ''}',
+                  style: TextStyle(
+                    fontSize: context.safeSp(12),
+                    fontWeight: FontWeight.w600,
+                    color: Colors.white.withValues(alpha: 0.42),
+                  ),
+                ),
+              ),
+              const SizedBox(height: 12),
+              Flexible(
+                child: ListView.separated(
+                  shrinkWrap: true,
+                  physics: const BouncingScrollPhysics(),
+                  itemCount: options.length,
+                  separatorBuilder: (_, __) => const SizedBox(height: 10),
+                  itemBuilder: (_, i) {
+                    final opt = options[i];
+                    final selected =
+                        opt.name.toLowerCase() == current.toLowerCase();
+
+                    return _ColorTile(
+                      option: opt,
+                      selected: selected,
+                      onTap: () => Navigator.pop(context, opt),
+                    );
+                  },
+                ),
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+class _ColorTile extends StatelessWidget {
+  final ColorOption option;
+  final bool selected;
+  final VoidCallback onTap;
+
+  const _ColorTile({
+    required this.option,
+    required this.selected,
+    required this.onTap,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    final accent = option.color;
+
+    return Material(
+      color: Colors.transparent,
+      child: InkWell(
+        onTap: onTap,
+        borderRadius: BorderRadius.circular(18),
+        child: AnimatedContainer(
+          duration: const Duration(milliseconds: 180),
+          curve: Curves.easeOut,
+          padding: const EdgeInsets.symmetric(
+            horizontal: 14,
+            vertical: 14,
+          ),
+          decoration: BoxDecoration(
+            color: selected
+                ? accent.withValues(alpha: 0.12)
+                : const Color(0xFF15171B),
+            borderRadius: BorderRadius.circular(18),
+            border: Border.all(
+              color: selected
+                  ? accent.withValues(alpha: 0.45)
+                  : Colors.white.withValues(alpha: 0.06),
+            ),
+          ),
+          child: Row(
+            children: [
+              Container(
+                width: 42,
+                height: 42,
+                decoration: BoxDecoration(
+                  color: selected
+                      ? accent.withValues(alpha: 0.12)
+                      : Colors.white.withValues(alpha: 0.03),
+                  shape: BoxShape.circle,
+                  border: Border.all(
+                    color: selected
+                        ? accent.withValues(alpha: 0.30)
+                        : Colors.white.withValues(alpha: 0.05),
+                  ),
+                ),
+                child: Center(
+                  child: ColorDot(
+                    option: option,
+                    size: 20,
+                  ),
+                ),
+              ),
+              const SizedBox(width: 12),
+              Expanded(
+                child: Text(
+                  option.name,
+                  maxLines: 1,
+                  overflow: TextOverflow.ellipsis,
+                  style: TextStyle(
+                    fontSize: context.safeSp(14),
+                    fontWeight: FontWeight.w600,
+                    color: Colors.white.withValues(
+                      alpha: selected ? 1 : 0.90,
+                    ),
+                  ),
+                ),
+              ),
+              AnimatedSwitcher(
+                duration: const Duration(milliseconds: 180),
+                child: selected
+                    ? Container(
+                        key: ValueKey('selected_${option.name}'),
+                        width: 24,
+                        height: 24,
+                        decoration: BoxDecoration(
+                          color: accent.withValues(alpha: 0.16),
+                          shape: BoxShape.circle,
+                        ),
+                        child: Icon(
+                          Icons.check_rounded,
+                          size: 16,
+                          color: accent,
+                        ),
+                      )
+                    : Icon(
+                        key: ValueKey('arrow_${option.name}'),
+                        Icons.chevron_right_rounded,
+                        color: Colors.white.withValues(alpha: 0.26),
+                      ),
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+class _CloseButton extends StatelessWidget {
+  final VoidCallback onTap;
+
+  const _CloseButton({
+    required this.onTap,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Material(
+      color: Colors.transparent,
+      child: InkWell(
+        onTap: onTap,
+        borderRadius: BorderRadius.circular(999),
+        child: Container(
+          width: 40,
+          height: 40,
+          decoration: BoxDecoration(
+            color: Colors.white.withValues(alpha: 0.04),
+            shape: BoxShape.circle,
+            border: Border.all(
+              color: Colors.white.withValues(alpha: 0.06),
+            ),
+          ),
+          child: Icon(
+            Icons.close_rounded,
+            size: 20,
+            color: Colors.white.withValues(alpha: 0.82),
+          ),
+        ),
+      ),
+    );
+  }
+}

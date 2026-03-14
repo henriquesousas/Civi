@@ -89,16 +89,8 @@ class _ItemListPageState extends ConsumerState<ItemListPage> {
             }
           },
         ),
-        // success: (_) => const Padding(
-        //   padding: EdgeInsets.symmetric(horizontal: 12, vertical: 12),
-        //   child: LoadingResultsSkeleton(
-        //     size: 10,
-        //   ),
-        // ),
         // loading: (_) => const ItemListShimmer(),
-        loading: (_) => const LoadingResultsSkeleton(
-          size: 10,
-        ),
+        loading: (_) => const LoadingResultsSkeletonV2(),
         orElse: () => Padding(
           padding: const EdgeInsets.all(8.0),
           child: EmptyStateWidget(

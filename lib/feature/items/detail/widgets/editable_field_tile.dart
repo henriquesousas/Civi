@@ -3,6 +3,7 @@ import 'package:deehelp/core/theme/export_theme.dart';
 import 'package:deehelp/core/ui/styles/export_style.dart';
 import 'package:deehelp/core/ui/widgets/icon/export_icon.dart';
 import 'package:deehelp/feature/items/register/presentation/widgets/item_highticon.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class EditableFieldTile extends StatelessWidget {
@@ -52,9 +53,10 @@ class EditableFieldTile extends StatelessWidget {
                   children: [
                     Text(
                       label,
-                      style: context.appText.caption.copyWith(
+                      style: TextStyle(
+                        fontSize: context.safeSp(11),
                         fontWeight: FontWeight.w800,
-                        color: context.secondaryColor,
+                        color: const Color(0xFF8D8D93),
                         letterSpacing: 0.2,
                       ),
                     ),
@@ -63,13 +65,10 @@ class EditableFieldTile extends StatelessWidget {
                       value.isEmpty ? 'Não informado' : value,
                       maxLines: 8,
                       overflow: TextOverflow.ellipsis,
-                      style: context.appText.bodymd.copyWith(
-                        fontWeight: FontWeight.w600,
-                        color: onEdit != null
-                            ? context.onSurface
-                            : textColor ??
-                                context.onSurface.withValues(alpha: 0.5),
-                        height: 1.35,
+                      style: TextStyle(
+                        fontSize: context.safeSp(13),
+                        fontWeight: FontWeight.w700,
+                        color: Colors.white,
                       ),
                     ),
                   ],
@@ -88,9 +87,12 @@ class EditableFieldTile extends StatelessWidget {
                   ),
                 if (!isLoading)
                   HighlightIcon(
+                    bgColor: Colors.white.withValues(alpha: 0.05),
                     icon: Icon(
-                      Icons.edit_outlined,
-                      color: context.primaryColor,
+                      CupertinoIcons.pencil,
+                      // color: context.primaryColor,
+                      color: AppColors.primaryColor,
+                      // color: const Color(0xFF8F98FF),
                       size: IconSizes.sm,
                     ),
                   ),
