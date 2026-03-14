@@ -1,6 +1,4 @@
-import 'package:deehelp/core/extension/color_extension.dart';
 import 'package:deehelp/core/theme/export_theme.dart';
-import 'package:deehelp/core/ui/widgets/cards/card_exports.dart';
 import 'package:deehelp/feature/items/register/presentation/widgets/section_title.dart';
 import 'package:deehelp/feature/items/register/presentation/widgets/type_selector.dart';
 import 'package:deehelp/feature/items/register/presentation/widgets/wizard_step.dart';
@@ -37,17 +35,17 @@ class _ItemRegisterTypeState extends ConsumerState<ItemRegisterType> {
           selected: state.type,
           onSelect: (value) => viewModel.selectProductType(value),
         ),
-        const SizedBox(height: SpacingSize.xxl),
-        CardHint(
-          title: "Dicas",
-          message:
-              "Depois de criar o item, você poderá adicionar fotos para verificação e identificação.",
-          icon: Icon(
-            Icons.info_outline,
-            color: context.primaryColor,
-            size: IconSizes.md,
-          ),
-        )
+        // const SizedBox(height: SpacingSize.xxl),
+        // CardHint(
+        //   title: "Dicas",
+        //   message:
+        //       "Depois de criar o item, você poderá adicionar fotos para verificação e identificação.",
+        //   icon: Icon(
+        //     Icons.info_outline,
+        //     color: context.primaryColor,
+        //     size: IconSizes.md,
+        //   ),
+        // )
       ],
     );
   }

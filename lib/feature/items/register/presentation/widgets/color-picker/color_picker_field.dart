@@ -4,6 +4,7 @@ import 'package:deehelp/feature/items/register/presentation/widgets/color-picker
 import 'package:deehelp/feature/items/register/presentation/widgets/color-picker/color_dot.dart';
 import 'package:deehelp/feature/items/register/presentation/widgets/color-picker/color_option.dart';
 import 'package:deehelp/feature/items/register/presentation/widgets/item_highticon.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class ColorPickerField extends StatelessWidget {
@@ -28,7 +29,7 @@ class ColorPickerField extends StatelessWidget {
         final picked = await showModalBottomSheet<ColorOption>(
           context: context,
           backgroundColor: Colors.transparent,
-          builder: (_) => ColorBottomSheet(
+          builder: (_) => ColorBottomSheetV2(
             current: value,
             options: options,
           ),
@@ -38,7 +39,7 @@ class ColorPickerField extends StatelessWidget {
       borderRadius: BorderRadius.circular(RadiusSize.md),
       child: Row(
         children: [
-          const ItemHighticon(iconData: Icons.color_lens_outlined),
+          const ItemHighticon(iconData: CupertinoIcons.paintbrush),
           const SizedBox(width: SpacingSize.md),
           Expanded(
             child: Container(

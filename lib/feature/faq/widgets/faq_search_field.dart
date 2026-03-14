@@ -25,10 +25,15 @@ class FaqSearhField extends StatelessWidget {
           // final hasFocus = Focus.of(context).hasFocus;
           return AnimatedContainer(
             duration: const Duration(milliseconds: 180),
-            decoration: BoxDecoration(
-              color: Colors.white,
-              borderRadius: BorderRadius.circular(RadiusSize.lg),
-            ),
+            // decoration: BoxDecoration(
+            //   color: Colors.white,
+            //   borderRadius: BorderRadius.circular(RadiusSize.lg),
+            // ),
+            // decoration: BoxDecoration(
+            //   color: const Color(0xFF101012),
+            //   borderRadius: BorderRadius.circular(24),
+            //   border: Border.all(color: const Color(0xFF1D1D21)),
+            // ),
             child: TextField(
               controller: controller,
               onChanged: onChanged,
@@ -36,7 +41,8 @@ class FaqSearhField extends StatelessWidget {
                 fontWeight: FontWeight.w600,
               ),
               decoration: InputDecoration(
-                fillColor: context.outlineVariantColor,
+                // fillColor: context.outlineVariantColor,
+                fillColor: Colors.black,
                 border: InputBorder.none,
                 contentPadding:
                     const EdgeInsets.symmetric(vertical: SpacingSize.lg),

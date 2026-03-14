@@ -114,40 +114,40 @@ class _ItemListPageState extends ConsumerState<ItemListPage> {
     );
   }
 
-  // Widget? _bottomBar(ListProductState state) {
-  //   return state.maybeMap(
-  //     success: (value) {
-  //       return Container(
-  //         padding: const EdgeInsets.fromLTRB(16, 12, 16, 16),
-  //         decoration: const BoxDecoration(
-  //           // color: context.surfaceColor,
-  //           boxShadow: [
-  //             BoxShadow(
-  //               color: Color(0x142B5BEE),
-  //               blurRadius: 16,
-  //               offset: Offset(0, -6),
-  //             ),
-  //           ],
-  //         ),
-  //         child: SafeArea(
-  //           top: false,
-  //           child: ButtonOutline(
-  //             press: () {
-  //               context.push(ItemsRouter.register);
-  //             },
-  //             borderColor: context.primaryColor,
-  //             bgColor: context.primaryColor,
-  //             // textColor: Colors.white,
-  //             icon: Icon(
-  //               Icons.add_circle_outline,
-  //               color: context.surfaceColor,
-  //             ),
-  //             text: "Cadastrar novo item",
-  //           ),
-  //         ),
-  //       );
-  //     },
-  //     orElse: () => null,
-  //   );
-  // }
+  Widget? _bottomBar(ListProductState state) {
+    return state.maybeMap(
+      success: (value) {
+        return Container(
+          padding: const EdgeInsets.fromLTRB(16, 12, 16, 16),
+          decoration: const BoxDecoration(
+            // color: context.surfaceColor,
+            boxShadow: [
+              BoxShadow(
+                color: Color(0x142B5BEE),
+                blurRadius: 16,
+                offset: Offset(0, -6),
+              ),
+            ],
+          ),
+          child: SafeArea(
+            top: false,
+            child: ButtonOutline(
+              press: () {
+                context.push(ItemsRouter.register);
+              },
+              borderColor: context.primaryColor,
+              bgColor: context.primaryColor,
+              textColor: Colors.black,
+              // icon: Icon(
+              //   Icons.add,
+              //   color: context.surfaceColor,
+              // ),
+              text: "Cadastrar novo",
+            ),
+          ),
+        );
+      },
+      orElse: () => null,
+    );
+  }
 }

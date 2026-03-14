@@ -308,7 +308,7 @@ class _BrandBottomSheetStateV2 extends State<BrandBottomSheetV2> {
                           ],
                         ),
                       ),
-                      _CloseButton(
+                      CloseButtonV2(
                         onTap: () => Navigator.pop(context),
                       ),
                     ],
@@ -486,10 +486,11 @@ class _BrandTile extends StatelessWidget {
   }
 }
 
-class _CloseButton extends StatelessWidget {
+class CloseButtonV2 extends StatelessWidget {
   final VoidCallback onTap;
 
-  const _CloseButton({
+  const CloseButtonV2({
+    super.key,
     required this.onTap,
   });
 

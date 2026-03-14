@@ -31,11 +31,16 @@ class RowSOSContact extends StatelessWidget {
       child: InkWell(
         onTap: onCall,
         child: Ink(
+          // decoration: BoxDecoration(
+          //   color: context.surfaceColor,
+          //   borderRadius: radius,
+          //   border: Border.all(color: context.outlineVariantColor),
+          //   boxShadow: const [AppColors.shadowSoft],
+          // ),
           decoration: BoxDecoration(
-            color: context.surfaceColor,
-            borderRadius: radius,
-            border: Border.all(color: context.outlineVariantColor),
-            boxShadow: const [AppColors.shadowSoft],
+            color: const Color(0xFF101012),
+            borderRadius: BorderRadius.circular(24),
+            border: Border.all(color: const Color(0xFF1D1D21)),
           ),
           padding: const EdgeInsets.all(LayoutSpacingSize.container),
           child: Row(

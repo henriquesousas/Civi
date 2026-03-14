@@ -213,6 +213,9 @@ class _ItemDetailPageState extends ConsumerState<ItemDetailPage> {
               status: item.status,
             ),
             const SizedBox(height: 18),
+            ItemStatusNotice(status: item.status),
+            const SizedBox(height: SpacingSize.lg),
+            const SizedBox(height: 18),
             const SectionTitle('Informações do item'),
             PageCard(
               child: Column(
@@ -370,8 +373,8 @@ class _ItemDetailPageState extends ConsumerState<ItemDetailPage> {
               ),
             ),
             const SizedBox(height: SpacingSize.lg),
-            ItemStatusNotice(status: item.status),
-            const SizedBox(height: SpacingSize.lg),
+            // ItemStatusNotice(status: item.status),
+            // const SizedBox(height: SpacingSize.lg),
             DangerZone(
               onDelete: () {
                 showDialog(

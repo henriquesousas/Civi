@@ -1,8 +1,5 @@
 import 'package:deehelp/core/extension/exports_extension.dart';
-import 'package:deehelp/core/ui/styles/export_style.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class DefaultAppBar extends StatelessWidget implements PreferredSizeWidget {
   final String title;
@@ -50,8 +47,8 @@ class DefaultAppBar extends StatelessWidget implements PreferredSizeWidget {
         // style: context.appText.headerlg,
         style: TextStyle(
           color: Colors.white,
-          fontSize: context.safeSp(22),
-          fontWeight: FontWeight.w700,
+          fontSize: context.safeSp(18),
+          fontWeight: FontWeight.w500,
           letterSpacing: -0.6,
           height: 1.05,
         ),
@@ -67,6 +64,7 @@ class DefaultAppBar extends StatelessWidget implements PreferredSizeWidget {
             onPressed: press,
             icon: const Icon(
               Icons.arrow_back_ios_new_rounded,
+              size: 18,
             ),
           )
         : null;

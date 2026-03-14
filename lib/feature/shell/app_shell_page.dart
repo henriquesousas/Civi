@@ -175,12 +175,12 @@ class _BottomNavBar extends StatelessWidget {
                             ? context.onSurfaceVariant
                             // : const Color(0xFF9CA3AF),
                             : context.onSurface.withValues(alpha: 0.8),
-                        size: IconSizes.lg,
+                        size: IconSizes.md,
                       ),
                       const SizedBox(height: 4),
                       Text(
                         item.label,
-                        style: context.appText.label.copyWith(
+                        style: context.appText.button.copyWith(
                           color: selected
                               ? context.onSurfaceVariant
                               : context.onSurface.withValues(alpha: 0.8),

@@ -1,7 +1,9 @@
 import 'package:deehelp/core/extension/exports_extension.dart';
 import 'package:deehelp/core/theme/export_theme.dart';
 import 'package:deehelp/core/ui/styles/export_style.dart';
+import 'package:deehelp/feature/items/register/presentation/widgets/brand-picker/brand_bottom_sheet.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class MapLayersBottomSheet extends StatefulWidget {
   final bool initiallyExpanded;
@@ -256,76 +258,168 @@ class _LayerPreviewIcon extends StatelessWidget {
 
 //DOIS
 
-class MapLayersBottomSheet2 extends StatelessWidget {
-  const MapLayersBottomSheet2({super.key});
+class MapLayersBottomSheet2 extends StatefulWidget {
+  final bool initiallyExpanded;
+  final Function(bool)? onTapHeader;
+  const MapLayersBottomSheet2(
+      {super.key, required this.initiallyExpanded, this.onTapHeader});
+
+  @override
+  State<MapLayersBottomSheet2> createState() => _MapLayersBottomSheet2State();
+}
+
+class _MapLayersBottomSheet2State extends State<MapLayersBottomSheet2>
+    with SingleTickerProviderStateMixin {
+  late bool _isExpanded;
+
+  @override
+  void initState() {
+    super.initState();
+    _isExpanded = widget.initiallyExpanded;
+  }
+
+  void _toggle() {
+    setState(() {
+      _isExpanded = !_isExpanded;
+    });
+    widget.onTapHeader?.call(_isExpanded);
+  }
 
   @override
   Widget build(BuildContext context) {
-    return Container(
+    return AnimatedContainer(
+      duration: const Duration(milliseconds: 260),
+      curve: Curves.easeInOut,
       width: double.infinity,
-      padding: const EdgeInsets.fromLTRB(16, 12, 16, 14),
-      decoration: const BoxDecoration(
-        color: Color(0xFF050505),
-        borderRadius: BorderRadius.vertical(top: Radius.circular(22)),
-        boxShadow: [
-          BoxShadow(
-            color: Colors.black54,
-            blurRadius: 24,
-            offset: Offset(0, -6),
-          ),
-        ],
-      ),
-      child: SafeArea(
-        top: false,
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Center(
-              child: Container(
-                width: 54,
-                height: 4,
-                decoration: BoxDecoration(
-                  color: Colors.white24,
-                  borderRadius: BorderRadius.circular(999),
-                ),
-              ),
-            ),
-            const SizedBox(height: 18),
-            const Text(
-              'Map Layers',
-              style: TextStyle(
-                color: Colors.white,
-                fontSize: 16,
-                fontWeight: FontWeight.w800,
-                letterSpacing: 0.2,
-              ),
-            ),
-            const SizedBox(height: 14),
-            _LayerTile(
-              title: 'Default',
-              subtitle:
-                  'See incidents (Assaults, Fires etc.) along with Good Vibes and Friends.',
-              selected: true,
-              leading: const _MapPreviewIcon(
-                dotColor: Color(0xFFFFC400),
-                showAvatar: true,
-              ),
-              onTap: () {},
-            ),
-            const SizedBox(height: 12),
-            _LayerTile(
-              title: 'Registered Offenders',
-              subtitle: 'See registered offenders with detailed information.',
-              selected: false,
-              leading: const _MapPreviewIcon(
-                dotColor: Color(0xFFFF8A00),
-                showAvatar: false,
-                centerIcon: Icons.person,
-              ),
-              onTap: () {},
+      child: Container(
+        width: double.infinity,
+        padding: const EdgeInsets.fromLTRB(16, 12, 16, 14),
+        decoration: const BoxDecoration(
+          color: Color(0xFF050505),
+          borderRadius: BorderRadius.vertical(top: Radius.circular(22)),
+          boxShadow: [
+            BoxShadow(
+              color: Colors.black54,
+              blurRadius: 24,
+              offset: Offset(0, -6),
             ),
           ],
+        ),
+        child: SafeArea(
+          top: false,
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              // Center(
+              //   child: Container(
+              //     width: 54,
+              //     height: 4,
+              //     decoration: BoxDecoration(
+              //       color: Colors.white24,
+              //       borderRadius: BorderRadius.circular(999),
+              //     ),
+              //   ),
+              // ),
+              // const SizedBox(height: 18),
+              GestureDetector(
+                behavior: HitTestBehavior.opaque,
+                onTap: _toggle,
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Text(
+                          'Osasco',
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontSize: 22.sp,
+                            fontWeight: FontWeight.w800,
+                            letterSpacing: 0.2,
+                          ),
+                        ),
+                        Container(
+                          width: IconSizes.xl,
+                          height: IconSizes.xl,
+                          decoration: BoxDecoration(
+                            // color: const Color(0xFFF3F4F6),
+                            color: Colors.white.withValues(alpha: 0.04),
+                            borderRadius: BorderRadius.circular(99),
+                            border: Border.all(
+                              // color: const Color(0xFFE5E7EB),
+                              color: context.outlineVariantColor,
+                            ),
+                          ),
+                          child: AnimatedRotation(
+                            turns: _isExpanded ? 0.5 : 0.0,
+                            duration: const Duration(milliseconds: 260),
+                            child: Icon(
+                              Icons.keyboard_arrow_up_rounded,
+                              size: IconSizes.lg,
+                              // color: const Color(0xFF111827),
+                              color: Colors.white54,
+                            ),
+                          ),
+                        ),
+                        // CloseButtonV2(
+                        //   onTap: () => Navigator.pop(context),
+                        // ),
+                      ],
+                    ),
+                    Text(
+                      'Travessa Francisco Alves da Silva 2 - São Paulo',
+                      style: TextStyle(
+                        color: Colors.grey,
+                        fontSize: 12.sp,
+                        fontWeight: FontWeight.normal,
+                        letterSpacing: 0.2,
+                      ),
+                    ),
+                    const SizedBox(height: 20),
+                  ],
+                ),
+              ),
+
+              AnimatedCrossFade(
+                firstChild: const SizedBox(height: 0),
+                secondChild: Column(
+                  children: [
+                    _LayerTile(
+                      title: 'Default',
+                      subtitle:
+                          'See incidents (Assaults, Fires etc.) along with Good Vibes and Friends.',
+                      selected: true,
+                      leading: const _MapPreviewIcon(
+                        dotColor: Color(0xFFFFC400),
+                        showAvatar: true,
+                      ),
+                      onTap: () {},
+                    ),
+                    const SizedBox(height: 12),
+                    _LayerTile(
+                      title: 'Registered Offenders',
+                      subtitle:
+                          'See registered offenders with detailed information.',
+                      selected: false,
+                      leading: const _MapPreviewIcon(
+                        dotColor: Color(0xFFFF8A00),
+                        showAvatar: false,
+                        centerIcon: Icons.person,
+                      ),
+                      onTap: () {},
+                    ),
+                  ],
+                ),
+                crossFadeState: _isExpanded
+                    ? CrossFadeState.showSecond
+                    : CrossFadeState.showFirst,
+                duration: const Duration(milliseconds: 240),
+              ),
+            ],
+          ),
         ),
       ),
     );

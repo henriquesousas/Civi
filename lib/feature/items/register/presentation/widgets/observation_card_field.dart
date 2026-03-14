@@ -3,7 +3,7 @@ import 'package:deehelp/core/ui/styles/app_text_style.dart';
 import 'package:deehelp/core/ui/widgets/textfield/text_field_primary.dart';
 import 'package:deehelp/feature/items/register/presentation/widgets/card_page.dart';
 import 'package:deehelp/feature/items/register/presentation/widgets/item_highticon.dart';
-import 'package:flutter/material.dart';
+import 'package:flutter/cupertino.dart';
 
 class ObservationCardField extends StatelessWidget {
   final Function(String)? onChanged;
@@ -20,7 +20,9 @@ class ObservationCardField extends StatelessWidget {
           children: [
             Row(
               children: [
-                const ItemHighticon(iconData: Icons.notes_outlined),
+                const ItemHighticon(
+                  iconData: CupertinoIcons.doc_text,
+                ),
                 const SizedBox(width: SpacingSize.md),
                 Expanded(
                   child: Text(

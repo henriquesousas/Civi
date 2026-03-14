@@ -19,6 +19,7 @@ import 'package:deehelp/feature/items/register/presentation/widgets/year-picker/
 import 'package:deehelp/feature/items/register/viewmodel/register_item_viewmodel.dart';
 import 'package:deehelp/module/item/di/item_viewmodel_provider.dart';
 import 'package:deehelp/core/utils/url_launcher_utils.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -50,7 +51,7 @@ class _ItemRegisterInfomationState
       context: context,
       backgroundColor: Colors.transparent,
       builder: (_) {
-        return YearBottomSheet(
+        return YearBottomSheetV2(
           selectedYear: selected,
           min: 1950,
         );
@@ -97,7 +98,7 @@ class _ItemRegisterInfomationState
             child: Column(
               children: [
                 SimpleTextField(
-                  icon: Icons.badge_outlined,
+                  icon: CupertinoIcons.cube_box,
                   label: state.type == ItemType.phone ? 'Modelo/Nome' : 'Nome',
                   hint: state.type == ItemType.phone
                       ? 'Ex: iPhone 13'
@@ -139,7 +140,7 @@ class _ItemRegisterInfomationState
                     value: state.year == null
                         ? 'Selecionar ano'
                         : state.year.toString(),
-                    icon: Icons.calendar_month_outlined,
+                    icon: CupertinoIcons.calendar,
                     onTap: () async {
                       final year = await _pickYear(context, yearCtrl.text);
                       if (year != null) {
@@ -151,7 +152,7 @@ class _ItemRegisterInfomationState
                   SimpleTextField(
                     label: 'Placa',
                     hint: 'Ex: ABC1D23',
-                    icon: Icons.confirmation_number_outlined,
+                    icon: CupertinoIcons.number,
                     maxLen: 7,
                     toUpperCase: true,
                     error: state.errorLicencePlate,

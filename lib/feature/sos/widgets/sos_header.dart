@@ -1,4 +1,3 @@
-import 'package:deehelp/core/extension/exports_extension.dart';
 import 'package:deehelp/core/theme/export_theme.dart';
 import 'package:deehelp/core/ui/styles/export_style.dart';
 import 'package:deehelp/core/ui/widgets/icon/export_icon.dart';
@@ -19,16 +18,21 @@ class SosHeaderCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
+      // decoration: BoxDecoration(
+      //   color: context.primaryColor,
+      //   borderRadius: BorderRadius.circular(RadiusSize.sm),
+      //   boxShadow: const [
+      //     BoxShadow(
+      //       color: Color(0x1F2157F8),
+      //       blurRadius: 18,
+      //       offset: Offset(0, 10),
+      //     ),
+      //   ],
+      // ),
       decoration: BoxDecoration(
-        color: context.primaryColor,
-        borderRadius: BorderRadius.circular(RadiusSize.sm),
-        boxShadow: const [
-          BoxShadow(
-            color: Color(0x1F2157F8),
-            blurRadius: 18,
-            offset: Offset(0, 10),
-          ),
-        ],
+        color: const Color(0xFF101012),
+        borderRadius: BorderRadius.circular(24),
+        border: Border.all(color: const Color(0xFF1D1D21)),
       ),
       padding: const EdgeInsets.all(16),
       child: Row(

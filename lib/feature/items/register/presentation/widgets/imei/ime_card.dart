@@ -3,7 +3,6 @@ import 'package:deehelp/core/theme/export_theme.dart';
 import 'package:deehelp/core/ui/styles/app_text_style.dart';
 import 'package:deehelp/core/ui/widgets/badge/badge_text.dart';
 import 'package:deehelp/core/ui/widgets/buttons/button_outline.dart';
-import 'package:deehelp/core/ui/widgets/cards/card_exports.dart';
 import 'package:deehelp/core/ui/widgets/icon/export_icon.dart';
 import 'package:deehelp/core/ui/widgets/textfield/text_field_primary.dart';
 import 'package:deehelp/feature/items/register/presentation/widgets/card_page.dart';
@@ -99,14 +98,24 @@ class ImeiCard extends StatelessWidget {
                 ),
               ],
             ),
-            const SizedBox(height: SpacingSize.md),
-            CardHint(
-              icon: Icon(Icons.info_outline,
-                  color: context.primaryColor, size: IconSizes.sm),
-              title: "Onde encontrar o IMEI",
-              message:
-                  "Você pode encontrar o IMEI em *#06# ou na caixa do aparelho.",
-            )
+            const SizedBox(height: SpacingSize.xl),
+            Text(
+              "Para você pode encontrar o IMEI digite *#06# na tela de discagem do aparelho ou na caixa do aparelho.",
+              textAlign: TextAlign.start,
+              style: context.appText.caption.copyWith(
+                fontWeight: FontWeight.w400,
+                letterSpacing: 1.2,
+                color: Colors.grey,
+              ),
+            ),
+            // const SizedBox(height: SpacingSize.md),
+            // CardHint(
+            //   icon: Icon(Icons.info_outline,
+            //       color: context.primaryColor, size: IconSizes.sm),
+            //   title: "Onde encontrar o IMEI",
+            //   message:
+            //       "Você pode encontrar o IMEI em *#06# ou na caixa do aparelho.",
+            // )
           ],
         ),
       ),

@@ -74,11 +74,11 @@ class FaqSupportCard extends StatelessWidget {
                   text: "Suporte",
                   bgColor: context.primaryColor,
                   borderColor: context.primaryColor,
-                  textColor: Colors.white,
+                  textColor: Colors.black,
                   icon: Icon(
                     Icons.chat_outlined,
                     size: IconSizes.md,
-                    color: Colors.white,
+                    color: Colors.black,
                   ),
                 ),
               ),

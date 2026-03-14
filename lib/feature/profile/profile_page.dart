@@ -19,10 +19,10 @@ import 'package:deehelp/feature/sos/sos_router.dart';
 import 'package:deehelp/module/auth/external/di/auth_view_model_provider.dart';
 import 'package:deehelp/core/utils/url_launcher_utils.dart';
 import 'package:deehelp/module/auth/external/di/authenticated_user_provider.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'profile_item.dart';
 import 'widgets/profile_options.dart';
-import 'widgets/title_section.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
@@ -40,8 +40,7 @@ class ProfilePage extends ConsumerWidget {
       ),
       body: ListView(
         physics: const BouncingScrollPhysics(),
-        padding:
-            const EdgeInsets.symmetric(vertical: LayoutSpacingSize.listItem),
+        padding: const EdgeInsets.symmetric(vertical: 12),
         children: [
           if (session != null) ...[
             Column(
@@ -52,8 +51,8 @@ class ProfilePage extends ConsumerWidget {
                   radius: 999,
                   showBoxShadow: true,
                   border: BoxBorder.all(
-                    color: context.primaryColor,
-                    width: 2,
+                    color: const Color(0xFFFF8A00),
+                    width: 1,
                   ),
                   imageUrl: session.photoUrl ?? '',
                   imageAlt: session.name,
@@ -90,7 +89,7 @@ class ProfilePage extends ConsumerWidget {
           ProfileOptions(
             items: [
               ProfileItem(
-                icon: Icons.inventory_2_outlined,
+                icon: CupertinoIcons.cube_box,
                 title: 'Meus itens',
                 subtitle: 'Itens vinculados ao seu perfil',
                 press: () => context.push(
@@ -104,7 +103,7 @@ class ProfilePage extends ConsumerWidget {
                 ),
               ),
               ProfileItem(
-                icon: Icons.report_outlined,
+                icon: CupertinoIcons.doc_text,
                 title: 'Minhas ocorrências',
                 subtitle: 'Histórico de registros feitos por você',
                 press: () => context.push(
@@ -114,11 +113,11 @@ class ProfilePage extends ConsumerWidget {
             ],
           ),
           const SizedBox(height: SpacingSize.lg),
-          const TitleSection(title: 'Explorar'),
+          // const TitleSection(title: 'Explorar'),
           ProfileOptions(
             items: [
               ProfileItem(
-                icon: Icons.search_rounded,
+                icon: CupertinoIcons.search,
                 title: 'Consultar',
                 subtitle: 'Pesquise ocorrências registradas',
                 press: () => context.push(
@@ -133,12 +132,12 @@ class ProfilePage extends ConsumerWidget {
                 press: () => context.push(SOSRouter.path),
               ),
               ProfileItem(
-                icon: Icons.help_outline,
+                icon: CupertinoIcons.question_circle,
                 title: 'Perguntas frequentes',
                 press: () => context.push(FaqPageRouter.path),
               ),
               ProfileItem(
-                icon: Icons.info_outline_rounded,
+                icon: CupertinoIcons.info,
                 title: 'Quem somos',
                 subtitle: 'Conheça mais sobre o app',
                 press: () => context.push(AboutRouter.path),
@@ -146,7 +145,7 @@ class ProfilePage extends ConsumerWidget {
             ],
           ),
           const SizedBox(height: SpacingSize.lg),
-          const TitleSection(title: 'Preferências'),
+          // const TitleSection(title: 'Preferências'),
           ProfileOptions(
             items: [
               // ProfileItem(
@@ -155,7 +154,7 @@ class ProfilePage extends ConsumerWidget {
               //   trailing: Switch(value: false, onChanged: null),
               // ),
               ProfileItem(
-                icon: Icons.star_border_rounded,
+                icon: CupertinoIcons.star_circle,
                 title: 'Avaliar o app',
                 subtitle: 'Ajude-nos a melhorar',
                 badge: 'Novo',
@@ -165,28 +164,28 @@ class ProfilePage extends ConsumerWidget {
             ],
           ),
           const SizedBox(height: SpacingSize.lg),
-          const TitleSection(title: 'Mídias socias'),
-          const ProfileOptions(
-            items: [
-              ProfileItem(
-                icon: Icons.facebook_outlined,
-                title: 'Facebook',
-                subtitle: 'Acompanhe as ocorrências da sua região',
-              ),
-              ProfileItem(
-                icon: Icons.mic_external_off,
-                title: 'Instagram',
-                subtitle: 'Fique por dentro dos alertas e atualizações',
-                isInstragram: true,
-              ),
-            ],
-          ),
-          const SizedBox(height: SpacingSize.lg),
-          const TitleSection(title: 'Sistema'),
+          // const TitleSection(title: 'Mídias socias'),
+          // const ProfileOptions(
+          //   items: [
+          //     ProfileItem(
+          //       icon: Icons.facebook_outlined,
+          //       title: 'Facebook',
+          //       subtitle: 'Acompanhe as ocorrências da sua região',
+          //     ),
+          //     ProfileItem(
+          //       icon: Icons.mic_external_off,
+          //       title: 'Instagram',
+          //       subtitle: 'Fique por dentro dos alertas e atualizações',
+          //       isInstragram: true,
+          //     ),
+          //   ],
+          // ),
+          // const SizedBox(height: SpacingSize.lg),
+          // const TitleSection(title: 'Sistema'),
           ProfileOptions(
             items: [
               const ProfileItem(
-                icon: Icons.info_outline,
+                icon: CupertinoIcons.info_circle_fill,
                 title: 'Versão do app',
                 subtitle: '1.0.0',
                 hideChevron: true,

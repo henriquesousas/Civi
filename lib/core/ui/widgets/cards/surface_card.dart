@@ -1,4 +1,3 @@
-import 'package:deehelp/core/extension/exports_extension.dart';
 import 'package:deehelp/core/theme/export_theme.dart';
 import 'package:flutter/material.dart';
 
@@ -36,15 +35,20 @@ class SurfaceCard extends StatelessWidget {
             horizontal: LayoutSpacingSize.card,
             vertical: LayoutSpacingSize.card,
           ),
+      // decoration: BoxDecoration(
+      //   color: context.surfaceColor,
+      //   borderRadius: BorderRadius.circular(RadiusSize.lg),
+      //   border: border ??
+      //       Border.all(
+      //         color: context.outlineVariantColor,
+      //         width: 1,
+      //       ),
+      //   boxShadow: const [shadowSoft],
+      // ),
       decoration: BoxDecoration(
-        color: context.surfaceColor,
-        borderRadius: BorderRadius.circular(RadiusSize.lg),
-        border: border ??
-            Border.all(
-              color: context.outlineVariantColor,
-              width: 1,
-            ),
-        boxShadow: const [shadowSoft],
+        color: const Color(0xFF101012),
+        borderRadius: BorderRadius.circular(24),
+        border: Border.all(color: const Color(0xFF1D1D21)),
       ),
       child: child,
     );

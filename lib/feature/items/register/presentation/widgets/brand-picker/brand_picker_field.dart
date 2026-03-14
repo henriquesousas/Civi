@@ -3,6 +3,7 @@ import 'package:deehelp/core/theme/export_theme.dart';
 import 'package:deehelp/core/ui/styles/app_text_style.dart';
 import 'package:deehelp/feature/items/register/presentation/widgets/item_highticon.dart';
 import 'package:deehelp/feature/items/register/presentation/widgets/brand-picker/brand_bottom_sheet.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class BrandPickerField extends StatelessWidget {
@@ -30,7 +31,7 @@ class BrandPickerField extends StatelessWidget {
           context: context,
           backgroundColor: Colors.transparent,
           isScrollControlled: true,
-          builder: (_) => BrandBottomSheet(
+          builder: (_) => BrandBottomSheetV2(
             current: value,
             options: (options.toSet().toList()..sort()),
           ),
@@ -40,7 +41,9 @@ class BrandPickerField extends StatelessWidget {
       borderRadius: BorderRadius.circular(RadiusSize.md),
       child: Row(
         children: [
-          const ItemHighticon(iconData: Icons.branding_watermark_outlined),
+          const ItemHighticon(
+            iconData: CupertinoIcons.tag,
+          ),
           const SizedBox(width: SpacingSize.md),
           Expanded(
             child: Container(

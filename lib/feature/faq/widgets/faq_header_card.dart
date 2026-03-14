@@ -9,14 +9,38 @@ class FaqHeaderCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
+      // decoration: BoxDecoration(
+      //   color: context.surface,
+      //   borderRadius: BorderRadius.circular(RadiusSize.lg),
+      // boxShadow: const [
+      //   BoxShadow(
+      //     color: Color(0x1F2157F8),
+      //     blurRadius: 18,
+      //     offset: Offset(0, 10),
+      //   ),
+      // ],
+      // ),
+      // decoration: BoxDecoration(
+      //   color: const Color(0xFF101012),
+      //   borderRadius: BorderRadius.circular(24),
+      //   border: Border.all(color: const Color(0xFF1D1D21)),
+      //   boxShadow: const [
+      //     BoxShadow(
+      //       color: Color(0x1F2157F8),
+      //       blurRadius: 18,
+      //       offset: Offset(0, 10),
+      //     ),
+      //   ],
+      // ),
       decoration: BoxDecoration(
-        color: context.surface,
+        color: context.secondaryContainer,
         borderRadius: BorderRadius.circular(RadiusSize.lg),
+        border: Border.all(color: context.outlineVariantColor),
         boxShadow: const [
           BoxShadow(
-            color: Color(0x1F2157F8),
-            blurRadius: 18,
-            offset: Offset(0, 10),
+            color: Color(0x142B5BEE),
+            blurRadius: 16,
+            offset: Offset(0, 8),
           ),
         ],
       ),

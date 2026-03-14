@@ -40,7 +40,7 @@ class SimpleTextField extends StatelessWidget {
                 errorText: error,
                 labelStyle: TextStyle(
                   color: context.secondaryColor,
-                  fontWeight: FontWeight.w800,
+                  fontWeight: FontWeight.w500,
                 ),
                 filled: true,
                 // fillColor: const Color(0xFFF5F7FD),

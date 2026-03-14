@@ -309,7 +309,7 @@ class _MapaPageState extends ConsumerState<MapaPage> {
           AnimatedPositioned(
             duration: const Duration(milliseconds: 300),
             curve: Curves.easeOut,
-            right: 16,
+            right: 10,
             // bottom: _showIncidentCards ? 240.h : 100.h,
             bottom: _getGpsHeight,
             child: Column(
@@ -325,8 +325,11 @@ class _MapaPageState extends ConsumerState<MapaPage> {
 
                   // backgroundColor: context.primaryColor,
                   backgroundColor:
-                      context.secondaryColor.withValues(alpha: 0.2),
+                      context.secondaryColor.withValues(alpha: 0.1),
                   elevation: 8,
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(999),
+                  ),
                   onPressed: () => _goToMyLocation(currenLocation),
                   child: const Icon(
                     Icons.navigation,
@@ -358,23 +361,37 @@ class _MapaPageState extends ConsumerState<MapaPage> {
               child: AnimatedOpacity(
                 duration: const Duration(milliseconds: 250),
                 opacity: _showIncidentCards ? 0 : 1,
-                child: const Positioned(
+                child: Positioned(
                   // child: MapLayersBottomSheet(
                   //   initiallyExpanded: _showIncidentCards,
                   //   onTapHeader: (opened) {
-                  //     _isCardOpened = opened;
-                  //     if (opened) {
-                  //       setState(() {
-                  //         _gpsHeight = GPSHeight.min;
-                  //       });
-                  //     } else {
-                  //       setState(() {
-                  //         _gpsHeight = GPSHeight.normal;
-                  //       });
-                  //     }
-                  //   },
+                  //   _isCardOpened = opened;
+                  //   if (opened) {
+                  //     setState(() {
+                  //       _gpsHeight = GPSHeight.min;
+                  //     });
+                  //   } else {
+                  //     setState(() {
+                  //       _gpsHeight = GPSHeight.normal;
+                  //     });
+                  //   }
+                  // },
                   // ),
-                  child: MapLayersBottomSheet2(),
+                  child: MapLayersBottomSheet2(
+                    initiallyExpanded: _showIncidentCards,
+                    onTapHeader: (opened) {
+                      _isCardOpened = opened;
+                      if (opened) {
+                        setState(() {
+                          _gpsHeight = GPSHeight.min;
+                        });
+                      } else {
+                        setState(() {
+                          _gpsHeight = GPSHeight.normal;
+                        });
+                      }
+                    },
+                  ),
                   // child: ExpandableIncidentCard(
                   //   startOpened: _showIncidentCards,
                   //   title: 'Osasco - SP',

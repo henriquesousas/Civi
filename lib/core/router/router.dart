@@ -95,7 +95,7 @@ var goRouterProvider = Provider<GoRouter>(
               // child: const MapPage2(),
               // child: const MounsHouse(),
               // child: const CardBottom(),
-              child: TestPage5Dark()
+              child: TesteProfile()
               // child: ItemDetailsPage(
               //   item: ItemDetailsModel(
               //     name: 'Citroen C3 Tendance',

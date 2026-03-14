@@ -3,6 +3,7 @@ import 'package:deehelp/core/theme/export_theme.dart';
 import 'package:deehelp/core/ui/styles/export_style.dart';
 import 'package:deehelp/feature/profile/profile_item.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 
 import '../../../core/ui/widgets/icon/export_icon.dart';
@@ -54,10 +55,17 @@ class ProfileTile extends StatelessWidget {
                     children: [
                       Text(
                         item.title,
-                        style: context.appText.headermd.copyWith(
-                          fontWeight: FontWeight.w800,
-                          color: context.onSurface,
+                        style: TextStyle(
+                          color: Colors.white,
+                          fontSize: 14.sp,
+                          fontWeight: FontWeight.w600,
+                          letterSpacing: -0.8,
+                          height: 1.0,
                         ),
+                        // style: context.appText.headermd.copyWith(
+                        //   fontWeight: FontWeight.w800,
+                        //   color: context.onSurface,
+                        // ),
                       ),
                       if (item.badge != null) ...[
                         const SizedBox(width: 8),

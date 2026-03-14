@@ -14,17 +14,17 @@ class HeaderSummary extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       padding: const EdgeInsets.all(LayoutSpacingSize.card),
-      decoration: BoxDecoration(
-        color: context.surfaceColor,
-        borderRadius: BorderRadius.circular(RadiusSize.xl),
-        boxShadow: const [
-          BoxShadow(
-            color: Color(0x142B5BEE),
-            blurRadius: 16,
-            offset: Offset(0, 8),
-          ),
-        ],
-      ),
+      // decoration: BoxDecoration(
+      //   color: context.surfaceColor,
+      //   borderRadius: BorderRadius.circular(RadiusSize.xl),
+      //   boxShadow: const [
+      //     BoxShadow(
+      //       color: Color(0x142B5BEE),
+      //       blurRadius: 16,
+      //       offset: Offset(0, 8),
+      //     ),
+      //   ],
+      // ),
       child: Row(
         children: [
           GestureDetector(
@@ -33,7 +33,7 @@ class HeaderSummary extends StatelessWidget {
               width: IconSizes.xxl,
               height: IconSizes.xxl,
               decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(999),
+                borderRadius: BorderRadius.circular(10),
                 gradient: LinearGradient(
                   colors: [
                     // Color(0xFF2B5BEE),
@@ -54,9 +54,9 @@ class HeaderSummary extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  'Seus itens cadastrados',
+                  'Toque para adiconar um novo',
                   style: context.appText.headermd.copyWith(
-                    fontWeight: FontWeight.w800,
+                    fontWeight: FontWeight.w500,
                   ),
                 ),
                 const SizedBox(height: SpacingSize.xs),
