@@ -85,7 +85,7 @@ class StatusBadgeV2 extends StatelessWidget {
         style: TextStyle(
           color: color,
           fontWeight: FontWeight.w700,
-          fontSize: context.safeSp(11),
+          fontSize: context.safeSp(9),
         ),
       ),
     );

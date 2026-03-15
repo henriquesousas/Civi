@@ -29,7 +29,8 @@ class ActionTile extends StatelessWidget {
         padding: const EdgeInsets.all(SpacingSize.md),
         decoration: BoxDecoration(
           color: isPrimary
-              ? context.primaryColor.withValues(alpha: 0.08)
+              // ? context.primaryColor.withValues(alpha: 0.08)
+              ? AppColors.primaryColor.withValues(alpha: 0.08)
               : const Color(0xFFF5F7FD),
           borderRadius: BorderRadius.circular(18),
           border: Border.all(

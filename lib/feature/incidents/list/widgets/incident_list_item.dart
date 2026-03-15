@@ -1,6 +1,10 @@
+import 'package:deehelp/core/extension/date_extension.dart';
 import 'package:deehelp/core/extension/exports_extension.dart';
 import 'package:deehelp/core/theme/export_theme.dart';
 import 'package:deehelp/core/ui/widgets/badge/export_badge.dart';
+import 'package:deehelp/core/ui/widgets/image/custom_network_image.dart';
+import 'package:deehelp/core/utils/enum_utils.dart';
+import 'package:deehelp/feature/incidents/list/widgets/fake_incident_list_model.dart';
 import 'package:deehelp/feature/incidents/list/widgets/incident_date.dart';
 import 'package:deehelp/feature/incidents/list/widgets/incident_image.dart';
 import 'package:deehelp/module/incident/domain/usecase/incident_output.dart';
@@ -11,6 +15,7 @@ import 'package:deehelp/feature/incidents/list/widgets/incident_how_to.dart';
 import 'package:deehelp/feature/incidents/list/widgets/incident_title.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class IncidentListItem extends StatelessWidget {
   final IncidentOutput incident;
@@ -104,6 +109,218 @@ class IncidentListItem extends StatelessWidget {
             ),
           ),
         ),
+      ),
+    );
+  }
+}
+
+class IncidentListItemV2 extends StatelessWidget {
+  final IncidentOutput incident;
+  final EdgeInsets? padding;
+  final EdgeInsets? margin;
+  final double width;
+  final VoidCallback? onPressed;
+  final bool isPress;
+  final bool isLoading;
+
+  const IncidentListItemV2({
+    super.key,
+    required this.incident,
+    this.width = double.infinity,
+    this.onPressed,
+    this.isPress = false,
+    this.padding,
+    this.margin,
+    this.isLoading = false,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    // const accent = Color(0xFF8F98FF);
+
+    return InkWell(
+      onTap: onPressed != null
+          ? () {
+              HapticFeedback.lightImpact();
+              onPressed!();
+            }
+          : null,
+      child: Padding(
+        padding: const EdgeInsets.fromLTRB(20, 10, 10, 10),
+        child: Row(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Expanded(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Row(
+                    children: [
+                      Flexible(
+                        child: Text(
+                          'Roubado ${incident.createdAt.timeAgo()}',
+                          maxLines: 2,
+                          style: TextStyle(
+                            color: Colors.white70,
+                            fontSize: 11.sp,
+                            fontWeight: FontWeight.w500,
+                          ),
+                          overflow: TextOverflow.ellipsis,
+                        ),
+                      ),
+                    ],
+                  ),
+                  const SizedBox(height: 5),
+                  Text(
+                    '${incident.local?.city} · ${incident.local?.state}  ${incident.local?.address ?? ''}',
+                    maxLines: 2,
+                    style: TextStyle(
+                      color: Colors.white70,
+                      fontSize: 11.sp,
+                      fontWeight: FontWeight.w500,
+                    ),
+                    overflow: TextOverflow.ellipsis,
+                  ),
+                  const SizedBox(height: 14),
+                  Text(
+                    incident.product.name,
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 18.sp,
+                      fontWeight: FontWeight.w800,
+                      letterSpacing: -0.8,
+                      height: 1.0,
+                    ),
+                  ),
+                  const SizedBox(height: 10),
+                  Text(
+                    incident.product.type != ItemType.phone.name
+                        ? 'Placa: ${incident.product.code} · ${incident.product.color}'
+                        : 'IMEI: ${incident.product.code} · ${incident.product.color}',
+                    style: TextStyle(
+                      // color: const Color(0xFFE7E7EA),
+                      color: Colors.white,
+                      fontSize: 13.sp,
+                      fontWeight: FontWeight.w400,
+                      height: 1.3,
+                    ),
+                  ),
+                  const SizedBox(height: 20),
+                  IncidentHowTo(howTo: incident.howTo),
+                  // const SizedBox(height: 20),
+                  // StatusBadgeV2(
+                  //     status: EnumUtils.fromString(
+                  //         ItemStatus.values, incident.status.name)),
+                ],
+              ),
+            ),
+            Column(
+              children: [
+                if (incident.product.type == ItemType.phone.name) ...[
+                  const BlurredLockedImage(),
+                  const SizedBox(height: 10),
+                  StatusBadgeV2(
+                    status: EnumUtils.fromString(
+                        ItemStatus.values, incident.status.name),
+                  ),
+                ] else ...[
+                  CustomNetworkImage(
+                    width: 90.w,
+                    height: 90.h,
+                    radius: 22,
+                    imageUrl: incident.product.images.isNotEmpty
+                        ? incident.product.images[0].value
+                        : null,
+                    customErrorWidget: Icon(
+                      Icons.phone_android,
+                      size: IconSizes.xl,
+                      color: context.onSurface.withValues(alpha: 0.5),
+                    ),
+                  ),
+                  const SizedBox(height: 10),
+                  StatusBadgeV2(
+                    status: EnumUtils.fromString(
+                        ItemStatus.values, incident.status.name),
+                  ),
+                  // InkWell(
+                  //   onTap: () {},
+                  //   borderRadius: BorderRadius.circular(12),
+                  //   child: const Padding(
+                  //     padding: EdgeInsets.symmetric(horizontal: 4, vertical: 4),
+                  //     child: Row(
+                  //       children: [
+                  //         Icon(
+                  //           Icons.reply_rounded,
+                  //           color: Colors.white,
+                  //           size: 21,
+                  //         ),
+                  //         SizedBox(width: 8),
+                  //         Text(
+                  //           'Share',
+                  //           style: TextStyle(
+                  //             color: Colors.white,
+                  //             fontSize: 15,
+                  //             fontWeight: FontWeight.w600,
+                  //           ),
+                  //         ),
+                  //       ],
+                  //     ),
+                  //   ),
+                  // ),
+                ],
+              ],
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+class BlurredLockedImage extends StatelessWidget {
+  const BlurredLockedImage({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      width: 90.w,
+      height: 90.h,
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(22),
+        gradient: const LinearGradient(
+          begin: Alignment.topLeft,
+          end: Alignment.bottomRight,
+          colors: [
+            Color(0xFFE8D7C2),
+            Color(0xFFB59E8D),
+            Color(0xFF4C5672),
+            Color(0xFF1B2338),
+          ],
+        ),
+      ),
+      child: Stack(
+        alignment: Alignment.center,
+        children: [
+          Container(
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(22),
+              color: Colors.black.withValues(alpha: 0.18),
+            ),
+          ),
+          Container(
+            width: 56.w,
+            height: 56.h,
+            decoration: BoxDecoration(
+              color: const Color(0xFF8EA2FF).withValues(alpha: 0.16),
+              borderRadius: BorderRadius.circular(100),
+            ),
+            child: Icon(
+              Icons.phone_android,
+              color: const Color(0xFF9FB1FF),
+              size: 22.w,
+            ),
+          ),
+        ],
       ),
     );
   }

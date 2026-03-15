@@ -35,7 +35,7 @@ class SupabaseIncidentRepository extends IncidentRepository {
       "how_to": dto.howTo,
       "city": dto.city,
       "state": dto.state,
-      "approximate_address": dto.address,
+      "address": dto.address,
       'status': dto.status.name,
       // 'visibility': dto.visibility,
     };

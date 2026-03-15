@@ -103,7 +103,18 @@ class _UpdateIncidentPageState extends ConsumerState<UpdateIncidentPage> {
               color: state.updatedValue!.visibilty
                   ? AppColors.success
                   : AppColors.grey,
-              size: IconSizes.sm,
+              size: IconSizes.md,
+            ),
+          ),
+          IconButton(
+            onPressed: () => UrlLauncherUtils.shareIncident(
+              context,
+              state.updatedValue!.alertId,
+              state.updatedValue!.createdAt,
+            ),
+            icon: Icon(
+              Icons.share,
+              size: IconSizes.md,
             ),
           )
         ],
@@ -135,7 +146,8 @@ class _UpdateIncidentPageState extends ConsumerState<UpdateIncidentPage> {
                   ],
                 ),
               ),
-              StatusBadge(style: StatusStyle.from(state.updatedValue!.status)),
+              // StatusBadge(style: StatusStyle.from(state.updatedValue!.status)),
+              StatusBadgeV2(status: state.updatedValue!.status),
               // _StatusPill(status: status),
             ],
           ),
@@ -231,13 +243,20 @@ class _UpdateIncidentPageState extends ConsumerState<UpdateIncidentPage> {
                       width: double.infinity,
                       padding: const EdgeInsets.all(14),
                       decoration: BoxDecoration(
-                        color: const Color(0xFFF5F7FD),
+                        // color: const Color(0xFFF5F7FD),
+                        color: AppColors.primaryColor.withValues(alpha: 0.08),
                         borderRadius: BorderRadius.circular(18),
-                        border: Border.all(color: const Color(0xFFE6EAF6)),
+                        // border: Border.all(color: const Color(0xFFE6EAF6)),
+                        border: Border.all(
+                            color:
+                                AppColors.primaryColor.withValues(alpha: 0.1),
+                            width: 1),
                       ),
                       child: Text(
                         state.updatedValue!.product.code,
-                        style: context.appText.headermd,
+                        style: context.appText.headermd.copyWith(
+                          color: Colors.grey,
+                        ),
                       ),
                     ),
                     const SizedBox(height: SpacingSize.md),
@@ -403,55 +422,52 @@ class _UpdateIncidentPageState extends ConsumerState<UpdateIncidentPage> {
           ),
           const SizedBox(height: SpacingSize.lg),
           const SectionTitle('Ações'),
-          PageCard(
-            padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 5),
-            child: Column(
-              children: [
-                ActionTile(
-                  icon: Icons.local_police_outlined,
-                  title: 'Chamar a polícia',
-                  subtitle: 'Discar 190',
-                  onTap: () => UrlLauncherUtils.makePhoneCall("190"),
-                  isPrimary: true,
-                ),
-                const SizedBox(height: SpacingSize.lg),
-                Row(
-                  children: [
-                    Expanded(
-                      child: ButtonOutline(
-                        press: () => UrlLauncherUtils.launchWhatsIncidentDenunc(
-                          alertId: state.updatedValue!.alertId,
-                          context: context,
-                        ),
-                        text: "WhatsApp",
-                        icon: Icon(
-                          Icons.chat_bubble_outline,
-                          color: context.onSurfaceVariant,
-                        ),
-                      ),
-                    ),
-                    const SizedBox(width: SpacingSize.md),
-                    Expanded(
-                      child: ButtonOutline(
-                        bgColor: context.primaryColor,
-                        borderColor: context.primaryColor,
-                        textColor: context.surface,
-                        press: () => UrlLauncherUtils.shareIncident(
-                          context,
-                          state.updatedValue!.alertId,
-                          state.updatedValue!.createdAt,
-                        ),
-                        text: "Compartilhar",
-                        icon: Icon(
-                          Icons.share,
-                          color: context.surface,
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
-              ],
-            ),
+          Column(
+            children: [
+              ActionTile(
+                icon: Icons.local_police_outlined,
+                title: 'Chamar a polícia',
+                subtitle: 'Discar 190',
+                onTap: () => UrlLauncherUtils.makePhoneCall("190"),
+                isPrimary: true,
+              ),
+              // const SizedBox(height: SpacingSize.lg),
+              // Row(
+              //   children: [
+              //     Expanded(
+              //       child: ButtonOutline(
+              //         press: () => UrlLauncherUtils.launchWhatsIncidentDenunc(
+              //           alertId: state.updatedValue!.alertId,
+              //           context: context,
+              //         ),
+              //         text: "WhatsApp",
+              //         icon: Icon(
+              //           Icons.chat_bubble_outline,
+              //           color: context.onSurfaceVariant,
+              //         ),
+              //       ),
+              //     ),
+              //     const SizedBox(width: SpacingSize.md),
+              //     Expanded(
+              //       child: ButtonOutline(
+              //         bgColor: context.primaryColor,
+              //         borderColor: context.primaryColor,
+              //         textColor: context.surface,
+              //         press: () => UrlLauncherUtils.shareIncident(
+              //           context,
+              //           state.updatedValue!.alertId,
+              //           state.updatedValue!.createdAt,
+              //         ),
+              //         text: "Compartilhar",
+              //         icon: Icon(
+              //           Icons.share,
+              //           color: context.surface,
+              //         ),
+              //       ),
+              //     ),
+              //   ],
+              // ),
+            ],
           ),
           const SizedBox(height: SpacingSize.lg),
           if (isOwner) ...[

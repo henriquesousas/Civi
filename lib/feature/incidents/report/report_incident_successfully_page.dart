@@ -10,10 +10,10 @@ import 'package:deehelp/feature/incidents/report/widgets/glass_header.dart';
 import 'package:deehelp/feature/incidents/report/widgets/glass_inline_info.dart';
 import 'package:deehelp/feature/incidents/report/widgets/mini_pill.dart';
 import 'package:deehelp/feature/incidents/report/widgets/register/glass_card.dart';
-import 'package:deehelp/feature/incidents/report/widgets/speech_bubble.dart';
 import 'package:deehelp/feature/incidents/report/widgets/success/regiter_incident_success_args.dart';
 import 'package:deehelp/feature/items/item_type.dart';
 import 'package:deehelp/feature/items/success/bullet.dart';
+import 'package:deehelp/feature/items/success/top_bar_v2.dart';
 import 'package:deehelp/module/incident/domain/entity/incident_local.dart';
 import 'package:deehelp/core/utils/url_launcher_utils.dart';
 import 'package:flutter/material.dart';
@@ -28,58 +28,31 @@ class ReportIncidentSuccessfullyPage extends StatelessWidget {
     required this.args,
   }) : super(key: key);
 
+  bool get _isPhone => args.itemType == ItemType.phone;
+
   @override
   Widget build(BuildContext context) {
+    final isDark = Theme.of(context).brightness == Brightness.dark;
+
+    final backgroundColor =
+        isDark ? const Color(0xFF050816) : AppColors.primaryColor;
+
+    final secondaryText = Colors.white.withValues(alpha: 0.82);
+
     return Scaffold(
       // backgroundColor: context.primaryColor,
-      backgroundColor: Theme.of(context).brightness == Brightness.dark
-          ? Colors.black
-          : AppColors.primaryColor,
+      backgroundColor: backgroundColor,
       body: SafeArea(
         child: DecorativeBubblesBackground(
           child: Stack(
             children: [
               Padding(
-                padding: const EdgeInsets.fromLTRB(8, 12, 8, 18),
+                padding: EdgeInsets.fromLTRB(16.w, 14.h, 16.w, 18.h),
                 child: Column(
                   children: [
-                    // Row(
-                    //   children: [
-                    //     GestureDetector(
-                    //       onTap: () => context.pop(),
-                    //       child: HighlightIcon(
-                    //         containerSize: IconSizes.xxl,
-                    //         radius: RadiusSize.md,
-                    //         border: Border.all(
-                    //             color: Colors.white.withValues(alpha: 0.18)),
-                    //         bgColor: AppColors.primaryColorVariant
-                    //             .withValues(alpha: 0.7),
-                    //         icon: const Icon(
-                    //           Icons.close,
-                    //           color: Colors.white,
-                    //         ),
-                    //       ),
-                    //     ),
-                    //     const Spacer(),
-                    //     GestureDetector(
-                    //       onTap: () => UrlLauncherUtils.shareIncident(
-                    //           context, args.alertId, args.createdAt),
-                    //       child: HighlightIcon(
-                    //         containerSize: IconSizes.xxl,
-                    //         radius: RadiusSize.md,
-                    //         border: Border.all(
-                    //             color: Colors.white.withValues(alpha: 0.18)),
-                    //         bgColor: AppColors.primaryColorVariant
-                    //             .withValues(alpha: 0.7),
-                    //         icon: const Icon(
-                    //           Icons.share_outlined,
-                    //           color: Colors.white,
-                    //         ),
-                    //       ),
-                    //     ),
-                    //   ],
-                    // ),
-                    // const SizedBox(height: SpacingSize.lg),
+                    TopBarV2(
+                      onClose: () => context.pop(),
+                    ),
                     Expanded(
                       child: ListView(
                         physics: const BouncingScrollPhysics(),
@@ -88,96 +61,20 @@ class ReportIncidentSuccessfullyPage extends StatelessWidget {
                           //   message:
                           //       "Estou triste com essa situação... 😔\nMas vamos agir rápido para resolver.",
                           // ),
-                          // const SizedBox(height: SpacingSize.lg),
-                          Lottie.asset(
-                            "assets/lottie/loader_success.json",
-                            width: 180.w,
-                            height: 180.h,
-                            repeat: false,
-                          ),
-                          Text(
-                            'Incidente reportado!',
-                            textAlign: TextAlign.center,
-                            style: context.appText.headerxl.copyWith(
-                              color: Colors.white,
-                              letterSpacing: 0.2,
-                            ),
+                          const SizedBox(height: SpacingSize.lg),
+                          const _SuccessHero(
+                            title: 'Incidente reportado',
+                            subtitle:
+                                'Agora vamos aumentar as chances de recuperação com os próximos passos recomendados.',
                           ),
                           const SizedBox(height: SpacingSize.lg),
-                          Text(
-                            "Agora vamos aumentar as chances de recuperação seguindo os próximos passos",
-                            textAlign: TextAlign.center,
-                            style: context.appText.bodySmall.copyWith(
-                              fontWeight: FontWeight.w500,
-                              color: Colors.white.withValues(alpha: 0.92),
-                              height: 1.35,
-                            ),
+                          _IncidentSummaryCard(
+                            itemName: args.item.name,
+                            locationText: _getLocation(args.local),
+                            alertId: args.alertId,
+                            itemType: args.itemType,
                           ),
-                          const SizedBox(height: SpacingSize.lg),
-                          GlassCard(
-                            child: Padding(
-                              padding: const EdgeInsets.all(16),
-                              child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  Text(
-                                    args.item.name,
-                                    style: context.appText.headermd.copyWith(
-                                      color: Colors.white,
-                                    ),
-                                  ),
-                                  const SizedBox(height: SpacingSize.xs),
-                                  Text(
-                                    _getLocation(args.local),
-                                    style: context.appText.caption.copyWith(
-                                      color:
-                                          Colors.white.withValues(alpha: 0.90),
-                                      fontWeight: FontWeight.w600,
-                                    ),
-                                  ),
-                                  const SizedBox(height: SpacingSize.md),
-                                  Wrap(
-                                    spacing: 10,
-                                    runSpacing: 10,
-                                    children: [
-                                      MiniPill(
-                                        icon: Icons.fingerprint_outlined,
-                                        text: args.alertId,
-                                      ),
-                                      // MiniPill(
-                                      //   icon: Icons.flash_on_outlined,
-                                      //   text: args.typeAlert ==
-                                      //           TypeAlert.immediately
-                                      //       ? 'Imediato'
-                                      //       : 'Detalhado',
-                                      // ),
-                                      MiniPill(
-                                        icon: args.itemType.icon,
-                                        text: args.itemType != ItemType.phone
-                                            ? 'Veículo'
-                                            : 'Celular',
-                                      ),
-                                    ],
-                                  ),
-                                  // if (args.itemType == ItemType.phone &&
-                                  //     (imei?.isNotEmpty ?? false)) ...[
-                                  //   const SizedBox(height: 12),
-                                  //   _GlassInlineInfo(
-                                  //     icon: Icons.dialpad_outlined,
-                                  //     title: 'IMEI',
-                                  //     subtitle: imei!,
-                                  //     trailing: _InlineChipButton(
-                                  //       label: 'Copiar',
-                                  //       icon: Icons.copy_outlined,
-                                  //       onTap: () => _copyImei(context),
-                                  //     ),
-                                  //   ),
-                                  // ],
-                                ],
-                              ),
-                            ),
-                          ),
-                          const SizedBox(height: SpacingSize.md),
+                          SizedBox(height: 14.h),
                           const GlassCard(
                             child: Padding(
                               padding: EdgeInsets.all(14),
@@ -185,27 +82,25 @@ class ReportIncidentSuccessfullyPage extends StatelessWidget {
                                 icon: Icons.assignment_turned_in_outlined,
                                 title: 'Faça o boletim de ocorrência',
                                 subtitle:
-                                    'Recomendamos registrar o BO o mais rápido possível. Isso ajuda na investigação e aumenta as chances de recuperação.',
+                                    'Registrar o BO o quanto antes ajuda na investigação e aumenta as chances de recuperação.',
                               ),
                             ),
                           ),
-
+                          SizedBox(height: 12.h),
                           const SizedBox(height: SpacingSize.md),
-
-                          // ✅ Safety note
                           const GlassCard(
                             child: Padding(
-                              padding: EdgeInsets.all(14),
+                              padding: EdgeInsets.all(12),
                               child: GlassInlineInfo(
                                 icon: Icons.health_and_safety_outlined,
                                 title: 'Cuide da sua segurança',
                                 subtitle:
-                                    'Se você estiver em risco, procure um local seguro e acione ajuda imediatamente.',
+                                    'Se você ainda estiver em risco, procure um local seguro e acione ajuda imediatamente.',
                               ),
                             ),
                           ),
-                          const SizedBox(height: SpacingSize.md),
-
+                          SizedBox(height: 14.h),
+                          const SizedBox(height: SpacingSize.xs),
                           GlassCard(
                             child: Padding(
                               padding: const EdgeInsets.all(14),
@@ -235,44 +130,40 @@ class ReportIncidentSuccessfullyPage extends StatelessWidget {
                               ),
                             ),
                           ),
-
-                          const SizedBox(height: SpacingSize.md),
-
-                          // ✅ Contextual actions
+                          SizedBox(height: 14.h),
                           GlassCard(
                             child: Padding(
-                              padding: const EdgeInsets.all(14),
+                              padding: EdgeInsets.all(14.r),
                               child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
-                                  if (args.itemType == ItemType.phone) ...[
+                                  const GlassHeader(
+                                    icon: Icons.bolt_outlined,
+                                    title: 'Ações rápidas',
+                                  ),
+                                  SizedBox(height: 14.h),
+                                  if (_isPhone) ...[
                                     ActionRow(
-                                      icon: Icons.lock_outline,
-                                      title:
-                                          'Orientações para bloquear o aparelho',
+                                      icon: Icons.lock_outline_rounded,
+                                      title: 'Bloquear o aparelho',
                                       subtitle:
-                                          'Como proceder com IMEI e operadora',
-                                      onTap: () => {},
+                                          'Veja como proceder com IMEI e operadora',
+                                      onTap: () {},
                                     ),
-                                    const SizedBox(height: 10),
+                                    SizedBox(height: 10.h),
                                   ],
-                                  // if (args.itemType != ItemType.phone) ...[
-                                  //   ActionRow(
-                                  //     icon: Icons.shield_outlined,
-                                  //     title: 'Avisar seguradora/rastreador',
-                                  //     subtitle:
-                                  //         'Entre em contato com seu serviço de proteção',
-                                  //     onTap: () => {},
-                                  //   ),
-                                  //   const SizedBox(height: 10),
-                                  // ],
                                   ActionRow(
                                     icon: Icons.share_outlined,
-                                    title: 'Compartilhar',
-                                    subtitle: 'Ajude a alertar outras pessoas',
+                                    title: 'Compartilhar alerta',
+                                    subtitle:
+                                        'Ajude a alertar outras pessoas da região',
                                     onTap: () => UrlLauncherUtils.shareIncident(
-                                        context, args.alertId, args.createdAt),
+                                      context,
+                                      args.alertId,
+                                      args.createdAt,
+                                    ),
                                   ),
-                                  const SizedBox(height: 10),
+                                  SizedBox(height: 10.h),
                                   ActionRow(
                                     icon: Icons.local_police_outlined,
                                     title: 'Chamar a polícia',
@@ -285,48 +176,41 @@ class ReportIncidentSuccessfullyPage extends StatelessWidget {
                               ),
                             ),
                           ),
-
-                          const SizedBox(height: SpacingSize.md),
-
-                          // ✅ Transparency: what happens now
-                          const GlassCard(
-                            child: Padding(
-                              padding: EdgeInsets.all(14),
-                              child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  GlassHeader(
-                                    icon: Icons.track_changes_outlined,
-                                    title: 'O que acontece agora',
-                                  ),
-                                  SizedBox(height: SpacingSize.md),
-                                  Bullet(
-                                    text:
-                                        'Sua ocorrência foi registrada com sucesso.',
-                                  ),
-                                  Bullet(
-                                    text:
-                                        'Ela poderá passar por validação antes de ganhar maior visibilidade.',
-                                  ),
-                                  Bullet(
-                                    text:
-                                        'Você pode atualizar informações e acompanhar o status.',
-                                  ),
-                                ],
-                              ),
-                            ),
-                          ),
-
-                          const SizedBox(height: SpacingSize.md),
-
-                          // Primary CTA
+                          SizedBox(height: 14.h),
+                          // const GlassCard(
+                          //   child: Padding(
+                          //     padding: EdgeInsets.all(14),
+                          //     child: Column(
+                          //       crossAxisAlignment: CrossAxisAlignment.start,
+                          //       children: [
+                          //         GlassHeader(
+                          //           icon: Icons.track_changes_outlined,
+                          //           title: 'O que acontece agora',
+                          //         ),
+                          //         SizedBox(height: SpacingSize.md),
+                          //         Bullet(
+                          //           text:
+                          //               'Sua ocorrência foi registrada com sucesso.',
+                          //         ),
+                          //         Bullet(
+                          //           text:
+                          //               'Ela poderá passar por validação antes de ganhar maior visibilidade.',
+                          //         ),
+                          //         Bullet(
+                          //           text:
+                          //               'Você pode atualizar informações e acompanhar o status.',
+                          //         ),
+                          //       ],
+                          //     ),
+                          //   ),
+                          // ),
+                          // const SizedBox(height: SpacingSize.md),
                           ButtonOutline(
                             press: () => context.pop(),
                             bgColor: context.primaryColor,
                             textColor: context.surface,
-                            text: "Concluir",
+                            text: "Fechar",
                           ),
-
                           const SizedBox(height: SpacingSize.md),
                         ],
                       ),
@@ -350,90 +234,155 @@ class ReportIncidentSuccessfullyPage extends StatelessWidget {
   }
 }
 
-// class _SpeechBubble extends StatelessWidget {
-//   final String message;
+class _SuccessHero extends StatelessWidget {
+  final String title;
+  final String subtitle;
 
-//   const _SpeechBubble({required this.message});
+  const _SuccessHero({
+    required this.title,
+    required this.subtitle,
+  });
 
-//   @override
-//   Widget build(BuildContext context) {
-//     const borderColor = Colors.white;
-//     const textColor = Colors.white;
+  @override
+  Widget build(BuildContext context) {
+    return GlassCard(
+      child: Padding(
+        padding: EdgeInsets.fromLTRB(20.w, 22.h, 20.w, 20.h),
+        child: Column(
+          children: [
+            Container(
+              width: 132.w,
+              height: 132.w,
+              decoration: BoxDecoration(
+                shape: BoxShape.circle,
+                color: Colors.white.withValues(alpha: 0.07),
+                border: Border.all(
+                  color: Colors.white.withValues(alpha: 0.10),
+                ),
+              ),
+              child: Center(
+                child: Lottie.asset(
+                  "assets/lottie/loader_success.json",
+                  width: 104.w,
+                  height: 104.h,
+                  repeat: false,
+                ),
+              ),
+            ),
+            SizedBox(height: 18.h),
+            Container(
+              padding: EdgeInsets.symmetric(horizontal: 12.w, vertical: 7.h),
+              decoration: BoxDecoration(
+                color: Colors.white.withValues(alpha: 0.08),
+                borderRadius: BorderRadius.circular(999.r),
+                border: Border.all(
+                  color: Colors.white.withValues(alpha: 0.08),
+                ),
+              ),
+              child: Text(
+                'Alerta enviado',
+                style: context.appText.bodySmall.copyWith(
+                  color: Colors.white,
+                  fontWeight: FontWeight.w700,
+                ),
+              ),
+            ),
+            SizedBox(height: 16.h),
+            Text(
+              title,
+              textAlign: TextAlign.center,
+              style: context.appText.headerxl.copyWith(
+                color: Colors.white,
+                fontWeight: FontWeight.w900,
+                height: 1.05,
+                letterSpacing: -0.5,
+              ),
+            ),
+            SizedBox(height: 10.h),
+            Text(
+              subtitle,
+              textAlign: TextAlign.center,
+              style: context.appText.bodySmall.copyWith(
+                color: Colors.white.withValues(alpha: 0.90),
+                fontWeight: FontWeight.w500,
+                height: 1.45,
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
 
-//     return Stack(
-//       clipBehavior: Clip.none,
-//       children: [
-//         /// Caixa principal
-//         Container(
-//           padding: const EdgeInsets.symmetric(
-//             horizontal: 18,
-//             vertical: 16,
-//           ),
-//           decoration: BoxDecoration(
-//             color: Colors.transparent,
-//             borderRadius: BorderRadius.circular(20),
-//             border: Border.all(
-//               color: borderColor.withOpacity(0.9),
-//               width: 1.6,
-//             ),
-//             boxShadow: [
-//               BoxShadow(
-//                 color: Colors.black.withOpacity(0.15),
-//                 blurRadius: 20,
-//                 offset: const Offset(0, 10),
-//               ),
-//             ],
-//           ),
-//           child: Text(
-//             message,
-//             style: const TextStyle(
-//               fontSize: 14,
-//               height: 1.5,
-//               fontWeight: FontWeight.w500,
-//               color: textColor,
-//             ),
-//           ),
-//         ),
+class _IncidentSummaryCard extends StatelessWidget {
+  final String itemName;
+  final String locationText;
+  final String alertId;
+  final ItemType itemType;
 
-//         /// Rabinho transparente com borda
-//         Positioned(
-//           left: -10,
-//           top: 26,
-//           child: CustomPaint(
-//             size: const Size(18, 18),
-//             painter: _BubbleTailPainter(borderColor),
-//           ),
-//         ),
-//       ],
-//     );
-//   }
-// }
+  const _IncidentSummaryCard({
+    required this.itemName,
+    required this.locationText,
+    required this.alertId,
+    required this.itemType,
+  });
 
-// class _BubbleTailPainter extends CustomPainter {
-//   final Color borderColor;
-
-//   _BubbleTailPainter(this.borderColor);
-
-//   @override
-//   void paint(Canvas canvas, Size size) {
-//     final path = Path();
-//     path.moveTo(size.width, 0);
-//     path.lineTo(0, size.height / 2);
-//     path.lineTo(size.width, size.height);
-//     path.close();
-
-//     // Sombra suave
-//     canvas.drawShadow(path, Colors.black.withOpacity(0.15), 6, true);
-
-//     // Apenas borda
-//     final paint = Paint()
-//       ..color = borderColor.withOpacity(0.9)
-//       ..style = PaintingStyle.stroke
-//       ..strokeWidth = 1.6;
-
-//     canvas.drawPath(path, paint);
-//   }
-
-//   @override
-//   bool shouldRepaint(CustomPainter oldDelegate) => false;
-// }
+  @override
+  Widget build(BuildContext context) {
+    return GlassCard(
+      child: Padding(
+        padding: EdgeInsets.all(16.r),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(
+              itemName,
+              style: context.appText.headermd.copyWith(
+                color: Colors.white,
+                fontWeight: FontWeight.w800,
+              ),
+            ),
+            SizedBox(height: 6.h),
+            Row(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Icon(
+                  Icons.location_on_outlined,
+                  color: Colors.white.withValues(alpha: 0.82),
+                  size: 16,
+                ),
+                SizedBox(width: 6.w),
+                Expanded(
+                  child: Text(
+                    locationText,
+                    style: context.appText.caption.copyWith(
+                      color: Colors.white.withValues(alpha: 0.88),
+                      fontWeight: FontWeight.w600,
+                      height: 1.35,
+                    ),
+                  ),
+                ),
+              ],
+            ),
+            SizedBox(height: 14.h),
+            Wrap(
+              spacing: 10,
+              runSpacing: 10,
+              children: [
+                MiniPill(
+                  icon: Icons.fingerprint_outlined,
+                  text: alertId,
+                ),
+                MiniPill(
+                  icon: itemType.icon,
+                  text: itemType == ItemType.phone ? 'Celular' : 'Veículo',
+                ),
+              ],
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}

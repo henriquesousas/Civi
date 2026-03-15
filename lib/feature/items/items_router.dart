@@ -64,7 +64,7 @@ class ItemsRouter {
           path: detailField,
           pageBuilder: (context, state) {
             final EditFieldArgs args = state.extra as EditFieldArgs;
-            return slideTransitionPage(
+            return slideDownToUpPage(
               key: state.pageKey,
               child: ItemEditFieldPageV2(
                 args: args,

@@ -25,7 +25,7 @@ class TextFieldLongText extends StatelessWidget {
       decoration: BoxDecoration(
         color: context.surface,
         borderRadius: BorderRadius.circular(18),
-        border: Border.all(color: const Color(0xFFE6EAF6)),
+        // border: Border.all(color: const Color(0xFFE6EAF6)),
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,

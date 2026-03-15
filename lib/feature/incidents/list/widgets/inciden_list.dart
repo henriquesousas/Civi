@@ -12,22 +12,46 @@ class IncidenList extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    return ListView(
-      padding: const EdgeInsets.fromLTRB(16, 16, 16, 24),
-      children: [
-        ...items.map(
-          (it) => Padding(
-            padding: const EdgeInsets.only(bottom: 12),
-            child: IncidentListItem(
-              incident: it,
-              onPressed: () {
-                ref.watch(incidentSelectedProvider.notifier).state = it;
-                context.push(IncidentRouter.detail);
-              },
-            ),
+    return ListView.separated(
+      physics: const BouncingScrollPhysics(),
+      itemCount: items.length,
+      itemBuilder: (context, index) {
+        final it = items[index];
+        return Padding(
+          padding: const EdgeInsets.only(bottom: 12),
+          child: IncidentListItemV2(
+            incident: it,
+            onPressed: () {
+              ref.watch(incidentSelectedProvider.notifier).state = it;
+              context.push(IncidentRouter.detail);
+            },
           ),
-        ),
-      ],
+        );
+      },
+      separatorBuilder: (BuildContext context, int index) {
+        return const Divider(
+          color: Color(0xFF323234),
+          // color: Colors.grey,
+          height: 1,
+        );
+      },
     );
+    // return ListView(
+    //   padding: const EdgeInsets.fromLTRB(16, 16, 16, 24),
+    //   children: [
+    //     ...items.map(
+    //       (it) => Padding(
+    //         padding: const EdgeInsets.only(bottom: 12),
+    //         child: IncidentListItemV2(
+    //           incident: it,
+    //           onPressed: () {
+    //             ref.watch(incidentSelectedProvider.notifier).state = it;
+    //             context.push(IncidentRouter.detail);
+    //           },
+    //         ),
+    //       ),
+    //     ),
+    //   ],
+    // );
   }
 }

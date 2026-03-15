@@ -58,7 +58,7 @@ class RowItemCardV2 extends StatelessWidget {
                     style: TextStyle(
                       color: Colors.white,
                       fontSize: 18.sp,
-                      fontWeight: FontWeight.w500,
+                      fontWeight: FontWeight.w800,
                       letterSpacing: -0.8,
                       height: 1.0,
                     ),
@@ -78,7 +78,7 @@ class RowItemCardV2 extends StatelessWidget {
                   const SizedBox(height: 20),
                   StatusBadgeV2(
                       status: EnumUtils.fromString(
-                          ItemStatus.values, item.status.name))
+                          ItemStatus.values, item.status.name)),
                 ],
               ),
             ),
@@ -102,6 +102,11 @@ class RowItemCardV2 extends StatelessWidget {
                 ],
               ],
             ),
+            // Divider(
+            //   // color: Color(0xFF1C1C1E),
+            //   color: Colors.grey,
+            //   height: 1,
+            // ),
           ],
         ),
       ),

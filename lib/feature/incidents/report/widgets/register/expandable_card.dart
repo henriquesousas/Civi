@@ -26,12 +26,11 @@ class ExpandableCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final border = selected
-        ? context.primaryColor.withValues(alpha: 0.2)
-        : context.outlineVariantColor;
+    final border =
+        selected ? AppColors.primaryColor : context.outlineVariantColor;
     final bg = selected
         ? context.primaryColor.withValues(alpha: 0.01)
-        : context.surface;
+        : Colors.grey.withValues(alpha: 0.2);
 
     return InkWell(
       borderRadius: BorderRadius.circular(RadiusSize.xl),
@@ -42,7 +41,7 @@ class ExpandableCard extends StatelessWidget {
         decoration: BoxDecoration(
           color: bg,
           borderRadius: BorderRadius.circular(RadiusSize.xl),
-          border: Border.all(color: border),
+          border: Border.all(color: border, width: selected ? 2 : 1),
           boxShadow: const [
             BoxShadow(
               color: Color(0x142B5BEE),

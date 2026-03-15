@@ -25,29 +25,14 @@ class TextFieldCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      padding: const EdgeInsets.fromLTRB(14, 14, 14, 14),
-      decoration: BoxDecoration(
-        // color: Colors.white,
-        color: context.surfaceColor,
-        borderRadius: BorderRadius.circular(RadiusSize.lg),
-        boxShadow: const [
-          BoxShadow(
-            color: Color(0x142B5BEE),
-            blurRadius: 16,
-            offset: Offset(0, 8),
-          ),
-        ],
-      ),
-      child: TextFieldPrimary(
-        hint: hint,
-        controller: controller,
-        onChanged: onChanged,
-        error: error,
-        inputFormatters: formatters,
-        maxLength: maxLength,
-        maxLines: maxLines,
-      ),
+    return TextFieldPrimary(
+      hint: hint,
+      controller: controller,
+      onChanged: onChanged,
+      error: error,
+      inputFormatters: formatters,
+      maxLength: maxLength,
+      maxLines: maxLines,
     );
   }
 }

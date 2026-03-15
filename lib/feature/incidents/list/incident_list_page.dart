@@ -8,6 +8,7 @@ import 'package:deehelp/feature/incidents/list/widgets/inciden_list.dart';
 import 'package:deehelp/feature/incidents/list/widgets/incident_empty_data.dart';
 import 'package:deehelp/feature/incidents/providers/incident_list_viewmodel_provider.dart';
 import 'package:deehelp/feature/incidents/providers/incident_selected_provider.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
@@ -48,7 +49,8 @@ class _ListingIncidentPageState extends ConsumerState<IncidentListPage> {
       body: state.when(
         data: (incidents) => IncidenList(items: incidents),
         // loading: () => const ItemListShimmer(),
-        loading: () => const LoadingResultsSkeleton(size: 10),
+        // loading: () => const LoadingResultsSkeleton(size: 10),
+        loading: () => const LoadingResultsSkeletonV2(),
         error: (error, stackTrace) => const IncidentEmptyData(),
       ),
     );
@@ -61,17 +63,6 @@ class _ListingIncidentPageState extends ConsumerState<IncidentListPage> {
           return state.hasValue && state.value!.isNotEmpty
               ? Container(
                   padding: const EdgeInsets.fromLTRB(16, 12, 16, 16),
-                  decoration: BoxDecoration(
-                    // color: Colors.white,
-                    color: context.surfaceColor,
-                    boxShadow: const [
-                      BoxShadow(
-                        color: Color(0x142B5BEE),
-                        blurRadius: 16,
-                        offset: Offset(0, -6),
-                      ),
-                    ],
-                  ),
                   child: SafeArea(
                     top: false,
                     child: ButtonOutline(
@@ -81,11 +72,11 @@ class _ListingIncidentPageState extends ConsumerState<IncidentListPage> {
                       },
                       bgColor: context.primaryColor,
                       textColor: context.surface,
-                      icon: Icon(
-                        Icons.add_circle_outline,
-                        color: context.surface,
+                      icon: const Icon(
+                        CupertinoIcons.add,
+                        color: Colors.black,
                       ),
-                      text: "Registrar roubo",
+                      text: "Alertar comunidade",
                     ),
                   ),
                 )

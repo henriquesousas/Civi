@@ -23,3 +23,30 @@ CustomTransitionPage<T> slideTransitionPage<T>({
     },
   );
 }
+
+CustomTransitionPage<T> slideDownToUpPage<T>({
+  required LocalKey key,
+  required Widget child,
+}) {
+  return CustomTransitionPage<T>(
+    key: key,
+    child: child,
+    transitionsBuilder: (context, animation, secondaryAnimation, child) {
+      const begin = Offset(0.0, 1.0);
+      const end = Offset.zero;
+      const curve = Curves.easeOutCubic;
+
+      final tween = Tween<Offset>(
+        begin: begin,
+        end: end,
+      ).chain(
+        CurveTween(curve: curve),
+      );
+
+      return SlideTransition(
+        position: animation.drive(tween),
+        child: ScaffoldMessenger(child: child),
+      );
+    },
+  );
+}

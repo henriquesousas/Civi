@@ -34,6 +34,7 @@ import 'package:deehelp/module/item/domain/entities/product.dart';
 import 'package:deehelp/feature/items/list/item_listing_args.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
 
 class ReportIncidentPage extends ConsumerStatefulWidget {
@@ -181,17 +182,38 @@ class _AddIncidentPageState extends ConsumerState<ReportIncidentPage>
       body: ListView(
         padding: const EdgeInsets.fromLTRB(16, 16, 16, 24),
         children: [
-          CardHint(
-            title: 'Selecione um item',
-            message:
-                'Para reportar um incidente, escolha um item já cadastrado no seu perfil.',
-            icon: Icon(
-              Icons.info_outline,
-              color: context.primaryColor,
-              size: IconSizes.md,
+          // CardHint(
+          //   title: 'Selecione um item',
+          //   message:
+          //       'Para reportar um incidente, escolha um item já cadastrado no seu perfil.',
+          //   icon: Icon(
+          //     Icons.info_outline,
+          //     color: context.primaryColor,
+          //     size: IconSizes.md,
+          //   ),
+          // ),
+          Text(
+            "Selecione um item",
+            style: TextStyle(
+              color: Colors.white,
+              fontSize: 18.sp,
+              fontWeight: FontWeight.w800,
+              // letterSpacing: -0.8,
+              height: 1.0,
             ),
           ),
           const SizedBox(height: SpacingSize.md),
+          Text(
+            "Para reportar um incidente, escolha um item já cadastrado no seu perfil.",
+            style: TextStyle(
+              color: Colors.grey,
+              fontSize: 12.sp,
+              fontWeight: FontWeight.w800,
+              // letterSpacing: -0.8,
+              height: 1.0,
+            ),
+          ),
+          const SizedBox(height: SpacingSize.xl),
           PageCard(
             child: InkWell(
               borderRadius: BorderRadius.circular(RadiusSize.xl),

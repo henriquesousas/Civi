@@ -15,6 +15,7 @@ class HorizontalPhotos extends StatelessWidget {
     return SizedBox(
       height: ImageSize.md,
       child: ListView.separated(
+        clipBehavior: Clip.none,
         scrollDirection: Axis.horizontal,
         itemCount: photos.length,
         separatorBuilder: (_, __) => const SizedBox(width: 10),

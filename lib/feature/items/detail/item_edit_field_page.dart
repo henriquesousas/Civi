@@ -173,6 +173,14 @@ class _ItemEditFieldPageStateV2 extends ConsumerState<ItemEditFieldPageV2> {
   late final TextEditingController _ctrl;
   late final FocusNode _focus;
 
+  final background = Color(0xFF0B1020);
+  final surface = Color(0xFF121A2F);
+  final surfaceSoft = Color(0xFF18233D);
+  final stroke = Color(0xFF26324F);
+  final primary = Color(0xFF4F7BFF);
+  final textPrimary = Colors.white;
+  final textSecondary = Color(0xFFA7B1C7);
+
   @override
   void initState() {
     super.initState();
@@ -203,7 +211,7 @@ class _ItemEditFieldPageStateV2 extends ConsumerState<ItemEditFieldPageV2> {
 
     _listener(_currentProduct!);
 
-    final colorScheme = Theme.of(context).colorScheme;
+    // final colorScheme = Theme.of(context).colorScheme;
 
     return Scaffold(
       backgroundColor: const Color(0xFF090C14),
@@ -217,122 +225,113 @@ class _ItemEditFieldPageStateV2 extends ConsumerState<ItemEditFieldPageV2> {
         child: ListView(
           padding: const EdgeInsets.fromLTRB(16, 12, 16, 24),
           children: [
-            Container(
-              padding: const EdgeInsets.all(16),
-              decoration: BoxDecoration(
-                color: const Color(0xFF111624),
-                borderRadius: BorderRadius.circular(20),
-                border: Border.all(
-                  color: Colors.white.withValues(alpha: 0.06),
-                ),
-              ),
-              child: EditInfoCard(
-                title: a.label,
-                helper: a.helper ??
-                    'Atualize esta informação para manter seus dados corretos.',
-              ),
+            // Container(
+            //   padding: const EdgeInsets.all(16),
+            //   decoration: BoxDecoration(
+            //     color: const Color(0xFF111624),
+            //     borderRadius: BorderRadius.circular(20),
+            //     border: Border.all(
+            //       color: Colors.white.withValues(alpha: 0.06),
+            //     ),
+            //   ),
+            //   child: EditInfoCard(
+            //     title: a.label,
+            //     helper: a.helper ??
+            //         'Atualize esta informação para manter seus dados corretos.',
+            //   ),
+            // ),
+            // Container(
+            //   padding: const EdgeInsets.all(18),
+            //   decoration: BoxDecoration(
+            //     borderRadius: BorderRadius.circular(24),
+            //     gradient: const LinearGradient(
+            //       begin: Alignment.topLeft,
+            //       end: Alignment.bottomRight,
+            //       colors: [
+            //         Color(0xFF182544),
+            //         Color(0xFF0F172B),
+            //       ],
+            //     ),
+            //     border: Border.all(
+            //       color: const Color(0xFF2A3A61),
+            //       width: 1,
+            //     ),
+            //     boxShadow: const [
+            //       BoxShadow(
+            //         color: Colors.black26,
+            //         blurRadius: 24,
+            //         offset: Offset(0, 10),
+            //       ),
+            //     ],
+            //   ),
+            //   child: Row(
+            //     crossAxisAlignment: CrossAxisAlignment.start,
+            //     children: [
+            //       Container(
+            //         width: 40.w,
+            //         height: 40.h,
+            //         decoration: BoxDecoration(
+            //           borderRadius: BorderRadius.circular(16),
+            //           color: primary.withValues(alpha: 0.14),
+            //           border: Border.all(
+            //             color: primary.withOpacity(0.28),
+            //           ),
+            //         ),
+            //         child: Icon(
+            //           CupertinoIcons.pen,
+            //           color: primary,
+            //           size: 24,
+            //         ),
+            //       ),
+            //       const SizedBox(width: 14),
+            //       Expanded(
+            //         child: Column(
+            //           crossAxisAlignment: CrossAxisAlignment.start,
+            //           children: [
+            //             Text(
+            //               'Atualize este campo',
+            //               style: TextStyle(
+            //                 color: textPrimary,
+            //                 fontSize: 16,
+            //                 fontWeight: FontWeight.w700,
+            //               ),
+            //             ),
+            //             const SizedBox(height: 6),
+            //             Text(
+            //               widget.args.helper ??
+            //                   'Atualize esta informação para manter seus dados corretos.',
+            //               style: TextStyle(
+            //                 color: textSecondary,
+            //                 fontSize: 14.5,
+            //                 height: 1.45,
+            //               ),
+            //             ),
+            //           ],
+            //         ),
+            //       ),
+            //     ],
+            //   ),
+            // ),
+            EditInfoCard(
+              title: "Atualizar ${widget.args.label}",
+              helper: a.helper ??
+                  'Atualize esta informação para manter seus dados corretos.',
             ),
             const SizedBox(height: SpacingSize.md),
-            Container(
-              padding: const EdgeInsets.all(14),
-              decoration: BoxDecoration(
-                color: const Color(0xFF121A2A),
-                borderRadius: BorderRadius.circular(20),
-                border: Border.all(
-                  color: Colors.white.withValues(alpha: 0.06),
-                ),
-                boxShadow: [
-                  BoxShadow(
-                    color: Colors.black.withValues(alpha: 0.20),
-                    blurRadius: 18,
-                    offset: const Offset(0, 8),
-                  ),
-                ],
-              ),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    'Novo valor',
-                    style: Theme.of(context).textTheme.titleSmall?.copyWith(
-                          color: Colors.white,
-                          fontWeight: FontWeight.w700,
-                        ),
-                  ),
-                  const SizedBox(height: 6),
-                  Text(
-                    'Preencha o campo abaixo',
-                    style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                          color: Colors.white70,
-                        ),
-                  ),
-                  const SizedBox(height: 14),
-                  Theme(
-                    data: Theme.of(context).copyWith(
-                      inputDecorationTheme: InputDecorationTheme(
-                        filled: true,
-                        fillColor: const Color(0xFF0E1422),
-                        hintStyle: TextStyle(
-                          color: Colors.white.withValues(alpha: 0.35),
-                        ),
-                        errorStyle: const TextStyle(
-                          color: Color(0xFFFF7B7B),
-                        ),
-                        border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(18),
-                          borderSide: BorderSide(
-                            color: Colors.white.withValues(alpha: 0.06),
-                          ),
-                        ),
-                        enabledBorder: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(18),
-                          borderSide: BorderSide(
-                            color: Colors.white.withValues(alpha: 0.06),
-                          ),
-                        ),
-                        focusedBorder: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(18),
-                          borderSide: BorderSide(
-                            color: colorScheme.primary,
-                            width: 1.2,
-                          ),
-                        ),
-                        errorBorder: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(18),
-                          borderSide: const BorderSide(
-                            color: Color(0xFFFF7B7B),
-                          ),
-                        ),
-                        focusedErrorBorder: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(18),
-                          borderSide: const BorderSide(
-                            color: Color(0xFFFF7B7B),
-                            width: 1.2,
-                          ),
-                        ),
-                        counterStyle: TextStyle(
-                          color: Colors.white.withValues(alpha: 0.45),
-                        ),
-                      ),
-                    ),
-                    child: TextFieldCard(
-                      controller: _ctrl,
-                      // focusNode: _focus,
-                      hint: a.hint,
-                      error: state.errorValidation,
-                      formatters: a.inputFormatters,
-                      maxLength: a.maxLen,
-                      maxLines: a.maxLines,
-                      onChanged: (value) => viewModel.onValueChange(
-                        a.field,
-                        value,
-                        a.initialValue,
-                      ),
-                    ),
-                  ),
-                ],
+            TextFieldCard(
+              controller: _ctrl,
+              hint: widget.args.hint,
+              error: state.errorValidation,
+              // formatters: widget.args.inputFormatters,
+              maxLength: widget.args.maxLen,
+              maxLines: widget.args.maxLines,
+              onChanged: (value) => viewModel.onValueChange(
+                a.field,
+                value,
+                a.initialValue,
               ),
             ),
+
             if (a.isPhone) ...[
               const SizedBox(height: SpacingSize.md),
               Container(
@@ -355,52 +354,60 @@ class _ItemEditFieldPageStateV2 extends ConsumerState<ItemEditFieldPageV2> {
                 ),
               ),
             ],
-          ],
-        ),
-      ),
-      bottomNavigationBar: Container(
-        decoration: BoxDecoration(
-          color: const Color(0xFF0B101C),
-          border: Border(
-            top: BorderSide(
-              color: Colors.white.withValues(alpha: 0.06),
-            ),
-          ),
-          boxShadow: [
-            BoxShadow(
-              color: Colors.black.withValues(alpha: 0.25),
-              blurRadius: 24,
-              offset: const Offset(0, -8),
+            const SizedBox(height: SpacingSize.xl),
+            ButtonPrimary(
+              press: state.errorValidation == null && state.hasChangeSomeField
+                  ? () => viewModel.updatreProduct()
+                  : null,
+              text: "Salvar alterações",
+              loading: state.isLoading,
             ),
           ],
         ),
-        padding: const EdgeInsets.fromLTRB(16, 12, 16, 16),
-        child: SafeArea(
-          top: false,
-          child: Row(
-            children: [
-              Expanded(
-                child: ButtonOutline(
-                  press: _pop,
-                  text: "Cancelar",
-                  textColor: Colors.white,
-                ),
-              ),
-              const SizedBox(width: SpacingSize.md),
-              Expanded(
-                child: ButtonPrimary(
-                  press:
-                      state.errorValidation == null && state.hasChangeSomeField
-                          ? () => viewModel.updatreProduct()
-                          : null,
-                  text: "Salvar alterações",
-                  loading: state.isLoading,
-                ),
-              ),
-            ],
-          ),
-        ),
       ),
+      // bottomNavigationBar: Container(
+      //   // decoration: BoxDecoration(
+      //   //     // color: const Color(0xFF0B101C),
+      //   //     // border: Border(
+      //   //     //   top: BorderSide(
+      //   //     //     color: Colors.white.withValues(alpha: 0.06),
+      //   //     //   ),
+      //   //     // ),
+      //   //     // boxShadow: [
+      //   //     //   BoxShadow(
+      //   //     //     color: Colors.black.withValues(alpha: 0.25),
+      //   //     //     blurRadius: 24,
+      //   //     //     offset: const Offset(0, -8),
+      //   //     //   ),
+      //   //     // ],
+      //   //     ),
+      //   padding: const EdgeInsets.fromLTRB(16, 12, 16, 16),
+      //   child: SafeArea(
+      //     top: false,
+      //     child: Row(
+      //       children: [
+      //         Expanded(
+      //           child: ButtonOutline(
+      //             press: _pop,
+      //             text: "Cancelar",
+      //             textColor: Colors.white,
+      //           ),
+      //         ),
+      //         const SizedBox(width: SpacingSize.md),
+      //         Expanded(
+      //           child: ButtonPrimary(
+      //             press:
+      //                 state.errorValidation == null && state.hasChangeSomeField
+      //                     ? () => viewModel.updatreProduct()
+      //                     : null,
+      //             text: "Salvar alterações",
+      //             loading: state.isLoading,
+      //           ),
+      //         ),
+      //       ],
+      //     ),
+      //   ),
+      // ),
     );
   }
 

@@ -51,7 +51,8 @@ class UICustomScaffold extends StatelessWidget {
       child: Scaffold(
         bottomNavigationBar: bottomNavigationBar,
         // backgroundColor: bgColor ?? const Color(0xFFF8FAFC),
-        backgroundColor: bgColor ?? Theme.of(context).scaffoldBackgroundColor,
+        // backgroundColor: bgColor ?? Theme.of(context).scaffoldBackgroundColor,
+        backgroundColor: const Color(0xFF090C14),
         resizeToAvoidBottomInset: false,
         appBar: hideAppBar == true
             ? null
