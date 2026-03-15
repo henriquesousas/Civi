@@ -1,12 +1,9 @@
 import 'package:deehelp/core/theme/export_theme.dart';
-import 'package:deehelp/core/ui/styles/export_style.dart';
+import 'package:deehelp/core/ui/styles/app_text_style.dart';
 import 'package:flutter/material.dart';
-import 'package:lottie/lottie.dart';
 
 class LogoBlock extends StatelessWidget {
   const LogoBlock({super.key});
-
-  static const _inkOnBlue = Colors.white;
 
   @override
   Widget build(BuildContext context) {
@@ -32,33 +29,58 @@ class LogoBlock extends StatelessWidget {
         //     ),
         //   ),
         // ),
-        Lottie.asset(
-          'assets/lottie/owl2.json',
-          width: ImageSize.xxl,
-          height: ImageSize.xxl,
-        ),
-        const Text(
-          'Que bom ver você por aqui!',
-          textAlign: TextAlign.center,
-          style: TextStyle(
-            color: _inkOnBlue,
-            fontSize: 22,
-            fontWeight: FontWeight.w900,
+        Container(
+          width: ImageSize.md,
+          height: ImageSize.md,
+          decoration: BoxDecoration(
+            color: Colors.black,
+            borderRadius: BorderRadius.circular(16),
+          ),
+          alignment: Alignment.center,
+          child: Image.asset(
+            "assets/images/logo_transp.png",
+            width: ImageSize.xl,
+            fit: BoxFit.contain,
           ),
         ),
-        const SizedBox(height: SpacingSize.sm),
-
+        const SizedBox(height: 5),
         Text(
-          'Sou a corujinha Tizo 🦉\n'
-          'Estou feliz em te ver e pronta para ajudar a '
-          'manter você e sua região mais protegidos.',
+          'Civi App',
           textAlign: TextAlign.center,
-          style: context.appText.caption.copyWith(
-            color: _inkOnBlue.withValues(alpha: 0.86),
-            fontWeight: FontWeight.w600,
-            height: 1.4,
+          style: context.appText.headerxl.copyWith(
+            color: Colors.white,
+            fontWeight: FontWeight.w800,
+            height: 1.05,
+            letterSpacing: -0.4,
           ),
         ),
+        // Lottie.asset(
+        //   'assets/lottie/owl2.json',
+        //   width: ImageSize.xxl,
+        //   height: ImageSize.xxl,
+        // ),
+        // const Text(
+        //   'Que bom ver você por aqui!',
+        //   textAlign: TextAlign.center,
+        //   style: TextStyle(
+        //     color: _inkOnBlue,
+        //     fontSize: 22,
+        //     fontWeight: FontWeight.w900,
+        //   ),
+        // ),
+        // const SizedBox(height: SpacingSize.sm),
+
+        // Text(
+        //   'Sou a corujinha Tizo 🦉\n'
+        //   'Estou feliz em te ver e pronta para ajudar a '
+        //   'manter você e sua região mais protegidos.',
+        //   textAlign: TextAlign.center,
+        //   style: context.appText.caption.copyWith(
+        //     color: _inkOnBlue.withValues(alpha: 0.86),
+        //     fontWeight: FontWeight.w600,
+        //     height: 1.4,
+        //   ),
+        // ),
       ],
     );
   }

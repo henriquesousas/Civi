@@ -23,7 +23,7 @@ class AuthView extends StatelessWidget {
         children: [
           ButtonOutline(
             press: onLoginWithGoogle,
-            bgColor: context.primaryColor,
+            // bgColor: context.primaryColor,
             textColor: Colors.white,
             icon: const GoogleGMark(),
             text: 'Continuar com Google',
@@ -34,7 +34,7 @@ class AuthView extends StatelessWidget {
             press: onContinueWithLogin,
             bgColor: const Color(0xFFF5F7FD),
             side: const BorderSide(color: Color(0xFFE6EAF6)),
-            textColor: context.onSurface,
+            textColor: Colors.black,
             text: 'Continuar sem login',
           ),
           const SizedBox(height: SpacingSize.md),
