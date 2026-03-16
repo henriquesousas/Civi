@@ -105,4 +105,12 @@ class IncidentMapper {
       return IncidentMapper.fromMap(map);
     }).toList();
   }
+
+  static List<IncidentOutput> toListV2(List data) {
+    if (data.isEmpty) return [];
+    return data.map<IncidentOutput>((dynamic item) {
+      final map = item as Map<String, dynamic>;
+      return IncidentMapper.fromMap(map);
+    }).toList();
+  }
 }

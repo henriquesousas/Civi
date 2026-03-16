@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:deehelp/app_startup_provider.dart';
+import 'package:deehelp/civi_search_page.dart';
 import 'package:deehelp/core/router/slide_transition_page.dart';
 import 'package:deehelp/core/ui/widgets/badge/status_style.dart';
 import 'package:deehelp/feature/about/about_router.dart';
@@ -95,53 +96,13 @@ var goRouterProvider = Provider<GoRouter>(
         GoRoute(
           path: '/',
           pageBuilder: (context, state) => slideTransitionPage(
-            key: state.pageKey,
-            // child: const MapPage(),
-            // child: const MapPage2(),
-            // child: const MounsHouse(),
-            // child: const CardBottom(),
-            child: ReportIncidentSuccessfullyPage(
-              args: RegiterIncidentSuccessArgs(
-                  item: Product(
-                    id: ProductId.unique(),
-                    name: "Carro",
-                    code: "INC101010",
-                    year: 2010,
-                    images: [],
-                    status: ItemStatus.active,
-                    type: ItemType.car.name,
-                    userId: "",
-                    color: "ssasas",
-                    brand: "sasas",
-                    obs: "sasa",
-                  ),
-                  alertId: "INC101010",
-                  itemType: ItemType.car,
-                  createdAt: DateTime.now()),
-            ),
-            // child: ItemDetailsPage(
-            //   item: ItemDetailsModel(
-            //     name: 'Citroen C3 Tendance',
-            //     status: ItemStatus.active,
-            //     createdAtLabel: 'Cadastrado em 12/03/2026',
-            //     identifierLabel: 'Placa',
-            //     identifierValue: 'FGH-2A11',
-            //     color: 'Branco',
-            //     extraLabel1: 'Ano',
-            //     extraValue1: '2018',
-            //     lastLocation: 'Osasco • SP',
-            //     lastUpdateLabel: 'Atualizado há 2 horas',
-            //     notes: 'Veículo cadastrado para monitoramento preventivo.',
-            //     imageUrls: [
-            //       'https://pub-0366da0e0a6d49998a77e988d464e762.r2.dev/products/374d51f7-b49a-4360-b5f7-3a8e5c4d995b/1773265765129.jpeg',
-            //       'https://pub-0366da0e0a6d49998a77e988d464e762.r2.dev/products/374d51f7-b49a-4360-b5f7-3a8e5c4d995b/1773343050076.jpeg',
-            //       'https://pub-0366da0e0a6d49998a77e988d464e762.r2.dev/products/374d51f7-b49a-4360-b5f7-3a8e5c4d995b/1773265791164.jpeg',
-            //     ],
-            //     onDelete: () {},
-            //     onEditIdentifier: () {},
-            //   ),
-            // ),
-          ),
+              key: state.pageKey,
+              // child: const MapPage(),
+              // child: const MapPage2(),
+              // child: const MounsHouse(),
+              // child: const CardBottom(),
+
+              child: TesteCiviSearchPage()),
         ),
       ],
     );

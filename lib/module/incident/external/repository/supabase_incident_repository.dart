@@ -1,4 +1,3 @@
-import 'package:deehelp/feature/search/widgets/mode_toogle.dart';
 import 'package:deehelp/core/extension/string_extension.dart';
 import 'package:deehelp/core/utils/result.dart';
 import 'package:deehelp/core/utils/unit.dart';
@@ -67,31 +66,47 @@ class SupabaseIncidentRepository extends IncidentRepository {
   Future<Result<List<IncidentOutput>>> getIncidents(
     IncidentFilter filter,
   ) async {
-    final term = _normalizeSearchTerm(filter.term);
-    debugPrint("Termo filtrado $term");
+    // final term = _normalizeSearchTerm(filter.term);
+    // final term = "ABC12";
+    debugPrint("Termo filtrado ${filter.term}");
 
-    var query = _supabaseClient
-        .from('report_with_coords')
-        .select(
-            "*,product!inner (id,name,code,color, brand, type, obs, product_images (*)),  regions(*)")
-        .eq('status', filter.status.value);
+    final data = await _supabaseClient.rpc(
+      'search_reports',
+      params: {
+        'search_term': filter.term,
+        'status_value': filter.status.value,
+        'limit_value': filter.limit,
+        'sort_direction': filter.direction.name,
+      },
+    );
 
-    if (filter.mode == SearchMode.incidentCode) {
-      query = query.filter("alert_id", 'ilike', '%$term%');
-    } else {
-      if (filter.term != '*') {
-        debugPrint("Entrou no query ilike $term");
-        query = query.or(
-          'name.ilike.%$term%,code.ilike.%$term%',
-          referencedTable: 'product',
-        );
-      }
-    }
+    // var query = _supabaseClient
+    //     .from('report_with_coords')
+    //     .select(
+    //         "*,product!inner (id,name,code,color, brand, type, obs, product_images (*)),  regions(*)")
+    //     .eq('status', filter.status.value);
 
-    final data =
-        await query.limit(filter.limit).order('created_at', ascending: false);
+    // query = query.filter("alert_id", 'ilike', '%$term%').or(
+    //       'name.ilike.%$term%,code.ilike.%$term%',
+    //       referencedTable: 'product',
+    //     );
 
-    final incidents = IncidentMapper.toList(data);
+    // if (filter.mode == SearchMode.incidentCode) {
+    //   query = query.filter("alert_id", 'ilike', '%$term%');
+    // } else {
+    //   if (filter.term != '*') {
+    //     debugPrint("Entrou no query ilike $term");
+    //     query = query.or(
+    //       'name.ilike.%$term%,code.ilike.%$term%',
+    //       referencedTable: 'product',
+    //     );
+    //   }
+    // }
+
+    // final data =
+    //     await query.limit(filter.limit).order('created_at', ascending: false);
+
+    final incidents = IncidentMapper.toListV2(data);
 
     return Result.success(incidents);
   }

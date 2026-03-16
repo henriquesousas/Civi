@@ -11,6 +11,13 @@ extension DateExtension on DateTime {
     return format.format(this);
   }
 
+  bool isOlderThanDays(int days) {
+    final now = DateTime.now();
+    final difference = now.difference(this);
+
+    return difference.inDays >= days;
+  }
+
   String timeAgo() {
     final now = DateTime.now();
     final difference = now.difference(this);

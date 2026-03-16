@@ -1,6 +1,5 @@
-import 'package:deehelp/feature/search/search_args.dart';
-import 'package:deehelp/feature/search/search_page.dart';
 import 'package:deehelp/core/router/slide_transition_page.dart';
+import 'package:deehelp/feature/search/search_page_v2.dart';
 import 'package:go_router/go_router.dart';
 
 class SearchRouter {
@@ -11,13 +10,13 @@ class SearchRouter {
         GoRoute(
           path: search,
           pageBuilder: (context, state) {
-            final args = state.extra as SearchArgs?;
+            // final args = state.extra as SearchArgs?;
             return slideTransitionPage(
-              key: state.pageKey,
-              child: SearchPage(
-                args: args,
-              ),
-            );
+                key: state.pageKey, child: const SearchPageV2()
+                // child: SearchPage(
+                //   args: args,
+                // ),
+                );
           },
         ),
       ];
