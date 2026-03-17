@@ -11,7 +11,7 @@ class SearchRouter {
           path: search,
           pageBuilder: (context, state) {
             // final args = state.extra as SearchArgs?;
-            return slideTransitionPage(
+            return slideDownToUpPage(
                 key: state.pageKey, child: const SearchPageV2()
                 // child: SearchPage(
                 //   args: args,

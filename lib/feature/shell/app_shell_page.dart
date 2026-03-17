@@ -29,7 +29,7 @@ class _AppShellPageState extends ConsumerState<AppShellPage> {
     // EventsScreen(),
     // AlertDetailsScreen(),
     MapaPage(),
-    ItemListPage(),
+    // ItemListPage(),
     // SearchPage(), // 2
     ItemListPage(), // 3
     ProfilePage(), // 4
@@ -51,7 +51,7 @@ class _AppShellPageState extends ConsumerState<AppShellPage> {
               );
 
               // ✅ quando clicar em "Meus itens"
-              if (i == 2) {
+              if (i == 1) {
                 final userId = ref.read(authenticatedUserProvider)?.id;
                 if (userId == null) {
                   ref.read(itemListViewmodelProvider.notifier).clear();
@@ -60,7 +60,7 @@ class _AppShellPageState extends ConsumerState<AppShellPage> {
                 }
               }
 
-              if (i == 2 && !_itemsLoadedOnce) {
+              if (i == 1 && !_itemsLoadedOnce) {
                 final userId = ref.read(authenticatedUserProvider)?.id;
                 if (userId == null) {
                   return;
@@ -125,12 +125,12 @@ class _BottomNavBar extends StatelessWidget {
         label: 'Mapa',
         selected: false,
       ),
-      _NavItem(
-        icon: CupertinoIcons.search,
-        activeIcon: CupertinoIcons.search,
-        label: 'Home',
-        selected: true,
-      ),
+      // _NavItem(
+      //   icon: CupertinoIcons.search,
+      //   activeIcon: CupertinoIcons.search,
+      //   label: 'Home',
+      //   selected: true,
+      // ),
       _NavItem(
         icon: CupertinoIcons.cube,
         activeIcon: CupertinoIcons.cube_box_fill,

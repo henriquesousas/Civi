@@ -65,7 +65,8 @@ var goRouterProvider = Provider<GoRouter>(
         // return ItemsRouter.success;
         switch (appStatus) {
           case AppStatus.loading:
-            return SplashRouter.path;
+            // return SplashRouter.path;
+            return AppSheelRouter.path;
 
           case AppStatus.unauthenticated:
             return isPublicRoute ? AppSheelRouter.path : null;

@@ -1,5 +1,4 @@
 import 'package:deehelp/core/extension/exports_extension.dart';
-import 'package:deehelp/core/theme/export_theme.dart';
 import 'package:deehelp/core/ui/styles/export_style.dart';
 import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';

@@ -9,12 +9,15 @@ import 'package:deehelp/core/ui/styles/export_style.dart';
 import 'package:deehelp/feature/mapa/reported_by.dart';
 import 'package:deehelp/feature/mapa/widgets/horizontal_incident_card.dart';
 import 'package:deehelp/feature/mapa/widgets/map_bottom_sheet.dart';
-import 'package:deehelp/map_page_teste.dart';
+import 'package:deehelp/feature/mapa/widgets/map_floating_toolbar.dart';
+import 'package:deehelp/feature/search/search_router.dart';
 import 'package:deehelp/module/auth/external/di/authenticated_user_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:go_router/go_router.dart';
+import 'package:lottie/lottie.dart';
 import 'package:mapbox_maps_flutter/mapbox_maps_flutter.dart';
 import 'package:permission_handler/permission_handler.dart';
 
@@ -299,12 +302,25 @@ class _MapaPageState extends ConsumerState<MapaPage> {
           //   ),
           // ),
 
-          // MapTopToolbar(
-          //   avatarUrl: state?.photoUrl,
-          //   // onProfileTap: () {},
-          //   onNotificationTap: () {},
-          //   onSettingsTap: () {},
-          // ),
+          Positioned(
+            top: 0,
+            left: context.percentWidth(0.3),
+            right: context.percentWidth(0.3),
+            bottom: 0,
+            // child: RadarPulse(),
+            child: Lottie.asset(
+              "assets/lottie/radar.json",
+              width: context.percentWidth(0.3),
+              height: context.percentWidth(0.3),
+            ),
+          ),
+
+          MapTopToolbar(
+            avatarUrl: state?.photoUrl,
+            // onProfileTap: () {},
+            onSearchTap: () => context.push(SearchRouter.search),
+            onSettingsTap: () {},
+          ),
           //GPS
           AnimatedPositioned(
             duration: const Duration(milliseconds: 300),
@@ -362,22 +378,11 @@ class _MapaPageState extends ConsumerState<MapaPage> {
                 duration: const Duration(milliseconds: 250),
                 opacity: _showIncidentCards ? 0 : 1,
                 child: Positioned(
-                  // child: MapLayersBottomSheet(
-                  //   initiallyExpanded: _showIncidentCards,
-                  //   onTapHeader: (opened) {
-                  //   _isCardOpened = opened;
-                  //   if (opened) {
-                  //     setState(() {
-                  //       _gpsHeight = GPSHeight.min;
-                  //     });
-                  //   } else {
-                  //     setState(() {
-                  //       _gpsHeight = GPSHeight.normal;
-                  //     });
-                  //   }
-                  // },
-                  // ),
                   child: MapLayersBottomSheet2(
+                    city: currenLocation?.city ?? "Buscando ocorrências...",
+                    address: currenLocation == null
+                        ? "Aguarde..."
+                        : '${currenLocation.address}',
                     initiallyExpanded: _showIncidentCards,
                     onTapHeader: (opened) {
                       _isCardOpened = opened;
@@ -558,7 +563,7 @@ class _MapaPageState extends ConsumerState<MapaPage> {
       await _mapboxMap!.compass.updateSettings(
         CompassSettings(
           enabled: true,
-          marginTop: context.topPadding,
+          marginTop: context.topPadding * 3,
           marginRight: 16,
         ),
       );

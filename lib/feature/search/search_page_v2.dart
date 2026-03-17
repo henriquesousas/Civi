@@ -7,7 +7,6 @@ import 'package:deehelp/core/services/permissions/location/domain/current_locati
 import 'package:deehelp/core/services/permissions/location/providers/location_providers.dart';
 import 'package:deehelp/core/theme/export_theme.dart';
 import 'package:deehelp/feature/incidents/list/widgets/fake_incident_list_model.dart';
-import 'package:deehelp/feature/search/avatar_stack_v2.dart';
 import 'package:deehelp/feature/search/search_viewmodel_provider.dart';
 import 'package:deehelp/feature/search/widgets/mode_toogle.dart';
 import 'package:deehelp/module/incident/domain/usecase/incident_output.dart';
@@ -15,6 +14,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:go_router/go_router.dart';
 
 class SearchPageV2 extends ConsumerStatefulWidget {
   const SearchPageV2({super.key});
@@ -73,9 +73,13 @@ class _SearchPageV2State extends ConsumerState<SearchPageV2> {
     // });
   }
 
-  void _cancelSearch() {
+  void _cancelSearch() async {
     FocusScope.of(context).unfocus();
-    Navigator.of(context).maybePop();
+    await Future.delayed(const Duration(milliseconds: 500));
+    if (mounted) {
+      context.pop();
+    }
+    // Navigator.of(context).maybePop();
   }
 
   @override
@@ -338,7 +342,7 @@ class _SearchResultTile extends StatelessWidget {
                     Text(
                       "Próximo  á ${item.local?.address}",
                       style: TextStyle(
-                        color: danger,
+                        color: dotColor,
                         // color: item.isAlert ? danger : secondaryText,
                         fontSize: context.safeSp(12),
                         height: 1.2,
@@ -425,46 +429,46 @@ String _getSummary(IncidentOutput item, CurrentLocation? currentLocation) {
   return '${item.occurredAt.timeAgo()} · $distance ${item.local?.city}· ${item.local?.state}';
 }
 
-class _EmptySearchState extends StatelessWidget {
-  const _EmptySearchState();
+// class _EmptySearchState extends StatelessWidget {
+//   const _EmptySearchState();
 
-  @override
-  Widget build(BuildContext context) {
-    return const Center(
-      child: Padding(
-        padding: EdgeInsets.all(24),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Icon(
-              CupertinoIcons.search,
-              color: Color(0xFF7A7A7A),
-              size: 34,
-            ),
-            SizedBox(height: 14),
-            Text(
-              'Nenhum resultado encontrado',
-              style: TextStyle(
-                color: Colors.white,
-                fontSize: 18,
-                fontWeight: FontWeight.w600,
-              ),
-            ),
-            SizedBox(height: 8),
-            Text(
-              'Tente buscar por incidente, bairro, rua ou região.',
-              textAlign: TextAlign.center,
-              style: TextStyle(
-                color: Color(0xFF7A7A7A),
-                fontSize: 14,
-              ),
-            ),
-          ],
-        ),
-      ),
-    );
-  }
-}
+//   @override
+//   Widget build(BuildContext context) {
+//     return const Center(
+//       child: Padding(
+//         padding: EdgeInsets.all(24),
+//         child: Column(
+//           mainAxisAlignment: MainAxisAlignment.center,
+//           children: [
+//             Icon(
+//               CupertinoIcons.search,
+//               color: Color(0xFF7A7A7A),
+//               size: 34,
+//             ),
+//             SizedBox(height: 14),
+//             Text(
+//               'Nenhum resultado encontrado',
+//               style: TextStyle(
+//                 color: Colors.white,
+//                 fontSize: 18,
+//                 fontWeight: FontWeight.w600,
+//               ),
+//             ),
+//             SizedBox(height: 8),
+//             Text(
+//               'Tente buscar por incidente, bairro, rua ou região.',
+//               textAlign: TextAlign.center,
+//               style: TextStyle(
+//                 color: Color(0xFF7A7A7A),
+//                 fontSize: 14,
+//               ),
+//             ),
+//           ],
+//         ),
+//       ),
+//     );
+//   }
+// }
 
 class CiviSearchItem {
   final String title;

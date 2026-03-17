@@ -1,268 +1,280 @@
 import 'package:deehelp/core/extension/exports_extension.dart';
 import 'package:deehelp/core/theme/export_theme.dart';
-import 'package:deehelp/core/ui/styles/export_style.dart';
-import 'package:deehelp/feature/items/register/presentation/widgets/brand-picker/brand_bottom_sheet.dart';
+import 'package:deehelp/feature/incidents/incident_router.dart';
+import 'package:deehelp/feature/items/items_router.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:go_router/go_router.dart';
 
-class MapLayersBottomSheet extends StatefulWidget {
-  final bool initiallyExpanded;
-  final Function(bool)? onTapHeader;
+// class MapLayersBottomSheet extends StatefulWidget {
+//   final bool initiallyExpanded;
+//   final String? city;
+//   final String? address;
+//   final Function(bool)? onTapHeader;
 
-  const MapLayersBottomSheet({
-    super.key,
-    this.initiallyExpanded = false,
-    this.onTapHeader,
-  });
+//   const MapLayersBottomSheet({
+//     super.key,
+//     this.initiallyExpanded = false,
+//     this.onTapHeader,
+//     this.city,
+//     this.address,
+//   });
 
-  @override
-  State<MapLayersBottomSheet> createState() => _MapLayersBottomSheetState();
-}
+//   @override
+//   State<MapLayersBottomSheet> createState() => _MapLayersBottomSheetState();
+// }
 
-class _MapLayersBottomSheetState extends State<MapLayersBottomSheet>
-    with SingleTickerProviderStateMixin {
-  late bool _isExpanded;
+// class _MapLayersBottomSheetState extends State<MapLayersBottomSheet>
+//     with SingleTickerProviderStateMixin {
+//   late bool _isExpanded;
 
-  @override
-  void initState() {
-    super.initState();
-    _isExpanded = widget.initiallyExpanded;
-  }
+//   @override
+//   void initState() {
+//     super.initState();
+//     _isExpanded = widget.initiallyExpanded;
+//   }
 
-  void _toggle() {
-    setState(() {
-      _isExpanded = !_isExpanded;
-    });
-    widget.onTapHeader?.call(_isExpanded);
-  }
+//   void _toggle() {
+//     setState(() {
+//       _isExpanded = !_isExpanded;
+//     });
+//     widget.onTapHeader?.call(_isExpanded);
+//   }
 
-  @override
-  Widget build(BuildContext context) {
-    return AnimatedContainer(
-      duration: const Duration(milliseconds: 260),
-      curve: Curves.easeInOut,
-      width: double.infinity,
-      decoration: BoxDecoration(
-        color: Theme.of(context).scaffoldBackgroundColor,
-        borderRadius: const BorderRadius.vertical(
-          top: Radius.circular(24),
-        ),
-        boxShadow: const [
-          BoxShadow(
-            color: Color(0x14000000),
-            blurRadius: 18,
-            offset: Offset(0, -4),
-          ),
-        ],
-      ),
-      child: SafeArea(
-        top: false,
-        child: Padding(
-          padding: const EdgeInsets.fromLTRB(16, 10, 16, 16),
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              GestureDetector(
-                behavior: HitTestBehavior.opaque,
-                onTap: _toggle,
-                child: Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: Row(
-                    children: [
-                      Container(
-                        width: IconSizes.xl,
-                        height: IconSizes.xl,
-                        decoration: BoxDecoration(
-                          // color: const Color(0xFFF3F4F6),
-                          color: context.secondaryColor.withValues(alpha: 0.1),
-                          borderRadius: BorderRadius.circular(999),
-                          border: Border.all(
-                            // color: const Color(0xFFE5E7EB),
-                            color: context.outlineVariantColor,
-                          ),
-                        ),
-                        child: AnimatedRotation(
-                          turns: _isExpanded ? 0.5 : 0.0,
-                          duration: const Duration(milliseconds: 260),
-                          child: Icon(
-                            Icons.keyboard_arrow_up_rounded,
-                            size: IconSizes.sm,
-                            // color: const Color(0xFF111827),
-                            color: context.outlineVariantColor,
-                          ),
-                        ),
-                      ),
-                      const SizedBox(width: 10),
-                      Expanded(
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text(
-                              'Osasco',
-                              overflow: TextOverflow.ellipsis,
-                              maxLines: 1,
-                              style: context.appText.headerlg,
-                            ),
-                            Text(
-                              'Travessa Francisco Alves da Silva, Osasco, Baronera',
-                              overflow: TextOverflow.ellipsis,
-                              maxLines: 1,
-                              style: context.appText.caption,
-                            ),
-                          ],
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-              ),
-              AnimatedCrossFade(
-                firstChild: const SizedBox(height: 0),
-                secondChild: const Column(
-                  children: [
-                    SizedBox(height: 16),
-                    _MapLayerOptionCard(
-                      title: "Default",
-                      subtitle:
-                          "See incidents (Assaults, Fires etc.) along with Good Vibes and Friends.",
-                      selected: false,
-                      icon: Icons.public,
-                    ),
-                    SizedBox(height: 12),
-                    _MapLayerOptionCard(
-                      title: "Criar alerta",
-                      subtitle:
-                          "Avise a comunidade sobre um incidente nesta área.",
-                      selected: true,
-                      icon: Icons.warning_amber_rounded,
-                    ),
-                  ],
-                ),
-                crossFadeState: _isExpanded
-                    ? CrossFadeState.showSecond
-                    : CrossFadeState.showFirst,
-                duration: const Duration(milliseconds: 240),
-              ),
-            ],
-          ),
-        ),
-      ),
-    );
-  }
-}
+//   @override
+//   Widget build(BuildContext context) {
+//     return AnimatedContainer(
+//       duration: const Duration(milliseconds: 260),
+//       curve: Curves.easeInOut,
+//       width: double.infinity,
+//       decoration: BoxDecoration(
+//         color: Theme.of(context).scaffoldBackgroundColor,
+//         borderRadius: const BorderRadius.vertical(
+//           top: Radius.circular(24),
+//         ),
+//         boxShadow: const [
+//           BoxShadow(
+//             color: Color(0x14000000),
+//             blurRadius: 18,
+//             offset: Offset(0, -4),
+//           ),
+//         ],
+//       ),
+//       child: SafeArea(
+//         top: false,
+//         child: Padding(
+//           padding: const EdgeInsets.fromLTRB(16, 10, 16, 16),
+//           child: Column(
+//             mainAxisSize: MainAxisSize.min,
+//             children: [
+//               GestureDetector(
+//                 behavior: HitTestBehavior.opaque,
+//                 onTap: _toggle,
+//                 child: Padding(
+//                   padding: const EdgeInsets.all(8.0),
+//                   child: Row(
+//                     children: [
+//                       Container(
+//                         width: IconSizes.xl,
+//                         height: IconSizes.xl,
+//                         decoration: BoxDecoration(
+//                           // color: const Color(0xFFF3F4F6),
+//                           color: context.secondaryColor.withValues(alpha: 0.1),
+//                           borderRadius: BorderRadius.circular(999),
+//                           border: Border.all(
+//                             // color: const Color(0xFFE5E7EB),
+//                             color: context.outlineVariantColor,
+//                           ),
+//                         ),
+//                         child: AnimatedRotation(
+//                           turns: _isExpanded ? 0.5 : 0.0,
+//                           duration: const Duration(milliseconds: 260),
+//                           child: Icon(
+//                             Icons.keyboard_arrow_up_rounded,
+//                             size: IconSizes.sm,
+//                             // color: const Color(0xFF111827),
+//                             color: context.outlineVariantColor,
+//                           ),
+//                         ),
+//                       ),
+//                       const SizedBox(width: 10),
+//                       Expanded(
+//                         child: Column(
+//                           mainAxisAlignment: MainAxisAlignment.start,
+//                           crossAxisAlignment: CrossAxisAlignment.start,
+//                           children: [
+//                             Text(
+//                               'Osasco',
+//                               overflow: TextOverflow.ellipsis,
+//                               maxLines: 1,
+//                               style: context.appText.headerlg,
+//                             ),
+//                             Text(
+//                               'Travessa Francisco Alves da Silva, Osasco, Baronera',
+//                               overflow: TextOverflow.ellipsis,
+//                               maxLines: 1,
+//                               style: context.appText.caption,
+//                             ),
+//                           ],
+//                         ),
+//                       ),
+//                     ],
+//                   ),
+//                 ),
+//               ),
+//               AnimatedCrossFade(
+//                 firstChild: const SizedBox(height: 0),
+//                 secondChild: const Column(
+//                   children: [
+//                     SizedBox(height: 16),
+//                     _MapLayerOptionCard(
+//                       title: "Default",
+//                       subtitle:
+//                           "See incidents (Assaults, Fires etc.) along with Good Vibes and Friends.",
+//                       selected: false,
+//                       icon: Icons.public,
+//                     ),
+//                     SizedBox(height: 12),
+//                     _MapLayerOptionCard(
+//                       title: "Criar alertas",
+//                       subtitle:
+//                           "Avise a comunidade sobre um incidente nesta área.",
+//                       selected: true,
+//                       icon: Icons.warning_amber_rounded,
+//                     ),
+//                   ],
+//                 ),
+//                 crossFadeState: _isExpanded
+//                     ? CrossFadeState.showSecond
+//                     : CrossFadeState.showFirst,
+//                 duration: const Duration(milliseconds: 240),
+//               ),
+//             ],
+//           ),
+//         ),
+//       ),
+//     );
+//   }
+// }
 
-class _MapLayerOptionCard extends StatelessWidget {
-  final String title;
-  final String subtitle;
-  final bool selected;
-  final IconData icon;
+// class _MapLayerOptionCard extends StatelessWidget {
+//   final String title;
+//   final String subtitle;
+//   final bool selected;
+//   final IconData icon;
 
-  const _MapLayerOptionCard({
-    required this.title,
-    required this.subtitle,
-    required this.selected,
-    required this.icon,
-  });
+//   const _MapLayerOptionCard({
+//     required this.title,
+//     required this.subtitle,
+//     required this.selected,
+//     required this.icon,
+//   });
 
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      width: double.infinity,
-      padding: const EdgeInsets.all(14),
-      decoration: BoxDecoration(
-        // color: selected ? const Color(0xFFF3F4F6) : Colors.white,
-        // color: selected ? const Color(0xFFF3F4F6) : context.surfaceColor,
-        color: context.surfaceColor,
-        borderRadius: BorderRadius.circular(12),
-        border: Border.all(
-          // color: const Color(0xFFE5E7EB),
-          // color: context.outlineVariantColor.withValues(alpha: 0.5),
-          color: selected
-              ? AppColors.danger2.withValues(alpha: 0.5)
-              : context.outlineVariantColor.withValues(alpha: 0.5),
-        ),
-      ),
-      child: Row(
-        children: [
-          _LayerPreviewIcon(
-            selected: selected,
-            icon: icon,
-          ),
-          const SizedBox(width: 14),
-          Expanded(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(title, style: context.appText.headermd),
-                const SizedBox(height: 4),
-                Text(
-                  subtitle,
-                  style: context.appText.caption.copyWith(
-                    color: context.secondaryColor,
-                  ),
-                  // style: context.appText.bodySmall.copyWith(
-                  //   color: const Color(0xFF6B7280),
-                  //   height: 1.25,
-                  //   fontWeight: FontWeight.normal,
-                  // ),
-                ),
-              ],
-            ),
-          ),
-        ],
-      ),
-    );
-  }
-}
+//   @override
+//   Widget build(BuildContext context) {
+//     return Container(
+//       width: double.infinity,
+//       padding: const EdgeInsets.all(14),
+//       decoration: BoxDecoration(
+//         // color: selected ? const Color(0xFFF3F4F6) : Colors.white,
+//         // color: selected ? const Color(0xFFF3F4F6) : context.surfaceColor,
+//         color: context.surfaceColor,
+//         borderRadius: BorderRadius.circular(12),
+//         border: Border.all(
+//           // color: const Color(0xFFE5E7EB),
+//           // color: context.outlineVariantColor.withValues(alpha: 0.5),
+//           color: selected
+//               ? AppColors.danger2.withValues(alpha: 0.5)
+//               : context.outlineVariantColor.withValues(alpha: 0.5),
+//         ),
+//       ),
+//       child: Row(
+//         children: [
+//           _LayerPreviewIcon(
+//             selected: selected,
+//             icon: icon,
+//           ),
+//           const SizedBox(width: 14),
+//           Expanded(
+//             child: Column(
+//               crossAxisAlignment: CrossAxisAlignment.start,
+//               children: [
+//                 Text(title, style: context.appText.headermd),
+//                 const SizedBox(height: 4),
+//                 Text(
+//                   subtitle,
+//                   style: context.appText.caption.copyWith(
+//                     color: context.secondaryColor,
+//                   ),
+//                   // style: context.appText.bodySmall.copyWith(
+//                   //   color: const Color(0xFF6B7280),
+//                   //   height: 1.25,
+//                   //   fontWeight: FontWeight.normal,
+//                   // ),
+//                 ),
+//               ],
+//             ),
+//           ),
+//         ],
+//       ),
+//     );
+//   }
+// }
 
-class _LayerPreviewIcon extends StatelessWidget {
-  final bool selected;
-  final IconData icon;
+// class _LayerPreviewIcon extends StatelessWidget {
+//   final bool selected;
+//   final IconData icon;
 
-  const _LayerPreviewIcon({
-    required this.selected,
-    required this.icon,
-  });
+//   const _LayerPreviewIcon({
+//     required this.selected,
+//     required this.icon,
+//   });
 
-  @override
-  Widget build(BuildContext context) {
-    final accent = selected ? const Color(0xFFF97316) : const Color(0xFF2B5BEE);
+//   @override
+//   Widget build(BuildContext context) {
+//     final accent = selected ? const Color(0xFFF97316) : const Color(0xFF2B5BEE);
 
-    return Container(
-      width: IconSizes.xxl,
-      height: IconSizes.xxl,
-      decoration: BoxDecoration(
-        shape: BoxShape.circle,
-        // color: const Color(0xFFF9FAFB),
-        color: selected
-            ? AppColors.danger2.withValues(alpha: 0.2)
-            : context.surfaceColor,
-        border: Border.all(
-          // color: const Color(0xFFE5E7EB),
-          color: selected
-              ? AppColors.danger2.withValues(alpha: 0.4)
-              : context.outlineVariantColor,
-        ),
-      ),
-      child: Center(
-        child: Icon(
-          icon,
-          size: IconSizes.md,
-          color: selected ? AppColors.danger : accent,
-        ),
-      ),
-    );
-  }
-}
+//     return Container(
+//       width: IconSizes.xxl,
+//       height: IconSizes.xxl,
+//       decoration: BoxDecoration(
+//         shape: BoxShape.circle,
+//         // color: const Color(0xFFF9FAFB),
+//         color: selected
+//             ? AppColors.danger2.withValues(alpha: 0.2)
+//             : context.surfaceColor,
+//         border: Border.all(
+//           // color: const Color(0xFFE5E7EB),
+//           color: selected
+//               ? AppColors.danger2.withValues(alpha: 0.4)
+//               : context.outlineVariantColor,
+//         ),
+//       ),
+//       child: Center(
+//         child: Icon(
+//           icon,
+//           size: IconSizes.md,
+//           color: selected ? AppColors.danger : accent,
+//         ),
+//       ),
+//     );
+//   }
+// }
 
 //DOIS
 
 class MapLayersBottomSheet2 extends StatefulWidget {
   final bool initiallyExpanded;
   final Function(bool)? onTapHeader;
-  const MapLayersBottomSheet2(
-      {super.key, required this.initiallyExpanded, this.onTapHeader});
+  final String? city;
+  final String? address;
+  const MapLayersBottomSheet2({
+    super.key,
+    required this.initiallyExpanded,
+    required this.city,
+    required this.address,
+    this.onTapHeader,
+  });
 
   @override
   State<MapLayersBottomSheet2> createState() => _MapLayersBottomSheet2State();
@@ -333,7 +345,7 @@ class _MapLayersBottomSheet2State extends State<MapLayersBottomSheet2>
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         Text(
-                          'Osasco',
+                          widget.city ?? "Não identificado",
                           style: TextStyle(
                             color: Colors.white,
                             fontSize: 22.sp,
@@ -370,7 +382,7 @@ class _MapLayersBottomSheet2State extends State<MapLayersBottomSheet2>
                       ],
                     ),
                     Text(
-                      'Travessa Francisco Alves da Silva 2 - São Paulo',
+                      widget.address ?? '',
                       style: TextStyle(
                         color: Colors.grey,
                         fontSize: 12.sp,
@@ -388,28 +400,28 @@ class _MapLayersBottomSheet2State extends State<MapLayersBottomSheet2>
                 secondChild: Column(
                   children: [
                     _LayerTile(
-                      title: 'Default',
+                      title: 'Cadastrar item',
                       subtitle:
-                          'See incidents (Assaults, Fires etc.) along with Good Vibes and Friends.',
+                          'Cadastre seus bens como carro, moto ou celular para maior segurança.',
                       selected: true,
                       leading: const _MapPreviewIcon(
                         dotColor: Color(0xFFFFC400),
                         showAvatar: true,
                       ),
-                      onTap: () {},
+                      onTap: () => context.push(ItemsRouter.register),
                     ),
                     const SizedBox(height: 12),
                     _LayerTile(
-                      title: 'Registered Offenders',
+                      title: 'Criar alerta',
                       subtitle:
-                          'See registered offenders with detailed information.',
+                          'Alertar a comunidade imediatamente sobre uma ocorrência.',
                       selected: false,
                       leading: const _MapPreviewIcon(
                         dotColor: Color(0xFFFF8A00),
                         showAvatar: false,
                         centerIcon: Icons.person,
                       ),
-                      onTap: () {},
+                      onTap: () => context.push(IncidentRouter.register),
                     ),
                   ],
                 ),
