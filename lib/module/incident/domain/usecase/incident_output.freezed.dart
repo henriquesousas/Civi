@@ -29,6 +29,7 @@ mixin _$IncidentOutput {
   Region? get region;
   IncidentLocal? get local;
   String? get howTo;
+  bool get isPlatformGenerated;
   bool get visibilty;
 
   /// Create a copy of IncidentOutput
@@ -64,6 +65,8 @@ mixin _$IncidentOutput {
             (identical(other.region, region) || other.region == region) &&
             (identical(other.local, local) || other.local == local) &&
             (identical(other.howTo, howTo) || other.howTo == howTo) &&
+            (identical(other.isPlatformGenerated, isPlatformGenerated) ||
+                other.isPlatformGenerated == isPlatformGenerated) &&
             (identical(other.visibilty, visibilty) ||
                 other.visibilty == visibilty));
   }
@@ -86,11 +89,12 @@ mixin _$IncidentOutput {
       region,
       local,
       howTo,
+      isPlatformGenerated,
       visibilty);
 
   @override
   String toString() {
-    return 'IncidentOutput(id: $id, userId: $userId, alertId: $alertId, type: $type, product: $product, status: $status, kind: $kind, reportType: $reportType, createdAt: $createdAt, occurredAt: $occurredAt, expiresAt: $expiresAt, occurredAtTime: $occurredAtTime, region: $region, local: $local, howTo: $howTo, visibilty: $visibilty)';
+    return 'IncidentOutput(id: $id, userId: $userId, alertId: $alertId, type: $type, product: $product, status: $status, kind: $kind, reportType: $reportType, createdAt: $createdAt, occurredAt: $occurredAt, expiresAt: $expiresAt, occurredAtTime: $occurredAtTime, region: $region, local: $local, howTo: $howTo, isPlatformGenerated: $isPlatformGenerated, visibilty: $visibilty)';
   }
 }
 
@@ -116,6 +120,7 @@ abstract mixin class $IncidentOutputCopyWith<$Res> {
       Region? region,
       IncidentLocal? local,
       String? howTo,
+      bool isPlatformGenerated,
       bool visibilty});
 }
 
@@ -147,6 +152,7 @@ class _$IncidentOutputCopyWithImpl<$Res>
     Object? region = freezed,
     Object? local = freezed,
     Object? howTo = freezed,
+    Object? isPlatformGenerated = null,
     Object? visibilty = null,
   }) {
     return _then(_self.copyWith(
@@ -210,6 +216,10 @@ class _$IncidentOutputCopyWithImpl<$Res>
           ? _self.howTo
           : howTo // ignore: cast_nullable_to_non_nullable
               as String?,
+      isPlatformGenerated: null == isPlatformGenerated
+          ? _self.isPlatformGenerated
+          : isPlatformGenerated // ignore: cast_nullable_to_non_nullable
+              as bool,
       visibilty: null == visibilty
           ? _self.visibilty
           : visibilty // ignore: cast_nullable_to_non_nullable
@@ -327,6 +337,7 @@ extension IncidentOutputPatterns on IncidentOutput {
             Region? region,
             IncidentLocal? local,
             String? howTo,
+            bool isPlatformGenerated,
             bool visibilty)?
         $default, {
     required TResult orElse(),
@@ -350,6 +361,7 @@ extension IncidentOutputPatterns on IncidentOutput {
             _that.region,
             _that.local,
             _that.howTo,
+            _that.isPlatformGenerated,
             _that.visibilty);
       case _:
         return orElse();
@@ -387,6 +399,7 @@ extension IncidentOutputPatterns on IncidentOutput {
             Region? region,
             IncidentLocal? local,
             String? howTo,
+            bool isPlatformGenerated,
             bool visibilty)
         $default,
   ) {
@@ -409,6 +422,7 @@ extension IncidentOutputPatterns on IncidentOutput {
             _that.region,
             _that.local,
             _that.howTo,
+            _that.isPlatformGenerated,
             _that.visibilty);
       case _:
         throw StateError('Unexpected subclass');
@@ -445,6 +459,7 @@ extension IncidentOutputPatterns on IncidentOutput {
             Region? region,
             IncidentLocal? local,
             String? howTo,
+            bool isPlatformGenerated,
             bool visibilty)?
         $default,
   ) {
@@ -467,6 +482,7 @@ extension IncidentOutputPatterns on IncidentOutput {
             _that.region,
             _that.local,
             _that.howTo,
+            _that.isPlatformGenerated,
             _that.visibilty);
       case _:
         return null;
@@ -493,6 +509,7 @@ class _IncidentOutput implements IncidentOutput {
       required this.region,
       this.local,
       this.howTo,
+      this.isPlatformGenerated = false,
       this.visibilty = true});
 
   @override
@@ -525,6 +542,9 @@ class _IncidentOutput implements IncidentOutput {
   final IncidentLocal? local;
   @override
   final String? howTo;
+  @override
+  @JsonKey()
+  final bool isPlatformGenerated;
   @override
   @JsonKey()
   final bool visibilty;
@@ -562,6 +582,8 @@ class _IncidentOutput implements IncidentOutput {
             (identical(other.region, region) || other.region == region) &&
             (identical(other.local, local) || other.local == local) &&
             (identical(other.howTo, howTo) || other.howTo == howTo) &&
+            (identical(other.isPlatformGenerated, isPlatformGenerated) ||
+                other.isPlatformGenerated == isPlatformGenerated) &&
             (identical(other.visibilty, visibilty) ||
                 other.visibilty == visibilty));
   }
@@ -584,11 +606,12 @@ class _IncidentOutput implements IncidentOutput {
       region,
       local,
       howTo,
+      isPlatformGenerated,
       visibilty);
 
   @override
   String toString() {
-    return 'IncidentOutput(id: $id, userId: $userId, alertId: $alertId, type: $type, product: $product, status: $status, kind: $kind, reportType: $reportType, createdAt: $createdAt, occurredAt: $occurredAt, expiresAt: $expiresAt, occurredAtTime: $occurredAtTime, region: $region, local: $local, howTo: $howTo, visibilty: $visibilty)';
+    return 'IncidentOutput(id: $id, userId: $userId, alertId: $alertId, type: $type, product: $product, status: $status, kind: $kind, reportType: $reportType, createdAt: $createdAt, occurredAt: $occurredAt, expiresAt: $expiresAt, occurredAtTime: $occurredAtTime, region: $region, local: $local, howTo: $howTo, isPlatformGenerated: $isPlatformGenerated, visibilty: $visibilty)';
   }
 }
 
@@ -616,6 +639,7 @@ abstract mixin class _$IncidentOutputCopyWith<$Res>
       Region? region,
       IncidentLocal? local,
       String? howTo,
+      bool isPlatformGenerated,
       bool visibilty});
 }
 
@@ -647,6 +671,7 @@ class __$IncidentOutputCopyWithImpl<$Res>
     Object? region = freezed,
     Object? local = freezed,
     Object? howTo = freezed,
+    Object? isPlatformGenerated = null,
     Object? visibilty = null,
   }) {
     return _then(_IncidentOutput(
@@ -710,6 +735,10 @@ class __$IncidentOutputCopyWithImpl<$Res>
           ? _self.howTo
           : howTo // ignore: cast_nullable_to_non_nullable
               as String?,
+      isPlatformGenerated: null == isPlatformGenerated
+          ? _self.isPlatformGenerated
+          : isPlatformGenerated // ignore: cast_nullable_to_non_nullable
+              as bool,
       visibilty: null == visibilty
           ? _self.visibilty
           : visibilty // ignore: cast_nullable_to_non_nullable

@@ -5,7 +5,9 @@ import 'package:deehelp/core/extension/date_extension.dart';
 import 'package:deehelp/core/extension/size_extension.dart';
 import 'package:deehelp/core/services/permissions/location/domain/current_location.dart';
 import 'package:deehelp/core/services/permissions/location/providers/location_providers.dart';
+import 'package:deehelp/core/theme/export_theme.dart';
 import 'package:deehelp/feature/incidents/list/widgets/fake_incident_list_model.dart';
+import 'package:deehelp/feature/search/avatar_stack_v2.dart';
 import 'package:deehelp/feature/search/search_viewmodel_provider.dart';
 import 'package:deehelp/feature/search/widgets/mode_toogle.dart';
 import 'package:deehelp/module/incident/domain/usecase/incident_output.dart';
@@ -26,57 +28,6 @@ class _SearchPageV2State extends ConsumerState<SearchPageV2> {
   final FocusNode _focusNode = FocusNode();
   Timer? _debounce;
   String _search = '';
-  bool _isLoading = false;
-
-  // final List<CiviSearchItem> _allItems = [
-  //   CiviSearchItem(
-  //     title: 'Moto roubada avistada na Av. Brasil',
-  //     subtitle: '1.2 km · Av. Brasil, Centro',
-  //     viewedAt: 'Visto em março 14',
-  //     isPremium: false,
-  //     isAlert: true,
-  //   ),
-  //   CiviSearchItem(
-  //     title: 'Celular furtado próximo à estação',
-  //     subtitle: '850 m · Estação Barueri',
-  //     viewedAt: 'Visto em março 14',
-  //     isPremium: false,
-  //   ),
-  //   CiviSearchItem(
-  //     title: 'Tentativa de roubo em veículo estacionado',
-  //     subtitle: '2.4 km · Rua da Prata, 120',
-  //     viewedAt: 'Visto em março 13',
-  //     isPremium: true,
-  //   ),
-  //   CiviSearchItem(
-  //     title: 'Carro suspeito circulando na região',
-  //     subtitle: '3.1 km · Alphaville Industrial',
-  //     viewedAt: 'Visto em março 13',
-  //     isPremium: true,
-  //   ),
-  //   CiviSearchItem(
-  //     title: 'Roubo de bicicleta registrado',
-  //     subtitle: '620 m · Parque Municipal',
-  //     viewedAt: 'Visto em março 12',
-  //     isPremium: false,
-  //   ),
-  //   CiviSearchItem(
-  //     title: 'Movimentação suspeita em condomínio',
-  //     subtitle: '1.7 km · Av. Andromeda',
-  //     viewedAt: 'Visto em março 12',
-  //     isPremium: true,
-  //   ),
-  // ];
-
-  // List<CiviSearchItem> get _filteredItems {
-  //   if (_search.trim().isEmpty) return _allItems;
-
-  //   final query = _search.toLowerCase();
-  //   return _allItems.where((item) {
-  //     return item.title.toLowerCase().contains(query) ||
-  //         item.subtitle.toLowerCase().contains(query);
-  //   }).toList();
-  // }
 
   void _onSearchChanged() {
     final value = _searchController.text;
@@ -87,7 +38,8 @@ class _SearchPageV2State extends ConsumerState<SearchPageV2> {
     }
 
     /// inicia novo timer
-    _debounce = Timer(const Duration(seconds: 1), () {
+    _debounce = Timer(const Duration(milliseconds: 700), () {
+      debugPrint('Entrou no _performSearch');
       _performSearch(value);
     });
   }
@@ -95,17 +47,15 @@ class _SearchPageV2State extends ConsumerState<SearchPageV2> {
   void _performSearch(String value) async {
     setState(() {
       _search = value;
-      _isLoading = true;
+      // _isLoading = true;
     });
 
     /// Aqui você faz a consulta no backend
-    debugPrint("Consultando: $value");
+    // await Future.delayed(const Duration(seconds: 1));
 
-    await Future.delayed(const Duration(seconds: 1));
-
-    setState(() {
-      _isLoading = false;
-    });
+    // setState(() {
+    //   _isLoading = false;
+    // });
 
     // exemplo
     // repository.searchReports(value);
@@ -116,11 +66,11 @@ class _SearchPageV2State extends ConsumerState<SearchPageV2> {
   }
 
   void _clearSearch() {
+    ref.watch(searchViewmodelProvider.notifier).clear();
     _searchController.clear();
-    setState(() {
-      _search = '';
-      _isLoading = false;
-    });
+    // setState(() {
+    //   _search = '';
+    // });
   }
 
   void _cancelSearch() {
@@ -213,32 +163,37 @@ class _SearchPageV2State extends ConsumerState<SearchPageV2> {
                               ),
                             ),
                           ),
-                          _isLoading
-                              ? const Padding(
-                                  padding: EdgeInsets.only(right: 10),
-                                  child: SizedBox(
-                                      width: 12,
-                                      height: 12,
-                                      child: CircularProgressIndicator()),
-                                )
-                              : AnimatedSwitcher(
-                                  duration: const Duration(milliseconds: 180),
-                                  child: _search.isNotEmpty
-                                      ? IconButton(
-                                          key: const ValueKey('clear'),
-                                          onPressed: _clearSearch,
-                                          splashRadius: 18,
-                                          icon: const Icon(
-                                            CupertinoIcons.xmark_circle_fill,
-                                            color: Color(0xFF6E6E73),
-                                            size: 18,
-                                          ),
-                                        )
-                                      : const SizedBox(
-                                          key: ValueKey('empty'),
-                                          width: 8,
-                                        ),
+                          if (state.isLoading) ...[
+                            Padding(
+                              padding: const EdgeInsets.only(right: 10),
+                              child: SizedBox(
+                                width: 12.w,
+                                height: 12.h,
+                                child: const CircularProgressIndicator(
+                                  strokeWidth: 2,
                                 ),
+                              ),
+                            )
+                          ] else ...[
+                            AnimatedSwitcher(
+                              duration: const Duration(milliseconds: 180),
+                              child: _search.isNotEmpty
+                                  ? IconButton(
+                                      key: const ValueKey('clear'),
+                                      onPressed: _clearSearch,
+                                      splashRadius: 18,
+                                      icon: const Icon(
+                                        CupertinoIcons.xmark_circle_fill,
+                                        color: Color(0xFF6E6E73),
+                                        size: 18,
+                                      ),
+                                    )
+                                  : const SizedBox(
+                                      key: ValueKey('empty'),
+                                      width: 8,
+                                    ),
+                            ),
+                          ],
                         ],
                       ),
                     ),
@@ -266,41 +221,20 @@ class _SearchPageV2State extends ConsumerState<SearchPageV2> {
               color: dividerColor,
             ),
             Expanded(
-              child: state.when(
-                data: (data) {
-                  return ListView(
-                    padding: const EdgeInsets.only(top: 10, bottom: 20),
-                    children: [
-                      ...data.map(
-                        (item) => _SearchResultTile(
-                          item: item,
-                          currentLocation: currentLocation,
-                          danger: danger,
-                          secondaryText: secondaryText,
-                          premiumBorder: premiumBorder,
-                        ),
-                      ),
-                    ],
-                  );
-                },
-                error: (error, stackTrace) => const _EmptySearchState(),
-                loading: () => const _EmptySearchState(),
+              child: ListView(
+                padding: const EdgeInsets.only(top: 10, bottom: 20),
+                children: [
+                  ...state.items.map(
+                    (item) => _SearchResultTile(
+                      item: item,
+                      currentLocation: currentLocation,
+                      danger: danger,
+                      secondaryText: secondaryText,
+                      premiumBorder: premiumBorder,
+                    ),
+                  ),
+                ],
               ),
-              // childs: _filteredItems.isEmpty
-              //     ? const _EmptySearchState()
-              //     : ListView(
-              //         padding: const EdgeInsets.only(top: 10, bottom: 20),
-              //         children: [
-              //           ..._filteredItems.map(
-              //             (item) => _SearchResultTile(
-              //               item: item,
-              //               danger: danger,
-              //               secondaryText: secondaryText,
-              //               premiumBorder: premiumBorder,
-              //             ),
-              //           ),
-              //         ],
-              //       ),
             ),
           ],
         ),
@@ -328,7 +262,7 @@ class _SearchResultTile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final dotColor =
-        item.occurredAt.isOlderThanDays(7) ? danger : const Color(0xFF8E8E93);
+        item.occurredAt.isOlderThanDays(7) ? const Color(0xFF8E8E93) : danger;
 
     return InkWell(
       onTap: () {},
@@ -377,7 +311,7 @@ class _SearchResultTile extends StatelessWidget {
                           ),
                         ),
                         //TODO: Premium
-                        if (true) ...[
+                        if (item.visibilty) ...[
                           const SizedBox(width: 8),
                           Container(
                             padding: const EdgeInsets.symmetric(
@@ -389,7 +323,7 @@ class _SearchResultTile extends StatelessWidget {
                               borderRadius: BorderRadius.circular(999),
                             ),
                             child: Text(
-                              'Premium',
+                              'Verificado',
                               style: TextStyle(
                                 color: Colors.white,
                                 fontSize: context.safeSp(10),
@@ -415,9 +349,39 @@ class _SearchResultTile extends StatelessWidget {
                       _getSummary(item, currentLocation),
                       style: TextStyle(
                         color: secondaryText,
-                        fontSize: 13,
+                        fontSize: context.safeSp(12),
                         height: 1.2,
                       ),
+                    ),
+                    const SizedBox(height: 4),
+                    Row(
+                      spacing: 5,
+                      children: [
+                        if (!item.isPlatformGenerated) ...[
+                          CircleAvatar(
+                            radius: 12,
+                            // backgroundColor: colors[index % colors.length],
+                            child: Icon(
+                              Icons.person,
+                              size: IconSizes.xxs,
+                              color: Colors.white,
+                            ),
+                          ),
+                        ] else ...[
+                          Image.asset(
+                            "assets/images/logo_transp.png",
+                            width: IconSizes.xs,
+                          ),
+                        ],
+                        Text(
+                          item.isPlatformGenerated ? "Civi" : "Comunidade",
+                          style: TextStyle(
+                            color: secondaryText,
+                            fontSize: context.safeSp(12),
+                            height: 1.2,
+                          ),
+                        )
+                      ],
                     ),
                   ],
                 ),

@@ -7,7 +7,6 @@ import 'package:deehelp/feature/home/v2/widgets/waze_alert.dart';
 import 'package:deehelp/feature/items/list/item_list_page.dart';
 import 'package:deehelp/feature/mapa/mapa_page.dart';
 import 'package:deehelp/feature/profile/profile_page.dart';
-import 'package:deehelp/feature/search/search_page.dart';
 import 'package:deehelp/module/auth/external/di/authenticated_user_provider.dart';
 import 'package:deehelp/module/item/di/item_viewmodel_provider.dart';
 import 'package:flutter/cupertino.dart';
@@ -30,7 +29,8 @@ class _AppShellPageState extends ConsumerState<AppShellPage> {
     // EventsScreen(),
     // AlertDetailsScreen(),
     MapaPage(),
-    SearchPage(), // 2
+    ItemListPage(),
+    // SearchPage(), // 2
     ItemListPage(), // 3
     ProfilePage(), // 4
   ];

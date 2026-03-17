@@ -61,6 +61,7 @@ class IncidentMapper {
         .toList();
     return IncidentOutput(
       id: map['id'],
+      isPlatformGenerated: map['is_platform_generated'],
       userId: map['user_id'],
       // type: TypeAlert.values.firstWhere((e) => e.name == map['type']),
       type: TypeAlert.detailed,

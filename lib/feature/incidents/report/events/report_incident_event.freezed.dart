@@ -145,7 +145,7 @@ extension ReportIncidentEventPatterns on ReportIncidentEvent {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(RegiterIncidentSuccessArgs args)? successfully,
-    TResult Function(String error, bool isUnkowError)? error,
+    TResult Function(String error, bool isKnowError)? error,
     TResult Function()? loadProgress,
     required TResult orElse(),
   }) {
@@ -154,7 +154,7 @@ extension ReportIncidentEventPatterns on ReportIncidentEvent {
       case ReportSuccessfully() when successfully != null:
         return successfully(_that.args);
       case ReportError() when error != null:
-        return error(_that.error, _that.isUnkowError);
+        return error(_that.error, _that.isKnowError);
       case ReportLoadProgress() when loadProgress != null:
         return loadProgress();
       case _:
@@ -178,7 +178,7 @@ extension ReportIncidentEventPatterns on ReportIncidentEvent {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function(RegiterIncidentSuccessArgs args) successfully,
-    required TResult Function(String error, bool isUnkowError) error,
+    required TResult Function(String error, bool isKnowError) error,
     required TResult Function() loadProgress,
   }) {
     final _that = this;
@@ -186,7 +186,7 @@ extension ReportIncidentEventPatterns on ReportIncidentEvent {
       case ReportSuccessfully():
         return successfully(_that.args);
       case ReportError():
-        return error(_that.error, _that.isUnkowError);
+        return error(_that.error, _that.isKnowError);
       case ReportLoadProgress():
         return loadProgress();
     }
@@ -207,7 +207,7 @@ extension ReportIncidentEventPatterns on ReportIncidentEvent {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(RegiterIncidentSuccessArgs args)? successfully,
-    TResult? Function(String error, bool isUnkowError)? error,
+    TResult? Function(String error, bool isKnowError)? error,
     TResult? Function()? loadProgress,
   }) {
     final _that = this;
@@ -215,7 +215,7 @@ extension ReportIncidentEventPatterns on ReportIncidentEvent {
       case ReportSuccessfully() when successfully != null:
         return successfully(_that.args);
       case ReportError() when error != null:
-        return error(_that.error, _that.isUnkowError);
+        return error(_that.error, _that.isKnowError);
       case ReportLoadProgress() when loadProgress != null:
         return loadProgress();
       case _:
@@ -291,10 +291,10 @@ class _$ReportSuccessfullyCopyWithImpl<$Res>
 /// @nodoc
 
 class ReportError implements ReportIncidentEvent {
-  const ReportError(this.error, this.isUnkowError);
+  const ReportError(this.error, this.isKnowError);
 
   final String error;
-  final bool isUnkowError;
+  final bool isKnowError;
 
   /// Create a copy of ReportIncidentEvent
   /// with the given fields replaced by the non-null parameter values.
@@ -309,16 +309,16 @@ class ReportError implements ReportIncidentEvent {
         (other.runtimeType == runtimeType &&
             other is ReportError &&
             (identical(other.error, error) || other.error == error) &&
-            (identical(other.isUnkowError, isUnkowError) ||
-                other.isUnkowError == isUnkowError));
+            (identical(other.isKnowError, isKnowError) ||
+                other.isKnowError == isKnowError));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, error, isUnkowError);
+  int get hashCode => Object.hash(runtimeType, error, isKnowError);
 
   @override
   String toString() {
-    return 'ReportIncidentEvent.error(error: $error, isUnkowError: $isUnkowError)';
+    return 'ReportIncidentEvent.error(error: $error, isKnowError: $isKnowError)';
   }
 }
 
@@ -329,7 +329,7 @@ abstract mixin class $ReportErrorCopyWith<$Res>
           ReportError value, $Res Function(ReportError) _then) =
       _$ReportErrorCopyWithImpl;
   @useResult
-  $Res call({String error, bool isUnkowError});
+  $Res call({String error, bool isKnowError});
 }
 
 /// @nodoc
@@ -344,16 +344,16 @@ class _$ReportErrorCopyWithImpl<$Res> implements $ReportErrorCopyWith<$Res> {
   @pragma('vm:prefer-inline')
   $Res call({
     Object? error = null,
-    Object? isUnkowError = null,
+    Object? isKnowError = null,
   }) {
     return _then(ReportError(
       null == error
           ? _self.error
           : error // ignore: cast_nullable_to_non_nullable
               as String,
-      null == isUnkowError
-          ? _self.isUnkowError
-          : isUnkowError // ignore: cast_nullable_to_non_nullable
+      null == isKnowError
+          ? _self.isKnowError
+          : isKnowError // ignore: cast_nullable_to_non_nullable
               as bool,
     ));
   }

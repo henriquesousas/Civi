@@ -28,6 +28,7 @@ abstract class IncidentOutput with _$IncidentOutput {
     required Region? region,
     IncidentLocal? local,
     String? howTo,
+    @Default(false) bool isPlatformGenerated,
     @Default(true) bool visibilty,
   }) = _IncidentOutput;
 }
