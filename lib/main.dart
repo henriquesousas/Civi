@@ -39,6 +39,12 @@ void main() async {
     statusBarColor: Colors.transparent,
   ));
 
+  await SystemChrome.setPreferredOrientations([
+    DeviceOrientation.portraitUp,
+    // se quiser permitir virar de cabeça pra baixo:
+    // DeviceOrientation.portraitDown,
+  ]);
+
   runApp(
     const ProviderScope(child: MainApp()),
   );

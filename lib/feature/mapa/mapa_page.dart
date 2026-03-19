@@ -1,184 +1,195 @@
-import 'dart:math';
-import 'dart:typed_data';
+import 'dart:async';
 import 'dart:ui' as ui;
 
+import 'package:deehelp/core/extension/date_extension.dart';
 import 'package:deehelp/core/extension/exports_extension.dart';
+import 'package:deehelp/core/providers/supabase_provider.dart';
+import 'package:deehelp/core/services/network/network_info_provider.dart';
+import 'package:deehelp/core/services/network/netwotk_alert_controller.dart';
 import 'package:deehelp/core/services/permissions/location/export_location.dart';
 import 'package:deehelp/core/theme/app_colors.dart';
 import 'package:deehelp/core/ui/styles/export_style.dart';
-import 'package:deehelp/feature/mapa/reported_by.dart';
+import 'package:deehelp/core/utils/enum_utils.dart';
+import 'package:deehelp/core/utils/url_launcher_utils.dart';
+import 'package:deehelp/feature/home/home_viewmodel_provider.dart';
+import 'package:deehelp/feature/home/v2/widgets/waze_alert.dart';
+import 'package:deehelp/feature/items/item_type.dart';
 import 'package:deehelp/feature/mapa/widgets/horizontal_incident_card.dart';
 import 'package:deehelp/feature/mapa/widgets/map_bottom_sheet.dart';
 import 'package:deehelp/feature/mapa/widgets/map_floating_toolbar.dart';
+import 'package:deehelp/feature/search/search_page_v2.dart';
 import 'package:deehelp/feature/search/search_router.dart';
 import 'package:deehelp/module/auth/external/di/authenticated_user_provider.dart';
+import 'package:deehelp/module/incident/domain/enum/incident_status.dart';
+import 'package:deehelp/module/incident/domain/usecase/incident_output.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
 import 'package:lottie/lottie.dart';
-import 'package:mapbox_maps_flutter/mapbox_maps_flutter.dart';
+import 'package:mapbox_maps_flutter/mapbox_maps_flutter.dart' hide Visibility;
 import 'package:permission_handler/permission_handler.dart';
+import 'package:supabase_flutter/supabase_flutter.dart';
 
-class FakeIncident {
-  final Point point;
-  final IconData image;
-  final String imageAssets;
-  final Color pinBorder;
+// class FakeIncident {
+//   final Point point;
+//   final IconData image;
+//   final String imageAssets;
+//   final Color pinBorder;
 
-  FakeIncident(
-      {required this.point,
-      required this.image,
-      required this.pinBorder,
-      required this.imageAssets});
+//   FakeIncident(
+//       {required this.point,
+//       required this.image,
+//       required this.pinBorder,
+//       required this.imageAssets});
 
-  static List<FakeIncident> generateFakeIncidents() {
-    final random = Random();
+//   static List<FakeIncident> generateFakeIncidents() {
+//     final random = Random();
 
-    const double minLat = -23.70;
-    const double maxLat = -23.45;
+//     const double minLat = -23.70;
+//     const double maxLat = -23.45;
 
-    const double minLng = -46.80;
-    const double maxLng = -46.40;
+//     const double minLng = -46.80;
+//     const double maxLng = -46.40;
 
-    final icons = [
-      Icons.directions_car_filled_rounded,
-      Icons.smartphone_rounded,
-      Icons.two_wheeler_rounded,
-    ];
+//     final icons = [
+//       Icons.directions_car_filled_rounded,
+//       Icons.smartphone_rounded,
+//       Icons.two_wheeler_rounded,
+//     ];
 
-    final imageAssets = [
-      "assets/images/motorcycle_pin_v9.png",
-      "assets/images/car_rouberry_v4.png",
-      "assets/images/phone_pin_v2.png",
-    ];
+//     final imageAssets = [
+//       "assets/images/motorcycle_pin_v9.png",
+//       "assets/images/car_rouberry_v4.png",
+//       "assets/images/phone_pin_v2.png",
+//     ];
 
-    return List.generate(100, (index) {
-      final lat = minLat + random.nextDouble() * (maxLat - minLat);
-      final lng = minLng + random.nextDouble() * (maxLng - minLng);
+//     return List.generate(100, (index) {
+//       final lat = minLat + random.nextDouble() * (maxLat - minLat);
+//       final lng = minLng + random.nextDouble() * (maxLng - minLng);
 
-      return FakeIncident(
-        point: Point(
-          coordinates: Position(lng, lat),
-        ),
-        image: icons[random.nextInt(icons.length)],
-        imageAssets: imageAssets[random.nextInt(imageAssets.length)],
-        pinBorder: AppColors.primaryColor,
-      );
-    });
-  }
+//       return FakeIncident(
+//         point: Point(
+//           coordinates: Position(lng, lat),
+//         ),
+//         image: icons[random.nextInt(icons.length)],
+//         imageAssets: imageAssets[random.nextInt(imageAssets.length)],
+//         pinBorder: AppColors.primaryColor,
+//       );
+//     });
+//   }
 
-  // static List<FakeIncident> itemss() {
-  //   return [
-  //     FakeIncident(
-  //       point: Point(coordinates: Position(-46.7905, -23.5338)),
-  //       image: Icons.directions_car_filled_rounded,
-  //       pinBorder: AppColors.primaryColor,
-  //     ),
-  //     FakeIncident(
-  //       point: Point(coordinates: Position(-46.7889, -23.5315)),
-  //       image: Icons.smartphone_rounded,
-  //       pinBorder: AppColors.primaryColor,
-  //     ),
-  //     FakeIncident(
-  //       point: Point(coordinates: Position(-46.7952, -23.5347)),
-  //       image: Icons.two_wheeler_rounded,
-  //       pinBorder: AppColors.primaryColor,
-  //     ),
-  //     FakeIncident(
-  //       point: Point(coordinates: Position(-46.7978, -23.5299)),
-  //       image: Icons.flood_rounded,
-  //       pinBorder: AppColors.primaryColor,
-  //     ),
-  //     FakeIncident(
-  //       point: Point(coordinates: Position(-46.7854, -23.5361)),
-  //       image: Icons.visibility_rounded,
-  //       pinBorder: AppColors.primaryColor,
-  //     ),
-  //     FakeIncident(
-  //       point: Point(coordinates: Position(-46.7822, -23.5304)),
-  //       image: Icons.flood_rounded,
-  //       pinBorder: AppColors.primaryColor,
-  //     ),
-  //     FakeIncident(
-  //       point: Point(coordinates: Position(-46.8001, -23.5321)),
-  //       image: Icons.directions_car_filled_rounded,
-  //       pinBorder: AppColors.primaryColor,
-  //     ),
-  //     FakeIncident(
-  //       point: Point(coordinates: Position(-46.8035, -23.5374)),
-  //       image: Icons.directions_car_filled_rounded,
-  //       pinBorder: AppColors.primaryColor,
-  //     ),
-  //     FakeIncident(
-  //       point: Point(coordinates: Position(-46.8035, -23.5374)),
-  //       image: Icons.motorcycle,
-  //       pinBorder: AppColors.primaryColor,
-  //     ),
-  //     FakeIncident(
-  //       point: Point(coordinates: Position(-46.7768, -23.5289)),
-  //       image: Icons.directions_car_filled_rounded,
-  //       pinBorder: AppColors.primaryColor,
-  //     ),
-  //     FakeIncident(
-  //       point: Point(coordinates: Position(-46.7741, -23.5340)),
-  //       image: Icons.motorcycle_rounded,
-  //       pinBorder: AppColors.primaryColor,
-  //     ),
-  //     FakeIncident(
-  //       point: Point(coordinates: Position(-46.7867, -23.5257)),
-  //       image: Icons.motorcycle_rounded,
-  //       pinBorder: AppColors.primaryColor,
-  //     ),
-  //     FakeIncident(
-  //       point: Point(coordinates: Position(-46.7928, -23.5402)),
-  //       image: Icons.directions_car_filled_rounded,
-  //       pinBorder: AppColors.primaryColor,
-  //     ),
-  //     FakeIncident(
-  //       point: Point(coordinates: Position(-46.8057, -23.5295)),
-  //       image: Icons.motorcycle_rounded,
-  //       pinBorder: AppColors.primaryColor,
-  //     ),
-  //     FakeIncident(
-  //       point: Point(coordinates: Position(-46.8092, -23.5333)),
-  //       image: Icons.phone_android_rounded,
-  //       pinBorder: AppColors.primaryColor,
-  //     ),
-  //     FakeIncident(
-  //       point: Point(coordinates: Position(-46.7819, -23.5411)),
-  //       image: Icons.directions_car_filled_rounded,
-  //       pinBorder: AppColors.primaryColor,
-  //     ),
-  //     FakeIncident(
-  //       point: Point(coordinates: Position(-46.7727, -23.5378)),
-  //       image: Icons.directions_car_filled_rounded,
-  //       pinBorder: AppColors.primaryColor,
-  //     ),
-  //     FakeIncident(
-  //       point: Point(coordinates: Position(-46.7994, -23.5252)),
-  //       image: Icons.directions_car_filled_rounded,
-  //       pinBorder: AppColors.primaryColor,
-  //     ),
-  //     FakeIncident(
-  //       point: Point(coordinates: Position(-46.8070, -23.5415)),
-  //       image: Icons.directions_car_filled_rounded,
-  //       pinBorder: AppColors.primaryColor,
-  //     ),
-  //     FakeIncident(
-  //       point: Point(coordinates: Position(-46.7840, -23.5440)),
-  //       image: Icons.directions_car_filled_rounded,
-  //       pinBorder: AppColors.primaryColor,
-  //     ),
-  //     FakeIncident(
-  //       point: Point(coordinates: Position(-46.7708, -23.5309)),
-  //       image: Icons.directions_car_filled_rounded,
-  //       pinBorder: AppColors.primaryColor,
-  //     ),
-  //   ];
-  // }
-}
+// static List<FakeIncident> itemss() {
+//   return [
+//     FakeIncident(
+//       point: Point(coordinates: Position(-46.7905, -23.5338)),
+//       image: Icons.directions_car_filled_rounded,
+//       pinBorder: AppColors.primaryColor,
+//     ),
+//     FakeIncident(
+//       point: Point(coordinates: Position(-46.7889, -23.5315)),
+//       image: Icons.smartphone_rounded,
+//       pinBorder: AppColors.primaryColor,
+//     ),
+//     FakeIncident(
+//       point: Point(coordinates: Position(-46.7952, -23.5347)),
+//       image: Icons.two_wheeler_rounded,
+//       pinBorder: AppColors.primaryColor,
+//     ),
+//     FakeIncident(
+//       point: Point(coordinates: Position(-46.7978, -23.5299)),
+//       image: Icons.flood_rounded,
+//       pinBorder: AppColors.primaryColor,
+//     ),
+//     FakeIncident(
+//       point: Point(coordinates: Position(-46.7854, -23.5361)),
+//       image: Icons.visibility_rounded,
+//       pinBorder: AppColors.primaryColor,
+//     ),
+//     FakeIncident(
+//       point: Point(coordinates: Position(-46.7822, -23.5304)),
+//       image: Icons.flood_rounded,
+//       pinBorder: AppColors.primaryColor,
+//     ),
+//     FakeIncident(
+//       point: Point(coordinates: Position(-46.8001, -23.5321)),
+//       image: Icons.directions_car_filled_rounded,
+//       pinBorder: AppColors.primaryColor,
+//     ),
+//     FakeIncident(
+//       point: Point(coordinates: Position(-46.8035, -23.5374)),
+//       image: Icons.directions_car_filled_rounded,
+//       pinBorder: AppColors.primaryColor,
+//     ),
+//     FakeIncident(
+//       point: Point(coordinates: Position(-46.8035, -23.5374)),
+//       image: Icons.motorcycle,
+//       pinBorder: AppColors.primaryColor,
+//     ),
+//     FakeIncident(
+//       point: Point(coordinates: Position(-46.7768, -23.5289)),
+//       image: Icons.directions_car_filled_rounded,
+//       pinBorder: AppColors.primaryColor,
+//     ),
+//     FakeIncident(
+//       point: Point(coordinates: Position(-46.7741, -23.5340)),
+//       image: Icons.motorcycle_rounded,
+//       pinBorder: AppColors.primaryColor,
+//     ),
+//     FakeIncident(
+//       point: Point(coordinates: Position(-46.7867, -23.5257)),
+//       image: Icons.motorcycle_rounded,
+//       pinBorder: AppColors.primaryColor,
+//     ),
+//     FakeIncident(
+//       point: Point(coordinates: Position(-46.7928, -23.5402)),
+//       image: Icons.directions_car_filled_rounded,
+//       pinBorder: AppColors.primaryColor,
+//     ),
+//     FakeIncident(
+//       point: Point(coordinates: Position(-46.8057, -23.5295)),
+//       image: Icons.motorcycle_rounded,
+//       pinBorder: AppColors.primaryColor,
+//     ),
+//     FakeIncident(
+//       point: Point(coordinates: Position(-46.8092, -23.5333)),
+//       image: Icons.phone_android_rounded,
+//       pinBorder: AppColors.primaryColor,
+//     ),
+//     FakeIncident(
+//       point: Point(coordinates: Position(-46.7819, -23.5411)),
+//       image: Icons.directions_car_filled_rounded,
+//       pinBorder: AppColors.primaryColor,
+//     ),
+//     FakeIncident(
+//       point: Point(coordinates: Position(-46.7727, -23.5378)),
+//       image: Icons.directions_car_filled_rounded,
+//       pinBorder: AppColors.primaryColor,
+//     ),
+//     FakeIncident(
+//       point: Point(coordinates: Position(-46.7994, -23.5252)),
+//       image: Icons.directions_car_filled_rounded,
+//       pinBorder: AppColors.primaryColor,
+//     ),
+//     FakeIncident(
+//       point: Point(coordinates: Position(-46.8070, -23.5415)),
+//       image: Icons.directions_car_filled_rounded,
+//       pinBorder: AppColors.primaryColor,
+//     ),
+//     FakeIncident(
+//       point: Point(coordinates: Position(-46.7840, -23.5440)),
+//       image: Icons.directions_car_filled_rounded,
+//       pinBorder: AppColors.primaryColor,
+//     ),
+//     FakeIncident(
+//       point: Point(coordinates: Position(-46.7708, -23.5309)),
+//       image: Icons.directions_car_filled_rounded,
+//       pinBorder: AppColors.primaryColor,
+//     ),
+//   ];
+// }
+// }
 
 enum GPSHeight {
   normal,
@@ -200,11 +211,8 @@ class _MapaPageState extends ConsumerState<MapaPage> {
   bool _isCardOpened = false;
   GPSHeight _gpsHeight = GPSHeight.normal;
   ScrollController controller = ScrollController();
-
-  // double gpsNormalHeight = 100.h;
-  // final double gpsCardIncidentHeight = 240.h;
-
-  // bool _locationEnabled = false;
+  RealtimeChannel? reportsChannel;
+  CurrentLocation? currenLocation;
   CameraState? _previousCameraState;
   final List<PointAnnotation> _markers = [];
   PointAnnotation? _activeMarker;
@@ -212,26 +220,165 @@ class _MapaPageState extends ConsumerState<MapaPage> {
   final PageController _incidentPageController =
       PageController(viewportFraction: 0.88);
   MapboxMap? _mapboxMap;
-  static final Point _myLocation = Point(
+  final Point _myLocation = Point(
     coordinates: Position(-46.7917, -23.5329),
   );
+  // late final NetworkInfo _networkInfo;
+  // // final ConnectionBannerController _bannerController =
+  // //     ConnectionBannerController();
+  // StreamSubscription<bool>? _connectionSubscription;
+  // bool _isOffline = false;
+
+  late final NetworkListener _networkListener;
+  NetworkReconnectListener? _networkReconnectListener;
 
   double get _getGpsHeight {
     switch (_gpsHeight) {
       case GPSHeight.normal:
         return 100.h;
       case GPSHeight.min:
-        return 270.h;
+        return 280.h;
       default:
-        return 220.h;
+        return 240.h;
+    }
+  }
+
+  void startListeningReports() {
+    final supabase = ref.read(supabaseClientProvider);
+    reportsChannel = supabase
+        .channel('public:reports')
+        .onPostgresChanges(
+          event: PostgresChangeEvent.insert,
+          schema: 'public',
+          table: 'report',
+          callback: (payload) {
+            // nao mostrar se é o meu id
+            //so mostrar se estiver "status" -> "active"
+
+            final authenticatedUser = ref.read(authenticatedUserProvider);
+            final myLocation = ref.read(currentLocationProvider);
+
+            if (authenticatedUser == null) return;
+            if (myLocation == null) return;
+
+            final data = payload.newRecord;
+
+            final status =
+                EnumUtils.fromString(IncidentStatus.values, data['status']);
+            final userId = data['user_id'];
+
+            if (status != IncidentStatus.active) {
+              return;
+            }
+
+            if (userId == authenticatedUser.id) {
+              return;
+            }
+
+            final time = DateTime.parse(data['occurred_at']).timeAgo();
+            final label = EnumUtils.fromString(ItemType.values, data['kind'])
+                .labelRouberry;
+            final city = data['city'];
+            final lat = (data['lat'] as num?)?.toDouble();
+            final long = (data['long'] as num?)?.toDouble();
+            String? distance;
+
+            if (lat != null || long != null) {
+              distance = DistanceUtils.formatDistance(
+                startLatitude: myLocation.latitude,
+                startLongitude: myLocation.longitude,
+                endLatitude: lat!,
+                endLongitude: long!,
+              );
+            }
+
+            WazeAlertController.instance.show(
+              WazeAlertState(
+                title: '$label agora',
+                // subtitle: '$time • $city • 1,8 km de você'),
+                subtitle: distance != null
+                    ? '$time • $city • $distance  de você'
+                    : '$time • $city',
+              ),
+            );
+
+            // Aqui você pode:
+            // - atualizar lista
+            // - mostrar marcador no mapa
+            // - disparar alerta local
+            // - chamar setState / notifier / provider
+          },
+        )
+        .subscribe();
+  }
+
+  void stopListeningReports() {
+    final supabase = ref.read(supabaseClientProvider);
+    if (reportsChannel != null) {
+      supabase.removeChannel(reportsChannel!);
+      reportsChannel = null;
     }
   }
 
   @override
+  void initState() {
+    //Ouve quando interne muda
+    final networkInfo = ref.read(networkInfoProvider);
+    _networkListener = NetworkListener(networkInfo);
+    _networkListener.start();
+
+    //Ouve quando internet volta
+    _networkReconnectListener = NetworkReconnectListener(networkInfo);
+    _networkReconnectListener?.start(
+      onReconnect: () async {
+        _loadData();
+      },
+      onDisconnect: () async {},
+    );
+    _loadData();
+    super.initState();
+    startListeningReports();
+  }
+
+  void _loadData() {
+    WidgetsBinding.instance.addPostFrameCallback(
+      (_) {
+        final currenLocation = ref.watch(currentLocationProvider);
+        //  final region = '${currenLocation?.city} • ${currenLocation?.state}';
+        ref
+            .read(homeViewmodelProvider.notifier)
+            .getRecentIncidents(currenLocation);
+      },
+    );
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
+    final homeState = ref.watch(homeViewmodelProvider);
     final state = ref.watch(authenticatedUserProvider);
-    final currenLocation = ref.watch(currentLocationProvider);
-    final fakeIncidents = FakeIncident.generateFakeIncidents();
+    currenLocation = ref.watch(currentLocationProvider);
+    // final fakeIncidents = FakeIncident.generateFakeIncidents();
+
+    if (currenLocation != null) {
+      // _myLocation.coordinates =
+      //     Position(currenLocation.latitude, currenLocation.longitude);
+
+      _goToMyLocation(currenLocation);
+    }
+
+    ref.listen(
+      homeViewmodelProvider,
+      (previous, state) {
+        if (state.hasValue) {
+          _createMarker(state.value!);
+        }
+      },
+    );
 
     return Scaffold(
       body: Stack(
@@ -248,70 +395,26 @@ class _MapaPageState extends ConsumerState<MapaPage> {
             ),
 
             textureView: true,
-            onMapCreated: (mapboxMap) =>
-                _onMapCreated(mapboxMap, fakeIncidents),
+            onMapCreated: (mapboxMap) => _onMapCreated(mapboxMap, []),
             // onMapCreated: _onMapCreated(),
           ),
-          //Search
-          // SafeArea(
-          //   bottom: false,
-          //   child: Padding(
-          //     padding: const EdgeInsets.fromLTRB(16, 10, 16, 0),
-          //     child: Row(
-          //       mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          //       children: [
-          //         Flexible(
-          //           flex: 1,
-          //           child: MapaAvatar(
-          //             photoUrl: state?.photoUrl,
-          //           ),
-          //         ),
-          //         // const SizedBox(width: 12),
-          //         const Flexible(flex: 4, child: SearchCardWithRegion()),
-          //         // const SizedBox(width: 12),
-          //         // Aqui deve ter 3  icones um abaixo do outro no caso aqui no topo
-          //         Flexible(
-          //           flex: 1,
-          //           child: MapSideActionButton(
-          //             assetPath: "assets/images/settingsv2.png",
-          //             // icon: Icons.settings_outlined,
-          //             onTap: () {},
-          //           ),
-          //         ),
 
-          //       ],
-          //     ),
-          //   ),
-          // ),
-
-          //Search
-          // SafeArea(
-          //   bottom: false,
-          //   child: Padding(
-          //     padding: const EdgeInsets.fromLTRB(20, 10, 20, 0),
-          //     child: MapSearch(
-          //       // hintText: 'Buscar incidentes ou locais',
-          //       hintText: "👋 Consultar placa ou IMEI de celular",
-          //       avatarUrl: state?.photoUrl,
-          //       userName: state?.name ?? '',
-          //       notificationCount: 3,
-          //       onTap: () {},
-          //       onAvatarTap: () {},
-          //       onNotificationTap: () {},
-          //     ),
-          //   ),
-          // ),
-
-          Positioned(
-            top: 0,
-            left: context.percentWidth(0.3),
-            right: context.percentWidth(0.3),
-            bottom: 0,
-            // child: RadarPulse(),
-            child: Lottie.asset(
-              "assets/lottie/radar.json",
-              width: context.percentWidth(0.3),
-              height: context.percentWidth(0.3),
+          //Radar loading
+          Visibility(
+            visible: homeState.isLoading,
+            child: Positioned(
+              top: 0,
+              left: context.percentWidth(0.3),
+              right: context.percentWidth(0.3),
+              bottom: 0,
+              // child: RadarPulse(),
+              child: IgnorePointer(
+                child: Lottie.asset(
+                  "assets/lottie/radar.json",
+                  width: context.percentWidth(0.3),
+                  height: context.percentWidth(0.3),
+                ),
+              ),
             ),
           ),
 
@@ -338,7 +441,6 @@ class _MapaPageState extends ConsumerState<MapaPage> {
                 // ),
                 FloatingActionButton(
                   mini: false,
-
                   // backgroundColor: context.primaryColor,
                   backgroundColor:
                       context.secondaryColor.withValues(alpha: 0.1),
@@ -347,6 +449,22 @@ class _MapaPageState extends ConsumerState<MapaPage> {
                     borderRadius: BorderRadius.circular(999),
                   ),
                   onPressed: () => _goToMyLocation(currenLocation),
+                  // onPressed: () {
+                  //   debugPrint('Lat ${currenLocation!.latitude}');
+                  //   debugPrint('Long ${currenLocation!.longitude}');
+
+                  //   final dis = DistanceUtils.formatDistance(
+                  //     startLatitude: -23.4928262,
+                  //     startLongitude: -46.8055845,
+
+                  //     // startLatitude: -23.492540969444104,
+                  //     // startLongitude: -46.80559304905333,
+                  //     endLatitude: -23.4927413,
+                  //     endLongitude: -46.8055424,
+                  //   );
+
+                  //   debugPrint(dis);
+                  // },
                   child: const Icon(
                     Icons.navigation,
                     color: Colors.white,
@@ -358,13 +476,35 @@ class _MapaPageState extends ConsumerState<MapaPage> {
           //Close incidents
           _clseButton(),
           //Grid incidentes
-          AnimatedPositioned(
-            duration: const Duration(milliseconds: 350),
-            left: 16,
-            right: 16,
-            bottom: _showIncidentCards ? 1 : -300,
-            child: _horizontalIncidentCard(fakeIncidents),
+          homeState.maybeMap(
+            data: (data) {
+              if (data.value.isEmpty) {
+                // return const Expanded(child: EmptyIncidentsState());
+                return SizedBox.shrink();
+              }
+
+              return AnimatedPositioned(
+                duration: const Duration(milliseconds: 350),
+                left: 16,
+                right: 16,
+                bottom: _showIncidentCards ? 1 : -300,
+                child: _horizontalIncidentCard(data.value),
+              );
+            },
+            loading: (loading) {
+              return const SizedBox.shrink();
+            },
+            orElse: () {
+              return const SizedBox.shrink();
+            },
           ),
+          // AnimatedPositioned(
+          //   duration: const Duration(milliseconds: 350),
+          //   left: 16,
+          //   right: 16,
+          //   bottom: _showIncidentCards ? 1 : -300,
+          //   child: _horizontalIncidentCard(fakeIncidents),
+          // ),
           // Location
           Positioned(
             left: 0,
@@ -382,7 +522,7 @@ class _MapaPageState extends ConsumerState<MapaPage> {
                     city: currenLocation?.city ?? "Buscando ocorrências...",
                     address: currenLocation == null
                         ? "Aguarde..."
-                        : '${currenLocation.address}',
+                        : '${currenLocation?.address}',
                     initiallyExpanded: _showIncidentCards,
                     onTapHeader: (opened) {
                       _isCardOpened = opened;
@@ -439,7 +579,8 @@ class _MapaPageState extends ConsumerState<MapaPage> {
 
   Widget _clseButton() {
     return Positioned(
-      bottom: _showIncidentCards ? 240.h : 100.h,
+      // bottom: _showIncidentCards ? 220.h : 100.h,
+      bottom: _getGpsHeight,
       left: 30,
       child: AnimatedOpacity(
         duration: const Duration(milliseconds: 250),
@@ -449,7 +590,8 @@ class _MapaPageState extends ConsumerState<MapaPage> {
           ignoring: !_showIncidentCards,
           child: Container(
             decoration: BoxDecoration(
-              color: Colors.white,
+              // color: Colors.white,
+              color: context.secondaryColor.withValues(alpha: 0.1),
               borderRadius: BorderRadius.circular(30),
               boxShadow: const [
                 BoxShadow(
@@ -471,6 +613,10 @@ class _MapaPageState extends ConsumerState<MapaPage> {
                 });
 
                 if (_previousCameraState != null) {
+                  if (_activeMarker != null) {
+                    _activeMarker!.iconSize = 1.2;
+                    await _pointManager?.update(_activeMarker!);
+                  }
                   await _mapboxMap?.flyTo(
                     CameraOptions(
                       center: _previousCameraState!.center,
@@ -489,8 +635,11 @@ class _MapaPageState extends ConsumerState<MapaPage> {
     );
   }
 
-  Widget _horizontalIncidentCard(List<FakeIncident> incidents) {
-    final height = context.percentHeight(0.15).clamp(205.0, 245.0);
+  Widget _horizontalIncidentCard(List<IncidentOutput> incidents) {
+    final screenHeight = MediaQuery.of(context).size.height;
+    final height = (screenHeight * 0.27).clamp(220.0, 270.0);
+
+    // final height = context.percentHeight(0.15).clamp(205.0, 245.0);
     return SizedBox(
       height: height,
       child: PageView.builder(
@@ -501,23 +650,26 @@ class _MapaPageState extends ConsumerState<MapaPage> {
           _onIncidentCardChanged(index);
         },
         itemBuilder: (context, index) {
+          final incident = incidents[index];
+
           return HorizontalIncidentCard(
             incidentType: 'Roubo',
-            title: 'Fox vermelho 2013',
-            locationLabel: 'Centro, Osasco',
-            timeLabel: 'hoje, 18:30',
-            distanceLabel: '1,2 km de você',
-            reportedBy: ReportedBy.community,
-            coverImageUrl:
-                'https://images.unsplash.com/photo-1503376780353-7e6692767b70?w=400',
-            confirmations: 93,
-            participantAvatarUrls: const [
-              'https://i.pravatar.cc/100?img=1',
-              'https://i.pravatar.cc/100?img=2',
-              'https://i.pravatar.cc/100?img=3',
-            ],
+            title: incident.product.name,
+
+            // locationLabel: 'Centro, Osasco',
+            // timeLabel: 'hoje, 18:30',
+            // distanceLabel: '1,2 km de você',
+            howTo: incident.howTo,
+            locationLabel: _getLocale(incident),
+            timeLabel: incident.occurredAt.timeAgo(),
+            distanceLabel: _getDistance(incident),
+            isPlatformGenerated: incident.isPlatformGenerated,
+            coverImageUrl: incident.product.images.isNotEmpty
+                ? incident.product.images.first.value
+                : null,
             onTap: () {},
-            onShareTap: () {},
+            onShareTap: () => UrlLauncherUtils.shareIncident(
+                context, incident.alertId, incident.occurredAt),
             onBookmarkTap: () {},
           );
         },
@@ -525,9 +677,26 @@ class _MapaPageState extends ConsumerState<MapaPage> {
     );
   }
 
+  String _getLocale(IncidentOutput incident) {
+    if (incident.local == null) return "Não informado";
+    return '${incident.local!.city}, ${incident.local!.state}';
+  }
+
+  String _getDistance(IncidentOutput incident) {
+    if (currenLocation == null) return '';
+    if (incident.local == null) return '';
+
+    return DistanceUtils.formatDistance(
+      startLatitude: currenLocation!.latitude,
+      startLongitude: currenLocation!.longitude,
+      endLatitude: incident.local!.latitue!,
+      endLongitude: incident.local!.longitude!,
+    );
+  }
+
   Future<void> _onMapCreated(
     MapboxMap mapboxMap,
-    List<FakeIncident> incidents,
+    List<IncidentOutput> incidents,
   ) async {
     _mapboxMap = mapboxMap;
 
@@ -601,35 +770,70 @@ class _MapaPageState extends ConsumerState<MapaPage> {
     _onMarkeClick(incidents);
 
     // final incidents = FakeIncident.items();
+    // _markers.clear();
+    // for (final incident in incidents) {
+    //   // final pinImage = await createPinWithText(
+    //   //   icon: incident.image,
+    //   //   label: 'DND0171',
+    //   //   isSelected: false,
+    //   // );
+    //   // final pinImage = await createPinWithIconV4(
+    //   //   icon: incident.image,
+    //   //   badgeText: 'DND0171',
+    //   //   isSelected: false,
+    //   // );
+
+    //   //car_rouberry_v4
+
+    //   // final pinImage = await createPinWithAsset(incident.imageAssets);
+
+    //   if (incident.local?.longitude != null &&
+    //       incident.local?.latitue != null) {
+    //     final pinImage =
+    //         await createPinWithAsset("assets/images/motorcycle_pin_v9.png");
+
+    //     final marker = await _pointManager!.create(
+    //       PointAnnotationOptions(
+    //         geometry: Point(
+    //           coordinates: Position(
+    //             incident.local!.longitude!,
+    //             incident.local!.latitue!,
+    //           ),
+    //         ),
+    //         image: pinImage,
+    //         iconSize: 1.2,
+    //         iconAnchor: IconAnchor.BOTTOM,
+    //       ),
+    //     );
+    //     _markers.add(marker);
+    //   }
+    // }
+  }
+
+  Future<void> _createMarker(List<IncidentOutput> incidents) async {
     _markers.clear();
     for (final incident in incidents) {
-      // final pinImage = await createPinWithText(
-      //   icon: incident.image,
-      //   label: 'DND0171',
-      //   isSelected: false,
-      // );
-      // final pinImage = await createPinWithIconV4(
-      //   icon: incident.image,
-      //   badgeText: 'DND0171',
-      //   isSelected: false,
-      // );
+      if (incident.local?.longitude != null &&
+          incident.local?.latitue != null) {
+        final pinImage = await createPinWithAsset(
+          EnumUtils.fromString(ItemType.values, incident.product.type).assets,
+        );
 
-      //car_rouberry_v4
-
-      final pinImage = await createPinWithAsset(incident.imageAssets);
-
-      final marker = await _pointManager!.create(
-        PointAnnotationOptions(
-          geometry: incident.point,
-          image: pinImage,
-          iconSize: 1.2,
-          iconAnchor: IconAnchor.BOTTOM,
-        ),
-      );
-      _markers.add(marker);
-      // if (marker != null) {
-      //   _markers.add(marker);
-      // }
+        final marker = await _pointManager!.create(
+          PointAnnotationOptions(
+            geometry: Point(
+              coordinates: Position(
+                incident.local!.longitude!,
+                incident.local!.latitue!,
+              ),
+            ),
+            image: pinImage,
+            iconSize: 1.2,
+            iconAnchor: IconAnchor.BOTTOM,
+          ),
+        );
+        _markers.add(marker);
+      }
     }
   }
 
@@ -1104,16 +1308,19 @@ class _MapaPageState extends ConsumerState<MapaPage> {
     return byteData!.buffer.asUint8List();
   }
 
-  Future<void> _onMarkeClick(List<FakeIncident> incidents) async {
+  Future<void> _onMarkeClick(List<IncidentOutput> incidents) async {
     _pointManager?.tapEvents(
       onTap: (pointAnnotation) async {
-        _highlightMarker(pointAnnotation);
         _previousCameraState = await _mapboxMap?.getCameraState();
         final coords = pointAnnotation.geometry.coordinates;
 
         final index = incidents.indexWhere(
-          (p) => p.point.coordinates == coords,
+          (p) =>
+              p.local?.latitue == coords.lat &&
+              p.local?.longitude == coords.lng,
         );
+
+        _highlightMarker(pointAnnotation);
 
         if (index != -1) {
           _incidentPageController.animateToPage(
@@ -1185,7 +1392,7 @@ class _MapaPageState extends ConsumerState<MapaPage> {
     );
   }
 
-  Future<void> _highlightMarker(PointAnnotation marker) async {
+  Future<void> _highlightMarker(PointAnnotation pointAnnotation) async {
     // /// volta todos para tamanho normal
     // for (final m in _markers) {
     //   m.iconSize = 1.5;
@@ -1194,10 +1401,11 @@ class _MapaPageState extends ConsumerState<MapaPage> {
     /// aumenta o selecionado
     // marker.iconSize = 2;
 
-    _activeMarker = marker;
-    for (final marker in _markers) {
-      await _pointManager?.update(marker);
-    }
+    _activeMarker = pointAnnotation;
+    // await _pointManager?.update(pointAnnotation);
+    // for (final marker in _markers) {
+    //   await _pointManager?.update(marker);
+    // }
 
     if (_activeMarker != null) {
       _activeMarker!.iconSize = 1.8;

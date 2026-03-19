@@ -5,7 +5,7 @@ import 'package:deehelp/core/ui/widgets/buttons/buttons_export.dart';
 import 'package:deehelp/core/utils/navigation_utils.dart';
 import 'package:deehelp/feature/items/detail/provider/selected_item_provider.dart';
 import 'package:deehelp/feature/items/items_router.dart';
-import 'package:deehelp/feature/items/list/item_list_state.dart';
+import 'package:deehelp/feature/items/list/list_product_state.dart';
 import 'package:deehelp/feature/items/list/item_listing_args.dart';
 import 'package:deehelp/feature/items/list/widgets/item_list_view.dart';
 import 'package:deehelp/feature/search/widgets/load_skeleton.dart';
@@ -33,6 +33,23 @@ class _ItemListPageState extends ConsumerState<ItemListPage> {
   @override
   void initState() {
     super.initState();
+    fetchData();
+    // WidgetsBinding.instance.addPostFrameCallback((_) {
+    //   final userId = ref.read(authenticatedUserProvider)?.id;
+    //   debugPrint("UserId $userId");
+    //   if (userId == null) {
+    //     ref.read(itemListViewmodelProvider.notifier).clear();
+    //     return;
+    //   }
+
+    //   ref.read(itemListViewmodelProvider.notifier).getProducts(
+    //         userId,
+    //         fetchData: widget.args?.fetchData ?? false,
+    //       );
+    // });
+  }
+
+  Future<void> fetchData() async {
     WidgetsBinding.instance.addPostFrameCallback((_) {
       final userId = ref.read(authenticatedUserProvider)?.id;
       debugPrint("UserId $userId");
@@ -91,6 +108,20 @@ class _ItemListPageState extends ConsumerState<ItemListPage> {
         ),
         // loading: (_) => const ItemListShimmer(),
         loading: (_) => const LoadingResultsSkeletonV2(),
+        noInternet: (value) => EmptyStateWidget(
+          highlightIcon: Icon(
+            Icons.inventory_2_outlined,
+            size: IconSizes.xl,
+            color: context.primaryColor,
+          ),
+          title: 'Sem conexão de rede :()',
+          subtitle:
+              'Por favor verifique sua conexão e tente novamente mais tarde!',
+          buttonText: "Tentar de novo",
+          onRetry: () {
+            fetchData();
+          },
+        ),
         orElse: () => Padding(
           padding: const EdgeInsets.all(8.0),
           child: EmptyStateWidget(
@@ -103,7 +134,7 @@ class _ItemListPageState extends ConsumerState<ItemListPage> {
             subtitle:
                 'Cadastre seu carro, moto ou celular para acompanhar ocorrências e receber alertas relacionados.',
             buttonText: "Cadastrar item",
-            onRegisterItem: () {
+            onRetry: () {
               final router =
                   NavigationUtils.safeNavigation(ItemsRouter.register, ref);
               context.push(router);

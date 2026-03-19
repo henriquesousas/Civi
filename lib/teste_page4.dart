@@ -48,7 +48,7 @@ class TesteReportIncidentSuccessfullyPage extends StatelessWidget {
               children: [
                 _TopActions(
                   onClose: () => context.pop(),
-                  onShare: () => UrlLauncherUtils.shareIncident(
+                  onShare: () => UrlLauncherUtils.shareMyIncident(
                     context,
                     args.alertId,
                     args.createdAt,
@@ -152,7 +152,7 @@ class TesteReportIncidentSuccessfullyPage extends StatelessWidget {
                                 title: 'Compartilhar alerta',
                                 subtitle:
                                     'Ajude a alertar outras pessoas da região',
-                                onTap: () => UrlLauncherUtils.shareIncident(
+                                onTap: () => UrlLauncherUtils.shareMyIncident(
                                   context,
                                   args.alertId,
                                   args.createdAt,

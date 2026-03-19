@@ -3,7 +3,7 @@
 // ignore_for_file: type=lint
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
-part of 'item_list_state.dart';
+part of 'list_product_state.dart';
 
 // **************************************************************************
 // FreezedGenerator
@@ -55,6 +55,7 @@ extension ListProductStatePatterns on ListProductState {
     TResult Function(_ListProductStateLoading value)? loading,
     TResult Function(_ListProductStateSuccess value)? success,
     TResult Function(_ListProductStateError value)? error,
+    TResult Function(_ListProductStateNoInternet value)? noInternet,
     TResult Function(_ListProductStateEmpty value)? empty,
     TResult Function(_ListProductStateDelete value)? delete,
     TResult Function(_ListProductStateDeleteLoading value)? deleteLoading,
@@ -72,6 +73,8 @@ extension ListProductStatePatterns on ListProductState {
         return success(_that);
       case _ListProductStateError() when error != null:
         return error(_that);
+      case _ListProductStateNoInternet() when noInternet != null:
+        return noInternet(_that);
       case _ListProductStateEmpty() when empty != null:
         return empty(_that);
       case _ListProductStateDelete() when delete != null:
@@ -106,6 +109,7 @@ extension ListProductStatePatterns on ListProductState {
     required TResult Function(_ListProductStateLoading value) loading,
     required TResult Function(_ListProductStateSuccess value) success,
     required TResult Function(_ListProductStateError value) error,
+    required TResult Function(_ListProductStateNoInternet value) noInternet,
     required TResult Function(_ListProductStateEmpty value) empty,
     required TResult Function(_ListProductStateDelete value) delete,
     required TResult Function(_ListProductStateDeleteLoading value)
@@ -124,6 +128,8 @@ extension ListProductStatePatterns on ListProductState {
         return success(_that);
       case _ListProductStateError():
         return error(_that);
+      case _ListProductStateNoInternet():
+        return noInternet(_that);
       case _ListProductStateEmpty():
         return empty(_that);
       case _ListProductStateDelete():
@@ -157,6 +163,7 @@ extension ListProductStatePatterns on ListProductState {
     TResult? Function(_ListProductStateLoading value)? loading,
     TResult? Function(_ListProductStateSuccess value)? success,
     TResult? Function(_ListProductStateError value)? error,
+    TResult? Function(_ListProductStateNoInternet value)? noInternet,
     TResult? Function(_ListProductStateEmpty value)? empty,
     TResult? Function(_ListProductStateDelete value)? delete,
     TResult? Function(_ListProductStateDeleteLoading value)? deleteLoading,
@@ -173,6 +180,8 @@ extension ListProductStatePatterns on ListProductState {
         return success(_that);
       case _ListProductStateError() when error != null:
         return error(_that);
+      case _ListProductStateNoInternet() when noInternet != null:
+        return noInternet(_that);
       case _ListProductStateEmpty() when empty != null:
         return empty(_that);
       case _ListProductStateDelete() when delete != null:
@@ -206,6 +215,7 @@ extension ListProductStatePatterns on ListProductState {
     TResult Function()? loading,
     TResult Function(List<Product> items, String selectedFilter)? success,
     TResult Function(String message)? error,
+    TResult Function()? noInternet,
     TResult Function()? empty,
     TResult Function()? delete,
     TResult Function()? deleteLoading,
@@ -223,6 +233,8 @@ extension ListProductStatePatterns on ListProductState {
         return success(_that.items, _that.selectedFilter);
       case _ListProductStateError() when error != null:
         return error(_that.message);
+      case _ListProductStateNoInternet() when noInternet != null:
+        return noInternet();
       case _ListProductStateEmpty() when empty != null:
         return empty();
       case _ListProductStateDelete() when delete != null:
@@ -258,6 +270,7 @@ extension ListProductStatePatterns on ListProductState {
     required TResult Function(List<Product> items, String selectedFilter)
         success,
     required TResult Function(String message) error,
+    required TResult Function() noInternet,
     required TResult Function() empty,
     required TResult Function() delete,
     required TResult Function() deleteLoading,
@@ -274,6 +287,8 @@ extension ListProductStatePatterns on ListProductState {
         return success(_that.items, _that.selectedFilter);
       case _ListProductStateError():
         return error(_that.message);
+      case _ListProductStateNoInternet():
+        return noInternet();
       case _ListProductStateEmpty():
         return empty();
       case _ListProductStateDelete():
@@ -307,6 +322,7 @@ extension ListProductStatePatterns on ListProductState {
     TResult? Function()? loading,
     TResult? Function(List<Product> items, String selectedFilter)? success,
     TResult? Function(String message)? error,
+    TResult? Function()? noInternet,
     TResult? Function()? empty,
     TResult? Function()? delete,
     TResult? Function()? deleteLoading,
@@ -323,6 +339,8 @@ extension ListProductStatePatterns on ListProductState {
         return success(_that.items, _that.selectedFilter);
       case _ListProductStateError() when error != null:
         return error(_that.message);
+      case _ListProductStateNoInternet() when noInternet != null:
+        return noInternet();
       case _ListProductStateEmpty() when empty != null:
         return empty();
       case _ListProductStateDelete() when delete != null:
@@ -522,6 +540,27 @@ class __$ListProductStateErrorCopyWithImpl<$Res>
           : message // ignore: cast_nullable_to_non_nullable
               as String,
     ));
+  }
+}
+
+/// @nodoc
+
+class _ListProductStateNoInternet implements ListProductState {
+  const _ListProductStateNoInternet();
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _ListProductStateNoInternet);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  String toString() {
+    return 'ListProductState.noInternet()';
   }
 }
 

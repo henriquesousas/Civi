@@ -1,8 +1,9 @@
+import 'package:deehelp/core/services/network/network_info_provider.dart';
 import 'package:deehelp/feature/items/register/viewmodel/register_item_viewmodel.dart';
 import 'package:deehelp/feature/items/register/viewmodel/add_product_state.dart';
 import 'package:deehelp/feature/items/list/item_list_viewmodel.dart';
 import 'package:deehelp/module/item/di/product_usecase_provider.dart';
-import 'package:deehelp/feature/items/list/item_list_state.dart';
+import 'package:deehelp/feature/items/list/list_product_state.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -10,10 +11,12 @@ final itemListViewmodelProvider =
     StateNotifierProvider.autoDispose<ItemListViewModel, ListProductState>(
   (ref) {
     final usecase = ref.watch(getProductsByUserUsecaseProvider);
+    final netInfo = ref.watch(networkInfoProvider);
     ref.onDispose(() {
       debugPrint('productListingViewmodelProvider disposed');
     });
-    return ItemListViewModel(getProductsByUserUsecase: usecase);
+    return ItemListViewModel(
+        getProductsByUserUsecase: usecase, networkInfo: netInfo);
   },
 );
 

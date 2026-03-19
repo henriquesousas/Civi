@@ -157,7 +157,8 @@ class ReportIncidentSuccessfullyPage extends StatelessWidget {
                                     title: 'Compartilhar alerta',
                                     subtitle:
                                         'Ajude a alertar outras pessoas da região',
-                                    onTap: () => UrlLauncherUtils.shareIncident(
+                                    onTap: () =>
+                                        UrlLauncherUtils.shareMyIncident(
                                       context,
                                       args.alertId,
                                       args.createdAt,

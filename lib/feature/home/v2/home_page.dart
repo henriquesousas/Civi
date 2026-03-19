@@ -16,14 +16,14 @@ import 'package:go_router/go_router.dart';
 import 'models.dart';
 import 'widgets/community_tips_action_card.dart';
 
-class HomePage extends StatefulWidget {
-  const HomePage({super.key});
+class TesteHomePageAlert extends StatefulWidget {
+  const TesteHomePageAlert({super.key});
 
   @override
-  State<HomePage> createState() => _HomePageState();
+  State<TesteHomePageAlert> createState() => _TesteHomePageAlertState();
 }
 
-class _HomePageState extends State<HomePage> {
+class _TesteHomePageAlertState extends State<TesteHomePageAlert> {
   bool hasEvidence = false;
   final floatingH = 92.0;
   final floatingTop = 12.0;
@@ -117,8 +117,8 @@ class _HomePageState extends State<HomePage> {
                 ],
                 onSendTip: () {
                   setState(() {
-                    WazeAlertController.instance
-                        .show(const WazeAlertState(title: "", subtitle: ""));
+                    WazeAlertController.instance.show(
+                        const WazeAlertState(title: "sas", subtitle: "sasa"));
                     AlertVibrationStrong.vibrateStrong();
                     hasEvidence = true;
                   });

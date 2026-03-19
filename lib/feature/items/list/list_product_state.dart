@@ -14,6 +14,7 @@ class ListProductState with _$ListProductState {
   ) = _ListProductStateSuccess;
 
   const factory ListProductState.error(String message) = _ListProductStateError;
+  const factory ListProductState.noInternet() = _ListProductStateNoInternet;
   const factory ListProductState.empty() = _ListProductStateEmpty;
   const factory ListProductState.delete() = _ListProductStateDelete;
   const factory ListProductState.deleteLoading() =

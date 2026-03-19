@@ -47,6 +47,8 @@ class IncidentMapper {
       'report_type': incident.reportType.name,
       'kind': incident.kind.name,
       'region_id': incident.regionId,
+      'lat': incident.local?.latitue,
+      'long': incident.local?.longitude,
       'point': incident.local?.longitude != null
           ? 'POINT(${incident.local!.longitude} ${incident.local!.latitue})'
           : null,

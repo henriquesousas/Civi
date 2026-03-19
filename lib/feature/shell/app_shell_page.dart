@@ -1,6 +1,9 @@
 // import 'package:deehelp/feature/home/v2/home_page.dart';
 
 import 'package:deehelp/core/extension/exports_extension.dart';
+import 'package:deehelp/core/services/network/network_info.dart';
+import 'package:deehelp/core/services/network/network_info_provider.dart';
+import 'package:deehelp/core/services/network/netwotk_alert_controller.dart';
 import 'package:deehelp/core/theme/export_theme.dart';
 import 'package:deehelp/core/ui/styles/export_style.dart';
 import 'package:deehelp/feature/home/v2/widgets/waze_alert.dart';
@@ -26,6 +29,7 @@ class _AppShellPageState extends ConsumerState<AppShellPage> {
   int index = 0;
   late final List<Widget> _pages = const [
     // HomePage(), //  1
+    // TesteHomePageAlert(),
     // EventsScreen(),
     // AlertDetailsScreen(),
     MapaPage(),
@@ -84,13 +88,12 @@ class _AppShellPageState extends ConsumerState<AppShellPage> {
                   valueListenable: WazeAlertController.instance.notifier,
                   builder: (context, alert, _) {
                     if (alert == null) return const SizedBox.shrink();
-
                     return AnimatedTopToastCard(
                       ttl: const Duration(seconds: 50),
                       onClosed: WazeAlertController.instance.hide,
                       child: Wazelert(
-                        title: 'Roubo registrado agora',
-                        subtitle: 'há 12 min • Centro • 1,8 km de você',
+                        title: alert.title,
+                        subtitle: alert.subtitle,
                         onTap: () {
                           // abrir detalhes, navegar etc.
                         },
@@ -103,6 +106,36 @@ class _AppShellPageState extends ConsumerState<AppShellPage> {
             ),
           ),
         ),
+        SafeArea(
+          child: Padding(
+            padding: const EdgeInsets.only(top: 20),
+            child: Align(
+              alignment: Alignment.topCenter,
+              child: ValueListenableBuilder<bool>(
+                valueListenable: NetworkAlertController.instance.notifier,
+                builder: (context, isOffline, _) {
+                  if (!isOffline) return const SizedBox.shrink();
+
+                  return AnimatedTopToastCard(
+                    ttl: const Duration(days: 1), // não some sozinho
+                    onClosed: NetworkAlertController.instance.hide,
+                    child: NoInternetCard(
+                      onRetry: () async {
+                        final hasConnection =
+                            await ref.read(networkInfoProvider).hasConnection;
+
+                        if (hasConnection) {
+                          NetworkAlertController.instance.hide();
+                        }
+                      },
+                      onClose: NetworkAlertController.instance.hide,
+                    ),
+                  );
+                },
+              ),
+            ),
+          ),
+        )
       ],
     );
   }

@@ -1,4 +1,6 @@
 import 'package:deehelp/core/extension/exports_extension.dart';
+import 'package:deehelp/core/services/network/network_info.dart';
+import 'package:deehelp/core/services/network/network_info_provider.dart';
 import 'package:deehelp/core/ui/widgets/appbar/default_app_bar.dart';
 import 'package:deehelp/core/ui/widgets/buttons/buttons_export.dart';
 import 'package:deehelp/feature/incidents/incident_router.dart';
@@ -21,14 +23,23 @@ class IncidentListPage extends ConsumerStatefulWidget {
 }
 
 class _ListingIncidentPageState extends ConsumerState<IncidentListPage> {
+  @override
+  void initState() {
+    super.initState();
+  }
+
   void listener() {
     ref.listen<IncidentOutput?>(
       incidentSelectedProvider,
       (oldItem, currentItem) {
         if (oldItem != null && oldItem != currentItem) {
-          ref
-              .watch(incidentListViewModelProvider.notifier)
-              .updateAt(currentItem!);
+          final ni = ref.watch(networkInfoProvider);
+          final niProvider = incidentListViewModelProvider(ni);
+          incidentListViewModelProvider(ni);
+          ref.watch(niProvider.notifier).updateAt(currentItem!);
+          // ref
+          //     .watch(incidentListViewModelProvider.notifier)
+          //     .updateAt(currentItem!);
         }
       },
     );
@@ -36,7 +47,12 @@ class _ListingIncidentPageState extends ConsumerState<IncidentListPage> {
 
   @override
   Widget build(BuildContext context) {
-    final state = ref.watch(incidentListViewModelProvider);
+    // final state = ref.watch(incidentListViewModelProvider);
+    final ni = ref.watch(networkInfoProvider);
+    final niProvider = incidentListViewModelProvider(ni);
+    incidentListViewModelProvider(ni);
+    final state = ref.watch(niProvider);
+
     listener();
 
     return Scaffold(
@@ -45,7 +61,7 @@ class _ListingIncidentPageState extends ConsumerState<IncidentListPage> {
         showBackButton: true,
         press: () => context.pop(),
       ),
-      bottomNavigationBar: _bottomBar(),
+      bottomNavigationBar: _bottomBar(ni),
       body: state.when(
         data: (incidents) => IncidenList(items: incidents),
         // loading: () => const ItemListShimmer(),
@@ -56,9 +72,9 @@ class _ListingIncidentPageState extends ConsumerState<IncidentListPage> {
     );
   }
 
-  Widget? _bottomBar() {
+  Widget? _bottomBar(NetworkInfo info) {
     return ref.watch(
-      incidentListViewModelProvider.select(
+      incidentListViewModelProvider(info).select(
         (state) {
           return state.hasValue && state.value!.isNotEmpty
               ? Container(

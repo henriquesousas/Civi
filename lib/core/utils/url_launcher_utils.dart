@@ -106,7 +106,7 @@ class UrlLauncherUtils {
     return false;
   }
 
-  static Future<void> shareIncident(
+  static Future<void> shareMyIncident(
       BuildContext context, String incidentId, DateTime date) async {
     final message = '''
 🚨 **ALERTA DE SEGURANÇA** 🚨
@@ -128,6 +128,35 @@ Baixe agora: https://play.google.com/store/apps/details?id=com.seu.app
 
 #SegurançaComunitária #Alerta #Caso$incidentId
 ''';
+
+    await Share.share(
+      message,
+      subject: 'Alerta de Segurança - Caso $incidentId',
+    );
+  }
+
+  static Future<void> shareIncident(
+      BuildContext context, String incidentId, DateTime date) async {
+    final message = '''
+🚨 **ALERTA DE SEGURANÇA** 🚨
+
+  Incidente de roubo registrado no aplicativo ${AppName.appName}.
+
+  🔢 **ID do Caso:** $incidentId
+  📅 **Registrado em:** ${date.toDateWithFullMonth()}
+
+  ⚠️ **Estou compartilhando para:**
+  • Alertar amigos e familiares
+  • Aumentar a segurança coletiva
+  • Contribuir com dados confiáveis para a comunidade
+
+  📱 **Compartilhado via ${AppName.appName}**
+  Este app ajuda a manter a comunidade mais segura.
+  Baixe agora: https://play.google.com/store/apps/details?id=com.seu.app
+
+
+  #SegurançaComunitária #Alerta #Caso$incidentId
+  ''';
 
     await Share.share(
       message,

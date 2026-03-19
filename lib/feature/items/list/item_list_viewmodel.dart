@@ -1,27 +1,39 @@
 import 'package:deehelp/core/handlers/handler_error.dart';
 import 'package:deehelp/core/handlers/handle_command.dart';
+import 'package:deehelp/core/services/network/network_info.dart';
+import 'package:deehelp/feature/items/list/list_product_state.dart';
 import 'package:deehelp/module/item/domain/entities/product.dart';
 import 'package:deehelp/module/item/domain/usecases/listing/get_products_by_user_usecase.dart';
-import 'package:deehelp/feature/items/list/item_list_state.dart';
 
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 class ItemListViewModel extends StateNotifier<ListProductState> {
   final GetProductsByUserUsecase _getProductsByUserUsecase;
+  final NetworkInfo _networkInfo;
   List<Product> _cacheProducts = [];
-  ItemListViewModel(
-      {required GetProductsByUserUsecase getProductsByUserUsecase})
-      : _getProductsByUserUsecase = getProductsByUserUsecase,
+  ItemListViewModel({
+    required GetProductsByUserUsecase getProductsByUserUsecase,
+    required NetworkInfo networkInfo,
+  })  : _getProductsByUserUsecase = getProductsByUserUsecase,
+        _networkInfo = networkInfo,
         super(const ListProductState.initial());
 
   void clear() {
     state = const ListProductState.empty();
   }
 
-  void getProducts(String userId, {bool fetchData = false}) {
+  Future<void> getProducts(String userId, {bool fetchData = false}) async {
     if (!fetchData) {
       if (_cacheProducts.isNotEmpty) return;
     }
+
+    //Verificar se tem internet
+    final connection = await _networkInfo.hasConnection;
+    if (!connection) {
+      state = const ListProductState.noInternet();
+      return;
+    }
+
     HandleCommand.execute<List<Product>, ListProductState>(
       updateState: (newState) => state = newState,
       command: () async => await _getProductsByUserUsecase.execute(userId),

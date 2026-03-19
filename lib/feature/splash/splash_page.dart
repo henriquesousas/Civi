@@ -1,7 +1,6 @@
 import 'package:deehelp/core/extension/exports_extension.dart';
 import 'package:deehelp/core/ui/styles/export_style.dart';
 import 'package:flutter/material.dart';
-import 'package:lottie/lottie.dart';
 
 class SplashPage extends StatefulWidget {
   const SplashPage({super.key});
@@ -16,19 +15,24 @@ class _SplashPageState extends State<SplashPage> {
     final isLandscape =
         MediaQuery.of(context).orientation == Orientation.landscape;
 
+    final primary = context.primaryColor;
+
     return Scaffold(
+      backgroundColor: const Color(0xFF09090B),
       body: Container(
         width: double.infinity,
         height: double.infinity,
-        decoration: const BoxDecoration(
+        decoration: BoxDecoration(
           gradient: LinearGradient(
             begin: Alignment.topLeft,
             end: Alignment.bottomRight,
             colors: [
-              Color(0xFF2B5BEE),
-              Color(0xFF1D4ED8),
-              Color(0xFF163EAF),
+              const Color(0xFF050507),
+              const Color(0xFF0B0B10),
+              const Color(0xFF11131A),
+              const Color(0xFF050507).withValues(alpha: 0.18),
             ],
+            stops: const [0.0, 0.35, 0.75, 1.0],
           ),
         ),
         child: SafeArea(
@@ -36,31 +40,61 @@ class _SplashPageState extends State<SplashPage> {
             builder: (context, constraints) {
               return Stack(
                 children: [
-                  /// detalhes decorativos no fundo
-                  Positioned(
-                    top: -60,
-                    right: -40,
-                    child: Container(
-                      width: 180,
-                      height: 180,
-                      decoration: BoxDecoration(
-                        shape: BoxShape.circle,
-                        color: Colors.white.withValues(alpha: 0.08),
-                      ),
-                    ),
-                  ),
-                  Positioned(
-                    bottom: -40,
-                    left: -30,
-                    child: Container(
-                      width: 140,
-                      height: 140,
-                      decoration: BoxDecoration(
-                        shape: BoxShape.circle,
-                        color: Colors.white.withValues(alpha: 0.06),
-                      ),
-                    ),
-                  ),
+                  /// glow superior
+                  // Positioned(
+                  //   top: -70,
+                  //   right: -40,
+                  //   child: Container(
+                  //     width: 220,
+                  //     height: 220,
+                  //     decoration: BoxDecoration(
+                  //       shape: BoxShape.circle,
+                  //       color: primary.withValues(alpha: 0.10),
+                  //       boxShadow: [
+                  //         BoxShadow(
+                  //           color: primary.withValues(alpha: 0.16),
+                  //           blurRadius: 80,
+                  //           spreadRadius: 10,
+                  //         ),
+                  //       ],
+                  //     ),
+                  //   ),
+                  // ),
+
+                  /// glow inferior
+                  // Positioned(
+                  //   bottom: -80,
+                  //   left: -50,
+                  //   child: Container(
+                  //     width: 220,
+                  //     height: 220,
+                  //     decoration: BoxDecoration(
+                  //       shape: BoxShape.circle,
+                  //       color: Colors.white.withValues(alpha: 0.03),
+                  //     ),
+                  //   ),
+                  // ),
+
+                  /// detalhe central suave
+                  // Positioned.fill(
+                  //   child: IgnorePointer(
+                  //     child: Center(
+                  //       child: Container(
+                  //         width: 320,
+                  //         height: 320,
+                  //         decoration: BoxDecoration(
+                  //           shape: BoxShape.circle,
+                  //           gradient: RadialGradient(
+                  //             colors: [
+                  //               primary.withValues(alpha: 0.10),
+                  //               Colors.transparent,
+                  //             ],
+                  //           ),
+                  //         ),
+                  //       ),
+                  //     ),
+                  //   ),
+                  // ),
 
                   Center(
                     child: SingleChildScrollView(
@@ -75,45 +109,54 @@ class _SplashPageState extends State<SplashPage> {
                         child: Column(
                           mainAxisSize: MainAxisSize.min,
                           children: [
-                            // Container(
-                            //   width: 124,
-                            //   height: 124,
-                            //   decoration: BoxDecoration(
-                            //     borderRadius: BorderRadius.circular(30),
-                            //     color: Colors.white.withValues(alpha: 0.14),
-                            //     border: Border.all(
-                            //       color: Colors.white.withValues(alpha: 0.16),
-                            //       width: 1.2,
-                            //     ),
-                            //     boxShadow: [
-                            //       BoxShadow(
-                            //         blurRadius: 32,
-                            //         offset: const Offset(0, 18),
-                            //         color: Colors.black.withValues(alpha: 0.18),
-                            //       ),
-                            //     ],
-                            //   ),
-                            //   alignment: Alignment.center,
-                            //   child: Container(
-                            //     width: 88,
-                            //     height: 88,
-                            //     decoration: BoxDecoration(
-                            //       borderRadius: BorderRadius.circular(24),
-                            //       color: Colors.white,
-                            //     ),
-                            //     alignment: Alignment.center,
-                            //     child: Icon(
-                            //       Icons.shield_rounded,
-                            //       color: context.primaryColor,
-                            //       size: 44,
-                            //     ),
-                            //   ),
-                            // ),
-                            Lottie.asset(
-                              "assets/lottie/radar.json",
-                              width: context.percentWidth(0.5),
+                            Container(
+                              width: context.percentWidth(0.3),
+                              height: context.percentWidth(0.3),
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(32),
+                                color: Colors.white.withValues(alpha: 0.05),
+                                border: Border.all(
+                                  color: Colors.white.withValues(alpha: 0.08),
+                                  width: 1.2,
+                                ),
+                                boxShadow: [
+                                  BoxShadow(
+                                    blurRadius: 32,
+                                    offset: const Offset(0, 20),
+                                    color: Colors.black.withValues(alpha: 0.40),
+                                  ),
+                                  BoxShadow(
+                                    blurRadius: 26,
+                                    spreadRadius: -4,
+                                    color: primary.withValues(alpha: 0.18),
+                                  ),
+                                ],
+                              ),
+                              alignment: Alignment.center,
+                              child: Container(
+                                width: context.percentWidth(0.2),
+                                height: context.percentWidth(0.2),
+                                decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(26),
+                                  color: const Color(0xFF14161C),
+                                  border: Border.all(
+                                    color: Colors.white.withValues(alpha: 0.06),
+                                  ),
+                                ),
+                                alignment: Alignment.center,
+                                child: Image.asset(
+                                  "assets/images/logo_transp.png",
+                                ),
+                              ),
                             ),
+
+                            // Lottie.asset(
+                            //   "assets/lottie/radar.json",
+                            //   width: context.percentWidth(0.5),
+                            // ),
+
                             const SizedBox(height: 28),
+
                             Text(
                               "Civi",
                               style: context.appText.headerxl.copyWith(
@@ -127,7 +170,7 @@ class _SplashPageState extends State<SplashPage> {
                               "Juntos por uma região mais segura",
                               textAlign: TextAlign.center,
                               style: context.appText.bodymd.copyWith(
-                                color: Colors.white.withValues(alpha: 0.92),
+                                color: Colors.white.withValues(alpha: 0.88),
                                 fontWeight: FontWeight.w600,
                                 height: 1.35,
                               ),
@@ -137,53 +180,58 @@ class _SplashPageState extends State<SplashPage> {
                               "Obtendo localização...",
                               textAlign: TextAlign.center,
                               style: context.appText.bodySmall.copyWith(
-                                color: Colors.white.withValues(alpha: 0.76),
+                                color: Colors.white.withValues(alpha: 0.58),
                                 height: 1.45,
                               ),
                             ),
                             const SizedBox(height: 28),
 
-                            /// loading
-                            // Container(
-                            //   padding: const EdgeInsets.symmetric(
-                            //     horizontal: 16,
-                            //     vertical: 14,
-                            //   ),
-                            //   decoration: BoxDecoration(
-                            //     color: Colors.white.withValues(alpha: 0.10),
-                            //     borderRadius: BorderRadius.circular(18),
-                            //     border: Border.all(
-                            //       color: Colors.white.withValues(alpha: 0.10),
-                            //     ),
-                            //   ),
-                            //   child: Row(
-                            //     mainAxisSize: MainAxisSize.min,
-                            //     children: [
-                            //       SizedBox(
-                            //         width: 20,
-                            //         height: 20,
-                            //         child: CircularProgressIndicator(
-                            //           strokeWidth: 2.6,
-                            //           valueColor:
-                            //               const AlwaysStoppedAnimation<Color>(
-                            //             Colors.white,
-                            //           ),
-                            //           backgroundColor:
-                            //               Colors.white.withValues(alpha: 0.22),
-                            //         ),
-                            //       ),
-                            //       const SizedBox(width: 12),
-                            //       Text(
-                            //         "Carregando dados...",
-                            //         style: context.appText.bodySmall.copyWith(
-                            //           color:
-                            //               Colors.white.withValues(alpha: 0.92),
-                            //           fontWeight: FontWeight.w600,
-                            //         ),
-                            //       ),
-                            //     ],
-                            //   ),
-                            // ),
+                            Container(
+                              padding: const EdgeInsets.symmetric(
+                                horizontal: 16,
+                                vertical: 14,
+                              ),
+                              decoration: BoxDecoration(
+                                color: Colors.white.withValues(alpha: 0.05),
+                                borderRadius: BorderRadius.circular(18),
+                                border: Border.all(
+                                  color: Colors.white.withValues(alpha: 0.08),
+                                ),
+                                boxShadow: [
+                                  BoxShadow(
+                                    color: Colors.black.withValues(alpha: 0.22),
+                                    blurRadius: 18,
+                                    offset: const Offset(0, 10),
+                                  ),
+                                ],
+                              ),
+                              child: Row(
+                                mainAxisSize: MainAxisSize.min,
+                                children: [
+                                  SizedBox(
+                                    width: 20,
+                                    height: 20,
+                                    child: CircularProgressIndicator(
+                                      strokeWidth: 2.4,
+                                      valueColor: AlwaysStoppedAnimation<Color>(
+                                        primary,
+                                      ),
+                                      backgroundColor:
+                                          Colors.white.withValues(alpha: 0.10),
+                                    ),
+                                  ),
+                                  const SizedBox(width: 12),
+                                  Text(
+                                    "Buscando localização...",
+                                    style: context.appText.bodySmall.copyWith(
+                                      color:
+                                          Colors.white.withValues(alpha: 0.88),
+                                      fontWeight: FontWeight.w600,
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
                           ],
                         ),
                       ),
@@ -200,7 +248,7 @@ class _SplashPageState extends State<SplashPage> {
                           'A segurança começa no seu bairro',
                           textAlign: TextAlign.center,
                           style: context.appText.caption.copyWith(
-                            color: Colors.white.withValues(alpha: 0.78),
+                            color: Colors.white.withValues(alpha: 0.52),
                             height: 1.4,
                           ),
                         ),
@@ -209,7 +257,7 @@ class _SplashPageState extends State<SplashPage> {
                           'Versão 1.0.0',
                           textAlign: TextAlign.center,
                           style: context.appText.caption.copyWith(
-                            color: Colors.white.withValues(alpha: 0.60),
+                            color: Colors.white.withValues(alpha: 0.34),
                             height: 1.4,
                           ),
                         ),

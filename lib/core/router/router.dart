@@ -3,15 +3,12 @@ import 'dart:async';
 import 'package:deehelp/app_startup_provider.dart';
 import 'package:deehelp/civi_search_page.dart';
 import 'package:deehelp/core/router/slide_transition_page.dart';
-import 'package:deehelp/core/ui/widgets/badge/status_style.dart';
 import 'package:deehelp/feature/about/about_router.dart';
 import 'package:deehelp/feature/auth/presentation/export_auth.dart';
 import 'package:deehelp/feature/faq/export_faq.dart';
 import 'package:deehelp/feature/home/export_home.dart';
+import 'package:deehelp/feature/home/v2/teste_home.dart';
 import 'package:deehelp/feature/incidents/incident_router.dart';
-import 'package:deehelp/feature/incidents/report/report_incident_successfully_page.dart';
-import 'package:deehelp/feature/incidents/report/widgets/success/regiter_incident_success_args.dart';
-import 'package:deehelp/feature/items/item_type.dart';
 import 'package:deehelp/feature/items/items_router.dart';
 import 'package:deehelp/feature/location/export_location.dart';
 import 'package:deehelp/feature/profile/export_profile.dart';
@@ -20,9 +17,10 @@ import 'package:deehelp/feature/shell/app_sheel_router.dart';
 import 'package:deehelp/feature/sos/sos_router.dart';
 import 'package:deehelp/feature/splash/splash_router.dart';
 import 'package:deehelp/core/router/router_refresh_notifier.dart';
-import 'package:deehelp/module/item/domain/entities/product.dart';
-import 'package:deehelp/module/item/domain/entities/product_id.dart';
-import 'package:deehelp/teste_page4.dart';
+import 'package:deehelp/map_page2.dart';
+import 'package:deehelp/map_page_teste.dart';
+import 'package:deehelp/teste_detail_page.dart';
+import 'package:deehelp/teste_detail_shimmer.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
@@ -62,11 +60,11 @@ var goRouterProvider = Provider<GoRouter>(
         final currentPath = state.matchedLocation;
         final isPublicRoute = _publicRoutes.contains(currentPath);
         // return '/';
-        // return ItemsRouter.success;
+        // return SplashRouter.path;
         switch (appStatus) {
           case AppStatus.loading:
-            // return SplashRouter.path;
-            return AppSheelRouter.path;
+            return SplashRouter.path;
+          // return AppSheelRouter.path;
 
           case AppStatus.unauthenticated:
             return isPublicRoute ? AppSheelRouter.path : null;
@@ -97,13 +95,15 @@ var goRouterProvider = Provider<GoRouter>(
         GoRoute(
           path: '/',
           pageBuilder: (context, state) => slideTransitionPage(
-              key: state.pageKey,
-              // child: const MapPage(),
-              // child: const MapPage2(),
-              // child: const MounsHouse(),
-              // child: const CardBottom(),
+            key: state.pageKey,
+            // child: const MapPage(),
+            // child: const MapPage2(),
+            // child: const MounsHouse(),
+            // child: const CardBottom(),
 
-              child: TesteCiviSearchPage()),
+            // child: EventsScreen(),
+            child: TesteDetailPage(),
+          ),
         ),
       ],
     );

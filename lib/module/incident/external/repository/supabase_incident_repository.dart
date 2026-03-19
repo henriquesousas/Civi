@@ -116,27 +116,37 @@ class SupabaseIncidentRepository extends IncidentRepository {
     String city,
     int limit,
   ) async {
-    String? term;
-    String? termWordsCondition;
+    // String? term;
+    // String? termWordsCondition;
 
-    if (!city.isNullOrEmpty()) {
-      term = _normalizeSearchTerm(city);
-      termWordsCondition = _prepareWordsConditions(term, 'city');
-    }
+    // if (!city.isNullOrEmpty()) {
+    //   term = _normalizeSearchTerm(city);
+    //   termWordsCondition = _prepareWordsConditions(term, 'city');
+    // }
 
-    var query = _supabaseClient
-        .from(_table)
-        .select(
-            "*,product!inner (id,name,code,color, brand, type, obs, product_images (*)),  regions(*)")
-        .eq('status', IncidentStatus.active.value);
+    // var query = _supabaseClient
+    //     .from(_table)
+    //     .select(
+    //         "*,product!inner (id,name,code,color, brand, type, obs, product_images (*)),  regions(*)")
+    //     .eq('status', IncidentStatus.active.value);
 
-    if (!term.isNullOrEmpty()) {
-      query = query.or("city.ilike.%$term%,$termWordsCondition%");
-    }
+    // if (!term.isNullOrEmpty()) {
+    //   query = query.or("city.ilike.%$term%,$termWordsCondition%");
+    // }
 
-    final data = await query.limit(limit).order('created_at', ascending: false);
+    // final data = await query.limit(limit).order('created_at', ascending: false);
+    final data = await _supabaseClient.rpc(
+      'search_reports',
+      params: {
+        'search_term': city,
+        'status_value': 'active',
+        'limit_value': limit,
+        'sort_direction': 'asc',
+      },
+    );
 
-    final incidents = IncidentMapper.toList(data);
+    // final incidents = IncidentMapper.toList(data);
+    final incidents = IncidentMapper.toListV2(data);
 
     return Result.success(incidents);
   }

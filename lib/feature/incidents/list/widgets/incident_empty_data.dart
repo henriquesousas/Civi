@@ -15,7 +15,7 @@ class IncidentEmptyData extends StatelessWidget {
       subtitle:
           "Quando você registrar ou acompanhar uma ocorrência, ela aparecerá aqui.",
       buttonText: "Criar alerta",
-      onRegisterItem: () => context.push(IncidentRouter.register),
+      onRetry: () => context.push(IncidentRouter.register),
       highlightIcon: Icon(
         Icons.search,
         size: IconSizes.xl,

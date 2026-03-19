@@ -1,4 +1,5 @@
 import 'package:deehelp/core/extension/color_extension.dart';
+import 'package:deehelp/core/services/network/network_info_provider.dart';
 import 'package:deehelp/core/theme/export_theme.dart';
 import 'package:deehelp/core/ui/styles/export_style.dart';
 import 'package:deehelp/core/ui/widgets/appbar/default_app_bar.dart';
@@ -75,9 +76,13 @@ class _UpdateIncidentPageState extends ConsumerState<UpdateIncidentPage> {
         }
 
         if (currentState.deletedSuccessfully) {
-          ref
-              .watch(incidentListViewModelProvider.notifier)
-              .removeAt(currentState.updatedValue!);
+          final ni = ref.watch(networkInfoProvider);
+          final niProvider = incidentListViewModelProvider(ni);
+          incidentListViewModelProvider(ni);
+          ref.watch(niProvider.notifier).removeAt(currentState.updatedValue!);
+          // ref
+          //     .watch(incidentListViewModelProvider.notifier)
+          //     .removeAt(currentState.updatedValue!);
           if (context.canPop()) context.pop();
         }
 
@@ -107,7 +112,7 @@ class _UpdateIncidentPageState extends ConsumerState<UpdateIncidentPage> {
             ),
           ),
           IconButton(
-            onPressed: () => UrlLauncherUtils.shareIncident(
+            onPressed: () => UrlLauncherUtils.shareMyIncident(
               context,
               state.updatedValue!.alertId,
               state.updatedValue!.createdAt,
