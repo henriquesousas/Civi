@@ -30,6 +30,7 @@ mixin _$AddProductState {
   List<ImageMedia> get imageMedia;
   bool get stepAddPhotoValid;
   bool get isLoading;
+  bool get isLoadingWithImage;
   bool get isSuccess;
   bool get isValidateApi;
   String? get errorMessage;
@@ -75,6 +76,8 @@ mixin _$AddProductState {
                 other.stepAddPhotoValid == stepAddPhotoValid) &&
             (identical(other.isLoading, isLoading) ||
                 other.isLoading == isLoading) &&
+            (identical(other.isLoadingWithImage, isLoadingWithImage) ||
+                other.isLoadingWithImage == isLoadingWithImage) &&
             (identical(other.isSuccess, isSuccess) ||
                 other.isSuccess == isSuccess) &&
             (identical(other.isValidateApi, isValidateApi) ||
@@ -102,6 +105,7 @@ mixin _$AddProductState {
         const DeepCollectionEquality().hash(imageMedia),
         stepAddPhotoValid,
         isLoading,
+        isLoadingWithImage,
         isSuccess,
         isValidateApi,
         errorMessage
@@ -109,7 +113,7 @@ mixin _$AddProductState {
 
   @override
   String toString() {
-    return 'AddProductState(currentStep: $currentStep, type: $type, hasProductTypeSelected: $hasProductTypeSelected, model: $model, errorModel: $errorModel, licencePlate: $licencePlate, errorLicencePlate: $errorLicencePlate, year: $year, errorYear: $errorYear, brand: $brand, color: $color, stepAddProductInfoDetailValid: $stepAddProductInfoDetailValid, obs: $obs, imageMedia: $imageMedia, stepAddPhotoValid: $stepAddPhotoValid, isLoading: $isLoading, isSuccess: $isSuccess, isValidateApi: $isValidateApi, errorMessage: $errorMessage)';
+    return 'AddProductState(currentStep: $currentStep, type: $type, hasProductTypeSelected: $hasProductTypeSelected, model: $model, errorModel: $errorModel, licencePlate: $licencePlate, errorLicencePlate: $errorLicencePlate, year: $year, errorYear: $errorYear, brand: $brand, color: $color, stepAddProductInfoDetailValid: $stepAddProductInfoDetailValid, obs: $obs, imageMedia: $imageMedia, stepAddPhotoValid: $stepAddPhotoValid, isLoading: $isLoading, isLoadingWithImage: $isLoadingWithImage, isSuccess: $isSuccess, isValidateApi: $isValidateApi, errorMessage: $errorMessage)';
   }
 }
 
@@ -136,6 +140,7 @@ abstract mixin class $AddProductStateCopyWith<$Res> {
       List<ImageMedia> imageMedia,
       bool stepAddPhotoValid,
       bool isLoading,
+      bool isLoadingWithImage,
       bool isSuccess,
       bool isValidateApi,
       String? errorMessage});
@@ -170,6 +175,7 @@ class _$AddProductStateCopyWithImpl<$Res>
     Object? imageMedia = null,
     Object? stepAddPhotoValid = null,
     Object? isLoading = null,
+    Object? isLoadingWithImage = null,
     Object? isSuccess = null,
     Object? isValidateApi = null,
     Object? errorMessage = freezed,
@@ -238,6 +244,10 @@ class _$AddProductStateCopyWithImpl<$Res>
       isLoading: null == isLoading
           ? _self.isLoading
           : isLoading // ignore: cast_nullable_to_non_nullable
+              as bool,
+      isLoadingWithImage: null == isLoadingWithImage
+          ? _self.isLoadingWithImage
+          : isLoadingWithImage // ignore: cast_nullable_to_non_nullable
               as bool,
       isSuccess: null == isSuccess
           ? _self.isSuccess
@@ -365,6 +375,7 @@ extension AddProductStatePatterns on AddProductState {
             List<ImageMedia> imageMedia,
             bool stepAddPhotoValid,
             bool isLoading,
+            bool isLoadingWithImage,
             bool isSuccess,
             bool isValidateApi,
             String? errorMessage)?
@@ -391,6 +402,7 @@ extension AddProductStatePatterns on AddProductState {
             _that.imageMedia,
             _that.stepAddPhotoValid,
             _that.isLoading,
+            _that.isLoadingWithImage,
             _that.isSuccess,
             _that.isValidateApi,
             _that.errorMessage);
@@ -431,6 +443,7 @@ extension AddProductStatePatterns on AddProductState {
             List<ImageMedia> imageMedia,
             bool stepAddPhotoValid,
             bool isLoading,
+            bool isLoadingWithImage,
             bool isSuccess,
             bool isValidateApi,
             String? errorMessage)
@@ -456,6 +469,7 @@ extension AddProductStatePatterns on AddProductState {
             _that.imageMedia,
             _that.stepAddPhotoValid,
             _that.isLoading,
+            _that.isLoadingWithImage,
             _that.isSuccess,
             _that.isValidateApi,
             _that.errorMessage);
@@ -495,6 +509,7 @@ extension AddProductStatePatterns on AddProductState {
             List<ImageMedia> imageMedia,
             bool stepAddPhotoValid,
             bool isLoading,
+            bool isLoadingWithImage,
             bool isSuccess,
             bool isValidateApi,
             String? errorMessage)?
@@ -520,6 +535,7 @@ extension AddProductStatePatterns on AddProductState {
             _that.imageMedia,
             _that.stepAddPhotoValid,
             _that.isLoading,
+            _that.isLoadingWithImage,
             _that.isSuccess,
             _that.isValidateApi,
             _that.errorMessage);
@@ -549,6 +565,7 @@ class _AddProductState implements AddProductState {
       final List<ImageMedia> imageMedia = const [],
       this.stepAddPhotoValid = false,
       this.isLoading = false,
+      this.isLoadingWithImage = false,
       this.isSuccess = false,
       this.isValidateApi = false,
       this.errorMessage})
@@ -604,6 +621,9 @@ class _AddProductState implements AddProductState {
   final bool isLoading;
   @override
   @JsonKey()
+  final bool isLoadingWithImage;
+  @override
+  @JsonKey()
   final bool isSuccess;
   @override
   @JsonKey()
@@ -652,6 +672,8 @@ class _AddProductState implements AddProductState {
                 other.stepAddPhotoValid == stepAddPhotoValid) &&
             (identical(other.isLoading, isLoading) ||
                 other.isLoading == isLoading) &&
+            (identical(other.isLoadingWithImage, isLoadingWithImage) ||
+                other.isLoadingWithImage == isLoadingWithImage) &&
             (identical(other.isSuccess, isSuccess) ||
                 other.isSuccess == isSuccess) &&
             (identical(other.isValidateApi, isValidateApi) ||
@@ -679,6 +701,7 @@ class _AddProductState implements AddProductState {
         const DeepCollectionEquality().hash(_imageMedia),
         stepAddPhotoValid,
         isLoading,
+        isLoadingWithImage,
         isSuccess,
         isValidateApi,
         errorMessage
@@ -686,7 +709,7 @@ class _AddProductState implements AddProductState {
 
   @override
   String toString() {
-    return 'AddProductState(currentStep: $currentStep, type: $type, hasProductTypeSelected: $hasProductTypeSelected, model: $model, errorModel: $errorModel, licencePlate: $licencePlate, errorLicencePlate: $errorLicencePlate, year: $year, errorYear: $errorYear, brand: $brand, color: $color, stepAddProductInfoDetailValid: $stepAddProductInfoDetailValid, obs: $obs, imageMedia: $imageMedia, stepAddPhotoValid: $stepAddPhotoValid, isLoading: $isLoading, isSuccess: $isSuccess, isValidateApi: $isValidateApi, errorMessage: $errorMessage)';
+    return 'AddProductState(currentStep: $currentStep, type: $type, hasProductTypeSelected: $hasProductTypeSelected, model: $model, errorModel: $errorModel, licencePlate: $licencePlate, errorLicencePlate: $errorLicencePlate, year: $year, errorYear: $errorYear, brand: $brand, color: $color, stepAddProductInfoDetailValid: $stepAddProductInfoDetailValid, obs: $obs, imageMedia: $imageMedia, stepAddPhotoValid: $stepAddPhotoValid, isLoading: $isLoading, isLoadingWithImage: $isLoadingWithImage, isSuccess: $isSuccess, isValidateApi: $isValidateApi, errorMessage: $errorMessage)';
   }
 }
 
@@ -715,6 +738,7 @@ abstract mixin class _$AddProductStateCopyWith<$Res>
       List<ImageMedia> imageMedia,
       bool stepAddPhotoValid,
       bool isLoading,
+      bool isLoadingWithImage,
       bool isSuccess,
       bool isValidateApi,
       String? errorMessage});
@@ -749,6 +773,7 @@ class __$AddProductStateCopyWithImpl<$Res>
     Object? imageMedia = null,
     Object? stepAddPhotoValid = null,
     Object? isLoading = null,
+    Object? isLoadingWithImage = null,
     Object? isSuccess = null,
     Object? isValidateApi = null,
     Object? errorMessage = freezed,
@@ -817,6 +842,10 @@ class __$AddProductStateCopyWithImpl<$Res>
       isLoading: null == isLoading
           ? _self.isLoading
           : isLoading // ignore: cast_nullable_to_non_nullable
+              as bool,
+      isLoadingWithImage: null == isLoadingWithImage
+          ? _self.isLoadingWithImage
+          : isLoadingWithImage // ignore: cast_nullable_to_non_nullable
               as bool,
       isSuccess: null == isSuccess
           ? _self.isSuccess

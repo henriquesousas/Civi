@@ -49,7 +49,7 @@ class MapTopToolbar extends StatelessWidget {
                 height: 64,
                 child: Row(
                   children: [
-                    const SizedBox(width: 12),
+                    // const SizedBox(width: 12),
                     // GestureDetector(
                     //   onTap: onAvatarTap,
                     //   child: CircleAvatar(
@@ -78,7 +78,7 @@ class MapTopToolbar extends StatelessWidget {
                     //   onTap: onSettingsTap,
                     //   isDark: isDark,
                     // ),
-                    const SizedBox(width: 12),
+                    const SizedBox(width: 16),
                   ],
                 ),
               ),

@@ -303,7 +303,7 @@ class _NoticeCard extends StatelessWidget {
               child: Text(
                 message,
                 style: textStyle,
-                maxLines: 3,
+                maxLines: 4,
                 overflow: TextOverflow.ellipsis,
               ),
             ),
@@ -344,7 +344,7 @@ extension TopNoticeExtension on BuildContext {
   void showTopNotice(
     String message, {
     DialogType type = DialogType.success,
-    Duration duration = const Duration(seconds: 3),
+    Duration duration = const Duration(seconds: 5),
     String? actionLabel,
     VoidCallback? onAction,
   }) {

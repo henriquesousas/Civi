@@ -45,10 +45,10 @@ class DefaultAppBar extends StatelessWidget implements PreferredSizeWidget {
       title: Text(
         title,
         // style: context.appText.headerlg,
-        style: TextStyle(
+        style: const TextStyle(
           color: Colors.white,
-          fontSize: context.safeSp(18),
-          fontWeight: FontWeight.w500,
+          // fontSize: context.safeSp(18),
+          fontWeight: FontWeight.w700,
           letterSpacing: -0.6,
           height: 1.05,
         ),

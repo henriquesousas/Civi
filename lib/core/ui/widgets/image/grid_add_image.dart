@@ -118,7 +118,7 @@ class GridAddImage extends StatelessWidget {
               child: Container(
                 padding: const EdgeInsets.all(4),
                 decoration: BoxDecoration(
-                  color: context.onSurface.withValues(alpha: 0.8),
+                  color: Colors.black.withValues(alpha: 0.8),
                   shape: BoxShape.circle,
                 ),
                 child: Icon(

@@ -6,6 +6,7 @@ import 'package:deehelp/core/extension/size_extension.dart';
 import 'package:deehelp/core/services/permissions/location/domain/current_location.dart';
 import 'package:deehelp/core/services/permissions/location/providers/location_providers.dart';
 import 'package:deehelp/core/theme/export_theme.dart';
+import 'package:deehelp/feature/incidents/incident_router.dart';
 import 'package:deehelp/feature/incidents/list/widgets/fake_incident_list_model.dart';
 import 'package:deehelp/feature/search/search_viewmodel_provider.dart';
 import 'package:deehelp/feature/search/widgets/mode_toogle.dart';
@@ -235,6 +236,8 @@ class _SearchPageV2State extends ConsumerState<SearchPageV2> {
                       danger: danger,
                       secondaryText: secondaryText,
                       premiumBorder: premiumBorder,
+                      press: () => context.push(IncidentRouter.detailComunity,
+                          extra: item),
                     ),
                   ),
                 ],
@@ -254,6 +257,7 @@ class _SearchResultTile extends StatelessWidget {
   final Color danger;
   final Color secondaryText;
   final Color premiumBorder;
+  final VoidCallback press;
 
   const _SearchResultTile({
     required this.item,
@@ -261,6 +265,7 @@ class _SearchResultTile extends StatelessWidget {
     required this.secondaryText,
     required this.premiumBorder,
     required this.currentLocation,
+    required this.press,
   });
 
   @override
@@ -269,7 +274,7 @@ class _SearchResultTile extends StatelessWidget {
         item.occurredAt.isOlderThanDays(7) ? const Color(0xFF8E8E93) : danger;
 
     return InkWell(
-      onTap: () {},
+      onTap: press,
       child: Padding(
         padding: const EdgeInsets.fromLTRB(14, 10, 14, 10),
         child: Row(
@@ -314,7 +319,6 @@ class _SearchResultTile extends StatelessWidget {
                             ),
                           ),
                         ),
-                        //TODO: Premium
                         if (item.visibilty) ...[
                           const SizedBox(width: 8),
                           Container(
@@ -429,45 +433,6 @@ String _getSummary(IncidentOutput item, CurrentLocation? currentLocation) {
   return '${item.occurredAt.timeAgo()} · $distance ${item.local?.city}· ${item.local?.state}';
 }
 
-// class _EmptySearchState extends StatelessWidget {
-//   const _EmptySearchState();
-
-//   @override
-//   Widget build(BuildContext context) {
-//     return const Center(
-//       child: Padding(
-//         padding: EdgeInsets.all(24),
-//         child: Column(
-//           mainAxisAlignment: MainAxisAlignment.center,
-//           children: [
-//             Icon(
-//               CupertinoIcons.search,
-//               color: Color(0xFF7A7A7A),
-//               size: 34,
-//             ),
-//             SizedBox(height: 14),
-//             Text(
-//               'Nenhum resultado encontrado',
-//               style: TextStyle(
-//                 color: Colors.white,
-//                 fontSize: 18,
-//                 fontWeight: FontWeight.w600,
-//               ),
-//             ),
-//             SizedBox(height: 8),
-//             Text(
-//               'Tente buscar por incidente, bairro, rua ou região.',
-//               textAlign: TextAlign.center,
-//               style: TextStyle(
-//                 color: Color(0xFF7A7A7A),
-//                 fontSize: 14,
-//               ),
-//             ),
-//           ],
-//         ),
-//       ),
-//     );
-//   }
 // }
 
 class CiviSearchItem {

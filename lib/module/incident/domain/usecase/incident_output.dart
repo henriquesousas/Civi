@@ -16,6 +16,7 @@ abstract class IncidentOutput with _$IncidentOutput {
     required String id,
     required String userId,
     required String alertId,
+    required String productType,
     required TypeAlert type,
     required IncidentProductOutput product,
     required ItemStatus status,

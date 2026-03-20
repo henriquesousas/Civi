@@ -3,7 +3,6 @@ import 'package:deehelp/core/theme/export_theme.dart';
 import 'package:deehelp/core/ui/styles/app_text_style.dart';
 import 'package:deehelp/core/ui/widgets/bubble/bubble_export.dart';
 import 'package:deehelp/core/ui/widgets/buttons/buttons_export.dart';
-import 'package:deehelp/core/ui/widgets/icon/export_icon.dart';
 import 'package:deehelp/feature/incidents/report/widgets/action_row.dart';
 import 'package:deehelp/feature/incidents/report/widgets/check_row.dart';
 import 'package:deehelp/feature/incidents/report/widgets/glass_header.dart';
@@ -12,7 +11,6 @@ import 'package:deehelp/feature/incidents/report/widgets/mini_pill.dart';
 import 'package:deehelp/feature/incidents/report/widgets/register/glass_card.dart';
 import 'package:deehelp/feature/incidents/report/widgets/success/regiter_incident_success_args.dart';
 import 'package:deehelp/feature/items/item_type.dart';
-import 'package:deehelp/feature/items/success/bullet.dart';
 import 'package:deehelp/feature/items/success/top_bar_v2.dart';
 import 'package:deehelp/module/incident/domain/entity/incident_local.dart';
 import 'package:deehelp/core/utils/url_launcher_utils.dart';
@@ -143,12 +141,13 @@ class ReportIncidentSuccessfullyPage extends StatelessWidget {
                                   ),
                                   SizedBox(height: 14.h),
                                   if (_isPhone) ...[
-                                    ActionRow(
+                                    const ActionRow(
                                       icon: Icons.lock_outline_rounded,
                                       title: 'Bloquear o aparelho',
+                                      // subtitle:
+                                      //     'Veja como proceder com IMEI e operadora',
                                       subtitle:
-                                          'Veja como proceder com IMEI e operadora',
-                                      onTap: () {},
+                                          'Entre em contato com sua operadora',
                                     ),
                                     SizedBox(height: 10.h),
                                   ],

@@ -8,6 +8,7 @@ class IncidentProductOutput {
   final String brand;
   final String type;
   final String? obs;
+  final String? year;
   final List<ImageMedia> images;
 
   IncidentProductOutput({
@@ -18,6 +19,7 @@ class IncidentProductOutput {
     required this.color,
     required this.brand,
     required this.type,
+    required this.year,
     this.obs,
   });
 }

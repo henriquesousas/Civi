@@ -112,30 +112,30 @@ class _SplashPageState extends State<SplashPage> {
                             Container(
                               width: context.percentWidth(0.3),
                               height: context.percentWidth(0.3),
-                              decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(32),
-                                color: Colors.white.withValues(alpha: 0.05),
-                                border: Border.all(
-                                  color: Colors.white.withValues(alpha: 0.08),
-                                  width: 1.2,
-                                ),
-                                boxShadow: [
-                                  BoxShadow(
-                                    blurRadius: 32,
-                                    offset: const Offset(0, 20),
-                                    color: Colors.black.withValues(alpha: 0.40),
-                                  ),
-                                  BoxShadow(
-                                    blurRadius: 26,
-                                    spreadRadius: -4,
-                                    color: primary.withValues(alpha: 0.18),
-                                  ),
-                                ],
-                              ),
+                              // decoration: BoxDecoration(
+                              //   borderRadius: BorderRadius.circular(32),
+                              //   color: Colors.white.withValues(alpha: 0.05),
+                              //   border: Border.all(
+                              //     color: Colors.white.withValues(alpha: 0.08),
+                              //     width: 1.2,
+                              //   ),
+                              //   boxShadow: [
+                              //     BoxShadow(
+                              //       blurRadius: 32,
+                              //       offset: const Offset(0, 20),
+                              //       color: Colors.black.withValues(alpha: 0.40),
+                              //     ),
+                              //     BoxShadow(
+                              //       blurRadius: 26,
+                              //       spreadRadius: -4,
+                              //       color: primary.withValues(alpha: 0.18),
+                              //     ),
+                              //   ],
+                              // ),
                               alignment: Alignment.center,
                               child: Container(
-                                width: context.percentWidth(0.2),
-                                height: context.percentWidth(0.2),
+                                width: context.percentWidth(0.25),
+                                height: context.percentWidth(0.25),
                                 decoration: BoxDecoration(
                                   borderRadius: BorderRadius.circular(26),
                                   color: const Color(0xFF14161C),

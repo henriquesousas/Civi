@@ -167,9 +167,9 @@ Baixe agora: https://play.google.com/store/apps/details?id=com.seu.app
   static Future<void> shareApp(BuildContext context) async {
     final message = '''
 
-🚨 **TIZZO App** 🚨
+🚨 **${AppName.appName} App** 🚨
 
-Estou usando o aplicativo Tizzo para registrar e acompanhar ocorrências na minha região.
+Estou usando o aplicativo ${AppName.appName} para registrar e acompanhar ocorrências na minha região.
 
 O app ajuda a fortalecer a segurança da comunidade de forma colaborativa.
 
@@ -178,7 +178,7 @@ https://play.google.com/store/apps/details?id=com.seu.app
 ''';
     await Share.share(
       message,
-      subject: 'Conheça o app Tizzo',
+      subject: 'Conheça o app ${AppName.appName}',
     );
   }
 

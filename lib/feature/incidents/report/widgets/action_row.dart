@@ -4,18 +4,18 @@ import 'package:deehelp/core/ui/widgets/icon/export_icon.dart';
 import 'package:flutter/material.dart';
 
 class ActionRow extends StatelessWidget {
-  final IconData icon;
+  final IconData? icon;
   final String title;
   final String subtitle;
-  final VoidCallback onTap;
+  final VoidCallback? onTap;
   final bool highlight;
 
   const ActionRow({
     super.key,
-    required this.icon,
+    this.icon,
     required this.title,
     required this.subtitle,
-    required this.onTap,
+    this.onTap,
     this.highlight = false,
   });
 
@@ -65,7 +65,9 @@ class ActionRow extends StatelessWidget {
                 ],
               ),
             ),
-            const Icon(Icons.chevron_right, color: Colors.white),
+            if (onTap != null) ...[
+              const Icon(Icons.chevron_right, color: Colors.white),
+            ]
           ],
         ),
       ),

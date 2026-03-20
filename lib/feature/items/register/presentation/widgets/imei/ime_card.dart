@@ -5,9 +5,11 @@ import 'package:deehelp/core/ui/widgets/badge/badge_text.dart';
 import 'package:deehelp/core/ui/widgets/buttons/button_outline.dart';
 import 'package:deehelp/core/ui/widgets/icon/export_icon.dart';
 import 'package:deehelp/core/ui/widgets/textfield/text_field_primary.dart';
+import 'package:deehelp/feature/items/items_router.dart';
 import 'package:deehelp/feature/items/register/presentation/widgets/card_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:go_router/go_router.dart';
 
 class ImeiCard extends StatelessWidget {
   final TextEditingController controller;
@@ -81,33 +83,35 @@ class ImeiCard extends StatelessWidget {
               children: [
                 Expanded(
                   child: ButtonOutline(
-                    press: onScan,
+                    bgColor: AppColors.primaryColor,
+                    borderColor: AppColors.primaryColorDark,
+                    press: () => context.push(ItemsRouter.imeiInfo),
                     height: ButtonSize.xm,
                     icon: const Icon(Icons.qr_code_scanner_outlined),
-                    text: "Abrir teclado",
+                    text: "Como encontrar o IMEI",
                   ),
                 ),
-                const SizedBox(width: SpacingSize.md),
-                Expanded(
-                  child: ButtonOutline(
-                    press: onPaste,
-                    height: ButtonSize.xm,
-                    icon: const Icon(Icons.qr_code_scanner_outlined),
-                    text: "Colar",
-                  ),
-                ),
+                // const SizedBox(width: SpacingSize.md),
+                // Expanded(
+                //   child: ButtonOutline(
+                //     press: onPaste,
+                //     height: ButtonSize.xm,
+                //     icon: const Icon(Icons.qr_code_scanner_outlined),
+                //     text: "Colar",
+                //   ),
+                // ),
               ],
             ),
-            const SizedBox(height: SpacingSize.xl),
-            Text(
-              "Para você pode encontrar o IMEI digite *#06# na tela de discagem do aparelho ou na caixa do aparelho.",
-              textAlign: TextAlign.start,
-              style: context.appText.caption.copyWith(
-                fontWeight: FontWeight.w400,
-                letterSpacing: 1.2,
-                color: Colors.grey,
-              ),
-            ),
+            // const SizedBox(height: SpacingSize.xl),
+            // Text(
+            //   "Para você pode encontrar o IMEI digite *#06# na tela de discagem do aparelho ou na caixa do aparelho.",
+            //   textAlign: TextAlign.start,
+            //   style: context.appText.caption.copyWith(
+            //     fontWeight: FontWeight.w400,
+            //     letterSpacing: 1.2,
+            //     color: Colors.grey,
+            //   ),
+            // ),
             // const SizedBox(height: SpacingSize.md),
             // CardHint(
             //   icon: Icon(Icons.info_outline,

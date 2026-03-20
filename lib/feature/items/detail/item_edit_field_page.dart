@@ -173,13 +173,13 @@ class _ItemEditFieldPageStateV2 extends ConsumerState<ItemEditFieldPageV2> {
   late final TextEditingController _ctrl;
   late final FocusNode _focus;
 
-  final background = Color(0xFF0B1020);
-  final surface = Color(0xFF121A2F);
-  final surfaceSoft = Color(0xFF18233D);
-  final stroke = Color(0xFF26324F);
-  final primary = Color(0xFF4F7BFF);
-  final textPrimary = Colors.white;
-  final textSecondary = Color(0xFFA7B1C7);
+  // final background = Color(0xFF0B1020);
+  // final surface = Color(0xFF121A2F);
+  // final surfaceSoft = Color(0xFF18233D);
+  // final stroke = Color(0xFF26324F);
+  // final primary = Color(0xFF4F7BFF);
+  // final textPrimary = Colors.white;
+  // final textSecondary = Color(0xFFA7B1C7);
 
   @override
   void initState() {
@@ -420,7 +420,9 @@ class _ItemEditFieldPageStateV2 extends ConsumerState<ItemEditFieldPageV2> {
         if (currentState.isSuccess) {
           ref.watch(selectedItemProvider.notifier).state =
               currentState.currentProduct!;
-          context.pop(true);
+
+          // context.pop(true);
+          _pop();
         }
 
         if (currentState.errorMessage != null &&
@@ -434,9 +436,9 @@ class _ItemEditFieldPageStateV2 extends ConsumerState<ItemEditFieldPageV2> {
     );
   }
 
-  void _pop() {
+  void _pop({hasReturn = true}) {
     final provider = itemUpdateViewmodelProvider(_currentProduct!.id.value);
     ref.read(provider.notifier).clearErrorMessage();
-    context.pop();
+    context.pop(hasReturn);
   }
 }

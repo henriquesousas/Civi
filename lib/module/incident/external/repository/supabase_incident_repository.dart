@@ -1,4 +1,3 @@
-import 'package:deehelp/core/extension/string_extension.dart';
 import 'package:deehelp/core/utils/result.dart';
 import 'package:deehelp/core/utils/unit.dart';
 import 'package:deehelp/module/incident/domain/entity/incident.dart';
@@ -188,17 +187,17 @@ class SupabaseIncidentRepository extends IncidentRepository {
     }
   }
 
-  String _normalizeSearchTerm(String term) {
-    final newTerm = term.trim().toLowerCase();
-    return newTerm.removeAccents();
-  }
+  // String _normalizeSearchTerm(String term) {
+  //   final newTerm = term.trim().toLowerCase();
+  //   return newTerm.removeAccents();
+  // }
 
-  String _prepareWordsConditions(String value, String fieldName) {
-    final words = value.toLowerCase().split(' ');
-    final conditions = words
-        .where((word) => word.length > 2)
-        .map((word) => "$fieldName.ilike.'%$word%'")
-        .join(",");
-    return conditions;
-  }
+  // String _prepareWordsConditions(String value, String fieldName) {
+  //   final words = value.toLowerCase().split(' ');
+  //   final conditions = words
+  //       .where((word) => word.length > 2)
+  //       .map((word) => "$fieldName.ilike.'%$word%'")
+  //       .join(",");
+  //   return conditions;
+  // }
 }

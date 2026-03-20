@@ -3,8 +3,9 @@ import 'package:deehelp/core/theme/size/spacing_size.dart';
 import 'package:deehelp/core/ui/styles/export_style.dart';
 import 'package:deehelp/core/ui/widgets/buttons/buttons_export.dart';
 import 'package:deehelp/feature/auth/presentation/widgets/auth_action_card.dart';
-import 'package:deehelp/feature/auth/presentation/widgets/google_mark.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_svg/svg.dart';
 
 class AuthView extends StatelessWidget {
   final VoidCallback onLoginWithGoogle;
@@ -25,7 +26,11 @@ class AuthView extends StatelessWidget {
             press: onLoginWithGoogle,
             // bgColor: context.primaryColor,
             textColor: Colors.white,
-            icon: const GoogleGMark(),
+            // icon: const GoogleGMark(),
+            icon: SvgPicture.asset(
+              "assets/svg/google.svg",
+              width: 15.w,
+            ),
             text: 'Continuar com Google',
             loading: isLoading,
           ),

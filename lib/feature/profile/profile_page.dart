@@ -3,7 +3,6 @@ import 'package:deehelp/core/theme/export_theme.dart';
 import 'package:deehelp/core/ui/styles/app_text_style.dart';
 import 'package:deehelp/core/ui/widgets/appbar/default_app_bar.dart';
 import 'package:deehelp/core/ui/widgets/avatar/profile_image_with_upload_button_widget.dart';
-import 'package:deehelp/core/ui/widgets/buttons/button_profile.dart';
 import 'package:deehelp/core/ui/widgets/buttons/buttons_export.dart';
 import 'package:deehelp/core/utils/navigation_utils.dart';
 import 'package:deehelp/feature/about/about_exports.dart';
@@ -51,8 +50,9 @@ class ProfilePage extends ConsumerWidget {
                   radius: 999,
                   showBoxShadow: true,
                   border: BoxBorder.all(
-                    color: const Color(0xFFFF8A00),
-                    width: 1,
+                    // color: const Color(0xFFFF8A00),
+                    color: Colors.black12,
+                    width: 2,
                   ),
                   imageUrl: session.photoUrl ?? '',
                   imageAlt: session.name,

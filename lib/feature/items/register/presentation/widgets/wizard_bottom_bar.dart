@@ -4,15 +4,19 @@ import 'package:flutter/material.dart';
 class WizardBottomBar extends StatelessWidget {
   final int step;
   final bool loading;
+  final bool loadingWithoutPicture;
   final VoidCallback? press;
+  final VoidCallback? onSaveWithoutPicture;
   final String nextLabel;
 
   const WizardBottomBar({
     super.key,
     required this.step,
     required this.loading,
+    required this.loadingWithoutPicture,
     required this.press,
     required this.nextLabel,
+    required this.onSaveWithoutPicture,
   });
 
   @override
@@ -31,10 +35,26 @@ class WizardBottomBar extends StatelessWidget {
       ),
       child: SafeArea(
         top: false,
-        child: ButtonPrimary(
-          press: press,
-          loading: loading,
-          text: nextLabel,
+        child: Row(
+          spacing: 10,
+          children: [
+            if (step == 2) ...[
+              Expanded(
+                child: ButtonOutline(
+                  press: onSaveWithoutPicture ?? () {},
+                  loading: loadingWithoutPicture,
+                  text: "Salvar sem foto",
+                ),
+              ),
+            ],
+            Expanded(
+              child: ButtonPrimary(
+                press: press,
+                loading: loading,
+                text: nextLabel,
+              ),
+            ),
+          ],
         ),
       ),
     );

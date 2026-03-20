@@ -53,6 +53,7 @@ class ItemUpdateViewmodel extends StateNotifier<ProductUpdateState> {
       errorMessage: null,
       errorValidation: null,
       hasChangeSomeField: false,
+      isSuccess: false,
     );
   }
 

@@ -34,11 +34,14 @@ class SupabaseProductRepository implements ProductRepository {
 
   @override
   Future<List<Product>> getAll(String userId) async {
-    final data =
-        await _supabaseClient.from(product).select("*,product_images (*)").eq(
-              "user_id",
-              userId,
-            );
+    final data = await _supabaseClient
+        .from(product)
+        .select("*,product_images (*)")
+        .eq(
+          "user_id",
+          userId,
+        )
+        .order("created_at");
     return data.isNotEmpty
         ? data.map((el) => ProductModel.fromMap(el)).toList()
         : [];

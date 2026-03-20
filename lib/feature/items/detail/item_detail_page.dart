@@ -239,7 +239,9 @@ class _ItemDetailPageState extends ConsumerState<ItemDetailPage> {
                       if (!context.mounted) return;
 
                       if (isUpdated!) {
-                        context.showSnackBar("nome alterado com sucesso");
+                        // context.showSnackBar("nome alterado com sucesso");
+                        context.showTopNotice(
+                            "${item.name}  alterado com sucesso");
                       }
                     },
                   ),
@@ -367,7 +369,8 @@ class _ItemDetailPageState extends ConsumerState<ItemDetailPage> {
                   if (!context.mounted) return;
 
                   if (isUpdated!) {
-                    context.showSnackBar("descriçao alterado com sucesso");
+                    context.showTopNotice("descriçao alterado com sucesso");
+                    // context.showSnackBar("descriçao alterado com sucesso");
                   }
                 },
               ),
@@ -389,7 +392,7 @@ class _ItemDetailPageState extends ConsumerState<ItemDetailPage> {
                       contentPadding: const EdgeInsets.fromLTRB(24, 0, 24, 16),
                       actionsPadding: const EdgeInsets.fromLTRB(16, 0, 16, 16),
                       title: Text(
-                        'Remover item?',
+                        'Remover ${item.name}?',
                         style: context.appText.headermd.copyWith(
                           color: Colors.white,
                         ),

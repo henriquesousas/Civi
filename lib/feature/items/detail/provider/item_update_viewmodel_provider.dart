@@ -1,6 +1,7 @@
 import 'package:deehelp/feature/items/detail/viewmodel/item_update_viewmodel.dart';
 import 'package:deehelp/feature/items/detail/viewmodel/product_update_state.dart';
 import 'package:deehelp/module/item/di/product_usecase_provider.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 final itemUpdateViewmodelProvider = StateNotifierProvider.autoDispose
@@ -9,6 +10,12 @@ final itemUpdateViewmodelProvider = StateNotifierProvider.autoDispose
   final deleteImageUsecase = ref.watch(deleteImageUsecaseProvider);
   final deleteProductUsecase = ref.watch(deleteProductUsecaseProvider);
   final updateProductUseCase = ref.watch(updateProductUsecaseProvider);
+
+  ref.onDispose(
+    () {
+      debugPrint("Item updade viewModel Disponse...");
+    },
+  );
 
   return ItemUpdateViewmodel(
       addImageUsecase: addImageUsecase,

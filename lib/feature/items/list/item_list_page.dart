@@ -1,8 +1,6 @@
 import 'package:deehelp/core/extension/color_extension.dart';
 import 'package:deehelp/core/theme/export_theme.dart';
 import 'package:deehelp/core/ui/widgets/appbar/default_app_bar.dart';
-import 'package:deehelp/core/ui/widgets/buttons/buttons_export.dart';
-import 'package:deehelp/core/utils/navigation_utils.dart';
 import 'package:deehelp/feature/items/detail/provider/selected_item_provider.dart';
 import 'package:deehelp/feature/items/items_router.dart';
 import 'package:deehelp/feature/items/list/list_product_state.dart';
@@ -34,19 +32,6 @@ class _ItemListPageState extends ConsumerState<ItemListPage> {
   void initState() {
     super.initState();
     fetchData();
-    // WidgetsBinding.instance.addPostFrameCallback((_) {
-    //   final userId = ref.read(authenticatedUserProvider)?.id;
-    //   debugPrint("UserId $userId");
-    //   if (userId == null) {
-    //     ref.read(itemListViewmodelProvider.notifier).clear();
-    //     return;
-    //   }
-
-    //   ref.read(itemListViewmodelProvider.notifier).getProducts(
-    //         userId,
-    //         fetchData: widget.args?.fetchData ?? false,
-    //       );
-    // });
   }
 
   Future<void> fetchData() async {
@@ -65,6 +50,20 @@ class _ItemListPageState extends ConsumerState<ItemListPage> {
     });
   }
 
+  Future<void> _onRefresh() async {
+    final userId = ref.read(authenticatedUserProvider)?.id;
+    debugPrint("UserId $userId");
+    if (userId == null) {
+      ref.read(itemListViewmodelProvider.notifier).clear();
+      return;
+    }
+
+    ref.read(itemListViewmodelProvider.notifier).getProducts(
+          userId,
+          fetchData: true,
+        );
+  }
+
   @override
   Widget build(BuildContext context) {
     final state = ref.watch(itemListViewmodelProvider);
@@ -76,109 +75,118 @@ class _ItemListPageState extends ConsumerState<ItemListPage> {
         press: () => context.pop(),
       ),
       body: state.maybeMap(
-        success: (value) => ItemListView(
-          items: value.items,
-          press: (item) async {
-            if (widget.args != null && widget.args!.isAddingIncident) {
-              context.pop(item);
-              return;
-            }
+          success: (value) => ItemListView(
+                onRefresh: () async {
+                  await _onRefresh();
+                },
+                items: value.items,
+                press: (item) async {
+                  if (widget.args != null && widget.args!.isAddingIncident) {
+                    context.pop(item);
+                    return;
+                  }
 
-            ref.watch(selectedItemProvider.notifier).state = item;
-            final result = await context.push<Map<String, dynamic>?>(
-              ItemsRouter.detail,
-              extra: item,
-            );
+                  ref.watch(selectedItemProvider.notifier).state = item;
+                  final result = await context.push<Map<String, dynamic>?>(
+                    ItemsRouter.detail,
+                    extra: item,
+                  );
 
-            final current = ref.watch(selectedItemProvider.notifier).state;
-            if (result != null) {
-              final operation = result['args']['operation'] as String;
-              // final status = result['args']['status'] as bool;
-              /*Refatorar para nao usar o valores fixos pois podem mudar
+                  final current =
+                      ref.watch(selectedItemProvider.notifier).state;
+                  if (result != null) {
+                    final operation = result['args']['operation'] as String;
+                    // final status = result['args']['status'] as bool;
+                    /*Refatorar para nao usar o valores fixos pois podem mudar
               este operation esta vindo da tela de detalhes*/
-              if (operation == 'delete') {
-                ref
-                    .watch(itemListViewmodelProvider.notifier)
-                    .removeAt(current!);
-              }
-            } else {
-              ref.watch(itemListViewmodelProvider.notifier).refresh(current!);
-            }
-          },
-        ),
-        // loading: (_) => const ItemListShimmer(),
-        loading: (_) => const LoadingResultsSkeletonV2(),
-        noInternet: (value) => EmptyStateWidget(
-          highlightIcon: Icon(
-            Icons.inventory_2_outlined,
-            size: IconSizes.xl,
-            color: context.primaryColor,
+                    if (operation == 'delete') {
+                      ref
+                          .watch(itemListViewmodelProvider.notifier)
+                          .removeAt(current!);
+                    }
+                  } else {
+                    ref
+                        .watch(itemListViewmodelProvider.notifier)
+                        .refresh(current!);
+                  }
+                },
+              ),
+          // loading: (_) => const ItemListShimmer(),
+          loading: (_) => const LoadingResultsSkeletonV2(),
+          noInternet: (value) => EmptyStateWidget(
+                highlightIcon: Icon(
+                  Icons.inventory_2_outlined,
+                  size: IconSizes.xl,
+                  color: context.primaryColor,
+                ),
+                title: 'Sem conexão de rede :()',
+                subtitle:
+                    'Por favor verifique sua conexão e tente novamente mais tarde!',
+                buttonText: "Tentar de novo",
+                onRetry: () {
+                  fetchData();
+                },
+              ),
+          orElse: () => const LoadingResultsSkeletonV2()
+          // orElse: () {
+          //   return Padding(
+          //     padding: const EdgeInsets.all(8.0),
+          //     child: EmptyStateWidget(
+          //       highlightIcon: Icon(
+          //         Icons.inventory_2_outlined,
+          //         size: IconSizes.xl,
+          //         color: context.primaryColor,
+          //       ),
+          //       title: 'Você ainda não cadastrou nenhum item',
+          //       subtitle:
+          //           'Cadastre seu carro, moto ou celular para acompanhar ocorrências e receber alertas relacionados.',
+          //       buttonText: "Cadastrar item",
+          //       onRetry: () {
+          //         final router =
+          //             NavigationUtils.safeNavigation(ItemsRouter.register, ref);
+          //         context.push(router);
+          //       },
+          //     ),
+          //   );
+          // },
           ),
-          title: 'Sem conexão de rede :()',
-          subtitle:
-              'Por favor verifique sua conexão e tente novamente mais tarde!',
-          buttonText: "Tentar de novo",
-          onRetry: () {
-            fetchData();
-          },
-        ),
-        orElse: () => Padding(
-          padding: const EdgeInsets.all(8.0),
-          child: EmptyStateWidget(
-            highlightIcon: Icon(
-              Icons.inventory_2_outlined,
-              size: IconSizes.xl,
-              color: context.primaryColor,
-            ),
-            title: 'Você ainda não cadastrou nenhum item',
-            subtitle:
-                'Cadastre seu carro, moto ou celular para acompanhar ocorrências e receber alertas relacionados.',
-            buttonText: "Cadastrar item",
-            onRetry: () {
-              final router =
-                  NavigationUtils.safeNavigation(ItemsRouter.register, ref);
-              context.push(router);
-            },
-          ),
-        ),
-      ),
     );
   }
 
-  Widget? _bottomBar(ListProductState state) {
-    return state.maybeMap(
-      success: (value) {
-        return Container(
-          padding: const EdgeInsets.fromLTRB(16, 12, 16, 16),
-          decoration: const BoxDecoration(
-            // color: context.surfaceColor,
-            boxShadow: [
-              BoxShadow(
-                color: Color(0x142B5BEE),
-                blurRadius: 16,
-                offset: Offset(0, -6),
-              ),
-            ],
-          ),
-          child: SafeArea(
-            top: false,
-            child: ButtonOutline(
-              press: () {
-                context.push(ItemsRouter.register);
-              },
-              borderColor: context.primaryColor,
-              bgColor: context.primaryColor,
-              textColor: Colors.black,
-              // icon: Icon(
-              //   Icons.add,
-              //   color: context.surfaceColor,
-              // ),
-              text: "Cadastrar novo",
-            ),
-          ),
-        );
-      },
-      orElse: () => null,
-    );
-  }
+  // Widget? _bottomBar(ListProductState state) {
+  //   return state.maybeMap(
+  //     success: (value) {
+  //       return Container(
+  //         padding: const EdgeInsets.fromLTRB(16, 12, 16, 16),
+  //         decoration: const BoxDecoration(
+  //           // color: context.surfaceColor,
+  //           boxShadow: [
+  //             BoxShadow(
+  //               color: Color(0x142B5BEE),
+  //               blurRadius: 16,
+  //               offset: Offset(0, -6),
+  //             ),
+  //           ],
+  //         ),
+  //         child: SafeArea(
+  //           top: false,
+  //           child: ButtonOutline(
+  //             press: () {
+  //               context.push(ItemsRouter.register);
+  //             },
+  //             borderColor: context.primaryColor,
+  //             bgColor: context.primaryColor,
+  //             textColor: Colors.black,
+  //             // icon: Icon(
+  //             //   Icons.add,
+  //             //   color: context.surfaceColor,
+  //             // ),
+  //             text: "Cadastrar novo",
+  //           ),
+  //         ),
+  //       );
+  //     },
+  //     orElse: () => null,
+  //   );
+  // }
 }

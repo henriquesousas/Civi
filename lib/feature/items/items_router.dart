@@ -7,11 +7,13 @@ import 'package:deehelp/feature/items/register/presentation/item_register_page_v
 import 'package:deehelp/feature/items/success/item_register_success_page.dart';
 import 'package:deehelp/feature/profile/item_list_router_args.dart';
 import 'package:deehelp/core/router/slide_transition_page.dart';
+import 'package:deehelp/imei_info_page.dart';
 import 'package:go_router/go_router.dart';
 
 class ItemsRouter {
   static const String list = '/list';
   static const String register = '/register';
+  static const String imeiInfo = '/imei-info';
   static const String detail = '/detail';
   static const String detailField = '/detail-field';
   static const String success = '/success';
@@ -39,6 +41,15 @@ class ItemsRouter {
             return slideTransitionPage(
               key: state.pageKey,
               child: const ItemRegisterPageView(),
+            );
+          },
+        ),
+        GoRoute(
+          path: imeiInfo,
+          pageBuilder: (context, state) {
+            return slideTransitionPage(
+              key: state.pageKey,
+              child: const ImeiInfoPage(),
             );
           },
         ),

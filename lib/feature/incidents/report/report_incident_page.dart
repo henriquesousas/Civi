@@ -86,7 +86,12 @@ class _AddIncidentPageState extends ConsumerState<ReportIncidentPage>
             context.pop();
           }
           if (!isKnowError) {
-            context.showTopNotice(error, type: DialogType.error);
+            context.showTopNotice(
+              error,
+              type: DialogType.error,
+              duration: const Duration(minutes: 1),
+            );
+            // _showReportErrorSheet(details: error, supportId: "teste ");
           } else {
             _showReportErrorSheet();
           }

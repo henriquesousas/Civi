@@ -88,10 +88,10 @@ class _ListingIncidentPageState extends ConsumerState<IncidentListPage> {
                       },
                       bgColor: context.primaryColor,
                       textColor: context.surface,
-                      icon: const Icon(
-                        CupertinoIcons.add,
-                        color: Colors.black,
-                      ),
+                      // icon: const Icon(
+                      //   CupertinoIcons.add,
+                      //   color: Colors.black,
+                      // ),
                       text: "Alertar comunidade",
                     ),
                   ),

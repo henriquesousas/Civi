@@ -72,23 +72,7 @@ class HorizontalIncidentCard extends StatelessWidget {
     }
   }
 
-  // String get _reportedBy {
-  //   switch (isPlatformGenerated) {
-  //     case ReportedBy.community:
-  //       return "Comunidade";
-  //     default:
-  //       return "Civi";
-  //   }
-  // }
-
-  // IconData get _reportedByIcon {
-  //   switch (isPlatformGenerated) {
-  //     case ReportedBy.community:
-  //       return Icons.groups_rounded;
-  //     default:
-  //       return Icons.verified;
-  //   }
-  // }
+  //
 
   @override
   Widget build(BuildContext context) {
@@ -97,7 +81,7 @@ class HorizontalIncidentCard extends StatelessWidget {
     return GestureDetector(
       onTap: onTap,
       child: Container(
-        margin: const EdgeInsets.only(right: 12),
+        margin: const EdgeInsets.only(right: 1),
         padding: const EdgeInsets.all(12),
         decoration: BoxDecoration(
           color: const Color(0xFF111318),

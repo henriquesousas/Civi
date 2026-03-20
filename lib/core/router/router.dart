@@ -17,6 +17,7 @@ import 'package:deehelp/feature/shell/app_sheel_router.dart';
 import 'package:deehelp/feature/sos/sos_router.dart';
 import 'package:deehelp/feature/splash/splash_router.dart';
 import 'package:deehelp/core/router/router_refresh_notifier.dart';
+import 'package:deehelp/imei_info_page.dart';
 import 'package:deehelp/map_page2.dart';
 import 'package:deehelp/map_page_teste.dart';
 import 'package:deehelp/teste_detail_page.dart';
@@ -103,6 +104,7 @@ var goRouterProvider = Provider<GoRouter>(
 
             // child: EventsScreen(),
             child: TesteDetailPage(),
+            // child: ImeiInfoPage(),
           ),
         ),
       ],

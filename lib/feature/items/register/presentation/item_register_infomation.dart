@@ -1,8 +1,4 @@
-import 'package:deehelp/core/extension/color_extension.dart';
 import 'package:deehelp/core/theme/export_theme.dart';
-import 'package:deehelp/core/ui/styles/app_text_style.dart';
-import 'package:deehelp/core/ui/widgets/cards/card_exports.dart';
-import 'package:deehelp/core/ui/widgets/cards/card_hint.dart';
 import 'package:deehelp/feature/items/item_type.dart';
 import 'package:deehelp/feature/items/register/item_data.dart';
 import 'package:deehelp/feature/items/register/presentation/widgets/card_page.dart';

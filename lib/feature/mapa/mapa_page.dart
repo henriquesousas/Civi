@@ -13,6 +13,7 @@ import 'package:deehelp/core/utils/enum_utils.dart';
 import 'package:deehelp/core/utils/url_launcher_utils.dart';
 import 'package:deehelp/feature/home/home_viewmodel_provider.dart';
 import 'package:deehelp/feature/home/v2/widgets/waze_alert.dart';
+import 'package:deehelp/feature/incidents/incident_router.dart';
 import 'package:deehelp/feature/items/item_type.dart';
 import 'package:deehelp/feature/mapa/widgets/horizontal_incident_card.dart';
 import 'package:deehelp/feature/mapa/widgets/map_bottom_sheet.dart';
@@ -32,165 +33,6 @@ import 'package:mapbox_maps_flutter/mapbox_maps_flutter.dart' hide Visibility;
 import 'package:permission_handler/permission_handler.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
-// class FakeIncident {
-//   final Point point;
-//   final IconData image;
-//   final String imageAssets;
-//   final Color pinBorder;
-
-//   FakeIncident(
-//       {required this.point,
-//       required this.image,
-//       required this.pinBorder,
-//       required this.imageAssets});
-
-//   static List<FakeIncident> generateFakeIncidents() {
-//     final random = Random();
-
-//     const double minLat = -23.70;
-//     const double maxLat = -23.45;
-
-//     const double minLng = -46.80;
-//     const double maxLng = -46.40;
-
-//     final icons = [
-//       Icons.directions_car_filled_rounded,
-//       Icons.smartphone_rounded,
-//       Icons.two_wheeler_rounded,
-//     ];
-
-//     final imageAssets = [
-//       "assets/images/motorcycle_pin_v9.png",
-//       "assets/images/car_rouberry_v4.png",
-//       "assets/images/phone_pin_v2.png",
-//     ];
-
-//     return List.generate(100, (index) {
-//       final lat = minLat + random.nextDouble() * (maxLat - minLat);
-//       final lng = minLng + random.nextDouble() * (maxLng - minLng);
-
-//       return FakeIncident(
-//         point: Point(
-//           coordinates: Position(lng, lat),
-//         ),
-//         image: icons[random.nextInt(icons.length)],
-//         imageAssets: imageAssets[random.nextInt(imageAssets.length)],
-//         pinBorder: AppColors.primaryColor,
-//       );
-//     });
-//   }
-
-// static List<FakeIncident> itemss() {
-//   return [
-//     FakeIncident(
-//       point: Point(coordinates: Position(-46.7905, -23.5338)),
-//       image: Icons.directions_car_filled_rounded,
-//       pinBorder: AppColors.primaryColor,
-//     ),
-//     FakeIncident(
-//       point: Point(coordinates: Position(-46.7889, -23.5315)),
-//       image: Icons.smartphone_rounded,
-//       pinBorder: AppColors.primaryColor,
-//     ),
-//     FakeIncident(
-//       point: Point(coordinates: Position(-46.7952, -23.5347)),
-//       image: Icons.two_wheeler_rounded,
-//       pinBorder: AppColors.primaryColor,
-//     ),
-//     FakeIncident(
-//       point: Point(coordinates: Position(-46.7978, -23.5299)),
-//       image: Icons.flood_rounded,
-//       pinBorder: AppColors.primaryColor,
-//     ),
-//     FakeIncident(
-//       point: Point(coordinates: Position(-46.7854, -23.5361)),
-//       image: Icons.visibility_rounded,
-//       pinBorder: AppColors.primaryColor,
-//     ),
-//     FakeIncident(
-//       point: Point(coordinates: Position(-46.7822, -23.5304)),
-//       image: Icons.flood_rounded,
-//       pinBorder: AppColors.primaryColor,
-//     ),
-//     FakeIncident(
-//       point: Point(coordinates: Position(-46.8001, -23.5321)),
-//       image: Icons.directions_car_filled_rounded,
-//       pinBorder: AppColors.primaryColor,
-//     ),
-//     FakeIncident(
-//       point: Point(coordinates: Position(-46.8035, -23.5374)),
-//       image: Icons.directions_car_filled_rounded,
-//       pinBorder: AppColors.primaryColor,
-//     ),
-//     FakeIncident(
-//       point: Point(coordinates: Position(-46.8035, -23.5374)),
-//       image: Icons.motorcycle,
-//       pinBorder: AppColors.primaryColor,
-//     ),
-//     FakeIncident(
-//       point: Point(coordinates: Position(-46.7768, -23.5289)),
-//       image: Icons.directions_car_filled_rounded,
-//       pinBorder: AppColors.primaryColor,
-//     ),
-//     FakeIncident(
-//       point: Point(coordinates: Position(-46.7741, -23.5340)),
-//       image: Icons.motorcycle_rounded,
-//       pinBorder: AppColors.primaryColor,
-//     ),
-//     FakeIncident(
-//       point: Point(coordinates: Position(-46.7867, -23.5257)),
-//       image: Icons.motorcycle_rounded,
-//       pinBorder: AppColors.primaryColor,
-//     ),
-//     FakeIncident(
-//       point: Point(coordinates: Position(-46.7928, -23.5402)),
-//       image: Icons.directions_car_filled_rounded,
-//       pinBorder: AppColors.primaryColor,
-//     ),
-//     FakeIncident(
-//       point: Point(coordinates: Position(-46.8057, -23.5295)),
-//       image: Icons.motorcycle_rounded,
-//       pinBorder: AppColors.primaryColor,
-//     ),
-//     FakeIncident(
-//       point: Point(coordinates: Position(-46.8092, -23.5333)),
-//       image: Icons.phone_android_rounded,
-//       pinBorder: AppColors.primaryColor,
-//     ),
-//     FakeIncident(
-//       point: Point(coordinates: Position(-46.7819, -23.5411)),
-//       image: Icons.directions_car_filled_rounded,
-//       pinBorder: AppColors.primaryColor,
-//     ),
-//     FakeIncident(
-//       point: Point(coordinates: Position(-46.7727, -23.5378)),
-//       image: Icons.directions_car_filled_rounded,
-//       pinBorder: AppColors.primaryColor,
-//     ),
-//     FakeIncident(
-//       point: Point(coordinates: Position(-46.7994, -23.5252)),
-//       image: Icons.directions_car_filled_rounded,
-//       pinBorder: AppColors.primaryColor,
-//     ),
-//     FakeIncident(
-//       point: Point(coordinates: Position(-46.8070, -23.5415)),
-//       image: Icons.directions_car_filled_rounded,
-//       pinBorder: AppColors.primaryColor,
-//     ),
-//     FakeIncident(
-//       point: Point(coordinates: Position(-46.7840, -23.5440)),
-//       image: Icons.directions_car_filled_rounded,
-//       pinBorder: AppColors.primaryColor,
-//     ),
-//     FakeIncident(
-//       point: Point(coordinates: Position(-46.7708, -23.5309)),
-//       image: Icons.directions_car_filled_rounded,
-//       pinBorder: AppColors.primaryColor,
-//     ),
-//   ];
-// }
-// }
-
 enum GPSHeight {
   normal,
   min,
@@ -205,7 +47,6 @@ class MapaPage extends ConsumerStatefulWidget {
 }
 
 class _MapaPageState extends ConsumerState<MapaPage> {
-  // final _initialZoom = 13.8;
   final _initialZoom = 16.0;
   bool _showIncidentCards = false;
   bool _isCardOpened = false;
@@ -223,11 +64,6 @@ class _MapaPageState extends ConsumerState<MapaPage> {
   final Point _myLocation = Point(
     coordinates: Position(-46.7917, -23.5329),
   );
-  // late final NetworkInfo _networkInfo;
-  // // final ConnectionBannerController _bannerController =
-  // //     ConnectionBannerController();
-  // StreamSubscription<bool>? _connectionSubscription;
-  // bool _isOffline = false;
 
   late final NetworkListener _networkListener;
   NetworkReconnectListener? _networkReconnectListener;
@@ -276,8 +112,9 @@ class _MapaPageState extends ConsumerState<MapaPage> {
             }
 
             final time = DateTime.parse(data['occurred_at']).timeAgo();
-            final label = EnumUtils.fromString(ItemType.values, data['kind'])
-                .labelRouberry;
+            final label =
+                EnumUtils.fromString(ItemType.values, data['product_type'])
+                    .labelRouberry;
             final city = data['city'];
             final lat = (data['lat'] as num?)?.toDouble();
             final long = (data['long'] as num?)?.toDouble();
@@ -359,6 +196,8 @@ class _MapaPageState extends ConsumerState<MapaPage> {
 
   @override
   Widget build(BuildContext context) {
+    debugPrint("Padding top ${context.topPadding}");
+    debugPrint("Padding top ${context.topPadding * 3}");
     final homeState = ref.watch(homeViewmodelProvider);
     final state = ref.watch(authenticatedUserProvider);
     currenLocation = ref.watch(currentLocationProvider);
@@ -498,14 +337,7 @@ class _MapaPageState extends ConsumerState<MapaPage> {
               return const SizedBox.shrink();
             },
           ),
-          // AnimatedPositioned(
-          //   duration: const Duration(milliseconds: 350),
-          //   left: 16,
-          //   right: 16,
-          //   bottom: _showIncidentCards ? 1 : -300,
-          //   child: _horizontalIncidentCard(fakeIncidents),
-          // ),
-          // Location
+
           Positioned(
             left: 0,
             right: 0,
@@ -655,10 +487,6 @@ class _MapaPageState extends ConsumerState<MapaPage> {
           return HorizontalIncidentCard(
             incidentType: 'Roubo',
             title: incident.product.name,
-
-            // locationLabel: 'Centro, Osasco',
-            // timeLabel: 'hoje, 18:30',
-            // distanceLabel: '1,2 km de você',
             howTo: incident.howTo,
             locationLabel: _getLocale(incident),
             timeLabel: incident.occurredAt.timeAgo(),
@@ -667,7 +495,8 @@ class _MapaPageState extends ConsumerState<MapaPage> {
             coverImageUrl: incident.product.images.isNotEmpty
                 ? incident.product.images.first.value
                 : null,
-            onTap: () {},
+            onTap: () =>
+                context.push(IncidentRouter.detailComunity, extra: incident),
             onShareTap: () => UrlLauncherUtils.shareIncident(
                 context, incident.alertId, incident.occurredAt),
             onBookmarkTap: () {},
@@ -732,7 +561,8 @@ class _MapaPageState extends ConsumerState<MapaPage> {
       await _mapboxMap!.compass.updateSettings(
         CompassSettings(
           enabled: true,
-          marginTop: context.topPadding * 3,
+          // marginTop: context.topPadding * 3,
+          marginTop: 90.h,
           marginRight: 16,
         ),
       );
@@ -763,8 +593,8 @@ class _MapaPageState extends ConsumerState<MapaPage> {
       true,
     );
 
-    _pointManager =
-        await _mapboxMap!.annotations.createPointAnnotationManager();
+    // _pointManager =
+    //     await _mapboxMap!.annotations.createPointAnnotationManager();
 
     _showScallableZoom(false);
     _onMarkeClick(incidents);
@@ -812,28 +642,37 @@ class _MapaPageState extends ConsumerState<MapaPage> {
 
   Future<void> _createMarker(List<IncidentOutput> incidents) async {
     _markers.clear();
-    for (final incident in incidents) {
-      if (incident.local?.longitude != null &&
-          incident.local?.latitue != null) {
-        final pinImage = await createPinWithAsset(
-          EnumUtils.fromString(ItemType.values, incident.product.type).assets,
-        );
 
-        final marker = await _pointManager!.create(
-          PointAnnotationOptions(
-            geometry: Point(
-              coordinates: Position(
-                incident.local!.longitude!,
-                incident.local!.latitue!,
+    _pointManager =
+        await _mapboxMap!.annotations.createPointAnnotationManager();
+
+    try {
+      for (final incident in incidents) {
+        if (incident.local?.longitude != null &&
+            incident.local?.latitue != null) {
+          final pinImage = await createPinWithAsset(
+            EnumUtils.fromString(ItemType.values, incident.product.type).assets,
+          );
+
+          final marker = await _pointManager!.create(
+            PointAnnotationOptions(
+              geometry: Point(
+                coordinates: Position(
+                  incident.local!.longitude!,
+                  incident.local!.latitue!,
+                ),
               ),
+              image: pinImage,
+              iconSize: 1.2,
+              iconAnchor: IconAnchor.BOTTOM,
             ),
-            image: pinImage,
-            iconSize: 1.2,
-            iconAnchor: IconAnchor.BOTTOM,
-          ),
-        );
-        _markers.add(marker);
+          );
+          _markers.add(marker);
+        }
       }
+      _onMarkeClick(incidents);
+    } catch (e) {
+      debugPrint(e.toString());
     }
   }
 

@@ -1,19 +1,26 @@
 import 'dart:math';
 
 import 'package:deehelp/core/base/use_case.dart';
+import 'package:deehelp/core/ui/widgets/badge/export_badge.dart';
 import 'package:deehelp/core/utils/id_utils.dart';
 import 'package:deehelp/core/utils/result.dart';
 import 'package:deehelp/module/incident/domain/entity/incident.dart';
 import 'package:deehelp/module/incident/domain/incident_repository.dart';
-import 'package:deehelp/module/incident/domain/product_already_exist_exception.dart';
+import 'package:deehelp/module/incident/domain/product_not_found_exception.dart';
+import 'package:deehelp/module/incident/domain/product_unavailable_exception.dart';
 import 'package:deehelp/module/incident/domain/usecase/add/add_incident_dto.dart';
 import 'package:deehelp/module/incident/external/repository/region_dto.dart';
+import 'package:deehelp/module/item/domain/product_repository.dart';
 
 class AddIncidentUsecase extends UseCase<AddIncidentDto, String> {
   final IncidentRepository _repository;
+  final ProductRepository _productRepository;
 
-  AddIncidentUsecase({required IncidentRepository repository})
-      : _repository = repository;
+  AddIncidentUsecase({
+    required IncidentRepository repository,
+    required ProductRepository productRepository,
+  })  : _repository = repository,
+        _productRepository = productRepository;
 
   @override
   Future<Result<String>> execute(AddIncidentDto dto) async {
@@ -27,14 +34,27 @@ class AddIncidentUsecase extends UseCase<AddIncidentDto, String> {
     }
 
     //Verificar se o produto ja foi feito incidente com ele
-    final product =
+    final incident =
         await _repository.getIncidentByProductId(dto.product.id.value);
 
-    if (product != null) {
-      return Result.failure(const ProductAlreadyExistException());
+    if (incident != null) {
+      return Result.failure(const ProductNotFoundException());
     }
 
-    final incident = Incident(
+    //Valida se esta ativo
+    final product = await _productRepository.getByCode(dto.product.code);
+
+    if (product == null) {
+      return Result.failure(const ProductNotFoundException());
+    }
+
+    if (product.status != ItemStatus.active) {
+      return Result.failure(
+        const ProductUnavailableException(),
+      );
+    }
+
+    final report = Incident(
       id: IdUtils.generate(),
       regionId: regionId,
       alertId: _generateIncidentId(),
@@ -50,8 +70,8 @@ class AddIncidentUsecase extends UseCase<AddIncidentDto, String> {
       reportType: dto.reportType,
     );
 
-    await _repository.save(incident);
-    return Result.success(incident.alertId!);
+    await _repository.save(report);
+    return Result.success(report.alertId!);
   }
 
   String _generateIncidentId() {

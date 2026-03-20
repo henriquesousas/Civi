@@ -36,6 +36,7 @@ class IncidentMapper {
     return {
       'alert_id': incident.alertId,
       'product_id': incident.product.id.value,
+      'product_type': incident.product.type,
       'user_id': incident.userId,
       'how_to': incident.howTo,
       'city': incident.local?.city,
@@ -76,13 +77,13 @@ class IncidentMapper {
         latitue: map['latitude'],
         longitude: map['longitude'],
       ),
-      // status: IncidentStatus.values.firstWhere((e) => e.name == map['status']),
       region: RegionMapper.fromMap(map['regions']),
       status: ItemStatus.values.firstWhere((e) => e.name == map['status']),
       kind: Kind.values.firstWhere((e) => e.name == map['kind']),
       reportType:
           ReportType.values.firstWhere((e) => e.name == map['report_type']),
       alertId: map['alert_id'],
+      productType: map['product_type'],
       product: IncidentProductOutput(
         productId: map['product']['id'],
         name: map['product']['name'],
@@ -91,6 +92,7 @@ class IncidentMapper {
         brand: map['product']['brand'],
         type: map['product']['type'],
         obs: map['product']['obs'],
+        year: map['product']['year'].toString(),
         images: images,
       ),
       createdAt: DateTime.parse(map['created_at']),

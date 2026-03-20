@@ -46,9 +46,11 @@ class SurfaceCard extends StatelessWidget {
       //   boxShadow: const [shadowSoft],
       // ),
       decoration: BoxDecoration(
-        color: const Color(0xFF101012),
+        // color: const Color(0xFF101012),
+        color: const Color(0xFF121821),
         borderRadius: BorderRadius.circular(24),
-        border: Border.all(color: const Color(0xFF1D1D21)),
+        // border: Border.all(color: const Color(0xFF1D1D21)),
+        border: Border.all(color: const Color(0xFF222B38)),
       ),
       child: child,
     );

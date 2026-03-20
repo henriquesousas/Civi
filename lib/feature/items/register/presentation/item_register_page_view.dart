@@ -77,6 +77,14 @@ class _ItemRegisterPageViewState extends ConsumerState<ItemRegisterPageView> {
     });
   }
 
+  void _saveWithouImage(WidgetRef ref) {
+    final userId = ref.read(authenticatedUserProvider)!.id;
+    ref.watch(registerItemViewModelProvider.notifier).save(
+          userId,
+          hasImage: false,
+        );
+  }
+
   void _previousPage({int? goToPage}) {
     final page = goToPage ?? --_currentPage;
     setState(() {
@@ -136,7 +144,9 @@ class _ItemRegisterPageViewState extends ConsumerState<ItemRegisterPageView> {
       bottomNavigationBar: WizardBottomBar(
         step: _currentPage,
         loading: state.isLoading,
+        loadingWithoutPicture: state.isLoadingWithImage,
         press: _buttonState(state) ? () => _nextPage(ref) : null,
+        onSaveWithoutPicture: () => _saveWithouImage(ref),
         nextLabel:
             (_currentPage == PageStep.photo.index ? 'Concluir' : 'Continuar'),
       ),

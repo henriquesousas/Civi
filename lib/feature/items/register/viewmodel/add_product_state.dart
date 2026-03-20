@@ -36,6 +36,7 @@ abstract class AddProductState with _$AddProductState {
     @Default([]) List<ImageMedia> imageMedia,
     @Default(false) bool stepAddPhotoValid,
     @Default(false) bool isLoading,
+    @Default(false) bool isLoadingWithImage,
     @Default(false) bool isSuccess,
     @Default(false) bool isValidateApi,
     String? errorMessage,

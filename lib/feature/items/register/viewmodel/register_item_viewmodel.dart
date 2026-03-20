@@ -23,7 +23,7 @@ class RegisterItemViewmodel extends StateNotifier<AddProductState> {
     state = state.copyWith(isValidateApi: false);
   }
 
-  void save(String userId) async {
+  void save(String userId, {bool hasImage = true}) async {
     final dto = AddProductDto(
       userId: userId,
       name: state.model!,
@@ -39,16 +39,30 @@ class RegisterItemViewmodel extends StateNotifier<AddProductState> {
     await HandleCommand.execute<Unit, AddProductState>(
       updateState: (newState) => state = newState,
       command: () => _addProductUseCase.execute(dto),
-      onLoading: () =>
-          state.copyWith(isLoading: true, errorMessage: null, isSuccess: false),
+      onLoading: () {
+        return state.copyWith(
+          isLoading: hasImage,
+          isLoadingWithImage: hasImage == false,
+          errorMessage: null,
+          isSuccess: false,
+        );
+      },
       onSuccess: (result) {
-        return state.copyWith(isSuccess: true, isLoading: false);
+        return state.copyWith(
+          isSuccess: true,
+          isLoading: false,
+          isLoadingWithImage: false,
+        );
       },
       onError: (error) {
         return handleError<AddProductState>(
           error,
           (message, _) {
-            return state.copyWith(errorMessage: message, isLoading: false);
+            return state.copyWith(
+              errorMessage: message,
+              isLoading: false,
+              isLoadingWithImage: false,
+            );
           },
         );
       },
