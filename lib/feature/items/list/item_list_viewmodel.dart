@@ -11,6 +11,7 @@ class ItemListViewModel extends StateNotifier<ListProductState> {
   final GetProductsByUserUsecase _getProductsByUserUsecase;
   final NetworkInfo _networkInfo;
   List<Product> _cacheProducts = [];
+  bool loadFirstTime = true;
   ItemListViewModel({
     required GetProductsByUserUsecase getProductsByUserUsecase,
     required NetworkInfo networkInfo,
@@ -19,7 +20,7 @@ class ItemListViewModel extends StateNotifier<ListProductState> {
         super(const ListProductState.initial());
 
   void clear() {
-    state = const ListProductState.empty();
+    // state = const ListProductState.empty();
   }
 
   Future<void> getProducts(String userId, {bool fetchData = false}) async {
@@ -33,7 +34,6 @@ class ItemListViewModel extends StateNotifier<ListProductState> {
       state = const ListProductState.noInternet();
       return;
     }
-
     HandleCommand.execute<List<Product>, ListProductState>(
       updateState: (newState) => state = newState,
       command: () async => await _getProductsByUserUsecase.execute(userId),

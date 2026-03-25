@@ -24,6 +24,23 @@
       "deviceId": "23a1b38d11057ece",
       "flutterMode": "debug",
       "program": "lib/main.dart"
+    },
+    {
+      "name": "Lane",
+      "request": "launch",
+      "type": "dart",
+      "deviceId": "RQCY101T16H",
+      "flutterMode": "debug",
+      "program": "lib/main.dart"
+    },
+
+    {
+      "name": "Gabriel",
+      "request": "launch",
+      "type": "dart",
+      "deviceId": "RQ8T200TDAR",
+      "flutterMode": "debug",
+      "program": "lib/main.dart"
     }
   ]
 }

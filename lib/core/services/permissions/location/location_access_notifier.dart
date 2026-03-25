@@ -38,8 +38,9 @@ class LocationAccessNotifier extends StateNotifier<LocationAccessState> {
 
   Future<void> _apply(LocationAccessResult result) async {
     if (result.isGranted) {
-      final location = await _position.getPosition(localeIdentifier: 'pt_BR');
-      state = LocationAccessState.granted(location);
+      // final location = await _position.getPosition(localeIdentifier: 'pt_BR');
+      // state = LocationAccessState.granted(location);
+      state = const LocationAccessState.granted(null);
       return;
     }
 

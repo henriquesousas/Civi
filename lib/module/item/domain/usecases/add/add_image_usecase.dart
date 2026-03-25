@@ -1,4 +1,6 @@
+import 'package:cloudflare_r2/cloudflare_r2.dart';
 import 'package:deehelp/core/base/use_case.dart';
+import 'package:deehelp/core/env_config.dart';
 import 'package:deehelp/core/services/storage/image_storage.dart';
 import 'package:deehelp/core/utils/result.dart';
 import 'package:deehelp/module/item/domain/entities/image_media.dart';
@@ -19,6 +21,12 @@ class AddImageUsecase extends UseCase<AddImageDto, List<ImageMedia>> {
   @override
   Future<Result<List<ImageMedia>>> execute(AddImageDto dto) async {
     try {
+      await CloudFlareR2.init(
+        accountId: EnvConfig.r2AccountId,
+        accessKeyId: EnvConfig.r2AccessKeyId,
+        secretAccessKey: EnvConfig.r2SecretAccessKeyId,
+      );
+
       final newUrl = await _imageStorage.upload(dto.image);
 
       final newImageMedia = ImageMedia.fromWeb(

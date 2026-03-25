@@ -158,6 +158,53 @@ class _ItemDetailPageState extends ConsumerState<ItemDetailPage> {
                     onOpenZoom: (i) =>
                         _openPhotoViewer(context, item.images, i),
                   ),
+
+                  /// 🔥 BOTÃO EDITAR IMAGENS
+                  Positioned(
+                    top: kToolbarHeight,
+                    right: 16,
+                    child: GestureDetector(
+                      onTap: () {
+                        // ação editar imagens
+                        context.push(ItemsRouter.updatePhoto);
+                      },
+                      child: Container(
+                        padding: const EdgeInsets.symmetric(
+                          horizontal: 12,
+                          vertical: 8,
+                        ),
+                        decoration: BoxDecoration(
+                          color: Colors.black.withValues(alpha: 0.55),
+                          borderRadius: BorderRadius.circular(999),
+                          border: Border.all(
+                            color: Colors.white.withValues(alpha: 0.10),
+                          ),
+                        ),
+                        child: Row(
+                          mainAxisSize: MainAxisSize.min,
+                          children: [
+                            Icon(
+                              CupertinoIcons.pencil,
+                              size: 15.w,
+                              color: Colors.white,
+                            ),
+                            const SizedBox(width: 6),
+                            Text(
+                              item.images.isNotEmpty
+                                  ? 'Editar foto'
+                                  : 'Adicionar foto',
+                              style: TextStyle(
+                                color: Colors.white,
+                                fontSize: context.safeSp(12),
+                                fontWeight: FontWeight.w600,
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
+                  ),
+
                   IgnorePointer(
                     child: DecoratedBox(
                       decoration: BoxDecoration(

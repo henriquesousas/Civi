@@ -5,6 +5,7 @@ import 'package:deehelp/module/auth/domain/services/operation_status.dart';
 import 'package:deehelp/module/auth/domain/usecases/sign_in_with_google_usecase.dart';
 import 'package:deehelp/module/auth/domain/usecases/sign_out_usecase.dart';
 import 'package:deehelp/feature/auth/viemodel/auth_state.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 class AuthViewModel extends StateNotifier<AuthState> {
@@ -26,6 +27,7 @@ class AuthViewModel extends StateNotifier<AuthState> {
       onSuccess: (authenticatedUser) =>
           AuthState.authenticated(authenticatedUser),
       onError: (error) {
+        debugPrint("AuthViewModel login com google error: ${error.message}");
         return handleError<AuthState>(
           error,
           (message, extra) {

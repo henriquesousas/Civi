@@ -159,7 +159,10 @@ class ProfilePage extends ConsumerWidget {
                 subtitle: 'Ajude-nos a melhorar',
                 badge: 'Novo',
                 press: () => UrlLauncherUtils.launchAppStorePage(
-                    context, "com.radardoroubo.br.radar_do_roubo", "br.com"),
+                  context,
+                  "br.com.atomos.deehelp",
+                  "br.com.atomos.deehelp",
+                ),
               ),
             ],
           ),

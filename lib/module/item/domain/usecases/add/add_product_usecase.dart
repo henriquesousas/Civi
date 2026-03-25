@@ -1,3 +1,5 @@
+import 'package:cloudflare_r2/cloudflare_r2.dart';
+import 'package:deehelp/core/env_config.dart';
 import 'package:deehelp/core/utils/enum_utils.dart';
 import 'package:deehelp/feature/items/item_type.dart';
 import 'package:deehelp/module/item/domain/exceptions/item_notfound_exception.dart';
@@ -26,6 +28,7 @@ class AddProductUseCase extends UseCase<AddProductDto, Unit> {
   @override
   Future<Result<Unit>> execute(AddProductDto dto) async {
     _logger.info("Iniciando AddProductUseCase para salvar o produto...");
+    List<ImageMedia> medias = [];
 
     final item = await _repository.getByCode(dto.code);
     if (item != null) {
@@ -34,23 +37,31 @@ class AddProductUseCase extends UseCase<AddProductDto, Unit> {
     }
 
     try {
-      final newImagesMedia = await Future.wait(
-        dto.images.map(
-          (currentImageMedia) async {
-            final newUrl = await _imageStorage.upload(currentImageMedia);
-            _logger.info('Imagem upload com sucesso $newUrl');
-            return ImageMedia.fromWeb(
-              url: newUrl,
-              size: currentImageMedia.size,
-              mimeType: currentImageMedia.mimeType,
-              imageName: currentImageMedia.imageName,
-            );
-          },
-        ),
-      );
+      if (dto.images.isNotEmpty) {
+        await CloudFlareR2.init(
+          accountId: EnvConfig.r2AccountId,
+          accessKeyId: EnvConfig.r2AccessKeyId,
+          secretAccessKey: EnvConfig.r2SecretAccessKeyId,
+        );
+
+        medias = await Future.wait(
+          dto.images.map(
+            (currentImageMedia) async {
+              final newUrl = await _imageStorage.upload(currentImageMedia);
+              _logger.info('Imagem upload com sucesso $newUrl');
+              return ImageMedia.fromWeb(
+                url: newUrl,
+                size: currentImageMedia.size,
+                mimeType: currentImageMedia.mimeType,
+                imageName: currentImageMedia.imageName,
+              );
+            },
+          ),
+        );
+      }
 
       final product = Product.fromDto(dto);
-      product.changeImage(newImagesMedia);
+      product.changeImage(medias);
       await _repository.save(product);
       _logger.info("Produto cadastrado com sucesso");
       return Result.success(const Unit());

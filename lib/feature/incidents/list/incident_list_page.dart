@@ -92,7 +92,7 @@ class _ListingIncidentPageState extends ConsumerState<IncidentListPage> {
                       //   CupertinoIcons.add,
                       //   color: Colors.black,
                       // ),
-                      text: "Alertar comunidade",
+                      text: "Criar alerta",
                     ),
                   ),
                 )

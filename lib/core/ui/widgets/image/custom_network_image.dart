@@ -1,5 +1,6 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:deehelp/core/theme/export_theme.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:shimmer/shimmer.dart';
@@ -206,13 +207,18 @@ class ImageErrorWidget extends StatelessWidget {
         borderRadius: BorderRadius.circular(radius),
         color: Colors.grey.withValues(alpha: 0.08),
       ),
-      child: Center(
-        child: Image.asset(
-          "assets/images/logo_transp.png",
-          width: 40.w,
-          height: 40.h,
-        ),
+      child: Icon(
+        CupertinoIcons.photo,
+        color: Colors.grey,
+        size: 25.w,
       ),
+      // child: Center(
+      //   child: Image.asset(
+      //     "assets/images/logo_white.png",
+      //     width: 55.w,
+      //     height: 55.h,
+      //   ),
+      // ),
     );
   }
 }

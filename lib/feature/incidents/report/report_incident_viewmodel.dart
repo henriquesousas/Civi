@@ -10,6 +10,7 @@ import 'package:deehelp/module/auth/domain/entity/authenticated_user.dart';
 import 'package:deehelp/module/incident/domain/entity/incident_local.dart';
 import 'package:deehelp/module/incident/domain/enum/incident_status.dart';
 import 'package:deehelp/module/incident/domain/enum/type_alert.dart';
+import 'package:deehelp/module/incident/domain/product_already_exist_exception%20copy.dart';
 import 'package:deehelp/module/incident/domain/product_not_found_exception.dart';
 import 'package:deehelp/module/incident/domain/product_unavailable_exception.dart';
 import 'package:deehelp/module/incident/domain/usecase/add/add_incident_dto.dart';
@@ -212,7 +213,7 @@ class ReportIncidentViewmodel extends StateNotifier<AddIncidentState> {
       },
       onError: (error) {
         if (error is ProductNotFoundException ||
-            error is ProductNotFoundException ||
+            error is ProductAlreadyExistException ||
             error is ProductUnavailableException) {
           state = state.copyWith(isLoading: false);
           _ref.read(reportIncidentEventProvider.notifier).state =

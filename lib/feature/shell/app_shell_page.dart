@@ -6,6 +6,7 @@ import 'package:deehelp/core/services/network/network_info_provider.dart';
 import 'package:deehelp/core/services/network/netwotk_alert_controller.dart';
 import 'package:deehelp/core/theme/export_theme.dart';
 import 'package:deehelp/core/ui/styles/export_style.dart';
+import 'package:deehelp/feature/auth/presentation/auth_router.dart';
 import 'package:deehelp/feature/home/v2/widgets/waze_alert.dart';
 import 'package:deehelp/feature/items/list/item_list_page.dart';
 import 'package:deehelp/feature/mapa/mapa_page.dart';
@@ -15,6 +16,7 @@ import 'package:deehelp/module/item/di/item_viewmodel_provider.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:go_router/go_router.dart';
 
 class AppShellPage extends ConsumerStatefulWidget {
   const AppShellPage({super.key});
@@ -42,39 +44,50 @@ class _AppShellPageState extends ConsumerState<AppShellPage> {
   Widget build(BuildContext context) {
     return Stack(
       children: [
-        Scaffold(
-          body: IndexedStack(
-            index: index,
-            children: _pages,
-          ),
-          bottomNavigationBar: _BottomNavBar(
-            currentIndex: index,
-            onChanged: (i) {
-              setState(
-                () => index = i,
-              );
+        SafeArea(
+          child: Scaffold(
+            body: IndexedStack(
+              index: index,
+              children: _pages,
+            ),
+            bottomNavigationBar: _BottomNavBar(
+              currentIndex: index,
+              onChanged: (i) {
+                setState(
+                  () {
+                    if (i == 1) {
+                      final userId = ref.read(authenticatedUserProvider)?.id;
+                      if (userId == null) {
+                        context.push(AuthRouter.path);
+                        return;
+                      }
+                    }
+                    index = i;
+                  },
+                );
 
-              // ✅ quando clicar em "Meus itens"
-              if (i == 1) {
-                final userId = ref.read(authenticatedUserProvider)?.id;
-                if (userId == null) {
-                  ref.read(itemListViewmodelProvider.notifier).clear();
-                  _itemsLoadedOnce = false;
-                  return;
+                // ✅ quando clicar em "Meus itens"
+                if (i == 1) {
+                  final userId = ref.read(authenticatedUserProvider)?.id;
+                  if (userId == null) {
+                    ref.read(itemListViewmodelProvider.notifier).clear();
+                    _itemsLoadedOnce = false;
+                    return;
+                  }
                 }
-              }
 
-              if (i == 1 && !_itemsLoadedOnce) {
-                final userId = ref.read(authenticatedUserProvider)?.id;
-                if (userId == null) {
-                  return;
+                if (i == 1 && !_itemsLoadedOnce) {
+                  final userId = ref.read(authenticatedUserProvider)?.id;
+                  if (userId == null) {
+                    return;
+                  }
+                  _itemsLoadedOnce = true;
+                  ref
+                      .read(itemListViewmodelProvider.notifier)
+                      .getProducts(userId);
                 }
-                _itemsLoadedOnce = true;
-                ref
-                    .read(itemListViewmodelProvider.notifier)
-                    .getProducts(userId);
-              }
-            },
+              },
+            ),
           ),
         ),
         SafeArea(

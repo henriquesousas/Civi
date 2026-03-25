@@ -126,18 +126,18 @@ class _FaqPageState extends State<FaqPage> {
             ],
           ],
           const SizedBox(height: SpacingSize.md),
-          FaqSupportCard(
-            onContact: () {
-              ScaffoldMessenger.of(context).showSnackBar(
-                const SnackBar(content: Text('Abrir suporte (fake)')),
-              );
-            },
-            onSuggest: () {
-              ScaffoldMessenger.of(context).showSnackBar(
-                const SnackBar(content: Text('Enviar sugestão (fake)')),
-              );
-            },
-          ),
+          // FaqSupportCard(
+          //   onContact: () {
+          //     ScaffoldMessenger.of(context).showSnackBar(
+          //       const SnackBar(content: Text('Abrir suporte (fake)')),
+          //     );
+          //   },
+          //   onSuggest: () {
+          //     ScaffoldMessenger.of(context).showSnackBar(
+          //       const SnackBar(content: Text('Enviar sugestão (fake)')),
+          //     );
+          //   },
+          // ),
         ],
       ),
     );
@@ -227,28 +227,28 @@ class _FaqPageState extends State<FaqPage> {
           ),
         ],
       ),
-      const FaqSection(
-        title: 'Mapa & filtros',
-        accentColor: Color(0xFFFB8C00),
-        items: [
-          FaqItem(
-            question: 'O que significa “Raio local personalizado”?',
-            answer:
-                'Você define uma distância (ex.: 1 km, 2 km) e o mapa mostra apenas ocorrências dentro dessa área.',
-          ),
-          FaqItem(
-            question: 'O que é “Filtrar por região visível”?',
-            answer:
-                'Mostra ocorrências com base na área que está visível no mapa. '
-                'Ao dar zoom e arrastar, você altera a região de busca.',
-          ),
-          FaqItem(
-            question: 'Por que alguns pins mostram placa e outros um ícone?',
-            answer:
-                'Para veículos, o pin mostra a placa. Para celular, exibimos um ícone por privacidade e clareza visual.',
-          ),
-        ],
-      ),
+      // const FaqSection(
+      //   title: 'Mapa & filtros',
+      //   accentColor: Color(0xFFFB8C00),
+      //   items: [
+      //     FaqItem(
+      //       question: 'O que significa “Raio local personalizado”?',
+      //       answer:
+      //           'Você define uma distância (ex.: 1 km, 2 km) e o mapa mostra apenas ocorrências dentro dessa área.',
+      //     ),
+      //     FaqItem(
+      //       question: 'O que é “Filtrar por região visível”?',
+      //       answer:
+      //           'Mostra ocorrências com base na área que está visível no mapa. '
+      //           'Ao dar zoom e arrastar, você altera a região de busca.',
+      //     ),
+      //     FaqItem(
+      //       question: 'Por que alguns pins mostram placa e outros um ícone?',
+      //       answer:
+      //           'Para veículos, o pin mostra a placa. Para celular, exibimos um ícone por privacidade e clareza visual.',
+      //     ),
+      //   ],
+      // ),
       const FaqSection(
         title: 'Privacidade & segurança',
         accentColor: Color(0xFF5F85FF),

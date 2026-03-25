@@ -282,7 +282,7 @@ class HorizontalIncidentCard extends StatelessWidget {
                 children: [
                   if (isPlatformGenerated) ...[
                     Image.asset(
-                      "assets/images/logo_mini.png",
+                      "assets/images/logo_white.png",
                       width: IconSizes.md,
                     )
                   ] else ...[

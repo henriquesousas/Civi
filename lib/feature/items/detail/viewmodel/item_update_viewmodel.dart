@@ -202,7 +202,7 @@ class ItemUpdateViewmodel extends StateNotifier<ProductUpdateState> {
           error,
           (message, extra) {
             return state.copyWith(
-              errorMessage: message,
+              // errorMessage: message,
               errorUploadOrDeleteImage: message,
               addingPhoto: false,
             );

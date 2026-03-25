@@ -59,8 +59,8 @@ class TranspToolbar extends StatelessWidget {
                 InkWell(
                   onTap: onIncidentsTap,
                   borderRadius: BorderRadius.circular(12),
-                  child: Row(
-                    children: const [
+                  child: const Row(
+                    children: [
                       Icon(
                         Icons.layers_outlined,
                         size: 18,

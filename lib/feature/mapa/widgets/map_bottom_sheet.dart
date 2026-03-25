@@ -358,11 +358,11 @@ class _MapLayersBottomSheet2State extends State<MapLayersBottomSheet2>
                           height: IconSizes.xl,
                           decoration: BoxDecoration(
                             // color: const Color(0xFFF3F4F6),
-                            color: Colors.white.withValues(alpha: 0.04),
+                            color: Colors.white.withValues(alpha: 0.1),
                             borderRadius: BorderRadius.circular(99),
                             border: Border.all(
                               // color: const Color(0xFFE5E7EB),
-                              color: context.outlineVariantColor,
+                              color: Colors.grey.withValues(alpha: 0.6),
                             ),
                           ),
                           child: AnimatedRotation(

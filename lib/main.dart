@@ -26,15 +26,6 @@ void main() async {
     anonKey: "sb_publishable_N5D6VJ2Qm832Onz-NvFGfA_bO1NohOE",
   );
 
-  await CloudFlareR2.init(
-    accountId: EnvConfig.r2AccountId,
-    accessKeyId: EnvConfig.r2AccessKeyId,
-    secretAccessKey: EnvConfig.r2SecretAccessKeyId,
-  );
-
-  MapboxOptions.setAccessToken(
-      "pk.eyJ1IjoicHNvYXJlczI2MDEiLCJhIjoiY21pbnlkanJuMjBlNzNlcHc5NDBoeWJvdCJ9.-9sIXSToKx-OfzGflYEiYw");
-
   SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(
     statusBarColor: Colors.transparent,
   ));
@@ -44,6 +35,10 @@ void main() async {
     // se quiser permitir virar de cabeça pra baixo:
     // DeviceOrientation.portraitDown,
   ]);
+
+  MapboxOptions.setAccessToken(
+    "pk.eyJ1IjoicHNvYXJlczI2MDEiLCJhIjoiY21uNHl4cmhwMDVrazJwb2xncGt1cnQ0eSJ9.Hfdr7a3Eefg4cXj_u4pYag",
+  );
 
   runApp(
     const ProviderScope(child: MainApp()),
@@ -85,7 +80,7 @@ class _MainAppState extends ConsumerState<MainApp> {
             // final isLandscape = mq.orientation == Orientation.landscape;
 
             final router = ref.watch(goRouterProvider);
-            final themeData = ref.watch(themeDataProvider);
+            // final themeData = ref.watch(themeDataProvider);
             // WidgetsBinding.instance.addPostFrameCallback((_) {
             //   ref.read(themeProvider.notifier).loadSavedTheme();
             // });

@@ -38,10 +38,14 @@ class _ItemPhotoUpdateState extends ConsumerState<ItemPhotoUpdate> {
       provider,
       (oldState, currentState) {
         if (currentState.errorUploadOrDeleteImage != null) {
-          context.showSnackBar(
-            'Desculpe tivemos um problema, tente novamente mais tarde!!!',
+          context.showTopNotice(
+            "Desculpe tivemos um problema para adicionar a imagem, tente novamente mais tarde!!!",
             type: DialogType.error,
           );
+          // context.showSnackBar(
+          //   'Desculpe tivemos um problema, tente novamente mais tarde!!!',
+          //   type: DialogType.error,
+          // );
         }
       },
     );

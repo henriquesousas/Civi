@@ -1,13 +1,11 @@
 import 'dart:async';
 
 import 'package:deehelp/app_startup_provider.dart';
-import 'package:deehelp/civi_search_page.dart';
 import 'package:deehelp/core/router/slide_transition_page.dart';
 import 'package:deehelp/feature/about/about_router.dart';
 import 'package:deehelp/feature/auth/presentation/export_auth.dart';
 import 'package:deehelp/feature/faq/export_faq.dart';
 import 'package:deehelp/feature/home/export_home.dart';
-import 'package:deehelp/feature/home/v2/teste_home.dart';
 import 'package:deehelp/feature/incidents/incident_router.dart';
 import 'package:deehelp/feature/items/items_router.dart';
 import 'package:deehelp/feature/location/export_location.dart';
@@ -17,11 +15,8 @@ import 'package:deehelp/feature/shell/app_sheel_router.dart';
 import 'package:deehelp/feature/sos/sos_router.dart';
 import 'package:deehelp/feature/splash/splash_router.dart';
 import 'package:deehelp/core/router/router_refresh_notifier.dart';
-import 'package:deehelp/imei_info_page.dart';
-import 'package:deehelp/map_page2.dart';
-import 'package:deehelp/map_page_teste.dart';
 import 'package:deehelp/teste_detail_page.dart';
-import 'package:deehelp/teste_detail_shimmer.dart';
+import 'package:deehelp/teste_profile.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
@@ -64,8 +59,8 @@ var goRouterProvider = Provider<GoRouter>(
         // return SplashRouter.path;
         switch (appStatus) {
           case AppStatus.loading:
-            return SplashRouter.path;
-          // return AppSheelRouter.path;
+            // return SplashRouter.path;
+            return AppSheelRouter.path;
 
           case AppStatus.unauthenticated:
             return isPublicRoute ? AppSheelRouter.path : null;
@@ -104,6 +99,7 @@ var goRouterProvider = Provider<GoRouter>(
 
             // child: EventsScreen(),
             child: TesteDetailPage(),
+            // child: ItemDetailsPage(item: ,),
             // child: ImeiInfoPage(),
           ),
         ),

@@ -4,6 +4,7 @@ import 'package:deehelp/module/auth/domain/services/google_credentials.dart';
 import 'package:deehelp/module/auth/domain/services/google_auth_service.dart';
 import 'package:deehelp/core/resources.dart';
 import 'package:deehelp/core/utils/result.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 
 class DefaultGoogleAuthService implements GoogleAuthService {
@@ -14,9 +15,8 @@ class DefaultGoogleAuthService implements GoogleAuthService {
   static Future<void> initSignIn() async {
     if (!isInitialize) {
       await _googleSignIn.initialize(
-        serverClientId:
-            '673259838307-a2tmdcc0oil4tmohe6r5gbcfssiklur8.apps.googleusercontent.com',
-      );
+          serverClientId:
+              "673259838307-a2tmdcc0oil4tmohe6r5gbcfssiklur8.apps.googleusercontent.com");
     }
     isInitialize = true;
   }
@@ -25,15 +25,19 @@ class DefaultGoogleAuthService implements GoogleAuthService {
   Future<Result<GoogleCredentials>> auth() async {
     try {
       initSignIn();
+      debugPrint("Chamou o goosignIn authenticated");
       final googleAccount = await _googleSignIn.authenticate();
+      debugPrint(
+          "Resposta do authenticate do google ${googleAccount.toString()}");
       final idToken = googleAccount.authentication.idToken;
+      debugPrint("IdToken : $idToken");
       final authorizationClient = googleAccount.authorizationClient;
-
+      debugPrint("authorizationClient: $authorizationClient");
       final scopes = ['email', 'profile'];
       GoogleSignInClientAuthorization? authorization =
           await authorizationClient.authorizationForScopes(scopes);
       final accessToken = authorization?.accessToken;
-
+      debugPrint("accessToken: $accessToken");
       if (accessToken == null) {
         final authorization2 =
             await authorizationClient.authorizationForScopes(scopes);
@@ -48,8 +52,14 @@ class DefaultGoogleAuthService implements GoogleAuthService {
         idToken: idToken!,
         accessToken: accessToken!,
       );
+      debugPrint("credentials: ${credentials.toString()}");
       return Result.success(credentials);
-    } on GoogleSignInException catch (e, _) {
+    } on GoogleSignInException catch (e, s) {
+      debugPrint(
+          "DefaultGoogleAuthService login com google error => ${e.description}");
+      debugPrint(
+          "DefaultGoogleAuthService login com google error => ${e.details.toString()}");
+      debugPrintStack(stackTrace: s);
       final operationStatus = e.code == GoogleSignInExceptionCode.canceled
           ? OperationStatus.canceled
           : OperationStatus.failure;

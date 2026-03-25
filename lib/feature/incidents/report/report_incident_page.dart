@@ -180,7 +180,7 @@ class _AddIncidentPageState extends ConsumerState<ReportIncidentPage>
 
     return Scaffold(
       appBar: DefaultAppBar(
-        title: 'Reportar incidente',
+        title: 'Criar alerta',
         showBackButton: true,
         press: () => context.pop(),
       ),

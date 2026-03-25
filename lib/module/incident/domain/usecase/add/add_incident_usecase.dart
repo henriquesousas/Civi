@@ -6,6 +6,7 @@ import 'package:deehelp/core/utils/id_utils.dart';
 import 'package:deehelp/core/utils/result.dart';
 import 'package:deehelp/module/incident/domain/entity/incident.dart';
 import 'package:deehelp/module/incident/domain/incident_repository.dart';
+import 'package:deehelp/module/incident/domain/product_already_exist_exception%20copy.dart';
 import 'package:deehelp/module/incident/domain/product_not_found_exception.dart';
 import 'package:deehelp/module/incident/domain/product_unavailable_exception.dart';
 import 'package:deehelp/module/incident/domain/usecase/add/add_incident_dto.dart';
@@ -38,7 +39,7 @@ class AddIncidentUsecase extends UseCase<AddIncidentDto, String> {
         await _repository.getIncidentByProductId(dto.product.id.value);
 
     if (incident != null) {
-      return Result.failure(const ProductNotFoundException());
+      return Result.failure(const ProductAlreadyExistException());
     }
 
     //Valida se esta ativo

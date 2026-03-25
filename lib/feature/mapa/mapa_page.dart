@@ -6,7 +6,9 @@ import 'package:deehelp/core/extension/exports_extension.dart';
 import 'package:deehelp/core/providers/supabase_provider.dart';
 import 'package:deehelp/core/services/network/network_info_provider.dart';
 import 'package:deehelp/core/services/network/netwotk_alert_controller.dart';
+import 'package:deehelp/core/services/permissions/location/domain/services/geolocator_position_gateway.dart';
 import 'package:deehelp/core/services/permissions/location/export_location.dart';
+import 'package:deehelp/core/services/permissions/location/external/default_geolocator_position_gateway.dart';
 import 'package:deehelp/core/theme/app_colors.dart';
 import 'package:deehelp/core/ui/styles/export_style.dart';
 import 'package:deehelp/core/utils/enum_utils.dart';
@@ -64,6 +66,7 @@ class _MapaPageState extends ConsumerState<MapaPage> {
   final Point _myLocation = Point(
     coordinates: Position(-46.7917, -23.5329),
   );
+  final GeolocatorPositionGateway position = DefaultGeolocatorPositionGateway();
 
   late final NetworkListener _networkListener;
   NetworkReconnectListener? _networkReconnectListener;
@@ -179,8 +182,16 @@ class _MapaPageState extends ConsumerState<MapaPage> {
 
   void _loadData() {
     WidgetsBinding.instance.addPostFrameCallback(
-      (_) {
-        final currenLocation = ref.watch(currentLocationProvider);
+      (_) async {
+        //Pega a posicao do GPS
+        final currentPosition =
+            await position.getPosition(localeIdentifier: 'pt_BR');
+
+        if (currentPosition != null) {
+          ref.read(currentLocationProvider.notifier).state = currentPosition;
+        }
+
+        // currenLocation = ref.watch(currentLocationProvider);
         //  final region = '${currenLocation?.city} • ${currenLocation?.state}';
         ref
             .read(homeViewmodelProvider.notifier)
@@ -223,18 +234,67 @@ class _MapaPageState extends ConsumerState<MapaPage> {
       body: Stack(
         children: [
           //Mapa
+          // MapWidget(
+          //   styleUri: MapboxStyles.STANDARD,
+          //   onMapCreated: (_) {
+          //     debugPrint('MAP CREATED');
+          //   },
+          //   onStyleLoadedListener: (_) {
+          //     debugPrint('STYLE LOADED');
+          //   },
+          //   onMapLoadedListener: (_) {
+          //     debugPrint('MAP LOADED');
+          //   },
+          //   onMapLoadErrorListener: (event) {
+          //     debugPrint('MAP ERROR: ${event.type} - ${event.message}');
+          //   },
+          //   onResourceRequestListener: (event) {
+          //     debugPrint(
+          //         'RESOURCE: ${event.request.kind} - ${event.request.url}');
+          //   },
+          // ),
           MapWidget(
             key: const ValueKey('mapWidget'),
-            styleUri: MapboxStyles.DARK,
+            styleUri: MapboxStyles.STANDARD,
+            // styleUri: MapboxStyles.MAPBOX_STREETS,
+            androidHostingMode: AndroidPlatformViewHostingMode.HC,
             cameraOptions: CameraOptions(
               center: _myLocation,
               zoom: _initialZoom,
               pitch: 65,
               bearing: -30,
             ),
+            // textureView: true,
+            onMapCreated: (mapboxMap) async => _onMapCreated(mapboxMap, []),
+            onStyleLoadedListener: (styleLoadedEventData) async {
+              await _mapboxMap!.style.setStyleImportConfigProperty(
+                'basemap',
+                'lightPreset',
+                // 'day',
+                'night',
+              );
 
-            textureView: true,
-            onMapCreated: (mapboxMap) => _onMapCreated(mapboxMap, []),
+              await _mapboxMap!.style.setStyleImportConfigProperty(
+                'basemap',
+                'showPointOfInterestLabels',
+                false,
+              );
+
+              await _mapboxMap!.style.setStyleImportConfigProperty(
+                'basemap',
+                'showTransitLabels',
+                true,
+              );
+
+              await _mapboxMap!.style.setStyleImportConfigProperty(
+                'basemap',
+                'showPedestrianRoads',
+                true,
+              );
+            },
+            onMapLoadErrorListener: (event) {
+              debugPrint('MAP LOAD ERROR: ${event.type} - ${event.message}');
+            },
             // onMapCreated: _onMapCreated(),
           ),
 
@@ -273,11 +333,6 @@ class _MapaPageState extends ConsumerState<MapaPage> {
             child: Column(
               spacing: 10,
               children: [
-                // MapSideActionButton(
-                //   assetPath: "assets/images/settingsv2.png",
-                //   // icon: Icons.settings_outlined,
-                //   onTap: () {},
-                // ),
                 FloatingActionButton(
                   mini: false,
                   // backgroundColor: context.primaryColor,
@@ -288,22 +343,6 @@ class _MapaPageState extends ConsumerState<MapaPage> {
                     borderRadius: BorderRadius.circular(999),
                   ),
                   onPressed: () => _goToMyLocation(currenLocation),
-                  // onPressed: () {
-                  //   debugPrint('Lat ${currenLocation!.latitude}');
-                  //   debugPrint('Long ${currenLocation!.longitude}');
-
-                  //   final dis = DistanceUtils.formatDistance(
-                  //     startLatitude: -23.4928262,
-                  //     startLongitude: -46.8055845,
-
-                  //     // startLatitude: -23.492540969444104,
-                  //     // startLongitude: -46.80559304905333,
-                  //     endLatitude: -23.4927413,
-                  //     endLongitude: -46.8055424,
-                  //   );
-
-                  //   debugPrint(dis);
-                  // },
                   child: const Icon(
                     Icons.navigation,
                     color: Colors.white,
@@ -319,7 +358,7 @@ class _MapaPageState extends ConsumerState<MapaPage> {
             data: (data) {
               if (data.value.isEmpty) {
                 // return const Expanded(child: EmptyIncidentsState());
-                return SizedBox.shrink();
+                return const SizedBox.shrink();
               }
 
               return AnimatedPositioned(
@@ -349,57 +388,24 @@ class _MapaPageState extends ConsumerState<MapaPage> {
               child: AnimatedOpacity(
                 duration: const Duration(milliseconds: 250),
                 opacity: _showIncidentCards ? 0 : 1,
-                child: Positioned(
-                  child: MapLayersBottomSheet2(
-                    city: currenLocation?.city ?? "Buscando ocorrências...",
-                    address: currenLocation == null
-                        ? "Aguarde..."
-                        : '${currenLocation?.address}',
-                    initiallyExpanded: _showIncidentCards,
-                    onTapHeader: (opened) {
-                      _isCardOpened = opened;
-                      if (opened) {
-                        setState(() {
-                          _gpsHeight = GPSHeight.min;
-                        });
-                      } else {
-                        setState(() {
-                          _gpsHeight = GPSHeight.normal;
-                        });
-                      }
-                    },
-                  ),
-                  // child: ExpandableIncidentCard(
-                  //   startOpened: _showIncidentCards,
-                  //   title: 'Osasco - SP',
-                  //   subtitle:
-                  //       'Trabessa Francisco Alves da Silva,2, Baronesa, Osasco',
-                  //   onViewIncidents: () {
-                  //     debugPrint('Ver incidentes');
-                  //   },
-                  //   onRegisterIncident: () {
-                  //     debugPrint('Registrar incidente');
-                  //     showModalBottomSheet(
-                  //       context: context,
-                  //       backgroundColor: Colors.transparent,
-                  //       barrierColor: Colors.black54,
-                  //       isScrollControlled: true,
-                  //       builder: (_) => const MapLayersBottomSheet(),
-                  //     );
-                  //   },
-                  //   onExpand: (opened) {
-                  //     _isCardOpened = opened;
-                  //     if (opened) {
-                  //       setState(() {
-                  //         _gpsHeight = GPSHeight.min;
-                  //       });
-                  //     } else {
-                  //       setState(() {
-                  //         _gpsHeight = GPSHeight.normal;
-                  //       });
-                  //     }
-                  //   },
-                  // ),
+                child: MapLayersBottomSheet2(
+                  city: currenLocation?.city ?? "Buscando ocorrências...",
+                  address: currenLocation == null
+                      ? "Aguarde..."
+                      : '${currenLocation?.address}',
+                  initiallyExpanded: _showIncidentCards,
+                  onTapHeader: (opened) {
+                    _isCardOpened = opened;
+                    if (opened) {
+                      setState(() {
+                        _gpsHeight = GPSHeight.min;
+                      });
+                    } else {
+                      setState(() {
+                        _gpsHeight = GPSHeight.normal;
+                      });
+                    }
+                  },
                 ),
               ),
             ),
@@ -562,82 +568,39 @@ class _MapaPageState extends ConsumerState<MapaPage> {
         CompassSettings(
           enabled: true,
           // marginTop: context.topPadding * 3,
-          marginTop: 90.h,
+          marginTop: 100.h,
           marginRight: 16,
         ),
       );
     }
 
-    await _mapboxMap!.style.setStyleImportConfigProperty(
-      'basemap',
-      'lightPreset',
-      'day',
-    );
-
     // opcionais, para deixar o mapa mais limpo
-    await _mapboxMap!.style.setStyleImportConfigProperty(
-      'basemap',
-      'showPointOfInterestLabels',
-      false,
-    );
+    // await _mapboxMap!.style.setStyleImportConfigProperty(
+    //   'basemap',
+    //   'lightPreset',
+    //   'day',
+    // );
 
-    await _mapboxMap!.style.setStyleImportConfigProperty(
-      'basemap',
-      'showTransitLabels',
-      true,
-    );
+    // await _mapboxMap!.style.setStyleImportConfigProperty(
+    //   'basemap',
+    //   'showPointOfInterestLabels',
+    //   false,
+    // );
 
-    await _mapboxMap!.style.setStyleImportConfigProperty(
-      'basemap',
-      'showPedestrianRoads',
-      true,
-    );
+    // await _mapboxMap!.style.setStyleImportConfigProperty(
+    //   'basemap',
+    //   'showTransitLabels',
+    //   true,
+    // );
 
-    // _pointManager =
-    //     await _mapboxMap!.annotations.createPointAnnotationManager();
+    // await _mapboxMap!.style.setStyleImportConfigProperty(
+    //   'basemap',
+    //   'showPedestrianRoads',
+    //   true,
+    // );
 
     _showScallableZoom(false);
     _onMarkeClick(incidents);
-
-    // final incidents = FakeIncident.items();
-    // _markers.clear();
-    // for (final incident in incidents) {
-    //   // final pinImage = await createPinWithText(
-    //   //   icon: incident.image,
-    //   //   label: 'DND0171',
-    //   //   isSelected: false,
-    //   // );
-    //   // final pinImage = await createPinWithIconV4(
-    //   //   icon: incident.image,
-    //   //   badgeText: 'DND0171',
-    //   //   isSelected: false,
-    //   // );
-
-    //   //car_rouberry_v4
-
-    //   // final pinImage = await createPinWithAsset(incident.imageAssets);
-
-    //   if (incident.local?.longitude != null &&
-    //       incident.local?.latitue != null) {
-    //     final pinImage =
-    //         await createPinWithAsset("assets/images/motorcycle_pin_v9.png");
-
-    //     final marker = await _pointManager!.create(
-    //       PointAnnotationOptions(
-    //         geometry: Point(
-    //           coordinates: Position(
-    //             incident.local!.longitude!,
-    //             incident.local!.latitue!,
-    //           ),
-    //         ),
-    //         image: pinImage,
-    //         iconSize: 1.2,
-    //         iconAnchor: IconAnchor.BOTTOM,
-    //       ),
-    //     );
-    //     _markers.add(marker);
-    //   }
-    // }
   }
 
   Future<void> _createMarker(List<IncidentOutput> incidents) async {
@@ -1086,7 +1049,7 @@ class _MapaPageState extends ConsumerState<MapaPage> {
 
   Future<Uint8List> createPinWithAsset(String assetPath) async {
     debugPrint(assetPath);
-    const double size = 70;
+    double size = 60.0.w;
     const double strokeWidth = 4;
     const double radius = 90;
 
@@ -1107,7 +1070,7 @@ class _MapaPageState extends ConsumerState<MapaPage> {
       ..isAntiAlias = true;
 
     final fillRRect = RRect.fromRectAndRadius(
-      const Rect.fromLTWH(0, 0, size, size),
+      Rect.fromLTWH(0, 0, size, size),
       const Radius.circular(radius),
     );
 
@@ -1247,7 +1210,7 @@ class _MapaPageState extends ConsumerState<MapaPage> {
     // }
 
     if (_activeMarker != null) {
-      _activeMarker!.iconSize = 1.8;
+      _activeMarker!.iconSize = 1.5;
       await _pointManager?.update(_activeMarker!);
     }
   }

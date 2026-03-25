@@ -38,14 +38,14 @@ class LogoBlock extends StatelessWidget {
           ),
           alignment: Alignment.center,
           child: Image.asset(
-            "assets/images/logo_transp.png",
+            "assets/images/logo_white.png",
             width: ImageSize.xl,
             fit: BoxFit.contain,
           ),
         ),
         const SizedBox(height: 5),
         Text(
-          'Civi App',
+          'Civi',
           textAlign: TextAlign.center,
           style: context.appText.headerxl.copyWith(
             color: Colors.white,
