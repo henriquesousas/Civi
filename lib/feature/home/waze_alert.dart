@@ -333,7 +333,7 @@ class _AnimatedTopToastCardState extends State<AnimatedTopToastCard>
     with SingleTickerProviderStateMixin {
   late final AnimationController _c;
   late final Animation<Offset> _slideIn;
-  late final Animation<Offset> _slideOut;
+  // late final Animation<Offset> _slideOut;
   late final Animation<double> _fade;
 
   Timer? _ttlTimer;
@@ -352,10 +352,10 @@ class _AnimatedTopToastCardState extends State<AnimatedTopToastCard>
     ).animate(CurvedAnimation(parent: _c, curve: Curves.easeOutCubic));
 
     // Saída: do lugar (0) para cima (-y)
-    _slideOut = Tween<Offset>(
-      begin: Offset.zero,
-      end: Offset(0, -widget.slideAmount),
-    ).animate(CurvedAnimation(parent: _c, curve: Curves.easeInCubic));
+    // _slideOut = Tween<Offset>(
+    //   begin: Offset.zero,
+    //   end: Offset(0, -widget.slideAmount),
+    // ).animate(CurvedAnimation(parent: _c, curve: Curves.easeInCubic));
 
     _fade = Tween<double>(begin: 0, end: 1).animate(
       CurvedAnimation(parent: _c, curve: Curves.easeOut),

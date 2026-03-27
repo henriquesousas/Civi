@@ -1,12 +1,8 @@
 import 'package:deehelp/core/theme/export_theme.dart';
 import 'package:deehelp/core/theme/size/spacing_size.dart';
-import 'package:deehelp/core/ui/widgets/buttons/button_outline.dart';
-import 'package:deehelp/core/ui/widgets/buttons/buttons_export.dart';
 import 'package:deehelp/feature/items/register/presentation/widgets/photo/card_photo.dart';
 import 'package:deehelp/feature/items/register/presentation/widgets/section_title.dart';
 import 'package:deehelp/feature/items/register/presentation/widgets/wizard_step.dart';
-import 'package:deehelp/module/auth/external/di/authenticated_user_provider.dart';
-import 'package:deehelp/module/item/di/item_viewmodel_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 

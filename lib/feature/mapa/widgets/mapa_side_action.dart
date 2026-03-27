@@ -1,4 +1,3 @@
-import 'package:deehelp/core/theme/export_theme.dart';
 import 'package:flutter/material.dart';
 
 class MapSideActionButton extends StatelessWidget {
@@ -17,7 +16,7 @@ class MapSideActionButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final double iconSize = size * 0.5;
+    // final double iconSize = size * 0.5;
 
     return Material(
       color: Colors.transparent,

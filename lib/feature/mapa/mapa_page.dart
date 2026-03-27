@@ -14,7 +14,7 @@ import 'package:deehelp/core/ui/styles/export_style.dart';
 import 'package:deehelp/core/utils/enum_utils.dart';
 import 'package:deehelp/core/utils/url_launcher_utils.dart';
 import 'package:deehelp/feature/home/home_viewmodel_provider.dart';
-import 'package:deehelp/feature/home/v2/widgets/waze_alert.dart';
+import 'package:deehelp/feature/home/waze_alert.dart';
 import 'package:deehelp/feature/incidents/incident_router.dart';
 import 'package:deehelp/feature/items/item_type.dart';
 import 'package:deehelp/feature/mapa/widgets/horizontal_incident_card.dart';

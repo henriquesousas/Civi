@@ -35,7 +35,7 @@ class ReportIncidentSuccessfullyPage extends StatelessWidget {
     final backgroundColor =
         isDark ? const Color(0xFF050816) : AppColors.primaryColor;
 
-    final secondaryText = Colors.white.withValues(alpha: 0.82);
+    // final secondaryText = Colors.white.withValues(alpha: 0.82);
 
     return Scaffold(
       // backgroundColor: context.primaryColor,

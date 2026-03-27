@@ -10,7 +10,6 @@ import 'widgets/faq_card.dart';
 import 'widgets/faq_header_card.dart';
 import 'widgets/faq_search_field.dart';
 import 'widgets/faq_section_title.dart';
-import 'widgets/faq_support_card.dart';
 import 'widgets/faq_tile.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';

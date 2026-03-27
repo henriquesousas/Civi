@@ -1,8 +1,6 @@
-import 'package:cloudflare_r2/cloudflare_r2.dart';
 import 'package:deehelp/app_name.dart';
 import 'package:deehelp/core/env_config.dart';
 import 'package:deehelp/core/theme/app_theme.dart';
-import 'package:deehelp/core/theme/theme_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';

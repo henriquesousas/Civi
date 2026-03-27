@@ -1,5 +1,3 @@
-import 'package:deehelp/core/extension/color_extension.dart';
-import 'package:deehelp/core/theme/export_theme.dart';
 import 'package:flutter/material.dart';
 
 class FaqCard extends StatelessWidget {

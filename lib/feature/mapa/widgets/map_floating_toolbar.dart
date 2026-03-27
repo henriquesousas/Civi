@@ -1,6 +1,5 @@
 import 'dart:ui';
 import 'package:deehelp/core/extension/size_extension.dart';
-import 'package:deehelp/novo/alert_sheet2.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -79,51 +78,11 @@ class MapTopToolbar extends StatelessWidget {
                     _ToolbarButton(
                       // icon: CupertinoIcons.hand_thumbsup,
                       icon: Icons.handshake_rounded,
-                      // onTap: () async => showSupportCiviBottomSheet(
-                      //   context,
-                      //   pixKey: "123",
-                      // ),
-                      onTap: () {
-                        AlertTypeSelectorBottomSheet.show(
-                          context,
-                          onSelect: (type) async {
-                            Navigator.pop(context);
+                      onTap: () async => showSupportCiviBottomSheet(
+                        context,
+                        pixKey: "123",
+                      ),
 
-                            if (type == AlertFlowType.profile) {
-                              // seguir fluxo já existente de alerta do perfil
-                              return;
-                            }
-
-                            await Future.delayed(
-                                const Duration(milliseconds: 180));
-
-                            if (!context.mounted) return;
-
-                            CommunityAlertBottomSheet.show(
-                              context,
-                              onSelect: (communityType) {
-                                Navigator.pop(context);
-
-                                switch (communityType) {
-                                  case CommunityAlertType.suspiciousActivity:
-                                    // abrir form
-                                    break;
-                                  case CommunityAlertType.flood:
-                                    break;
-                                  case CommunityAlertType.powerOutage:
-                                    break;
-                                  case CommunityAlertType.noiseComplaint:
-                                    break;
-                                  case CommunityAlertType.blockedRoad:
-                                    break;
-                                  case CommunityAlertType.localRisk:
-                                    break;
-                                }
-                              },
-                            );
-                          },
-                        );
-                      },
                       isDark: isDark,
                     ),
                     const SizedBox(width: 16),

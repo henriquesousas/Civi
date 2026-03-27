@@ -7,7 +7,7 @@ import 'package:deehelp/core/services/network/netwotk_alert_controller.dart';
 import 'package:deehelp/core/theme/export_theme.dart';
 import 'package:deehelp/core/ui/styles/export_style.dart';
 import 'package:deehelp/feature/auth/presentation/auth_router.dart';
-import 'package:deehelp/feature/home/v2/widgets/waze_alert.dart';
+import 'package:deehelp/feature/home/waze_alert.dart';
 import 'package:deehelp/feature/items/list/item_list_page.dart';
 import 'package:deehelp/feature/mapa/mapa_page.dart';
 import 'package:deehelp/feature/profile/profile_page.dart';

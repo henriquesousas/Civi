@@ -1,11 +1,9 @@
 import 'dart:async';
 
 import 'package:deehelp/app_startup_provider.dart';
-import 'package:deehelp/core/router/slide_transition_page.dart';
 import 'package:deehelp/feature/about/about_router.dart';
 import 'package:deehelp/feature/auth/presentation/export_auth.dart';
 import 'package:deehelp/feature/faq/export_faq.dart';
-import 'package:deehelp/feature/home/export_home.dart';
 import 'package:deehelp/feature/incidents/incident_router.dart';
 import 'package:deehelp/feature/items/items_router.dart';
 import 'package:deehelp/feature/location/export_location.dart';
@@ -15,27 +13,6 @@ import 'package:deehelp/feature/shell/app_sheel_router.dart';
 import 'package:deehelp/feature/sos/sos_router.dart';
 import 'package:deehelp/feature/splash/splash_router.dart';
 import 'package:deehelp/core/router/router_refresh_notifier.dart';
-import 'package:deehelp/novo/flood_alert_page.dart';
-import 'package:deehelp/novo/itens/item_color_step_dark_page.dart';
-import 'package:deehelp/novo/itens/item_color_step_page.dart';
-import 'package:deehelp/novo/itens/item_description_light_page.dart';
-import 'package:deehelp/novo/itens/item_description_page.dart';
-import 'package:deehelp/novo/itens/item_detail_page_light.dart';
-import 'package:deehelp/novo/itens/item_detail_page_light_v2.dart';
-import 'package:deehelp/novo/itens/item_name_step_light_page.dart';
-import 'package:deehelp/novo/itens/item_name_step_page.dart';
-import 'package:deehelp/novo/itens/item_phone_detail_page.dart';
-import 'package:deehelp/novo/itens/item_photo_step_dark_page.dart';
-import 'package:deehelp/novo/itens/item_photo_step_page.dart';
-import 'package:deehelp/novo/itens/item_registered_successfully_dark_page.dart';
-import 'package:deehelp/novo/itens/item_type_select_dark_page.dart';
-import 'package:deehelp/novo/itens/item_type_select_dark_page_v2.dart';
-import 'package:deehelp/novo/itens/item_type_select_light_page.dart';
-import 'package:deehelp/novo/itens/item_type_select_light_page_v2.dart';
-import 'package:deehelp/novo/noise_complaint_page.dart';
-import 'package:deehelp/novo/suspicious_type_page.dart';
-import 'package:deehelp/teste_detail_page.dart';
-import 'package:deehelp/teste_profile.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
@@ -57,7 +34,7 @@ class GoRouterRefreshStream extends ChangeNotifier {
 
 final _publicRoutes = [
   SplashRouter.path,
-  HomeRouter.path,
+  // HomeRouter.path,
   LocationRouter.gpsDisabled,
   LocationRouter.locationDenied,
 ];
@@ -74,7 +51,7 @@ var goRouterProvider = Provider<GoRouter>(
         final appStatus = ref.read(appStartupProvider);
         final currentPath = state.matchedLocation;
         final isPublicRoute = _publicRoutes.contains(currentPath);
-        return '/';
+        // return '/';
         // return SplashRouter.path;
         switch (appStatus) {
           case AppStatus.loading:
@@ -98,7 +75,7 @@ var goRouterProvider = Provider<GoRouter>(
         ...AppSheelRouter.routers,
         ...SplashRouter.routers,
         ...LocationRouter.routers,
-        ...HomeRouter.routers,
+        // ...HomeRouter.routers,
         ...ProfileRouter.routers,
         ...AboutRouter.routers,
         ...FaqPageRouter.routers,
@@ -107,39 +84,39 @@ var goRouterProvider = Provider<GoRouter>(
         ...IncidentRouter.routers,
         ...SOSRouter.routers,
         ...SearchRouter.routers,
-        GoRoute(
-          path: '/',
-          pageBuilder: (context, state) => slideTransitionPage(
-            key: state.pageKey,
-            // child: const MapPage(),
-            // child: const MapPage2(),
-            // child: const MounsHouse(),
-            // child: const CardBottom(),
+        // GoRoute(
+        //   path: '/',
+        //   pageBuilder: (context, state) => slideTransitionPage(
+        //     key: state.pageKey,
+        //     // child: const MapPage(),
+        //     // child: const MapPage2(),
+        //     // child: const MounsHouse(),
+        //     // child: const CardBottom(),
 
-            // child: EventsScreen(),
-            // child: TesteDetailPage(),
-            // child: ItemDetailsPage(item: ,),
-            // child: ImeiInfoPage(),
-            // child: SuspiciousActivityPage(),
-            // child: NoiseComplaintPage(),
-            // child: FloodAlertPage(
-            //   locationLabel: 'Centro Osascos',
-            // ),
-            // child: ItemTypeSelectionPageLightV2(),
-            // child: ItemTypeSelectionPageDarkV2(),
-            // child: ItemNameStepLightPage(
-            //   itemTypeLabel: "Carro",
-            // ),
-            // child: ItemColorStepPage(),
-            // child: ItemDescriptionPageLight(),
-            // child: ItemDetailPageLight(),
-            // child: ItemDetailPageLightV2(),
-            child: ItemPhonePageLight(),
-            // child: ItemPhotoStepPage(),
-            // child: ItemPhotoStepDarkPage(),
-            // child: ItemRegisteredSuccessfullyDarkPage(),
-          ),
-        ),
+        //     // child: EventsScreen(),
+        //     // child: TesteDetailPage(),
+        //     // child: ItemDetailsPage(item: ,),
+        //     // child: ImeiInfoPage(),
+        //     // child: SuspiciousActivityPage(),
+        //     // child: NoiseComplaintPage(),
+        //     // child: FloodAlertPage(
+        //     //   locationLabel: 'Centro Osascos',
+        //     // ),
+        //     // child: ItemTypeSelectionPageLightV2(),
+        //     // child: ItemTypeSelectionPageDarkV2(),
+        //     // child: ItemNameStepLightPage(
+        //     //   itemTypeLabel: "Carro",
+        //     // ),
+        //     // child: ItemColorStepPage(),
+        //     // child: ItemDescriptionPageLight(),
+        //     // child: ItemDetailPageLight(),
+        //     // child: ItemDetailPageLightV2(),
+        //     // child: ItemPhonePageLight(),
+        //     // child: ItemPhotoStepPage(),
+        //     // child: ItemPhotoStepDarkPage(),
+        //     // child: ItemRegisteredSuccessfullyDarkPage(),
+        //   ),
+        // ),
       ],
     );
   },
