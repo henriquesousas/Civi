@@ -465,26 +465,27 @@ class WazeAlertController {
 }
 
 //Fraco
-class AlertVibration {
-  static Future<void> vibrateAlert() async {
-    if (await Vibration.hasVibrator() ?? false) {
-      Vibration.vibrate(
-        pattern: [
-          0, // inicia imediatamente
-          200, // vibra
-          120, // pausa
-          200, // vibra
-          120,
-          400 // vibração final mais forte
-        ],
-      );
-    }
-  }
-}
+// class AlertVibration {
+//   static Future<void> vibrateAlert() async {
+//     if (await Vibration.hasVibrator() ?? false) {
+//       Vibration.vibrate(
+//         pattern: [
+//           0, // inicia imediatamente
+//           200, // vibra
+//           120, // pausa
+//           200, // vibra
+//           120,
+//           400 // vibração final mais forte
+//         ],
+//       );
+//     }
+//   }
+// }
 
 class AlertVibrationStrong {
   static Future<void> vibrateStrong() async {
-    if (await Vibration.hasVibrator() ?? false) {
+    final haVibration = await Vibration.hasVibrator();
+    if (haVibration) {
       Vibration.vibrate(
         pattern: [
           0, // começa imediatamente

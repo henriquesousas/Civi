@@ -7,7 +7,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 class LocationAccessNotifier extends StateNotifier<LocationAccessState> {
   final GeolocatorAccessGateway _access;
-  final GeolocatorPositionGateway _position;
+  // final GeolocatorPositionGateway _position;
   final PermissionSettingsOpener _settings;
 
   LocationAccessNotifier({
@@ -15,7 +15,6 @@ class LocationAccessNotifier extends StateNotifier<LocationAccessState> {
     required GeolocatorPositionGateway position,
     required PermissionSettingsOpener settings,
   })  : _access = access,
-        _position = position,
         _settings = settings,
         super(const LocationAccessState.loading());
 
