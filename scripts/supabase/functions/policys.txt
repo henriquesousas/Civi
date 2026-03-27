@@ -1,0 +1,88 @@
+-- Policy de incidentes
+-- ========================================================
+
+create policy "Allow public read access to incidents"
+on "public"."incidents"
+to public
+using (
+  true
+);
+
+create policy "delete-just-authenticated-user"
+on "public"."incidents"
+to public
+using (
+  (auth.uid() = user_id)
+);
+
+create policy "insert-just-authenticated-user"
+on "public"."incidents"
+to public
+with check (
+  (auth.uid() = user_id)
+);
+
+create policy "update-just-authenticated-user"
+on "public"."incidents"
+to public
+using (
+  (auth.uid() = user_id)
+) with check (
+ (auth.uid() = user_id)
+);
+
+
+-- Policy de produtos
+-- ========================================================
+
+create policy "Allow public read product"
+on "public"."product"
+to public
+using (
+  true
+);
+
+create policy "permiti_crud_usuarios_autenticados"
+on "public"."product"
+to public
+using (
+  (auth.uid() = user_id)
+) with check (
+   (auth.uid() = user_id)
+);
+
+create policy "permiti_inserir_apenas_usuarios_autenticado"
+on "public"."product"
+to public
+with check (
+  (auth.uid() = user_id)
+);
+
+
+create policy "permiti_inserir_apenas_usuarios_autenticados"
+on "public"."product"
+to public
+using (
+  (auth.uid() = user_id)
+);
+
+
+-- Policy de imagens
+-- ========================================================
+create policy "Allow public read product images"
+on "public"."product_images"
+to public
+using (
+  true
+);
+
+create policy "permiti_acoes_apenas_usuarios_logad"
+on "public"."product_images"
+to public
+using (
+  (auth.role() = 'authenticated'::text)
+) with check (
+  (auth.role() = 'authenticated'::text)
+);
+
+CREATE EXTENSION IF NOT EXISTS unaccent;

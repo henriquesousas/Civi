@@ -1,3 +1,4 @@
+import 'package:deehelp/core/env_config.dart';
 import 'package:deehelp/module/auth/domain/exceptions/auth_failure.dart';
 import 'package:deehelp/module/auth/domain/services/operation_status.dart';
 import 'package:deehelp/module/auth/domain/services/google_credentials.dart';
@@ -15,8 +16,8 @@ class DefaultGoogleAuthService implements GoogleAuthService {
   static Future<void> initSignIn() async {
     if (!isInitialize) {
       await _googleSignIn.initialize(
-          serverClientId:
-              "673259838307-a2tmdcc0oil4tmohe6r5gbcfssiklur8.apps.googleusercontent.com");
+        serverClientId: EnvConfig.googleServiceClientId,
+      );
     }
     isInitialize = true;
   }

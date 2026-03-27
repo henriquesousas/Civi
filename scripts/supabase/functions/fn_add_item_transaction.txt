@@ -1,0 +1,73 @@
+CREATE OR REPLACE FUNCTION add_product_with_image_transaction(
+  product_data JSONB,
+  imagens  JSONB[]
+)
+RETURNS JSONB
+LANGUAGE plpgsql
+SECURITY DEFINER
+AS $$
+DECLARE
+  new_product_id UUID;
+  result JSONB;
+BEGIN
+  -- Inicia transação implícita
+  BEGIN
+    -- Insere o produto e retorna o ID
+    INSERT INTO product (
+      name,
+      code,
+      color,
+      brand,
+      obs,
+      year,
+      status,
+      type,
+      user_id
+    ) VALUES (
+      product_data->>'name',
+      product_data->>'code',
+      product_data->>'color',
+      product_data->>'brand',
+      product_data->>'obs',
+      (product_data->>'year')::INTEGER, 
+      (product_data->>'status')::status,
+      product_data->>'type',
+      (product_data->>'user_id')::UUID
+      
+    )
+    RETURNING id INTO new_product_id;
+
+    -- PERFORM 1 / 0;  -- ERRO: simula error
+
+    -- Se houver imagens, insere-as
+    IF imagens IS NOT NULL AND array_length(imagens, 1) > 0 THEN
+      INSERT INTO product_images (product_id, url, size,mime_type, image_name)
+      SELECT 
+       new_product_id,
+       img->>'url',
+      (img->>'size')::INT, 
+       img->>'mime_type',
+       img->>'image_name'
+      FROM unnest(imagens) as img;
+    END IF;
+
+    -- Retorna o resultado
+    result := jsonb_build_object(
+      'status', true,
+      'product_id', new_product_id,
+      'message', 'Produto e imagens salvos com sucesso'
+    );
+    
+    RETURN result;
+    
+  EXCEPTION WHEN OTHERS THEN
+    -- Em caso de erro, retorna mensagem de erro
+    result := jsonb_build_object(
+      'status', false,
+      'erro', SQLERRM,
+      'code', SQLSTATE
+    );
+    RETURN result;
+  END;
+END;
+$$;

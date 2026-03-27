@@ -1,0 +1,3 @@
+CREATE TYPE public.status AS ENUM ('pending', 'canceled', 'rouberry', 'active', 'resolved', 'paused');
+CREATE TYPE public.kind AS ENUM ('car', 'moto', 'phone', 'flooding', 'streetClosed', 'dragnet','suspiciousActivity','rouberry');
+CREATE TYPE public.report_type AS ENUM ('alertExpire', 'alertIncident');

@@ -1,0 +1,76 @@
+CREATE EXTENSION IF NOT EXISTS postgis;
+
+CREATE TABLE public.profile (
+  id bigint GENERATED ALWAYS AS IDENTITY NOT NULL,
+  created_at timestamp with time zone NOT NULL DEFAULT now(),
+  nickname text UNIQUE,
+  user_id uuid DEFAULT auth.uid(),
+  CONSTRAINT profile_pkey PRIMARY KEY (id)
+);
+
+
+CREATE TABLE public.regions (
+  id uuid NOT NULL DEFAULT gen_random_uuid(),
+  name text UNIQUE,
+  city text,
+  state text,
+  created_at timestamp with time zone DEFAULT now(),
+  region_key text NOT NULL UNIQUE,
+  CONSTRAINT regions_pkey PRIMARY KEY (id)
+);
+
+CREATE TABLE public.product (
+  created_at timestamp with time zone NOT NULL DEFAULT now(),
+  name text,
+  code text,
+  color text,
+  brand text,
+  obs text,
+  year integer,
+  status status NOT NULL DEFAULT 'pending'::status,
+  type text,
+  user_id uuid NOT NULL DEFAULT auth.uid(),
+  id uuid NOT NULL DEFAULT gen_random_uuid(),
+  CONSTRAINT product_pkey PRIMARY KEY (id)
+);
+
+
+CREATE TABLE public.product_images (
+  created_at timestamp with time zone NOT NULL DEFAULT now(),
+  url text NOT NULL UNIQUE,
+  product_id uuid NOT NULL,
+  size bigint NOT NULL,
+  mime_type text NOT NULL,
+  id uuid NOT NULL DEFAULT gen_random_uuid(),
+  image_name text,
+  CONSTRAINT product_images_pkey PRIMARY KEY (id),
+  CONSTRAINT image_product_id_fkey FOREIGN KEY (product_id) REFERENCES public.product(id)
+);
+
+CREATE TABLE public.report (
+  created_at timestamp with time zone NOT NULL DEFAULT now(),
+  id uuid NOT NULL DEFAULT gen_random_uuid(),
+  product_id uuid NOT NULL,
+  how_to text,
+  city text,
+  state text,
+  address text,
+  user_id uuid NOT NULL DEFAULT auth.uid(),
+  occurred_at timestamp with time zone,
+  status status NOT NULL DEFAULT 'pending'::status,
+  hour time without time zone NOT NULL,
+  alert_id text UNIQUE,
+  verified boolean DEFAULT false,
+  report_type report_type,
+  expires_at timestamp with time zone,
+  kind kind,
+  region_id uuid,
+  point geography(Point, 4326),
+  is_platform_generated boolean NOT NULL DEFAULT false,
+  lat double precision,
+  long double precision,
+  product_type text,
+  CONSTRAINT report_pkey PRIMARY KEY (id),
+  CONSTRAINT incidents_product_id_fkey FOREIGN KEY (product_id) REFERENCES public.product(id),
+  CONSTRAINT report_region_id_fkey FOREIGN KEY (region_id) REFERENCES public.regions(id)
+);

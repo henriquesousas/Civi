@@ -1,0 +1,7 @@
+-- drop view report_with_coords;
+create or replace view report_with_coords as
+select
+  r.*,
+  ST_Y(r.point::geometry) as latitude,
+  ST_X(r.point::geometry) as longitude
+from report r;

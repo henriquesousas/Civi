@@ -20,8 +20,8 @@ void main() async {
   await initializeDateFormatting('pt_BR', null);
 
   await Supabase.initialize(
-    url: "https://zgwniakmowojymmmljbw.supabase.co",
-    anonKey: "sb_publishable_N5D6VJ2Qm832Onz-NvFGfA_bO1NohOE",
+    url: EnvConfig.supabaseUrl,
+    anonKey: EnvConfig.supabaseAnonKey,
   );
 
   SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(
@@ -34,9 +34,7 @@ void main() async {
     // DeviceOrientation.portraitDown,
   ]);
 
-  MapboxOptions.setAccessToken(
-    "pk.eyJ1IjoicHNvYXJlczI2MDEiLCJhIjoiY21uNHl4cmhwMDVrazJwb2xncGt1cnQ0eSJ9.Hfdr7a3Eefg4cXj_u4pYag",
-  );
+  MapboxOptions.setAccessToken(EnvConfig.mapBoxToken);
 
   runApp(
     const ProviderScope(child: MainApp()),

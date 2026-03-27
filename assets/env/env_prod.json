@@ -1,0 +1,10 @@
+{
+  "R2_BASE_URL": "https://pub-0366da0e0a6d49998a77e988d464e762.r2.dev",
+  "R2_ACCOUNT_ID": "2f0c45d371a6f728da6a889027b991f5",
+  "R2_ACCESS_KEY_ID": "290d6a3180cc5b6fa78937b557bda224",
+  "R2_SECRET_ACCESS_KEY_ID": "6fd0a3d0bbaa58909b0a8739d70dda002d709dc19ef9a237ac1473a29eba0312",
+  "MAP_BOX_TOKEN": "pk.eyJ1IjoicHNvYXJlczI2MDEiLCJhIjoiY21uNHl4cmhwMDVrazJwb2xncGt1cnQ0eSJ9.Hfdr7a3Eefg4cXj_u4pYag",
+  "SUPABASE_URL": "https://zgwniakmowojymmmljbw.supabase.co",
+  "SUPABASE_ANON_KEY": "sb_publishable_N5D6VJ2Qm832Onz-NvFGfA_bO1NohOE",
+  "GOOGLE_SERVIE_CLIENT_ID": "673259838307-a2tmdcc0oil4tmohe6r5gbcfssiklur8.apps.googleusercontent.com"
+}

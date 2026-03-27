@@ -1,0 +1,40 @@
+
+CREATE OR REPLACE FUNCTION remove_product_with_images_transaction(
+  p_product_id  UUID
+)
+RETURNS JSONB
+LANGUAGE plpgsql
+SECURITY DEFINER
+AS $$
+DECLARE
+  result JSONB;
+BEGIN
+  BEGIN
+    -- Remove primeiro as imagens associadas ao produto
+    DELETE FROM product_images
+    WHERE product_id = p_product_id;
+
+    -- Remove o produto
+    DELETE FROM product
+    WHERE id = p_product_id;
+
+    -- Retorna resultado de sucesso
+    result := jsonb_build_object(
+      'status', true,
+      'product_id', p_product_id ,
+      'message', 'Produto e imagens removidos com sucesso'
+    );
+
+    RETURN result;
+
+  EXCEPTION WHEN OTHERS THEN
+    -- Em caso de erro, retorna mensagem de erro
+    result := jsonb_build_object(
+      'status', false,
+      'erro', SQLERRM,
+      'code', SQLSTATE
+    );
+    RETURN result;
+  END;
+END;
+$$;

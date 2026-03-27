@@ -15,6 +15,11 @@ class EnvConfig {
     "R2_ACCESS_KEY_ID": String.fromEnvironment("R2_ACCESS_KEY_ID"),
     "R2_SECRET_ACCESS_KEY_ID":
         String.fromEnvironment("R2_SECRET_ACCESS_KEY_ID"),
+    "MAP_BOX_TOKEN": String.fromEnvironment("MAP_BOX_TOKEN"),
+    "SUPABASE_URL": String.fromEnvironment("SUPABASE_URL"),
+    "SUPABASE_ANON_KEY": String.fromEnvironment("SUPABASE_ANON_KEY"),
+    "GOOGLE_SERVIE_CLIENT_ID":
+        String.fromEnvironment("GOOGLE_SERVIE_CLIENT_ID"),
   };
 
   static Future<void> init() async {
@@ -51,4 +56,8 @@ class EnvConfig {
   static String get r2AccountId => _getKey("R2_ACCOUNT_ID");
   static String get r2AccessKeyId => _getKey("R2_ACCESS_KEY_ID");
   static String get r2SecretAccessKeyId => _getKey("R2_SECRET_ACCESS_KEY_ID");
+  static String get mapBoxToken => _getKey("MAP_BOX_TOKEN");
+  static String get supabaseUrl => _getKey("SUPABASE_URL");
+  static String get supabaseAnonKey => _getKey("SUPABASE_ANON_KEY");
+  static String get googleServiceClientId => _getKey("GOOGLE_SERVIE_CLIENT_ID");
 }

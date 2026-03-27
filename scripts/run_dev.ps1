@@ -1,1 +1,1 @@
-flutter run --debug --dart-define-from-file=assets/env/env_dev.json
+flutter run --debug --dart-define-from-file=assets/env/env_prod.json

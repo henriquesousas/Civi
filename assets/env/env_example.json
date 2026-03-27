@@ -2,5 +2,9 @@
   "R2_BASE_URL": "",
   "R2_ACCOUNT_ID": "",
   "R2_ACCESS_KEY_ID": "",
-  "R2_SECRET_ACCESS_KEY_ID": " "
+  "R2_SECRET_ACCESS_KEY_ID": "",
+  "MAP_BOX_TOKEN": "",
+  "SUPABASE_URL": "",
+  "SUPABASE_ANON_KEY": "",
+  "GOOGLE_SERVIE_CLIENT_ID": ""
 }

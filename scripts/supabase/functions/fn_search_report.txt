@@ -1,0 +1,87 @@
+-- drop function if exists search_reports(text, text, integer, text);
+-- drop function if exists search_reports(text, text);
+
+-- USAGE
+-- select * from search_reports('Osasco','active',10,'desc');
+
+create or replace function search_reports(
+  search_term text,
+  status_value text,
+  limit_value int default 20,
+  sort_direction text default 'desc'
+)
+returns setof jsonb
+language sql
+as $$
+  select jsonb_build_object(
+    'id', rwc.id,
+    'alert_id', rwc.alert_id,
+    'status', rwc.status,
+    'created_at', rwc.created_at,
+    'latitude', rwc.latitude,
+    'longitude', rwc.longitude,
+    'point', rwc.point,
+    'region_id', rwc.region_id,
+    'product_id', rwc.product_id,
+    'user_id', rwc.user_id,
+    'verified', rwc.verified,
+    'kind', rwc.kind,
+    'report_type', rwc.report_type,
+    'occurred_at', rwc.occurred_at,
+    'hour', rwc.hour,
+    'expires_at', rwc.expires_at,
+    'how_to', rwc.how_to,
+    'city', rwc.city,
+    'state', rwc.state,
+    'address', rwc.address,
+    'is_platform_generated', rwc.is_platform_generated,
+    'product_type', rwc.product_type,
+
+    'region', to_jsonb(r),
+
+    'product', jsonb_build_object(
+      'id', p.id,
+      'name', p.name,
+      'code', p.code,
+      'color', p.color,
+      'brand', p.brand,
+      'type', p.type,
+      'obs', p.obs,
+      'year', p.year,
+      'product_images', coalesce(
+        (
+          select jsonb_agg(to_jsonb(pi))
+          from product_images pi
+          where pi.product_id = p.id
+        ),
+        '[]'::jsonb
+      )
+    )
+  )
+  from report_with_coords rwc
+  join product p on p.id = rwc.product_id
+  left join regions r on r.id = rwc.region_id
+
+  where
+    (
+      status_value is null
+      or status_value = ''
+      or rwc.status::text = status_value
+    )
+    and (
+      search_term is null
+      or search_term = ''
+      or search_term = '*'
+      or rwc.alert_id::text ilike '%' || search_term || '%'
+      or rwc.address::text ilike '%' || search_term || '%'
+      or rwc.city::text ilike '%' || search_term || '%'
+      or p.name ilike '%' || search_term || '%'
+      or p.code ilike '%' || search_term || '%'
+    )
+
+  order by
+    case when lower(sort_direction) = 'asc' then rwc.created_at end asc,
+    case when lower(sort_direction) = 'desc' then rwc.created_at end desc
+
+  limit limit_value;
+$$;
