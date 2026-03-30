@@ -1,6 +1,7 @@
 import 'package:deehelp/core/theme/export_theme.dart';
+import 'package:deehelp/feature/alerts/alert_type_bottom_sheet.dart';
+import 'package:deehelp/feature/alerts/alerts_router.dart';
 import 'package:deehelp/feature/incidents/incident_router.dart';
-import 'package:deehelp/feature/items/items_router.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
@@ -399,28 +400,42 @@ class _MapLayersBottomSheet2State extends State<MapLayersBottomSheet2>
                 secondChild: Column(
                   children: [
                     _LayerTile(
-                      title: 'Cadastrar item',
+                      title: 'Alertar comunidade',
                       subtitle:
-                          'Cadastre seus bens como carro, moto ou celular para maior segurança.',
+                          'Reporte rapidamente roubo ou atividade suspeita perto de você',
                       selected: true,
                       leading: const _MapPreviewIcon(
                         dotColor: Color(0xFFFFC400),
                         showAvatar: true,
                       ),
-                      onTap: () => context.push(ItemsRouter.register),
+                      // onTap: () => context.push(ItemsRouter.register),
+                      onTap: () {
+                        _toggle();
+                        AlertTypeBottomSheet.show(
+                          context,
+                          onSuspiciousTap: () {
+                            context.push(AlertsRouter.suspiciousActivity);
+                          },
+                          onRobberyTap: () =>
+                              context.push(AlertsRouter.chooseAttemptType),
+                        );
+                      },
                     ),
                     const SizedBox(height: 12),
                     _LayerTile(
-                      title: 'Criar alerta',
+                      title: 'Meu item foi roubado',
                       subtitle:
-                          'Alertar a comunidade imediatamente sobre uma ocorrência.',
+                          'Informe o roubo de um item cadastrado como carro, moto ou celular',
                       selected: false,
                       leading: const _MapPreviewIcon(
                         dotColor: Color(0xFFFF8A00),
                         showAvatar: false,
                         centerIcon: Icons.person,
                       ),
-                      onTap: () => context.push(IncidentRouter.register),
+                      onTap: () {
+                        _toggle();
+                        context.push(IncidentRouter.register);
+                      },
                     ),
                   ],
                 ),

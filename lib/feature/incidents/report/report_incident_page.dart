@@ -285,9 +285,6 @@ class _AddIncidentPageState extends ConsumerState<ReportIncidentPage>
                     UIHoldConfirmButton(
                       hapticFeedback: true,
                       title: "Segure pra confirmar",
-                      // title: state.isLoading
-                      //     ? "Aguarde..."
-                      //     : "Segure pra confirmar",
                       textColor: Colors.white,
                       backgroundColor: AppColors.primaryColorDark,
                       contentPadding: const EdgeInsets.all(SpacingSize.xl),

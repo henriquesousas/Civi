@@ -8,40 +8,52 @@ import 'input_decoration_theme.dart';
 
 class AppTheme {
   static ThemeData lightTheme() {
-    final baseColorScheme = ColorScheme.light(
-      primaryContainer: const Color(0xFF2B5BEE),
-      // Bg principal
-      surface: Colors.white,
-      secondaryContainer: Colors.white,
+    final baseColorScheme = const ColorScheme.light(
+      primaryContainer: Color(0xFF2B5BEE),
+      //CARDS
+      surface: Colors.white, //background principal
+      surfaceContainer: Colors.white, //background principal
+      surfaceContainerLow: Color(0XFFF3F4F6), //background secundario
+      surfaceContainerHigh: Color(0XFFd6d6d6), //background accent
+      /// BORDAS
+      outline: Color(0xFFE4E8EF), //  borda principal
+      outlineVariant: Color(0xFFE4E8EF), // borda secundária
+      // TEXTOS
+      onSurface: Color(0xFF111827), // texto principal
+      onSurfaceVariant: Color(0xFF6B7280), // texto secundário
+
+      // Background principal
+      // surface: Colors.white,
+      // secondaryContainer: Colors.white,
       //Texto
       // texto principal
-      onSurface: const Color(0xFF1F2A44),
+      // onSurface: const Color(0xFF1F2A44),
       // texto secundario
-      secondary: const Color(0xFF6B7AAE),
+      // secondary: const Color(0xFF6B7AAE),
       // texto/icone/ propositalmente apagado
-      surfaceDim: const Color(0xFF475569),
+      surfaceDim: Color(0xFF475569),
       // texto error
-      onError: const Color(0xFFEA5B5B),
+      onError: Color(0xFFEA5B5B),
       // overlay de cor aplicado conforme a elevação
-      surfaceTint: const Color.fromARGB(0, 12, 15, 0),
+      surfaceTint: Color.fromARGB(0, 12, 15, 0),
       // bordas mais forte
       // outline: Color(0xFF475569),
       // outline → “borda principal”
-      outline: Colors.grey.shade100,
+      // outline: Colors.grey.shade100,
       // bordas mais fraca
-      outlineVariant: const Color(0xFFE6EAF6),
+      // outlineVariant: const Color(0xFFE6EAF6),
       // shadow
-      shadow: const Color(0x14000000),
+      shadow: Color(0x14000000),
       // usado pra modais (pode ser o mesmo)
       scrim: Colors.black,
 
-      surfaceContainer: Colors.white,
-      onSurfaceVariant: const Color(0xFF2B5BEE),
+      // surfaceContainer: Colors.white,
+      // onSurfaceVariant: const Color(0xFF2B5BEE),
       // outlineVariant: Colors.grey.shade300,
       // outline: Colors.grey.shade800,
 
-      primary: const Color(0xFF2B5BEE),
-      onPrimary: const Color(0xFFFFFFFF),
+      primary: Color(0xFF2B5BEE),
+      onPrimary: Color(0xFFFFFFFF),
     );
 
     return ThemeData(
@@ -77,21 +89,26 @@ class AppTheme {
 
   static ThemeData dark() {
     final baseColorScheme = ColorScheme.dark(
-      primaryContainer: const Color(0xFF1f222a),
-      surface: const Color(0xFF1f222a), // Fundo principal
-      secondaryContainer:
-          Colors.grey.withValues(alpha: 0.1), //Color(0xFF1f222a),
+      primaryContainer: const Color.fromRGBO(31, 34, 42, 1),
+      //CARDS
+      surface: const Color(0xFF0F141B), //background principal
+      surfaceContainer: const Color(0xFF0F141B), //background principal
+      surfaceContainerLow: const Color(0xFF131A22), //background secundario
+      surfaceContainerHigh: const Color(0XFF11171e),
 
-      onSurface: Colors.white, // Texto principal
+      // TEXTOS
+      onSurface: Colors.white, // texto principal
+      onSurfaceVariant: const Color(0xFF9AA4B2), // texto secundário
+
+      /// BORDAS
+      outline: const Color(0xFF263241), //  borda principal
+      outlineVariant: const Color(0xFF263241), // borda secundária
+
+      //DELETE
+      secondaryContainer: Colors.grey.withValues(alpha: 0.1),
       // texto/icone/ propositalmente apagado
       surfaceDim: Colors.grey.shade700,
       //Fundo para componentes (cards, listas) em diferentes níveis de elevação.
-      surfaceContainer: const Color(0xFF1f222a),
-      // outlineVariant versão mais suave, usada em bordas
-      outlineVariant: Colors.grey.shade800,
-      // outline → “borda principal”
-      outline: Colors.grey.shade900,
-      onSurfaceVariant: Colors.white,
 
       // outline: Colors.grey.shade500,
       // primary: const Color(0xFF2B5BEE),
@@ -107,6 +124,7 @@ class AppTheme {
     return ThemeData(
       useMaterial3: true,
       scaffoldBackgroundColor: Colors.black87,
+      // scaffoldBackgroundColor: const Color(0xFF0B0E14),
       brightness: Brightness.dark,
       fontFamily: "Plus Jakarta",
       colorScheme: baseColorScheme,

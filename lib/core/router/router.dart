@@ -1,7 +1,10 @@
 import 'dart:async';
 
 import 'package:deehelp/app_startup_provider.dart';
+import 'package:deehelp/core/router/slide_transition_page.dart';
 import 'package:deehelp/feature/about/about_router.dart';
+import 'package:deehelp/feature/alerts/alerts_router.dart';
+import 'package:deehelp/feature/alerts/rouberry_attempt_type_page.dart';
 import 'package:deehelp/feature/auth/presentation/export_auth.dart';
 import 'package:deehelp/feature/faq/export_faq.dart';
 import 'package:deehelp/feature/incidents/incident_router.dart';
@@ -13,6 +16,7 @@ import 'package:deehelp/feature/shell/app_sheel_router.dart';
 import 'package:deehelp/feature/sos/sos_router.dart';
 import 'package:deehelp/feature/splash/splash_router.dart';
 import 'package:deehelp/core/router/router_refresh_notifier.dart';
+import 'package:deehelp/teste_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
@@ -75,7 +79,7 @@ var goRouterProvider = Provider<GoRouter>(
         ...AppSheelRouter.routers,
         ...SplashRouter.routers,
         ...LocationRouter.routers,
-        // ...HomeRouter.routers,
+        ...AlertsRouter.routers,
         ...ProfileRouter.routers,
         ...AboutRouter.routers,
         ...FaqPageRouter.routers,
@@ -84,39 +88,40 @@ var goRouterProvider = Provider<GoRouter>(
         ...IncidentRouter.routers,
         ...SOSRouter.routers,
         ...SearchRouter.routers,
-        // GoRoute(
-        //   path: '/',
-        //   pageBuilder: (context, state) => slideTransitionPage(
-        //     key: state.pageKey,
-        //     // child: const MapPage(),
-        //     // child: const MapPage2(),
-        //     // child: const MounsHouse(),
-        //     // child: const CardBottom(),
+        GoRoute(
+          path: '/',
+          pageBuilder: (context, state) => slideTransitionPage(
+            key: state.pageKey,
+            // child: const MapPage(),
+            // child: const MapPage2(),
+            // child: const MounsHouse(),
+            // child: const CardBottom(),
 
-        //     // child: EventsScreen(),
-        //     // child: TesteDetailPage(),
-        //     // child: ItemDetailsPage(item: ,),
-        //     // child: ImeiInfoPage(),
-        //     // child: SuspiciousActivityPage(),
-        //     // child: NoiseComplaintPage(),
-        //     // child: FloodAlertPage(
-        //     //   locationLabel: 'Centro Osascos',
-        //     // ),
-        //     // child: ItemTypeSelectionPageLightV2(),
-        //     // child: ItemTypeSelectionPageDarkV2(),
-        //     // child: ItemNameStepLightPage(
-        //     //   itemTypeLabel: "Carro",
-        //     // ),
-        //     // child: ItemColorStepPage(),
-        //     // child: ItemDescriptionPageLight(),
-        //     // child: ItemDetailPageLight(),
-        //     // child: ItemDetailPageLightV2(),
-        //     // child: ItemPhonePageLight(),
-        //     // child: ItemPhotoStepPage(),
-        //     // child: ItemPhotoStepDarkPage(),
-        //     // child: ItemRegisteredSuccessfullyDarkPage(),
-        //   ),
-        // ),
+            // child: EventsScreen(),
+            // child: TesteDetailPage(),
+            // child: ItemDetailsPage(item: ,),
+            // child: ImeiInfoPage(),
+            // child: SuspiciousActivityPage(),
+            // child: NoiseComplaintPage(),
+            // child: FloodAlertPage(
+            //   locationLabel: 'Centro Osascos',
+            // ),
+            // child: ItemTypeSelectionPageLightV2(),
+            // child: ItemTypeSelectionPageDarkV2(),
+            // child: ItemNameStepLightPage(
+            //   itemTypeLabel: "Carro",
+            // ),
+            // child: ItemColorStepPage(),
+            // child: ItemDescriptionPageLight(),
+            // child: ItemDetailPageLight(),
+            // child: ItemDetailPageLightV2(),
+            // child: ItemPhonePageLight(),
+            // child: ItemPhotoStepPage(),
+            // child: ItemPhotoStepDarkPage(),
+            // child: ItemRegisteredSuccessfullyDarkPage(),
+            child: SuspiciousActivityPageLight(),
+          ),
+        ),
       ],
     );
   },
