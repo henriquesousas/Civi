@@ -218,9 +218,9 @@ class _BottomNavBar extends StatelessWidget {
                       Icon(
                         selected ? item.activeIcon : item.icon,
                         color: selected
-                            ? context.onSurfaceVariant
+                            ? context.primaryTextColor
                             // : const Color(0xFF9CA3AF),
-                            : context.onSurface.withValues(alpha: 0.8),
+                            : context.secondaryTextColor,
                         size: IconSizes.md,
                       ),
                       const SizedBox(height: 4),
@@ -228,8 +228,8 @@ class _BottomNavBar extends StatelessWidget {
                         item.label,
                         style: context.appText.button.copyWith(
                           color: selected
-                              ? context.onSurfaceVariant
-                              : context.onSurface.withValues(alpha: 0.8),
+                              ? context.primaryTextColor
+                              : context.secondaryTextColor,
                           // : const Color(0xFF9CA3AF),
                           fontWeight: FontWeight.normal,
                         ),
@@ -261,7 +261,7 @@ class _NavItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final color = selected ? Colors.white : const Color(0xFFA1A1A8);
+    final color = selected ? Colors.red : const Color(0xFFA1A1A8);
 
     return SizedBox(
       width: 70,
@@ -271,11 +271,11 @@ class _NavItem extends StatelessWidget {
           Icon(icon, color: color, size: 28),
           const SizedBox(height: 6),
           Text(
-            label,
+            "Ola",
             style: TextStyle(
               color: color,
               fontSize: context.safeSp(13),
-              fontWeight: selected ? FontWeight.w700 : FontWeight.w500,
+              fontWeight: selected ? FontWeight.w800 : FontWeight.w500,
             ),
           ),
         ],

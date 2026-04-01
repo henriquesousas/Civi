@@ -11,12 +11,13 @@ class Incident {
   final String? alertId;
   final String? regionId;
   final IncidentStatus status;
-  final Product product;
+  final Product? product;
   final String userId;
   final String? howTo;
   final IncidentLocal? local;
   final Kind kind;
   final ReportType reportType;
+  final String? title;
   bool visibility;
   DateTime createdAt;
   DateTime? expiresAt;
@@ -27,10 +28,11 @@ class Incident {
     required this.id,
     required this.alertId,
     required this.status,
-    required this.product,
     required this.userId,
     required this.kind,
     required this.reportType,
+    this.title,
+    this.product,
     this.visibility = true,
     this.howTo,
     this.local,

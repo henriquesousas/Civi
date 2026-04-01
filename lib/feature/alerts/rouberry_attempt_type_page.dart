@@ -1,20 +1,31 @@
-import 'package:deehelp/core/extension/color_extension.dart';
+import 'dart:ui';
+
+import 'package:deehelp/core/extension/exports_extension.dart';
 import 'package:deehelp/core/theme/app_colors.dart';
+import 'package:deehelp/core/theme/size/layout_spacing_size.dart';
+import 'package:deehelp/core/theme/size/progress_indicator_size.dart';
+import 'package:deehelp/core/theme/size/radius_size.dart';
 import 'package:deehelp/core/theme/size/spacing_size.dart';
 import 'package:deehelp/core/ui/widgets/appbar/default_app_bar.dart';
+import 'package:deehelp/core/ui/widgets/buttons/buttons_export.dart';
 import 'package:deehelp/core/ui/widgets/buttons/ui_hold_confirm_button.dart';
+import 'package:deehelp/feature/alerts/providers/add_alert_viewmodel_provider.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
+import 'package:lottie/lottie.dart';
 
-class RobberyAttemptTypePage extends StatefulWidget {
+class RobberyAttemptTypePage extends ConsumerStatefulWidget {
   const RobberyAttemptTypePage({super.key});
 
   @override
-  State<RobberyAttemptTypePage> createState() => _RobberyAttemptTypePageState();
+  ConsumerState<RobberyAttemptTypePage> createState() =>
+      _RobberyAttemptTypePageState();
 }
 
-class _RobberyAttemptTypePageState extends State<RobberyAttemptTypePage> {
+class _RobberyAttemptTypePageState
+    extends ConsumerState<RobberyAttemptTypePage> {
   String? selectedType;
 
   final List<_AlertOption> options = const [
@@ -73,6 +84,54 @@ class _RobberyAttemptTypePageState extends State<RobberyAttemptTypePage> {
     const selectedColor = Color(0xFF123D91);
     const selectedBorder = Color(0xFF2B5BEE);
 
+    ref.listen(
+      addAlertViewModelProvider,
+      (previous, currentState) {
+        if (currentState.isLoading) {
+          showDialogOverlay(context);
+        }
+
+        if (currentState.registeredsuccessfully) {
+          if (Navigator.canPop(context)) {
+            Navigator.of(context, rootNavigator: true).pop();
+          }
+          // context.showTopNotice(
+          //   "Obrigado por avisar a comunidade. Sua colaboração ajuda a proteger pessoas perto de você.",
+          //   type: DialogType.success,
+          // );
+          // context.showThankYouNotice(
+          //   context,
+          // );
+          // showThankYouNotice(context);
+          showDialog(
+            context: context,
+            barrierDismissible: false,
+            builder: (_) => ThankYouDialog(
+              onContinue: () {
+                Navigator.of(context, rootNavigator: true)
+                    .pop(); // fecha dialog
+                context.pop(); //echa tela
+              },
+            ),
+          );
+          // showDialog(
+          //   context: context,
+          //   barrierColor: Colors.black54,
+          //   builder: (_) => Center(
+          //     child: ThankYouAlertCard(),
+          //   ),
+          // );
+
+          // 3. Fecha a tela atual (depois de um pequeno delay)
+          // Future.delayed(const Duration(milliseconds: 300), () {
+          //   if (context.mounted) {
+          //     context.pop();
+          //   }
+          // });
+        }
+      },
+    );
+
     return Scaffold(
       backgroundColor: context.scaffoldBackgroundColor,
       appBar: DefaultAppBar(
@@ -107,7 +166,7 @@ class _RobberyAttemptTypePageState extends State<RobberyAttemptTypePage> {
                           height: 36.h,
                           decoration: BoxDecoration(
                             color:
-                                const Color(0xFF2B5BEE).withValues(alpha: 0.14),
+                                AppColors.primaryColor.withValues(alpha: 0.14),
                             borderRadius: BorderRadius.circular(12),
                           ),
                           child: Icon(
@@ -157,7 +216,16 @@ class _RobberyAttemptTypePageState extends State<RobberyAttemptTypePage> {
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
               child: UIHoldConfirmButton(
-                onProgressCompleted: () async {},
+                onProgressCompleted: () async {
+                  if (selectedType == null) return;
+
+                  final type = options
+                      .where((element) => element.id == selectedType)
+                      .first;
+                  ref
+                      .read(addAlertViewModelProvider.notifier)
+                      .sendAlert(type.title);
+                },
                 onApiCall: () async {},
                 onProgressChange: (v) {},
                 hapticFeedback: true,
@@ -167,45 +235,103 @@ class _RobberyAttemptTypePageState extends State<RobberyAttemptTypePage> {
                 contentPadding: const EdgeInsets.all(SpacingSize.xl),
               ),
             )
-            // Container(
-            //   padding: const EdgeInsets.fromLTRB(20, 14, 20, 20),
-            //   decoration: BoxDecoration(
-            //     color: context.primaryBgCard,
-            //     border: Border(
-            //       top: BorderSide(color: context.outlineVariantColor),
-            //     ),
-            //   ),
-            //   child: SafeArea(
-            //     top: false,
-            //     child: SizedBox(
-            //       width: double.infinity,
-            //       height: 54,
-            //       child: FilledButton(
-            //         onPressed: selectedType == null ? null : () {},
-            //         style: FilledButton.styleFrom(
-            //           backgroundColor: const Color(0xFF2B5BEE),
-            //           disabledBackgroundColor:
-            //               const Color(0xFF2B5BEE).withOpacity(0.35),
-            //           shape: RoundedRectangleBorder(
-            //             borderRadius: BorderRadius.circular(16),
-            //           ),
-            //         ),
-            //         child: const Text(
-            //           'Continuar',
-            //           style: TextStyle(
-            //             fontSize: 16,
-            //             fontWeight: FontWeight.w700,
-            //           ),
-            //         ),
-            //       ),
-            //     ),
-            //   ),
-            // ),
           ],
         ),
       ),
     );
   }
+}
+
+void showDialogOverlay(BuildContext context, {String? message}) {
+  showDialog(
+    context: context,
+    barrierDismissible: false,
+    barrierColor: Colors.black.withValues(alpha: 0.15), // leve escurecido
+    builder: (_) {
+      return PopScope(
+        canPop: true,
+        child: Stack(
+          children: [
+            // Blur no fundo
+            BackdropFilter(
+              filter: ImageFilter.blur(sigmaX: 8, sigmaY: 8),
+              child: Container(color: Colors.transparent),
+            ),
+
+            // Card central
+            Center(
+              child: Material(
+                color: Colors.transparent,
+                child: Container(
+                  width: context.percentWidth(0.6),
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: LayoutSpacingSize.container,
+                    vertical: LayoutSpacingSize.container,
+                  ),
+                  decoration: BoxDecoration(
+                    color: Theme.of(context).colorScheme.surface,
+                    borderRadius: BorderRadius.circular(RadiusSize.xl),
+                    boxShadow: const [
+                      BoxShadow(
+                        color: Color(0x22000000),
+                        blurRadius: 24,
+                        offset: Offset(0, 12),
+                      ),
+                    ],
+                    border: Border.all(
+                      color: Theme.of(context)
+                          .colorScheme
+                          .outlineVariant
+                          .withValues(alpha: 0.6),
+                    ),
+                  ),
+                  child: Column(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      const SizedBox(height: 4),
+
+                      // Loader + animação suave
+                      SizedBox(
+                        width: ProgressIndicatorSizes.xl,
+                        height: ProgressIndicatorSizes.xl,
+                        child: CircularProgressIndicator(
+                          strokeWidth: 3.2,
+                          color: Theme.of(context).colorScheme.primary,
+                        ),
+                      ),
+
+                      const SizedBox(height: 14),
+
+                      Text(
+                        "Enviando alerta",
+                        textAlign: TextAlign.center,
+                        style:
+                            Theme.of(context).textTheme.titleMedium?.copyWith(
+                                  fontWeight: FontWeight.w700,
+                                ),
+                      ),
+
+                      const SizedBox(height: 6),
+
+                      Text(
+                        "Aguarde...",
+                        textAlign: TextAlign.center,
+                        style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                              color: Theme.of(context)
+                                  .colorScheme
+                                  .onSurfaceVariant,
+                            ),
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+            ),
+          ],
+        ),
+      );
+    },
+  );
 }
 
 class _SelectableOptionCard extends StatelessWidget {
@@ -347,4 +473,219 @@ class _AlertOption {
     required this.iconBackgroundColor,
     required this.iconColor,
   });
+}
+
+// class ThankYouAlertCard extends StatelessWidget {
+//   final VoidCallback? onClose;
+
+//   const ThankYouAlertCard({
+//     super.key,
+//     this.onClose,
+//   });
+
+//   @override
+//   Widget build(BuildContext context) {
+//     return Container(
+//       padding: const EdgeInsets.all(16),
+//       decoration: BoxDecoration(
+//         // color: const Color(0xFF111827),
+//         color: AppColors.green,
+//         borderRadius: BorderRadius.circular(20),
+//         border: Border.all(
+//           // color: const Color(0xFF2B5BEE).withValues(alpha: 0.25),
+//           color: AppColors.green.withValues(alpha: 0.25),
+//         ),
+//         boxShadow: [
+//           BoxShadow(
+//             color: Colors.black.withValues(alpha: 0.18),
+//             blurRadius: 18,
+//             offset: const Offset(0, 8),
+//           ),
+//         ],
+//       ),
+//       child: Row(
+//         crossAxisAlignment: CrossAxisAlignment.start,
+//         children: [
+//           Container(
+//             width: 44,
+//             height: 44,
+//             decoration: BoxDecoration(
+//               color: AppColors.green.withValues(alpha: 0.14),
+//               shape: BoxShape.circle,
+//             ),
+//             child: Icon(
+//               Icons.favorite_rounded,
+//               color: AppColors.danger2,
+//               size: 20.w,
+//             ),
+//           ),
+//           const SizedBox(width: 12),
+//           Expanded(
+//             child: Column(
+//               mainAxisSize: MainAxisSize.min,
+//               crossAxisAlignment: CrossAxisAlignment.start,
+//               children: [
+//                 Text(
+//                   'Obrigado por compartilhar este alerta',
+//                   maxLines: 2,
+//                   overflow: TextOverflow.ellipsis,
+//                   style: TextStyle(
+//                     color: Colors.white,
+//                     fontSize: context.safeSp(14),
+//                     fontWeight: FontWeight.w800,
+//                     height: 1.2,
+//                   ),
+//                 ),
+//                 const SizedBox(height: 6),
+//                 Text(
+//                   'Cada aviso ajuda a comunidade a agir com mais atenção e segurança.',
+//                   maxLines: 3,
+//                   overflow: TextOverflow.ellipsis,
+//                   style: TextStyle(
+//                     color: Colors.white.withOpacity(0.76),
+//                     fontSize: context.safeSp(12),
+//                     fontWeight: FontWeight.w500,
+//                     height: 1.35,
+//                   ),
+//                 ),
+//               ],
+//             ),
+//           ),
+//           const SizedBox(width: 8),
+//           InkWell(
+//             borderRadius: BorderRadius.circular(99),
+//             onTap: onClose,
+//             child: Container(
+//               width: 32,
+//               height: 32,
+//               decoration: BoxDecoration(
+//                 color: Colors.white.withOpacity(0.05),
+//                 shape: BoxShape.circle,
+//               ),
+//               child: const Icon(
+//                 Icons.close_rounded,
+//                 color: Colors.white70,
+//                 size: 18,
+//               ),
+//             ),
+//           ),
+//         ],
+//       ),
+//     );
+//   }
+// }
+
+// void showThankYouNotice(BuildContext context) {
+//   final overlay = Overlay.of(context);
+
+//   late OverlayEntry entry;
+
+//   entry = OverlayEntry(
+//     builder: (_) {
+//       final top = MediaQuery.of(context).padding.top + 12;
+
+//       return Positioned(
+//         top: top,
+//         left: 16,
+//         right: 16,
+//         child: Material(
+//           color: Colors.transparent, // 🔥 importante
+//           child: SafeArea(
+//             bottom: false,
+//             child: ThankYouAlertCard(
+//               onClose: () => entry.remove(),
+//             ),
+//           ),
+//         ),
+//       );
+//     },
+//   );
+
+//   overlay.insert(entry);
+
+//   Future.delayed(const Duration(minutes: 10), () {
+//     if (entry.mounted) {
+//       entry.remove();
+//     }
+//   });
+// }
+
+class ThankYouDialog extends StatelessWidget {
+  final VoidCallback onContinue;
+
+  const ThankYouDialog({
+    super.key,
+    required this.onContinue,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Dialog(
+      backgroundColor: Colors.transparent,
+      insetPadding: const EdgeInsets.symmetric(horizontal: 24),
+      child: Container(
+        padding: const EdgeInsets.fromLTRB(20, 24, 20, 20),
+        decoration: BoxDecoration(
+          color: context.primaryBgCardLow,
+          borderRadius: BorderRadius.circular(24),
+          border: Border.all(
+            color: context.outline,
+          ),
+          boxShadow: [
+            BoxShadow(
+              color: Colors.black.withValues(alpha: 0.35),
+              blurRadius: 30,
+              offset: const Offset(0, 12),
+            ),
+          ],
+        ),
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            Lottie.asset(
+              'assets/lottie/thanks.json',
+              width: context.percentWidth(0.9),
+              height: context.percentHeight(0.2),
+            ),
+
+            const SizedBox(height: 20),
+
+            // 🔹 Título
+            Text(
+              'Obrigado por compartilhar!',
+              textAlign: TextAlign.center,
+              style: TextStyle(
+                color: context.primaryTextColor,
+                fontSize: context.safeSp(22),
+                fontWeight: FontWeight.w800,
+              ),
+            ),
+
+            const SizedBox(height: 10),
+
+            // 🔹 Mensagem
+            Text(
+              'Seu alerta ajuda a proteger pessoas perto de você e deixa a comunidade mais segura.',
+              textAlign: TextAlign.center,
+              style: TextStyle(
+                color: context.secondaryTextColor,
+                fontSize: context.safeSp(12),
+                height: 1.4,
+              ),
+            ),
+
+            const SizedBox(height: 24),
+
+            // 🔹 Botão
+            ButtonOutline(
+              press: onContinue,
+              text: "Fechar",
+              borderColor: AppColors.primaryColor,
+              // bgColor: AppColors.primaryColor,
+            ),
+          ],
+        ),
+      ),
+    );
+  }
 }

@@ -48,17 +48,17 @@ class IncidentRowItem extends StatelessWidget {
             //       ? incident.product.images.first.value
             //       : '',
             // ),
-            if (incident.product.type != ItemType.phone.name) ...[
+            if (incident.product?.type != ItemType.phone.name) ...[
               CustomNetworkImage(
                 width: ImageSize.xs,
                 height: ImageSize.xs,
                 radius: RadiusSize.md,
-                imageUrl: incident.product.images.isNotEmpty
-                    ? incident.product.images.first.value
+                imageUrl: incident.product!.images.isNotEmpty
+                    ? incident.product!.images.first.value
                     : '',
               ),
             ],
-            if (incident.product.type == ItemType.phone.name) ...[
+            if (incident.product?.type == ItemType.phone.name) ...[
               HighlightIcon(
                 containerSize: IconSizes.xxl,
                 icon: const Icon(Icons.phone_android),
@@ -119,9 +119,9 @@ class IncidentRowItem extends StatelessWidget {
   }
 
   String _getCode(IncidentOutput incident) {
-    if (incident.product.type != ItemType.phone.name) {
-      return "${incident.product.name} • ${incident.product.code}";
+    if (incident.product?.type != ItemType.phone.name) {
+      return "${incident.product?.name} • ${incident.product?.code}";
     }
-    return "${incident.product.name} • ${incident.product.color}";
+    return "${incident.product?.name} • ${incident.product?.color}";
   }
 }

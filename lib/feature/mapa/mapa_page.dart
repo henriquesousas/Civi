@@ -492,14 +492,14 @@ class _MapaPageState extends ConsumerState<MapaPage> {
 
           return HorizontalIncidentCard(
             incidentType: 'Roubo',
-            title: incident.product.name,
+            title: incident.product?.name ?? "Não informado",
             howTo: incident.howTo,
             locationLabel: _getLocale(incident),
             timeLabel: incident.occurredAt.timeAgo(),
             distanceLabel: _getDistance(incident),
             isPlatformGenerated: incident.isPlatformGenerated,
-            coverImageUrl: incident.product.images.isNotEmpty
-                ? incident.product.images.first.value
+            coverImageUrl: incident.product?.images.isNotEmpty == true
+                ? incident.product!.images.first.value
                 : null,
             onTap: () =>
                 context.push(IncidentRouter.detailComunity, extra: incident),
@@ -614,7 +614,7 @@ class _MapaPageState extends ConsumerState<MapaPage> {
         if (incident.local?.longitude != null &&
             incident.local?.latitue != null) {
           final pinImage = await createPinWithAsset(
-            EnumUtils.fromString(ItemType.values, incident.product.type).assets,
+            EnumUtils.fromString(ItemType.values, incident.productType).assets,
           );
 
           final marker = await _pointManager!.create(

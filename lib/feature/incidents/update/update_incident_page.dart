@@ -49,7 +49,7 @@ class _UpdateIncidentPageState extends ConsumerState<UpdateIncidentPage> {
     final authenticatedUser = ref.watch(authenticatedUserProvider);
     final state = ref.watch(updateIncidentViewmodelProvider);
 
-    final isVehicle = state.updatedValue!.product.type != ItemType.phone.name;
+    final isVehicle = state.updatedValue!.product?.type != ItemType.phone.name;
     bool isOwner = authenticatedUser == null
         ? false
         : state.updatedValue!.userId == authenticatedUser.id;
@@ -138,7 +138,7 @@ class _UpdateIncidentPageState extends ConsumerState<UpdateIncidentPage> {
                   children: [
                     Text(
                       // '${state.updatedValue!.product.name} reportado como roubado',
-                      state.updatedValue!.product.name,
+                      state.updatedValue!.product?.name ?? '',
                       style: context.appText.headerlg,
                     ),
                     const SizedBox(height: SpacingSize.sm),
@@ -184,7 +184,7 @@ class _UpdateIncidentPageState extends ConsumerState<UpdateIncidentPage> {
                           ),
                         ),
                         BadgeText(
-                          text: state.updatedValue?.product.images.length
+                          text: state.updatedValue?.product?.images.length
                                   .toString() ??
                               "0",
                         )
@@ -192,10 +192,10 @@ class _UpdateIncidentPageState extends ConsumerState<UpdateIncidentPage> {
                     ),
                     const SizedBox(height: 12),
                     HorizontalPhotos(
-                      photos: state.updatedValue?.product.images ?? [],
+                      photos: state.updatedValue?.product?.images ?? [],
                       onTap: (index) => openPhotoViewer(
                         index,
-                        state.updatedValue!.product.images,
+                        state.updatedValue!.product?.images ?? [],
                       ),
                     ),
                     const SizedBox(height: SpacingSize.sm),
@@ -235,8 +235,8 @@ class _UpdateIncidentPageState extends ConsumerState<UpdateIncidentPage> {
                         Flexible(
                           fit: FlexFit.loose,
                           child: ButtonOutline(
-                            press: () => _copyImei(
-                                context, state.updatedValue!.product.code),
+                            press: () => _copyImei(context,
+                                state.updatedValue!.product?.code ?? ''),
                             icon: Icon(Icons.copy_outlined, size: IconSizes.sm),
                             text: "Copiar",
                           ),
@@ -258,7 +258,7 @@ class _UpdateIncidentPageState extends ConsumerState<UpdateIncidentPage> {
                             width: 1),
                       ),
                       child: Text(
-                        state.updatedValue!.product.code,
+                        state.updatedValue!.product?.code ?? '',
                         style: context.appText.headermd.copyWith(
                           color: Colors.grey,
                         ),
@@ -297,7 +297,7 @@ class _UpdateIncidentPageState extends ConsumerState<UpdateIncidentPage> {
 
                   textColor: context.onSurface,
                   value: EnumUtils.fromString(
-                          ItemType.values, state.updatedValue!.product.type)
+                          ItemType.values, state.updatedValue!.product?.type)
                       .label,
                   // onEdit: () async {},
                 ),
@@ -306,14 +306,14 @@ class _UpdateIncidentPageState extends ConsumerState<UpdateIncidentPage> {
                   icon: Icons.branding_watermark_outlined,
                   label: 'Marca',
                   textColor: context.onSurface,
-                  value: state.updatedValue!.product.brand,
+                  value: state.updatedValue!.product?.brand ?? '',
                 ),
                 const SoftDivider(),
                 EditableFieldTile(
                   icon: Icons.color_lens_outlined,
                   label: 'Cor',
                   textColor: context.onSurface,
-                  value: state.updatedValue!.product.color,
+                  value: state.updatedValue!.product?.color ?? '',
                 ),
                 const SoftDivider(),
                 if (isVehicle) ...[
@@ -321,7 +321,7 @@ class _UpdateIncidentPageState extends ConsumerState<UpdateIncidentPage> {
                     icon: Icons.confirmation_number_outlined,
                     label: 'Placa',
                     textColor: context.onSurface,
-                    value: state.updatedValue?.product.code ?? '',
+                    value: state.updatedValue!.product?.code ?? '',
                   ),
                 ],
                 if (!isVehicle) ...[
@@ -329,7 +329,7 @@ class _UpdateIncidentPageState extends ConsumerState<UpdateIncidentPage> {
                     icon: Icons.numbers,
                     label: 'IMEI',
                     textColor: context.onSurface,
-                    value: state.updatedValue?.product.code ?? '',
+                    value: state.updatedValue!.product?.code ?? '',
                   ),
                 ],
                 const SoftDivider(),
@@ -337,7 +337,7 @@ class _UpdateIncidentPageState extends ConsumerState<UpdateIncidentPage> {
                   icon: Icons.place_outlined,
                   label: 'Detalhes do item',
                   textColor: context.onSurface,
-                  value: state.updatedValue?.product.obs ?? '',
+                  value: state.updatedValue!.product?.obs ?? '',
                 ),
                 const SoftDivider(),
                 EditableFieldTile(

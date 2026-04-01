@@ -357,4 +357,46 @@ extension TopNoticeExtension on BuildContext {
       onAction: onAction,
     );
   }
+
+  // void showThankYouNotice(BuildContext context) {
+  //   final overlay = Overlay.of(context);
+
+  //   late OverlayEntry entry;
+
+  //   entry = OverlayEntry(
+  //     builder: (_) {
+  //       final top = MediaQuery.of(context).padding.top + 12;
+
+  //       return Positioned(
+  //         top: top,
+  //         left: 16,
+  //         right: 16,
+  //         child: Material(
+  //           color: Colors.transparent,
+  //           child: SafeArea(
+  //             bottom: false,
+  //             child: ConstrainedBox(
+  //               constraints: const BoxConstraints(
+  //                 maxWidth: 600,
+  //               ),
+  //               child: ThankYouAlertCard(
+  //                 onClose: () {
+  //                   entry.remove();
+  //                 },
+  //               ),
+  //             ),
+  //           ),
+  //         ),
+  //       );
+  //     },
+  //   );
+
+  //   overlay.insert(entry);
+
+  //   Future.delayed(const Duration(seconds: 3), () {
+  //     if (entry.mounted) {
+  //       entry.remove();
+  //     }
+  //   });
+  // }
 }

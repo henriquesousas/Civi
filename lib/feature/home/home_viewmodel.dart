@@ -31,7 +31,7 @@ class HomeViewmodel extends StateNotifier<AsyncValue<List<IncidentOutput>>> {
       final filter = IncidentFilter(
         status: IncidentStatus.active,
         term: location?.city ?? '',
-        limit: 10,
+        limit: 50,
       );
 
       final result = await _getIncidentUsecase.execute(filter);

@@ -120,6 +120,7 @@ var goRouterProvider = Provider<GoRouter>(
             // child: ItemPhotoStepDarkPage(),
             // child: ItemRegisteredSuccessfullyDarkPage(),
             child: SuspiciousActivityPageLight(),
+            // child: ThankYouAlertCard(),
           ),
         ),
       ],

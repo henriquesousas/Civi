@@ -15,11 +15,12 @@ T _$identity<T>(T value) => value;
 /// @nodoc
 mixin _$IncidentOutput {
   String get id;
+  String get title;
   String get userId;
   String get alertId;
   String get productType;
   TypeAlert get type;
-  IncidentProductOutput get product;
+  IncidentProductOutput? get product;
   ItemStatus get status;
   Kind get kind;
   ReportType get reportType;
@@ -47,6 +48,7 @@ mixin _$IncidentOutput {
         (other.runtimeType == runtimeType &&
             other is IncidentOutput &&
             (identical(other.id, id) || other.id == id) &&
+            (identical(other.title, title) || other.title == title) &&
             (identical(other.userId, userId) || other.userId == userId) &&
             (identical(other.alertId, alertId) || other.alertId == alertId) &&
             (identical(other.productType, productType) ||
@@ -75,30 +77,32 @@ mixin _$IncidentOutput {
   }
 
   @override
-  int get hashCode => Object.hash(
-      runtimeType,
-      id,
-      userId,
-      alertId,
-      productType,
-      type,
-      product,
-      status,
-      kind,
-      reportType,
-      createdAt,
-      occurredAt,
-      expiresAt,
-      occurredAtTime,
-      region,
-      local,
-      howTo,
-      isPlatformGenerated,
-      visibilty);
+  int get hashCode => Object.hashAll([
+        runtimeType,
+        id,
+        title,
+        userId,
+        alertId,
+        productType,
+        type,
+        product,
+        status,
+        kind,
+        reportType,
+        createdAt,
+        occurredAt,
+        expiresAt,
+        occurredAtTime,
+        region,
+        local,
+        howTo,
+        isPlatformGenerated,
+        visibilty
+      ]);
 
   @override
   String toString() {
-    return 'IncidentOutput(id: $id, userId: $userId, alertId: $alertId, productType: $productType, type: $type, product: $product, status: $status, kind: $kind, reportType: $reportType, createdAt: $createdAt, occurredAt: $occurredAt, expiresAt: $expiresAt, occurredAtTime: $occurredAtTime, region: $region, local: $local, howTo: $howTo, isPlatformGenerated: $isPlatformGenerated, visibilty: $visibilty)';
+    return 'IncidentOutput(id: $id, title: $title, userId: $userId, alertId: $alertId, productType: $productType, type: $type, product: $product, status: $status, kind: $kind, reportType: $reportType, createdAt: $createdAt, occurredAt: $occurredAt, expiresAt: $expiresAt, occurredAtTime: $occurredAtTime, region: $region, local: $local, howTo: $howTo, isPlatformGenerated: $isPlatformGenerated, visibilty: $visibilty)';
   }
 }
 
@@ -110,11 +114,12 @@ abstract mixin class $IncidentOutputCopyWith<$Res> {
   @useResult
   $Res call(
       {String id,
+      String title,
       String userId,
       String alertId,
       String productType,
       TypeAlert type,
-      IncidentProductOutput product,
+      IncidentProductOutput? product,
       ItemStatus status,
       Kind kind,
       ReportType reportType,
@@ -143,11 +148,12 @@ class _$IncidentOutputCopyWithImpl<$Res>
   @override
   $Res call({
     Object? id = null,
+    Object? title = null,
     Object? userId = null,
     Object? alertId = null,
     Object? productType = null,
     Object? type = null,
-    Object? product = null,
+    Object? product = freezed,
     Object? status = null,
     Object? kind = null,
     Object? reportType = null,
@@ -166,6 +172,10 @@ class _$IncidentOutputCopyWithImpl<$Res>
           ? _self.id
           : id // ignore: cast_nullable_to_non_nullable
               as String,
+      title: null == title
+          ? _self.title
+          : title // ignore: cast_nullable_to_non_nullable
+              as String,
       userId: null == userId
           ? _self.userId
           : userId // ignore: cast_nullable_to_non_nullable
@@ -182,10 +192,10 @@ class _$IncidentOutputCopyWithImpl<$Res>
           ? _self.type
           : type // ignore: cast_nullable_to_non_nullable
               as TypeAlert,
-      product: null == product
+      product: freezed == product
           ? _self.product
           : product // ignore: cast_nullable_to_non_nullable
-              as IncidentProductOutput,
+              as IncidentProductOutput?,
       status: null == status
           ? _self.status
           : status // ignore: cast_nullable_to_non_nullable
@@ -333,11 +343,12 @@ extension IncidentOutputPatterns on IncidentOutput {
   TResult maybeWhen<TResult extends Object?>(
     TResult Function(
             String id,
+            String title,
             String userId,
             String alertId,
             String productType,
             TypeAlert type,
-            IncidentProductOutput product,
+            IncidentProductOutput? product,
             ItemStatus status,
             Kind kind,
             ReportType reportType,
@@ -358,6 +369,7 @@ extension IncidentOutputPatterns on IncidentOutput {
       case _IncidentOutput() when $default != null:
         return $default(
             _that.id,
+            _that.title,
             _that.userId,
             _that.alertId,
             _that.productType,
@@ -397,11 +409,12 @@ extension IncidentOutputPatterns on IncidentOutput {
   TResult when<TResult extends Object?>(
     TResult Function(
             String id,
+            String title,
             String userId,
             String alertId,
             String productType,
             TypeAlert type,
-            IncidentProductOutput product,
+            IncidentProductOutput? product,
             ItemStatus status,
             Kind kind,
             ReportType reportType,
@@ -421,6 +434,7 @@ extension IncidentOutputPatterns on IncidentOutput {
       case _IncidentOutput():
         return $default(
             _that.id,
+            _that.title,
             _that.userId,
             _that.alertId,
             _that.productType,
@@ -459,11 +473,12 @@ extension IncidentOutputPatterns on IncidentOutput {
   TResult? whenOrNull<TResult extends Object?>(
     TResult? Function(
             String id,
+            String title,
             String userId,
             String alertId,
             String productType,
             TypeAlert type,
-            IncidentProductOutput product,
+            IncidentProductOutput? product,
             ItemStatus status,
             Kind kind,
             ReportType reportType,
@@ -483,6 +498,7 @@ extension IncidentOutputPatterns on IncidentOutput {
       case _IncidentOutput() when $default != null:
         return $default(
             _that.id,
+            _that.title,
             _that.userId,
             _that.alertId,
             _that.productType,
@@ -511,6 +527,7 @@ extension IncidentOutputPatterns on IncidentOutput {
 class _IncidentOutput implements IncidentOutput {
   const _IncidentOutput(
       {required this.id,
+      required this.title,
       required this.userId,
       required this.alertId,
       required this.productType,
@@ -532,6 +549,8 @@ class _IncidentOutput implements IncidentOutput {
   @override
   final String id;
   @override
+  final String title;
+  @override
   final String userId;
   @override
   final String alertId;
@@ -540,7 +559,7 @@ class _IncidentOutput implements IncidentOutput {
   @override
   final TypeAlert type;
   @override
-  final IncidentProductOutput product;
+  final IncidentProductOutput? product;
   @override
   final ItemStatus status;
   @override
@@ -582,6 +601,7 @@ class _IncidentOutput implements IncidentOutput {
         (other.runtimeType == runtimeType &&
             other is _IncidentOutput &&
             (identical(other.id, id) || other.id == id) &&
+            (identical(other.title, title) || other.title == title) &&
             (identical(other.userId, userId) || other.userId == userId) &&
             (identical(other.alertId, alertId) || other.alertId == alertId) &&
             (identical(other.productType, productType) ||
@@ -610,30 +630,32 @@ class _IncidentOutput implements IncidentOutput {
   }
 
   @override
-  int get hashCode => Object.hash(
-      runtimeType,
-      id,
-      userId,
-      alertId,
-      productType,
-      type,
-      product,
-      status,
-      kind,
-      reportType,
-      createdAt,
-      occurredAt,
-      expiresAt,
-      occurredAtTime,
-      region,
-      local,
-      howTo,
-      isPlatformGenerated,
-      visibilty);
+  int get hashCode => Object.hashAll([
+        runtimeType,
+        id,
+        title,
+        userId,
+        alertId,
+        productType,
+        type,
+        product,
+        status,
+        kind,
+        reportType,
+        createdAt,
+        occurredAt,
+        expiresAt,
+        occurredAtTime,
+        region,
+        local,
+        howTo,
+        isPlatformGenerated,
+        visibilty
+      ]);
 
   @override
   String toString() {
-    return 'IncidentOutput(id: $id, userId: $userId, alertId: $alertId, productType: $productType, type: $type, product: $product, status: $status, kind: $kind, reportType: $reportType, createdAt: $createdAt, occurredAt: $occurredAt, expiresAt: $expiresAt, occurredAtTime: $occurredAtTime, region: $region, local: $local, howTo: $howTo, isPlatformGenerated: $isPlatformGenerated, visibilty: $visibilty)';
+    return 'IncidentOutput(id: $id, title: $title, userId: $userId, alertId: $alertId, productType: $productType, type: $type, product: $product, status: $status, kind: $kind, reportType: $reportType, createdAt: $createdAt, occurredAt: $occurredAt, expiresAt: $expiresAt, occurredAtTime: $occurredAtTime, region: $region, local: $local, howTo: $howTo, isPlatformGenerated: $isPlatformGenerated, visibilty: $visibilty)';
   }
 }
 
@@ -647,11 +669,12 @@ abstract mixin class _$IncidentOutputCopyWith<$Res>
   @useResult
   $Res call(
       {String id,
+      String title,
       String userId,
       String alertId,
       String productType,
       TypeAlert type,
-      IncidentProductOutput product,
+      IncidentProductOutput? product,
       ItemStatus status,
       Kind kind,
       ReportType reportType,
@@ -680,11 +703,12 @@ class __$IncidentOutputCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   $Res call({
     Object? id = null,
+    Object? title = null,
     Object? userId = null,
     Object? alertId = null,
     Object? productType = null,
     Object? type = null,
-    Object? product = null,
+    Object? product = freezed,
     Object? status = null,
     Object? kind = null,
     Object? reportType = null,
@@ -703,6 +727,10 @@ class __$IncidentOutputCopyWithImpl<$Res>
           ? _self.id
           : id // ignore: cast_nullable_to_non_nullable
               as String,
+      title: null == title
+          ? _self.title
+          : title // ignore: cast_nullable_to_non_nullable
+              as String,
       userId: null == userId
           ? _self.userId
           : userId // ignore: cast_nullable_to_non_nullable
@@ -719,10 +747,10 @@ class __$IncidentOutputCopyWithImpl<$Res>
           ? _self.type
           : type // ignore: cast_nullable_to_non_nullable
               as TypeAlert,
-      product: null == product
+      product: freezed == product
           ? _self.product
           : product // ignore: cast_nullable_to_non_nullable
-              as IncidentProductOutput,
+              as IncidentProductOutput?,
       status: null == status
           ? _self.status
           : status // ignore: cast_nullable_to_non_nullable

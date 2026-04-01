@@ -74,16 +74,19 @@ class IncidentListItem extends StatelessWidget {
                   spacing: 12,
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    IncidentImage(images: incident.product.images),
+                    IncidentImage(
+                        images: incident.product == null
+                            ? []
+                            : incident.product!.images),
                     Expanded(
                       child: Column(
                         spacing: 7,
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          IncidentTitle(title: incident.product.name),
+                          IncidentTitle(title: incident.product?.name ?? ''),
                           IncidentLocation(local: incident.local),
                           IncidentDate(occurreAt: incident.occurredAt),
-                          IncidentCode(code: incident.product.code),
+                          IncidentCode(code: incident.product?.code ?? ''),
                         ],
                       ),
                     ),
@@ -183,7 +186,7 @@ class IncidentListItemV2 extends StatelessWidget {
                   ),
                   const SizedBox(height: 14),
                   Text(
-                    incident.product.name,
+                    incident.product?.name ?? '',
                     style: TextStyle(
                       color: Colors.white,
                       fontSize: 18.sp,
@@ -194,9 +197,9 @@ class IncidentListItemV2 extends StatelessWidget {
                   ),
                   const SizedBox(height: 10),
                   Text(
-                    incident.product.type != ItemType.phone.name
-                        ? 'Placa: ${incident.product.code} · ${incident.product.color}'
-                        : 'IMEI: ${incident.product.code} · ${incident.product.color}',
+                    incident.product?.type != ItemType.phone.name
+                        ? 'Placa: ${incident.product?.code} · ${incident.product?.color}'
+                        : 'IMEI: ${incident.product?.code} · ${incident.product?.color}',
                     style: TextStyle(
                       // color: const Color(0xFFE7E7EA),
                       color: Colors.white,
@@ -216,7 +219,7 @@ class IncidentListItemV2 extends StatelessWidget {
             ),
             Column(
               children: [
-                if (incident.product.type == ItemType.phone.name) ...[
+                if (incident.product?.type == ItemType.phone.name) ...[
                   const BlurredLockedImage(),
                   const SizedBox(height: 10),
                   StatusBadgeV2(
@@ -228,8 +231,8 @@ class IncidentListItemV2 extends StatelessWidget {
                     width: 90.w,
                     height: 90.h,
                     radius: 22,
-                    imageUrl: incident.product.images.isNotEmpty
-                        ? incident.product.images[0].value
+                    imageUrl: incident.product!.images.isNotEmpty
+                        ? incident.product?.images[0].value
                         : null,
                     customErrorWidget: Icon(
                       Icons.phone_android,

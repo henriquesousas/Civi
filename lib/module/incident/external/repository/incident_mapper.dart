@@ -7,6 +7,7 @@ import 'package:deehelp/module/incident/domain/usecase/incident_product_output.d
 import 'package:deehelp/module/incident/domain/usecase/kind.dart';
 import 'package:deehelp/module/incident/domain/usecase/report_type.dart';
 import 'package:deehelp/module/incident/external/repository/region_mapper.dart';
+import 'package:deehelp/module/item/domain/entities/image_media.dart';
 import 'package:deehelp/module/item/repository/image_media_model.dart';
 import 'package:flutter/material.dart';
 
@@ -35,8 +36,9 @@ class IncidentMapper {
   static Map<String, dynamic> toMap(Incident incident) {
     return {
       'alert_id': incident.alertId,
-      'product_id': incident.product.id.value,
-      'product_type': incident.product.type,
+      "title": incident.title,
+      'product_id': incident.product?.id.value,
+      'product_type': incident.product?.type,
       'user_id': incident.userId,
       'how_to': incident.howTo,
       'city': incident.local?.city,
@@ -59,11 +61,16 @@ class IncidentMapper {
   }
 
   static IncidentOutput fromMap(Map<String, dynamic> map) {
-    final images = (map['product']["product_images"] as List)
-        .map((e) => ImageMediaModel.fromMap(e))
-        .toList();
+    List<ImageMedia> images = [];
+    if (map['product'] != null) {
+      images = (map['product']["product_images"] as List)
+          .map((e) => ImageMediaModel.fromMap(e))
+          .toList();
+    }
+
     return IncidentOutput(
       id: map['id'],
+      title: map['title'],
       isPlatformGenerated: map['is_platform_generated'],
       userId: map['user_id'],
       // type: TypeAlert.values.firstWhere((e) => e.name == map['type']),
@@ -84,17 +91,19 @@ class IncidentMapper {
           ReportType.values.firstWhere((e) => e.name == map['report_type']),
       alertId: map['alert_id'],
       productType: map['product_type'],
-      product: IncidentProductOutput(
-        productId: map['product']['id'],
-        name: map['product']['name'],
-        code: map['product']['code'],
-        color: map['product']['color'],
-        brand: map['product']['brand'],
-        type: map['product']['type'],
-        obs: map['product']['obs'],
-        year: map['product']['year'].toString(),
-        images: images,
-      ),
+      product: map['product'] != null
+          ? IncidentProductOutput(
+              productId: map['product']['id'],
+              name: map['product']['name'],
+              code: map['product']['code'],
+              color: map['product']['color'],
+              brand: map['product']['brand'],
+              type: map['product']['type'],
+              obs: map['product']['obs'],
+              year: map['product']['year'].toString(),
+              images: images,
+            )
+          : null,
       createdAt: DateTime.parse(map['created_at']),
       occurredAt: DateTime.parse(map['occurred_at']),
       occurredAtTime: _parseTimeFromString(map['hour']),

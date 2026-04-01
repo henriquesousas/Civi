@@ -1,3 +1,4 @@
+import 'package:deehelp/core/extension/exports_extension.dart';
 import 'package:deehelp/core/theme/export_theme.dart';
 import 'package:deehelp/feature/alerts/alert_type_bottom_sheet.dart';
 import 'package:deehelp/feature/alerts/alerts_router.dart';
@@ -5,263 +6,6 @@ import 'package:deehelp/feature/incidents/incident_router.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
-
-// class MapLayersBottomSheet extends StatefulWidget {
-//   final bool initiallyExpanded;
-//   final String? city;
-//   final String? address;
-//   final Function(bool)? onTapHeader;
-
-//   const MapLayersBottomSheet({
-//     super.key,
-//     this.initiallyExpanded = false,
-//     this.onTapHeader,
-//     this.city,
-//     this.address,
-//   });
-
-//   @override
-//   State<MapLayersBottomSheet> createState() => _MapLayersBottomSheetState();
-// }
-
-// class _MapLayersBottomSheetState extends State<MapLayersBottomSheet>
-//     with SingleTickerProviderStateMixin {
-//   late bool _isExpanded;
-
-//   @override
-//   void initState() {
-//     super.initState();
-//     _isExpanded = widget.initiallyExpanded;
-//   }
-
-//   void _toggle() {
-//     setState(() {
-//       _isExpanded = !_isExpanded;
-//     });
-//     widget.onTapHeader?.call(_isExpanded);
-//   }
-
-//   @override
-//   Widget build(BuildContext context) {
-//     return AnimatedContainer(
-//       duration: const Duration(milliseconds: 260),
-//       curve: Curves.easeInOut,
-//       width: double.infinity,
-//       decoration: BoxDecoration(
-//         color: Theme.of(context).scaffoldBackgroundColor,
-//         borderRadius: const BorderRadius.vertical(
-//           top: Radius.circular(24),
-//         ),
-//         boxShadow: const [
-//           BoxShadow(
-//             color: Color(0x14000000),
-//             blurRadius: 18,
-//             offset: Offset(0, -4),
-//           ),
-//         ],
-//       ),
-//       child: SafeArea(
-//         top: false,
-//         child: Padding(
-//           padding: const EdgeInsets.fromLTRB(16, 10, 16, 16),
-//           child: Column(
-//             mainAxisSize: MainAxisSize.min,
-//             children: [
-//               GestureDetector(
-//                 behavior: HitTestBehavior.opaque,
-//                 onTap: _toggle,
-//                 child: Padding(
-//                   padding: const EdgeInsets.all(8.0),
-//                   child: Row(
-//                     children: [
-//                       Container(
-//                         width: IconSizes.xl,
-//                         height: IconSizes.xl,
-//                         decoration: BoxDecoration(
-//                           // color: const Color(0xFFF3F4F6),
-//                           color: context.secondaryColor.withValues(alpha: 0.1),
-//                           borderRadius: BorderRadius.circular(999),
-//                           border: Border.all(
-//                             // color: const Color(0xFFE5E7EB),
-//                             color: context.outlineVariantColor,
-//                           ),
-//                         ),
-//                         child: AnimatedRotation(
-//                           turns: _isExpanded ? 0.5 : 0.0,
-//                           duration: const Duration(milliseconds: 260),
-//                           child: Icon(
-//                             Icons.keyboard_arrow_up_rounded,
-//                             size: IconSizes.sm,
-//                             // color: const Color(0xFF111827),
-//                             color: context.outlineVariantColor,
-//                           ),
-//                         ),
-//                       ),
-//                       const SizedBox(width: 10),
-//                       Expanded(
-//                         child: Column(
-//                           mainAxisAlignment: MainAxisAlignment.start,
-//                           crossAxisAlignment: CrossAxisAlignment.start,
-//                           children: [
-//                             Text(
-//                               'Osasco',
-//                               overflow: TextOverflow.ellipsis,
-//                               maxLines: 1,
-//                               style: context.appText.headerlg,
-//                             ),
-//                             Text(
-//                               'Travessa Francisco Alves da Silva, Osasco, Baronera',
-//                               overflow: TextOverflow.ellipsis,
-//                               maxLines: 1,
-//                               style: context.appText.caption,
-//                             ),
-//                           ],
-//                         ),
-//                       ),
-//                     ],
-//                   ),
-//                 ),
-//               ),
-//               AnimatedCrossFade(
-//                 firstChild: const SizedBox(height: 0),
-//                 secondChild: const Column(
-//                   children: [
-//                     SizedBox(height: 16),
-//                     _MapLayerOptionCard(
-//                       title: "Default",
-//                       subtitle:
-//                           "See incidents (Assaults, Fires etc.) along with Good Vibes and Friends.",
-//                       selected: false,
-//                       icon: Icons.public,
-//                     ),
-//                     SizedBox(height: 12),
-//                     _MapLayerOptionCard(
-//                       title: "Criar alertas",
-//                       subtitle:
-//                           "Avise a comunidade sobre um incidente nesta área.",
-//                       selected: true,
-//                       icon: Icons.warning_amber_rounded,
-//                     ),
-//                   ],
-//                 ),
-//                 crossFadeState: _isExpanded
-//                     ? CrossFadeState.showSecond
-//                     : CrossFadeState.showFirst,
-//                 duration: const Duration(milliseconds: 240),
-//               ),
-//             ],
-//           ),
-//         ),
-//       ),
-//     );
-//   }
-// }
-
-// class _MapLayerOptionCard extends StatelessWidget {
-//   final String title;
-//   final String subtitle;
-//   final bool selected;
-//   final IconData icon;
-
-//   const _MapLayerOptionCard({
-//     required this.title,
-//     required this.subtitle,
-//     required this.selected,
-//     required this.icon,
-//   });
-
-//   @override
-//   Widget build(BuildContext context) {
-//     return Container(
-//       width: double.infinity,
-//       padding: const EdgeInsets.all(14),
-//       decoration: BoxDecoration(
-//         // color: selected ? const Color(0xFFF3F4F6) : Colors.white,
-//         // color: selected ? const Color(0xFFF3F4F6) : context.surfaceColor,
-//         color: context.surfaceColor,
-//         borderRadius: BorderRadius.circular(12),
-//         border: Border.all(
-//           // color: const Color(0xFFE5E7EB),
-//           // color: context.outlineVariantColor.withValues(alpha: 0.5),
-//           color: selected
-//               ? AppColors.danger2.withValues(alpha: 0.5)
-//               : context.outlineVariantColor.withValues(alpha: 0.5),
-//         ),
-//       ),
-//       child: Row(
-//         children: [
-//           _LayerPreviewIcon(
-//             selected: selected,
-//             icon: icon,
-//           ),
-//           const SizedBox(width: 14),
-//           Expanded(
-//             child: Column(
-//               crossAxisAlignment: CrossAxisAlignment.start,
-//               children: [
-//                 Text(title, style: context.appText.headermd),
-//                 const SizedBox(height: 4),
-//                 Text(
-//                   subtitle,
-//                   style: context.appText.caption.copyWith(
-//                     color: context.secondaryColor,
-//                   ),
-//                   // style: context.appText.bodySmall.copyWith(
-//                   //   color: const Color(0xFF6B7280),
-//                   //   height: 1.25,
-//                   //   fontWeight: FontWeight.normal,
-//                   // ),
-//                 ),
-//               ],
-//             ),
-//           ),
-//         ],
-//       ),
-//     );
-//   }
-// }
-
-// class _LayerPreviewIcon extends StatelessWidget {
-//   final bool selected;
-//   final IconData icon;
-
-//   const _LayerPreviewIcon({
-//     required this.selected,
-//     required this.icon,
-//   });
-
-//   @override
-//   Widget build(BuildContext context) {
-//     final accent = selected ? const Color(0xFFF97316) : const Color(0xFF2B5BEE);
-
-//     return Container(
-//       width: IconSizes.xxl,
-//       height: IconSizes.xxl,
-//       decoration: BoxDecoration(
-//         shape: BoxShape.circle,
-//         // color: const Color(0xFFF9FAFB),
-//         color: selected
-//             ? AppColors.danger2.withValues(alpha: 0.2)
-//             : context.surfaceColor,
-//         border: Border.all(
-//           // color: const Color(0xFFE5E7EB),
-//           color: selected
-//               ? AppColors.danger2.withValues(alpha: 0.4)
-//               : context.outlineVariantColor,
-//         ),
-//       ),
-//       child: Center(
-//         child: Icon(
-//           icon,
-//           size: IconSizes.md,
-//           color: selected ? AppColors.danger : accent,
-//         ),
-//       ),
-//     );
-//   }
-// }
-
-//DOIS
 
 class MapLayersBottomSheet2 extends StatefulWidget {
   final bool initiallyExpanded;
@@ -323,17 +67,6 @@ class _MapLayersBottomSheet2State extends State<MapLayersBottomSheet2>
             mainAxisSize: MainAxisSize.min,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              // Center(
-              //   child: Container(
-              //     width: 54,
-              //     height: 4,
-              //     decoration: BoxDecoration(
-              //       color: Colors.white24,
-              //       borderRadius: BorderRadius.circular(999),
-              //     ),
-              //   ),
-              // ),
-              // const SizedBox(height: 18),
               GestureDetector(
                 behavior: HitTestBehavior.opaque,
                 onTap: _toggle,
@@ -394,48 +127,48 @@ class _MapLayersBottomSheet2State extends State<MapLayersBottomSheet2>
                   ],
                 ),
               ),
-
               AnimatedCrossFade(
                 firstChild: const SizedBox(height: 0),
-                secondChild: Column(
+                secondChild: Row(
                   children: [
-                    _LayerTile(
-                      title: 'Alertar comunidade',
-                      subtitle:
-                          'Reporte rapidamente roubo ou atividade suspeita perto de você',
-                      selected: true,
-                      leading: const _MapPreviewIcon(
-                        dotColor: Color(0xFFFFC400),
-                        showAvatar: true,
+                    Expanded(
+                      child: _LayerActionTile(
+                        title: 'Criar alerta',
+                        subtitle: 'Roubo ou atitude suspeita',
+                        selected: true,
+                        leading: const _MapPreviewIcon(
+                          dotColor: Color(0xFFFFC400),
+                          showAvatar: true,
+                        ),
+                        onTap: () {
+                          _toggle();
+                          AlertTypeBottomSheet.show(
+                            context,
+                            onSuspiciousTap: () {
+                              context.push(AlertsRouter.suspiciousActivity);
+                            },
+                            onRobberyTap: () =>
+                                context.push(AlertsRouter.chooseAttemptType),
+                          );
+                        },
                       ),
-                      // onTap: () => context.push(ItemsRouter.register),
-                      onTap: () {
-                        _toggle();
-                        AlertTypeBottomSheet.show(
-                          context,
-                          onSuspiciousTap: () {
-                            context.push(AlertsRouter.suspiciousActivity);
-                          },
-                          onRobberyTap: () =>
-                              context.push(AlertsRouter.chooseAttemptType),
-                        );
-                      },
                     ),
-                    const SizedBox(height: 12),
-                    _LayerTile(
-                      title: 'Meu item foi roubado',
-                      subtitle:
-                          'Informe o roubo de um item cadastrado como carro, moto ou celular',
-                      selected: false,
-                      leading: const _MapPreviewIcon(
-                        dotColor: Color(0xFFFF8A00),
-                        showAvatar: false,
-                        centerIcon: Icons.person,
+                    const SizedBox(width: 12),
+                    Expanded(
+                      child: _LayerActionTile(
+                        title: 'Item roubado',
+                        subtitle: 'Carro, moto ou celular',
+                        selected: false,
+                        leading: const _MapPreviewIcon(
+                          dotColor: Color(0xFFFF8A00),
+                          showAvatar: false,
+                          centerIcon: Icons.person,
+                        ),
+                        onTap: () {
+                          _toggle();
+                          context.push(IncidentRouter.register);
+                        },
                       ),
-                      onTap: () {
-                        _toggle();
-                        context.push(IncidentRouter.register);
-                      },
                     ),
                   ],
                 ),
@@ -443,7 +176,7 @@ class _MapLayersBottomSheet2State extends State<MapLayersBottomSheet2>
                     ? CrossFadeState.showSecond
                     : CrossFadeState.showFirst,
                 duration: const Duration(milliseconds: 240),
-              ),
+              )
             ],
           ),
         ),
@@ -452,14 +185,14 @@ class _MapLayersBottomSheet2State extends State<MapLayersBottomSheet2>
   }
 }
 
-class _LayerTile extends StatelessWidget {
+class _LayerActionTile extends StatelessWidget {
   final String title;
   final String subtitle;
   final bool selected;
   final Widget leading;
   final VoidCallback onTap;
 
-  const _LayerTile({
+  const _LayerActionTile({
     required this.title,
     required this.subtitle,
     required this.selected,
@@ -469,55 +202,82 @@ class _LayerTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final borderColor =
-        selected ? Colors.transparent : Colors.white.withOpacity(0.16);
+    final borderColor = selected
+        ? const Color(0xFF2A2A2A)
+        : Colors.white.withValues(alpha: 0.12);
+
+    final backgroundColor =
+        selected ? const Color(0xFF171717) : const Color(0xFF0D0D0D);
 
     return Material(
       color: Colors.transparent,
       child: InkWell(
-        borderRadius: BorderRadius.circular(18),
+        borderRadius: BorderRadius.circular(20),
         onTap: onTap,
-        child: AnimatedContainer(
-          duration: const Duration(milliseconds: 180),
-          padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 12),
+        child: Ink(
+          padding: const EdgeInsets.fromLTRB(14, 16, 14, 16),
           decoration: BoxDecoration(
-            color: selected ? const Color(0xFF171717) : Colors.transparent,
-            borderRadius: BorderRadius.circular(18),
+            color: backgroundColor,
+            borderRadius: BorderRadius.circular(20),
             border: Border.all(color: borderColor),
+            boxShadow: [
+              BoxShadow(
+                color: Colors.black.withOpacity(0.18),
+                blurRadius: 14,
+                offset: const Offset(0, 6),
+              ),
+            ],
           ),
-          child: Row(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.start,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               leading,
-              const SizedBox(width: 12),
-              Expanded(
-                child: Padding(
-                  padding: const EdgeInsets.only(top: 2),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        title,
-                        style: const TextStyle(
-                          color: Colors.white,
-                          fontSize: 15,
-                          fontWeight: FontWeight.w700,
-                          height: 1.1,
-                        ),
-                      ),
-                      const SizedBox(height: 5),
-                      Text(
-                        subtitle,
-                        style: TextStyle(
-                          color: Colors.white.withOpacity(0.82),
-                          fontSize: 12.5,
-                          fontWeight: FontWeight.w500,
-                          height: 1.25,
-                        ),
-                      ),
-                    ],
-                  ),
+              const SizedBox(height: 14),
+              Text(
+                title,
+                maxLines: 2,
+                overflow: TextOverflow.ellipsis,
+                style: TextStyle(
+                  color: Colors.white,
+                  fontSize: context.safeSp(16),
+                  fontWeight: FontWeight.w800,
+                  height: 1.15,
                 ),
+              ),
+              const SizedBox(height: 6),
+              Text(
+                subtitle,
+                maxLines: 2,
+                overflow: TextOverflow.ellipsis,
+                style: TextStyle(
+                  // color: Colors.white.withValues(alpha: 0.72),
+                  color: context.secondaryTextColor,
+                  fontSize: context.safeSp(11),
+                  fontWeight: FontWeight.w500,
+                  height: 1.3,
+                ),
+              ),
+              const SizedBox(height: 14),
+              Row(
+                children: [
+                  Container(
+                    width: 28,
+                    height: 28,
+                    decoration: BoxDecoration(
+                      color: Colors.white.withOpacity(0.06),
+                      shape: BoxShape.circle,
+                      border: Border.all(
+                        color: Colors.white.withOpacity(0.08),
+                      ),
+                    ),
+                    child: const Icon(
+                      Icons.arrow_forward_rounded,
+                      size: 16,
+                      color: Colors.white70,
+                    ),
+                  ),
+                ],
               ),
             ],
           ),

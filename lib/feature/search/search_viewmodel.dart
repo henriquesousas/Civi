@@ -28,11 +28,10 @@ class SearchViewmodel extends StateNotifier<SearchState> {
 
     if (_cache.isNotEmpty) {
       final resultCache = _cache
-          .where(
-            (item) =>
-                item.alertId.contains(query) ||
-                item.product.code.contains(query),
-          )
+          .where((item) => item.alertId.contains(query)
+              // item.alertId.contains(query) ||
+              // item.product?.code.contains(query),
+              )
           .toList();
       debugPrint(
           'Resultado encontrado no cache ${resultCache.length.toString()}');

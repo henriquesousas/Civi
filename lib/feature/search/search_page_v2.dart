@@ -402,13 +402,13 @@ class _SearchResultTile extends StatelessWidget {
   }
 
   String _getTitle(IncidentOutput item) {
-    if (item.product.type == ItemType.moto.name) {
-      return '${item.product.name} roubada';
+    if (item.product?.type == ItemType.moto.name) {
+      return '${item.product?.name} roubada';
     }
-    if (item.product.type == ItemType.car.name) {
-      return '${item.product.name} roubado';
+    if (item.product?.type == ItemType.car.name) {
+      return '${item.product?.name} roubado';
     }
-    return '${item.product.name} roubado';
+    return '${item.product?.name} roubado';
   }
 }
 

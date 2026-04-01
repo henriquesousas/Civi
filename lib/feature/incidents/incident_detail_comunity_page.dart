@@ -41,7 +41,7 @@ class IncidentDetailComunityPage extends ConsumerWidget {
                   height: 250.h,
                   incidentId: incident?.alertId ?? '',
                   incidentCreated: incident?.occurredAt ?? DateTime.now(),
-                  photos: incident?.product.images ?? [],
+                  photos: incident?.product?.images ?? [],
                 ),
               ),
               SliverToBoxAdapter(
@@ -172,7 +172,8 @@ class IncidentDetailComunityPage extends ConsumerWidget {
                                   const SizedBox(height: 4),
                                   Text(
                                     incident != null
-                                        ? incident!.product.name
+                                        ? incident!.product?.name ??
+                                            "Não informado"
                                         : "Não informado",
                                     style:
                                         theme.textTheme.titleMedium?.copyWith(
@@ -361,20 +362,20 @@ class IncidentDetailComunityPage extends ConsumerWidget {
 
   String _getProductDescription(IncidentOutput? incident) {
     if (incident?.productType == ItemType.phone.name) {
-      return "${incident?.product.brand} ${incident?.product.name} • ${incident?.product.color} • IMEI ${incident?.product.code}";
+      return "${incident?.product?.brand} ${incident?.product?.name} • ${incident?.product?.color} • IMEI ${incident?.product?.code}";
     }
 
-    return "${incident?.product.brand} ${incident?.product.name} • ${incident?.product.color} • placa ${incident?.product.code}";
+    return "${incident?.product?.brand} ${incident?.product?.name} • ${incident?.product?.color} • placa ${incident?.product?.code}";
   }
 
   String _details(IncidentOutput? incident) {
     if (incident == null) return '';
     if (EnumUtils.fromString(ItemType.values, incident.productType) ==
         ItemType.phone) {
-      return 'Cor ${incident.product.color} • Código ${incident.alertId} ';
+      return 'Cor ${incident.product?.color} • Código ${incident.alertId} ';
     }
 
-    return 'Cor ${incident.product.color} • Ano ${incident.product.year} • Código ${incident.alertId} ';
+    return 'Cor ${incident.product?.color} • Ano ${incident.product?.year} • Código ${incident.alertId} ';
   }
 }
 

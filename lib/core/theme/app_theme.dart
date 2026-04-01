@@ -92,7 +92,8 @@ class AppTheme {
       primaryContainer: const Color.fromRGBO(31, 34, 42, 1),
       //CARDS
       surface: const Color(0xFF0F141B), //background principal
-      surfaceContainer: const Color(0xFF0F141B), //background principal
+      // surfaceContainer: const Color(0xFF0F141B), //background principal
+      surfaceContainer: const Color(0xFF0D0D0D), //background principal
       surfaceContainerLow: const Color(0xFF131A22), //background secundario
       surfaceContainerHigh: const Color(0XFF11171e),
 
@@ -101,8 +102,8 @@ class AppTheme {
       onSurfaceVariant: const Color(0xFF9AA4B2), // texto secundário
 
       /// BORDAS
-      outline: const Color(0xFF263241), //  borda principal
-      outlineVariant: const Color(0xFF263241), // borda secundária
+      outline: const Color(0xFF2A2A2A), //  borda principal
+      outlineVariant: const Color(0xFF1d1d1d), // borda secundária
 
       //DELETE
       secondaryContainer: Colors.grey.withValues(alpha: 0.1),
