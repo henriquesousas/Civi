@@ -1,3 +1,5 @@
+import 'package:deehelp/core/extension/size_extension.dart';
+import 'package:deehelp/core/theme/app_colors.dart';
 import 'package:deehelp/core/ui/widgets/buttons/buttons_export.dart';
 import 'package:flutter/material.dart';
 
@@ -43,6 +45,9 @@ class WizardBottomBar extends StatelessWidget {
                 child: ButtonOutline(
                   press: onSaveWithoutPicture ?? () {},
                   loading: loadingWithoutPicture,
+                  textColor:
+                      context.isDark() ? Colors.white : AppColors.primaryColor,
+                  borderColor: AppColors.primaryColor,
                   text: "Salvar sem foto",
                 ),
               ),

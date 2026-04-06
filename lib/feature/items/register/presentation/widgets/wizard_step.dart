@@ -34,15 +34,15 @@ class WizardHeader extends StatelessWidget {
                   Text(
                     title,
                     style: context.appText.body.copyWith(
-                      fontWeight: FontWeight.w900,
-                    ),
+                        fontWeight: FontWeight.w900,
+                        color: context.primaryTextColor),
                   ),
                   const SizedBox(height: SpacingSize.xs),
                   Text(
                     subtitle,
                     style: context.appText.bodySmall.copyWith(
                       fontWeight: FontWeight.w600,
-                      color: context.secondaryColor,
+                      color: context.secondaryTextColor,
                     ),
                   ),
                 ],

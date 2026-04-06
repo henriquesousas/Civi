@@ -22,7 +22,7 @@ class BrandNotFound extends StatelessWidget {
         'Nenhuma marca encontrada.',
         style: TextStyle(
           fontWeight: FontWeight.w700,
-          color: context.secondaryColor,
+          color: context.secondaryTextColor,
         ),
       ),
     );

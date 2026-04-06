@@ -1,3 +1,4 @@
+import 'package:deehelp/core/extension/exports_extension.dart';
 import 'package:deehelp/feature/items/list/widgets/header_summary.dart';
 import 'package:deehelp/feature/items/list/widgets/row_item_card_v2.dart';
 import 'package:deehelp/module/item/domain/entities/product.dart';
@@ -27,8 +28,8 @@ class ItemListView extends ConsumerWidget {
           const SizedBox(height: 5),
           // const VerificationInfoCard(),
           //   const SizedBox(height: SpacingSize.md),
-          const Divider(
-            color: Color(0xFF1C1C1E),
+          Divider(
+            color: context.outlineVariantColor,
             height: 1,
           ),
         ],
@@ -42,7 +43,7 @@ class ItemListView extends ConsumerWidget {
               itemBuilder: (context, index) {
                 final it = items[index];
                 return Padding(
-                  padding: const EdgeInsets.only(bottom: 12),
+                  padding: const EdgeInsets.only(bottom: 2),
                   child: RowItemCardV2(
                     item: it,
                     onTap: () => press(it),
@@ -50,8 +51,8 @@ class ItemListView extends ConsumerWidget {
                 );
               },
               separatorBuilder: (BuildContext context, int index) {
-                return const Divider(
-                  color: Color(0xFF1C1C1E),
+                return Divider(
+                  color: context.outlineVariantColor,
                   // color: Colors.grey,
                   height: 1,
                 );

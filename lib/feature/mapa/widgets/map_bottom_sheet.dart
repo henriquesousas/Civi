@@ -133,8 +133,8 @@ class _MapLayersBottomSheet2State extends State<MapLayersBottomSheet2>
                   children: [
                     Expanded(
                       child: _LayerActionTile(
-                        title: 'Criar alerta',
-                        subtitle: 'Roubo ou atitude suspeita',
+                        title: 'Publicar alerta',
+                        subtitle: 'Escolha uma categoria',
                         selected: true,
                         leading: const _MapPreviewIcon(
                           dotColor: Color(0xFFFFC400),
@@ -157,7 +157,7 @@ class _MapLayersBottomSheet2State extends State<MapLayersBottomSheet2>
                     Expanded(
                       child: _LayerActionTile(
                         title: 'Item roubado',
-                        subtitle: 'Carro, moto ou celular',
+                        subtitle: 'Seus itens',
                         selected: false,
                         leading: const _MapPreviewIcon(
                           dotColor: Color(0xFFFF8A00),

@@ -5,6 +5,7 @@ import 'package:deehelp/core/ui/widgets/icon/highlight_icon.dart';
 import 'package:deehelp/feature/items/register/presentation/widgets/brand-picker/brand_not_found.dart';
 import 'package:deehelp/feature/items/register/presentation/widgets/brand-picker/brand_search_field.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class BrandBottomSheet extends StatefulWidget {
   final String current;
@@ -246,7 +247,8 @@ class _BrandBottomSheetStateV2 extends State<BrandBottomSheetV2> {
         height: MediaQuery.of(context).size.height * 0.84,
         child: DecoratedBox(
           decoration: BoxDecoration(
-            color: const Color(0xFF0F1013),
+            // color: const Color(0xFF0F1013),
+            color: context.primaryBgCardLow,
             borderRadius: const BorderRadius.vertical(
               top: Radius.circular(28),
             ),
@@ -269,10 +271,12 @@ class _BrandBottomSheetStateV2 extends State<BrandBottomSheetV2> {
 
                 /// drag handle
                 Container(
-                  width: 42,
-                  height: 5,
+                  width: 42.w,
+                  height: 5.h,
                   decoration: BoxDecoration(
-                    color: Colors.white.withValues(alpha: 0.16),
+                    // color: Colors.white.withValues(alpha: 0.16),
+                    color: context.outline,
+
                     borderRadius: BorderRadius.circular(999),
                   ),
                 ),
@@ -291,9 +295,9 @@ class _BrandBottomSheetStateV2 extends State<BrandBottomSheetV2> {
                             Text(
                               'Selecionar marca',
                               style: TextStyle(
-                                fontSize: context.safeSp(16),
-                                fontWeight: FontWeight.w700,
-                                color: Colors.white,
+                                fontSize: context.safeSp(18),
+                                fontWeight: FontWeight.bold,
+                                color: context.primaryTextColor,
                               ),
                             ),
                             const SizedBox(height: 4),
@@ -302,7 +306,7 @@ class _BrandBottomSheetStateV2 extends State<BrandBottomSheetV2> {
                               style: TextStyle(
                                 fontSize: context.safeSp(12),
                                 fontWeight: FontWeight.w500,
-                                color: Colors.white.withValues(alpha: 0.58),
+                                color: context.secondaryTextColor,
                               ),
                             ),
                           ],
@@ -329,24 +333,24 @@ class _BrandBottomSheetStateV2 extends State<BrandBottomSheetV2> {
                 const SizedBox(height: 16),
 
                 /// result count
-                Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 16),
-                  child: Align(
-                    alignment: Alignment.centerLeft,
-                    child: Text(
-                      filtered.isEmpty
-                          ? 'Nenhuma marca encontrada'
-                          : '${filtered.length} marca${filtered.length > 1 ? 's' : ''}',
-                      style: TextStyle(
-                        fontSize: context.safeSp(12),
-                        fontWeight: FontWeight.w600,
-                        color: Colors.white.withValues(alpha: 0.42),
-                      ),
-                    ),
-                  ),
-                ),
+                // Padding(
+                //   padding: const EdgeInsets.symmetric(horizontal: 16),
+                //   child: Align(
+                //     alignment: Alignment.centerLeft,
+                //     child: Text(
+                //       filtered.isEmpty
+                //           ? 'Nenhuma marca encontrada'
+                //           : '${filtered.length} marca${filtered.length > 1 ? 's' : ''}',
+                //       style: TextStyle(
+                //         fontSize: context.safeSp(12),
+                //         fontWeight: FontWeight.w600,
+                //         color: context.primaryTextColor.withValues(alpha: 0.42),
+                //       ),
+                //     ),
+                //   ),
+                // ),
 
-                const SizedBox(height: 12),
+                // const SizedBox(height: 12),
 
                 if (filtered.isEmpty)
                   Expanded(
@@ -419,24 +423,31 @@ class _BrandTile extends StatelessWidget {
           decoration: BoxDecoration(
             color: selected
                 ? primary.withValues(alpha: 0.12)
-                : const Color(0xFF15171B),
+                : context.primaryBgCard,
             borderRadius: BorderRadius.circular(18),
             border: Border.all(
+              // color: const Color(0xFF1D1D21),
               color: selected
                   ? primary.withValues(alpha: 0.50)
-                  : Colors.white.withValues(alpha: 0.06),
+                  : context.outlineVariantColor.withValues(alpha: 1),
             ),
+            // border: Border.all(
+            //   color: selected
+            //       ? primary.withValues(alpha: 0.50)
+            //       : Colors.white.withValues(alpha: 0.06),
+            // ),
           ),
           child: Row(
             children: [
               HighlightIcon(
                 bgColor: selected
                     ? primary.withValues(alpha: 0.18)
-                    : Colors.white.withValues(alpha: 0.04),
+                    : context.outlineVariantColor,
                 icon: Icon(
                   Icons.directions_car_filled_rounded,
-                  color:
-                      selected ? primary : Colors.white.withValues(alpha: 0.72),
+                  color: selected
+                      ? primary
+                      : context.primaryTextColor.withValues(alpha: 0.5),
                   size: 18,
                 ),
               ),
@@ -449,7 +460,7 @@ class _BrandTile extends StatelessWidget {
                   style: TextStyle(
                     fontSize: context.safeSp(14),
                     fontWeight: FontWeight.w600,
-                    color: Colors.white.withValues(
+                    color: context.primaryTextColor.withValues(
                       alpha: selected ? 1 : 0.90,
                     ),
                   ),
@@ -502,19 +513,20 @@ class CloseButtonV2 extends StatelessWidget {
         onTap: onTap,
         borderRadius: BorderRadius.circular(999),
         child: Container(
-          width: 40,
-          height: 40,
+          width: 40.w,
+          height: 40.h,
           decoration: BoxDecoration(
-            color: Colors.white.withValues(alpha: 0.04),
+            // color: Colors.white.withValues(alpha: 0.04),
+            color: context.outlineVariantColor,
             shape: BoxShape.circle,
             border: Border.all(
-              color: Colors.white.withValues(alpha: 0.06),
+              color: context.outline.withValues(alpha: 0.06),
             ),
           ),
           child: Icon(
             Icons.close_rounded,
-            size: 20,
-            color: Colors.white.withValues(alpha: 0.82),
+            size: 20.w,
+            color: context.primaryTextColor,
           ),
         ),
       ),

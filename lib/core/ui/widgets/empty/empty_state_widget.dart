@@ -74,7 +74,7 @@ class EmptyStateWidget extends StatelessWidget {
                   subtitle,
                   textAlign: TextAlign.center,
                   style: context.appText.bodySmall.copyWith(
-                    color: context.secondaryColor,
+                    color: context.secondaryTextColor,
                     fontWeight: FontWeight.w500,
                     height: 1.45,
                   ),

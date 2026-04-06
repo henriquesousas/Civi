@@ -8,7 +8,7 @@ import 'package:flutter/material.dart';
 
 class BrandPickerField extends StatelessWidget {
   // final TextEditingController controller;
-  final String value;
+  final String? value;
   final List<String> options;
   final ValueChanged<String> onSelected;
 
@@ -32,7 +32,7 @@ class BrandPickerField extends StatelessWidget {
           backgroundColor: Colors.transparent,
           isScrollControlled: true,
           builder: (_) => BrandBottomSheetV2(
-            current: value,
+            current: value ?? '',
             options: (options.toSet().toList()..sort()),
           ),
         );
@@ -58,17 +58,21 @@ class BrandPickerField extends StatelessWidget {
                 children: [
                   Expanded(
                     child: Text(
-                      value,
+                      value ?? "Selecionar marca",
                       style: context.appText.bodySmall.copyWith(
-                        fontWeight: FontWeight.w800,
-                        color:
-                            muted ? context.secondaryColor : context.onSurface,
+                        fontWeight:
+                            value == null ? FontWeight.w600 : FontWeight.bold,
+                        color: muted
+                            ? context.secondaryTextColor
+                            : value == null
+                                ? context.secondaryTextColor
+                                : context.primaryTextColor,
                       ),
                     ),
                   ),
-                  Icon(
+                  const Icon(
                     Icons.expand_more,
-                    color: context.onSurfaceVariant.withValues(alpha: 0.2),
+                    color: AppColors.trailing,
                   ),
                 ],
               ),

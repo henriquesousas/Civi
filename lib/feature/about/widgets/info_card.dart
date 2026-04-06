@@ -40,13 +40,13 @@ class InfoCard extends StatelessWidget {
                   child: Text(
                     title,
                     style: context.appText.body.copyWith(
-                      fontWeight: FontWeight.w600,
+                      fontWeight: FontWeight.w800,
                     ),
                   ),
                 ),
-                Icon(
+                const Icon(
                   Icons.chevron_right,
-                  color: context.onSurface.withValues(alpha: 0.5),
+                  color: AppColors.trailing,
                 ),
               ],
             ),

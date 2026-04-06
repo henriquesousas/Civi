@@ -11,7 +11,7 @@ class CardNextStep extends StatelessWidget {
     return Container(
       padding: const EdgeInsets.all(LayoutSpacingSize.card),
       decoration: BoxDecoration(
-        color: Colors.white.withValues(alpha: 0.12),
+        color: Colors.white.withValues(alpha: 0.05),
         borderRadius: BorderRadius.circular(20),
         border: Border.all(color: Colors.white.withValues(alpha: 0.18)),
       ),
@@ -19,7 +19,7 @@ class CardNextStep extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
-            'O que acontece agora?',
+            'Próximos passos?',
             style: context.appText.headersm.copyWith(
               color: Colors.white,
             ),

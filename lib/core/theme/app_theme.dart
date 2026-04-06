@@ -13,10 +13,12 @@ class AppTheme {
       //CARDS
       surface: Colors.white, //background principal
       surfaceContainer: Colors.white, //background principal
-      surfaceContainerLow: Color(0XFFF3F4F6), //background secundario
+      surfaceContainerLow: Color(0XFFF3F4F6), //background secundar
+      // surfaceContainerHigh: Color(0XFFd6d6d6), //background accent
       surfaceContainerHigh: Color(0XFFd6d6d6), //background accent
       /// BORDAS
-      outline: Color(0xFFE4E8EF), //  borda principal
+      // outline: Color(0xFFE4E8EF), //  borda principal
+      outline: Color(0xFFcdd0d7), //  borda principal
       outlineVariant: Color(0xFFE4E8EF), // borda secundária
       // TEXTOS
       onSurface: Color(0xFF111827), // texto principal
@@ -54,18 +56,24 @@ class AppTheme {
 
       primary: Color(0xFF2B5BEE),
       onPrimary: Color(0xFFFFFFFF),
+      secondary: Colors.white70,
     );
 
     return ThemeData(
       useMaterial3: true,
       // appBarTheme: appBarLightTheme,
-      scaffoldBackgroundColor: const Color(0xFFF8FAFC),
+      scaffoldBackgroundColor: const Color(0xFFF5F7FD),
+      // scaffoldBackgroundColor: const Color(0xFFF8FAFC),
       // scaffoldBackgroundColor: const Color(0xFFF8FAFC),
       brightness: Brightness.light,
-      fontFamily: "Plus Jakarta",
+      // fontFamily: "Plus Jakarta",
+      // fontFamily: "MuseoModerno",
+      // fontFamily: "AlbertSans",
+      fontFamily: "Inter",
       colorScheme: baseColorScheme,
       primarySwatch: AppColors.primaryMaterialColor,
       primaryColor: AppColors.primaryColor,
+      primaryColorDark: AppColors.primaryColorDark,
       // iconTheme: const IconThemeData(color: AppColors.blackColor),
       // textTheme: AppTypography.textTheme.apply(
       //   displayColor: baseColorScheme.onSurface,
@@ -79,27 +87,30 @@ class AppTheme {
         backgroundColor: Colors.white,
         foregroundColor: Colors.black, // cor do texto e ícones
       ),
-      // checkboxTheme: checkboxThemeData.copyWith(
-      //   side: const BorderSide(color: AppColors.blackColor40),
-      // ),
-      // scrollbarTheme: scrollbarThemeData,
-      // dataTableTheme: dataTableLightThemeData,
     );
   }
 
   static ThemeData dark() {
     final baseColorScheme = ColorScheme.dark(
-      primaryContainer: const Color.fromRGBO(31, 34, 42, 1),
+      // primaryContainer: const Color.fromRGBO(31, 34, 42, 1),
+      primaryContainer: const Color(0xFF2B5BEE),
       //CARDS
-      surface: const Color(0xFF0F141B), //background principal
+      // surface: const Color(0xFF0F141B), //background principal
+      surface: const Color(0xFF0D0D0D), //background principal
       // surfaceContainer: const Color(0xFF0F141B), //background principal
-      surfaceContainer: const Color(0xFF0D0D0D), //background principal
-      surfaceContainerLow: const Color(0xFF131A22), //background secundario
-      surfaceContainerHigh: const Color(0XFF11171e),
+      // surfaceContainer: const Color(0xFF0D0D0D), //background principal
+      surfaceContainer: const Color(0xFF171717), //background principal
+      surfaceContainerLow: const Color(0xFF131A22), //background secundar
+
+      //background secundar
+      // surfaceContainerHigh: const Color(0XFF11171e),
+      surfaceContainerHigh: const Color(0XFF000000),
 
       // TEXTOS
       onSurface: Colors.white, // texto principal
       onSurfaceVariant: const Color(0xFF9AA4B2), // texto secundário
+      // onSurfaceVariant: const Color(0xFF6B7280), // texto secundário
+      // onSurfaceVariant: Colors.white, // texto secundário
 
       /// BORDAS
       outline: const Color(0xFF2A2A2A), //  borda principal
@@ -113,8 +124,8 @@ class AppTheme {
 
       // outline: Colors.grey.shade500,
       // primary: const Color(0xFF2B5BEE),
-      primary: Colors.white,
-      onPrimary: Colors.white,
+      primary: const Color(0xFF2B5BEE),
+      onPrimary: const Color(0xFFFFFFFF),
       secondary: Colors.white70,
       onSecondary: const Color(0xFF2157F8),
 
@@ -127,11 +138,12 @@ class AppTheme {
       scaffoldBackgroundColor: Colors.black87,
       // scaffoldBackgroundColor: const Color(0xFF0B0E14),
       brightness: Brightness.dark,
-      fontFamily: "Plus Jakarta",
+      // fontFamily: "Plus Jakarta",
+      fontFamily: "Inter",
       colorScheme: baseColorScheme,
       primarySwatch: AppColors.primaryMaterialColor,
-      primaryColor: Colors.white,
-      primaryColorDark: Colors.white,
+      primaryColor: AppColors.primaryColor,
+      primaryColorDark: AppColors.primaryColorDark,
       elevatedButtonTheme: elevatedButtonThemeData,
       textButtonTheme: textButtonThemeData,
       outlinedButtonTheme: outlinedButtonTheme(),

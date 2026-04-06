@@ -12,9 +12,12 @@ class DangerZone extends StatelessWidget {
     return Container(
       padding: const EdgeInsets.all(LayoutSpacingSize.card),
       decoration: BoxDecoration(
-        color: const Color(0xFF151010),
-        borderRadius: BorderRadius.circular(24),
-        border: Border.all(color: const Color(0xFF3A1E22)),
+        color: AppColors.danger.withValues(alpha: 0.1),
+        borderRadius: BorderRadius.circular(10),
+        border: Border.all(
+          // color: const Color(0xFF3A1E22),
+          color: AppColors.danger.withValues(alpha: 0.2),
+        ),
       ),
       child: InkWell(
         borderRadius: BorderRadius.circular(RadiusSize.md),
@@ -33,15 +36,15 @@ class DangerZone extends StatelessWidget {
                 child: Text(
                   'Remover item',
                   style: TextStyle(
-                    fontSize: 15,
-                    fontWeight: FontWeight.w800,
+                    // fontSize: context.safeSp(15),
+                    fontWeight: FontWeight.bold,
                     color: Color(0xFFEF4444),
                   ),
                 ),
               ),
               Icon(
                 CupertinoIcons.chevron_right,
-                color: const Color(0xFF8D8D93),
+                color: AppColors.danger,
                 size: IconSizes.xs,
               ),
             ],

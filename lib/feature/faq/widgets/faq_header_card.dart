@@ -33,7 +33,8 @@ class FaqHeaderCard extends StatelessWidget {
       //   ],
       // ),
       decoration: BoxDecoration(
-        color: context.secondaryContainer,
+        // color: context.secondaryContainer,
+        color: AppColors.primaryColor,
         borderRadius: BorderRadius.circular(RadiusSize.lg),
         border: Border.all(color: context.outlineVariantColor),
         boxShadow: const [

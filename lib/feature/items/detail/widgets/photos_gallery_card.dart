@@ -1,13 +1,17 @@
+import 'package:deehelp/core/extension/exports_extension.dart';
 import 'package:deehelp/core/theme/export_theme.dart';
 import 'package:deehelp/core/ui/styles/app_text_style.dart';
 import 'package:deehelp/core/ui/widgets/badge/badge_text.dart';
 import 'package:deehelp/core/ui/widgets/image/custom_network_image.dart';
+import 'package:deehelp/core/ui/widgets/image/ui_my_assets_image_widget.dart';
 import 'package:deehelp/feature/items/detail/widgets/card_text_zoom.dart';
 import 'package:deehelp/feature/items/detail/widgets/empty_photos.dart';
 import 'package:deehelp/feature/items/detail/widgets/horizontal_image_preview.dart';
+import 'package:deehelp/feature/items/item_type.dart';
 import 'package:deehelp/module/item/domain/entities/image_media.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class PhotosGalleryCard extends StatelessWidget {
   final List<ImageMedia> photos;
@@ -29,93 +33,80 @@ class PhotosGalleryCard extends StatelessWidget {
   Widget build(BuildContext context) {
     final hasPhotos = photos.isNotEmpty;
 
-    return Container(
-      // decoration: BoxDecoration(
-      //   color: context.surfaceColor,
-      //   borderRadius: BorderRadius.circular(24),
-      //   boxShadow: const [
-      //     BoxShadow(
-      //       color: Color(0x142B5BEE),
-      //       blurRadius: 16,
-      //       offset: Offset(0, 8),
-      //     ),
-      //   ],
-      // ),
-      child: Padding(
-        padding: const EdgeInsets.fromLTRB(12, 12, 12, 12),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Row(
-              children: [
-                Expanded(
-                  child: Text(
-                    'Fotos do item',
-                    style: context.appText.bodymd.copyWith(
-                      fontWeight: FontWeight.w700,
-                    ),
+    return Padding(
+      padding: const EdgeInsets.fromLTRB(12, 12, 12, 12),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Row(
+            children: [
+              Expanded(
+                child: Text(
+                  'Fotos do item',
+                  style: context.appText.bodymd.copyWith(
+                    fontWeight: FontWeight.w700,
                   ),
                 ),
-                if (hasPhotos) ...[
-                  BadgeText(text: '${selectedIndex + 1}/${photos.length}'),
-                ],
+              ),
+              if (hasPhotos) ...[
+                BadgeText(text: '${selectedIndex + 1}/${photos.length}'),
               ],
-            ),
-            const SizedBox(height: SpacingSize.md),
-            ClipRRect(
-              borderRadius: BorderRadius.circular(RadiusSize.lg),
-              child: AspectRatio(
-                aspectRatio: 16 / 10,
-                child: hasPhotos
-                    ? Stack(
-                        children: [
-                          PageView.builder(
-                            controller: controller,
-                            itemCount: photos.length,
-                            onPageChanged: onIndexChanged,
-                            itemBuilder: (_, i) {
-                              return GestureDetector(
-                                onTap: () => onOpenZoom(i),
-                                child: CustomNetworkImage(
-                                    imageUrl: photos[i].value),
-                                // child: Container(
-                                //   color: const Color(0xFFF5F7FD),
-                                //   child: Image(
-                                //     image: photos[i],
-                                //     fit: BoxFit.cover,
-                                //   ),
-                                // ),
-                              );
-                            },
-                          ),
-                          const Positioned(
-                            right: 10,
-                            bottom: 10,
-                            child: CardTextZoom(),
-                          ),
-                        ],
-                      )
-                    : const EmptyPhotos(),
-              ),
-            ),
-            if (hasPhotos) ...[
-              const SizedBox(height: SpacingSize.md),
-              HorizontalImagePreview(
-                photos: photos,
-                selectedIndex: selectedIndex,
-                press: (i) {
-                  controller.animateToPage(
-                    i,
-                    duration: const Duration(milliseconds: 260),
-                    curve: Curves.easeOut,
-                  );
-                  onIndexChanged(i);
-                },
-              ),
-              // TextButton(onPressed: () {}, child: const Text("Atualizar fotos"))
             ],
+          ),
+          const SizedBox(height: SpacingSize.md),
+          ClipRRect(
+            borderRadius: BorderRadius.circular(RadiusSize.lg),
+            child: AspectRatio(
+              aspectRatio: 16 / 10,
+              child: hasPhotos
+                  ? Stack(
+                      children: [
+                        PageView.builder(
+                          controller: controller,
+                          itemCount: photos.length,
+                          onPageChanged: onIndexChanged,
+                          itemBuilder: (_, i) {
+                            return GestureDetector(
+                              onTap: () => onOpenZoom(i),
+                              child:
+                                  CustomNetworkImage(imageUrl: photos[i].value),
+                              // child: Container(
+                              //   color: const Color(0xFFF5F7FD),
+                              //   child: Image(
+                              //     image: photos[i],
+                              //     fit: BoxFit.cover,
+                              //   ),
+                              // ),
+                            );
+                          },
+                        ),
+                        const Positioned(
+                          right: 10,
+                          bottom: 10,
+                          child: CardTextZoom(),
+                        ),
+                      ],
+                    )
+                  : const EmptyPhotos(),
+            ),
+          ),
+          if (hasPhotos) ...[
+            const SizedBox(height: SpacingSize.md),
+            HorizontalImagePreview(
+              photos: photos,
+              selectedIndex: selectedIndex,
+              press: (i) {
+                controller.animateToPage(
+                  i,
+                  duration: const Duration(milliseconds: 260),
+                  curve: Curves.easeOut,
+                );
+                onIndexChanged(i);
+              },
+            ),
+            // TextButton(onPressed: () {}, child: const Text("Atualizar fotos"))
           ],
-        ),
+        ],
       ),
     );
   }
@@ -123,6 +114,7 @@ class PhotosGalleryCard extends StatelessWidget {
 
 class PhotosGalleryCardV2 extends StatelessWidget {
   final List<ImageMedia> photos;
+  final String itemtype;
   final int selectedIndex;
   final ValueChanged<int> onIndexChanged;
   final PageController controller;
@@ -135,6 +127,7 @@ class PhotosGalleryCardV2 extends StatelessWidget {
     required this.onIndexChanged,
     required this.controller,
     required this.onOpenZoom,
+    required this.itemtype,
   });
 
   @override
@@ -143,13 +136,35 @@ class PhotosGalleryCardV2 extends StatelessWidget {
 
     if (!hasPhotos) {
       return Container(
-        color: const Color(0xFF111214),
-        child: const Center(
-          child: Icon(
-            CupertinoIcons.photo,
-            color: Colors.white38,
-            size: 46,
-          ),
+        // color: const Color(0xFF111214),
+        color: context.primaryBgCard,
+        child: Center(
+          child: itemtype == ItemType.phone.name
+              ? CiviImageCard(
+                  assetPath: "assets/images/phone_pin_v2.png",
+                  width: 70.w,
+                  height: 70.h,
+                )
+              : Container(
+                  width: 80.w,
+                  height: 80.w,
+                  decoration: BoxDecoration(
+                    // color: context.primaryBgCardLow,
+                    color: context.primaryBgCardHigh,
+                    // color: Colors.black.withValues(alpha: 0.2),
+                    borderRadius: BorderRadius.circular(20),
+                    border: Border.all(
+                      color: context.primaryBgCard,
+                    ),
+                  ),
+                  clipBehavior: Clip.hardEdge,
+                  child: Icon(
+                    Icons.image_not_supported,
+                    // color: context.isDark() ? Colors.white : context.primaryBgCard,
+                    color: context.primaryTextColor.withValues(alpha: 0.5),
+                    size: 40.w,
+                  ),
+                ),
         ),
       );
     }

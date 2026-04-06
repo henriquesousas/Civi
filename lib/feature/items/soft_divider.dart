@@ -9,7 +9,7 @@ class SoftDivider extends StatelessWidget {
     return Divider(
       height: 1,
       indent: 70,
-      color: context.outlineVariantColor.withValues(alpha: 0.3),
+      color: context.outlineVariantColor,
     );
   }
 }

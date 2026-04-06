@@ -36,9 +36,14 @@ class HeaderCard extends StatelessWidget {
       //   ],
       // ),
       decoration: BoxDecoration(
-        color: const Color(0xFF101012),
+        // color: const Color(0xFF101012),
+        // color: context.primaryBgCardLow,
+        color: context.primaryBgCard,
         borderRadius: BorderRadius.circular(24),
-        border: Border.all(color: const Color(0xFF1D1D21)),
+        border: Border.all(
+          // color: const Color(0xFF1D1D21),
+          color: context.outlineVariantColor,
+        ),
       ),
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.center,
@@ -61,10 +66,10 @@ class HeaderCard extends StatelessWidget {
                         title,
                         maxLines: 1,
                         overflow: TextOverflow.ellipsis,
-                        style: const TextStyle(
-                          fontSize: 17,
+                        style: TextStyle(
+                          fontSize: context.safeSp(17),
                           fontWeight: FontWeight.w800,
-                          color: Colors.white,
+                          color: context.primaryTextColor,
                         ),
                       ),
                     ),
@@ -79,7 +84,7 @@ class HeaderCard extends StatelessWidget {
                   subtitle,
                   style: TextStyle(
                     fontSize: context.safeSp(11),
-                    color: const Color(0xFF8D8D93),
+                    color: context.secondaryTextColor,
                   ),
                 ),
               ],

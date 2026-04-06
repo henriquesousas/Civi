@@ -99,8 +99,8 @@ class _MainAppState extends ConsumerState<MainApp> {
               // themeMode: ThemeMode.light,
               // darkTheme: AppTheme.dark(),
               // theme: themeData,
-              theme: AppTheme.lightTheme(),
-              darkTheme: AppTheme.dark(),
+              theme: AppTheme.dark(),
+              darkTheme: AppTheme.lightTheme(),
               themeMode: ThemeMode.dark,
               // themeMode:
               //     themeState.isDarkMode ? ThemeMode.dark : ThemeMode.light,
@@ -111,5 +111,25 @@ class _MainAppState extends ConsumerState<MainApp> {
         );
       },
     );
+  }
+}
+
+class SystemUIHelper {
+  static void setStyle(Brightness brightness) {
+    if (brightness == Brightness.dark) {
+      SystemChrome.setSystemUIOverlayStyle(
+        const SystemUiOverlayStyle(
+          statusBarColor: Colors.transparent,
+          statusBarIconBrightness: Brightness.light,
+        ),
+      );
+    } else {
+      SystemChrome.setSystemUIOverlayStyle(
+        const SystemUiOverlayStyle(
+          statusBarColor: Colors.transparent,
+          statusBarIconBrightness: Brightness.dark,
+        ),
+      );
+    }
   }
 }

@@ -55,7 +55,8 @@ class EditableFieldTile extends StatelessWidget {
                       style: TextStyle(
                         fontSize: context.safeSp(11),
                         fontWeight: FontWeight.w800,
-                        color: const Color(0xFF8D8D93),
+                        // color: const Color(0xFF8D8D93),
+                        color: context.primaryTextColor,
                         letterSpacing: 0.2,
                       ),
                     ),
@@ -67,7 +68,7 @@ class EditableFieldTile extends StatelessWidget {
                       style: TextStyle(
                         fontSize: context.safeSp(13),
                         fontWeight: FontWeight.w700,
-                        color: Colors.white,
+                        color: context.secondaryTextColor,
                       ),
                     ),
                   ],

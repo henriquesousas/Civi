@@ -6,7 +6,7 @@ import 'package:shimmer/shimmer.dart';
 
 class LoadingResultsSkeleton extends StatelessWidget {
   final int size;
-  const LoadingResultsSkeleton({super.key, required this.size});
+  const LoadingResultsSkeleton({super.key, this.size = 10});
 
   @override
   Widget build(BuildContext context) {
@@ -102,7 +102,7 @@ class LoadingResultsSkeletonV2 extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.black,
+      backgroundColor: Colors.transparent,
       body: SafeArea(
         child: Column(
           children: [
@@ -112,14 +112,15 @@ class LoadingResultsSkeletonV2 extends StatelessWidget {
                 alignment: Alignment.bottomCenter,
                 child: Container(
                   width: double.infinity,
-                  decoration: const BoxDecoration(
-                    color: Color(0xFF050505),
-                    borderRadius: BorderRadius.vertical(
+                  decoration: BoxDecoration(
+                    // color: Color(0xFF050505),
+                    color: context.surfaceColor,
+                    borderRadius: const BorderRadius.vertical(
                       top: Radius.circular(28),
                     ),
-                    boxShadow: [
+                    boxShadow: const [
                       BoxShadow(
-                        color: Colors.black54,
+                        color: Color(0x142B5BEE),
                         blurRadius: 30,
                         offset: Offset(0, -8),
                       ),
@@ -131,8 +132,9 @@ class LoadingResultsSkeletonV2 extends StatelessWidget {
                         child: ListView.separated(
                           padding: EdgeInsets.zero,
                           itemCount: 5,
-                          separatorBuilder: (_, __) => const Divider(
-                            color: Color(0xFF1C1C1E),
+                          separatorBuilder: (_, __) => Divider(
+                            // color: Color(0xFF1C1C1E),
+                            color: context.outlineVariantColor,
                             height: 1,
                           ),
                           itemBuilder: (_, __) =>
@@ -148,38 +150,6 @@ class LoadingResultsSkeletonV2 extends StatelessWidget {
         ),
       ),
       // bottomNavigationBar: const _BottomNavBarShimmer(),
-    );
-  }
-}
-
-// ignore: unused_element
-class _HeaderSectionShimmer extends StatelessWidget {
-  const _HeaderSectionShimmer();
-
-  @override
-  Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.fromLTRB(24, 8, 24, 18),
-      child: Shimmer.fromColors(
-        baseColor: const Color(0xFF151517),
-        highlightColor: const Color(0xFF242428),
-        child: const Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            _ShimmerBox(
-              width: 180,
-              height: 30,
-              radius: 8,
-            ),
-            SizedBox(height: 10),
-            _ShimmerBox(
-              width: 120,
-              height: 16,
-              radius: 6,
-            ),
-          ],
-        ),
-      ),
     );
   }
 }
@@ -234,8 +204,10 @@ class OffenderListTileShimmer extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.fromLTRB(10, 20, 20, 20),
       child: Shimmer.fromColors(
-        baseColor: const Color(0xFF151517),
-        highlightColor: const Color(0xFF242428),
+        // baseColor: const Color(0xFF151517),
+        // highlightColor: const Color(0xFF242428),
+        baseColor: context.outline,
+        highlightColor: context.outlineVariantColor,
         child: const Row(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [

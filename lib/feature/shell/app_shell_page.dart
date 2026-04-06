@@ -16,6 +16,7 @@ import 'package:deehelp/module/item/di/item_viewmodel_provider.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
 
 class AppShellPage extends ConsumerStatefulWidget {
@@ -42,114 +43,110 @@ class _AppShellPageState extends ConsumerState<AppShellPage> {
   ];
   @override
   Widget build(BuildContext context) {
-    return Stack(
-      children: [
-        SafeArea(
-          child: Scaffold(
-            body: IndexedStack(
-              index: index,
-              children: _pages,
-            ),
-            bottomNavigationBar: _BottomNavBar(
-              currentIndex: index,
-              onChanged: (i) {
-                setState(
-                  () {
-                    if (i == 1) {
-                      final userId = ref.read(authenticatedUserProvider)?.id;
-                      if (userId == null) {
-                        context.push(AuthRouter.path);
-                        return;
-                      }
-                    }
-                    index = i;
-                  },
-                );
-
-                // ✅ quando clicar em "Meus itens"
-                if (i == 1) {
-                  final userId = ref.read(authenticatedUserProvider)?.id;
-                  if (userId == null) {
-                    ref.read(itemListViewmodelProvider.notifier).clear();
-                    _itemsLoadedOnce = false;
-                    return;
-                  }
+    return Scaffold(
+      bottomNavigationBar: _BottomNavBar(
+        currentIndex: index,
+        onChanged: (i) {
+          setState(
+            () {
+              if (i == 1) {
+                final userId = ref.read(authenticatedUserProvider)?.id;
+                if (userId == null) {
+                  context.push(AuthRouter.path);
+                  return;
                 }
+              }
+              index = i;
+            },
+          );
 
-                if (i == 1 && !_itemsLoadedOnce) {
-                  final userId = ref.read(authenticatedUserProvider)?.id;
-                  if (userId == null) {
-                    return;
-                  }
-                  _itemsLoadedOnce = true;
-                  ref
-                      .read(itemListViewmodelProvider.notifier)
-                      .getProducts(userId);
-                }
-              },
+          // ✅ quando clicar em "Meus itens"
+          if (i == 1) {
+            final userId = ref.read(authenticatedUserProvider)?.id;
+            if (userId == null) {
+              ref.read(itemListViewmodelProvider.notifier).clear();
+              _itemsLoadedOnce = false;
+              return;
+            }
+          }
+
+          if (i == 1 && !_itemsLoadedOnce) {
+            final userId = ref.read(authenticatedUserProvider)?.id;
+            if (userId == null) {
+              return;
+            }
+            _itemsLoadedOnce = true;
+            ref.read(itemListViewmodelProvider.notifier).getProducts(userId);
+          }
+        },
+      ),
+      body: Stack(
+        children: [
+          IndexedStack(
+            index: index,
+            children: _pages,
+          ),
+          SafeArea(
+            child: Padding(
+              padding: const EdgeInsets.only(top: 10),
+              child: Align(
+                alignment: Alignment.topCenter,
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 12),
+                  child: ValueListenableBuilder(
+                    valueListenable: WazeAlertController.instance.notifier,
+                    builder: (context, alert, _) {
+                      if (alert == null) return const SizedBox.shrink();
+                      return AnimatedTopToastCard(
+                        ttl: const Duration(seconds: 50),
+                        onClosed: WazeAlertController.instance.hide,
+                        child: Wazelert(
+                          title: alert.title,
+                          subtitle: alert.subtitle,
+                          onTap: () {
+                            // abrir detalhes, navegar etc.
+                          },
+                          onClosed: WazeAlertController.instance.hide,
+                        ),
+                      );
+                    },
+                  ),
+                ),
+              ),
             ),
           ),
-        ),
-        SafeArea(
-          child: Padding(
-            padding: const EdgeInsets.only(top: 10),
-            child: Align(
-              alignment: Alignment.topCenter,
-              child: Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 12),
-                child: ValueListenableBuilder(
-                  valueListenable: WazeAlertController.instance.notifier,
-                  builder: (context, alert, _) {
-                    if (alert == null) return const SizedBox.shrink();
+          SafeArea(
+            child: Padding(
+              padding: const EdgeInsets.only(top: 20),
+              child: Align(
+                alignment: Alignment.topCenter,
+                child: ValueListenableBuilder<bool>(
+                  valueListenable: NetworkAlertController.instance.notifier,
+                  builder: (context, isOffline, _) {
+                    if (!isOffline) return const SizedBox.shrink();
+
                     return AnimatedTopToastCard(
-                      ttl: const Duration(seconds: 50),
-                      onClosed: WazeAlertController.instance.hide,
-                      child: Wazelert(
-                        title: alert.title,
-                        subtitle: alert.subtitle,
-                        onTap: () {
-                          // abrir detalhes, navegar etc.
+                      ttl: const Duration(days: 1), // não some sozinho
+                      onClosed: NetworkAlertController.instance.hide,
+                      child: NoInternetCard(
+                        onRetry: () async {
+                          final hasConnection =
+                              await ref.read(networkInfoProvider).hasConnection;
+
+                          if (hasConnection) {
+                            NetworkAlertController.instance.hide();
+                          }
                         },
-                        onClosed: WazeAlertController.instance.hide,
+                        onClose: NetworkAlertController.instance.hide,
                       ),
                     );
                   },
                 ),
               ),
             ),
-          ),
-        ),
-        SafeArea(
-          child: Padding(
-            padding: const EdgeInsets.only(top: 20),
-            child: Align(
-              alignment: Alignment.topCenter,
-              child: ValueListenableBuilder<bool>(
-                valueListenable: NetworkAlertController.instance.notifier,
-                builder: (context, isOffline, _) {
-                  if (!isOffline) return const SizedBox.shrink();
-
-                  return AnimatedTopToastCard(
-                    ttl: const Duration(days: 1), // não some sozinho
-                    onClosed: NetworkAlertController.instance.hide,
-                    child: NoInternetCard(
-                      onRetry: () async {
-                        final hasConnection =
-                            await ref.read(networkInfoProvider).hasConnection;
-
-                        if (hasConnection) {
-                          NetworkAlertController.instance.hide();
-                        }
-                      },
-                      onClose: NetworkAlertController.instance.hide,
-                    ),
-                  );
-                },
-              ),
-            ),
-          ),
-        )
-      ],
+          )
+        ],
+      ),
     );
   }
 }
@@ -191,11 +188,16 @@ class _BottomNavBar extends StatelessWidget {
       ),
     ];
     return Container(
-      height: 86,
-      decoration: const BoxDecoration(
-        color: Color(0xFF040404),
+      height: 86.h,
+      decoration: BoxDecoration(
+        // color: Color(0xFF040404),
+        color: context.surface,
         border: Border(
-          top: BorderSide(color: Color(0xFF1C1C1E), width: 1),
+          top: BorderSide(
+            // color: Color(0xFF1C1C1E),
+            color: context.outlineVariantColor,
+            width: 1,
+          ),
         ),
       ),
       child: Row(
@@ -215,23 +217,38 @@ class _BottomNavBar extends StatelessWidget {
                   child: Column(
                     mainAxisSize: MainAxisSize.min,
                     children: [
-                      Icon(
-                        selected ? item.activeIcon : item.icon,
-                        color: selected
-                            ? context.primaryTextColor
-                            // : const Color(0xFF9CA3AF),
-                            : context.secondaryTextColor,
-                        size: IconSizes.md,
+                      // Icon(
+                      //   selected ? item.activeIcon : item.icon,
+                      //   color: selected
+                      //       ? context.primaryTextColor
+                      //       : context.secondaryTextColor,
+                      //   size: IconSizes.md,
+                      // ),
+                      AnimatedContainer(
+                        duration: const Duration(milliseconds: 200),
+                        padding: const EdgeInsets.all(8),
+                        decoration: BoxDecoration(
+                          color: selected
+                              ? context.primaryColor.withValues(alpha: 0.15)
+                              : Colors.transparent,
+                          borderRadius: BorderRadius.circular(14),
+                        ),
+                        child: Icon(
+                          selected ? item.activeIcon : item.icon,
+                          color: selected
+                              ? context.primaryColor // azul forte
+                              : context.secondaryTextColor,
+                          size: IconSizes.md,
+                        ),
                       ),
-                      const SizedBox(height: 4),
                       Text(
                         item.label,
                         style: context.appText.button.copyWith(
+                          fontWeight:
+                              selected ? FontWeight.w500 : FontWeight.w200,
                           color: selected
                               ? context.primaryTextColor
                               : context.secondaryTextColor,
-                          // : const Color(0xFF9CA3AF),
-                          fontWeight: FontWeight.normal,
                         ),
                       ),
                     ],
@@ -283,120 +300,3 @@ class _NavItem extends StatelessWidget {
     );
   }
 }
-
-// class HomeBottomSheetNav extends StatelessWidget {
-//   final int currentIndex;
-//   final ValueChanged<int>? onChanged;
-
-//   const HomeBottomSheetNav({
-//     super.key,
-//     required this.currentIndex,
-//     this.onChanged,
-//   });
-
-//   @override
-//   Widget build(BuildContext context) {
-//     const items = [
-//       _BottomNavItemData(
-//         icon: Icons.public,
-//         activeIcon: Icons.public_outlined,
-//         label: 'Mapa',
-//       ),
-//       _BottomNavItemData(
-//         icon: Icons.search,
-//         activeIcon: Icons.search,
-//         label: 'Buscar',
-//       ),
-//       _BottomNavItemData(
-//         icon: Icons.inventory_2_outlined,
-//         activeIcon: Icons.inventory_2_rounded,
-//         label: 'Items',
-//       ),
-//       _BottomNavItemData(
-//         icon: Icons.person_outline_rounded,
-//         activeIcon: Icons.person,
-//         label: 'Perfil',
-//       ),
-//     ];
-
-//     return Container(
-//       padding: EdgeInsets.only(
-//         left: 10,
-//         right: 10,
-//         top: 10,
-//         bottom: MediaQuery.of(context).padding.bottom + 10,
-//       ),
-//       decoration: BoxDecoration(
-//         // color: Colors.white,
-//         // color: context.surfaceColor,
-//         color: Theme.of(context).scaffoldBackgroundColor,
-//         borderRadius: const BorderRadius.vertical(
-//           top: Radius.circular(28),
-//         ),
-//         boxShadow: const [
-//           BoxShadow(
-//             color: Color(0x14000000),
-//             blurRadius: 18,
-//             offset: Offset(0, -4),
-//           ),
-//         ],
-//       ),
-//       child: Row(
-//         mainAxisAlignment: MainAxisAlignment.spaceAround,
-//         children: List.generate(
-//           items.length,
-//           (index) {
-//             final item = items[index];
-//             final selected = currentIndex == index;
-
-//             return Expanded(
-//               child: InkWell(
-//                 onTap: () => onChanged?.call(index),
-//                 borderRadius: BorderRadius.circular(16),
-//                 child: Padding(
-//                   padding: const EdgeInsets.symmetric(vertical: 6),
-//                   child: Column(
-//                     mainAxisSize: MainAxisSize.min,
-//                     children: [
-//                       Icon(
-//                         selected ? item.activeIcon : item.icon,
-//                         color: selected
-//                             ? context.onSurfaceVariant
-//                             // : const Color(0xFF9CA3AF),
-//                             : context.onSurface.withValues(alpha: 0.8),
-//                         size: IconSizes.lg,
-//                       ),
-//                       const SizedBox(height: 4),
-//                       Text(
-//                         item.label,
-//                         style: context.appText.label.copyWith(
-//                           color: selected
-//                               ? context.onSurfaceVariant
-//                               : context.onSurface.withValues(alpha: 0.8),
-//                           // : const Color(0xFF9CA3AF),
-//                           fontWeight: FontWeight.normal,
-//                         ),
-//                       ),
-//                     ],
-//                   ),
-//                 ),
-//               ),
-//             );
-//           },
-//         ),
-//       ),
-//     );
-//   }
-// }
-
-// class _BottomNavItemData {
-//   final IconData icon;
-//   final IconData activeIcon;
-//   final String label;
-
-//   const _BottomNavItemData({
-//     required this.icon,
-//     required this.activeIcon,
-//     required this.label,
-//   });
-// }

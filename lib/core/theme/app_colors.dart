@@ -25,6 +25,7 @@ class AppColors {
   static const Color danger = Color(0xFFE53935);
   static const Color danger2 = Color(0xFF900505);
   static const Color success = Color(0xFF16A34A);
+  static const Color trailing = Color(0xFF8A96C8);
 
   static const shadow = BoxShadow(
     color: Color(0x12000000),

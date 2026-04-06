@@ -45,6 +45,7 @@ class AddAlertUsecase extends UseCase<AddAlertDto, String> {
       kind: Kind.rouberry,
       reportType: ReportType.alertIncident,
       title: dto.alertTitle,
+      type: dto.typeItem,
     );
 
     await _repository.save(report);

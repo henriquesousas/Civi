@@ -35,15 +35,15 @@ class EngagementCard extends StatelessWidget {
             '• Envie sugestões — cada feedback conta',
             style: context.appText.bodySmall.copyWith(
               height: 1.35,
+              color: context.secondaryTextColor,
             ),
           ),
-          const SizedBox(height: SpacingSize.lg),
+          const SizedBox(height: SpacingSize.xl),
           ButtonOutline(
-            bgColor: context.primaryColor,
-            // textColor:
-            //     context.isLight ? AppColors.primaryColor : context.primaryColor,
-            textColor: context.surface,
-            icon: Icon(Icons.share_outlined, color: context.surface),
+            bgColor: AppColors.primaryColor,
+            borderColor: AppColors.primaryColor,
+            textColor: Colors.white,
+            icon: const Icon(Icons.share_outlined, color: Colors.white),
             text: 'Compartilhar o ${AppName.appName}',
             press: onShare,
           )

@@ -21,7 +21,7 @@ class AlertViewmodel extends StateNotifier<AlertState> {
         _authenticatedUser = authenticatedUser,
         super(const AlertState());
 
-  void sendAlert(String alertTitle) async {
+  void sendAlert(String alertTitle, String typeItem) async {
     if (_currentLocation == null || _authenticatedUser == null) {
       return;
     }
@@ -37,6 +37,7 @@ class AlertViewmodel extends StateNotifier<AlertState> {
       userId: _authenticatedUser.id,
       local: local,
       alertTitle: alertTitle,
+      typeItem: typeItem,
     );
     await HandleCommand.execute<String, AlertState>(
       updateState: (newState) => state = newState,

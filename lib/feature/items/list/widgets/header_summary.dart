@@ -33,13 +33,8 @@ class _HeaderSummaryState extends State<HeaderSummary> {
         duration: const Duration(milliseconds: 180),
         curve: Curves.easeOut,
         decoration: BoxDecoration(
-          color: context.surfaceColor.withValues(alpha: 0.5),
+          color: context.primaryBgCard,
           borderRadius: borderRadius,
-          // border: Border.all(
-          //   color: _isHovered
-          //       ? context.primaryColor.withValues(alpha: 0.22)
-          //       : context.primaryColor.withValues(alpha: 0.08),
-          // ),
           boxShadow: [
             BoxShadow(
               color: Colors.black.withValues(
@@ -50,93 +45,90 @@ class _HeaderSummaryState extends State<HeaderSummary> {
             ),
           ],
         ),
-        child: Material(
-          color: Colors.transparent,
+        child: InkWell(
           borderRadius: borderRadius,
-          child: InkWell(
-            borderRadius: borderRadius,
-            splashColor: context.primaryColor.withValues(alpha: 0.10),
-            highlightColor: context.primaryColor.withValues(alpha: 0.04),
-            onTap: () => _handleTap(context),
-            onHighlightChanged: (value) {
-              setState(() => _isPressed = value);
-            },
-            child: Padding(
-              padding: const EdgeInsets.all(LayoutSpacingSize.card),
-              child: Row(
-                children: [
-                  AnimatedContainer(
-                    duration: const Duration(milliseconds: 180),
-                    width: IconSizes.xxl,
-                    height: IconSizes.xxl,
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(14),
-                      gradient: LinearGradient(
-                        colors: [
-                          context.primaryColor,
-                          context.primaryColorDark,
-                        ],
-                        begin: Alignment.topLeft,
-                        end: Alignment.bottomRight,
-                      ),
-                      boxShadow: [
-                        BoxShadow(
-                          color: context.primaryColor.withValues(
-                            alpha: _isHovered ? 0.30 : 0.18,
-                          ),
-                          blurRadius: _isHovered ? 16 : 10,
-                          offset: const Offset(0, 6),
-                        ),
+          splashColor: context.primaryColor.withValues(alpha: 0.10),
+          highlightColor: context.primaryColor.withValues(alpha: 0.04),
+          onTap: () => _handleTap(context),
+          onHighlightChanged: (value) {
+            setState(() => _isPressed = value);
+          },
+          child: Padding(
+            padding: const EdgeInsets.all(LayoutSpacingSize.card),
+            child: Row(
+              children: [
+                AnimatedContainer(
+                  duration: const Duration(milliseconds: 180),
+                  width: IconSizes.xxl,
+                  height: IconSizes.xxl,
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(14),
+                    gradient: const LinearGradient(
+                      colors: [
+                        AppColors.primaryColor,
+                        AppColors.primaryColorDark,
                       ],
+                      begin: Alignment.topLeft,
+                      end: Alignment.bottomRight,
                     ),
-                    child: Icon(
-                      Icons.add_rounded,
-                      color: context.surfaceColor,
-                    ),
-                  ),
-                  const SizedBox(width: SpacingSize.md),
-                  Expanded(
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(
-                          'Adicionar novo item',
-                          style: context.appText.headermd.copyWith(
-                            fontWeight: FontWeight.w600,
-                          ),
+                    boxShadow: [
+                      BoxShadow(
+                        color: context.primaryColor.withValues(
+                          alpha: _isHovered ? 0.30 : 0.18,
                         ),
-                        const SizedBox(height: SpacingSize.xs),
-                        Text(
-                          '${widget.total} item(ns) no seu perfil',
-                          style: context.appText.caption.copyWith(
-                            color: context.secondaryColor,
-                          ),
+                        blurRadius: _isHovered ? 16 : 10,
+                        offset: const Offset(0, 6),
+                      ),
+                    ],
+                  ),
+                  child: const Icon(
+                    Icons.add_rounded,
+                    color: Colors.white,
+                  ),
+                ),
+                const SizedBox(width: SpacingSize.md),
+                Expanded(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        'Adicionar novo item',
+                        style: context.appText.headermd.copyWith(
+                          fontWeight: FontWeight.w600,
+                          color: context.primaryTextColor,
                         ),
-                      ],
+                      ),
+                      const SizedBox(height: SpacingSize.xs),
+                      Text(
+                        '${widget.total} item(ns) no seu perfil',
+                        style: context.appText.caption.copyWith(
+                          color: context.secondaryTextColor,
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+                AnimatedContainer(
+                  duration: const Duration(milliseconds: 180),
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: 12,
+                    vertical: 7,
+                  ),
+                  decoration: BoxDecoration(
+                    color: context.primaryColor.withValues(
+                      alpha: _isHovered ? 0.16 : 0.10,
+                    ),
+                    borderRadius: BorderRadius.circular(RadiusSize.xxxl),
+                  ),
+                  child: Text(
+                    '${widget.total}',
+                    style: context.appText.caption.copyWith(
+                      fontWeight: FontWeight.w800,
+                      color: context.primaryColor,
                     ),
                   ),
-                  AnimatedContainer(
-                    duration: const Duration(milliseconds: 180),
-                    padding: const EdgeInsets.symmetric(
-                      horizontal: 12,
-                      vertical: 7,
-                    ),
-                    decoration: BoxDecoration(
-                      color: context.primaryColor.withValues(
-                        alpha: _isHovered ? 0.16 : 0.10,
-                      ),
-                      borderRadius: BorderRadius.circular(RadiusSize.xxxl),
-                    ),
-                    child: Text(
-                      '${widget.total}',
-                      style: context.appText.caption.copyWith(
-                        fontWeight: FontWeight.w800,
-                        color: context.primaryColor,
-                      ),
-                    ),
-                  ),
-                ],
-              ),
+                ),
+              ],
             ),
           ),
         ),

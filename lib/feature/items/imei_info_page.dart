@@ -1,4 +1,6 @@
+import 'package:deehelp/core/extension/color_extension.dart';
 import 'package:deehelp/core/extension/size_extension.dart';
+import 'package:deehelp/core/theme/app_colors.dart';
 import 'package:deehelp/core/ui/widgets/appbar/default_app_bar.dart';
 import 'package:deehelp/core/ui/widgets/buttons/buttons_export.dart';
 import 'package:flutter/material.dart';
@@ -11,19 +13,19 @@ class ImeiInfoPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    const bg = Color(0xFF0B0F14);
-    const surface = Color(0xFF121821);
-    // const surfaceSoft = Color(0xFF161D27);
-    const border = Color(0xFF222B38);
-    // const primary = Color(0xFF3B82F6);
-    const textPrimary = Colors.white;
-    const textSecondary = Color(0xFF9AA4B2);
+    // const bg = Color(0xFF0B0F14);
+    // const surface = Color(0xFF121821);
+    // // const surfaceSoft = Color(0xFF161D27);
+    // const border = Color(0xFF222B38);
+    // // const primary = Color(0xFF3B82F6);
+    // const textPrimary = Colors.white;
+    // const textSecondary = Color(0xFF9AA4B2);
     const warningBg = Color(0xFF1E1720);
     const warningBorder = Color(0xFF3A243C);
     const warningText = Color(0xFFF5C2E7);
 
     return Scaffold(
-      backgroundColor: bg,
+      backgroundColor: context.scaffoldBackgroundColor,
       // appBar: AppBar(
       //   backgroundColor: bg,
       //   elevation: 0,
@@ -101,7 +103,7 @@ class ImeiInfoPage extends StatelessWidget {
             Text(
               'O que é o IMEI?',
               style: TextStyle(
-                color: textPrimary,
+                color: context.primaryTextColor,
                 fontSize: context.safeSp(22),
                 fontWeight: FontWeight.w900,
               ),
@@ -112,7 +114,7 @@ class ImeiInfoPage extends StatelessWidget {
               'Ele funciona como a identidade do aparelho e pode ajudar '
               'na comprovação e identificação em caso de perda ou roubo.',
               style: TextStyle(
-                color: textSecondary,
+                color: context.secondaryTextColor,
                 fontSize: context.safeSp(14),
                 height: 1.5,
               ),
@@ -143,9 +145,11 @@ class ImeiInfoPage extends StatelessWidget {
               width: double.infinity,
               padding: const EdgeInsets.all(16),
               decoration: BoxDecoration(
-                color: surface,
+                // color: surface,
+                color: context.primaryBgCardLow,
                 borderRadius: BorderRadius.circular(20),
-                border: Border.all(color: border),
+                // border: Border.all(color: border),
+                border: Border.all(color: context.outline),
               ),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -153,7 +157,7 @@ class ImeiInfoPage extends StatelessWidget {
                   Text(
                     'Como acessar o IMEI do dispositivo',
                     style: TextStyle(
-                      color: textPrimary,
+                      color: context.primaryTextColor,
                       fontSize: context.safeSp(14),
                       fontWeight: FontWeight.w700,
                     ),
@@ -181,7 +185,7 @@ class ImeiInfoPage extends StatelessWidget {
                     'Android: Configurações > Sobre o telefone\n'
                     'iPhone: Ajustes > Geral > Sobre',
                     style: TextStyle(
-                      color: textSecondary,
+                      color: context.primaryTextColor,
                       fontSize: context.safeSp(13),
                       height: 1.5,
                     ),
@@ -385,9 +389,9 @@ class _StepItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    const primary = Color(0xFF3B82F6);
+    const primary = AppColors.primaryColor;
     // const textPrimary = Colors.white;
-    const textSecondary = Color(0xFF9AA4B2);
+    // const textSecondary = Color(0xFF9AA4B2);
 
     return Padding(
       padding: const EdgeInsets.only(bottom: 12),
@@ -416,7 +420,7 @@ class _StepItem extends StatelessWidget {
             child: Text(
               text,
               style: TextStyle(
-                color: textSecondary,
+                color: context.primaryTextColor,
                 fontSize: context.safeSp(12),
                 height: 1.45,
               ),

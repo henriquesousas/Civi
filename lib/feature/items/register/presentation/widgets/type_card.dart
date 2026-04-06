@@ -1,13 +1,15 @@
 import 'package:deehelp/core/extension/color_extension.dart';
 import 'package:deehelp/core/theme/export_theme.dart';
 import 'package:deehelp/core/ui/styles/export_style.dart';
-import 'package:deehelp/core/ui/widgets/icon/highlight_icon.dart';
+import 'package:deehelp/core/ui/widgets/image/ui_my_assets_image_widget.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class TypeCard extends StatelessWidget {
   final String title;
   final String subtitle;
   final IconData icon;
+  final String? asset;
   final bool selected;
   final VoidCallback onTap;
 
@@ -18,6 +20,7 @@ class TypeCard extends StatelessWidget {
     required this.icon,
     required this.selected,
     required this.onTap,
+    this.asset,
   });
 
   @override
@@ -27,7 +30,7 @@ class TypeCard extends StatelessWidget {
         selected ? context.primaryColor : context.outlineVariantColor;
     final bg = selected
         ? context.primaryColor.withValues(alpha: 0.07)
-        : const Color(0xFF101012);
+        : context.primaryBgCard;
 
     return InkWell(
       onTap: onTap,
@@ -53,15 +56,24 @@ class TypeCard extends StatelessWidget {
         // ),
         child: Row(
           children: [
-            HighlightIcon(
-              bgColor: selected
-                  ? context.primaryColor.withValues(alpha: 0.16)
-                  : context.outline,
-              // : const Color(0xFFF5F7FD),
-              icon: Icon(
-                icon,
-                color: selected ? context.primaryColor : context.onSurface,
-              ),
+            // HighlightIcon(
+            //   bgColor: selected
+            //       ? context.primaryColor.withValues(alpha: 0.8)
+            //       : context.primaryBgCardHigh.withValues(alpha: 0.4),
+            //   // : const Color(0xFFF5F7FD),
+            //   icon: Icon(
+            //     icon,
+            //     // color: selected ? context.primaryColor : context.onSurface,
+            //     color: selected ? Colors.white : context.onSurface,
+            //   ),
+            //   // icon: Image.asset(
+            //   //   asset!,
+            //   // ),
+            // ),
+            CiviImageCard(
+              assetPath: asset!,
+              width: 50.w,
+              height: 50.h,
             ),
             const SizedBox(width: SpacingSize.md),
             Expanded(
@@ -70,14 +82,16 @@ class TypeCard extends StatelessWidget {
                 children: [
                   Text(
                     title,
-                    style: context.appText.headermd,
+                    style: context.appText.headermd.copyWith(
+                      fontWeight: FontWeight.w700,
+                    ),
                   ),
                   const SizedBox(height: SpacingSize.xs),
                   Text(
                     subtitle,
                     style: context.appText.caption.copyWith(
                       fontWeight: FontWeight.w600,
-                      color: context.secondaryColor,
+                      color: context.secondaryTextColor,
                     ),
                   ),
                 ],

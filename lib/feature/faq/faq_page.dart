@@ -64,14 +64,14 @@ class _FaqPageState extends State<FaqPage> {
                   'Como podemos ajudar?',
                   style: context.appText.headermd.copyWith(
                     fontWeight: FontWeight.w900,
-                    color: context.onSurface,
+                    color: Colors.white,
                   ),
                 ),
                 const SizedBox(height: SpacingSize.sm),
                 Text(
                   'Encontre respostas rápidas sobre cadastro de itens, ocorrências, mapa e privacidade.',
                   style: context.appText.bodySmall.copyWith(
-                    color: context.secondaryColor.withValues(alpha: 0.85),
+                    color: Colors.white.withValues(alpha: 0.85),
                     height: 1.35,
                   ),
                 ),

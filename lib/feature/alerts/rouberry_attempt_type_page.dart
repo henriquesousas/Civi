@@ -61,14 +61,14 @@ class _RobberyAttemptTypePageState
       iconBackgroundColor: Color(0xFF2D1B47),
       iconColor: Color(0xFFA78BFA),
     ),
-    // _AlertOption(
-    //   id: 'phone_theft',
-    //   title: 'Roubo de celular',
-    //   subtitle: 'Celular ou pertence foi roubado durante a abordagem.',
-    //   icon: Icons.smartphone_rounded,
-    //   iconBackgroundColor: Color(0xFF3A1818),
-    //   iconColor: Color(0xFFFB7185),
-    // ),
+    _AlertOption(
+      id: 'suspicious_activity',
+      title: 'Atividade suspeita',
+      subtitle: 'Você observou alguma atividade suspeita na área.',
+      icon: Icons.report_problem_rounded,
+      iconBackgroundColor: Color(0xFF32C12),
+      iconColor: Color(0xFFFBBF24),
+    ),
     // _AlertOption(
     //   id: 'other',
     //   title: 'Outro',
@@ -95,14 +95,7 @@ class _RobberyAttemptTypePageState
           if (Navigator.canPop(context)) {
             Navigator.of(context, rootNavigator: true).pop();
           }
-          // context.showTopNotice(
-          //   "Obrigado por avisar a comunidade. Sua colaboração ajuda a proteger pessoas perto de você.",
-          //   type: DialogType.success,
-          // );
-          // context.showThankYouNotice(
-          //   context,
-          // );
-          // showThankYouNotice(context);
+
           showDialog(
             context: context,
             barrierDismissible: false,
@@ -217,14 +210,14 @@ class _RobberyAttemptTypePageState
               padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
               child: UIHoldConfirmButton(
                 onProgressCompleted: () async {
-                  if (selectedType == null) return;
+                  // if (selectedType == null) return;
 
-                  final type = options
-                      .where((element) => element.id == selectedType)
-                      .first;
-                  ref
-                      .read(addAlertViewModelProvider.notifier)
-                      .sendAlert(type.title);
+                  // final type = options
+                  //     .where((element) => element.id == selectedType)
+                  //     .first;
+                  // ref
+                  //     .read(addAlertViewModelProvider.notifier)
+                  //     .sendAlert(type.title);
                 },
                 onApiCall: () async {},
                 onProgressChange: (v) {},

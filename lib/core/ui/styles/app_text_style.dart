@@ -35,7 +35,7 @@ class AppTextStyles {
   TextStyle get bodySmall => _textTheme.bodySmall!.copyWith(
         fontSize: _context.safeSp(AppTextSizes.bodySmall),
         fontWeight: FontWeight.w500,
-        color: _colorScheme.secondary,
+        color: _colorScheme.onSurface,
       );
 
   TextStyle get title => _textTheme.titleLarge!.copyWith(

@@ -1,14 +1,13 @@
 import 'package:deehelp/core/extension/color_extension.dart';
 import 'package:deehelp/core/theme/export_theme.dart';
 import 'package:deehelp/feature/items/register/presentation/widgets/color-picker/color_bottom_sheet.dart';
-import 'package:deehelp/feature/items/register/presentation/widgets/color-picker/color_dot.dart';
 import 'package:deehelp/feature/items/register/presentation/widgets/color-picker/color_option.dart';
 import 'package:deehelp/feature/items/register/presentation/widgets/item_highticon.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class ColorPickerField extends StatelessWidget {
-  final String value;
+  final String? value;
   final List<ColorOption> options;
   final ValueChanged<ColorOption> onSelected;
 
@@ -30,7 +29,7 @@ class ColorPickerField extends StatelessWidget {
           context: context,
           backgroundColor: Colors.transparent,
           builder: (_) => ColorBottomSheetV2(
-            current: value,
+            current: value ?? '',
             options: options,
           ),
         );
@@ -54,29 +53,33 @@ class ColorPickerField extends StatelessWidget {
               ),
               child: Row(
                 children: [
-                  if (!muted) ...[
-                    ColorDot(
-                      option: options.firstWhere(
-                        (o) => o.name.toLowerCase() == value.toLowerCase(),
-                        orElse: () => const ColorOption('—', Color(0xFFE6EAF6)),
-                      ),
-                      size: 14,
-                    ),
-                    const SizedBox(width: SpacingSize.md),
-                  ],
+                  // if (!muted) ...[
+                  //   ColorDot(
+                  //     option: options.firstWhere(
+                  //       (o) => o.name.toLowerCase() == value?.toLowerCase(),
+                  //       orElse: () => const ColorOption('—', Color(0xFFE6EAF6)),
+                  //     ),
+                  //     size: 14,
+                  //   ),
+                  //   const SizedBox(width: SpacingSize.md),
+                  // ],
                   Expanded(
                     child: Text(
-                      value,
+                      value ?? "Selecionar cor",
                       style: TextStyle(
-                        fontWeight: FontWeight.w800,
-                        color:
-                            muted ? context.secondaryColor : context.onSurface,
+                        fontWeight:
+                            value == null ? FontWeight.w600 : FontWeight.bold,
+                        color: muted
+                            ? context.secondaryTextColor
+                            : value == null
+                                ? context.secondaryTextColor
+                                : context.primaryTextColor,
                       ),
                     ),
                   ),
-                  Icon(
+                  const Icon(
                     Icons.expand_more,
-                    color: context.onSurfaceVariant.withValues(alpha: 0.2),
+                    color: AppColors.trailing,
                   ),
                 ],
               ),

@@ -23,4 +23,8 @@ extension ScreenSizeExtension on BuildContext {
     final v = value.sp;
     return isLandscape ? v.clamp(10.0, 18.0) : v;
   }
+
+  bool isDark() {
+    return Theme.of(this).brightness == Brightness.dark;
+  }
 }

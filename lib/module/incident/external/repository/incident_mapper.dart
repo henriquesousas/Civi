@@ -38,7 +38,7 @@ class IncidentMapper {
       'alert_id': incident.alertId,
       "title": incident.title,
       'product_id': incident.product?.id.value,
-      'product_type': incident.product?.type,
+      'product_type': incident.type,
       'user_id': incident.userId,
       'how_to': incident.howTo,
       'city': incident.local?.city,

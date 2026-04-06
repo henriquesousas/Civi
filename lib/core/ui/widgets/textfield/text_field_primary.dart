@@ -42,19 +42,24 @@ class TextFieldPrimary extends StatelessWidget {
           onChanged!(text);
         }
       },
+      style: const TextStyle(fontWeight: FontWeight.bold),
       decoration: InputDecoration(
           counterText: '',
           errorText: error,
-          counterStyle: TextStyle(color: context.secondaryColor),
+          counterStyle: TextStyle(color: context.secondaryTextColor),
           labelText: labelText,
           labelStyle: TextStyle(
-            color: context.secondaryColor,
-            fontWeight: FontWeight.w800,
+            color: context.secondaryTextColor,
+            fontWeight: FontWeight.w500,
+          ),
+          hintStyle: TextStyle(
+            color: context.secondaryTextColor,
+            fontWeight: FontWeight.w500,
           ),
           hintText: hint,
           filled: true,
           // fillColor: const Color(0xFFF5F7FD),
-          fillColor: context.secondaryContainer,
+          fillColor: context.primaryBgCardLow,
           border: OutlineInputBorder(
             borderRadius: BorderRadius.circular(RadiusSize.md),
             borderSide: BorderSide.none,

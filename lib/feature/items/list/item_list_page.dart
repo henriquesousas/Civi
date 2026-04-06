@@ -77,6 +77,7 @@ class _ItemListPageState extends ConsumerState<ItemListPage> {
     final state = ref.watch(itemListViewmodelProvider);
     return Scaffold(
       // bottomNavigationBar: _bottomBar(state),
+      backgroundColor: context.scaffoldBackgroundColor,
       appBar: DefaultAppBar(
         title: "Meus itens",
         showBackButton: widget.showBackButton ?? false,
@@ -116,22 +117,41 @@ class _ItemListPageState extends ConsumerState<ItemListPage> {
             }
           },
         ),
-        // loading: (_) => const ItemListShimmer(),
-        loading: (_) => const LoadingResultsSkeletonV2(),
-        noInternet: (value) => EmptyStateWidget(
-          highlightIcon: Icon(
-            Icons.inventory_2_outlined,
-            size: IconSizes.xl,
-            color: context.primaryColor,
-          ),
-          title: 'Sem conexão de rede :()',
-          subtitle:
-              'Por favor verifique sua conexão e tente novamente mais tarde!',
-          buttonText: "Tentar de novo",
-          onRetry: () {
-            fetchData();
-          },
-        ),
+
+        // success: (value) => const LoadingResultsSkeletonV2(),
+        // success: (value) => Padding(
+        //   padding: const EdgeInsets.all(8.0),
+        //   child: EmptyStateWidget(
+        //     highlightIcon: Icon(
+        //       CupertinoIcons.exclamationmark_circle,
+        //       size: IconSizes.xl,
+        //       color: context.primaryColor,
+        //     ),
+        //     title: 'Algo deu errado',
+        //     subtitle:
+        //         'Não conseguimos carregar seus itens agora. Tente novamente em instantes.',
+        //     buttonText: "Tentar novamente",
+        //     onRetry: () {
+        //       fetchData();
+        //     },
+        //   ),
+        // ),
+        // // loading: (_) => const ItemListShimmer(),
+        // loading: (_) => const LoadingResultsSkeletonV2(),
+        // noInternet: (value) => EmptyStateWidget(
+        //   highlightIcon: Icon(
+        //     Icons.inventory_2_outlined,
+        //     size: IconSizes.xl,
+        //     color: context.primaryColor,
+        //   ),
+        //   title: 'Sem conexão de rede :()',
+        //   subtitle:
+        //       'Por favor verifique sua conexão e tente novamente mais tarde!',
+        //   buttonText: "Tentar de novo",
+        //   onRetry: () {
+        //     fetchData();
+        //   },
+        // ),
         empty: (value) {
           if (widget.args != null) {
             return NoRegisteredItemBottomSheet(
@@ -227,10 +247,11 @@ class NoRegisteredItemBottomSheet extends StatelessWidget {
             child: Container(
               padding: const EdgeInsets.fromLTRB(20, 14, 20, 20),
               decoration: BoxDecoration(
-                color: const Color(0xFF111315).withValues(alpha: 0.96),
+                // color: const Color(0xFF111315).withValues(alpha: 0.96),
+                color: context.primaryBgCard.withValues(alpha: 0.96),
                 borderRadius: BorderRadius.circular(28),
                 border: Border.all(
-                  color: Colors.white.withValues(alpha: 0.08),
+                  color: context.outlineVariantColor,
                 ),
                 boxShadow: const [
                   BoxShadow(
@@ -276,7 +297,7 @@ class NoRegisteredItemBottomSheet extends StatelessWidget {
                       'Nenhum item cadastrado ainda',
                       textAlign: TextAlign.center,
                       style: TextStyle(
-                        color: Colors.white,
+                        color: context.primaryTextColor,
                         fontSize: context.safeSp(18),
                         fontWeight: FontWeight.w800,
                         letterSpacing: -0.3,
@@ -287,7 +308,8 @@ class NoRegisteredItemBottomSheet extends StatelessWidget {
                       'Para continuar, você precisa cadastrar um item e aguardar a verificação da equipe Civi. Após a aprovação, ele poderá ser usado em ocorrências e alertas.',
                       textAlign: TextAlign.center,
                       style: TextStyle(
-                        color: Colors.white.withValues(alpha: 0.72),
+                        color:
+                            context.secondaryTextColor.withValues(alpha: 0.72),
                         fontSize: context.safeSp(13),
                         height: 1.45,
                       ),
@@ -297,7 +319,7 @@ class NoRegisteredItemBottomSheet extends StatelessWidget {
                       width: double.infinity,
                       padding: const EdgeInsets.all(14),
                       decoration: BoxDecoration(
-                        color: Colors.white.withValues(alpha: 0.04),
+                        color: context.primaryBgCardHigh.withValues(alpha: 0.5),
                         borderRadius: BorderRadius.circular(18),
                         border: Border.all(
                           color: Colors.white.withValues(alpha: 0.07),
@@ -316,7 +338,8 @@ class NoRegisteredItemBottomSheet extends StatelessWidget {
                             child: Text(
                               'A verificação ajuda a manter a segurança e a confiabilidade das informações dentro da comunidade Civi.',
                               style: TextStyle(
-                                color: Colors.white.withValues(alpha: 0.66),
+                                color: context.primaryTextColor
+                                    .withValues(alpha: 0.66),
                                 fontSize: context.safeSp(11),
                                 height: 1.4,
                               ),

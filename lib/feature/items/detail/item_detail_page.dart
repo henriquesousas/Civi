@@ -122,409 +122,422 @@ class _ItemDetailPageState extends ConsumerState<ItemDetailPage> {
     listener(item);
 
     return Scaffold(
+        backgroundColor: context.scaffoldBackgroundColor,
         body: NestedScrollView(
-      physics: const BouncingScrollPhysics(),
-      headerSliverBuilder: (context, innerBoxIsScrolled) {
-        return [
-          SliverAppBar(
-            expandedHeight: 400.h,
-            pinned: true,
-            elevation: 0,
-            leading: Padding(
-              padding: const EdgeInsets.only(left: 10),
-              child: TopCircleBack(
-                icon: CupertinoIcons.back,
-                onTap: () => context.pop(),
-              ),
-            ),
-            flexibleSpace: FlexibleSpaceBar(
-              collapseMode: CollapseMode.parallax,
-              background: Stack(
-                fit: StackFit.expand,
-                children: [
-                  PhotosGalleryCardV2(
-                    photos: item.images,
-                    selectedIndex: selectedPhoto,
-                    controller: _pageCtrl,
-                    onIndexChanged: (i) {
-                      if (!mounted) return;
-                      if (i == selectedPhoto) return;
-
-                      WidgetsBinding.instance.addPostFrameCallback((_) {
-                        if (!mounted) return;
-                        setState(() => selectedPhoto = i);
-                      });
-                    },
-                    onOpenZoom: (i) =>
-                        _openPhotoViewer(context, item.images, i),
+          physics: const BouncingScrollPhysics(),
+          headerSliverBuilder: (context, innerBoxIsScrolled) {
+            // final isAllowedShow = (item.type == ItemType.car.name ||
+            //     item.type == ItemType.moto.name);
+            return [
+              SliverAppBar(
+                expandedHeight: 400.h,
+                pinned: true,
+                elevation: 0,
+                leading: Padding(
+                  padding: const EdgeInsets.only(left: 10),
+                  child: TopCircleBack(
+                    icon: CupertinoIcons.back,
+                    onTap: () => context.pop(),
                   ),
+                ),
+                flexibleSpace: FlexibleSpaceBar(
+                  collapseMode: CollapseMode.parallax,
+                  background: Stack(
+                    fit: StackFit.expand,
+                    children: [
+                      PhotosGalleryCardV2(
+                        itemtype: item.type,
+                        photos: item.images,
+                        selectedIndex: selectedPhoto,
+                        controller: _pageCtrl,
+                        onIndexChanged: (i) {
+                          if (!mounted) return;
+                          if (i == selectedPhoto) return;
 
-                  /// 🔥 BOTÃO EDITAR IMAGENS
-                  Positioned(
-                    top: kToolbarHeight,
-                    right: 16,
-                    child: GestureDetector(
-                      onTap: () {
-                        // ação editar imagens
-                        context.push(ItemsRouter.updatePhoto);
-                      },
-                      child: Container(
-                        padding: const EdgeInsets.symmetric(
-                          horizontal: 12,
-                          vertical: 8,
-                        ),
-                        decoration: BoxDecoration(
-                          color: Colors.black.withValues(alpha: 0.55),
-                          borderRadius: BorderRadius.circular(999),
-                          border: Border.all(
-                            color: Colors.white.withValues(alpha: 0.10),
-                          ),
-                        ),
-                        child: Row(
-                          mainAxisSize: MainAxisSize.min,
-                          children: [
-                            Icon(
-                              CupertinoIcons.pencil,
-                              size: 15.w,
-                              color: Colors.white,
-                            ),
-                            const SizedBox(width: 6),
-                            Text(
-                              item.images.isNotEmpty
-                                  ? 'Editar foto'
-                                  : 'Adicionar foto',
-                              style: TextStyle(
-                                color: Colors.white,
-                                fontSize: context.safeSp(12),
-                                fontWeight: FontWeight.w600,
+                          WidgetsBinding.instance.addPostFrameCallback((_) {
+                            if (!mounted) return;
+                            setState(() => selectedPhoto = i);
+                          });
+                        },
+                        onOpenZoom: (i) =>
+                            _openPhotoViewer(context, item.images, i),
+                      ),
+
+                      /// 🔥 BOTÃO EDITAR IMAGENS
+                      if (item.type != ItemType.phone.name) ...[
+                        Positioned(
+                          top: kToolbarHeight,
+                          right: 16,
+                          child: GestureDetector(
+                            onTap: () {
+                              // ação editar imagens
+                              context.push(ItemsRouter.updatePhoto);
+                            },
+                            child: Container(
+                              padding: const EdgeInsets.symmetric(
+                                horizontal: 12,
+                                vertical: 8,
+                              ),
+                              decoration: BoxDecoration(
+                                color: Colors.black.withValues(alpha: 0.55),
+                                borderRadius: BorderRadius.circular(999),
+                                border: Border.all(
+                                  color: Colors.white.withValues(alpha: 0.10),
+                                ),
+                              ),
+                              child: Row(
+                                mainAxisSize: MainAxisSize.min,
+                                children: [
+                                  Icon(
+                                    CupertinoIcons.pencil,
+                                    size: 15.w,
+                                    color: Colors.white,
+                                  ),
+                                  const SizedBox(width: 6),
+                                  Text(
+                                    item.images.isNotEmpty
+                                        ? 'Editar foto'
+                                        : 'Adicionar foto',
+                                    style: TextStyle(
+                                      color: Colors.white,
+                                      fontSize: context.safeSp(12),
+                                      fontWeight: FontWeight.w600,
+                                    ),
+                                  ),
+                                ],
                               ),
                             ),
-                          ],
+                          ),
                         ),
-                      ),
-                    ),
-                  ),
+                      ],
 
-                  IgnorePointer(
-                    child: DecoratedBox(
-                      decoration: BoxDecoration(
-                        gradient: LinearGradient(
-                          begin: Alignment.topCenter,
-                          end: Alignment.bottomCenter,
-                          colors: [
-                            // Colors.black.withValues(alpha: 0.08),
-                            // Colors.black.withValues(alpha: 0.12),
-                            // Colors.black.withValues(alpha: 0.24),
-                            // Colors.black.withValues(alpha: 0.55),
-                            Colors.transparent,
-                            Colors.black.withValues(alpha: 0.05),
-                            Colors.black.withValues(alpha: 0.12),
-                            Colors.black.withValues(alpha: 0.35),
-                          ],
-                          // stops: const [0.0, 0.35, 0.68, 1.0],
-                          stops: const [0.0, 0.6, 0.8, 1.0],
+                      IgnorePointer(
+                        child: DecoratedBox(
+                          decoration: BoxDecoration(
+                            gradient: LinearGradient(
+                              begin: Alignment.topCenter,
+                              end: Alignment.bottomCenter,
+                              colors: [
+                                // Colors.black.withValues(alpha: 0.08),
+                                // Colors.black.withValues(alpha: 0.12),
+                                // Colors.black.withValues(alpha: 0.24),
+                                // Colors.black.withValues(alpha: 0.55),
+                                Colors.transparent,
+                                Colors.black.withValues(alpha: 0.05),
+                                Colors.black.withValues(alpha: 0.12),
+                                Colors.black.withValues(alpha: 0.35),
+                              ],
+                              // stops: const [0.0, 0.35, 0.68, 1.0],
+                              stops: const [0.0, 0.6, 0.8, 1.0],
+                            ),
+                          ),
                         ),
                       ),
-                    ),
+                    ],
                   ),
-                ],
-              ),
-            ),
-          ),
-        ];
-      },
-      body: Container(
-        decoration: const BoxDecoration(
-          color: Color(0xFF050505),
-          borderRadius: BorderRadius.vertical(
-            top: Radius.circular(32),
-          ),
-        ),
-        child: ListView(
-          padding: const EdgeInsets.fromLTRB(10, 20, 10, 120),
-          children: [
-            Center(
-              child: Container(
-                width: 54,
-                height: 5,
-                decoration: BoxDecoration(
-                  color: Colors.white24,
-                  borderRadius: BorderRadius.circular(100),
                 ),
               ),
+            ];
+          },
+          body: Container(
+            decoration: BoxDecoration(
+              // color: Color(0xFF050505),
+              color: context.scaffoldBackgroundColor,
+              borderRadius: const BorderRadius.vertical(
+                top: Radius.circular(32),
+              ),
             ),
-            const SizedBox(height: 20),
-            HeaderCard(
-              title: item.name,
-              subtitle: 'Toque nos campos para editar',
-              status: item.status,
-            ),
-            const SizedBox(height: 18),
-            ItemStatusNotice(status: item.status),
-            const SizedBox(height: SpacingSize.lg),
-            const SizedBox(height: 18),
-            const SectionTitle('Informações do item'),
-            PageCard(
-              child: Column(
-                children: [
-                  EditableFieldTile(
-                    icon: CupertinoIcons.cube_box,
-                    label: 'Nome',
-                    value: item.name,
+            child: ListView(
+              padding: const EdgeInsets.fromLTRB(10, 20, 10, 120),
+              children: [
+                Center(
+                  child: Container(
+                    width: 54.w,
+                    height: 5.h,
+                    decoration: BoxDecoration(
+                      color: context.outline,
+                      borderRadius: BorderRadius.circular(100),
+                    ),
+                  ),
+                ),
+                const SizedBox(height: 20),
+                HeaderCard(
+                  title: item.name,
+                  subtitle: 'Toque nos campos para editar',
+                  status: item.status,
+                ),
+                const SizedBox(height: 18),
+                ItemStatusNotice(status: item.status),
+                const SizedBox(height: SpacingSize.lg),
+                const SizedBox(height: 18),
+                const SectionTitle('Informações do item'),
+                PageCard(
+                  child: Column(
+                    children: [
+                      EditableFieldTile(
+                        icon: CupertinoIcons.cube_box,
+                        label: 'Nome',
+                        value: item.name,
+                        onEdit: () async {
+                          final isUpdated = await context.push<bool>(
+                            ItemsRouter.detailField,
+                            extra: EditFieldArgs(
+                              field: ItemField.name,
+                              title: 'Nome',
+                              label: 'Nome',
+                              hint: 'Nome',
+                              initialValue: item.name,
+                            ),
+                          );
+
+                          if (!context.mounted) return;
+
+                          if (isUpdated!) {
+                            // context.showSnackBar("nome alterado com sucesso");
+                            context.showTopNotice(
+                                "${item.name}  alterado com sucesso");
+                          }
+                        },
+                      ),
+                      const SoftDivider(),
+                      EditableFieldTile(
+                        icon: CupertinoIcons.tag,
+                        label: 'Marca',
+                        value: item.brand,
+                        isLoading: state.brandUpdateLoad,
+                        onEdit: () async {
+                          final picked = await showModalBottomSheet<String>(
+                            context: context,
+                            backgroundColor: Colors.transparent,
+                            isScrollControlled: true,
+                            builder: (_) => BrandBottomSheetV2(
+                              current: item.brand,
+                              options: (getData(EnumUtils.fromString(
+                                      ItemType.values, item.type))
+                                  .toSet()
+                                  .toList()
+                                ..sort()),
+                            ),
+                          );
+                          if (picked != null) {
+                            viewModel.onValueChange(
+                              ItemField.brand,
+                              picked,
+                              '',
+                              executeUpdate: true,
+                            );
+                          }
+                        },
+                      ),
+                      const SoftDivider(),
+                      EditableFieldTile(
+                        icon: CupertinoIcons.paintbrush,
+                        label: 'Cor',
+                        value: item.color,
+                        isLoading: state.colorUpdateLoad,
+                        onEdit: () async {
+                          final picked =
+                              await showModalBottomSheet<ColorOption>(
+                            context: context,
+                            backgroundColor: Colors.transparent,
+                            builder: (_) => ColorBottomSheetV2(
+                              current: item.color,
+                              options: const [
+                                ColorOption('Preto', Color(0xFF1F2A44)),
+                                ColorOption('Branco', Color(0xFFFFFFFF),
+                                    border: Color(0xFFE6EAF6)),
+                                ColorOption('Cinza', Color(0xFF9AA4B2)),
+                                ColorOption('Prata', Color(0xFFC7CDD6)),
+                                ColorOption('Vermelho', Color(0xFFE53935)),
+                                ColorOption('Azul', Color(0xFF1E88E5)),
+                                ColorOption('Verde', Color(0xFF43A047)),
+                                ColorOption('Amarelo', Color(0xFFFDD835)),
+                                ColorOption('Laranja', Color(0xFFFB8C00)),
+                                ColorOption('Marrom', Color(0xFF6D4C41)),
+                                ColorOption('Roxo', Color(0xFF8E24AA)),
+                              ],
+                            ),
+                          );
+                          if (picked != null) {
+                            viewModel.onValueChange(
+                              ItemField.color,
+                              picked.name,
+                              '',
+                              executeUpdate: true,
+                            );
+                          }
+                        },
+                      ),
+                      const SoftDivider(),
+                      if (item.type != ItemType.phone.name) ...[
+                        EditableFieldTile(
+                          icon: CupertinoIcons.calendar,
+                          label: 'Ano',
+                          value: "${item.year}",
+                          isLoading: state.yearUpdateLoad,
+                          onEdit: () async {
+                            final year =
+                                await _pickYear(context, item.year.toString());
+                            viewModel.onValueChange(
+                              ItemField.year,
+                              year.toString(),
+                              '',
+                              executeUpdate: true,
+                            );
+                          },
+                        ),
+                      ],
+                      const SoftDivider(),
+                      EditableFieldTile(
+                        icon: CupertinoIcons.number,
+                        label: hintCode,
+                        value: item.code,
+                      ),
+                    ],
+                  ),
+                ),
+                const SizedBox(height: SpacingSize.lg),
+                const SectionTitle('Observação do item'),
+                PageCard(
+                  child: EditableFieldTile(
+                    icon: CupertinoIcons.doc_text,
+                    label: 'Descrição (até 300 caracteres)',
+                    value: item.obs ?? '',
+                    minHeight: 150,
+                    maxLines: 10,
                     onEdit: () async {
                       final isUpdated = await context.push<bool>(
                         ItemsRouter.detailField,
                         extra: EditFieldArgs(
-                          field: ItemField.name,
-                          title: 'Nome',
-                          label: 'Nome',
-                          hint: 'Nome',
-                          initialValue: item.name,
+                          title: "Descrição",
+                          label: "Descrição",
+                          helper:
+                              "Descreva marcas, danos ou características únicas que ajudem a reconhecer este item.",
+                          hint: hintCode,
+                          initialValue: item.obs ?? '',
+                          maxLen: 150,
+                          maxLines: 8,
+                          field: ItemField.obs,
                         ),
                       );
 
                       if (!context.mounted) return;
 
                       if (isUpdated!) {
-                        // context.showSnackBar("nome alterado com sucesso");
-                        context.showTopNotice(
-                            "${item.name}  alterado com sucesso");
+                        context.showTopNotice("descriçao alterado com sucesso");
+                        // context.showSnackBar("descriçao alterado com sucesso");
                       }
                     },
                   ),
-                  const SoftDivider(),
-                  EditableFieldTile(
-                    icon: CupertinoIcons.tag,
-                    label: 'Marca',
-                    value: item.brand,
-                    isLoading: state.brandUpdateLoad,
-                    onEdit: () async {
-                      final picked = await showModalBottomSheet<String>(
-                        context: context,
-                        backgroundColor: Colors.transparent,
-                        isScrollControlled: true,
-                        builder: (_) => BrandBottomSheetV2(
-                          current: item.brand,
-                          options: (getData(EnumUtils.fromString(
-                                  ItemType.values, item.type))
-                              .toSet()
-                              .toList()
-                            ..sort()),
-                        ),
-                      );
-                      if (picked != null) {
-                        viewModel.onValueChange(
-                          ItemField.brand,
-                          picked,
-                          '',
-                          executeUpdate: true,
-                        );
-                      }
-                    },
-                  ),
-                  const SoftDivider(),
-                  EditableFieldTile(
-                    icon: CupertinoIcons.paintbrush,
-                    label: 'Cor',
-                    value: item.color,
-                    isLoading: state.colorUpdateLoad,
-                    onEdit: () async {
-                      final picked = await showModalBottomSheet<ColorOption>(
-                        context: context,
-                        backgroundColor: Colors.transparent,
-                        builder: (_) => ColorBottomSheetV2(
-                          current: item.color,
-                          options: const [
-                            ColorOption('Preto', Color(0xFF1F2A44)),
-                            ColorOption('Branco', Color(0xFFFFFFFF),
-                                border: Color(0xFFE6EAF6)),
-                            ColorOption('Cinza', Color(0xFF9AA4B2)),
-                            ColorOption('Prata', Color(0xFFC7CDD6)),
-                            ColorOption('Vermelho', Color(0xFFE53935)),
-                            ColorOption('Azul', Color(0xFF1E88E5)),
-                            ColorOption('Verde', Color(0xFF43A047)),
-                            ColorOption('Amarelo', Color(0xFFFDD835)),
-                            ColorOption('Laranja', Color(0xFFFB8C00)),
-                            ColorOption('Marrom', Color(0xFF6D4C41)),
-                            ColorOption('Roxo', Color(0xFF8E24AA)),
+                ),
+                const SizedBox(height: SpacingSize.lg),
+                // ItemStatusNotice(status: item.status),
+                // const SizedBox(height: SpacingSize.lg),
+                DangerZone(
+                  onDelete: () {
+                    showDialog(
+                      context: context,
+                      builder: (context) {
+                        return AlertDialog(
+                          // backgroundColor: const Color(0xFF121826),
+                          backgroundColor: context.primaryBgCard,
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(20),
+                          ),
+                          titlePadding:
+                              const EdgeInsets.fromLTRB(24, 24, 24, 12),
+                          contentPadding:
+                              const EdgeInsets.fromLTRB(24, 0, 24, 16),
+                          actionsPadding:
+                              const EdgeInsets.fromLTRB(16, 0, 16, 16),
+                          title: Text(
+                            'Remover ${item.name}?',
+                            style: context.appText.headermd.copyWith(
+                              color: context.primaryTextColor,
+                            ),
+                          ),
+                          content: Text(
+                            'Essa ação não pode ser desfeita. Deseja continuar?',
+                            style: context.appText.bodymd.copyWith(
+                              color: context.secondaryTextColor,
+                            ),
+                          ),
+                          actions: [
+                            TextButton(
+                              onPressed: () => context.pop(),
+                              child: Text(
+                                'Cancelar',
+                                style: TextStyle(
+                                  color: context.primaryColor,
+                                  fontWeight: FontWeight.w600,
+                                ),
+                              ),
+                            ),
+                            OutlinedButton(
+                              style: OutlinedButton.styleFrom(
+                                side:
+                                    const BorderSide(color: Color(0xFFFF6B6B)),
+                                foregroundColor: const Color(0xFFFF6B6B),
+                                shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(12),
+                                ),
+                              ),
+                              onPressed: () {
+                                context.pop();
+                                viewModel.deleteProduct();
+                              },
+                              child: const Text('Remover'),
+                            ),
                           ],
-                        ),
-                      );
-                      if (picked != null) {
-                        viewModel.onValueChange(
-                          ItemField.color,
-                          picked.name,
-                          '',
-                          executeUpdate: true,
-                        );
-                      }
-                    },
-                  ),
-                  const SoftDivider(),
-                  if (item.type != ItemType.phone.name) ...[
-                    EditableFieldTile(
-                      icon: CupertinoIcons.calendar,
-                      label: 'Ano',
-                      value: "${item.year}",
-                      isLoading: state.yearUpdateLoad,
-                      onEdit: () async {
-                        final year =
-                            await _pickYear(context, item.year.toString());
-                        viewModel.onValueChange(
-                          ItemField.year,
-                          year.toString(),
-                          '',
-                          executeUpdate: true,
                         );
                       },
-                    ),
-                  ],
-                  const SoftDivider(),
-                  EditableFieldTile(
-                    icon: CupertinoIcons.number,
-                    label: hintCode,
-                    value: item.code,
-                  ),
-                ],
-              ),
-            ),
-            const SizedBox(height: SpacingSize.lg),
-            const SectionTitle('Observação do item'),
-            PageCard(
-              child: EditableFieldTile(
-                icon: CupertinoIcons.doc_text,
-                label: 'Descrição (até 300 caracteres)',
-                value: item.obs ?? '',
-                minHeight: 150,
-                maxLines: 10,
-                onEdit: () async {
-                  final isUpdated = await context.push<bool>(
-                    ItemsRouter.detailField,
-                    extra: EditFieldArgs(
-                      title: "Descrição",
-                      label: "Descrição",
-                      helper:
-                          "Descreva marcas, danos ou características únicas que ajudem a reconhecer este item.",
-                      hint: hintCode,
-                      initialValue: item.obs ?? '',
-                      maxLen: 150,
-                      maxLines: 8,
-                      field: ItemField.obs,
-                    ),
-                  );
-
-                  if (!context.mounted) return;
-
-                  if (isUpdated!) {
-                    context.showTopNotice("descriçao alterado com sucesso");
-                    // context.showSnackBar("descriçao alterado com sucesso");
-                  }
-                },
-              ),
-            ),
-            const SizedBox(height: SpacingSize.lg),
-            // ItemStatusNotice(status: item.status),
-            // const SizedBox(height: SpacingSize.lg),
-            DangerZone(
-              onDelete: () {
-                showDialog(
-                  context: context,
-                  builder: (context) {
-                    return AlertDialog(
-                      backgroundColor: const Color(0xFF121826),
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(20),
-                      ),
-                      titlePadding: const EdgeInsets.fromLTRB(24, 24, 24, 12),
-                      contentPadding: const EdgeInsets.fromLTRB(24, 0, 24, 16),
-                      actionsPadding: const EdgeInsets.fromLTRB(16, 0, 16, 16),
-                      title: Text(
-                        'Remover ${item.name}?',
-                        style: context.appText.headermd.copyWith(
-                          color: Colors.white,
-                        ),
-                      ),
-                      content: Text(
-                        'Essa ação não pode ser desfeita. Deseja continuar?',
-                        style: context.appText.bodymd.copyWith(
-                          color: Colors.white70,
-                        ),
-                      ),
-                      actions: [
-                        TextButton(
-                          onPressed: () => context.pop(),
-                          child: Text(
-                            'Cancelar',
-                            style: TextStyle(
-                              color: context.primaryColor,
-                              fontWeight: FontWeight.w600,
-                            ),
-                          ),
-                        ),
-                        OutlinedButton(
-                          style: OutlinedButton.styleFrom(
-                            side: const BorderSide(color: Color(0xFFFF6B6B)),
-                            foregroundColor: const Color(0xFFFF6B6B),
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(12),
-                            ),
-                          ),
-                          onPressed: () {
-                            context.pop();
-                            viewModel.deleteProduct();
-                          },
-                          child: const Text('Remover'),
-                        ),
-                      ],
                     );
-                  },
-                );
 
-                //   showDialog(
-                //     context: context,
-                //     builder: (_) => AlertDialog(
-                //       title: Text(
-                //         'Remover item?',
-                //         style: context.appText.headermd,
-                //       ),
-                //       content: const Text(
-                //         'Essa ação não pode ser desfeita. Deseja continuar?',
-                //       ),
-                //       actions: [
-                //         TextButton(
-                //           onPressed: () => Navigator.pop(context),
-                //           child: const Text('Cancelar'),
-                //         ),
-                //         FilledButton(
-                //           onPressed: () {
-                //             context.pop();
-                //             viewModel.deleteProduct();
-                //             // showDeletingOverlay(context);
-                //           },
-                //           child: const Text('Remover'),
-                //         ),
-                //       ],
-                //     ),
-                //   );
-              },
-            ),
-            const SizedBox(height: SpacingSize.lg),
-            Center(
-              child: Text(
-                "Itens com status Roubado não podem ser excluídos. Primeiro é necessário excluir a ocorrência associada.",
-                textAlign: TextAlign.center,
-                style: TextStyle(
-                  fontSize: context.safeSp(11),
-                  fontWeight: FontWeight.w500,
-                  color: const Color(0xFF8D8D93),
-                  letterSpacing: 0.2,
+                    //   showDialog(
+                    //     context: context,
+                    //     builder: (_) => AlertDialog(
+                    //       title: Text(
+                    //         'Remover item?',
+                    //         style: context.appText.headermd,
+                    //       ),
+                    //       content: const Text(
+                    //         'Essa ação não pode ser desfeita. Deseja continuar?',
+                    //       ),
+                    //       actions: [
+                    //         TextButton(
+                    //           onPressed: () => Navigator.pop(context),
+                    //           child: const Text('Cancelar'),
+                    //         ),
+                    //         FilledButton(
+                    //           onPressed: () {
+                    //             context.pop();
+                    //             viewModel.deleteProduct();
+                    //             // showDeletingOverlay(context);
+                    //           },
+                    //           child: const Text('Remover'),
+                    //         ),
+                    //       ],
+                    //     ),
+                    //   );
+                  },
                 ),
-              ),
+                const SizedBox(height: SpacingSize.lg),
+                Center(
+                  child: Text(
+                    "Itens com status Roubado não podem ser excluídos. Primeiro é necessário excluir a ocorrência associada.",
+                    textAlign: TextAlign.center,
+                    style: TextStyle(
+                      fontSize: context.safeSp(11),
+                      fontWeight: FontWeight.w500,
+                      color: const Color(0xFF8D8D93),
+                      letterSpacing: 0.2,
+                    ),
+                  ),
+                ),
+              ],
             ),
-          ],
-        ),
-      ),
-    ));
+          ),
+        ));
   }
 
   Future<int?> _pickYear(BuildContext context, String initial) async {

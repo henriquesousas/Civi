@@ -33,6 +33,7 @@ class ProfilePage extends ConsumerWidget {
     final session = ref.watch(authenticatedUserProvider);
     final authViewModel = ref.watch(authViewViewModelProvider.notifier);
     return Scaffold(
+      backgroundColor: context.scaffoldBackgroundColor,
       appBar: DefaultAppBar(
         title: 'Perfil',
         press: () => context.pop(),
@@ -48,10 +49,10 @@ class ProfilePage extends ConsumerWidget {
                   width: ImageSize.md,
                   height: ImageSize.md,
                   radius: 999,
-                  showBoxShadow: true,
+                  showBoxShadow: false,
                   border: BoxBorder.all(
                     // color: const Color(0xFFFF8A00),
-                    color: Colors.black12,
+                    color: AppColors.primaryColor,
                     width: 2,
                   ),
                   imageUrl: session.photoUrl ?? '',
@@ -67,6 +68,7 @@ class ProfilePage extends ConsumerWidget {
                   session.email,
                   style: context.appText.bodySmall.copyWith(
                     fontWeight: FontWeight.w400,
+                    color: context.secondaryTextColor,
                   ),
                 ),
               ],

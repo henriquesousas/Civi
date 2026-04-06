@@ -15,7 +15,7 @@ T _$identity<T>(T value) => value;
 /// @nodoc
 mixin _$IncidentOutput {
   String get id;
-  String get title;
+  String? get title;
   String get userId;
   String get alertId;
   String get productType;
@@ -114,7 +114,7 @@ abstract mixin class $IncidentOutputCopyWith<$Res> {
   @useResult
   $Res call(
       {String id,
-      String title,
+      String? title,
       String userId,
       String alertId,
       String productType,
@@ -148,7 +148,7 @@ class _$IncidentOutputCopyWithImpl<$Res>
   @override
   $Res call({
     Object? id = null,
-    Object? title = null,
+    Object? title = freezed,
     Object? userId = null,
     Object? alertId = null,
     Object? productType = null,
@@ -172,10 +172,10 @@ class _$IncidentOutputCopyWithImpl<$Res>
           ? _self.id
           : id // ignore: cast_nullable_to_non_nullable
               as String,
-      title: null == title
+      title: freezed == title
           ? _self.title
           : title // ignore: cast_nullable_to_non_nullable
-              as String,
+              as String?,
       userId: null == userId
           ? _self.userId
           : userId // ignore: cast_nullable_to_non_nullable
@@ -343,7 +343,7 @@ extension IncidentOutputPatterns on IncidentOutput {
   TResult maybeWhen<TResult extends Object?>(
     TResult Function(
             String id,
-            String title,
+            String? title,
             String userId,
             String alertId,
             String productType,
@@ -409,7 +409,7 @@ extension IncidentOutputPatterns on IncidentOutput {
   TResult when<TResult extends Object?>(
     TResult Function(
             String id,
-            String title,
+            String? title,
             String userId,
             String alertId,
             String productType,
@@ -473,7 +473,7 @@ extension IncidentOutputPatterns on IncidentOutput {
   TResult? whenOrNull<TResult extends Object?>(
     TResult? Function(
             String id,
-            String title,
+            String? title,
             String userId,
             String alertId,
             String productType,
@@ -549,7 +549,7 @@ class _IncidentOutput implements IncidentOutput {
   @override
   final String id;
   @override
-  final String title;
+  final String? title;
   @override
   final String userId;
   @override
@@ -669,7 +669,7 @@ abstract mixin class _$IncidentOutputCopyWith<$Res>
   @useResult
   $Res call(
       {String id,
-      String title,
+      String? title,
       String userId,
       String alertId,
       String productType,
@@ -703,7 +703,7 @@ class __$IncidentOutputCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   $Res call({
     Object? id = null,
-    Object? title = null,
+    Object? title = freezed,
     Object? userId = null,
     Object? alertId = null,
     Object? productType = null,
@@ -727,10 +727,10 @@ class __$IncidentOutputCopyWithImpl<$Res>
           ? _self.id
           : id // ignore: cast_nullable_to_non_nullable
               as String,
-      title: null == title
+      title: freezed == title
           ? _self.title
           : title // ignore: cast_nullable_to_non_nullable
-              as String,
+              as String?,
       userId: null == userId
           ? _self.userId
           : userId // ignore: cast_nullable_to_non_nullable

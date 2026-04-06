@@ -1,6 +1,7 @@
 import 'package:deehelp/core/extension/exports_extension.dart';
 import 'package:deehelp/core/theme/export_theme.dart';
 import 'package:deehelp/core/ui/styles/export_style.dart';
+import 'package:deehelp/core/ui/widgets/buttons/buttons_export.dart';
 import 'package:deehelp/core/ui/widgets/icon/export_icon.dart';
 import 'package:flutter/material.dart';
 
@@ -25,7 +26,7 @@ class EmptyState extends StatelessWidget {
       height: context.percentHeight(0.3),
       padding: const EdgeInsets.all(18),
       decoration: BoxDecoration(
-        color: context.secondaryContainer,
+        color: context.primaryBgCard,
         borderRadius: BorderRadius.circular(RadiusSize.lg),
         border: Border.all(color: context.outline),
         boxShadow: const [
@@ -44,7 +45,7 @@ class EmptyState extends StatelessWidget {
             bgColor: context.surfaceColor,
             icon: Icon(
               Icons.search_off_outlined,
-              color: context.secondaryColor,
+              color: context.secondaryTextColor,
             ),
           ),
           const SizedBox(height: SpacingSize.md),
@@ -61,17 +62,23 @@ class EmptyState extends StatelessWidget {
             style: context.appText.bodySmall.copyWith(
               height: 1.35,
               fontWeight: FontWeight.w600,
-              color: context.secondaryColor,
+              color: context.secondaryTextColor,
             ),
           ),
           const SizedBox(height: SpacingSize.md),
-          TextButton(
-            onPressed: press,
-            child: Text(
-              actionTitle,
-              style: const TextStyle(fontWeight: FontWeight.w900),
-            ),
+          ButtonOutline(
+            width: context.percentWidth(0.5),
+            borderColor: AppColors.primaryColor,
+            press: press,
+            text: "Limpar pesquisa",
           ),
+          // TextButton(
+          //   onPressed: press,
+          //   child: Text(
+          //     actionTitle,
+          //     style: const TextStyle(fontWeight: FontWeight.w900),
+          //   ),
+          // ),
         ],
       ),
     );

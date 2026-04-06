@@ -14,7 +14,7 @@ part 'incident_output.freezed.dart';
 abstract class IncidentOutput with _$IncidentOutput {
   const factory IncidentOutput({
     required String id,
-    required String title,
+    required String? title,
     required String userId,
     required String alertId,
     required String productType,

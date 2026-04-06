@@ -59,7 +59,7 @@ class ButtonPrimary extends StatelessWidget {
     return Text(
       text,
       style: context.appText.button.copyWith(
-        color: context.surfaceColor,
+        color: Colors.white,
       ),
     );
   }

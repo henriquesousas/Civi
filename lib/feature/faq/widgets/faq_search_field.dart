@@ -39,20 +39,21 @@ class FaqSearhField extends StatelessWidget {
               onChanged: onChanged,
               style: context.appText.bodySmall.copyWith(
                 fontWeight: FontWeight.w600,
+                color: Colors.black,
               ),
               decoration: InputDecoration(
                 // fillColor: context.outlineVariantColor,
-                fillColor: Colors.black,
+                fillColor: Colors.white,
                 border: InputBorder.none,
                 contentPadding:
                     const EdgeInsets.symmetric(vertical: SpacingSize.lg),
                 prefixIcon: Icon(
                   Icons.search,
-                  color: context.secondaryColor,
+                  color: context.secondaryTextColor,
                 ),
                 hintText: hint,
                 hintStyle: TextStyle(
-                  color: context.secondaryColor,
+                  color: context.secondaryTextColor,
                   fontWeight: FontWeight.w600,
                 ),
                 suffixIcon: ValueListenableBuilder<TextEditingValue>(
@@ -66,7 +67,7 @@ class FaqSearhField extends StatelessWidget {
                       icon: Icon(
                         Icons.close,
                         size: IconSizes.md,
-                        color: context.secondaryColor,
+                        color: context.secondaryTextColor,
                       ),
                       splashRadius: 18,
                       tooltip: 'Limpar',

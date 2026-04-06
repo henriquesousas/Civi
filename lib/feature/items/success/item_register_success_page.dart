@@ -150,6 +150,7 @@ class ItemRegisterSuccessPage extends StatelessWidget {
                                   padding: EdgeInsets.all(16.r),
                                   decoration: BoxDecoration(
                                     color: Colors.white.withValues(alpha: 0.05),
+                                    // color: context.primaryBgCardLow,
                                     borderRadius: BorderRadius.circular(22.r),
                                     border: Border.all(
                                       color:
@@ -217,12 +218,12 @@ class ItemRegisterSuccessPage extends StatelessWidget {
                 Column(
                   children: [
                     ButtonOutline(
-                      bgColor: Colors.white,
-                      borderColor: Colors.white.withValues(alpha: 0.20),
-                      textColor: Colors.black,
+                      bgColor: AppColors.primaryColorDark,
+                      borderColor: AppColors.primaryColorDark,
+                      textColor: Colors.white,
                       icon: const Icon(
                         Icons.share_outlined,
-                        color: Colors.black,
+                        color: Colors.white,
                       ),
                       press: () {
                         UrlLauncherUtils.shareApp(context);

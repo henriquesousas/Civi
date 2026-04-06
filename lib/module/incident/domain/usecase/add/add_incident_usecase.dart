@@ -69,6 +69,7 @@ class AddIncidentUsecase extends UseCase<AddIncidentDto, String> {
       createdAt: DateTime.now(),
       kind: dto.kind,
       reportType: dto.reportType,
+      type: product.type,
     );
 
     await _repository.save(report);

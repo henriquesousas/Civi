@@ -20,7 +20,7 @@ class AboutPage extends ConsumerWidget {
     return Scaffold(
       // backgroundColor: Color(0XFFf8fafc),
       appBar: DefaultAppBar(
-        title: AppName.appName,
+        title: 'Sobre o ${AppName.appName} ',
         press: () => context.pop(),
         showBackButton: true,
       ),
@@ -55,7 +55,7 @@ class AboutPage extends ConsumerWidget {
                           'A informação vem da comunidade: quanto mais gente usando, mais útil e preciso fica.',
                           style: context.appText.bodySmall.copyWith(
                             height: 1.35,
-                            color: context.secondaryColor,
+                            color: context.secondaryTextColor,
                           ),
                         ),
                       ),

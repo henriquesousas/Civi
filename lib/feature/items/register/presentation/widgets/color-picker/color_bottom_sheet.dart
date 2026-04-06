@@ -138,7 +138,8 @@ class ColorBottomSheetV2 extends StatelessWidget {
   Widget build(BuildContext context) {
     return DecoratedBox(
       decoration: BoxDecoration(
-        color: const Color(0xFF0F1013),
+        // color: const Color(0xFF0F1013),
+        color: context.primaryBgCardLow,
         borderRadius: const BorderRadius.vertical(
           top: Radius.circular(28),
         ),
@@ -161,10 +162,10 @@ class ColorBottomSheetV2 extends StatelessWidget {
             mainAxisSize: MainAxisSize.min,
             children: [
               Container(
-                width: 42,
-                height: 5,
+                width: 42.w,
+                height: 5.h,
                 decoration: BoxDecoration(
-                  color: Colors.white.withValues(alpha: 0.16),
+                  color: context.outline,
                   borderRadius: BorderRadius.circular(999),
                 ),
               ),
@@ -178,9 +179,9 @@ class ColorBottomSheetV2 extends StatelessWidget {
                         Text(
                           'Selecionar cor',
                           style: TextStyle(
-                            fontSize: context.safeSp(16),
+                            fontSize: context.safeSp(18),
                             fontWeight: FontWeight.w700,
-                            color: Colors.white,
+                            color: context.primaryTextColor,
                           ),
                         ),
                         const SizedBox(height: 4),
@@ -189,7 +190,7 @@ class ColorBottomSheetV2 extends StatelessWidget {
                           style: TextStyle(
                             fontSize: context.safeSp(12),
                             fontWeight: FontWeight.w500,
-                            color: Colors.white.withValues(alpha: 0.58),
+                            color: context.secondaryTextColor,
                           ),
                         ),
                       ],
@@ -208,7 +209,7 @@ class ColorBottomSheetV2 extends StatelessWidget {
                   style: TextStyle(
                     fontSize: context.safeSp(12),
                     fontWeight: FontWeight.w600,
-                    color: Colors.white.withValues(alpha: 0.42),
+                    color: context.primaryTextColor.withValues(alpha: 0.42),
                   ),
                 ),
               ),
@@ -270,12 +271,12 @@ class _ColorTile extends StatelessWidget {
           decoration: BoxDecoration(
             color: selected
                 ? accent.withValues(alpha: 0.12)
-                : const Color(0xFF15171B),
+                : context.primaryBgCard,
             borderRadius: BorderRadius.circular(18),
             border: Border.all(
               color: selected
                   ? accent.withValues(alpha: 0.45)
-                  : Colors.white.withValues(alpha: 0.06),
+                  : context.primaryBgCard.withValues(alpha: 0.06),
             ),
           ),
           child: Row(
@@ -290,8 +291,8 @@ class _ColorTile extends StatelessWidget {
                   shape: BoxShape.circle,
                   border: Border.all(
                     color: selected
-                        ? accent.withValues(alpha: 0.30)
-                        : Colors.white.withValues(alpha: 0.05),
+                        ? context.outline.withValues(alpha: 0.30)
+                        : context.outlineVariantColor.withValues(alpha: 0.05),
                   ),
                 ),
                 child: Center(
@@ -310,7 +311,7 @@ class _ColorTile extends StatelessWidget {
                   style: TextStyle(
                     fontSize: context.safeSp(14),
                     fontWeight: FontWeight.w600,
-                    color: Colors.white.withValues(
+                    color: context.primaryTextColor.withValues(
                       alpha: selected ? 1 : 0.90,
                     ),
                   ),
@@ -324,13 +325,13 @@ class _ColorTile extends StatelessWidget {
                         width: 24,
                         height: 24,
                         decoration: BoxDecoration(
-                          color: accent.withValues(alpha: 0.16),
+                          color: accent.withValues(alpha: 0.5),
                           shape: BoxShape.circle,
                         ),
-                        child: Icon(
+                        child: const Icon(
                           Icons.check_rounded,
                           size: 16,
-                          color: accent,
+                          color: Colors.white,
                         ),
                       )
                     : Icon(
@@ -362,10 +363,10 @@ class _CloseButton extends StatelessWidget {
         onTap: onTap,
         borderRadius: BorderRadius.circular(999),
         child: Container(
-          width: 40,
-          height: 40,
+          width: 40.w,
+          height: 40.h,
           decoration: BoxDecoration(
-            color: Colors.white.withValues(alpha: 0.04),
+            color: context.outlineVariantColor,
             shape: BoxShape.circle,
             border: Border.all(
               color: Colors.white.withValues(alpha: 0.06),
@@ -374,7 +375,7 @@ class _CloseButton extends StatelessWidget {
           child: Icon(
             Icons.close_rounded,
             size: 20,
-            color: Colors.white.withValues(alpha: 0.82),
+            color: context.primaryTextColor,
           ),
         ),
       ),

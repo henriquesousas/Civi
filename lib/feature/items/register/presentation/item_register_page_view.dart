@@ -151,7 +151,7 @@ class _ItemRegisterPageViewState extends ConsumerState<ItemRegisterPageView> {
             (_currentPage == PageStep.photo.index ? 'Concluir' : 'Continuar'),
       ),
       appBar: DefaultAppBar(
-        title: "Cadastrar novo item",
+        title: state.type.value ?? "Selecione um item",
         showBackButton: true,
         // leading: const Icon(Icons.close),
         press: () {

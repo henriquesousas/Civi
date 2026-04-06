@@ -15,10 +15,13 @@ class BrandSearchField extends StatelessWidget {
       onChanged: (v) => onChanged(v),
       decoration: InputDecoration(
         hintText: 'Buscar marca...',
-        prefixIcon: Icon(Icons.search, color: context.secondaryColor),
+        prefixIcon: Icon(
+          Icons.search,
+          color: context.primaryTextColor.withValues(alpha: 0.5),
+        ),
         filled: true,
         // fillColor: const Color(0xFFF5F7FD),
-        fillColor: context.secondaryContainer,
+        fillColor: context.outlineVariantColor,
         border: OutlineInputBorder(
           borderRadius: BorderRadius.circular(RadiusSize.md),
           borderSide: BorderSide.none,

@@ -82,7 +82,8 @@ class YearBottomSheetV2 extends StatelessWidget {
 
     return DecoratedBox(
       decoration: BoxDecoration(
-        color: const Color(0xFF0F1013),
+        // color: const Color(0xFF0F1013),
+        color: context.primaryBgCardLow,
         borderRadius: const BorderRadius.vertical(
           top: Radius.circular(28),
         ),
@@ -105,10 +106,10 @@ class YearBottomSheetV2 extends StatelessWidget {
             mainAxisSize: MainAxisSize.min,
             children: [
               Container(
-                width: 42,
-                height: 5,
+                width: 42.w,
+                height: 5.h,
                 decoration: BoxDecoration(
-                  color: Colors.white.withValues(alpha: 0.16),
+                  color: context.outlineVariantColor,
                   borderRadius: BorderRadius.circular(999),
                 ),
               ),
@@ -124,7 +125,7 @@ class YearBottomSheetV2 extends StatelessWidget {
                           style: TextStyle(
                             fontSize: context.safeSp(16),
                             fontWeight: FontWeight.w700,
-                            color: Colors.white,
+                            color: context.primaryTextColor,
                           ),
                         ),
                         const SizedBox(height: 4),
@@ -133,7 +134,7 @@ class YearBottomSheetV2 extends StatelessWidget {
                           style: TextStyle(
                             fontSize: context.safeSp(12),
                             fontWeight: FontWeight.w500,
-                            color: Colors.white.withValues(alpha: 0.58),
+                            color: context.secondaryTextColor,
                           ),
                         ),
                       ],
@@ -152,18 +153,19 @@ class YearBottomSheetV2 extends StatelessWidget {
                   vertical: 10,
                 ),
                 decoration: BoxDecoration(
-                  color: const Color(0xFF15171B),
+                  // color: const Color(0xFF15171B),
+                  color: context.primaryBgCardHigh,
                   borderRadius: BorderRadius.circular(18),
                   border: Border.all(
-                    color: Colors.white.withValues(alpha: 0.06),
+                    color: context.primaryTextColor.withValues(alpha: 0.06),
                   ),
                 ),
                 child: Row(
                   children: [
                     Icon(
                       Icons.calendar_today_rounded,
-                      size: 18,
-                      color: context.primaryColor,
+                      size: 18.w,
+                      color: context.secondaryTextColor,
                     ),
                     const SizedBox(width: 10),
                     Text(
@@ -171,7 +173,8 @@ class YearBottomSheetV2 extends StatelessWidget {
                       style: TextStyle(
                         fontSize: context.safeSp(13),
                         fontWeight: FontWeight.w600,
-                        color: Colors.white.withValues(alpha: 0.88),
+                        color:
+                            context.secondaryTextColor.withValues(alpha: 0.88),
                       ),
                     ),
                   ],
@@ -226,19 +229,19 @@ class _CloseButton extends StatelessWidget {
         onTap: onTap,
         borderRadius: BorderRadius.circular(999),
         child: Container(
-          width: 40,
-          height: 40,
+          width: 40.w,
+          height: 40.h,
           decoration: BoxDecoration(
-            color: Colors.white.withValues(alpha: 0.04),
+            color: context.outlineVariantColor,
             shape: BoxShape.circle,
             border: Border.all(
-              color: Colors.white.withValues(alpha: 0.06),
+              color: context.outline.withValues(alpha: 0.06),
             ),
           ),
           child: Icon(
             Icons.close_rounded,
-            size: 20,
-            color: Colors.white.withValues(alpha: 0.82),
+            size: 20.w,
+            color: context.primaryTextColor.withValues(alpha: 0.82),
           ),
         ),
       ),

@@ -51,11 +51,11 @@ class ImeiCard extends StatelessWidget {
                   child: Text(
                     'Identificação do aparelho',
                     style: context.appText.bodymd.copyWith(
-                      fontWeight: FontWeight.w900,
+                      fontWeight: FontWeight.normal,
                     ),
                   ),
                 ),
-                const BadgeText(text: "Opcional"),
+                // const BadgeText(text: "Opcional"),
               ],
             ),
             const SizedBox(height: SpacingSize.md),
@@ -83,11 +83,17 @@ class ImeiCard extends StatelessWidget {
               children: [
                 Expanded(
                   child: ButtonOutline(
-                    bgColor: AppColors.primaryColor,
+                    // bgColor: AppColors.primaryColor,
                     borderColor: AppColors.primaryColorDark,
+                    textColor: context.isDark()
+                        ? Colors.white
+                        : AppColors.primaryColor,
                     press: () => context.push(ItemsRouter.imeiInfo),
                     height: ButtonSize.xm,
-                    icon: const Icon(Icons.qr_code_scanner_outlined),
+                    icon: Icon(Icons.qr_code_scanner_outlined,
+                        color: context.isDark()
+                            ? Colors.white
+                            : AppColors.primaryColor),
                     text: "Como encontrar o IMEI",
                   ),
                 ),

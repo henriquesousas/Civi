@@ -33,13 +33,18 @@ class SimpleTextField extends StatelessWidget {
         Expanded(
           child: TextField(
               maxLength: maxLen,
+              style: const TextStyle(fontWeight: FontWeight.bold),
               decoration: InputDecoration(
                 counterText: '',
                 labelText: label,
                 hintText: hint,
                 errorText: error,
+                hintStyle: TextStyle(
+                  color: context.secondaryTextColor,
+                  fontWeight: FontWeight.w500,
+                ),
                 labelStyle: TextStyle(
-                  color: context.secondaryColor,
+                  color: context.secondaryTextColor,
                   fontWeight: FontWeight.w500,
                 ),
                 filled: true,

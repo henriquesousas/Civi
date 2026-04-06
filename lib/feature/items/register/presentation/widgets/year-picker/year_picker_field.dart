@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 
 class YearPickerField extends StatelessWidget {
   final String label;
-  final String value;
+  final String? value;
   final IconData icon;
   final VoidCallback onTap;
 
@@ -37,17 +37,22 @@ class YearPickerField extends StatelessWidget {
               decoration: BoxDecoration(
                 // color: const Color(0xFFF5F7FD),
                 color: context.onSurfaceVariant.withValues(alpha: 0.03),
+                // color: context.primaryBgCardLow,
                 borderRadius: BorderRadius.circular(RadiusSize.md),
               ),
               child: Row(
                 children: [
                   Expanded(
                     child: Text(
-                      value,
+                      value ?? 'Selecionar ano',
                       style: TextStyle(
-                        fontWeight: FontWeight.w800,
-                        color:
-                            muted ? context.secondaryColor : context.onSurface,
+                        fontWeight:
+                            value == null ? FontWeight.w600 : FontWeight.bold,
+                        color: muted
+                            ? context.secondaryTextColor
+                            : value == null
+                                ? context.secondaryTextColor
+                                : context.primaryTextColor,
                       ),
                       // style: TextStyle(
                       //   fontWeight: FontWeight.w800,
@@ -56,9 +61,9 @@ class YearPickerField extends StatelessWidget {
                       // ),
                     ),
                   ),
-                  Icon(
+                  const Icon(
                     Icons.expand_more,
-                    color: context.onSurfaceVariant.withValues(alpha: 0.2),
+                    color: AppColors.trailing,
                   ),
                 ],
               ),

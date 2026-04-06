@@ -17,6 +17,7 @@ import 'package:deehelp/feature/sos/sos_router.dart';
 import 'package:deehelp/feature/splash/splash_router.dart';
 import 'package:deehelp/core/router/router_refresh_notifier.dart';
 import 'package:deehelp/teste_page.dart';
+import 'package:deehelp/teste_profile.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
@@ -119,8 +120,9 @@ var goRouterProvider = Provider<GoRouter>(
             // child: ItemPhotoStepPage(),
             // child: ItemPhotoStepDarkPage(),
             // child: ItemRegisteredSuccessfullyDarkPage(),
-            child: SuspiciousActivityPageLight(),
+            // child: SuspiciousActivityPageLight(),
             // child: ThankYouAlertCard(),
+            child: TestPage12FaqPage(),
           ),
         ),
       ],

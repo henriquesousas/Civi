@@ -15,7 +15,7 @@ class SectionTitle extends StatelessWidget {
         style: context.appText.headersm.copyWith(
           fontWeight: FontWeight.w600,
           letterSpacing: 1.2,
-          color: context.secondaryColor,
+          color: context.secondaryTextColor,
         ),
       ),
     );

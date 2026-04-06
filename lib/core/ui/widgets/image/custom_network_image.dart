@@ -1,4 +1,5 @@
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:deehelp/core/extension/color_extension.dart';
 import 'package:deehelp/core/theme/export_theme.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -205,11 +206,12 @@ class ImageErrorWidget extends StatelessWidget {
       width: width,
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(radius),
-        color: Colors.grey.withValues(alpha: 0.08),
+        // color: Colors.grey.withValues(alpha: 0.08),
+        color: context.primaryBgCardHigh,
       ),
       child: Icon(
-        CupertinoIcons.photo,
-        color: Colors.grey,
+        Icons.image_not_supported,
+        color: context.primaryTextColor.withValues(alpha: 0.5),
         size: 25.w,
       ),
       // child: Center(

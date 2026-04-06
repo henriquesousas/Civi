@@ -18,6 +18,7 @@ class Incident {
   final Kind kind;
   final ReportType reportType;
   final String? title;
+  final String type;
   bool visibility;
   DateTime createdAt;
   DateTime? expiresAt;
@@ -31,6 +32,7 @@ class Incident {
     required this.userId,
     required this.kind,
     required this.reportType,
+    required this.type,
     this.title,
     this.product,
     this.visibility = true,

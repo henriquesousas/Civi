@@ -24,10 +24,13 @@ class ProfileOptions extends StatelessWidget {
       //   ],
       // ),
       decoration: BoxDecoration(
-        color: const Color(0xFF101012),
+        // color: const Color(0xFF101012),
+        color: context.primaryBgCard,
+        // color: const Color(0xFF171717),
         borderRadius: BorderRadius.circular(24),
         border: Border.all(
-          color: const Color(0xFF1D1D21),
+          // color: const Color(0xFF1D1D21),
+          color: context.outlineVariantColor.withValues(alpha: 1),
         ),
       ),
       child: Column(
@@ -45,7 +48,7 @@ class ProfileOptions extends StatelessWidget {
                     Divider(
                       height: 1,
                       indent: 72,
-                      color: context.outlineVariantColor.withValues(alpha: 0.3),
+                      color: context.outlineVariantColor,
                     ),
                 ],
               ),

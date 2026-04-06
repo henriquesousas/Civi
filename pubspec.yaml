@@ -115,15 +115,29 @@ flutter:
         - asset: assets/fonts/museomodern/MuseoModerno-ExtraBold.ttf
           weight: 800
 
-    # - family: AlbertSans
+    - family: AlbertSans
+      fonts:
+        - asset: assets/fonts/albert_sans/AlbertSans-Regular.ttf
+        - asset: assets/fonts/albert_sans/AlbertSans-Bold.ttf
+          weight: 700
+        - asset: assets/fonts/albert_sans/AlbertSans-Italic.ttf
+          style: italic
+        - asset: assets/fonts/albert_sans/AlbertSans-Light.ttf
+          weight: 300
+
+    - family: Inter
+      fonts:
+        - asset: assets/fonts/inter/Inter_Medium.ttf
+        - asset: assets/fonts/inter/Inter_Regular.ttf
+        - asset: assets/fonts/inter/Inter_SemiBold.ttf
+        - asset: assets/fonts/inter/Inter_Bold.ttf
+
+    # - family: Robotto
     #   fonts:
-    #     - asset: assets/fonts/albert_sans/AlbertSans-Regular.ttf
-    #     - asset: assets/fonts/albert_sans/AlbertSans-Bold.ttf
-    #       weight: 700
-    #     - asset: assets/fonts/albert_sans/AlbertSans-Italic.ttf
-    #       style: italic
-    #     - asset: assets/fonts/albert_sans/AlbertSans-Light.ttf
-    #       weight: 300
+    #     - asset: assets/fonts/inter/roboto_black.ttf
+    #     - asset: assets/fonts/inter/roboto_bold.ttf
+    #     - asset: assets/fonts/inter/roboto_light.ttf
+    #     - asset: assets/fonts/inter/roboto_regular.ttf
 
 # Comando para gerar o arquivo => flutter gen-l10n
 # dart run build_runner build --delete-conflicting-outputs

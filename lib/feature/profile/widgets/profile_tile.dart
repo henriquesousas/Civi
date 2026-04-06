@@ -56,9 +56,9 @@ class ProfileTile extends StatelessWidget {
                       Text(
                         item.title,
                         style: TextStyle(
-                          color: Colors.white,
+                          color: context.primaryTextColor,
                           fontSize: 14.sp,
-                          fontWeight: FontWeight.w600,
+                          fontWeight: FontWeight.w500,
                           letterSpacing: -0.8,
                           height: 1.0,
                         ),
@@ -75,13 +75,13 @@ class ProfileTile extends StatelessWidget {
                             vertical: SpacingSize.xxs,
                           ),
                           decoration: BoxDecoration(
-                            color: context.primaryColor,
+                            color: AppColors.primaryColor,
                             borderRadius: BorderRadius.circular(RadiusSize.xxl),
                           ),
                           child: Text(
                             item.badge!,
                             style: context.appText.caption.copyWith(
-                              color: Theme.of(context).colorScheme.surface,
+                              color: Colors.white,
                               fontWeight: FontWeight.w600,
                             ),
                           ),
@@ -95,7 +95,7 @@ class ProfileTile extends StatelessWidget {
                       item.subtitle!,
                       style: context.appText.caption.copyWith(
                         fontWeight: FontWeight.w400,
-                        color: context.secondaryColor,
+                        color: context.secondaryTextColor,
                       ),
                     ),
                   ],
@@ -105,9 +105,9 @@ class ProfileTile extends StatelessWidget {
             item.trailing ??
                 (item.hideChevron
                     ? const SizedBox.shrink()
-                    : Icon(
+                    : const Icon(
                         Icons.chevron_right,
-                        color: context.surfaceDim,
+                        color: AppColors.trailing,
                       )),
           ],
         ),

@@ -1,5 +1,7 @@
 import 'dart:io';
 
+import 'package:deehelp/core/extension/color_extension.dart';
+import 'package:deehelp/core/extension/exports_extension.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 
@@ -75,6 +77,45 @@ class UIMyAssetsImageWidget extends StatelessWidget {
       fit: boxFit,
       color: color,
       colorBlendMode: color != null ? BlendMode.srcIn : null,
+    );
+  }
+}
+
+class CiviImageCard extends StatelessWidget {
+  final double width;
+  final double height;
+  final String assetPath;
+  final Color? color;
+
+  const CiviImageCard({
+    super.key,
+    required this.assetPath,
+    required this.width,
+    required this.height,
+    this.color,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      width: width,
+      height: height,
+      decoration: BoxDecoration(
+        // color: context.primaryBgCardLow,
+        color: color ?? context.primaryBgCardHigh,
+        borderRadius: BorderRadius.circular(20),
+        border: Border.all(
+          color: context.primaryBgCard,
+        ),
+      ),
+      clipBehavior: Clip.hardEdge,
+      child: Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: Image.asset(
+          assetPath,
+          fit: BoxFit.cover,
+        ),
+      ),
     );
   }
 }

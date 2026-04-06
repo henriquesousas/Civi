@@ -41,6 +41,15 @@
       "deviceId": "RQ8T200TDAR",
       "flutterMode": "debug",
       "program": "lib/main.dart"
+    },
+
+    {
+      "name": "Daniel tablet",
+      "request": "launch",
+      "type": "dart",
+      "deviceId": "52008527c03b9575",
+      "flutterMode": "debug",
+      "program": "lib/main.dart"
     }
   ]
 }

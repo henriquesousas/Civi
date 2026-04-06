@@ -34,7 +34,7 @@ class WelcomeCard extends StatelessWidget {
                 const Spacer(),
                 Icon(
                   Icons.info_outline,
-                  color: context.secondaryColor,
+                  color: AppColors.trailing,
                   size: IconSizes.md,
                 ),
               ],
@@ -49,7 +49,7 @@ class WelcomeCard extends StatelessWidget {
               'Estamos em desenvolvimento e sua participação faz diferença. '
               'Aqui você registra itens, acompanha ocorrências e ajuda sua comunidade a ficar mais segura.',
               style: context.appText.bodySmall.copyWith(
-                color: context.secondaryColor,
+                color: context.secondaryTextColor,
                 fontWeight: FontWeight.w500,
                 height: 1.35,
               ),

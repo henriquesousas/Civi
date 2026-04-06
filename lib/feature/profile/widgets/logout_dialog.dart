@@ -43,7 +43,7 @@ class LogoutDialog extends StatelessWidget {
               'Você poderá entrar novamente quando quiser.',
               textAlign: TextAlign.center,
               style: context.appText.label.copyWith(
-                color: context.secondaryColor,
+                color: context.secondaryTextColor,
                 fontWeight: FontWeight.normal,
               ),
             ),

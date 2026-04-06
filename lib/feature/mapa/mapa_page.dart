@@ -10,7 +10,7 @@ import 'package:deehelp/core/services/permissions/location/domain/services/geolo
 import 'package:deehelp/core/services/permissions/location/export_location.dart';
 import 'package:deehelp/core/services/permissions/location/external/default_geolocator_position_gateway.dart';
 import 'package:deehelp/core/theme/app_colors.dart';
-import 'package:deehelp/core/ui/styles/export_style.dart';
+
 import 'package:deehelp/core/utils/enum_utils.dart';
 import 'package:deehelp/core/utils/url_launcher_utils.dart';
 import 'package:deehelp/feature/home/home_viewmodel_provider.dart';
@@ -307,12 +307,31 @@ class _MapaPageState extends ConsumerState<MapaPage> {
               right: context.percentWidth(0.3),
               bottom: 0,
               // child: RadarPulse(),
-              child: IgnorePointer(
-                child: Lottie.asset(
-                  "assets/lottie/radar.json",
-                  width: context.percentWidth(0.3),
-                  height: context.percentWidth(0.3),
-                ),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  IgnorePointer(
+                    child: Lottie.asset(
+                      "assets/lottie/radar.json",
+                      width: context.percentWidth(0.3),
+                      height: context.percentWidth(0.3),
+                    ),
+                  ),
+                  Container(
+                    padding: const EdgeInsets.symmetric(
+                        horizontal: 10, vertical: 10),
+                    decoration: BoxDecoration(
+                      color: context.primaryBgCard,
+                      borderRadius: BorderRadius.circular(20),
+                    ),
+                    child: const Text(
+                      "Escaneando área.",
+                      style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                  )
+                ],
               ),
             ),
           ),
@@ -452,7 +471,7 @@ class _MapaPageState extends ConsumerState<MapaPage> {
 
                 if (_previousCameraState != null) {
                   if (_activeMarker != null) {
-                    _activeMarker!.iconSize = 1.2;
+                    _activeMarker!.iconSize = 1.1;
                     await _pointManager?.update(_activeMarker!);
                   }
                   await _mapboxMap?.flyTo(
@@ -489,18 +508,30 @@ class _MapaPageState extends ConsumerState<MapaPage> {
         },
         itemBuilder: (context, index) {
           final incident = incidents[index];
-
+          final labelRoberry =
+              EnumUtils.fromString(ItemType.values, incident.productType)
+                  .labelRouberry;
+          final label =
+              EnumUtils.fromString(ItemType.values, incident.productType).label;
+          final assets =
+              EnumUtils.fromString(ItemType.values, incident.productType)
+                  .assets;
           return HorizontalIncidentCard(
-            incidentType: 'Roubo',
-            title: incident.product?.name ?? "Não informado",
+            incidentType: label,
+            title: incident.product != null
+                ? incident.product?.name ?? "Não informado"
+                : labelRoberry,
             howTo: incident.howTo,
             locationLabel: _getLocale(incident),
             timeLabel: incident.occurredAt.timeAgo(),
             distanceLabel: _getDistance(incident),
             isPlatformGenerated: incident.isPlatformGenerated,
-            coverImageUrl: incident.product?.images.isNotEmpty == true
-                ? incident.product!.images.first.value
-                : null,
+            isAssetImage: incident.product == null,
+            coverImageUrl: incident.product == null
+                ? assets
+                : incident.product?.images.isNotEmpty == true
+                    ? incident.product!.images.first.value
+                    : null,
             onTap: () =>
                 context.push(IncidentRouter.detailComunity, extra: incident),
             onShareTap: () => UrlLauncherUtils.shareIncident(
@@ -613,9 +644,12 @@ class _MapaPageState extends ConsumerState<MapaPage> {
       for (final incident in incidents) {
         if (incident.local?.longitude != null &&
             incident.local?.latitue != null) {
-          final pinImage = await createPinWithAsset(
-            EnumUtils.fromString(ItemType.values, incident.productType).assets,
-          );
+          final pin =
+              EnumUtils.fromString(ItemType.values, incident.productType)
+                  .assets;
+          // final color =
+          //     EnumUtils.fromString(ItemType.values, incident.productType).color;
+          final pinImage = await createPinWithAsset(pin, AppColors.danger);
 
           final marker = await _pointManager!.create(
             PointAnnotationOptions(
@@ -626,7 +660,7 @@ class _MapaPageState extends ConsumerState<MapaPage> {
                 ),
               ),
               image: pinImage,
-              iconSize: 1.2,
+              iconSize: 1.1,
               iconAnchor: IconAnchor.BOTTOM,
             ),
           );
@@ -647,434 +681,33 @@ class _MapaPageState extends ConsumerState<MapaPage> {
     );
   }
 
-  Future<Uint8List> createPinWithText({
-    required String label,
-    required IconData icon,
-    bool isSelected = false,
-  }) async {
-    final double height = context.percentHeight(0.055);
-    // final double height = 35.h;
-    const double pointerHeight = 10;
-
-    const double borderRadius = 24;
-    const double borderWidth = 1.4;
-
-    final double iconCircleSize = context.percentHeight(0.045);
-    // final double iconCircleSize = 28.w;
-    final double iconSize = 21.w;
-    const double iconLeft = 8;
-
-    final double textLeft = 50.w;
-    const double textRightPadding = 16;
-
-    /// mede texto
-    final textPainter = TextPainter(
-      textDirection: TextDirection.ltr,
-      text: TextSpan(
-        text: label,
-        style: context.appText.caption.copyWith(
-          color: context.onSurface,
-        ),
-      ),
-    )..layout();
-
-    /// largura dinâmica
-    double width;
-
-    if (isSelected) {
-      width = textLeft + textPainter.width + textRightPadding;
-    } else {
-      width = iconCircleSize + 16;
-    }
-
-    final recorder = ui.PictureRecorder();
-    final canvas = Canvas(recorder);
-
-    final double centerX = width / 2;
-
-    final path = Path()
-      ..moveTo(borderRadius, 0)
-
-      /// topo
-      ..lineTo(width - borderRadius, 0)
-      ..quadraticBezierTo(width, 0, width, borderRadius)
-
-      /// lado direito
-      ..lineTo(width, height - borderRadius)
-      ..quadraticBezierTo(width, height, width - borderRadius, height)
-
-      /// seta
-      ..lineTo(centerX + 14, height)
-      ..cubicTo(
-        centerX + 6,
-        height,
-        centerX + 4,
-        height + 6,
-        centerX + 2,
-        height + pointerHeight - 1,
-      )
-      ..quadraticBezierTo(
-        centerX,
-        height + pointerHeight + 1.5,
-        centerX - 2,
-        height + pointerHeight - 1,
-      )
-      ..cubicTo(
-        centerX - 4,
-        height + 6,
-        centerX - 6,
-        height,
-        centerX - 12,
-        height,
-      )
-
-      /// lado esquerdo
-      ..lineTo(borderRadius, height)
-      ..quadraticBezierTo(0, height, 0, height - borderRadius)
-      ..lineTo(0, borderRadius)
-      ..quadraticBezierTo(0, 0, borderRadius, 0)
-      ..close();
-
-    /// shadow
-    canvas.save();
-    canvas.translate(0, 2);
-    canvas.drawPath(
-      path,
-      Paint()
-        ..color = const Color(0x22000000)
-        ..maskFilter = const ui.MaskFilter.blur(ui.BlurStyle.normal, 6),
-    );
-    canvas.restore();
-
-    /// fundo
-    canvas.drawPath(path, Paint()..color = Colors.white);
-
-    /// borda
-    canvas.drawPath(
-      path,
-      Paint()
-        ..color = AppColors.grey.withValues(alpha: 0.3)
-        ..style = PaintingStyle.stroke
-        ..strokeWidth = borderWidth
-        ..isAntiAlias = true,
-    );
-
-    /// círculo do ícone
-    final double iconTop = (height - iconCircleSize) / 2;
-
-    canvas.drawCircle(
-      Offset(
-        iconLeft + iconCircleSize / 2,
-        iconTop + iconCircleSize / 2,
-      ),
-      iconCircleSize / 2,
-      Paint()..color = const Color(0xFFE53935),
-    );
-
-    /// ícone
-    final iconPainter = TextPainter(
-      textDirection: TextDirection.ltr,
-      text: TextSpan(
-        text: String.fromCharCode(icon.codePoint),
-        style: TextStyle(
-          fontSize: iconSize,
-          fontFamily: icon.fontFamily,
-          package: icon.fontPackage,
-          color: Colors.white,
-        ),
-      ),
-    )..layout();
-
-    iconPainter.paint(
-      canvas,
-      Offset(
-        iconLeft + (iconCircleSize - iconPainter.width) / 2,
-        iconTop + (iconCircleSize - iconPainter.height) / 2,
-      ),
-    );
-
-    /// label
-    if (isSelected) {
-      textPainter.paint(
-        canvas,
-        Offset(
-          textLeft,
-          (height - textPainter.height) / 2,
-        ),
-      );
-    }
-
-    final picture = recorder.endRecording();
-    final image = await picture.toImage(
-      width.toInt(),
-      (height + pointerHeight + 6).toInt(),
-    );
-
-    final bytes = await image.toByteData(format: ui.ImageByteFormat.png);
-    return bytes!.buffer.asUint8List();
-  }
-
-  Future<Uint8List> createPinWithIconV4({
-    required IconData icon,
-    required String badgeText,
-    bool isSelected = false,
-  }) async {
-    final double height = context.percentHeight(0.055);
-    const double pointerHeight = 10;
-
-    const double borderRadius = 22;
-    const double borderWidth = 1.4;
-
-    final double iconCircleSize = context.percentHeight(0.045);
-    final double iconSize = 21.w;
-
-    const double horizontalPadding = 8;
-    final double width = iconCircleSize + (horizontalPadding * 2);
-
-    /// badge
-    final badgePainter = TextPainter(
-      textDirection: TextDirection.ltr,
-      maxLines: 1,
-      text: TextSpan(
-        text: badgeText.toUpperCase(),
-        style: TextStyle(
-          fontSize: 11.sp,
-          fontWeight: FontWeight.w700,
-          color: const Color(0xFFE53935),
-          // color: Colors.black,
-          letterSpacing: 0.3,
-        ),
-      ),
-    )..layout();
-
-    const double badgeHorizontalPadding = 10;
-    const double badgeHeight = 20;
-    final double badgeWidth = badgePainter.width + (badgeHorizontalPadding * 2);
-
-    const double badgeTopSpacing = 2;
-    const double gapBetweenBadgeAndCard = 6;
-
-    final double totalHeight = badgeTopSpacing +
-        badgeHeight +
-        gapBetweenBadgeAndCard +
-        height +
-        pointerHeight +
-        6;
-
-    final recorder = ui.PictureRecorder();
-    final canvas = Canvas(recorder);
-
-    final double cardTop =
-        badgeTopSpacing + badgeHeight + gapBetweenBadgeAndCard;
-    final double centerX = width / 2;
-
-    /// path do card branco com seta
-    final path = Path()
-      ..moveTo(borderRadius, cardTop)
-
-      /// topo
-      ..lineTo(width - borderRadius, cardTop)
-      ..quadraticBezierTo(width, cardTop, width, cardTop + borderRadius)
-
-      /// lado direito
-      ..lineTo(width, cardTop + height - borderRadius)
-      ..quadraticBezierTo(
-        width,
-        cardTop + height,
-        width - borderRadius,
-        cardTop + height,
-      )
-
-      /// seta inferior
-      ..lineTo(centerX + 14, cardTop + height)
-      ..cubicTo(
-        centerX + 6,
-        cardTop + height,
-        centerX + 4,
-        cardTop + height + 6,
-        centerX + 2,
-        cardTop + height + pointerHeight - 1,
-      )
-      ..quadraticBezierTo(
-        centerX,
-        cardTop + height + pointerHeight + 1.5,
-        centerX - 2,
-        cardTop + height + pointerHeight - 1,
-      )
-      ..cubicTo(
-        centerX - 4,
-        cardTop + height + 6,
-        centerX - 6,
-        cardTop + height,
-        centerX - 12,
-        cardTop + height,
-      )
-
-      /// lado esquerdo
-      ..lineTo(borderRadius, cardTop + height)
-      ..quadraticBezierTo(
-          0, cardTop + height, 0, cardTop + height - borderRadius)
-      ..lineTo(0, cardTop + borderRadius)
-      ..quadraticBezierTo(0, cardTop, borderRadius, cardTop)
-      ..close();
-
-    /// sombra do card
-    canvas.save();
-    canvas.translate(0, 2);
-    canvas.drawPath(
-      path,
-      Paint()
-        ..color = const Color(0x22000000)
-        ..maskFilter = const ui.MaskFilter.blur(ui.BlurStyle.normal, 6),
-    );
-    canvas.restore();
-
-    /// fundo do card
-    canvas.drawPath(path, Paint()..color = Colors.white);
-
-    /// borda do card
-    canvas.drawPath(
-      path,
-      Paint()
-        ..color = AppColors.grey.withValues(alpha: 0.28)
-        ..style = PaintingStyle.stroke
-        ..strokeWidth = borderWidth
-        ..isAntiAlias = true,
-    );
-
-    /// badge flutuante acima
-    final double badgeLeft = (width - badgeWidth) / 2;
-    final Rect badgeRect = Rect.fromLTWH(
-      badgeLeft,
-      badgeTopSpacing,
-      badgeWidth,
-      badgeHeight,
-    );
-
-    final badgeRRect = RRect.fromRectAndRadius(
-      badgeRect,
-      const Radius.circular(999),
-    );
-
-    /// sombra badge
-    canvas.save();
-    canvas.translate(0, 1.5);
-    canvas.drawRRect(
-      badgeRRect,
-      Paint()
-        ..color = const Color(0x16000000)
-        ..maskFilter = const ui.MaskFilter.blur(ui.BlurStyle.normal, 4),
-    );
-    canvas.restore();
-
-    /// fundo badge
-    canvas.drawRRect(
-      badgeRRect,
-      Paint()..color = const Color(0xFFFFEBEE),
-      // Paint()..color = Colors.black87,
-    );
-
-    /// borda badge
-    canvas.drawRRect(
-      badgeRRect,
-      Paint()
-        // ..color = const Color(0xFFE53935).withValues(alpha: 0.22)
-        ..color = Colors.black.withValues(alpha: 0.22)
-        ..style = PaintingStyle.stroke
-        ..strokeWidth = 1,
-    );
-
-    badgePainter.paint(
-      canvas,
-      Offset(
-        badgeLeft + badgeHorizontalPadding,
-        badgeTopSpacing + (badgeHeight - badgePainter.height) / 2,
-      ),
-    );
-
-    /// círculo do ícone dentro do card
-    final double iconTop = cardTop + (height - iconCircleSize) / 2;
-    final double iconLeft = (width - iconCircleSize) / 2;
-
-    canvas.drawCircle(
-      Offset(
-        iconLeft + iconCircleSize / 2,
-        iconTop + iconCircleSize / 2,
-      ),
-      iconCircleSize / 2,
-      Paint()..color = const Color(0xFFE53935),
-    );
-
-    /// ícone
-    final iconPainter = TextPainter(
-      textDirection: TextDirection.ltr,
-      text: TextSpan(
-        text: String.fromCharCode(icon.codePoint),
-        style: TextStyle(
-          fontSize: iconSize,
-          fontFamily: icon.fontFamily,
-          package: icon.fontPackage,
-          color: Colors.white,
-        ),
-      ),
-    )..layout();
-
-    iconPainter.paint(
-      canvas,
-      Offset(
-        iconLeft + (iconCircleSize - iconPainter.width) / 2,
-        iconTop + (iconCircleSize - iconPainter.height) / 2,
-      ),
-    );
-
-    /// destaque quando selecionado
-    if (isSelected) {
-      canvas.drawPath(
-        path,
-        Paint()
-          ..color = const Color(0xFFE53935).withValues(alpha: 0.06)
-          ..style = PaintingStyle.fill,
-      );
-    }
-
-    final picture = recorder.endRecording();
-    final image = await picture.toImage(
-      width.toInt(),
-      totalHeight.toInt(),
-    );
-
-    final bytes = await image.toByteData(format: ui.ImageByteFormat.png);
-    return bytes!.buffer.asUint8List();
-  }
-
-  Future<Uint8List> createPinWithAsset(String assetPath) async {
-    debugPrint(assetPath);
-    double size = 60.0.w;
+  Future<Uint8List> createPinWithAsset(
+    String assetPath,
+    Color color,
+  ) async {
+    const double size = 64.0;
     const double strokeWidth = 4;
-    const double radius = 90;
+    const double radius = 20;
+    const double padding = 14;
 
     final recorder = ui.PictureRecorder();
     final canvas = Canvas(recorder);
 
-    // final fillPaint = Paint()..color = Colors.white;
-    final fillPaint = Paint()..color = Colors.black;
+    // final fillPaint = Paint()..color = const Color(0xFFF2F4F7);
+    final fillPaint = Paint()..color = const Color(0xFF000000);
 
     final borderPaint = Paint()
-      // ..color = const Color(0xFF2B5BEE)
-      ..color = AppColors.danger //fire
-      // ..color = Colors.white //fire
-      // ..color = AppColors.primaryColor //flooding
-      // ..color = AppColors.primaryColor //car
+      ..color = color
       ..style = PaintingStyle.stroke
       ..strokeWidth = strokeWidth
       ..isAntiAlias = true;
 
     final fillRRect = RRect.fromRectAndRadius(
-      Rect.fromLTWH(0, 0, size, size),
+      const Rect.fromLTWH(0, 0, size, size),
       const Radius.circular(radius),
     );
 
-    double borderInset = strokeWidth / 2;
+    final borderInset = strokeWidth / 2;
 
     final borderRRect = RRect.fromRectAndRadius(
       Rect.fromLTWH(
@@ -1092,16 +725,25 @@ class _MapaPageState extends ConsumerState<MapaPage> {
     final ByteData data = await rootBundle.load(assetPath);
     final Uint8List bytes = data.buffer.asUint8List();
 
-    final codec = await ui.instantiateImageCodec(bytes, targetWidth: 56);
+    final codec = await ui.instantiateImageCodec(bytes);
     final frame = await codec.getNextFrame();
     final image = frame.image;
 
-    final offset = Offset(
-      (size - image.width) / 2,
-      (size - image.height) / 2,
+    final dstRect = const Rect.fromLTWH(
+      padding,
+      padding,
+      size - (padding * 2),
+      size - (padding * 2),
     );
 
-    canvas.drawImage(image, offset, Paint());
+    final srcRect = Rect.fromLTWH(
+      0,
+      0,
+      image.width.toDouble(),
+      image.height.toDouble(),
+    );
+
+    canvas.drawImageRect(image, srcRect, dstRect, Paint());
 
     final picture = recorder.endRecording();
     final img = await picture.toImage(size.toInt(), size.toInt());
@@ -1210,7 +852,7 @@ class _MapaPageState extends ConsumerState<MapaPage> {
     // }
 
     if (_activeMarker != null) {
-      _activeMarker!.iconSize = 1.5;
+      _activeMarker!.iconSize = 1.2;
       await _pointManager?.update(_activeMarker!);
     }
   }
@@ -1239,3 +881,407 @@ class _MapaPageState extends ConsumerState<MapaPage> {
     _zoomToMarker(coords);
   }
 }
+
+
+
+// Future<Uint8List> createPinWithIconV4({
+  //   required IconData icon,
+  //   required String badgeText,
+  //   bool isSelected = false,
+  // }) async {
+  //   final double height = context.percentHeight(0.055);
+  //   const double pointerHeight = 10;
+
+  //   const double borderRadius = 22;
+  //   const double borderWidth = 1.4;
+
+  //   final double iconCircleSize = context.percentHeight(0.045);
+  //   final double iconSize = 21.w;
+
+  //   const double horizontalPadding = 8;
+  //   final double width = iconCircleSize + (horizontalPadding * 2);
+
+  //   /// badge
+  //   final badgePainter = TextPainter(
+  //     textDirection: TextDirection.ltr,
+  //     maxLines: 1,
+  //     text: TextSpan(
+  //       text: badgeText.toUpperCase(),
+  //       style: TextStyle(
+  //         fontSize: 11.sp,
+  //         fontWeight: FontWeight.w700,
+  //         color: const Color(0xFFE53935),
+  //         // color: Colors.black,
+  //         letterSpacing: 0.3,
+  //       ),
+  //     ),
+  //   )..layout();
+
+  //   const double badgeHorizontalPadding = 10;
+  //   const double badgeHeight = 20;
+  //   final double badgeWidth = badgePainter.width + (badgeHorizontalPadding * 2);
+
+  //   const double badgeTopSpacing = 2;
+  //   const double gapBetweenBadgeAndCard = 6;
+
+  //   final double totalHeight = badgeTopSpacing +
+  //       badgeHeight +
+  //       gapBetweenBadgeAndCard +
+  //       height +
+  //       pointerHeight +
+  //       6;
+
+  //   final recorder = ui.PictureRecorder();
+  //   final canvas = Canvas(recorder);
+
+  //   final double cardTop =
+  //       badgeTopSpacing + badgeHeight + gapBetweenBadgeAndCard;
+  //   final double centerX = width / 2;
+
+  //   /// path do card branco com seta
+  //   final path = Path()
+  //     ..moveTo(borderRadius, cardTop)
+
+  //     /// topo
+  //     ..lineTo(width - borderRadius, cardTop)
+  //     ..quadraticBezierTo(width, cardTop, width, cardTop + borderRadius)
+
+  //     /// lado direito
+  //     ..lineTo(width, cardTop + height - borderRadius)
+  //     ..quadraticBezierTo(
+  //       width,
+  //       cardTop + height,
+  //       width - borderRadius,
+  //       cardTop + height,
+  //     )
+
+  //     /// seta inferior
+  //     ..lineTo(centerX + 14, cardTop + height)
+  //     ..cubicTo(
+  //       centerX + 6,
+  //       cardTop + height,
+  //       centerX + 4,
+  //       cardTop + height + 6,
+  //       centerX + 2,
+  //       cardTop + height + pointerHeight - 1,
+  //     )
+  //     ..quadraticBezierTo(
+  //       centerX,
+  //       cardTop + height + pointerHeight + 1.5,
+  //       centerX - 2,
+  //       cardTop + height + pointerHeight - 1,
+  //     )
+  //     ..cubicTo(
+  //       centerX - 4,
+  //       cardTop + height + 6,
+  //       centerX - 6,
+  //       cardTop + height,
+  //       centerX - 12,
+  //       cardTop + height,
+  //     )
+
+  //     /// lado esquerdo
+  //     ..lineTo(borderRadius, cardTop + height)
+  //     ..quadraticBezierTo(
+  //         0, cardTop + height, 0, cardTop + height - borderRadius)
+  //     ..lineTo(0, cardTop + borderRadius)
+  //     ..quadraticBezierTo(0, cardTop, borderRadius, cardTop)
+  //     ..close();
+
+  //   /// sombra do card
+  //   canvas.save();
+  //   canvas.translate(0, 2);
+  //   canvas.drawPath(
+  //     path,
+  //     Paint()
+  //       ..color = const Color(0x22000000)
+  //       ..maskFilter = const ui.MaskFilter.blur(ui.BlurStyle.normal, 6),
+  //   );
+  //   canvas.restore();
+
+  //   /// fundo do card
+  //   canvas.drawPath(path, Paint()..color = Colors.white);
+
+  //   /// borda do card
+  //   canvas.drawPath(
+  //     path,
+  //     Paint()
+  //       ..color = AppColors.grey.withValues(alpha: 0.28)
+  //       ..style = PaintingStyle.stroke
+  //       ..strokeWidth = borderWidth
+  //       ..isAntiAlias = true,
+  //   );
+
+  //   /// badge flutuante acima
+  //   final double badgeLeft = (width - badgeWidth) / 2;
+  //   final Rect badgeRect = Rect.fromLTWH(
+  //     badgeLeft,
+  //     badgeTopSpacing,
+  //     badgeWidth,
+  //     badgeHeight,
+  //   );
+
+  //   final badgeRRect = RRect.fromRectAndRadius(
+  //     badgeRect,
+  //     const Radius.circular(999),
+  //   );
+
+  //   /// sombra badge
+  //   canvas.save();
+  //   canvas.translate(0, 1.5);
+  //   canvas.drawRRect(
+  //     badgeRRect,
+  //     Paint()
+  //       ..color = const Color(0x16000000)
+  //       ..maskFilter = const ui.MaskFilter.blur(ui.BlurStyle.normal, 4),
+  //   );
+  //   canvas.restore();
+
+  //   /// fundo badge
+  //   canvas.drawRRect(
+  //     badgeRRect,
+  //     Paint()..color = const Color(0xFFFFEBEE),
+  //     // Paint()..color = Colors.black87,
+  //   );
+
+  //   /// borda badge
+  //   canvas.drawRRect(
+  //     badgeRRect,
+  //     Paint()
+  //       // ..color = const Color(0xFFE53935).withValues(alpha: 0.22)
+  //       ..color = Colors.black.withValues(alpha: 0.22)
+  //       ..style = PaintingStyle.stroke
+  //       ..strokeWidth = 1,
+  //   );
+
+  //   badgePainter.paint(
+  //     canvas,
+  //     Offset(
+  //       badgeLeft + badgeHorizontalPadding,
+  //       badgeTopSpacing + (badgeHeight - badgePainter.height) / 2,
+  //     ),
+  //   );
+
+  //   /// círculo do ícone dentro do card
+  //   final double iconTop = cardTop + (height - iconCircleSize) / 2;
+  //   final double iconLeft = (width - iconCircleSize) / 2;
+
+  //   canvas.drawCircle(
+  //     Offset(
+  //       iconLeft + iconCircleSize / 2,
+  //       iconTop + iconCircleSize / 2,
+  //     ),
+  //     iconCircleSize / 2,
+  //     Paint()..color = const Color(0xFFE53935),
+  //   );
+
+  //   /// ícone
+  //   final iconPainter = TextPainter(
+  //     textDirection: TextDirection.ltr,
+  //     text: TextSpan(
+  //       text: String.fromCharCode(icon.codePoint),
+  //       style: TextStyle(
+  //         fontSize: iconSize,
+  //         fontFamily: icon.fontFamily,
+  //         package: icon.fontPackage,
+  //         color: Colors.white,
+  //       ),
+  //     ),
+  //   )..layout();
+
+  //   iconPainter.paint(
+  //     canvas,
+  //     Offset(
+  //       iconLeft + (iconCircleSize - iconPainter.width) / 2,
+  //       iconTop + (iconCircleSize - iconPainter.height) / 2,
+  //     ),
+  //   );
+
+  //   /// destaque quando selecionado
+  //   if (isSelected) {
+  //     canvas.drawPath(
+  //       path,
+  //       Paint()
+  //         ..color = const Color(0xFFE53935).withValues(alpha: 0.06)
+  //         ..style = PaintingStyle.fill,
+  //     );
+  //   }
+
+  //   final picture = recorder.endRecording();
+  //   final image = await picture.toImage(
+  //     width.toInt(),
+  //     totalHeight.toInt(),
+  //   );
+
+  //   final bytes = await image.toByteData(format: ui.ImageByteFormat.png);
+  //   return bytes!.buffer.asUint8List();
+  // }
+
+
+  
+  // Future<Uint8List> createPinWithText({
+  //   required String label,
+  //   required IconData icon,
+  //   bool isSelected = false,
+  // }) async {
+  //   final double height = context.percentHeight(0.055);
+  //   // final double height = 35.h;
+  //   const double pointerHeight = 10;
+
+  //   const double borderRadius = 24;
+  //   const double borderWidth = 1.4;
+
+  //   final double iconCircleSize = context.percentHeight(0.045);
+  //   // final double iconCircleSize = 28.w;
+  //   final double iconSize = 21.w;
+  //   const double iconLeft = 8;
+
+  //   final double textLeft = 50.w;
+  //   const double textRightPadding = 16;
+
+  //   /// mede texto
+  //   final textPainter = TextPainter(
+  //     textDirection: TextDirection.ltr,
+  //     text: TextSpan(
+  //       text: label,
+  //       style: context.appText.caption.copyWith(
+  //         color: context.onSurface,
+  //       ),
+  //     ),
+  //   )..layout();
+
+  //   /// largura dinâmica
+  //   double width;
+
+  //   if (isSelected) {
+  //     width = textLeft + textPainter.width + textRightPadding;
+  //   } else {
+  //     width = iconCircleSize + 16;
+  //   }
+
+  //   final recorder = ui.PictureRecorder();
+  //   final canvas = Canvas(recorder);
+
+  //   final double centerX = width / 2;
+
+  //   final path = Path()
+  //     ..moveTo(borderRadius, 0)
+
+  //     /// topo
+  //     ..lineTo(width - borderRadius, 0)
+  //     ..quadraticBezierTo(width, 0, width, borderRadius)
+
+  //     /// lado direito
+  //     ..lineTo(width, height - borderRadius)
+  //     ..quadraticBezierTo(width, height, width - borderRadius, height)
+
+  //     /// seta
+  //     ..lineTo(centerX + 14, height)
+  //     ..cubicTo(
+  //       centerX + 6,
+  //       height,
+  //       centerX + 4,
+  //       height + 6,
+  //       centerX + 2,
+  //       height + pointerHeight - 1,
+  //     )
+  //     ..quadraticBezierTo(
+  //       centerX,
+  //       height + pointerHeight + 1.5,
+  //       centerX - 2,
+  //       height + pointerHeight - 1,
+  //     )
+  //     ..cubicTo(
+  //       centerX - 4,
+  //       height + 6,
+  //       centerX - 6,
+  //       height,
+  //       centerX - 12,
+  //       height,
+  //     )
+
+  //     /// lado esquerdo
+  //     ..lineTo(borderRadius, height)
+  //     ..quadraticBezierTo(0, height, 0, height - borderRadius)
+  //     ..lineTo(0, borderRadius)
+  //     ..quadraticBezierTo(0, 0, borderRadius, 0)
+  //     ..close();
+
+  //   /// shadow
+  //   canvas.save();
+  //   canvas.translate(0, 2);
+  //   canvas.drawPath(
+  //     path,
+  //     Paint()
+  //       ..color = const Color(0x22000000)
+  //       ..maskFilter = const ui.MaskFilter.blur(ui.BlurStyle.normal, 6),
+  //   );
+  //   canvas.restore();
+
+  //   /// fundo
+  //   canvas.drawPath(path, Paint()..color = Colors.white);
+
+  //   /// borda
+  //   canvas.drawPath(
+  //     path,
+  //     Paint()
+  //       ..color = AppColors.grey.withValues(alpha: 0.3)
+  //       ..style = PaintingStyle.stroke
+  //       ..strokeWidth = borderWidth
+  //       ..isAntiAlias = true,
+  //   );
+
+  //   /// círculo do ícone
+  //   final double iconTop = (height - iconCircleSize) / 2;
+
+  //   canvas.drawCircle(
+  //     Offset(
+  //       iconLeft + iconCircleSize / 2,
+  //       iconTop + iconCircleSize / 2,
+  //     ),
+  //     iconCircleSize / 2,
+  //     Paint()..color = const Color(0xFFE53935),
+  //   );
+
+  //   /// ícone
+  //   final iconPainter = TextPainter(
+  //     textDirection: TextDirection.ltr,
+  //     text: TextSpan(
+  //       text: String.fromCharCode(icon.codePoint),
+  //       style: TextStyle(
+  //         fontSize: iconSize,
+  //         fontFamily: icon.fontFamily,
+  //         package: icon.fontPackage,
+  //         color: Colors.white,
+  //       ),
+  //     ),
+  //   )..layout();
+
+  //   iconPainter.paint(
+  //     canvas,
+  //     Offset(
+  //       iconLeft + (iconCircleSize - iconPainter.width) / 2,
+  //       iconTop + (iconCircleSize - iconPainter.height) / 2,
+  //     ),
+  //   );
+
+  //   /// label
+  //   if (isSelected) {
+  //     textPainter.paint(
+  //       canvas,
+  //       Offset(
+  //         textLeft,
+  //         (height - textPainter.height) / 2,
+  //       ),
+  //     );
+  //   }
+
+  //   final picture = recorder.endRecording();
+  //   final image = await picture.toImage(
+  //     width.toInt(),
+  //     (height + pointerHeight + 6).toInt(),
+  //   );
+
+  //   final bytes = await image.toByteData(format: ui.ImageByteFormat.png);
+  //   return bytes!.buffer.asUint8List();
+  // }

@@ -69,8 +69,8 @@ class StepTile extends StatelessWidget {
                   subtitle,
                   style: context.appText.caption.copyWith(
                     height: 1.25,
-                    fontWeight: FontWeight.w700,
-                    color: context.secondaryColor,
+                    fontWeight: FontWeight.w500,
+                    color: context.secondaryTextColor,
                   ),
                 ),
               ],
