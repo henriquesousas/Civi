@@ -20,7 +20,7 @@ class CardHintInfo extends StatelessWidget {
     return Container(
       padding: const EdgeInsets.all(16),
       decoration: BoxDecoration(
-        color: bgColor ?? context.surfaceColor,
+        color: bgColor ?? context.primaryBgCardLow,
         borderRadius: BorderRadius.circular(RadiusSize.lg),
         border: Border.all(color: context.outlineVariantColor),
         boxShadow: [
@@ -41,8 +41,8 @@ class CardHintInfo extends StatelessWidget {
               message,
               style: context.appText.bodySmall.copyWith(
                 height: 1.35,
-                fontWeight: FontWeight.w600,
-                color: textColor ?? context.secondaryColor,
+                fontWeight: FontWeight.w500,
+                color: textColor ?? context.secondaryTextColor,
               ),
             ),
           ),

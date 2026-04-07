@@ -41,7 +41,7 @@ class TextInputTile extends StatelessWidget {
                   label,
                   style: context.appText.caption.copyWith(
                     fontWeight: FontWeight.w800,
-                    color: context.secondaryColor,
+                    color: context.primaryTextColor,
                   ),
                 ),
                 const SizedBox(height: 6),
@@ -56,9 +56,9 @@ class TextInputTile extends StatelessWidget {
                   decoration: InputDecoration(
                     hintText: hint,
                     errorText: error,
-                    hintStyle: TextStyle(color: context.secondaryColor),
+                    hintStyle: TextStyle(color: context.secondaryTextColor),
                     filled: true,
-                    fillColor: context.surface,
+                    fillColor: context.primaryBgCard,
                     border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(16),
                       borderSide: BorderSide.none,

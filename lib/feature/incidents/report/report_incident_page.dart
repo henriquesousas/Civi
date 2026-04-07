@@ -132,12 +132,41 @@ class _AddIncidentPageState extends ConsumerState<ReportIncidentPage>
   Future<void> _pickDate(
       ReportIncidentViewmodel viewModel, DateTime? initialDate) async {
     final now = DateTime.now();
+    // final result = await showDatePicker(
+    //   context: context,
+    //   initialDate: initialDate ?? now,
+    //   firstDate: DateTime(now.year - 2),
+    //   lastDate: DateTime(now.year + 1),
+    //   helpText: 'Selecionar data',
+    // );
     final result = await showDatePicker(
       context: context,
       initialDate: initialDate ?? now,
       firstDate: DateTime(now.year - 2),
       lastDate: DateTime(now.year + 1),
       helpText: 'Selecionar data',
+      builder: (context, child) {
+        return Theme(
+          data: Theme.of(context).copyWith(
+            colorScheme: ColorScheme.dark(
+              primary: AppColors.primaryColor,
+              onPrimary: Colors.white,
+              surface:
+                  context.isDark() ? Colors.black : context.primaryBgCardHigh,
+              //Dark
+              onSurface:
+                  context.isDark() ? Colors.white : AppColors.primaryColor,
+            ),
+            datePickerTheme: DatePickerThemeData(
+              backgroundColor: context.primaryBgCard,
+              headerBackgroundColor: AppColors.primaryColor,
+              headerForegroundColor: Colors.white,
+              // dayForegroundColor: MaterialStatePropertyAll(Colors.white),
+            ),
+          ),
+          child: child!,
+        );
+      },
     );
     if (result == null) return;
     // setState(() => selectedDate = result);
@@ -155,10 +184,41 @@ class _AddIncidentPageState extends ConsumerState<ReportIncidentPage>
 
   Future<void> _pickTime(
       ReportIncidentViewmodel viewModel, TimeOfDay? initialTime) async {
+    // final result = await showTimePicker(
+    //   context: context,
+    //   initialTime: initialTime ?? TimeOfDay.now(),
+    //   helpText: 'Selecionar horário',
+    // );
     final result = await showTimePicker(
       context: context,
       initialTime: initialTime ?? TimeOfDay.now(),
       helpText: 'Selecionar horário',
+      builder: (context, child) {
+        return Theme(
+          data: Theme.of(context).copyWith(
+            colorScheme: ColorScheme.dark(
+              primary: AppColors.primaryColor,
+              onPrimary: AppColors.primaryColorDark,
+              // surface: context.isDark() ? Colors.white : Colors.black,
+              surface:
+                  context.isDark() ? Colors.black : context.primaryBgCardHigh,
+              // onSurface: AppColors.primaryColor,
+              //Dark
+              onSurface:
+                  context.isDark() ? Colors.white : AppColors.primaryColor,
+
+              // onSurface:
+              //     context.isDark() ? Colors.white : AppColors.primaryColor,
+            ),
+            timePickerTheme: TimePickerThemeData(
+              backgroundColor: context.primaryBgCard,
+              hourMinuteTextColor: Colors.white,
+              dialHandColor: Colors.white,
+            ),
+          ),
+          child: child!,
+        );
+      },
     );
     if (result == null) return;
     // setState(() => selectedTime = result);
@@ -180,7 +240,7 @@ class _AddIncidentPageState extends ConsumerState<ReportIncidentPage>
 
     return Scaffold(
       appBar: DefaultAppBar(
-        title: 'Criar alerta',
+        title: 'Publicar alerta',
         showBackButton: true,
         press: () => context.pop(),
       ),
@@ -200,7 +260,7 @@ class _AddIncidentPageState extends ConsumerState<ReportIncidentPage>
           Text(
             "Selecione um item",
             style: TextStyle(
-              color: Colors.white,
+              color: context.primaryTextColor,
               fontSize: 18.sp,
               fontWeight: FontWeight.w800,
               // letterSpacing: -0.8,
@@ -211,9 +271,8 @@ class _AddIncidentPageState extends ConsumerState<ReportIncidentPage>
           Text(
             "Para reportar um incidente, escolha um item já cadastrado no seu perfil.",
             style: TextStyle(
-              color: Colors.grey,
+              color: context.secondaryTextColor,
               fontSize: 12.sp,
-              fontWeight: FontWeight.w800,
               // letterSpacing: -0.8,
               height: 1.0,
             ),

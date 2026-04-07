@@ -1,3 +1,4 @@
+import 'package:deehelp/core/extension/color_extension.dart';
 import 'package:deehelp/core/theme/export_theme.dart';
 import 'package:deehelp/core/ui/styles/export_style.dart';
 import 'package:deehelp/core/ui/widgets/icon/export_icon.dart';
@@ -30,16 +31,25 @@ class SosHeaderCard extends StatelessWidget {
       //   ],
       // ),
       decoration: BoxDecoration(
-        color: const Color(0xFF101012),
+        // color: const Color(0xFF101012),
+        color: context.primaryBgCard,
         borderRadius: BorderRadius.circular(24),
-        border: Border.all(color: const Color(0xFF1D1D21)),
+        border: Border.all(color: context.outline),
+        boxShadow: const [
+          BoxShadow(
+            color: Color(0x142B5BEE),
+            blurRadius: 16,
+            offset: Offset(0, 8),
+          ),
+        ],
       ),
       padding: const EdgeInsets.all(16),
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           HighlightIcon(
-            bgColor: Colors.white.withValues(alpha: 0.16),
+            // bgColor: Colors.white.withValues(alpha: 0.16),
+            bgColor: context.primaryBgCardHigh,
             icon: const Icon(Icons.sos_rounded, color: Colors.white),
           ),
           const SizedBox(width: SpacingSize.md),
@@ -49,15 +59,13 @@ class SosHeaderCard extends StatelessWidget {
               children: [
                 Text(
                   title,
-                  style: context.appText.headermd.copyWith(
-                    color: Colors.white,
-                  ),
+                  style: context.appText.headermd,
                 ),
                 const SizedBox(height: SpacingSize.sm),
                 Text(
                   subtitle,
                   style: context.appText.caption.copyWith(
-                    color: Colors.white.withValues(alpha: 0.88),
+                    // color: Colors.white.withValues(alpha: 0.88),
                     fontWeight: FontWeight.w600,
                     height: 1.25,
                   ),

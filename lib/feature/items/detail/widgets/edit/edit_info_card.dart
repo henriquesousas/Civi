@@ -20,15 +20,16 @@ class EditInfoCard extends StatelessWidget {
       padding: const EdgeInsets.all(16),
       decoration: BoxDecoration(
         // color: Colors.white,
-        color: context.secondaryContainer.withValues(alpha: 0.3),
+        // color: context.secondaryContainer.withValues(alpha: 0.3),
+        color: context.primaryBgCard,
         borderRadius: BorderRadius.circular(22),
-        // boxShadow: const [
-        //   BoxShadow(
-        //     color: Color(0x142B5BEE),
-        //     blurRadius: 16,
-        //     offset: Offset(0, 8),
-        //   ),
-        // ],
+        boxShadow: const [
+          BoxShadow(
+            color: Color(0x142B5BEE),
+            blurRadius: 16,
+            offset: Offset(0, 8),
+          ),
+        ],
       ),
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -57,7 +58,7 @@ class EditInfoCard extends StatelessWidget {
                 Text(
                   helper,
                   style: context.appText.caption.copyWith(
-                    color: context.secondaryColor,
+                    color: context.secondaryTextColor,
                     fontWeight: FontWeight.w600,
                   ),
                 ),

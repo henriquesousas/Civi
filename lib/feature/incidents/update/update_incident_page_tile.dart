@@ -1,4 +1,5 @@
 import 'package:deehelp/core/extension/exports_extension.dart';
+import 'package:deehelp/core/theme/app_colors.dart';
 import 'package:deehelp/core/ui/widgets/buttons/buttons_export.dart';
 import 'package:deehelp/core/ui/widgets/textfield/text_field_card.dart';
 import 'package:deehelp/feature/items/detail/widgets/edit/edit_info_card.dart';
@@ -131,6 +132,9 @@ class _UpdateIncidentPageTileState
           ButtonOutline(
             loading: state.isGetCurrentLocattion,
             isPrimary: true,
+            borderColor:
+                context.isDark() ? Colors.white : AppColors.primaryColor,
+            textColor: context.isDark() ? Colors.white : AppColors.primaryColor,
             press: () async {
               viewModel.getCurrentLocation(
                   widget.args.value, widget.args.field);
@@ -138,7 +142,7 @@ class _UpdateIncidentPageTileState
             icon: Icon(
               Icons.gps_fixed,
               // color: context.primaryColor,
-              color: context.onSurfaceVariant,
+              color: context.isDark() ? Colors.white : AppColors.primaryColor,
             ),
             text: "Usar minha localização",
           ),

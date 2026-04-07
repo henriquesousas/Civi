@@ -1,3 +1,4 @@
+import 'package:deehelp/core/extension/color_extension.dart';
 import 'package:deehelp/feature/incidents/incident_router.dart';
 import 'package:deehelp/feature/incidents/providers/incident_selected_provider.dart';
 import 'package:deehelp/module/incident/domain/usecase/incident_output.dart';
@@ -18,7 +19,7 @@ class IncidenList extends ConsumerWidget {
       itemBuilder: (context, index) {
         final it = items[index];
         return Padding(
-          padding: const EdgeInsets.only(bottom: 12),
+          padding: const EdgeInsets.only(bottom: 1),
           child: IncidentListItemV2(
             incident: it,
             onPressed: () {
@@ -29,9 +30,8 @@ class IncidenList extends ConsumerWidget {
         );
       },
       separatorBuilder: (BuildContext context, int index) {
-        return const Divider(
-          color: Color(0xFF323234),
-          // color: Colors.grey,
+        return Divider(
+          color: context.outlineVariantColor,
           height: 1,
         );
       },

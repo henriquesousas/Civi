@@ -58,22 +58,14 @@ class TextFieldPrimary extends StatelessWidget {
           ),
           hintText: hint,
           filled: true,
-          // fillColor: const Color(0xFFF5F7FD),
-          fillColor: context.primaryBgCardLow,
+          // fillColor: Colors.amberAccent,
+          // fillColor: context.primaryBgCardHigh.withValues(alpha: 0.5),
+          fillColor: context.outlineVariantColor,
           border: OutlineInputBorder(
             borderRadius: BorderRadius.circular(RadiusSize.md),
             borderSide: BorderSide.none,
           ),
-          suffixIcon: suffixIcon
-
-          // suffixIcon: controller.text.isEmpty
-          //     ? null
-          //     : IconButton(
-          //         onPressed: onClear,
-          //         icon: const Icon(Icons.close),
-          //         color: const Color(0xFF8A96C8),
-          //       ),
-          ),
+          suffixIcon: suffixIcon),
     );
   }
 }

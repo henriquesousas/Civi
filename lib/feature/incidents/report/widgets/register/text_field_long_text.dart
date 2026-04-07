@@ -23,7 +23,7 @@ class TextFieldLongText extends StatelessWidget {
     return Container(
       padding: const EdgeInsets.all(14),
       decoration: BoxDecoration(
-        color: context.surface,
+        color: context.primaryBgCard,
         borderRadius: BorderRadius.circular(18),
         // border: Border.all(color: const Color(0xFFE6EAF6)),
       ),
@@ -34,7 +34,7 @@ class TextFieldLongText extends StatelessWidget {
             title.toUpperCase(),
             style: context.appText.caption.copyWith(
               fontWeight: FontWeight.w800,
-              color: context.secondaryColor,
+              color: context.primaryTextColor,
             ),
           ),
           const SizedBox(height: 6),
@@ -42,7 +42,7 @@ class TextFieldLongText extends StatelessWidget {
             subtitle,
             style: context.appText.caption.copyWith(
               fontWeight: FontWeight.w600,
-              color: context.secondaryColor,
+              color: context.secondaryTextColor,
             ),
           ),
           const SizedBox(height: 10),
@@ -57,9 +57,9 @@ class TextFieldLongText extends StatelessWidget {
             },
             decoration: InputDecoration(
               hintText: 'Digite aqui…',
-              hintStyle: TextStyle(color: context.secondaryColor),
+              hintStyle: TextStyle(color: context.secondaryTextColor),
               filled: true,
-              fillColor: context.outlineVariantColor,
+              fillColor: context.primaryBgCardHigh.withValues(alpha: 0.3),
               border: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(16),
                 borderSide: BorderSide.none,

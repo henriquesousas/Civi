@@ -28,9 +28,13 @@ class ExpandableCard extends StatelessWidget {
   Widget build(BuildContext context) {
     final border =
         selected ? AppColors.primaryColor : context.outlineVariantColor;
+    // final bg = selected
+    //     ? context.primaryColor.withValues(alpha: 0.01)
+    //     : Colors.grey.withValues(alpha: 0.2);
+
     final bg = selected
         ? context.primaryColor.withValues(alpha: 0.01)
-        : Colors.grey.withValues(alpha: 0.2);
+        : context.primaryBgCard;
 
     return InkWell(
       borderRadius: BorderRadius.circular(RadiusSize.xl),
@@ -95,7 +99,7 @@ class ExpandableCard extends StatelessWidget {
                           style: context.appText.caption.copyWith(
                             height: 1.25,
                             fontWeight: FontWeight.w600,
-                            color: context.secondaryColor,
+                            color: context.secondaryTextColor,
                           ),
                         ),
                       ],
@@ -104,8 +108,10 @@ class ExpandableCard extends StatelessWidget {
                   AnimatedRotation(
                     turns: selected ? 0.25 : 0,
                     duration: const Duration(milliseconds: 180),
-                    child: Icon(Icons.chevron_right,
-                        color: context.secondaryColor),
+                    child: Icon(
+                      Icons.chevron_right,
+                      color: context.secondaryTextColor,
+                    ),
                   ),
                 ],
               ),

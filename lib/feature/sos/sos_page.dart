@@ -1,3 +1,4 @@
+import 'package:deehelp/core/extension/exports_extension.dart';
 import 'package:deehelp/core/theme/export_theme.dart';
 import 'package:deehelp/core/ui/widgets/appbar/default_app_bar.dart';
 import 'package:deehelp/feature/sos/widgets/row_sos_contact.dart';
@@ -16,7 +17,7 @@ class SOSPage extends StatelessWidget {
     final contacts = SosContact.defaultEmergencyContacts();
 
     return Scaffold(
-      // backgroundColor: context.secondaryContainer,
+      backgroundColor: context.scaffoldBackgroundColor,
       appBar: DefaultAppBar(
         title: "SOS",
         showBackButton: true,

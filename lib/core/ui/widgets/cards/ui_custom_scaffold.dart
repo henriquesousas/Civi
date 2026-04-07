@@ -1,3 +1,4 @@
+import 'package:deehelp/core/extension/exports_extension.dart';
 import 'package:deehelp/core/ui/widgets/appbar/default_app_bar.dart';
 import 'package:deehelp/core/ui_annotated_region_widget.dart';
 import 'package:flutter/material.dart';
@@ -52,14 +53,16 @@ class UICustomScaffold extends StatelessWidget {
         bottomNavigationBar: bottomNavigationBar,
         // backgroundColor: bgColor ?? const Color(0xFFF8FAFC),
         // backgroundColor: bgColor ?? Theme.of(context).scaffoldBackgroundColor,
-        backgroundColor: const Color(0xFF090C14),
+        // backgroundColor: const Color(0xFF090C14),
+        backgroundColor: context.scaffoldBackgroundColor,
         resizeToAvoidBottomInset: false,
         appBar: hideAppBar == true
             ? null
             : DefaultAppBar(
                 title: "$pageTitle",
-                press: () => onBackButtonTap,
-                leading: _getLeading(),
+                press: () => onBackButtonTap?.call(),
+                // leading: _getLeading(),
+                showBackButton: true,
               ),
         // : AppBar(
         //     // surfaceTintColor: Colors.transparent,
@@ -98,19 +101,19 @@ class UICustomScaffold extends StatelessWidget {
     );
   }
 
-  Widget? _getLeading() {
-    if (leading != null) return leading!;
-    return showBackButton
-        ? IconButton(
-            onPressed: () {
-              if (onBackButtonTap != null) {
-                onBackButtonTap!();
-              } else {}
-            },
-            icon: const Icon(
-              Icons.arrow_back_ios_new_rounded,
-            ),
-          )
-        : null;
-  }
+  // Widget? _getLeading() {
+  //   if (leading != null) return leading!;
+  //   return showBackButton
+  //       ? IconButton(
+  //           onPressed: () {
+  //             if (onBackButtonTap != null) {
+  //               onBackButtonTap!();
+  //             } else {}
+  //           },
+  //           icon: const Icon(
+  //             Icons.arrow_back_ios_new_rounded,
+  //           ),
+  //         )
+  //       : null;
+  // }
 }

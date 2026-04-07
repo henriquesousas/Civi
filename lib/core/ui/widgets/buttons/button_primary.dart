@@ -1,4 +1,5 @@
 import 'package:deehelp/core/extension/color_extension.dart';
+import 'package:deehelp/core/extension/size_extension.dart';
 import 'package:deehelp/core/theme/export_theme.dart';
 import 'package:deehelp/core/ui/styles/export_style.dart';
 import 'package:flutter/material.dart';
@@ -69,7 +70,7 @@ class ButtonPrimary extends StatelessWidget {
       height: CiruclarProgressIndicatorSize.xs,
       width: CiruclarProgressIndicatorSize.xs,
       child: CircularProgressIndicator(
-        color: context.surfaceColor,
+        color: context.isDark() ? Colors.white : context.surfaceColor,
       ),
     );
   }

@@ -56,6 +56,7 @@ class _ListingIncidentPageState extends ConsumerState<IncidentListPage> {
     listener();
 
     return Scaffold(
+      backgroundColor: context.scaffoldBackgroundColor,
       appBar: DefaultAppBar(
         title: "Minhas ocorrências",
         showBackButton: true,
@@ -87,7 +88,7 @@ class _ListingIncidentPageState extends ConsumerState<IncidentListPage> {
                         context.push(IncidentRouter.register);
                       },
                       bgColor: context.primaryColor,
-                      textColor: context.surface,
+                      textColor: Colors.white,
                       // icon: const Icon(
                       //   CupertinoIcons.add,
                       //   color: Colors.black,

@@ -62,7 +62,7 @@ class ActionTile extends StatelessWidget {
                   Text(
                     title,
                     style: context.appText.bodySmall.copyWith(
-                      color: context.onSurface,
+                      color: context.primaryTextColor,
                       fontWeight: FontWeight.w900,
                     ),
                   ),
@@ -71,7 +71,7 @@ class ActionTile extends StatelessWidget {
                     subtitle,
                     style: context.appText.caption.copyWith(
                       fontWeight: FontWeight.w600,
-                      color: context.secondaryColor,
+                      color: context.secondaryTextColor,
                     ),
                   ),
                 ],

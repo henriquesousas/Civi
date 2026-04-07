@@ -24,10 +24,20 @@ class RowSOSContact extends StatelessWidget {
     final radius = BorderRadius.circular(RadiusSize.lg);
 
     return Material(
-      color: context.surfaceColor,
+      // color: context.primaryBgCard,
+      color: context.primaryBgCard,
+
       borderRadius: radius,
       clipBehavior: Clip.antiAlias,
       elevation: 0,
+      // shadowColor: const Color(0x142B5BEE),
+      // boxShadow: const [
+      //   BoxShadow(
+      //     color: Color(0x142B5BEE),
+      //     blurRadius: 16,
+      //     offset: Offset(0, 8),
+      //   ),
+      // ],
       child: InkWell(
         onTap: onCall,
         child: Ink(
@@ -38,9 +48,10 @@ class RowSOSContact extends StatelessWidget {
           //   boxShadow: const [AppColors.shadowSoft],
           // ),
           decoration: BoxDecoration(
-            color: const Color(0xFF101012),
+            // color: const Color(0xFF101012),
+            color: context.primaryBgCard,
             borderRadius: BorderRadius.circular(24),
-            border: Border.all(color: const Color(0xFF1D1D21)),
+            border: Border.all(color: context.outlineVariantColor),
           ),
           padding: const EdgeInsets.all(LayoutSpacingSize.container),
           child: Row(
@@ -61,9 +72,7 @@ class RowSOSContact extends StatelessWidget {
                     const SizedBox(height: SpacingSize.xs),
                     Text(
                       contact.subtitle,
-                      style: context.appText.caption.copyWith(
-                        color: context.secondaryColor,
-                      ),
+                      style: context.appText.caption,
                     ),
                   ],
                 ),

@@ -37,6 +37,10 @@ class ReportIncidentSuccessfullyPage extends StatelessWidget {
 
     // final secondaryText = Colors.white.withValues(alpha: 0.82);
 
+    final softCard = isDark
+        ? Colors.white.withValues(alpha: 0.06)
+        : Colors.white.withValues(alpha: 0.12);
+
     return Scaffold(
       // backgroundColor: context.primaryColor,
       backgroundColor: backgroundColor,
@@ -207,8 +211,9 @@ class ReportIncidentSuccessfullyPage extends StatelessWidget {
                           // const SizedBox(height: SpacingSize.md),
                           ButtonOutline(
                             press: () => context.pop(),
-                            bgColor: context.primaryColor,
-                            textColor: context.surface,
+                            bgColor: AppColors.primaryColorDark,
+                            borderColor: AppColors.primaryColorDark,
+                            textColor: Colors.white,
                             text: "Fechar",
                           ),
                           const SizedBox(height: SpacingSize.md),

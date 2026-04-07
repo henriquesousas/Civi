@@ -239,6 +239,7 @@ class _UpdateIncidentPageState extends ConsumerState<UpdateIncidentPage> {
                                 state.updatedValue!.product?.code ?? ''),
                             icon: Icon(Icons.copy_outlined, size: IconSizes.sm),
                             text: "Copiar",
+                            borderColor: AppColors.primaryColor,
                           ),
                         ),
                       ],
@@ -249,7 +250,8 @@ class _UpdateIncidentPageState extends ConsumerState<UpdateIncidentPage> {
                       padding: const EdgeInsets.all(14),
                       decoration: BoxDecoration(
                         // color: const Color(0xFFF5F7FD),
-                        color: AppColors.primaryColor.withValues(alpha: 0.08),
+                        color: context.outlineVariantColor,
+                        // color: AppColors.primaryColor.withValues(alpha: 0.08),
                         borderRadius: BorderRadius.circular(18),
                         // border: Border.all(color: const Color(0xFFE6EAF6)),
                         border: Border.all(
@@ -375,16 +377,17 @@ class _UpdateIncidentPageState extends ConsumerState<UpdateIncidentPage> {
                 Row(
                   children: [
                     HighlightIcon(
-                        icon: Icon(
-                      Icons.description_outlined,
-                      color: context.onSurface,
-                    )),
+                      icon: Icon(
+                        Icons.description_outlined,
+                        color: context.onSurface,
+                      ),
+                    ),
                     const SizedBox(width: 12),
                     Expanded(
                       child: Text(
                         'Descrição (até 300 caracteres)',
                         style: context.appText.caption.copyWith(
-                          color: context.secondaryColor,
+                          color: context.secondaryTextColor,
                           fontWeight: FontWeight.w800,
                           letterSpacing: 0.2,
                         ),
@@ -417,7 +420,7 @@ class _UpdateIncidentPageState extends ConsumerState<UpdateIncidentPage> {
                       ? 'Nenhuma descrição informada.'
                       : state.updatedValue!.howTo!,
                   style: context.appText.bodySmall.copyWith(
-                    color: context.onSurface,
+                    color: context.secondaryTextColor,
                     fontWeight: FontWeight.w600,
                     height: 1.35,
                   ),
@@ -436,42 +439,6 @@ class _UpdateIncidentPageState extends ConsumerState<UpdateIncidentPage> {
                 onTap: () => UrlLauncherUtils.makePhoneCall("190"),
                 isPrimary: true,
               ),
-              // const SizedBox(height: SpacingSize.lg),
-              // Row(
-              //   children: [
-              //     Expanded(
-              //       child: ButtonOutline(
-              //         press: () => UrlLauncherUtils.launchWhatsIncidentDenunc(
-              //           alertId: state.updatedValue!.alertId,
-              //           context: context,
-              //         ),
-              //         text: "WhatsApp",
-              //         icon: Icon(
-              //           Icons.chat_bubble_outline,
-              //           color: context.onSurfaceVariant,
-              //         ),
-              //       ),
-              //     ),
-              //     const SizedBox(width: SpacingSize.md),
-              //     Expanded(
-              //       child: ButtonOutline(
-              //         bgColor: context.primaryColor,
-              //         borderColor: context.primaryColor,
-              //         textColor: context.surface,
-              //         press: () => UrlLauncherUtils.shareIncident(
-              //           context,
-              //           state.updatedValue!.alertId,
-              //           state.updatedValue!.createdAt,
-              //         ),
-              //         text: "Compartilhar",
-              //         icon: Icon(
-              //           Icons.share,
-              //           color: context.surface,
-              //         ),
-              //       ),
-              //     ),
-              //   ],
-              // ),
             ],
           ),
           const SizedBox(height: SpacingSize.lg),

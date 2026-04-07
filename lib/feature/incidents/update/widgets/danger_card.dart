@@ -2,6 +2,7 @@ import 'package:deehelp/core/extension/color_extension.dart';
 import 'package:deehelp/core/theme/export_theme.dart';
 import 'package:deehelp/core/ui/styles/app_text_style.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class DangerCard extends StatelessWidget {
   final String title;
@@ -45,8 +46,8 @@ class DangerCard extends StatelessWidget {
           child: Row(
             children: [
               Container(
-                width: 44,
-                height: 44,
+                width: 42.w,
+                height: 42.h,
                 decoration: BoxDecoration(
                   color: color.withValues(alpha: 0.10),
                   borderRadius: BorderRadius.circular(RadiusSize.md),
@@ -62,15 +63,14 @@ class DangerCard extends StatelessWidget {
                       title,
                       style: context.appText.bodySmall.copyWith(
                         fontWeight: FontWeight.w900,
-                        color: context.onSurface,
+                        color: context.primaryTextColor,
                       ),
                     ),
                     const SizedBox(height: 4),
                     Text(
                       subtitle,
-                      style: context.appText.caption.copyWith(
-                        color: context.secondaryColor,
-                      ),
+                      style: context.appText.caption
+                          .copyWith(color: context.secondaryTextColor),
                     ),
                   ],
                 ),
