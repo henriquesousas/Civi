@@ -50,10 +50,11 @@ class _MapLayersBottomSheet2State extends State<MapLayersBottomSheet2>
       child: Container(
         width: double.infinity,
         padding: const EdgeInsets.fromLTRB(16, 12, 16, 14),
-        decoration: const BoxDecoration(
-          color: Color(0xFF050505),
-          borderRadius: BorderRadius.vertical(top: Radius.circular(22)),
-          boxShadow: [
+        decoration: BoxDecoration(
+          // color: Color(0xFF050505),
+          color: context.surface,
+          borderRadius: const BorderRadius.vertical(top: Radius.circular(22)),
+          boxShadow: const [
             BoxShadow(
               color: Colors.black54,
               blurRadius: 24,
@@ -80,7 +81,6 @@ class _MapLayersBottomSheet2State extends State<MapLayersBottomSheet2>
                         Text(
                           widget.city ?? "Não identificado",
                           style: TextStyle(
-                            color: Colors.white,
                             fontSize: 22.sp,
                             fontWeight: FontWeight.w800,
                             letterSpacing: 0.2,
@@ -91,11 +91,13 @@ class _MapLayersBottomSheet2State extends State<MapLayersBottomSheet2>
                           height: IconSizes.xl,
                           decoration: BoxDecoration(
                             // color: const Color(0xFFF3F4F6),
-                            color: Colors.white.withValues(alpha: 0.1),
+                            // color: Colors.white.withValues(alpha: 0.1),
+                            color: context.primaryBgCardLow,
                             borderRadius: BorderRadius.circular(99),
                             border: Border.all(
                               // color: const Color(0xFFE5E7EB),
-                              color: Colors.grey.withValues(alpha: 0.6),
+                              // color: Colors.grey.withValues(alpha: 0.6),
+                              color: context.outline,
                             ),
                           ),
                           child: AnimatedRotation(
@@ -105,7 +107,8 @@ class _MapLayersBottomSheet2State extends State<MapLayersBottomSheet2>
                               Icons.keyboard_arrow_up_rounded,
                               size: IconSizes.lg,
                               // color: const Color(0xFF111827),
-                              color: Colors.white54,
+                              color: context.primaryTextColor
+                                  .withValues(alpha: 0.5),
                             ),
                           ),
                         ),
@@ -117,7 +120,7 @@ class _MapLayersBottomSheet2State extends State<MapLayersBottomSheet2>
                     Text(
                       widget.address ?? '',
                       style: TextStyle(
-                        color: Colors.grey,
+                        color: context.secondaryTextColor,
                         fontSize: 12.sp,
                         fontWeight: FontWeight.normal,
                         letterSpacing: 0.2,
@@ -202,12 +205,11 @@ class _LayerActionTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final borderColor = selected
-        ? const Color(0xFF2A2A2A)
-        : Colors.white.withValues(alpha: 0.12);
-
-    final backgroundColor =
-        selected ? const Color(0xFF171717) : const Color(0xFF0D0D0D);
+    // final borderColor = selected ? const Color(0xFF2A2A2A) : context.outline;
+    // final backgroundColor =
+    //     selected ? const Color(0xFF171717) : const Color(0xFF0D0D0D);
+    final borderColor = context.outline;
+    final backgroundColor = context.primaryBgCardLow;
 
     return Material(
       color: Colors.transparent,
@@ -222,7 +224,7 @@ class _LayerActionTile extends StatelessWidget {
             border: Border.all(color: borderColor),
             boxShadow: [
               BoxShadow(
-                color: Colors.black.withOpacity(0.18),
+                color: context.primaryBgCardLow.withValues(alpha: 0.18),
                 blurRadius: 14,
                 offset: const Offset(0, 6),
               ),
@@ -239,7 +241,6 @@ class _LayerActionTile extends StatelessWidget {
                 maxLines: 2,
                 overflow: TextOverflow.ellipsis,
                 style: TextStyle(
-                  color: Colors.white,
                   fontSize: context.safeSp(16),
                   fontWeight: FontWeight.w800,
                   height: 1.15,
@@ -262,19 +263,20 @@ class _LayerActionTile extends StatelessWidget {
               Row(
                 children: [
                   Container(
-                    width: 28,
-                    height: 28,
+                    width: 26.w,
+                    height: 26.w,
                     decoration: BoxDecoration(
-                      color: Colors.white.withOpacity(0.06),
+                      color: context.primaryBgCardHigh,
                       shape: BoxShape.circle,
                       border: Border.all(
-                        color: Colors.white.withOpacity(0.08),
+                        // color: Colors.white.withValues(alpha: 0.08),
+                        color: context.primaryBgCardHigh,
                       ),
                     ),
-                    child: const Icon(
+                    child: Icon(
                       Icons.arrow_forward_rounded,
                       size: 16,
-                      color: Colors.white70,
+                      color: context.primaryTextColor.withValues(alpha: 0.5),
                     ),
                   ),
                 ],

@@ -2,6 +2,7 @@ import 'dart:async';
 import 'dart:math';
 
 import 'package:deehelp/core/extension/date_extension.dart';
+import 'package:deehelp/core/extension/exports_extension.dart';
 import 'package:deehelp/core/extension/size_extension.dart';
 import 'package:deehelp/core/services/permissions/location/domain/current_location.dart';
 import 'package:deehelp/core/services/permissions/location/providers/location_providers.dart';
@@ -122,7 +123,7 @@ class _SearchPageV2State extends ConsumerState<SearchPageV2> {
     final currentLocation = ref.watch(currentLocationProvider);
 
     return Scaffold(
-      backgroundColor: background,
+      backgroundColor: context.scaffoldBackgroundColor,
       body: SafeArea(
         child: Column(
           children: [
@@ -134,7 +135,7 @@ class _SearchPageV2State extends ConsumerState<SearchPageV2> {
                     child: Container(
                       height: 44,
                       decoration: BoxDecoration(
-                        color: searchBg,
+                        color: context.outline,
                         borderRadius: BorderRadius.circular(24),
                       ),
                       child: Row(
@@ -150,17 +151,20 @@ class _SearchPageV2State extends ConsumerState<SearchPageV2> {
                             child: TextField(
                               controller: _searchController,
                               focusNode: _focusNode,
-                              style: const TextStyle(
-                                color: Colors.white,
-                                fontSize: 16,
+                              style: TextStyle(
+                                color: context.primaryTextColor,
+                                fontSize: context.safeSp(15),
+                                fontWeight: FontWeight.bold,
                               ),
-                              cursorColor: Colors.white,
-                              decoration: const InputDecoration(
-                                hintText: 'Buscar incidentes, locais, regiões',
-                                fillColor: searchBg,
+                              // cursorColor: context.primaryBgCard,
+                              decoration: InputDecoration(
+                                hintText:
+                                    'Buscar incidentes, locais, regiões...',
+                                fillColor: context.outline,
                                 hintStyle: TextStyle(
                                   color: hintColor,
-                                  fontSize: 15,
+                                  fontWeight: FontWeight.normal,
+                                  fontSize: context.safeSp(14),
                                 ),
                                 border: InputBorder.none,
                                 isCollapsed: true,
@@ -211,7 +215,6 @@ class _SearchPageV2State extends ConsumerState<SearchPageV2> {
                       child: Text(
                         'Cancelar',
                         style: TextStyle(
-                          color: Colors.white,
                           fontSize: 17,
                           fontWeight: FontWeight.w400,
                         ),
@@ -223,24 +226,42 @@ class _SearchPageV2State extends ConsumerState<SearchPageV2> {
             ),
             Container(
               height: 1,
-              color: dividerColor,
+              color: context.outlineVariantColor,
             ),
             Expanded(
-              child: ListView(
+              child: ListView.separated(
                 padding: const EdgeInsets.only(top: 10, bottom: 20),
-                children: [
-                  ...state.items.map(
-                    (item) => _SearchResultTile(
-                      item: item,
-                      currentLocation: currentLocation,
-                      danger: danger,
-                      secondaryText: secondaryText,
-                      premiumBorder: premiumBorder,
-                      press: () => context.push(IncidentRouter.detailComunity,
-                          extra: item),
+                separatorBuilder: (context, index) => Container(
+                  height: 2,
+                  color: context.outlineVariantColor,
+                ),
+                itemCount: state.items.length,
+                itemBuilder: (context, index) {
+                  return _SearchResultTile(
+                    item: state.items[index],
+                    currentLocation: currentLocation,
+                    danger: danger,
+                    secondaryText: secondaryText,
+                    premiumBorder: premiumBorder,
+                    press: () => context.push(
+                      IncidentRouter.detailComunity,
+                      extra: state.items[index],
                     ),
-                  ),
-                ],
+                  );
+                },
+                // children: [
+                //   ...state.items.map(
+                //     (item) => _SearchResultTile(
+                //       item: item,
+                //       currentLocation: currentLocation,
+                //       danger: danger,
+                //       secondaryText: secondaryText,
+                //       premiumBorder: premiumBorder,
+                //       press: () => context.push(IncidentRouter.detailComunity,
+                //           extra: item),
+                //     ),
+                //   ),
+                // ],
               ),
             ),
           ],
@@ -275,127 +296,133 @@ class _SearchResultTile extends StatelessWidget {
 
     return InkWell(
       onTap: press,
-      child: Padding(
-        padding: const EdgeInsets.fromLTRB(14, 10, 14, 10),
-        child: Row(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Container(
-              width: 40.w,
-              height: 40.h,
-              decoration: const BoxDecoration(
-                color: Color(0xFF252527),
-                shape: BoxShape.circle,
-              ),
-              child: Center(
-                child: Container(
-                  width: 10.w,
-                  height: 10.h,
-                  decoration: BoxDecoration(
-                    color: dotColor,
-                    shape: BoxShape.circle,
+      child: Container(
+        color: context.primaryBgCard,
+        child: Padding(
+          padding: const EdgeInsets.fromLTRB(14, 10, 14, 10),
+          child: Row(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Container(
+                width: 40.w,
+                height: 40.h,
+                decoration: BoxDecoration(
+                  // color: Color(0xFF252527),
+                  color: context.primaryBgCardHigh,
+                  shape: BoxShape.circle,
+                ),
+                child: Center(
+                  child: Container(
+                    width: 10.w,
+                    height: 10.h,
+                    decoration: BoxDecoration(
+                      color: dotColor,
+                      shape: BoxShape.circle,
+                    ),
                   ),
                 ),
               ),
-            ),
-            const SizedBox(width: 12),
-            Expanded(
-              child: Padding(
-                padding: const EdgeInsets.only(top: 1),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Row(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Expanded(
-                          child: Text(
-                            _getTitle(item),
-                            style: TextStyle(
-                              color: Colors.white,
-                              fontSize: context.safeSp(13),
-                              fontWeight: FontWeight.w600,
-                              height: 1.2,
-                            ),
-                          ),
-                        ),
-                        if (item.visibilty) ...[
-                          const SizedBox(width: 8),
-                          Container(
-                            padding: const EdgeInsets.symmetric(
-                              horizontal: 8,
-                              vertical: 2,
-                            ),
-                            decoration: BoxDecoration(
-                              border: Border.all(color: premiumBorder),
-                              borderRadius: BorderRadius.circular(999),
-                            ),
+              const SizedBox(width: 12),
+              Expanded(
+                child: Padding(
+                  padding: const EdgeInsets.only(top: 1),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Row(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Expanded(
                             child: Text(
-                              'Verificado',
+                              _getTitle(item),
                               style: TextStyle(
-                                color: Colors.white,
-                                fontSize: context.safeSp(10),
-                                fontWeight: FontWeight.w500,
+                                color: context.primaryTextColor,
+                                fontSize: context.safeSp(14),
+                                fontWeight: FontWeight.bold,
+                                height: 1.2,
                               ),
                             ),
                           ),
-                        ],
-                      ],
-                    ),
-                    const SizedBox(height: 5),
-                    Text(
-                      "Próximo  á ${item.local?.address}",
-                      style: TextStyle(
-                        color: dotColor,
-                        // color: item.isAlert ? danger : secondaryText,
-                        fontSize: context.safeSp(12),
-                        height: 1.2,
-                      ),
-                    ),
-                    const SizedBox(height: 4),
-                    Text(
-                      _getSummary(item, currentLocation),
-                      style: TextStyle(
-                        color: secondaryText,
-                        fontSize: context.safeSp(12),
-                        height: 1.2,
-                      ),
-                    ),
-                    const SizedBox(height: 4),
-                    Row(
-                      spacing: 5,
-                      children: [
-                        if (!item.isPlatformGenerated) ...[
-                          CircleAvatar(
-                            radius: 12,
-                            // backgroundColor: colors[index % colors.length],
-                            child: Icon(
-                              Icons.person,
-                              size: IconSizes.xxs,
-                              color: Colors.white,
+                          if (item.visibilty) ...[
+                            const SizedBox(width: 8),
+                            Container(
+                              padding: const EdgeInsets.symmetric(
+                                horizontal: 8,
+                                vertical: 2,
+                              ),
+                              decoration: BoxDecoration(
+                                color: context.primaryBgCardLow,
+                                border: Border.all(
+                                    color: context.primaryBgCardHigh),
+                                borderRadius: BorderRadius.circular(999),
+                              ),
+                              child: Text(
+                                'Verificado',
+                                style: TextStyle(
+                                  color: context.primaryTextColor,
+                                  fontSize: context.safeSp(10),
+                                  fontWeight: FontWeight.w500,
+                                ),
+                              ),
                             ),
-                          ),
-                        ] else ...[
-                          Image.asset(
-                            "assets/images/logo_transp.png",
-                            width: IconSizes.xs,
-                          ),
+                          ],
                         ],
-                        Text(
-                          item.isPlatformGenerated ? "Civi" : "Comunidade",
-                          style: TextStyle(
-                            color: secondaryText,
-                            fontSize: context.safeSp(12),
-                            height: 1.2,
-                          ),
-                        )
-                      ],
-                    ),
-                  ],
+                      ),
+                      const SizedBox(height: 5),
+                      Text(
+                        "Próximo  á ${item.local?.address}",
+                        style: TextStyle(
+                          color: dotColor,
+                          // color: item.isAlert ? danger : secondaryText,
+                          fontSize: context.safeSp(12),
+                          height: 1.2,
+                        ),
+                      ),
+                      const SizedBox(height: 5),
+                      Text(
+                        _getSummary(item, currentLocation),
+                        style: TextStyle(
+                          color: secondaryText,
+                          fontSize: context.safeSp(12),
+                          height: 1.2,
+                        ),
+                      ),
+                      const SizedBox(height: 10),
+                      Row(
+                        spacing: 5,
+                        children: [
+                          if (!item.isPlatformGenerated) ...[
+                            CircleAvatar(
+                              radius: 12,
+                              // backgroundColor: colors[index % colors.length],
+                              child: Icon(
+                                Icons.person,
+                                size: IconSizes.xxs,
+                                color: Colors.white,
+                              ),
+                            ),
+                          ] else ...[
+                            Image.asset(
+                              "assets/images/logo_transp.png",
+                              width: IconSizes.xs,
+                            ),
+                          ],
+                          Text(
+                            item.isPlatformGenerated ? "Civi" : "Comunidade",
+                            style: TextStyle(
+                              color: secondaryText,
+                              fontSize: context.safeSp(12),
+                              height: 1.2,
+                            ),
+                          )
+                        ],
+                      ),
+                    ],
+                  ),
                 ),
               ),
-            ),
-          ],
+            ],
+          ),
         ),
       ),
     );

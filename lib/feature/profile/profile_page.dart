@@ -150,11 +150,11 @@ class ProfilePage extends ConsumerWidget {
           // const TitleSection(title: 'Preferências'),
           ProfileOptions(
             items: [
-              // ProfileItem(
-              //   icon: Icons.dark_mode_outlined,
-              //   title: 'Modo escuro',
-              //   trailing: Switch(value: false, onChanged: null),
-              // ),
+              const ProfileItem(
+                icon: Icons.dark_mode_outlined,
+                title: 'Modo escuro',
+                trailing: Switch(value: false, onChanged: null),
+              ),
               ProfileItem(
                 icon: CupertinoIcons.star_circle,
                 title: 'Avaliar o app',

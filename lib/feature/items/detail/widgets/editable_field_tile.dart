@@ -87,7 +87,8 @@ class EditableFieldTile extends StatelessWidget {
                   ),
                 if (!isLoading)
                   HighlightIcon(
-                    bgColor: Colors.white.withValues(alpha: 0.05),
+                    // bgColor: Colors.white.withValues(alpha: 0.05),
+                    bgColor: context.primaryBgCardLow,
                     icon: Icon(
                       CupertinoIcons.pencil,
                       // color: context.primaryColor,

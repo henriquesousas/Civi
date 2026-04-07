@@ -267,11 +267,12 @@ class _MapaPageState extends ConsumerState<MapaPage> {
             // textureView: true,
             onMapCreated: (mapboxMap) async => _onMapCreated(mapboxMap, []),
             onStyleLoadedListener: (styleLoadedEventData) async {
+              final isNight = context.isDark() ? "night" : "day";
               await _mapboxMap!.style.setStyleImportConfigProperty(
                 'basemap',
                 'lightPreset',
                 // 'day',
-                'night',
+                isNight,
               );
 
               await _mapboxMap!.style.setStyleImportConfigProperty(
@@ -355,8 +356,13 @@ class _MapaPageState extends ConsumerState<MapaPage> {
                 FloatingActionButton(
                   mini: false,
                   // backgroundColor: context.primaryColor,
-                  backgroundColor:
-                      context.secondaryColor.withValues(alpha: 0.1),
+                  // backgroundColor:
+                  //     context.primaryTextColor.withValues(alpha: 0.1),
+                  // backgroundColor:
+                  //     context.primaryTextColor.withValues(alpha: 0.2),
+                  backgroundColor: context.isDark()
+                      ? context.primaryTextColor.withValues(alpha: 0.2)
+                      : Colors.black.withValues(alpha: 0.3),
                   elevation: 8,
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(999),
@@ -395,7 +401,7 @@ class _MapaPageState extends ConsumerState<MapaPage> {
               return const SizedBox.shrink();
             },
           ),
-
+          //Bottom
           Positioned(
             left: 0,
             right: 0,
