@@ -18,7 +18,8 @@ class AppTheme {
       surfaceContainerHigh: Color(0XFFd6d6d6), //background accent
       /// BORDAS
       // outline: Color(0xFFE4E8EF), //  borda principal
-      outline: Color(0xFFcdd0d7), //  borda principal
+      // outline: Color(0xFFcdd0d7), //  borda principal
+      outline: Color(0xFFe1e2e7), //  borda principal
       outlineVariant: Color(0xFFE4E8EF), // borda secundária
       // TEXTOS
       onSurface: Color(0xFF111827), // texto principal

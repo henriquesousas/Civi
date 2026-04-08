@@ -140,8 +140,11 @@ class _MapLayersBottomSheet2State extends State<MapLayersBottomSheet2>
                         subtitle: 'Escolha uma categoria',
                         selected: true,
                         leading: const _MapPreviewIcon(
-                          dotColor: Color(0xFFFFC400),
-                          showAvatar: true,
+                          // accentColor: Color(0xFFFFC400),
+                          accentColor: Color(0xFFFFB300),
+                          showBadge: true,
+                          centerIcon: Icons.warning_amber_rounded,
+                          badgeIcon: Icons.people_alt_rounded,
                         ),
                         onTap: () {
                           _toggle();
@@ -163,9 +166,9 @@ class _MapLayersBottomSheet2State extends State<MapLayersBottomSheet2>
                         subtitle: 'Seus itens',
                         selected: false,
                         leading: const _MapPreviewIcon(
-                          dotColor: Color(0xFFFF8A00),
-                          showAvatar: false,
-                          centerIcon: Icons.person,
+                          accentColor: Color(0xFFFF5A36),
+                          showBadge: false,
+                          centerIcon: Icons.directions_car_filled_rounded,
                         ),
                         onTap: () {
                           _toggle();
@@ -213,6 +216,7 @@ class _LayerActionTile extends StatelessWidget {
 
     return Material(
       color: Colors.transparent,
+      // color: context.primaryBgCard,
       child: InkWell(
         borderRadius: BorderRadius.circular(20),
         onTap: onTap,
@@ -290,91 +294,120 @@ class _LayerActionTile extends StatelessWidget {
 }
 
 class _MapPreviewIcon extends StatelessWidget {
-  final Color dotColor;
-  final bool showAvatar;
-  final IconData? centerIcon;
+  final Color accentColor;
+  final bool showBadge;
+  final IconData centerIcon;
+  final IconData? badgeIcon;
 
   const _MapPreviewIcon({
-    required this.dotColor,
-    required this.showAvatar,
-    this.centerIcon,
+    required this.accentColor,
+    required this.showBadge,
+    required this.centerIcon,
+    this.badgeIcon,
   });
 
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      width: 48,
-      height: 48,
+      width: 52,
+      height: 52,
       child: Stack(
         clipBehavior: Clip.none,
         children: [
           Container(
-            width: 48,
-            height: 48,
+            width: 52,
+            height: 52,
             decoration: BoxDecoration(
               shape: BoxShape.circle,
-              color: const Color(0xFF0F0F10),
+              color: context.primaryBgCardLow,
               border: Border.all(
-                color: Colors.white.withOpacity(0.08),
+                color: context.outline,
+                width: 1.2,
               ),
+              boxShadow: [
+                BoxShadow(
+                  color: Colors.black.withValues(alpha: 0.10),
+                  blurRadius: 10,
+                  offset: const Offset(0, 4),
+                ),
+              ],
             ),
-            child: CustomPaint(
-              painter: _RadarPainter(),
-              child: Center(
-                child: centerIcon != null
-                    ? Container(
-                        width: 18,
-                        height: 18,
-                        decoration: BoxDecoration(
-                          color: dotColor,
-                          shape: BoxShape.circle,
-                        ),
-                        child: Icon(
-                          centerIcon,
-                          size: 11,
-                          color: Colors.black,
-                        ),
-                      )
-                    : null,
-              ),
+            child: Stack(
+              alignment: Alignment.center,
+              children: [
+                Container(
+                  width: 34,
+                  height: 34,
+                  decoration: BoxDecoration(
+                    shape: BoxShape.circle,
+                    color: accentColor.withValues(alpha: 0.10),
+                  ),
+                ),
+                Container(
+                  width: 24,
+                  height: 24,
+                  decoration: BoxDecoration(
+                    shape: BoxShape.circle,
+                    color: accentColor.withValues(alpha: 0.18),
+                  ),
+                ),
+                Icon(
+                  centerIcon,
+                  size: 20,
+                  color: accentColor,
+                ),
+              ],
             ),
           ),
           Positioned(
-            left: 6,
-            bottom: 8,
+            left: 4,
+            bottom: 4,
             child: Container(
-              width: 11,
-              height: 11,
+              width: 12,
+              height: 12,
               decoration: BoxDecoration(
-                color: dotColor,
+                color: accentColor,
                 shape: BoxShape.circle,
+                border: Border.all(
+                  color: context.surface,
+                  width: 2,
+                ),
                 boxShadow: [
                   BoxShadow(
-                    color: dotColor.withOpacity(0.5),
+                    color: accentColor.withValues(alpha: 0.35),
                     blurRadius: 8,
-                    spreadRadius: 0.2,
+                    spreadRadius: 1,
                   ),
                 ],
-                border: Border.all(color: Colors.black, width: 1.2),
               ),
             ),
           ),
-          if (showAvatar)
+          if (showBadge)
             Positioned(
-              right: -1,
-              top: -1,
+              right: -2,
+              top: -2,
               child: Container(
-                width: 18,
-                height: 18,
+                width: 20,
+                height: 20,
                 decoration: BoxDecoration(
                   shape: BoxShape.circle,
-                  border: Border.all(color: Colors.black, width: 1.5),
-                  image: const DecorationImage(
-                    image: NetworkImage(
-                      'https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=80&q=80',
-                    ),
-                    fit: BoxFit.cover,
+                  color: context.surface,
+                  border: Border.all(
+                    color: context.outline,
+                    width: 1,
                   ),
+                  boxShadow: [
+                    BoxShadow(
+                      color: Colors.black.withValues(alpha: 0.10),
+                      blurRadius: 6,
+                      offset: const Offset(0, 2),
+                    ),
+                  ],
+                ),
+                child: Icon(
+                  badgeIcon ?? Icons.campaign_rounded,
+                  size: 11,
+                  color: context.primaryTextColor.withValues(alpha: 0.75),
                 ),
               ),
             ),
@@ -382,48 +415,4 @@ class _MapPreviewIcon extends StatelessWidget {
       ),
     );
   }
-}
-
-class _RadarPainter extends CustomPainter {
-  @override
-  void paint(Canvas canvas, Size size) {
-    final gridPaint = Paint()
-      ..color = Colors.white.withOpacity(0.08)
-      ..style = PaintingStyle.stroke
-      ..strokeWidth = 0.8;
-
-    final linePaint = Paint()
-      ..color = Colors.white.withOpacity(0.07)
-      ..strokeWidth = 0.8;
-
-    final center = Offset(size.width / 2, size.height / 2);
-
-    canvas.drawCircle(center, size.width * 0.22, gridPaint);
-    canvas.drawCircle(center, size.width * 0.38, gridPaint);
-    canvas.drawCircle(center, size.width * 0.49, gridPaint);
-
-    canvas.drawLine(
-      Offset(center.dx, 3),
-      Offset(center.dx, size.height - 3),
-      linePaint,
-    );
-    canvas.drawLine(
-      Offset(3, center.dy),
-      Offset(size.width - 3, center.dy),
-      linePaint,
-    );
-    canvas.drawLine(
-      const Offset(8, 8),
-      Offset(size.width - 8, size.height - 8),
-      linePaint,
-    );
-    canvas.drawLine(
-      Offset(size.width - 8, 8),
-      Offset(8, size.height - 8),
-      linePaint,
-    );
-  }
-
-  @override
-  bool shouldRepaint(covariant CustomPainter oldDelegate) => false;
 }

@@ -154,6 +154,17 @@ class IncidentListItemV2 extends StatelessWidget {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
+                    Text(
+                      incident.product?.name ?? '',
+                      style: TextStyle(
+                        color: context.primaryTextColor,
+                        fontSize: 18.sp,
+                        fontWeight: FontWeight.w800,
+                        letterSpacing: -0.8,
+                        height: 1.0,
+                      ),
+                    ),
+                    const SizedBox(height: 10),
                     Row(
                       children: [
                         Flexible(
@@ -182,17 +193,17 @@ class IncidentListItemV2 extends StatelessWidget {
                       overflow: TextOverflow.ellipsis,
                     ),
                     const SizedBox(height: 14),
-                    Text(
-                      incident.product?.name ?? '',
-                      style: TextStyle(
-                        color: context.primaryTextColor,
-                        fontSize: 18.sp,
-                        fontWeight: FontWeight.w800,
-                        letterSpacing: -0.8,
-                        height: 1.0,
-                      ),
-                    ),
-                    const SizedBox(height: 10),
+                    // Text(
+                    //   incident.product?.name ?? '',
+                    //   style: TextStyle(
+                    //     color: context.primaryTextColor,
+                    //     fontSize: 18.sp,
+                    //     fontWeight: FontWeight.w800,
+                    //     letterSpacing: -0.8,
+                    //     height: 1.0,
+                    //   ),
+                    // ),
+                    // const SizedBox(height: 10),
                     Text(
                       incident.product?.type != ItemType.phone.name
                           ? 'Placa: ${incident.product?.code} · ${incident.product?.color}'

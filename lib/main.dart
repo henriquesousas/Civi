@@ -1,6 +1,7 @@
 import 'package:deehelp/app_name.dart';
 import 'package:deehelp/core/env_config.dart';
 import 'package:deehelp/core/theme/app_theme.dart';
+import 'package:deehelp/core/theme/theme_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -59,10 +60,10 @@ class _MainAppState extends ConsumerState<MainApp> {
     return OrientationBuilder(
       builder: (context, orientation) {
         // final router = ref.watch(goRouterProvider);
-        // final themeData = ref.watch(themeDataProvider);
-        // WidgetsBinding.instance.addPostFrameCallback((_) {
-        //   ref.read(themeProvider.notifier).loadSavedTheme();
-        // });
+        final themeData = ref.watch(themeDataProvider);
+        WidgetsBinding.instance.addPostFrameCallback((_) {
+          ref.read(themeProvider.notifier).loadSavedTheme();
+        });
 
         return ScreenUtilInit(
           // designSize: context.designSize(),
@@ -100,7 +101,9 @@ class _MainAppState extends ConsumerState<MainApp> {
               // darkTheme: AppTheme.dark(),
               // theme: themeData,
               theme: AppTheme.dark(),
-              darkTheme: AppTheme.lightTheme(),
+              // darkTheme: AppTheme.lightTheme(),
+              darkTheme: themeData,
+              // darkTheme: AppTheme.dark(),
               themeMode: ThemeMode.dark,
               // themeMode:
               //     themeState.isDarkMode ? ThemeMode.dark : ThemeMode.light,

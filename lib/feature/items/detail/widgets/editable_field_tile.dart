@@ -67,7 +67,7 @@ class EditableFieldTile extends StatelessWidget {
                       overflow: TextOverflow.ellipsis,
                       style: TextStyle(
                         fontSize: context.safeSp(13),
-                        fontWeight: FontWeight.w700,
+                        fontWeight: FontWeight.w500,
                         color: context.secondaryTextColor,
                       ),
                     ),

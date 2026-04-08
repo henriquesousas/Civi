@@ -19,6 +19,7 @@ class HorizontalIncidentCard extends StatelessWidget {
   final String distanceLabel;
   final bool isPlatformGenerated;
   final String? coverImageUrl;
+  final String assetImagePath;
   final bool isAssetImage;
   final String? howTo;
   final VoidCallback? onTap;
@@ -35,6 +36,7 @@ class HorizontalIncidentCard extends StatelessWidget {
     required this.timeLabel,
     required this.distanceLabel,
     required this.coverImageUrl,
+    required this.assetImagePath,
     required this.isAssetImage,
     // required this.confirmations,
     // required this.participantAvatarUrls,
@@ -47,36 +49,7 @@ class HorizontalIncidentCard extends StatelessWidget {
 
   Color get _badgeColor {
     return AppColors.danger;
-    // switch (incidentType.toLowerCase()) {
-    //   case 'roubo':
-    //     return AppColors.danger;
-    //   case 'furto':
-    //     return const Color(0xFFF59E0B);
-    //   case 'suspeito':
-    //     return const Color(0xFF8B5CF6);
-    //   case 'recuperado':
-    //     return AppColors.success;
-    //   default:
-    //     return AppColors.primaryColor;
-    // }
   }
-
-  // IconData get _incidentIcon {
-  //   switch (incidentType.toLowerCase()) {
-  //     case 'roubo':
-  //       return Icons.local_police_outlined;
-  //     case 'furto':
-  //       return Icons.warning_amber_rounded;
-  //     case 'suspeito':
-  //       return Icons.visibility_outlined;
-  //     case 'recuperado':
-  //       return Icons.verified_rounded;
-  //     default:
-  //       return Icons.report_gmailerrorred_rounded;
-  //   }
-  // }
-
-  //
 
   @override
   Widget build(BuildContext context) {
@@ -85,24 +58,31 @@ class HorizontalIncidentCard extends StatelessWidget {
     return GestureDetector(
       onTap: onTap,
       child: Container(
-        margin: const EdgeInsets.only(right: 1),
+        margin: const EdgeInsets.only(right: 10),
         padding: const EdgeInsets.all(12),
         decoration: BoxDecoration(
-          color: const Color(0xFF111318),
+          // color: const Color(0xFF111318),
+          color: context.primaryBgCard,
           borderRadius: BorderRadius.circular(20),
           border: Border.all(
-            color: Colors.white.withValues(alpha: 0.05),
+            // color: Colors.white.withValues(alpha: 0.05),
+            color: context.outline,
           ),
-          boxShadow: [
+          boxShadow: const [
+            // BoxShadow(
+            //   color: Colors.black.withValues(alpha: 0.6),
+            //   blurRadius: 24,
+            //   offset: const Offset(0, 12),
+            // ),
+            // BoxShadow(
+            //   color: _badgeColor.withValues(alpha: 0.08),
+            //   blurRadius: 20,
+            //   spreadRadius: -4,
+            // ),
             BoxShadow(
-              color: Colors.black.withValues(alpha: 0.6),
-              blurRadius: 24,
-              offset: const Offset(0, 12),
-            ),
-            BoxShadow(
-              color: _badgeColor.withValues(alpha: 0.08),
-              blurRadius: 20,
-              spreadRadius: -4,
+              color: Color(0x142B5BEE),
+              blurRadius: 16,
+              offset: Offset(0, 8),
             ),
           ],
         ),
@@ -120,6 +100,11 @@ class HorizontalIncidentCard extends StatelessWidget {
                       width: ImageSize.sm,
                       height: ImageSize.sm,
                       imageUrl: coverImageUrl,
+                      customErrorWidget: CiviImageCard(
+                        assetPath: assetImagePath,
+                        width: ImageSize.sm,
+                        height: ImageSize.sm,
+                      ),
                     ),
                   ),
                 ] else ...[
@@ -136,58 +121,6 @@ class HorizontalIncidentCard extends StatelessWidget {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      // Wrap(
-                      //   crossAxisAlignment: WrapCrossAlignment.center,
-                      //   spacing: 6,
-                      //   runSpacing: 6,
-                      //   children: [
-                      //     TypeBadge(
-                      //       label: incidentType,
-                      //       textColor: Colors.white,
-                      //       bgColor: _badgeColor.withValues(alpha: 0.9),
-                      //     ),
-
-                      //     /// status pill
-                      //     Container(
-                      //       padding: const EdgeInsets.symmetric(
-                      //         horizontal: 10,
-                      //         vertical: 5,
-                      //       ),
-                      //       decoration: BoxDecoration(
-                      //         color: _badgeColor.withValues(alpha: 0.12),
-                      //         borderRadius: BorderRadius.circular(999),
-                      //       ),
-                      //       child: Row(
-                      //         mainAxisSize: MainAxisSize.min,
-                      //         children: [
-                      //           Icon(
-                      //             _incidentIcon,
-                      //             size: IconSizes.xs,
-                      //             color: _badgeColor,
-                      //           ),
-                      //           const SizedBox(width: 4),
-                      //           Text(
-                      //             'Ativo',
-                      //             style: context.appText.caption.copyWith(
-                      //               color: _badgeColor,
-                      //               fontWeight: FontWeight.w700,
-                      //             ),
-                      //           ),
-                      //         ],
-                      //       ),
-                      //     ),
-                      //     // Spacer(),
-                      //     HighlightIcon(
-                      //       radius: 10,
-                      //       containerSize: IconContainerSizes.xs,
-                      //       icon: Icon(
-                      //         Icons.share_outlined,
-                      //         size: IconSizes.xxs,
-                      //         color: Colors.white.withValues(alpha: 0.7),
-                      //       ),
-                      //     ),
-                      //   ],
-                      // ),
                       Row(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
@@ -203,34 +136,6 @@ class HorizontalIncidentCard extends StatelessWidget {
                                   textColor: Colors.white,
                                   bgColor: _badgeColor.withValues(alpha: 0.9),
                                 ),
-                                // Container(
-                                //   padding: const EdgeInsets.symmetric(
-                                //     horizontal: 10,
-                                //     vertical: 5,
-                                //   ),
-                                //   decoration: BoxDecoration(
-                                //     color: _badgeColor.withValues(alpha: 0.12),
-                                //     borderRadius: BorderRadius.circular(999),
-                                //   ),
-                                //   child: Row(
-                                //     mainAxisSize: MainAxisSize.min,
-                                //     children: [
-                                //       Icon(
-                                //         _incidentIcon,
-                                //         size: IconSizes.xs,
-                                //         color: _badgeColor,
-                                //       ),
-                                //       const SizedBox(width: 4),
-                                //       Text(
-                                //         'Ativo',
-                                //         style: context.appText.caption.copyWith(
-                                //           color: _badgeColor,
-                                //           fontWeight: FontWeight.w700,
-                                //         ),
-                                //       ),
-                                //     ],
-                                //   ),
-                                // ),
                               ],
                             ),
                           ),
@@ -240,11 +145,13 @@ class HorizontalIncidentCard extends StatelessWidget {
                             onTap: onShareTap,
                             child: HighlightIcon(
                               radius: 10,
+                              bgColor: context.outlineVariantColor,
                               containerSize: IconContainerSizes.sm,
                               icon: Icon(
                                 Icons.share_outlined,
                                 size: IconSizes.md,
-                                color: Colors.white.withValues(alpha: 0.7),
+                                // color: Colors.white.withValues(alpha: 0.7),
+                                color: context.secondaryTextColor,
                               ),
                             ),
                           ),
@@ -255,11 +162,11 @@ class HorizontalIncidentCard extends StatelessWidget {
                         title,
                         maxLines: 2,
                         overflow: TextOverflow.ellipsis,
-                        style: context.appText.body.copyWith(
-                          color: Colors.white,
+                        style: context.appText.headerlg.copyWith(
+                          color: context.primaryTextColor,
                           height: 1.2,
-                          fontWeight: FontWeight.w600,
-                          fontSize: context.safeSp(13),
+                          fontWeight: FontWeight.bold,
+                          // fontSize: context.safeSp(13),
                         ),
                       ),
                       const SizedBox(height: 6),
@@ -268,7 +175,7 @@ class HorizontalIncidentCard extends StatelessWidget {
                         maxLines: 2,
                         overflow: TextOverflow.ellipsis,
                         style: context.appText.caption.copyWith(
-                          color: Colors.white.withValues(alpha: 0.55),
+                          color: context.secondaryTextColor,
                         ),
                       ),
                     ],
@@ -280,55 +187,52 @@ class HorizontalIncidentCard extends StatelessWidget {
             const SizedBox(height: 12),
 
             /// ORIGEM
-            Container(
-              padding: const EdgeInsets.symmetric(
-                horizontal: 10,
-                vertical: 6,
-              ),
-              // decoration: BoxDecoration(
-              //   color: Colors.white.withValues(alpha: 0.04),
-              //   borderRadius: BorderRadius.circular(12),
-              //   border: Border.all(
-              //     color: Colors.white.withValues(alpha: 0.06),
-              //   ),
-              // ),
-              child: Row(
-                children: [
-                  if (isPlatformGenerated) ...[
-                    Image.asset(
-                      "assets/images/logo_white.png",
-                      width: IconSizes.md,
-                    )
-                  ] else ...[
-                    Icon(
-                      Icons.group,
-                      color: Colors.white.withValues(alpha: 0.6),
-                      size: IconSizes.sm,
+            Row(
+              children: [
+                //
+                if (isPlatformGenerated) ...[
+                  Container(
+                    width: IconContainerSizes.sm,
+                    height: IconContainerSizes.sm,
+                    decoration: BoxDecoration(
+                      color: AppColors.primaryColor.withValues(alpha: 0.1),
+                      shape: BoxShape.circle,
                     ),
-                  ],
-                  const SizedBox(width: 8),
-                  Expanded(
-                    child: Text(
-                      isPlatformGenerated ? "Civi" : "Comunidade",
-                      maxLines: 1,
-                      overflow: TextOverflow.ellipsis,
-                      style: context.appText.caption.copyWith(
-                        color: Colors.white.withValues(alpha: 0.75),
-                        fontWeight: FontWeight.w600,
-                      ),
+                    child: Image.asset(
+                      "assets/images/spoken_logo_v2.png",
+                      width: IconSizes.xs,
+                    ),
+                  )
+                ] else ...[
+                  Container(
+                    width: IconContainerSizes.sm,
+                    height: IconContainerSizes.sm,
+                    decoration: BoxDecoration(
+                      color: AppColors.primaryColor.withValues(alpha: 0.1),
+                      shape: BoxShape.circle,
+                    ),
+                    child: Icon(
+                      Icons.group,
+                      size: IconSizes.xs,
+                      // color: Colors.white.withValues(alpha: 0.6),
+                      color: context.primaryTextColor,
+                    ),
+                  )
+                ],
+                const SizedBox(width: 8),
+                Expanded(
+                  child: Text(
+                    isPlatformGenerated ? "Civi" : "Comunidade",
+                    maxLines: 1,
+                    overflow: TextOverflow.ellipsis,
+                    style: context.appText.caption.copyWith(
+                      // color: Colors.white.withValues(alpha: 0.75),
+                      color: context.secondaryTextColor,
+                      fontWeight: FontWeight.w600,
                     ),
                   ),
-                  // HighlightIcon(
-                  //   radius: 10,
-                  //   containerSize: IconContainerSizes.xs,
-                  //   icon: Icon(
-                  //     Icons.share_outlined,
-                  //     size: IconSizes.xxs,
-                  //     color: Colors.white.withValues(alpha: 0.7),
-                  //   ),
-                  // ),
-                ],
-              ),
+                ),
+              ],
             ),
 
             const SizedBox(height: 8),
@@ -342,7 +246,8 @@ class HorizontalIncidentCard extends StatelessWidget {
                   vertical: 8,
                 ),
                 decoration: BoxDecoration(
-                  color: Colors.white.withValues(alpha: 0.03),
+                  // color: Colors.white.withValues(alpha: 0.03),
+                  color: context.outlineVariantColor,
                   borderRadius: BorderRadius.circular(12),
                   border: Border.all(
                     color: Colors.white.withValues(alpha: 0.05),
@@ -355,7 +260,8 @@ class HorizontalIncidentCard extends StatelessWidget {
                     overflow: TextOverflow.ellipsis,
                     style: context.appText.caption.copyWith(
                       fontSize: 11.sp,
-                      color: Colors.white.withValues(alpha: 0.65),
+                      // color: Colors.white.withValues(alpha: 0.65),
+                      color: context.secondaryTextColor,
                     ),
                   ),
                 ),

@@ -10,6 +10,7 @@ import 'package:deehelp/core/services/permissions/location/domain/services/geolo
 import 'package:deehelp/core/services/permissions/location/export_location.dart';
 import 'package:deehelp/core/services/permissions/location/external/default_geolocator_position_gateway.dart';
 import 'package:deehelp/core/theme/app_colors.dart';
+import 'package:deehelp/core/theme/theme_provider.dart';
 
 import 'package:deehelp/core/utils/enum_utils.dart';
 import 'package:deehelp/core/utils/url_launcher_utils.dart';
@@ -63,6 +64,7 @@ class _MapaPageState extends ConsumerState<MapaPage> {
   final PageController _incidentPageController =
       PageController(viewportFraction: 0.88);
   MapboxMap? _mapboxMap;
+  bool _styleLoaded = false;
   final Point _myLocation = Point(
     coordinates: Position(-46.7917, -23.5329),
   );
@@ -74,7 +76,7 @@ class _MapaPageState extends ConsumerState<MapaPage> {
   double get _getGpsHeight {
     switch (_gpsHeight) {
       case GPSHeight.normal:
-        return 100.h;
+        return 110.h;
       case GPSHeight.min:
         return 280.h;
       default:
@@ -207,6 +209,18 @@ class _MapaPageState extends ConsumerState<MapaPage> {
 
   @override
   Widget build(BuildContext context) {
+    ref.listen(themeProvider, (previous, next) async {
+      if (_mapboxMap == null || !_styleLoaded) return;
+
+      final isNight = next.isDarkMode ? 'night' : 'day';
+
+      await _mapboxMap!.style.setStyleImportConfigProperty(
+        'basemap',
+        'lightPreset',
+        isNight,
+      );
+    });
+
     debugPrint("Padding top ${context.topPadding}");
     debugPrint("Padding top ${context.topPadding * 3}");
     final homeState = ref.watch(homeViewmodelProvider);
@@ -225,10 +239,40 @@ class _MapaPageState extends ConsumerState<MapaPage> {
       homeViewmodelProvider,
       (previous, state) {
         if (state.hasValue) {
-          _createMarker(state.value!);
+          _createMarker(state.value!, context);
         }
       },
     );
+
+    Future<void> _applyMapStyle() async {
+      if (_mapboxMap == null) return;
+
+      final isNight = ref.read(themeProvider).isDarkMode ? 'night' : 'day';
+
+      await _mapboxMap!.style.setStyleImportConfigProperty(
+        'basemap',
+        'lightPreset',
+        isNight,
+      );
+
+      await _mapboxMap!.style.setStyleImportConfigProperty(
+        'basemap',
+        'showPointOfInterestLabels',
+        false,
+      );
+
+      await _mapboxMap!.style.setStyleImportConfigProperty(
+        'basemap',
+        'showTransitLabels',
+        true,
+      );
+
+      await _mapboxMap!.style.setStyleImportConfigProperty(
+        'basemap',
+        'showPedestrianRoads',
+        true,
+      );
+    }
 
     return Scaffold(
       body: Stack(
@@ -267,32 +311,38 @@ class _MapaPageState extends ConsumerState<MapaPage> {
             // textureView: true,
             onMapCreated: (mapboxMap) async => _onMapCreated(mapboxMap, []),
             onStyleLoadedListener: (styleLoadedEventData) async {
-              final isNight = context.isDark() ? "night" : "day";
-              await _mapboxMap!.style.setStyleImportConfigProperty(
-                'basemap',
-                'lightPreset',
-                // 'day',
-                isNight,
-              );
-
-              await _mapboxMap!.style.setStyleImportConfigProperty(
-                'basemap',
-                'showPointOfInterestLabels',
-                false,
-              );
-
-              await _mapboxMap!.style.setStyleImportConfigProperty(
-                'basemap',
-                'showTransitLabels',
-                true,
-              );
-
-              await _mapboxMap!.style.setStyleImportConfigProperty(
-                'basemap',
-                'showPedestrianRoads',
-                true,
-              );
+              _styleLoaded = true;
+              await _applyMapStyle();
             },
+            // onStyleLoadedListener: (styleLoadedEventData) async {
+            //   // final isNight = context.isDark() ? "night" : "day";
+            //   final isNight =
+            //       ref.watch(themeProvider).isDarkMode ? "night" : "day";
+            //   await _mapboxMap!.style.setStyleImportConfigProperty(
+            //     'basemap',
+            //     'lightPreset',
+            //     // 'night',
+            //     isNight,
+            //   );
+
+            //   await _mapboxMap!.style.setStyleImportConfigProperty(
+            //     'basemap',
+            //     'showPointOfInterestLabels',
+            //     false,
+            //   );
+
+            //   await _mapboxMap!.style.setStyleImportConfigProperty(
+            //     'basemap',
+            //     'showTransitLabels',
+            //     true,
+            //   );
+
+            //   await _mapboxMap!.style.setStyleImportConfigProperty(
+            //     'basemap',
+            //     'showPedestrianRoads',
+            //     true,
+            //   );
+            // },
             onMapLoadErrorListener: (event) {
               debugPrint('MAP LOAD ERROR: ${event.type} - ${event.message}');
             },
@@ -320,7 +370,9 @@ class _MapaPageState extends ConsumerState<MapaPage> {
                   ),
                   Container(
                     padding: const EdgeInsets.symmetric(
-                        horizontal: 10, vertical: 10),
+                      horizontal: 10,
+                      vertical: 10,
+                    ),
                     decoration: BoxDecoration(
                       color: context.primaryBgCard,
                       borderRadius: BorderRadius.circular(20),
@@ -340,7 +392,10 @@ class _MapaPageState extends ConsumerState<MapaPage> {
           MapTopToolbar(
             avatarUrl: state?.photoUrl,
             // onProfileTap: () {},
-            onSearchTap: () => context.push(SearchRouter.search),
+            onSearchTap: () {
+              _onCloseTap();
+              context.push(SearchRouter.search);
+            },
             onSettingsTap: () {},
           ),
           //GPS
@@ -362,15 +417,15 @@ class _MapaPageState extends ConsumerState<MapaPage> {
                   //     context.primaryTextColor.withValues(alpha: 0.2),
                   backgroundColor: context.isDark()
                       ? context.primaryTextColor.withValues(alpha: 0.2)
-                      : Colors.black.withValues(alpha: 0.3),
+                      : Colors.white,
                   elevation: 8,
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(999),
                   ),
                   onPressed: () => _goToMyLocation(currenLocation),
-                  child: const Icon(
-                    Icons.navigation,
-                    color: Colors.white,
+                  child: Icon(
+                    Icons.navigation_outlined,
+                    color: context.primaryTextColor,
                   ),
                 ),
               ],
@@ -388,8 +443,8 @@ class _MapaPageState extends ConsumerState<MapaPage> {
 
               return AnimatedPositioned(
                 duration: const Duration(milliseconds: 350),
-                left: 16,
-                right: 16,
+                left: context.percentWidth(0.1),
+                right: context.percentWidth(0.1),
                 bottom: _showIncidentCards ? 1 : -300,
                 child: _horizontalIncidentCard(data.value),
               );
@@ -453,8 +508,10 @@ class _MapaPageState extends ConsumerState<MapaPage> {
           ignoring: !_showIncidentCards,
           child: Container(
             decoration: BoxDecoration(
-              // color: Colors.white,
-              color: context.secondaryColor.withValues(alpha: 0.1),
+              // color: context.secondaryColor.withValues(alpha: 0.1),
+              color: context.isDark()
+                  ? context.primaryTextColor.withValues(alpha: 0.2)
+                  : Colors.white,
               borderRadius: BorderRadius.circular(30),
               boxShadow: const [
                 BoxShadow(
@@ -464,7 +521,10 @@ class _MapaPageState extends ConsumerState<MapaPage> {
               ],
             ),
             child: IconButton(
-              icon: const Icon(Icons.close),
+              icon: Icon(
+                Icons.close,
+                color: context.primaryTextColor,
+              ),
               onPressed: () async {
                 setState(() {
                   _showIncidentCards = false;
@@ -496,6 +556,33 @@ class _MapaPageState extends ConsumerState<MapaPage> {
         ),
       ),
     );
+  }
+
+  void _onCloseTap() async {
+    setState(() {
+      _showIncidentCards = false;
+      if (!_isCardOpened) {
+        _gpsHeight = GPSHeight.normal;
+      } else {
+        _gpsHeight = GPSHeight.min;
+      }
+    });
+
+    if (_previousCameraState != null) {
+      if (_activeMarker != null) {
+        _activeMarker!.iconSize = 1.1;
+        await _pointManager?.update(_activeMarker!);
+      }
+      await _mapboxMap?.flyTo(
+        CameraOptions(
+          center: _previousCameraState!.center,
+          zoom: _previousCameraState!.zoom,
+          bearing: _previousCameraState!.bearing,
+          pitch: _previousCameraState!.pitch,
+        ),
+        MapAnimationOptions(duration: 900),
+      );
+    }
   }
 
   Widget _horizontalIncidentCard(List<IncidentOutput> incidents) {
@@ -533,13 +620,15 @@ class _MapaPageState extends ConsumerState<MapaPage> {
             distanceLabel: _getDistance(incident),
             isPlatformGenerated: incident.isPlatformGenerated,
             isAssetImage: incident.product == null,
+            assetImagePath: assets,
             coverImageUrl: incident.product == null
                 ? assets
                 : incident.product?.images.isNotEmpty == true
                     ? incident.product!.images.first.value
                     : null,
-            onTap: () =>
-                context.push(IncidentRouter.detailComunity, extra: incident),
+            onTap: () {
+              context.push(IncidentRouter.detailComunity, extra: incident);
+            },
             onShareTap: () => UrlLauncherUtils.shareIncident(
                 context, incident.alertId, incident.occurredAt),
             onBookmarkTap: () {},
@@ -640,7 +729,8 @@ class _MapaPageState extends ConsumerState<MapaPage> {
     _onMarkeClick(incidents);
   }
 
-  Future<void> _createMarker(List<IncidentOutput> incidents) async {
+  Future<void> _createMarker(
+      List<IncidentOutput> incidents, BuildContext context) async {
     _markers.clear();
 
     _pointManager =
@@ -648,6 +738,7 @@ class _MapaPageState extends ConsumerState<MapaPage> {
 
     try {
       for (final incident in incidents) {
+        if (!context.mounted) return;
         if (incident.local?.longitude != null &&
             incident.local?.latitue != null) {
           final pin =
@@ -655,7 +746,10 @@ class _MapaPageState extends ConsumerState<MapaPage> {
                   .assets;
           // final color =
           //     EnumUtils.fromString(ItemType.values, incident.productType).color;
-          final pinImage = await createPinWithAsset(pin, AppColors.danger);
+          final pinImage =
+              await createPinWithAsset(context, pin, AppColors.danger);
+
+          if (!context.mounted) return;
 
           final marker = await _pointManager!.create(
             PointAnnotationOptions(
@@ -666,7 +760,8 @@ class _MapaPageState extends ConsumerState<MapaPage> {
                 ),
               ),
               image: pinImage,
-              iconSize: 1.1,
+              iconSize: 1,
+              // iconSize: getPinIconScale(context),
               iconAnchor: IconAnchor.BOTTOM,
             ),
           );
@@ -687,12 +782,61 @@ class _MapaPageState extends ConsumerState<MapaPage> {
     );
   }
 
+  double getPinSize(BuildContext context) {
+    final media = MediaQuery.of(context);
+    final shortestSide = media.size.shortestSide;
+    final dpr = media.devicePixelRatio;
+
+    double size = shortestSide * 0.15;
+
+    // ajuste bem leve, só para telas muito densas
+    if (dpr >= 3.5) {
+      size *= 0.92;
+    } else if (dpr >= 3.0) {
+      size *= 0.95;
+    } else if (dpr >= 2.5) {
+      size *= 0.98;
+    }
+
+    return size.clamp(52.0, 72.0);
+  }
+
+  double getPinSizeAdvanced(BuildContext context) {
+    final media = MediaQuery.of(context);
+
+    final width = media.size.width;
+    final height = media.size.height;
+    final dpr = media.devicePixelRatio;
+
+    final base = (width + height) / 2;
+
+    double size = base * 0.05;
+
+    // normaliza pela densidade
+    size = size / (dpr * 0.85);
+    return size;
+    // return size.clamp(36.0, 68.0);
+  }
+
+  double getPinIconScale(BuildContext context) {
+    final media = MediaQuery.of(context);
+
+    final width = media.size.width;
+    final dpr = media.devicePixelRatio;
+
+    double scale = (width / 400) / dpr;
+
+    return scale.clamp(0.6, 1.0);
+  }
+
   Future<Uint8List> createPinWithAsset(
+    BuildContext context,
     String assetPath,
     Color color,
   ) async {
-    const double size = 64.0;
-    const double strokeWidth = 4;
+    // const double size = 64.0;
+    final double size = getPinSize(context);
+    const double strokeWidth = 2;
     const double radius = 20;
     const double padding = 14;
 
@@ -709,7 +853,7 @@ class _MapaPageState extends ConsumerState<MapaPage> {
       ..isAntiAlias = true;
 
     final fillRRect = RRect.fromRectAndRadius(
-      const Rect.fromLTWH(0, 0, size, size),
+      Rect.fromLTWH(0, 0, size, size),
       const Radius.circular(radius),
     );
 
@@ -735,7 +879,7 @@ class _MapaPageState extends ConsumerState<MapaPage> {
     final frame = await codec.getNextFrame();
     final image = frame.image;
 
-    final dstRect = const Rect.fromLTWH(
+    final dstRect = Rect.fromLTWH(
       padding,
       padding,
       size - (padding * 2),

@@ -22,8 +22,8 @@ class ButtonProfile extends StatelessWidget {
         child: Ink(
           // width: IconSizes.xxl,
           // height: IconSizes.xxl,
-          width: ImageSize.sm,
-          height: ImageSize.sm,
+          width: ImageSize.md,
+          height: ImageSize.md,
           decoration: BoxDecoration(
             shape: BoxShape.circle,
             border: Border.fromBorderSide(BorderSide(
@@ -34,7 +34,7 @@ class ButtonProfile extends StatelessWidget {
             child: Icon(
               Icons.person_rounded,
               // size: IconSizes.lg,
-              size: IconSizes.lg,
+              size: IconSizes.xxl,
               color: const Color(0xFF667085),
             ),
           ),

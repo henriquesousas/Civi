@@ -75,14 +75,14 @@ class _SearchPageV2State extends ConsumerState<SearchPageV2> {
     // });
   }
 
-  void _cancelSearch() async {
-    FocusScope.of(context).unfocus();
-    await Future.delayed(const Duration(milliseconds: 500));
-    if (mounted) {
-      context.pop();
-    }
-    // Navigator.of(context).maybePop();
-  }
+  // void _cancelSearch() async {
+  //   FocusScope.of(context).unfocus();
+  //   await Future.delayed(const Duration(milliseconds: 500));
+  //   if (mounted) {
+  //     context.pop();
+  //   }
+  //   // Navigator.of(context).maybePop();
+  // }
 
   @override
   void initState() {
@@ -110,9 +110,9 @@ class _SearchPageV2State extends ConsumerState<SearchPageV2> {
 
   @override
   Widget build(BuildContext context) {
-    const background = Color(0xFF000000);
-    const dividerColor = Color(0xFF161616);
-    const searchBg = Color(0xFF1C1C1E);
+    // const background = Color(0xFF000000);
+    // const dividerColor = Color(0xFF161616);
+    // const searchBg = Color(0xFF1C1C1E);
     const hintColor = Color(0xFF8E8E93);
     const secondaryText = Color(0xFF7A7A7A);
     const premiumBorder = Color(0xFF5E5E62);
@@ -128,9 +128,18 @@ class _SearchPageV2State extends ConsumerState<SearchPageV2> {
         child: Column(
           children: [
             Padding(
-              padding: const EdgeInsets.fromLTRB(14, 8, 12, 12),
+              padding: const EdgeInsets.fromLTRB(14, 12, 14, 12),
               child: Row(
                 children: [
+                  IconButton(
+                    onPressed: () => context.pop(),
+                    icon: const Center(
+                      child: Icon(
+                        Icons.arrow_back_ios,
+                        size: 18,
+                      ),
+                    ),
+                  ),
                   Expanded(
                     child: Container(
                       height: 44,
@@ -208,19 +217,6 @@ class _SearchPageV2State extends ConsumerState<SearchPageV2> {
                     ),
                   ),
                   const SizedBox(width: 10),
-                  GestureDetector(
-                    onTap: _cancelSearch,
-                    child: const Padding(
-                      padding: EdgeInsets.symmetric(horizontal: 2, vertical: 8),
-                      child: Text(
-                        'Cancelar',
-                        style: TextStyle(
-                          fontSize: 17,
-                          fontWeight: FontWeight.w400,
-                        ),
-                      ),
-                    ),
-                  ),
                 ],
               ),
             ),
@@ -306,21 +302,26 @@ class _SearchResultTile extends StatelessWidget {
               Container(
                 width: 40.w,
                 height: 40.h,
-                decoration: BoxDecoration(
-                  // color: Color(0xFF252527),
-                  color: context.primaryBgCardHigh,
+                decoration: const BoxDecoration(
+                  color: Color(0xFFdcdee3),
+                  // color: context.primaryBgCardHigh,
                   shape: BoxShape.circle,
                 ),
-                child: Center(
-                  child: Container(
-                    width: 10.w,
-                    height: 10.h,
-                    decoration: BoxDecoration(
-                      color: dotColor,
-                      shape: BoxShape.circle,
-                    ),
-                  ),
+                child: Icon(
+                  CupertinoIcons.arrow_up_right,
+                  color: context.secondaryTextColor,
+                  size: 18.w,
                 ),
+                // child: Center(
+                //   child: Container(
+                //     width: 10.w,
+                //     height: 10.h,
+                //     decoration: BoxDecoration(
+                //       color: dotColor,
+                //       shape: BoxShape.circle,
+                //     ),
+                //   ),
+                // ),
               ),
               const SizedBox(width: 12),
               Expanded(
@@ -337,7 +338,7 @@ class _SearchResultTile extends StatelessWidget {
                               _getTitle(item),
                               style: TextStyle(
                                 color: context.primaryTextColor,
-                                fontSize: context.safeSp(14),
+                                fontSize: context.safeSp(16),
                                 fontWeight: FontWeight.bold,
                                 height: 1.2,
                               ),
@@ -374,6 +375,7 @@ class _SearchResultTile extends StatelessWidget {
                         style: TextStyle(
                           color: dotColor,
                           // color: item.isAlert ? danger : secondaryText,
+                          fontWeight: FontWeight.w500,
                           fontSize: context.safeSp(12),
                           height: 1.2,
                         ),
@@ -391,21 +393,36 @@ class _SearchResultTile extends StatelessWidget {
                       Row(
                         spacing: 5,
                         children: [
-                          if (!item.isPlatformGenerated) ...[
-                            CircleAvatar(
-                              radius: 12,
-                              // backgroundColor: colors[index % colors.length],
-                              child: Icon(
-                                Icons.person,
-                                size: IconSizes.xxs,
-                                color: Colors.white,
+                          if (item.isPlatformGenerated) ...[
+                            Container(
+                              width: IconContainerSizes.sm,
+                              height: IconContainerSizes.sm,
+                              decoration: BoxDecoration(
+                                color: AppColors.primaryColor
+                                    .withValues(alpha: 0.1),
+                                shape: BoxShape.circle,
                               ),
-                            ),
+                              child: Image.asset(
+                                "assets/images/spoken_logo_v2.png",
+                                width: IconSizes.xs,
+                              ),
+                            )
                           ] else ...[
-                            Image.asset(
-                              "assets/images/logo_transp.png",
-                              width: IconSizes.xs,
-                            ),
+                            Container(
+                              width: IconContainerSizes.sm,
+                              height: IconContainerSizes.sm,
+                              decoration: BoxDecoration(
+                                color: AppColors.primaryColor
+                                    .withValues(alpha: 0.1),
+                                shape: BoxShape.circle,
+                              ),
+                              child: Icon(
+                                Icons.group,
+                                size: IconSizes.xs,
+                                // color: Colors.white.withValues(alpha: 0.6),
+                                color: context.primaryTextColor,
+                              ),
+                            )
                           ],
                           Text(
                             item.isPlatformGenerated ? "Civi" : "Comunidade",

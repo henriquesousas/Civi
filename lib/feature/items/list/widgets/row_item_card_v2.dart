@@ -93,8 +93,8 @@ class RowItemCardV2 extends StatelessWidget {
                     // const BlurredLockedImageV2(),
                     CiviImageCard(
                       assetPath: 'assets/images/phone_pin_v2.png',
-                      width: 70.w,
-                      height: 70.h,
+                      width: 65.w,
+                      height: 65.h,
                     ),
                   ] else ...[
                     CustomNetworkImage(

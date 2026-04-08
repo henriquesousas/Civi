@@ -1,7 +1,6 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:deehelp/core/extension/color_extension.dart';
 import 'package:deehelp/core/theme/export_theme.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:shimmer/shimmer.dart';
@@ -84,11 +83,12 @@ class CustomNetworkImage extends StatelessWidget {
   }
 
   Widget _buildErrorWidget() {
-    return ImageErrorWidget(
-      height: height ?? ImageSize.xs,
-      width: width ?? ImageSize.xs,
-      radius: radius ?? RadiusSize.xs,
-    );
+    return customErrorWidget ??
+        ImageErrorWidget(
+          height: height ?? ImageSize.xs,
+          width: width ?? ImageSize.xs,
+          radius: radius ?? RadiusSize.xs,
+        );
     // return SizedBox(
     //   height: height,
     //   width: width,

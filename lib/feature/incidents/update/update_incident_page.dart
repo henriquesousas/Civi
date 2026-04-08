@@ -139,14 +139,14 @@ class _UpdateIncidentPageState extends ConsumerState<UpdateIncidentPage> {
                     Text(
                       // '${state.updatedValue!.product.name} reportado como roubado',
                       state.updatedValue!.product?.name ?? '',
-                      style: context.appText.headerlg,
+                      style: context.appText.headerxl,
                     ),
                     const SizedBox(height: SpacingSize.sm),
                     Text(
                       'Roubado nas proximidades de ${_getLocal(state)} • ${_dataLabel(state)}',
                       style: context.appText.bodySmall.copyWith(
-                        fontWeight: FontWeight.w600,
-                      ),
+                          // fontWeight: FontWeight.w500,
+                          ),
                     ),
                   ],
                 ),
@@ -232,6 +232,7 @@ class _UpdateIncidentPageState extends ConsumerState<UpdateIncidentPage> {
                             ),
                           ),
                         ),
+                        const SizedBox(width: 10),
                         Flexible(
                           fit: FlexFit.loose,
                           child: ButtonOutline(

@@ -1,4 +1,5 @@
 import 'package:deehelp/core/extension/exports_extension.dart';
+import 'package:deehelp/core/theme/export_theme.dart';
 import 'package:deehelp/core/theme/size/spacing_size.dart';
 import 'package:deehelp/core/ui/styles/export_style.dart';
 import 'package:deehelp/core/ui/widgets/buttons/buttons_export.dart';
@@ -26,6 +27,8 @@ class AuthView extends StatelessWidget {
             press: onLoginWithGoogle,
             // bgColor: context.primaryColor,
             textColor: Colors.white,
+            borderColor: AppColors.primaryColor,
+            bgColor: AppColors.primaryColor,
             // icon: const GoogleGMark(),
             icon: SvgPicture.asset(
               "assets/svg/google.svg",
@@ -37,9 +40,13 @@ class AuthView extends StatelessWidget {
           const SizedBox(height: SpacingSize.md),
           ButtonOutline(
             press: onContinueWithLogin,
-            bgColor: const Color(0xFFF5F7FD),
-            side: const BorderSide(color: Color(0xFFE6EAF6)),
-            textColor: Colors.black,
+            // bgColor: AppColors.primaryColor,
+            // side: const BorderSide(color: Color(0xFFE6EAF6)),
+            borderColor:
+                context.isDark() ? Colors.white : AppColors.primaryColor,
+            textColor: context.isDark()
+                ? context.primaryTextColor
+                : AppColors.primaryColor,
             text: 'Continuar sem login',
           ),
           const SizedBox(height: SpacingSize.md),
@@ -47,7 +54,7 @@ class AuthView extends StatelessWidget {
             'Ao continuar, você concorda com nossos Termos e Política de Privacidade.',
             textAlign: TextAlign.center,
             style: context.appText.caption.copyWith(
-              color: context.secondaryColor.withValues(alpha: 0.95),
+              color: context.secondaryTextColor,
               height: 1.3,
             ),
           ),

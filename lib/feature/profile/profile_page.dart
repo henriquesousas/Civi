@@ -1,5 +1,6 @@
 import 'package:deehelp/core/extension/exports_extension.dart';
 import 'package:deehelp/core/theme/export_theme.dart';
+import 'package:deehelp/core/theme/theme_provider.dart';
 import 'package:deehelp/core/ui/styles/app_text_style.dart';
 import 'package:deehelp/core/ui/widgets/appbar/default_app_bar.dart';
 import 'package:deehelp/core/ui/widgets/avatar/profile_image_with_upload_button_widget.dart';
@@ -79,9 +80,14 @@ class ProfilePage extends ConsumerWidget {
               spacing: 10,
               children: [
                 ButtonProfile(onTap: () {}),
+                const SizedBox(height: 10),
                 ButtonOutline(
                   width: context.percentWidth(0.5),
                   press: () => context.push(AuthRouter.path),
+                  textColor:
+                      context.isDark() ? Colors.white : AppColors.primaryColor,
+                  borderColor:
+                      context.isDark() ? Colors.white : AppColors.primaryColor,
                   text: "Fazer login",
                 )
               ],
@@ -150,10 +156,15 @@ class ProfilePage extends ConsumerWidget {
           // const TitleSection(title: 'Preferências'),
           ProfileOptions(
             items: [
-              const ProfileItem(
+              ProfileItem(
                 icon: Icons.dark_mode_outlined,
                 title: 'Modo escuro',
-                trailing: Switch(value: false, onChanged: null),
+                trailing: Switch(
+                  value: ref.watch(themeProvider).isDarkMode,
+                  onChanged: (value) {
+                    ref.watch(themeProvider.notifier).toggleTheme();
+                  },
+                ),
               ),
               ProfileItem(
                 icon: CupertinoIcons.star_circle,

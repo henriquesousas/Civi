@@ -126,11 +126,13 @@ class _UpdateIncidentPageTileState
         ButtonPrimary(
           press: () => viewModel.update(),
           loading: state.isLoading,
+          // loading: true,
           text: "Confirmar",
         ),
         if (widget.args.showMyLocationButton) ...[
           ButtonOutline(
             loading: state.isGetCurrentLocattion,
+            // loading: true,
             isPrimary: true,
             borderColor:
                 context.isDark() ? Colors.white : AppColors.primaryColor,

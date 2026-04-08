@@ -111,9 +111,11 @@ class CiviImageCard extends StatelessWidget {
       clipBehavior: Clip.hardEdge,
       child: Padding(
         padding: const EdgeInsets.all(8.0),
-        child: Image.asset(
-          assetPath,
-          fit: BoxFit.cover,
+        child: Center(
+          child: Image.asset(
+            assetPath,
+            fit: BoxFit.cover,
+          ),
         ),
       ),
     );
