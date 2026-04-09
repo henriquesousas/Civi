@@ -33,7 +33,8 @@ class AlertTypeBottomSheet {
       backgroundColor: Colors.transparent,
       builder: (_) {
         return FractionallySizedBox(
-          heightFactor: 0.9,
+          heightFactor: 0.75,
+          // heightFactor: context.screenHeight / 3,
           alignment: Alignment.bottomCenter,
           child: Container(
             decoration: const BoxDecoration(
@@ -76,25 +77,29 @@ class _AlertTypeContentState extends ConsumerState<_AlertTypeContent> {
       'description':
           'Tentativa de roubo com objeto lançado para obrigar motorista a parar',
       'icon': Icons.car_crash_rounded,
-      'iconBackgroundColor': const Color(0xFF3A2C12),
-      'iconColor': const Color(0xFFFBBF24),
-    },
-    {
-      'id': 'motorcycleApproach',
-      'title': 'Aproximação de motocicleta',
-      'description': 'Motocicleta se aproximando de forma suspeita.',
-      'icon': Icons.two_wheeler_rounded,
       'iconBackgroundColor': const Color(0xFF16284F),
       'iconColor': const Color(0xFF78A6FF),
+      // 'iconBackgroundColor': const Color(0xFF123325),
+      // 'iconColor': const Color(0xFF34D399)
+      // 'iconBackgroundColor': const Color(0xFF3A2C12),
+      // 'iconColor': const Color(0xFFFBBF24),
     },
-    {
-      'id': 'onFootApproach',
-      'title': 'Abordagem a pé',
-      'description': 'pessoa se aproximando para tentar intimidar ou roubar.',
-      'icon': Icons.directions_walk_rounded,
-      'iconBackgroundColor': const Color(0xFF123325),
-      'iconColor': const Color(0xFF34D399)
-    },
+    // {
+    //   'id': 'motorcycleApproach',
+    //   'title': 'Aproximação de motocicleta',
+    //   'description': 'Motocicleta se aproximando de forma suspeita.',
+    //   'icon': Icons.two_wheeler_rounded,
+    // 'iconBackgroundColor': const Color(0xFF16284F),
+    // 'iconColor': const Color(0xFF78A6FF),
+    // },
+    // {
+    //   'id': 'onFootApproach',
+    //   'title': 'Abordagem a pé',
+    //   'description': 'pessoa se aproximando para tentar intimidar ou roubar.',
+    //   'icon': Icons.directions_walk_rounded,
+    //   'iconBackgroundColor': const Color(0xFF123325),
+    //   'iconColor': const Color(0xFF34D399)
+    // },
     {
       'id': 'vehicleInvasionAttempt',
       'title': 'Abordagem de veículo',
@@ -104,7 +109,7 @@ class _AlertTypeContentState extends ConsumerState<_AlertTypeContent> {
       'iconColor': const Color(0xFFA78BFA)
     },
     {
-      'id': 'suspicious_activity',
+      'id': 'suspiciousActivity',
       'title': 'Atividade suspeita',
       'description': 'Carro,moto ou pessoa circulando de forma suspeita',
       'icon': Icons.visibility_rounded,
@@ -319,7 +324,7 @@ class _AlertCard extends StatelessWidget {
             ),
             color: isSelected
                 ? AppColors.primaryColor.withValues(alpha: 0.06)
-                : context.primaryBgCard,
+                : context.primaryBgCardLow,
           ),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -361,7 +366,7 @@ class _AlertCard extends StatelessWidget {
                 maxLines: 3,
                 overflow: TextOverflow.ellipsis,
                 style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                      color: context.secondaryColor,
+                      color: context.primaryTextColor,
                       fontSize: context.safeSp(10),
                     ),
               ),

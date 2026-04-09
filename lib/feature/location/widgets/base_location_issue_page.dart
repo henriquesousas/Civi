@@ -61,7 +61,7 @@ class _BaseLocationIssuePageState extends ConsumerState<BaseLocationIssuePage>
     );
 
     return Scaffold(
-      backgroundColor: context.secondaryContainer,
+      backgroundColor: context.scaffoldBackgroundColor,
       body: SafeArea(
         child: Padding(
           padding: const EdgeInsets.all(LayoutSpacingSize.page),
@@ -107,7 +107,7 @@ class _BaseLocationIssuePageState extends ConsumerState<BaseLocationIssuePage>
                 icon: Icon(
                   Icons.lock_outline,
                   size: IconSizes.xs,
-                  color: context.secondaryColor,
+                  color: AppColors.primaryColor,
                   // color: _muted,
                 ),
               ),

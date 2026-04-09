@@ -89,7 +89,7 @@ class _AddIncidentPageState extends ConsumerState<ReportIncidentPage>
             context.showTopNotice(
               error,
               type: DialogType.error,
-              duration: const Duration(minutes: 1),
+              duration: const Duration(seconds: 10),
             );
             // _showReportErrorSheet(details: error, supportId: "teste ");
           } else {

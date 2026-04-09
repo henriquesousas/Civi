@@ -64,7 +64,15 @@ class _ListingIncidentPageState extends ConsumerState<IncidentListPage> {
       ),
       bottomNavigationBar: _bottomBar(ni),
       body: state.when(
-        data: (incidents) => IncidenList(items: incidents),
+        data: (incidents) => Container(
+          decoration: BoxDecoration(
+            color: context.primaryBgCard,
+            border: Border.all(
+              color: context.outlineVariantColor,
+            ),
+          ),
+          child: IncidenList(items: incidents),
+        ),
         // loading: () => const ItemListShimmer(),
         // loading: () => const LoadingResultsSkeleton(size: 10),
         loading: () => const LoadingResultsSkeletonV2(),

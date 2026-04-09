@@ -4,7 +4,7 @@ description: "A new Flutter project."
 # pub.dev using `flutter pub publish`. This is preferred for private packages.
 publish_to: "none" # Remove this line if you wish to publish to pub.dev
 
-version: 1.0.0+2
+version: 1.0.0+3
 
 environment:
   sdk: ^3.6.0
@@ -96,18 +96,6 @@ flutter:
         - asset: assets/fonts/plus_jakarta/PlusJakartaDisplay-Bold.otf
           weight: 700
 
-    # - family: Grandis Extended
-    #   fonts:
-    #     - asset: assets/fonts/grandis_extended/GrandisExtended-Regular.ttf
-    #     - asset: assets/fonts/grandis_extended/GrandisExtended-Thin.ttf
-    #       weight: 300
-    #     - asset: assets/fonts/grandis_extended/GrandisExtended-Medium.ttf
-    #       weight: 500
-    #     - asset: assets/fonts/grandis_extended/GrandisExtended-Bold.ttf
-    #       weight: 700
-    #     - asset: assets/fonts/grandis_extended/GrandisExtended-Black.ttf
-    #       weight: 900
-
     - family: MuseoModerno
       fonts:
         - asset: assets/fonts/museomodern/MuseoModerno-Regular.ttf
@@ -132,12 +120,39 @@ flutter:
         - asset: assets/fonts/inter/Inter_SemiBold.ttf
         - asset: assets/fonts/inter/Inter_Bold.ttf
 
-    # - family: Robotto
-    #   fonts:
-    #     - asset: assets/fonts/inter/roboto_black.ttf
-    #     - asset: assets/fonts/inter/roboto_bold.ttf
-    #     - asset: assets/fonts/inter/roboto_light.ttf
-    #     - asset: assets/fonts/inter/roboto_regular.ttf
+    - family: Poppins
+      fonts:
+        - asset: assets/fonts/poppins/poppins_extra_light.ttf
+          weight: 100
+        - asset: assets/fonts/poppins/poppins_thin.ttf
+          weight: 200
+        - asset: assets/fonts/poppins/poppins_light.ttf
+          weight: 300
+        - asset: assets/fonts/poppins/poppins_regular.ttf
+          weight: 400
+        - asset: assets/fonts/poppins/poppins_medium.ttf
+          weight: 500
+        - asset: assets/fonts/poppins/poppins_semi_bold.ttf
+          weight: 600
+        - asset: assets/fonts/poppins/poppins_bold.ttf
+          weight: 700
+        - asset: assets/fonts/poppins/poppins_black.ttf
+          weight: 800
+        - asset: assets/fonts/poppins/poppins_extra_bold.ttf
+          weight: 900
+
+    - family: Roboto
+      fonts:
+        - asset: assets/fonts/roboto/roboto_light.ttf
+          weight: 300
+        - asset: assets/fonts/roboto/roboto_regular.ttf
+          weight: 400
+        - asset: assets/fonts/roboto/roboto_medium.ttf
+          weight: 500
+        - asset: assets/fonts/roboto/roboto_bold.ttf
+          weight: 700
+        - asset: assets/fonts/roboto/roboto_black.ttf
+          weight: 900
 
 # Comando para gerar o arquivo => flutter gen-l10n
 # dart run build_runner build --delete-conflicting-outputs

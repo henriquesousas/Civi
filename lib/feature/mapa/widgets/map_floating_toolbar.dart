@@ -75,16 +75,16 @@ class MapTopToolbar extends StatelessWidget {
                       onTap: onSearchTap,
                       isDark: isDark,
                     ),
-                    _ToolbarButton(
-                      // icon: CupertinoIcons.hand_thumbsup,
-                      icon: Icons.handshake_rounded,
-                      onTap: () async => showSupportCiviBottomSheet(
-                        context,
-                        pixKey: "123",
-                      ),
+                    // _ToolbarButton(
+                    //   // icon: CupertinoIcons.hand_thumbsup,
+                    //   icon: Icons.handshake_rounded,
+                    //   onTap: () async => showSupportCiviBottomSheet(
+                    //     context,
+                    //     pixKey: "123",
+                    //   ),
 
-                      isDark: isDark,
-                    ),
+                    //   isDark: isDark,
+                    // ),
                     const SizedBox(width: 16),
                   ],
                 ),

@@ -141,6 +141,7 @@ class _MapLayersBottomSheet2State extends State<MapLayersBottomSheet2>
                         selected: true,
                         leading: const _MapPreviewIcon(
                           // accentColor: Color(0xFFFFC400),
+                          assets: "assets/images/alert.png",
                           accentColor: Color(0xFFFFB300),
                           showBadge: true,
                           centerIcon: Icons.warning_amber_rounded,
@@ -166,6 +167,7 @@ class _MapLayersBottomSheet2State extends State<MapLayersBottomSheet2>
                         subtitle: 'Seus itens',
                         selected: false,
                         leading: const _MapPreviewIcon(
+                          assets: "assets/images/thief.png",
                           accentColor: Color(0xFFFF5A36),
                           showBadge: false,
                           centerIcon: Icons.directions_car_filled_rounded,
@@ -212,7 +214,7 @@ class _LayerActionTile extends StatelessWidget {
     // final backgroundColor =
     //     selected ? const Color(0xFF171717) : const Color(0xFF0D0D0D);
     final borderColor = context.outline;
-    final backgroundColor = context.primaryBgCardLow;
+    final backgroundColor = context.primaryBgCard;
 
     return Material(
       color: Colors.transparent,
@@ -263,28 +265,28 @@ class _LayerActionTile extends StatelessWidget {
                   height: 1.3,
                 ),
               ),
-              const SizedBox(height: 14),
-              Row(
-                children: [
-                  Container(
-                    width: 26.w,
-                    height: 26.w,
-                    decoration: BoxDecoration(
-                      color: context.primaryBgCardHigh,
-                      shape: BoxShape.circle,
-                      border: Border.all(
-                        // color: Colors.white.withValues(alpha: 0.08),
-                        color: context.primaryBgCardHigh,
-                      ),
-                    ),
-                    child: Icon(
-                      Icons.arrow_forward_rounded,
-                      size: 16,
-                      color: context.primaryTextColor.withValues(alpha: 0.5),
-                    ),
-                  ),
-                ],
-              ),
+              // const SizedBox(height: 14),
+              // Row(
+              //   children: [
+              //     Container(
+              //       width: 26.w,
+              //       height: 26.w,
+              //       decoration: BoxDecoration(
+              //         color: context.primaryBgCardHigh,
+              //         shape: BoxShape.circle,
+              //         border: Border.all(
+              //           // color: Colors.white.withValues(alpha: 0.08),
+              //           color: context.primaryBgCardHigh,
+              //         ),
+              //       ),
+              //       child: Icon(
+              //         Icons.arrow_forward_rounded,
+              //         size: 16,
+              //         color: context.primaryTextColor.withValues(alpha: 0.5),
+              //       ),
+              //     ),
+              //   ],
+              // ),
             ],
           ),
         ),
@@ -296,6 +298,7 @@ class _LayerActionTile extends StatelessWidget {
 class _MapPreviewIcon extends StatelessWidget {
   final Color accentColor;
   final bool showBadge;
+  final String assets;
   final IconData centerIcon;
   final IconData? badgeIcon;
 
@@ -303,6 +306,7 @@ class _MapPreviewIcon extends StatelessWidget {
     required this.accentColor,
     required this.showBadge,
     required this.centerIcon,
+    required this.assets,
     this.badgeIcon,
   });
 
@@ -315,8 +319,8 @@ class _MapPreviewIcon extends StatelessWidget {
         clipBehavior: Clip.none,
         children: [
           Container(
-            width: 52,
-            height: 52,
+            width: 52.w,
+            height: 52.h,
             decoration: BoxDecoration(
               shape: BoxShape.circle,
               color: context.primaryBgCardLow,
@@ -324,93 +328,98 @@ class _MapPreviewIcon extends StatelessWidget {
                 color: context.outline,
                 width: 1.2,
               ),
-              boxShadow: [
-                BoxShadow(
-                  color: Colors.black.withValues(alpha: 0.10),
-                  blurRadius: 10,
-                  offset: const Offset(0, 4),
-                ),
-              ],
+              // boxShadow: [
+              //   BoxShadow(
+              //     color: Colors.black.withValues(alpha: 0.10),
+              //     blurRadius: 10,
+              //     offset: const Offset(0, 4),
+              //   ),
+              // ],
             ),
             child: Stack(
               alignment: Alignment.center,
               children: [
-                Container(
-                  width: 34,
-                  height: 34,
-                  decoration: BoxDecoration(
-                    shape: BoxShape.circle,
-                    color: accentColor.withValues(alpha: 0.10),
-                  ),
-                ),
-                Container(
-                  width: 24,
-                  height: 24,
-                  decoration: BoxDecoration(
-                    shape: BoxShape.circle,
-                    color: accentColor.withValues(alpha: 0.18),
-                  ),
-                ),
-                Icon(
-                  centerIcon,
-                  size: 20,
-                  color: accentColor,
+                // Container(
+                //   width: 34,
+                //   height: 34,
+                //   decoration: BoxDecoration(
+                //     shape: BoxShape.circle,
+                //     color: accentColor.withValues(alpha: 0.10),
+                //   ),
+                // ),
+                // Container(
+                //   width: 24,
+                //   height: 24,
+                //   decoration: BoxDecoration(
+                //     shape: BoxShape.circle,
+                //     color: accentColor.withValues(alpha: 0.18),
+                //   ),
+                // ),
+                // Icon(
+                //   centerIcon,
+                //   size: 20,
+                //   color: accentColor,
+                // ),
+                Image.asset(
+                  assets,
+                  width: 28.w,
+                  height: 28.h,
                 ),
               ],
             ),
           ),
-          Positioned(
-            left: 4,
-            bottom: 4,
-            child: Container(
-              width: 12,
-              height: 12,
-              decoration: BoxDecoration(
-                color: accentColor,
-                shape: BoxShape.circle,
-                border: Border.all(
-                  color: context.surface,
-                  width: 2,
-                ),
-                boxShadow: [
-                  BoxShadow(
-                    color: accentColor.withValues(alpha: 0.35),
-                    blurRadius: 8,
-                    spreadRadius: 1,
-                  ),
-                ],
-              ),
-            ),
-          ),
-          if (showBadge)
-            Positioned(
-              right: -2,
-              top: -2,
-              child: Container(
-                width: 20,
-                height: 20,
-                decoration: BoxDecoration(
-                  shape: BoxShape.circle,
-                  color: context.surface,
-                  border: Border.all(
-                    color: context.outline,
-                    width: 1,
-                  ),
-                  boxShadow: [
-                    BoxShadow(
-                      color: Colors.black.withValues(alpha: 0.10),
-                      blurRadius: 6,
-                      offset: const Offset(0, 2),
-                    ),
-                  ],
-                ),
-                child: Icon(
-                  badgeIcon ?? Icons.campaign_rounded,
-                  size: 11,
-                  color: context.primaryTextColor.withValues(alpha: 0.75),
-                ),
-              ),
-            ),
+          // Positioned(
+          //   left: 4,
+          //   bottom: 4,
+          //   child: Container(
+          //     width: 12,
+          //     height: 12,
+          //     decoration: BoxDecoration(
+          //       color: accentColor,
+          //       shape: BoxShape.circle,
+          //       border: Border.all(
+          //         color: context.surface,
+          //         width: 2,
+          //       ),
+          //       boxShadow: [
+          //         BoxShadow(
+          //           color: accentColor.withValues(alpha: 0.35),
+          //           blurRadius: 8,
+          //           spreadRadius: 1,
+          //         ),
+          //       ],
+          //     ),
+          //   ),
+          // ),
+          // if (showBadge)
+          //   Positioned(
+          //     right: -2,
+          //     top: -2,
+          //     child: Container(
+          //       width: 20,
+          //       height: 20,
+          //       decoration: BoxDecoration(
+          //         shape: BoxShape.circle,
+          //         color: context.surface,
+          //         border: Border.all(
+          //           color: context.outline,
+          //           width: 1,
+          //         ),
+          //         boxShadow: [
+          //           BoxShadow(
+          //             color: Colors.black.withValues(alpha: 0.10),
+          //             blurRadius: 6,
+          //             offset: const Offset(0, 2),
+          //           ),
+          //         ],
+          //       ),
+          //       child: Icon(
+          //         badgeIcon ?? Icons.campaign_rounded,
+          //         size: 11,
+          //         color: context.primaryTextColor.withValues(alpha: 0.75),
+          //       ),
+          //     ),
+          //   ),
         ],
       ),
     );

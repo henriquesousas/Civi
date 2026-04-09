@@ -4,12 +4,12 @@ import 'package:deehelp/feature/home/widgets/recent_incident_card.dart';
 
 enum IncidentStatus { active, inReview, canceled }
 
-enum ItemType { car, moto, phone }
+enum ItemTypeOld { car, moto, phone }
 
 class FakeIncidentListModel {
   final String id;
   final String itemName;
-  final ItemType itemType;
+  final ItemTypeOld itemType;
   final IncidentKind kind;
   final IncidentStatus status;
   final String location;
@@ -31,5 +31,6 @@ class FakeIncidentListModel {
     required this.imageUrl,
   });
 
-  bool get isVehicle => itemType == ItemType.car || itemType == ItemType.moto;
+  bool get isVehicle =>
+      itemType == ItemTypeOld.car || itemType == ItemTypeOld.moto;
 }

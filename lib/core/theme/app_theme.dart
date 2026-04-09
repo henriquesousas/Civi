@@ -14,6 +14,7 @@ class AppTheme {
       surface: Colors.white, //background principal
       surfaceContainer: Colors.white, //background principal
       surfaceContainerLow: Color(0XFFF3F4F6), //background secundar
+      // surfaceContainerLow: Color(0XFF000000), //background secundar
       // surfaceContainerHigh: Color(0XFFd6d6d6), //background accent
       surfaceContainerHigh: Color(0XFFd6d6d6), //background accent
       /// BORDAS
@@ -67,10 +68,12 @@ class AppTheme {
       // scaffoldBackgroundColor: const Color(0xFFF8FAFC),
       // scaffoldBackgroundColor: const Color(0xFFF8FAFC),
       brightness: Brightness.light,
-      // fontFamily: "Plus Jakarta",
+      fontFamily: "Plus Jakarta",
       // fontFamily: "MuseoModerno",
       // fontFamily: "AlbertSans",
-      fontFamily: "Inter",
+      // fontFamily: "Inter",
+      // fontFamily: "Poppins",
+      // fontFamily: "Roboto",
       colorScheme: baseColorScheme,
       primarySwatch: AppColors.primaryMaterialColor,
       primaryColor: AppColors.primaryColor,
@@ -101,7 +104,8 @@ class AppTheme {
       // surfaceContainer: const Color(0xFF0F141B), //background principal
       // surfaceContainer: const Color(0xFF0D0D0D), //background principal
       surfaceContainer: const Color(0xFF171717), //background principal
-      surfaceContainerLow: const Color(0xFF131A22), //background secundar
+      // surfaceContainerLow: const Color(0xFF131A22), //background secundar
+      surfaceContainerLow: const Color(0xFF252525), //background secundar
 
       //background secundar
       // surfaceContainerHigh: const Color(0XFF11171e),
@@ -139,8 +143,10 @@ class AppTheme {
       scaffoldBackgroundColor: Colors.black87,
       // scaffoldBackgroundColor: const Color(0xFF0B0E14),
       brightness: Brightness.dark,
-      // fontFamily: "Plus Jakarta",
-      fontFamily: "Inter",
+      fontFamily: "Plus Jakarta",
+      // fontFamily: "Poppins",
+      // fontFamily: "Poppins",
+      // fontFamily: "Roboto",
       colorScheme: baseColorScheme,
       primarySwatch: AppColors.primaryMaterialColor,
       primaryColor: AppColors.primaryColor,

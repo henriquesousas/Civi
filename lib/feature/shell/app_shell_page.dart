@@ -245,7 +245,7 @@ class _BottomNavBar extends StatelessWidget {
                         item.label,
                         style: context.appText.button.copyWith(
                           fontWeight:
-                              selected ? FontWeight.w500 : FontWeight.w200,
+                              selected ? FontWeight.w600 : FontWeight.normal,
                           color: selected
                               ? context.primaryTextColor
                               : context.secondaryTextColor,

@@ -1,4 +1,5 @@
 import 'dart:ui';
+
 import 'package:deehelp/core/extension/date_extension.dart';
 import 'package:deehelp/core/extension/exports_extension.dart';
 import 'package:deehelp/core/extension/time_extension.dart';
@@ -13,217 +14,141 @@ import 'package:deehelp/feature/items/item_type.dart';
 import 'package:deehelp/feature/search/search_page_v2.dart';
 import 'package:deehelp/module/incident/domain/usecase/incident_output.dart';
 import 'package:deehelp/module/item/domain/entities/image_media.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class IncidentDetailComunityPage extends ConsumerWidget {
   final IncidentOutput? incident;
-  const IncidentDetailComunityPage({super.key, this.incident});
+
+  const IncidentDetailComunityPage({
+    super.key,
+    this.incident,
+  });
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final currentLocation = ref.watch(currentLocationProvider);
     final theme = Theme.of(context);
 
-    final distance = _calculateDistance(incident, currentLocation);
+    final data = _IncidentDetailPresenter.fromIncident(
+      incident,
+      currentLocation,
+    );
 
     return Scaffold(
-      backgroundColor: const Color(0xFF0B0B0F),
+      backgroundColor: context.scaffoldBackgroundColor,
       body: Stack(
         children: [
           CustomScrollView(
             physics: const BouncingScrollPhysics(),
             slivers: [
               SliverToBoxAdapter(
-                child: IncidentPhotosCard(
-                  height: 250.h,
-                  incidentId: incident?.alertId ?? '',
-                  incidentCreated: incident?.occurredAt ?? DateTime.now(),
-                  photos: incident?.product?.images ?? [],
+                child: _IncidentHeroSection(
+                  incidentId: data.alertId,
+                  incidentCreated: data.occurredAt,
+                  photos: data.photos,
+                  height: 280.h,
                 ),
               ),
               SliverToBoxAdapter(
                 child: Padding(
-                  padding: const EdgeInsets.fromLTRB(20, 18, 20, 120),
+                  padding: const EdgeInsets.fromLTRB(20, 18, 20, 130),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      /// Tipo + status
                       Wrap(
                         spacing: 8,
                         runSpacing: 8,
                         children: [
-                          const _Pill(
-                            label: 'ROUBO',
+                          _StatusPill(
+                            label: data.categoryLabel,
                             icon: Icons.warning_amber_rounded,
-                            bgColor: Color(0x22FF5A5F),
-                            textColor: Color(0xFFFF6B6F),
+                            bgColor: const Color(0x22FF5A5F),
+                            textColor: const Color(0xFFFF6B6F),
                           ),
-                          const _Pill(
-                            label: 'ATIVO',
-                            icon: Icons.bolt_rounded,
-                            bgColor: Color(0x222E6BFF),
-                            textColor: Color(0xFF7DA2FF),
-                          ),
-                          if (distance != null) ...[
-                            _Pill(
-                              // label: '1,8 km',
-                              label: distance,
+                          if (data.distanceText != null)
+                            _StatusPill(
+                              label: data.distanceText!,
                               icon: Icons.near_me_rounded,
-                              bgColor: const Color(0x22FFFFFF),
-                              textColor: const Color(0xFFE7E7EA),
+                              bgColor: context.primaryBgCardLow,
+                              textColor: context.primaryTextColor,
                             ),
-                          ],
+                          if (data.isVerified)
+                            _StatusPill(
+                              label: 'Verificado',
+                              icon: Icons.verified_rounded,
+                              bgColor: AppColors.primaryColor
+                                  .withValues(alpha: 0.10),
+                              textColor: AppColors.primaryColor,
+                            ),
                         ],
                       ),
-
                       const SizedBox(height: 18),
-
-                      /// Título
                       Text(
-                        EnumUtils.fromString(
-                                ItemType.values, incident?.productType)
-                            .labelRouberry,
-                        style: TextStyle(
-                          color: Colors.white,
-                          fontSize: 22.sp,
+                        data.title,
+                        style: theme.textTheme.headlineSmall?.copyWith(
+                          color: context.primaryTextColor,
                           fontWeight: FontWeight.w800,
                           height: 1.05,
                         ),
                       ),
-
                       const SizedBox(height: 8),
-
                       Text(
-                        _getProductDescription(incident),
+                        data.subtitle,
                         style: theme.textTheme.titleSmall?.copyWith(
-                          color: const Color(0xFFB8B8C2),
+                          color: context.secondaryTextColor,
                           fontWeight: FontWeight.w500,
+                          height: 1.3,
                         ),
                       ),
-
                       const SizedBox(height: 24),
-
-                      _InfoTile(
-                        icon: Icons.calendar_month_rounded,
-                        title: 'Ocorrido em',
-                        subtitle: incident != null
-                            ? '${incident?.occurredAt.toDateWithFullMonth()} as ${incident?.occurredAtTime.to24hFormat()}'
-                            : 'Não informado',
-                      ),
-
-                      const Divider(color: Color(0xFF1E1F26), height: 28),
-
-                      _InfoTile(
-                        icon: Icons.location_on_rounded,
-                        title: 'Local',
-                        // subtitle:
-                        //     'Rua Galvão Bueno, 352 • Liberdade • São Paulo, SP',
-                        subtitle: incident != null
-                            ? '${incident?.local?.address} • ${incident?.local?.city} • ${incident?.local?.state}'
-                            : "Não informado",
-                        trailingIcon: Icons.map_outlined,
-                      ),
-
-                      const SizedBox(height: 18),
-
-                      Container(
-                        padding: const EdgeInsets.all(14),
-                        decoration: BoxDecoration(
-                          color: const Color(0xFF13141A),
-                          borderRadius: BorderRadius.circular(20),
-                          border: Border.all(
-                            color: Colors.white.withValues(alpha: 0.05),
-                          ),
-                        ),
-                        child: Row(
+                      _SectionCard(
+                        child: Column(
                           children: [
-                            Container(
-                              width: 45.w,
-                              height: 45.h,
-                              decoration: BoxDecoration(
-                                color: const Color(0xFF1C1D24),
-                                borderRadius: BorderRadius.circular(16),
-                              ),
-                              child: Icon(
-                                incident == null
-                                    ? CupertinoIcons.cube_box
-                                    : EnumUtils.fromString(ItemType.values,
-                                            incident!.productType)
-                                        .icon,
-                                // color: const Color(0xFF7DA2FF),
-                                color: AppColors.primaryColor,
-                                size: 25.w,
-                              ),
+                            _InfoRow(
+                              icon: Icons.calendar_month_rounded,
+                              title: 'Ocorrido em',
+                              subtitle: data.occurredAtText,
                             ),
-                            const SizedBox(width: 14),
-                            Expanded(
-                              child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  Text(
-                                    'Item relacionado',
-                                    style: theme.textTheme.bodySmall?.copyWith(
-                                      color: const Color(0xFF8E90A0),
-                                    ),
-                                  ),
-                                  const SizedBox(height: 4),
-                                  Text(
-                                    incident != null
-                                        ? incident!.product?.name ??
-                                            "Não informado"
-                                        : "Não informado",
-                                    style:
-                                        theme.textTheme.titleMedium?.copyWith(
-                                      color: Colors.white,
-                                      fontWeight: FontWeight.w700,
-                                    ),
-                                  ),
-                                  const SizedBox(height: 4),
-                                  Text(
-                                    _details(incident),
-                                    style: theme.textTheme.bodyMedium?.copyWith(
-                                      color: const Color(0xFFB8B8C2),
-                                    ),
-                                  ),
-                                ],
-                              ),
+                            _SectionDivider(),
+                            _InfoRow(
+                              icon: Icons.location_on_rounded,
+                              title: 'Local',
+                              subtitle: data.locationText,
+                              trailingIcon: Icons.map_outlined,
                             ),
                           ],
                         ),
                       ),
-
-                      const SizedBox(height: 24),
-
-                      Text(
-                        'Descrição',
-                        style: theme.textTheme.titleLarge?.copyWith(
-                          color: Colors.white,
-                          fontWeight: FontWeight.w800,
-                        ),
+                      const SizedBox(height: 16),
+                      _ItemHighlightCard(
+                        icon: data.itemIcon,
+                        title: 'Item relacionado',
+                        name: data.itemName,
+                        subtitle: data.itemDetails,
                       ),
-
+                      const SizedBox(height: 24),
+                      const _SectionTitle(
+                        title: 'Descrição',
+                        subtitle: 'Detalhes informados sobre a ocorrência',
+                      ),
                       const SizedBox(height: 12),
-
-                      Text(
-                        incident?.howTo ?? 'Não informado',
-                        style: theme.textTheme.bodyLarge?.copyWith(
-                          color: const Color(0xFFD6D6DC),
-                          height: 1.55,
-                        ),
+                      _DescriptionCard(
+                        text: data.description,
                       ),
-
                       const SizedBox(height: 24),
-
+                      _SectionTitle(
+                        title: 'Resumo',
+                        subtitle: 'Informações rápidas da ocorrência',
+                      ),
+                      const SizedBox(height: 12),
                       Row(
                         children: [
                           Expanded(
                             child: _MetricCard(
                               label: 'Verificado',
-                              value:
-                                  incident?.visibilty == true ? "Sim" : "Não",
+                              value: data.isVerified ? 'Sim' : 'Não',
                               icon: Icons.verified_rounded,
                             ),
                           ),
@@ -231,21 +156,19 @@ class IncidentDetailComunityPage extends ConsumerWidget {
                           Expanded(
                             child: _MetricCard(
                               label: 'Região',
-                              value: incident?.local?.city ?? 'NI',
+                              value: data.regionLabel,
                               icon: Icons.public_rounded,
                             ),
                           ),
                         ],
                       ),
-
                       const SizedBox(height: 12),
-
                       Row(
                         children: [
                           Expanded(
                             child: _MetricCard(
                               label: 'Publicado',
-                              value: incident?.createdAt.timeAgo() ?? 'NI',
+                              value: data.publishedAtLabel,
                               icon: Icons.schedule_rounded,
                             ),
                           ),
@@ -253,11 +176,7 @@ class IncidentDetailComunityPage extends ConsumerWidget {
                           Expanded(
                             child: _MetricCard(
                               label: 'Fonte',
-                              value: incident != null
-                                  ? incident!.isPlatformGenerated
-                                      ? "Civi"
-                                      : "Comunidade"
-                                  : "NI",
+                              value: data.sourceLabel,
                               icon: Icons.groups_rounded,
                             ),
                           ),
@@ -269,355 +188,212 @@ class IncidentDetailComunityPage extends ConsumerWidget {
               ),
             ],
           ),
-
-          /// bottom action
-          Positioned(
-            left: 16,
-            right: 16,
-            bottom: 18,
-            child: ClipRRect(
-              borderRadius: BorderRadius.circular(26),
-              child: BackdropFilter(
-                filter: ImageFilter.blur(sigmaX: 16, sigmaY: 16),
-                child: Container(
-                  padding: const EdgeInsets.all(10),
-                  decoration: BoxDecoration(
-                    color: const Color(0xFF121319).withValues(alpha: 0.92),
-                    borderRadius: BorderRadius.circular(26),
-                    border: Border.all(
-                      color: Colors.white.withValues(alpha: 0.06),
+          _BottomActionBar(
+            title: 'Ocorrência ativa',
+            onShare: incident == null
+                ? null
+                : () => UrlLauncherUtils.shareIncident(
+                      context,
+                      incident!.alertId,
+                      incident!.occurredAt,
                     ),
-                    boxShadow: [
-                      BoxShadow(
-                        color: Colors.black.withValues(alpha: 0.24),
-                        blurRadius: 20,
-                        offset: const Offset(0, 8),
-                      ),
-                    ],
-                  ),
-                  child: Row(
-                    children: [
-                      Expanded(
-                        child: Text(
-                          'Ocorrência ativa',
-                          style: theme.textTheme.titleMedium?.copyWith(
-                            color: Colors.white,
-                            fontWeight: FontWeight.w700,
-                          ),
-                        ),
-                      ),
-                      Expanded(
-                        child: ButtonPrimary(
-                          press: () => UrlLauncherUtils.shareIncident(
-                            context,
-                            incident!.alertId,
-                            incident!.occurredAt,
-                          ),
-                          text: "Compartilhar",
-                        ),
-                      ),
-                      // SizedBox(
-                      //   height: 52,
-                      //   child: FilledButton.icon(
-                      //     style: FilledButton.styleFrom(
-                      //       backgroundColor: const Color(0xFF2E6BFF),
-                      //       foregroundColor: Colors.white,
-                      //       padding: const EdgeInsets.symmetric(
-                      //         horizontal: 20,
-                      //       ),
-                      //       shape: RoundedRectangleBorder(
-                      //         borderRadius: BorderRadius.circular(18),
-                      //       ),
-                      //     ),
-                      //     onPressed: () {},
-                      //     icon: const Icon(Icons.map_rounded),
-                      //     label: const Text('Ver no mapa'),
-                      //   ),
-                      // ),
-                    ],
-                  ),
-                ),
-              ),
-            ),
           ),
         ],
       ),
     );
   }
+}
 
-  String? _calculateDistance(
-      IncidentOutput? incident, CurrentLocation? currentLocation) {
-    if (currentLocation == null) return null;
-    if (incident?.local?.latitue == null ||
-        incident?.local?.longitude == null) {
+class _IncidentDetailPresenter {
+  final String alertId;
+  final DateTime occurredAt;
+  final List<ImageMedia> photos;
+  final String title;
+  final String subtitle;
+  final String categoryLabel;
+  final String occurredAtText;
+  final String locationText;
+  final String description;
+  final String regionLabel;
+  final String publishedAtLabel;
+  final String sourceLabel;
+  final String itemName;
+  final String itemDetails;
+  final String? distanceText;
+  final bool isVerified;
+  final IconData itemIcon;
+
+  const _IncidentDetailPresenter({
+    required this.alertId,
+    required this.occurredAt,
+    required this.photos,
+    required this.title,
+    required this.subtitle,
+    required this.categoryLabel,
+    required this.occurredAtText,
+    required this.locationText,
+    required this.description,
+    required this.regionLabel,
+    required this.publishedAtLabel,
+    required this.sourceLabel,
+    required this.itemName,
+    required this.itemDetails,
+    required this.distanceText,
+    required this.isVerified,
+    required this.itemIcon,
+  });
+
+  factory _IncidentDetailPresenter.fromIncident(
+    IncidentOutput? incident,
+    CurrentLocation? currentLocation,
+  ) {
+    final itemType = incident == null
+        ? ItemType.car
+        : EnumUtils.fromString(ItemType.values, incident.productType);
+
+    final distanceText = _calculateDistance(incident, currentLocation);
+
+    return _IncidentDetailPresenter(
+      alertId: incident?.alertId ?? '',
+      occurredAt: incident?.occurredAt ?? DateTime.now(),
+      photos: incident?.product?.images ?? [],
+      title: _buildTitle(incident, itemType),
+      subtitle: _buildSubtitle(incident, itemType),
+      categoryLabel: itemType.labelRouberry,
+      occurredAtText: incident != null
+          ? '${incident.occurredAt.toDateWithFullMonth()} às ${incident.occurredAtTime.to24hFormat()}'
+          : 'Não informado',
+      locationText: _buildLocation(incident),
+      description: incident?.howTo?.trim().isNotEmpty == true
+          ? incident!.howTo!
+          : 'Nenhuma descrição adicional foi informada para esta ocorrência.',
+      regionLabel: incident?.local?.city?.trim().isNotEmpty == true
+          ? incident!.local!.city!
+          : 'Não informado',
+      publishedAtLabel: incident?.createdAt.timeAgo() ?? 'Não informado',
+      sourceLabel: incident == null
+          ? 'Não informado'
+          : incident.isPlatformGenerated
+              ? 'Civi'
+              : 'Comunidade',
+      itemName: incident?.product?.name?.trim().isNotEmpty == true
+          ? incident!.product!.name!
+          : 'Item não informado',
+      itemDetails: _buildItemDetails(incident, itemType),
+      distanceText: distanceText,
+      isVerified: incident?.visibilty == true,
+      itemIcon: itemType.icon,
+    );
+  }
+
+  static String? _calculateDistance(
+    IncidentOutput? incident,
+    CurrentLocation? currentLocation,
+  ) {
+    if (incident == null || currentLocation == null) return null;
+    if (incident.local?.latitue == null || incident.local?.longitude == null) {
       return null;
     }
+
     return DistanceUtils.formatDistance(
-      startLatitude: incident!.local!.latitue!,
+      startLatitude: incident.local!.latitue!,
       startLongitude: incident.local!.longitude!,
       endLatitude: currentLocation.latitude,
       endLongitude: currentLocation.longitude,
     );
   }
 
-  String _getProductDescription(IncidentOutput? incident) {
-    if (incident?.productType == ItemType.phone.name) {
-      return "${incident?.product?.brand} ${incident?.product?.name} • ${incident?.product?.color} • IMEI ${incident?.product?.code}";
+  static String _buildTitle(IncidentOutput? incident, ItemType itemType) {
+    final productName = incident?.product?.name;
+
+    if (productName != null && productName.trim().isNotEmpty) {
+      if (itemType == ItemType.moto) return '$productName roubada';
+      return '$productName roubado';
     }
 
-    return "${incident?.product?.brand} ${incident?.product?.name} • ${incident?.product?.color} • placa ${incident?.product?.code}";
+    return itemType.labelRouberry;
   }
 
-  String _details(IncidentOutput? incident) {
-    if (incident == null) return '';
-    if (EnumUtils.fromString(ItemType.values, incident.productType) ==
-        ItemType.phone) {
-      return 'Cor ${incident.product?.color} • Código ${incident.alertId} ';
+  static String _buildSubtitle(IncidentOutput? incident, ItemType itemType) {
+    final brand = incident?.product?.brand;
+    final name = incident?.product?.name;
+    final color = incident?.product?.color;
+    final code = incident?.product?.code;
+
+    final parts = <String>[];
+
+    final brandAndName =
+        [brand, name].where((e) => e != null && e.trim().isNotEmpty).join(' ');
+    if (brandAndName.isNotEmpty) parts.add(brandAndName);
+
+    if (color != null && color.trim().isNotEmpty) {
+      parts.add(color);
     }
 
-    return 'Cor ${incident.product?.color} • Ano ${incident.product?.year} • Código ${incident.alertId} ';
+    if (code != null && code.trim().isNotEmpty) {
+      parts.add(itemType == ItemType.phone ? 'IMEI $code' : 'Placa $code');
+    }
+
+    if (parts.isEmpty) {
+      return 'Informações do item não disponíveis';
+    }
+
+    return parts.join(' • ');
+  }
+
+  static String _buildLocation(IncidentOutput? incident) {
+    final parts = <String>[
+      if (incident?.local?.address?.trim().isNotEmpty == true)
+        incident!.local!.address!,
+      if (incident?.local?.city?.trim().isNotEmpty == true)
+        incident!.local!.city!,
+      if (incident?.local?.state?.trim().isNotEmpty == true)
+        incident!.local!.state!,
+    ];
+
+    return parts.isEmpty ? 'Local não informado' : parts.join(' • ');
+  }
+
+  static String _buildItemDetails(IncidentOutput? incident, ItemType itemType) {
+    if (incident == null) return 'Informações não disponíveis';
+
+    final parts = <String>[];
+
+    if (incident.product?.color?.trim().isNotEmpty == true) {
+      parts.add('Cor ${incident.product!.color!}');
+    }
+
+    if (itemType != ItemType.phone &&
+        incident.product?.year?.toString().trim().isNotEmpty == true) {
+      parts.add('Ano ${incident.product!.year}');
+    }
+
+    if (incident.alertId.trim().isNotEmpty) {
+      parts.add('Código ${incident.alertId}');
+    }
+
+    return parts.isEmpty ? 'Informações não disponíveis' : parts.join(' • ');
   }
 }
 
-class _InfoTile extends StatelessWidget {
-  final IconData icon;
-  final String title;
-  final String subtitle;
-  final IconData? trailingIcon;
-
-  const _InfoTile({
-    required this.icon,
-    required this.title,
-    required this.subtitle,
-    this.trailingIcon,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    final theme = Theme.of(context);
-
-    return Row(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Container(
-          width: 42,
-          height: 42,
-          decoration: BoxDecoration(
-            color: const Color(0xFF15161D),
-            borderRadius: BorderRadius.circular(14),
-          ),
-          child: Icon(
-            icon,
-            color: const Color(0xFFFD9B5A),
-            size: 22,
-          ),
-        ),
-        const SizedBox(width: 14),
-        Expanded(
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text(
-                title,
-                style: theme.textTheme.bodySmall?.copyWith(
-                  color: const Color(0xFF8E90A0),
-                ),
-              ),
-              const SizedBox(height: 4),
-              Text(
-                subtitle,
-                style: theme.textTheme.titleMedium?.copyWith(
-                  color: Colors.white,
-                  fontWeight: FontWeight.w600,
-                  height: 1.35,
-                ),
-              ),
-            ],
-          ),
-        ),
-        if (trailingIcon != null)
-          Padding(
-            padding: const EdgeInsets.only(top: 6),
-            child: Icon(
-              trailingIcon,
-              color: const Color(0xFF9FA3B4),
-            ),
-          ),
-      ],
-    );
-  }
-}
-
-class _MetricCard extends StatelessWidget {
-  final String label;
-  final String value;
-  final IconData icon;
-
-  const _MetricCard({
-    required this.label,
-    required this.value,
-    required this.icon,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    final theme = Theme.of(context);
-
-    return Container(
-      padding: const EdgeInsets.all(14),
-      decoration: BoxDecoration(
-        color: const Color(0xFF13141A),
-        borderRadius: BorderRadius.circular(18),
-        border: Border.all(
-          color: Colors.white.withValues(alpha: 0.05),
-        ),
-      ),
-      child: Row(
-        children: [
-          Container(
-            width: 42.w,
-            height: 42.h,
-            decoration: BoxDecoration(
-              color: const Color(0xFF1C1D24),
-              borderRadius: BorderRadius.circular(14),
-            ),
-            child: Icon(
-              icon,
-              // color: const Color(0xFF7DA2FF),
-              color: AppColors.primaryColor,
-              size: 20.w,
-            ),
-          ),
-          const SizedBox(width: 12),
-          Expanded(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  label,
-                  style: theme.textTheme.bodySmall?.copyWith(
-                    color: const Color(0xFF8E90A0),
-                  ),
-                ),
-                const SizedBox(height: 4),
-                Text(
-                  value,
-                  style: theme.textTheme.titleMedium?.copyWith(
-                    color: Colors.white,
-                    fontWeight: FontWeight.w700,
-                  ),
-                ),
-              ],
-            ),
-          ),
-        ],
-      ),
-    );
-  }
-}
-
-class _Pill extends StatelessWidget {
-  final String label;
-  final IconData icon;
-  final Color bgColor;
-  final Color textColor;
-
-  const _Pill({
-    required this.label,
-    required this.icon,
-    required this.bgColor,
-    required this.textColor,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 9),
-      decoration: BoxDecoration(
-        color: bgColor,
-        borderRadius: BorderRadius.circular(999),
-        border: Border.all(
-          color: Colors.white.withValues(alpha: 0.04),
-        ),
-      ),
-      child: Row(
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          Icon(icon, size: 16, color: textColor),
-          const SizedBox(width: 6),
-          Text(
-            label,
-            style: TextStyle(
-              color: textColor,
-              fontWeight: FontWeight.w700,
-              fontSize: 13,
-            ),
-          ),
-        ],
-      ),
-    );
-  }
-}
-
-class CiviIncidentDetailsModel {
-  final String title;
-  final String subtitle;
-  final List<String> photos;
-  final DateTime occurredAt;
-  final String address;
-  final String neighborhood;
-  final String city;
-  final String description;
-  final String status;
-  final String distanceText;
-  final bool verified;
-  final String source;
-  final String itemName;
-  final String itemMeta;
-
-  CiviIncidentDetailsModel({
-    required this.title,
-    required this.subtitle,
-    required this.photos,
-    required this.occurredAt,
-    required this.address,
-    required this.neighborhood,
-    required this.city,
-    required this.description,
-    required this.status,
-    required this.distanceText,
-    required this.verified,
-    required this.source,
-    required this.itemName,
-    required this.itemMeta,
-  });
-}
-
-class IncidentPhotosCard extends StatefulWidget {
+class _IncidentHeroSection extends StatefulWidget {
   final String incidentId;
   final DateTime incidentCreated;
   final List<ImageMedia> photos;
   final double height;
-  final VoidCallback? onBack;
-  final VoidCallback? onShare;
-  final VoidCallback? onBookmark;
 
-  const IncidentPhotosCard({
-    super.key,
-    required this.photos,
+  const _IncidentHeroSection({
     required this.incidentId,
     required this.incidentCreated,
-    this.height = 300,
-    this.onBack,
-    this.onShare,
-    this.onBookmark,
+    required this.photos,
+    required this.height,
   });
 
   @override
-  State<IncidentPhotosCard> createState() => _IncidentPhotosCardState();
+  State<_IncidentHeroSection> createState() => _IncidentHeroSectionState();
 }
 
-class _IncidentPhotosCardState extends State<IncidentPhotosCard> {
+class _IncidentHeroSectionState extends State<_IncidentHeroSection> {
   late final PageController _pageController;
   int currentIndex = 0;
 
@@ -639,13 +415,12 @@ class _IncidentPhotosCardState extends State<IncidentPhotosCard> {
 
     return Container(
       height: widget.height,
-      margin: const EdgeInsets.fromLTRB(0, 12, 0, 0),
+      margin: const EdgeInsets.only(top: 12),
       clipBehavior: Clip.antiAlias,
       decoration: BoxDecoration(
-        color: const Color(0xFF121319),
-        // borderRadius: BorderRadius.circular(28),
+        color: context.primaryBgCard,
         border: Border.all(
-          color: Colors.white.withValues(alpha: 0.05),
+          color: context.outlineVariantColor.withValues(alpha: 0.25),
         ),
       ),
       child: Stack(
@@ -653,11 +428,11 @@ class _IncidentPhotosCardState extends State<IncidentPhotosCard> {
           Positioned.fill(
             child: photos.isEmpty
                 ? Container(
-                    color: const Color(0xFF181A22),
+                    color: context.primaryBgCardLow,
                     child: Center(
                       child: Icon(
                         Icons.image_not_supported_outlined,
-                        color: Colors.white54,
+                        color: context.secondaryTextColor,
                         size: 42.w,
                       ),
                     ),
@@ -672,15 +447,9 @@ class _IncidentPhotosCardState extends State<IncidentPhotosCard> {
                       return CustomNetworkImage(
                         imageUrl: photos[index].value,
                       );
-                      // return Image.network(
-                      //   photos[index],
-                      //   fit: BoxFit.cover,
-                      // );
                     },
                   ),
           ),
-
-          /// gradiente superior
           Positioned.fill(
             child: IgnorePointer(
               child: DecoratedBox(
@@ -692,7 +461,7 @@ class _IncidentPhotosCardState extends State<IncidentPhotosCard> {
                       Colors.black.withValues(alpha: 0.34),
                       Colors.transparent,
                       Colors.transparent,
-                      Colors.black.withValues(alpha: 0.58),
+                      Colors.black.withValues(alpha: 0.62),
                     ],
                     stops: const [0.0, 0.18, 0.56, 1.0],
                   ),
@@ -700,8 +469,6 @@ class _IncidentPhotosCardState extends State<IncidentPhotosCard> {
               ),
             ),
           ),
-
-          /// ações topo
           Positioned(
             top: context.topPadding + 10,
             left: 14,
@@ -710,57 +477,29 @@ class _IncidentPhotosCardState extends State<IncidentPhotosCard> {
               children: [
                 _GlassCircleButton(
                   icon: Icons.arrow_back_ios_new_rounded,
-                  onTap: widget.onBack ?? () => Navigator.pop(context),
+                  onTap: () => Navigator.pop(context),
                 ),
                 const Spacer(),
                 _GlassCircleButton(
                   icon: Icons.share_outlined,
-                  onTap: widget.onShare ??
-                      () => UrlLauncherUtils.shareIncident(
-                          context, widget.incidentId, widget.incidentCreated),
+                  onTap: () => UrlLauncherUtils.shareIncident(
+                    context,
+                    widget.incidentId,
+                    widget.incidentCreated,
+                  ),
                 ),
-                // const SizedBox(width: 10),
-                // _GlassCircleButton(
-                //   icon: Icons.bookmark_border_rounded,
-                //   onTap: widget.onBookmark ?? () {},
-                // ),
               ],
             ),
           ),
-
-          /// contador
           if (photos.length > 1)
             Positioned(
-              top: 68,
+              top: context.topPadding + 62,
               right: 14,
-              child: ClipRRect(
-                borderRadius: BorderRadius.circular(999),
-                child: BackdropFilter(
-                  filter: ImageFilter.blur(sigmaX: 8, sigmaY: 8),
-                  child: Container(
-                    padding:
-                        const EdgeInsets.symmetric(horizontal: 10, vertical: 6),
-                    decoration: BoxDecoration(
-                      color: Colors.black.withValues(alpha: 0.34),
-                      borderRadius: BorderRadius.circular(999),
-                      border: Border.all(
-                        color: Colors.white.withValues(alpha: 0.06),
-                      ),
-                    ),
-                    child: Text(
-                      '${currentIndex + 1}/${photos.length}',
-                      style: const TextStyle(
-                        color: Colors.white,
-                        fontWeight: FontWeight.w700,
-                        fontSize: 12,
-                      ),
-                    ),
-                  ),
-                ),
+              child: _PhotoCounter(
+                currentIndex: currentIndex,
+                total: photos.length,
               ),
             ),
-
-          /// indicadores
           if (photos.length > 1)
             Positioned(
               bottom: 16,
@@ -786,6 +525,476 @@ class _IncidentPhotosCardState extends State<IncidentPhotosCard> {
               ),
             ),
         ],
+      ),
+    );
+  }
+}
+
+class _PhotoCounter extends StatelessWidget {
+  final int currentIndex;
+  final int total;
+
+  const _PhotoCounter({
+    required this.currentIndex,
+    required this.total,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return ClipRRect(
+      borderRadius: BorderRadius.circular(999),
+      child: BackdropFilter(
+        filter: ImageFilter.blur(sigmaX: 8, sigmaY: 8),
+        child: Container(
+          padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 6),
+          decoration: BoxDecoration(
+            color: Colors.black.withValues(alpha: 0.34),
+            borderRadius: BorderRadius.circular(999),
+            border: Border.all(
+              color: Colors.white.withValues(alpha: 0.06),
+            ),
+          ),
+          child: Text(
+            '${currentIndex + 1}/$total',
+            style: const TextStyle(
+              color: Colors.white,
+              fontWeight: FontWeight.w700,
+              fontSize: 12,
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+class _SectionTitle extends StatelessWidget {
+  final String title;
+  final String? subtitle;
+
+  const _SectionTitle({
+    required this.title,
+    this.subtitle,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Text(
+          title,
+          style: theme.textTheme.titleLarge?.copyWith(
+            color: context.primaryTextColor,
+            fontWeight: FontWeight.w800,
+          ),
+        ),
+        if (subtitle != null) ...[
+          const SizedBox(height: 4),
+          Text(
+            subtitle!,
+            style: theme.textTheme.bodyMedium?.copyWith(
+              color: context.secondaryTextColor,
+              height: 1.3,
+            ),
+          ),
+        ],
+      ],
+    );
+  }
+}
+
+class _SectionCard extends StatelessWidget {
+  final Widget child;
+
+  const _SectionCard({
+    required this.child,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      padding: const EdgeInsets.all(16),
+      decoration: BoxDecoration(
+        color: context.secondaryContainer,
+        borderRadius: BorderRadius.circular(22),
+        border: Border.all(color: context.outline),
+      ),
+      child: child,
+    );
+  }
+}
+
+class _DescriptionCard extends StatelessWidget {
+  final String text;
+
+  const _DescriptionCard({
+    required this.text,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+
+    return Container(
+      width: double.infinity,
+      padding: const EdgeInsets.all(16),
+      decoration: BoxDecoration(
+        color: context.secondaryContainer,
+        borderRadius: BorderRadius.circular(22),
+        border: Border.all(color: context.outline),
+      ),
+      child: Text(
+        text,
+        style: theme.textTheme.bodyLarge?.copyWith(
+          color: context.primaryTextColor,
+          height: 1.55,
+        ),
+      ),
+    );
+  }
+}
+
+class _ItemHighlightCard extends StatelessWidget {
+  final IconData icon;
+  final String title;
+  final String name;
+  final String subtitle;
+
+  const _ItemHighlightCard({
+    required this.icon,
+    required this.title,
+    required this.name,
+    required this.subtitle,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+
+    return Container(
+      padding: const EdgeInsets.all(14),
+      decoration: BoxDecoration(
+        color: context.secondaryContainer,
+        borderRadius: BorderRadius.circular(22),
+        border: Border.all(color: context.outline),
+      ),
+      child: Row(
+        children: [
+          Container(
+            width: 48.w,
+            height: 48.h,
+            decoration: BoxDecoration(
+              color: AppColors.primaryColor.withValues(alpha: 0.12),
+              borderRadius: BorderRadius.circular(16),
+            ),
+            child: Icon(
+              icon,
+              color: AppColors.primaryColor,
+              size: 24.w,
+            ),
+          ),
+          const SizedBox(width: 14),
+          Expanded(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  title,
+                  style: theme.textTheme.bodySmall?.copyWith(
+                    color: context.secondaryTextColor,
+                    fontWeight: FontWeight.w600,
+                  ),
+                ),
+                const SizedBox(height: 4),
+                Text(
+                  name,
+                  style: theme.textTheme.titleMedium?.copyWith(
+                    color: context.primaryTextColor,
+                    fontWeight: FontWeight.w700,
+                  ),
+                ),
+                const SizedBox(height: 4),
+                Text(
+                  subtitle,
+                  style: theme.textTheme.bodyMedium?.copyWith(
+                    color: context.secondaryTextColor,
+                    height: 1.35,
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+class _InfoRow extends StatelessWidget {
+  final IconData icon;
+  final String title;
+  final String subtitle;
+  final IconData? trailingIcon;
+
+  const _InfoRow({
+    required this.icon,
+    required this.title,
+    required this.subtitle,
+    this.trailingIcon,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+
+    return Row(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Container(
+          width: 44,
+          height: 44,
+          decoration: BoxDecoration(
+            color: AppColors.primaryColor.withValues(alpha: 0.08),
+            borderRadius: BorderRadius.circular(14),
+          ),
+          child: Icon(
+            icon,
+            color: AppColors.primaryColor,
+            size: 22,
+          ),
+        ),
+        const SizedBox(width: 14),
+        Expanded(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                title,
+                style: theme.textTheme.bodySmall?.copyWith(
+                  color: context.secondaryTextColor,
+                  fontWeight: FontWeight.w700,
+                ),
+              ),
+              const SizedBox(height: 4),
+              Text(
+                subtitle,
+                style: theme.textTheme.titleMedium?.copyWith(
+                  color: context.primaryTextColor,
+                  fontWeight: FontWeight.w600,
+                  height: 1.35,
+                ),
+              ),
+            ],
+          ),
+        ),
+        if (trailingIcon != null)
+          Padding(
+            padding: const EdgeInsets.only(top: 8),
+            child: Icon(
+              trailingIcon,
+              color: context.secondaryTextColor,
+              size: 20,
+            ),
+          ),
+      ],
+    );
+  }
+}
+
+class _SectionDivider extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      margin: const EdgeInsets.symmetric(vertical: 16),
+      height: 1,
+      color: context.outlineVariantColor,
+    );
+  }
+}
+
+class _MetricCard extends StatelessWidget {
+  final String label;
+  final String value;
+  final IconData icon;
+
+  const _MetricCard({
+    required this.label,
+    required this.value,
+    required this.icon,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+
+    return Container(
+      padding: const EdgeInsets.all(14),
+      decoration: BoxDecoration(
+        color: context.secondaryContainer,
+        borderRadius: BorderRadius.circular(18),
+        border: Border.all(color: context.outline),
+      ),
+      child: Row(
+        children: [
+          Container(
+            width: 42.w,
+            height: 42.h,
+            decoration: BoxDecoration(
+              color: context.primaryBgCardLow,
+              borderRadius: BorderRadius.circular(14),
+            ),
+            child: Icon(
+              icon,
+              color: AppColors.primaryColor,
+              size: 20.w,
+            ),
+          ),
+          const SizedBox(width: 12),
+          Expanded(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  label,
+                  maxLines: 1,
+                  overflow: TextOverflow.ellipsis,
+                  style: theme.textTheme.bodySmall?.copyWith(
+                    color: context.secondaryTextColor,
+                    fontWeight: FontWeight.w600,
+                  ),
+                ),
+                const SizedBox(height: 4),
+                Text(
+                  value,
+                  maxLines: 2,
+                  overflow: TextOverflow.ellipsis,
+                  style: theme.textTheme.titleMedium?.copyWith(
+                    color: context.primaryTextColor,
+                    fontWeight: FontWeight.w700,
+                    height: 1.2,
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+class _StatusPill extends StatelessWidget {
+  final String label;
+  final IconData icon;
+  final Color bgColor;
+  final Color textColor;
+
+  const _StatusPill({
+    required this.label,
+    required this.icon,
+    required this.bgColor,
+    required this.textColor,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 9),
+      decoration: BoxDecoration(
+        color: bgColor,
+        borderRadius: BorderRadius.circular(999),
+        border: Border.all(
+          color: bgColor.withValues(alpha: 0.9),
+        ),
+      ),
+      child: Row(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          Icon(icon, size: 16, color: textColor),
+          const SizedBox(width: 6),
+          Text(
+            label,
+            style: TextStyle(
+              color: textColor,
+              fontWeight: FontWeight.w700,
+              fontSize: 13.sp,
+              height: 1,
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+class _BottomActionBar extends StatelessWidget {
+  final String title;
+  final VoidCallback? onShare;
+
+  const _BottomActionBar({
+    required this.title,
+    required this.onShare,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+
+    return Positioned(
+      left: 16,
+      right: 16,
+      bottom: 18,
+      child: ClipRRect(
+        borderRadius: BorderRadius.circular(26),
+        child: BackdropFilter(
+          filter: ImageFilter.blur(sigmaX: 16, sigmaY: 16),
+          child: Container(
+            padding: const EdgeInsets.all(10),
+            decoration: BoxDecoration(
+              color: context.secondaryContainer,
+              borderRadius: BorderRadius.circular(26),
+              border: Border.all(color: context.outline),
+            ),
+            child: Row(
+              children: [
+                Expanded(
+                  child: Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 6),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          title,
+                          style: theme.textTheme.titleMedium?.copyWith(
+                            color: context.primaryTextColor,
+                            fontWeight: FontWeight.w700,
+                          ),
+                        ),
+                        const SizedBox(height: 2),
+                        Text(
+                          'Compartilhe esta ocorrência com segurança',
+                          style: theme.textTheme.bodySmall?.copyWith(
+                            color: context.secondaryTextColor,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+                SizedBox(
+                  width: 150,
+                  child: ButtonPrimary(
+                    press: onShare ?? () {},
+                    text: 'Compartilhar',
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ),
       ),
     );
   }

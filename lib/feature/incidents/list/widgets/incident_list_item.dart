@@ -205,7 +205,7 @@ class IncidentListItemV2 extends StatelessWidget {
                     // ),
                     // const SizedBox(height: 10),
                     Text(
-                      incident.product?.type != ItemType.phone.name
+                      incident.product?.type != ItemTypeOld.phone.name
                           ? 'Placa: ${incident.product?.code} · ${incident.product?.color}'
                           : 'IMEI: ${incident.product?.code} · ${incident.product?.color}',
                       style: TextStyle(
@@ -227,7 +227,7 @@ class IncidentListItemV2 extends StatelessWidget {
               ),
               Column(
                 children: [
-                  if (incident.product?.type == ItemType.phone.name) ...[
+                  if (incident.product?.type == ItemTypeOld.phone.name) ...[
                     // const BlurredLockedImage(),
                     CiviImageCard(
                       assetPath: 'assets/images/phone_pin_v2.png',

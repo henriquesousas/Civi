@@ -28,11 +28,18 @@ class RowItemCardV2 extends StatelessWidget {
     // const accent = Color(0xFF8F98FF);
 
     return Container(
-      color: context.primaryBgCard,
+      // color: context.primaryBgCard,
+      decoration: BoxDecoration(
+        color: context.primaryBgCard,
+        border: Border.all(
+          color: context.outlineVariantColor,
+          width: 1,
+        ),
+      ),
       child: InkWell(
         onTap: onTap,
         child: Padding(
-          padding: const EdgeInsets.fromLTRB(20, 10, 10, 10),
+          padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
           child: Row(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
@@ -69,7 +76,7 @@ class RowItemCardV2 extends StatelessWidget {
                     ),
                     const SizedBox(height: 10),
                     Text(
-                      item.type != ItemType.phone.name
+                      item.type != ItemTypeOld.phone.name
                           ? 'Placa: ${item.code} · ${item.color} · ${item.year}'
                           : 'IMEI: ${item.code} · ${item.color}',
                       style: TextStyle(
@@ -89,7 +96,7 @@ class RowItemCardV2 extends StatelessWidget {
               ),
               Column(
                 children: [
-                  if (item.type == ItemType.phone.name) ...[
+                  if (item.type == ItemTypeOld.phone.name) ...[
                     // const BlurredLockedImageV2(),
                     CiviImageCard(
                       assetPath: 'assets/images/phone_pin_v2.png',

@@ -670,10 +670,13 @@ class ThankYouDialog extends StatelessWidget {
             const SizedBox(height: 24),
 
             // 🔹 Botão
-            ButtonOutline(
+            ButtonPrimary(
               press: onContinue,
               text: "Fechar",
-              borderColor: AppColors.primaryColor,
+              // textColor:
+              //     context.isDark() ? Colors.white : AppColors.primaryColor,
+              // borderColor:
+              //     context.isDark() ? Colors.white : AppColors.primaryColor,
               // bgColor: AppColors.primaryColor,
             ),
           ],

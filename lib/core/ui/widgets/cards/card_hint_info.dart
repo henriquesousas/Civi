@@ -20,16 +20,16 @@ class CardHintInfo extends StatelessWidget {
     return Container(
       padding: const EdgeInsets.all(16),
       decoration: BoxDecoration(
-        color: bgColor ?? context.primaryBgCardLow,
+        color: bgColor ?? context.primaryBgCard,
         borderRadius: BorderRadius.circular(RadiusSize.lg),
         border: Border.all(color: context.outlineVariantColor),
-        boxShadow: [
-          BoxShadow(
-            color: context.shadowColor,
-            blurRadius: 16,
-            offset: const Offset(0, 8),
-          ),
-        ],
+        // boxShadow: [
+        //   BoxShadow(
+        //     color: context.shadowColor,
+        //     blurRadius: 16,
+        //     offset: const Offset(0, 8),
+        //   ),
+        // ],
       ),
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.start,

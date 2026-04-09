@@ -51,7 +51,7 @@ extension ItemTypeExtension on ItemType {
       case ItemType.onFootApproach:
         return 'Abordagem a pé';
       case ItemType.vehicleInvasionAttempt:
-        return 'Tentativa de invasão veicular';
+        return 'Tentativa de invasão';
       case ItemType.suspiciousActivity:
         return 'Atividade suspeita';
       default:
@@ -125,6 +125,8 @@ extension ItemTypeExtension on ItemType {
         return "assets/images/unlockv2.png";
       case ItemType.suspiciousActivity:
         return "assets/images/thief.png";
+      // return "assets/images/car_rouberry.png";
+      // return "assets/images/phone_pin_v2.png";
       default:
         return "";
     }

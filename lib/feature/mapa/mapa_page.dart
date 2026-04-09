@@ -443,8 +443,8 @@ class _MapaPageState extends ConsumerState<MapaPage> {
 
               return AnimatedPositioned(
                 duration: const Duration(milliseconds: 350),
-                left: context.percentWidth(0.1),
-                right: context.percentWidth(0.1),
+                left: data.value.length > 1 ? context.percentWidth(0.1) : 0,
+                right: data.value.length > 1 ? context.percentWidth(0.1) : 0,
                 bottom: _showIncidentCards ? 1 : -300,
                 child: _horizontalIncidentCard(data.value),
               );
@@ -801,22 +801,49 @@ class _MapaPageState extends ConsumerState<MapaPage> {
     return size.clamp(52.0, 72.0);
   }
 
-  double getPinSizeAdvanced(BuildContext context) {
+  double getPinSize2(BuildContext context) {
     final media = MediaQuery.of(context);
+    final screenWidth = media.size.width;
+    final isTablet = screenWidth >= 600;
 
-    final width = media.size.width;
-    final height = media.size.height;
-    final dpr = media.devicePixelRatio;
-
-    final base = (width + height) / 2;
-
-    double size = base * 0.05;
-
-    // normaliza pela densidade
-    size = size / (dpr * 0.85);
-    return size;
-    // return size.clamp(36.0, 68.0);
+    // Abordagem baseada em breakpoints
+    if (isTablet) {
+      // Tablet: tamanho fixo ou baseado em porcentagem menor
+      if (screenWidth >= 1200) {
+        return 54.0; // Tablet grande
+      } else if (screenWidth >= 800) {
+        return 50.0; // Tablet médio
+      } else {
+        return 46.0; // Tablet pequeno
+      }
+    } else {
+      // Phone: baseado na largura
+      if (screenWidth >= 480) {
+        return 66.0.w; // Phone grande
+      } else if (screenWidth >= 360) {
+        return 63.0.dg; //58.0; // Phone médio
+      } else {
+        return 53.0.w; // Phone pequeno
+      }
+    }
   }
+
+  // double getPinSizeAdvanced(BuildContext context) {
+  //   final media = MediaQuery.of(context);
+
+  //   final width = media.size.width;
+  //   final height = media.size.height;
+  //   final dpr = media.devicePixelRatio;
+
+  //   final base = (width + height) / 2;
+
+  //   double size = base * 0.05;
+
+  //   // normaliza pela densidade
+  //   size = size / (dpr * 0.85);
+  //   return size;
+  //   // return size.clamp(36.0, 68.0);
+  // }
 
   double getPinIconScale(BuildContext context) {
     final media = MediaQuery.of(context);
@@ -835,9 +862,10 @@ class _MapaPageState extends ConsumerState<MapaPage> {
     Color color,
   ) async {
     // const double size = 64.0;
-    final double size = getPinSize(context);
-    const double strokeWidth = 2;
-    const double radius = 20;
+    // final double size = getPinSize(context).w;
+    final double size = getPinSize2(context);
+    const double strokeWidth = 4;
+    const double radius = 999;
     const double padding = 14;
 
     final recorder = ui.PictureRecorder();
@@ -845,6 +873,7 @@ class _MapaPageState extends ConsumerState<MapaPage> {
 
     // final fillPaint = Paint()..color = const Color(0xFFF2F4F7);
     final fillPaint = Paint()..color = const Color(0xFF000000);
+    // final fillPaint = Paint()..color = context.primaryBgCard;
 
     final borderPaint = Paint()
       ..color = color

@@ -12,13 +12,13 @@ class AuthActionCard extends StatelessWidget {
       decoration: BoxDecoration(
         // color: Colors.white,
         borderRadius: BorderRadius.circular(RadiusSize.lg),
-        boxShadow: const [
-          BoxShadow(
-            color: Color(0x1A000000),
-            blurRadius: 22,
-            offset: Offset(0, 14),
-          ),
-        ],
+        // boxShadow: const [
+        //   BoxShadow(
+        //     color: Color(0x1A000000),
+        //     blurRadius: 22,
+        //     offset: Offset(0, 14),
+        //   ),
+        // ],
       ),
       child: child,
     );

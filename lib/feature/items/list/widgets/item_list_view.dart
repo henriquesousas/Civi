@@ -26,8 +26,6 @@ class ItemListView extends ConsumerWidget {
             child: HeaderSummary(total: items.length),
           ),
           const SizedBox(height: 5),
-          // const VerificationInfoCard(),
-          //   const SizedBox(height: SpacingSize.md),
           Divider(
             color: context.outlineVariantColor,
             height: 1,
@@ -36,27 +34,25 @@ class ItemListView extends ConsumerWidget {
         Expanded(
           child: RefreshIndicator(
             onRefresh: onRefresh,
-            child: ListView.separated(
-              // physics: const BouncingScrollPhysics(),
+            child: ListView.builder(
+              shrinkWrap: true,
               physics: const AlwaysScrollableScrollPhysics(),
               itemCount: items.length,
               itemBuilder: (context, index) {
                 final it = items[index];
-                return Padding(
-                  padding: const EdgeInsets.only(bottom: 2),
-                  child: RowItemCardV2(
-                    item: it,
-                    onTap: () => press(it),
-                  ),
+                return RowItemCardV2(
+                  item: it,
+                  onTap: () => press(it),
                 );
               },
-              separatorBuilder: (BuildContext context, int index) {
-                return Divider(
-                  color: context.outlineVariantColor,
-                  // color: Colors.grey,
-                  height: 1,
-                );
-              },
+              // separatorBuilder: (BuildContext context, int index) {
+              //   return const SizedBox.shrink();
+              //   // return Divider(
+              //   //   color: context.outlineVariantColor,
+              //   //   // color: Colors.grey,
+              //   //   height: 0,
+              //   // );
+              // },
             ),
           ),
         )

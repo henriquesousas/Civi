@@ -58,16 +58,16 @@ class HorizontalIncidentCard extends StatelessWidget {
     return GestureDetector(
       onTap: onTap,
       child: Container(
-        margin: const EdgeInsets.only(right: 10),
+        margin: const EdgeInsets.only(right: 3),
         padding: const EdgeInsets.all(12),
         decoration: BoxDecoration(
           // color: const Color(0xFF111318),
           color: context.primaryBgCard,
           borderRadius: BorderRadius.circular(20),
           border: Border.all(
-            // color: Colors.white.withValues(alpha: 0.05),
-            color: context.outline,
-          ),
+              // color: Colors.white.withValues(alpha: 0.05),
+              color: context.outline,
+              width: 1),
           boxShadow: const [
             // BoxShadow(
             //   color: Colors.black.withValues(alpha: 0.6),
@@ -97,8 +97,8 @@ class HorizontalIncidentCard extends StatelessWidget {
                   ClipRRect(
                     borderRadius: BorderRadius.circular(14),
                     child: CustomNetworkImage(
-                      width: ImageSize.sm,
-                      height: ImageSize.sm,
+                      width: ImageSize.xs,
+                      height: ImageSize.xs,
                       imageUrl: coverImageUrl,
                       customErrorWidget: CiviImageCard(
                         assetPath: assetImagePath,
@@ -110,8 +110,8 @@ class HorizontalIncidentCard extends StatelessWidget {
                 ] else ...[
                   CiviImageCard(
                     assetPath: coverImageUrl!,
-                    width: ImageSize.sm,
-                    height: ImageSize.sm,
+                    width: ImageSize.xs,
+                    height: ImageSize.xs,
                   ),
                 ],
                 const SizedBox(width: 10),
@@ -140,6 +140,8 @@ class HorizontalIncidentCard extends StatelessWidget {
                             ),
                           ),
 
+                          const SizedBox(width: 5),
+
                           /// DIREITA (ação)
                           GestureDetector(
                             onTap: onShareTap,
@@ -149,7 +151,7 @@ class HorizontalIncidentCard extends StatelessWidget {
                               containerSize: IconContainerSizes.sm,
                               icon: Icon(
                                 Icons.share_outlined,
-                                size: IconSizes.md,
+                                size: IconSizes.xs,
                                 // color: Colors.white.withValues(alpha: 0.7),
                                 color: context.secondaryTextColor,
                               ),
@@ -160,7 +162,7 @@ class HorizontalIncidentCard extends StatelessWidget {
                       const SizedBox(height: 10),
                       Text(
                         title,
-                        maxLines: 2,
+                        maxLines: 1,
                         overflow: TextOverflow.ellipsis,
                         style: context.appText.headerlg.copyWith(
                           color: context.primaryTextColor,
@@ -169,7 +171,7 @@ class HorizontalIncidentCard extends StatelessWidget {
                           // fontSize: context.safeSp(13),
                         ),
                       ),
-                      const SizedBox(height: 6),
+                      // const SizedBox(height: 6),
                       Text(
                         subtitle,
                         maxLines: 2,
@@ -184,7 +186,7 @@ class HorizontalIncidentCard extends StatelessWidget {
               ],
             ),
 
-            const SizedBox(height: 12),
+            // const SizedBox(height: 12),
 
             /// ORIGEM
             Row(
@@ -247,7 +249,7 @@ class HorizontalIncidentCard extends StatelessWidget {
                 ),
                 decoration: BoxDecoration(
                   // color: Colors.white.withValues(alpha: 0.03),
-                  color: context.outlineVariantColor,
+                  color: context.primaryBgCardLow.withValues(alpha: 0.8),
                   borderRadius: BorderRadius.circular(12),
                   border: Border.all(
                     color: Colors.white.withValues(alpha: 0.05),
