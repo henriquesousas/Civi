@@ -12,6 +12,7 @@ import 'package:deehelp/module/incident/domain/product_unavailable_exception.dar
 import 'package:deehelp/module/incident/domain/usecase/add/add_incident_dto.dart';
 import 'package:deehelp/module/incident/external/repository/region_dto.dart';
 import 'package:deehelp/module/item/domain/product_repository.dart';
+import 'package:flutter/material.dart';
 
 class AddIncidentUsecase extends UseCase<AddIncidentDto, String> {
   final IncidentRepository _repository;
@@ -71,7 +72,7 @@ class AddIncidentUsecase extends UseCase<AddIncidentDto, String> {
       reportType: dto.reportType,
       type: product.type,
     );
-
+    debugPrint("Salvando incidente com ID: ${report.id}");
     await _repository.save(report);
     return Result.success(report.alertId!);
   }

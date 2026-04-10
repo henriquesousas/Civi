@@ -5,6 +5,7 @@ import 'package:flutter/services.dart';
 
 class EnvConfig {
   static final _assetPath = 'assets/env/env_dev.json';
+  // static final _assetPath = 'assets/env/env_prod.json';
   EnvConfig._();
 
   static Map<String, String> _runtime = {};
