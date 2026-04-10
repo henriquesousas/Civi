@@ -44,8 +44,9 @@ dependencies:
   skeletonizer: ^2.1.1
   connectivity_plus:
     ^7.0.0
+
     # Preparar para remover (essa lib remove caracteres especiais)
-  diacritic: ^0.1.6
+  # diacritic: ^0.1.6
   vibration: ^3.1.3
   mapbox_maps_flutter: ^2.20.0
   # Usado no mapa para animacao
@@ -96,70 +97,67 @@ flutter:
         - asset: assets/fonts/plus_jakarta/PlusJakartaDisplay-Bold.otf
           weight: 700
 
-    - family: MuseoModerno
-      fonts:
-        - asset: assets/fonts/museomodern/MuseoModerno-Regular.ttf
-          weight: 400
-        - asset: assets/fonts/museomodern/MuseoModerno-ExtraBold.ttf
-          weight: 800
+    # - family: MuseoModerno
+    #   fonts:
+    #     - asset: assets/fonts/museomodern/MuseoModerno-Regular.ttf
+    #       weight: 400
+    #     - asset: assets/fonts/museomodern/MuseoModerno-ExtraBold.ttf
+    #       weight: 800
 
-    - family: AlbertSans
-      fonts:
-        - asset: assets/fonts/albert_sans/AlbertSans-Regular.ttf
-        - asset: assets/fonts/albert_sans/AlbertSans-Bold.ttf
-          weight: 700
-        - asset: assets/fonts/albert_sans/AlbertSans-Italic.ttf
-          style: italic
-        - asset: assets/fonts/albert_sans/AlbertSans-Light.ttf
-          weight: 300
+    # - family: AlbertSans
+    #   fonts:
+    #     - asset: assets/fonts/albert_sans/AlbertSans-Regular.ttf
+    #     - asset: assets/fonts/albert_sans/AlbertSans-Bold.ttf
+    #       weight: 700
+    #     - asset: assets/fonts/albert_sans/AlbertSans-Italic.ttf
+    #       style: italic
+    #     - asset: assets/fonts/albert_sans/AlbertSans-Light.ttf
+    #       weight: 300
 
-    - family: Inter
-      fonts:
-        - asset: assets/fonts/inter/Inter_Medium.ttf
-        - asset: assets/fonts/inter/Inter_Regular.ttf
-        - asset: assets/fonts/inter/Inter_SemiBold.ttf
-        - asset: assets/fonts/inter/Inter_Bold.ttf
+    # - family: Inter
+    #   fonts:
+    #     - asset: assets/fonts/inter/Inter_Medium.ttf
+    #     - asset: assets/fonts/inter/Inter_Regular.ttf
+    #     - asset: assets/fonts/inter/Inter_SemiBold.ttf
+    #     - asset: assets/fonts/inter/Inter_Bold.ttf
 
-    - family: Poppins
-      fonts:
-        - asset: assets/fonts/poppins/poppins_extra_light.ttf
-          weight: 100
-        - asset: assets/fonts/poppins/poppins_thin.ttf
-          weight: 200
-        - asset: assets/fonts/poppins/poppins_light.ttf
-          weight: 300
-        - asset: assets/fonts/poppins/poppins_regular.ttf
-          weight: 400
-        - asset: assets/fonts/poppins/poppins_medium.ttf
-          weight: 500
-        - asset: assets/fonts/poppins/poppins_semi_bold.ttf
-          weight: 600
-        - asset: assets/fonts/poppins/poppins_bold.ttf
-          weight: 700
-        - asset: assets/fonts/poppins/poppins_black.ttf
-          weight: 800
-        - asset: assets/fonts/poppins/poppins_extra_bold.ttf
-          weight: 900
+    # - family: Poppins
+    #   fonts:
+    #     - asset: assets/fonts/poppins/poppins_extra_light.ttf
+    #       weight: 100
+    #     - asset: assets/fonts/poppins/poppins_thin.ttf
+    #       weight: 200
+    #     - asset: assets/fonts/poppins/poppins_light.ttf
+    #       weight: 300
+    #     - asset: assets/fonts/poppins/poppins_regular.ttf
+    #       weight: 400
+    #     - asset: assets/fonts/poppins/poppins_medium.ttf
+    #       weight: 500
+    #     - asset: assets/fonts/poppins/poppins_semi_bold.ttf
+    #       weight: 600
+    #     - asset: assets/fonts/poppins/poppins_bold.ttf
+    #       weight: 700
+    #     - asset: assets/fonts/poppins/poppins_black.ttf
+    #       weight: 800
+    #     - asset: assets/fonts/poppins/poppins_extra_bold.ttf
+    #       weight: 900
 
-    - family: Roboto
-      fonts:
-        - asset: assets/fonts/roboto/roboto_light.ttf
-          weight: 300
-        - asset: assets/fonts/roboto/roboto_regular.ttf
-          weight: 400
-        - asset: assets/fonts/roboto/roboto_medium.ttf
-          weight: 500
-        - asset: assets/fonts/roboto/roboto_bold.ttf
-          weight: 700
-        - asset: assets/fonts/roboto/roboto_black.ttf
-          weight: 900
+    # - family: Roboto
+    #   fonts:
+    #     - asset: assets/fonts/roboto/roboto_light.ttf
+    #       weight: 300
+    #     - asset: assets/fonts/roboto/roboto_regular.ttf
+    #       weight: 400
+    #     - asset: assets/fonts/roboto/roboto_medium.ttf
+    #       weight: 500
+    #     - asset: assets/fonts/roboto/roboto_bold.ttf
+    #       weight: 700
+    #     - asset: assets/fonts/roboto/roboto_black.ttf
+    #       weight: 900
 
 # Comando para gerar o arquivo => flutter gen-l10n
 # dart run build_runner build --delete-conflicting-outputs
 
-# l10n:
-#   arb-dir: lib/l10n
-#   template-arb-file: app_en.arb
-#   output-localization-file: app_localizations.dart
-#   supported-locales: [en, pt]
-#   output-dir: lib/l10n
+# Desinstalar app
+# adb uninstall br.com.atomos.deehelp
+

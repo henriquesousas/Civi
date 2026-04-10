@@ -1,7 +1,6 @@
 import 'package:deehelp/core/extension/exports_extension.dart';
 import 'package:deehelp/core/theme/export_theme.dart';
 import 'package:deehelp/core/ui/styles/app_text_style.dart';
-import 'package:deehelp/core/ui/widgets/badge/badge_text.dart';
 import 'package:deehelp/core/ui/widgets/buttons/button_outline.dart';
 import 'package:deehelp/core/ui/widgets/icon/export_icon.dart';
 import 'package:deehelp/core/ui/widgets/textfield/text_field_primary.dart';

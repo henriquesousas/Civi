@@ -276,8 +276,8 @@ class _IncidentDetailPresenter {
           : incident.isPlatformGenerated
               ? 'Civi'
               : 'Comunidade',
-      itemName: incident?.product?.name?.trim().isNotEmpty == true
-          ? incident!.product!.name!
+      itemName: incident?.product?.name.trim().isNotEmpty == true
+          ? incident!.product!.name
           : 'Item não informado',
       itemDetails: _buildItemDetails(incident, itemType),
       distanceText: distanceText,
@@ -359,8 +359,8 @@ class _IncidentDetailPresenter {
 
     final parts = <String>[];
 
-    if (incident.product?.color?.trim().isNotEmpty == true) {
-      parts.add('Cor ${incident.product!.color!}');
+    if (incident.product?.color.trim().isNotEmpty == true) {
+      parts.add('Cor ${incident.product!.color}');
     }
 
     if (itemType != ItemType.phone &&

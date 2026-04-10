@@ -1,4 +1,3 @@
-import 'package:deehelp/core/extension/exports_extension.dart';
 import 'package:deehelp/core/theme/export_theme.dart';
 import 'package:deehelp/core/ui/styles/app_text_style.dart';
 import 'package:deehelp/core/ui/widgets/bubble/bubble_export.dart';
@@ -37,9 +36,9 @@ class ReportIncidentSuccessfullyPage extends StatelessWidget {
 
     // final secondaryText = Colors.white.withValues(alpha: 0.82);
 
-    final softCard = isDark
-        ? Colors.white.withValues(alpha: 0.06)
-        : Colors.white.withValues(alpha: 0.12);
+    // final softCard = isDark
+    //     ? Colors.white.withValues(alpha: 0.06)
+    //     : Colors.white.withValues(alpha: 0.12);
 
     return Scaffold(
       // backgroundColor: context.primaryColor,

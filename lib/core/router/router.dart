@@ -1,16 +1,12 @@
 import 'dart:async';
 
 import 'package:deehelp/app_startup_provider.dart';
-import 'package:deehelp/core/router/slide_transition_page.dart';
 import 'package:deehelp/feature/about/about_router.dart';
 import 'package:deehelp/feature/alerts/alerts_router.dart';
 import 'package:deehelp/feature/auth/presentation/export_auth.dart';
 import 'package:deehelp/feature/faq/export_faq.dart';
 import 'package:deehelp/feature/incidents/incident_router.dart';
-import 'package:deehelp/feature/incidents/report/report_incident_successfully_page.dart';
-import 'package:deehelp/feature/incidents/report/widgets/success/regiter_incident_success_args.dart';
 import 'package:deehelp/feature/items/items_router.dart';
-import 'package:deehelp/feature/items/success/item_register_success_page.dart';
 import 'package:deehelp/feature/location/export_location.dart';
 import 'package:deehelp/feature/profile/export_profile.dart';
 import 'package:deehelp/feature/search/search_router.dart';
@@ -18,7 +14,6 @@ import 'package:deehelp/feature/shell/app_sheel_router.dart';
 import 'package:deehelp/feature/sos/sos_router.dart';
 import 'package:deehelp/feature/splash/splash_router.dart';
 import 'package:deehelp/core/router/router_refresh_notifier.dart';
-import 'package:deehelp/teste_profile.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
@@ -90,42 +85,42 @@ var goRouterProvider = Provider<GoRouter>(
         ...IncidentRouter.routers,
         ...SOSRouter.routers,
         ...SearchRouter.routers,
-        GoRoute(
-          path: '/',
-          pageBuilder: (context, state) => slideTransitionPage(
-            key: state.pageKey,
-            // child: const MapPage(),
-            // child: const MapPage2(),
-            // child: const MounsHouse(),
-            // child: const CardBottom(),
+        // GoRoute(
+        //   path: '/',
+        //   pageBuilder: (context, state) => slideTransitionPage(
+        //     key: state.pageKey,
+        //     // child: const MapPage(),
+        //     // child: const MapPage2(),
+        //     // child: const MounsHouse(),
+        //     // child: const CardBottom(),
 
-            // child: EventsScreen(),
-            // child: TesteDetailPage(),
-            // child: ItemDetailsPage(item: ,),
-            // child: ImeiInfoPage(),
-            // child: SuspiciousActivityPage(),
-            // child: NoiseComplaintPage(),
-            // child: FloodAlertPage(
-            //   locationLabel: 'Centro Osascos',
-            // ),
-            // child: ItemTypeSelectionPageLightV2(),
-            // child: ItemTypeSelectionPageDarkV2(),
-            // child: ItemNameStepLightPage(
-            //   itemTypeLabel: "Carro",
-            // ),
-            // child: ItemColorStepPage(),
-            // child: ItemDescriptionPageLight(),
-            // child: ItemDetailPageLight(),
-            // child: ItemDetailPageLightV2(),
-            // child: ItemPhonePageLight(),
-            // child: ItemPhotoStepPage(),
-            // child: ItemPhotoStepDarkPage(),
-            // child: ItemRegisteredSuccessfullyDarkPage(),
-            // child: SuspiciousActivityPageLight(),
-            // child: ThankYouAlertCard(),
-            child: TestPage12FaqPage(),
-          ),
-        ),
+        //     // child: EventsScreen(),
+        //     // child: TesteDetailPage(),
+        //     // child: ItemDetailsPage(item: ,),
+        //     // child: ImeiInfoPage(),
+        //     // child: SuspiciousActivityPage(),
+        //     // child: NoiseComplaintPage(),
+        //     // child: FloodAlertPage(
+        //     //   locationLabel: 'Centro Osascos',
+        //     // ),
+        //     // child: ItemTypeSelectionPageLightV2(),
+        //     // child: ItemTypeSelectionPageDarkV2(),
+        //     // child: ItemNameStepLightPage(
+        //     //   itemTypeLabel: "Carro",
+        //     // ),
+        //     // child: ItemColorStepPage(),
+        //     // child: ItemDescriptionPageLight(),
+        //     // child: ItemDetailPageLight(),
+        //     // child: ItemDetailPageLightV2(),
+        //     // child: ItemPhonePageLight(),
+        //     // child: ItemPhotoStepPage(),
+        //     // child: ItemPhotoStepDarkPage(),
+        //     // child: ItemRegisteredSuccessfullyDarkPage(),
+        //     // child: SuspiciousActivityPageLight(),
+        //     // child: ThankYouAlertCard(),
+        //     // child: TestPage12FaqPage(),
+        //   ),
+        // ),
       ],
     );
   },
