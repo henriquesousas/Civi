@@ -143,12 +143,6 @@ class _MapaPageState extends ConsumerState<MapaPage> {
                     : '$time • $city',
               ),
             );
-
-            // Aqui você pode:
-            // - atualizar lista
-            // - mostrar marcador no mapa
-            // - disparar alerta local
-            // - chamar setState / notifier / provider
           },
         )
         .subscribe();

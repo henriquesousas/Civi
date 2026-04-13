@@ -4,7 +4,7 @@ description: "A new Flutter project."
 # pub.dev using `flutter pub publish`. This is preferred for private packages.
 publish_to: "none" # Remove this line if you wish to publish to pub.dev
 
-version: 1.0.0+3
+version: 1.0.1+4
 
 environment:
   sdk: ^3.6.0
@@ -42,13 +42,12 @@ dependencies:
   share_plus: ^7.2.0
   permission_handler: ^12.0.1
   skeletonizer: ^2.1.1
-  connectivity_plus:
-    ^7.0.0
-
-    # Preparar para remover (essa lib remove caracteres especiais)
-  # diacritic: ^0.1.6
+  connectivity_plus: ^7.0.0
   vibration: ^3.1.3
   mapbox_maps_flutter: ^2.20.0
+  flutter_switch: ^0.3.2
+  flutter_local_notifications: ^20.1.0
+  flutter_foreground_task: ^9.2.2
   # Usado no mapa para animacao
   # flutter_map_animations: ^0.9.0
 
@@ -68,7 +67,6 @@ dependencies:
   # cloud_firestore: ^6.0.3
   # firebase_storage: ^13.0.4
   # dotted_border: ^3.1.0
-  flutter_switch: ^0.3.2
 
 dev_dependencies:
   flutter_test:
