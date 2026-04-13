@@ -19,7 +19,6 @@ import 'package:deehelp/feature/sos/sos_router.dart';
 import 'package:deehelp/module/auth/external/di/auth_view_model_provider.dart';
 import 'package:deehelp/core/utils/url_launcher_utils.dart';
 import 'package:deehelp/module/auth/external/di/authenticated_user_provider.dart';
-import 'package:deehelp/montinor_setting_controller.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'profile_item.dart';

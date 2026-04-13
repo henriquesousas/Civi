@@ -6,10 +6,10 @@
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
     <uses-permission android:name="android.permission.CAMERA" />
     <uses-permission android:name="android.permission.VIBRATE"/>
-    <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
-    <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
+    <!-- <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
+    <uses-permission android:name="android.permission.POST_NOTIFICATIONS" /> -->
     <!-- Escolha o tipo com cuidado -->
-    <uses-permission android:name="android.permission.FOREGROUND_SERVICE_SPECIAL_USE" />
+    <!-- <uses-permission android:name="android.permission.FOREGROUND_SERVICE_SPECIAL_USE" /> -->
     <!-- alternativa possível dependendo do caso -->
     <!-- <uses-permission android:name="android.permission.FOREGROUND_SERVICE_DATA_SYNC" /> -->
 
@@ -51,10 +51,10 @@
             android:value="pk.eyJ1IjoicHNvYXJlczI2MDEiLCJhIjoiY21uNHl4cmhwMDVrazJwb2xncGt1cnQ0eSJ9.Hfdr7a3Eefg4cXj_u4pYag"/>
 
 
-        <service
+        <!-- <service
             android:name="com.pravera.flutter_foreground_task.service.ForegroundService"
             android:exported="false"
-            android:foregroundServiceType="specialUse" />
+            android:foregroundServiceType="specialUse" /> -->
 
         <!-- <service
             android:name="com.pravera.flutter_foreground_task.service.ForegroundService"
