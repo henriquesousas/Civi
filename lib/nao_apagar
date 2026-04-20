@@ -1,0 +1,44 @@
+ Container(
+              padding: const EdgeInsets.symmetric(horizontal: 8),
+              child: Row(
+                children: [
+                  const Icon(Icons.location_on, color: Colors.blue, size: 20),
+                  const SizedBox(width: 8),
+                  Expanded(
+                    child: Slider(
+                      value: notificationDistance,
+                      min: 0.1,
+                      max: 10.0,
+                      divisions: 99,
+                      label: '${notificationDistance.toStringAsFixed(1)} km',
+                      onChanged: (value) {
+                        setState(() {
+                          notificationDistance = value;
+                        });
+                      },
+                      activeColor: Colors.blue,
+                      inactiveColor: Colors.grey[300],
+                    ),
+                  ),
+                  const SizedBox(width: 8),
+                  Container(
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: 12,
+                      vertical: 6,
+                    ),
+                    decoration: BoxDecoration(
+                      color: Colors.blue.withOpacity(0.1),
+                      borderRadius: BorderRadius.circular(20),
+                    ),
+                    child: Text(
+                      '${notificationDistance.toStringAsFixed(1)} km',
+                      style: const TextStyle(
+                        color: Colors.blue,
+                        fontWeight: FontWeight.w600,
+                        fontSize: 14,
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            ),
