@@ -59,7 +59,7 @@ class StepTile extends StatelessWidget {
               children: [
                 Text(
                   title,
-                  style: context.appText.caption.copyWith(
+                  style: context.appTextOld.caption.copyWith(
                     fontWeight: FontWeight.w900,
                     color: context.onSurface,
                   ),
@@ -67,7 +67,7 @@ class StepTile extends StatelessWidget {
                 const SizedBox(height: SpacingSize.xs),
                 Text(
                   subtitle,
-                  style: context.appText.caption.copyWith(
+                  style: context.appTextOld.caption.copyWith(
                     height: 1.25,
                     fontWeight: FontWeight.w500,
                     color: context.secondaryTextColor,

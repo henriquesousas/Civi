@@ -11,7 +11,7 @@ class FaqSectionTitle extends StatelessWidget {
       padding: const EdgeInsets.fromLTRB(8, 2, 8, 10),
       child: Text(
         text.toUpperCase(),
-        style: context.appText.caption.copyWith(
+        style: context.appTextOld.caption.copyWith(
           fontWeight: FontWeight.w600,
           color: const Color(0xFF8A96C8),
           letterSpacing: 1.2,

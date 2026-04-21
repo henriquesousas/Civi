@@ -59,7 +59,7 @@ class ButtonPrimary extends StatelessWidget {
   Text _title(BuildContext context) {
     return Text(
       text,
-      style: context.appText.button.copyWith(
+      style: context.appTextOld.button.copyWith(
         color: Colors.white,
       ),
     );

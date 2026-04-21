@@ -93,7 +93,7 @@ class _HeaderSummaryState extends State<HeaderSummary> {
                     children: [
                       Text(
                         'Adicionar novo item',
-                        style: context.appText.headermd.copyWith(
+                        style: context.appTextOld.headermd.copyWith(
                           fontWeight: FontWeight.w600,
                           color: context.primaryTextColor,
                         ),
@@ -101,7 +101,7 @@ class _HeaderSummaryState extends State<HeaderSummary> {
                       const SizedBox(height: SpacingSize.xs),
                       Text(
                         '${widget.total} item(ns) no seu perfil',
-                        style: context.appText.caption.copyWith(
+                        style: context.appTextOld.caption.copyWith(
                           color: context.secondaryTextColor,
                         ),
                       ),
@@ -122,7 +122,7 @@ class _HeaderSummaryState extends State<HeaderSummary> {
                   ),
                   child: Text(
                     '${widget.total}',
-                    style: context.appText.caption.copyWith(
+                    style: context.appTextOld.caption.copyWith(
                       fontWeight: FontWeight.w800,
                       color: context.primaryColor,
                     ),

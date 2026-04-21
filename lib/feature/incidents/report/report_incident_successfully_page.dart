@@ -285,7 +285,7 @@ class _SuccessHero extends StatelessWidget {
               ),
               child: Text(
                 'Alerta enviado',
-                style: context.appText.bodySmall.copyWith(
+                style: context.appTextOld.bodySmall.copyWith(
                   color: Colors.white,
                   fontWeight: FontWeight.w700,
                 ),
@@ -295,7 +295,7 @@ class _SuccessHero extends StatelessWidget {
             Text(
               title,
               textAlign: TextAlign.center,
-              style: context.appText.headerxl.copyWith(
+              style: context.appTextOld.headerxl.copyWith(
                 color: Colors.white,
                 fontWeight: FontWeight.w900,
                 height: 1.05,
@@ -306,7 +306,7 @@ class _SuccessHero extends StatelessWidget {
             Text(
               subtitle,
               textAlign: TextAlign.center,
-              style: context.appText.bodySmall.copyWith(
+              style: context.appTextOld.bodySmall.copyWith(
                 color: Colors.white.withValues(alpha: 0.90),
                 fontWeight: FontWeight.w500,
                 height: 1.45,
@@ -342,7 +342,7 @@ class _IncidentSummaryCard extends StatelessWidget {
           children: [
             Text(
               itemName,
-              style: context.appText.headermd.copyWith(
+              style: context.appTextOld.headermd.copyWith(
                 color: Colors.white,
                 fontWeight: FontWeight.w800,
               ),
@@ -360,7 +360,7 @@ class _IncidentSummaryCard extends StatelessWidget {
                 Expanded(
                   child: Text(
                     locationText,
-                    style: context.appText.caption.copyWith(
+                    style: context.appTextOld.caption.copyWith(
                       color: Colors.white.withValues(alpha: 0.88),
                       fontWeight: FontWeight.w600,
                       height: 1.35,

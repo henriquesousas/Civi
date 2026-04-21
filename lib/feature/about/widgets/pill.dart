@@ -24,7 +24,7 @@ class Pill extends StatelessWidget {
       ),
       child: Text(
         label,
-        style: context.appText.caption.copyWith(
+        style: context.appTextOld.caption.copyWith(
           color: fg,
           fontWeight: FontWeight.w900,
           letterSpacing: 0.3,

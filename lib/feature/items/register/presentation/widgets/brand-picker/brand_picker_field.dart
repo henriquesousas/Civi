@@ -59,7 +59,7 @@ class BrandPickerField extends StatelessWidget {
                   Expanded(
                     child: Text(
                       value ?? "Selecionar marca",
-                      style: context.appText.bodySmall.copyWith(
+                      style: context.appTextOld.bodySmall.copyWith(
                         fontWeight:
                             value == null ? FontWeight.w600 : FontWeight.bold,
                         color: muted

@@ -49,7 +49,7 @@ class ImeiCard extends StatelessWidget {
                 Expanded(
                   child: Text(
                     'Identificação do aparelho',
-                    style: context.appText.bodymd.copyWith(
+                    style: context.appTextOld.bodymd.copyWith(
                       fontWeight: FontWeight.normal,
                     ),
                   ),

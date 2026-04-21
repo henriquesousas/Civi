@@ -82,7 +82,7 @@ class _SpeechBubble extends StatelessWidget {
           ),
           child: Text(
             message,
-            style: context.appText.caption.copyWith(
+            style: context.appTextOld.caption.copyWith(
               height: 1.5,
               fontWeight: FontWeight.w500,
               // color: context.onSurface,

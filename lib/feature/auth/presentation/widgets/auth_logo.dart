@@ -22,7 +22,7 @@ class LogoBlock extends StatelessWidget {
         Text(
           'Civi',
           textAlign: TextAlign.center,
-          style: context.appText.headerxl.copyWith(
+          style: context.appTextOld.headerxl.copyWith(
             color: context.primaryTextColor,
             fontWeight: FontWeight.bold,
             height: 1.05,

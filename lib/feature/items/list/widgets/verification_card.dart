@@ -39,14 +39,14 @@ class VerificationInfoCard extends StatelessWidget {
               children: [
                 Text(
                   'Verificação',
-                  style: context.appText.headermd.copyWith(
+                  style: context.appTextOld.headermd.copyWith(
                     fontWeight: FontWeight.w800,
                   ),
                 ),
                 const SizedBox(height: SpacingSize.sm),
                 Text(
                   'Todos os itens cadastrados passam por uma verificação da nossa equipe antes de ficarem visíveis no app.',
-                  style: context.appText.caption.copyWith(
+                  style: context.appTextOld.caption.copyWith(
                     height: 1.35,
                     fontWeight: FontWeight.w600,
                     color: context.secondaryColor,

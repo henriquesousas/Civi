@@ -67,7 +67,7 @@ class HomeAppBar extends ConsumerWidget implements PreferredSizeWidget {
               children: [
                 Text(
                   'Roubos na região',
-                  style: context.appText.bodymd.copyWith(
+                  style: context.appTextOld.bodymd.copyWith(
                     color: context.onSurface,
                     fontWeight: FontWeight.bold,
                     // letterSpacing: 0.5,
@@ -86,7 +86,7 @@ class HomeAppBar extends ConsumerWidget implements PreferredSizeWidget {
                         region != null ? region! : "Bem vindo",
                         maxLines: 1,
                         overflow: TextOverflow.ellipsis,
-                        style: context.appText.bodySmall,
+                        style: context.appTextOld.bodySmall,
                       ),
                     )
                   ],

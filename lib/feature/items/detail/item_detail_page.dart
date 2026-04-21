@@ -452,13 +452,13 @@ class _ItemDetailPageState extends ConsumerState<ItemDetailPage> {
                               const EdgeInsets.fromLTRB(16, 0, 16, 16),
                           title: Text(
                             'Remover ${item.name}?',
-                            style: context.appText.headermd.copyWith(
+                            style: context.appTextOld.headermd.copyWith(
                               color: context.primaryTextColor,
                             ),
                           ),
                           content: Text(
                             'Essa ação não pode ser desfeita. Deseja continuar?',
-                            style: context.appText.bodymd.copyWith(
+                            style: context.appTextOld.bodymd.copyWith(
                               color: context.secondaryTextColor,
                             ),
                           ),

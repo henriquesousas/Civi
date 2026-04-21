@@ -54,14 +54,14 @@ class EmptyIncidentsState extends StatelessWidget {
           Text(
             'Nenhuma ocorrência recente',
             textAlign: TextAlign.center,
-            style: context.appText.headermd,
+            style: context.appTextOld.headermd,
           ),
           const SizedBox(height: SpacingSize.sm),
           Text(
             'Não encontramos registros na sua região no momento.\n'
             'Isso é um bom sinal 👌',
             textAlign: TextAlign.center,
-            style: context.appText.caption.copyWith(
+            style: context.appTextOld.caption.copyWith(
               fontWeight: FontWeight.w600,
               height: 1.35,
               color: context.secondaryColor,
@@ -90,7 +90,7 @@ class EmptyIncidentsState extends StatelessWidget {
                 Expanded(
                   child: Text(
                     'Se algo acontecer, registre para avisar a comunidade',
-                    style: context.appText.caption.copyWith(
+                    style: context.appTextOld.caption.copyWith(
                       fontWeight: FontWeight.w700,
                       color: context.secondaryColor,
                     ),

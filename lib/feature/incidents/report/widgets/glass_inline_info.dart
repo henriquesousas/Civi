@@ -35,7 +35,7 @@ class GlassInlineInfo extends StatelessWidget {
             children: [
               Text(
                 title,
-                style: context.appText.headersm.copyWith(
+                style: context.appTextOld.headersm.copyWith(
                   color: Colors.white,
                   fontWeight: FontWeight.w900,
                 ),
@@ -43,7 +43,7 @@ class GlassInlineInfo extends StatelessWidget {
               const SizedBox(height: SpacingSize.xs),
               Text(
                 subtitle,
-                style: context.appText.caption.copyWith(
+                style: context.appTextOld.caption.copyWith(
                   color: Colors.white.withValues(alpha: 0.92),
                   fontWeight: FontWeight.w600,
                   height: 1.3,

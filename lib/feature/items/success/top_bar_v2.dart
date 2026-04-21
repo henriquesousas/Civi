@@ -46,7 +46,7 @@ class TopBarV2 extends StatelessWidget {
           ),
           child: Text(
             'Item protegido',
-            style: context.appText.bodySmall.copyWith(
+            style: context.appTextOld.bodySmall.copyWith(
               color: Colors.white,
               fontWeight: FontWeight.w700,
             ),

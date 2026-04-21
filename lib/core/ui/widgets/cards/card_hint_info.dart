@@ -39,7 +39,7 @@ class CardHintInfo extends StatelessWidget {
           Expanded(
             child: Text(
               message,
-              style: context.appText.bodySmall.copyWith(
+              style: context.appTextOld.bodySmall.copyWith(
                 height: 1.35,
                 fontWeight: FontWeight.w500,
                 color: textColor ?? context.secondaryTextColor,

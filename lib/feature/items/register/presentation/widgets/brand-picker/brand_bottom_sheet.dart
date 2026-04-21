@@ -171,7 +171,7 @@ class _BrandBottomSheetState extends State<BrandBottomSheet> {
                               Expanded(
                                 child: Text(
                                   brand,
-                                  style: context.appText.headersm,
+                                  style: context.appTextOld.headersm,
                                 ),
                               ),
                               if (selected)

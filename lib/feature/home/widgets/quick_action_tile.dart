@@ -44,12 +44,12 @@ class QuickActionTile extends StatelessWidget {
                 children: [
                   Text(
                     title,
-                    style: context.appText.headersm,
+                    style: context.appTextOld.headersm,
                   ),
                   const SizedBox(height: 4),
                   Text(
                     subtitle,
-                    style: context.appText.caption.copyWith(
+                    style: context.appTextOld.caption.copyWith(
                       color: context.secondaryColor,
                       fontWeight: FontWeight.w700,
                     ),

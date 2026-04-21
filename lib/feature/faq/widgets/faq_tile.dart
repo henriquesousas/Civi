@@ -48,7 +48,7 @@ class _FaqTileState extends State<FaqTile> {
             ),
             title: Text(
               widget.item.question,
-              style: context.appText.headermd.copyWith(
+              style: context.appTextOld.headermd.copyWith(
                 color: context.primaryTextColor,
                 fontWeight: FontWeight.w600,
                 height: 1.2,
@@ -61,7 +61,7 @@ class _FaqTileState extends State<FaqTile> {
             children: [
               Text(
                 widget.item.answer,
-                style: context.appText.bodySmall
+                style: context.appTextOld.bodySmall
                     .copyWith(height: 1.35, color: context.secondaryTextColor),
               ),
             ],

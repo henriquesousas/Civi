@@ -39,7 +39,7 @@ class FaqSupportCard extends StatelessWidget {
               const SizedBox(width: SpacingSize.md),
               Text(
                 'Ainda com dúvidas?',
-                style: context.appText.body.copyWith(
+                style: context.appTextOld.body.copyWith(
                   fontWeight: FontWeight.w900,
                 ),
               ),
@@ -48,7 +48,7 @@ class FaqSupportCard extends StatelessWidget {
           const SizedBox(height: SpacingSize.sm),
           Text(
             'Envie uma mensagem para o suporte ou compartilhe uma sugestão para melhorar o app.',
-            style: context.appText.bodySmall.copyWith(
+            style: context.appTextOld.bodySmall.copyWith(
               height: 1.35,
               fontWeight: FontWeight.w500,
             ),

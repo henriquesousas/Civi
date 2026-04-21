@@ -21,7 +21,7 @@ class IncidentLocation extends StatelessWidget {
             _getLocation(),
             maxLines: 1,
             overflow: TextOverflow.ellipsis,
-            style: context.appText.caption,
+            style: context.appTextOld.caption,
           ),
         ),
       ],

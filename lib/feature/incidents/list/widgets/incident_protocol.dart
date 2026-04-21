@@ -20,7 +20,7 @@ class IncidentProtocol extends StatelessWidget {
           SizedBox(width: 4.w),
           Text(
             "Protocolo: $protocolNumber",
-            style: context.appText.bodySmall.copyWith(
+            style: context.appTextOld.bodySmall.copyWith(
               fontWeight: FontWeight.w600,
             ),
           ),

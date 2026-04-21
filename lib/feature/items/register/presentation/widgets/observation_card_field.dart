@@ -27,7 +27,7 @@ class ObservationCardField extends StatelessWidget {
                 Expanded(
                   child: Text(
                     'Descrição (até 300 caracteres)',
-                    style: context.appText.bodySmall.copyWith(
+                    style: context.appTextOld.bodySmall.copyWith(
                       fontWeight: FontWeight.w800,
                       letterSpacing: 0.2,
                     ),

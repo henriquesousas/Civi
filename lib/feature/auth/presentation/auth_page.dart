@@ -119,7 +119,7 @@ class AuthPage extends ConsumerWidget {
                     Text(
                       'Entre para continuar',
                       textAlign: TextAlign.center,
-                      style: context.appText.headerlg.copyWith(
+                      style: context.appTextOld.headerlg.copyWith(
                         color: context.primaryTextColor,
                         fontWeight: FontWeight.w800,
                         height: 1.05,
@@ -130,7 +130,7 @@ class AuthPage extends ConsumerWidget {
                     Text(
                       'Acesse sua conta para acompanhar seus itens, ocorrências e alertas da sua região.',
                       textAlign: TextAlign.center,
-                      style: context.appText.bodySmall.copyWith(
+                      style: context.appTextOld.bodySmall.copyWith(
                         color: context.secondaryTextColor,
                         height: 1.45,
                         fontWeight: FontWeight.w500,
@@ -201,7 +201,7 @@ class AuthPage extends ConsumerWidget {
                                     children: [
                                       Text(
                                         'Mais segurança para você',
-                                        style: context.appText.body.copyWith(
+                                        style: context.appTextOld.body.copyWith(
                                           color: context.primaryTextColor,
                                           fontWeight: FontWeight.w700,
                                         ),
@@ -209,8 +209,8 @@ class AuthPage extends ConsumerWidget {
                                       const SizedBox(height: 4),
                                       Text(
                                         'Faça login para gerenciar seus itens e receber uma experiência mais completa no app.',
-                                        style:
-                                            context.appText.bodySmall.copyWith(
+                                        style: context.appTextOld.bodySmall
+                                            .copyWith(
                                           color: context.secondaryTextColor,
                                           height: 1.4,
                                         ),
@@ -242,7 +242,7 @@ class AuthPage extends ConsumerWidget {
                     Text(
                       'Você pode continuar sem login e acessar o aplicativo depois.',
                       textAlign: TextAlign.center,
-                      style: context.appText.caption.copyWith(
+                      style: context.appTextOld.caption.copyWith(
                         color: context.secondaryTextColor,
                         height: 1.45,
                       ),

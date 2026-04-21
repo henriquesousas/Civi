@@ -51,14 +51,14 @@ class ActionRow extends StatelessWidget {
                 children: [
                   Text(
                     title,
-                    style: context.appText.headersm.copyWith(
+                    style: context.appTextOld.headersm.copyWith(
                       color: Colors.white,
                       fontWeight: FontWeight.w900,
                     ),
                   ),
                   const SizedBox(height: 4),
                   Text(subtitle,
-                      style: context.appText.headersm.copyWith(
+                      style: context.appTextOld.headersm.copyWith(
                         color: Colors.white,
                         fontWeight: FontWeight.w600,
                       )),

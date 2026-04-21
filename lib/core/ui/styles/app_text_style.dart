@@ -3,7 +3,7 @@ import '../../theme/size/app_text_size.dart';
 import 'package:flutter/material.dart';
 
 extension AppTexteExtension on BuildContext {
-  AppTextStyles get appText => AppTextStyles(this);
+  AppTextStyles get appTextOld => AppTextStyles(this);
 }
 
 class AppTextStyles {

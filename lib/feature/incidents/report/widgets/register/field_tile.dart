@@ -37,7 +37,7 @@ class FieldTile extends StatelessWidget {
                 children: [
                   Text(
                     label,
-                    style: context.appText.caption.copyWith(
+                    style: context.appTextOld.caption.copyWith(
                       fontWeight: FontWeight.w800,
                       color: context.primaryTextColor,
                     ),
@@ -45,7 +45,7 @@ class FieldTile extends StatelessWidget {
                   const SizedBox(height: 4),
                   Text(
                     value,
-                    style: context.appText.bodySmall.copyWith(
+                    style: context.appTextOld.bodySmall.copyWith(
                       fontWeight: FontWeight.normal,
                       color: context.primaryTextColor,
                     ),

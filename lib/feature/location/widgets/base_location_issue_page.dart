@@ -81,13 +81,13 @@ class _BaseLocationIssuePageState extends ConsumerState<BaseLocationIssuePage>
               Text(
                 widget.title,
                 textAlign: TextAlign.center,
-                style: context.appText.headerlg,
+                style: context.appTextOld.headerlg,
               ),
               const SizedBox(height: SpacingSize.md),
               Text(
                 widget.message,
                 textAlign: TextAlign.center,
-                style: context.appText.body.copyWith(
+                style: context.appTextOld.body.copyWith(
                   height: 1.4,
                   fontWeight: FontWeight.w600,
                 ),
@@ -97,7 +97,7 @@ class _BaseLocationIssuePageState extends ConsumerState<BaseLocationIssuePage>
                 'Usamos o GPS para mostrar ocorrências próximas, '
                 'mapa da região e alertas relevantes para você.',
                 textAlign: TextAlign.center,
-                style: context.appText.bodySmall,
+                style: context.appTextOld.bodySmall,
               ),
               const SizedBox(height: SpacingSize.xl),
               CardHintInfo(

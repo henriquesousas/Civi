@@ -11,11 +11,11 @@ class SectionHeader extends StatelessWidget {
       children: [
         Text(
           'Serviços essenciais',
-          style: context.appText.headermd,
+          style: context.appTextOld.headermd,
         ),
         const SizedBox(height: 3),
         Text('Liga direto para o atendimento',
-            style: context.appText.bodySmall),
+            style: context.appTextOld.bodySmall),
       ],
     );
   }

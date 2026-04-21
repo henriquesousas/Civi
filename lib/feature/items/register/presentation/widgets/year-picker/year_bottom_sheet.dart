@@ -36,7 +36,7 @@ class YearBottomSheet extends StatelessWidget {
             const SizedBox(height: SpacingSize.md),
             Text(
               'Selecionar ano',
-              style: context.appText.headermd,
+              style: context.appTextOld.headermd,
             ),
             const SizedBox(height: SpacingSize.md),
             SizedBox(

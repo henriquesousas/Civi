@@ -35,14 +35,14 @@ class CardHeader extends StatelessWidget {
               children: [
                 Text(
                   title,
-                  style: context.appText.headermd,
+                  style: context.appTextOld.headermd,
                 ),
                 const SizedBox(height: SpacingSize.xs),
                 Text(
                   subtitle,
                   maxLines: 1,
                   overflow: TextOverflow.ellipsis,
-                  style: context.appText.bodySmall,
+                  style: context.appTextOld.bodySmall,
                 ),
               ],
             ),

@@ -39,7 +39,7 @@ class TextInputTile extends StatelessWidget {
               children: [
                 Text(
                   label,
-                  style: context.appText.caption.copyWith(
+                  style: context.appTextOld.caption.copyWith(
                     fontWeight: FontWeight.w800,
                     color: context.primaryTextColor,
                   ),

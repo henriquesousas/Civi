@@ -20,7 +20,7 @@ class DetectionLine extends StatelessWidget {
         Expanded(
           child: Text(
             text,
-            style: context.appText.caption.copyWith(
+            style: context.appTextOld.caption.copyWith(
               color: color,
               fontWeight: FontWeight.w700,
             ),

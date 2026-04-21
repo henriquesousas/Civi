@@ -28,7 +28,7 @@ class MetaPill extends StatelessWidget {
           const SizedBox(width: SpacingSize.sm),
           Text(
             text,
-            style: context.appText.caption.copyWith(
+            style: context.appTextOld.caption.copyWith(
               fontWeight: FontWeight.w800,
               color: context.secondaryColor,
             ),

@@ -53,7 +53,7 @@ class AboutPage extends ConsumerWidget {
                           'Criamos o ${AppName.appName} para ajudar pessoas a entenderem melhor o nível de risco '
                           'na região onde vivem e a reagirem mais rápido quando algo acontece.\n\n'
                           'A informação vem da comunidade: quanto mais gente usando, mais útil e preciso fica.',
-                          style: context.appText.bodySmall.copyWith(
+                          style: context.appTextOld.bodySmall.copyWith(
                             height: 1.35,
                             color: context.secondaryTextColor,
                           ),

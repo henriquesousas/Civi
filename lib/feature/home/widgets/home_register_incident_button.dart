@@ -45,7 +45,7 @@ class HomeRegisterIncidentButton extends StatelessWidget {
                 Expanded(
                   child: Text(
                     'Registrar incidente',
-                    style: context.appText.body.copyWith(
+                    style: context.appTextOld.body.copyWith(
                       color: Colors.white,
                       fontWeight: FontWeight.w800,
                     ),

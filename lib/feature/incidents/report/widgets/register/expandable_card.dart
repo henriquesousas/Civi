@@ -72,7 +72,7 @@ class ExpandableCard extends StatelessWidget {
                           children: [
                             Text(
                               title,
-                              style: context.appText.headermd,
+                              style: context.appTextOld.headermd,
                             ),
                             const SizedBox(width: SpacingSize.sm),
                             Container(
@@ -84,7 +84,7 @@ class ExpandableCard extends StatelessWidget {
                               ),
                               child: Text(
                                 badge,
-                                style: context.appText.caption.copyWith(
+                                style: context.appTextOld.caption.copyWith(
                                   color: context.surface,
                                   fontWeight: FontWeight.w900,
                                   letterSpacing: 0.4,
@@ -96,7 +96,7 @@ class ExpandableCard extends StatelessWidget {
                         const SizedBox(height: SpacingSize.sm),
                         Text(
                           subtitle,
-                          style: context.appText.caption.copyWith(
+                          style: context.appTextOld.caption.copyWith(
                             height: 1.25,
                             fontWeight: FontWeight.w600,
                             color: context.secondaryTextColor,

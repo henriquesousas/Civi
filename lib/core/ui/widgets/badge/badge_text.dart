@@ -21,7 +21,7 @@ class BadgeText extends StatelessWidget {
       ),
       child: Text(
         text,
-        style: context.appText.caption.copyWith(
+        style: context.appTextOld.caption.copyWith(
           fontWeight: FontWeight.w900,
           color: context.primaryColor,
         ),

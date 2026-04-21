@@ -23,7 +23,7 @@ class Bullet extends StatelessWidget {
           Expanded(
             child: Text(
               text,
-              style: context.appText.caption.copyWith(
+              style: context.appTextOld.caption.copyWith(
                 color: Colors.white,
                 fontWeight: FontWeight.w600,
                 height: 1.3,

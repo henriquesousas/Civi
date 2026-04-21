@@ -32,7 +32,7 @@ class SeeDetailButton extends StatelessWidget {
           children: [
             Text(
               text,
-              style: context.appText.caption.copyWith(
+              style: context.appTextOld.caption.copyWith(
                 color: context.secondaryColor,
                 fontWeight: FontWeight.w900,
               ),

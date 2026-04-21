@@ -109,7 +109,7 @@ class _ExpandableIncidentCardState extends State<ExpandableIncidentCard>
                                   widget.title,
                                   overflow: TextOverflow.ellipsis,
                                   maxLines: 1,
-                                  style: context.appText.headerlg.copyWith(
+                                  style: context.appTextOld.headerlg.copyWith(
                                     fontWeight: FontWeight.w700,
                                     color: const Color(0xFF111827),
                                   ),
@@ -119,7 +119,7 @@ class _ExpandableIncidentCardState extends State<ExpandableIncidentCard>
                                   widget.subtitle,
                                   maxLines: 2,
                                   overflow: TextOverflow.ellipsis,
-                                  style: context.appText.caption.copyWith(
+                                  style: context.appTextOld.caption.copyWith(
                                     fontWeight: FontWeight.w500,
                                     color: const Color(0xFF6B7280),
                                   ),

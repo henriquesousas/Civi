@@ -32,7 +32,7 @@ class TextFieldLongText extends StatelessWidget {
         children: [
           Text(
             title.toUpperCase(),
-            style: context.appText.caption.copyWith(
+            style: context.appTextOld.caption.copyWith(
               fontWeight: FontWeight.w800,
               color: context.primaryTextColor,
             ),
@@ -40,7 +40,7 @@ class TextFieldLongText extends StatelessWidget {
           const SizedBox(height: 6),
           Text(
             subtitle,
-            style: context.appText.caption.copyWith(
+            style: context.appTextOld.caption.copyWith(
               fontWeight: FontWeight.w600,
               color: context.secondaryTextColor,
             ),

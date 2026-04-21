@@ -109,7 +109,7 @@ class _CardPhotoState extends ConsumerState<CardPhoto> {
                 Expanded(
                   child: Text(
                     'Adicione fotos do item',
-                    style: context.appText.bodySmall.copyWith(
+                    style: context.appTextOld.bodySmall.copyWith(
                       fontWeight: FontWeight.w900,
                       color: context.onSurface,
                     ),
@@ -128,7 +128,7 @@ class _CardPhotoState extends ConsumerState<CardPhoto> {
             const SizedBox(height: SpacingSize.lg),
             Text(
               'Dica: fotos nítidas ajudam a agilizar a verificação.',
-              style: context.appText.bodySmall.copyWith(
+              style: context.appTextOld.bodySmall.copyWith(
                 fontWeight: FontWeight.w600,
               ),
             ),

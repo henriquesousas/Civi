@@ -302,14 +302,14 @@ class _AddIncidentPageState extends ConsumerState<ReportIncidentPage>
                         children: [
                           Text(
                             hasItem ? selectedItem!.name : 'Escolher item',
-                            style: context.appText.headermd,
+                            style: context.appTextOld.headermd,
                           ),
                           const SizedBox(height: SpacingSize.xs),
                           Text(
                             hasItem
                                 ? '${EnumUtils.fromString(ItemType.values, selectedItem!.type).label} • ${selectedItem.name} • ${selectedItem.color}'
                                 : 'Toque para selecionar um item cadastrado',
-                            style: context.appText.bodySmall,
+                            style: context.appTextOld.bodySmall,
                           ),
                         ],
                       ),

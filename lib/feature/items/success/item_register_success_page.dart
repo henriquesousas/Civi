@@ -113,8 +113,8 @@ class ItemRegisterSuccessPage extends StatelessWidget {
                                             ? '$itemName cadastrado com sucesso'
                                             : 'Cadastro recebido com sucesso',
                                         textAlign: TextAlign.center,
-                                        style:
-                                            context.appText.headerxl.copyWith(
+                                        style: context.appTextOld.headerxl
+                                            .copyWith(
                                           color: Colors.white,
                                           fontWeight: FontWeight.w900,
                                           height: 1.05,
@@ -125,8 +125,8 @@ class ItemRegisterSuccessPage extends StatelessWidget {
                                       Text(
                                         'Recebemos seu cadastro e ele passará por uma validação antes de ficar visível no aplicativo.',
                                         textAlign: TextAlign.center,
-                                        style:
-                                            context.appText.bodySmall.copyWith(
+                                        style: context.appTextOld.bodySmall
+                                            .copyWith(
                                           color: secondaryText,
                                           fontWeight: FontWeight.w500,
                                           height: 1.45,
@@ -184,8 +184,8 @@ class ItemRegisterSuccessPage extends StatelessWidget {
                                           children: [
                                             Text(
                                               'O que acontece agora?',
-                                              style:
-                                                  context.appText.body.copyWith(
+                                              style: context.appTextOld.body
+                                                  .copyWith(
                                                 color: Colors.white,
                                                 fontWeight: FontWeight.w800,
                                               ),
@@ -193,7 +193,8 @@ class ItemRegisterSuccessPage extends StatelessWidget {
                                             SizedBox(height: 4.h),
                                             Text(
                                               'Nossa equipe poderá validar as informações enviadas para melhorar a confiabilidade dos dados no app.',
-                                              style: context.appText.bodySmall
+                                              style: context
+                                                  .appTextOld.bodySmall
                                                   .copyWith(
                                                 color: secondaryText,
                                                 height: 1.4,

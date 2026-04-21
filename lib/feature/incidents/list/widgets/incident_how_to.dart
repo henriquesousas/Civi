@@ -38,7 +38,7 @@ class IncidentHowTo extends StatelessWidget {
               howTo!,
               maxLines: 1,
               overflow: TextOverflow.ellipsis,
-              style: context.appText.caption,
+              style: context.appTextOld.caption,
             ),
           ),
         ],

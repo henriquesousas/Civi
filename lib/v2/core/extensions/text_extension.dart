@@ -8,7 +8,9 @@ class AppTextStyles {
   final BuildContext _context;
   const AppTextStyles(this._context);
   TextTheme get _textTheme => Theme.of(_context).textTheme;
-  TextStyle get header => _textTheme.headlineLarge!;
+  TextStyle get header => _textTheme.headlineLarge!.copyWith(
+        fontWeight: FontWeight.w500,
+      );
   TextStyle get title => _textTheme.titleLarge!;
   TextStyle get subtitle => _textTheme.bodyMedium!;
   TextStyle get caption => _textTheme.bodySmall!;

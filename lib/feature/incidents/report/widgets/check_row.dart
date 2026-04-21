@@ -23,7 +23,7 @@ class CheckRow extends StatelessWidget {
           Expanded(
             child: Text(
               text,
-              style: context.appText.bodySmall.copyWith(
+              style: context.appTextOld.bodySmall.copyWith(
                 color: Colors.white.withValues(alpha: 0.92),
                 fontWeight: FontWeight.w700,
                 height: 1.25,

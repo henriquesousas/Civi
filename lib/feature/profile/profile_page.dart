@@ -62,12 +62,12 @@ class ProfilePage extends ConsumerWidget {
                 ),
                 Text(
                   session.name,
-                  style: context.appText.headerlg,
+                  style: context.appTextOld.headerlg,
                 ),
                 const SizedBox(height: SpacingSize.xxs),
                 Text(
                   session.email,
-                  style: context.appText.bodySmall.copyWith(
+                  style: context.appTextOld.bodySmall.copyWith(
                     fontWeight: FontWeight.w400,
                     color: context.secondaryTextColor,
                   ),

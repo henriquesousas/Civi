@@ -12,7 +12,7 @@ class SectionTitle extends StatelessWidget {
       padding: const EdgeInsets.fromLTRB(8, 2, 8, 10),
       child: Text(
         text.toUpperCase(),
-        style: context.appText.headersm.copyWith(
+        style: context.appTextOld.headersm.copyWith(
           fontWeight: FontWeight.w600,
           letterSpacing: 1.2,
           color: context.secondaryTextColor,

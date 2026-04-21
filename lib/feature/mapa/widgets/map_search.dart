@@ -67,7 +67,7 @@ class MapSearch extends StatelessWidget {
               hintText,
               maxLines: 1,
               overflow: TextOverflow.ellipsis,
-              style: context.appText.bodySmall.copyWith(
+              style: context.appTextOld.bodySmall.copyWith(
                 height: 1.5,
                 color: AppColors.grey,
                 fontWeight: FontWeight.normal,

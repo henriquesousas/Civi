@@ -25,7 +25,7 @@ class EmptyPhotos extends StatelessWidget {
               const SizedBox(height: SpacingSize.md),
               Text(
                 'Nenhuma foto adicionada',
-                style: context.appText.bodySmall.copyWith(
+                style: context.appTextOld.bodySmall.copyWith(
                   fontWeight: FontWeight.w700,
                   color: context.onSurface,
                 ),
@@ -34,7 +34,7 @@ class EmptyPhotos extends StatelessWidget {
               Text(
                 'Adicione fotos para facilitar a identificação.',
                 textAlign: TextAlign.center,
-                style: context.appText.caption.copyWith(
+                style: context.appTextOld.caption.copyWith(
                   color: context.secondaryColor,
                 ),
               ),

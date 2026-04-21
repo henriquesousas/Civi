@@ -27,7 +27,7 @@ class CardId extends StatelessWidget {
           Expanded(
             child: Text(
               'ID do item: $itemId',
-              style: context.appText.bodySmall.copyWith(
+              style: context.appTextOld.bodySmall.copyWith(
                 color: Colors.white,
                 fontWeight: FontWeight.w800,
               ),
@@ -55,7 +55,7 @@ class CardId extends StatelessWidget {
               ),
               child: Text(
                 'Copiar',
-                style: context.appText.caption.copyWith(
+                style: context.appTextOld.caption.copyWith(
                   color: Colors.white,
                   fontWeight: FontWeight.w900,
                 ),

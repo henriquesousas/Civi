@@ -63,13 +63,13 @@ class CardHint extends StatelessWidget {
               children: [
                 Text(
                   title,
-                  style: context.appText.headermd,
+                  style: context.appTextOld.headermd,
                 ),
                 const SizedBox(height: SpacingSize.xs),
                 Text(
                   message,
                   style: textStyle ??
-                      context.appText.bodySmall.copyWith(
+                      context.appTextOld.bodySmall.copyWith(
                         height: 1.35,
                         fontWeight: FontWeight.w600,
                       ),

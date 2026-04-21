@@ -37,7 +37,7 @@ class FaqSearhField extends StatelessWidget {
             child: TextField(
               controller: controller,
               onChanged: onChanged,
-              style: context.appText.bodySmall.copyWith(
+              style: context.appTextOld.bodySmall.copyWith(
                 fontWeight: FontWeight.w600,
                 color: Colors.black,
               ),

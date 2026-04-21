@@ -51,7 +51,7 @@ class SegmentedTabs extends StatelessWidget {
                     items[i],
                     maxLines: 1,
                     overflow: TextOverflow.ellipsis,
-                    style: context.appText.bodySmall.copyWith(
+                    style: context.appTextOld.bodySmall.copyWith(
                       color:
                           selected ? context.onSurface : context.secondaryColor,
                       fontWeight: selected ? FontWeight.w900 : FontWeight.w800,

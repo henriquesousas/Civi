@@ -27,7 +27,7 @@ class CardTextZoom extends StatelessWidget {
           const SizedBox(width: SpacingSize.sm),
           Text(
             'Ampliar',
-            style: context.appText.caption.copyWith(
+            style: context.appTextOld.caption.copyWith(
               color: Colors.white,
               fontWeight: FontWeight.w700,
             ),

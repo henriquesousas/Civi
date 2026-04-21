@@ -213,7 +213,7 @@ class _UIHoldConfirmButtonState extends State<UIHoldConfirmButton>
                         ), // Key to switch back to progress text
                         textAlign: TextAlign.center,
                         style: widget.textStyle ??
-                            context.appText.button.copyWith(
+                            context.appTextOld.button.copyWith(
                               fontWeight: FontWeight.w600,
                               color: (progressController.value * 100) > 40
                                   ? Colors.white

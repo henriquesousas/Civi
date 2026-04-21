@@ -19,7 +19,7 @@ class ButtonInline extends StatelessWidget {
         // style: const TextStyle(fontWeight: FontWeight.w900).copyWith(
         //   color: textColor ?? Colors.white,
         // ),
-        style: context.appText.button.copyWith(
+        style: context.appTextOld.button.copyWith(
           color: textColor ?? context.onSurface,
         ),
       ),

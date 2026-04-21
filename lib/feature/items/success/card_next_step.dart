@@ -20,7 +20,7 @@ class CardNextStep extends StatelessWidget {
         children: [
           Text(
             'Próximos passos?',
-            style: context.appText.headersm.copyWith(
+            style: context.appTextOld.headersm.copyWith(
               color: Colors.white,
             ),
           ),

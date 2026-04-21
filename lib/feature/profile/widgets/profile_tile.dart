@@ -80,7 +80,7 @@ class ProfileTile extends StatelessWidget {
                           ),
                           child: Text(
                             item.badge!,
-                            style: context.appText.caption.copyWith(
+                            style: context.appTextOld.caption.copyWith(
                               color: Colors.white,
                               fontWeight: FontWeight.w600,
                             ),
@@ -93,7 +93,7 @@ class ProfileTile extends StatelessWidget {
                     const SizedBox(height: SpacingSize.xs),
                     Text(
                       item.subtitle!,
-                      style: context.appText.caption.copyWith(
+                      style: context.appTextOld.caption.copyWith(
                         fontWeight: FontWeight.w400,
                         color: context.secondaryTextColor,
                       ),

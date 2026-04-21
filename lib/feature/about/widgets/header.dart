@@ -46,7 +46,7 @@ class Header extends StatelessWidget {
         Expanded(
           child: Text(
             AppName.appName,
-            style: context.appText.headerlg.copyWith(
+            style: context.appTextOld.headerlg.copyWith(
               fontWeight: FontWeight.w900,
               color: context.onSurface,
               letterSpacing: 0.2,

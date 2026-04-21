@@ -38,13 +38,13 @@ class SearchEmptyState extends StatelessWidget {
             const SizedBox(height: SpacingSize.md),
             Text(
               title,
-              style: context.appText.headermd,
+              style: context.appTextOld.headermd,
             ),
             const SizedBox(height: SpacingSize.sm),
             Text(
               subtitle,
               textAlign: TextAlign.center,
-              style: context.appText.bodySmall.copyWith(
+              style: context.appTextOld.bodySmall.copyWith(
                 height: 1.35,
                 fontWeight: FontWeight.w600,
               ),

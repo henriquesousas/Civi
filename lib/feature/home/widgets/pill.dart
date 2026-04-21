@@ -27,7 +27,7 @@ class Pill extends StatelessWidget {
           const SizedBox(width: 6),
           Text(
             text,
-            style: context.appText.caption.copyWith(
+            style: context.appTextOld.caption.copyWith(
               fontWeight: FontWeight.w800,
               color: context.primaryColor,
             ),

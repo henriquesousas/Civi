@@ -35,14 +35,14 @@ class IncidentLoading extends StatelessWidget {
           Text(
             'Buscando ocorrência...',
             textAlign: TextAlign.center,
-            style: context.appText.headermd,
+            style: context.appTextOld.headermd,
           ),
           const SizedBox(height: SpacingSize.sm),
           Text(
             'Estou verificando as ocorrências por aqui 🦉\n'
             'Aguarde um instante...',
             textAlign: TextAlign.center,
-            style: context.appText.caption.copyWith(
+            style: context.appTextOld.caption.copyWith(
               fontWeight: FontWeight.w600,
               height: 1.35,
               color: context.secondaryColor,

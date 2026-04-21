@@ -96,17 +96,17 @@ class AppTheme {
 
   static ThemeData dark() {
     final baseColorScheme = ColorScheme.dark(
-      // primaryContainer: const Color.fromRGBO(31, 34, 42, 1),
       primaryContainer: const Color(0xFF2B5BEE),
       //CARDS
       surface: const Color(0xFF161616), //background base
       surfaceContainer: const Color(0xFF171717), //background principal
       surfaceContainerLow: const Color(0xFF252525), //background secundar
       surfaceContainerHigh: const Color(0XFF000000),
-
       // TEXTOS
       onSurface: Colors.white, // texto principal
       onSurfaceVariant: Colors.white54, // texto secundário
+      // Surface propositalmente apagado
+      surfaceDim: const Color(0xFFB3B3B3), //Icone
 
       /// BORDAS
       outline: const Color(0xFF2A2A2A), //  borda principal
@@ -114,8 +114,7 @@ class AppTheme {
 
       //DELETE
       secondaryContainer: Colors.grey.withValues(alpha: 0.1),
-      // texto/icone/ propositalmente apagado
-      surfaceDim: Colors.grey.shade700,
+
       //Fundo para componentes (cards, listas) em diferentes níveis de elevação.
 
       // outline: Colors.grey.shade500,

@@ -20,7 +20,7 @@ class GlassHeader extends StatelessWidget {
         Expanded(
           child: Text(
             title,
-            style: context.appText.headersm.copyWith(
+            style: context.appTextOld.headersm.copyWith(
               color: Colors.white,
               fontWeight: FontWeight.w900,
             ),

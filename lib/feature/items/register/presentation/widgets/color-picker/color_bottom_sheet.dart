@@ -43,7 +43,7 @@ class ColorBottomSheet extends StatelessWidget {
                 Expanded(
                   child: Text(
                     'Selecionar cor',
-                    style: context.appText.headermd.copyWith(
+                    style: context.appTextOld.headermd.copyWith(
                       fontWeight: FontWeight.w800,
                     ),
                   ),
@@ -94,7 +94,7 @@ class ColorBottomSheet extends StatelessWidget {
                           Expanded(
                             child: Text(
                               opt.name,
-                              style: context.appText.bodymd.copyWith(
+                              style: context.appTextOld.bodymd.copyWith(
                                 fontWeight: FontWeight.w800,
                               ),
                             ),

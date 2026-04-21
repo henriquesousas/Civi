@@ -10,8 +10,8 @@ class TestPost extends StatefulWidget {
 class _TestPostState extends State<TestPost> {
   int currentIndex = 0;
 
-  final List<FeedPost> posts = [
-    FeedPost(
+  final List<FeedPostOld> posts = [
+    FeedPostOld(
       author: 'Nationwide',
       title: 'Escaped Prisoner Near Playground',
       timeAgo: '3 hours',
@@ -28,7 +28,7 @@ class _TestPostState extends State<TestPost> {
       isVideo: true,
       showCarouselDots: true,
     ),
-    FeedPost(
+    FeedPostOld(
       author: 'newyorkUser2253570007',
       title: 'Fire on 16th Floor of Building',
       timeAgo: '2 hours',
@@ -45,7 +45,7 @@ class _TestPostState extends State<TestPost> {
       isVideo: false,
       showCarouselDots: false,
     ),
-    FeedPost(
+    FeedPostOld(
       author: 'communityReporter',
       title: 'Road Blocked After Crash',
       timeAgo: '1 hour',
@@ -139,7 +139,7 @@ class _TestPostState extends State<TestPost> {
   }
 }
 
-class FeedPost {
+class FeedPostOld {
   final String author;
   final String title;
   final String timeAgo;
@@ -154,7 +154,7 @@ class FeedPost {
   final bool isVideo;
   final bool showCarouselDots;
 
-  FeedPost({
+  FeedPostOld({
     required this.author,
     required this.title,
     required this.timeAgo,
@@ -172,7 +172,7 @@ class FeedPost {
 }
 
 class FeedPostCard extends StatelessWidget {
-  final FeedPost post;
+  final FeedPostOld post;
 
   const FeedPostCard({
     super.key,
@@ -322,7 +322,7 @@ class FeedPostCard extends StatelessWidget {
 }
 
 class _MediaPreview extends StatelessWidget {
-  final FeedPost post;
+  final FeedPostOld post;
 
   const _MediaPreview({required this.post});
 

@@ -67,12 +67,12 @@ class RowSOSContact extends StatelessWidget {
                   children: [
                     Text(
                       contact.title,
-                      style: context.appText.headermd,
+                      style: context.appTextOld.headermd,
                     ),
                     const SizedBox(height: SpacingSize.xs),
                     Text(
                       contact.subtitle,
-                      style: context.appText.caption,
+                      style: context.appTextOld.caption,
                     ),
                   ],
                 ),

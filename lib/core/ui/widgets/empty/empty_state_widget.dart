@@ -55,7 +55,7 @@ class EmptyStateWidget extends StatelessWidget {
                   ),
                   child: Text(
                     'Nenhum resultado',
-                    style: context.appText.bodySmall.copyWith(
+                    style: context.appTextOld.bodySmall.copyWith(
                       color: context.primaryColor,
                       fontWeight: FontWeight.w700,
                     ),
@@ -65,7 +65,7 @@ class EmptyStateWidget extends StatelessWidget {
                 Text(
                   title,
                   textAlign: TextAlign.center,
-                  style: context.appText.headermd.copyWith(
+                  style: context.appTextOld.headermd.copyWith(
                     fontWeight: FontWeight.w800,
                   ),
                 ),
@@ -73,7 +73,7 @@ class EmptyStateWidget extends StatelessWidget {
                 Text(
                   subtitle,
                   textAlign: TextAlign.center,
-                  style: context.appText.bodySmall.copyWith(
+                  style: context.appTextOld.bodySmall.copyWith(
                     color: context.secondaryTextColor,
                     fontWeight: FontWeight.w500,
                     height: 1.45,

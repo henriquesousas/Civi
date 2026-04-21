@@ -43,7 +43,7 @@ class PhotosGalleryCard extends StatelessWidget {
               Expanded(
                 child: Text(
                   'Fotos do item',
-                  style: context.appText.bodymd.copyWith(
+                  style: context.appTextOld.bodymd.copyWith(
                     fontWeight: FontWeight.w700,
                   ),
                 ),

@@ -50,14 +50,14 @@ class EditInfoCard extends StatelessWidget {
               children: [
                 Text(
                   title,
-                  style: context.appText.headermd.copyWith(
+                  style: context.appTextOld.headermd.copyWith(
                     fontWeight: FontWeight.w800,
                   ),
                 ),
                 const SizedBox(width: SpacingSize.md),
                 Text(
                   helper,
-                  style: context.appText.caption.copyWith(
+                  style: context.appTextOld.caption.copyWith(
                     color: context.secondaryTextColor,
                     fontWeight: FontWeight.w600,
                   ),

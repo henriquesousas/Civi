@@ -164,7 +164,7 @@ class HorizontalIncidentCard extends StatelessWidget {
                         title,
                         maxLines: 1,
                         overflow: TextOverflow.ellipsis,
-                        style: context.appText.headerlg.copyWith(
+                        style: context.appTextOld.headerlg.copyWith(
                           color: context.primaryTextColor,
                           height: 1.2,
                           fontWeight: FontWeight.bold,
@@ -176,7 +176,7 @@ class HorizontalIncidentCard extends StatelessWidget {
                         subtitle,
                         maxLines: 2,
                         overflow: TextOverflow.ellipsis,
-                        style: context.appText.caption.copyWith(
+                        style: context.appTextOld.caption.copyWith(
                           color: context.secondaryTextColor,
                         ),
                       ),
@@ -227,7 +227,7 @@ class HorizontalIncidentCard extends StatelessWidget {
                     isPlatformGenerated ? "Civi" : "Comunidade",
                     maxLines: 1,
                     overflow: TextOverflow.ellipsis,
-                    style: context.appText.caption.copyWith(
+                    style: context.appTextOld.caption.copyWith(
                       // color: Colors.white.withValues(alpha: 0.75),
                       color: context.secondaryTextColor,
                       fontWeight: FontWeight.w600,
@@ -260,7 +260,7 @@ class HorizontalIncidentCard extends StatelessWidget {
                     howTo ?? 'Não informado como aconteceu!',
                     maxLines: 3,
                     overflow: TextOverflow.ellipsis,
-                    style: context.appText.caption.copyWith(
+                    style: context.appTextOld.caption.copyWith(
                       fontSize: 11.sp,
                       // color: Colors.white.withValues(alpha: 0.65),
                       color: context.secondaryTextColor,

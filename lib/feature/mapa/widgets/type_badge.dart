@@ -23,7 +23,7 @@ class TypeBadge extends StatelessWidget {
       ),
       child: Text(
         label,
-        style: context.appText.caption.copyWith(
+        style: context.appTextOld.caption.copyWith(
           fontWeight: FontWeight.w700,
           color: textColor,
         ),

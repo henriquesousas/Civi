@@ -55,7 +55,7 @@ class SearchCardWithRegion extends StatelessWidget {
               "Osasco - SP",
               overflow: TextOverflow.ellipsis,
               textAlign: TextAlign.center,
-              style: context.appText.bodymd.copyWith(
+              style: context.appTextOld.bodymd.copyWith(
                 fontWeight: FontWeight.w600,
               ),
             ),

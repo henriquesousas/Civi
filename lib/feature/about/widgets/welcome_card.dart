@@ -42,13 +42,13 @@ class WelcomeCard extends StatelessWidget {
             const SizedBox(height: SpacingSize.md),
             Text(
               'Bem-vindo ao ${AppName.appName} 👋',
-              style: context.appText.headerlg,
+              style: context.appTextOld.headerlg,
             ),
             const SizedBox(height: SpacingSize.sm),
             Text(
               'Estamos em desenvolvimento e sua participação faz diferença. '
               'Aqui você registra itens, acompanha ocorrências e ajuda sua comunidade a ficar mais segura.',
-              style: context.appText.bodySmall.copyWith(
+              style: context.appTextOld.bodySmall.copyWith(
                 color: context.secondaryTextColor,
                 fontWeight: FontWeight.w500,
                 height: 1.35,

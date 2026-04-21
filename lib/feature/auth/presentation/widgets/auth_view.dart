@@ -53,7 +53,7 @@ class AuthView extends StatelessWidget {
           Text(
             'Ao continuar, você concorda com nossos Termos e Política de Privacidade.',
             textAlign: TextAlign.center,
-            style: context.appText.caption.copyWith(
+            style: context.appTextOld.caption.copyWith(
               color: context.secondaryTextColor,
               height: 1.3,
             ),

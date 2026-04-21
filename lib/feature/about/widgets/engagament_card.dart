@@ -21,7 +21,7 @@ class EngagementCard extends StatelessWidget {
           const SizedBox(height: SpacingSize.sm),
           Text(
             'O ${AppName.appName} melhora com o uso da comunidade.',
-            style: context.appText.bodySmall.copyWith(
+            style: context.appTextOld.bodySmall.copyWith(
               height: 1.35,
               // color: context.onSurface,
               color: context.onSurface,
@@ -33,7 +33,7 @@ class EngagementCard extends StatelessWidget {
             '• Registre ocorrências com responsabilidade\n'
             '• Compartilhe o app com vizinhos e familiares\n'
             '• Envie sugestões — cada feedback conta',
-            style: context.appText.bodySmall.copyWith(
+            style: context.appTextOld.bodySmall.copyWith(
               height: 1.35,
               color: context.secondaryTextColor,
             ),

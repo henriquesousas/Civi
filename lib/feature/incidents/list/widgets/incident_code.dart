@@ -26,7 +26,7 @@ class IncidentCode extends StatelessWidget {
         code,
         maxLines: 1,
         overflow: TextOverflow.ellipsis,
-        style: context.appText.caption.copyWith(
+        style: context.appTextOld.caption.copyWith(
           fontWeight: FontWeight.w600,
           color: AppColors.grey,
         ),

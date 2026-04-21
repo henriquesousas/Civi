@@ -23,7 +23,7 @@ class MiniPill extends StatelessWidget {
           const SizedBox(width: 8),
           Text(
             text,
-            style: context.appText.caption.copyWith(
+            style: context.appTextOld.caption.copyWith(
               color: Colors.white,
               fontWeight: FontWeight.w900,
             ),

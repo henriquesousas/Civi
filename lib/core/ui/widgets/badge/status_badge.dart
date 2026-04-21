@@ -28,7 +28,7 @@ class StatusBadge extends StatelessWidget {
           const SizedBox(width: 4),
           Text(
             style.label,
-            style: context.appText.caption.copyWith(
+            style: context.appTextOld.caption.copyWith(
               fontWeight: FontWeight.w800,
               color: style.fg,
             ),

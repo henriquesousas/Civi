@@ -61,7 +61,7 @@ class ActionTile extends StatelessWidget {
                 children: [
                   Text(
                     title,
-                    style: context.appText.bodySmall.copyWith(
+                    style: context.appTextOld.bodySmall.copyWith(
                       color: context.primaryTextColor,
                       fontWeight: FontWeight.w900,
                     ),
@@ -69,7 +69,7 @@ class ActionTile extends StatelessWidget {
                   const SizedBox(height: SpacingSize.sm),
                   Text(
                     subtitle,
-                    style: context.appText.caption.copyWith(
+                    style: context.appTextOld.caption.copyWith(
                       fontWeight: FontWeight.w600,
                       color: context.secondaryTextColor,
                     ),

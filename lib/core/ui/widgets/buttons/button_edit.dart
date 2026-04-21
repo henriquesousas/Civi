@@ -29,7 +29,7 @@ class ButtonEdit extends StatelessWidget {
             const SizedBox(width: 2),
             Text(
               'Editar',
-              style: context.appText.caption.copyWith(
+              style: context.appTextOld.caption.copyWith(
                 fontWeight: FontWeight.w900,
                 color: Colors.white,
               ),

@@ -62,7 +62,7 @@ class _FaqPageState extends State<FaqPage> {
               children: [
                 Text(
                   'Como podemos ajudar?',
-                  style: context.appText.headermd.copyWith(
+                  style: context.appTextOld.headermd.copyWith(
                     fontWeight: FontWeight.w900,
                     color: Colors.white,
                   ),
@@ -70,7 +70,7 @@ class _FaqPageState extends State<FaqPage> {
                 const SizedBox(height: SpacingSize.sm),
                 Text(
                   'Encontre respostas rápidas sobre cadastro de itens, ocorrências, mapa e privacidade.',
-                  style: context.appText.bodySmall.copyWith(
+                  style: context.appTextOld.bodySmall.copyWith(
                     color: Colors.white.withValues(alpha: 0.85),
                     height: 1.35,
                   ),

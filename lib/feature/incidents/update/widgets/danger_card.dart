@@ -61,7 +61,7 @@ class DangerCard extends StatelessWidget {
                   children: [
                     Text(
                       title,
-                      style: context.appText.bodySmall.copyWith(
+                      style: context.appTextOld.bodySmall.copyWith(
                         fontWeight: FontWeight.w900,
                         color: context.primaryTextColor,
                       ),
@@ -69,7 +69,7 @@ class DangerCard extends StatelessWidget {
                     const SizedBox(height: 4),
                     Text(
                       subtitle,
-                      style: context.appText.caption
+                      style: context.appTextOld.caption
                           .copyWith(color: context.secondaryTextColor),
                     ),
                   ],

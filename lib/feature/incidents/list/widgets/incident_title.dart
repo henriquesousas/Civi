@@ -12,7 +12,7 @@ class IncidentTitle extends StatelessWidget {
       title,
       maxLines: 2,
       overflow: TextOverflow.ellipsis,
-      style: context.appText.body.copyWith(
+      style: context.appTextOld.body.copyWith(
         color: context.onSurface,
         fontWeight: FontWeight.w900,
       ),

@@ -35,14 +35,14 @@ class LogoutDialog extends StatelessWidget {
             const SizedBox(height: SpacingSize.lg),
             Text(
               'Sair da conta',
-              style: context.appText.headermd,
+              style: context.appTextOld.headermd,
             ),
             const SizedBox(height: SpacingSize.md),
             Text(
               'Tem certeza que deseja sair do ${AppName.appName}?\n'
               'Você poderá entrar novamente quando quiser.',
               textAlign: TextAlign.center,
-              style: context.appText.label.copyWith(
+              style: context.appTextOld.label.copyWith(
                 color: context.secondaryTextColor,
                 fontWeight: FontWeight.normal,
               ),

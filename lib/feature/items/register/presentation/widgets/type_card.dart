@@ -82,14 +82,14 @@ class TypeCard extends StatelessWidget {
                 children: [
                   Text(
                     title,
-                    style: context.appText.headermd.copyWith(
+                    style: context.appTextOld.headermd.copyWith(
                       fontWeight: FontWeight.w700,
                     ),
                   ),
                   const SizedBox(height: SpacingSize.xs),
                   Text(
                     subtitle,
-                    style: context.appText.caption.copyWith(
+                    style: context.appTextOld.caption.copyWith(
                       fontWeight: FontWeight.w600,
                       color: context.secondaryTextColor,
                     ),

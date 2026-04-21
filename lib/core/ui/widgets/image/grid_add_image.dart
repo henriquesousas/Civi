@@ -192,13 +192,13 @@ class GridAddImage extends StatelessWidget {
                     const SizedBox(height: 4),
                     Text(
                       'Adicionar',
-                      style: context.appText.headersm.copyWith(
+                      style: context.appTextOld.headersm.copyWith(
                         color: Theme.of(context).primaryColor,
                       ),
                     ),
                     Text(
                       '${photos.length}/$maxPhotos',
-                      style: context.appText.caption.copyWith(
+                      style: context.appTextOld.caption.copyWith(
                         color: Theme.of(context).primaryColor,
                       ),
                     ),

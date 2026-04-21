@@ -29,7 +29,7 @@ class ItemInfoPill extends StatelessWidget {
         children: [
           Text(
             title,
-            style: context.appText.bodySmall.copyWith(
+            style: context.appTextOld.bodySmall.copyWith(
               color: Colors.white.withValues(alpha: 0.65),
               fontWeight: FontWeight.w600,
             ),
@@ -37,7 +37,7 @@ class ItemInfoPill extends StatelessWidget {
           SizedBox(height: 4.h),
           Text(
             value,
-            style: context.appText.body.copyWith(
+            style: context.appTextOld.body.copyWith(
               color: Colors.white,
               fontWeight: FontWeight.w800,
             ),

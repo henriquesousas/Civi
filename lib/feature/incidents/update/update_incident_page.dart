@@ -139,12 +139,12 @@ class _UpdateIncidentPageState extends ConsumerState<UpdateIncidentPage> {
                     Text(
                       // '${state.updatedValue!.product.name} reportado como roubado',
                       state.updatedValue!.product?.name ?? '',
-                      style: context.appText.headerxl,
+                      style: context.appTextOld.headerxl,
                     ),
                     const SizedBox(height: SpacingSize.sm),
                     Text(
                       'Roubado nas proximidades de ${_getLocal(state)} • ${_dataLabel(state)}',
-                      style: context.appText.bodySmall.copyWith(
+                      style: context.appTextOld.bodySmall.copyWith(
                           // fontWeight: FontWeight.w500,
                           ),
                     ),
@@ -177,7 +177,7 @@ class _UpdateIncidentPageState extends ConsumerState<UpdateIncidentPage> {
                         Expanded(
                           child: Text(
                             'Imagens do item',
-                            style: context.appText.bodySmall.copyWith(
+                            style: context.appTextOld.bodySmall.copyWith(
                               fontWeight: FontWeight.w900,
                               color: context.onSurface,
                             ),
@@ -201,7 +201,7 @@ class _UpdateIncidentPageState extends ConsumerState<UpdateIncidentPage> {
                     const SizedBox(height: SpacingSize.sm),
                     Text(
                       'Dica: fotos nítidas ajudam a identificar o veículo mais rápido.',
-                      style: context.appText.bodySmall.copyWith(
+                      style: context.appTextOld.bodySmall.copyWith(
                         fontWeight: FontWeight.w600,
                       ),
                     ),
@@ -226,7 +226,7 @@ class _UpdateIncidentPageState extends ConsumerState<UpdateIncidentPage> {
                         Expanded(
                           child: Text(
                             'Identificação do aparelho',
-                            style: context.appText.bodySmall.copyWith(
+                            style: context.appTextOld.bodySmall.copyWith(
                               fontWeight: FontWeight.w900,
                               color: context.onSurface,
                             ),
@@ -262,7 +262,7 @@ class _UpdateIncidentPageState extends ConsumerState<UpdateIncidentPage> {
                       ),
                       child: Text(
                         state.updatedValue!.product?.code ?? '',
-                        style: context.appText.headermd.copyWith(
+                        style: context.appTextOld.headermd.copyWith(
                           color: Colors.grey,
                         ),
                       ),
@@ -270,7 +270,7 @@ class _UpdateIncidentPageState extends ConsumerState<UpdateIncidentPage> {
                     const SizedBox(height: SpacingSize.md),
                     Text(
                       'Você pode informar esse número às autoridades e operadoras.',
-                      style: context.appText.caption.copyWith(
+                      style: context.appTextOld.caption.copyWith(
                         fontWeight: FontWeight.w600,
                         color: context.secondaryColor,
                       ),
@@ -387,7 +387,7 @@ class _UpdateIncidentPageState extends ConsumerState<UpdateIncidentPage> {
                     Expanded(
                       child: Text(
                         'Descrição (até 300 caracteres)',
-                        style: context.appText.caption.copyWith(
+                        style: context.appTextOld.caption.copyWith(
                           color: context.secondaryTextColor,
                           fontWeight: FontWeight.w800,
                           letterSpacing: 0.2,
@@ -420,7 +420,7 @@ class _UpdateIncidentPageState extends ConsumerState<UpdateIncidentPage> {
                   state.updatedValue?.howTo == null
                       ? 'Nenhuma descrição informada.'
                       : state.updatedValue!.howTo!,
-                  style: context.appText.bodySmall.copyWith(
+                  style: context.appTextOld.bodySmall.copyWith(
                     color: context.secondaryTextColor,
                     fontWeight: FontWeight.w600,
                     height: 1.35,

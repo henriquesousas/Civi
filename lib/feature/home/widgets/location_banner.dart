@@ -51,7 +51,7 @@ class LocationBanner extends StatelessWidget {
               children: [
                 Text(
                   title,
-                  style: context.appText.bodySmall.copyWith(
+                  style: context.appTextOld.bodySmall.copyWith(
                     fontWeight: FontWeight.w600,
                     color: AppColors.grey, // cinza elegante
                   ),
@@ -61,7 +61,7 @@ class LocationBanner extends StatelessWidget {
                   primaryText,
                   maxLines: 1,
                   overflow: TextOverflow.ellipsis,
-                  style: context.appText.headermd.copyWith(
+                  style: context.appTextOld.headermd.copyWith(
                     fontWeight: FontWeight.w800,
                   ),
                 ),
@@ -71,7 +71,7 @@ class LocationBanner extends StatelessWidget {
                     secondaryText!,
                     maxLines: 1,
                     overflow: TextOverflow.ellipsis,
-                    style: context.appText.caption.copyWith(
+                    style: context.appTextOld.caption.copyWith(
                       color: AppColors.grey,
                     ),
                   ),

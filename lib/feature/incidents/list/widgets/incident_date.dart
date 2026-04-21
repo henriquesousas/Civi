@@ -20,7 +20,7 @@ class IncidentDate extends StatelessWidget {
         ),
         Text(
           occurreAt.toDateWithFullMonth(),
-          style: context.appText.caption,
+          style: context.appTextOld.caption,
         ),
       ],
     );

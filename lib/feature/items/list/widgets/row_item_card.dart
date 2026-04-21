@@ -75,7 +75,7 @@ class RowItemCard extends StatelessWidget {
                               item.name,
                               maxLines: 1,
                               overflow: TextOverflow.ellipsis,
-                              style: context.appText.bodymd.copyWith(
+                              style: context.appTextOld.bodymd.copyWith(
                                 fontWeight: FontWeight.w800,
                               ),
                             ),
@@ -104,7 +104,7 @@ class RowItemCard extends StatelessWidget {
                               children: [
                                 Text(
                                   'Cadastrado em',
-                                  style: context.appText.caption.copyWith(
+                                  style: context.appTextOld.caption.copyWith(
                                     fontWeight: FontWeight.w700,
                                     color: context.secondaryColor,
                                   ),
@@ -112,7 +112,7 @@ class RowItemCard extends StatelessWidget {
                                 const SizedBox(height: 2),
                                 Text(
                                   item.createdAt!.toDayMonthYearFormat(),
-                                  style: context.appText.bodySmall.copyWith(
+                                  style: context.appTextOld.bodySmall.copyWith(
                                     fontWeight: FontWeight.w700,
                                     color: context.secondaryColor,
                                   ),

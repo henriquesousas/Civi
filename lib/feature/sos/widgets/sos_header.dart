@@ -59,12 +59,12 @@ class SosHeaderCard extends StatelessWidget {
               children: [
                 Text(
                   title,
-                  style: context.appText.headermd,
+                  style: context.appTextOld.headermd,
                 ),
                 const SizedBox(height: SpacingSize.sm),
                 Text(
                   subtitle,
-                  style: context.appText.caption.copyWith(
+                  style: context.appTextOld.caption.copyWith(
                     // color: Colors.white.withValues(alpha: 0.88),
                     fontWeight: FontWeight.w600,
                     height: 1.25,

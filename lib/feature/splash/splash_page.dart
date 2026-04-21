@@ -159,7 +159,7 @@ class _SplashPageState extends State<SplashPage> {
 
                             Text(
                               "Civi",
-                              style: context.appText.headerxl.copyWith(
+                              style: context.appTextOld.headerxl.copyWith(
                                 color: Colors.white,
                                 fontWeight: FontWeight.w800,
                                 letterSpacing: 1.4,
@@ -169,7 +169,7 @@ class _SplashPageState extends State<SplashPage> {
                             Text(
                               "Juntos por uma região mais segura",
                               textAlign: TextAlign.center,
-                              style: context.appText.bodymd.copyWith(
+                              style: context.appTextOld.bodymd.copyWith(
                                 color: Colors.white.withValues(alpha: 0.88),
                                 fontWeight: FontWeight.w600,
                                 height: 1.35,
@@ -179,7 +179,7 @@ class _SplashPageState extends State<SplashPage> {
                             Text(
                               "Obtendo localização...",
                               textAlign: TextAlign.center,
-                              style: context.appText.bodySmall.copyWith(
+                              style: context.appTextOld.bodySmall.copyWith(
                                 color: Colors.white.withValues(alpha: 0.58),
                                 height: 1.45,
                               ),
@@ -223,7 +223,8 @@ class _SplashPageState extends State<SplashPage> {
                                   const SizedBox(width: 12),
                                   Text(
                                     "Buscando localização...",
-                                    style: context.appText.bodySmall.copyWith(
+                                    style:
+                                        context.appTextOld.bodySmall.copyWith(
                                       color:
                                           Colors.white.withValues(alpha: 0.88),
                                       fontWeight: FontWeight.w600,
@@ -247,7 +248,7 @@ class _SplashPageState extends State<SplashPage> {
                         Text(
                           'A segurança começa no seu bairro',
                           textAlign: TextAlign.center,
-                          style: context.appText.caption.copyWith(
+                          style: context.appTextOld.caption.copyWith(
                             color: Colors.white.withValues(alpha: 0.52),
                             height: 1.4,
                           ),
@@ -256,7 +257,7 @@ class _SplashPageState extends State<SplashPage> {
                         Text(
                           'Versão 1.0.0',
                           textAlign: TextAlign.center,
-                          style: context.appText.caption.copyWith(
+                          style: context.appTextOld.caption.copyWith(
                             color: Colors.white.withValues(alpha: 0.34),
                             height: 1.4,
                           ),

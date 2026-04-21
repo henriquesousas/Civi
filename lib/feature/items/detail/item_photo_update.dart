@@ -78,7 +78,7 @@ class _ItemPhotoUpdateState extends ConsumerState<ItemPhotoUpdate> {
                       Expanded(
                         child: Text(
                           'Adicione fotos do item',
-                          style: context.appText.bodySmall.copyWith(
+                          style: context.appTextOld.bodySmall.copyWith(
                             fontWeight: FontWeight.w900,
                             color: context.onSurface,
                           ),
@@ -125,7 +125,7 @@ class _ItemPhotoUpdateState extends ConsumerState<ItemPhotoUpdate> {
                   const SizedBox(height: SpacingSize.lg),
                   Text(
                     'Dica: fotos nítidas ajudam a agilizar a verificação.',
-                    style: context.appText.bodySmall.copyWith(
+                    style: context.appTextOld.bodySmall.copyWith(
                       fontWeight: FontWeight.w600,
                     ),
                   ),

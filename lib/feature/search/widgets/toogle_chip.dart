@@ -55,7 +55,7 @@ class ToggleChip extends StatelessWidget {
               child: Text(
                 label,
                 overflow: TextOverflow.ellipsis,
-                style: context.appText.label.copyWith(
+                style: context.appTextOld.label.copyWith(
                   fontWeight: FontWeight.w700,
                   // color: selected ? context.primaryColor : context.onSurface,
                   color: selected ? context.primaryColor : context.onSurface,
