@@ -1,6 +1,6 @@
-import 'package:deehelp/v2/feature/post/domain/feed_post.dart';
-import 'package:deehelp/v2/feature/post/widgets/action_tile.dart';
-import 'package:deehelp/v2/feature/post/widgets/share_icon.dart';
+import 'package:deehelp/v2/feature/feed/domain/feed_post.dart';
+import 'package:deehelp/v2/feature/feed/presentation/widgets/action_tile.dart';
+import 'package:deehelp/v2/feature/feed/presentation/widgets/share_icon.dart';
 import 'package:flutter/material.dart';
 
 class FeedAction extends StatelessWidget {

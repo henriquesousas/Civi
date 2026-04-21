@@ -1,5 +1,5 @@
 import 'package:deehelp/v2/core/widgets/image/app_network_image.dart';
-import 'package:deehelp/v2/feature/post/domain/feed_post.dart';
+import 'package:deehelp/v2/feature/feed/domain/feed_post.dart';
 import 'package:flutter/material.dart';
 
 class FeedImagePreview extends StatelessWidget {

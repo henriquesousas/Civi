@@ -1,4 +1,4 @@
-import 'package:deehelp/v2/feature/post/domain/feed_post.dart';
+import 'package:deehelp/v2/feature/feed/domain/feed_post.dart';
 
 final List<FeedPost> posts = [
   FeedPost(

@@ -1,5 +1,5 @@
 import 'package:deehelp/v2/core/extensions/text_extension.dart';
-import 'package:deehelp/v2/feature/post/widgets/text_last_hours.dart';
+import 'package:deehelp/v2/feature/feed/presentation/widgets/text_last_hours.dart';
 import 'package:flutter/material.dart';
 
 class SilverAppTitle extends StatelessWidget {

@@ -27,7 +27,7 @@ import 'package:deehelp/test_registrar2.dart';
 import 'package:deehelp/test_suspicius.dart';
 import 'package:deehelp/test_welcome.dart';
 import 'package:deehelp/teste_notification.dart';
-import 'package:deehelp/v2/feature/post/fedd_post_page.dart';
+import 'package:deehelp/v2/feature/feed/presentation/fedd_post_page.dart';
 import 'package:deehelp/v2/feature/send_alert/presentation/send_alert_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';

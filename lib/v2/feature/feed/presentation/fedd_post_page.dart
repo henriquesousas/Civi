@@ -1,7 +1,7 @@
 import 'package:deehelp/v2/core/theme/app_colors.dart';
-import 'package:deehelp/v2/feature/post/domain/feed_post_fake_data.dart';
-import 'package:deehelp/v2/feature/post/widgets/feed_post_card.dart';
-import 'package:deehelp/v2/feature/post/widgets/silver_app_title.dart';
+import 'package:deehelp/v2/feature/feed/domain/feed_post_fake_data.dart';
+import 'package:deehelp/v2/feature/feed/presentation/widgets/feed_post_card.dart';
+import 'package:deehelp/v2/feature/feed/presentation/widgets/silver_app_title.dart';
 import 'package:flutter/material.dart';
 
 class FeedPostPage extends StatelessWidget {

@@ -1,9 +1,9 @@
 import 'package:deehelp/v2/core/extensions/text_extension.dart';
 import 'package:deehelp/v2/core/theme/app_colors.dart';
 import 'package:deehelp/v2/core/theme/size_spacing.dart';
-import 'package:deehelp/v2/feature/post/domain/feed_post.dart';
-import 'package:deehelp/v2/feature/post/widgets/feed_action.dart';
-import 'package:deehelp/v2/feature/post/widgets/feed_image_preview.dart';
+import 'package:deehelp/v2/feature/feed/domain/feed_post.dart';
+import 'package:deehelp/v2/feature/feed/presentation/widgets/feed_action.dart';
+import 'package:deehelp/v2/feature/feed/presentation/widgets/feed_image_preview.dart';
 import 'package:flutter/material.dart';
 
 class FeedPostCard extends StatelessWidget {
