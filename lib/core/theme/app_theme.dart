@@ -99,23 +99,14 @@ class AppTheme {
       // primaryContainer: const Color.fromRGBO(31, 34, 42, 1),
       primaryContainer: const Color(0xFF2B5BEE),
       //CARDS
-      // surface: const Color(0xFF0F141B), //background principal
-      surface: const Color(0xFF0D0D0D), //background principal
-      // surfaceContainer: const Color(0xFF0F141B), //background principal
-      // surfaceContainer: const Color(0xFF0D0D0D), //background principal
+      surface: const Color(0xFF161616), //background base
       surfaceContainer: const Color(0xFF171717), //background principal
-      // surfaceContainerLow: const Color(0xFF131A22), //background secundar
       surfaceContainerLow: const Color(0xFF252525), //background secundar
-
-      //background secundar
-      // surfaceContainerHigh: const Color(0XFF11171e),
       surfaceContainerHigh: const Color(0XFF000000),
 
       // TEXTOS
       onSurface: Colors.white, // texto principal
-      onSurfaceVariant: const Color(0xFF9AA4B2), // texto secundário
-      // onSurfaceVariant: const Color(0xFF6B7280), // texto secundário
-      // onSurfaceVariant: Colors.white, // texto secundário
+      onSurfaceVariant: Colors.white54, // texto secundário
 
       /// BORDAS
       outline: const Color(0xFF2A2A2A), //  borda principal
