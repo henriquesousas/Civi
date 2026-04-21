@@ -21,6 +21,7 @@ import 'package:deehelp/test_bottom.dart';
 import 'package:deehelp/test_location_disable.dart';
 import 'package:deehelp/test_map.dart';
 import 'package:deehelp/test_mapa_detail.dart';
+import 'package:deehelp/test_noise.dart';
 import 'package:deehelp/test_post.dart';
 import 'package:deehelp/test_registrar.dart';
 import 'package:deehelp/test_registrar2.dart';
@@ -135,11 +136,11 @@ var goRouterProvider = Provider<GoRouter>(
             // child: ThankYouAlertCard(),
             // child: TestAlertHomePage(), //OK
             // child: SendAlertPage(),
-            // child: SendAlertPage(),
             // child: TestMapaDetail(),
             // child: TestPost(),
-            child: FeedPostPage(),
-            // child: TestNotification(),
+            // child: FeedPostPage(), OK
+            // child: TesteNicknamePage(),
+            child: TestNotification(),
             // child: FloodAlertPage(locationLabel: "Rua Joao ventura"),
             // child: SuspiciousActivityPage(),
           ),
