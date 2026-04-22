@@ -1,4 +1,5 @@
 import 'package:deehelp/core/extension/string_extension.dart';
+import 'package:deehelp/v2/core/theme/size_layout_spacing.dart';
 import 'package:deehelp/v2/core/theme/size_spacing.dart';
 import 'package:deehelp/v2/feature/send_alert/presentation/widgets/section_category.dart';
 import 'package:deehelp/v2/feature/send_alert/presentation/widgets/section_header.dart';
@@ -49,7 +50,7 @@ class _SendAlertPageState extends State<SendAlertPage> {
     return Scaffold(
       body: SafeArea(
         child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 24),
+          padding: const EdgeInsets.symmetric(horizontal: SizeLayoutSpacing.l),
           child: Column(
             children: [
               const TopAppBar(),

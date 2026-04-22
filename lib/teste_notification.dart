@@ -1,3 +1,4 @@
+import 'package:deehelp/test_router_preview.dart';
 import 'package:flutter/material.dart';
 
 class TestNotification extends StatelessWidget {
@@ -100,6 +101,12 @@ class AlertTile extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           // tempo
+          // RoutePreviewCard(
+          //   distanceKm: 2.4,
+          //   startPoint: const Offset(0.25, 0.35), // ocorrência
+          //   endPoint: const Offset(0.72, 0.70), // usuário
+          //   onTap: () {},
+          // ),
           Text(
             item.time,
             style: const TextStyle(

@@ -29,6 +29,7 @@ import 'package:deehelp/test_suspicius.dart';
 import 'package:deehelp/test_welcome.dart';
 import 'package:deehelp/teste_notification.dart';
 import 'package:deehelp/v2/feature/feed/presentation/fedd_post_page.dart';
+import 'package:deehelp/v2/feature/notification/presentation/notification_page.dart';
 import 'package:deehelp/v2/feature/send_alert/presentation/send_alert_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -140,7 +141,8 @@ var goRouterProvider = Provider<GoRouter>(
             // child: TestPost(),
             // child: FeedPostPage(), OK
             // child: TesteNicknamePage(),
-            child: TestNotification(),
+            // child: TestNotification(),
+            child: NotificationPage(),
             // child: FloodAlertPage(locationLabel: "Rua Joao ventura"),
             // child: SuspiciousActivityPage(),
           ),

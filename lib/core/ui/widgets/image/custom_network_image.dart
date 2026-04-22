@@ -1,6 +1,7 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:deehelp/core/extension/color_extension.dart';
 import 'package:deehelp/core/theme/export_theme.dart';
+import 'package:deehelp/v2/core/theme/app_colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:shimmer/shimmer.dart';
@@ -65,14 +66,6 @@ class CustomNetworkImage extends StatelessWidget {
   }
 
   Widget _buildPlaceholderWidget() {
-    // return Container(
-    //   height: height ?? ImageSize.xs,
-    //   width: width ?? ImageSize.xs,
-    //   decoration: BoxDecoration(
-    //     borderRadius: BorderRadius.circular(RadiusSize.xs),
-    //     color: AppColors.grey.withValues(alpha: 0.2),
-    //   ),
-    // );
     return ImageShimmer(
       height: height ?? ImageSize.xs,
       width: width ?? ImageSize.xs,
@@ -89,70 +82,6 @@ class CustomNetworkImage extends StatelessWidget {
           width: width ?? ImageSize.xs,
           radius: radius ?? RadiusSize.xs,
         );
-    // return SizedBox(
-    //   height: height,
-    //   width: width,
-    //   child: FittedBox(
-    //     fit: boxFit,
-    //     child: Container(
-    //       height: height,
-    //       width: width,
-    //       padding: const EdgeInsets.all(RadiusSize.md),
-    //       decoration: BoxDecoration(
-    //         borderRadius: BorderRadius.circular(RadiusSize.md),
-    //         color: AppColors.grey.withValues(alpha: 0.09),
-    //       ),
-    //       child: customErrorWidget ??
-    //           ClipRRect(
-    //             borderRadius: BorderRadius.circular(RadiusSize.xs),
-    //             child: Center(
-    //               child: Icon(
-    //                 Icons.image_not_supported,
-    //                 color: AppColors.grey.withValues(alpha: 0.5),
-    //                 size: IconSizes.lg,
-    //               ),
-    //             ),
-    //           ),
-    //     ),
-    //     // child: isProfile
-    //     //     ? (imageAlt != null && imageAlt!.isNotEmpty
-    //     //         ? RandomColorAvatar(
-    //     //             width: 40.w,
-    //     //             height: 40.h,
-    //     //             name: imageAlt!,
-    //     //           )
-    //     //         : ClipRRect(
-    //     //             borderRadius: BorderRadius.circular(RadiusSize.xs),
-    //     //             child: Center(
-    //     //               child: Icon(
-    //     //                 Icons.image,
-    //     //                 color: AppColors.grey,
-    //     //                 size: (height ?? 20) / 2,
-    //     //               ),
-    //     //             ),
-    //     //           ))
-    //     //     : Container(
-    //     //         height: height,
-    //     //         width: width,
-    //     //         padding: const EdgeInsets.all(RadiusSize.md),
-    //     //         decoration: BoxDecoration(
-    //     //           borderRadius: BorderRadius.circular(RadiusSize.xs),
-    //     //           color: AppColors.grey.withValues(alpha: 0.3),
-    //     //         ),
-    //     //         child: customErrorWidget ??
-    //     //             ClipRRect(
-    //     //               borderRadius: BorderRadius.circular(RadiusSize.xs),
-    //     //               child: Center(
-    //     //                 child: Icon(
-    //     //                   Icons.photo,
-    //     //                   color: AppColors.grey.withValues(alpha: 0.9),
-    //     //                   size: IconSizes.lg,
-    //     //                 ),
-    //     //               ),
-    //     //             ),
-    //     //       ),
-    //   ),
-    // );
   }
 }
 
@@ -206,21 +135,13 @@ class ImageErrorWidget extends StatelessWidget {
       width: width,
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(radius),
-        // color: Colors.grey.withValues(alpha: 0.08),
-        color: context.primaryBgCardHigh,
+        color: context.appColor.primaryBgColor,
       ),
       child: Icon(
         Icons.image_not_supported,
         color: context.primaryTextColor.withValues(alpha: 0.5),
         size: 25.w,
       ),
-      // child: Center(
-      //   child: Image.asset(
-      //     "assets/images/logo_white.png",
-      //     width: 55.w,
-      //     height: 55.h,
-      //   ),
-      // ),
     );
   }
 }
