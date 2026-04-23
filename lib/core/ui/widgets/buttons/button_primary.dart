@@ -1,7 +1,7 @@
 import 'package:deehelp/core/extension/color_extension.dart';
 import 'package:deehelp/core/extension/size_extension.dart';
 import 'package:deehelp/core/theme/export_theme.dart';
-import 'package:deehelp/core/ui/styles/export_style.dart';
+import 'package:deehelp/v2/core/extensions/export_extension.dart';
 import 'package:flutter/material.dart';
 
 class ButtonPrimary extends StatelessWidget {
@@ -24,11 +24,11 @@ class ButtonPrimary extends StatelessWidget {
       height: ButtonSize.xs,
       child: ElevatedButton(
         style: ElevatedButton.styleFrom(
-          backgroundColor: context.primaryColor,
-          foregroundColor: Colors.white,
+          backgroundColor: const Color(0xFFB8CDE3),
+          foregroundColor: Colors.black,
           minimumSize: const Size(double.infinity, 32),
           shape: const RoundedRectangleBorder(
-            borderRadius: BorderRadius.all(Radius.circular(RadiusSize.xl)),
+            borderRadius: BorderRadius.all(Radius.circular(999)),
           ),
         ).copyWith(
           textStyle: WidgetStatePropertyAll(
@@ -38,11 +38,6 @@ class ButtonPrimary extends StatelessWidget {
             ),
           ),
         ),
-        // onPressed: () {
-        //   if (!loading) {
-        //     press();
-        //   }
-        // },
         onPressed: press != null
             ? () {
                 if (!loading) {
@@ -59,8 +54,8 @@ class ButtonPrimary extends StatelessWidget {
   Text _title(BuildContext context) {
     return Text(
       text,
-      style: context.appTextOld.button.copyWith(
-        color: Colors.white,
+      style: context.appText.button.copyWith(
+        color: Colors.black,
       ),
     );
   }

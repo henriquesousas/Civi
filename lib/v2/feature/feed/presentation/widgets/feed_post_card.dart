@@ -1,5 +1,5 @@
 import 'package:deehelp/v2/core/extensions/text_extension.dart';
-import 'package:deehelp/v2/core/theme/app_colors.dart';
+import 'package:deehelp/v2/core/extensions/theme_colors_extension.dart';
 import 'package:deehelp/v2/core/theme/size_spacing.dart';
 import 'package:deehelp/v2/feature/feed/domain/feed_post.dart';
 import 'package:deehelp/v2/feature/feed/presentation/widgets/feed_action.dart';
@@ -60,7 +60,7 @@ class FeedPostCard extends StatelessWidget {
               Text(
                 '${post.timeAgo} · ${post.location} · ${post.distance}',
                 style: context.appText.caption.copyWith(
-                  color: context.appColor.secundaryTextColor,
+                  color: context.themeColor.secundaryTextColor,
                 ),
               ),
               Text(
@@ -78,7 +78,7 @@ class FeedPostCard extends StatelessWidget {
         Divider(
           height: 1,
           thickness: 1,
-          color: context.appColor.outline,
+          color: context.themeColor.outline,
         ),
       ],
     );

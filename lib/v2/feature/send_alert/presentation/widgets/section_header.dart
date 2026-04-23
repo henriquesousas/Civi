@@ -1,5 +1,5 @@
 import 'package:deehelp/v2/core/extensions/text_extension.dart';
-import 'package:deehelp/v2/core/theme/app_colors.dart';
+import 'package:deehelp/v2/core/extensions/theme_colors_extension.dart';
 import 'package:flutter/material.dart';
 
 class SectionHeader extends StatelessWidget {
@@ -21,7 +21,7 @@ class SectionHeader extends StatelessWidget {
           'Travessa Francisco Alves da Silva, 2, Osasco, São Paulo',
           textAlign: TextAlign.center,
           style: context.appText.subtitle.copyWith(
-            color: context.appColor.secundaryTextColor,
+            color: context.themeColor.secundaryTextColor,
             fontWeight: FontWeight.w400,
           ),
         ),

@@ -1,7 +1,7 @@
 import 'package:deehelp/core/extension/exports_extension.dart';
-import 'package:deehelp/core/theme/size/spacing_size.dart';
-import 'package:deehelp/core/ui/styles/app_text_style.dart';
+import 'package:deehelp/core/theme/export_theme.dart';
 import 'package:deehelp/core/ui/widgets/icon/export_icon.dart';
+import 'package:deehelp/v2/core/extensions/export_extension.dart';
 import 'package:flutter/material.dart';
 
 class CardHeader extends StatelessWidget {
@@ -35,14 +35,16 @@ class CardHeader extends StatelessWidget {
               children: [
                 Text(
                   title,
-                  style: context.appTextOld.headermd,
+                  style: context.appText.bodyLarger.copyWith(
+                    fontWeight: FontWeight.bold,
+                  ),
                 ),
                 const SizedBox(height: SpacingSize.xs),
                 Text(
                   subtitle,
                   maxLines: 1,
                   overflow: TextOverflow.ellipsis,
-                  style: context.appTextOld.bodySmall,
+                  style: context.appText.caption,
                 ),
               ],
             ),

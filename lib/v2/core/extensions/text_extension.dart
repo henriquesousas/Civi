@@ -12,6 +12,7 @@ class AppTextStyles {
         fontWeight: FontWeight.w500,
       );
   TextStyle get title => _textTheme.titleLarge!;
+  TextStyle get bodyLarger => _textTheme.bodyLarge!;
   TextStyle get subtitle => _textTheme.bodyMedium!;
   TextStyle get caption => _textTheme.bodySmall!;
   TextStyle get button => _textTheme.labelLarge!;

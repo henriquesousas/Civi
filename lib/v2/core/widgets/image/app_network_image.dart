@@ -1,5 +1,5 @@
 import 'package:cached_network_image/cached_network_image.dart';
-import 'package:deehelp/v2/core/theme/app_colors.dart';
+import 'package:deehelp/v2/core/extensions/theme_colors_extension.dart';
 import 'package:deehelp/v2/core/theme/size_circular_progress_indicator.dart';
 import 'package:deehelp/v2/core/theme/size_spacing.dart';
 import 'package:deehelp/v2/core/widgets/image/aspect_ration.dart';
@@ -49,7 +49,7 @@ class AppNetworkImage extends StatelessWidget {
           }
 
           return Container(
-            color: context.appColor.primaryBgColor,
+            color: context.themeColor.primaryBgColor,
             alignment: Alignment.center,
             child: const Icon(
               Icons.image_not_supported_outlined,

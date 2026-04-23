@@ -1,7 +1,7 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:deehelp/core/extension/color_extension.dart';
 import 'package:deehelp/core/theme/export_theme.dart';
-import 'package:deehelp/v2/core/theme/app_colors.dart';
+import 'package:deehelp/v2/core/extensions/theme_colors_extension.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:shimmer/shimmer.dart';
@@ -135,7 +135,7 @@ class ImageErrorWidget extends StatelessWidget {
       width: width,
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(radius),
-        color: context.appColor.primaryBgColor,
+        color: context.themeColor.primaryBgColor,
       ),
       child: Icon(
         Icons.image_not_supported,

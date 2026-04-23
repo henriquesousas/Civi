@@ -17,10 +17,12 @@ import 'package:deehelp/feature/sos/sos_router.dart';
 import 'package:deehelp/feature/splash/splash_router.dart';
 import 'package:deehelp/core/router/router_refresh_notifier.dart';
 import 'package:deehelp/test_alert_choose.dart';
+import 'package:deehelp/test_alert_zone_page.dart';
 import 'package:deehelp/test_bottom.dart';
 import 'package:deehelp/test_location_disable.dart';
 import 'package:deehelp/test_map.dart';
 import 'package:deehelp/test_mapa_detail.dart';
+import 'package:deehelp/test_nickname_required_page.dart';
 import 'package:deehelp/test_noise.dart';
 import 'package:deehelp/test_post.dart';
 import 'package:deehelp/test_registrar.dart';
@@ -30,6 +32,7 @@ import 'package:deehelp/test_welcome.dart';
 import 'package:deehelp/teste_notification.dart';
 import 'package:deehelp/v2/feature/feed/presentation/fedd_post_page.dart';
 import 'package:deehelp/v2/feature/notification/presentation/notification_page.dart';
+import 'package:deehelp/v2/feature/profile/nickname/presentation/add_nickname_page.dart';
 import 'package:deehelp/v2/feature/send_alert/presentation/send_alert_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -138,11 +141,15 @@ var goRouterProvider = Provider<GoRouter>(
             // child: TestAlertHomePage(), //OK
             // child: SendAlertPage(),
             // child: TestMapaDetail(),
-            // child: TestPost(),
-            // child: FeedPostPage(), OK
+            // child: TestPost(), //OK
+            // child: FeedPostPage(),
             // child: TesteNicknamePage(),
-            // child: TestNotification(),
-            child: NotificationPage(),
+            child: AddNicknamePage(),
+            // child: TestNicknameRequiredPage(),
+            // child: TestAlertZonePage(),
+            // child: TestMapa(),
+            // child: TestNotification(), //OK
+            // child: NotificationPage(),
             // child: FloodAlertPage(locationLabel: "Rua Joao ventura"),
             // child: SuspiciousActivityPage(),
           ),

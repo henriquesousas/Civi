@@ -23,7 +23,7 @@ class UINotificationTile extends StatelessWidget {
           Text(
             item.time,
             style: context.appText.caption.copyWith(
-              color: context.appColor.secundaryTextColor,
+              color: context.themeColor.secundaryTextColor,
             ),
           ),
           const SizedBox(height: SizeSpacing.s),
@@ -46,7 +46,7 @@ class UINotificationTile extends StatelessWidget {
                     Text(
                       item.description,
                       style: context.appText.subtitle.copyWith(
-                        color: context.appColor.secundaryTextColor,
+                        color: context.themeColor.secundaryTextColor,
                         height: 1.3,
                       ),
                     ),

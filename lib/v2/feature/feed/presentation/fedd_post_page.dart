@@ -1,4 +1,4 @@
-import 'package:deehelp/v2/core/theme/app_colors.dart';
+import 'package:deehelp/v2/core/extensions/theme_colors_extension.dart';
 import 'package:deehelp/v2/feature/feed/domain/feed_post_fake_data.dart';
 import 'package:deehelp/v2/feature/feed/presentation/widgets/feed_post_card.dart';
 import 'package:deehelp/v2/feature/feed/presentation/widgets/silver_app_title.dart';
@@ -26,7 +26,7 @@ class FeedPostPage extends StatelessWidget {
               child: Divider(
                 height: 1,
                 thickness: 1,
-                color: context.appColor.outlineVariant,
+                color: context.themeColor.outlineVariant,
               ),
             ),
           ),

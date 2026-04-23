@@ -10,16 +10,19 @@ class TesteNicknamePage extends StatefulWidget {
 }
 
 class _TesteNicknamePageState extends State<TesteNicknamePage> {
-  // ===== Dark tokens (premium / Civi style)
-  static const _bg = Color(0xFF0B1220);
-  static const _surface = Color(0xFF121A2B);
-  static const _surfaceSoft = Color(0xFF182235);
-  static const _surfaceInput = Color(0xFF0F1728);
-  static const _ink = Color(0xFFF3F7FF);
-  static const _muted = Color(0xFF93A4C3);
-  static const _border = Color(0xFF22314D);
-  static const _primary = Color(0xFF2B5BEE);
-  static const _primarySoft = Color(0x1A2B5BEE);
+  static const _bg = Color(0xFF0A1120);
+  static const _surface = Color(0xFF111A2B);
+  static const _surfaceSoft = Color(0xFF172338);
+  static const _surfaceInput = Color(0xFF0E1727);
+  static const _ink = Color(0xFFF4F7FD);
+  static const _muted = Color(0xFF91A0BD);
+  static const _border = Color(0xFF243552);
+
+  static const _primary = Color(0xFF4C7DFF);
+  static const _primarySoft = Color(0x1A4C7DFF);
+  static const _primaryPressed = Color(0xFF3E6EF0);
+  static const _primaryBorder = Color(0xFF6B93FF);
+
   static const _success = Color(0xFF5ED0A5);
 
   final _ctrl = TextEditingController();
@@ -219,7 +222,7 @@ class _TesteNicknamePageState extends State<TesteNicknamePage> {
                       focusedBorder: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(18),
                         borderSide:
-                            const BorderSide(color: _primary, width: 1.4),
+                            const BorderSide(color: _primaryBorder, width: 1.4),
                       ),
                       prefixIcon: const Icon(
                         Icons.person_outline_rounded,
@@ -269,6 +272,10 @@ class _TesteNicknamePageState extends State<TesteNicknamePage> {
                             padding: const EdgeInsets.symmetric(vertical: 13),
                             shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(16),
+                            ),
+                          ).copyWith(
+                            overlayColor: WidgetStatePropertyAll(
+                              _primaryPressed.withOpacity(.18),
                             ),
                           ),
                           child: const Text(
@@ -378,8 +385,6 @@ class _TesteNicknamePageState extends State<TesteNicknamePage> {
     );
   }
 }
-
-/* ==================== Components ==================== */
 
 class _Card extends StatelessWidget {
   final Widget child;

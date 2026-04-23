@@ -1,4 +1,4 @@
-import 'package:deehelp/v2/core/theme/export_theme.dart';
+import 'package:deehelp/v2/core/extensions/export_extension.dart';
 import 'package:flutter/material.dart';
 
 class UIDot extends StatelessWidget {
@@ -11,7 +11,7 @@ class UIDot extends StatelessWidget {
       width: 6,
       height: 6,
       decoration: BoxDecoration(
-        color: context.appColor.primaryColor,
+        color: context.themeColor.primaryColor,
         shape: BoxShape.circle,
       ),
     );

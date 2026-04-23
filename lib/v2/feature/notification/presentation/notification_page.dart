@@ -1,4 +1,4 @@
-import 'package:deehelp/v2/core/theme/app_colors.dart';
+import 'package:deehelp/v2/core/extensions/theme_colors_extension.dart';
 import 'package:deehelp/v2/feature/notification/domain/notification_alert.dart';
 import 'package:deehelp/v2/feature/notification/presentation/widgets/ui_notification_tile.dart';
 import 'package:flutter/material.dart';
@@ -34,7 +34,7 @@ class _NotificationPageState extends State<NotificationPage> {
       body: ListView.separated(
         itemCount: notification.length,
         separatorBuilder: (_, __) => Divider(
-          color: context.appColor.outlineVariant,
+          color: context.themeColor.outlineVariant,
           height: 1,
         ),
         itemBuilder: (context, index) {

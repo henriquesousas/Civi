@@ -15,12 +15,12 @@ class ActionTile extends StatelessWidget {
         Icon(
           icon,
           size: SizeIcon.m,
-          color: context.appColor.surfaceVariant,
+          color: context.themeColor.surfaceVariant,
         ),
         Text(
           title,
           style: context.appText.caption.copyWith(
-            color: context.appColor.surfaceVariant,
+            color: context.themeColor.surfaceVariant,
           ),
         ),
       ],

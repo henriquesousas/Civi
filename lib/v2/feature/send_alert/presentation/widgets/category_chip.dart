@@ -1,5 +1,5 @@
 import 'package:deehelp/v2/core/extensions/text_extension.dart';
-import 'package:deehelp/v2/core/theme/app_colors.dart';
+import 'package:deehelp/v2/core/extensions/theme_colors_extension.dart';
 import 'package:flutter/material.dart';
 
 class CategoryChip extends StatelessWidget {
@@ -24,10 +24,10 @@ class CategoryChip extends StatelessWidget {
         duration: const Duration(milliseconds: 220),
         padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
         decoration: BoxDecoration(
-          color: context.appColor.primaryBgColor,
+          color: context.themeColor.primaryBgColor,
           borderRadius: BorderRadius.circular(999),
           border: Border.all(
-            color: isSelected ? context.appColor.outline : Colors.transparent,
+            color: isSelected ? context.themeColor.outline : Colors.transparent,
           ),
           boxShadow: const [
             BoxShadow(
