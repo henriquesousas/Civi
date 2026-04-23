@@ -196,7 +196,7 @@ class _AddNicknamePageState extends State<AddNicknamePage> {
             ),
             const SizedBox(height: SizeSpacing.xs),
             Text(
-              "Crie um apelido para aparecer nas interações do app.\nDica: não use informações pessoais.",
+              "Crie um apelido para aparecer nas interações do app.\nDica: evite usar nome completo, telefone, placa, endereço ou qualquer dado pessoal no seu apelido.",
               style: context.appText.subtitle.copyWith(
                 color: context.themeColor.secundaryTextColor,
               ),
