@@ -1,7 +1,7 @@
 import 'package:deehelp/core/extension/color_extension.dart';
 import 'package:deehelp/core/extension/size_extension.dart';
 import 'package:deehelp/core/theme/export_theme.dart';
-import 'package:deehelp/core/ui/styles/export_style.dart';
+import 'package:deehelp/v2/core/extensions/export_extension.dart';
 import 'package:deehelp/v2/core/theme/export_theme.dart';
 import 'package:flutter/material.dart';
 
@@ -25,7 +25,8 @@ class UIButtonPrimary extends StatelessWidget {
       height: ButtonSize.xs,
       child: ElevatedButton(
         style: ElevatedButton.styleFrom(
-          backgroundColor: context.primaryColor,
+          // backgroundColor: context.primaryColor,
+          backgroundColor: const Color(0xFFB8CDE3),
           foregroundColor: Colors.white,
           minimumSize: const Size(double.infinity, 32),
           shape: const RoundedRectangleBorder(
@@ -57,8 +58,8 @@ class UIButtonPrimary extends StatelessWidget {
   Text _title(BuildContext context) {
     return Text(
       text,
-      style: context.appTextOld.button.copyWith(
-        color: Colors.white,
+      style: context.appText.button.copyWith(
+        color: Colors.black,
       ),
     );
   }

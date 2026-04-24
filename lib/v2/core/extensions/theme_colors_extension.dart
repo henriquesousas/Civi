@@ -17,6 +17,9 @@ class ThemeColors {
       Theme.of(_context).colorScheme.surfaceContainerLow;
   Color get secundaryBgColorHight =>
       Theme.of(_context).colorScheme.surfaceContainerHigh;
+  Color get secundaryBgColorLow =>
+      Theme.of(_context).colorScheme.surfaceContainerLow;
+  //Texto
   //Texto
   Color get primaryTextColor => Theme.of(_context).colorScheme.onSurface;
   Color get secundaryTextColor =>

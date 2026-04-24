@@ -2,7 +2,7 @@ import 'package:deehelp/core/extension/exports_extension.dart';
 import 'package:flutter/material.dart';
 
 class DefaultAppBar extends StatelessWidget implements PreferredSizeWidget {
-  final String title;
+  final String? title;
   final Widget? leading;
   final VoidCallback press;
   final bool showBackButton;
@@ -10,7 +10,7 @@ class DefaultAppBar extends StatelessWidget implements PreferredSizeWidget {
 
   const DefaultAppBar({
     super.key,
-    required this.title,
+    this.title,
     required this.press,
     this.leading,
     this.showBackButton = false,
@@ -36,8 +36,7 @@ class DefaultAppBar extends StatelessWidget implements PreferredSizeWidget {
       iconTheme: IconThemeData(color: context.onSurface),
       leading: _getLeading(),
       title: Text(
-        title,
-        // style: context.appText.headerlg,
+        title ?? '',
         style: TextStyle(
           color: context.primaryTextColor,
           // fontSize: context.safeSp(18),

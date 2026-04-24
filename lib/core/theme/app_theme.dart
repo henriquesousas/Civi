@@ -101,6 +101,7 @@ class AppTheme {
       surface: const Color(0xFF161616), //background base
       surfaceContainer: const Color(0xFF171717), //background principal
       surfaceContainerLow: const Color(0xFF252525), //background secundar
+      // surfaceContainerLow: const Color(0xFF111111), //background secundar
       surfaceContainerHigh: const Color(0xFF2e2e2e),
       // TEXTOS
       onSurface: Colors.white, // texto principal

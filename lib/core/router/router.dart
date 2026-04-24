@@ -19,19 +19,24 @@ import 'package:deehelp/core/router/router_refresh_notifier.dart';
 import 'package:deehelp/test_alert_choose.dart';
 import 'package:deehelp/test_alert_zone_page.dart';
 import 'package:deehelp/test_bottom.dart';
+import 'package:deehelp/test_brand_page.dart';
 import 'package:deehelp/test_location_disable.dart';
 import 'package:deehelp/test_map.dart';
 import 'package:deehelp/test_mapa_detail.dart';
 import 'package:deehelp/test_nickname_required_page.dart';
 import 'package:deehelp/test_noise.dart';
+import 'package:deehelp/test_phone_register_page.dart';
 import 'package:deehelp/test_post.dart';
 import 'package:deehelp/test_registrar.dart';
 import 'package:deehelp/test_registrar2.dart';
 import 'package:deehelp/test_suspicius.dart';
+import 'package:deehelp/test_vehicle_register_page.dart';
 import 'package:deehelp/test_welcome.dart';
 import 'package:deehelp/teste_notification.dart';
 import 'package:deehelp/v2/feature/feed/presentation/fedd_post_page.dart';
 import 'package:deehelp/v2/feature/notification/presentation/notification_page.dart';
+import 'package:deehelp/v2/feature/product/presentation/vehicle/register_phone_page.dart';
+import 'package:deehelp/v2/feature/product/presentation/vehicle/register_vehicle_page.dart';
 import 'package:deehelp/v2/feature/profile/nickname/presentation/add_nickname_page.dart';
 import 'package:deehelp/v2/feature/send_alert/presentation/send_alert_page.dart';
 import 'package:flutter/material.dart';
@@ -144,9 +149,14 @@ var goRouterProvider = Provider<GoRouter>(
             // child: TestPost(), //OK
             // child: FeedPostPage(),
             // child: TesteNicknamePage(),
-            child: AddNicknamePage(),
+            // child: AddNicknamePage(),
             // child: TestNicknameRequiredPage(),
             // child: TestAlertZonePage(),
+            // child: TestVehicleRegisterPage(),
+            // child: RegisterVehiclePage(),
+            // child: TestPhoneRegisterPage(),
+            child: RegisterPhonePage(),
+            // child: TestBrandPage(),
             // child: TestMapa(),
             // child: TestNotification(), //OK
             // child: NotificationPage(),

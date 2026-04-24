@@ -202,6 +202,7 @@ class _AddNicknamePageState extends State<AddNicknamePage> {
               ),
             ),
             const SizedBox(height: SizeSpacing.xl),
+            //Usar o UIPrimaryTextField
             TextField(
               controller: _ctrl,
               focusNode: _focus,
