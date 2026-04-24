@@ -32,9 +32,11 @@ import 'package:deehelp/test_registrar2.dart';
 import 'package:deehelp/test_suspicius.dart';
 import 'package:deehelp/test_vehicle_register_page.dart';
 import 'package:deehelp/test_welcome.dart';
+import 'package:deehelp/test_welcome_page2.dart';
 import 'package:deehelp/teste_notification.dart';
 import 'package:deehelp/v2/feature/feed/presentation/fedd_post_page.dart';
 import 'package:deehelp/v2/feature/location_disable/presentation/location_disable_page.dart';
+import 'package:deehelp/v2/feature/login/presentation/login_page.dart';
 import 'package:deehelp/v2/feature/notification/presentation/notification_page.dart';
 import 'package:deehelp/v2/feature/product/presentation/vehicle/register_phone_page.dart';
 import 'package:deehelp/v2/feature/product/presentation/vehicle/register_vehicle_page.dart';
@@ -158,7 +160,9 @@ var goRouterProvider = Provider<GoRouter>(
             // child: TestPhoneRegisterPage(),
             // child: RegisterPhonePage(),
             // child: TestLocationDisabledPage(),
-            child: LocationDisablePage(),
+            // child: LocationDisablePage(),
+            // child: TestWelcome2(),
+            child: LoginPage(),
             // child: TestBrandPage(),
             // child: TestMapa(),
             // child: TestNotification(), //OK

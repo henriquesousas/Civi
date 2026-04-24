@@ -12,60 +12,22 @@ class TestWelcome extends StatelessWidget {
       body: Stack(
         children: [
           Positioned.fill(
-            child: Image.network(
-              'https://images.unsplash.com/photo-1519501025264-65ba15a82390?auto=format&fit=crop&w=1400&q=80',
-              // 'https://images.unsplash.com/photo-1467269204594-9661b134dd2b?auto=format&fit=crop&w=1400&q=80',
-              fit: BoxFit.cover,
+            child: Container(
+              decoration: const BoxDecoration(
+                gradient: LinearGradient(
+                  begin: Alignment.topCenter,
+                  end: Alignment.bottomCenter,
+                  colors: [
+                    Color(0xFF0B1220),
+                    Color(0xFF0B1220),
+                    Color(0xFF111827),
+                  ],
+                ),
+              ),
             ),
           ),
-          // Positioned.fill(
-          //   child: Container(
-          //     decoration: const BoxDecoration(
-          //       gradient: LinearGradient(
-          //         begin: Alignment.topCenter,
-          //         end: Alignment.bottomCenter,
-          //         colors: [
-          //           Color(0xAA0B1220),
-          //           Color(0x660B1220),
-          //           Color(0xB30B1220),
-          //         ],
-          //         stops: [0.0, 0.42, 1.0],
-          //       ),
-          //     ),
-          //   ),
-          // ),
-          // Positioned.fill(
-          //   child: Container(
-          //     decoration: const BoxDecoration(
-          //       gradient: LinearGradient(
-          //         begin: Alignment.topCenter,
-          //         end: Alignment.bottomCenter,
-          //         colors: [
-          //           Color(0x660B1220), // topo bem mais leve
-          //           Color(0x330B1220), // meio quase transparente
-          //           Color(0x990B1220), // fundo ainda escuro pra contraste
-          //         ],
-          //         stops: [0.0, 0.45, 1.0],
-          //       ),
-          //     ),
-          //   ),
-          // ),
-          // Positioned.fill(
-          //   child: Container(
-          //     decoration: const BoxDecoration(
-          //       gradient: LinearGradient(
-          //         begin: Alignment.topCenter,
-          //         end: Alignment.bottomCenter,
-          //         colors: [
-          //           Color(0x440B1220),
-          //           Color(0x220B1220),
-          //           Color(0x770B1220),
-          //         ],
-          //         stops: [0.0, 0.45, 1.0],
-          //       ),
-          //     ),
-          //   ),
-          // ),
+
+          /// Conteúdo do topo
           Positioned.fill(
             child: SafeArea(
               child: Padding(
@@ -76,14 +38,13 @@ class TestWelcome extends StatelessWidget {
                     const _LogoSection(),
                     const SizedBox(height: 36),
                     Text(
-                      // 'Veja o que está acontecendo\nao seu redor em tempo real',
                       'Saiba o que está acontecendo\nagora perto de você',
                       textAlign: TextAlign.center,
                       style:
                           Theme.of(context).textTheme.headlineMedium?.copyWith(
                                 fontSize: 26,
                                 height: 1.15,
-                                fontWeight: FontWeight.w700,
+                                fontWeight: FontWeight.w800,
                                 color: Colors.white,
                               ),
                     ),
@@ -95,40 +56,75 @@ class TestWelcome extends StatelessWidget {
                             fontSize: 15,
                             height: 1.45,
                             color: Colors.white.withOpacity(0.78),
-                            fontWeight: FontWeight.w400,
                           ),
                     ),
-                    const Spacer(),
                   ],
                 ),
               ),
             ),
           ),
+
+          /// Imagem inferior — não pega tela toda
           Positioned(
-            top: size.height * 0.37,
             left: 18,
+            right: 18,
+            bottom: 190,
+            height: size.height * 0.45,
+            child: ClipRRect(
+              borderRadius: BorderRadius.circular(34),
+              child: Stack(
+                fit: StackFit.expand,
+                children: [
+                  Image.network(
+                    'https://images.unsplash.com/photo-1519501025264-65ba15a82390?auto=format&fit=crop&w=1400&q=80',
+                    fit: BoxFit.cover,
+                  ),
+                  Container(
+                    decoration: BoxDecoration(
+                      gradient: LinearGradient(
+                        begin: Alignment.topCenter,
+                        end: Alignment.bottomCenter,
+                        colors: [
+                          const Color(0xFF0B1220).withOpacity(0.10),
+                          const Color(0xFF0B1220).withOpacity(0.20),
+                          const Color(0xFF0B1220).withOpacity(0.62),
+                        ],
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ),
+
+          /// Pins alinhados na área da imagem
+          Positioned(
+            bottom: 390,
+            left: 28,
             child: const _FloatingTag(
               text: '200M de você',
-              lineHeight: 120,
+              lineHeight: 70,
             ),
           ),
           Positioned(
-            top: size.height * 0.31,
-            left: size.width * 0.38,
+            bottom: 430,
+            left: size.width * 0.35,
             child: const _FloatingTag(
               text: 'Atividade suspeita',
-              lineHeight: 190,
+              lineHeight: 92,
             ),
           ),
           Positioned(
-            top: size.height * 0.46,
-            right: 18,
+            bottom: 355,
+            right: 28,
             child: const _FloatingTag(
               text: 'Roubo registrado',
-              lineHeight: 80,
+              lineHeight: 58,
               lineToRight: true,
             ),
           ),
+
+          /// Botões alinhados no bottom
           Align(
             alignment: Alignment.bottomCenter,
             child: SafeArea(
@@ -165,18 +161,15 @@ class TestWelcome extends StatelessWidget {
                       onTap: () {},
                     ),
                     const SizedBox(height: 18),
-                    Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 18),
-                      child: Text(
-                        'Ao continuar, você concorda com a Política\n'
-                        'de privacidade e os Termos de uso do Spoke',
-                        textAlign: TextAlign.center,
-                        style: TextStyle(
-                          fontSize: 12,
-                          height: 1.5,
-                          color: Colors.white.withOpacity(0.74),
-                          fontWeight: FontWeight.w500,
-                        ),
+                    Text(
+                      'Ao continuar, você concorda com a Política\n'
+                      'de privacidade e os Termos de uso do Civi',
+                      textAlign: TextAlign.center,
+                      style: TextStyle(
+                        fontSize: 12,
+                        height: 1.5,
+                        color: Colors.white.withOpacity(0.62),
+                        fontWeight: FontWeight.w500,
                       ),
                     ),
                     const SizedBox(height: 8),
@@ -232,20 +225,20 @@ class _FloatingTag extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final lineColor = Colors.white.withOpacity(0.9);
+    final lineColor = Colors.white.withOpacity(0.90);
 
     return Column(
       crossAxisAlignment:
           lineToRight ? CrossAxisAlignment.end : CrossAxisAlignment.center,
       children: [
         Container(
-          padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 13),
+          padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 11),
           decoration: BoxDecoration(
             color: const Color(0xFFF8FAFC),
             borderRadius: BorderRadius.circular(28),
             boxShadow: [
               BoxShadow(
-                color: Colors.black.withOpacity(0.18),
+                color: Colors.black.withOpacity(0.22),
                 blurRadius: 16,
                 offset: const Offset(0, 8),
               ),
@@ -254,18 +247,14 @@ class _FloatingTag extends StatelessWidget {
           child: Text(
             text,
             style: const TextStyle(
-              fontSize: 15,
-              fontWeight: FontWeight.w700,
+              fontSize: 13.5,
+              fontWeight: FontWeight.w800,
               color: Color(0xFF0F172A),
             ),
           ),
         ),
         if (!lineToRight) ...[
-          Container(
-            width: 2,
-            height: lineHeight,
-            color: lineColor,
-          ),
+          Container(width: 2, height: lineHeight, color: lineColor),
           Container(
             width: 14,
             height: 14,
@@ -278,16 +267,8 @@ class _FloatingTag extends StatelessWidget {
           Row(
             mainAxisSize: MainAxisSize.min,
             children: [
-              Container(
-                width: 2,
-                height: lineHeight,
-                color: lineColor,
-              ),
-              Container(
-                width: 54,
-                height: 2,
-                color: lineColor,
-              ),
+              Container(width: 2, height: lineHeight, color: lineColor),
+              Container(width: 42, height: 2, color: lineColor),
               Container(
                 width: 14,
                 height: 14,
@@ -323,29 +304,23 @@ class _PrimaryAuthButton extends StatelessWidget {
       child: Material(
         color: const Color(0xFF2B5BEE),
         borderRadius: BorderRadius.circular(999),
-        elevation: 0,
         child: InkWell(
-          borderRadius: BorderRadius.circular(18),
+          borderRadius: BorderRadius.circular(999),
           onTap: onTap,
-          child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 18),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                SizedBox(width: 30, child: Center(child: icon)),
-                const SizedBox(width: 12),
-                Flexible(
-                  child: Text(
-                    label,
-                    style: const TextStyle(
-                      fontSize: 17,
-                      fontWeight: FontWeight.w700,
-                      color: Colors.white,
-                    ),
-                  ),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              SizedBox(width: 30, child: Center(child: icon)),
+              const SizedBox(width: 12),
+              Text(
+                label,
+                style: const TextStyle(
+                  fontSize: 17,
+                  fontWeight: FontWeight.w700,
+                  color: Colors.white,
                 ),
-              ],
-            ),
+              ),
+            ],
           ),
         ),
       ),
@@ -371,12 +346,12 @@ class _SecondaryAuthButton extends StatelessWidget {
         color: Colors.white.withOpacity(0.08),
         borderRadius: BorderRadius.circular(999),
         child: InkWell(
-          borderRadius: BorderRadius.circular(18),
+          borderRadius: BorderRadius.circular(999),
           onTap: onTap,
           child: Container(
             alignment: Alignment.center,
             decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(18),
+              borderRadius: BorderRadius.circular(999),
               border: Border.all(
                 color: Colors.white.withOpacity(0.14),
               ),

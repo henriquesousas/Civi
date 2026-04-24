@@ -10,23 +10,28 @@ class UIButtonPrimary extends StatelessWidget {
   final VoidCallback? press;
   final bool loading;
   final double? width;
+  final double? height;
+  final Color? backgroundColor;
+  final Color? textColor;
   const UIButtonPrimary({
     super.key,
     required this.press,
     required this.text,
     this.width,
     this.loading = false,
+    this.height,
+    this.backgroundColor,
+    this.textColor,
   });
 
   @override
   Widget build(BuildContext context) {
     return SizedBox(
       width: width ?? double.infinity,
-      height: ButtonSize.xs,
+      height: height ?? ButtonSize.xs,
       child: ElevatedButton(
         style: ElevatedButton.styleFrom(
-          // backgroundColor: context.primaryColor,
-          backgroundColor: const Color(0xFFB8CDE3),
+          backgroundColor: backgroundColor ?? const Color(0xFFB8CDE3),
           foregroundColor: Colors.white,
           minimumSize: const Size(double.infinity, 32),
           shape: const RoundedRectangleBorder(
@@ -59,7 +64,7 @@ class UIButtonPrimary extends StatelessWidget {
     return Text(
       text,
       style: context.appText.button.copyWith(
-        color: Colors.black,
+        color: textColor ?? Colors.black,
       ),
     );
   }
