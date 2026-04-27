@@ -3,7 +3,7 @@ import 'package:deehelp/v2/core/extensions/export_extension.dart';
 import 'package:deehelp/v2/core/theme/export_theme.dart';
 import 'package:deehelp/v2/core/widgets/buttons/export_buttons.dart';
 import 'package:deehelp/v2/core/widgets/textfield/ui_primary_textfield.dart';
-import 'package:deehelp/v2/feature/product/presentation/widgets/section_label.dart';
+import 'package:deehelp/v2/feature/product/presentation/register/widgets/section_label.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 

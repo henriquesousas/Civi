@@ -1,7 +1,7 @@
 import 'package:deehelp/v2/core/extensions/export_extension.dart';
 import 'package:deehelp/v2/core/theme/export_theme.dart';
-import 'package:deehelp/v2/feature/product/presentation/widgets/add_photo_tile.dart';
-import 'package:deehelp/v2/feature/product/presentation/widgets/photo_view_tile.dart';
+import 'package:deehelp/v2/feature/product/presentation/register/widgets/add_photo_tile.dart';
+import 'package:deehelp/v2/feature/product/presentation/register/widgets/photo_view_tile.dart';
 import 'package:flutter/material.dart';
 
 class PhotoContainer extends StatelessWidget {

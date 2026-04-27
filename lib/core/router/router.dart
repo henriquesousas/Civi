@@ -20,6 +20,7 @@ import 'package:deehelp/test_alert_choose.dart';
 import 'package:deehelp/test_alert_zone_page.dart';
 import 'package:deehelp/test_bottom.dart';
 import 'package:deehelp/test_brand_page.dart';
+import 'package:deehelp/test_list_prod_page.dart';
 import 'package:deehelp/test_location_disable.dart';
 import 'package:deehelp/test_map.dart';
 import 'package:deehelp/test_mapa_detail.dart';
@@ -38,8 +39,9 @@ import 'package:deehelp/v2/feature/feed/presentation/fedd_post_page.dart';
 import 'package:deehelp/v2/feature/location_disable/presentation/location_disable_page.dart';
 import 'package:deehelp/v2/feature/login/presentation/login_page.dart';
 import 'package:deehelp/v2/feature/notification/presentation/notification_page.dart';
-import 'package:deehelp/v2/feature/product/presentation/vehicle/register_phone_page.dart';
-import 'package:deehelp/v2/feature/product/presentation/vehicle/register_vehicle_page.dart';
+import 'package:deehelp/v2/feature/product/presentation/list/list_product_page.dart';
+import 'package:deehelp/v2/feature/product/presentation/register/vehicle/register_phone_page.dart';
+import 'package:deehelp/v2/feature/product/presentation/register/vehicle/register_vehicle_page.dart';
 import 'package:deehelp/v2/feature/profile/nickname/presentation/add_nickname_page.dart';
 import 'package:deehelp/v2/feature/send_alert/presentation/send_alert_page.dart';
 import 'package:flutter/material.dart';
@@ -155,6 +157,8 @@ var goRouterProvider = Provider<GoRouter>(
             // child: AddNicknamePage(),
             // child: TestNicknameRequiredPage(),
             // child: TestAlertZonePage(),
+            // child: TestListProdPage(),
+            child: ListProductPage(),
             // child: TestVehicleRegisterPage(),
             // child: RegisterVehiclePage(),
             // child: TestPhoneRegisterPage(),
@@ -162,7 +166,7 @@ var goRouterProvider = Provider<GoRouter>(
             // child: TestLocationDisabledPage(),
             // child: LocationDisablePage(),
             // child: TestWelcome2(),
-            child: LoginPage(),
+            // child: LoginPage(),
             // child: TestBrandPage(),
             // child: TestMapa(),
             // child: TestNotification(), //OK
