@@ -1,4 +1,4 @@
-import 'package:deehelp/v2/feature/send_alert/presentation/widgets/category_chip.dart';
+import 'package:deehelp/v2/feature/occurrence/send_alert/presentation/widgets/category_chip.dart';
 import 'package:flutter/material.dart';
 
 class SectionCategory extends StatelessWidget {

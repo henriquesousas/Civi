@@ -1,4 +1,4 @@
-import 'package:deehelp/v2/core/widgets/image/app_network_image.dart';
+import 'package:deehelp/v2/core/widgets/image/ui_aspection_ratio_image.dart';
 import 'package:deehelp/v2/feature/feed/domain/feed_post.dart';
 import 'package:flutter/material.dart';
 
@@ -11,7 +11,7 @@ class FeedImagePreview extends StatelessWidget {
   Widget build(BuildContext context) {
     return Stack(
       children: [
-        AppNetworkImage(imageUrl: post.imageUrl)
+        UIAspectionRatioImage(imageUrl: post.imageUrl)
         // if (post.isVideo)
         //   Positioned(
         //     top: 12,

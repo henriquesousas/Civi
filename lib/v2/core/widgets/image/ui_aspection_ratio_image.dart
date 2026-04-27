@@ -5,13 +5,13 @@ import 'package:deehelp/v2/core/theme/size_spacing.dart';
 import 'package:deehelp/v2/core/widgets/image/aspect_ration.dart';
 import 'package:flutter/material.dart';
 
-class AppNetworkImage extends StatelessWidget {
+class UIAspectionRatioImage extends StatelessWidget {
   final String imageUrl;
   final AspectRatioType aspectRatio;
   final BoxFit fit;
   final String? fallbackAsset;
 
-  const AppNetworkImage({
+  const UIAspectionRatioImage({
     super.key,
     required this.imageUrl,
     this.fallbackAsset,

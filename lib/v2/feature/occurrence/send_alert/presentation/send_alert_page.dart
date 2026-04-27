@@ -1,12 +1,12 @@
 import 'package:deehelp/core/extension/string_extension.dart';
 import 'package:deehelp/v2/core/theme/size_layout_spacing.dart';
 import 'package:deehelp/v2/core/theme/size_spacing.dart';
-import 'package:deehelp/v2/feature/send_alert/presentation/widgets/section_category.dart';
-import 'package:deehelp/v2/feature/send_alert/presentation/widgets/section_header.dart';
-import 'package:deehelp/v2/feature/send_alert/presentation/widgets/section_description.dart';
-import 'package:deehelp/v2/feature/send_alert/presentation/widgets/send_alert_pulse_buttton.dart';
-import 'package:deehelp/v2/feature/send_alert/presentation/widgets/top_app_bar.dart';
-import 'package:deehelp/v2/feature/send_alert/presentation/widgets/voice_listening_dialog.dart';
+import 'package:deehelp/v2/feature/occurrence/send_alert/presentation/widgets/section_category.dart';
+import 'package:deehelp/v2/feature/occurrence/send_alert/presentation/widgets/section_header.dart';
+import 'package:deehelp/v2/feature/occurrence/send_alert/presentation/widgets/section_description.dart';
+import 'package:deehelp/v2/feature/occurrence/send_alert/presentation/widgets/send_alert_pulse_buttton.dart';
+import 'package:deehelp/v2/feature/occurrence/send_alert/presentation/widgets/top_app_bar.dart';
+import 'package:deehelp/v2/feature/occurrence/send_alert/presentation/widgets/voice_listening_dialog.dart';
 import 'package:flutter/material.dart';
 
 class SendAlertPage extends StatefulWidget {
