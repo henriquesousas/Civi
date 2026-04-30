@@ -28,7 +28,7 @@ class NicknameSuggestionRow extends StatelessWidget {
             const UIIconCard(
               icon: Icon(
                 Icons.auto_awesome_rounded,
-                size: SizeIcon.m,
+                size: SizeIcon.s,
                 color: Color(0xFFF3F7FF),
               ),
             ),
@@ -47,7 +47,7 @@ class NicknameSuggestionRow extends StatelessWidget {
             const UIIconCard(
               icon: Icon(
                 Icons.check_rounded,
-                size: SizeIcon.m,
+                size: SizeIcon.s,
                 color: Colors.white,
               ),
             ),

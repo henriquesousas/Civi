@@ -28,6 +28,7 @@ import 'package:deehelp/test_nickname_required_page.dart';
 import 'package:deehelp/test_noise.dart';
 import 'package:deehelp/test_phone_register_page.dart';
 import 'package:deehelp/test_post.dart';
+import 'package:deehelp/test_profile_v2.dart';
 import 'package:deehelp/test_registrar.dart';
 import 'package:deehelp/test_registrar2.dart';
 import 'package:deehelp/test_router_preview.dart';
@@ -39,8 +40,9 @@ import 'package:deehelp/teste_notification.dart';
 import 'package:deehelp/v2/feature/feed/presentation/fedd_post_page.dart';
 import 'package:deehelp/v2/feature/location_disable/presentation/location_disable_page.dart';
 import 'package:deehelp/v2/feature/login/presentation/login_page.dart';
+import 'package:deehelp/v2/feature/map/presentation/map_page.dart';
 import 'package:deehelp/v2/feature/notification/presentation/notification_page.dart';
-import 'package:deehelp/v2/feature/occurrence/detail/presentation/alert_detail.dart';
+import 'package:deehelp/v2/feature/occurrence/detail/presentation/alert_detail_page.dart';
 import 'package:deehelp/v2/feature/product/presentation/list/list_product_page.dart';
 import 'package:deehelp/v2/feature/product/presentation/register/vehicle/register_phone_page.dart';
 import 'package:deehelp/v2/feature/product/presentation/register/vehicle/register_vehicle_page.dart';
@@ -120,63 +122,66 @@ var goRouterProvider = Provider<GoRouter>(
         GoRoute(
           path: '/',
           pageBuilder: (context, state) => slideTransitionPage(
-              key: state.pageKey,
-              // child: const MapPage(),
-              // child: const MapPage2(),
-              // child: const MounsHouse(),
-              // child: const CardBottom(),
+            key: state.pageKey,
+            // child: const MapPage(),
+            // child: const MapPage2(),
+            // child: const MounsHouse(),
+            // child: const CardBottom(),
 
-              // child: EventsScreen(),
-              // child: TesteDetailPage(),
-              // child: ItemDetailsPage(item: ,),
-              // child: ImeiInfoPage(),
-              // child: SuspiciousActivityPage(),
-              // child: NoiseComplaintPage(),
-              // child: FloodAlertPage(
-              //   locationLabel: 'Centro Osascos',
-              // ),
-              // child: ItemTypeSelectionPageLightV2(),
-              // child: ItemTypeSelectionPageDarkV2(),
-              // child: ItemNameStepLightPage(
-              //   itemTypeLabel: "Carro",
-              // ),
-              // child: ItemColorStepPage(),
-              // child: ItemDescriptionPageLight(),
-              // child: ItemDetailPageLight(),
-              // child: ItemDetailPageLightV2(),
-              // child: ItemPhonePageLight(),
-              // child: ItemPhotoStepPage(),
-              // child: ItemPhotoStepDarkPage(),
-              // child: ItemRegisteredSuccessfullyDarkPage(),
-              // child: SuspiciousActivityPageLight(),
-              // child: ThankYouAlertCard(),
-              // child: TestAlertHomePage(), //OK
-              // child: SendAlertPage(),
-              // child: TestMapaDetail(),
-              child: AlertDetail()
-              // child: TestPost(), //OK
-              // child: FeedPostPage(),
-              // child: TesteNicknamePage(),
-              // child: AddNicknamePage(),
-              // child: TestNicknameRequiredPage(),
-              // child: TestAlertZonePage(),
-              // child: TestListProdPage(),
-              // child: ListProductPage(),
-              // child: TestVehicleRegisterPage(),
-              // child: RegisterVehiclePage(),
-              // child: TestPhoneRegisterPage(),
-              // child: RegisterPhonePage(),
-              // child: TestLocationDisabledPage(),
-              // child: LocationDisablePage(),
-              // child: TestWelcome2(),
-              // child: LoginPage(),
-              // child: TestBrandPage(),
-              // child: TestMapa(),
-              // child: TestNotification(), //OK
-              // child: NotificationPage(),
-              // child: FloodAlertPage(locationLabel: "Rua Joao ventura"),
-              // child: SuspiciousActivityPage(),
-              ),
+            // child: EventsScreen(),
+            // child: TesteDetailPage(),
+            // child: ItemDetailsPage(item: ,),
+            // child: ImeiInfoPage(),
+            // child: SuspiciousActivityPage(),
+            // child: NoiseComplaintPage(),
+            // child: FloodAlertPage(
+            //   locationLabel: 'Centro Osascos',
+            // ),
+            // child: ItemTypeSelectionPageLightV2(),
+            // child: ItemTypeSelectionPageDarkV2(),
+            // child: ItemNameStepLightPage(
+            //   itemTypeLabel: "Carro",
+            // ),
+            // child: ItemColorStepPage(),
+            // child: ItemDescriptionPageLight(),
+            // child: ItemDetailPageLight(),
+            // child: ItemDetailPageLightV2(),
+            // child: ItemPhonePageLight(),
+            // child: ItemPhotoStepPage(),
+            // child: ItemPhotoStepDarkPage(),
+            // child: ItemRegisteredSuccessfullyDarkPage(),
+            // child: SuspiciousActivityPageLight(),
+            // child: ThankYouAlertCard(),
+            // child: TestAlertHomePage(), //OK
+            // child: SendAlertPage(),
+            // child: TestMapaDetail(),
+            // child: TestMapa(),
+            child: MapPage(),
+            // child: AlertDetail()
+            // child: TestProfileV2(), //Profile
+            // child: TestPost(), //OK
+            // child: FeedPostPage(),
+            // child: TesteNicknamePage(),
+            // child: AddNicknamePage(),
+            // child: TestNicknameRequiredPage(),
+            // child: TestAlertZonePage(),
+            // child: TestListProdPage(),
+            // child: ListProductPage(),
+            // child: TestVehicleRegisterPage(),
+            // child: RegisterVehiclePage(),
+            // child: TestPhoneRegisterPage(),
+            // child: RegisterPhonePage(),
+            // child: TestLocationDisabledPage(),
+            // child: LocationDisablePage(),
+            // child: TestWelcome2(),
+            // child: LoginPage(),
+            // child: TestBrandPage(),
+            // child: TestMapa(),
+            // child: TestNotification(), //OK
+            // child: NotificationPage(),
+            // child: FloodAlertPage(locationLabel: "Rua Joao ventura"),
+            // child: SuspiciousActivityPage(),
+          ),
         ),
       ],
     );

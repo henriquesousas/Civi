@@ -1,5 +1,5 @@
-import 'package:deehelp/v2/feature/occurrence/detail/presentation/floating_chat_bar.dart';
-import 'package:deehelp/v2/feature/occurrence/detail/presentation/section_distance.dart';
+import 'package:deehelp/v2/feature/occurrence/detail/presentation/widgets/floating_chat_bar.dart';
+import 'package:deehelp/v2/feature/occurrence/detail/presentation/widgets/section_distance.dart';
 import 'package:deehelp/v2/feature/occurrence/detail/presentation/widgets/section_detail.dart';
 import 'package:deehelp/v2/feature/occurrence/detail/presentation/widgets/section_media.dart';
 import 'package:deehelp/v2/feature/occurrence/detail/presentation/widgets/section_summary.dart';

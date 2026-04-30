@@ -70,7 +70,7 @@ class _MediaSectionState extends State<SectionMedia> {
                     const Icon(
                       Icons.remove_red_eye,
                       color: Colors.white,
-                      size: SizeIcon.m,
+                      size: SizeIcon.s,
                     ),
                     Text(
                       '3,659',

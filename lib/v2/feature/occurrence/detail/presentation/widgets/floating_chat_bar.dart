@@ -2,6 +2,7 @@ import 'package:deehelp/core/extension/exports_extension.dart';
 import 'package:deehelp/v2/core/extensions/export_extension.dart';
 import 'package:deehelp/v2/core/theme/export_theme.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class FloatingChatBar extends StatelessWidget {
   const FloatingChatBar({super.key});
@@ -17,10 +18,11 @@ class FloatingChatBar extends StatelessWidget {
         children: [
           Expanded(
             child: Container(
-              height: 68,
-              padding: const EdgeInsets.symmetric(horizontal: 24),
+              height: 50.h,
+              padding:
+                  const EdgeInsets.symmetric(horizontal: SizeLayoutSpacing.l),
               decoration: BoxDecoration(
-                color: const Color(0xFF242424),
+                color: context.themeColor.secundaryBgColor,
                 borderRadius: BorderRadius.circular(34),
                 boxShadow: const [
                   BoxShadow(
@@ -30,14 +32,12 @@ class FloatingChatBar extends StatelessWidget {
                   ),
                 ],
               ),
-              child: const Align(
+              child: Align(
                 alignment: Alignment.centerLeft,
                 child: Text(
                   'Chat · 803',
-                  style: TextStyle(
-                    color: Colors.white,
-                    fontSize: 18,
-                    fontWeight: FontWeight.w500,
+                  style: context.appText.bodyLarger.copyWith(
+                    fontWeight: FontWeight.w600,
                   ),
                 ),
               ),

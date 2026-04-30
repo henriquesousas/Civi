@@ -14,7 +14,7 @@ class ActionTile extends StatelessWidget {
       children: [
         Icon(
           icon,
-          size: SizeIcon.m,
+          size: SizeIcon.s,
           color: context.themeColor.surfaceVariant,
         ),
         Text(

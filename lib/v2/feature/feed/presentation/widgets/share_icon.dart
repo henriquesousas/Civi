@@ -12,7 +12,7 @@ class ShareIcon extends StatelessWidget {
       children: [
         const Icon(
           Icons.reply,
-          size: SizeIcon.m,
+          size: SizeIcon.s,
           color: Colors.white,
         ),
         Text(
