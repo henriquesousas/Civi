@@ -37,9 +37,10 @@ import 'package:deehelp/test_vehicle_register_page.dart';
 import 'package:deehelp/test_welcome.dart';
 import 'package:deehelp/test_welcome_page2.dart';
 import 'package:deehelp/teste_notification.dart';
-import 'package:deehelp/v2/feature/feed/presentation/fedd_post_page.dart';
+import 'package:deehelp/v2/feature/feed/presentation/fedd_page.dart';
 import 'package:deehelp/v2/feature/location_disable/presentation/location_disable_page.dart';
 import 'package:deehelp/v2/feature/login/presentation/login_page.dart';
+import 'package:deehelp/v2/feature/shell/main_shell_page.dart';
 import 'package:deehelp/v2/feature/map/presentation/map_page.dart';
 import 'package:deehelp/v2/feature/notification/presentation/notification_page.dart';
 import 'package:deehelp/v2/feature/occurrence/detail/presentation/alert_detail_page.dart';
@@ -156,7 +157,8 @@ var goRouterProvider = Provider<GoRouter>(
             // child: SendAlertPage(),
             // child: TestMapaDetail(),
             // child: TestMapa(),
-            child: MapPage(),
+            // child: MapPage(),
+            child: MainShellPage(),
             // child: AlertDetail()
             // child: TestProfileV2(), //Profile
             // child: TestPost(), //OK

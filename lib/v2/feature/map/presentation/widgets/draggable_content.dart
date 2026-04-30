@@ -1,3 +1,4 @@
+import 'package:deehelp/core/extension/size_extension.dart';
 import 'package:deehelp/v2/core/theme/size_radius.dart';
 import 'package:deehelp/v2/core/widgets/ui_indicator.dart';
 import 'package:deehelp/v2/core/widgets/ui_thin_divider.dart';
@@ -36,10 +37,10 @@ class DraggableContent extends StatelessWidget {
           Expanded(
             child: ListView(
               controller: scrollController,
-              padding: const EdgeInsets.only(
+              padding: EdgeInsets.only(
                 left: 0,
                 right: 0,
-                // bottom: bottomNavHeight + 20,
+                bottom: context.bottomPadding + 20,
               ),
               children: [
                 const BottomSheetHeader(),

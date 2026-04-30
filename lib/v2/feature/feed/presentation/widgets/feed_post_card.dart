@@ -54,8 +54,9 @@ class FeedPostCard extends StatelessWidget {
               ],
               Text(
                 post.title,
-                style: context.appText.header
-                    .copyWith(fontWeight: FontWeight.w400),
+                style: context.appText.title.copyWith(
+                  fontWeight: FontWeight.w500,
+                ),
               ),
               Text(
                 '${post.timeAgo} · ${post.location} · ${post.distance}',

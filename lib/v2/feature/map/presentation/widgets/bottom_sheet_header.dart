@@ -19,7 +19,7 @@ class BottomSheetHeader extends StatelessWidget {
             children: [
               Expanded(
                 child: Text(
-                  'Scholl',
+                  'Osasco',
                   style: context.appText.header.copyWith(
                     fontWeight: FontWeight.w500,
                   ),

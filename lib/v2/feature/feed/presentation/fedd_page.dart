@@ -1,11 +1,13 @@
 import 'package:deehelp/v2/core/extensions/theme_colors_extension.dart';
+import 'package:deehelp/v2/core/theme/export_theme.dart';
 import 'package:deehelp/v2/feature/feed/domain/feed_post_fake_data.dart';
 import 'package:deehelp/v2/feature/feed/presentation/widgets/feed_post_card.dart';
 import 'package:deehelp/v2/feature/feed/presentation/widgets/silver_app_title.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-class FeedPostPage extends StatelessWidget {
-  const FeedPostPage({super.key});
+class FeedPage extends StatelessWidget {
+  const FeedPage({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -18,8 +20,8 @@ class FeedPostPage extends StatelessWidget {
             floating: false,
             elevation: 0,
             automaticallyImplyLeading: false,
-            toolbarHeight: 72,
-            titleSpacing: 16,
+            toolbarHeight: 64.h,
+            titleSpacing: SizeLayoutSpacing.m,
             title: const SilverAppTitle(),
             bottom: PreferredSize(
               preferredSize: const Size.fromHeight(1),

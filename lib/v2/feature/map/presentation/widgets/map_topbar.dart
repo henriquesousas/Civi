@@ -2,6 +2,7 @@ import 'package:deehelp/core/extension/size_extension.dart';
 import 'package:deehelp/v2/core/extensions/export_extension.dart';
 import 'package:deehelp/v2/core/theme/export_theme.dart';
 import 'package:deehelp/v2/core/widgets/icon/ui_icon_card.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -37,7 +38,7 @@ class MapTopbar extends StatelessWidget {
           spacing: 10,
           children: [
             const Icon(
-              Icons.location_city,
+              Icons.public,
               color: Colors.white,
               size: SizeIcon.m,
             ),
@@ -54,6 +55,13 @@ class MapTopbar extends StatelessWidget {
               width: SizeIcon.xl.w,
               height: SizeIcon.xl.h,
               icon: const Icon(Icons.search),
+            ),
+            UIIconCard(
+              bgColor: Colors.white.withValues(alpha: 0.12),
+              radius: 9999,
+              width: SizeIcon.xl.w,
+              height: SizeIcon.xl.h,
+              icon: const Icon(CupertinoIcons.cube_box_fill),
             ),
           ],
         ),
