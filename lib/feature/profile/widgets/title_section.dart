@@ -1,3 +1,4 @@
+import 'package:deehelp/v2/core/extensions/export_extension.dart';
 import 'package:flutter/material.dart';
 
 class TitleSection extends StatelessWidget {
@@ -11,11 +12,9 @@ class TitleSection extends StatelessWidget {
       padding: const EdgeInsets.fromLTRB(24, 0, 24, 12),
       child: Text(
         title.toUpperCase(),
-        style: const TextStyle(
-          fontSize: 12,
+        style: context.appText.caption.copyWith(
           fontWeight: FontWeight.w600,
-          color: Color(0xFF8A96C8),
-          letterSpacing: 1.2,
+          // color: context.themeColor.secundaryTextColor,
         ),
       ),
     );

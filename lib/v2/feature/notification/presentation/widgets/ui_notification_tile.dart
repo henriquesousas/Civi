@@ -38,7 +38,7 @@ class UINotificationTile extends StatelessWidget {
                   children: [
                     Text(
                       item.title,
-                      style: context.appText.title.copyWith(
+                      style: context.appText.bodyLarger.copyWith(
                         fontWeight: FontWeight.w600,
                       ),
                     ),

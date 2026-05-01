@@ -1,9 +1,8 @@
 import 'package:deehelp/core/extension/exports_extension.dart';
 import 'package:deehelp/core/theme/export_theme.dart';
-import 'package:deehelp/core/ui/styles/export_style.dart';
 import 'package:deehelp/feature/profile/profile_item.dart';
+import 'package:deehelp/v2/core/extensions/export_extension.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 
 import '../../../core/ui/widgets/icon/export_icon.dart';
@@ -55,17 +54,10 @@ class ProfileTile extends StatelessWidget {
                     children: [
                       Text(
                         item.title,
-                        style: TextStyle(
-                          color: context.primaryTextColor,
-                          fontSize: 14.sp,
+                        style: context.appText.subtitle.copyWith(
                           fontWeight: FontWeight.w500,
-                          letterSpacing: -0.8,
                           height: 1.0,
                         ),
-                        // style: context.appText.headermd.copyWith(
-                        //   fontWeight: FontWeight.w800,
-                        //   color: context.onSurface,
-                        // ),
                       ),
                       if (item.badge != null) ...[
                         const SizedBox(width: 8),
@@ -75,13 +67,14 @@ class ProfileTile extends StatelessWidget {
                             vertical: SpacingSize.xxs,
                           ),
                           decoration: BoxDecoration(
-                            color: AppColors.primaryColor,
+                            // color: AppColors.primaryColor,
+                            color: Colors.white,
                             borderRadius: BorderRadius.circular(RadiusSize.xxl),
                           ),
                           child: Text(
                             item.badge!,
-                            style: context.appTextOld.caption.copyWith(
-                              color: Colors.white,
+                            style: context.appText.caption.copyWith(
+                              color: Colors.black,
                               fontWeight: FontWeight.w600,
                             ),
                           ),
@@ -93,7 +86,7 @@ class ProfileTile extends StatelessWidget {
                     const SizedBox(height: SpacingSize.xs),
                     Text(
                       item.subtitle!,
-                      style: context.appTextOld.caption.copyWith(
+                      style: context.appText.caption.copyWith(
                         fontWeight: FontWeight.w400,
                         color: context.secondaryTextColor,
                       ),
@@ -105,9 +98,10 @@ class ProfileTile extends StatelessWidget {
             item.trailing ??
                 (item.hideChevron
                     ? const SizedBox.shrink()
-                    : const Icon(
+                    : Icon(
                         Icons.chevron_right,
-                        color: AppColors.trailing,
+                        color: context.themeColor.secundaryTextColor,
+                        // color: Color(0xFFE7EDE1),
                       )),
           ],
         ),

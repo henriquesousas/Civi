@@ -4,6 +4,7 @@ import 'package:deehelp/core/services/network/network_info.dart';
 import 'package:deehelp/core/services/network/network_info_provider.dart';
 import 'package:deehelp/core/services/network/netwotk_alert_controller.dart';
 import 'package:deehelp/feature/home/waze_alert.dart';
+import 'package:deehelp/feature/profile/export_profile.dart';
 import 'package:deehelp/v2/feature/feed/presentation/fedd_page.dart';
 import 'package:deehelp/v2/feature/map/presentation/map_page.dart';
 import 'package:deehelp/v2/feature/notification/presentation/notification_page.dart';
@@ -25,7 +26,8 @@ class _AppShellPageState extends ConsumerState<MainShellPage> {
     FeedPage(),
     MapPage(),
     SendAlertPage(),
-    NotificationPage()
+    NotificationPage(),
+    ProfilePage(),
   ];
   @override
   Widget build(BuildContext context) {

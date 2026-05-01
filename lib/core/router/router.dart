@@ -38,17 +38,24 @@ import 'package:deehelp/test_welcome.dart';
 import 'package:deehelp/test_welcome_page2.dart';
 import 'package:deehelp/teste_notification.dart';
 import 'package:deehelp/v2/feature/feed/presentation/fedd_page.dart';
+import 'package:deehelp/v2/feature/location_disable/location_disable_router.dart';
 import 'package:deehelp/v2/feature/location_disable/presentation/location_disable_page.dart';
+import 'package:deehelp/v2/feature/login/login_router.dart';
 import 'package:deehelp/v2/feature/login/presentation/login_page.dart';
+import 'package:deehelp/v2/feature/notification/notification_router.dart';
+import 'package:deehelp/v2/feature/occurrence/detail/alert_detail_router.dart';
+import 'package:deehelp/v2/feature/product/product_router.dart';
+import 'package:deehelp/v2/feature/profile/nickname/nickname_routert.dart';
 import 'package:deehelp/v2/feature/shell/main_shell_page.dart';
 import 'package:deehelp/v2/feature/map/presentation/map_page.dart';
 import 'package:deehelp/v2/feature/notification/presentation/notification_page.dart';
 import 'package:deehelp/v2/feature/occurrence/detail/presentation/alert_detail_page.dart';
 import 'package:deehelp/v2/feature/product/presentation/list/list_product_page.dart';
-import 'package:deehelp/v2/feature/product/presentation/register/vehicle/register_phone_page.dart';
+import 'package:deehelp/v2/feature/product/presentation/register/phone/register_phone_page.dart';
 import 'package:deehelp/v2/feature/product/presentation/register/vehicle/register_vehicle_page.dart';
 import 'package:deehelp/v2/feature/profile/nickname/presentation/add_nickname_page.dart';
 import 'package:deehelp/v2/feature/occurrence/send_alert/presentation/send_alert_page.dart';
+import 'package:deehelp/v2/feature/shell/main_shell_router.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
@@ -80,46 +87,56 @@ var goRouterProvider = Provider<GoRouter>(
     Future.microtask(() => ref.read(appStartupProvider.notifier).initCheck());
 
     return GoRouter(
-      initialLocation: SplashRouter.path,
+      // initialLocation: SplashRouter.path,
+      initialLocation: '/',
       debugLogDiagnostics: true,
-      refreshListenable: RouterRefreshNotifier(ref),
-      redirect: (context, state) {
-        final appStatus = ref.read(appStartupProvider);
-        final currentPath = state.matchedLocation;
-        final isPublicRoute = _publicRoutes.contains(currentPath);
-        return '/';
-        // return SplashRouter.path;
-        switch (appStatus) {
-          case AppStatus.loading:
-            // return SplashRouter.path;
-            return AppSheelRouter.path;
+      // refreshListenable: RouterRefreshNotifier(ref),
+      // redirect: (context, state) {
+      //   final appStatus = ref.read(appStartupProvider);
+      //   final currentPath = state.matchedLocation;
+      //   final isPublicRoute = _publicRoutes.contains(currentPath);
+      //   // return '/';
+      //   return MainShellRouter.path;
+      //   switch (appStatus) {
+      //     case AppStatus.loading:
+      //       // return SplashRouter.path;
+      //       return AppSheelRouter.path;
 
-          case AppStatus.unauthenticated:
-            return isPublicRoute ? AppSheelRouter.path : null;
+      //     case AppStatus.unauthenticated:
+      //       return isPublicRoute ? AppSheelRouter.path : null;
 
-          case AppStatus.needLocation:
-            return LocationRouter.locationDenied;
+      //     case AppStatus.needLocation:
+      //       return LocationRouter.locationDenied;
 
-          case AppStatus.gpsInactive:
-            return LocationRouter.gpsDisabled;
+      //     case AppStatus.gpsInactive:
+      //       return LocationRouter.gpsDisabled;
 
-          case AppStatus.ready:
-            return isPublicRoute ? AppSheelRouter.path : null;
-        }
-      },
+      //     case AppStatus.ready:
+      //       return isPublicRoute ? AppSheelRouter.path : null;
+      //   }
+      // },
       routes: [
-        ...AppSheelRouter.routers,
         ...SplashRouter.routers,
-        ...LocationRouter.routers,
-        ...AlertsRouter.routers,
-        ...ProfileRouter.routers,
-        ...AboutRouter.routers,
-        ...FaqPageRouter.routers,
-        ...AuthRouter.routers,
-        ...ItemsRouter.routers,
-        ...IncidentRouter.routers,
-        ...SOSRouter.routers,
-        ...SearchRouter.routers,
+        // ...AppSheelRouter.routers,
+        // ...LocationRouter.routers,
+        // ...AlertsRouter.routers,
+        // ...ProfileRouter.routers,
+        // ...AboutRouter.routers,
+        // ...FaqPageRouter.routers,
+        // ...AuthRouter.routers,
+        // ...ItemsRouter.routers,
+        // ...IncidentRouter.routers,
+        // ...SOSRouter.routers,
+        // ...SearchRouter.routers,
+        //Rotas V2
+        ...MainShellRouter.routers,
+        ...LocationDisableRouter.routers,
+        ...LoginRouter.routers,
+        ...NotificationRouter.routers,
+        ...AlertDetailRouter.routers,
+        ...NicknameRouter.routers,
+        ...ProductRouter.routers,
+
         GoRoute(
           path: '/',
           pageBuilder: (context, state) => slideTransitionPage(
@@ -158,7 +175,7 @@ var goRouterProvider = Provider<GoRouter>(
             // child: TestMapaDetail(),
             // child: TestMapa(),
             // child: MapPage(),
-            child: MainShellPage(),
+            // child: MainShellPage(),
             // child: AlertDetail()
             // child: TestProfileV2(), //Profile
             // child: TestPost(), //OK
@@ -167,7 +184,7 @@ var goRouterProvider = Provider<GoRouter>(
             // child: AddNicknamePage(),
             // child: TestNicknameRequiredPage(),
             // child: TestAlertZonePage(),
-            // child: TestListProdPage(),
+            child: TestListProdPage(),
             // child: ListProductPage(),
             // child: TestVehicleRegisterPage(),
             // child: RegisterVehiclePage(),

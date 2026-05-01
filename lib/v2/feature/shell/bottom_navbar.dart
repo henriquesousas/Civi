@@ -24,24 +24,25 @@ class BottomNavBar extends StatelessWidget {
         label: 'Feed',
       ),
       const ItemBottom(
-        icon: CupertinoIcons.location,
-        activeIcon: CupertinoIcons.location_fill,
+        icon: CupertinoIcons.map,
+        activeIcon: CupertinoIcons.map_fill,
         label: 'Mapa',
       ),
+      //
       const ItemBottom(
-        icon: CupertinoIcons.exclamationmark_triangle,
-        activeIcon: CupertinoIcons.exclamationmark_triangle_fill,
+        icon: CupertinoIcons.largecircle_fill_circle,
+        activeIcon: CupertinoIcons.largecircle_fill_circle,
         label: 'Denúnciar',
         isCenter: true,
       ),
       const ItemBottom(
         icon: CupertinoIcons.bell,
         activeIcon: CupertinoIcons.bell_fill,
-        label: 'Notificações',
+        label: 'Mensagens',
       ),
       const ItemBottom(
-        icon: CupertinoIcons.person,
-        activeIcon: CupertinoIcons.person_fill,
+        icon: CupertinoIcons.person_alt_circle,
+        activeIcon: CupertinoIcons.person_alt_circle_fill,
         label: 'Perfil',
       ),
     ];

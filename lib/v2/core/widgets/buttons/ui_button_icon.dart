@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 class UIButtonIcon extends StatelessWidget {
   final VoidCallback tap;
   final String title;
-  final Icon icon;
+  final Widget icon;
   final ButtonStyle? buttonStyle;
   final TextStyle? textStyle;
   const UIButtonIcon({
@@ -18,31 +18,29 @@ class UIButtonIcon extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Expanded(
-      child: OutlinedButton.icon(
-        onPressed: tap,
-        icon: icon,
-        label: Text(
-          title,
-          style: textStyle ??
-              context.appText.button.copyWith(
-                fontWeight: FontWeight.w700,
-                color: Colors.black,
-              ),
-        ),
-        style: buttonStyle ??
-            OutlinedButton.styleFrom(
-              foregroundColor: Colors.black,
-              side: const BorderSide(
-                color: Color(0xFF22314D),
-              ),
-              backgroundColor: Colors.white,
-              padding: const EdgeInsets.symmetric(vertical: 13),
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(999),
-              ),
+    return OutlinedButton.icon(
+      onPressed: tap,
+      icon: icon,
+      label: Text(
+        title,
+        style: textStyle ??
+            context.appText.button.copyWith(
+              fontWeight: FontWeight.w700,
+              color: Colors.black,
             ),
       ),
+      style: buttonStyle ??
+          OutlinedButton.styleFrom(
+            foregroundColor: Colors.black,
+            side: const BorderSide(
+              color: Color(0xFF22314D),
+            ),
+            backgroundColor: Colors.white,
+            padding: const EdgeInsets.symmetric(vertical: 13),
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(999),
+            ),
+          ),
     );
   }
 }

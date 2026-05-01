@@ -4,8 +4,10 @@ import 'package:deehelp/v2/core/theme/export_theme.dart';
 import 'package:deehelp/v2/core/widgets/buttons/export_buttons.dart';
 import 'package:deehelp/v2/feature/login/presentation/widgets/floating_tag.dart';
 import 'package:deehelp/v2/feature/login/presentation/widgets/login_chip.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_svg/svg.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
@@ -114,10 +116,10 @@ class _LoginPageState extends State<LoginPage> {
                     ),
                     const SizedBox(height: SizeSpacing.xl),
                     UIButtonPrimary(
-                      text: "Começar com o Google",
-                      backgroundColor: AppColor.primaryColor,
-                      textColor: Colors.white,
                       press: () {},
+                      text: "Login com o Google",
+                      textColor: Colors.white,
+                      backgroundColor: AppColor.primaryColor,
                     ),
                     const SizedBox(height: SizeSpacing.xs),
                     Center(
@@ -125,7 +127,9 @@ class _LoginPageState extends State<LoginPage> {
                         onPressed: () {},
                         child: const Text(
                           "Continuar sem login",
-                          style: TextStyle(color: Colors.white),
+                          style: TextStyle(
+                            color: Colors.white,
+                          ),
                         ),
                       ),
                     ),
@@ -213,3 +217,62 @@ class _LoginPageState extends State<LoginPage> {
 //     );
 //   }
 // }
+
+class GoogleLoginButton extends StatelessWidget {
+  final VoidCallback onPressed;
+
+  const GoogleLoginButton({
+    super.key,
+    required this.onPressed,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return SizedBox(
+      width: double.infinity,
+      height: 56,
+      child: CupertinoButton(
+        padding: EdgeInsets.zero,
+        onPressed: onPressed,
+        child: Container(
+          height: 56,
+          decoration: BoxDecoration(
+            color: const Color(0xFF1F1F1F),
+            borderRadius: BorderRadius.circular(18),
+            border: Border.all(
+              color: const Color(0xFF2C2C2C),
+            ),
+            boxShadow: [
+              BoxShadow(
+                color: CupertinoColors.black.withValues(alpha: .18),
+                blurRadius: 18,
+                offset: const Offset(0, 8),
+              ),
+            ],
+          ),
+          padding: const EdgeInsets.symmetric(horizontal: 18),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              SvgPicture.asset(
+                "assets/svg/google.svg",
+                width: 22,
+                height: 22,
+              ),
+              const SizedBox(width: 14),
+              const Text(
+                'Continuar com Google',
+                style: TextStyle(
+                  color: CupertinoColors.white,
+                  fontSize: 16,
+                  fontWeight: FontWeight.w600,
+                  letterSpacing: -.2,
+                ),
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+}

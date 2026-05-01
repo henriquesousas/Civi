@@ -46,15 +46,15 @@ class _ProfileImageWithUploadButtonWidgetState
         children: [
           Container(
             padding: const EdgeInsets.all(1),
-            decoration: BoxDecoration(
-              border: Border.all(
-                color: widget.showBorder
-                    ? context.primaryColor
-                    : context.primaryColor,
-                width: 1,
-              ),
-              borderRadius: BorderRadius.circular(RadiusSize.xxl),
-            ),
+            // decoration: BoxDecoration(
+            //   border: Border.all(
+            //     color: widget.showBorder
+            //         ? context.primaryColor
+            //         : context.primaryColor,
+            //     width: 1,
+            //   ),
+            //   borderRadius: BorderRadius.circular(RadiusSize.xxl),
+            // ),
             child: Container(
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(RadiusSize.xxl),

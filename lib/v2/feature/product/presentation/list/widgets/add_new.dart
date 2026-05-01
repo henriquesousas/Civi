@@ -2,7 +2,9 @@ import 'package:deehelp/core/theme/export_theme.dart';
 import 'package:deehelp/v2/core/extensions/export_extension.dart';
 import 'package:deehelp/v2/core/theme/export_theme.dart';
 import 'package:deehelp/v2/core/widgets/icon/export_icon.dart';
+import 'package:deehelp/v2/feature/product/product_router.dart';
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 
 class AddNew extends StatelessWidget {
   const AddNew({super.key});
@@ -10,7 +12,7 @@ class AddNew extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      onTap: () {},
+      onTap: () => context.push(ProductRouter.addNewVehicle),
       child: Container(
         padding: const EdgeInsets.symmetric(
           horizontal: SizeLayoutSpacing.m,
