@@ -1,5 +1,6 @@
 import 'dart:math';
 
+import 'package:deehelp/core/ui/widgets/appbar/default_app_bar.dart';
 import 'package:deehelp/core/ui/widgets/buttons/buttons_export.dart';
 import 'package:deehelp/v2/core/extensions/export_extension.dart';
 import 'package:deehelp/v2/core/theme/export_theme.dart';
@@ -10,6 +11,7 @@ import 'package:deehelp/v2/feature/profile/nickname/widgets/nickname_suggetion_r
 import 'package:deehelp/v2/feature/profile/nickname/widgets/header_suggestion_nickname.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:go_router/go_router.dart';
 
 class AddNicknamePage extends StatefulWidget {
   const AddNicknamePage({super.key});
@@ -182,9 +184,9 @@ class _AddNicknamePageState extends State<AddNicknamePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        elevation: 0,
-        centerTitle: true,
+      appBar: DefaultAppBar(
+        showBackButton: true,
+        press: () => context.pop(),
       ),
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: SizeLayoutSpacing.m),

@@ -4,10 +4,12 @@ import 'package:deehelp/v2/core/theme/export_theme.dart';
 import 'package:deehelp/v2/core/widgets/buttons/export_buttons.dart';
 import 'package:deehelp/v2/feature/login/presentation/widgets/floating_tag.dart';
 import 'package:deehelp/v2/feature/login/presentation/widgets/login_chip.dart';
+import 'package:deehelp/v2/feature/profile/profile_routert.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:go_router/go_router.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
@@ -116,7 +118,7 @@ class _LoginPageState extends State<LoginPage> {
                     ),
                     const SizedBox(height: SizeSpacing.xl),
                     UIButtonPrimary(
-                      press: () {},
+                      press: () => context.push(ProfileRouter.path),
                       text: "Login com o Google",
                       textColor: Colors.white,
                       backgroundColor: AppColor.primaryColor,

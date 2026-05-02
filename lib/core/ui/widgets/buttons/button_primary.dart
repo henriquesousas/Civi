@@ -24,7 +24,8 @@ class ButtonPrimary extends StatelessWidget {
       height: ButtonSize.xs,
       child: ElevatedButton(
         style: ElevatedButton.styleFrom(
-          backgroundColor: const Color(0xFFB8CDE3),
+          // backgroundColor: const Color(0xFFB8CDE3),
+          backgroundColor: AppColors.primaryColor,
           foregroundColor: Colors.black,
           minimumSize: const Size(double.infinity, 32),
           shape: const RoundedRectangleBorder(
@@ -55,7 +56,7 @@ class ButtonPrimary extends StatelessWidget {
     return Text(
       text,
       style: context.appText.button.copyWith(
-        color: Colors.black,
+        color: Colors.white,
       ),
     );
   }

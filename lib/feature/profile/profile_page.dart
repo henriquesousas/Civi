@@ -1,5 +1,4 @@
 import 'package:deehelp/core/extension/exports_extension.dart';
-// import 'package:deehelp/core/theme/export_theme.dart';
 import 'package:deehelp/core/ui/widgets/appbar/default_app_bar.dart';
 import 'package:deehelp/core/utils/navigation_utils.dart';
 import 'package:deehelp/feature/about/about_exports.dart';
@@ -10,16 +9,14 @@ import 'package:deehelp/feature/profile/widgets/title_section.dart';
 import 'package:deehelp/feature/search/search_args.dart';
 import 'package:deehelp/feature/search/search_router.dart';
 import 'package:deehelp/feature/sos/sos_router.dart';
-import 'package:deehelp/module/auth/external/di/auth_view_model_provider.dart';
 import 'package:deehelp/core/utils/url_launcher_utils.dart';
 import 'package:deehelp/module/auth/external/di/authenticated_user_provider.dart';
 import 'package:deehelp/v2/core/extensions/export_extension.dart';
 import 'package:deehelp/v2/core/extensions/text_extension.dart';
 import 'package:deehelp/v2/core/theme/export_theme.dart';
-import 'package:deehelp/v2/core/theme/size_icon.dart';
-import 'package:deehelp/v2/core/theme/size_layout_spacing.dart';
-import 'package:deehelp/v2/feature/login/login_router.dart';
 import 'package:deehelp/v2/feature/product/product_router.dart';
+import 'package:deehelp/v2/feature/profile/profile/text_ripple.dart';
+import 'package:deehelp/v2/feature/profile/profile/widgets/profile_header.dart';
 import 'package:deehelp/v2/feature/profile/profile/widgets/profile_premium_card.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -35,7 +32,7 @@ class ProfilePage extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final session = ref.watch(authenticatedUserProvider);
-    final authViewModel = ref.watch(authViewViewModelProvider.notifier);
+    // final authViewModel = ref.watch(authViewViewModelProvider.notifier);
     return Scaffold(
       backgroundColor: context.scaffoldBackgroundColor,
       appBar: DefaultAppBar(
@@ -96,80 +93,8 @@ class ProfilePage extends ConsumerWidget {
           //     ],
           //   ),
           // ],
-          const _ProfileHeader(),
+          const ProfileHeader(),
           const SizedBox(height: SizeSpacing.l),
-          //TOOD: Refatorar esse widget
-          // Container(
-          //   margin: const EdgeInsets.symmetric(horizontal: SizeLayoutSpacing.m),
-          //   padding: const EdgeInsets.all(14),
-          //   decoration: BoxDecoration(
-          //     borderRadius: BorderRadius.circular(22),
-          //     border: Border.all(
-          //       color: Colors.white.withOpacity(.06),
-          //     ),
-          //     gradient: const LinearGradient(
-          //       begin: Alignment.topLeft,
-          //       end: Alignment.bottomRight,
-          //       colors: [
-          //         Color(0xFF111827),
-          //         Color(0xFF0B1220),
-          //         Colors.black,
-          //       ],
-          //     ),
-          //   ),
-          //   child: Row(
-          //     children: [
-          //       Container(
-          //         width: 52,
-          //         height: 52,
-          //         decoration: BoxDecoration(
-          //           borderRadius: BorderRadius.circular(16),
-          //           border: Border.all(
-          //             color: Color(0xFF6B8DFF),
-          //           ),
-          //         ),
-          //         child: const Icon(
-          //           CupertinoIcons.sparkles,
-          //           color: Color(0xFF7DA2FF),
-          //           size: 24,
-          //         ),
-          //       ),
-          //       const SizedBox(width: 14),
-          //       const Expanded(
-          //         child: Column(
-          //           crossAxisAlignment: CrossAxisAlignment.start,
-          //           children: [
-          //             Text(
-          //               'Upgrade to Premium',
-          //               style: TextStyle(
-          //                 color: Colors.white,
-          //                 fontSize: 20,
-          //                 fontWeight: FontWeight.w700,
-          //               ),
-          //             ),
-          //             SizedBox(height: 2),
-          //             Text(
-          //               'Gain access to all of Citizen.',
-          //               style: TextStyle(
-          //                 color: Colors.white70,
-          //                 fontSize: 14,
-          //               ),
-          //             ),
-          //             SizedBox(height: 6),
-          //             Text(
-          //               'Learn More',
-          //               style: TextStyle(
-          //                 color: Color(0xFF6C8FFF),
-          //                 fontSize: 14,
-          //                 fontWeight: FontWeight.w600,
-          //               ),
-          //             ),
-          //           ],
-          //         ),
-          //       ),
-          //     ],
-          //   ),
-          // ),
           const ProfilePremiumCard(),
           const SizedBox(height: SizeSpacing.l),
           ProfileOptions(
@@ -273,51 +198,12 @@ class ProfilePage extends ConsumerWidget {
             ],
           ),
           const SizedBox(height: SizeSpacing.l),
-          //Refatorar esse widget
           Column(
             spacing: 15,
             children: [
-              InkWell(
-                child: GestureDetector(
-                  onTap: () {},
-                  child: Text(
-                    "Termos de uso".toUpperCase(),
-                    style: context.appText.caption.copyWith(
-                      fontWeight: FontWeight.w500,
-                      color: context.themeColor.secundaryTextColor,
-                    ),
-                  ),
-                ),
-              ),
-              Material(
-                color: Colors.transparent,
-                child: InkWell(
-                  borderRadius: BorderRadius.circular(8),
-                  onTap: () {
-                    // ação
-                  },
-                  child: Padding(
-                    padding: const EdgeInsets.symmetric(
-                      horizontal: 8,
-                      vertical: 6,
-                    ),
-                    child: Text(
-                      "Política de privacidade".toUpperCase(),
-                      style: context.appText.caption.copyWith(
-                        fontWeight: FontWeight.w500,
-                        color: context.themeColor.secundaryTextColor,
-                      ),
-                    ),
-                  ),
-                ),
-              ),
-              Text(
-                "Sair".toUpperCase(),
-                style: context.appText.caption.copyWith(
-                  fontWeight: FontWeight.w500,
-                  color: context.themeColor.secundaryTextColor,
-                ),
-              ),
+              TextRipple(text: "Termos de uso".toUpperCase()),
+              TextRipple(text: "Política de privacidade".toUpperCase()),
+              TextRipple(text: "Sair".toUpperCase()),
               const SizedBox(height: SizeSpacing.l),
             ],
           )
@@ -370,65 +256,6 @@ class UIButtonLogout extends StatelessWidget {
           style: context.appText.subtitle.copyWith(
             fontWeight: FontWeight.w700,
           ),
-        ),
-      ),
-    );
-  }
-}
-
-//TODO: Refatorar esse widget
-class _ProfileHeader extends StatelessWidget {
-  const _ProfileHeader();
-
-  @override
-  Widget build(BuildContext context) {
-    return GestureDetector(
-      onTap: () => context.push(LoginRouter.path),
-      child: Container(
-        margin: const EdgeInsets.symmetric(horizontal: SizeLayoutSpacing.m),
-        child: const Column(
-          children: [
-            CircleAvatar(
-              radius: 32,
-              backgroundColor: Color(0xFFDDE6D1),
-              child: Icon(
-                Icons.person,
-                color: Color(0xFF252A20),
-                size: 32,
-              ),
-            ),
-            SizedBox(height: 12),
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  'Paulo Soares',
-                  style: TextStyle(
-                    color: Color(0xFFF4F6F0),
-                    fontSize: 15,
-                    fontWeight: FontWeight.w800,
-                  ),
-                ),
-                SizedBox(height: 3),
-                Text(
-                  'paulo@email.com',
-                  style: TextStyle(
-                    color: Color(0xFF9EA69A),
-                    fontSize: 12,
-                    fontWeight: FontWeight.w500,
-                  ),
-                ),
-              ],
-            ),
-            // IconButton(
-            //   onPressed: () {},
-            //   icon: const Icon(
-            //     Icons.edit_outlined,
-            //     color: Color(0xFFE7EDE1),
-            //     size: 20,
-            //   ),
-            // ),
-          ],
         ),
       ),
     );

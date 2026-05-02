@@ -45,7 +45,7 @@ import 'package:deehelp/v2/feature/login/presentation/login_page.dart';
 import 'package:deehelp/v2/feature/notification/notification_router.dart';
 import 'package:deehelp/v2/feature/occurrence/detail/alert_detail_router.dart';
 import 'package:deehelp/v2/feature/product/product_router.dart';
-import 'package:deehelp/v2/feature/profile/nickname/nickname_routert.dart';
+import 'package:deehelp/v2/feature/profile/profile_routert.dart';
 import 'package:deehelp/v2/feature/shell/main_shell_page.dart';
 import 'package:deehelp/v2/feature/map/presentation/map_page.dart';
 import 'package:deehelp/v2/feature/notification/presentation/notification_page.dart';
@@ -134,7 +134,8 @@ var goRouterProvider = Provider<GoRouter>(
         ...LoginRouter.routers,
         ...NotificationRouter.routers,
         ...AlertDetailRouter.routers,
-        ...NicknameRouter.routers,
+        ...ProfileRouter.routers,
+        ...ProfileRouterOld.routers,
         ...ProductRouter.routers,
 
         GoRoute(
