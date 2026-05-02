@@ -26,7 +26,7 @@ class FloatingTag extends StatelessWidget {
         Container(
           padding: const EdgeInsets.symmetric(
             horizontal: SizeLayoutSpacing.m,
-            vertical: SizeLayoutSpacing.x,
+            vertical: SizeLayoutSpacing.xs,
           ),
           decoration: BoxDecoration(
             color: const Color(0xFFF8FAFC),

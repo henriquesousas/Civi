@@ -7,26 +7,25 @@ class TopDescription extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
+    return Padding(
       padding: const EdgeInsets.symmetric(
         horizontal: SizeLayoutSpacing.m,
-        vertical: SizeLayoutSpacing.m,
       ),
-      width: double.infinity,
-      alignment: Alignment.centerLeft,
-      decoration: BoxDecoration(
-        border: Border.symmetric(
-          horizontal: BorderSide(
-            color: Colors.white.withValues(alpha: 0.10),
-            width: 1,
+      child: Container(
+        padding: const EdgeInsets.all(SizeLayoutSpacing.m),
+        decoration: BoxDecoration(
+          color: context.themeColor.primaryBgColor,
+          borderRadius: BorderRadius.circular(SizeRadius.xxs),
+          border: Border.all(
+            color: Colors.white.withValues(alpha: .05),
           ),
         ),
-      ),
-      child: Text(
-        'Cadastre ou gerencie, carros, motos e celulares para acompanhar ocorrências e receber alertas rapidamente.',
-        style: context.appText.bodyLarger.copyWith(
-          color: context.themeColor.secundaryTextColor,
-          fontWeight: FontWeight.w400,
+        child: Text(
+          'Cadastre veículos e celulares para acompanhar ocorrências e receber alertas rapidamente.',
+          style: context.appText.caption.copyWith(
+            fontWeight: FontWeight.w500,
+            color: context.themeColor.secundaryTextColor,
+          ),
         ),
       ),
     );
