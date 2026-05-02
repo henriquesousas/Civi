@@ -20,6 +20,7 @@ import 'package:deehelp/v2/core/theme/size_icon.dart';
 import 'package:deehelp/v2/core/theme/size_layout_spacing.dart';
 import 'package:deehelp/v2/feature/login/login_router.dart';
 import 'package:deehelp/v2/feature/product/product_router.dart';
+import 'package:deehelp/v2/feature/profile/profile/widgets/profile_premium_card.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -98,77 +99,78 @@ class ProfilePage extends ConsumerWidget {
           const _ProfileHeader(),
           const SizedBox(height: SizeSpacing.l),
           //TOOD: Refatorar esse widget
-          Container(
-            margin: const EdgeInsets.symmetric(horizontal: SizeLayoutSpacing.m),
-            padding: const EdgeInsets.all(14),
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(22),
-              border: Border.all(
-                color: Colors.white.withOpacity(.06),
-              ),
-              gradient: const LinearGradient(
-                begin: Alignment.topLeft,
-                end: Alignment.bottomRight,
-                colors: [
-                  Color(0xFF111827),
-                  Color(0xFF0B1220),
-                  Colors.black,
-                ],
-              ),
-            ),
-            child: Row(
-              children: [
-                Container(
-                  width: 52,
-                  height: 52,
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(16),
-                    border: Border.all(
-                      color: Color(0xFF6B8DFF),
-                    ),
-                  ),
-                  child: const Icon(
-                    CupertinoIcons.sparkles,
-                    color: Color(0xFF7DA2FF),
-                    size: 24,
-                  ),
-                ),
-                const SizedBox(width: 14),
-                const Expanded(
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        'Upgrade to Premium',
-                        style: TextStyle(
-                          color: Colors.white,
-                          fontSize: 20,
-                          fontWeight: FontWeight.w700,
-                        ),
-                      ),
-                      SizedBox(height: 2),
-                      Text(
-                        'Gain access to all of Citizen.',
-                        style: TextStyle(
-                          color: Colors.white70,
-                          fontSize: 14,
-                        ),
-                      ),
-                      SizedBox(height: 6),
-                      Text(
-                        'Learn More',
-                        style: TextStyle(
-                          color: Color(0xFF6C8FFF),
-                          fontSize: 14,
-                          fontWeight: FontWeight.w600,
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-              ],
-            ),
-          ),
+          // Container(
+          //   margin: const EdgeInsets.symmetric(horizontal: SizeLayoutSpacing.m),
+          //   padding: const EdgeInsets.all(14),
+          //   decoration: BoxDecoration(
+          //     borderRadius: BorderRadius.circular(22),
+          //     border: Border.all(
+          //       color: Colors.white.withOpacity(.06),
+          //     ),
+          //     gradient: const LinearGradient(
+          //       begin: Alignment.topLeft,
+          //       end: Alignment.bottomRight,
+          //       colors: [
+          //         Color(0xFF111827),
+          //         Color(0xFF0B1220),
+          //         Colors.black,
+          //       ],
+          //     ),
+          //   ),
+          //   child: Row(
+          //     children: [
+          //       Container(
+          //         width: 52,
+          //         height: 52,
+          //         decoration: BoxDecoration(
+          //           borderRadius: BorderRadius.circular(16),
+          //           border: Border.all(
+          //             color: Color(0xFF6B8DFF),
+          //           ),
+          //         ),
+          //         child: const Icon(
+          //           CupertinoIcons.sparkles,
+          //           color: Color(0xFF7DA2FF),
+          //           size: 24,
+          //         ),
+          //       ),
+          //       const SizedBox(width: 14),
+          //       const Expanded(
+          //         child: Column(
+          //           crossAxisAlignment: CrossAxisAlignment.start,
+          //           children: [
+          //             Text(
+          //               'Upgrade to Premium',
+          //               style: TextStyle(
+          //                 color: Colors.white,
+          //                 fontSize: 20,
+          //                 fontWeight: FontWeight.w700,
+          //               ),
+          //             ),
+          //             SizedBox(height: 2),
+          //             Text(
+          //               'Gain access to all of Citizen.',
+          //               style: TextStyle(
+          //                 color: Colors.white70,
+          //                 fontSize: 14,
+          //               ),
+          //             ),
+          //             SizedBox(height: 6),
+          //             Text(
+          //               'Learn More',
+          //               style: TextStyle(
+          //                 color: Color(0xFF6C8FFF),
+          //                 fontSize: 14,
+          //                 fontWeight: FontWeight.w600,
+          //               ),
+          //             ),
+          //           ],
+          //         ),
+          //       ),
+          //     ],
+          //   ),
+          // ),
+          const ProfilePremiumCard(),
           const SizedBox(height: SizeSpacing.l),
           ProfileOptions(
             items: [

@@ -9,6 +9,7 @@ class UIIconCard extends StatelessWidget {
   final double? radius;
   final Color? bgColor;
   final Icon icon;
+  final Border? border;
   const UIIconCard({
     super.key,
     required this.icon,
@@ -16,6 +17,7 @@ class UIIconCard extends StatelessWidget {
     this.width,
     this.height,
     this.bgColor,
+    this.border,
   });
 
   @override
@@ -26,6 +28,7 @@ class UIIconCard extends StatelessWidget {
       decoration: BoxDecoration(
         color: bgColor ?? context.themeColor.secundaryBgColorHight,
         borderRadius: BorderRadius.circular(radius ?? SizeRadius.xxs),
+        border: border,
       ),
       child: icon,
     );
