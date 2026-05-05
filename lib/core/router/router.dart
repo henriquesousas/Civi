@@ -16,8 +16,11 @@ import 'package:deehelp/feature/shell/app_sheel_router.dart';
 import 'package:deehelp/feature/sos/sos_router.dart';
 import 'package:deehelp/feature/splash/splash_router.dart';
 import 'package:deehelp/core/router/router_refresh_notifier.dart';
+import 'package:deehelp/social_profile_screen.dart';
 import 'package:deehelp/test_alert_choose.dart';
 import 'package:deehelp/test_alert_zone_page.dart';
+import 'package:deehelp/test_badge_page.dart';
+import 'package:deehelp/test_badge_unlocked_page.dart';
 import 'package:deehelp/test_bottom.dart';
 import 'package:deehelp/test_brand_page.dart';
 import 'package:deehelp/test_list_prod_page.dart';
@@ -28,6 +31,8 @@ import 'package:deehelp/test_nickname_required_page.dart';
 import 'package:deehelp/test_noise.dart';
 import 'package:deehelp/test_phone_register_page.dart';
 import 'package:deehelp/test_post.dart';
+import 'package:deehelp/test_profile3.dart';
+import 'package:deehelp/test_profile_badge_page.dart';
 import 'package:deehelp/test_profile_v2.dart';
 import 'package:deehelp/test_registrar.dart';
 import 'package:deehelp/test_registrar2.dart';
@@ -117,19 +122,6 @@ var goRouterProvider = Provider<GoRouter>(
       // },
       routes: [
         ...SplashRouter.routers,
-        // ...AppSheelRouter.routers,
-        // ...LocationRouter.routers,
-        // ...AlertsRouter.routers,
-        // ...ProfileRouter.routers,
-        // ...AboutRouter.routers,
-        // ...FaqPageRouter.routers,
-        // ...AuthRouter.routers,
-        // ...ItemsRouter.routers,
-        // ...IncidentRouter.routers,
-        // ...SOSRouter.routers,
-        // ...SearchRouter.routers,
-        //Rotas V2
-        ...MainShellRouter.routers,
         ...LocationDisableRouter.routers,
         ...LoginRouter.routers,
         ...NotificationRouter.routers,
@@ -137,7 +129,6 @@ var goRouterProvider = Provider<GoRouter>(
         ...ProfileRouter.routers,
         ...ProfileRouterOld.routers,
         ...ProductRouter.routers,
-
         GoRoute(
           path: '/',
           pageBuilder: (context, state) => slideTransitionPage(
@@ -179,13 +170,18 @@ var goRouterProvider = Provider<GoRouter>(
             // child: MainShellPage(),
             // child: AlertDetail()
             // child: TestProfileV2(), //Profile
+            // child: TesteSettings(),
+            // child: SocialProfileScreen(),
+            child: TestProfileBadgePage(),
+            // child: TestBadgeUnlockedPage(),
+            // child: TestBadgePage(),
             // child: TestPost(), //OK
             // child: FeedPostPage(),
             // child: TesteNicknamePage(),
             // child: AddNicknamePage(),
             // child: TestNicknameRequiredPage(),
             // child: TestAlertZonePage(),
-            child: TestListProdPage(),
+            // child: TestListProdPage(),
             // child: ListProductPage(),
             // child: TestVehicleRegisterPage(),
             // child: RegisterVehiclePage(),

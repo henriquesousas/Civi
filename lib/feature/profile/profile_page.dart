@@ -100,6 +100,14 @@ class ProfilePage extends ConsumerWidget {
           ProfileOptions(
             items: [
               ProfileItem(
+                icon: CupertinoIcons.person,
+                title: 'Minha conta',
+                subtitle: 'Dados pessoais',
+                press: () => context.push(
+                  NavigationUtils.path(IncidentRouter.list, session),
+                ),
+              ),
+              ProfileItem(
                 icon: CupertinoIcons.cube_box,
                 title: 'Meus itens',
                 subtitle: 'Itens vinculados ao seu perfil',
@@ -116,7 +124,7 @@ class ProfilePage extends ConsumerWidget {
               ),
               ProfileItem(
                 icon: CupertinoIcons.doc_text,
-                title: 'Minhas ocorrências',
+                title: 'Meus alertas',
                 subtitle: 'Histórico de registros feitos por você',
                 press: () => context.push(
                   NavigationUtils.path(IncidentRouter.list, session),
