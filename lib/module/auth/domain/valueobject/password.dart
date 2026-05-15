@@ -1,23 +1,23 @@
-import 'package:deehelp/core/valueobject/value_object.dart';
+// import 'package:deehelp/business/_shared/value_objects/value_object.dart';
 
-class Password extends ValueObject<String> {
-  static const _minLength = 3;
-  static const _maxLength = 10;
+// class Password extends ValueObject<String> {
+//   static const _minLength = 3;
+//   static const _maxLength = 10;
 
-  Password._(super.value);
+//   Password._(super.value);
 
-  factory Password.from(String value) {
-    return Password._(value);
-  }
+//   factory Password.from(String value) {
+//     return Password._(value);
+//   }
 
-  @override
-  void validate(String value) {
-    final sanitizedValue = value.trim();
+//   @override
+//   void validate(String value) {
+//     final sanitizedValue = value.trim();
 
-    if (sanitizedValue.length < _minLength ||
-        sanitizedValue.length > _maxLength) {
-      notification.add("password",
-          'A senha deve ter entre $_minLength e $_maxLength caracteres.');
-    }
-  }
-}
+//     if (sanitizedValue.length < _minLength ||
+//         sanitizedValue.length > _maxLength) {
+//       notification.add("password",
+//           'A senha deve ter entre $_minLength e $_maxLength caracteres.');
+//     }
+//   }
+// }

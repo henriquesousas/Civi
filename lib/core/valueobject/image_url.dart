@@ -1,4 +1,4 @@
-import 'package:deehelp/core/valueobject/value_object.dart';
+import 'package:deehelp/business/_shared/value_objects/value_object.dart';
 
 class ImageUrl extends ValueObject<String> {
   static final RegExp _urlRegex = RegExp(
@@ -16,19 +16,19 @@ class ImageUrl extends ValueObject<String> {
 
   @override
   void validate(value) {
-    if (value.isEmpty) {
-      super.notification.add("imageUrl", "URL da imagem não pode ser vazia.");
-      return;
-    }
+    // if (value.isEmpty) {
+    //   super.notification.add("imageUrl", "URL da imagem não pode ser vazia.");
+    //   return;
+    // }
 
-    if (!_urlRegex.hasMatch(value)) {
-      super.notification.add("imageUrl", "O formato da URL não válida.");
-    }
+    // if (!_urlRegex.hasMatch(value)) {
+    //   super.notification.add("imageUrl", "O formato da URL não válida.");
+    // }
 
-    if (!_hasAllowedExtension(value)) {
-      super.notification.add("imageUrl",
-          "A URL deve terminar com uma extensão permitida: ${_allowedExtensions.join(', ')}.");
-    }
+    // if (!_hasAllowedExtension(value)) {
+    //   super.notification.add("imageUrl",
+    //       "A URL deve terminar com uma extensão permitida: ${_allowedExtensions.join(', ')}.");
+    // }
   }
 
   bool _hasAllowedExtension(String url) {

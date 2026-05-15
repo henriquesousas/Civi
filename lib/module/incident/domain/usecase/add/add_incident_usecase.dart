@@ -2,7 +2,7 @@ import 'dart:math';
 
 import 'package:deehelp/core/base/use_case.dart';
 import 'package:deehelp/core/ui/widgets/badge/export_badge.dart';
-import 'package:deehelp/core/utils/id_utils.dart';
+import 'package:deehelp/business/_shared/utils/id_utils.dart';
 import 'package:deehelp/core/utils/result.dart';
 import 'package:deehelp/module/incident/domain/entity/incident.dart';
 import 'package:deehelp/module/incident/domain/incident_repository.dart';

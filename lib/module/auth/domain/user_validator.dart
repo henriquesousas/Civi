@@ -1,26 +1,24 @@
-import 'package:deehelp/core/notification/domain_notification.dart';
+import 'package:deehelp/business/_shared/domain_notification.dart';
+import 'package:deehelp/business/user/user.dart';
 import 'package:deehelp/core/validation/validator.dart';
-import 'package:deehelp/module/auth/domain/entity/user.dart';
 
 import '../../../core/validation/validation_handler.dart';
 
 class UserValidator extends Validator {
-  final User user;
-
   UserValidator({
-    required this.user,
+    required User user,
     required ValidationHandler handler,
   }) : super(handler: handler);
 
   @override
   void validate() {
-    final List<DomainNotification?> notifications = [
-      user.id.notification,
-      user.name.notification,
-      user.email.notification,
-      user.photoUrl?.notification,
-    ];
-    notifications.forEach((notification) => copyIfHasError(notification));
+    // final List<DomainNotification?> notifications = [
+    //   user.id.notification,
+    //   user.name.notification,
+    //   user.email.notification,
+    //   user.photoUrl?.notification,
+    // ];
+    // notifications.forEach((notification) => copyIfHasError(notification));
   }
 
   void copyIfHasError(final DomainNotification? notification) {

@@ -1,5 +1,6 @@
 import '../errors/failure.dart';
 
+//TODO: Remover
 sealed class Result<T> {
   const Result();
 

@@ -1,4 +1,4 @@
-import '../../../../core/utils/id_utils.dart';
+import '../../../../business/_shared/utils/id_utils.dart';
 import '../../../../core/valueobject/identifier.dart';
 
 class ProductId extends Identifier {

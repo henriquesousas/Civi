@@ -1,7 +1,7 @@
 import 'dart:math';
 
 import 'package:deehelp/core/base/use_case.dart';
-import 'package:deehelp/core/utils/id_utils.dart';
+import 'package:deehelp/business/_shared/utils/id_utils.dart';
 import 'package:deehelp/core/utils/result.dart';
 import 'package:deehelp/module/alert/add_alert_dto.dart';
 import 'package:deehelp/module/incident/domain/entity/incident.dart';

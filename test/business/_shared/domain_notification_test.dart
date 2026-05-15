@@ -1,5 +1,5 @@
 import 'package:flutter_test/flutter_test.dart';
-import 'package:deehelp/core/notification/domain_notification.dart';
+import 'package:deehelp/business/_shared/domain_notification.dart';
 
 void main() {
   test("givenSingleNotificationMessage_whenCallAdd_shouldReturnCorrectValues",
@@ -8,11 +8,11 @@ void main() {
     final expectedErrorLength = 1;
 
     final sut = DomainNotification();
-    sut.add("any", expectedError);
+    sut.append("any_field", expectedError);
 
     expect(sut.hasErrors, isTrue);
     expect(sut.getErrors.length, equals(expectedErrorLength));
-    expect(sut.getErrors.first, expectedError);
+    expect(sut.getErrors.first.message, expectedError);
   });
 
   test("givenListNotificationMessage_whenCallAdd_shouldReturnCorrectValues",
@@ -21,12 +21,12 @@ void main() {
     final expectedErrorLength = 2;
 
     final sut = DomainNotification();
-    sut.add("any_1", expectedErrors[0]);
-    sut.add("any_2", expectedErrors[1]);
+    sut.append("any_1", expectedErrors[0]);
+    sut.append("any_2", expectedErrors[1]);
 
     expect(sut.hasErrors, isTrue);
     expect(sut.getErrors.length, equals(expectedErrorLength));
-    expect(sut.getErrors, expectedErrors);
+    expect(sut.getErrors.map((e) => e.message), expectedErrors);
   });
 
   test("givenDomainNotification_whenCallCopy_shouldCopyAllValues", () {
@@ -34,15 +34,15 @@ void main() {
     final expectedErrorLength = 2;
 
     final domainNotification = DomainNotification();
-    domainNotification.add("any_1", expectedErrors[0]);
-    domainNotification.add("any_2", expectedErrors[1]);
+    domainNotification.append("any_1", expectedErrors[0]);
+    domainNotification.append("any_2", expectedErrors[1]);
 
     final sut = DomainNotification();
     sut.copy(domainNotification);
 
     expect(sut.hasErrors, isTrue);
     expect(sut.getErrors.length, equals(expectedErrorLength));
-    expect(sut.getErrors, expectedErrors);
+    expect(sut.getErrors.map((e) => e.message), expectedErrors);
   });
 
   test(
@@ -51,11 +51,11 @@ void main() {
     final expectedErrorLength = 1;
 
     final sut = DomainNotification();
-    sut.add("any", "any");
-    sut.add("any", "any");
+    sut.append("any", "any");
+    sut.append("any", "any");
 
     expect(sut.hasErrors, isTrue);
     expect(sut.getErrors.length, equals(expectedErrorLength));
-    expect(sut.getErrors, ["any"]);
+    expect(sut.getErrors.map((e) => e.message), ["any"]);
   });
 }

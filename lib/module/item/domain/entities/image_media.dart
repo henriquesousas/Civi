@@ -1,6 +1,6 @@
 import 'dart:io';
 
-import 'package:deehelp/core/valueobject/value_object.dart';
+import 'package:deehelp/business/_shared/value_objects/value_object.dart';
 
 enum MediaSource { api, camera, gallery, assets }
 

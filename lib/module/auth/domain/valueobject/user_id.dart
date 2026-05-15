@@ -1,4 +1,3 @@
-import 'package:deehelp/core/utils/id_utils.dart';
 import 'package:deehelp/core/valueobject/identifier.dart';
 
 class UserId extends Identifier {
@@ -9,6 +8,7 @@ class UserId extends Identifier {
   }
 
   factory UserId.unique() {
-    return UserId(IdUtils.generate());
+    // return UserId(IdUtils.generate());
+    return UserId("invalido");
   }
 }

@@ -1,9 +1,9 @@
-import 'package:deehelp/core/valueobject/email.dart';
+import 'package:deehelp/business/_shared/value_objects/email.dart';
 import 'package:deehelp/core/valueobject/image_url.dart';
 import 'package:deehelp/module/auth/domain/entity/user.dart';
 import 'package:deehelp/module/auth/domain/gender.dart';
 import 'package:deehelp/module/auth/domain/status.dart';
-import 'package:deehelp/module/auth/domain/valueobject/name.dart';
+import 'package:deehelp/business/_shared/value_objects/name.dart';
 import 'package:deehelp/module/auth/domain/valueobject/user_id.dart';
 
 class UserBuilder {
@@ -56,14 +56,15 @@ class UserBuilder {
   }
 
   User build() {
-    return User(
-      userId: userId != null ? UserId.from(userId!) : UserId.unique(),
-      name: Name.from(name),
-      email: Email.create(value: email),
-      status: status ?? Status.pending,
-      photoUrl: photoUrl != null ? ImageUrl.create(value: photoUrl!) : null,
-      createdAt: createdAt ?? DateTime.now(),
-      deletedAt: deletedAt,
-    );
+    throw Exception("UserBuilder is not implemented yet");
+    // return User(
+    //   userId: userId != null ? UserId.from(userId!) : UserId.unique(),
+    //   name: Name.create(name),
+    //   email: Email.create(value: email),
+    //   status: status ?? Status.pending,
+    //   photoUrl: photoUrl != null ? ImageUrl.create(value: photoUrl!) : null,
+    //   createdAt: createdAt ?? DateTime.now(),
+    //   deletedAt: deletedAt,
+    // );
   }
 }
