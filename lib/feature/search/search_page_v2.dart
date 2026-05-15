@@ -61,10 +61,10 @@ class _SearchPageV2State extends ConsumerState<SearchPageV2> {
 
     // exemplo
     // repository.searchReports(value);
-    ref.watch(searchViewmodelProvider.notifier).search(
-          _search,
-          SearchMode.auto,
-        );
+    // ref.watch(searchViewmodelProvider.notifier).search(
+    //       _search,
+    //       SearchMode.auto,
+    //     );
   }
 
   void _clearSearch() {

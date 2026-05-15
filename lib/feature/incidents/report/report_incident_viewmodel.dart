@@ -6,7 +6,7 @@ import 'package:deehelp/feature/incidents/report/widgets/success/regiter_inciden
 import 'package:deehelp/feature/items/item_type.dart';
 import 'package:deehelp/core/extension/string_extension.dart';
 import 'package:deehelp/core/handlers/handle_command.dart';
-import 'package:deehelp/module/auth/domain/entity/authenticated_user.dart';
+import 'package:deehelp/business/auth/domain/logged_user.dart';
 import 'package:deehelp/module/incident/domain/entity/incident_local.dart';
 import 'package:deehelp/module/incident/domain/enum/incident_status.dart';
 import 'package:deehelp/module/incident/domain/enum/type_alert.dart';
@@ -28,12 +28,12 @@ import 'package:logging/logging.dart';
 class ReportIncidentViewmodel extends StateNotifier<AddIncidentState> {
   static final _logger = Logger("AddIncidentViewmodel");
   final Ref _ref;
-  final AuthenticatedUser _authenticatedUser;
+  final LoggedUser _authenticatedUser;
   final AddIncidentUsecase _addIncidentUsecase;
   ReportIncidentViewmodel({
     required Ref ref,
     required AddIncidentUsecase addIncidentImmediatelyUsecase,
-    required AuthenticatedUser authenticatedUser,
+    required LoggedUser authenticatedUser,
   })  : _addIncidentUsecase = addIncidentImmediatelyUsecase,
         _ref = ref,
         _authenticatedUser = authenticatedUser,
@@ -192,52 +192,52 @@ class ReportIncidentViewmodel extends StateNotifier<AddIncidentState> {
     _ref.read(reportIncidentEventProvider.notifier).state =
         const ReportIncidentEvent.loadProgress();
     _logger.info("Iniciando chamada de salvar incidente...");
-    await HandleCommand.execute<String, AddIncidentState>(
-      updateState: (newState) => state = newState,
-      command: () => _addIncidentUsecase.execute(dto),
-      onLoading: () {
-        return state.copyWith(isLoading: true);
-      },
-      onSuccess: (alertId) {
-        _logger.info("Incident salvo com sucesso");
-        final args = RegiterIncidentSuccessArgs(
-          alertId: alertId,
-          item: dto.product,
-          itemType: EnumUtils.fromString(ItemType.values, dto.product.type),
-          local: dto.local,
-          createdAt: dto.occurredAt,
-        );
-        _ref.read(reportIncidentEventProvider.notifier).state =
-            ReportIncidentEvent.successfully(args);
-        return state;
-      },
-      onError: (error) {
-        if (error is ProductNotFoundException ||
-            error is ProductAlreadyExistException ||
-            error is ProductUnavailableException) {
-          state = state.copyWith(isLoading: false);
-          _ref.read(reportIncidentEventProvider.notifier).state =
-              ReportIncidentEvent.error(error.message.toString(), false);
-          return state;
-        }
+    // await HandleCommand.execute<String, AddIncidentState>(
+    //   updateState: (newState) => state = newState,
+    //   command: () => _addIncidentUsecase.execute(dto),
+    //   onLoading: () {
+    //     return state.copyWith(isLoading: true);
+    //   },
+    //   onSuccess: (alertId) {
+    //     _logger.info("Incident salvo com sucesso");
+    //     final args = RegiterIncidentSuccessArgs(
+    //       alertId: alertId,
+    //       item: dto.product,
+    //       itemType: EnumUtils.fromString(ItemType.values, dto.product.type),
+    //       local: dto.local,
+    //       createdAt: dto.occurredAt,
+    //     );
+    //     _ref.read(reportIncidentEventProvider.notifier).state =
+    //         ReportIncidentEvent.successfully(args);
+    //     return state;
+    //   },
+    //   onError: (error) {
+    //     if (error is ProductNotFoundException ||
+    //         error is ProductAlreadyExistException ||
+    //         error is ProductUnavailableException) {
+    //       state = state.copyWith(isLoading: false);
+    //       _ref.read(reportIncidentEventProvider.notifier).state =
+    //           ReportIncidentEvent.error(error.message.toString(), false);
+    //       return state;
+    //     }
 
-        return handleError<AddIncidentState>(
-          error,
-          (message, extra) {
-            state = state.copyWith(isLoading: false);
-            _ref.read(reportIncidentEventProvider.notifier).state =
-                ReportIncidentEvent.error(error.toString(), true);
-            return state;
-          },
-        );
+    //     return handleError<AddIncidentState>(
+    //       error,
+    //       (message, extra) {
+    //         state = state.copyWith(isLoading: false);
+    //         _ref.read(reportIncidentEventProvider.notifier).state =
+    //             ReportIncidentEvent.error(error.toString(), true);
+    //         return state;
+    //       },
+    //     );
 
-        // _logger.info("Erro ao salvar incident ${error.toString()}");
-        // state = state.copyWith(isLoading: false);
-        // _ref.read(reportIncidentEventProvider.notifier).state =
-        //     ReportIncidentEvent.error(error.toString());
-        // return state;
-      },
-    );
+    //     // _logger.info("Erro ao salvar incident ${error.toString()}");
+    //     // state = state.copyWith(isLoading: false);
+    //     // _ref.read(reportIncidentEventProvider.notifier).state =
+    //     //     ReportIncidentEvent.error(error.toString());
+    //     // return state;
+    //   },
+    // );
   }
 
   @override

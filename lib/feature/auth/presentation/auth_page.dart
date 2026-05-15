@@ -2,8 +2,8 @@ import 'package:deehelp/core/extension/exports_extension.dart';
 import 'package:deehelp/core/theme/export_theme.dart';
 import 'package:deehelp/core/ui/styles/app_text_style.dart';
 import 'package:deehelp/feature/auth/presentation/widgets/auth_view.dart';
-import 'package:deehelp/feature/auth/viemodel/auth_state.dart';
-import 'package:deehelp/module/auth/external/di/auth_view_model_provider.dart';
+import 'package:deehelp/ui/auth/auth_state.dart';
+import 'package:deehelp/ui/auth/auth_notifier_provider.dart';
 import 'package:deehelp/core/extension/dialog_extension.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -16,7 +16,7 @@ class AuthPageV2 extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final authViewModel = ref.watch(authViewViewModelProvider.notifier);
+    final authViewModel = ref.watch(authNotifierProvider.notifier);
 
     listeners(context, ref);
 
@@ -36,7 +36,7 @@ class AuthPageV2 extends ConsumerWidget {
                     children: [
                       const LogoBlock(),
                       const SizedBox(height: SpacingSize.lg),
-                      ref.watch(authViewViewModelProvider).maybeWhen(
+                      ref.watch(authNotifierProvider).maybeWhen(
                             loading: () => AuthView(
                               onLoginWithGoogle: () {},
                               onContinueWithLogin: () => context.pop(),
@@ -62,7 +62,7 @@ class AuthPageV2 extends ConsumerWidget {
 
   void listeners(BuildContext context, WidgetRef ref) {
     ref.listen<AuthState>(
-      authViewViewModelProvider,
+      authNotifierProvider,
       (previousState, currentState) {
         switch (currentState) {
           // case AuthStateAuthenticated(:final user):
@@ -89,8 +89,8 @@ class AuthPage extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final authViewModel = ref.watch(authViewViewModelProvider.notifier);
-    final authState = ref.watch(authViewViewModelProvider);
+    final authViewModel = ref.watch(authNotifierProvider.notifier);
+    final authState = ref.watch(authNotifierProvider);
 
     listeners(context, ref);
 
@@ -259,7 +259,7 @@ class AuthPage extends ConsumerWidget {
 
   void listeners(BuildContext context, WidgetRef ref) {
     ref.listen<AuthState>(
-      authViewViewModelProvider,
+      authNotifierProvider,
       (previousState, currentState) {
         switch (currentState) {
           case AuthStateAuthenticated():

@@ -36,14 +36,14 @@ class HomeViewmodel extends StateNotifier<AsyncValue<List<IncidentOutput>>> {
 
       final result = await _getIncidentUsecase.execute(filter);
 
-      if (result.isSuccess) {
-        _cache = result.data!;
-        _hasCache = true;
-        _cacheTimestamp = DateTime.now();
-        state = AsyncValue.data(result.data!);
-      } else {
-        state = const AsyncValue.data([]);
-      }
+      // if (result.isSuccess) {
+      //   _cache = result.data!;
+      //   _hasCache = true;
+      //   _cacheTimestamp = DateTime.now();
+      //   state = AsyncValue.data(result.data!);
+      // } else {
+      //   state = const AsyncValue.data([]);
+      // }
     } catch (e, _) {
       if (_hasCache) {
         state = AsyncValue.data(_cache);

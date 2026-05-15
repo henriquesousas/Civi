@@ -11,7 +11,7 @@ import 'package:deehelp/feature/home/waze_alert.dart';
 import 'package:deehelp/feature/items/list/item_list_page.dart';
 import 'package:deehelp/feature/mapa/mapa_page.dart';
 import 'package:deehelp/feature/profile/profile_page.dart';
-import 'package:deehelp/module/auth/external/di/authenticated_user_provider.dart';
+import 'package:deehelp/business/auth/di/loggued_user_provider.dart';
 import 'package:deehelp/module/item/di/item_viewmodel_provider.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -50,7 +50,7 @@ class _AppShellPageState extends ConsumerState<AppShellPage> {
           setState(
             () {
               if (i == 1) {
-                final userId = ref.read(authenticatedUserProvider)?.id;
+                final userId = ref.read(logguedUserProvider)?.id;
                 if (userId == null) {
                   context.push(AuthRouter.path);
                   return;
@@ -62,7 +62,7 @@ class _AppShellPageState extends ConsumerState<AppShellPage> {
 
           // ✅ quando clicar em "Meus itens"
           if (i == 1) {
-            final userId = ref.read(authenticatedUserProvider)?.id;
+            final userId = ref.read(logguedUserProvider)?.id;
             if (userId == null) {
               ref.read(itemListViewmodelProvider.notifier).clear();
               _itemsLoadedOnce = false;
@@ -71,7 +71,7 @@ class _AppShellPageState extends ConsumerState<AppShellPage> {
           }
 
           if (i == 1 && !_itemsLoadedOnce) {
-            final userId = ref.read(authenticatedUserProvider)?.id;
+            final userId = ref.read(logguedUserProvider)?.id;
             if (userId == null) {
               return;
             }

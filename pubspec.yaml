@@ -161,3 +161,6 @@ flutter:
 # Desinstalar app
 # adb uninstall br.com.atomos.deehelp
 
+# Gerar arquivos do freezed
+# flutter pub run build_runner build --delete-conflicting-outputs
+

@@ -29,26 +29,26 @@ class UpdateIncidentViewmodel extends StateNotifier<UpdateIncidentState> {
         super(UpdateIncidentState.initial(currenIncident));
 
   void delete(String incidentId) async {
-    await HandleCommand.execute<Unit, UpdateIncidentState>(
-      updateState: (newState) => state = newState,
-      command: () => _deleteIncidentUsecase.execute(incidentId),
-      onLoading: () => state.copyWith(isLoading: true, errorMessage: null),
-      onSuccess: (result) {
-        return state.copyWith(deletedSuccessfully: true);
-      },
-      onError: (error) {
-        return handleError<UpdateIncidentState>(
-          error,
-          (message, extra) {
-            return state.copyWith(
-              isLoading: false,
-              errorMessage: message,
-              deletedSuccessfully: false,
-            );
-          },
-        );
-      },
-    );
+    // await HandleCommand.execute<Unit, UpdateIncidentState>(
+    //   updateState: (newState) => state = newState,
+    //   command: () => _deleteIncidentUsecase.execute(incidentId),
+    //   onLoading: () => state.copyWith(isLoading: true, errorMessage: null),
+    //   onSuccess: (result) {
+    //     return state.copyWith(deletedSuccessfully: true);
+    //   },
+    //   onError: (error) {
+    //     return handleError<UpdateIncidentState>(
+    //       error,
+    //       (message, extra) {
+    //         return state.copyWith(
+    //           isLoading: false,
+    //           errorMessage: message,
+    //           deletedSuccessfully: false,
+    //         );
+    //       },
+    //     );
+    //   },
+    // );
   }
 
   void update() async {
@@ -136,22 +136,22 @@ class UpdateIncidentViewmodel extends StateNotifier<UpdateIncidentState> {
       visibility: _currentIncident.visibilty,
     );
 
-    await HandleCommand.execute<Unit, UpdateIncidentState>(
-      updateState: (newState) => state = newState,
-      command: () => _updateIncidentUsecase.execute(dto),
-      onLoading: () => state.copyWith(
-        isLoading: true,
-        errorMessage: null,
-        errorUpdateStatusMessage: null,
-        updatedSuccessfully: false,
-      ),
-      onSuccess: (_) => state.copyWith(
-        isLoading: false,
-        updatedSuccessfully: true,
-        updatedValue: _currentIncident,
-      ),
-      onError: (error) => onError(error),
-    );
+    // await HandleCommand.execute<Unit, UpdateIncidentState>(
+    //   updateState: (newState) => state = newState,
+    //   command: () => _updateIncidentUsecase.execute(dto),
+    //   onLoading: () => state.copyWith(
+    //     isLoading: true,
+    //     errorMessage: null,
+    //     errorUpdateStatusMessage: null,
+    //     updatedSuccessfully: false,
+    //   ),
+    //   onSuccess: (_) => state.copyWith(
+    //     isLoading: false,
+    //     updatedSuccessfully: true,
+    //     updatedValue: _currentIncident,
+    //   ),
+    //   onError: (error) => onError(error),
+    // );
   }
 
   void _updateIncidentField(IncidentField field, String value) {

@@ -1,4 +1,4 @@
-import 'package:deehelp/core/base/use_case.dart';
+import 'package:deehelp/business/_shared/use_case.dart';
 import 'package:deehelp/core/services/storage/image_storage.dart';
 import 'package:deehelp/core/utils/result.dart';
 import 'package:deehelp/core/utils/unit.dart';
@@ -7,7 +7,7 @@ import 'package:deehelp/module/item/domain/exceptions/delete_product_failure.dar
 import 'package:deehelp/module/item/domain/product_repository.dart';
 import 'package:logging/logging.dart';
 
-class DeleteProductUsecase extends UseCase<Product, Unit> {
+class DeleteProductUsecase extends OLDUseCase<Product, Unit> {
   static final _logger = Logger("DeleteProductUsecase");
   final ProductRepository _repository;
   final ImageStorage _imageStorage;

@@ -10,7 +10,7 @@ import 'package:deehelp/feature/items/list/list_product_state.dart';
 import 'package:deehelp/feature/items/list/item_listing_args.dart';
 import 'package:deehelp/feature/items/list/widgets/item_list_view.dart';
 import 'package:deehelp/feature/search/widgets/load_skeleton.dart';
-import 'package:deehelp/module/auth/external/di/authenticated_user_provider.dart';
+import 'package:deehelp/business/auth/di/loggued_user_provider.dart';
 import 'package:deehelp/module/item/di/item_viewmodel_provider.dart';
 import 'package:deehelp/core/ui/widgets/empty/empty_state_widget.dart';
 import 'package:flutter/cupertino.dart';
@@ -43,7 +43,7 @@ class _ItemListPageState extends ConsumerState<ItemListPage> {
 
   Future<void> fetchData() async {
     WidgetsBinding.instance.addPostFrameCallback((_) {
-      final userId = ref.read(authenticatedUserProvider)?.id;
+      final userId = ref.read(logguedUserProvider)?.id;
       debugPrint("UserId $userId");
       if (userId == null) {
         ref.read(itemListViewmodelProvider.notifier).clear();
@@ -58,7 +58,7 @@ class _ItemListPageState extends ConsumerState<ItemListPage> {
   }
 
   Future<void> _onRefresh() async {
-    final userId = ref.read(authenticatedUserProvider)?.id;
+    final userId = ref.read(logguedUserProvider)?.id;
     debugPrint("UserId $userId");
     if (userId == null) {
       ref.read(itemListViewmodelProvider.notifier).clear();

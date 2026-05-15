@@ -1,5 +1,5 @@
 import 'package:flutter_test/flutter_test.dart';
-import 'package:deehelp/business/_shared/domain_notification.dart';
+import 'package:deehelp/business/_shared/validation/domain_notification.dart';
 
 void main() {
   test("givenSingleNotificationMessage_whenCallAdd_shouldReturnCorrectValues",

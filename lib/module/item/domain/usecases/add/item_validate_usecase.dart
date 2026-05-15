@@ -1,7 +1,7 @@
 import 'package:deehelp/core/utils/enum_utils.dart';
 import 'package:deehelp/feature/items/item_type.dart';
 import 'package:deehelp/module/item/domain/exceptions/item_already_exist_exception.dart';
-import 'package:deehelp/core/base/use_case.dart';
+import 'package:deehelp/business/_shared/use_case.dart';
 import 'package:deehelp/core/utils/result.dart';
 import 'package:deehelp/module/item/domain/product_repository.dart';
 import 'package:deehelp/core/utils/unit.dart';
@@ -14,7 +14,7 @@ class GetItemDto {
   GetItemDto({required this.code, required this.type});
 }
 
-class ItemValidaUseCase extends UseCase<GetItemDto, Unit> {
+class ItemValidaUseCase extends OLDUseCase<GetItemDto, Unit> {
   static final _logger = Logger("ItemValidateUseCase");
   final ProductRepository _repository;
 

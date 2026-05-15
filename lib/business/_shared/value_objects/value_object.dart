@@ -1,7 +1,7 @@
-import 'package:deehelp/core/notification/notification_message.dart';
+import 'package:deehelp/business/_shared/validation/notification_message.dart';
 import 'package:equatable/equatable.dart';
 
-import '../domain_notification.dart';
+import '../validation/domain_notification.dart';
 
 abstract class ValueObject<T extends Object> extends Equatable {
   final T value;

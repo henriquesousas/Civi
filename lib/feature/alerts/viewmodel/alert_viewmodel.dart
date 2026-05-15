@@ -4,18 +4,18 @@ import 'package:deehelp/core/services/permissions/location/domain/current_locati
 import 'package:deehelp/feature/alerts/viewmodel/alert_state.dart';
 import 'package:deehelp/module/alert/add_alert_dto.dart';
 import 'package:deehelp/module/alert/add_alert_usecase.dart';
-import 'package:deehelp/module/auth/domain/entity/authenticated_user.dart';
+import 'package:deehelp/business/auth/domain/logged_user.dart';
 import 'package:deehelp/module/incident/domain/entity/incident_local.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 class AlertViewmodel extends StateNotifier<AlertState> {
   final AddAlertUsecase _addAlertUsecase;
   final CurrentLocation? _currentLocation;
-  final AuthenticatedUser? _authenticatedUser;
+  final LoggedUser? _authenticatedUser;
   AlertViewmodel({
     required AddAlertUsecase addAlertUsecase,
     required CurrentLocation? currentLocation,
-    required AuthenticatedUser? authenticatedUser,
+    required LoggedUser? authenticatedUser,
   })  : _addAlertUsecase = addAlertUsecase,
         _currentLocation = currentLocation,
         _authenticatedUser = authenticatedUser,
@@ -39,25 +39,25 @@ class AlertViewmodel extends StateNotifier<AlertState> {
       alertTitle: alertTitle,
       typeItem: typeItem,
     );
-    await HandleCommand.execute<String, AlertState>(
-      updateState: (newState) => state = newState,
-      command: () => _addAlertUsecase.execute(dto),
-      onLoading: () {
-        return state.copyWith(isLoading: true, registeredsuccessfully: false);
-      },
-      onSuccess: (alertId) {
-        return state.copyWith(isLoading: false, registeredsuccessfully: true);
-      },
-      onError: (error) {
-        return handleError<AlertState>(
-          error,
-          (message, extra) {
-            state =
-                state.copyWith(isLoading: false, registeredsuccessfully: false);
-            return state;
-          },
-        );
-      },
-    );
+    // await HandleCommand.execute<String, AlertState>(
+    //   updateState: (newState) => state = newState,
+    //   command: () => _addAlertUsecase.execute(dto),
+    //   onLoading: () {
+    //     return state.copyWith(isLoading: true, registeredsuccessfully: false);
+    //   },
+    //   onSuccess: (alertId) {
+    //     return state.copyWith(isLoading: false, registeredsuccessfully: true);
+    //   },
+    //   onError: (error) {
+    //     return handleError<AlertState>(
+    //       error,
+    //       (message, extra) {
+    //         state =
+    //             state.copyWith(isLoading: false, registeredsuccessfully: false);
+    //         return state;
+    //       },
+    //     );
+    //   },
+    // );
   }
 }

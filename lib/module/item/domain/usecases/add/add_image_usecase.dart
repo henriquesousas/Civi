@@ -1,5 +1,5 @@
 import 'package:cloudflare_r2/cloudflare_r2.dart';
-import 'package:deehelp/core/base/use_case.dart';
+import 'package:deehelp/business/_shared/use_case.dart';
 import 'package:deehelp/core/env_config.dart';
 import 'package:deehelp/core/services/storage/image_storage.dart';
 import 'package:deehelp/core/utils/result.dart';
@@ -8,7 +8,7 @@ import 'package:deehelp/module/item/domain/exceptions/upload_image_failure.dart'
 import 'package:deehelp/module/item/domain/product_repository.dart';
 import 'package:deehelp/module/item/domain/usecases/add/dtos/add_image_dto.dart';
 
-class AddImageUsecase extends UseCase<AddImageDto, List<ImageMedia>> {
+class AddImageUsecase extends OLDUseCase<AddImageDto, List<ImageMedia>> {
   final ProductRepository _repository;
   final ImageStorage _imageStorage;
 

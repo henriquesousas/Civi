@@ -1,7 +1,6 @@
 import 'package:deehelp/core/router/slide_transition_page.dart';
-
-import 'auth_page.dart';
 import 'package:go_router/go_router.dart';
+import '../../../ui/auth/auth_page.dart';
 
 class AuthRouter {
   static const String path = '/auth';

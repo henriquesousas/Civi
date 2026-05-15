@@ -4,7 +4,7 @@ import 'package:deehelp/core/ui/styles/export_style.dart';
 import 'package:deehelp/core/ui/widgets/buttons/button_profile.dart';
 import 'package:deehelp/core/ui/widgets/image/profile_image_with_upload.dart';
 import 'package:deehelp/feature/auth/presentation/auth_router.dart';
-import 'package:deehelp/module/auth/external/di/authenticated_user_provider.dart';
+import 'package:deehelp/business/auth/di/loggued_user_provider.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -28,7 +28,7 @@ class HomeAppBar extends ConsumerWidget implements PreferredSizeWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final authenticatedUser = ref.watch(authenticatedUserProvider);
+    final authenticatedUser = ref.watch(logguedUserProvider);
 
     return AppBar(
       systemOverlayStyle: const SystemUiOverlayStyle(

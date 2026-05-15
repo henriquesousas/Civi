@@ -2,7 +2,7 @@ import 'dart:async';
 
 import 'package:deehelp/core/extension/result_extension.dart';
 import 'package:deehelp/core/services/network/network_info.dart';
-import 'package:deehelp/module/auth/external/di/authenticated_user_provider.dart';
+import 'package:deehelp/business/auth/di/loggued_user_provider.dart';
 import 'package:deehelp/module/incident/domain/usecase/incident_output.dart';
 import 'package:deehelp/feature/incidents/providers/incident_usecase_providers.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -21,16 +21,16 @@ class IncidentListViewModel
   }
 
   Future<List<IncidentOutput>> _fetchAll() async {
-    final authenticatedUser = ref.watch(authenticatedUserProvider);
+    final authenticatedUser = ref.watch(logguedUserProvider);
     final getIncidentByUserUseCase =
         ref.watch(getIncidentByUserUseCaseProvider);
     final incidentOrError =
         await getIncidentByUserUseCase.execute(authenticatedUser!.id);
 
-    if (incidentOrError.isFailure) {
-      return [];
-    }
-    _cacheIncidents = incidentOrError.data as List<IncidentOutput>;
+    // if (incidentOrError.isFailure) {
+    return [];
+    // }
+    // _cacheIncidents = incidentOrError.data as List<IncidentOutput>;
     return _cacheIncidents;
   }
 

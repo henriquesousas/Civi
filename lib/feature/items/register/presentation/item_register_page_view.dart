@@ -6,7 +6,7 @@ import 'package:deehelp/feature/items/register/presentation/item_register_photo.
 import 'package:deehelp/feature/items/register/presentation/item_register_type.dart';
 import 'package:deehelp/feature/items/register/presentation/widgets/wizard_bottom_bar.dart';
 import 'package:deehelp/feature/items/register/viewmodel/add_product_state.dart';
-import 'package:deehelp/module/auth/external/di/authenticated_user_provider.dart';
+import 'package:deehelp/business/auth/di/loggued_user_provider.dart';
 import 'package:deehelp/module/item/di/item_viewmodel_provider.dart';
 import 'package:deehelp/core/extension/dialog_extension.dart';
 import 'package:flutter/material.dart';
@@ -52,7 +52,7 @@ class _ItemRegisterPageViewState extends ConsumerState<ItemRegisterPageView> {
   void _nextPage(WidgetRef ref, {int? goToPage}) {
     if (_currentPage == PageStep.info.index) {
       if (ref.watch(registerItemViewModelProvider).type == ItemType.phone) {
-        final userId = ref.read(authenticatedUserProvider)!.id;
+        final userId = ref.read(logguedUserProvider)!.id;
         ref.watch(registerItemViewModelProvider.notifier).save(userId);
         return;
       } else {
@@ -62,7 +62,7 @@ class _ItemRegisterPageViewState extends ConsumerState<ItemRegisterPageView> {
     }
 
     if (_currentPage == PageStep.photo.index) {
-      final userId = ref.read(authenticatedUserProvider)!.id;
+      final userId = ref.read(logguedUserProvider)!.id;
       ref.watch(registerItemViewModelProvider.notifier).save(userId);
       return;
     }
@@ -78,7 +78,7 @@ class _ItemRegisterPageViewState extends ConsumerState<ItemRegisterPageView> {
   }
 
   void _saveWithouImage(WidgetRef ref) {
-    final userId = ref.read(authenticatedUserProvider)!.id;
+    final userId = ref.read(logguedUserProvider)!.id;
     ref.watch(registerItemViewModelProvider.notifier).save(
           userId,
           hasImage: false,

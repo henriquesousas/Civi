@@ -1,5 +1,5 @@
-import 'package:deehelp/business/_shared/domain_notification.dart';
-import 'package:deehelp/core/validation/validation_handler.dart';
+import 'package:deehelp/business/_shared/validation/domain_notification.dart';
+import 'package:deehelp/business/_shared/validation/validation_handler.dart';
 import 'package:deehelp/core/valueobject/identifier.dart';
 import 'package:equatable/equatable.dart';
 

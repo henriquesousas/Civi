@@ -3,7 +3,7 @@ import 'package:deehelp/core/env_config.dart';
 import 'package:deehelp/core/utils/enum_utils.dart';
 import 'package:deehelp/feature/items/item_type.dart';
 import 'package:deehelp/module/item/domain/exceptions/item_notfound_exception.dart';
-import 'package:deehelp/core/base/use_case.dart';
+import 'package:deehelp/business/_shared/use_case.dart';
 import 'package:deehelp/core/services/storage/image_storage.dart';
 import 'package:deehelp/core/utils/result.dart';
 import 'package:deehelp/module/item/domain/exceptions/add_product_failure.dart';
@@ -14,7 +14,7 @@ import 'package:deehelp/module/item/domain/usecases/add/dtos/add_product_dto.dar
 import 'package:deehelp/core/utils/unit.dart';
 import 'package:logging/logging.dart';
 
-class AddProductUseCase extends UseCase<AddProductDto, Unit> {
+class AddProductUseCase extends OLDUseCase<AddProductDto, Unit> {
   static final _logger = Logger("AddProductUseCase");
   final ProductRepository _repository;
   final ImageStorage _imageStorage;

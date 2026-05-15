@@ -22,7 +22,7 @@ import 'package:deehelp/feature/items/item_type.dart';
 import 'package:deehelp/feature/items/register/presentation/widgets/card_page.dart';
 import 'package:deehelp/feature/items/register/presentation/widgets/section_title.dart';
 import 'package:deehelp/feature/items/soft_divider.dart';
-import 'package:deehelp/module/auth/external/di/authenticated_user_provider.dart';
+import 'package:deehelp/business/auth/di/loggued_user_provider.dart';
 import 'package:deehelp/module/item/domain/entities/image_media.dart';
 import 'package:deehelp/core/extension/date_extension.dart';
 import 'package:deehelp/core/extension/dialog_extension.dart';
@@ -46,7 +46,7 @@ class UpdateIncidentPage extends ConsumerStatefulWidget {
 class _UpdateIncidentPageState extends ConsumerState<UpdateIncidentPage> {
   @override
   Widget build(BuildContext context) {
-    final authenticatedUser = ref.watch(authenticatedUserProvider);
+    final authenticatedUser = ref.watch(logguedUserProvider);
     final state = ref.watch(updateIncidentViewmodelProvider);
 
     final isVehicle = state.updatedValue!.product?.type != ItemType.phone.name;

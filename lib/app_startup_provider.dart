@@ -1,6 +1,5 @@
 import 'package:deehelp/core/services/permissions/location/export_location.dart';
 import 'package:deehelp/core/extension/result_extension.dart';
-import 'package:deehelp/module/auth/external/di/auth_repository_provider.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 enum AppStatus {
@@ -23,14 +22,14 @@ class AppStartupNotifier extends StateNotifier<AppStatus> {
 
   Future<void> initCheck() async {
     AppStatus? currentStatus;
-    final authenticated = await _checkAuthenticationWithMinSplash();
-    if (!authenticated) {
-      // state = AppStatus.unauthenticated;
-      currentStatus = AppStatus.unauthenticated;
-      // return;
-    }
+    // final authenticated = await _checkAuthenticationWithMinSplash();
+    // if (!authenticated) {
+    //   // state = AppStatus.unauthenticated;
+    //   currentStatus = AppStatus.unauthenticated;
+    //   // return;
+    // }
 
-    await _checkLocalization(currentStatus);
+    // await _checkLocalization(currentStatus);
   }
 
   Future<void> refresh() async {
@@ -39,13 +38,14 @@ class AppStartupNotifier extends StateNotifier<AppStatus> {
   }
 
   Future<bool> _checkAuthenticationWithMinSplash() async {
-    final start = DateTime.now();
+    // final start = DateTime.now();
 
-    final authRepo = ref.read(authRepositoryProvider);
-    final result = await authRepo.getCurrentUser();
+    // final authRepo = ref.read(authRepositoryProvider);
+    // final result = await authRepo.getCurrentUser();
 
-    await _ensureMinSplash(start);
-    return result.isSuccess;
+    // await _ensureMinSplash(start);
+    // return result.isSuccess;
+    return false;
   }
 
   Future<void> _ensureMinSplash(DateTime start) async {

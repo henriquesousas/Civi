@@ -1,10 +1,12 @@
-import 'package:deehelp/core/base/use_case.dart';
+import 'package:deehelp/business/_shared/failures/failure.dart';
+import 'package:deehelp/business/_shared/use_case.dart';
 import 'package:deehelp/core/utils/result.dart';
 import 'package:deehelp/core/utils/unit.dart';
 import 'package:deehelp/module/incident/domain/incident_repository.dart';
+import 'package:fpdart/src/task_either.dart';
 
 //TODO: Nao passar String diretamente e sim o IncidentId value obects
-class DeleteIncidentUsecase extends UseCase<String, Unit> {
+class DeleteIncidentUsecase extends OLDUseCase<String, Unit> {
   final IncidentRepository _repository;
 
   DeleteIncidentUsecase({required IncidentRepository repository})

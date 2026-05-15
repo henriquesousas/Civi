@@ -17,47 +17,47 @@ class SearchViewmodel extends StateNotifier<SearchState> {
   })  : _getIncidentsUseCase = getIncidentsUseCase,
         super(const SearchState());
 
-  Future<void> search(String query, SearchMode mode) async {
-    debugPrint("Filtrando por $query");
-    debugPrint("Valor no cache ${_cache.length}");
-    state = state.copyWith(isLoading: true, items: _cache);
-    if (query.isEmpty) {
-      state = state.copyWith(isLoading: false, items: _cache);
-      return;
-    }
+  // Future<void> search(String query, SearchMode mode) async {
+  //   debugPrint("Filtrando por $query");
+  //   debugPrint("Valor no cache ${_cache.length}");
+  //   state = state.copyWith(isLoading: true, items: _cache);
+  //   if (query.isEmpty) {
+  //     state = state.copyWith(isLoading: false, items: _cache);
+  //     return;
+  //   }
 
-    if (_cache.isNotEmpty) {
-      final resultCache = _cache
-          .where((item) => item.alertId.contains(query)
-              // item.alertId.contains(query) ||
-              // item.product?.code.contains(query),
-              )
-          .toList();
-      debugPrint(
-          'Resultado encontrado no cache ${resultCache.length.toString()}');
-      if (resultCache.isNotEmpty) {
-        state = state.copyWith(isLoading: false, items: resultCache);
-        return;
-      }
-    }
+  //   if (_cache.isNotEmpty) {
+  //     final resultCache = _cache
+  //         .where((item) => item.alertId.contains(query)
+  //             // item.alertId.contains(query) ||
+  //             // item.product?.code.contains(query),
+  //             )
+  //         .toList();
+  //     debugPrint(
+  //         'Resultado encontrado no cache ${resultCache.length.toString()}');
+  //     if (resultCache.isNotEmpty) {
+  //       state = state.copyWith(isLoading: false, items: resultCache);
+  //       return;
+  //     }
+  //   }
 
-    // await Future.delayed(const Duration(milliseconds: 500));
-    debugPrint("Buscando da API");
-    try {
-      final filter = IncidentFilter(
-        status: IncidentStatus.active,
-        term: query,
-        limit: 20,
-        mode: mode,
-      );
-      final result = await _getIncidentsUseCase.execute(filter);
-      _updateCache(result.data!);
-      // _cache = result.data!;
-      state = state.copyWith(isLoading: false, items: result.data!);
-    } catch (e, _) {
-      state = state.copyWith(isLoading: false, items: _cache);
-    }
-  }
+  //   // await Future.delayed(const Duration(milliseconds: 500));
+  //   debugPrint("Buscando da API");
+  //   try {
+  //     final filter = IncidentFilter(
+  //       status: IncidentStatus.active,
+  //       term: query,
+  //       limit: 20,
+  //       mode: mode,
+  //     );
+  //     final result = await _getIncidentsUseCase.execute(filter);
+  //     _updateCache(result.data!);
+  //     // _cache = result.data!;
+  //     state = state.copyWith(isLoading: false, items: result.data!);
+  //   } catch (e, _) {
+  //     state = state.copyWith(isLoading: false, items: _cache);
+  //   }
+  // }
 
   Future<void> clear() async {
     debugPrint("Limpando");
@@ -66,22 +66,22 @@ class SearchViewmodel extends StateNotifier<SearchState> {
     }
   }
 
-  Future<void> getlast() async {
-    debugPrint('getlast');
-    // state = const AsyncValue.loading();
+  // Future<void> getlast() async {
+  //   debugPrint('getlast');
+  //   // state = const AsyncValue.loading();
 
-    try {
-      final filter = IncidentFilter(
-        status: IncidentStatus.active,
-        term: '*',
-        limit: 30,
-      );
-      final result = await _getIncidentsUseCase.execute(filter);
-      state = state.copyWith(isLoading: false, items: result.data!);
-    } catch (e, _) {
-      state = state.copyWith(isLoading: false, items: _cache);
-    }
-  }
+  //   try {
+  //     final filter = IncidentFilter(
+  //       status: IncidentStatus.active,
+  //       term: '*',
+  //       limit: 30,
+  //     );
+  //     final result = await _getIncidentsUseCase.execute(filter);
+  //     state = state.copyWith(isLoading: false, items: result.data!);
+  //   } catch (e, _) {
+  //     state = state.copyWith(isLoading: false, items: _cache);
+  //   }
+  // }
 
   Future<void> _updateCache(List<IncidentOutput> newData) async {
     final map = {

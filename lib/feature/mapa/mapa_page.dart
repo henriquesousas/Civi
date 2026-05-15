@@ -23,7 +23,7 @@ import 'package:deehelp/feature/mapa/widgets/map_bottom_sheet.dart';
 import 'package:deehelp/feature/mapa/widgets/map_floating_toolbar.dart';
 import 'package:deehelp/feature/search/search_page_v2.dart';
 import 'package:deehelp/feature/search/search_router.dart';
-import 'package:deehelp/module/auth/external/di/authenticated_user_provider.dart';
+import 'package:deehelp/business/auth/di/loggued_user_provider.dart';
 import 'package:deehelp/module/incident/domain/enum/incident_status.dart';
 import 'package:deehelp/module/incident/domain/usecase/incident_output.dart';
 import 'package:flutter/material.dart';
@@ -96,7 +96,7 @@ class _MapaPageState extends ConsumerState<MapaPage> {
             // nao mostrar se é o meu id
             //so mostrar se estiver "status" -> "active"
 
-            final authenticatedUser = ref.read(authenticatedUserProvider);
+            final authenticatedUser = ref.read(logguedUserProvider);
             final myLocation = ref.read(currentLocationProvider);
 
             if (authenticatedUser == null) return;
@@ -218,7 +218,7 @@ class _MapaPageState extends ConsumerState<MapaPage> {
     debugPrint("Padding top ${context.topPadding}");
     debugPrint("Padding top ${context.topPadding * 3}");
     final homeState = ref.watch(homeViewmodelProvider);
-    final state = ref.watch(authenticatedUserProvider);
+    final state = ref.watch(logguedUserProvider);
     currenLocation = ref.watch(currentLocationProvider);
     // final fakeIncidents = FakeIncident.generateFakeIncidents();
 

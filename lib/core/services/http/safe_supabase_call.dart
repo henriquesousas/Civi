@@ -1,31 +1,22 @@
 import 'dart:io';
 
-import 'package:deehelp/core/errors/network_failure.dart';
-import 'package:deehelp/core/errors/unknow_failure.dart';
+import 'package:deehelp/business/_shared/failures/exports.dart';
 import 'package:deehelp/core/services/network/network_info.dart';
-import 'package:deehelp/module/auth/domain/exceptions/auth_failure.dart';
-import 'package:deehelp/core/utils/result.dart';
-import 'package:supabase_flutter/supabase_flutter.dart';
 
-Future<Result<T>> safeSupabaseCall<T>({
+Future<T> safeSupabaseCall<T>({
   required NetworkInfo networkInfo,
   required Future<T> Function() call,
 }) async {
   try {
     final hasConnection = await networkInfo.hasConnection;
     if (!hasConnection) {
-      return Result.failure(const NetworkFailure());
+      throw const NetworkFailure();
     }
 
-    final result = await call();
-    return Result.success(result);
+    return await call();
   } on SocketException {
-    return Result.failure(const NetworkFailure());
-  } on AuthException catch (e) {
-    return Result.failure(AuthFailure(e.message));
-  } on PostgrestException catch (e) {
-    return Result.failure(AuthFailure(e.message));
+    throw const NetworkFailure();
   } catch (_) {
-    return Result.failure(const UnknownFailure());
+    throw const UnexpectedFailure();
   }
 }

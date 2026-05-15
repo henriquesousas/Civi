@@ -2,7 +2,7 @@ import 'package:deehelp/business/_shared/value_objects/exports.dart';
 import 'package:deehelp/business/user/user.dart';
 import 'package:deehelp/core/validation/validator.dart';
 
-import '../../../core/validation/validation_handler.dart';
+import '../_shared/validation/validation_handler.dart';
 
 class UserValidator extends Validator {
   final User user;

@@ -3,7 +3,7 @@ import 'package:deehelp/business/_shared/value_objects/exports.dart';
 import 'package:deehelp/business/user/user_validator.dart';
 import 'package:deehelp/business/user/value_objects/bio.dart';
 import 'package:deehelp/business/user/value_objects/nickname.dart';
-import 'package:deehelp/core/validation/validation_handler.dart';
+import 'package:deehelp/business/_shared/validation/validation_handler.dart';
 
 class NullableUtils {
   static T? of<T, R>(

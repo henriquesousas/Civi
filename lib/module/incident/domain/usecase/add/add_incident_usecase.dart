@@ -1,6 +1,7 @@
 import 'dart:math';
 
-import 'package:deehelp/core/base/use_case.dart';
+import 'package:deehelp/business/_shared/failures/failure.dart';
+import 'package:deehelp/business/_shared/use_case.dart';
 import 'package:deehelp/core/ui/widgets/badge/export_badge.dart';
 import 'package:deehelp/business/_shared/utils/id_utils.dart';
 import 'package:deehelp/core/utils/result.dart';
@@ -13,8 +14,9 @@ import 'package:deehelp/module/incident/domain/usecase/add/add_incident_dto.dart
 import 'package:deehelp/module/incident/external/repository/region_dto.dart';
 import 'package:deehelp/module/item/domain/product_repository.dart';
 import 'package:flutter/material.dart';
+import 'package:fpdart/src/task_either.dart';
 
-class AddIncidentUsecase extends UseCase<AddIncidentDto, String> {
+class AddIncidentUsecase extends OLDUseCase<AddIncidentDto, String> {
   final IncidentRepository _repository;
   final ProductRepository _productRepository;
 

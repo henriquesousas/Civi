@@ -1,9 +1,11 @@
-import 'package:deehelp/core/base/use_case.dart';
+import 'package:deehelp/business/_shared/failures/failure.dart';
+import 'package:deehelp/business/_shared/use_case.dart';
 import 'package:deehelp/core/utils/unit.dart';
 import 'package:deehelp/core/utils/result.dart';
-import 'package:deehelp/module/auth/domain/repositories/auth_repository.dart';
+import 'package:deehelp/business/auth/domain/auth_repository.dart';
+import 'package:fpdart/src/task_either.dart';
 
-class SignOutUsecase implements UseCaseWithoutParam<Unit> {
+class SignOutUsecase implements OLDUseCaseWithoutParam<Unit> {
   final AuthRepository _repository;
 
   SignOutUsecase({required AuthRepository repository})
@@ -11,6 +13,7 @@ class SignOutUsecase implements UseCaseWithoutParam<Unit> {
 
   @override
   Future<Result<Unit>> execute() async {
-    return await _repository.signOut();
+    // return await _repository.signOut();
+    throw UnimplementedError();
   }
 }

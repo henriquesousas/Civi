@@ -1,6 +1,6 @@
 import 'package:deehelp/v2/core/extensions/export_extension.dart';
 import 'package:deehelp/v2/core/theme/export_theme.dart';
-import 'package:deehelp/v2/feature/login/login_router.dart';
+import 'package:deehelp/ui/auth/auth_router.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
@@ -11,7 +11,7 @@ class ProfileHeader extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () => context.push(LoginRouter.path),
+      onTap: () => context.push(AuthRouter.path),
       child: Container(
         margin: const EdgeInsets.symmetric(horizontal: SizeLayoutSpacing.m),
         child: Column(

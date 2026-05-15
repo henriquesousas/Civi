@@ -1,6 +1,7 @@
 import 'dart:math';
 
-import 'package:deehelp/core/base/use_case.dart';
+import 'package:deehelp/business/_shared/failures/failure.dart';
+import 'package:deehelp/business/_shared/use_case.dart';
 import 'package:deehelp/business/_shared/utils/id_utils.dart';
 import 'package:deehelp/core/utils/result.dart';
 import 'package:deehelp/module/alert/add_alert_dto.dart';
@@ -11,8 +12,9 @@ import 'package:deehelp/module/incident/domain/usecase/kind.dart';
 import 'package:deehelp/module/incident/domain/usecase/report_type.dart';
 import 'package:deehelp/module/incident/external/repository/region_dto.dart';
 import 'package:flutter/material.dart';
+import 'package:fpdart/src/task_either.dart';
 
-class AddAlertUsecase extends UseCase<AddAlertDto, String> {
+class AddAlertUsecase extends OLDUseCase<AddAlertDto, String> {
   final IncidentRepository _repository;
 
   AddAlertUsecase({
