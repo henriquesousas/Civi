@@ -87,14 +87,5 @@ class GoogleAuthServiceDefault implements GoogleAuthService {
     final accessToken = authorization?.accessToken;
     _logger.info("accessToken: $accessToken");
     return accessToken;
-    // if (accessToken == null) {
-    //   final authorization2 =
-    //       await authorizationClient.authorizationForScopes(scopes);
-
-    //   if (authorization2?.accessToken == null) {
-    //     throw const GoogleAuthFailure();
-    //   }
-    //   authorization = authorization2;
-    // }
   }
 }
