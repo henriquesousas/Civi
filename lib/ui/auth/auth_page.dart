@@ -30,7 +30,7 @@ class _AuthPageState extends ConsumerState<AuthPage> {
       (previous, next) {
         next.whenOrNull(
           error: (error, type) => AppDialog.show(
-            message: error,
+            message: "any",
             context,
             type: type.toDialogType(),
           ),
