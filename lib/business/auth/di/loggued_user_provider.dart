@@ -1,9 +1,9 @@
-import 'package:deehelp/business/auth/domain/logged_user.dart';
+import 'package:deehelp/business/auth/domain/loggued_user.dart';
 import 'package:deehelp/module/auth/external/di/auth_state_provider.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 //TODO verificar se precisa
-final logguedUserProvider = Provider<LoggedUser?>((ref) {
+final logguedUserProvider = Provider<LogguedUser?>((ref) {
   final session = ref.watch(authStateProvider).maybeWhen(
         data: (session) => session,
         orElse: () => null,

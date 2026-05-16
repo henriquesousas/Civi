@@ -1,6 +1,6 @@
 import 'package:deehelp/business/auth/domain/auth_datasource.dart';
 import 'package:deehelp/business/auth/domain/invalid_credentials_failure.dart';
-import 'package:deehelp/business/auth/domain/logged_user.dart';
+import 'package:deehelp/business/auth/domain/loggued_user.dart';
 import 'package:deehelp/business/auth/external/auth_repository_remote.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:fpdart/fpdart.dart';
@@ -21,7 +21,7 @@ void main() {
       () async {
     final expectedIdToken = "any_idToken";
     final expectedAccessToken = "any_accessToken";
-    final expectedLogguedUser = LoggedUser(
+    final expectedLogguedUser = LogguedUser(
       id: "any_id",
       name: "any_name",
       email: "any_email",

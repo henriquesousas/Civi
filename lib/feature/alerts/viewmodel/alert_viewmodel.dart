@@ -4,18 +4,18 @@ import 'package:deehelp/core/services/permissions/location/domain/current_locati
 import 'package:deehelp/feature/alerts/viewmodel/alert_state.dart';
 import 'package:deehelp/module/alert/add_alert_dto.dart';
 import 'package:deehelp/module/alert/add_alert_usecase.dart';
-import 'package:deehelp/business/auth/domain/logged_user.dart';
+import 'package:deehelp/business/auth/domain/loggued_user.dart';
 import 'package:deehelp/module/incident/domain/entity/incident_local.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 class AlertViewmodel extends StateNotifier<AlertState> {
   final AddAlertUsecase _addAlertUsecase;
   final CurrentLocation? _currentLocation;
-  final LoggedUser? _authenticatedUser;
+  final LogguedUser? _authenticatedUser;
   AlertViewmodel({
     required AddAlertUsecase addAlertUsecase,
     required CurrentLocation? currentLocation,
-    required LoggedUser? authenticatedUser,
+    required LogguedUser? authenticatedUser,
   })  : _addAlertUsecase = addAlertUsecase,
         _currentLocation = currentLocation,
         _authenticatedUser = authenticatedUser,

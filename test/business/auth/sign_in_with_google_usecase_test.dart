@@ -2,7 +2,7 @@ import 'package:deehelp/business/_shared/failures/failure.dart';
 import 'package:deehelp/business/_shared/failures/unexpected_failure.dart';
 import 'package:deehelp/business/auth/domain/auth_repository.dart';
 import 'package:deehelp/business/auth/domain/google_auth_failure.dart';
-import 'package:deehelp/business/auth/domain/logged_user.dart';
+import 'package:deehelp/business/auth/domain/loggued_user.dart';
 import 'package:deehelp/business/auth/domain/sign_in_with_google_usecase.dart';
 import 'package:deehelp/business/auth/external/google/google_auth_service.dart';
 import 'package:deehelp/business/auth/external/google/google_credentials.dart';
@@ -14,7 +14,7 @@ class MockAuthRepository extends Mock implements AuthRepository {}
 
 class MockGoogleAuthService extends Mock implements GoogleAuthService {}
 
-LoggedUser makeLoggedUser() => LoggedUser(
+LogguedUser makeLoggedUser() => LogguedUser(
       id: 'any_id',
       name: 'any_name',
       email: 'any_email',
@@ -51,7 +51,7 @@ void main() {
           any(),
           any(),
         )).thenReturn(
-      TaskEither<Failure, LoggedUser>.right(expectedLogguedUser),
+      TaskEither<Failure, LogguedUser>.right(expectedLogguedUser),
     );
 
     final res = await sut.execute().run();

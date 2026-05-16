@@ -1,6 +1,6 @@
 import 'package:deehelp/business/auth/domain/auth_datasource.dart';
 import 'package:deehelp/business/auth/domain/invalid_credentials_failure.dart';
-import 'package:deehelp/business/auth/domain/logged_user.dart';
+import 'package:deehelp/business/auth/domain/loggued_user.dart';
 import 'package:deehelp/business/auth/external/mapper_logged_user.dart';
 import 'package:deehelp/core/services/http/safe_supabase_call.dart';
 import 'package:deehelp/core/services/network/network_info.dart';
@@ -19,7 +19,7 @@ class AuthDataSourceSupabase implements AuthDataSource {
         _networkInfo = networkInfo;
 
   @override
-  Future<LoggedUser> signInWithGoogle(
+  Future<LogguedUser> signInWithGoogle(
     String idToken,
     String accessToken,
   ) async {

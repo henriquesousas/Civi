@@ -1,7 +1,7 @@
-import 'package:deehelp/business/auth/domain/logged_user.dart';
+import 'package:deehelp/business/auth/domain/loggued_user.dart';
 
 abstract interface class AuthDataSource {
-  Future<LoggedUser> signInWithGoogle(
+  Future<LogguedUser> signInWithGoogle(
     String idToken,
     String accessToken,
   );

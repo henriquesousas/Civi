@@ -1,7 +1,7 @@
 import 'package:deehelp/business/_shared/failures/exports.dart';
 import 'package:deehelp/business/_shared/failures/network_failure.dart';
 import 'package:deehelp/business/auth/domain/invalid_credentials_failure.dart';
-import 'package:deehelp/business/auth/domain/logged_user.dart';
+import 'package:deehelp/business/auth/domain/loggued_user.dart';
 import 'package:deehelp/business/auth/external/auth_datasource_supabase.dart';
 import 'package:deehelp/core/services/network/network_info.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -46,7 +46,7 @@ void main() {
   test('givenAuthDataSource_whenSignInSucceeds_thenReturnsLoggedUser',
       () async {
     final expectedLogguedUser =
-        LoggedUser(id: "any_id", name: "any_name", email: "any_email");
+        LogguedUser(id: "any_id", name: "any_name", email: "any_email");
 
     final expectedUserSupabase = User(
       id: 'any_id',

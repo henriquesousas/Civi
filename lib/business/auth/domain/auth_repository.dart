@@ -1,9 +1,9 @@
 import 'package:deehelp/business/_shared/failures/exports.dart';
-import 'package:deehelp/business/auth/domain/logged_user.dart';
+import 'package:deehelp/business/auth/domain/loggued_user.dart';
 import 'package:fpdart/fpdart.dart';
 
 abstract class AuthRepository {
-  TaskEither<Failure, LoggedUser> signInWithGoogle(
+  TaskEither<Failure, LogguedUser> signInWithGoogle(
     String idToken,
     String accessToken,
   );

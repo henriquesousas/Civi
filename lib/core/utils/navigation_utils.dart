@@ -1,12 +1,12 @@
 import 'package:deehelp/feature/auth/presentation/auth_router.dart';
-import 'package:deehelp/business/auth/domain/logged_user.dart';
+import 'package:deehelp/business/auth/domain/loggued_user.dart';
 import 'package:deehelp/business/auth/di/loggued_user_provider.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 class NavigationUtils {
   static String path(
     String destiny,
-    LoggedUser? user,
+    LogguedUser? user,
   ) {
     return user == null ? AuthRouter.path : destiny;
   }

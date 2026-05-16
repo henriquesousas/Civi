@@ -1,6 +1,6 @@
 import 'package:deehelp/business/_shared/failures/failure.dart';
 import 'package:deehelp/business/auth/domain/auth_datasource.dart';
-import 'package:deehelp/business/auth/domain/logged_user.dart';
+import 'package:deehelp/business/auth/domain/loggued_user.dart';
 import 'package:deehelp/business/auth/domain/auth_repository.dart';
 import 'package:fpdart/fpdart.dart';
 import 'package:logging/logging.dart';
@@ -14,7 +14,7 @@ class AuthRepositoryRemote implements AuthRepository {
   }) : _datasource = datasource;
 
   @override
-  TaskEither<Failure, LoggedUser> signInWithGoogle(
+  TaskEither<Failure, LogguedUser> signInWithGoogle(
     String idToken,
     String accessToken,
   ) {

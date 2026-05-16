@@ -6,7 +6,7 @@ import 'package:deehelp/feature/incidents/report/widgets/success/regiter_inciden
 import 'package:deehelp/feature/items/item_type.dart';
 import 'package:deehelp/core/extension/string_extension.dart';
 import 'package:deehelp/core/handlers/handle_command.dart';
-import 'package:deehelp/business/auth/domain/logged_user.dart';
+import 'package:deehelp/business/auth/domain/loggued_user.dart';
 import 'package:deehelp/module/incident/domain/entity/incident_local.dart';
 import 'package:deehelp/module/incident/domain/enum/incident_status.dart';
 import 'package:deehelp/module/incident/domain/enum/type_alert.dart';
@@ -28,12 +28,12 @@ import 'package:logging/logging.dart';
 class ReportIncidentViewmodel extends StateNotifier<AddIncidentState> {
   static final _logger = Logger("AddIncidentViewmodel");
   final Ref _ref;
-  final LoggedUser _authenticatedUser;
+  final LogguedUser _authenticatedUser;
   final AddIncidentUsecase _addIncidentUsecase;
   ReportIncidentViewmodel({
     required Ref ref,
     required AddIncidentUsecase addIncidentImmediatelyUsecase,
-    required LoggedUser authenticatedUser,
+    required LogguedUser authenticatedUser,
   })  : _addIncidentUsecase = addIncidentImmediatelyUsecase,
         _ref = ref,
         _authenticatedUser = authenticatedUser,

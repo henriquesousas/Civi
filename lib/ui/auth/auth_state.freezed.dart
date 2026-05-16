@@ -179,7 +179,7 @@ extension AuthStatePatterns on AuthState {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function(LoggedUser user)? authenticated,
+    TResult Function(LogguedUser user)? authenticated,
     TResult Function(String error, TypeFailure type)? error,
     TResult Function()? unauthenticated,
     TResult Function()? loadingAuthWithoutAccount,
@@ -222,7 +222,7 @@ extension AuthStatePatterns on AuthState {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loading,
-    required TResult Function(LoggedUser user) authenticated,
+    required TResult Function(LogguedUser user) authenticated,
     required TResult Function(String error, TypeFailure type) error,
     required TResult Function() unauthenticated,
     required TResult Function() loadingAuthWithoutAccount,
@@ -262,7 +262,7 @@ extension AuthStatePatterns on AuthState {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function()? loading,
-    TResult? Function(LoggedUser user)? authenticated,
+    TResult? Function(LogguedUser user)? authenticated,
     TResult? Function(String error, TypeFailure type)? error,
     TResult? Function()? unauthenticated,
     TResult? Function()? loadingAuthWithoutAccount,
@@ -333,7 +333,7 @@ class AuthStateLoading implements AuthState {
 class AuthStateAuthenticated implements AuthState {
   const AuthStateAuthenticated(this.user);
 
-  final LoggedUser user;
+  final LogguedUser user;
 
   /// Create a copy of AuthState
   /// with the given fields replaced by the non-null parameter values.
@@ -367,7 +367,7 @@ abstract mixin class $AuthStateAuthenticatedCopyWith<$Res>
           $Res Function(AuthStateAuthenticated) _then) =
       _$AuthStateAuthenticatedCopyWithImpl;
   @useResult
-  $Res call({LoggedUser user});
+  $Res call({LogguedUser user});
 }
 
 /// @nodoc
@@ -388,7 +388,7 @@ class _$AuthStateAuthenticatedCopyWithImpl<$Res>
       null == user
           ? _self.user
           : user // ignore: cast_nullable_to_non_nullable
-              as LoggedUser,
+              as LogguedUser,
     ));
   }
 }
