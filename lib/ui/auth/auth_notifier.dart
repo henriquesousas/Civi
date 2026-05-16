@@ -16,7 +16,7 @@ class AuthNotifier extends StateNotifier<AuthState> {
     state = const AuthState.loading();
     final result = await _signInWithGoogleUseCase.execute().run();
     state = result.fold(
-      (failure) => AuthState.error(failure.message),
+      (failure) => AuthState.error(failure.message, failure.type),
       (loggedUser) => AuthState.authenticated(loggedUser),
     );
   }

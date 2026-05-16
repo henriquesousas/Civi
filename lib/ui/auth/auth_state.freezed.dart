@@ -180,7 +180,7 @@ extension AuthStatePatterns on AuthState {
     TResult Function()? initial,
     TResult Function()? loading,
     TResult Function(LoggedUser user)? authenticated,
-    TResult Function(String error)? error,
+    TResult Function(String error, TypeFailure type)? error,
     TResult Function()? unauthenticated,
     TResult Function()? loadingAuthWithoutAccount,
     required TResult orElse(),
@@ -194,7 +194,7 @@ extension AuthStatePatterns on AuthState {
       case AuthStateAuthenticated() when authenticated != null:
         return authenticated(_that.user);
       case AuthStateError() when error != null:
-        return error(_that.error);
+        return error(_that.error, _that.type);
       case AuthStateUnAuthenticated() when unauthenticated != null:
         return unauthenticated();
       case AuthStateLoadingAuthWithoutAccount()
@@ -223,7 +223,7 @@ extension AuthStatePatterns on AuthState {
     required TResult Function() initial,
     required TResult Function() loading,
     required TResult Function(LoggedUser user) authenticated,
-    required TResult Function(String error) error,
+    required TResult Function(String error, TypeFailure type) error,
     required TResult Function() unauthenticated,
     required TResult Function() loadingAuthWithoutAccount,
   }) {
@@ -236,7 +236,7 @@ extension AuthStatePatterns on AuthState {
       case AuthStateAuthenticated():
         return authenticated(_that.user);
       case AuthStateError():
-        return error(_that.error);
+        return error(_that.error, _that.type);
       case AuthStateUnAuthenticated():
         return unauthenticated();
       case AuthStateLoadingAuthWithoutAccount():
@@ -263,7 +263,7 @@ extension AuthStatePatterns on AuthState {
     TResult? Function()? initial,
     TResult? Function()? loading,
     TResult? Function(LoggedUser user)? authenticated,
-    TResult? Function(String error)? error,
+    TResult? Function(String error, TypeFailure type)? error,
     TResult? Function()? unauthenticated,
     TResult? Function()? loadingAuthWithoutAccount,
   }) {
@@ -276,7 +276,7 @@ extension AuthStatePatterns on AuthState {
       case AuthStateAuthenticated() when authenticated != null:
         return authenticated(_that.user);
       case AuthStateError() when error != null:
-        return error(_that.error);
+        return error(_that.error, _that.type);
       case AuthStateUnAuthenticated() when unauthenticated != null:
         return unauthenticated();
       case AuthStateLoadingAuthWithoutAccount()
@@ -396,9 +396,10 @@ class _$AuthStateAuthenticatedCopyWithImpl<$Res>
 /// @nodoc
 
 class AuthStateError implements AuthState {
-  const AuthStateError(this.error);
+  const AuthStateError(this.error, this.type);
 
   final String error;
+  final TypeFailure type;
 
   /// Create a copy of AuthState
   /// with the given fields replaced by the non-null parameter values.
@@ -412,15 +413,16 @@ class AuthStateError implements AuthState {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is AuthStateError &&
-            (identical(other.error, error) || other.error == error));
+            (identical(other.error, error) || other.error == error) &&
+            (identical(other.type, type) || other.type == type));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, error);
+  int get hashCode => Object.hash(runtimeType, error, type);
 
   @override
   String toString() {
-    return 'AuthState.error(error: $error)';
+    return 'AuthState.error(error: $error, type: $type)';
   }
 }
 
@@ -431,7 +433,7 @@ abstract mixin class $AuthStateErrorCopyWith<$Res>
           AuthStateError value, $Res Function(AuthStateError) _then) =
       _$AuthStateErrorCopyWithImpl;
   @useResult
-  $Res call({String error});
+  $Res call({String error, TypeFailure type});
 }
 
 /// @nodoc
@@ -447,12 +449,17 @@ class _$AuthStateErrorCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   $Res call({
     Object? error = null,
+    Object? type = null,
   }) {
     return _then(AuthStateError(
       null == error
           ? _self.error
           : error // ignore: cast_nullable_to_non_nullable
               as String,
+      null == type
+          ? _self.type
+          : type // ignore: cast_nullable_to_non_nullable
+              as TypeFailure,
     ));
   }
 }

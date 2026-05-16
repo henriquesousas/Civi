@@ -1,7 +1,8 @@
 import 'package:deehelp/core/extension/exports_extension.dart';
 import 'package:deehelp/ui/auth/auth_notifier_provider.dart';
 import 'package:deehelp/ui/auth/auth_state.dart';
-import 'package:deehelp/ui/auth/_shared/error_dialog.dart';
+import 'package:deehelp/ui/auth/_shared/refactor/error_dialog.dart';
+import 'package:deehelp/ui/auth/error_failure_type_mapper.dart';
 import 'package:deehelp/v2/core/extensions/export_extension.dart';
 import 'package:deehelp/v2/core/theme/export_theme.dart';
 import 'package:deehelp/v2/core/widgets/buttons/export_buttons.dart';
@@ -23,6 +24,20 @@ class _AuthPageState extends ConsumerState<AuthPage> {
   Widget build(BuildContext context) {
     final authNotifier = ref.watch(authNotifierProvider.notifier);
     final authState = ref.watch(authNotifierProvider);
+
+    ref.listen<AuthState>(
+      authNotifierProvider,
+      (previous, next) {
+        next.whenOrNull(
+          error: (error, type) => AppDialog.show(
+            message: error,
+            context,
+            type: type.toDialogType(),
+          ),
+        );
+      },
+    );
+
     return Scaffold(
       body: SizedBox(
         width: double.infinity,

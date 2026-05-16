@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 enum DialogType { success, error, network }
 
 class AppDialog extends StatefulWidget {
+  final String? title;
   final String message;
   final DialogType type;
   final VoidCallback? onRetry;
@@ -11,6 +12,7 @@ class AppDialog extends StatefulWidget {
     super.key,
     required this.message,
     required this.type,
+    this.title,
     this.onRetry,
   });
 
@@ -18,6 +20,7 @@ class AppDialog extends StatefulWidget {
     BuildContext context, {
     required String message,
     required DialogType type,
+    String? title,
     VoidCallback? onRetry,
   }) async {
     final result = await showDialog<bool>(
@@ -25,6 +28,7 @@ class AppDialog extends StatefulWidget {
       barrierColor: Colors.black.withOpacity(0.7),
       barrierDismissible: false,
       builder: (_) => AppDialog(
+        title: title,
         message: message,
         type: type,
         onRetry: onRetry,
@@ -52,7 +56,7 @@ class _AppDialogState extends State<AppDialog>
             buttonColor: Colors.green.shade700,
           ),
         DialogType.error => _DialogConfig(
-            title: 'Falha na autenticação',
+            title: widget.title ?? 'Falha',
             icon: Icons.error_outline_outlined,
             color: Colors.red.shade400,
             bgColor: Colors.red.shade900.withOpacity(0.25),

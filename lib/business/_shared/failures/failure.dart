@@ -1,11 +1,16 @@
+import 'package:deehelp/business/_shared/failures/type_failure.dart';
 import 'package:equatable/equatable.dart';
 
 class Failure extends Equatable {
   final String message;
-  const Failure(this.message);
+  final TypeFailure type;
+  const Failure(
+    this.message, {
+    this.type = TypeFailure.unexpected,
+  });
 
   @override
-  List<Object> get props => [message];
+  List<Object> get props => [message, type];
 }
 
 /**

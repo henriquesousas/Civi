@@ -1,3 +1,4 @@
+import 'package:deehelp/business/_shared/failures/exports.dart';
 import 'package:deehelp/business/auth/domain/logged_user.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
@@ -9,7 +10,8 @@ class AuthState with _$AuthState {
   const factory AuthState.loading() = AuthStateLoading;
   const factory AuthState.authenticated(LoggedUser user) =
       AuthStateAuthenticated;
-  const factory AuthState.error(String error) = AuthStateError;
+  const factory AuthState.error(String error, TypeFailure type) =
+      AuthStateError;
   //TODO: Remover
   const factory AuthState.unauthenticated() = AuthStateUnAuthenticated;
   const factory AuthState.loadingAuthWithoutAccount() =

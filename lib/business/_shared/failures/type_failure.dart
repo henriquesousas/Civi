@@ -1,0 +1,1 @@
+enum TypeFailure { network, unexpected }
