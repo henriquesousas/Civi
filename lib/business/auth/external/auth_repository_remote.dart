@@ -1,9 +1,7 @@
 import 'package:deehelp/business/_shared/failures/failure.dart';
-import 'package:deehelp/business/_shared/failures/unexpected_failure.dart';
 import 'package:deehelp/business/auth/domain/auth_datasource.dart';
 import 'package:deehelp/business/auth/domain/logged_user.dart';
 import 'package:deehelp/business/auth/domain/auth_repository.dart';
-import 'package:deehelp/business/auth/domain/auth_exception.dart';
 import 'package:fpdart/fpdart.dart';
 import 'package:logging/logging.dart';
 
@@ -23,12 +21,7 @@ class AuthRepositoryRemote implements AuthRepository {
     _logger.info("AuthRepositoryRemote: Iniciando signInWithGoogle");
     return TaskEither.tryCatch(
       () => _datasource.signInWithGoogle(idToken, accessToken),
-      (error, stackTrace) => _mapException(error, stackTrace),
+      (error, stackTrace) => error as Failure,
     );
-  }
-
-  Failure _mapException(Object error, StackTrace _) {
-    if (error is AuthException) return error.failure;
-    return const UnexpectedFailure();
   }
 }

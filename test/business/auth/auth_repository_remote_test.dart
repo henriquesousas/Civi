@@ -1,5 +1,5 @@
-import 'package:deehelp/business/_shared/failures/exports.dart';
 import 'package:deehelp/business/auth/domain/auth_datasource.dart';
+import 'package:deehelp/business/auth/domain/invalid_credentials_failure.dart';
 import 'package:deehelp/business/auth/domain/logged_user.dart';
 import 'package:deehelp/business/auth/external/auth_repository_remote.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -43,10 +43,10 @@ void main() {
       () async {
     final expectedIdToken = "any_idToken";
     final expectedAccessToken = "any_accessToken";
-    final expectedFailure = const UnexpectedFailure();
+    final expectedFailure = const InvalidCredentialsFailure();
 
     when(() => mockAuthDatasource.signInWithGoogle(any(), any())).thenAnswer(
-      (_) async => throw Exception('any'),
+      (_) async => throw const InvalidCredentialsFailure(),
     );
 
     final res =

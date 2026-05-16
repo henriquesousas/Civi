@@ -14,6 +14,8 @@ Future<T> safeSupabaseCall<T>({
     }
 
     return await call();
+  } on Failure {
+    rethrow;
   } on SocketException {
     throw const NetworkFailure();
   } catch (_) {

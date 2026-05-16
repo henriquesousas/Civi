@@ -1,10 +1,12 @@
 //TODO: remover
+import 'package:equatable/equatable.dart';
+
 enum AuthMethod {
   google,
   anonymous,
 }
 
-class LoggedUser {
+class LoggedUser extends Equatable {
   final String id;
   final String name;
   final String email;
@@ -21,6 +23,10 @@ class LoggedUser {
     this.nickName,
     this.authMethod = AuthMethod.anonymous,
   });
+
+  @override
+  // TODO: implement props
+  List<Object?> get props => [id, name, email];
 
   // factory LoggedUser.create(Map<String, dynamic>? data) {
   //   return LoggedUser(
