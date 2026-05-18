@@ -31,7 +31,8 @@ class UIButtonPrimary extends StatelessWidget {
       height: height ?? ButtonSize.xs,
       child: ElevatedButton(
         style: ElevatedButton.styleFrom(
-          backgroundColor: backgroundColor ?? const Color(0xFFB8CDE3),
+          // backgroundColor: backgroundColor ?? const Color(0xFFB8CDE3),
+          backgroundColor: AppColor.primaryColor,
           foregroundColor: Colors.white,
           minimumSize: const Size(double.infinity, 32),
           shape: const RoundedRectangleBorder(
@@ -64,7 +65,7 @@ class UIButtonPrimary extends StatelessWidget {
     return Text(
       text,
       style: context.appText.button.copyWith(
-        color: textColor ?? Colors.black,
+        color: textColor ?? Colors.white,
       ),
     );
   }

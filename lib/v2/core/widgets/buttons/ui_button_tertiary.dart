@@ -8,16 +8,19 @@ class UIButtonTertiary extends StatelessWidget {
   final VoidCallback press;
   final double? width;
   final double? height;
+  final double? radius;
   const UIButtonTertiary({
     super.key,
     required this.text,
     required this.press,
     this.width,
     this.height,
+    this.radius,
   });
 
   @override
   Widget build(BuildContext context) {
+    final borderRadius = radius ?? SizeRadius.xs;
     return SizedBox(
       width: width ?? context.screenWidth,
       height: height ?? context.percentHeight(0.05),
@@ -28,7 +31,7 @@ class UIButtonTertiary extends StatelessWidget {
           backgroundColor: const Color(0xFF1B2E46),
           foregroundColor: Colors.white,
           shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(SizeRadius.xs),
+            borderRadius: BorderRadius.circular(borderRadius),
             side: const BorderSide(
               color: Color(0xFF2E5E92),
               width: 1.5,

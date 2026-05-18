@@ -3,7 +3,7 @@ import 'package:deehelp/v2/feature/profile/nickname/presentation/add_nickname_pa
 import 'package:go_router/go_router.dart';
 
 class ProfileRouter {
-  static const String path = '/nickname';
+  static const String path = '/profile';
   ProfileRouter._();
 
   static List<RouteBase> get routers => [

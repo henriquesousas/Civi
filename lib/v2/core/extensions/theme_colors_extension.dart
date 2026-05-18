@@ -13,8 +13,7 @@ class ThemeColors {
   Color get primaryColorDark => const Color(0xFF2651d6);
   //Background
   Color get primaryBgColor => Theme.of(_context).colorScheme.surface;
-  Color get secundaryBgColor =>
-      Theme.of(_context).colorScheme.surfaceContainerLow;
+  Color get secundaryBgColor => Theme.of(_context).colorScheme.surfaceContainer;
   Color get secundaryBgColorHight =>
       Theme.of(_context).colorScheme.surfaceContainerHigh;
   Color get secundaryBgColorLow =>

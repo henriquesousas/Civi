@@ -6,4 +6,5 @@ export 'size_image.dart';
 export 'size_layout_spacing.dart';
 export 'size_radius.dart';
 export 'size_container.dart';
+export 'size_button.dart';
 export 'app_color.dart';

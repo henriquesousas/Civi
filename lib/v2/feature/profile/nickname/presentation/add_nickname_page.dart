@@ -271,7 +271,7 @@ class _AddNicknamePageState extends State<AddNicknamePage> {
             UIButtonIcon(
               icon: const Icon(Icons.auto_awesome_rounded),
               title: "Gerar 10 sugestões",
-              tap: () => _generateSuggestions(),
+              press: () => _generateSuggestions(),
             ),
             const SizedBox(height: SizeSpacing.m),
             AnimatedSwitcher(

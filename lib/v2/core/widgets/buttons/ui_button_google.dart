@@ -11,7 +11,7 @@ class UIButtonGoogle extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return UIButtonIcon(
-      tap: () {},
+      press: () {},
       buttonStyle: OutlinedButton.styleFrom(
         foregroundColor: Colors.black,
         side: const BorderSide(

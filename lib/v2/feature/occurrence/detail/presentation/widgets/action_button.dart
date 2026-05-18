@@ -10,7 +10,7 @@ class ActionButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return UIButtonIcon(
-      tap: () {},
+      press: () {},
       title: text,
       textStyle: context.appText.button.copyWith(
         fontWeight: FontWeight.w700,
