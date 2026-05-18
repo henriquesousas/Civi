@@ -1,19 +1,19 @@
 import 'dart:async';
 import 'dart:ui' as ui;
 
-import 'package:deehelp/core/extension/date_extension.dart';
-import 'package:deehelp/core/extension/exports_extension.dart';
-import 'package:deehelp/core/providers/supabase_provider.dart';
-import 'package:deehelp/core/services/network/network_info_provider.dart';
-import 'package:deehelp/core/services/network/netwotk_alert_controller.dart';
-import 'package:deehelp/core/services/permissions/location/domain/services/geolocator_position_gateway.dart';
-import 'package:deehelp/core/services/permissions/location/export_location.dart';
-import 'package:deehelp/core/services/permissions/location/external/default_geolocator_position_gateway.dart';
-import 'package:deehelp/core/theme/app_colors.dart';
-import 'package:deehelp/core/theme/theme_provider.dart';
+import 'package:deehelp/old_core/extension/date_extension.dart';
+import 'package:deehelp/old_core/extension/exports_extension.dart';
+import 'package:deehelp/old_core/providers/supabase_provider.dart';
+import 'package:deehelp/old_core/services/network/network_info_provider.dart';
+import 'package:deehelp/old_core/services/network/netwotk_alert_controller.dart';
+import 'package:deehelp/old_core/services/permissions/location/domain/services/geolocator_position_gateway.dart';
+import 'package:deehelp/old_core/services/permissions/location/export_location.dart';
+import 'package:deehelp/old_core/services/permissions/location/external/default_geolocator_position_gateway.dart';
+import 'package:deehelp/old_core/theme/app_colors.dart';
+import 'package:deehelp/old_core/theme/theme_provider.dart';
 
-import 'package:deehelp/core/utils/enum_utils.dart';
-import 'package:deehelp/core/utils/url_launcher_utils.dart';
+import 'package:deehelp/old_core/utils/enum_utils.dart';
+import 'package:deehelp/old_core/utils/url_launcher_utils.dart';
 import 'package:deehelp/feature/home/home_viewmodel_provider.dart';
 import 'package:deehelp/feature/home/waze_alert.dart';
 import 'package:deehelp/feature/incidents/incident_router.dart';
@@ -23,7 +23,7 @@ import 'package:deehelp/feature/mapa/widgets/map_bottom_sheet.dart';
 import 'package:deehelp/feature/mapa/widgets/map_floating_toolbar.dart';
 import 'package:deehelp/feature/search/search_page_v2.dart';
 import 'package:deehelp/feature/search/search_router.dart';
-import 'package:deehelp/business/auth/di/loggued_user_provider.dart';
+import 'package:deehelp/business/auth/providers/loggued_user_provider.dart';
 import 'package:deehelp/module/incident/domain/enum/incident_status.dart';
 import 'package:deehelp/module/incident/domain/usecase/incident_output.dart';
 import 'package:flutter/material.dart';
@@ -96,7 +96,7 @@ class _MapaPageState extends ConsumerState<MapaPage> {
             // nao mostrar se é o meu id
             //so mostrar se estiver "status" -> "active"
 
-            final authenticatedUser = ref.read(logguedUserProvider);
+            final authenticatedUser = ref.read(logguedUserProviderOld);
             final myLocation = ref.read(currentLocationProvider);
 
             if (authenticatedUser == null) return;
@@ -218,7 +218,7 @@ class _MapaPageState extends ConsumerState<MapaPage> {
     debugPrint("Padding top ${context.topPadding}");
     debugPrint("Padding top ${context.topPadding * 3}");
     final homeState = ref.watch(homeViewmodelProvider);
-    final state = ref.watch(logguedUserProvider);
+    final state = ref.watch(logguedUserProviderOld);
     currenLocation = ref.watch(currentLocationProvider);
     // final fakeIncidents = FakeIncident.generateFakeIncidents();
 

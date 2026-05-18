@@ -1,5 +1,5 @@
 import 'package:deehelp/feature/alerts/rouberry_attempt_type_page.dart';
-import 'package:deehelp/core/router/slide_transition_page.dart';
+import 'package:deehelp/old_core/router/slide_transition_page.dart';
 import 'package:deehelp/feature/alerts/suspicious_activity_page.dart';
 import 'package:go_router/go_router.dart';
 

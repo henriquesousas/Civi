@@ -1,15 +1,15 @@
-import 'package:deehelp/core/extension/color_extension.dart';
-import 'package:deehelp/core/services/network/network_info_provider.dart';
-import 'package:deehelp/core/theme/export_theme.dart';
-import 'package:deehelp/core/ui/styles/export_style.dart';
-import 'package:deehelp/core/ui/widgets/appbar/default_app_bar.dart';
-import 'package:deehelp/core/ui/widgets/badge/badge_text.dart';
-import 'package:deehelp/core/ui/widgets/badge/export_badge.dart';
-import 'package:deehelp/core/ui/widgets/buttons/button_edit.dart';
-import 'package:deehelp/core/ui/widgets/buttons/button_outline.dart';
-import 'package:deehelp/core/ui/widgets/icon/export_icon.dart';
-import 'package:deehelp/core/ui/widgets/image/image_view_dialog.dart';
-import 'package:deehelp/core/utils/enum_utils.dart';
+import 'package:deehelp/old_core/extension/color_extension.dart';
+import 'package:deehelp/old_core/services/network/network_info_provider.dart';
+import 'package:deehelp/old_core/theme/export_theme.dart';
+import 'package:deehelp/old_core/ui/styles/export_style.dart';
+import 'package:deehelp/old_core/ui/widgets/appbar/default_app_bar.dart';
+import 'package:deehelp/old_core/ui/widgets/badge/badge_text.dart';
+import 'package:deehelp/old_core/ui/widgets/badge/export_badge.dart';
+import 'package:deehelp/old_core/ui/widgets/buttons/button_edit.dart';
+import 'package:deehelp/old_core/ui/widgets/buttons/button_outline.dart';
+import 'package:deehelp/old_core/ui/widgets/icon/export_icon.dart';
+import 'package:deehelp/old_core/ui/widgets/image/image_view_dialog.dart';
+import 'package:deehelp/old_core/utils/enum_utils.dart';
 import 'package:deehelp/feature/incidents/incident_router.dart';
 import 'package:deehelp/feature/incidents/update/incident_field.dart';
 import 'package:deehelp/feature/incidents/update/update_incident_args.dart';
@@ -22,15 +22,15 @@ import 'package:deehelp/feature/items/item_type.dart';
 import 'package:deehelp/feature/items/register/presentation/widgets/card_page.dart';
 import 'package:deehelp/feature/items/register/presentation/widgets/section_title.dart';
 import 'package:deehelp/feature/items/soft_divider.dart';
-import 'package:deehelp/business/auth/di/loggued_user_provider.dart';
+import 'package:deehelp/business/auth/providers/loggued_user_provider.dart';
 import 'package:deehelp/module/item/domain/entities/image_media.dart';
-import 'package:deehelp/core/extension/date_extension.dart';
-import 'package:deehelp/core/extension/dialog_extension.dart';
+import 'package:deehelp/old_core/extension/date_extension.dart';
+import 'package:deehelp/old_core/extension/dialog_extension.dart';
 import 'package:deehelp/feature/incidents/providers/incident_list_viewmodel_provider.dart';
 import 'package:deehelp/feature/incidents/providers/incident_selected_provider.dart';
 import 'package:deehelp/feature/incidents/providers/update_incident_viewmodel_provider.dart';
 import 'package:deehelp/feature/incidents/update/state/update_incident_state.dart';
-import 'package:deehelp/core/utils/url_launcher_utils.dart';
+import 'package:deehelp/old_core/utils/url_launcher_utils.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -46,7 +46,7 @@ class UpdateIncidentPage extends ConsumerStatefulWidget {
 class _UpdateIncidentPageState extends ConsumerState<UpdateIncidentPage> {
   @override
   Widget build(BuildContext context) {
-    final authenticatedUser = ref.watch(logguedUserProvider);
+    final authenticatedUser = ref.watch(logguedUserProviderOld);
     final state = ref.watch(updateIncidentViewmodelProvider);
 
     final isVehicle = state.updatedValue!.product?.type != ItemType.phone.name;

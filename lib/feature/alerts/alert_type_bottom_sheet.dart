@@ -1,8 +1,8 @@
-import 'package:deehelp/core/extension/dialog_extension.dart';
-import 'package:deehelp/core/extension/exports_extension.dart';
-import 'package:deehelp/core/theme/app_colors.dart';
-import 'package:deehelp/core/theme/size/spacing_size.dart';
-import 'package:deehelp/core/ui/widgets/buttons/ui_hold_confirm_button.dart';
+import 'package:deehelp/old_core/extension/dialog_extension.dart';
+import 'package:deehelp/old_core/extension/exports_extension.dart';
+import 'package:deehelp/old_core/theme/app_colors.dart';
+import 'package:deehelp/old_core/theme/size/spacing_size.dart';
+import 'package:deehelp/old_core/ui/widgets/buttons/ui_hold_confirm_button.dart';
 import 'package:deehelp/feature/alerts/providers/add_alert_viewmodel_provider.dart';
 import 'package:deehelp/feature/alerts/rouberry_attempt_type_page.dart';
 import 'package:flutter/material.dart';

@@ -1,15 +1,15 @@
 import 'dart:ui';
 
-import 'package:deehelp/core/extension/date_extension.dart';
-import 'package:deehelp/core/extension/exports_extension.dart';
-import 'package:deehelp/core/extension/time_extension.dart';
-import 'package:deehelp/core/services/permissions/location/domain/current_location.dart';
-import 'package:deehelp/core/services/permissions/location/providers/location_providers.dart';
-import 'package:deehelp/core/theme/export_theme.dart';
-import 'package:deehelp/core/ui/widgets/buttons/button_primary.dart';
-import 'package:deehelp/core/ui/widgets/image/custom_network_image.dart';
-import 'package:deehelp/core/utils/enum_utils.dart';
-import 'package:deehelp/core/utils/url_launcher_utils.dart';
+import 'package:deehelp/old_core/extension/date_extension.dart';
+import 'package:deehelp/old_core/extension/exports_extension.dart';
+import 'package:deehelp/old_core/extension/time_extension.dart';
+import 'package:deehelp/old_core/services/permissions/location/domain/current_location.dart';
+import 'package:deehelp/old_core/services/permissions/location/providers/location_providers.dart';
+import 'package:deehelp/old_core/theme/export_theme.dart';
+import 'package:deehelp/old_core/ui/widgets/buttons/button_primary.dart';
+import 'package:deehelp/old_core/ui/widgets/image/custom_network_image.dart';
+import 'package:deehelp/old_core/utils/enum_utils.dart';
+import 'package:deehelp/old_core/utils/url_launcher_utils.dart';
 import 'package:deehelp/feature/items/item_type.dart';
 import 'package:deehelp/feature/search/search_page_v2.dart';
 import 'package:deehelp/module/incident/domain/usecase/incident_output.dart';

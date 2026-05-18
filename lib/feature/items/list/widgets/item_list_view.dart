@@ -1,4 +1,4 @@
-import 'package:deehelp/core/extension/exports_extension.dart';
+import 'package:deehelp/old_core/extension/exports_extension.dart';
 import 'package:deehelp/feature/items/list/widgets/header_summary.dart';
 import 'package:deehelp/feature/items/list/widgets/row_item_card_v2.dart';
 import 'package:deehelp/module/item/domain/entities/product.dart';

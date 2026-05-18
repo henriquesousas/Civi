@@ -1,4 +1,4 @@
-import 'package:deehelp/core/theme/size/spacing_size.dart';
+import 'package:deehelp/old_core/theme/size/spacing_size.dart';
 import 'package:deehelp/v2/core/extensions/export_extension.dart';
 import 'package:deehelp/v2/core/theme/export_theme.dart';
 import 'package:deehelp/v2/feature/occurrence/detail/presentation/widgets/action_button.dart';

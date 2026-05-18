@@ -1,7 +1,7 @@
 import 'dart:async';
 
-import 'package:deehelp/core/services/permissions/location/domain/current_location.dart';
-import 'package:deehelp/core/extension/result_extension.dart';
+import 'package:deehelp/old_core/services/permissions/location/domain/current_location.dart';
+import 'package:deehelp/old_core/extension/result_extension.dart';
 import 'package:deehelp/module/incident/domain/enum/incident_status.dart';
 import 'package:deehelp/module/incident/domain/usecase/incident_output.dart';
 import 'package:deehelp/module/incident/domain/usecase/listing/incident_filter.dart';

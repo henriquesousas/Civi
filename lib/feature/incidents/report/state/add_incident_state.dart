@@ -1,6 +1,6 @@
 import 'dart:ffi';
 
-import 'package:deehelp/core/services/permissions/location/domain/current_location.dart';
+import 'package:deehelp/old_core/services/permissions/location/domain/current_location.dart';
 import 'package:deehelp/module/incident/domain/enum/type_alert.dart';
 import 'package:deehelp/module/item/domain/entities/product.dart';
 import 'package:flutter/material.dart';

@@ -1,4 +1,4 @@
-import 'package:deehelp/core/theme/export_theme.dart';
+import 'package:deehelp/old_core/theme/export_theme.dart';
 import 'package:flutter/material.dart';
 
 class AuthActionCard extends StatelessWidget {

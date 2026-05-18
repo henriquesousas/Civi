@@ -1,4 +1,4 @@
-import 'package:deehelp/core/services/network/network_info.dart';
+import 'package:deehelp/old_core/services/network/network_info.dart';
 import 'package:deehelp/module/incident/domain/usecase/incident_output.dart';
 import 'package:deehelp/feature/incidents/list/incident_list_viewmodel.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';

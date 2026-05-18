@@ -1,9 +1,9 @@
 import 'dart:ui';
 
-import 'package:deehelp/core/extension/color_extension.dart';
-import 'package:deehelp/core/ui/styles/export_style.dart';
-import 'package:deehelp/core/ui/widgets/buttons/buttons_export.dart';
-import 'package:deehelp/core/ui/widgets/icon/export_icon.dart';
+import 'package:deehelp/old_core/extension/color_extension.dart';
+import 'package:deehelp/old_core/ui/styles/export_style.dart';
+import 'package:deehelp/old_core/ui/widgets/buttons/buttons_export.dart';
+import 'package:deehelp/old_core/ui/widgets/icon/export_icon.dart';
 import 'package:flutter/material.dart';
 
 class ExpandableIncidentCard extends StatefulWidget {

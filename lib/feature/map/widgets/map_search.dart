@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 
-import '../../../core/resources.dart';
+import '../../../old_core/resources.dart';
 
 class MapSearch extends StatelessWidget {
   const MapSearch({super.key});

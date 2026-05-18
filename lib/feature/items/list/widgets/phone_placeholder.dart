@@ -1,5 +1,5 @@
-import 'package:deehelp/core/extension/color_extension.dart';
-import 'package:deehelp/core/theme/export_theme.dart';
+import 'package:deehelp/old_core/extension/color_extension.dart';
+import 'package:deehelp/old_core/theme/export_theme.dart';
 import 'package:flutter/material.dart';
 
 class PhonePlaceholder extends StatelessWidget {

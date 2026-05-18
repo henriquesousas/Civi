@@ -1,4 +1,4 @@
-import 'package:deehelp/core/ui/widgets/badge/status_style.dart';
+import 'package:deehelp/old_core/ui/widgets/badge/status_style.dart';
 import 'package:deehelp/module/item/domain/entities/product_id.dart';
 import 'package:deehelp/module/item/repository/image_media_model.dart';
 

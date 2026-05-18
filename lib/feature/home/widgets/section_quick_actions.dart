@@ -1,4 +1,4 @@
-import 'package:deehelp/core/ui/widgets/cards/card_exports.dart';
+import 'package:deehelp/old_core/ui/widgets/cards/card_exports.dart';
 import 'package:flutter/material.dart';
 
 class SectionQuickActions extends StatelessWidget {

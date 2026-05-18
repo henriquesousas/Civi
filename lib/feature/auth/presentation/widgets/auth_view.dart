@@ -1,8 +1,8 @@
-import 'package:deehelp/core/extension/exports_extension.dart';
-import 'package:deehelp/core/theme/export_theme.dart';
-import 'package:deehelp/core/theme/size/spacing_size.dart';
-import 'package:deehelp/core/ui/styles/export_style.dart';
-import 'package:deehelp/core/ui/widgets/buttons/buttons_export.dart';
+import 'package:deehelp/old_core/extension/exports_extension.dart';
+import 'package:deehelp/old_core/theme/export_theme.dart';
+import 'package:deehelp/old_core/theme/size/spacing_size.dart';
+import 'package:deehelp/old_core/ui/styles/export_style.dart';
+import 'package:deehelp/old_core/ui/widgets/buttons/buttons_export.dart';
 import 'package:deehelp/feature/auth/presentation/widgets/auth_action_card.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';

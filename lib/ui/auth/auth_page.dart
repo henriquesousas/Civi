@@ -1,4 +1,4 @@
-import 'package:deehelp/core/extension/exports_extension.dart';
+import 'package:deehelp/old_core/extension/exports_extension.dart';
 import 'package:deehelp/ui/auth/auth_notifier_provider.dart';
 import 'package:deehelp/ui/auth/auth_state.dart';
 import 'package:deehelp/ui/auth/_shared/refactor/error_dialog.dart';
@@ -8,9 +8,11 @@ import 'package:deehelp/v2/core/theme/export_theme.dart';
 import 'package:deehelp/v2/core/widgets/buttons/export_buttons.dart';
 import 'package:deehelp/ui/auth/widgets/floating_tag.dart';
 import 'package:deehelp/ui/auth/widgets/login_chip.dart';
+import 'package:deehelp/v2/feature/shell/main_shell_router.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:go_router/go_router.dart';
 
 class AuthPage extends ConsumerStatefulWidget {
   const AuthPage({super.key});
@@ -34,6 +36,7 @@ class _AuthPageState extends ConsumerState<AuthPage> {
             context,
             type: type.toDialogType(),
           ),
+          authenticated: (_) => context.go(MainShellRouter.path),
         );
       },
     );

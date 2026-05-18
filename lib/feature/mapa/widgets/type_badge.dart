@@ -1,4 +1,4 @@
-import 'package:deehelp/core/ui/styles/app_text_style.dart';
+import 'package:deehelp/old_core/ui/styles/app_text_style.dart';
 import 'package:flutter/material.dart';
 
 class TypeBadge extends StatelessWidget {

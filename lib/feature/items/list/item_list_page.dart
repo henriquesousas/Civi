@@ -1,18 +1,18 @@
 import 'dart:ui';
 
-import 'package:deehelp/core/extension/exports_extension.dart';
-import 'package:deehelp/core/theme/export_theme.dart';
-import 'package:deehelp/core/ui/widgets/appbar/default_app_bar.dart';
-import 'package:deehelp/core/utils/navigation_utils.dart';
+import 'package:deehelp/old_core/extension/exports_extension.dart';
+import 'package:deehelp/old_core/theme/export_theme.dart';
+import 'package:deehelp/old_core/ui/widgets/appbar/default_app_bar.dart';
+import 'package:deehelp/old_core/utils/navigation_utils.dart';
 import 'package:deehelp/feature/items/detail/provider/selected_item_provider.dart';
 import 'package:deehelp/feature/items/items_router.dart';
 import 'package:deehelp/feature/items/list/list_product_state.dart';
 import 'package:deehelp/feature/items/list/item_listing_args.dart';
 import 'package:deehelp/feature/items/list/widgets/item_list_view.dart';
 import 'package:deehelp/feature/search/widgets/load_skeleton.dart';
-import 'package:deehelp/business/auth/di/loggued_user_provider.dart';
+import 'package:deehelp/business/auth/providers/loggued_user_provider.dart';
 import 'package:deehelp/module/item/di/item_viewmodel_provider.dart';
-import 'package:deehelp/core/ui/widgets/empty/empty_state_widget.dart';
+import 'package:deehelp/old_core/ui/widgets/empty/empty_state_widget.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -43,7 +43,7 @@ class _ItemListPageState extends ConsumerState<ItemListPage> {
 
   Future<void> fetchData() async {
     WidgetsBinding.instance.addPostFrameCallback((_) {
-      final userId = ref.read(logguedUserProvider)?.id;
+      final userId = ref.read(logguedUserProviderOld)?.id;
       debugPrint("UserId $userId");
       if (userId == null) {
         ref.read(itemListViewmodelProvider.notifier).clear();
@@ -58,7 +58,7 @@ class _ItemListPageState extends ConsumerState<ItemListPage> {
   }
 
   Future<void> _onRefresh() async {
-    final userId = ref.read(logguedUserProvider)?.id;
+    final userId = ref.read(logguedUserProviderOld)?.id;
     debugPrint("UserId $userId");
     if (userId == null) {
       ref.read(itemListViewmodelProvider.notifier).clear();

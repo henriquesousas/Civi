@@ -1,4 +1,4 @@
-import 'package:deehelp/core/services/network/network_info_provider.dart';
+import 'package:deehelp/old_core/services/network/network_info_provider.dart';
 import 'package:deehelp/feature/items/register/viewmodel/register_item_viewmodel.dart';
 import 'package:deehelp/feature/items/register/viewmodel/add_product_state.dart';
 import 'package:deehelp/feature/items/list/item_list_viewmodel.dart';

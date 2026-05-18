@@ -1,10 +1,10 @@
 import 'dart:ui';
 
-import 'package:deehelp/core/extension/exports_extension.dart';
-import 'package:deehelp/core/theme/export_theme.dart';
-import 'package:deehelp/core/ui/styles/export_style.dart';
-import 'package:deehelp/core/ui/widgets/image/export_image.dart';
-import 'package:deehelp/core/utils/enum_utils.dart';
+import 'package:deehelp/old_core/extension/exports_extension.dart';
+import 'package:deehelp/old_core/theme/export_theme.dart';
+import 'package:deehelp/old_core/ui/styles/export_style.dart';
+import 'package:deehelp/old_core/ui/widgets/image/export_image.dart';
+import 'package:deehelp/old_core/utils/enum_utils.dart';
 import 'package:deehelp/feature/items/detail/edit_args.dart';
 import 'package:deehelp/feature/items/detail/provider/item_update_viewmodel_provider.dart';
 import 'package:deehelp/feature/items/detail/provider/selected_item_provider.dart';
@@ -28,7 +28,7 @@ import 'package:deehelp/feature/items/register/presentation/widgets/year-picker/
 import 'package:deehelp/feature/items/soft_divider.dart';
 import 'package:deehelp/module/item/domain/entities/image_media.dart';
 import 'package:deehelp/module/item/domain/entities/product.dart';
-import 'package:deehelp/core/extension/dialog_extension.dart';
+import 'package:deehelp/old_core/extension/dialog_extension.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';

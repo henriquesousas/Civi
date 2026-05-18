@@ -1,6 +1,6 @@
-import 'package:deehelp/core/extension/exports_extension.dart';
-import 'package:deehelp/core/ui/widgets/appbar/default_app_bar.dart';
-import 'package:deehelp/core/utils/navigation_utils.dart';
+import 'package:deehelp/old_core/extension/exports_extension.dart';
+import 'package:deehelp/old_core/ui/widgets/appbar/default_app_bar.dart';
+import 'package:deehelp/old_core/utils/navigation_utils.dart';
 import 'package:deehelp/feature/about/about_exports.dart';
 import 'package:deehelp/feature/faq/export_faq.dart';
 import 'package:deehelp/feature/incidents/incident_router.dart';
@@ -9,8 +9,8 @@ import 'package:deehelp/feature/profile/widgets/title_section.dart';
 import 'package:deehelp/feature/search/search_args.dart';
 import 'package:deehelp/feature/search/search_router.dart';
 import 'package:deehelp/feature/sos/sos_router.dart';
-import 'package:deehelp/core/utils/url_launcher_utils.dart';
-import 'package:deehelp/business/auth/di/loggued_user_provider.dart';
+import 'package:deehelp/old_core/utils/url_launcher_utils.dart';
+import 'package:deehelp/business/auth/providers/loggued_user_provider.dart';
 import 'package:deehelp/v2/core/extensions/export_extension.dart';
 import 'package:deehelp/v2/core/extensions/text_extension.dart';
 import 'package:deehelp/v2/core/theme/export_theme.dart';
@@ -31,7 +31,7 @@ class ProfilePage extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final session = ref.watch(logguedUserProvider);
+    final session = ref.watch(logguedUserProviderOld);
     // final authViewModel = ref.watch(authViewViewModelProvider.notifier);
     return Scaffold(
       backgroundColor: context.scaffoldBackgroundColor,

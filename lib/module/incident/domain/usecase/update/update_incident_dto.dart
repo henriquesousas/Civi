@@ -1,4 +1,4 @@
-import 'package:deehelp/core/ui/widgets/badge/export_badge.dart';
+import 'package:deehelp/old_core/ui/widgets/badge/export_badge.dart';
 
 class UpdateIncidentDto {
   final String incidentId;

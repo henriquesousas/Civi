@@ -1,5 +1,5 @@
 import 'package:deehelp/module/item/domain/usecases/add/item_validate_usecase.dart';
-import 'package:deehelp/core/providers/image_storage_provider.dart';
+import 'package:deehelp/old_core/providers/image_storage_provider.dart';
 import 'package:deehelp/module/item/domain/usecases/add/add_image_usecase.dart';
 import 'package:deehelp/module/item/domain/usecases/add/add_product_usecase.dart';
 import 'package:deehelp/module/item/domain/usecases/delete/delete_image_usecase.dart';

@@ -1,11 +1,11 @@
-import 'package:deehelp/core/extension/exports_extension.dart';
-import 'package:deehelp/core/theme/export_theme.dart';
+import 'package:deehelp/old_core/extension/exports_extension.dart';
+import 'package:deehelp/old_core/theme/export_theme.dart';
 import 'package:deehelp/feature/profile/profile_item.dart';
 import 'package:deehelp/v2/core/extensions/export_extension.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 
-import '../../../core/ui/widgets/icon/export_icon.dart';
+import '../../../old_core/ui/widgets/icon/export_icon.dart';
 
 class ProfileTile extends StatelessWidget {
   final ProfileItem item;

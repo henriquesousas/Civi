@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:skeletonizer/skeletonizer.dart';
 
-import '../../../core/theme/export_theme.dart';
+import '../../../old_core/theme/export_theme.dart';
 
 class RowItemCardSkeleton extends StatelessWidget {
   const RowItemCardSkeleton({super.key});

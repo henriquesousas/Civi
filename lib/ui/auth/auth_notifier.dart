@@ -1,4 +1,4 @@
-import 'package:deehelp/business/auth/domain/sign_in_with_google_usecase.dart';
+import 'package:deehelp/business/auth/usecases/sign_in_with_google_usecase.dart';
 import 'package:deehelp/module/auth/domain/usecases/sign_out_usecase.dart';
 import 'package:deehelp/ui/auth/auth_state.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';

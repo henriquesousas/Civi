@@ -1,4 +1,4 @@
-import 'package:deehelp/core/ui/widgets/badge/status_style.dart';
+import 'package:deehelp/old_core/ui/widgets/badge/status_style.dart';
 import 'package:deehelp/module/incident/domain/entity/incident.dart';
 import 'package:deehelp/module/incident/domain/entity/incident_local.dart';
 import 'package:deehelp/module/incident/domain/enum/type_alert.dart';

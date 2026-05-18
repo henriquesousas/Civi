@@ -1,10 +1,10 @@
-import 'package:deehelp/core/extension/color_extension.dart';
-import 'package:deehelp/core/theme/export_theme.dart';
-import 'package:deehelp/core/ui/styles/app_text_style.dart';
-import 'package:deehelp/core/ui/widgets/badge/export_badge.dart';
-import 'package:deehelp/core/ui/widgets/icon/highlight_icon.dart';
+import 'package:deehelp/old_core/extension/color_extension.dart';
+import 'package:deehelp/old_core/theme/export_theme.dart';
+import 'package:deehelp/old_core/ui/styles/app_text_style.dart';
+import 'package:deehelp/old_core/ui/widgets/badge/export_badge.dart';
+import 'package:deehelp/old_core/ui/widgets/icon/highlight_icon.dart';
 import 'package:deehelp/module/item/domain/entities/product.dart';
-import 'package:deehelp/core/extension/date_extension.dart';
+import 'package:deehelp/old_core/extension/date_extension.dart';
 import 'package:flutter/material.dart';
 
 class RowItemCard extends StatelessWidget {

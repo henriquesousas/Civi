@@ -1,5 +1,5 @@
-import 'package:deehelp/core/extension/exports_extension.dart';
-import 'package:deehelp/core/theme/export_theme.dart';
+import 'package:deehelp/old_core/extension/exports_extension.dart';
+import 'package:deehelp/old_core/theme/export_theme.dart';
 import 'package:deehelp/feature/items/item_type.dart';
 import 'package:deehelp/module/item/domain/entities/product.dart';
 import 'package:flutter/material.dart';

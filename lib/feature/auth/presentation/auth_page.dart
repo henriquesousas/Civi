@@ -1,10 +1,10 @@
-import 'package:deehelp/core/extension/exports_extension.dart';
-import 'package:deehelp/core/theme/export_theme.dart';
-import 'package:deehelp/core/ui/styles/app_text_style.dart';
+import 'package:deehelp/old_core/extension/exports_extension.dart';
+import 'package:deehelp/old_core/theme/export_theme.dart';
+import 'package:deehelp/old_core/ui/styles/app_text_style.dart';
 import 'package:deehelp/feature/auth/presentation/widgets/auth_view.dart';
 import 'package:deehelp/ui/auth/auth_state.dart';
 import 'package:deehelp/ui/auth/auth_notifier_provider.dart';
-import 'package:deehelp/core/extension/dialog_extension.dart';
+import 'package:deehelp/old_core/extension/dialog_extension.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';

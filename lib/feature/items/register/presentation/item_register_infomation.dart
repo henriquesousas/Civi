@@ -1,4 +1,4 @@
-import 'package:deehelp/core/theme/export_theme.dart';
+import 'package:deehelp/old_core/theme/export_theme.dart';
 import 'package:deehelp/feature/items/item_type.dart';
 import 'package:deehelp/feature/items/register/item_data.dart';
 import 'package:deehelp/feature/items/register/presentation/widgets/card_page.dart';
@@ -14,7 +14,7 @@ import 'package:deehelp/feature/items/register/presentation/widgets/year-picker/
 import 'package:deehelp/feature/items/register/presentation/widgets/year-picker/year_bottom_sheet.dart';
 import 'package:deehelp/feature/items/register/viewmodel/register_item_viewmodel.dart';
 import 'package:deehelp/module/item/di/item_viewmodel_provider.dart';
-import 'package:deehelp/core/utils/url_launcher_utils.dart';
+import 'package:deehelp/old_core/utils/url_launcher_utils.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';

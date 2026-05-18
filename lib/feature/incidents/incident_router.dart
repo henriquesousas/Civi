@@ -6,7 +6,7 @@ import 'package:deehelp/feature/incidents/report/widgets/success/regiter_inciden
 import 'package:deehelp/feature/incidents/update/update_incident_args.dart';
 import 'package:deehelp/feature/incidents/update/update_incident_page.dart';
 import 'package:deehelp/feature/incidents/update/update_incident_page_tile.dart';
-import 'package:deehelp/core/router/slide_transition_page.dart';
+import 'package:deehelp/old_core/router/slide_transition_page.dart';
 import 'package:deehelp/module/incident/domain/usecase/incident_output.dart';
 import 'package:go_router/go_router.dart';
 

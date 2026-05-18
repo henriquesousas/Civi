@@ -1,9 +1,9 @@
-import 'package:deehelp/business/_shared/failures/exports.dart';
-import 'package:deehelp/business/_shared/failures/network_failure.dart';
-import 'package:deehelp/business/auth/domain/invalid_credentials_failure.dart';
-import 'package:deehelp/business/auth/domain/loggued_user.dart';
-import 'package:deehelp/business/auth/external/auth_datasource_supabase.dart';
-import 'package:deehelp/core/services/network/network_info.dart';
+import 'package:deehelp/core/failures/exports.dart';
+import 'package:deehelp/core/failures/network_failure.dart';
+import 'package:deehelp/core/failures/invalid_credentials_failure.dart';
+import 'package:deehelp/business/auth/loggued_user.dart';
+import 'package:deehelp/core/data/auth/auth_datasource_supabase.dart';
+import 'package:deehelp/old_core/services/network/network_info.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';

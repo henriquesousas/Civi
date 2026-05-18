@@ -1,9 +1,9 @@
-import 'package:deehelp/core/extension/exports_extension.dart';
-import 'package:deehelp/core/theme/export_theme.dart';
-import 'package:deehelp/core/ui/styles/app_text_style.dart';
-import 'package:deehelp/core/ui/widgets/badge/badge_text.dart';
-import 'package:deehelp/core/ui/widgets/image/custom_network_image.dart';
-import 'package:deehelp/core/ui/widgets/image/ui_my_assets_image_widget.dart';
+import 'package:deehelp/old_core/extension/exports_extension.dart';
+import 'package:deehelp/old_core/theme/export_theme.dart';
+import 'package:deehelp/old_core/ui/styles/app_text_style.dart';
+import 'package:deehelp/old_core/ui/widgets/badge/badge_text.dart';
+import 'package:deehelp/old_core/ui/widgets/image/custom_network_image.dart';
+import 'package:deehelp/old_core/ui/widgets/image/ui_my_assets_image_widget.dart';
 import 'package:deehelp/feature/items/detail/widgets/card_text_zoom.dart';
 import 'package:deehelp/feature/items/detail/widgets/empty_photos.dart';
 import 'package:deehelp/feature/items/detail/widgets/horizontal_image_preview.dart';

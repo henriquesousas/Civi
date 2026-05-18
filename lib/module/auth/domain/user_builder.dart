@@ -1,5 +1,5 @@
 import 'package:deehelp/business/_shared/value_objects/email.dart';
-import 'package:deehelp/core/valueobject/image_url.dart';
+import 'package:deehelp/old_core/valueobject/image_url.dart';
 import 'package:deehelp/module/auth/domain/user.dart';
 import 'package:deehelp/module/auth/domain/gender.dart';
 import 'package:deehelp/module/auth/domain/status.dart';

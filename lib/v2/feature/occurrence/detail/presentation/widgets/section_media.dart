@@ -1,4 +1,4 @@
-import 'package:deehelp/core/ui/widgets/image/custom_network_image.dart';
+import 'package:deehelp/old_core/ui/widgets/image/custom_network_image.dart';
 import 'package:deehelp/v2/core/extensions/export_extension.dart';
 import 'package:deehelp/v2/core/theme/export_theme.dart';
 import 'package:deehelp/v2/core/widgets/image/export_image.dart';

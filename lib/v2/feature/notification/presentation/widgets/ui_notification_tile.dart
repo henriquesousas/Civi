@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:deehelp/core/ui/widgets/image/custom_network_image.dart';
+import 'package:deehelp/old_core/ui/widgets/image/custom_network_image.dart';
 import 'package:deehelp/v2/core/extensions/export_extension.dart';
 import 'package:deehelp/v2/core/theme/export_theme.dart';
 import 'package:deehelp/v2/feature/notification/domain/notification_alert.dart';

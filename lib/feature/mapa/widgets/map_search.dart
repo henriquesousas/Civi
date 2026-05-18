@@ -1,7 +1,7 @@
-import 'package:deehelp/core/theme/export_theme.dart';
-import 'package:deehelp/core/ui/styles/export_style.dart';
-import 'package:deehelp/core/ui/widgets/buttons/button_profile.dart';
-import 'package:deehelp/core/ui/widgets/image/profile_image_with_upload.dart';
+import 'package:deehelp/old_core/theme/export_theme.dart';
+import 'package:deehelp/old_core/ui/styles/export_style.dart';
+import 'package:deehelp/old_core/ui/widgets/buttons/button_profile.dart';
+import 'package:deehelp/old_core/ui/widgets/image/profile_image_with_upload.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 

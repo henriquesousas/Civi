@@ -1,4 +1,4 @@
-import 'package:deehelp/core/extension/size_extension.dart';
+import 'package:deehelp/old_core/extension/size_extension.dart';
 import 'package:deehelp/v2/feature/location_disable/presentation/widgets/location_content.dart';
 import 'package:deehelp/v2/feature/location_disable/presentation/widgets/top_placeholder.dart';
 import 'package:flutter/material.dart';

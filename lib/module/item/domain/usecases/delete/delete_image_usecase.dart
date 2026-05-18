@@ -1,7 +1,7 @@
 import 'package:deehelp/business/_shared/use_case.dart';
-import 'package:deehelp/core/services/storage/image_storage.dart';
-import 'package:deehelp/core/utils/result.dart';
-import 'package:deehelp/core/utils/unit.dart';
+import 'package:deehelp/old_core/services/storage/image_storage.dart';
+import 'package:deehelp/old_core/utils/result.dart';
+import 'package:deehelp/old_core/utils/unit.dart';
 import 'package:deehelp/module/item/domain/exceptions/delete_image_failure.dart';
 import 'package:deehelp/module/item/domain/product_repository.dart';
 import 'package:deehelp/module/item/domain/usecases/delete/dtos/delete_image_dto.dart';

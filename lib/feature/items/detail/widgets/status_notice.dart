@@ -1,5 +1,5 @@
-import 'package:deehelp/core/extension/exports_extension.dart';
-import 'package:deehelp/core/ui/widgets/badge/status_style.dart';
+import 'package:deehelp/old_core/extension/exports_extension.dart';
+import 'package:deehelp/old_core/ui/widgets/badge/status_style.dart';
 import 'package:flutter/material.dart';
 
 // class ItemStatusNotice extends StatelessWidget {

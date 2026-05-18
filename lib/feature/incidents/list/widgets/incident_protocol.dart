@@ -1,5 +1,5 @@
-import 'package:deehelp/core/theme/size/icon_size.dart';
-import 'package:deehelp/core/ui/styles/export_style.dart';
+import 'package:deehelp/old_core/theme/size/icon_size.dart';
+import 'package:deehelp/old_core/ui/styles/export_style.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 

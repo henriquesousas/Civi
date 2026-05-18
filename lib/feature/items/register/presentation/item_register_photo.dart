@@ -1,5 +1,5 @@
-import 'package:deehelp/core/theme/export_theme.dart';
-import 'package:deehelp/core/theme/size/spacing_size.dart';
+import 'package:deehelp/old_core/theme/export_theme.dart';
+import 'package:deehelp/old_core/theme/size/spacing_size.dart';
 import 'package:deehelp/feature/items/register/presentation/widgets/photo/card_photo.dart';
 import 'package:deehelp/feature/items/register/presentation/widgets/section_title.dart';
 import 'package:deehelp/feature/items/register/presentation/widgets/wizard_step.dart';

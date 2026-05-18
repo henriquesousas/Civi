@@ -1,4 +1,4 @@
-import 'package:deehelp/core/extension/size_extension.dart';
+import 'package:deehelp/old_core/extension/size_extension.dart';
 import 'package:deehelp/v2/core/extensions/export_extension.dart';
 import 'package:deehelp/v2/core/theme/export_theme.dart';
 import 'package:deehelp/v2/core/widgets/buttons/ui_button_tertiary.dart';

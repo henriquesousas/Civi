@@ -1,7 +1,7 @@
-import 'package:deehelp/core/extension/color_extension.dart';
-import 'package:deehelp/core/theme/size/radius_size.dart';
-import 'package:deehelp/core/theme/size/spacing_size.dart';
-import 'package:deehelp/core/ui/styles/app_text_style.dart';
+import 'package:deehelp/old_core/extension/color_extension.dart';
+import 'package:deehelp/old_core/theme/size/radius_size.dart';
+import 'package:deehelp/old_core/theme/size/spacing_size.dart';
+import 'package:deehelp/old_core/ui/styles/app_text_style.dart';
 import 'package:flutter/material.dart';
 
 class EditInfoCard extends StatelessWidget {

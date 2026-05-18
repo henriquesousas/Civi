@@ -1,6 +1,6 @@
-import 'package:deehelp/core/theme/export_theme.dart';
-import 'package:deehelp/core/ui/widgets/avatar/profile_image_with_upload_button_widget.dart';
-import 'package:deehelp/core/ui/widgets/buttons/button_profile.dart';
+import 'package:deehelp/old_core/theme/export_theme.dart';
+import 'package:deehelp/old_core/ui/widgets/avatar/profile_image_with_upload_button_widget.dart';
+import 'package:deehelp/old_core/ui/widgets/buttons/button_profile.dart';
 import 'package:flutter/widgets.dart';
 
 class MapaAvatar extends StatelessWidget {

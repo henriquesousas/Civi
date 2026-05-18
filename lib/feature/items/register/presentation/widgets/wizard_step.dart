@@ -1,8 +1,8 @@
-import 'package:deehelp/core/extension/exports_extension.dart';
-import 'package:deehelp/core/theme/export_theme.dart';
-import 'package:deehelp/core/ui/styles/export_style.dart';
-import 'package:deehelp/core/ui/widgets/cards/card_exports.dart';
-import 'package:deehelp/core/ui/widgets/cards/surface_card.dart';
+import 'package:deehelp/old_core/extension/exports_extension.dart';
+import 'package:deehelp/old_core/theme/export_theme.dart';
+import 'package:deehelp/old_core/ui/styles/export_style.dart';
+import 'package:deehelp/old_core/ui/widgets/cards/card_exports.dart';
+import 'package:deehelp/old_core/ui/widgets/cards/surface_card.dart';
 import 'package:flutter/material.dart';
 
 class WizardHeader extends StatelessWidget {

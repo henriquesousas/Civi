@@ -1,4 +1,4 @@
-import 'package:deehelp/core/ui/styles/export_style.dart';
+import 'package:deehelp/old_core/ui/styles/export_style.dart';
 import 'package:flutter/material.dart';
 
 class FaqSectionTitle extends StatelessWidget {

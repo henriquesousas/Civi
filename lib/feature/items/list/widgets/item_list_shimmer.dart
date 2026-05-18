@@ -1,6 +1,6 @@
-import 'package:deehelp/core/theme/export_theme.dart';
+import 'package:deehelp/old_core/theme/export_theme.dart';
 import 'package:deehelp/feature/items/list/row_item_card_skeleton.dart';
-import 'package:deehelp/core/shimmer_animation.dart';
+import 'package:deehelp/old_core/shimmer_animation.dart';
 import 'package:flutter/material.dart';
 
 //Ta sendo usado por ItemListPage e IncideListPage

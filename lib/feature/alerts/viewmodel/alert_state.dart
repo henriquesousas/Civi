@@ -1,4 +1,4 @@
-import 'package:deehelp/core/services/permissions/location/domain/current_location.dart';
+import 'package:deehelp/old_core/services/permissions/location/domain/current_location.dart';
 import 'package:deehelp/module/incident/domain/enum/type_alert.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 

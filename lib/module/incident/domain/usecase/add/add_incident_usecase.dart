@@ -1,10 +1,10 @@
 import 'dart:math';
 
-import 'package:deehelp/business/_shared/failures/failure.dart';
+import 'package:deehelp/core/failures/failure.dart';
 import 'package:deehelp/business/_shared/use_case.dart';
-import 'package:deehelp/core/ui/widgets/badge/export_badge.dart';
+import 'package:deehelp/old_core/ui/widgets/badge/export_badge.dart';
 import 'package:deehelp/business/_shared/utils/id_utils.dart';
-import 'package:deehelp/core/utils/result.dart';
+import 'package:deehelp/old_core/utils/result.dart';
 import 'package:deehelp/module/incident/domain/entity/incident.dart';
 import 'package:deehelp/module/incident/domain/incident_repository.dart';
 import 'package:deehelp/module/incident/domain/product_already_exist_exception%20copy.dart';

@@ -1,7 +1,7 @@
 import 'package:deehelp/app_name.dart';
-import 'package:deehelp/core/env_config.dart';
-import 'package:deehelp/core/theme/app_theme.dart';
-import 'package:deehelp/core/theme/theme_provider.dart';
+import 'package:deehelp/old_core/env_config.dart';
+import 'package:deehelp/old_core/theme/app_theme.dart';
+import 'package:deehelp/old_core/theme/theme_provider.dart';
 import 'package:deehelp/foreground_monitor.dart';
 import 'package:deehelp/local_notification_service.dart';
 import 'package:flutter/material.dart';
@@ -13,7 +13,7 @@ import 'package:mapbox_maps_flutter/mapbox_maps_flutter.dart'
     show MapboxOptions;
 import 'package:supabase_flutter/supabase_flutter.dart';
 
-import 'core/router/router.dart';
+import 'old_core/router/router.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();

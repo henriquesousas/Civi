@@ -1,4 +1,4 @@
-import 'package:deehelp/core/extension/size_extension.dart';
+import 'package:deehelp/old_core/extension/size_extension.dart';
 import 'package:deehelp/v2/core/theme/size_radius.dart';
 import 'package:deehelp/v2/core/widgets/ui_indicator.dart';
 import 'package:deehelp/v2/core/widgets/ui_thin_divider.dart';

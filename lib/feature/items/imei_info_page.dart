@@ -1,8 +1,8 @@
-import 'package:deehelp/core/extension/color_extension.dart';
-import 'package:deehelp/core/extension/size_extension.dart';
-import 'package:deehelp/core/theme/app_colors.dart';
-import 'package:deehelp/core/ui/widgets/appbar/default_app_bar.dart';
-import 'package:deehelp/core/ui/widgets/buttons/buttons_export.dart';
+import 'package:deehelp/old_core/extension/color_extension.dart';
+import 'package:deehelp/old_core/extension/size_extension.dart';
+import 'package:deehelp/old_core/theme/app_colors.dart';
+import 'package:deehelp/old_core/ui/widgets/appbar/default_app_bar.dart';
+import 'package:deehelp/old_core/ui/widgets/buttons/buttons_export.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';

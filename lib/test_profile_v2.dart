@@ -1,4 +1,4 @@
-import 'package:deehelp/core/ui/widgets/image/export_image.dart';
+import 'package:deehelp/old_core/ui/widgets/image/export_image.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 

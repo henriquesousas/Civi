@@ -1,17 +1,17 @@
 // import 'package:deehelp/feature/home/v2/home_page.dart';
 
-import 'package:deehelp/core/extension/exports_extension.dart';
-import 'package:deehelp/core/services/network/network_info.dart';
-import 'package:deehelp/core/services/network/network_info_provider.dart';
-import 'package:deehelp/core/services/network/netwotk_alert_controller.dart';
-import 'package:deehelp/core/theme/export_theme.dart';
-import 'package:deehelp/core/ui/styles/export_style.dart';
+import 'package:deehelp/old_core/extension/exports_extension.dart';
+import 'package:deehelp/old_core/services/network/network_info.dart';
+import 'package:deehelp/old_core/services/network/network_info_provider.dart';
+import 'package:deehelp/old_core/services/network/netwotk_alert_controller.dart';
+import 'package:deehelp/old_core/theme/export_theme.dart';
+import 'package:deehelp/old_core/ui/styles/export_style.dart';
 import 'package:deehelp/feature/auth/presentation/auth_router.dart';
 import 'package:deehelp/feature/home/waze_alert.dart';
 import 'package:deehelp/feature/items/list/item_list_page.dart';
 import 'package:deehelp/feature/mapa/mapa_page.dart';
 import 'package:deehelp/feature/profile/profile_page.dart';
-import 'package:deehelp/business/auth/di/loggued_user_provider.dart';
+import 'package:deehelp/business/auth/providers/loggued_user_provider.dart';
 import 'package:deehelp/module/item/di/item_viewmodel_provider.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -50,7 +50,7 @@ class _AppShellPageState extends ConsumerState<AppShellPage> {
           setState(
             () {
               if (i == 1) {
-                final userId = ref.read(logguedUserProvider)?.id;
+                final userId = ref.read(logguedUserProviderOld)?.id;
                 if (userId == null) {
                   context.push(AuthRouter.path);
                   return;
@@ -62,7 +62,7 @@ class _AppShellPageState extends ConsumerState<AppShellPage> {
 
           // ✅ quando clicar em "Meus itens"
           if (i == 1) {
-            final userId = ref.read(logguedUserProvider)?.id;
+            final userId = ref.read(logguedUserProviderOld)?.id;
             if (userId == null) {
               ref.read(itemListViewmodelProvider.notifier).clear();
               _itemsLoadedOnce = false;
@@ -71,7 +71,7 @@ class _AppShellPageState extends ConsumerState<AppShellPage> {
           }
 
           if (i == 1 && !_itemsLoadedOnce) {
-            final userId = ref.read(logguedUserProvider)?.id;
+            final userId = ref.read(logguedUserProviderOld)?.id;
             if (userId == null) {
               return;
             }

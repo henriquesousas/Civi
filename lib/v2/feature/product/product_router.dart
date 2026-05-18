@@ -1,4 +1,4 @@
-import 'package:deehelp/core/router/slide_transition_page.dart';
+import 'package:deehelp/old_core/router/slide_transition_page.dart';
 import 'package:deehelp/v2/feature/product/presentation/list/list_product_page.dart';
 import 'package:deehelp/v2/feature/product/presentation/register/phone/register_phone_page.dart';
 import 'package:deehelp/v2/feature/product/presentation/register/vehicle/register_vehicle_page.dart';

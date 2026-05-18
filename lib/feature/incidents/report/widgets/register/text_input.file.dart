@@ -1,6 +1,6 @@
-import 'package:deehelp/core/extension/color_extension.dart';
-import 'package:deehelp/core/ui/styles/app_text_style.dart';
-import 'package:deehelp/core/ui/widgets/icon/highlight_icon.dart';
+import 'package:deehelp/old_core/extension/color_extension.dart';
+import 'package:deehelp/old_core/ui/styles/app_text_style.dart';
+import 'package:deehelp/old_core/ui/widgets/icon/highlight_icon.dart';
 import 'package:flutter/material.dart';
 
 class TextInputTile extends StatelessWidget {

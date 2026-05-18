@@ -1,4 +1,4 @@
-import 'package:deehelp/core/providers/supabase_provider.dart';
+import 'package:deehelp/old_core/providers/supabase_provider.dart';
 import 'package:deehelp/module/incident/domain/incident_repository.dart';
 import 'package:deehelp/module/incident/external/repository/supabase_incident_repository.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';

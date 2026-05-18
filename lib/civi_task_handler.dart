@@ -1,5 +1,5 @@
 import 'dart:async';
-import 'package:deehelp/core/utils/enum_utils.dart';
+import 'package:deehelp/old_core/utils/enum_utils.dart';
 import 'package:deehelp/feature/items/item_type.dart';
 import 'package:deehelp/local_notification_service.dart';
 import 'package:flutter/material.dart';

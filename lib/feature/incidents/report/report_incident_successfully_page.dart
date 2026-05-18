@@ -1,7 +1,7 @@
-import 'package:deehelp/core/theme/export_theme.dart';
-import 'package:deehelp/core/ui/styles/app_text_style.dart';
-import 'package:deehelp/core/ui/widgets/bubble/bubble_export.dart';
-import 'package:deehelp/core/ui/widgets/buttons/buttons_export.dart';
+import 'package:deehelp/old_core/theme/export_theme.dart';
+import 'package:deehelp/old_core/ui/styles/app_text_style.dart';
+import 'package:deehelp/old_core/ui/widgets/bubble/bubble_export.dart';
+import 'package:deehelp/old_core/ui/widgets/buttons/buttons_export.dart';
 import 'package:deehelp/feature/incidents/report/widgets/action_row.dart';
 import 'package:deehelp/feature/incidents/report/widgets/check_row.dart';
 import 'package:deehelp/feature/incidents/report/widgets/glass_header.dart';
@@ -12,7 +12,7 @@ import 'package:deehelp/feature/incidents/report/widgets/success/regiter_inciden
 import 'package:deehelp/feature/items/item_type.dart';
 import 'package:deehelp/feature/items/success/top_bar_v2.dart';
 import 'package:deehelp/module/incident/domain/entity/incident_local.dart';
-import 'package:deehelp/core/utils/url_launcher_utils.dart';
+import 'package:deehelp/old_core/utils/url_launcher_utils.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';

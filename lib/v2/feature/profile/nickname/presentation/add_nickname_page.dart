@@ -1,7 +1,7 @@
 import 'dart:math';
 
-import 'package:deehelp/core/ui/widgets/appbar/default_app_bar.dart';
-import 'package:deehelp/core/ui/widgets/buttons/buttons_export.dart';
+import 'package:deehelp/old_core/ui/widgets/appbar/default_app_bar.dart';
+import 'package:deehelp/old_core/ui/widgets/buttons/buttons_export.dart';
 import 'package:deehelp/v2/core/extensions/export_extension.dart';
 import 'package:deehelp/v2/core/theme/export_theme.dart';
 import 'package:deehelp/v2/core/widgets/buttons/export_buttons.dart';

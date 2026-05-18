@@ -1,4 +1,4 @@
-import 'package:deehelp/core/errors/failure.dart';
+import 'package:deehelp/old_core/errors/failure.dart';
 import 'package:deehelp/feature/items/item_type.dart';
 
 class ItemAlreadyExistException extends Failure {

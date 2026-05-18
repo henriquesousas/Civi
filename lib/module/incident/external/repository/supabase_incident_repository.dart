@@ -1,5 +1,5 @@
-import 'package:deehelp/core/utils/result.dart';
-import 'package:deehelp/core/utils/unit.dart';
+import 'package:deehelp/old_core/utils/result.dart';
+import 'package:deehelp/old_core/utils/unit.dart';
 import 'package:deehelp/module/incident/domain/entity/incident.dart';
 import 'package:deehelp/module/incident/domain/enum/incident_status.dart';
 import 'package:deehelp/module/incident/domain/incident_repository.dart';

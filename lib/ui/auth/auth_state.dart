@@ -1,5 +1,5 @@
-import 'package:deehelp/business/_shared/failures/exports.dart';
-import 'package:deehelp/business/auth/domain/loggued_user.dart';
+import 'package:deehelp/core/failures/exports.dart';
+import 'package:deehelp/business/auth/loggued_user.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 part 'auth_state.freezed.dart';

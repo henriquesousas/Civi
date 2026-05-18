@@ -1,7 +1,7 @@
 import 'package:deehelp/app_name.dart';
-import 'package:deehelp/core/extension/color_extension.dart';
-import 'package:deehelp/core/theme/export_theme.dart';
-import 'package:deehelp/core/ui/styles/export_style.dart';
+import 'package:deehelp/old_core/extension/color_extension.dart';
+import 'package:deehelp/old_core/theme/export_theme.dart';
+import 'package:deehelp/old_core/ui/styles/export_style.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 

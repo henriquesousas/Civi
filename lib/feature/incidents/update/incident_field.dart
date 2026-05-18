@@ -1,4 +1,4 @@
-import 'package:deehelp/core/services/permissions/location/export_location.dart';
+import 'package:deehelp/old_core/services/permissions/location/export_location.dart';
 
 enum IncidentField {
   howto,

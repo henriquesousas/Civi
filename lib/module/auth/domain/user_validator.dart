@@ -1,6 +1,6 @@
 import 'package:deehelp/business/_shared/validation/domain_notification.dart';
 import 'package:deehelp/business/user/user.dart';
-import 'package:deehelp/core/validation/validator.dart';
+import 'package:deehelp/old_core/validation/validator.dart';
 
 import '../../../business/_shared/validation/validation_handler.dart';
 

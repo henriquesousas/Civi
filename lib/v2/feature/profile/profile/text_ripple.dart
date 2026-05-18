@@ -1,5 +1,6 @@
 import 'package:deehelp/v2/core/extensions/export_extension.dart';
 import 'package:flutter/material.dart';
+import 'package:supabase_flutter/supabase_flutter.dart';
 
 class TextRipple extends StatelessWidget {
   final String text;
@@ -11,8 +12,9 @@ class TextRipple extends StatelessWidget {
       color: Colors.transparent,
       child: InkWell(
         borderRadius: BorderRadius.circular(8),
-        onTap: () {
+        onTap: () async {
           // ação
+          Supabase.instance.client.auth.signOut();
         },
         child: Padding(
           padding: const EdgeInsets.symmetric(

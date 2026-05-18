@@ -1,4 +1,4 @@
-import 'package:deehelp/core/extension/string_extension.dart';
+import 'package:deehelp/old_core/extension/string_extension.dart';
 import 'package:deehelp/v2/core/theme/size_layout_spacing.dart';
 import 'package:deehelp/v2/core/theme/size_spacing.dart';
 import 'package:deehelp/v2/feature/occurrence/send_alert/presentation/widgets/section_category.dart';

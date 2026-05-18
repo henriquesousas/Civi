@@ -1,10 +1,10 @@
-import 'package:deehelp/core/handlers/handle_command.dart';
-import 'package:deehelp/core/handlers/handler_error.dart';
-import 'package:deehelp/core/services/permissions/location/domain/current_location.dart';
+import 'package:deehelp/old_core/handlers/handle_command.dart';
+import 'package:deehelp/old_core/handlers/handler_error.dart';
+import 'package:deehelp/old_core/services/permissions/location/domain/current_location.dart';
 import 'package:deehelp/feature/alerts/viewmodel/alert_state.dart';
 import 'package:deehelp/module/alert/add_alert_dto.dart';
 import 'package:deehelp/module/alert/add_alert_usecase.dart';
-import 'package:deehelp/business/auth/domain/loggued_user.dart';
+import 'package:deehelp/business/auth/loggued_user.dart';
 import 'package:deehelp/module/incident/domain/entity/incident_local.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
