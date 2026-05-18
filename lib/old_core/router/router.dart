@@ -7,8 +7,10 @@ import 'package:deehelp/old_core/router/slide_transition_page.dart';
 import 'package:deehelp/social_profile_screen.dart';
 import 'package:deehelp/test_badge_page.dart';
 import 'package:deehelp/test_badge_unlocked_page.dart';
+import 'package:deehelp/test_media_tab_page.dart';
 import 'package:deehelp/test_profile_badge_page.dart';
 import 'package:deehelp/test_profile_v2.dart';
+import 'package:deehelp/test_sync_serve.dart';
 import 'package:deehelp/v2/feature/location_disable/location_disable_router.dart';
 import 'package:deehelp/v2/feature/notification/notification_router.dart';
 import 'package:deehelp/v2/feature/occurrence/detail/alert_detail_router.dart';
@@ -45,18 +47,18 @@ var goRouterProvider = Provider<GoRouter>(
     // Future.microtask(() => ref.read(appStartupProvider.notifier).initCheck());
     final sessionNotifier = ref.watch(sessionUserNotifier);
     return GoRouter(
-      // initialLocation: "/ola",
+      initialLocation: "/ola",
       // initialLocation: AuthRouter.path,
-      debugLogDiagnostics: true,
-      refreshListenable: SessionUserNotifier(ref.watch(supabaseClientProvider)),
-      redirect: (context, state) async {
-        final isLoggedIn = sessionNotifier.user != null;
-        if (!isLoggedIn) {
-          //Verificar se ja clicou no Continuar sem Login
-          return AuthRouter.path;
-        }
-        return MainShellRouter.path;
-      },
+      // debugLogDiagnostics: true,
+      // refreshListenable: SessionUserNotifier(ref.watch(supabaseClientProvider)),
+      // redirect: (context, state) async {
+      //   final isLoggedIn = sessionNotifier.user != null;
+      //   if (!isLoggedIn) {
+      //     //Verificar se ja clicou no Continuar sem Login
+      //     return AuthRouter.path;
+      //   }
+      //   return MainShellRouter.path;
+      // },
       // redirect: (context, state) {
       //   final appStatus = ref.read(appStartupProvider);
       //   final currentPath = state.matchedLocation;
@@ -137,7 +139,49 @@ var goRouterProvider = Provider<GoRouter>(
             // child: SocialProfileScreen(),
             // child: TestProfileBadgePage(),
             // child: TestBadgeUnlockedPage(),
-            child: TestBadgePage(),
+            child: TestSyncServer(),
+            // child: TestBadgePage(),
+            // child: MediaTab(
+            //   vehicles: [
+            //     VehicleMedia(
+            //       id: "1",
+            //       name: "Fox",
+            //       photos: [
+            //         VehiclePhoto(
+            //           url:
+            //               "https://dicas.olx.com.br/wp-content/uploads/2023/06/Melhores-carros-fiat-2023-.jpg",
+            //           label: "Palio",
+            //         ),
+            //         VehiclePhoto(
+            //           url:
+            //               "https://dicas.olx.com.br/wp-content/uploads/2023/06/Melhores-carros-fiat-2023-.jpg",
+            //           label: "Palio",
+            //         )
+            //       ],
+            //     ),
+            //     VehicleMedia(
+            //       id: "2",
+            //       name: "Mercebes BMW",
+            //       photos: [
+            //         VehiclePhoto(
+            //           url:
+            //               "https://dicas.olx.com.br/wp-content/uploads/2023/06/Melhores-carros-fiat-2023-.jpg",
+            //           label: "Frente",
+            //         ),
+            //         VehiclePhoto(
+            //           url:
+            //               "https://dicas.olx.com.br/wp-content/uploads/2023/06/Melhores-carros-fiat-2023-.jpg",
+            //           label: "Lateral",
+            //         ),
+            //         VehiclePhoto(
+            //           url:
+            //               "https://dicas.olx.com.br/wp-content/uploads/2023/06/Melhores-carros-fiat-2023-.jpg",
+            //           label: "Traseira",
+            //         )
+            //       ],
+            //     )
+            //   ],
+            // ),
             // //     // child: TestPost(), //OK
             // //     // child: FeedPostPage(),
             // //     // child: TesteNicknamePage(),
