@@ -1,6 +1,6 @@
-import 'package:deehelp/infra/auth/providers/auth_datasource_provider.dart';
+import 'package:deehelp/infra/auth/datasouces/auth_datasource_provider.dart';
 import 'package:deehelp/business/auth/auth_repository.dart';
-import 'package:deehelp/infra/auth/auth_repository_remote.dart';
+import 'package:deehelp/infra/auth/repositories/auth_repository_remote.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 part 'auth_repository_provider.g.dart';

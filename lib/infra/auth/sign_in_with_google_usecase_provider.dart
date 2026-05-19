@@ -1,5 +1,5 @@
-import 'package:deehelp/infra/auth/providers/auth_repository_provider.dart';
-import 'package:deehelp/infra/auth/providers/google_auth_service_provider.dart';
+import 'package:deehelp/infra/auth/repositories/auth_repository_provider.dart';
+import 'package:deehelp/infra/auth/services/google_auth_service_provider.dart';
 import 'package:deehelp/business/auth/sign_in_with_google_usecase.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 

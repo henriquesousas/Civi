@@ -1,5 +1,5 @@
 import 'package:deehelp/infra/failures/exports.dart';
-import 'package:deehelp/ui/auth/_shared/refactor/error_dialog.dart';
+import 'package:deehelp/ui/_shared/refactor/error_dialog.dart';
 
 extension ErrorFailureTypeMapper on TypeFailure {
   DialogType toDialogType() {

@@ -1,4 +1,4 @@
-import 'package:deehelp/infra/auth/providers/loggued_user_provider.dart';
+import 'package:deehelp/infra/auth/loggued_user_provider.dart';
 import 'package:deehelp/feature/incidents/providers/incident_usecase_providers.dart';
 import 'package:deehelp/feature/incidents/report/report_incident_viewmodel.dart';
 import 'package:deehelp/feature/incidents/report/state/add_incident_state.dart';

@@ -10,7 +10,7 @@ import 'package:deehelp/feature/search/search_args.dart';
 import 'package:deehelp/feature/search/search_router.dart';
 import 'package:deehelp/feature/sos/sos_router.dart';
 import 'package:deehelp/old_core/utils/url_launcher_utils.dart';
-import 'package:deehelp/infra/auth/providers/loggued_user_provider.dart';
+import 'package:deehelp/infra/auth/loggued_user_provider.dart';
 import 'package:deehelp/v2/core/extensions/export_extension.dart';
 import 'package:deehelp/v2/core/extensions/text_extension.dart';
 import 'package:deehelp/v2/core/theme/export_theme.dart';

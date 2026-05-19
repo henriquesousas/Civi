@@ -1,7 +1,7 @@
 import 'package:deehelp/old_core/env_config.dart';
 import 'package:deehelp/old_core/services/storage/image_storage.dart';
 import 'package:deehelp/old_core/services/storage/r2_cloudflare_image_storage.dart';
-import 'package:deehelp/infra/auth/providers/loggued_user_provider.dart';
+import 'package:deehelp/infra/auth/loggued_user_provider.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 //TODO: Acoplado a esse prover authenticatedUserProvider

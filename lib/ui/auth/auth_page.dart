@@ -1,9 +1,9 @@
+import 'package:deehelp/old_core/extension/size_extension.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
-import 'package:deehelp/old_core/extension/exports_extension.dart';
-import 'package:deehelp/ui/auth/auth_state.dart';
-import 'package:deehelp/ui/auth/_shared/refactor/error_dialog.dart';
-import 'package:deehelp/ui/auth/error_failure_type_mapper.dart';
+import 'package:deehelp/ui/auth/notifiers/auth_state.dart';
+import 'package:deehelp/ui/_shared/refactor/error_dialog.dart';
+import 'package:deehelp/ui/_shared/error_failure_type_mapper.dart';
 import 'package:deehelp/v2/core/extensions/export_extension.dart';
 import 'package:deehelp/v2/core/theme/export_theme.dart';
 import 'package:deehelp/v2/core/widgets/buttons/export_buttons.dart';
@@ -13,7 +13,7 @@ import 'package:deehelp/v2/feature/shell/main_shell_router.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-import 'package:deehelp/ui/auth/auth_notifier.dart';
+import 'package:deehelp/ui/auth/notifiers/auth_notifier.dart';
 
 class AuthPage extends ConsumerStatefulWidget {
   const AuthPage({super.key});

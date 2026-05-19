@@ -4,7 +4,7 @@ import 'package:deehelp/old_core/ui/styles/export_style.dart';
 import 'package:deehelp/old_core/ui/widgets/buttons/button_profile.dart';
 import 'package:deehelp/old_core/ui/widgets/image/profile_image_with_upload.dart';
 import 'package:deehelp/feature/auth/presentation/auth_router.dart';
-import 'package:deehelp/infra/auth/providers/loggued_user_provider.dart';
+import 'package:deehelp/infra/auth/loggued_user_provider.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 

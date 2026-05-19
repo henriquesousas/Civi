@@ -22,7 +22,7 @@ import 'package:deehelp/feature/items/item_type.dart';
 import 'package:deehelp/feature/items/register/presentation/widgets/card_page.dart';
 import 'package:deehelp/feature/items/register/presentation/widgets/section_title.dart';
 import 'package:deehelp/feature/items/soft_divider.dart';
-import 'package:deehelp/infra/auth/providers/loggued_user_provider.dart';
+import 'package:deehelp/infra/auth/loggued_user_provider.dart';
 import 'package:deehelp/module/item/domain/entities/image_media.dart';
 import 'package:deehelp/old_core/extension/date_extension.dart';
 import 'package:deehelp/old_core/extension/dialog_extension.dart';

@@ -2,7 +2,7 @@ import 'package:deehelp/infra/failures/exports.dart';
 import 'package:deehelp/infra/failures/network_failure.dart';
 import 'package:deehelp/infra/failures/invalid_credentials_failure.dart';
 import 'package:deehelp/business/auth/loggued_user.dart';
-import 'package:deehelp/infra/auth/auth_datasource_supabase.dart';
+import 'package:deehelp/infra/auth/datasouces/auth_datasource_supabase.dart';
 import 'package:deehelp/old_core/services/network/network_info.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';

@@ -1,7 +1,7 @@
 import 'package:riverpod_annotation/riverpod_annotation.dart';
-import 'package:deehelp/infra/auth/providers/sign_in_with_google_usecase_provider.dart';
+import 'package:deehelp/infra/auth/sign_in_with_google_usecase_provider.dart';
 import 'package:deehelp/business/auth/sign_in_with_google_usecase.dart';
-import 'package:deehelp/ui/auth/auth_state.dart';
+import 'package:deehelp/ui/auth/notifiers/auth_state.dart';
 
 part 'auth_notifier.g.dart';
 

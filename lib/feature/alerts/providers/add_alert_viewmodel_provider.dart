@@ -2,7 +2,7 @@ import 'package:deehelp/old_core/services/permissions/location/providers/locatio
 import 'package:deehelp/feature/alerts/providers/add_alert_usecase_provider.dart';
 import 'package:deehelp/feature/alerts/viewmodel/alert_state.dart';
 import 'package:deehelp/feature/alerts/viewmodel/alert_viewmodel.dart';
-import 'package:deehelp/infra/auth/providers/loggued_user_provider.dart';
+import 'package:deehelp/infra/auth/loggued_user_provider.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_riverpod/legacy.dart';

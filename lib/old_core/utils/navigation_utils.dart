@@ -1,6 +1,6 @@
 import 'package:deehelp/feature/auth/presentation/auth_router.dart';
 import 'package:deehelp/business/auth/loggued_user.dart';
-import 'package:deehelp/infra/auth/providers/loggued_user_provider.dart';
+import 'package:deehelp/infra/auth/loggued_user_provider.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 class NavigationUtils {
