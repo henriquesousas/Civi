@@ -23,6 +23,7 @@ import 'package:deehelp/module/incident/domain/usecase/report_type.dart';
 import 'package:deehelp/module/item/domain/entities/product.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:flutter_riverpod/legacy.dart';
 import 'package:logging/logging.dart';
 
 class ReportIncidentViewmodel extends StateNotifier<AddIncidentState> {

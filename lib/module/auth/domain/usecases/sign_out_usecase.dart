@@ -1,4 +1,4 @@
-import 'package:deehelp/core/failures/failure.dart';
+import 'package:deehelp/infra/failures/failure.dart';
 import 'package:deehelp/business/_shared/use_case.dart';
 import 'package:deehelp/old_core/utils/unit.dart';
 import 'package:deehelp/old_core/utils/result.dart';

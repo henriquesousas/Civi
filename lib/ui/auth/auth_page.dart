@@ -1,5 +1,6 @@
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:go_router/go_router.dart';
 import 'package:deehelp/old_core/extension/exports_extension.dart';
-import 'package:deehelp/ui/auth/auth_notifier_provider.dart';
 import 'package:deehelp/ui/auth/auth_state.dart';
 import 'package:deehelp/ui/auth/_shared/refactor/error_dialog.dart';
 import 'package:deehelp/ui/auth/error_failure_type_mapper.dart';
@@ -10,9 +11,9 @@ import 'package:deehelp/ui/auth/widgets/floating_tag.dart';
 import 'package:deehelp/ui/auth/widgets/login_chip.dart';
 import 'package:deehelp/v2/feature/shell/main_shell_router.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:go_router/go_router.dart';
+
+import 'package:deehelp/ui/auth/auth_notifier.dart';
 
 class AuthPage extends ConsumerStatefulWidget {
   const AuthPage({super.key});
@@ -24,11 +25,11 @@ class AuthPage extends ConsumerStatefulWidget {
 class _AuthPageState extends ConsumerState<AuthPage> {
   @override
   Widget build(BuildContext context) {
-    final authNotifier = ref.watch(authNotifierProvider.notifier);
-    final authState = ref.watch(authNotifierProvider);
+    final authNotifier = ref.watch(authProvider.notifier);
+    final authState = ref.watch(authProvider);
 
     ref.listen<AuthState>(
-      authNotifierProvider,
+      authProvider,
       (previous, next) {
         next.whenOrNull(
           error: (error, type) => AppDialog.show(

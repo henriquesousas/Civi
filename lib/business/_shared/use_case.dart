@@ -1,4 +1,4 @@
-import 'package:deehelp/core/failures/exports.dart';
+import 'package:deehelp/infra/failures/exports.dart';
 import 'package:fpdart/fpdart.dart';
 import 'package:deehelp/old_core/utils/result.dart';
 

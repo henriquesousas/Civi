@@ -2,7 +2,7 @@ import 'package:deehelp/old_core/providers/supabase_provider.dart';
 import 'package:deehelp/feature/auth/presentation/export_auth.dart';
 import 'package:deehelp/feature/profile/export_profile.dart';
 import 'package:deehelp/feature/splash/splash_router.dart';
-import 'package:deehelp/core/data/auth/session_user_notifier.dart';
+import 'package:deehelp/infra/auth/session_user_notifier.dart';
 import 'package:deehelp/old_core/router/slide_transition_page.dart';
 import 'package:deehelp/social_profile_screen.dart';
 import 'package:deehelp/test_badge_page.dart';
@@ -47,18 +47,18 @@ var goRouterProvider = Provider<GoRouter>(
     // Future.microtask(() => ref.read(appStartupProvider.notifier).initCheck());
     final sessionNotifier = ref.watch(sessionUserNotifier);
     return GoRouter(
-      initialLocation: "/ola",
-      // initialLocation: AuthRouter.path,
-      // debugLogDiagnostics: true,
-      // refreshListenable: SessionUserNotifier(ref.watch(supabaseClientProvider)),
-      // redirect: (context, state) async {
-      //   final isLoggedIn = sessionNotifier.user != null;
-      //   if (!isLoggedIn) {
-      //     //Verificar se ja clicou no Continuar sem Login
-      //     return AuthRouter.path;
-      //   }
-      //   return MainShellRouter.path;
-      // },
+      // initialLocation: "/ola",
+      initialLocation: AuthRouter.path,
+      debugLogDiagnostics: true,
+      refreshListenable: SessionUserNotifier(ref.watch(supabaseClientProvider)),
+      redirect: (context, state) async {
+        final isLoggedIn = sessionNotifier.user != null;
+        if (!isLoggedIn) {
+          //Verificar se ja clicou no Continuar sem Login
+          return AuthRouter.path;
+        }
+        return MainShellRouter.path;
+      },
       // redirect: (context, state) {
       //   final appStatus = ref.read(appStartupProvider);
       //   final currentPath = state.matchedLocation;

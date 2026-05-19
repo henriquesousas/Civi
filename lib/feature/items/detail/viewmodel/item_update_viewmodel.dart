@@ -12,6 +12,7 @@ import 'package:deehelp/module/item/domain/usecases/update/update_product_usecas
 import 'package:deehelp/feature/items/detail/viewmodel/item_update_manager.dart';
 import 'package:deehelp/feature/items/detail/viewmodel/product_update_state.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:flutter_riverpod/legacy.dart';
 
 class ItemUpdateViewmodel extends StateNotifier<ProductUpdateState> {
   final UpdateProductUseCase _updateProductUseCase;

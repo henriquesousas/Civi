@@ -6,7 +6,7 @@ import 'package:deehelp/feature/items/register/presentation/item_register_photo.
 import 'package:deehelp/feature/items/register/presentation/item_register_type.dart';
 import 'package:deehelp/feature/items/register/presentation/widgets/wizard_bottom_bar.dart';
 import 'package:deehelp/feature/items/register/viewmodel/add_product_state.dart';
-import 'package:deehelp/business/auth/providers/loggued_user_provider.dart';
+import 'package:deehelp/infra/auth/providers/loggued_user_provider.dart';
 import 'package:deehelp/module/item/di/item_viewmodel_provider.dart';
 import 'package:deehelp/old_core/extension/dialog_extension.dart';
 import 'package:flutter/material.dart';

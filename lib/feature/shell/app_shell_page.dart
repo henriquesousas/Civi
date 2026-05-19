@@ -11,7 +11,7 @@ import 'package:deehelp/feature/home/waze_alert.dart';
 import 'package:deehelp/feature/items/list/item_list_page.dart';
 import 'package:deehelp/feature/mapa/mapa_page.dart';
 import 'package:deehelp/feature/profile/profile_page.dart';
-import 'package:deehelp/business/auth/providers/loggued_user_provider.dart';
+import 'package:deehelp/infra/auth/providers/loggued_user_provider.dart';
 import 'package:deehelp/module/item/di/item_viewmodel_provider.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';

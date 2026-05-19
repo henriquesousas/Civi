@@ -6,6 +6,7 @@ import 'package:deehelp/module/item/di/product_usecase_provider.dart';
 import 'package:deehelp/feature/items/list/list_product_state.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:flutter_riverpod/legacy.dart';
 
 final itemListViewmodelProvider =
     StateNotifierProvider.autoDispose<ItemListViewModel, ListProductState>(

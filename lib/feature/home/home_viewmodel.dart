@@ -7,6 +7,7 @@ import 'package:deehelp/module/incident/domain/usecase/incident_output.dart';
 import 'package:deehelp/module/incident/domain/usecase/listing/incident_filter.dart';
 import 'package:deehelp/module/incident/domain/usecase/listing/get_recent_incidents_by_location_usecase.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:flutter_riverpod/legacy.dart';
 
 class HomeViewmodel extends StateNotifier<AsyncValue<List<IncidentOutput>>> {
   List<IncidentOutput> _cache = [];

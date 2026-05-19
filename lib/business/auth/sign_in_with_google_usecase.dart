@@ -1,8 +1,8 @@
-import 'package:deehelp/core/failures/exports.dart';
+import 'package:deehelp/infra/failures/exports.dart';
 import 'package:deehelp/business/_shared/use_case.dart';
 import 'package:deehelp/business/auth/loggued_user.dart';
 import 'package:deehelp/business/auth/auth_repository.dart';
-import 'package:deehelp/core/data/auth/google/google_auth_service.dart';
+import 'package:deehelp/infra/auth/google/google_auth_service.dart';
 import 'package:fpdart/fpdart.dart';
 import 'package:logging/logging.dart';
 

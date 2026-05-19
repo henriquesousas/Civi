@@ -1,4 +1,4 @@
-import 'package:deehelp/core/failures/exports.dart';
+import 'package:deehelp/infra/failures/exports.dart';
 
 final class InvalidCredentialsFailure extends Failure {
   const InvalidCredentialsFailure()

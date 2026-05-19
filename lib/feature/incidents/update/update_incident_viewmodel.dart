@@ -12,6 +12,7 @@ import 'package:deehelp/module/incident/domain/usecase/update/update_incident_us
 import 'package:deehelp/feature/incidents/update/incident_field.dart';
 import 'package:deehelp/feature/incidents/update/state/update_incident_state.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:flutter_riverpod/legacy.dart';
 
 class UpdateIncidentViewmodel extends StateNotifier<UpdateIncidentState> {
   IncidentOutput _currentIncident;

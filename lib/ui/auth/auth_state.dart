@@ -1,4 +1,4 @@
-import 'package:deehelp/core/failures/exports.dart';
+import 'package:deehelp/infra/failures/exports.dart';
 import 'package:deehelp/business/auth/loggued_user.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 

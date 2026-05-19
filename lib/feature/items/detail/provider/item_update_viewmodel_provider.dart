@@ -3,6 +3,7 @@ import 'package:deehelp/feature/items/detail/viewmodel/product_update_state.dart
 import 'package:deehelp/module/item/di/product_usecase_provider.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:flutter_riverpod/legacy.dart';
 
 final itemUpdateViewmodelProvider = StateNotifierProvider.autoDispose
     .family<ItemUpdateViewmodel, ProductUpdateState, String>((ref, productId) {

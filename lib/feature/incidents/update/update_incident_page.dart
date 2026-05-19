@@ -22,7 +22,7 @@ import 'package:deehelp/feature/items/item_type.dart';
 import 'package:deehelp/feature/items/register/presentation/widgets/card_page.dart';
 import 'package:deehelp/feature/items/register/presentation/widgets/section_title.dart';
 import 'package:deehelp/feature/items/soft_divider.dart';
-import 'package:deehelp/business/auth/providers/loggued_user_provider.dart';
+import 'package:deehelp/infra/auth/providers/loggued_user_provider.dart';
 import 'package:deehelp/module/item/domain/entities/image_media.dart';
 import 'package:deehelp/old_core/extension/date_extension.dart';
 import 'package:deehelp/old_core/extension/dialog_extension.dart';
@@ -76,14 +76,14 @@ class _UpdateIncidentPageState extends ConsumerState<UpdateIncidentPage> {
         }
 
         if (currentState.deletedSuccessfully) {
-          final ni = ref.watch(networkInfoProvider);
-          final niProvider = incidentListViewModelProvider(ni);
-          incidentListViewModelProvider(ni);
-          ref.watch(niProvider.notifier).removeAt(currentState.updatedValue!);
-          // ref
-          //     .watch(incidentListViewModelProvider.notifier)
-          //     .removeAt(currentState.updatedValue!);
-          if (context.canPop()) context.pop();
+          // final ni = ref.watch(networkInfoProvider);
+          // final niProvider = incidentListViewModelProvider(ni);
+          // incidentListViewModelProvider(ni);
+          // ref.watch(niProvider.notifier).removeAt(currentState.updatedValue!);
+          // // ref
+          // //     .watch(incidentListViewModelProvider.notifier)
+          // //     .removeAt(currentState.updatedValue!);
+          // if (context.canPop()) context.pop();
         }
 
         if (oldState?.errorMessage != currentState.errorMessage &&

@@ -1,13 +1,8 @@
 import 'package:deehelp/old_core/extension/exports_extension.dart';
 import 'package:deehelp/old_core/theme/export_theme.dart';
 import 'package:deehelp/old_core/ui/styles/app_text_style.dart';
-import 'package:deehelp/feature/auth/presentation/widgets/auth_view.dart';
-import 'package:deehelp/ui/auth/auth_state.dart';
-import 'package:deehelp/ui/auth/auth_notifier_provider.dart';
-import 'package:deehelp/old_core/extension/dialog_extension.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:go_router/go_router.dart';
 import 'widgets/auth_logo.dart';
 import 'package:flutter/material.dart';
 
@@ -16,7 +11,7 @@ class AuthPageV2 extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final authViewModel = ref.watch(authNotifierProvider.notifier);
+    // final authViewModel = ref.watch(authNotifierProviderold.notifier);
 
     listeners(context, ref);
 
@@ -36,19 +31,19 @@ class AuthPageV2 extends ConsumerWidget {
                     children: [
                       const LogoBlock(),
                       const SizedBox(height: SpacingSize.lg),
-                      ref.watch(authNotifierProvider).maybeWhen(
-                            loading: () => AuthView(
-                              onLoginWithGoogle: () {},
-                              onContinueWithLogin: () => context.pop(),
-                              isLoading: true,
-                            ),
-                            orElse: () => AuthView(
-                              onLoginWithGoogle: () =>
-                                  authViewModel.signInWithGoogle(),
-                              onContinueWithLogin: () => context.pop(),
-                              isLoading: false,
-                            ),
-                          ),
+                      // ref.watch(authNotifierProviderold).maybeWhen(
+                      //       loading: () => AuthView(
+                      //         onLoginWithGoogle: () {},
+                      //         onContinueWithLogin: () => context.pop(),
+                      //         isLoading: true,
+                      //       ),
+                      //       orElse: () => AuthView(
+                      //         onLoginWithGoogle: () =>
+                      //             authViewModel.signInWithGoogle(),
+                      //         onContinueWithLogin: () => context.pop(),
+                      //         isLoading: false,
+                      //       ),
+                      //     ),
                     ],
                   ),
                 ),
@@ -61,26 +56,26 @@ class AuthPageV2 extends ConsumerWidget {
   }
 
   void listeners(BuildContext context, WidgetRef ref) {
-    ref.listen<AuthState>(
-      authNotifierProvider,
-      (previousState, currentState) {
-        switch (currentState) {
-          // case AuthStateAuthenticated(:final user):
-          case AuthStateAuthenticated():
-            // ref.read(appStartupProvider.notifier).refresh();
-            context.pop();
-            return;
-          case AuthStateError(:final error):
-            {
-              context.showSnackBar(
-                type: DialogType.error,
-                error,
-              );
-            }
-            break;
-        }
-      },
-    );
+    // ref.listen<AuthState>(
+    //   authNotifierProviderold,
+    //   (previousState, currentState) {
+    //     switch (currentState) {
+    //       // case AuthStateAuthenticated(:final user):
+    //       case AuthStateAuthenticated():
+    //         // ref.read(appStartupProvider.notifier).refresh();
+    //         context.pop();
+    //         return;
+    //       case AuthStateError(:final error):
+    //         {
+    //           context.showSnackBar(
+    //             type: DialogType.error,
+    //             error,
+    //           );
+    //         }
+    //         break;
+    //     }
+    //   },
+    // );
   }
 }
 
@@ -89,10 +84,10 @@ class AuthPage extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final authViewModel = ref.watch(authNotifierProvider.notifier);
-    final authState = ref.watch(authNotifierProvider);
+    // final authViewModel = ref.watch(authNotifierProviderold.notifier);
+    // final authState = ref.watch(authNotifierProviderold);
 
-    listeners(context, ref);
+    // listeners(context, ref);
 
     // const background = Color(0xFF070B16);
     final borderColor = Colors.white.withValues(alpha: 0.08);
@@ -222,19 +217,19 @@ class AuthPage extends ConsumerWidget {
                             ),
                           ),
                           const SizedBox(height: 18),
-                          authState.maybeWhen(
-                            loading: () => AuthView(
-                              onLoginWithGoogle: () {},
-                              onContinueWithLogin: () => context.pop(),
-                              isLoading: true,
-                            ),
-                            orElse: () => AuthView(
-                              onLoginWithGoogle: () =>
-                                  authViewModel.signInWithGoogle(),
-                              onContinueWithLogin: () => context.pop(),
-                              isLoading: false,
-                            ),
-                          ),
+                          // authState.maybeWhen(
+                          //   loading: () => AuthView(
+                          //     onLoginWithGoogle: () {},
+                          //     onContinueWithLogin: () => context.pop(),
+                          //     isLoading: true,
+                          //   ),
+                          //   orElse: () => AuthView(
+                          //     onLoginWithGoogle: () =>
+                          //         authViewModel.signInWithGoogle(),
+                          //     onContinueWithLogin: () => context.pop(),
+                          //     isLoading: false,
+                          //   ),
+                          // ),
                         ],
                       ),
                     ),
@@ -258,21 +253,21 @@ class AuthPage extends ConsumerWidget {
   }
 
   void listeners(BuildContext context, WidgetRef ref) {
-    ref.listen<AuthState>(
-      authNotifierProvider,
-      (previousState, currentState) {
-        switch (currentState) {
-          case AuthStateAuthenticated():
-            context.pop();
-            return;
-          case AuthStateError(:final error):
-            context.showSnackBar(
-              type: DialogType.error,
-              error,
-            );
-            break;
-        }
-      },
-    );
+    // ref.listen<AuthState>(
+    //   authNotifierProviderold,
+    //   (previousState, currentState) {
+    //     switch (currentState) {
+    //       case AuthStateAuthenticated():
+    //         context.pop();
+    //         return;
+    //       case AuthStateError(:final error):
+    //         context.showSnackBar(
+    //           type: DialogType.error,
+    //           error,
+    //         );
+    //         break;
+    //     }
+    //   },
+    // );
   }
 }

@@ -3,6 +3,7 @@ import 'package:deehelp/feature/incidents/providers/incident_usecase_providers.d
 import 'package:deehelp/feature/incidents/update/state/update_incident_state.dart';
 import 'package:deehelp/feature/incidents/update/update_incident_viewmodel.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:flutter_riverpod/legacy.dart';
 
 final updateIncidentViewmodelProvider = StateNotifierProvider.autoDispose<
     UpdateIncidentViewmodel, UpdateIncidentState>((ref) {

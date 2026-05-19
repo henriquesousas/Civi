@@ -7,6 +7,7 @@ import 'package:deehelp/module/incident/domain/usecase/listing/get_incidents_use
 import 'package:deehelp/module/incident/domain/usecase/listing/incident_filter.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:flutter_riverpod/legacy.dart';
 
 class SearchViewmodel extends StateNotifier<SearchState> {
   List<IncidentOutput> _cache = [];

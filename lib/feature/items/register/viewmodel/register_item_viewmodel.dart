@@ -8,6 +8,7 @@ import 'package:deehelp/module/item/domain/usecases/add/dtos/add_product_dto.dar
 import 'package:deehelp/feature/items/register/viewmodel/add_product_state.dart';
 import 'package:deehelp/old_core/utils/unit.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:flutter_riverpod/legacy.dart';
 
 class RegisterItemViewmodel extends StateNotifier<AddProductState> {
   final AddProductUseCase _addProductUseCase;

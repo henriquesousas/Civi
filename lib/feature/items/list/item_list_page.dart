@@ -10,7 +10,7 @@ import 'package:deehelp/feature/items/list/list_product_state.dart';
 import 'package:deehelp/feature/items/list/item_listing_args.dart';
 import 'package:deehelp/feature/items/list/widgets/item_list_view.dart';
 import 'package:deehelp/feature/search/widgets/load_skeleton.dart';
-import 'package:deehelp/business/auth/providers/loggued_user_provider.dart';
+import 'package:deehelp/infra/auth/providers/loggued_user_provider.dart';
 import 'package:deehelp/module/item/di/item_viewmodel_provider.dart';
 import 'package:deehelp/old_core/ui/widgets/empty/empty_state_widget.dart';
 import 'package:flutter/cupertino.dart';

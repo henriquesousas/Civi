@@ -1,7 +1,7 @@
 import 'package:deehelp/business/auth/auth_datasource.dart';
-import 'package:deehelp/core/failures/invalid_credentials_failure.dart';
+import 'package:deehelp/infra/failures/invalid_credentials_failure.dart';
 import 'package:deehelp/business/auth/loggued_user.dart';
-import 'package:deehelp/core/data/auth/auth_repository_remote.dart';
+import 'package:deehelp/infra/auth/auth_repository_remote.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:fpdart/fpdart.dart';
 import 'package:mocktail/mocktail.dart';

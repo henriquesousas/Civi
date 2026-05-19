@@ -23,7 +23,7 @@ import 'package:deehelp/feature/mapa/widgets/map_bottom_sheet.dart';
 import 'package:deehelp/feature/mapa/widgets/map_floating_toolbar.dart';
 import 'package:deehelp/feature/search/search_page_v2.dart';
 import 'package:deehelp/feature/search/search_router.dart';
-import 'package:deehelp/business/auth/providers/loggued_user_provider.dart';
+import 'package:deehelp/infra/auth/providers/loggued_user_provider.dart';
 import 'package:deehelp/module/incident/domain/enum/incident_status.dart';
 import 'package:deehelp/module/incident/domain/usecase/incident_output.dart';
 import 'package:flutter/material.dart';

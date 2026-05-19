@@ -6,6 +6,7 @@ import 'package:deehelp/module/item/domain/entities/product.dart';
 import 'package:deehelp/module/item/domain/usecases/listing/get_products_by_user_usecase.dart';
 
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:flutter_riverpod/legacy.dart';
 
 class ItemListViewModel extends StateNotifier<ListProductState> {
   final GetProductsByUserUsecase _getProductsByUserUsecase;

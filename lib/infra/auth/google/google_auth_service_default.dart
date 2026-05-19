@@ -1,9 +1,9 @@
-import 'package:deehelp/core/failures/exports.dart';
-import 'package:deehelp/core/failures/failure.dart';
-import 'package:deehelp/core/failures/google_auth_failure.dart';
+import 'package:deehelp/infra/failures/exports.dart';
+import 'package:deehelp/infra/failures/failure.dart';
+import 'package:deehelp/infra/failures/google_auth_failure.dart';
 import 'package:deehelp/old_core/env_config.dart';
-import 'package:deehelp/core/data/auth/google/google_credentials.dart';
-import 'package:deehelp/core/data/auth/google/google_auth_service.dart';
+import 'package:deehelp/infra/auth/google/google_credentials.dart';
+import 'package:deehelp/infra/auth/google/google_auth_service.dart';
 import 'package:fpdart/fpdart.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:logging/logging.dart';

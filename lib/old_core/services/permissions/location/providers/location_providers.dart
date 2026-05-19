@@ -1,3 +1,5 @@
+import 'package:flutter_riverpod/legacy.dart';
+
 import '../domain/current_location.dart';
 import '../domain/services/geolocator_access_gateway.dart';
 import '../domain/services/geolocator_position_gateway.dart';

@@ -3,6 +3,7 @@ import 'package:deehelp/feature/incidents/providers/incident_usecase_providers.d
 import 'package:deehelp/feature/search/search_viewmodel.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:flutter_riverpod/legacy.dart';
 
 final searchViewmodelProvider =
     StateNotifierProvider.autoDispose<SearchViewmodel, SearchState>((ref) {

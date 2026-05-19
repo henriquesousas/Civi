@@ -7,6 +7,7 @@ import 'package:deehelp/module/alert/add_alert_usecase.dart';
 import 'package:deehelp/business/auth/loggued_user.dart';
 import 'package:deehelp/module/incident/domain/entity/incident_local.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:flutter_riverpod/legacy.dart';
 
 class AlertViewmodel extends StateNotifier<AlertState> {
   final AddAlertUsecase _addAlertUsecase;

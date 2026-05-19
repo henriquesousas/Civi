@@ -1,10 +1,10 @@
 import 'dart:async';
 
 import 'package:deehelp/business/auth/loggued_user.dart';
-import 'package:deehelp/core/data/auth/mapper_logged_user.dart';
+import 'package:deehelp/infra/auth/mapper_logged_user.dart';
 import 'package:deehelp/old_core/providers/supabase_provider.dart';
 import 'package:flutter/foundation.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:flutter_riverpod/legacy.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
 final sessionUserNotifier = ChangeNotifierProvider<SessionUserNotifier>((ref) {
