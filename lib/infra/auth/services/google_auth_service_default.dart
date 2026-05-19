@@ -1,4 +1,4 @@
-import 'package:deehelp/infra/failures/exports.dart';
+import 'package:deehelp/core/failures/exports.dart';
 import 'package:deehelp/old_core/env_config.dart';
 import 'package:deehelp/business/auth/services/google_credentials.dart';
 import 'package:deehelp/business/auth/services/google_auth_service.dart';

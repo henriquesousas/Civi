@@ -1,6 +1,6 @@
 import 'package:deehelp/old_core/handlers/handler_error.dart';
 import 'package:deehelp/old_core/handlers/handle_command.dart';
-import 'package:deehelp/old_core/services/network/network_info.dart';
+import 'package:deehelp/infra/_shared/connectivity/network_info.dart';
 import 'package:deehelp/feature/items/list/list_product_state.dart';
 import 'package:deehelp/module/item/domain/entities/product.dart';
 import 'package:deehelp/module/item/domain/usecases/listing/get_products_by_user_usecase.dart';

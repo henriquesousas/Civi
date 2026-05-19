@@ -1,6 +1,6 @@
-import 'package:deehelp/old_core/services/network/network_info.dart';
-import 'package:deehelp/old_core/services/network/network_info_provider.dart';
-import 'package:deehelp/old_core/services/network/netwotk_alert_controller.dart';
+import 'package:deehelp/infra/_shared/connectivity/network_info.dart';
+import 'package:deehelp/infra/_shared/connectivity/network_info_provider.dart';
+import 'package:deehelp/infra/_shared/connectivity/netwotk_alert_controller.dart';
 import 'package:deehelp/feature/home/waze_alert.dart';
 import 'package:deehelp/ui/profile/profile_page.dart';
 import 'package:deehelp/v2/feature/feed/presentation/fedd_page.dart';

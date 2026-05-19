@@ -1,7 +1,7 @@
-import 'package:deehelp/infra/failures/failure.dart';
-import 'package:deehelp/infra/failures/unexpected_failure.dart';
+import 'package:deehelp/core/failures/failure.dart';
+import 'package:deehelp/core/failures/unexpected_failure.dart';
 import 'package:deehelp/business/auth/auth_repository.dart';
-import 'package:deehelp/infra/failures/google_auth_failure.dart';
+import 'package:deehelp/core/failures/google_auth_failure.dart';
 import 'package:deehelp/business/auth/loggued_user.dart';
 import 'package:deehelp/business/auth/sign_in_with_google_usecase.dart';
 import 'package:deehelp/business/auth/services/google_auth_service.dart';

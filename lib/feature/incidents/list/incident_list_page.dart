@@ -1,6 +1,6 @@
 import 'package:deehelp/old_core/extension/exports_extension.dart';
-import 'package:deehelp/old_core/services/network/network_info.dart';
-import 'package:deehelp/old_core/services/network/network_info_provider.dart';
+import 'package:deehelp/infra/_shared/connectivity/network_info.dart';
+import 'package:deehelp/infra/_shared/connectivity/network_info_provider.dart';
 import 'package:deehelp/old_core/ui/widgets/appbar/default_app_bar.dart';
 import 'package:deehelp/old_core/ui/widgets/buttons/buttons_export.dart';
 import 'package:deehelp/feature/incidents/incident_router.dart';

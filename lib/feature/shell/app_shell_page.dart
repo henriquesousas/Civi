@@ -1,9 +1,9 @@
 // import 'package:deehelp/feature/home/v2/home_page.dart';
 
 import 'package:deehelp/old_core/extension/exports_extension.dart';
-import 'package:deehelp/old_core/services/network/network_info.dart';
-import 'package:deehelp/old_core/services/network/network_info_provider.dart';
-import 'package:deehelp/old_core/services/network/netwotk_alert_controller.dart';
+import 'package:deehelp/infra/_shared/connectivity/network_info.dart';
+import 'package:deehelp/infra/_shared/connectivity/network_info_provider.dart';
+import 'package:deehelp/infra/_shared/connectivity/netwotk_alert_controller.dart';
 import 'package:deehelp/old_core/theme/export_theme.dart';
 import 'package:deehelp/old_core/ui/styles/export_style.dart';
 import 'package:deehelp/feature/auth/presentation/auth_router.dart';

@@ -1,4 +1,4 @@
-import 'package:deehelp/infra/failures/type_failure.dart';
+import 'package:deehelp/core/failures/type_failure.dart';
 import 'package:equatable/equatable.dart';
 
 class Failure extends Equatable {

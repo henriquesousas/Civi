@@ -1,7 +1,7 @@
 import 'dart:io';
 
-import 'package:deehelp/infra/failures/exports.dart';
-import 'package:deehelp/old_core/services/network/network_info.dart';
+import 'package:deehelp/core/failures/exports.dart';
+import 'package:deehelp/infra/_shared/connectivity/network_info.dart';
 
 Future<T> safeSupabaseCall<T>({
   required NetworkInfo networkInfo,

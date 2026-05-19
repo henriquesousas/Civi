@@ -1,5 +1,5 @@
 import 'package:deehelp/old_core/extension/color_extension.dart';
-import 'package:deehelp/old_core/services/network/network_info_provider.dart';
+import 'package:deehelp/infra/_shared/connectivity/network_info_provider.dart';
 import 'package:deehelp/old_core/theme/export_theme.dart';
 import 'package:deehelp/old_core/ui/styles/export_style.dart';
 import 'package:deehelp/old_core/ui/widgets/appbar/default_app_bar.dart';

@@ -1,4 +1,4 @@
-import 'package:deehelp/infra/failures/failure.dart';
+import 'package:deehelp/core/failures/failure.dart';
 import 'package:deehelp/business/auth/auth_datasource.dart';
 import 'package:deehelp/business/auth/loggued_user.dart';
 import 'package:deehelp/business/auth/auth_repository.dart';

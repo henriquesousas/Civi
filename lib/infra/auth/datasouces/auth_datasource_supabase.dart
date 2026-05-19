@@ -1,9 +1,9 @@
 import 'package:deehelp/business/auth/auth_datasource.dart';
-import 'package:deehelp/infra/failures/invalid_credentials_failure.dart';
+import 'package:deehelp/core/failures/invalid_credentials_failure.dart';
 import 'package:deehelp/business/auth/loggued_user.dart';
 import 'package:deehelp/infra/auth/mapper_logged_user.dart';
 import 'package:deehelp/old_core/services/http/safe_supabase_call.dart';
-import 'package:deehelp/old_core/services/network/network_info.dart';
+import 'package:deehelp/infra/_shared/connectivity/network_info.dart';
 import 'package:logging/logging.dart';
 import 'package:supabase_flutter/supabase_flutter.dart' hide AuthException;
 

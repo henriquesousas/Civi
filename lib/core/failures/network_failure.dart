@@ -1,5 +1,5 @@
-import 'package:deehelp/infra/failures/failure.dart';
-import 'package:deehelp/infra/failures/type_failure.dart';
+import 'package:deehelp/core/failures/failure.dart';
+import 'package:deehelp/core/failures/type_failure.dart';
 
 final class NetworkFailure extends Failure {
   const NetworkFailure()

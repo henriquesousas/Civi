@@ -1,5 +1,5 @@
 import 'package:connectivity_plus/connectivity_plus.dart';
-import 'package:deehelp/old_core/services/network/network_info.dart';
+import 'package:deehelp/infra/_shared/connectivity/network_info.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 final _connectivityProvider = Provider((ref) => Connectivity());
