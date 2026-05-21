@@ -12,20 +12,24 @@ part of 'sign_in_with_google_usecase_provider.dart';
 @ProviderFor(signInWithGoogleUseCase)
 final signInWithGoogleUseCaseProvider = SignInWithGoogleUseCaseProvider._();
 
-final class SignInWithGoogleUseCaseProvider extends $FunctionalProvider<
-    SignInWithGoogleUseCase,
-    SignInWithGoogleUseCase,
-    SignInWithGoogleUseCase> with $Provider<SignInWithGoogleUseCase> {
+final class SignInWithGoogleUseCaseProvider
+    extends
+        $FunctionalProvider<
+          SignInWithGoogleUseCase,
+          SignInWithGoogleUseCase,
+          SignInWithGoogleUseCase
+        >
+    with $Provider<SignInWithGoogleUseCase> {
   SignInWithGoogleUseCaseProvider._()
-      : super(
-          from: null,
-          argument: null,
-          retry: null,
-          name: r'signInWithGoogleUseCaseProvider',
-          isAutoDispose: true,
-          dependencies: null,
-          $allTransitiveDependencies: null,
-        );
+    : super(
+        from: null,
+        argument: null,
+        retry: null,
+        name: r'signInWithGoogleUseCaseProvider',
+        isAutoDispose: true,
+        dependencies: null,
+        $allTransitiveDependencies: null,
+      );
 
   @override
   String debugGetCreateSourceHash() => _$signInWithGoogleUseCaseHash();
@@ -33,8 +37,8 @@ final class SignInWithGoogleUseCaseProvider extends $FunctionalProvider<
   @$internal
   @override
   $ProviderElement<SignInWithGoogleUseCase> $createElement(
-          $ProviderPointer pointer) =>
-      $ProviderElement(pointer);
+    $ProviderPointer pointer,
+  ) => $ProviderElement(pointer);
 
   @override
   SignInWithGoogleUseCase create(Ref ref) {

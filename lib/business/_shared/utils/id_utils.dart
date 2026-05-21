@@ -1,5 +1,6 @@
 import 'package:uuid/uuid.dart';
 
+//TODO: Criar unit test
 class IdUtils {
   static const _uuid = Uuid();
 
@@ -8,7 +9,12 @@ class IdUtils {
   }
 
   static bool isValid(String value) {
-    // return value.isNotEmpty && _uuid.parse(value) != null;
-    return false;
+    try {
+      if (value.isEmpty) return false;
+      Uuid.parse(value);
+      return true;
+    } catch (_) {
+      return false;
+    }
   }
 }

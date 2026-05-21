@@ -1,3 +1,5 @@
+import 'package:deehelp/business/_shared/entity/exports.dart';
+import 'package:deehelp/infra/user/get_profile_usecase.dart';
 import 'package:deehelp/old_core/extension/size_extension.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
@@ -48,6 +50,7 @@ class _AuthPageState extends ConsumerState<AuthPage> {
         height: double.infinity,
         child: Stack(
           children: [
+            //TODO: Deixar fixa
             Positioned(
               child: Image.network(
                 'https://images.unsplash.com/photo-1519501025264-65ba15a82390?auto=format&fit=crop&w=1400&q=80',
@@ -151,11 +154,18 @@ class _AuthPageState extends ConsumerState<AuthPage> {
                     const SizedBox(height: SizeSpacing.xs),
                     Center(
                       child: TextButton(
-                        onPressed: () => AppDialog.show(
-                          context,
-                          type: DialogType.success,
-                          message: "Falha ao realizar o login",
-                        ),
+                        // onPressed: () => AppDialog.show(
+                        //   context,
+                        //   type: DialogType.success,
+                        //   message: "Falha ao realizar o login",
+                        // ),
+                        onPressed: () async {
+                          final res = await ref
+                              .read(getProfileUseCaseProvider)
+                              .execute("17fb07ad-2ecd-4f8c-90b9-0d8ce86925e3")
+                              .run();
+                          print(res);
+                        },
                         child: const Text(
                           "Continuar sem login",
                           style: TextStyle(

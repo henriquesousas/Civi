@@ -1,5 +1,5 @@
 import 'package:deehelp/business/_shared/value_objects/exports.dart';
-import 'package:deehelp/business/user/user.dart';
+import 'package:deehelp/business/user/entities/user.dart';
 import 'package:deehelp/old_core/validation/validator.dart';
 
 import '../_shared/validation/validation_handler.dart';

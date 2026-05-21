@@ -11,129 +11,47 @@ part of 'incident_output.dart';
 
 // dart format off
 T _$identity<T>(T value) => value;
-
 /// @nodoc
 mixin _$IncidentOutput {
-  String get id;
-  String? get title;
-  String get userId;
-  String get alertId;
-  String get productType;
-  TypeAlert get type;
-  IncidentProductOutput? get product;
-  ItemStatus get status;
-  Kind get kind;
-  ReportType get reportType;
-  DateTime get createdAt;
-  DateTime get occurredAt;
-  DateTime? get expiresAt;
-  TimeOfDay get occurredAtTime;
-  Region? get region;
-  IncidentLocal? get local;
-  String? get howTo;
-  bool get isPlatformGenerated;
-  bool get visibilty;
 
-  /// Create a copy of IncidentOutput
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  @pragma('vm:prefer-inline')
-  $IncidentOutputCopyWith<IncidentOutput> get copyWith =>
-      _$IncidentOutputCopyWithImpl<IncidentOutput>(
-          this as IncidentOutput, _$identity);
+ String get id; String? get title; String get userId; String get alertId; String get productType; TypeAlert get type; IncidentProductOutput? get product; ItemStatus get status; Kind get kind; ReportType get reportType; DateTime get createdAt; DateTime get occurredAt; DateTime? get expiresAt; TimeOfDay get occurredAtTime; Region? get region; IncidentLocal? get local; String? get howTo; bool get isPlatformGenerated; bool get visibilty;
+/// Create a copy of IncidentOutput
+/// with the given fields replaced by the non-null parameter values.
+@JsonKey(includeFromJson: false, includeToJson: false)
+@pragma('vm:prefer-inline')
+$IncidentOutputCopyWith<IncidentOutput> get copyWith => _$IncidentOutputCopyWithImpl<IncidentOutput>(this as IncidentOutput, _$identity);
 
-  @override
-  bool operator ==(Object other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType &&
-            other is IncidentOutput &&
-            (identical(other.id, id) || other.id == id) &&
-            (identical(other.title, title) || other.title == title) &&
-            (identical(other.userId, userId) || other.userId == userId) &&
-            (identical(other.alertId, alertId) || other.alertId == alertId) &&
-            (identical(other.productType, productType) ||
-                other.productType == productType) &&
-            (identical(other.type, type) || other.type == type) &&
-            (identical(other.product, product) || other.product == product) &&
-            (identical(other.status, status) || other.status == status) &&
-            (identical(other.kind, kind) || other.kind == kind) &&
-            (identical(other.reportType, reportType) ||
-                other.reportType == reportType) &&
-            (identical(other.createdAt, createdAt) ||
-                other.createdAt == createdAt) &&
-            (identical(other.occurredAt, occurredAt) ||
-                other.occurredAt == occurredAt) &&
-            (identical(other.expiresAt, expiresAt) ||
-                other.expiresAt == expiresAt) &&
-            (identical(other.occurredAtTime, occurredAtTime) ||
-                other.occurredAtTime == occurredAtTime) &&
-            (identical(other.region, region) || other.region == region) &&
-            (identical(other.local, local) || other.local == local) &&
-            (identical(other.howTo, howTo) || other.howTo == howTo) &&
-            (identical(other.isPlatformGenerated, isPlatformGenerated) ||
-                other.isPlatformGenerated == isPlatformGenerated) &&
-            (identical(other.visibilty, visibilty) ||
-                other.visibilty == visibilty));
-  }
 
-  @override
-  int get hashCode => Object.hashAll([
-        runtimeType,
-        id,
-        title,
-        userId,
-        alertId,
-        productType,
-        type,
-        product,
-        status,
-        kind,
-        reportType,
-        createdAt,
-        occurredAt,
-        expiresAt,
-        occurredAtTime,
-        region,
-        local,
-        howTo,
-        isPlatformGenerated,
-        visibilty
-      ]);
 
-  @override
-  String toString() {
-    return 'IncidentOutput(id: $id, title: $title, userId: $userId, alertId: $alertId, productType: $productType, type: $type, product: $product, status: $status, kind: $kind, reportType: $reportType, createdAt: $createdAt, occurredAt: $occurredAt, expiresAt: $expiresAt, occurredAtTime: $occurredAtTime, region: $region, local: $local, howTo: $howTo, isPlatformGenerated: $isPlatformGenerated, visibilty: $visibilty)';
-  }
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is IncidentOutput&&(identical(other.id, id) || other.id == id)&&(identical(other.title, title) || other.title == title)&&(identical(other.userId, userId) || other.userId == userId)&&(identical(other.alertId, alertId) || other.alertId == alertId)&&(identical(other.productType, productType) || other.productType == productType)&&(identical(other.type, type) || other.type == type)&&(identical(other.product, product) || other.product == product)&&(identical(other.status, status) || other.status == status)&&(identical(other.kind, kind) || other.kind == kind)&&(identical(other.reportType, reportType) || other.reportType == reportType)&&(identical(other.createdAt, createdAt) || other.createdAt == createdAt)&&(identical(other.occurredAt, occurredAt) || other.occurredAt == occurredAt)&&(identical(other.expiresAt, expiresAt) || other.expiresAt == expiresAt)&&(identical(other.occurredAtTime, occurredAtTime) || other.occurredAtTime == occurredAtTime)&&(identical(other.region, region) || other.region == region)&&(identical(other.local, local) || other.local == local)&&(identical(other.howTo, howTo) || other.howTo == howTo)&&(identical(other.isPlatformGenerated, isPlatformGenerated) || other.isPlatformGenerated == isPlatformGenerated)&&(identical(other.visibilty, visibilty) || other.visibilty == visibilty));
+}
+
+
+@override
+int get hashCode => Object.hashAll([runtimeType,id,title,userId,alertId,productType,type,product,status,kind,reportType,createdAt,occurredAt,expiresAt,occurredAtTime,region,local,howTo,isPlatformGenerated,visibilty]);
+
+@override
+String toString() {
+  return 'IncidentOutput(id: $id, title: $title, userId: $userId, alertId: $alertId, productType: $productType, type: $type, product: $product, status: $status, kind: $kind, reportType: $reportType, createdAt: $createdAt, occurredAt: $occurredAt, expiresAt: $expiresAt, occurredAtTime: $occurredAtTime, region: $region, local: $local, howTo: $howTo, isPlatformGenerated: $isPlatformGenerated, visibilty: $visibilty)';
+}
+
+
 }
 
 /// @nodoc
-abstract mixin class $IncidentOutputCopyWith<$Res> {
-  factory $IncidentOutputCopyWith(
-          IncidentOutput value, $Res Function(IncidentOutput) _then) =
-      _$IncidentOutputCopyWithImpl;
-  @useResult
-  $Res call(
-      {String id,
-      String? title,
-      String userId,
-      String alertId,
-      String productType,
-      TypeAlert type,
-      IncidentProductOutput? product,
-      ItemStatus status,
-      Kind kind,
-      ReportType reportType,
-      DateTime createdAt,
-      DateTime occurredAt,
-      DateTime? expiresAt,
-      TimeOfDay occurredAtTime,
-      Region? region,
-      IncidentLocal? local,
-      String? howTo,
-      bool isPlatformGenerated,
-      bool visibilty});
-}
+abstract mixin class $IncidentOutputCopyWith<$Res>  {
+  factory $IncidentOutputCopyWith(IncidentOutput value, $Res Function(IncidentOutput) _then) = _$IncidentOutputCopyWithImpl;
+@useResult
+$Res call({
+ String id, String? title, String userId, String alertId, String productType, TypeAlert type, IncidentProductOutput? product, ItemStatus status, Kind kind, ReportType reportType, DateTime createdAt, DateTime occurredAt, DateTime? expiresAt, TimeOfDay occurredAtTime, Region? region, IncidentLocal? local, String? howTo, bool isPlatformGenerated, bool visibilty
+});
 
+
+
+
+}
 /// @nodoc
 class _$IncidentOutputCopyWithImpl<$Res>
     implements $IncidentOutputCopyWith<$Res> {
@@ -142,553 +60,230 @@ class _$IncidentOutputCopyWithImpl<$Res>
   final IncidentOutput _self;
   final $Res Function(IncidentOutput) _then;
 
-  /// Create a copy of IncidentOutput
-  /// with the given fields replaced by the non-null parameter values.
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? id = null,
-    Object? title = freezed,
-    Object? userId = null,
-    Object? alertId = null,
-    Object? productType = null,
-    Object? type = null,
-    Object? product = freezed,
-    Object? status = null,
-    Object? kind = null,
-    Object? reportType = null,
-    Object? createdAt = null,
-    Object? occurredAt = null,
-    Object? expiresAt = freezed,
-    Object? occurredAtTime = null,
-    Object? region = freezed,
-    Object? local = freezed,
-    Object? howTo = freezed,
-    Object? isPlatformGenerated = null,
-    Object? visibilty = null,
-  }) {
-    return _then(_self.copyWith(
-      id: null == id
-          ? _self.id
-          : id // ignore: cast_nullable_to_non_nullable
-              as String,
-      title: freezed == title
-          ? _self.title
-          : title // ignore: cast_nullable_to_non_nullable
-              as String?,
-      userId: null == userId
-          ? _self.userId
-          : userId // ignore: cast_nullable_to_non_nullable
-              as String,
-      alertId: null == alertId
-          ? _self.alertId
-          : alertId // ignore: cast_nullable_to_non_nullable
-              as String,
-      productType: null == productType
-          ? _self.productType
-          : productType // ignore: cast_nullable_to_non_nullable
-              as String,
-      type: null == type
-          ? _self.type
-          : type // ignore: cast_nullable_to_non_nullable
-              as TypeAlert,
-      product: freezed == product
-          ? _self.product
-          : product // ignore: cast_nullable_to_non_nullable
-              as IncidentProductOutput?,
-      status: null == status
-          ? _self.status
-          : status // ignore: cast_nullable_to_non_nullable
-              as ItemStatus,
-      kind: null == kind
-          ? _self.kind
-          : kind // ignore: cast_nullable_to_non_nullable
-              as Kind,
-      reportType: null == reportType
-          ? _self.reportType
-          : reportType // ignore: cast_nullable_to_non_nullable
-              as ReportType,
-      createdAt: null == createdAt
-          ? _self.createdAt
-          : createdAt // ignore: cast_nullable_to_non_nullable
-              as DateTime,
-      occurredAt: null == occurredAt
-          ? _self.occurredAt
-          : occurredAt // ignore: cast_nullable_to_non_nullable
-              as DateTime,
-      expiresAt: freezed == expiresAt
-          ? _self.expiresAt
-          : expiresAt // ignore: cast_nullable_to_non_nullable
-              as DateTime?,
-      occurredAtTime: null == occurredAtTime
-          ? _self.occurredAtTime
-          : occurredAtTime // ignore: cast_nullable_to_non_nullable
-              as TimeOfDay,
-      region: freezed == region
-          ? _self.region
-          : region // ignore: cast_nullable_to_non_nullable
-              as Region?,
-      local: freezed == local
-          ? _self.local
-          : local // ignore: cast_nullable_to_non_nullable
-              as IncidentLocal?,
-      howTo: freezed == howTo
-          ? _self.howTo
-          : howTo // ignore: cast_nullable_to_non_nullable
-              as String?,
-      isPlatformGenerated: null == isPlatformGenerated
-          ? _self.isPlatformGenerated
-          : isPlatformGenerated // ignore: cast_nullable_to_non_nullable
-              as bool,
-      visibilty: null == visibilty
-          ? _self.visibilty
-          : visibilty // ignore: cast_nullable_to_non_nullable
-              as bool,
-    ));
-  }
+/// Create a copy of IncidentOutput
+/// with the given fields replaced by the non-null parameter values.
+@pragma('vm:prefer-inline') @override $Res call({Object? id = null,Object? title = freezed,Object? userId = null,Object? alertId = null,Object? productType = null,Object? type = null,Object? product = freezed,Object? status = null,Object? kind = null,Object? reportType = null,Object? createdAt = null,Object? occurredAt = null,Object? expiresAt = freezed,Object? occurredAtTime = null,Object? region = freezed,Object? local = freezed,Object? howTo = freezed,Object? isPlatformGenerated = null,Object? visibilty = null,}) {
+  return _then(_self.copyWith(
+id: null == id ? _self.id : id // ignore: cast_nullable_to_non_nullable
+as String,title: freezed == title ? _self.title : title // ignore: cast_nullable_to_non_nullable
+as String?,userId: null == userId ? _self.userId : userId // ignore: cast_nullable_to_non_nullable
+as String,alertId: null == alertId ? _self.alertId : alertId // ignore: cast_nullable_to_non_nullable
+as String,productType: null == productType ? _self.productType : productType // ignore: cast_nullable_to_non_nullable
+as String,type: null == type ? _self.type : type // ignore: cast_nullable_to_non_nullable
+as TypeAlert,product: freezed == product ? _self.product : product // ignore: cast_nullable_to_non_nullable
+as IncidentProductOutput?,status: null == status ? _self.status : status // ignore: cast_nullable_to_non_nullable
+as ItemStatus,kind: null == kind ? _self.kind : kind // ignore: cast_nullable_to_non_nullable
+as Kind,reportType: null == reportType ? _self.reportType : reportType // ignore: cast_nullable_to_non_nullable
+as ReportType,createdAt: null == createdAt ? _self.createdAt : createdAt // ignore: cast_nullable_to_non_nullable
+as DateTime,occurredAt: null == occurredAt ? _self.occurredAt : occurredAt // ignore: cast_nullable_to_non_nullable
+as DateTime,expiresAt: freezed == expiresAt ? _self.expiresAt : expiresAt // ignore: cast_nullable_to_non_nullable
+as DateTime?,occurredAtTime: null == occurredAtTime ? _self.occurredAtTime : occurredAtTime // ignore: cast_nullable_to_non_nullable
+as TimeOfDay,region: freezed == region ? _self.region : region // ignore: cast_nullable_to_non_nullable
+as Region?,local: freezed == local ? _self.local : local // ignore: cast_nullable_to_non_nullable
+as IncidentLocal?,howTo: freezed == howTo ? _self.howTo : howTo // ignore: cast_nullable_to_non_nullable
+as String?,isPlatformGenerated: null == isPlatformGenerated ? _self.isPlatformGenerated : isPlatformGenerated // ignore: cast_nullable_to_non_nullable
+as bool,visibilty: null == visibilty ? _self.visibilty : visibilty // ignore: cast_nullable_to_non_nullable
+as bool,
+  ));
 }
+
+}
+
 
 /// Adds pattern-matching-related methods to [IncidentOutput].
 extension IncidentOutputPatterns on IncidentOutput {
-  /// A variant of `map` that fallback to returning `orElse`.
-  ///
-  /// It is equivalent to doing:
-  /// ```dart
-  /// switch (sealedClass) {
-  ///   case final Subclass value:
-  ///     return ...;
-  ///   case _:
-  ///     return orElse();
-  /// }
-  /// ```
+/// A variant of `map` that fallback to returning `orElse`.
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case final Subclass value:
+///     return ...;
+///   case _:
+///     return orElse();
+/// }
+/// ```
 
-  @optionalTypeArgs
-  TResult maybeMap<TResult extends Object?>(
-    TResult Function(_IncidentOutput value)? $default, {
-    required TResult orElse(),
-  }) {
-    final _that = this;
-    switch (_that) {
-      case _IncidentOutput() when $default != null:
-        return $default(_that);
-      case _:
-        return orElse();
-    }
-  }
+@optionalTypeArgs TResult maybeMap<TResult extends Object?>(TResult Function( _IncidentOutput value)?  $default,{required TResult orElse(),}){
+final _that = this;
+switch (_that) {
+case _IncidentOutput() when $default != null:
+return $default(_that);case _:
+  return orElse();
 
-  /// A `switch`-like method, using callbacks.
-  ///
-  /// Callbacks receives the raw object, upcasted.
-  /// It is equivalent to doing:
-  /// ```dart
-  /// switch (sealedClass) {
-  ///   case final Subclass value:
-  ///     return ...;
-  ///   case final Subclass2 value:
-  ///     return ...;
-  /// }
-  /// ```
+}
+}
+/// A `switch`-like method, using callbacks.
+///
+/// Callbacks receives the raw object, upcasted.
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case final Subclass value:
+///     return ...;
+///   case final Subclass2 value:
+///     return ...;
+/// }
+/// ```
 
-  @optionalTypeArgs
-  TResult map<TResult extends Object?>(
-    TResult Function(_IncidentOutput value) $default,
-  ) {
-    final _that = this;
-    switch (_that) {
-      case _IncidentOutput():
-        return $default(_that);
-      case _:
-        throw StateError('Unexpected subclass');
-    }
-  }
+@optionalTypeArgs TResult map<TResult extends Object?>(TResult Function( _IncidentOutput value)  $default,){
+final _that = this;
+switch (_that) {
+case _IncidentOutput():
+return $default(_that);case _:
+  throw StateError('Unexpected subclass');
 
-  /// A variant of `map` that fallback to returning `null`.
-  ///
-  /// It is equivalent to doing:
-  /// ```dart
-  /// switch (sealedClass) {
-  ///   case final Subclass value:
-  ///     return ...;
-  ///   case _:
-  ///     return null;
-  /// }
-  /// ```
+}
+}
+/// A variant of `map` that fallback to returning `null`.
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case final Subclass value:
+///     return ...;
+///   case _:
+///     return null;
+/// }
+/// ```
 
-  @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>(
-    TResult? Function(_IncidentOutput value)? $default,
-  ) {
-    final _that = this;
-    switch (_that) {
-      case _IncidentOutput() when $default != null:
-        return $default(_that);
-      case _:
-        return null;
-    }
-  }
+@optionalTypeArgs TResult? mapOrNull<TResult extends Object?>(TResult? Function( _IncidentOutput value)?  $default,){
+final _that = this;
+switch (_that) {
+case _IncidentOutput() when $default != null:
+return $default(_that);case _:
+  return null;
 
-  /// A variant of `when` that fallback to an `orElse` callback.
-  ///
-  /// It is equivalent to doing:
-  /// ```dart
-  /// switch (sealedClass) {
-  ///   case Subclass(:final field):
-  ///     return ...;
-  ///   case _:
-  ///     return orElse();
-  /// }
-  /// ```
+}
+}
+/// A variant of `when` that fallback to an `orElse` callback.
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case Subclass(:final field):
+///     return ...;
+///   case _:
+///     return orElse();
+/// }
+/// ```
 
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>(
-    TResult Function(
-            String id,
-            String? title,
-            String userId,
-            String alertId,
-            String productType,
-            TypeAlert type,
-            IncidentProductOutput? product,
-            ItemStatus status,
-            Kind kind,
-            ReportType reportType,
-            DateTime createdAt,
-            DateTime occurredAt,
-            DateTime? expiresAt,
-            TimeOfDay occurredAtTime,
-            Region? region,
-            IncidentLocal? local,
-            String? howTo,
-            bool isPlatformGenerated,
-            bool visibilty)?
-        $default, {
-    required TResult orElse(),
-  }) {
-    final _that = this;
-    switch (_that) {
-      case _IncidentOutput() when $default != null:
-        return $default(
-            _that.id,
-            _that.title,
-            _that.userId,
-            _that.alertId,
-            _that.productType,
-            _that.type,
-            _that.product,
-            _that.status,
-            _that.kind,
-            _that.reportType,
-            _that.createdAt,
-            _that.occurredAt,
-            _that.expiresAt,
-            _that.occurredAtTime,
-            _that.region,
-            _that.local,
-            _that.howTo,
-            _that.isPlatformGenerated,
-            _that.visibilty);
-      case _:
-        return orElse();
-    }
-  }
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( String id,  String? title,  String userId,  String alertId,  String productType,  TypeAlert type,  IncidentProductOutput? product,  ItemStatus status,  Kind kind,  ReportType reportType,  DateTime createdAt,  DateTime occurredAt,  DateTime? expiresAt,  TimeOfDay occurredAtTime,  Region? region,  IncidentLocal? local,  String? howTo,  bool isPlatformGenerated,  bool visibilty)?  $default,{required TResult orElse(),}) {final _that = this;
+switch (_that) {
+case _IncidentOutput() when $default != null:
+return $default(_that.id,_that.title,_that.userId,_that.alertId,_that.productType,_that.type,_that.product,_that.status,_that.kind,_that.reportType,_that.createdAt,_that.occurredAt,_that.expiresAt,_that.occurredAtTime,_that.region,_that.local,_that.howTo,_that.isPlatformGenerated,_that.visibilty);case _:
+  return orElse();
 
-  /// A `switch`-like method, using callbacks.
-  ///
-  /// As opposed to `map`, this offers destructuring.
-  /// It is equivalent to doing:
-  /// ```dart
-  /// switch (sealedClass) {
-  ///   case Subclass(:final field):
-  ///     return ...;
-  ///   case Subclass2(:final field2):
-  ///     return ...;
-  /// }
-  /// ```
+}
+}
+/// A `switch`-like method, using callbacks.
+///
+/// As opposed to `map`, this offers destructuring.
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case Subclass(:final field):
+///     return ...;
+///   case Subclass2(:final field2):
+///     return ...;
+/// }
+/// ```
 
-  @optionalTypeArgs
-  TResult when<TResult extends Object?>(
-    TResult Function(
-            String id,
-            String? title,
-            String userId,
-            String alertId,
-            String productType,
-            TypeAlert type,
-            IncidentProductOutput? product,
-            ItemStatus status,
-            Kind kind,
-            ReportType reportType,
-            DateTime createdAt,
-            DateTime occurredAt,
-            DateTime? expiresAt,
-            TimeOfDay occurredAtTime,
-            Region? region,
-            IncidentLocal? local,
-            String? howTo,
-            bool isPlatformGenerated,
-            bool visibilty)
-        $default,
-  ) {
-    final _that = this;
-    switch (_that) {
-      case _IncidentOutput():
-        return $default(
-            _that.id,
-            _that.title,
-            _that.userId,
-            _that.alertId,
-            _that.productType,
-            _that.type,
-            _that.product,
-            _that.status,
-            _that.kind,
-            _that.reportType,
-            _that.createdAt,
-            _that.occurredAt,
-            _that.expiresAt,
-            _that.occurredAtTime,
-            _that.region,
-            _that.local,
-            _that.howTo,
-            _that.isPlatformGenerated,
-            _that.visibilty);
-      case _:
-        throw StateError('Unexpected subclass');
-    }
-  }
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( String id,  String? title,  String userId,  String alertId,  String productType,  TypeAlert type,  IncidentProductOutput? product,  ItemStatus status,  Kind kind,  ReportType reportType,  DateTime createdAt,  DateTime occurredAt,  DateTime? expiresAt,  TimeOfDay occurredAtTime,  Region? region,  IncidentLocal? local,  String? howTo,  bool isPlatformGenerated,  bool visibilty)  $default,) {final _that = this;
+switch (_that) {
+case _IncidentOutput():
+return $default(_that.id,_that.title,_that.userId,_that.alertId,_that.productType,_that.type,_that.product,_that.status,_that.kind,_that.reportType,_that.createdAt,_that.occurredAt,_that.expiresAt,_that.occurredAtTime,_that.region,_that.local,_that.howTo,_that.isPlatformGenerated,_that.visibilty);case _:
+  throw StateError('Unexpected subclass');
 
-  /// A variant of `when` that fallback to returning `null`
-  ///
-  /// It is equivalent to doing:
-  /// ```dart
-  /// switch (sealedClass) {
-  ///   case Subclass(:final field):
-  ///     return ...;
-  ///   case _:
-  ///     return null;
-  /// }
-  /// ```
+}
+}
+/// A variant of `when` that fallback to returning `null`
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case Subclass(:final field):
+///     return ...;
+///   case _:
+///     return null;
+/// }
+/// ```
 
-  @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>(
-    TResult? Function(
-            String id,
-            String? title,
-            String userId,
-            String alertId,
-            String productType,
-            TypeAlert type,
-            IncidentProductOutput? product,
-            ItemStatus status,
-            Kind kind,
-            ReportType reportType,
-            DateTime createdAt,
-            DateTime occurredAt,
-            DateTime? expiresAt,
-            TimeOfDay occurredAtTime,
-            Region? region,
-            IncidentLocal? local,
-            String? howTo,
-            bool isPlatformGenerated,
-            bool visibilty)?
-        $default,
-  ) {
-    final _that = this;
-    switch (_that) {
-      case _IncidentOutput() when $default != null:
-        return $default(
-            _that.id,
-            _that.title,
-            _that.userId,
-            _that.alertId,
-            _that.productType,
-            _that.type,
-            _that.product,
-            _that.status,
-            _that.kind,
-            _that.reportType,
-            _that.createdAt,
-            _that.occurredAt,
-            _that.expiresAt,
-            _that.occurredAtTime,
-            _that.region,
-            _that.local,
-            _that.howTo,
-            _that.isPlatformGenerated,
-            _that.visibilty);
-      case _:
-        return null;
-    }
-  }
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( String id,  String? title,  String userId,  String alertId,  String productType,  TypeAlert type,  IncidentProductOutput? product,  ItemStatus status,  Kind kind,  ReportType reportType,  DateTime createdAt,  DateTime occurredAt,  DateTime? expiresAt,  TimeOfDay occurredAtTime,  Region? region,  IncidentLocal? local,  String? howTo,  bool isPlatformGenerated,  bool visibilty)?  $default,) {final _that = this;
+switch (_that) {
+case _IncidentOutput() when $default != null:
+return $default(_that.id,_that.title,_that.userId,_that.alertId,_that.productType,_that.type,_that.product,_that.status,_that.kind,_that.reportType,_that.createdAt,_that.occurredAt,_that.expiresAt,_that.occurredAtTime,_that.region,_that.local,_that.howTo,_that.isPlatformGenerated,_that.visibilty);case _:
+  return null;
+
+}
+}
+
 }
 
 /// @nodoc
+
 
 class _IncidentOutput implements IncidentOutput {
-  const _IncidentOutput(
-      {required this.id,
-      required this.title,
-      required this.userId,
-      required this.alertId,
-      required this.productType,
-      required this.type,
-      required this.product,
-      required this.status,
-      required this.kind,
-      required this.reportType,
-      required this.createdAt,
-      required this.occurredAt,
-      required this.expiresAt,
-      required this.occurredAtTime,
-      required this.region,
-      this.local,
-      this.howTo,
-      this.isPlatformGenerated = false,
-      this.visibilty = true});
+  const _IncidentOutput({required this.id, required this.title, required this.userId, required this.alertId, required this.productType, required this.type, required this.product, required this.status, required this.kind, required this.reportType, required this.createdAt, required this.occurredAt, required this.expiresAt, required this.occurredAtTime, required this.region, this.local, this.howTo, this.isPlatformGenerated = false, this.visibilty = true});
+  
 
-  @override
-  final String id;
-  @override
-  final String? title;
-  @override
-  final String userId;
-  @override
-  final String alertId;
-  @override
-  final String productType;
-  @override
-  final TypeAlert type;
-  @override
-  final IncidentProductOutput? product;
-  @override
-  final ItemStatus status;
-  @override
-  final Kind kind;
-  @override
-  final ReportType reportType;
-  @override
-  final DateTime createdAt;
-  @override
-  final DateTime occurredAt;
-  @override
-  final DateTime? expiresAt;
-  @override
-  final TimeOfDay occurredAtTime;
-  @override
-  final Region? region;
-  @override
-  final IncidentLocal? local;
-  @override
-  final String? howTo;
-  @override
-  @JsonKey()
-  final bool isPlatformGenerated;
-  @override
-  @JsonKey()
-  final bool visibilty;
+@override final  String id;
+@override final  String? title;
+@override final  String userId;
+@override final  String alertId;
+@override final  String productType;
+@override final  TypeAlert type;
+@override final  IncidentProductOutput? product;
+@override final  ItemStatus status;
+@override final  Kind kind;
+@override final  ReportType reportType;
+@override final  DateTime createdAt;
+@override final  DateTime occurredAt;
+@override final  DateTime? expiresAt;
+@override final  TimeOfDay occurredAtTime;
+@override final  Region? region;
+@override final  IncidentLocal? local;
+@override final  String? howTo;
+@override@JsonKey() final  bool isPlatformGenerated;
+@override@JsonKey() final  bool visibilty;
 
-  /// Create a copy of IncidentOutput
-  /// with the given fields replaced by the non-null parameter values.
-  @override
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  @pragma('vm:prefer-inline')
-  _$IncidentOutputCopyWith<_IncidentOutput> get copyWith =>
-      __$IncidentOutputCopyWithImpl<_IncidentOutput>(this, _$identity);
+/// Create a copy of IncidentOutput
+/// with the given fields replaced by the non-null parameter values.
+@override @JsonKey(includeFromJson: false, includeToJson: false)
+@pragma('vm:prefer-inline')
+_$IncidentOutputCopyWith<_IncidentOutput> get copyWith => __$IncidentOutputCopyWithImpl<_IncidentOutput>(this, _$identity);
 
-  @override
-  bool operator ==(Object other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType &&
-            other is _IncidentOutput &&
-            (identical(other.id, id) || other.id == id) &&
-            (identical(other.title, title) || other.title == title) &&
-            (identical(other.userId, userId) || other.userId == userId) &&
-            (identical(other.alertId, alertId) || other.alertId == alertId) &&
-            (identical(other.productType, productType) ||
-                other.productType == productType) &&
-            (identical(other.type, type) || other.type == type) &&
-            (identical(other.product, product) || other.product == product) &&
-            (identical(other.status, status) || other.status == status) &&
-            (identical(other.kind, kind) || other.kind == kind) &&
-            (identical(other.reportType, reportType) ||
-                other.reportType == reportType) &&
-            (identical(other.createdAt, createdAt) ||
-                other.createdAt == createdAt) &&
-            (identical(other.occurredAt, occurredAt) ||
-                other.occurredAt == occurredAt) &&
-            (identical(other.expiresAt, expiresAt) ||
-                other.expiresAt == expiresAt) &&
-            (identical(other.occurredAtTime, occurredAtTime) ||
-                other.occurredAtTime == occurredAtTime) &&
-            (identical(other.region, region) || other.region == region) &&
-            (identical(other.local, local) || other.local == local) &&
-            (identical(other.howTo, howTo) || other.howTo == howTo) &&
-            (identical(other.isPlatformGenerated, isPlatformGenerated) ||
-                other.isPlatformGenerated == isPlatformGenerated) &&
-            (identical(other.visibilty, visibilty) ||
-                other.visibilty == visibilty));
-  }
 
-  @override
-  int get hashCode => Object.hashAll([
-        runtimeType,
-        id,
-        title,
-        userId,
-        alertId,
-        productType,
-        type,
-        product,
-        status,
-        kind,
-        reportType,
-        createdAt,
-        occurredAt,
-        expiresAt,
-        occurredAtTime,
-        region,
-        local,
-        howTo,
-        isPlatformGenerated,
-        visibilty
-      ]);
 
-  @override
-  String toString() {
-    return 'IncidentOutput(id: $id, title: $title, userId: $userId, alertId: $alertId, productType: $productType, type: $type, product: $product, status: $status, kind: $kind, reportType: $reportType, createdAt: $createdAt, occurredAt: $occurredAt, expiresAt: $expiresAt, occurredAtTime: $occurredAtTime, region: $region, local: $local, howTo: $howTo, isPlatformGenerated: $isPlatformGenerated, visibilty: $visibilty)';
-  }
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _IncidentOutput&&(identical(other.id, id) || other.id == id)&&(identical(other.title, title) || other.title == title)&&(identical(other.userId, userId) || other.userId == userId)&&(identical(other.alertId, alertId) || other.alertId == alertId)&&(identical(other.productType, productType) || other.productType == productType)&&(identical(other.type, type) || other.type == type)&&(identical(other.product, product) || other.product == product)&&(identical(other.status, status) || other.status == status)&&(identical(other.kind, kind) || other.kind == kind)&&(identical(other.reportType, reportType) || other.reportType == reportType)&&(identical(other.createdAt, createdAt) || other.createdAt == createdAt)&&(identical(other.occurredAt, occurredAt) || other.occurredAt == occurredAt)&&(identical(other.expiresAt, expiresAt) || other.expiresAt == expiresAt)&&(identical(other.occurredAtTime, occurredAtTime) || other.occurredAtTime == occurredAtTime)&&(identical(other.region, region) || other.region == region)&&(identical(other.local, local) || other.local == local)&&(identical(other.howTo, howTo) || other.howTo == howTo)&&(identical(other.isPlatformGenerated, isPlatformGenerated) || other.isPlatformGenerated == isPlatformGenerated)&&(identical(other.visibilty, visibilty) || other.visibilty == visibilty));
+}
+
+
+@override
+int get hashCode => Object.hashAll([runtimeType,id,title,userId,alertId,productType,type,product,status,kind,reportType,createdAt,occurredAt,expiresAt,occurredAtTime,region,local,howTo,isPlatformGenerated,visibilty]);
+
+@override
+String toString() {
+  return 'IncidentOutput(id: $id, title: $title, userId: $userId, alertId: $alertId, productType: $productType, type: $type, product: $product, status: $status, kind: $kind, reportType: $reportType, createdAt: $createdAt, occurredAt: $occurredAt, expiresAt: $expiresAt, occurredAtTime: $occurredAtTime, region: $region, local: $local, howTo: $howTo, isPlatformGenerated: $isPlatformGenerated, visibilty: $visibilty)';
+}
+
+
 }
 
 /// @nodoc
-abstract mixin class _$IncidentOutputCopyWith<$Res>
-    implements $IncidentOutputCopyWith<$Res> {
-  factory _$IncidentOutputCopyWith(
-          _IncidentOutput value, $Res Function(_IncidentOutput) _then) =
-      __$IncidentOutputCopyWithImpl;
-  @override
-  @useResult
-  $Res call(
-      {String id,
-      String? title,
-      String userId,
-      String alertId,
-      String productType,
-      TypeAlert type,
-      IncidentProductOutput? product,
-      ItemStatus status,
-      Kind kind,
-      ReportType reportType,
-      DateTime createdAt,
-      DateTime occurredAt,
-      DateTime? expiresAt,
-      TimeOfDay occurredAtTime,
-      Region? region,
-      IncidentLocal? local,
-      String? howTo,
-      bool isPlatformGenerated,
-      bool visibilty});
-}
+abstract mixin class _$IncidentOutputCopyWith<$Res> implements $IncidentOutputCopyWith<$Res> {
+  factory _$IncidentOutputCopyWith(_IncidentOutput value, $Res Function(_IncidentOutput) _then) = __$IncidentOutputCopyWithImpl;
+@override @useResult
+$Res call({
+ String id, String? title, String userId, String alertId, String productType, TypeAlert type, IncidentProductOutput? product, ItemStatus status, Kind kind, ReportType reportType, DateTime createdAt, DateTime occurredAt, DateTime? expiresAt, TimeOfDay occurredAtTime, Region? region, IncidentLocal? local, String? howTo, bool isPlatformGenerated, bool visibilty
+});
 
+
+
+
+}
 /// @nodoc
 class __$IncidentOutputCopyWithImpl<$Res>
     implements _$IncidentOutputCopyWith<$Res> {
@@ -697,110 +292,34 @@ class __$IncidentOutputCopyWithImpl<$Res>
   final _IncidentOutput _self;
   final $Res Function(_IncidentOutput) _then;
 
-  /// Create a copy of IncidentOutput
-  /// with the given fields replaced by the non-null parameter values.
-  @override
-  @pragma('vm:prefer-inline')
-  $Res call({
-    Object? id = null,
-    Object? title = freezed,
-    Object? userId = null,
-    Object? alertId = null,
-    Object? productType = null,
-    Object? type = null,
-    Object? product = freezed,
-    Object? status = null,
-    Object? kind = null,
-    Object? reportType = null,
-    Object? createdAt = null,
-    Object? occurredAt = null,
-    Object? expiresAt = freezed,
-    Object? occurredAtTime = null,
-    Object? region = freezed,
-    Object? local = freezed,
-    Object? howTo = freezed,
-    Object? isPlatformGenerated = null,
-    Object? visibilty = null,
-  }) {
-    return _then(_IncidentOutput(
-      id: null == id
-          ? _self.id
-          : id // ignore: cast_nullable_to_non_nullable
-              as String,
-      title: freezed == title
-          ? _self.title
-          : title // ignore: cast_nullable_to_non_nullable
-              as String?,
-      userId: null == userId
-          ? _self.userId
-          : userId // ignore: cast_nullable_to_non_nullable
-              as String,
-      alertId: null == alertId
-          ? _self.alertId
-          : alertId // ignore: cast_nullable_to_non_nullable
-              as String,
-      productType: null == productType
-          ? _self.productType
-          : productType // ignore: cast_nullable_to_non_nullable
-              as String,
-      type: null == type
-          ? _self.type
-          : type // ignore: cast_nullable_to_non_nullable
-              as TypeAlert,
-      product: freezed == product
-          ? _self.product
-          : product // ignore: cast_nullable_to_non_nullable
-              as IncidentProductOutput?,
-      status: null == status
-          ? _self.status
-          : status // ignore: cast_nullable_to_non_nullable
-              as ItemStatus,
-      kind: null == kind
-          ? _self.kind
-          : kind // ignore: cast_nullable_to_non_nullable
-              as Kind,
-      reportType: null == reportType
-          ? _self.reportType
-          : reportType // ignore: cast_nullable_to_non_nullable
-              as ReportType,
-      createdAt: null == createdAt
-          ? _self.createdAt
-          : createdAt // ignore: cast_nullable_to_non_nullable
-              as DateTime,
-      occurredAt: null == occurredAt
-          ? _self.occurredAt
-          : occurredAt // ignore: cast_nullable_to_non_nullable
-              as DateTime,
-      expiresAt: freezed == expiresAt
-          ? _self.expiresAt
-          : expiresAt // ignore: cast_nullable_to_non_nullable
-              as DateTime?,
-      occurredAtTime: null == occurredAtTime
-          ? _self.occurredAtTime
-          : occurredAtTime // ignore: cast_nullable_to_non_nullable
-              as TimeOfDay,
-      region: freezed == region
-          ? _self.region
-          : region // ignore: cast_nullable_to_non_nullable
-              as Region?,
-      local: freezed == local
-          ? _self.local
-          : local // ignore: cast_nullable_to_non_nullable
-              as IncidentLocal?,
-      howTo: freezed == howTo
-          ? _self.howTo
-          : howTo // ignore: cast_nullable_to_non_nullable
-              as String?,
-      isPlatformGenerated: null == isPlatformGenerated
-          ? _self.isPlatformGenerated
-          : isPlatformGenerated // ignore: cast_nullable_to_non_nullable
-              as bool,
-      visibilty: null == visibilty
-          ? _self.visibilty
-          : visibilty // ignore: cast_nullable_to_non_nullable
-              as bool,
-    ));
-  }
+/// Create a copy of IncidentOutput
+/// with the given fields replaced by the non-null parameter values.
+@override @pragma('vm:prefer-inline') $Res call({Object? id = null,Object? title = freezed,Object? userId = null,Object? alertId = null,Object? productType = null,Object? type = null,Object? product = freezed,Object? status = null,Object? kind = null,Object? reportType = null,Object? createdAt = null,Object? occurredAt = null,Object? expiresAt = freezed,Object? occurredAtTime = null,Object? region = freezed,Object? local = freezed,Object? howTo = freezed,Object? isPlatformGenerated = null,Object? visibilty = null,}) {
+  return _then(_IncidentOutput(
+id: null == id ? _self.id : id // ignore: cast_nullable_to_non_nullable
+as String,title: freezed == title ? _self.title : title // ignore: cast_nullable_to_non_nullable
+as String?,userId: null == userId ? _self.userId : userId // ignore: cast_nullable_to_non_nullable
+as String,alertId: null == alertId ? _self.alertId : alertId // ignore: cast_nullable_to_non_nullable
+as String,productType: null == productType ? _self.productType : productType // ignore: cast_nullable_to_non_nullable
+as String,type: null == type ? _self.type : type // ignore: cast_nullable_to_non_nullable
+as TypeAlert,product: freezed == product ? _self.product : product // ignore: cast_nullable_to_non_nullable
+as IncidentProductOutput?,status: null == status ? _self.status : status // ignore: cast_nullable_to_non_nullable
+as ItemStatus,kind: null == kind ? _self.kind : kind // ignore: cast_nullable_to_non_nullable
+as Kind,reportType: null == reportType ? _self.reportType : reportType // ignore: cast_nullable_to_non_nullable
+as ReportType,createdAt: null == createdAt ? _self.createdAt : createdAt // ignore: cast_nullable_to_non_nullable
+as DateTime,occurredAt: null == occurredAt ? _self.occurredAt : occurredAt // ignore: cast_nullable_to_non_nullable
+as DateTime,expiresAt: freezed == expiresAt ? _self.expiresAt : expiresAt // ignore: cast_nullable_to_non_nullable
+as DateTime?,occurredAtTime: null == occurredAtTime ? _self.occurredAtTime : occurredAtTime // ignore: cast_nullable_to_non_nullable
+as TimeOfDay,region: freezed == region ? _self.region : region // ignore: cast_nullable_to_non_nullable
+as Region?,local: freezed == local ? _self.local : local // ignore: cast_nullable_to_non_nullable
+as IncidentLocal?,howTo: freezed == howTo ? _self.howTo : howTo // ignore: cast_nullable_to_non_nullable
+as String?,isPlatformGenerated: null == isPlatformGenerated ? _self.isPlatformGenerated : isPlatformGenerated // ignore: cast_nullable_to_non_nullable
+as bool,visibilty: null == visibilty ? _self.visibilty : visibilty // ignore: cast_nullable_to_non_nullable
+as bool,
+  ));
+}
+
+
 }
 
 // dart format on

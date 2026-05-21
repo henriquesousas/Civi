@@ -52,6 +52,7 @@ var goRouterProvider = Provider<GoRouter>(
       debugLogDiagnostics: true,
       refreshListenable: SessionUserNotifier(ref.watch(supabaseClientProvider)),
       redirect: (context, state) async {
+        return AuthRouter.path;
         final isLoggedIn = sessionNotifier.user != null;
         if (!isLoggedIn) {
           //Verificar se ja clicou no Continuar sem Login

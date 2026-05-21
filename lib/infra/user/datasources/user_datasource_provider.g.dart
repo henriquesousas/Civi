@@ -16,15 +16,15 @@ final class UserDataSourceProvider
     extends $FunctionalProvider<UserDataSource, UserDataSource, UserDataSource>
     with $Provider<UserDataSource> {
   UserDataSourceProvider._()
-      : super(
-          from: null,
-          argument: null,
-          retry: null,
-          name: r'userDataSourceProvider',
-          isAutoDispose: true,
-          dependencies: null,
-          $allTransitiveDependencies: null,
-        );
+    : super(
+        from: null,
+        argument: null,
+        retry: null,
+        name: r'userDataSourceProvider',
+        isAutoDispose: true,
+        dependencies: null,
+        $allTransitiveDependencies: null,
+      );
 
   @override
   String debugGetCreateSourceHash() => _$userDataSourceHash();

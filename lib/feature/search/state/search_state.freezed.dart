@@ -11,341 +11,273 @@ part of 'search_state.dart';
 
 // dart format off
 T _$identity<T>(T value) => value;
-
 /// @nodoc
 mixin _$SearchState {
-  List<IncidentOutput> get items;
-  bool get isLoading;
-  String? get alertId;
 
-  /// Create a copy of SearchState
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  @pragma('vm:prefer-inline')
-  $SearchStateCopyWith<SearchState> get copyWith =>
-      _$SearchStateCopyWithImpl<SearchState>(this as SearchState, _$identity);
+ List<IncidentOutput> get items; bool get isLoading; String? get alertId;
+/// Create a copy of SearchState
+/// with the given fields replaced by the non-null parameter values.
+@JsonKey(includeFromJson: false, includeToJson: false)
+@pragma('vm:prefer-inline')
+$SearchStateCopyWith<SearchState> get copyWith => _$SearchStateCopyWithImpl<SearchState>(this as SearchState, _$identity);
 
-  @override
-  bool operator ==(Object other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType &&
-            other is SearchState &&
-            const DeepCollectionEquality().equals(other.items, items) &&
-            (identical(other.isLoading, isLoading) ||
-                other.isLoading == isLoading) &&
-            (identical(other.alertId, alertId) || other.alertId == alertId));
-  }
 
-  @override
-  int get hashCode => Object.hash(runtimeType,
-      const DeepCollectionEquality().hash(items), isLoading, alertId);
 
-  @override
-  String toString() {
-    return 'SearchState(items: $items, isLoading: $isLoading, alertId: $alertId)';
-  }
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is SearchState&&const DeepCollectionEquality().equals(other.items, items)&&(identical(other.isLoading, isLoading) || other.isLoading == isLoading)&&(identical(other.alertId, alertId) || other.alertId == alertId));
+}
+
+
+@override
+int get hashCode => Object.hash(runtimeType,const DeepCollectionEquality().hash(items),isLoading,alertId);
+
+@override
+String toString() {
+  return 'SearchState(items: $items, isLoading: $isLoading, alertId: $alertId)';
+}
+
+
 }
 
 /// @nodoc
-abstract mixin class $SearchStateCopyWith<$Res> {
-  factory $SearchStateCopyWith(
-          SearchState value, $Res Function(SearchState) _then) =
-      _$SearchStateCopyWithImpl;
-  @useResult
-  $Res call({List<IncidentOutput> items, bool isLoading, String? alertId});
-}
+abstract mixin class $SearchStateCopyWith<$Res>  {
+  factory $SearchStateCopyWith(SearchState value, $Res Function(SearchState) _then) = _$SearchStateCopyWithImpl;
+@useResult
+$Res call({
+ List<IncidentOutput> items, bool isLoading, String? alertId
+});
 
+
+
+
+}
 /// @nodoc
-class _$SearchStateCopyWithImpl<$Res> implements $SearchStateCopyWith<$Res> {
+class _$SearchStateCopyWithImpl<$Res>
+    implements $SearchStateCopyWith<$Res> {
   _$SearchStateCopyWithImpl(this._self, this._then);
 
   final SearchState _self;
   final $Res Function(SearchState) _then;
 
-  /// Create a copy of SearchState
-  /// with the given fields replaced by the non-null parameter values.
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? items = null,
-    Object? isLoading = null,
-    Object? alertId = freezed,
-  }) {
-    return _then(_self.copyWith(
-      items: null == items
-          ? _self.items
-          : items // ignore: cast_nullable_to_non_nullable
-              as List<IncidentOutput>,
-      isLoading: null == isLoading
-          ? _self.isLoading
-          : isLoading // ignore: cast_nullable_to_non_nullable
-              as bool,
-      alertId: freezed == alertId
-          ? _self.alertId
-          : alertId // ignore: cast_nullable_to_non_nullable
-              as String?,
-    ));
-  }
+/// Create a copy of SearchState
+/// with the given fields replaced by the non-null parameter values.
+@pragma('vm:prefer-inline') @override $Res call({Object? items = null,Object? isLoading = null,Object? alertId = freezed,}) {
+  return _then(_self.copyWith(
+items: null == items ? _self.items : items // ignore: cast_nullable_to_non_nullable
+as List<IncidentOutput>,isLoading: null == isLoading ? _self.isLoading : isLoading // ignore: cast_nullable_to_non_nullable
+as bool,alertId: freezed == alertId ? _self.alertId : alertId // ignore: cast_nullable_to_non_nullable
+as String?,
+  ));
 }
+
+}
+
 
 /// Adds pattern-matching-related methods to [SearchState].
 extension SearchStatePatterns on SearchState {
-  /// A variant of `map` that fallback to returning `orElse`.
-  ///
-  /// It is equivalent to doing:
-  /// ```dart
-  /// switch (sealedClass) {
-  ///   case final Subclass value:
-  ///     return ...;
-  ///   case _:
-  ///     return orElse();
-  /// }
-  /// ```
+/// A variant of `map` that fallback to returning `orElse`.
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case final Subclass value:
+///     return ...;
+///   case _:
+///     return orElse();
+/// }
+/// ```
 
-  @optionalTypeArgs
-  TResult maybeMap<TResult extends Object?>(
-    TResult Function(_SearchState value)? $default, {
-    required TResult orElse(),
-  }) {
-    final _that = this;
-    switch (_that) {
-      case _SearchState() when $default != null:
-        return $default(_that);
-      case _:
-        return orElse();
-    }
-  }
+@optionalTypeArgs TResult maybeMap<TResult extends Object?>(TResult Function( _SearchState value)?  $default,{required TResult orElse(),}){
+final _that = this;
+switch (_that) {
+case _SearchState() when $default != null:
+return $default(_that);case _:
+  return orElse();
 
-  /// A `switch`-like method, using callbacks.
-  ///
-  /// Callbacks receives the raw object, upcasted.
-  /// It is equivalent to doing:
-  /// ```dart
-  /// switch (sealedClass) {
-  ///   case final Subclass value:
-  ///     return ...;
-  ///   case final Subclass2 value:
-  ///     return ...;
-  /// }
-  /// ```
+}
+}
+/// A `switch`-like method, using callbacks.
+///
+/// Callbacks receives the raw object, upcasted.
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case final Subclass value:
+///     return ...;
+///   case final Subclass2 value:
+///     return ...;
+/// }
+/// ```
 
-  @optionalTypeArgs
-  TResult map<TResult extends Object?>(
-    TResult Function(_SearchState value) $default,
-  ) {
-    final _that = this;
-    switch (_that) {
-      case _SearchState():
-        return $default(_that);
-      case _:
-        throw StateError('Unexpected subclass');
-    }
-  }
+@optionalTypeArgs TResult map<TResult extends Object?>(TResult Function( _SearchState value)  $default,){
+final _that = this;
+switch (_that) {
+case _SearchState():
+return $default(_that);case _:
+  throw StateError('Unexpected subclass');
 
-  /// A variant of `map` that fallback to returning `null`.
-  ///
-  /// It is equivalent to doing:
-  /// ```dart
-  /// switch (sealedClass) {
-  ///   case final Subclass value:
-  ///     return ...;
-  ///   case _:
-  ///     return null;
-  /// }
-  /// ```
+}
+}
+/// A variant of `map` that fallback to returning `null`.
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case final Subclass value:
+///     return ...;
+///   case _:
+///     return null;
+/// }
+/// ```
 
-  @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>(
-    TResult? Function(_SearchState value)? $default,
-  ) {
-    final _that = this;
-    switch (_that) {
-      case _SearchState() when $default != null:
-        return $default(_that);
-      case _:
-        return null;
-    }
-  }
+@optionalTypeArgs TResult? mapOrNull<TResult extends Object?>(TResult? Function( _SearchState value)?  $default,){
+final _that = this;
+switch (_that) {
+case _SearchState() when $default != null:
+return $default(_that);case _:
+  return null;
 
-  /// A variant of `when` that fallback to an `orElse` callback.
-  ///
-  /// It is equivalent to doing:
-  /// ```dart
-  /// switch (sealedClass) {
-  ///   case Subclass(:final field):
-  ///     return ...;
-  ///   case _:
-  ///     return orElse();
-  /// }
-  /// ```
+}
+}
+/// A variant of `when` that fallback to an `orElse` callback.
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case Subclass(:final field):
+///     return ...;
+///   case _:
+///     return orElse();
+/// }
+/// ```
 
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>(
-    TResult Function(
-            List<IncidentOutput> items, bool isLoading, String? alertId)?
-        $default, {
-    required TResult orElse(),
-  }) {
-    final _that = this;
-    switch (_that) {
-      case _SearchState() when $default != null:
-        return $default(_that.items, _that.isLoading, _that.alertId);
-      case _:
-        return orElse();
-    }
-  }
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( List<IncidentOutput> items,  bool isLoading,  String? alertId)?  $default,{required TResult orElse(),}) {final _that = this;
+switch (_that) {
+case _SearchState() when $default != null:
+return $default(_that.items,_that.isLoading,_that.alertId);case _:
+  return orElse();
 
-  /// A `switch`-like method, using callbacks.
-  ///
-  /// As opposed to `map`, this offers destructuring.
-  /// It is equivalent to doing:
-  /// ```dart
-  /// switch (sealedClass) {
-  ///   case Subclass(:final field):
-  ///     return ...;
-  ///   case Subclass2(:final field2):
-  ///     return ...;
-  /// }
-  /// ```
+}
+}
+/// A `switch`-like method, using callbacks.
+///
+/// As opposed to `map`, this offers destructuring.
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case Subclass(:final field):
+///     return ...;
+///   case Subclass2(:final field2):
+///     return ...;
+/// }
+/// ```
 
-  @optionalTypeArgs
-  TResult when<TResult extends Object?>(
-    TResult Function(
-            List<IncidentOutput> items, bool isLoading, String? alertId)
-        $default,
-  ) {
-    final _that = this;
-    switch (_that) {
-      case _SearchState():
-        return $default(_that.items, _that.isLoading, _that.alertId);
-      case _:
-        throw StateError('Unexpected subclass');
-    }
-  }
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( List<IncidentOutput> items,  bool isLoading,  String? alertId)  $default,) {final _that = this;
+switch (_that) {
+case _SearchState():
+return $default(_that.items,_that.isLoading,_that.alertId);case _:
+  throw StateError('Unexpected subclass');
 
-  /// A variant of `when` that fallback to returning `null`
-  ///
-  /// It is equivalent to doing:
-  /// ```dart
-  /// switch (sealedClass) {
-  ///   case Subclass(:final field):
-  ///     return ...;
-  ///   case _:
-  ///     return null;
-  /// }
-  /// ```
+}
+}
+/// A variant of `when` that fallback to returning `null`
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case Subclass(:final field):
+///     return ...;
+///   case _:
+///     return null;
+/// }
+/// ```
 
-  @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>(
-    TResult? Function(
-            List<IncidentOutput> items, bool isLoading, String? alertId)?
-        $default,
-  ) {
-    final _that = this;
-    switch (_that) {
-      case _SearchState() when $default != null:
-        return $default(_that.items, _that.isLoading, _that.alertId);
-      case _:
-        return null;
-    }
-  }
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( List<IncidentOutput> items,  bool isLoading,  String? alertId)?  $default,) {final _that = this;
+switch (_that) {
+case _SearchState() when $default != null:
+return $default(_that.items,_that.isLoading,_that.alertId);case _:
+  return null;
+
+}
+}
+
 }
 
 /// @nodoc
+
 
 class _SearchState implements SearchState {
-  const _SearchState(
-      {final List<IncidentOutput> items = const [],
-      this.isLoading = false,
-      this.alertId})
-      : _items = items;
+  const _SearchState({final  List<IncidentOutput> items = const [], this.isLoading = false, this.alertId}): _items = items;
+  
 
-  final List<IncidentOutput> _items;
-  @override
-  @JsonKey()
-  List<IncidentOutput> get items {
-    if (_items is EqualUnmodifiableListView) return _items;
-    // ignore: implicit_dynamic_type
-    return EqualUnmodifiableListView(_items);
-  }
+ final  List<IncidentOutput> _items;
+@override@JsonKey() List<IncidentOutput> get items {
+  if (_items is EqualUnmodifiableListView) return _items;
+  // ignore: implicit_dynamic_type
+  return EqualUnmodifiableListView(_items);
+}
 
-  @override
-  @JsonKey()
-  final bool isLoading;
-  @override
-  final String? alertId;
+@override@JsonKey() final  bool isLoading;
+@override final  String? alertId;
 
-  /// Create a copy of SearchState
-  /// with the given fields replaced by the non-null parameter values.
-  @override
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  @pragma('vm:prefer-inline')
-  _$SearchStateCopyWith<_SearchState> get copyWith =>
-      __$SearchStateCopyWithImpl<_SearchState>(this, _$identity);
+/// Create a copy of SearchState
+/// with the given fields replaced by the non-null parameter values.
+@override @JsonKey(includeFromJson: false, includeToJson: false)
+@pragma('vm:prefer-inline')
+_$SearchStateCopyWith<_SearchState> get copyWith => __$SearchStateCopyWithImpl<_SearchState>(this, _$identity);
 
-  @override
-  bool operator ==(Object other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType &&
-            other is _SearchState &&
-            const DeepCollectionEquality().equals(other._items, _items) &&
-            (identical(other.isLoading, isLoading) ||
-                other.isLoading == isLoading) &&
-            (identical(other.alertId, alertId) || other.alertId == alertId));
-  }
 
-  @override
-  int get hashCode => Object.hash(runtimeType,
-      const DeepCollectionEquality().hash(_items), isLoading, alertId);
 
-  @override
-  String toString() {
-    return 'SearchState(items: $items, isLoading: $isLoading, alertId: $alertId)';
-  }
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _SearchState&&const DeepCollectionEquality().equals(other._items, _items)&&(identical(other.isLoading, isLoading) || other.isLoading == isLoading)&&(identical(other.alertId, alertId) || other.alertId == alertId));
+}
+
+
+@override
+int get hashCode => Object.hash(runtimeType,const DeepCollectionEquality().hash(_items),isLoading,alertId);
+
+@override
+String toString() {
+  return 'SearchState(items: $items, isLoading: $isLoading, alertId: $alertId)';
+}
+
+
 }
 
 /// @nodoc
-abstract mixin class _$SearchStateCopyWith<$Res>
-    implements $SearchStateCopyWith<$Res> {
-  factory _$SearchStateCopyWith(
-          _SearchState value, $Res Function(_SearchState) _then) =
-      __$SearchStateCopyWithImpl;
-  @override
-  @useResult
-  $Res call({List<IncidentOutput> items, bool isLoading, String? alertId});
-}
+abstract mixin class _$SearchStateCopyWith<$Res> implements $SearchStateCopyWith<$Res> {
+  factory _$SearchStateCopyWith(_SearchState value, $Res Function(_SearchState) _then) = __$SearchStateCopyWithImpl;
+@override @useResult
+$Res call({
+ List<IncidentOutput> items, bool isLoading, String? alertId
+});
 
+
+
+
+}
 /// @nodoc
-class __$SearchStateCopyWithImpl<$Res> implements _$SearchStateCopyWith<$Res> {
+class __$SearchStateCopyWithImpl<$Res>
+    implements _$SearchStateCopyWith<$Res> {
   __$SearchStateCopyWithImpl(this._self, this._then);
 
   final _SearchState _self;
   final $Res Function(_SearchState) _then;
 
-  /// Create a copy of SearchState
-  /// with the given fields replaced by the non-null parameter values.
-  @override
-  @pragma('vm:prefer-inline')
-  $Res call({
-    Object? items = null,
-    Object? isLoading = null,
-    Object? alertId = freezed,
-  }) {
-    return _then(_SearchState(
-      items: null == items
-          ? _self._items
-          : items // ignore: cast_nullable_to_non_nullable
-              as List<IncidentOutput>,
-      isLoading: null == isLoading
-          ? _self.isLoading
-          : isLoading // ignore: cast_nullable_to_non_nullable
-              as bool,
-      alertId: freezed == alertId
-          ? _self.alertId
-          : alertId // ignore: cast_nullable_to_non_nullable
-              as String?,
-    ));
-  }
+/// Create a copy of SearchState
+/// with the given fields replaced by the non-null parameter values.
+@override @pragma('vm:prefer-inline') $Res call({Object? items = null,Object? isLoading = null,Object? alertId = freezed,}) {
+  return _then(_SearchState(
+items: null == items ? _self._items : items // ignore: cast_nullable_to_non_nullable
+as List<IncidentOutput>,isLoading: null == isLoading ? _self.isLoading : isLoading // ignore: cast_nullable_to_non_nullable
+as bool,alertId: freezed == alertId ? _self.alertId : alertId // ignore: cast_nullable_to_non_nullable
+as String?,
+  ));
+}
+
+
 }
 
 // dart format on

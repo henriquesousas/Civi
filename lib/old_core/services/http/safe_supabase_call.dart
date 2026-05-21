@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:deehelp/core/failures/exports.dart';
 import 'package:deehelp/infra/_shared/connectivity/network_info.dart';
 
+//TODO: Renomear
 Future<T> safeSupabaseCall<T>({
   required NetworkInfo networkInfo,
   required Future<T> Function() call,

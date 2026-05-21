@@ -12,20 +12,24 @@ part of 'get_profile_usecase.dart';
 @ProviderFor(getProfileUseCase)
 final getProfileUseCaseProvider = GetProfileUseCaseProvider._();
 
-final class GetProfileUseCaseProvider extends $FunctionalProvider<
-    GetProfileUsecase,
-    GetProfileUsecase,
-    GetProfileUsecase> with $Provider<GetProfileUsecase> {
+final class GetProfileUseCaseProvider
+    extends
+        $FunctionalProvider<
+          GetProfileUsecase,
+          GetProfileUsecase,
+          GetProfileUsecase
+        >
+    with $Provider<GetProfileUsecase> {
   GetProfileUseCaseProvider._()
-      : super(
-          from: null,
-          argument: null,
-          retry: null,
-          name: r'getProfileUseCaseProvider',
-          isAutoDispose: true,
-          dependencies: null,
-          $allTransitiveDependencies: null,
-        );
+    : super(
+        from: null,
+        argument: null,
+        retry: null,
+        name: r'getProfileUseCaseProvider',
+        isAutoDispose: true,
+        dependencies: null,
+        $allTransitiveDependencies: null,
+      );
 
   @override
   String debugGetCreateSourceHash() => _$getProfileUseCaseHash();
@@ -33,8 +37,8 @@ final class GetProfileUseCaseProvider extends $FunctionalProvider<
   @$internal
   @override
   $ProviderElement<GetProfileUsecase> $createElement(
-          $ProviderPointer pointer) =>
-      $ProviderElement(pointer);
+    $ProviderPointer pointer,
+  ) => $ProviderElement(pointer);
 
   @override
   GetProfileUsecase create(Ref ref) {

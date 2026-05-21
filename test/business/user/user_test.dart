@@ -1,4 +1,4 @@
-import 'package:deehelp/business/user/user.dart';
+import 'package:deehelp/business/user/entities/user.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 void main() {

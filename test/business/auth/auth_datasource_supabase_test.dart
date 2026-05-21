@@ -1,6 +1,4 @@
 import 'package:deehelp/core/failures/exports.dart';
-import 'package:deehelp/core/failures/network_failure.dart';
-import 'package:deehelp/core/failures/invalid_credentials_failure.dart';
 import 'package:deehelp/business/auth/loggued_user.dart';
 import 'package:deehelp/infra/auth/datasouces/auth_datasource_supabase.dart';
 import 'package:deehelp/infra/_shared/connectivity/network_info.dart';
@@ -33,61 +31,69 @@ void main() {
     );
   });
 
-  test('givenAuthDataSource_whenNoConnection_thenThrowsNetworkFailure',
-      () async {
-    when(() => mockNetworkInfo.hasConnection).thenAnswer((_) async => false);
+  test(
+    'givenAuthDataSource_whenNoConnection_thenThrowsNetworkFailure',
+    () async {
+      when(() => mockNetworkInfo.hasConnection).thenAnswer((_) async => false);
 
-    expect(
-      () => sut.signInWithGoogle('any_token', 'any_access_token'),
-      throwsA(isA<NetworkFailure>()),
-    );
-  });
+      expect(
+        () => sut.signInWithGoogle('any_token', 'any_access_token'),
+        throwsA(isA<NetworkFailure>()),
+      );
+    },
+  );
 
-  test('givenAuthDataSource_whenSignInSucceeds_thenReturnsLoggedUser',
-      () async {
-    final expectedLogguedUser =
-        LogguedUser(id: "any_id", name: "any_name", email: "any_email");
+  test(
+    'givenAuthDataSource_whenSignInSucceeds_thenReturnsLoggedUser',
+    () async {
+      final expectedLogguedUser = LogguedUser(
+        id: "any_id",
+        name: "any_name",
+        email: "any_email",
+      );
 
-    final expectedUserSupabase = User(
-      id: 'any_id',
-      email: 'any_email',
-      appMetadata: {},
-      userMetadata: {'full_name': 'any_name', 'email': 'any_email'},
-      aud: 'authenticated',
-      createdAt: DateTime.now().toIso8601String(),
-    );
+      final expectedUserSupabase = User(
+        id: 'any_id',
+        email: 'any_email',
+        appMetadata: {},
+        userMetadata: {'full_name': 'any_name', 'email': 'any_email'},
+        aud: 'authenticated',
+        createdAt: DateTime.now().toIso8601String(),
+      );
 
-    final expectedAuthResponse = AuthResponse(
-      session: null,
-      user: expectedUserSupabase,
-    );
+      final expectedAuthResponse = AuthResponse(
+        session: null,
+        user: expectedUserSupabase,
+      );
 
-    when(() => mockNetworkInfo.hasConnection).thenAnswer((_) async => true);
+      when(() => mockNetworkInfo.hasConnection).thenAnswer((_) async => true);
 
-    when(() => mockAuth.signInWithIdToken(
+      when(
+        () => mockAuth.signInWithIdToken(
           provider: OAuthProvider.google,
           idToken: any(named: 'idToken'),
           accessToken: any(named: 'accessToken'),
-        )).thenAnswer((_) async => expectedAuthResponse);
+        ),
+      ).thenAnswer((_) async => expectedAuthResponse);
 
-    final res = await sut.signInWithGoogle('any', 'any');
+      final res = await sut.signInWithGoogle('any', 'any');
 
-    expect(res, expectedLogguedUser);
-  });
+      expect(res, expectedLogguedUser);
+    },
+  );
 
   test('user null', () async {
-    final expectedAuthResponse = AuthResponse(
-      session: null,
-      user: null,
-    );
+    final expectedAuthResponse = AuthResponse(session: null, user: null);
 
     when(() => mockNetworkInfo.hasConnection).thenAnswer((_) async => true);
 
-    when(() => mockAuth.signInWithIdToken(
-          provider: OAuthProvider.google,
-          idToken: any(named: 'idToken'),
-          accessToken: any(named: 'accessToken'),
-        )).thenAnswer((_) async => expectedAuthResponse);
+    when(
+      () => mockAuth.signInWithIdToken(
+        provider: OAuthProvider.google,
+        idToken: any(named: 'idToken'),
+        accessToken: any(named: 'accessToken'),
+      ),
+    ).thenAnswer((_) async => expectedAuthResponse);
 
     expect(
       () => sut.signInWithGoogle('any_token', 'any_access_token'),
