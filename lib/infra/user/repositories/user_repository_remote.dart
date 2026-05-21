@@ -1,8 +1,8 @@
 import 'package:deehelp/business/user/usecases/get_profile/profile.dart';
-import 'package:deehelp/business/user/entities/user.dart';
 import 'package:deehelp/business/user/user_datasource.dart';
 import 'package:deehelp/business/user/user_repository.dart';
 import 'package:deehelp/core/failures/failure.dart';
+import 'package:deehelp/infra/archivement/archivement_repository_remote.dart';
 import 'package:deehelp/infra/user/repositories/models/profile_model.dart';
 import 'package:fpdart/fpdart.dart';
 
@@ -17,13 +17,7 @@ class UserRepositoryRemote extends UserRepository {
     return TaskEither.tryCatch(() async {
       final result = await _dataSource.getProfile(userId);
       final profileOutput = ProfileModel.fromJson(result['data']);
-      final profileOutput2 = profileOutput.toProfile();
-      return profileOutput2;
-    }, (error, stackTrace) => error as Failure);
-  }
-
-  @override
-  void save(User user) {
-    // TODO: implement save
+      return profileOutput.toProfile();
+    }, (error, stackTrace) => error.toFailure());
   }
 }

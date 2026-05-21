@@ -1,6 +1,9 @@
-import 'package:deehelp/business/_shared/entity/exports.dart';
+import 'package:deehelp/infra/_shared/connectivity/network_info_provider.dart';
+import 'package:deehelp/infra/archivement/archiment_repository_remote.dart';
+import 'package:deehelp/infra/archivement/archivement_datasource_supabase.dart';
 import 'package:deehelp/infra/user/get_profile_usecase.dart';
 import 'package:deehelp/old_core/extension/size_extension.dart';
+import 'package:deehelp/old_core/providers/supabase_provider.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:deehelp/ui/auth/notifiers/auth_state.dart';
@@ -30,19 +33,13 @@ class _AuthPageState extends ConsumerState<AuthPage> {
     final authNotifier = ref.watch(authProvider.notifier);
     final authState = ref.watch(authProvider);
 
-    ref.listen<AuthState>(
-      authProvider,
-      (previous, next) {
-        next.whenOrNull(
-          error: (error, type) => AppDialog.show(
-            message: error,
-            context,
-            type: type.toDialogType(),
-          ),
-          authenticated: (_) => context.go(MainShellRouter.path),
-        );
-      },
-    );
+    ref.listen<AuthState>(authProvider, (previous, next) {
+      next.whenOrNull(
+        error: (error, type) =>
+            AppDialog.show(message: error, context, type: type.toDialogType()),
+        authenticated: (_) => context.go(MainShellRouter.path),
+      );
+    });
 
     return Scaffold(
       body: SizedBox(
@@ -60,10 +57,7 @@ class _AuthPageState extends ConsumerState<AuthPage> {
             Positioned(
               top: 150.h,
               left: 28,
-              child: const FloatingTag(
-                text: '200M de você',
-                lineHeight: 70,
-              ),
+              child: const FloatingTag(text: '200M de você', lineHeight: 70),
             ),
             Positioned(
               top: 220.h,
@@ -160,17 +154,37 @@ class _AuthPageState extends ConsumerState<AuthPage> {
                         //   message: "Falha ao realizar o login",
                         // ),
                         onPressed: () async {
-                          final res = await ref
-                              .read(getProfileUseCaseProvider)
-                              .execute("17fb07ad-2ecd-4f8c-90b9-0d8ce86925e3")
-                              .run();
-                          print(res);
+                          // try {
+                          //   // await ref
+                          //   //     .read(getProfileUseCaseProvider)
+                          //   //     .execute("17fb07ad-2ecd-4f8c-90b9-0d8ce86925e3")
+                          //   //     .run();
+
+                          // } catch (e) {
+                          //   print(e);
+                          // }
+                          final client = ref.watch(supabaseClientProvider);
+                          final networkInfo = ref.watch(networkInfoProvider);
+                          final ds = ArchivementDatasourceSupabase(
+                            client: client,
+                            networkInfo: networkInfo,
+                          );
+                          final repo = ArchimentRepositoryRemote(
+                            datasource: ds,
+                          );
+                          final data = await repo.getArchivements().run();
+                          data.fold(
+                            (l) {
+                              print(l);
+                            },
+                            (r) {
+                              print(r);
+                            },
+                          );
                         },
                         child: const Text(
                           "Continuar sem login",
-                          style: TextStyle(
-                            color: Colors.white,
-                          ),
+                          style: TextStyle(color: Colors.white),
                         ),
                       ),
                     ),

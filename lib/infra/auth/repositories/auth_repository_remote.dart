@@ -2,6 +2,7 @@ import 'package:deehelp/core/failures/failure.dart';
 import 'package:deehelp/business/auth/auth_datasource.dart';
 import 'package:deehelp/business/auth/loggued_user.dart';
 import 'package:deehelp/business/auth/auth_repository.dart';
+import 'package:deehelp/infra/archivement/archivement_repository_remote.dart';
 import 'package:fpdart/fpdart.dart';
 import 'package:logging/logging.dart';
 
@@ -9,9 +10,8 @@ class AuthRepositoryRemote implements AuthRepository {
   static final _logger = Logger("AuthRepositoryRemote");
   final AuthDataSource _datasource;
 
-  AuthRepositoryRemote({
-    required AuthDataSource datasource,
-  }) : _datasource = datasource;
+  AuthRepositoryRemote({required AuthDataSource datasource})
+    : _datasource = datasource;
 
   @override
   TaskEither<Failure, LogguedUser> signInWithGoogle(
@@ -21,7 +21,7 @@ class AuthRepositoryRemote implements AuthRepository {
     _logger.info("AuthRepositoryRemote: Iniciando signInWithGoogle");
     return TaskEither.tryCatch(
       () => _datasource.signInWithGoogle(idToken, accessToken),
-      (error, stackTrace) => error as Failure,
+      (error, _) => error.toFailure(),
     );
   }
 }
