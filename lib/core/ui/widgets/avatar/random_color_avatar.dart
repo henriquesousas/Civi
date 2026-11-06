@@ -37,11 +37,13 @@ class RandomColorAvatar extends StatelessWidget {
   final double height;
   final Color? color;
 
+//AQUI é um teste de comentario
+
   const RandomColorAvatar({
     super.key,
     required this.name,
     this.width = 50.0,
-    this.height = 50.0,
+    this.height = 60.0,
     this.color,
   });
 
